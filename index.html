@@ -4,24 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aggelos Mouzakitis | Executive Therapist &amp; Growth Advisor for Senior Tech Leaders</title>
-<meta name="description" content="Licensed psychotherapist and executive coach for senior tech professionals. 12 years in B2B SaaS growth. I understand what high-stakes careers do to people because I've lived inside the system.">
+<meta name="description" content="Licensed psychotherapist and executive coach for senior tech professionals. 18+ years in B2B SaaS growth. I work with the things that success doesn't fix.">
 <link rel="canonical" href="https://aggelosmouzakitis.com">
 
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Aggelos Mouzakitis | Executive Therapist &amp; Growth Advisor">
-<meta property="og:description" content="Licensed psychotherapist and executive coach for senior tech professionals. I understand what high-stakes careers do to people because I've lived inside the system.">
+<meta property="og:description" content="Licensed psychotherapist and executive coach for senior tech professionals. I work with the things that success doesn't fix.">
 <meta property="og:url" content="https://aggelosmouzakitis.com">
 <meta property="og:image" content="https://aggelosmouzakitis.com/img/aggelos.jpg">
 <meta property="og:locale" content="en_IE">
 
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Aggelos Mouzakitis | Executive Therapist &amp; Growth Advisor">
-<meta name="twitter:description" content="Licensed psychotherapist and executive coach for senior tech professionals. I understand what high-stakes careers do to people because I've lived inside the system.">
+<meta name="twitter:description" content="Licensed psychotherapist and executive coach for senior tech professionals. I work with the things that success doesn't fix.">
 <meta name="twitter:image" content="https://aggelosmouzakitis.com/img/aggelos.jpg">
 
-<!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -30,17 +27,14 @@
   "url": "https://aggelosmouzakitis.com",
   "image": "https://aggelosmouzakitis.com/img/aggelos.jpg",
   "jobTitle": ["Licensed Psychotherapist", "Executive Coach", "Fractional Growth Advisor"],
-  "description": "Licensed psychotherapist and executive coach for senior tech professionals, with 12 years of B2B SaaS growth experience.",
+  "description": "Licensed psychotherapist and executive coach for senior tech professionals, with 18+ years of B2B SaaS growth experience.",
   "sameAs": [
     "https://www.linkedin.com/in/growth-product-manager/",
     "https://undisguised.io",
     "https://headofgrowth.io"
   ],
   "knowsAbout": ["Executive Therapy", "Psychotherapy for Executives", "B2B SaaS Growth", "Product-Led Growth", "Executive Coaching"],
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "IE"
-  }
+  "address": { "@type": "PostalAddress", "addressCountry": "IE" }
 }
 </script>
 
@@ -48,416 +42,106 @@
   @font-face {
     font-family: 'Departure Mono';
     src: url('https://cdn.jsdelivr.net/gh/rougier/departure-mono@master/fonts/DepartureMono-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+    font-weight: 400; font-style: normal; font-display: swap;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: #282726;
-    color: #ffffff;
+    background: #282726; color: #ffffff;
     font-family: 'Departure Mono', 'SF Mono', 'Fira Mono', Menlo, 'Courier New', monospace;
-    font-size: 15px;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
+    font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased;
   }
 
-  ::selection {
-    background: #ffffff;
-    color: #282726;
-  }
+  ::selection { background: #ffffff; color: #282726; }
 
-  /* ========================================
-     NAV STYLES
-     ======================================== */
-
+  /* --- Sticky Nav --- */
   .site-nav {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    position: sticky; top: 0; z-index: 200;
+    background: #282726;
   }
 
   .site-nav-inner {
-    max-width: 740px;
-    margin: 0 auto;
-    padding: 0.7rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    max-width: 740px; margin: 0 auto; padding: 0.7rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
   }
 
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 1.8rem;
-    list-style: none;
-  }
+  .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
+  .nav-links a { color: #888; text-decoration: none; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.15s; }
+  .nav-links a:hover, .nav-links a:focus { color: #ffffff; text-decoration: none; }
 
-  .nav-links a {
-    color: #888;
-    text-decoration: none;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: color 0.15s;
-  }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown-toggle { color: #888; background: none; border: none; font-family: inherit; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; padding: 0; transition: color 0.15s; display: flex; align-items: center; gap: 0.3rem; }
+  .nav-dropdown-toggle:hover, .nav-dropdown-toggle:focus { color: #ffffff; outline: none; }
+  .nav-dropdown-toggle .chevron { font-size: 8px; transition: transform 0.15s; }
 
-  .nav-links a:hover,
-  .nav-links a:focus {
-    color: #ffffff;
-    text-decoration: none;
-  }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #333231; border: 1px solid rgba(255,255,255,0.1); min-width: 160px; padding: 0.4rem 0; z-index: 100; list-style: none; }
+  .nav-dropdown-menu::before { content: ''; position: absolute; top: -0.6rem; left: 0; right: 0; height: 0.6rem; }
 
-  /* Dropdown wrapper */
-  .nav-dropdown {
-    position: relative;
-  }
-
-  .nav-dropdown-toggle {
-    color: #888;
-    background: none;
-    border: none;
-    font-family: inherit;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    padding: 0;
-    transition: color 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
-
-  .nav-dropdown-toggle:hover,
-  .nav-dropdown-toggle:focus {
-    color: #ffffff;
-    outline: none;
-  }
-
-  .nav-dropdown-toggle .chevron {
-    font-size: 8px;
-    transition: transform 0.15s;
-  }
-
-  /* Dropdown panel */
-  .nav-dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #333231;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    min-width: 160px;
-    padding: 0.4rem 0;
-    z-index: 100;
-    list-style: none;
-  }
-
-  /*
-   * Desktop: open on hover via CSS.
-   * A padding bridge between toggle and menu prevents
-   * the menu from closing when the cursor moves down.
-   */
-  .nav-dropdown-menu::before {
-    content: '';
-    position: absolute;
-    top: -0.6rem;
-    left: 0;
-    right: 0;
-    height: 0.6rem;
-  }
-
-  /* Desktop hover: pure CSS, no JS needed */
   @media (min-width: 641px) {
-    .nav-dropdown:hover .nav-dropdown-menu,
-    .nav-dropdown:focus-within .nav-dropdown-menu {
-      display: block;
-    }
-
-    .nav-dropdown:hover .chevron {
-      transform: rotate(180deg);
-    }
+    .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+    .nav-dropdown:hover .chevron { transform: rotate(180deg); }
   }
-
-  /* Mobile: JS-driven via data-open */
   @media (max-width: 640px) {
-    .nav-dropdown[data-open="true"] .nav-dropdown-menu {
-      display: block;
-    }
-
-    .nav-dropdown[data-open="true"] .chevron {
-      transform: rotate(180deg);
-    }
+    .nav-dropdown[data-open="true"] .nav-dropdown-menu { display: block; }
+    .nav-dropdown[data-open="true"] .chevron { transform: rotate(180deg); }
   }
 
-  .nav-dropdown-menu li a {
-    display: block;
-    padding: 0.35rem 1rem;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #888;
-    text-decoration: none;
-    white-space: nowrap;
-  }
+  .nav-dropdown-menu li a { display: block; padding: 0.35rem 1rem; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #888; text-decoration: none; white-space: nowrap; }
+  .nav-dropdown-menu li a:hover, .nav-dropdown-menu li a:focus { color: #ffffff; background: rgba(255,255,255,0.05); }
 
-  .nav-dropdown-menu li a:hover,
-  .nav-dropdown-menu li a:focus {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.05);
-  }
+  .nav-cta { font-family: inherit; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #ffffff !important; background: transparent; border: 1px solid rgba(255,255,255,0.4); text-decoration: none !important; padding: 0.35rem 0.9rem; cursor: pointer; transition: border-color 0.15s; white-space: nowrap; }
+  .nav-cta:hover, .nav-cta:focus { border-color: #ffffff; color: #ffffff !important; text-decoration: none !important; background: transparent; }
 
-  /* CTA BUTTON — outlined, not filled */
-  .nav-cta {
-    font-family: inherit;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #ffffff !important;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    text-decoration: none !important;
-    padding: 0.35rem 0.9rem;
-    cursor: pointer;
-    transition: border-color 0.15s, color 0.15s;
-    white-space: nowrap;
-  }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.25rem; flex-direction: column; gap: 4px; }
+  .nav-hamburger span { display: block; width: 20px; height: 1px; background: #888; transition: transform 0.2s, opacity 0.2s; }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
 
-  .nav-cta:hover,
-  .nav-cta:focus {
-    border-color: #ffffff;
-    color: #ffffff !important;
-    text-decoration: none !important;
-    background: transparent;
-  }
-
-  /* Hamburger button (hidden on desktop) */
-  .nav-hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.25rem;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .nav-hamburger span {
-    display: block;
-    width: 20px;
-    height: 1px;
-    background: #888;
-    transition: transform 0.2s, opacity 0.2s;
-  }
-
-  .nav-hamburger[aria-expanded="true"] span:nth-child(1) {
-    transform: translateY(5px) rotate(45deg);
-  }
-
-  .nav-hamburger[aria-expanded="true"] span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .nav-hamburger[aria-expanded="true"] span:nth-child(3) {
-    transform: translateY(-5px) rotate(-45deg);
-  }
-
-  /* Mobile nav */
   @media (max-width: 640px) {
-    .site-nav-inner {
-      padding: 0.7rem 1.2rem;
-      flex-wrap: wrap;
-    }
-
-    .nav-hamburger {
-      display: flex;
-    }
-
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      align-items: flex-start;
-      width: 100%;
-      gap: 0;
-      padding-top: 0.8rem;
-    }
-
-    .nav-links[data-open="true"] {
-      display: flex;
-    }
-
-    .nav-links > li {
-      width: 100%;
-      padding: 0.5rem 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .nav-dropdown-menu {
-      position: static;
-      background: none;
-      border: none;
-      padding: 0.2rem 0 0.2rem 1rem;
-      min-width: 0;
-    }
-
-    .nav-dropdown-menu::before {
-      display: none;
-    }
-
-    .nav-dropdown-menu li a {
-      padding: 0.3rem 0;
-    }
-
-    .nav-dropdown-menu li a:hover,
-    .nav-dropdown-menu li a:focus {
-      background: none;
-    }
-
-    .nav-links .nav-cta-item {
-      padding-top: 0.7rem;
-    }
-
-    .nav-cta {
-      display: inline-block;
-    }
+    .site-nav-inner { padding: 0.7rem 1.2rem; flex-wrap: wrap; }
+    .nav-hamburger { display: flex; }
+    .nav-links { display: none; flex-direction: column; align-items: flex-start; width: 100%; gap: 0; padding-top: 0.8rem; }
+    .nav-links[data-open="true"] { display: flex; }
+    .nav-links > li { width: 100%; padding: 0.5rem 0; border-top: 1px solid rgba(255,255,255,0.06); }
+    .nav-dropdown-menu { position: static; background: none; border: none; padding: 0.2rem 0 0.2rem 1rem; min-width: 0; }
+    .nav-dropdown-menu::before { display: none; }
+    .nav-dropdown-menu li a { padding: 0.3rem 0; }
+    .nav-dropdown-menu li a:hover, .nav-dropdown-menu li a:focus { background: none; }
+    .nav-links .nav-cta-item { padding-top: 0.7rem; }
+    .nav-cta { display: inline-block; }
   }
 
-  /* ========================================
-     EXISTING SITE STYLES (UNCHANGED)
-     ======================================== */
+  /* --- Page --- */
+  .page { max-width: 740px; margin: 0 auto; padding: 3.5rem 2rem 6rem; }
+  a { color: #00bf63; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; color: #008d49; }
 
-  .page {
-    max-width: 740px;
-    margin: 0 auto;
-    padding: 3.5rem 2rem 6rem;
-  }
+  .hero { display: grid; grid-template-columns: 160px 1fr; gap: 0 2rem; align-items: start; margin-bottom: 3.5rem; }
+  .hero-photo { width: 160px; height: 160px; }
+  .hero-photo img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .hero-text p { margin-bottom: 1rem; }
+  .hero-text p:last-child { margin-bottom: 0; }
 
-  a {
-    color: #00bf63;
-    text-underline-offset: 3px;
-    text-decoration-thickness: 1px;
-  }
+  h1 { font-family: inherit; font-size: 15px; font-weight: 400; line-height: 1.7; color: #ffffff; display: contents; }
 
-  a:hover {
-    text-decoration-thickness: 2px;
-    color: #008d49;
-  }
+  .section { display: grid; grid-template-columns: 160px 1fr; gap: 0 2rem; margin-bottom: 3rem; }
+  h2 { font-family: inherit; font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: #888; padding-top: 0.25rem; line-height: 1.7; }
+  .section-content p { margin-bottom: 1.2rem; }
+  .section-content p:last-child { margin-bottom: 0; }
 
-  /* --- Hero: photo + intro, aligned to section grid --- */
-  .hero {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 0 2rem;
-    align-items: start;
-    margin-bottom: 3.5rem;
-  }
-
-  .hero-photo {
-    width: 160px;
-    height: 160px;
-  }
-
-  .hero-photo img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  .hero-text p {
-    margin-bottom: 1rem;
-  }
-
-  .hero-text p:last-child {
-    margin-bottom: 0;
-  }
-
-  h1 {
-    font-family: inherit;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.7;
-    color: #ffffff;
-    display: contents;
-  }
-
-  /* --- Sections with left label --- */
-  .section {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 0 2rem;
-    margin-bottom: 3rem;
-  }
-
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #888;
-    padding-top: 0.25rem;
-    line-height: 1.7;
-  }
-
-  h2 {
-    font-family: inherit;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #888;
-    padding-top: 0.25rem;
-    line-height: 1.7;
-  }
-
-  .section-content p {
-    margin-bottom: 1.2rem;
-  }
-
-  .section-content p:last-child {
-    margin-bottom: 0;
-  }
-
-  .link-row {
-    margin-bottom: 0.4rem;
-  }
-
-  .sep {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 2.5rem 0;
-  }
-
-  .footer {
-    margin-top: 3rem;
-    font-size: 12px;
-    color: #aaa;
-  }
+  .link-row { margin-bottom: 0.4rem; }
+  .sep { border: none; border-top: 1px solid #ccc; margin: 2.5rem 0; }
+  .footer { margin-top: 3rem; font-size: 12px; color: #aaa; }
 
   @media (max-width: 640px) {
     .page { padding: 2.5rem 1.2rem 4rem; }
-
-    .hero {
-      grid-template-columns: 1fr;
-      gap: 1.2rem 0;
-    }
-
-    .hero-photo {
-      width: 140px;
-      height: 140px;
-    }
-
-    .section {
-      grid-template-columns: 1fr;
-      gap: 0.3rem 0;
-      margin-bottom: 2.5rem;
-    }
-
-    .section-label,
-    h2 {
-      margin-bottom: 0.6rem;
-    }
+    .hero { grid-template-columns: 1fr; gap: 1.2rem 0; }
+    .hero-photo { width: 140px; height: 140px; }
+    .section { grid-template-columns: 1fr; gap: 0.3rem 0; margin-bottom: 2.5rem; }
+    h2 { margin-bottom: 0.6rem; }
   }
 </style>
 </head>
@@ -466,36 +150,13 @@
 <!-- NAV START -->
 <nav class="site-nav" aria-label="Main navigation">
   <div class="site-nav-inner">
-
-    <!-- Home link -->
     <a href="/" style="color:#888;text-decoration:none;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">Home</a>
-
-    <!-- Hamburger (mobile only) -->
-    <button
-      class="nav-hamburger"
-      aria-expanded="false"
-      aria-controls="nav-menu"
-      aria-label="Toggle menu"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="nav-hamburger" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
     </button>
-
     <ul class="nav-links" id="nav-menu" role="menubar">
-
-      <!-- Specialties dropdown -->
       <li class="nav-dropdown" data-open="false" role="none">
-        <button
-          class="nav-dropdown-toggle"
-          aria-expanded="false"
-          aria-controls="dropdown-specialties"
-          role="menuitem"
-          aria-haspopup="true"
-        >
-          Specialties <span class="chevron" aria-hidden="true">&#9662;</span>
-        </button>
-        <!-- DROPDOWN LOGIC -->
+        <button class="nav-dropdown-toggle" aria-expanded="false" aria-controls="dropdown-specialties" role="menuitem" aria-haspopup="true">Specialties <span class="chevron" aria-hidden="true">&#9662;</span></button>
         <ul class="nav-dropdown-menu" id="dropdown-specialties" role="menu">
           <li role="none"><a href="/therapy-for-executives/" role="menuitem">Therapy for Executives</a></li>
           <li role="none"><a href="/therapy-for-founders/" role="menuitem">Therapy for Founders</a></li>
@@ -504,30 +165,16 @@
           <li role="none"><a href="/career-transition-therapy/" role="menuitem">Career Transitions</a></li>
         </ul>
       </li>
-
-      <!-- Content dropdown -->
       <li class="nav-dropdown" data-open="false" role="none">
-        <button
-          class="nav-dropdown-toggle"
-          aria-expanded="false"
-          aria-controls="dropdown-content"
-          role="menuitem"
-          aria-haspopup="true"
-        >
-          Content <span class="chevron" aria-hidden="true">&#9662;</span>
-        </button>
-        <!-- DROPDOWN LOGIC -->
+        <button class="nav-dropdown-toggle" aria-expanded="false" aria-controls="dropdown-content" role="menuitem" aria-haspopup="true">Content <span class="chevron" aria-hidden="true">&#9662;</span></button>
         <ul class="nav-dropdown-menu" id="dropdown-content" role="menu">
           <li role="none"><a href="https://www.undisguised.io" target="_blank" rel="noopener" role="menuitem">Blog</a></li>
           <li role="none"><a href="https://www.youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener" role="menuitem">YouTube</a></li>
         </ul>
       </li>
-
-      <!-- CTA BUTTON -->
       <li class="nav-cta-item" role="none">
-        <a href="CTA_LINK" class="nav-cta" role="menuitem">Free 60' Session</a>
+        <a href="mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session" class="nav-cta" role="menuitem">Free 60' Session</a>
       </li>
-
     </ul>
   </div>
 </nav>
@@ -539,44 +186,38 @@
     <div class="hero-photo">
       <picture>
         <source srcset="/img/aggelos.webp" type="image/webp">
-        <img
-          src="/img/aggelos.jpg"
-          alt="Aggelos Mouzakitis, executive therapist and growth advisor"
-          width="160"
-          height="160"
-          fetchpriority="high"
-        >
+        <img src="/img/aggelos.jpg" alt="Aggelos Mouzakitis, executive therapist and growth advisor" width="160" height="160" fetchpriority="high">
       </picture>
     </div>
     <div class="hero-text">
       <h1><p>I'm Aggelos Mouzakitis, a licensed psychotherapist and executive coach for senior tech professionals, based in Ireland.</p></h1>
-      <p>I've spent 12 years inside the system that produces the problems I now help people solve. My coaching is direct, my work is diagnostic, and the duality is the point.</p>
+      <p>I've spent 18+ years working in B2B SaaS before training as a therapist. That background shapes how I work with clients now.</p>
     </div>
   </header>
 
   <section class="section">
     <h2>Therapy &amp; executive coaching</h2>
     <div class="section-content">
-      <p>I work with founders, executives, and senior tech leaders on the harder, less visible challenges that come with operating at a high level: the identity questions that success doesn't answer, the performance pressure that leaks into everything, the isolation that nobody around you is equipped to name.</p>
-      <p>Most therapists don't understand your world. I do. I've sat in the rooms where growth targets get set, where pricing gets debated, where the decision to cut a team happens in a Tuesday afternoon meeting. That context matters when someone walks into a session carrying what it actually costs to lead.</p>
-      <p>I write about the psychology of ambition, identity and performance at <a href="https://undisguised.io" target="_blank">Undisguised</a>, and work with senior professionals in 1:1 sessions to go deeper into what the essays can only point at. The writing names what most people in high-stakes careers feel but rarely say out loud. The private work is where we actually change it.</p>
+      <p>I work with founders, executives, and senior tech leaders on the things that tend to get harder with seniority, not easier: questions about identity, the pressure to keep performing, and the kind of isolation that comes with being the person everyone else relies on.</p>
+      <p>Because I've worked in the same environments my clients come from, we spend less time on context and more time on what's actually going on. I know what these roles demand, and I know what they cost.</p>
+      <p>I write about the psychology of ambition, identity and performance at <a href="https://undisguised.io" target="_blank">Undisguised</a>, and work with senior professionals in 1:1 sessions to go deeper into what the writing can only point at.</p>
     </div>
   </section>
 
   <section class="section">
     <h2>Why the duality matters</h2>
     <div class="section-content">
-      <p>I'm a licensed psychotherapist who is also a working growth professional with deep B2B SaaS experience. In both roles I do the same thing: connect the right insights, spot the patterns others miss, and design strategies that actually work, whether for a product or a person.</p>
-      <p>The growth career isn't a second identity. It's the reason the therapy works. I don't need you to explain your context, your org dynamics, or what "series B pressure" feels like. I already know. That saves you time and lets us get to the real work faster.</p>
+      <p>I'm a licensed psychotherapist who also works as a growth professional in B2B SaaS. Both roles involve the same kind of work: finding the real problem underneath the presenting one, seeing patterns others miss, and figuring out what's actually stuck.</p>
+      <p>The tech career isn't separate from the therapy. It means I already understand the context my clients are operating in, whether that's org politics, fundraising pressure, or the particular kind of exhaustion that comes from running a team through ambiguity. We don't have to start from scratch.</p>
     </div>
   </section>
 
   <section class="section">
     <h2>Product growth</h2>
     <div class="section-content">
-      <p>Over 12 years I've led growth strategy across companies at every stage, from early-stage startups to <a href="https://www.ibm.com" target="_blank">IBM</a>'s enterprise portfolio, spanning PLG, pricing, activation, and go-to-market. I've worked with 50+ companies, always embedded, always hands-on.</p>
-      <p>I help product-led companies turn usage into revenue. Your growth hire gets VP-level thinking without the VP-level hire. I work as a fractional growth advisor for SaaS founders and growth leaders on the problems that frameworks don't solve: activation that doesn't stick, pricing that confuses, funnels that leak in ways that aren't obvious.</p>
-      <p><a href="https://headofgrowth.io" target="_blank">See how I work with founders and growth teams →</a></p>
+      <p>I've spent 18+ years in growth strategy across companies at every stage, from early-stage startups to <a href="https://www.ibm.com" target="_blank">IBM</a>'s enterprise portfolio, covering PLG, pricing, activation, and go-to-market. I've worked with 50+ companies, always embedded, always hands-on.</p>
+      <p>I help product-led companies turn usage into revenue. I work as a fractional growth advisor for SaaS founders and growth leaders on the problems that frameworks don't reach: activation that doesn't stick, pricing that confuses, funnels that leak in ways nobody has noticed yet.</p>
+      <p><a href="https://headofgrowth.io" target="_blank">How I work with founders and growth teams &rarr;</a></p>
     </div>
   </section>
 
@@ -588,79 +229,53 @@
       <div class="link-row"><a href="https://www.linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener">LinkedIn</a></div>
       <div class="link-row"><a href="https://undisguised.io" target="_blank" rel="noopener">Undisguised</a></div>
       <div class="link-row"><a href="https://headofgrowth.io" target="_blank" rel="noopener">headofgrowth.io</a></div>
-      <div class="link-row"><a href="/cdn-cgi/l/email-protection#b1d0d6d6d4dddec29fdcdec4cbd0dad8c5d8c2f1d6dcd0d8dd9fd2dedc"><span class="__cf_email__" data-cfemail="e9888e8e8c85869ac784869c938882809d809aa98e84888085c78a8684">[email&#160;protected]</span></a></div>
+      <div class="link-row"><a href="mailto:aggelos.mouzakitis@gmail.com">aggelos.mouzakitis@gmail.com</a></div>
     </div>
   </nav>
 
-  <footer class="footer">© Aggelos Mouzakitis</footer>
+  <footer class="footer">&copy; Aggelos Mouzakitis</footer>
 
 </main>
 
-<!-- DROPDOWN LOGIC -->
-<!-- JS is only needed for mobile: hamburger toggle and tap-to-open dropdowns -->
-<!-- Desktop dropdowns are pure CSS hover — no JS involved -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   (function () {
     'use strict';
-
-    /* --- Hamburger toggle (mobile) --- */
     var hamburger = document.querySelector('.nav-hamburger');
     var navMenu = document.getElementById('nav-menu');
-
     hamburger.addEventListener('click', function () {
       var expanded = hamburger.getAttribute('aria-expanded') === 'true';
       hamburger.setAttribute('aria-expanded', String(!expanded));
       navMenu.setAttribute('data-open', String(!expanded));
     });
-
-    /* --- Mobile dropdown toggles (tap to open) --- */
     var dropdowns = document.querySelectorAll('.nav-dropdown');
-
     dropdowns.forEach(function (dd) {
       var toggle = dd.querySelector('.nav-dropdown-toggle');
-
       toggle.addEventListener('click', function (e) {
-        /* Only use JS toggle on mobile (CSS hover handles desktop) */
         if (window.innerWidth > 640) return;
-
         e.stopPropagation();
         var isOpen = dd.getAttribute('data-open') === 'true';
-
-        /* Close all other dropdowns */
         dropdowns.forEach(function (other) {
-          if (other !== dd) {
-            other.setAttribute('data-open', 'false');
-            other.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
-          }
+          if (other !== dd) { other.setAttribute('data-open', 'false'); other.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false'); }
         });
-
         dd.setAttribute('data-open', String(!isOpen));
         toggle.setAttribute('aria-expanded', String(!isOpen));
       });
-
-      /* Keyboard: Escape closes dropdown */
       toggle.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-          dd.setAttribute('data-open', 'false');
-          toggle.setAttribute('aria-expanded', 'false');
-          toggle.focus();
-        }
+        if (e.key === 'Escape') { dd.setAttribute('data-open', 'false'); toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); }
       });
-
       dd.querySelectorAll('.nav-dropdown-menu a').forEach(function (item) {
         item.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape') {
-            dd.setAttribute('data-open', 'false');
-            toggle.setAttribute('aria-expanded', 'false');
-            toggle.focus();
-          }
+          if (e.key === 'Escape') { dd.setAttribute('data-open', 'false'); toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); }
         });
       });
     });
-
-    /* Close mobile dropdowns when tapping outside */
     document.addEventListener('click', function () {
       if (window.innerWidth > 640) return;
-      dropdowns.forEach(function (dd) {
-        dd.setAttribute('data-open', 'false');
-        dd.querySelector('.nav-dropdown-t
+      dropdowns.forEach(function (dd) { dd.setAttribute('data-open', 'false'); dd.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false'); });
+    });
+    document.querySelector('.site-nav').addEventListener('click', function (e) { if (window.innerWidth > 640) return; e.stopPropagation(); });
+  })();
+</script>
+
+</body>
+</html>
