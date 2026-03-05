@@ -281,11 +281,4 @@
       toggle.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') { dd.setAttribute('data-open', 'false'); toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); }
       });
-      dd.querySelectorAll('.nav-dropdown-menu a').forEach(function (item) {
-        item.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape') { dd.setAttribute('data-open', 'false'); toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); }
-        });
-      });
-    });
-    document.addEventListener('click', function () {
-      if (window.innerWidth > 640) return;
+      dd.querySelec
