@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Aggelos Mouzakitis | Executive Therapist &amp; Growth Advisor for Senior Tech Leaders</title>
 <meta name="description" content="Licensed psychotherapist and executive coach for senior tech professionals. 18+ years in B2B SaaS growth. I work with the things that success doesn't fix.">
 <link rel="canonical" href="https://aggelosmouzakitis.com">
@@ -143,6 +146,21 @@
     .section { grid-template-columns: 1fr; gap: 0.3rem 0; margin-bottom: 2.5rem; }
     h2 { margin-bottom: 0.6rem; }
   }
+
+  /* Mobile readability improvements */
+  @media (max-width: 640px) {
+    body { font-size: 16px; line-height: 1.75; }
+    h1 { font-size: 16px; line-height: 1.75; }
+    h2 { font-size: 12px; }
+    h3 { font-size: 16px; }
+    .nav-dropdown-toggle { font-size: 12px; }
+    .nav-cta { font-size: 12px; }
+    .site-nav-inner a { font-size: 12px; }
+    .nav-links a { font-size: 12px; }
+    .nav-dropdown-menu li a { font-size: 12px; }
+    .cta-button { font-size: 12px; padding: 0.6rem 1.2rem; }
+    .footer { font-size: 13px; }
+  }
 </style>
 </head>
 <body>
@@ -173,7 +191,7 @@
         </ul>
       </li>
       <li class="nav-cta-item" role="none">
-        <a href="mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session" class="nav-cta" role="menuitem">Free 60' Session</a>
+        <a href="/cdn-cgi/l/email-protection#c5a4a2a2a0a9aab6eba8aab0bfa4aeacb1acb685a2a8a4aca9eba6aaa8fab6b0a7afa0a6b1f883b7a0a0e0f7f5f3f5e8a8acabb0b1a0e0f7f5b6a0b6b6acaaab" class="nav-cta" role="menuitem">Free 60' Session</a>
       </li>
     </ul>
   </div>
@@ -229,7 +247,7 @@
       <div class="link-row"><a href="https://www.linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener">LinkedIn</a></div>
       <div class="link-row"><a href="https://undisguised.io" target="_blank" rel="noopener">Undisguised</a></div>
       <div class="link-row"><a href="https://headofgrowth.io" target="_blank" rel="noopener">headofgrowth.io</a></div>
-      <div class="link-row"><a href="mailto:aggelos.mouzakitis@gmail.com">aggelos.mouzakitis@gmail.com</a></div>
+      <div class="link-row"><a href="/cdn-cgi/l/email-protection#12737575777e7d613c7f7d676873797b667b6152757f737b7e3c717d7f"><span class="__cf_email__" data-cfemail="e9888e8e8c85869ac784869c938882809d809aa98e84888085c78a8684">[email&#160;protected]</span></a></div>
     </div>
   </nav>
 
@@ -237,7 +255,7 @@
 
 </main>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   (function () {
     'use strict';
     var hamburger = document.querySelector('.nav-hamburger');
@@ -271,11 +289,3 @@
     });
     document.addEventListener('click', function () {
       if (window.innerWidth > 640) return;
-      dropdowns.forEach(function (dd) { dd.setAttribute('data-open', 'false'); dd.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false'); });
-    });
-    document.querySelector('.site-nav').addEventListener('click', function (e) { if (window.innerWidth > 640) return; e.stopPropagation(); });
-  })();
-</script>
-
-</body>
-</html>
