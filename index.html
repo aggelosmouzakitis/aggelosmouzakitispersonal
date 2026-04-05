@@ -7,7 +7,7 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Aggelos Mouzakitis | Burnout Coach &amp; Licensed Psychotherapist for High-Functioning People in Tech</title>
-<meta name="description" content="Licensed psychotherapist and burnout coach for high-functioning people in tech. 18+ years in B2B SaaS. I help founders, executives, and senior professionals break performance dependence before it costs them what they built.">>
+<meta name="description" content="Licensed psychotherapist and burnout coach for high-functioning people in tech. 18+ years in B2B SaaS. I help founders, executives, and senior professionals break performance dependence before it costs them what they built.">
 <link rel="canonical" href="https://aggelosmouzakitis.com">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Aggelos Mouzakitis | Burnout Coach &amp; Licensed Psychotherapist for Tech Leaders">
@@ -89,6 +89,9 @@ h2{font-family:inherit;font-size:11px;font-weight:400;letter-spacing:.12em;text-
 .section-content p{margin-bottom:1.2rem;}
 .section-content p:last-child{margin-bottom:0;}
 .link-row{margin-bottom:.4rem;}
+.cta-block{margin-top:.5rem;}
+.cta-button{font-family:inherit;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.4);text-decoration:none;padding:.5rem 1.1rem;display:inline-block;transition:border-color .15s;}
+.cta-button:hover{border-color:#fff;color:#fff;text-decoration:none;}
 .sep{border:none;border-top:1px solid #ccc;margin:2.5rem 0;}
 .footer{margin-top:3rem;font-size:12px;color:#aaa;}
 @media(max-width:640px){
@@ -190,11 +193,13 @@ h2{font-size:12px;}
       <div class="link-row"><a href="https://www.linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener">LinkedIn</a></div>
       <div class="link-row"><a href="https://undisguised.io" target="_blank" rel="noopener">Undisguised</a></div>
       <div class="link-row"><a href="https://headofgrowth.io" target="_blank" rel="noopener">headofgrowth.io</a></div>
-      <div class="link-row"><a href="mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session"><span class="__cf_email__" data-cfemail="f1909696949d9e82df9c9e848b909a98859882b1969c90989ddf929e9c">[email&#160;protected]</span></a></div>
+      <div class="link-row"><a href="https://www.youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener">YouTube</a></div>
+      <div class="link-row"><a href="mailto:aggelos.mouzakitis@gmail.com">aggelos.mouzakitis&#64;gmail.com</a></div>
     </div>
   </nav>
   <footer class="footer">&copy; Aggelos Mouzakitis</footer>
 </main>
+<script>
 (function(){
 var h=document.querySelector('.nav-hamburger');
 var m=document.getElementById('nav-menu');
@@ -216,4 +221,12 @@ dd.setAttribute('data-open',String(!open));
 tog.setAttribute('aria-expanded',String(!open));
 });
 });
-document.addEventListener('click',function
+document.addEventListener('click',function(){
+if(window.innerWidth>640)return;
+dds.forEach(function(dd){dd.setAttribute('data-open','false');dd.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded','false');});
+});
+document.querySelector('.site-nav').addEventListener('click',function(e){if(window.innerWidth>640)return;e.stopPropagation();});
+})();
+</script>
+</body>
+</html>
