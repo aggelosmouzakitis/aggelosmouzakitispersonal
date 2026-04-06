@@ -249,8 +249,12 @@
   <footer class="footer"><p>&copy; <a href="https://aggelosmouzakitis.com" style="color:#aaa;">Aggelos Mouzakitis</a></p></footer>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function(){
+  emailjs.init({
+    publicKey: 'bfBcHLXj2nKaev_lT'
+  });
   var h=document.querySelector('.nav-hamburger');
   var m=document.getElementById('nav-menu');
   if(h&&m){
@@ -458,6 +462,33 @@
     });
   }
 
+  function buildSectionBreakdownText(){
+    var sectionResults = getSectionResults();
+    return sectionResults.map(function(section){
+      return section.title + ': ' + section.label + ' (' + formatScore(section.score) + ' / 5.00)';
+    }).join('\n');
+  }
+
+  function buildAnswersText(){
+    return flatQuestions.map(function(question, index){
+      var answer = answers[question.key];
+      var answerLabel = answer === undefined ? 'No answer' : (answer === 'na' ? 'N/A' : String(answer));
+      return (index + 1) + '. [' + question.sectionTitle + '] ' + question.text + ' => ' + answerLabel;
+    }).join('\n');
+  }
+
+  function sendResultsEmail(){
+    var overallScore = getOverallScore();
+    return emailjs.send('service_i4xq7vg', 'template_wdsrbdo', {
+      user_email: emailInput.value.trim(),
+      overall_score: formatScore(overallScore),
+      overall_grade: getOverallGrade(overallScore),
+      section_breakdown: buildSectionBreakdownText(),
+      all_answers: buildAnswersText(),
+      page_url: window.location.href
+    });
+  }
+
   function showScreen(screen){
     [introScreen, questionScreen, gateScreen, resultsScreen].forEach(function(el){ el.classList.add('hidden'); });
     screen.classList.remove('hidden');
@@ -541,8 +572,23 @@
       emailInput.focus();
       return;
     }
-    renderResults();
-    showScreen(resultsScreen);
+
+    showResultsBtn.disabled = true;
+    showResultsBtn.textContent = 'Sending...';
+
+    sendResultsEmail()
+      .then(function(){
+        renderResults();
+        showScreen(resultsScreen);
+      })
+      .catch(function(error){
+        console.error('EmailJS error:', error);
+        alert('Your results could not be sent right now. Please try again.');
+      })
+      .finally(function(){
+        showResultsBtn.disabled = false;
+        showResultsBtn.textContent = 'Show results';
+      });
   });
 
   retakeBtn.addEventListener('click', function(){
