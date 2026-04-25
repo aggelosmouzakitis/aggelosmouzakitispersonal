@@ -164,6 +164,7 @@ h2{margin-bottom:.6rem;}body{font-size:16px;line-height:1.75;}h1{font-size:16px;
   </section>
   <footer class="footer"><p>&copy; <a href="https://aggelosmouzakitis.com" style="color:#aaa;">Aggelos Mouzakitis</a></p></footer>
 </main>
+<script>
 (function(){
 var h=document.querySelector('.nav-hamburger');
 var m=document.getElementById('nav-menu');
@@ -185,4 +186,12 @@ dd.setAttribute('data-open',String(!open));
 tog.setAttribute('aria-expanded',String(!open));
 });
 });
-document.addEventListen
+document.addEventListener('click',function(){
+if(window.innerWidth>640)return;
+dds.forEach(function(dd){dd.setAttribute('data-open','false');dd.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded','false');});
+});
+document.querySelector('.site-nav').addEventListener('click',function(e){if(window.innerWidth>640)return;e.stopPropagation();});
+})();
+</script>
+</body>
+</html>
