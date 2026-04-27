@@ -1,4 +1,6 @@
-// diagnostic.jsx — Interactive burnout diagnostic with EmailJS restored
+// diagnostic.jsx — Interactive burnout diagnostic with EmailJS + Google Sheets tracking
+
+const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyENlzB0Ak1vE-0ei61AeKdAweIKnCbOGNaS7atVh9PdqHTXpQfAEOlO_wvUHGhYtve/exec';
 
 if (window.emailjs) {
   emailjs.init({
@@ -7,80 +9,86 @@ if (window.emailjs) {
 }
 
 const DIAG_SECTIONS = [
-{ id: 'self-worth', title: 'Self-worth through achievement', questions: [
-  'A bad period at work can mess with my confidence significantly.',
-  'When I’m not doing well professionally, I tend to become harsher on myself.',
-  'It’s easier to feel good about myself when things are going well professionally.']
-},
-{ id: 'shame-guilt-pressure', title: 'Shame, guilt, and pressure', questions: [
-  'I find it hard to relax when there is still work to be done.',
-  'I can sit down to rest and still feel like I should be productive.',
-  'I tend to focus on what’s still missing.']
-},
-{ id: 'comparison', title: 'Comparison, shame, and not-enoughness', questions: [
-  'Seeing other people do well makes me worry about my performance.',
-  'When someone in my close network is moving fast, I tend to think about where I’m falling short.',
-  'I can have objectively good results and still feel behind my goals.']
-},
-{ id: 'vulnerability', title: 'Fear of vulnerability', questions: [
-  'I feel uneasy with the idea of people close to me seeing me weak.',
-  'If I’m struggling, my instinct is usually to keep it to myself.',
-  'I’d rather deal with something alone than let people see me unsure or messy.']
-},
-{ id: 'grind', title: 'Pride in grind and pressure', questions: [
-  'I’m used to carrying a lot without complaining about it.',
-  'Part of me takes pride in how much pressure I can handle.',
-  'Slowing down can feel uncomfortable, even when it seems like I need it.']
-},
-{ id: 'identity', title: 'Identity and persona', questions: [
-  'People know me as someone who gets things done.',
-  'Being capable is a big part of how I see myself.',
-  'Letting people down hits me hard, especially when they expect a lot from me.',
-  'People often tell me I am too hard on myself or that I push myself too much.']
-},
-{ id: 'relationships', title: 'Interpersonal relationships', questions: [
-  'When work is heavy, I have less patience for people who do not get it.',
-  'When I’m stressed, I can become harder to interact with.',
-  'There are times when I feel too loaded to really be present with other people.',
-  'My relationship with my partner has suffered because of how I carry stress.',
-  'There are times when I feel distant from my partner, or they feel unsupported by me.']
-},
-{ id: 'drive-meaning', title: 'Loss of drive and meaning', questions: [
-  'I’ve started feeling resentful about parts of work I used to take pride in.',
-  'I miss the times when work felt easier to enjoy.']
-},
-{ id: 'numbness', title: 'Emotional numbness and detachment', questions: [
-  'I can get through a full day and still feel emotionally flat.',
-  'Things that used to matter to me don’t land the same way now.',
-  'I can be productive and still feel disconnected from what I’m doing.',
-  'I often feel less like myself and more like I’m just operating.',
-  'There are moments when I wonder what all this effort is really for.']
-},
-{ id: 'cynicism', title: 'Cynicism and depersonalisation', questions: [
-  'I’ve become more cynical about work than I used to be.',
-  'Some parts of work now feel mechanical, even when I do them well.',
-  'There are moments when I feel more detached than engaged.']
-},
-{ id: 'nervous-system', title: 'Nervous-system overload', questions: [
-  'I can be tired and still feel unable to fully settle.',
-  'Sleep does not always leave me feeling properly reset.',
-  'Stress has started showing up in my body through things like headaches, muscle tension, stomach issues, nausea, or similar symptoms.',
-  'My body can stay tense even when I’m not actively working.']
-},
-{ id: 'tech-activation', title: 'Tech-specific constant activation', questions: [
-  'Even when I’m off, part of me still feels on call.',
-  'I check work things in moments that should be personal time.',
-  'It’s hard for me to feel fully off duty.',
-  'My mind stays connected to work more than I want.',
-  'I feel a pull to reply quickly even when I don’t have to.',
-  'I often turn to AI, self-help content, or similar inputs to figure myself out, but it rarely leads to real change.',
-  'I consume advice about burnout, stress, or performance, but still find myself stuck in the same patterns.']
-}];
+  { id: 'self-worth', title: 'Self-worth through achievement', sheetKey: 'self_worth', questions: [
+    'A bad period at work can mess with my confidence significantly.',
+    'When I’m not doing well professionally, I tend to become harsher on myself.',
+    'It’s easier to feel good about myself when things are going well professionally.'
+  ]},
+  { id: 'shame-guilt-pressure', title: 'Shame, guilt, and pressure', sheetKey: 'shame_guilt_pressure', questions: [
+    'I find it hard to relax when there is still work to be done.',
+    'I can sit down to rest and still feel like I should be productive.',
+    'I tend to focus on what’s still missing.'
+  ]},
+  { id: 'comparison', title: 'Comparison, shame, and not-enoughness', sheetKey: 'comparison', questions: [
+    'Seeing other people do well makes me worry about my performance.',
+    'When someone in my close network is moving fast, I tend to think about where I’m falling short.',
+    'I can have objectively good results and still feel behind my goals.'
+  ]},
+  { id: 'vulnerability', title: 'Fear of vulnerability', sheetKey: 'vulnerability', questions: [
+    'I feel uneasy with the idea of people close to me seeing me weak.',
+    'If I’m struggling, my instinct is usually to keep it to myself.',
+    'I’d rather deal with something alone than let people see me unsure or messy.'
+  ]},
+  { id: 'grind', title: 'Pride in grind and pressure', sheetKey: 'grind', questions: [
+    'I’m used to carrying a lot without complaining about it.',
+    'Part of me takes pride in how much pressure I can handle.',
+    'Slowing down can feel uncomfortable, even when it seems like I need it.'
+  ]},
+  { id: 'identity', title: 'Identity and persona', sheetKey: 'identity', questions: [
+    'People know me as someone who gets things done.',
+    'Being capable is a big part of how I see myself.',
+    'Letting people down hits me hard, especially when they expect a lot from me.',
+    'People often tell me I am too hard on myself or that I push myself too much.'
+  ]},
+  { id: 'relationships', title: 'Interpersonal relationships', sheetKey: 'relationships', questions: [
+    'When work is heavy, I have less patience for people who do not get it.',
+    'When I’m stressed, I can become harder to interact with.',
+    'There are times when I feel too loaded to really be present with other people.',
+    'My relationship with my partner has suffered because of how I carry stress.',
+    'There are times when I feel distant from my partner, or they feel unsupported by me.'
+  ]},
+  { id: 'drive-meaning', title: 'Loss of drive and meaning', sheetKey: 'drive_meaning', questions: [
+    'I’ve started feeling resentful about parts of work I used to take pride in.',
+    'I miss the times when work felt easier to enjoy.'
+  ]},
+  { id: 'numbness', title: 'Emotional numbness and detachment', sheetKey: 'numbness', questions: [
+    'I can get through a full day and still feel emotionally flat.',
+    'Things that used to matter to me don’t land the same way now.',
+    'I can be productive and still feel disconnected from what I’m doing.',
+    'I often feel less like myself and more like I’m just operating.',
+    'There are moments when I wonder what all this effort is really for.'
+  ]},
+  { id: 'cynicism', title: 'Cynicism and depersonalisation', sheetKey: 'cynicism', questions: [
+    'I’ve become more cynical about work than I used to be.',
+    'Some parts of work now feel mechanical, even when I do them well.',
+    'There are moments when I feel more detached than engaged.'
+  ]},
+  { id: 'nervous-system', title: 'Nervous-system overload', sheetKey: 'nervous_system', questions: [
+    'I can be tired and still feel unable to fully settle.',
+    'Sleep does not always leave me feeling properly reset.',
+    'Stress has started showing up in my body through things like headaches, muscle tension, stomach issues, nausea, or similar symptoms.',
+    'My body can stay tense even when I’m not actively working.'
+  ]},
+  { id: 'tech-activation', title: 'Tech-specific constant activation', sheetKey: 'tech_activation', questions: [
+    'Even when I’m off, part of me still feels on call.',
+    'I check work things in moments that should be personal time.',
+    'It’s hard for me to feel fully off duty.',
+    'My mind stays connected to work more than I want.',
+    'I feel a pull to reply quickly even when I don’t have to.',
+    'I often turn to AI, self-help content, or similar inputs to figure myself out, but it rarely leads to real change.',
+    'I consume advice about burnout, stress, or performance, but still find myself stuck in the same patterns.'
+  ]}
+];
 
 const FLAT_QUESTIONS = [];
 DIAG_SECTIONS.forEach((section) => {
   section.questions.forEach((text, index) => {
-    FLAT_QUESTIONS.push({ key: section.id + '-' + index, sectionId: section.id, sectionTitle: section.title, text });
+    FLAT_QUESTIONS.push({
+      key: section.id + '-' + index,
+      sectionId: section.id,
+      sectionTitle: section.title,
+      text
+    });
   });
 });
 
@@ -133,7 +141,9 @@ function DiagnosticPage() {
   const [results, setResults] = useState(null);
   const mainRef = useRef(null);
 
-  const scrollTop = () => { if (mainRef.current) mainRef.current.scrollTop = 0; };
+  const scrollTop = () => {
+    if (mainRef.current) mainRef.current.scrollTop = 0;
+  };
 
   const totalQ = FLAT_QUESTIONS.length;
   const answered = Object.keys(answers).filter((k) => answers[k] !== undefined).length;
@@ -151,7 +161,14 @@ function DiagnosticPage() {
       const answeredCount = keys.filter((k) => answers[k] !== undefined).length;
       const threshold = Math.ceil(keys.length * 0.7);
       const score = answeredCount >= threshold ? avg(nums) : null;
-      return { title: section.title, score, label: getSectionLabel(score) };
+
+      return {
+        id: section.id,
+        title: section.title,
+        sheetKey: section.sheetKey,
+        score,
+        label: getSectionLabel(score)
+      };
     });
   }
 
@@ -169,14 +186,6 @@ function DiagnosticPage() {
     }).join('\n');
   }
 
-  function sendResultsEmail(payload) {
-    if (!window.emailjs) {
-      return Promise.reject(new Error('EmailJS is not loaded'));
-    }
-
-    return emailjs.send('service_i4xq7vg', 'template_wdsrbdo', payload);
-  }
-
   function calculateResults() {
     const overall = getOverallScore();
     const sections = getSectionResults();
@@ -189,6 +198,52 @@ function DiagnosticPage() {
     };
   }
 
+  function sendResultsEmail(payload) {
+    if (!window.emailjs) {
+      return Promise.reject(new Error('EmailJS is not loaded'));
+    }
+
+    return emailjs.send('service_i4xq7vg', 'template_wdsrbdo', payload);
+  }
+
+  function sendResultsToSheet(calculated, trimmedEmail) {
+    const sectionScores = {};
+
+    calculated.sections.forEach((section) => {
+      sectionScores[section.sheetKey] = fmt(section.score);
+    });
+
+    return fetch(GOOGLE_SHEET_WEB_APP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify({
+        email: trimmedEmail,
+        overall_score: fmt(calculated.overall),
+        overall_grade: calculated.grade,
+
+        self_worth: sectionScores.self_worth || '',
+        shame_guilt_pressure: sectionScores.shame_guilt_pressure || '',
+        comparison: sectionScores.comparison || '',
+        vulnerability: sectionScores.vulnerability || '',
+        grind: sectionScores.grind || '',
+        identity: sectionScores.identity || '',
+        relationships: sectionScores.relationships || '',
+        drive_meaning: sectionScores.drive_meaning || '',
+        numbness: sectionScores.numbness || '',
+        cynicism: sectionScores.cynicism || '',
+        nervous_system: sectionScores.nervous_system || '',
+        tech_activation: sectionScores.tech_activation || '',
+
+        section_breakdown: buildSectionBreakdownText(calculated.sections),
+        all_answers: buildAnswersText(),
+        page_url: window.location.href
+      })
+    });
+  }
+
   function handleShowResults() {
     const trimmedEmail = email.trim();
 
@@ -198,21 +253,24 @@ function DiagnosticPage() {
 
     setSending(true);
 
-    sendResultsEmail({
-      user_email: trimmedEmail,
-      overall_score: fmt(calculated.overall),
-      overall_grade: calculated.grade,
-      section_breakdown: buildSectionBreakdownText(calculated.sections),
-      all_answers: buildAnswersText(),
-      page_url: window.location.href
-    })
+    Promise.all([
+      sendResultsEmail({
+        user_email: trimmedEmail,
+        overall_score: fmt(calculated.overall),
+        overall_grade: calculated.grade,
+        section_breakdown: buildSectionBreakdownText(calculated.sections),
+        all_answers: buildAnswersText(),
+        page_url: window.location.href
+      }),
+      sendResultsToSheet(calculated, trimmedEmail)
+    ])
       .then(() => {
         setResults(calculated);
         setScreen('results');
         setTimeout(scrollTop, 50);
       })
       .catch((error) => {
-        console.error('EmailJS error:', error);
+        console.error('Submission error:', error);
         alert('Your results could not be sent right now. Please try again.');
       })
       .finally(() => {
@@ -231,22 +289,43 @@ function DiagnosticPage() {
     card: { border: '1px solid rgba(40,39,38,.15)', padding: '1rem' },
     note: { fontSize: '13px', color: '#777', lineHeight: 1.7 },
     cta: {
-      fontFamily: 'inherit', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase',
-      color: '#F4F2F0', background: '#282726', border: '1px solid #282726',
-      padding: '.8rem 1.2rem', display: 'inline-block', cursor: 'pointer'
+      fontFamily: 'inherit',
+      fontSize: '11px',
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: '#F4F2F0',
+      background: '#282726',
+      border: '1px solid #282726',
+      padding: '.8rem 1.2rem',
+      display: 'inline-block',
+      cursor: 'pointer'
     },
     ctaSec: { background: 'transparent', color: '#282726', borderColor: 'rgba(40,39,38,.3)' },
     optionBtn: (selected) => ({
-      width: '100%', textAlign: 'left', border: selected ? '1px solid #00bf63' : '1px solid rgba(40,39,38,.15)',
-      padding: '1rem', borderRadius: '8px', background: selected ? '#00bf63' : 'transparent',
-      color: selected ? '#fff' : '#282726', fontFamily: 'inherit', fontSize: '14px', lineHeight: 1.7,
-      cursor: 'pointer', marginBottom: '.75rem'
+      width: '100%',
+      textAlign: 'left',
+      border: selected ? '1px solid #00bf63' : '1px solid rgba(40,39,38,.15)',
+      padding: '1rem',
+      borderRadius: '8px',
+      background: selected ? '#00bf63' : 'transparent',
+      color: selected ? '#fff' : '#282726',
+      fontFamily: 'inherit',
+      fontSize: '14px',
+      lineHeight: 1.7,
+      cursor: 'pointer',
+      marginBottom: '.75rem'
     }),
     progressLine: { height: '1px', background: 'rgba(40,39,38,.12)', position: 'relative', marginTop: '.8rem' },
     progressFill: (pct) => ({ height: '1px', background: '#00bf63', width: pct + '%', transition: 'width .2s ease' }),
     sectionRow: {
-      border: '1px solid rgba(40,39,38,.15)', padding: '1rem', borderRadius: '8px',
-      display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', marginBottom: '.75rem'
+      border: '1px solid rgba(40,39,38,.15)',
+      padding: '1rem',
+      borderRadius: '8px',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      gap: '1rem',
+      marginBottom: '.75rem'
     },
     footer: { marginTop: '3rem', fontSize: '12px', color: '#777' }
   };
@@ -269,9 +348,13 @@ function DiagnosticPage() {
       </div>
 
       <p style={C.note}>This diagnostic is directional, not a clinical diagnosis.</p>
+
       <div style={{ marginTop: '2rem' }}>
-        <button style={C.cta} onClick={() => { setScreen('question'); setIdx(0); scrollTop(); }}>Start assessment</button>
+        <button style={C.cta} onClick={() => { setScreen('question'); setIdx(0); scrollTop(); }}>
+          Start assessment
+        </button>
       </div>
+
       <footer style={C.footer}>© Aggelos Mouzakitis</footer>
     </div>
   );
@@ -291,20 +374,26 @@ function DiagnosticPage() {
       </h2>
 
       {SCALE.map((opt) =>
-        <button key={opt.value} style={C.optionBtn(currentAnswer === opt.value)}
-          onClick={() => setAnswers((a) => ({ ...a, [currentQ.key]: opt.value }))}>
+        <button
+          key={opt.value}
+          style={C.optionBtn(currentAnswer === opt.value)}
+          onClick={() => setAnswers((a) => ({ ...a, [currentQ.key]: opt.value }))}
+        >
           {opt.label}
         </button>
       )}
 
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginTop: '2rem' }}>
-        <button style={{ ...C.cta, ...C.ctaSec, opacity: idx === 0 ? 0.4 : 1 }}
+        <button
+          style={{ ...C.cta, ...C.ctaSec, opacity: idx === 0 ? 0.4 : 1 }}
           disabled={idx === 0}
-          onClick={() => { setIdx((i) => i - 1); scrollTop(); }}>
+          onClick={() => { setIdx((i) => i - 1); scrollTop(); }}
+        >
           Back
         </button>
 
-        <button style={{ ...C.cta, opacity: currentAnswer === undefined ? 0.4 : 1 }}
+        <button
+          style={{ ...C.cta, opacity: currentAnswer === undefined ? 0.4 : 1 }}
           disabled={currentAnswer === undefined}
           onClick={() => {
             if (idx < totalQ - 1) {
@@ -314,7 +403,8 @@ function DiagnosticPage() {
               setScreen('gate');
               scrollTop();
             }
-          }}>
+          }}
+        >
           {idx === totalQ - 1 ? 'Continue' : 'Next'}
         </button>
       </div>
@@ -327,20 +417,39 @@ function DiagnosticPage() {
       <h1 style={C.h1}>Enter your email to view your result.</h1>
       <p style={C.p}>You'll see your burnout score and section breakdown immediately after this.</p>
 
-      <label style={{ display: 'block', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', color: '#888', marginBottom: '.6rem' }}>Email</label>
-      <input type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)}
+      <label style={{ display: 'block', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', color: '#888', marginBottom: '.6rem' }}>
+        Email
+      </label>
+
+      <input
+        type="email"
+        placeholder="you@example.com"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         style={{
-          width: '100%', border: '1px solid rgba(40,39,38,.2)', padding: '1rem',
-          borderRadius: '8px', background: 'transparent', color: '#282726',
-          fontFamily: 'inherit', fontSize: '14px', lineHeight: 1.7, outline: 'none'
+          width: '100%',
+          border: '1px solid rgba(40,39,38,.2)',
+          padding: '1rem',
+          borderRadius: '8px',
+          background: 'transparent',
+          color: '#282726',
+          fontFamily: 'inherit',
+          fontSize: '14px',
+          lineHeight: 1.7,
+          outline: 'none'
         }}
       />
 
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginTop: '2rem' }}>
-        <button style={{ ...C.cta, ...C.ctaSec }} onClick={() => { setScreen('question'); scrollTop(); }}>Back</button>
-        <button style={{ ...C.cta, opacity: !email.trim() || sending ? 0.4 : 1 }}
+        <button style={{ ...C.cta, ...C.ctaSec }} onClick={() => { setScreen('question'); scrollTop(); }}>
+          Back
+        </button>
+
+        <button
+          style={{ ...C.cta, opacity: !email.trim() || sending ? 0.4 : 1 }}
           disabled={!email.trim() || sending}
-          onClick={handleShowResults}>
+          onClick={handleShowResults}
+        >
           {sending ? 'Sending...' : 'Show results'}
         </button>
       </div>
@@ -369,10 +478,23 @@ function DiagnosticPage() {
       </div>
 
       <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
-        <button style={C.cta} onClick={() => { setAnswers({}); setIdx(0); setEmail(''); setResults(null); setScreen('intro'); scrollTop(); }}>
+        <button
+          style={C.cta}
+          onClick={() => {
+            setAnswers({});
+            setIdx(0);
+            setEmail('');
+            setResults(null);
+            setScreen('intro');
+            scrollTop();
+          }}
+        >
           Retake assessment
         </button>
-        <button style={{ ...C.cta, ...C.ctaSec }} onClick={() => window.print()}>Print result</button>
+
+        <button style={{ ...C.cta, ...C.ctaSec }} onClick={() => window.print()}>
+          Print result
+        </button>
       </div>
 
       <footer style={C.footer}>© Aggelos Mouzakitis</footer>
