@@ -1,6 +1,6 @@
 // diagnostic.jsx — Interactive burnout diagnostic with EmailJS + Google Sheets tracking
 
-const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyENlzB0Ak1vE-0ei61AeKdAweIKnCbOGNaS7atVh9PdqHTXpQfAEOlO_wvUHGhYtve/exec';
+const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby-gv3oCFT2q5KXvVnqRzS4PAzcMjPB8Gls5qodZJ3v4_9HKGqJHMdBCw7YYbEzIE2d/exec';
 
 if (window.emailjs) {
   emailjs.init({
