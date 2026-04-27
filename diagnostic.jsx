@@ -11,26 +11,26 @@ if (window.emailjs) {
 const DIAG_SECTIONS = [
   { id: 'self-worth', title: 'Self-worth through achievement', sheetKey: 'self_worth', questions: [
     'A bad period at work can mess with my confidence significantly.',
-    'When I’m not doing well professionally, I tend to become harsher on myself.',
-    'It’s easier to feel good about myself when things are going well professionally.'
+    'When I am not doing well professionally, I tend to become harsher on myself.',
+    'It is easier to feel good about myself when things are going well professionally.'
   ]},
   { id: 'shame-guilt-pressure', title: 'Shame, guilt, and pressure', sheetKey: 'shame_guilt_pressure', questions: [
     'I find it hard to relax when there is still work to be done.',
     'I can sit down to rest and still feel like I should be productive.',
-    'I tend to focus on what’s still missing.'
+    'I tend to focus on what is still missing.'
   ]},
   { id: 'comparison', title: 'Comparison, shame, and not-enoughness', sheetKey: 'comparison', questions: [
     'Seeing other people do well makes me worry about my performance.',
-    'When someone in my close network is moving fast, I tend to think about where I’m falling short.',
+    'When someone in my close network is moving fast, I tend to think about where I am falling short.',
     'I can have objectively good results and still feel behind my goals.'
   ]},
   { id: 'vulnerability', title: 'Fear of vulnerability', sheetKey: 'vulnerability', questions: [
     'I feel uneasy with the idea of people close to me seeing me weak.',
-    'If I’m struggling, my instinct is usually to keep it to myself.',
-    'I’d rather deal with something alone than let people see me unsure or messy.'
+    'If I am struggling, my instinct is usually to keep it to myself.',
+    'I would rather deal with something alone than let people see me unsure or messy.'
   ]},
   { id: 'grind', title: 'Pride in grind and pressure', sheetKey: 'grind', questions: [
-    'I’m used to carrying a lot without complaining about it.',
+    'I am used to carrying a lot without complaining about it.',
     'Part of me takes pride in how much pressure I can handle.',
     'Slowing down can feel uncomfortable, even when it seems like I need it.'
   ]},
@@ -42,24 +42,24 @@ const DIAG_SECTIONS = [
   ]},
   { id: 'relationships', title: 'Interpersonal relationships', sheetKey: 'relationships', questions: [
     'When work is heavy, I have less patience for people who do not get it.',
-    'When I’m stressed, I can become harder to interact with.',
+    'When I am stressed, I can become harder to interact with.',
     'There are times when I feel too loaded to really be present with other people.',
     'My relationship with my partner has suffered because of how I carry stress.',
     'There are times when I feel distant from my partner, or they feel unsupported by me.'
   ]},
   { id: 'drive-meaning', title: 'Loss of drive and meaning', sheetKey: 'drive_meaning', questions: [
-    'I’ve started feeling resentful about parts of work I used to take pride in.',
+    'I have started feeling resentful about parts of work I used to take pride in.',
     'I miss the times when work felt easier to enjoy.'
   ]},
   { id: 'numbness', title: 'Emotional numbness and detachment', sheetKey: 'numbness', questions: [
     'I can get through a full day and still feel emotionally flat.',
-    'Things that used to matter to me don’t land the same way now.',
-    'I can be productive and still feel disconnected from what I’m doing.',
-    'I often feel less like myself and more like I’m just operating.',
+    'Things that used to matter to me do not land the same way now.',
+    'I can be productive and still feel disconnected from what I am doing.',
+    'I often feel less like myself and more like I am just operating.',
     'There are moments when I wonder what all this effort is really for.'
   ]},
   { id: 'cynicism', title: 'Cynicism and depersonalisation', sheetKey: 'cynicism', questions: [
-    'I’ve become more cynical about work than I used to be.',
+    'I have become more cynical about work than I used to be.',
     'Some parts of work now feel mechanical, even when I do them well.',
     'There are moments when I feel more detached than engaged.'
   ]},
@@ -67,14 +67,14 @@ const DIAG_SECTIONS = [
     'I can be tired and still feel unable to fully settle.',
     'Sleep does not always leave me feeling properly reset.',
     'Stress has started showing up in my body through things like headaches, muscle tension, stomach issues, nausea, or similar symptoms.',
-    'My body can stay tense even when I’m not actively working.'
+    'My body can stay tense even when I am not actively working.'
   ]},
   { id: 'tech-activation', title: 'Tech-specific constant activation', sheetKey: 'tech_activation', questions: [
-    'Even when I’m off, part of me still feels on call.',
+    'Even when I am off, part of me still feels on call.',
     'I check work things in moments that should be personal time.',
-    'It’s hard for me to feel fully off duty.',
+    'It is hard for me to feel fully off duty.',
     'My mind stays connected to work more than I want.',
-    'I feel a pull to reply quickly even when I don’t have to.',
+    'I feel a pull to reply quickly even when I do not have to.',
     'I often turn to AI, self-help content, or similar inputs to figure myself out, but it rarely leads to real change.',
     'I consume advice about burnout, stress, or performance, but still find myself stuck in the same patterns.'
   ]}
@@ -216,9 +216,6 @@ function DiagnosticPage() {
     return fetch(GOOGLE_SHEET_WEB_APP_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8'
-      },
       body: JSON.stringify({
         email: trimmedEmail,
         overall_score: fmt(calculated.overall),
@@ -246,36 +243,28 @@ function DiagnosticPage() {
 
   function handleShowResults() {
     const trimmedEmail = email.trim();
-
     if (!trimmedEmail) return;
 
     const calculated = calculateResults();
-
     setSending(true);
 
-    Promise.all([
-      sendResultsEmail({
-        user_email: trimmedEmail,
-        overall_score: fmt(calculated.overall),
-        overall_grade: calculated.grade,
-        section_breakdown: buildSectionBreakdownText(calculated.sections),
-        all_answers: buildAnswersText(),
-        page_url: window.location.href
-      }),
-      sendResultsToSheet(calculated, trimmedEmail)
-    ])
-      .then(() => {
-        setResults(calculated);
-        setScreen('results');
-        setTimeout(scrollTop, 50);
-      })
-      .catch((error) => {
-        console.error('Submission error:', error);
-        alert('Your results could not be sent right now. Please try again.');
-      })
-      .finally(() => {
-        setSending(false);
-      });
+    sendResultsToSheet(calculated, trimmedEmail)
+      .catch((err) => console.error('Sheet error:', err));
+
+    sendResultsEmail({
+      user_email: trimmedEmail,
+      overall_score: fmt(calculated.overall),
+      overall_grade: calculated.grade,
+      section_breakdown: buildSectionBreakdownText(calculated.sections),
+      all_answers: buildAnswersText(),
+      page_url: window.location.href
+    })
+      .catch((err) => console.error('Email error:', err));
+
+    setResults(calculated);
+    setScreen('results');
+    setTimeout(scrollTop, 50);
+    setSending(false);
   }
 
   const currentQ = FLAT_QUESTIONS[idx];
@@ -339,7 +328,7 @@ function DiagnosticPage() {
       <p style={C.p}>It takes around 8 minutes. At the end, you'll get a burnout score, a grade, and a breakdown by section.</p>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', margin: '2rem 0' }}>
-        {[['Length', '45 questions'], ['Format', '1–5 scale + N/A'], ['Result', 'Score + section breakdown']].map(([label, value]) =>
+        {[['Length', '45 questions'], ['Format', '1-5 scale + N/A'], ['Result', 'Score + section breakdown']].map(([label, value]) =>
           <div key={label} style={C.card}>
             <div style={{ fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', color: '#888', marginBottom: '.5rem' }}>{label}</div>
             <div>{value}</div>
