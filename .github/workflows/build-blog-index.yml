@@ -12,52 +12,41 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Generate posts.json + pages
-        run: |
-          mkdir -p blog
-          echo "[" > blog/posts.json
-          first=true
+    - name: Generate posts.json + pages
+  run: |
+    mkdir -p blog
+    echo "[" > blog/posts.json
+    first=true
 
-          for file in blog/posts/*.md; do
-            title=$(grep '^title:' "$file" | cut -d ':' -f2- | sed 's/^ //')
-            date=$(grep '^date:' "$file" | cut -d ':' -f2- | sed 's/^ //')
-            slug=$(basename "$file" .md)
+    for file in blog/posts/*.md; do
+      slug=$(basename "$file" .md)
 
-            # JSON
-            if [ "$first" = true ]; then
-              first=false
-            else
-              echo "," >> blog/posts.json
-            fi
+      title=$(grep '^title:' "$file" | sed 's/title: //')
+      date=$(grep '^date:' "$file" | sed 's/date: //')
 
-            echo "{\"title\":\"$title\",\"date\":\"$date\",\"slug\":\"$slug\"}" >> blog/posts.json
+      if [ "$first" = true ]; then
+        first=false
+      else
+        echo "," >> blog/posts.json
+      fi
 
-            # Create folder page
-            mkdir -p blog/$slug
+      echo "{\"title\":\"$title\",\"date\":\"$date\",\"slug\":\"$slug\"}" >> blog/posts.json
 
-            cat > blog/$slug/index.html <<EOF
-<!DOCTYPE html>
+      mkdir -p "blog/$slug"
+
+      echo "<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>$title</title>
+<meta charset='UTF-8'>
+<title>$title</title>
 </head>
 <body>
-  <script>
-    window.location.href = "/blog/post.html?slug=$slug";
-  </script>
+<script>
+window.location.href = '/blog/post.html?slug=$slug';
+</script>
 </body>
-</html>
-EOF
+</html>" > "blog/$slug/index.html"
 
-          done
+    done
 
-          echo "]" >> blog/posts.json
-
-      - name: Commit changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add blog/
-          git commit -m "update blog pages" || echo "no changes"
-          git push
+    echo "]" >> blog/posts.json
