@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog Post | Aggelos Mouzakitis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body { background:#F4F2F0; color:#282726; font-family:monospace; line-height:1.8; margin:0; }
+    main { max-width:740px; margin:0 auto; padding:4rem 2rem; }
+    a { color:#00bf63; }
+    .eyebrow { font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:#777; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><a href="/blog/">Back to blog</a></p>
+    <article id="post">Loading post...</article>
+  </main>
+
+  <script>
+    function parseFrontmatter(text) {
+      const match = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+      if (!match) return { data: {}, body: text };
+
+      const data = {};
+      match[1].split("\n").forEach(line => {
+        const [key, ...rest] = line.split(":");
+        if (!key || !rest.length) return;
+        data[key.trim()] = rest.join(":").trim().replace(/^"|"$/g, "");
+      });
+
+      return { data, body: match[2] };
+    }
+
+    async function loadPost() {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get("slug");
+
+      if (!slug) {
+        document.getElementById("post").innerHTML = "<p>No post selected.</p>";
+        return;
+      }
+
+      const res = await fetch(`/blog/posts/${slug}.md`);
+
+      if (!res.ok) {
+        document.getElementById("post").innerHTML = "<p>Post not found.</p>";
+        return;
+      }
+
+      const text = await res.text();
+      const { data, body } = parseFrontmatter(text);
+
+      document.title = `${data.title || slug} | Aggelos Mouzakitis`;
+
+      document.getElementById("post").innerHTML = `
+        <p class="eyebrow">${data.date ? new Date(data.date).toLocaleDateString() : ""}</p>
+        <h1>${data.title || slug}</h1>
+        <p>${data.description || ""}</p>
+        <hr>
+        ${marked.parse(body)}
+      `;
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>
