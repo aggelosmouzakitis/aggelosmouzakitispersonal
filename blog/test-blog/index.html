@@ -1,12 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Test blog trying to work, let's what happened!</title>
-  <meta http-equiv="refresh" content="0; url=/blog/post.html?slug=test-blog">
+  <title>Test blog trying to work, let's what happened!1 | Aggelos Mouzakitis</title>
+  <meta name="description" content="test blog_TESTAKI">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://aggelosmouzakitis.com/blog/test-blog/">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body { background:#F4F2F0; color:#282726; font-family:monospace; line-height:1.8; margin:0; }
+    main { max-width:740px; margin:0 auto; padding:4rem 2rem; }
+    a { color:#00bf63; }
+    .eyebrow { font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:#777; }
+  </style>
 </head>
 <body>
-  <p>Redirecting to <a href="/blog/post.html?slug=test-blog">Test blog trying to work, let's what happened!</a></p>
+  <main>
+    <p><a href="/blog/">Back to blog</a></p>
+    <article id="post">Loading post...</article>
+  </main>
+
+  <script>
+    const markdown = "---\ntitle: Test blog trying to work, let's what happened!1\nslug: fff\ndate: 2026-04-28T15:54:00.000+01:00\ndescription: test blog_TESTAKI\n---\ntest blog completed\n";
+
+    function parseFrontmatter(text) {
+      const match = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+      if (!match) return { body: text };
+      return { body: match[2] };
+    }
+
+    const parsed = parseFrontmatter(markdown);
+
+    document.getElementById("post").innerHTML =
+      '<p class="eyebrow">4/28/2026</p>' +
+      '<h1>Test blog trying to work, let's what happened!1</h1>' +
+      '<p>test blog_TESTAKI</p>' +
+      '<hr>' +
+      marked.parse(parsed.body);
+  </script>
 </body>
 </html>
