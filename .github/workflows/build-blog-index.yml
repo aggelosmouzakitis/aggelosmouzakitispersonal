@@ -1,4 +1,4 @@
-name: Build blog index
+ name: Build blog index
 
 on:
   push:
@@ -25,9 +25,7 @@ jobs:
           const postsDir = 'blog/posts';
           const blogDir = 'blog';
 
-          if (!fs.existsSync(postsDir)) {
-            process.exit(0);
-          }
+          if (!fs.existsSync(postsDir)) process.exit(0);
 
           const files = fs.readdirSync(postsDir).filter(file => file.endsWith('.md'));
 
@@ -35,29 +33,63 @@ jobs:
             const slug = file.replace('.md', '');
             const content = fs.readFileSync(path.join(postsDir, file), 'utf8');
 
-            const titleMatch = content.match(/title:\s*["']?(.+?)["']?\s*$/m);
-            const dateMatch = content.match(/date:\s*["']?(.+?)["']?\s*$/m);
-            const descriptionMatch = content.match(/description:\s*["']?(.+?)["']?\s*$/m);
-
-            const title = titleMatch ? titleMatch[1] : slug;
-            const date = dateMatch ? dateMatch[1] : '';
-            const description = descriptionMatch ? descriptionMatch[1] : '';
+            const title = content.match(/title:\s*["']?(.+?)["']?\s*$/m)?.[1] || slug;
+            const date = content.match(/date:\s*["']?(.+?)["']?\s*$/m)?.[1] || '';
+            const description = content.match(/description:\s*["']?(.+?)["']?\s*$/m)?.[1] || '';
 
             const postDir = path.join(blogDir, slug);
             fs.mkdirSync(postDir, { recursive: true });
 
-            const html = '<!DOCTYPE html>\n' +
-              '<html>\n' +
-              '<head>\n' +
-              '  <meta charset="UTF-8">\n' +
-              '  <title>' + title + '</title>\n' +
-              '  <meta http-equiv="refresh" content="0; url=/blog/post.html?slug=' + slug + '">\n' +
-              '  <link rel="canonical" href="https://aggelosmouzakitis.com/blog/' + slug + '/">\n' +
-              '</head>\n' +
-              '<body>\n' +
-              '  <p>Redirecting to <a href="/blog/post.html?slug=' + slug + '">' + title + '</a></p>\n' +
-              '</body>\n' +
-              '</html>';
+            const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>${title} | Aggelos Mouzakitis</title>
+  <meta name="description" content="${description}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://aggelosmouzakitis.com/blog/${slug}/">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body { background:#F4F2F0; color:#282726; font-family:monospace; line-height:1.8; margin:0; }
+    main { max-width:740px; margin:0 auto; padding:4rem 2rem; }
+    a { color:#00bf63; }
+    .eyebrow { font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:#777; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><a href="/blog/">Back to blog</a></p>
+    <article id="post">Loading post...</article>
+  </main>
+
+  <script>
+    const markdown = ${JSON.stringify(content)};
+
+    function parseFrontmatter(text) {
+      const match = text.match(/^---\\n([\\s\\S]*?)\\n---\\n([\\s\\S]*)$/);
+      if (!match) return { data: {}, body: text };
+
+      const data = {};
+      match[1].split("\\n").forEach(line => {
+        const [key, ...rest] = line.split(":");
+        if (!key || !rest.length) return;
+        data[key.trim()] = rest.join(":").trim().replace(/^"|"$/g, "");
+      });
+
+      return { data, body: match[2] };
+    }
+
+    const parsed = parseFrontmatter(markdown);
+
+    document.getElementById("post").innerHTML =
+      '<p class="eyebrow">' + (parsed.data.date ? new Date(parsed.data.date).toLocaleDateString() : '') + '</p>' +
+      '<h1>' + (parsed.data.title || '${slug}') + '</h1>' +
+      '<p>' + (parsed.data.description || '') + '</p>' +
+      '<hr>' +
+      marked.parse(parsed.body);
+  </script>
+</body>
+</html>`;
 
             fs.writeFileSync(path.join(postDir, 'index.html'), html);
 
@@ -65,7 +97,6 @@ jobs:
           });
 
           posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
           fs.writeFileSync(path.join(blogDir, 'posts.json'), JSON.stringify(posts, null, 2));
           NODE_SCRIPT
 
