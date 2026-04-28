@@ -28,8 +28,8 @@ const posts = fs.readdirSync(postsDir)
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>${title} | Aggelos Mouzakitis</title>
-  <meta name="description" content="${description}">
+  <title>${title.replace(/"/g, "&quot;")} | Aggelos Mouzakitis</title>
+  <meta name="description" content="${description.replace(/"/g, "&quot;")}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://aggelosmouzakitis.com/blog/${slug}/">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -48,6 +48,9 @@ const posts = fs.readdirSync(postsDir)
 
   <script>
     const markdown = ${JSON.stringify(content)};
+    const postTitle = ${JSON.stringify(title)};
+    const postDescription = ${JSON.stringify(description)};
+    const postDate = ${JSON.stringify(date)};
 
     function parseFrontmatter(text) {
       const match = text.match(/^---\\n([\\s\\S]*?)\\n---\\n([\\s\\S]*)$/);
@@ -58,9 +61,9 @@ const posts = fs.readdirSync(postsDir)
     const parsed = parseFrontmatter(markdown);
 
     document.getElementById("post").innerHTML =
-      '<p class="eyebrow">${date ? new Date(date).toLocaleDateString() : ""}</p>' +
-      '<h1>${title}</h1>' +
-      '<p>${description}</p>' +
+      '<p class="eyebrow">' + (postDate ? new Date(postDate).toLocaleDateString() : '') + '</p>' +
+      '<h1>' + postTitle + '</h1>' +
+      '<p>' + postDescription + '</p>' +
       '<hr>' +
       marked.parse(parsed.body);
   </script>
