@@ -3,50 +3,71 @@ name: Build blog index
 on:
   push:
     paths:
-      - 'blog/posts/**'
+      - "blog/posts/**"
+      - ".github/workflows/build-blog-index.yml"
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-    - name: Generate posts.json + pages
-  run: |
-    mkdir -p blog
-    echo "[" > blog/posts.json
-    first=true
+      - name: Generate posts.json and clean URL pages
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
 
-    for file in blog/posts/*.md; do
-      slug=$(basename "$file" .md)
+          const postsDir = 'blog/posts';
+          const blogDir = 'blog';
 
-      title=$(grep '^title:' "$file" | sed 's/title: //')
-      date=$(grep '^date:' "$file" | sed 's/date: //')
+          if (!fs.existsSync(postsDir)) {
+            console.log('No blog/posts folder found');
+            process.exit(0);
+          }
 
-      if [ "$first" = true ]; then
-        first=false
-      else
-        echo "," >> blog/posts.json
-      fi
+          const files = fs.readdirSync(postsDir).filter(file => file.endsWith('.md'));
 
-      echo "{\"title\":\"$title\",\"date\":\"$date\",\"slug\":\"$slug\"}" >> blog/posts.json
+          const posts = files.map(file => {
+            const slug = file.replace('.md', '');
+            const content = fs.readFileSync(path.join(postsDir, file), 'utf8');
 
-      mkdir -p "blog/$slug"
+            const title = content.match(/title:\s*["']?(.+?)["']?\s*$/m)?.[1] || slug;
+            const date = content.match(/date:\s*["']?(.+?)["']?\s*$/m)?.[1] || '';
+            const description = content.match(/description:\s*["']?(.+?)["']?\s*$/m)?.[1] || '';
 
-      echo "<!DOCTYPE html>
+            const postDir = path.join(blogDir, slug);
+            fs.mkdirSync(postDir, { recursive: true });
+
+            fs.writeFileSync(path.join(postDir, 'index.html'), `<!DOCTYPE html>
 <html>
 <head>
-<meta charset='UTF-8'>
-<title>$title</title>
+  <meta charset="UTF-8">
+  <title>${title}</title>
+  <meta http-equiv="refresh" content="0; url=/blog/post.html?slug=${slug}">
+  <link rel="canonical" href="https://aggelosmouzakitis.com/blog/${slug}/">
 </head>
 <body>
-<script>
-window.location.href = '/blog/post.html?slug=$slug';
-</script>
+  <p>Redirecting to <a href="/blog/post.html?slug=${slug}">${title}</a></p>
 </body>
-</html>" > "blog/$slug/index.html"
+</html>`);
 
-    done
+            return { slug, title, date, description };
+          });
 
-    echo "]" >> blog/posts.json
+          posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+          fs.writeFileSync(path.join(blogDir, 'posts.json'), JSON.stringify(posts, null, 2));
+          EOF
+
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add blog/posts.json blog/*/index.html
+          git diff --cached --quiet || git commit -m "Update generated blog pages"
+          git push
