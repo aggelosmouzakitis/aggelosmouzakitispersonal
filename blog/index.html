@@ -27,7 +27,7 @@
           div.style.padding = "1.5rem 0";
 
           div.innerHTML = `
-            <h2><a href="/blog/post.html?slug=${post.slug}" style="color:#00bf63;">${post.title}</a></h2>
+            <h2><a href="/blog/${post.slug}/" style="color:#00bf63;">${post.title}</a></h2>
             <p>${post.description || ""}</p>
           `;
 
