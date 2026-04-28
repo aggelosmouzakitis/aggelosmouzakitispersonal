@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Blog | Aggelos Mouzakitis</title>
+</head>
+<body style="background:#F4F2F0;color:#282726;font-family:monospace;line-height:1.7;">
+  <main style="max-width:740px;margin:0 auto;padding:4rem 2rem;">
+    <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#777;">Blog</p>
+    <h1>Writing</h1>
+    <div id="posts">Loading posts...</div>
+  </main>
+
+  <script>
+    async function loadPosts() {
+      const container = document.getElementById("posts");
+
+      try {
+        const res = await fetch("/blog/posts.json");
+        const posts = await res.json();
+
+        container.innerHTML = "";
+
+        posts.forEach(post => {
+          const div = document.createElement("div");
+          div.style.borderTop = "1px solid rgba(40,39,38,.15)";
+          div.style.padding = "1.5rem 0";
+
+          div.innerHTML = `
+            <h2><a href="/blog/post.html?slug=${post.slug}" style="color:#00bf63;">${post.title}</a></h2>
+            <p>${post.description || ""}</p>
+          `;
+
+          container.appendChild(div);
+        });
+
+      } catch (e) {
+        container.innerHTML = "<p>No posts yet.</p>";
+      }
+    }
+
+    loadPosts();
+  </script>
+</body>
+</html>
