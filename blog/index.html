@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing | Aggelos Mouzakitis</title>
+<meta name="description" content="Essays on high-functioning burnout, performance identity, and the psychology of ambition. By Aggelos Mouzakitis.">
+<link rel="canonical" href="https://aggelosmouzakitis.com/blog/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Writing | Aggelos Mouzakitis">
+<meta property="og:description" content="Essays on high-functioning burnout, performance identity, and the psychology of ambition. By Aggelos Mouzakitis.">
+<meta property="og:url" content="https://aggelosmouzakitis.com/blog/">
+<meta property="og:image" content="https://aggelosmouzakitis.com/img/aggelos.jpg">
+<meta property="og:locale" content="en_IE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Writing | Aggelos Mouzakitis">
+<meta name="twitter:description" content="Essays on high-functioning burnout, performance identity, and the psychology of ambition.">
+<meta name="twitter:image" content="https://aggelosmouzakitis.com/img/aggelos.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Writing — Aggelos Mouzakitis",
+  "url": "https://aggelosmouzakitis.com/blog/",
+  "description": "Essays on high-functioning burnout, performance identity, and the psychology of ambition.",
+  "author": {
+    "@type": "Person",
+    "name": "Aggelos Mouzakitis",
+    "url": "https://aggelosmouzakitis.com"
+  }
+}
+</script>
+<style>
+@font-face {
+  font-family: 'Departure Mono';
+  src: url('https://cdn.jsdelivr.net/gh/rougier/departure-mono@master/fonts/DepartureMono-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  background: #1A1918;
+  font-family: 'Departure Mono', 'SF Mono', 'Fira Mono', Menlo, 'Courier New', monospace;
+  font-size: 15px; line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: #282726; color: #F4F2F0; }
+#root { display: flex; overflow: hidden; }
+#main-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; background: #F4F2F0; color: #282726; }
+#main-scroll::-webkit-scrollbar { width: 4px; }
+#main-scroll::-webkit-scrollbar-thumb { background: rgba(40,39,38,0.15); }
+#sidebar { position: relative; flex-shrink: 0; }
+.blog-page { max-width: 740px; margin: 0 auto; padding: 4rem 2rem 7rem; }
+.section-label { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #999; margin-bottom: 2rem; }
+.post-list { list-style: none; }
+.post-item { padding: 1.8rem 0; border-bottom: 1px solid rgba(40,39,38,0.1); }
+.post-item:first-child { border-top: 1px solid rgba(40,39,38,0.1); }
+.post-title { font-size: 17px; font-weight: 400; line-height: 1.45; color: #282726; margin-bottom: .5rem; letter-spacing: -.01em; }
+.post-title a { color: #282726; text-decoration: none; transition: color .15s; }
+.post-title a:hover { color: #00bf63; }
+.post-desc { font-size: 13px; color: #666; line-height: 1.65; margin-bottom: .75rem; }
+.post-meta { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #999; display: flex; align-items: center; gap: .6rem; }
+.loading { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #999; padding: 2rem 0; }
+@media (max-width: 767px) {
+  #root { display: block; height: 100%; }
+  #sidebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; }
+  #main-scroll { height: 100%; padding-bottom: 80px; }
+  .blog-page { padding: 2rem 1.2rem 4rem; }
+  .post-title { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="../sidebar.jsx"></script>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const URL_MAP = {
+  'home': '/', 'diagnostic': '/burnout-diagnostic/', 'blog': '/blog/',
+  'therapy-for-executives': '/therapy-for-executives/',
+  'therapy-for-founders': '/therapy-for-founders/',
+  'imposter-syndrome-therapy': '/imposter-syndrome-therapy/',
+  'executive-burnout-therapy': '/executive-burnout-therapy/',
+  'career-transition-therapy': '/career-transition-therapy/',
+};
+
+function navigate(id) {
+  window.location.href = URL_MAP[id] || '/';
+}
+
+function BlogIndex() {
+  const [posts, setPosts] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const mainRef = useRef(null);
+
+  useEffect(() => {
+    fetch('/blog/posts.json')
+      .then(r => r.json())
+      .then(setPosts)
+      .catch(() => setPosts([]));
+  }, []);
+
+  return (
+    <React.Fragment>
+      <div id="sidebar">
+        <Sidebar page="blog" setPage={navigate} open={sidebarOpen} setOpen={setSidebarOpen} />
+      </div>
+      <div id="main-scroll" ref={mainRef}>
+        <div className="blog-page">
+          <p className="section-label">Recent posts</p>
+          {posts === null && <p className="loading">Loading…</p>}
+          {posts !== null && posts.length === 0 && <p className="loading">No posts yet.</p>}
+          {posts && posts.length > 0 && (
+            <ul className="post-list">
+              {posts.map(p => (
+                <li key={p.slug} className="post-item">
+                  <h2 className="post-title">
+                    <a href={`/blog/${p.slug}/`}>{p.title}</a>
+                  </h2>
+                  {p.description && <p className="post-desc">{p.description}</p>}
+                  <div className="post-meta">
+                    <span>{p.date}</span>
+                    <span style={{opacity: .4}}>·</span>
+                    <span>Aggelos Mouzakitis</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </React.Fragment>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<BlogIndex />);
+</script>
+</body>
+</html>
