@@ -94,7 +94,6 @@ const SPECIALTIES = [
 const SOCIALS = [
   { id: 'li', label: 'LinkedIn', href: 'https://linkedin.com/in/growth-product-manager/', Icon: ICONS.LinkedIn },
   { id: 'yt', label: 'YouTube', href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA', Icon: ICONS.YouTube },
-  { id: 'blog', label: 'Blog', href: 'https://undisguised.io', Icon: ICONS.Book },
 ];
 
 // ── MOBILE BOTTOM NAV ────────────────────────────────────────────────────────
@@ -179,6 +178,9 @@ function MobileNav({ page, setPage }) {
       }}>
         <button style={tabStyle(page === 'home')} onClick={() => { setPage('home'); setSheetOpen(false); }}>
           <ICONS.Home /><span>Home</span>
+        </button>
+        <button style={tabStyle(page === 'blog')} onClick={() => { setPage('blog'); setSheetOpen(false); }}>
+          <ICONS.Book /><span>Writing</span>
         </button>
         <button style={tabStyle(isSpecialty || sheetOpen)} onClick={() => setSheetOpen(v => !v)}>
           <ICONS.Briefcase /><span>Services</span>
@@ -304,6 +306,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
       <img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', margin: '22px 0 18px', display: 'block' }} />
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '0 12px 4px' }} />
       {iconBtn('home', ICONS.Home, () => setPage('home'), page === 'home', 'Home')}
+      {iconBtn('blog', ICONS.Book, () => setPage('blog'), page === 'blog', 'Writing')}
       {iconBtn('spec', ICONS.Briefcase, () => { setOpen(true); setSpecialtiesOpen(true); }, isSpecialty, 'Specialties')}
       {iconBtn('diag', ICONS.Clipboard, () => setPage('diagnostic'), page === 'diagnostic', 'Free Diagnostic')}
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '4px 12px' }} />
@@ -329,6 +332,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
         {/* Home */}
         <div style={{ padding: '10px 0 0' }}>
           {navBtn('home', 'Home', ICONS.Home, page === 'home', () => setPage('home'))}
+          {navBtn('blog', 'Writing', ICONS.Book, page === 'blog', () => setPage('blog'))}
         </div>
 
         {/* Specialties */}
