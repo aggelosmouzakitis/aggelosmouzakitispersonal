@@ -1,67 +1,69 @@
-// diagnostic.jsx — Interactive burnout diagnostic with exact questions from the real site
+// diagnostic.jsx — Interactive burnout diagnostic with EmailJS + Google Sheets tracking
+
+const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby-gv3oCFT2q5KXvVnqRzS4PAzcMjPB8Gls5qodZJ3v4_9HKGqJHMdBCw7YYbEzIE2d/exec';
 
 const DIAG_SECTIONS = [
-{ id: 'self-worth', title: 'Self-worth through achievement', questions: [
+{ id: 'self-worth', title: 'Self-worth through achievement', sheetKey: 'self_worth', questions: [
   'A bad period at work can mess with my confidence significantly.',
   'When I\u2019m not doing well professionally, I tend to become harsher on myself.',
   'It\u2019s easier to feel good about myself when things are going well professionally.']
 },
-{ id: 'shame-guilt-pressure', title: 'Shame, guilt, and pressure', questions: [
+{ id: 'shame-guilt-pressure', title: 'Shame, guilt, and pressure', sheetKey: 'shame_guilt_pressure', questions: [
   'I find it hard to relax when there is still work to be done.',
   'I can sit down to rest and still feel like I should be productive.',
   'I tend to focus on what\u2019s still missing.']
 },
-{ id: 'comparison', title: 'Comparison, shame, and not-enoughness', questions: [
+{ id: 'comparison', title: 'Comparison, shame, and not-enoughness', sheetKey: 'comparison', questions: [
   'Seeing other people do well makes me worry about my performance.',
   'When someone in my close network is moving fast, I tend to think about where I\u2019m falling short.',
   'I can have objectively good results and still feel behind my goals.']
 },
-{ id: 'vulnerability', title: 'Fear of vulnerability', questions: [
+{ id: 'vulnerability', title: 'Fear of vulnerability', sheetKey: 'vulnerability', questions: [
   'I feel uneasy with the idea of people close to me seeing me weak.',
   'If I\u2019m struggling, my instinct is usually to keep it to myself.',
   'I\u2019d rather deal with something alone than let people see me unsure or messy.']
 },
-{ id: 'grind', title: 'Pride in grind and pressure', questions: [
+{ id: 'grind', title: 'Pride in grind and pressure', sheetKey: 'grind', questions: [
   'I\u2019m used to carrying a lot without complaining about it.',
   'Part of me takes pride in how much pressure I can handle.',
   'Slowing down can feel uncomfortable, even when it seems like I need it.']
 },
-{ id: 'identity', title: 'Identity and persona', questions: [
+{ id: 'identity', title: 'Identity and persona', sheetKey: 'identity', questions: [
   'People know me as someone who gets things done.',
   'Being capable is a big part of how I see myself.',
   'Letting people down hits me hard, especially when they expect a lot from me.',
   'People often tell me I am too hard on myself or that I push myself too much.']
 },
-{ id: 'relationships', title: 'Interpersonal relationships', questions: [
+{ id: 'relationships', title: 'Interpersonal relationships', sheetKey: 'relationships', questions: [
   'When work is heavy, I have less patience for people who do not get it.',
   'When I\u2019m stressed, I can become harder to interact with.',
   'There are times when I feel too loaded to really be present with other people.',
   'My relationship with my partner has suffered because of how I carry stress.',
   'There are times when I feel distant from my partner, or they feel unsupported by me.']
 },
-{ id: 'drive-meaning', title: 'Loss of drive and meaning', questions: [
+{ id: 'drive-meaning', title: 'Loss of drive and meaning', sheetKey: 'drive_meaning', questions: [
   'I\u2019ve started feeling resentful about parts of work I used to take pride in.',
   'I miss the times when work felt easier to enjoy.']
 },
-{ id: 'numbness', title: 'Emotional numbness and detachment', questions: [
+{ id: 'numbness', title: 'Emotional numbness and detachment', sheetKey: 'numbness', questions: [
   'I can get through a full day and still feel emotionally flat.',
   'Things that used to matter to me don\u2019t land the same way now.',
   'I can be productive and still feel disconnected from what I\u2019m doing.',
   'I often feel less like myself and more like I\u2019m just operating.',
   'There are moments when I wonder what all this effort is really for.']
 },
-{ id: 'cynicism', title: 'Cynicism and depersonalisation', questions: [
+{ id: 'cynicism', title: 'Cynicism and depersonalisation', sheetKey: 'cynicism', questions: [
   'I\u2019ve become more cynical about work than I used to be.',
   'Some parts of work now feel mechanical, even when I do them well.',
   'There are moments when I feel more detached than engaged.']
 },
-{ id: 'nervous-system', title: 'Nervous-system overload', questions: [
+{ id: 'nervous-system', title: 'Nervous-system overload', sheetKey: 'nervous_system', questions: [
   'I can be tired and still feel unable to fully settle.',
   'Sleep does not always leave me feeling properly reset.',
   'Stress has started showing up in my body through things like headaches, muscle tension, stomach issues, nausea, or similar symptoms.',
   'My body can stay tense even when I\u2019m not actively working.']
 },
-{ id: 'tech-activation', title: 'Tech-specific constant activation', questions: [
+{ id: 'tech-activation', title: 'Tech-specific constant activation', sheetKey: 'tech_activation', questions: [
   'Even when I\u2019m off, part of me still feels on call.',
   'I check work things in moments that should be personal time.',
   'It\u2019s hard for me to feel fully off duty.',
@@ -146,16 +148,81 @@ function DiagnosticPage() {
       const answeredCount = keys.filter((k) => answers[k] !== undefined).length;
       const threshold = Math.ceil(keys.length * 0.7);
       const score = answeredCount >= threshold ? avg(nums) : null;
-      return { title: section.title, score, label: getSectionLabel(score) };
+      return { id: section.id, title: section.title, sheetKey: section.sheetKey, score, label: getSectionLabel(score) };
     });
   }
 
-  function showResults() {
+  function buildSectionBreakdownText(sections) {
+    return sections.map((section) => {
+      return section.title + ': ' + section.label + ' (' + fmt(section.score) + ' / 5.00)';
+    }).join('\n');
+  }
+
+  function buildAnswersText() {
+    return FLAT_QUESTIONS.map((question, index) => {
+      const answer = answers[question.key];
+      const answerLabel = answer === undefined ? 'No answer' : (answer === 'na' ? 'N/A' : String(answer));
+      return (index + 1) + '. [' + question.sectionTitle + '] ' + question.text + ' => ' + answerLabel;
+    }).join('\n');
+  }
+
+  function sendResultsEmail(payload) {
+    if (!window.emailjs) return Promise.reject(new Error('EmailJS not loaded'));
+    return emailjs.send('service_i4xq7vg', 'template_wdsrbdo', payload);
+  }
+
+  function sendResultsToSheet(calculated, trimmedEmail) {
+    const sectionScores = {};
+    calculated.sections.forEach((section) => {
+      sectionScores[section.sheetKey] = fmt(section.score);
+    });
+    return fetch(GOOGLE_SHEET_WEB_APP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({
+        email: trimmedEmail,
+        overall_score: fmt(calculated.overall),
+        overall_grade: calculated.grade,
+        self_worth: sectionScores.self_worth || '',
+        shame_guilt_pressure: sectionScores.shame_guilt_pressure || '',
+        comparison: sectionScores.comparison || '',
+        vulnerability: sectionScores.vulnerability || '',
+        grind: sectionScores.grind || '',
+        identity: sectionScores.identity || '',
+        relationships: sectionScores.relationships || '',
+        drive_meaning: sectionScores.drive_meaning || '',
+        numbness: sectionScores.numbness || '',
+        cynicism: sectionScores.cynicism || '',
+        nervous_system: sectionScores.nervous_system || '',
+        tech_activation: sectionScores.tech_activation || '',
+        section_breakdown: buildSectionBreakdownText(calculated.sections),
+        all_answers: buildAnswersText(),
+        page_url: window.location.href
+      })
+    });
+  }
+
+  function handleShowResults() {
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) return;
     const overall = getOverallScore();
     const sections = getSectionResults();
-    setResults({ overall, grade: getGrade(overall), desc: getDesc(overall), sections });
+    const calculated = { overall, grade: getGrade(overall), desc: getDesc(overall), sections };
+    setSending(true);
+    sendResultsToSheet(calculated, trimmedEmail)
+      .catch((err) => console.error('Sheet error:', err));
+    sendResultsEmail({
+      user_email: trimmedEmail,
+      overall_score: fmt(calculated.overall),
+      overall_grade: calculated.grade,
+      section_breakdown: buildSectionBreakdownText(calculated.sections),
+      all_answers: buildAnswersText(),
+      page_url: window.location.href
+    }).catch((err) => console.error('Email error:', err));
+    setResults(calculated);
     setScreen('results');
     setTimeout(scrollTop, 50);
+    setSending(false);
   }
 
   const currentQ = FLAT_QUESTIONS[idx];
@@ -279,7 +346,7 @@ function DiagnosticPage() {
         <button style={{ ...C.cta, ...C.ctaSec }} onClick={() => {setScreen('question');scrollTop();}}>Back</button>
         <button style={{ ...C.cta, opacity: !email.trim() || sending ? 0.4 : 1, cursor: !email.trim() || sending ? 'not-allowed' : 'pointer' }}
         disabled={!email.trim() || sending}
-        onClick={() => {setSending(true);setTimeout(() => {showResults();setSending(false);}, 600);}}>
+        onClick={handleShowResults}>
           {sending ? 'Loading...' : 'Show results'}
         </button>
       </div>
