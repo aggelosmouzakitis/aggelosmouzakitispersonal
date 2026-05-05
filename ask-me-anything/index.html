@@ -108,8 +108,9 @@ body {
 .ama-status.success { color: #00bf63; }
 .ama-status.error { color: #c0392b; }
 
-/* SpeakPipe column */
-.ama-speakpipe-wrap iframe { display: block; }
+/* SpeakPipe column — mix-blend-mode: darken maps white → page cream, leaves all darker colors intact */
+.ama-speakpipe-wrap { background: #F4F2F0; isolation: isolate; }
+.ama-speakpipe-wrap iframe { display: block; mix-blend-mode: darken; }
 
 /* How it works */
 .ama-how { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(40,39,38,0.1); }
@@ -256,13 +257,10 @@ function AMAPage() {
       <div id="main-scroll">
         <div className="ama-page">
           <p className="ama-eyebrow">Ask anything</p>
-          <h1 className="ama-title">Got a question?<br />I'll answer it on video.</h1>
+          <h1 className="ama-title">Got a question?<br />I'll answer it on video. Anonymously!</h1>
           <p className="ama-intro">
-            Something about burnout, performance identity, imposter syndrome, the cost of high achievement — ask it here.
+            Something about burnout, performance identity, imposter syndrome, the cost of high achievement or basically anything that concerns you — ask it here.
             I go through submissions and turn the ones that resonate into videos. Your question might be the one that helps someone else finally put words to what they've been carrying.
-          </p>
-          <p className="ama-intro">
-            No agenda, no sales pitch. Just honest answers.
           </p>
           <div className="ama-anon-note">
             All submissions are anonymous by default. Name and email are optional — you can ask without revealing who you are.
