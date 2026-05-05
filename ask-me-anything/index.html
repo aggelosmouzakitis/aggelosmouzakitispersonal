@@ -120,11 +120,16 @@ body {
 
 @media (max-width: 767px) {
   #root { display: block; height: 100%; }
-  #sidebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; }
+  #sidebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; width: 100% !important; }
   #main-scroll { height: 100%; padding-bottom: 80px; }
   .ama-page { padding: 2rem 1.2rem 4rem; }
   .ama-title { font-size: 22px; }
-  .ama-columns { grid-template-columns: 1fr; gap: 2rem; }
+  .ama-intro { font-size: 13px; }
+  .ama-columns { grid-template-columns: 1fr; gap: 2.2rem; }
+  .ama-submit { padding: 14px 0; font-size: 12px; }
+  .ama-input, .ama-textarea { font-size: 16px; }
+  .ama-anon-note { font-size: 12px; margin: 1.2rem 0 2rem; }
+  .ama-step { font-size: 12px; }
 }
 </style>
 </head>
