@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask Me Anything | Aggelos Mouzakitis</title>
+<meta name="description" content="Ask Aggelos anything about burnout, performance identity, imposter syndrome, or the psychology of high achievement. Questions may be answered in a future video.">
+<link rel="canonical" href="https://aggelosmouzakitis.com/ask-me-anything/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ask Me Anything | Aggelos Mouzakitis">
+<meta property="og:description" content="Ask anything about burnout, performance identity, or the psychology of high achievement. Questions may be answered in a future video.">
+<meta property="og:url" content="https://aggelosmouzakitis.com/ask-me-anything/">
+<meta property="og:image" content="https://aggelosmouzakitis.com/img/aggelos.jpg">
+<meta property="og:locale" content="en_IE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ask Me Anything | Aggelos Mouzakitis">
+<meta name="twitter:description" content="Ask anything about burnout, performance identity, or the psychology of high achievement.">
+<meta name="twitter:image" content="https://aggelosmouzakitis.com/img/aggelos.jpg">
+<style>
+@font-face {
+  font-family: 'Departure Mono';
+  src: url('https://cdn.jsdelivr.net/gh/rougier/departure-mono@master/fonts/DepartureMono-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  background: #1A1918;
+  font-family: 'Departure Mono', 'SF Mono', 'Fira Mono', Menlo, 'Courier New', monospace;
+  font-size: 15px; line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: #282726; color: #F4F2F0; }
+#root { display: flex; overflow: hidden; }
+#main-scroll {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  background: #F4F2F0; color: #282726;
+}
+#main-scroll::-webkit-scrollbar { width: 4px; }
+#main-scroll::-webkit-scrollbar-thumb { background: rgba(40,39,38,0.15); }
+#sidebar { position: relative; flex-shrink: 0; }
+
+.ama-page { max-width: 800px; margin: 0 auto; padding: 4rem 2rem 7rem; }
+.ama-eyebrow { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #999; margin-bottom: 1.2rem; }
+.ama-title { font-size: 28px; font-weight: 400; letter-spacing: -.02em; color: #282726; line-height: 1.2; margin-bottom: 1.4rem; }
+.ama-intro { font-size: 14px; color: #555; line-height: 1.8; margin-bottom: .9rem; }
+.ama-anon-note {
+  font-size: 12px; color: #888; line-height: 1.65;
+  border-left: 2px solid #00bf63;
+  padding: 10px 14px; margin: 1.6rem 0 2.8rem;
+  background: rgba(0,191,99,0.04);
+}
+.ama-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.ama-col-label {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: #999; margin-bottom: 1rem;
+}
+.ama-col-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(40,39,38,0.1);
+  margin: 2.5rem 0;
+}
+
+/* Form */
+.ama-form { display: flex; flex-direction: column; gap: 1rem; }
+.ama-field { display: flex; flex-direction: column; gap: .35rem; }
+.ama-label {
+  font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: #888;
+}
+.ama-input, .ama-textarea {
+  background: #fff;
+  border: 1px solid rgba(40,39,38,0.18);
+  color: #282726;
+  font-family: inherit; font-size: 13px; line-height: 1.6;
+  padding: 10px 12px;
+  width: 100%;
+  outline: none;
+  transition: border-color .15s;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+.ama-input:focus, .ama-textarea:focus { border-color: #00bf63; }
+.ama-textarea { resize: vertical; min-height: 140px; }
+.ama-submit {
+  width: 100%; padding: 11px 0;
+  font-family: inherit; font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase;
+  background: transparent;
+  border: 1px solid #00bf63;
+  color: #00bf63;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  margin-top: .25rem;
+}
+.ama-submit:hover:not(:disabled) { background: #00bf63; color: #fff; }
+.ama-submit:disabled { opacity: .45; cursor: not-allowed; }
+.ama-status {
+  font-size: 12px; letter-spacing: .08em;
+  margin-top: .5rem; min-height: 1.4rem;
+}
+.ama-status.success { color: #00bf63; }
+.ama-status.error { color: #c0392b; }
+
+/* SpeakPipe column */
+.ama-speakpipe-wrap iframe { display: block; }
+
+/* How it works */
+.ama-how { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(40,39,38,0.1); }
+.ama-how-title { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #999; margin-bottom: 1.4rem; }
+.ama-steps { display: flex; flex-direction: column; gap: .9rem; }
+.ama-step { font-size: 13px; color: #555; line-height: 1.7; display: flex; gap: 1rem; }
+.ama-step-num { color: #00bf63; flex-shrink: 0; }
+
+@media (max-width: 767px) {
+  #root { display: block; height: 100%; }
+  #sidebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; }
+  #main-scroll { height: 100%; padding-bottom: 80px; }
+  .ama-page { padding: 2rem 1.2rem 4rem; }
+  .ama-title { font-size: 22px; }
+  .ama-columns { grid-template-columns: 1fr; gap: 2rem; }
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/babel" src="../sidebar.jsx"></script>
+<script type="text/babel">
+const { useState, useRef } = React;
+
+const EMAILJS_PUBLIC_KEY = 'bfBcHLXj2nKaev_lT';
+const EMAILJS_SERVICE_ID = 'service_i4xq7vg';
+const EMAILJS_TEMPLATE_ID = 'template_6mv5hou';
+
+const URL_MAP = {
+  'home': '/', 'diagnostic': '/burnout-diagnostic/', 'blog': '/blog/',
+  'ask-me-anything': '/ask-me-anything/',
+  'therapy-for-executives': '/therapy-for-executives/',
+  'therapy-for-founders': '/therapy-for-founders/',
+  'imposter-syndrome-therapy': '/imposter-syndrome-therapy/',
+  'executive-burnout-therapy': '/executive-burnout-therapy/',
+  'career-transition-therapy': '/career-transition-therapy/',
+};
+
+function navigate(id) {
+  window.location.href = URL_MAP[id] || '/';
+}
+
+function AMAForm() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(null);
+  const [sending, setSending] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!message.trim()) return;
+    setSending(true);
+    setStatus(null);
+
+    emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        from_name: name.trim() || 'Anonymous',
+        from_email: email.trim() || 'Not provided',
+        message: message.trim(),
+      },
+      EMAILJS_PUBLIC_KEY
+    ).then(() => {
+      setStatus('sent');
+      setName('');
+      setEmail('');
+      setMessage('');
+    }).catch(() => {
+      setStatus('error');
+    }).finally(() => {
+      setSending(false);
+    });
+  }
+
+  return (
+    <form className="ama-form" onSubmit={handleSubmit} noValidate>
+      <div className="ama-field">
+        <label className="ama-label" htmlFor="ama-name">Name <span style={{color:'#bbb'}}>(optional)</span></label>
+        <input
+          id="ama-name"
+          className="ama-input"
+          type="text"
+          placeholder="Or leave blank to stay anonymous"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          autoComplete="off"
+        />
+      </div>
+      <div className="ama-field">
+        <label className="ama-label" htmlFor="ama-email">Email <span style={{color:'#bbb'}}>(optional)</span></label>
+        <input
+          id="ama-email"
+          className="ama-input"
+          type="email"
+          placeholder="Only if you want a direct reply"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          autoComplete="off"
+        />
+      </div>
+      <div className="ama-field">
+        <label className="ama-label" htmlFor="ama-message">Your question <span style={{color:'#c0392b'}}>*</span></label>
+        <textarea
+          id="ama-message"
+          className="ama-textarea"
+          placeholder="What's been on your mind?"
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          required
+        />
+      </div>
+      <button className="ama-submit" type="submit" disabled={sending || !message.trim()}>
+        {sending ? 'Sending…' : 'Send question →'}
+      </button>
+      {status === 'sent' && (
+        <p className="ama-status success">Got it. I'll consider it for a future video.</p>
+      )}
+      {status === 'error' && (
+        <p className="ama-status error">Something went wrong. Try again or email me directly.</p>
+      )}
+    </form>
+  );
+}
+
+function AMAPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  return (
+    <React.Fragment>
+      <div id="sidebar">
+        <Sidebar page="ask-me-anything" setPage={navigate} open={sidebarOpen} setOpen={setSidebarOpen} />
+      </div>
+      <div id="main-scroll">
+        <div className="ama-page">
+          <p className="ama-eyebrow">Ask anything</p>
+          <h1 className="ama-title">Got a question?<br />I'll answer it on video.</h1>
+          <p className="ama-intro">
+            Something about burnout, performance identity, imposter syndrome, the cost of high achievement — ask it here.
+            I go through submissions and turn the ones that resonate into videos. Your question might be the one that helps someone else finally put words to what they've been carrying.
+          </p>
+          <p className="ama-intro">
+            No agenda, no sales pitch. Just honest answers.
+          </p>
+          <div className="ama-anon-note">
+            All submissions are anonymous by default. Name and email are optional — you can ask without revealing who you are.
+            If you include your email, I'll only use it to reply directly and nothing else.
+          </div>
+
+          <div className="ama-columns">
+            <div>
+              <p className="ama-col-label">Leave a voice message</p>
+              <div className="ama-speakpipe-wrap">
+                <iframe
+                  src="https://www.speakpipe.com/widget/inline/zeofbff8ulskjge5zesmtgqxwqkmjvo3"
+                  allow="microphone"
+                  width="100%"
+                  height="200"
+                  frameBorder="0"
+                  title="Leave a voice message"
+                />
+              </div>
+            </div>
+            <div>
+              <p className="ama-col-label">Send a written question</p>
+              <AMAForm />
+            </div>
+          </div>
+
+          <div className="ama-how">
+            <p className="ama-how-title">How it works</p>
+            <div className="ama-steps">
+              <div className="ama-step">
+                <span className="ama-step-num">01</span>
+                <span>Ask anything — burnout, identity, performance anxiety, career crossroads, whatever's been stuck in your head. Voice or text, your choice.</span>
+              </div>
+              <div className="ama-step">
+                <span className="ama-step-num">02</span>
+                <span>I read and listen to every submission. The ones that hit something real become the basis for a video.</span>
+              </div>
+              <div className="ama-step">
+                <span className="ama-step-num">03</span>
+                <span>Answers go on <a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener" style={{color:'#00bf63',textUnderlineOffset:'3px',textDecorationThickness:'1px'}}>YouTube</a>. Subscribe if you don't want to miss them.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<AMAPage />);
+</script>
+<script async src="https://www.speakpipe.com/widget/loader.js" charset="utf-8"></script>
+</body>
+</html>

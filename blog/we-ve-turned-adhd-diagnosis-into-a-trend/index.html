@@ -176,7 +176,7 @@ body { background: #1A1918; font-family: 'Departure Mono', 'SF Mono', 'Fira Mono
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script type="text/babel" src="../../sidebar.jsx"></script>
 <script type="text/babel">
-const URL_MAP = { 'home':'/', 'diagnostic':'/burnout-diagnostic/', 'blog':'/blog/', 'therapy-for-executives':'/therapy-for-executives/', 'therapy-for-founders':'/therapy-for-founders/', 'imposter-syndrome-therapy':'/imposter-syndrome-therapy/', 'executive-burnout-therapy':'/executive-burnout-therapy/', 'career-transition-therapy':'/career-transition-therapy/' };
+const URL_MAP = { 'home':'/', 'diagnostic':'/burnout-diagnostic/', 'blog':'/blog/', 'therapy-for-executives':'/therapy-for-executives/', 'therapy-for-founders':'/therapy-for-founders/', 'imposter-syndrome-therapy':'/imposter-syndrome-therapy/', 'executive-burnout-therapy':'/executive-burnout-therapy/', 'career-transition-therapy':'/career-transition-therapy/','ask-me-anything':'/ask-me-anything/' };
 function SidebarApp() {
   const [open, setOpen] = React.useState(true);
   return <Sidebar page="blog" setPage={id => { window.location.href = URL_MAP[id] || '/'; }} open={open} setOpen={setOpen} />;
