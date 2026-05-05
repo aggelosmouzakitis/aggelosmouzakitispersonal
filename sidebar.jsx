@@ -49,6 +49,11 @@ const ICONS = {
       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
     </svg>
   ),
+  MessageCircle: () => (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  ),
   ExtLink: () => (
     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
       <line x1="7" y1="17" x2="17" y2="7"/>
@@ -158,6 +163,21 @@ function MobileNav({ page, setPage }) {
             {s.label}
           </button>
         ))}
+        {/* Ask me anything */}
+        <button onClick={() => { setPage('ask-me-anything'); setSheetOpen(false); }}
+          style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            width: '100%', padding: '14px 20px',
+            background: page === 'ask-me-anything' ? 'rgba(0,191,99,0.08)' : 'none',
+            border: 'none', borderLeft: page === 'ask-me-anything' ? '2px solid #00bf63' : '2px solid transparent',
+            borderTop: '1px solid rgba(255,255,255,0.06)',
+            cursor: 'pointer', fontFamily: 'inherit',
+            fontSize: '14px', letterSpacing: '.05em',
+            color: page === 'ask-me-anything' ? '#00bf63' : 'rgba(255,255,255,0.8)',
+            textAlign: 'left',
+          }}>
+          Ask me anything
+        </button>
         {/* Diagnostic CTA */}
         <div style={{ margin: '12px 20px 4px', padding: '14px', border: '1px solid rgba(0,191,99,0.25)', background: 'rgba(0,191,99,0.04)' }}>
           <div style={{ fontSize: '10px', letterSpacing: '.15em', textTransform: 'uppercase', color: '#00bf63', marginBottom: 8 }}>Free Burnout Diagnostic</div>
@@ -307,6 +327,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '0 12px 4px' }} />
       {iconBtn('home', ICONS.Home, () => setPage('home'), page === 'home', 'Home')}
       {iconBtn('blog', ICONS.Book, () => setPage('blog'), page === 'blog', 'Writing')}
+      {iconBtn('ask-me-anything', ICONS.MessageCircle, () => setPage('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything')}
       {iconBtn('spec', ICONS.Briefcase, () => { setOpen(true); setSpecialtiesOpen(true); }, isSpecialty, 'Specialties')}
       {iconBtn('diag', ICONS.Clipboard, () => setPage('diagnostic'), page === 'diagnostic', 'Free Diagnostic')}
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '4px 12px' }} />
@@ -333,6 +354,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
         <div style={{ padding: '10px 0 0' }}>
           {navBtn('home', 'Home', ICONS.Home, page === 'home', () => setPage('home'))}
           {navBtn('blog', 'Writing', ICONS.Book, page === 'blog', () => setPage('blog'))}
+          {navBtn('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', () => setPage('ask-me-anything'))}
         </div>
 
         {/* Specialties */}
