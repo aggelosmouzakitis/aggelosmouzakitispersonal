@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -10,18 +11,24 @@
 <meta name="description" content="Psychotherapy for startup founders, from a therapist with 18+ years in B2B SaaS. I work with the isolation, pressure, and identity questions that come with building a company.">
 <link rel="canonical" href="https://aggelosmouzakitis.com/therapy-for-founders/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Aggelos Mouzakitis">
 <meta property="og:title" content="Therapy for Founders | Aggelos Mouzakitis">
 <meta property="og:description" content="Psychotherapy for startup founders, from a therapist with 18+ years in B2B SaaS. I work with the isolation, pressure, and identity questions that come with building a company.">
 <meta property="og:url" content="https://aggelosmouzakitis.com/therapy-for-founders/">
 <meta property="og:image" content="https://aggelosmouzakitis.com/img/aggelos.jpg">
+<meta property="og:image:width" content="300">
+<meta property="og:image:height" content="300">
 <meta property="og:locale" content="en_IE">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Therapy for Founders | Aggelos Mouzakitis">
 <meta name="twitter:description" content="Psychotherapy for startup founders, from a therapist with 18+ years in B2B SaaS. I work with the isolation, pressure, and identity questions that come with building a company.">
 <meta name="twitter:image" content="https://aggelosmouzakitis.com/img/aggelos.jpg">
-<script type="application/ld+json">{
+<script type="application/ld+json">
+[
+{
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "https://aggelosmouzakitis.com/#person",
   "name": "Aggelos Mouzakitis",
   "url": "https://aggelosmouzakitis.com",
   "image": "https://aggelosmouzakitis.com/img/aggelos.jpg",
@@ -30,7 +37,20 @@
   "sameAs": ["https://www.linkedin.com/in/growth-product-manager/","https://undisguised.io","https://headofgrowth.io"],
   "address": {"@type":"PostalAddress","addressCountry":"IE"},
   "hasCredential": {"@type":"EducationalOccupationalCredential","credentialCategory":"Professional License","name":"Licensed Psychotherapist"}
-}</script>
+},
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Therapy for Founders",
+  "url": "https://aggelosmouzakitis.com/therapy-for-founders/",
+  "serviceType": "Psychotherapy",
+  "description": "Psychotherapy for startup founders navigating isolation, pressure, and performance identity.",
+  "provider": {"@id": "https://aggelosmouzakitis.com/#person"},
+  "areaServed": ["IE","GB","US","DE","FR","NL","AU","CA","SG"],
+  "audience": {"@type": "Audience", "audienceType": "Startup Founders"}
+}
+]
+</script>
 <style>@font-face {
   font-family: 'Departure Mono';
   src: url('https://cdn.jsdelivr.net/gh/rougier/departure-mono@master/fonts/DepartureMono-Regular.woff2') format('woff2');
