@@ -1,0 +1,587 @@
+// diagnostic.jsx — Interactive burnout diagnostic with EmailJS + Google Sheets tracking
+
+const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby-gv3oCFT2q5KXvVnqRzS4PAzcMjPB8Gls5qodZJ3v4_9HKGqJHMdBCw7YYbEzIE2d/exec';
+if (window.emailjs) {
+  emailjs.init({
+    publicKey: 'bfBcHLXj2nKaev_lT'
+  });
+}
+const DIAG_SECTIONS = [{
+  id: 'self-worth',
+  title: 'Self-worth through achievement',
+  sheetKey: 'self_worth',
+  questions: ['A bad period at work can mess with my confidence significantly.', 'When I am not doing well professionally, I tend to become harsher on myself.', 'It is easier to feel good about myself when things are going well professionally.']
+}, {
+  id: 'shame-guilt-pressure',
+  title: 'Shame, guilt, and pressure',
+  sheetKey: 'shame_guilt_pressure',
+  questions: ['I find it hard to relax when there is still work to be done.', 'I can sit down to rest and still feel like I should be productive.', 'I tend to focus on what is still missing.']
+}, {
+  id: 'comparison',
+  title: 'Comparison, shame, and not-enoughness',
+  sheetKey: 'comparison',
+  questions: ['Seeing other people do well makes me worry about my performance.', 'When someone in my close network is moving fast, I tend to think about where I am falling short.', 'I can have objectively good results and still feel behind my goals.']
+}, {
+  id: 'vulnerability',
+  title: 'Fear of vulnerability',
+  sheetKey: 'vulnerability',
+  questions: ['I feel uneasy with the idea of people close to me seeing me weak.', 'If I am struggling, my instinct is usually to keep it to myself.', 'I would rather deal with something alone than let people see me unsure or messy.']
+}, {
+  id: 'grind',
+  title: 'Pride in grind and pressure',
+  sheetKey: 'grind',
+  questions: ['I am used to carrying a lot without complaining about it.', 'Part of me takes pride in how much pressure I can handle.', 'Slowing down can feel uncomfortable, even when it seems like I need it.']
+}, {
+  id: 'identity',
+  title: 'Identity and persona',
+  sheetKey: 'identity',
+  questions: ['People know me as someone who gets things done.', 'Being capable is a big part of how I see myself.', 'Letting people down hits me hard, especially when they expect a lot from me.', 'People often tell me I am too hard on myself or that I push myself too much.']
+}, {
+  id: 'relationships',
+  title: 'Interpersonal relationships',
+  sheetKey: 'relationships',
+  questions: ['When work is heavy, I have less patience for people who do not get it.', 'When I am stressed, I can become harder to interact with.', 'There are times when I feel too loaded to really be present with other people.', 'My relationship with my partner has suffered because of how I carry stress.', 'There are times when I feel distant from my partner, or they feel unsupported by me.']
+}, {
+  id: 'drive-meaning',
+  title: 'Loss of drive and meaning',
+  sheetKey: 'drive_meaning',
+  questions: ['I have started feeling resentful about parts of work I used to take pride in.', 'I miss the times when work felt easier to enjoy.']
+}, {
+  id: 'numbness',
+  title: 'Emotional numbness and detachment',
+  sheetKey: 'numbness',
+  questions: ['I can get through a full day and still feel emotionally flat.', 'Things that used to matter to me do not land the same way now.', 'I can be productive and still feel disconnected from what I am doing.', 'I often feel less like myself and more like I am just operating.', 'There are moments when I wonder what all this effort is really for.']
+}, {
+  id: 'cynicism',
+  title: 'Cynicism and depersonalisation',
+  sheetKey: 'cynicism',
+  questions: ['I have become more cynical about work than I used to be.', 'Some parts of work now feel mechanical, even when I do them well.', 'There are moments when I feel more detached than engaged.']
+}, {
+  id: 'nervous-system',
+  title: 'Nervous-system overload',
+  sheetKey: 'nervous_system',
+  questions: ['I can be tired and still feel unable to fully settle.', 'Sleep does not always leave me feeling properly reset.', 'Stress has started showing up in my body through things like headaches, muscle tension, stomach issues, nausea, or similar symptoms.', 'My body can stay tense even when I am not actively working.']
+}, {
+  id: 'tech-activation',
+  title: 'Tech-specific constant activation',
+  sheetKey: 'tech_activation',
+  questions: ['Even when I am off, part of me still feels on call.', 'I check work things in moments that should be personal time.', 'It is hard for me to feel fully off duty.', 'My mind stays connected to work more than I want.', 'I feel a pull to reply quickly even when I do not have to.', 'I often turn to AI, self-help content, or similar inputs to figure myself out, but it rarely leads to real change.', 'I consume advice about burnout, stress, or performance, but still find myself stuck in the same patterns.']
+}];
+const FLAT_QUESTIONS = [];
+DIAG_SECTIONS.forEach(section => {
+  section.questions.forEach((text, index) => {
+    FLAT_QUESTIONS.push({
+      key: section.id + '-' + index,
+      sectionId: section.id,
+      sectionTitle: section.title,
+      text
+    });
+  });
+});
+const SCALE = [{
+  value: 1,
+  label: 'Strongly disagree'
+}, {
+  value: 2,
+  label: 'Disagree'
+}, {
+  value: 3,
+  label: 'Neither agree nor disagree'
+}, {
+  value: 4,
+  label: 'Agree'
+}, {
+  value: 5,
+  label: 'Strongly agree'
+}, {
+  value: 'na',
+  label: 'N/A'
+}];
+function avg(vals) {
+  if (!vals.length) return null;
+  return vals.reduce((a, b) => a + b, 0) / vals.length;
+}
+function getGrade(score) {
+  if (score === null) return 'Insufficient data';
+  if (score <= 2.5) return 'OK';
+  if (score <= 3.2) return 'Signs of burnout';
+  return 'Getting serious';
+}
+function getDesc(score) {
+  if (score === null) return 'There is not enough data to score this assessment yet.';
+  if (score <= 2.5) return 'Your answers do not currently suggest a strong burnout pattern. That does not mean there is no pressure in your life. It means the pattern is not dominating your energy, relationships, or sense of self in a major way right now.';
+  if (score <= 3.2) return 'Your answers suggest noticeable signs of burnout. This is often the stage where people still function well on the outside, but the cost is already building underneath in ways that spill into motivation, mood, relationships, or recovery.';
+  return 'Your answers suggest a serious pattern. This usually means the issue goes deeper than workload alone and is now affecting multiple parts of life at the same time.';
+}
+function getSectionLabel(score) {
+  if (score === null) return 'Insufficient data';
+  if (score <= 2.5) return 'OK';
+  if (score <= 3.2) return 'Signs';
+  return 'Serious';
+}
+function fmt(score) {
+  return score === null ? 'N/A' : score.toFixed(2);
+}
+function DiagnosticPage() {
+  const {
+    useState,
+    useRef
+  } = React;
+  const [screen, setScreen] = useState('intro');
+  const [answers, setAnswers] = useState({});
+  const [idx, setIdx] = useState(0);
+  const [email, setEmail] = useState('');
+  const [sending, setSending] = useState(false);
+  const [results, setResults] = useState(null);
+  const mainRef = useRef(null);
+  const scrollTop = () => {
+    if (mainRef.current) mainRef.current.scrollTop = 0;
+  };
+  const totalQ = FLAT_QUESTIONS.length;
+  const answered = Object.keys(answers).filter(k => answers[k] !== undefined).length;
+  const progress = Math.round(answered / totalQ * 100);
+  function getOverallScore() {
+    const nums = Object.values(answers).filter(v => typeof v === 'number');
+    return avg(nums);
+  }
+  function getSectionResults() {
+    return DIAG_SECTIONS.map(section => {
+      const keys = section.questions.map((_, i) => section.id + '-' + i);
+      const nums = keys.map(k => answers[k]).filter(v => typeof v === 'number');
+      const answeredCount = keys.filter(k => answers[k] !== undefined).length;
+      const threshold = Math.ceil(keys.length * 0.7);
+      const score = answeredCount >= threshold ? avg(nums) : null;
+      return {
+        id: section.id,
+        title: section.title,
+        sheetKey: section.sheetKey,
+        score,
+        label: getSectionLabel(score)
+      };
+    });
+  }
+  function buildSectionBreakdownText(sections) {
+    return sections.map(section => {
+      return section.title + ': ' + section.label + ' (' + fmt(section.score) + ' / 5.00)';
+    }).join('\n');
+  }
+  function buildAnswersText() {
+    return FLAT_QUESTIONS.map((question, index) => {
+      const answer = answers[question.key];
+      const answerLabel = answer === undefined ? 'No answer' : answer === 'na' ? 'N/A' : String(answer);
+      return index + 1 + '. [' + question.sectionTitle + '] ' + question.text + ' => ' + answerLabel;
+    }).join('\n');
+  }
+  function calculateResults() {
+    const overall = getOverallScore();
+    const sections = getSectionResults();
+    return {
+      overall,
+      grade: getGrade(overall),
+      desc: getDesc(overall),
+      sections
+    };
+  }
+  function sendResultsEmail(payload) {
+    if (!window.emailjs) {
+      return Promise.reject(new Error('EmailJS is not loaded'));
+    }
+    return emailjs.send('service_i4xq7vg', 'template_wdsrbdo', payload);
+  }
+  function sendResultsToSheet(calculated, trimmedEmail) {
+    const sectionScores = {};
+    calculated.sections.forEach(section => {
+      sectionScores[section.sheetKey] = fmt(section.score);
+    });
+    return fetch(GOOGLE_SHEET_WEB_APP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({
+        email: trimmedEmail,
+        overall_score: fmt(calculated.overall),
+        overall_grade: calculated.grade,
+        self_worth: sectionScores.self_worth || '',
+        shame_guilt_pressure: sectionScores.shame_guilt_pressure || '',
+        comparison: sectionScores.comparison || '',
+        vulnerability: sectionScores.vulnerability || '',
+        grind: sectionScores.grind || '',
+        identity: sectionScores.identity || '',
+        relationships: sectionScores.relationships || '',
+        drive_meaning: sectionScores.drive_meaning || '',
+        numbness: sectionScores.numbness || '',
+        cynicism: sectionScores.cynicism || '',
+        nervous_system: sectionScores.nervous_system || '',
+        tech_activation: sectionScores.tech_activation || '',
+        section_breakdown: buildSectionBreakdownText(calculated.sections),
+        all_answers: buildAnswersText(),
+        page_url: window.location.href
+      })
+    });
+  }
+  function handleShowResults() {
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) return;
+    const calculated = calculateResults();
+    setSending(true);
+    sendResultsToSheet(calculated, trimmedEmail).catch(err => console.error('Sheet error:', err));
+    sendResultsEmail({
+      user_email: trimmedEmail,
+      overall_score: fmt(calculated.overall),
+      overall_grade: calculated.grade,
+      section_breakdown: buildSectionBreakdownText(calculated.sections),
+      all_answers: buildAnswersText(),
+      page_url: window.location.href
+    }).catch(err => console.error('Email error:', err));
+    setResults(calculated);
+    setScreen('results');
+    setTimeout(scrollTop, 50);
+    setSending(false);
+  }
+  const currentQ = FLAT_QUESTIONS[idx];
+  const currentAnswer = answers[currentQ?.key];
+  const C = {
+    page: {
+      maxWidth: 740,
+      margin: '0 auto',
+      padding: '4rem 2rem 7rem',
+      color: '#282726',
+      fontFamily: 'inherit'
+    },
+    eyebrow: {
+      fontSize: '11px',
+      fontWeight: 400,
+      letterSpacing: '.15em',
+      textTransform: 'uppercase',
+      color: '#777',
+      lineHeight: 1.7
+    },
+    h1: {
+      fontSize: '28px',
+      fontWeight: 400,
+      lineHeight: 1.35,
+      color: '#282726',
+      marginBottom: '1.5rem'
+    },
+    p: {
+      marginBottom: '1.4rem',
+      lineHeight: 1.85,
+      fontSize: '16px',
+      color: '#282726'
+    },
+    card: {
+      border: '1px solid rgba(40,39,38,.15)',
+      padding: '1rem'
+    },
+    note: {
+      fontSize: '13px',
+      color: '#777',
+      lineHeight: 1.7
+    },
+    cta: {
+      fontFamily: 'inherit',
+      fontSize: '11px',
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: '#F4F2F0',
+      background: '#282726',
+      border: '1px solid #282726',
+      padding: '.8rem 1.2rem',
+      display: 'inline-block',
+      cursor: 'pointer'
+    },
+    ctaSec: {
+      background: 'transparent',
+      color: '#282726',
+      borderColor: 'rgba(40,39,38,.3)'
+    },
+    optionBtn: selected => ({
+      width: '100%',
+      textAlign: 'left',
+      border: selected ? '1px solid #00bf63' : '1px solid rgba(40,39,38,.15)',
+      padding: '1rem',
+      borderRadius: '8px',
+      background: selected ? '#00bf63' : 'transparent',
+      color: selected ? '#fff' : '#282726',
+      fontFamily: 'inherit',
+      fontSize: '14px',
+      lineHeight: 1.7,
+      cursor: 'pointer',
+      marginBottom: '.75rem'
+    }),
+    progressLine: {
+      height: '1px',
+      background: 'rgba(40,39,38,.12)',
+      position: 'relative',
+      marginTop: '.8rem'
+    },
+    progressFill: pct => ({
+      height: '1px',
+      background: '#00bf63',
+      width: pct + '%',
+      transition: 'width .2s ease'
+    }),
+    sectionRow: {
+      border: '1px solid rgba(40,39,38,.15)',
+      padding: '1rem',
+      borderRadius: '8px',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      gap: '1rem',
+      marginBottom: '.75rem'
+    },
+    footer: {
+      marginTop: '3rem',
+      fontSize: '12px',
+      color: '#777'
+    }
+  };
+  if (screen === 'intro') return /*#__PURE__*/React.createElement("div", {
+    style: C.page,
+    ref: mainRef
+  }, /*#__PURE__*/React.createElement("p", {
+    style: C.eyebrow
+  }, "Burnout diagnostic"), /*#__PURE__*/React.createElement("h1", {
+    style: C.h1
+  }, "High-Functioning Burnout Diagnostic for People in Tech"), /*#__PURE__*/React.createElement("p", {
+    style: C.p
+  }, "This assessment is for high-functioning people in tech whose drive may be getting expensive."), /*#__PURE__*/React.createElement("p", {
+    style: C.p
+  }, "It looks beyond obvious overwork and measures patterns linked to performance, pressure, identity, nervous-system overload, emotional flattening, and constant activation."), /*#__PURE__*/React.createElement("p", {
+    style: C.p
+  }, "It takes around 8 minutes. At the end, you'll get a burnout score, a grade, and a breakdown by section."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3,1fr)',
+      gap: '1rem',
+      margin: '2rem 0'
+    }
+  }, [['Length', '45 questions'], ['Format', '1-5 scale + N/A'], ['Result', 'Score + section breakdown']].map(([label, value]) => /*#__PURE__*/React.createElement("div", {
+    key: label,
+    style: C.card
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: '11px',
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: '#888',
+      marginBottom: '.5rem'
+    }
+  }, label), /*#__PURE__*/React.createElement("div", null, value)))), /*#__PURE__*/React.createElement("p", {
+    style: C.note
+  }, "This diagnostic is directional, not a clinical diagnosis."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: '2rem'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    style: C.cta,
+    onClick: () => {
+      setScreen('question');
+      setIdx(0);
+      scrollTop();
+    }
+  }, "Start assessment")), /*#__PURE__*/React.createElement("footer", {
+    style: C.footer
+  }, "\xA9 Aggelos Mouzakitis"));
+  if (screen === 'question') return /*#__PURE__*/React.createElement("div", {
+    style: C.page,
+    ref: mainRef
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: '2rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      gap: '1rem',
+      marginBottom: '.8rem'
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: C.eyebrow
+  }, "Question ", idx + 1, " of ", totalQ), /*#__PURE__*/React.createElement("p", {
+    style: C.eyebrow
+  }, progress, "% complete")), /*#__PURE__*/React.createElement("div", {
+    style: C.progressLine
+  }, /*#__PURE__*/React.createElement("div", {
+    style: C.progressFill(progress)
+  }))), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: '20px',
+      lineHeight: 1.85,
+      marginBottom: '1.8rem',
+      fontWeight: 400,
+      color: '#282726'
+    }
+  }, currentQ.text), SCALE.map(opt => /*#__PURE__*/React.createElement("button", {
+    key: opt.value,
+    style: C.optionBtn(currentAnswer === opt.value),
+    onClick: () => setAnswers(a => ({
+      ...a,
+      [currentQ.key]: opt.value
+    }))
+  }, opt.label)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      gap: '1rem',
+      marginTop: '2rem'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    style: {
+      ...C.cta,
+      ...C.ctaSec,
+      opacity: idx === 0 ? 0.4 : 1
+    },
+    disabled: idx === 0,
+    onClick: () => {
+      setIdx(i => i - 1);
+      scrollTop();
+    }
+  }, "Back"), /*#__PURE__*/React.createElement("button", {
+    style: {
+      ...C.cta,
+      opacity: currentAnswer === undefined ? 0.4 : 1
+    },
+    disabled: currentAnswer === undefined,
+    onClick: () => {
+      if (idx < totalQ - 1) {
+        setIdx(i => i + 1);
+        scrollTop();
+      } else {
+        setScreen('gate');
+        scrollTop();
+      }
+    }
+  }, idx === totalQ - 1 ? 'Continue' : 'Next')));
+  if (screen === 'gate') return /*#__PURE__*/React.createElement("div", {
+    style: C.page,
+    ref: mainRef
+  }, /*#__PURE__*/React.createElement("p", {
+    style: C.eyebrow
+  }, "One last step"), /*#__PURE__*/React.createElement("h1", {
+    style: C.h1
+  }, "Enter your email to view your result."), /*#__PURE__*/React.createElement("p", {
+    style: C.p
+  }, "You'll see your burnout score and section breakdown immediately after this."), /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: 'block',
+      fontSize: '11px',
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: '#888',
+      marginBottom: '.6rem'
+    }
+  }, "Email"), /*#__PURE__*/React.createElement("input", {
+    type: "email",
+    placeholder: "you@example.com",
+    value: email,
+    onChange: e => setEmail(e.target.value),
+    style: {
+      width: '100%',
+      border: '1px solid rgba(40,39,38,.2)',
+      padding: '1rem',
+      borderRadius: '8px',
+      background: 'transparent',
+      color: '#282726',
+      fontFamily: 'inherit',
+      fontSize: '14px',
+      lineHeight: 1.7,
+      outline: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      gap: '1rem',
+      marginTop: '2rem'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    style: {
+      ...C.cta,
+      ...C.ctaSec
+    },
+    onClick: () => {
+      setScreen('question');
+      scrollTop();
+    }
+  }, "Back"), /*#__PURE__*/React.createElement("button", {
+    style: {
+      ...C.cta,
+      opacity: !email.trim() || sending ? 0.4 : 1
+    },
+    disabled: !email.trim() || sending,
+    onClick: handleShowResults
+  }, sending ? 'Sending...' : 'Show results')));
+  if (screen === 'results' && results) return /*#__PURE__*/React.createElement("div", {
+    style: C.page,
+    ref: mainRef
+  }, /*#__PURE__*/React.createElement("p", {
+    style: C.eyebrow
+  }, "Your result"), /*#__PURE__*/React.createElement("h1", {
+    style: {
+      ...C.h1,
+      marginBottom: '.5rem'
+    }
+  }, results.grade), /*#__PURE__*/React.createElement("p", {
+    style: C.p
+  }, "Burnout score: ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#00bf63'
+    }
+  }, fmt(results.overall)), " / 5.00"), /*#__PURE__*/React.createElement("p", {
+    style: C.p
+  }, results.desc), /*#__PURE__*/React.createElement("p", {
+    style: C.note
+  }, "This diagnostic is directional, not a clinical diagnosis."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: '2rem'
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      ...C.eyebrow,
+      marginBottom: '1rem'
+    }
+  }, "Section breakdown"), results.sections.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: C.sectionRow
+  }, /*#__PURE__*/React.createElement("div", null, s.title), /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'right'
+    }
+  }, /*#__PURE__*/React.createElement("div", null, s.label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: '13px',
+      color: '#888'
+    }
+  }, fmt(s.score), " / 5.00"))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: '1rem',
+      marginTop: '2rem',
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    style: C.cta,
+    onClick: () => {
+      setAnswers({});
+      setIdx(0);
+      setEmail('');
+      setResults(null);
+      setScreen('intro');
+      scrollTop();
+    }
+  }, "Retake assessment"), /*#__PURE__*/React.createElement("button", {
+    style: {
+      ...C.cta,
+      ...C.ctaSec
+    },
+    onClick: () => window.print()
+  }, "Print result")), /*#__PURE__*/React.createElement("footer", {
+    style: C.footer
+  }, "\xA9 Aggelos Mouzakitis"));
+  return null;
+}
+Object.assign(window, {
+  DiagnosticPage
+});
