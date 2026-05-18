@@ -7,20 +7,21 @@
 <title>Writing | Aggelos Mouzakitis</title>
 <meta name="description" content="Essays on high-functioning burnout, performance identity, and the psychology of ambition. By Aggelos Mouzakitis.">
 <link rel="canonical" href="https://aggelosmouzakitis.com/blog/">
+<link rel="alternate" type="application/rss+xml" title="Writing — Aggelos Mouzakitis" href="/blog/feed.xml">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Aggelos Mouzakitis">
 <meta property="og:title" content="Writing | Aggelos Mouzakitis">
 <meta property="og:description" content="Essays on high-functioning burnout, performance identity, and the psychology of ambition. By Aggelos Mouzakitis.">
 <meta property="og:url" content="https://aggelosmouzakitis.com/blog/">
-<meta property="og:image" content="https://aggelosmouzakitis.com/img/aggelos.jpg">
-<meta property="og:image:width" content="300">
-<meta property="og:image:height" content="300">
+<meta property="og:image" content="https://aggelosmouzakitis.com/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_IE">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Writing | Aggelos Mouzakitis">
 <meta name="twitter:description" content="Essays on high-functioning burnout, performance identity, and the psychology of ambition.">
-<meta name="twitter:image" content="https://aggelosmouzakitis.com/img/aggelos.jpg">
+<meta name="twitter:image" content="https://aggelosmouzakitis.com/img/og-image.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,73 +79,9 @@ body {
 </head>
 <body>
 <div id="root"></div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="../sidebar.jsx"></script>
-<script type="text/babel">
-const { useState, useEffect, useRef } = React;
-
-const URL_MAP = {
-  'home': '/', 'diagnostic': '/burnout-diagnostic/', 'blog': '/blog/',
-  'therapy-for-executives': '/therapy-for-executives/',
-  'therapy-for-founders': '/therapy-for-founders/',
-  'imposter-syndrome-therapy': '/imposter-syndrome-therapy/',
-  'executive-burnout-therapy': '/executive-burnout-therapy/',
-  'career-transition-therapy': '/career-transition-therapy/',
-  'ask-me-anything': '/ask-me-anything/',
-};
-
-function navigate(id) {
-  window.location.href = URL_MAP[id] || '/';
-}
-
-function BlogIndex() {
-  const [posts, setPosts] = useState(null);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const mainRef = useRef(null);
-
-  useEffect(() => {
-    fetch('/blog/posts.json')
-      .then(r => r.json())
-      .then(setPosts)
-      .catch(() => setPosts([]));
-  }, []);
-
-  return (
-    <React.Fragment>
-      <div id="sidebar">
-        <Sidebar page="blog" setPage={navigate} open={sidebarOpen} setOpen={setSidebarOpen} />
-      </div>
-      <div id="main-scroll" ref={mainRef}>
-        <div className="blog-page">
-          <p className="section-label">Recent posts</p>
-          {posts === null && <p className="loading">Loading…</p>}
-          {posts !== null && posts.length === 0 && <p className="loading">No posts yet.</p>}
-          {posts && posts.length > 0 && (
-            <ul className="post-list">
-              {posts.map(p => (
-                <li key={p.slug} className="post-item">
-                  <h2 className="post-title">
-                    <a href={`/blog/${p.slug}/`}>{p.title}</a>
-                  </h2>
-                  {p.description && <p className="post-desc">{p.description}</p>}
-                  <div className="post-meta">
-                    <span>{p.date}</span>
-                    <span style={{opacity: .4}}>·</span>
-                    <span>Aggelos Mouzakitis</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </div>
-    </React.Fragment>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById('root')).render(<BlogIndex />);
-</script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="/sidebar.js"></script>
+<script src="/blog/blog-index.js"></script>
 </body>
 </html>
