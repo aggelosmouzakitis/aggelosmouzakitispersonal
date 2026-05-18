@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /blog/post-template.html
 Disallow: /blog/sample-post/
+Disallow: /admin/
 
 Sitemap: https://aggelosmouzakitis.com/sitemap.xml
