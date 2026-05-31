@@ -108,23 +108,25 @@ function avg(vals) {
 
 function getGrade(score) {
   if (score === null) return 'Insufficient data';
-  if (score <= 2.5) return 'OK';
-  if (score <= 3.2) return 'Signs of burnout';
-  return 'Getting serious';
+  if (score <= 2.25) return 'Level 1 — Stable but stretched';
+  if (score <= 2.9) return 'Level 2 — Performing at a cost';
+  if (score <= 3.5) return 'Level 3 — High-functioning depletion';
+  return 'Level 4 — Fulfilment breakdown';
 }
 
 function getDesc(score) {
   if (score === null) return 'There is not enough data to score this assessment yet.';
-  if (score <= 2.5) return 'Your answers do not currently suggest a strong burnout pattern. That does not mean there is no pressure in your life. It means the pattern is not dominating your energy, relationships, or sense of self in a major way right now.';
-  if (score <= 3.2) return 'Your answers suggest noticeable signs of burnout. This is often the stage where people still function well on the outside, but the cost is already building underneath in ways that spill into motivation, mood, relationships, or recovery.';
-  return 'Your answers suggest a serious pattern. This usually means the issue goes deeper than workload alone and is now affecting multiple parts of life at the same time.';
+  if (score <= 2.25) return 'You are still functioning, but some parts of your operating system are starting to show strain. This is not crisis repair. It is prevention, self-awareness, and small adjustments before the cost grows.';
+  if (score <= 2.9) return 'You are still delivering, but success is starting to cost you more than it gives back. You may notice emotional fatigue, slower recovery, more irritability, less fulfilment, or a stronger dependence on achievement to feel okay.';
+  if (score <= 3.5) return 'You may still look capable from the outside, but internally your system is under significant load. This is where emotional flatness, avoidance, relationship strain, and nervous-system overload become harder to ignore.';
+  return 'At this stage the issue is no longer only stress. The way you are operating may be disconnected from your wellbeing, values, body, relationships, and sense of self. The goal is not simply to rest more — it is to rebuild your relationship with ambition and success.';
 }
 
 function getSectionLabel(score) {
   if (score === null) return 'Insufficient data';
-  if (score <= 2.5) return 'OK';
-  if (score <= 3.2) return 'Signs';
-  return 'Serious';
+  if (score <= 2.5) return 'Low';
+  if (score <= 3.2) return 'Elevated';
+  return 'High';
 }
 
 function fmt(score) {
@@ -321,14 +323,14 @@ function DiagnosticPage() {
 
   if (screen === 'intro') return (
     <div style={C.page} ref={mainRef}>
-      <p style={C.eyebrow}>Burnout diagnostic</p>
-      <h1 style={C.h1}>High-Functioning Burnout Diagnostic for People in Tech</h1>
-      <p style={C.p}>This assessment is for high-functioning people in tech whose drive may be getting expensive.</p>
-      <p style={C.p}>It looks beyond obvious overwork and measures patterns linked to performance, pressure, identity, nervous-system overload, emotional flattening, and constant activation.</p>
-      <p style={C.p}>It takes around 8 minutes. At the end, you'll get a burnout score, a grade, and a breakdown by section.</p>
+      <p style={C.eyebrow}>Fulfilment diagnostic</p>
+      <h1 style={C.h1}>The High-Performance Fulfilment Diagnostic</h1>
+      <p style={C.p}>This isn't designed to label you as burnt out. It's built to show how your current relationship with work, ambition, and pressure is affecting your fulfilment, nervous system, self-trust, relationships, and ability to recover.</p>
+      <p style={C.p}>It's for tech high performers who are still functioning, still ambitious, and still carrying responsibility — but suspect the way they're succeeding is starting to cost more than it gives back. It looks beyond generic burnout symptoms at the deeper patterns behind pressure, achievement, nervous-system load, emotional fatigue, overthinking, avoidance, and loss of fulfilment.</p>
+      <p style={C.p}>Around 8 minutes. At the end you'll see your operating pattern, a level, and a breakdown by section.</p>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', margin: '2rem 0' }}>
-        {[['Length', '45 questions'], ['Format', '1-5 scale + N/A'], ['Result', 'Score + section breakdown']].map(([label, value]) =>
+        {[['Length', '45 questions'], ['Format', '1-5 scale + N/A'], ['Result', 'Level + section breakdown']].map(([label, value]) =>
           <div key={label} style={C.card}>
             <div style={{ fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', color: '#888', marginBottom: '.5rem' }}>{label}</div>
             <div>{value}</div>
@@ -404,7 +406,7 @@ function DiagnosticPage() {
     <div style={C.page} ref={mainRef}>
       <p style={C.eyebrow}>One last step</p>
       <h1 style={C.h1}>Enter your email to view your result.</h1>
-      <p style={C.p}>You'll see your burnout score and section breakdown immediately after this.</p>
+      <p style={C.p}>You'll see your level and section breakdown immediately after this.</p>
 
       <label style={{ display: 'block', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', color: '#888', marginBottom: '.6rem' }}>
         Email
@@ -449,7 +451,7 @@ function DiagnosticPage() {
     <div style={C.page} ref={mainRef}>
       <p style={C.eyebrow}>Your result</p>
       <h1 style={{ ...C.h1, marginBottom: '.5rem' }}>{results.grade}</h1>
-      <p style={C.p}>Burnout score: <span style={{ color: '#00bf63' }}>{fmt(results.overall)}</span> / 5.00</p>
+      <p style={C.p}>Your score: <span style={{ color: '#00bf63' }}>{fmt(results.overall)}</span> / 5.00</p>
       <p style={C.p}>{results.desc}</p>
       <p style={C.note}>This diagnostic is directional, not a clinical diagnosis.</p>
 

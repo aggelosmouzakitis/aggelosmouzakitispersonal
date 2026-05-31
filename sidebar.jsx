@@ -180,11 +180,11 @@ function MobileNav({ page, setPage }) {
         </button>
         {/* Diagnostic CTA */}
         <div style={{ margin: '12px 20px 4px', padding: '14px', border: '1px solid rgba(0,191,99,0.25)', background: 'rgba(0,191,99,0.04)' }}>
-          <div style={{ fontSize: '10px', letterSpacing: '.15em', textTransform: 'uppercase', color: '#00bf63', marginBottom: 8 }}>Free Burnout Diagnostic</div>
-          <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', marginBottom: 12 }}>45 questions. Score + section breakdown.</div>
+          <div style={{ fontSize: '10px', letterSpacing: '.15em', textTransform: 'uppercase', color: '#00bf63', marginBottom: 8 }}>Free Fulfilment Diagnostic</div>
+          <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', marginBottom: 12 }}>45 questions. Your operating pattern + breakdown.</div>
           <button onClick={() => { setPage('diagnostic'); setSheetOpen(false); }}
             style={{ width: '100%', padding: '10px', fontFamily: 'inherit', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', background: 'transparent', border: '1px solid #00bf63', color: '#00bf63', cursor: 'pointer' }}>
-            Start assessment →
+            Take the diagnostic →
           </button>
         </div>
       </div>
@@ -389,8 +389,8 @@ function Sidebar({ page, setPage, open, setOpen }) {
         {/* Diagnostic CTA */}
         <div style={{ padding: '0 16px 22px', flexShrink: 0 }}>
           <div style={{ border: `1px solid rgba(0,191,99,0.25)`, padding: '18px', background: 'rgba(0,191,99,0.04)' }}>
-            <div style={{ fontSize: '10px', letterSpacing: '.16em', textTransform: 'uppercase', color: SB.accent, marginBottom: 8 }}>Free Burnout Diagnostic</div>
-            <div style={{ fontSize: '12px', color: SB.muted, lineHeight: 1.75, marginBottom: 14 }}>45 questions. 8 minutes.<br />Score + section breakdown.</div>
+            <div style={{ fontSize: '10px', letterSpacing: '.16em', textTransform: 'uppercase', color: SB.accent, marginBottom: 8 }}>Free Fulfilment Diagnostic</div>
+            <div style={{ fontSize: '12px', color: SB.muted, lineHeight: 1.75, marginBottom: 14 }}>45 questions. 8 minutes.<br />Your operating pattern + breakdown.</div>
             <button onClick={() => setPage('diagnostic')}
               onMouseEnter={e => { e.currentTarget.style.background = SB.accent; e.currentTarget.style.color = '#fff'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = SB.accent; }}
