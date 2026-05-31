@@ -133,6 +133,45 @@ function fmt(score) {
   return score === null ? 'N/A' : score.toFixed(2);
 }
 
+// Display-only grouping: the 12 scored sections roll up into 7 dimensions for the
+// on-screen result. The Sheet + EmailJS payloads still use the original 12 sections,
+// so no automation changes are needed.
+const DIMENSIONS = [
+  { id: 'achievement-self-worth', title: 'Achievement & self-worth', sectionIds: ['self-worth', 'comparison'],
+    interp: 'How strongly your sense of worth is tied to achievement, progress, and external performance.' },
+  { id: 'pressure-internal-demand', title: 'Pressure & internal demand', sectionIds: ['shame-guilt-pressure', 'grind'],
+    interp: 'How much pressure you create internally, even when no one is directly demanding more from you.' },
+  { id: 'identity-vulnerability', title: 'Identity & vulnerability', sectionIds: ['identity', 'vulnerability'],
+    interp: 'How much your professional identity depends on being capable, composed, and hard to disappoint.' },
+  { id: 'emotional-availability', title: 'Emotional availability & relationships', sectionIds: ['relationships'],
+    interp: 'Whether your current operating mode is reducing your emotional availability outside work.' },
+  { id: 'meaning-fulfilment', title: 'Meaning & fulfilment', sectionIds: ['drive-meaning', 'numbness', 'cynicism'],
+    interp: 'Whether success is still emotionally rewarding, or whether you are performing without enough meaning, aliveness, or satisfaction.' },
+  { id: 'nervous-system-load', title: 'Nervous-system load', sectionIds: ['nervous-system'],
+    interp: 'How much your body is carrying the pressure, even when your mind thinks you are managing.' },
+  { id: 'tech-activation', title: 'Tech-specific activation', sectionIds: ['tech-activation'],
+    interp: 'How much your work environment keeps you mentally and physiologically activated, even when you are technically not working.' }
+];
+
+// Roll the 12 section results into the 7 display dimensions, scoring each dimension
+// from the underlying question answers (not an average-of-averages).
+function getDimensionResults(sections, answers) {
+  const byId = {};
+  sections.forEach((s) => { byId[s.id] = s; });
+  return DIMENSIONS.map((dim) => {
+    const keys = [];
+    dim.sectionIds.forEach((sid) => {
+      const section = DIAG_SECTIONS.find((s) => s.id === sid);
+      if (section) section.questions.forEach((_, i) => keys.push(sid + '-' + i));
+    });
+    const nums = keys.map((k) => answers[k]).filter((v) => typeof v === 'number');
+    const answeredCount = keys.filter((k) => answers[k] !== undefined).length;
+    const threshold = Math.ceil(keys.length * 0.7);
+    const score = answeredCount >= threshold ? avg(nums) : null;
+    return { id: dim.id, title: dim.title, interp: dim.interp, score, label: getSectionLabel(score) };
+  });
+}
+
 function DiagnosticPage() {
   const { useState, useRef } = React;
   const [screen, setScreen] = useState('intro');
@@ -196,7 +235,8 @@ function DiagnosticPage() {
       overall,
       grade: getGrade(overall),
       desc: getDesc(overall),
-      sections
+      sections,
+      dimensions: getDimensionResults(sections, answers)
     };
   }
 
@@ -456,14 +496,17 @@ function DiagnosticPage() {
       <p style={C.note}>This diagnostic is directional, not a clinical diagnosis.</p>
 
       <div style={{ marginTop: '2rem' }}>
-        <p style={{ ...C.eyebrow, marginBottom: '1rem' }}>Section breakdown</p>
-        {results.sections.map((s, i) =>
-          <div key={i} style={C.sectionRow}>
-            <div>{s.title}</div>
-            <div style={{ textAlign: 'right' }}>
-              <div>{s.label}</div>
-              <div style={{ fontSize: '13px', color: '#888' }}>{fmt(s.score)} / 5.00</div>
+        <p style={{ ...C.eyebrow, marginBottom: '1rem' }}>Your operating pattern</p>
+        {(results.dimensions || []).map((d, i) =>
+          <div key={i} style={{ ...C.sectionRow, flexDirection: 'column', alignItems: 'stretch', gap: '.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
+              <div>{d.title}</div>
+              <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                <div>{d.label}</div>
+                <div style={{ fontSize: '13px', color: '#888' }}>{fmt(d.score)} / 5.00</div>
+              </div>
             </div>
+            <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.65 }}>{d.interp}</div>
           </div>
         )}
       </div>
