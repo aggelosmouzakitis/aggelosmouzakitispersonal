@@ -129,35 +129,85 @@ function getSectionLabel(score) {
   return 'High';
 }
 
+// Colour + fill for the per-dimension level bar (display-only).
+function getLevelVisual(score) {
+  if (score === null) return { color: '#bbb', pct: 0 };
+  const pct = Math.max(0, Math.min(100, ((score - 1) / 4) * 100));
+  if (score <= 2.5) return { color: '#00bf63', pct };
+  if (score <= 3.2) return { color: '#d9a200', pct };
+  return { color: '#c0392b', pct };
+}
+
 function fmt(score) {
   return score === null ? 'N/A' : score.toFixed(2);
 }
 
 // Display-only grouping: the 12 scored sections roll up into 7 dimensions for the
 // on-screen result. The Sheet + EmailJS payloads still use the original 12 sections,
-// so no automation changes are needed.
+// so no automation changes are needed. Each dimension carries three copy variants
+// (low / elevated / high) so the interpretation flexes with the person's score.
 const DIMENSIONS = [
   { id: 'achievement-self-worth', title: 'Achievement & self-worth', sectionIds: ['self-worth', 'comparison'],
-    interp: 'How strongly your sense of worth is tied to achievement, progress, and external performance.' },
+    base: 'How strongly your sense of worth is tied to achievement, progress, and external performance.',
+    interps: {
+      low: 'Your worth doesn’t seem to live or die by the last result. That’s a stable base most high performers don’t have.',
+      elevated: 'Your sense of worth is leaning on achievement more than you might like. Good periods lift you; bad ones cut deeper than the facts justify.',
+      high: 'Right now your worth is closely fused with performance. Wins reassure briefly, setbacks feel personal, and the bar keeps moving. This is the engine underneath a lot of the rest.'
+    } },
   { id: 'pressure-internal-demand', title: 'Pressure & internal demand', sectionIds: ['shame-guilt-pressure', 'grind'],
-    interp: 'How much pressure you create internally, even when no one is directly demanding more from you.' },
+    base: 'How much pressure you create internally, even when no one is directly demanding more from you.',
+    interps: {
+      low: 'You can ease off without guilt running the show. The pressure you carry looks mostly external, not self-generated.',
+      elevated: 'A fair amount of your pressure is self-imposed. Rest comes with a tax, and "enough" keeps getting redefined upward.',
+      high: 'Most of the pressure is coming from inside. Slowing down feels unsafe rather than restorative, and the demand rarely lets up even when the work does.'
+    } },
   { id: 'identity-vulnerability', title: 'Identity & vulnerability', sectionIds: ['identity', 'vulnerability'],
-    interp: 'How much your professional identity depends on being capable, composed, and hard to disappoint.' },
+    base: 'How much your professional identity depends on being capable, composed, and hard to disappoint.',
+    interps: {
+      low: 'You can be seen as unsure or struggling without it threatening who you are. That flexibility is protective.',
+      elevated: 'Being the capable, composed one matters enough that showing strain feels risky. You likely carry more alone than you need to.',
+      high: 'Your identity is heavily invested in being capable and hard to disappoint. Vulnerability feels dangerous, so the strain stays hidden — which is exactly what keeps it going.'
+    } },
   { id: 'emotional-availability', title: 'Emotional availability & relationships', sectionIds: ['relationships'],
-    interp: 'Whether your current operating mode is reducing your emotional availability outside work.' },
+    base: 'Whether your current operating mode is reducing your emotional availability outside work.',
+    interps: {
+      low: 'Work pressure isn’t obviously bleeding into how present you are with the people close to you.',
+      elevated: 'Some of the load is spilling into your relationships — less patience, less presence, a shorter fuse than you’d want.',
+      high: 'Your operating mode is costing you outside work. The people closest to you are likely getting the depleted version, and that gap tends to compound.'
+    } },
   { id: 'meaning-fulfilment', title: 'Meaning & fulfilment', sectionIds: ['drive-meaning', 'numbness', 'cynicism'],
-    interp: 'Whether success is still emotionally rewarding, or whether you are performing without enough meaning, aliveness, or satisfaction.' },
+    base: 'Whether success is still emotionally rewarding, or whether you are performing without enough meaning or satisfaction.',
+    interps: {
+      low: 'The work still gives something back. You’re not just performing on momentum — there’s real engagement here.',
+      elevated: 'The reward is thinning out. You’re still delivering, but more of it feels like motion than meaning, and the satisfaction doesn’t land like it used to.',
+      high: 'This is the one that matters most for fulfilment. Success isn’t paying you back emotionally right now — flatness, detachment, and "what is this all for?" are showing up underneath the output.'
+    } },
   { id: 'nervous-system-load', title: 'Nervous-system load', sectionIds: ['nervous-system'],
-    interp: 'How much your body is carrying the pressure, even when your mind thinks you are managing.' },
+    base: 'How much your body is carrying the pressure, even when your mind thinks you are managing.',
+    interps: {
+      low: 'Your body seems to be recovering reasonably well. The system isn’t stuck in a constant state of activation.',
+      elevated: 'Your body is holding some of this — tension, uneven sleep, a hum that doesn’t fully switch off. Recovery isn’t quite keeping up.',
+      high: 'Your nervous system is under real load. Tired-but-wired, poor recovery, physical symptoms — the body is signalling what the mind is overriding. This rarely resolves with willpower alone.'
+    } },
   { id: 'tech-activation', title: 'Tech-specific activation', sectionIds: ['tech-activation'],
-    interp: 'How much your work environment keeps you mentally and physiologically activated, even when you are technically not working.' }
+    base: 'How much your work environment keeps you mentally and physiologically activated, even off the clock.',
+    interps: {
+      low: 'You can get genuinely off-duty. Work isn’t keeping a permanent background process running in your head.',
+      elevated: 'You’re rarely fully off. Part of you stays on call, checking, half-connected — which quietly blocks real recovery.',
+      high: 'You’re almost always activated. Fully switching off feels out of reach, and the constant low-grade "on" state is one of the harder patterns to interrupt without a deliberate approach.'
+    } }
 ];
+
+function pickInterp(dim, score) {
+  if (score === null) return dim.base;
+  if (score <= 2.5) return dim.interps.low;
+  if (score <= 3.2) return dim.interps.elevated;
+  return dim.interps.high;
+}
 
 // Roll the 12 section results into the 7 display dimensions, scoring each dimension
 // from the underlying question answers (not an average-of-averages).
 function getDimensionResults(sections, answers) {
-  const byId = {};
-  sections.forEach((s) => { byId[s.id] = s; });
   return DIMENSIONS.map((dim) => {
     const keys = [];
     dim.sectionIds.forEach((sid) => {
@@ -168,8 +218,24 @@ function getDimensionResults(sections, answers) {
     const answeredCount = keys.filter((k) => answers[k] !== undefined).length;
     const threshold = Math.ceil(keys.length * 0.7);
     const score = answeredCount >= threshold ? avg(nums) : null;
-    return { id: dim.id, title: dim.title, interp: dim.interp, score, label: getSectionLabel(score) };
+    return { id: dim.id, title: dim.title, interp: pickInterp(dim, score), score, label: getSectionLabel(score) };
   });
+}
+
+// Per-level "what to do with this" beat, in fulfilment language (display-only).
+function getNextStep(score) {
+  if (score === null) return '';
+  if (score <= 2.25) return 'The useful move here is prevention: notice which areas are starting to draw down, and adjust before the cost climbs.';
+  if (score <= 2.9) return 'This is the stage where small structural and internal shifts pay off most — before "performing at a cost" hardens into something heavier.';
+  if (score <= 3.5) return 'At this level, managing symptoms usually isn’t enough. The work is to address what’s driving the load underneath — identity, pressure, recovery — not just to rest harder.';
+  return 'This isn’t a willpower problem and rest alone won’t resolve it. The work is to rebuild your relationship with ambition and success so it stops costing you this much.';
+}
+
+// Highest-load dimension, for the headline line on the result screen (display-only).
+function getTopDimension(dimensions) {
+  const scored = (dimensions || []).filter((d) => typeof d.score === 'number');
+  if (!scored.length) return null;
+  return scored.reduce((top, d) => (d.score > top.score ? d : top), scored[0]);
 }
 
 function DiagnosticPage() {
@@ -231,12 +297,22 @@ function DiagnosticPage() {
     const overall = getOverallScore();
     const sections = getSectionResults();
 
+    const dimensions = getDimensionResults(sections, answers);
+    // Sort by severity (highest load first); unscored dimensions sink to the bottom.
+    const sortedDimensions = [...dimensions].sort((a, b) => {
+      const av = typeof a.score === 'number' ? a.score : -1;
+      const bv = typeof b.score === 'number' ? b.score : -1;
+      return bv - av;
+    });
+
     return {
       overall,
       grade: getGrade(overall),
       desc: getDesc(overall),
+      nextStep: getNextStep(overall),
       sections,
-      dimensions: getDimensionResults(sections, answers)
+      dimensions: sortedDimensions,
+      topDimension: getTopDimension(dimensions)
     };
   }
 
@@ -492,28 +568,54 @@ function DiagnosticPage() {
       <p style={C.eyebrow}>Your result</p>
       <h1 style={{ ...C.h1, marginBottom: '.5rem' }}>{results.grade}</h1>
       <p style={C.p}>Your score: <span style={{ color: '#00bf63' }}>{fmt(results.overall)}</span> / 5.00</p>
+      {results.topDimension && (
+        <p style={C.p}>Your highest-load area right now is <span style={{ color: '#282726', borderBottom: '1px solid rgba(40,39,38,.3)' }}>{results.topDimension.title}</span>.</p>
+      )}
       <p style={C.p}>{results.desc}</p>
+      {results.nextStep && (
+        <div style={{ borderLeft: '2px solid #00bf63', padding: '2px 0 2px 14px', margin: '1.6rem 0' }}>
+          <p style={{ ...C.eyebrow, marginBottom: '.5rem' }}>What to do with this</p>
+          <p style={{ ...C.p, marginBottom: 0 }}>{results.nextStep}</p>
+        </div>
+      )}
       <p style={C.note}>This diagnostic is directional, not a clinical diagnosis.</p>
 
       <div style={{ marginTop: '2rem' }}>
-        <p style={{ ...C.eyebrow, marginBottom: '1rem' }}>Your operating pattern</p>
-        {(results.dimensions || []).map((d, i) =>
-          <div key={i} style={{ ...C.sectionRow, flexDirection: 'column', alignItems: 'stretch', gap: '.5rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
-              <div>{d.title}</div>
-              <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                <div>{d.label}</div>
-                <div style={{ fontSize: '13px', color: '#888' }}>{fmt(d.score)} / 5.00</div>
+        <p style={{ ...C.eyebrow, marginBottom: '1rem' }}>Your operating pattern <span style={{ color: '#bbb' }}>· highest load first</span></p>
+        {(results.dimensions || []).map((d, i) => {
+          const vis = getLevelVisual(d.score);
+          return (
+            <div key={i} style={{ ...C.sectionRow, flexDirection: 'column', alignItems: 'stretch', gap: '.6rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
+                <div>{d.title}</div>
+                <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                  <div style={{ color: vis.color }}>{d.label}</div>
+                  <div style={{ fontSize: '13px', color: '#888' }}>{fmt(d.score)} / 5.00</div>
+                </div>
               </div>
+              <div style={{ height: '3px', background: 'rgba(40,39,38,.08)', borderRadius: '2px' }}>
+                <div style={{ height: '3px', width: vis.pct + '%', background: vis.color, borderRadius: '2px' }} />
+              </div>
+              <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.65 }}>{d.interp}</div>
             </div>
-            <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.65 }}>{d.interp}</div>
-          </div>
-        )}
+          );
+        })}
+      </div>
+
+      <div style={{ border: '1px solid rgba(0,191,99,0.3)', background: 'rgba(0,191,99,0.04)', padding: '1.4rem', marginTop: '2.5rem' }}>
+        <p style={{ ...C.eyebrow, marginBottom: '.6rem' }}>Where this goes next</p>
+        <p style={{ ...C.p, marginBottom: '1.2rem' }}>A diagnostic shows the pattern. Changing it is the actual work. If any of this landed, the first session is free, 60 minutes, and no strings — we use it to figure out where you are and whether working together makes sense.</p>
+        <a
+          href="mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session"
+          style={{ ...C.cta, textDecoration: 'none' }}
+        >
+          Book a free 60-minute session
+        </a>
       </div>
 
       <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
         <button
-          style={C.cta}
+          style={{ ...C.cta, ...C.ctaSec }}
           onClick={() => {
             setAnswers({});
             setIdx(0);
