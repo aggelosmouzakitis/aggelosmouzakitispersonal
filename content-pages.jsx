@@ -73,34 +73,39 @@ function HomePage({ setPage }) {
   const mobH1 = mob ? { ...h1Style, fontSize: '20px' } : h1Style;
   return React.createElement('main', { style: mobPage },
     React.createElement('header', { style: { marginBottom: mob ? '2rem' : '4rem', borderBottom: `1px solid ${C.border}`, paddingBottom: mob ? '1.5rem' : '3rem' } },
-      React.createElement('p', { style: { fontSize: '10px', letterSpacing: '.15em', textTransform: 'uppercase', color: C.muted, marginBottom: '1.2rem' } }, 'Psychotherapist & Burnout Coach'),
-      React.createElement('h1', { style: { ...h1Style, marginBottom: '1.5rem', fontSize: mob ? '20px' : '24px' } },
-        "I\u2019m Aggelos Mouzakitis, a licensed psychotherapist and burnout coach for high-functioning people in tech. Based in Ireland, working globally."
+      React.createElement('p', { style: { fontSize: '10px', letterSpacing: '.15em', textTransform: 'uppercase', color: C.muted, marginBottom: '1.2rem' } }, 'High-Performance Coach & Licensed Therapist'),
+      React.createElement('h1', { style: { ...h1Style, marginBottom: '1.5rem', fontSize: mob ? '22px' : '28px' } },
+        "Find genuine fulfilment without losing your ambition."
       ),
-      React.createElement('p', { style: { ...pStyle, marginBottom: 0, maxWidth: 560 } },
-        "I spent 18+ years working in B2B SaaS before training as a therapist. That background shapes how I work with clients now."
+      React.createElement('p', { style: { ...pStyle, marginBottom: '1.2rem', maxWidth: 600 } },
+        "I help tech high performers break the deeper patterns behind burnout, shame-driven achievement, overthinking, and emotional fatigue \u2014 through high-trust advisory, nervous system regulation, and data."
+      ),
+      React.createElement('p', { style: { ...pStyle, marginBottom: 0, maxWidth: 600, color: C.muted, fontSize: '15px' } },
+        "I\u2019m Aggelos Mouzakitis, a licensed therapist with 18+ years in B2B SaaS. Based in Ireland, working globally."
       )
     ),
 
     React.createElement(Section, { label: 'What I do', mob },
-      React.createElement(P, null, "I work with founders, executives, and senior tech professionals on performance dependence: the pattern where achievement has become the way you regulate your sense of worth, and any disruption to performance starts threatening more than just your career."),
-      React.createElement(P, null, "High-functioning burnout usually runs deeper than overwork. For most of the people I work with, performance became identity and proof of worth a long time ago. That can drive success for years, but it also means that when things stop going well, motivation, relationships, and your sense of self all start to crack at the same time."),
-      React.createElement(P, { last: true }, "I help people keep their drive while ending the dependency on it.")
+      React.createElement(P, null, "Ambition isn’t the problem. Most of the people I work with are still performing well. What has changed is the cost: success starts to feel like relief rather than reward, rest feels unsafe, and setbacks land as personal threats rather than situations to handle."),
+      React.createElement(P, { last: true }, "Usually that means achievement has quietly become the way you regulate your sense of worth. The work is to keep the drive while ending the dependence underneath it — so success feels worth it again.")
+    ),
+
+    React.createElement(Section, { label: 'How I work', mob },
+      React.createElement(P, null, React.createElement(Strong, null, "High-trust advisory."), " Grounded in your real context — career decisions, founder stress, leadership, difficult conversations — not abstract coaching."),
+      React.createElement(P, null, React.createElement(Strong, null, "Nervous system regulation."), " The work includes the body, not just thoughts: how pressure shows up as activation, shutdown, and poor recovery, alongside shame, identity, and the meanings you attach to success and failure."),
+      React.createElement(P, { last: true }, React.createElement(Strong, null, "Data."), " Wearable and behavioural signals — sleep, HRV, stress, recovery — make invisible stress patterns visible. Not biohacking. Pattern recognition.")
     ),
 
     React.createElement(Section, { label: 'Who I work with', mob },
-      React.createElement(P, null, "Senior tech professionals, founders, VPs, and executives who are doing well by every external measure but are starting to notice what it costs. The anxiety that doesn't match the accomplishments. The irritability that leaks into relationships. The sense that taking your foot off the gas, even slightly, would reveal something you're not ready to face."),
-      React.createElement(P, null, "I also work with people navigating imposter syndrome, career transitions, leadership isolation, and the broader identity questions that come with operating at a high level for a long time."),
+      React.createElement(P, null, "Founders, executives, product and growth leaders, and senior operators in tech. People doing well by every external measure who sense their relationship with work, performance, and self-worth has become too costly."),
       React.createElement(P, { last: true },
-        "I write about the psychology of ambition, identity, and performance at ", React.createElement(A, { href: 'https://undisguised.io' }, 'Undisguised'), ". The writing names what most people in high-stakes careers feel but rarely say out loud. The private work is where we actually change it."
+        "I write about the psychology of ambition, identity, and performance at ", React.createElement(A, { href: 'https://undisguised.io' }, 'Undisguised'), ". The writing names what most people in high-stakes careers feel but rarely say out loud. The private work is where we change it."
       )
     ),
 
-    React.createElement(Section, { label: 'Product growth', mob },
-      React.createElement(P, null, "I've spent 18+ years in growth strategy across companies at every stage, from early-stage startups to ", React.createElement(A, { href: 'https://www.ibm.com' }, 'IBM'), "'s enterprise portfolio, covering PLG, pricing, activation, and go-to-market. I've worked with 50+ companies, always embedded, always hands-on."),
-      React.createElement(P, null, "I help product-led companies turn usage into revenue. I work as a fractional growth advisor for SaaS founders and growth leaders on the problems that frameworks don't reach: activation that doesn't stick, pricing that confuses, funnels that leak in ways nobody has noticed yet."),
+    React.createElement(Section, { label: 'Background', mob },
       React.createElement(P, { last: true },
-        React.createElement(A, { href: 'https://headofgrowth.io' }, 'How I work with founders and growth teams →')
+        "Before training as a therapist I spent 18+ years in B2B SaaS growth, from early-stage startups to ", React.createElement(A, { href: 'https://www.ibm.com' }, 'IBM'), "’s enterprise portfolio, advising 50+ companies. I still work as a fractional growth advisor. ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'More on that →')
       )
     ),
 
@@ -160,6 +165,8 @@ function ExecTherapyPage() {
     React.createElement(Section, { label: 'How I work', mob },
       React.createElement(P, null, "I'm a licensed psychotherapist with 18+ years in B2B SaaS. I've led growth strategy at startups and inside ", React.createElement(A, { href: 'https://www.ibm.com' }, 'IBM'), "'s enterprise portfolio, and I've ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised 50+ companies'), " on the kind of work my clients carry into sessions every week."),
       React.createElement(P, null, React.createElement(Strong, null, "That means I already understand the environment you're operating in."), " We don't have to spend time on context-setting, which lets us get to the real work faster."),
+      React.createElement(P, null, "The work combines three things: high-trust advisory grounded in your real context, nervous system regulation so pressure stops running the show physically, and data from wearables that makes invisible stress patterns visible."),
+      React.createElement(P, null, "A lot of it is what I call strategic detachment: learning to play the professional roles, handle pressure, and navigate business dynamics without turning every interaction into a referendum on your worth. The goal isn't less ambition. It's ambition that finally feels fulfilling."),
       React.createElement(P, { last: true }, "I write about the psychology of ambition and performance at ", React.createElement(A, { href: 'https://undisguised.io' }, 'Undisguised'), " (5,000+ subscribers). The writing explores the patterns. The private work is where we actually address them.")
     ),
 
@@ -235,7 +242,8 @@ function FoundersTherapyPage() {
 
     React.createElement(Section, { label: 'Why I understand this', mob },
       React.createElement(P, null, "I'm a licensed psychotherapist with 18+ years in B2B SaaS, including advising 50+ companies on growth. I've been on the other side of the table where you set targets, defend strategy, and absorb pressure from every direction."),
-      React.createElement(P, { last: true }, "When a client comes in carrying the weight of a down round or a co-founder conflict, ", React.createElement(Strong, null, "I don't need them to explain the context"), ". I know what that room feels like. We skip the background and go straight to the work.")
+      React.createElement(P, null, "When a client comes in carrying the weight of a down round or a co-founder conflict, ", React.createElement(Strong, null, "I don't need them to explain the context"), ". I know what that room feels like. We skip the background and go straight to the work."),
+      React.createElement(P, { last: true }, "That high-trust advisory is one part of how I work. The others are nervous system regulation — so the constant activation of founding stops living in your body — and data from wearables (sleep, HRV, recovery) that makes the real cost of crunch periods, travel, and conflict visible instead of guessed at.")
     ),
 
     React.createElement(Section, { label: 'How it works', mob },
@@ -306,6 +314,7 @@ function ImposterPage() {
     React.createElement(Section, { label: 'How I work with this', mob },
       React.createElement(P, null, "I'm a licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advising 50+ companies on growth'), ". I know the environment that amplifies imposter syndrome in tech: the pace, the ambiguity, the constant comparison."),
       React.createElement(P, null, React.createElement(Strong, null, "We work with the root pattern rather than the symptoms."), " That means going beyond the current role to understand where the conditional sense of worth was established, why it persists, and what it would take to build a sense of self that doesn't depend entirely on the next result."),
+      React.createElement(P, null, "Insight alone rarely shifts this — most high performers have already understood it intellectually. So the work also includes nervous system regulation, so safety stops depending on the next win, and, where it helps, data from wearables that shows the gap between what you think you can handle and what your body is already doing."),
       React.createElement(P, { last: true }, "I write about this at ", React.createElement(A, { href: 'https://undisguised.io' }, 'Undisguised'), ". The writing explores the patterns. The private work is where they actually move.")
     ),
 
@@ -376,7 +385,7 @@ function BurnoutPage() {
     React.createElement(Section, { label: 'How I work with this', mob },
       React.createElement(P, null, React.createElement(Strong, null, "This work goes to the level of the pattern, not the symptoms."), " We look at what's driving the overwork: what it would mean to stop, what you're avoiding by staying in motion, why the idea of doing less feels threatening rather than freeing."),
       React.createElement(P, null, "I'm a licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advising 50+ companies on growth'), ". I understand the environment well: the always-on culture, the ambiguity, the pressure to appear certain when you're not."),
-      React.createElement(P, { last: true }, "The goal isn't necessarily to make you work less (though that might happen). ", React.createElement(Strong, null, "The goal is to change your relationship to the work so it costs less."), " Sometimes that means structural changes. Sometimes something shifts internally and the same role becomes sustainable. The work helps clarify which.")
+      React.createElement(P, { last: true }, "The goal isn't necessarily to make you work less (though that might happen). ", React.createElement(Strong, null, "The goal is a more fulfilling relationship with the work, so it costs less and means more."), " We do that through high-trust advisory, nervous system regulation so recovery actually lands, and data from wearables (sleep, HRV, stress) that shows what rest alone isn't fixing.")
     ),
 
     React.createElement(Section, { label: 'Start here', mob },
@@ -446,7 +455,8 @@ function CareerTransitionPage() {
     React.createElement(Section, { label: 'Why a therapist, not a career coach', mob },
       React.createElement(P, null, "Career coaching helps you figure out what to do next. ", React.createElement(Strong, null, "Therapeutically-informed coaching helps you understand why you're stuck"), ", what the transition is actually about at a deeper level, and what needs to shift internally for any external change to hold."),
       React.createElement(P, null, "Without that internal work, people tend to recreate the same patterns in new settings. ", React.createElement(A, { href: 'https://www.undisguised.io/p/youre-creating-the-exact-problem' }, 'They end up building the same problem in a different context.'), ""),
-      React.createElement(P, { last: true }, "I'm a licensed psychotherapist who made this kind of transition myself — from 18+ years in B2B SaaS and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'growth advisory'), " to clinical practice. I know what it's like to leave an identity that works, and I know the difference between doing that reactively and doing it with some clarity about what's actually driving the change.")
+      React.createElement(P, null, "I'm a licensed psychotherapist who made this kind of transition myself — from 18+ years in B2B SaaS and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'growth advisory'), " to clinical practice. I know what it's like to leave an identity that works, and I know the difference between doing that reactively and doing it with some clarity about what's actually driving the change."),
+      React.createElement(P, { last: true }, "The work combines high-trust advisory, nervous system regulation, and — where useful — data from wearables that shows how the transition is actually landing on you. The aim isn't just the next role. It's a working life that feels genuinely fulfilling, not just impressive.")
     ),
 
     React.createElement(Section, { label: 'Who this is for', mob },

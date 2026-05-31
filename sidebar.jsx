@@ -346,7 +346,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
           <img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, display: 'block' }} />
           <div style={{ overflow: 'hidden', flex: 1 }}>
             <div style={{ fontSize: '12.5px', letterSpacing: '.1em', textTransform: 'uppercase', color: SB.active, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Aggelos Mouzakitis</div>
-            <div style={{ fontSize: '11px', letterSpacing: '.08em', textTransform: 'uppercase', color: SB.muted }}>Psychotherapist & Coach</div>
+            <div style={{ fontSize: '11px', letterSpacing: '.08em', textTransform: 'uppercase', color: SB.muted }}>Coach & Therapist</div>
           </div>
         </div>
 
