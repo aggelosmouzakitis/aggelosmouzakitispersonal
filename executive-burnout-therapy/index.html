@@ -61,44 +61,64 @@ body { background: #1A1918; font-family: 'Departure Mono', 'SF Mono', 'Fira Mono
 </head>
 <body>
 <div id="root"></div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="../sidebar.jsx"></script>
-<script type="text/babel" src="../content-pages.jsx"></script>
-<script type="text/babel" src="../diagnostic.jsx"></script>
-<script type="text/babel">
-const { useState, useEffect, useRef } = React;
-const SPECIALTY_IDS = ['therapy-for-executives','therapy-for-founders','imposter-syndrome-therapy','executive-burnout-therapy','career-transition-therapy'];
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+
+<script src="../sidebar.js"></script>
+<script src="../content-pages.js"></script>
+<script src="../diagnostic.js"></script>
+<script>
+const {
+  useState,
+  useEffect,
+  useRef
+} = React;
+const SPECIALTY_IDS = ['therapy-for-executives', 'therapy-for-founders', 'imposter-syndrome-therapy', 'executive-burnout-therapy', 'career-transition-therapy'];
 const URL_MAP = {
-  'home': '/', 'diagnostic': '/burnout-diagnostic/',
+  'home': '/',
+  'diagnostic': '/burnout-diagnostic/',
   'therapy-for-executives': '/therapy-for-executives/',
   'therapy-for-founders': '/therapy-for-founders/',
   'imposter-syndrome-therapy': '/imposter-syndrome-therapy/',
   'executive-burnout-therapy': '/executive-burnout-therapy/',
   'career-transition-therapy': '/career-transition-therapy/',
-  'ask-me-anything': '/ask-me-anything/',
+  'ask-me-anything': '/ask-me-anything/'
 };
 function App() {
   const [page, setPage] = useState('executive-burnout-therapy');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const mainRef = useRef(null);
-  useEffect(() => { if (mainRef.current) mainRef.current.scrollTop = 0; }, [page]);
-  function navigate(id) { window.location.href = URL_MAP[id] || '/'; }
-  function renderPage() {
-    if (page === 'home') return <HomePage setPage={navigate} />;
-    if (SPECIALTY_IDS.includes(page)) return <SpecialtyPage pageId={page} />;
-    if (page === 'diagnostic') return <DiagnosticPage />;
-    return <HomePage setPage={navigate} />;
+  useEffect(() => {
+    if (mainRef.current) mainRef.current.scrollTop = 0;
+  }, [page]);
+  function navigate(id) {
+    window.location.href = URL_MAP[id] || '/';
   }
-  return (
-    <React.Fragment>
-      <div id="sidebar"><Sidebar page={page} setPage={navigate} open={sidebarOpen} setOpen={setSidebarOpen} /></div>
-      <div id="main-scroll" ref={mainRef}>{renderPage()}</div>
-    </React.Fragment>
-  );
+  function renderPage() {
+    if (page === 'home') return /*#__PURE__*/React.createElement(HomePage, {
+      setPage: navigate
+    });
+    if (SPECIALTY_IDS.includes(page)) return /*#__PURE__*/React.createElement(SpecialtyPage, {
+      pageId: page
+    });
+    if (page === 'diagnostic') return /*#__PURE__*/React.createElement(DiagnosticPage, null);
+    return /*#__PURE__*/React.createElement(HomePage, {
+      setPage: navigate
+    });
+  }
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    id: "sidebar"
+  }, /*#__PURE__*/React.createElement(Sidebar, {
+    page: page,
+    setPage: navigate,
+    open: sidebarOpen,
+    setOpen: setSidebarOpen
+  })), /*#__PURE__*/React.createElement("div", {
+    id: "main-scroll",
+    ref: mainRef
+  }, renderPage()));
 }
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
 </script>
 </body>
 </html>

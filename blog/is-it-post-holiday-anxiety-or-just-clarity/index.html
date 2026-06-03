@@ -130,17 +130,34 @@ body { background: #1A1918; font-family: 'Departure Mono', 'SF Mono', 'Fira Mono
     </div>
   </div>
 </div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="../../sidebar.jsx"></script>
-<script type="text/babel">
-const URL_MAP = { 'home':'/', 'diagnostic':'/burnout-diagnostic/', 'blog':'/blog/', 'therapy-for-executives':'/therapy-for-executives/', 'therapy-for-founders':'/therapy-for-founders/', 'imposter-syndrome-therapy':'/imposter-syndrome-therapy/', 'executive-burnout-therapy':'/executive-burnout-therapy/', 'career-transition-therapy':'/career-transition-therapy/','ask-me-anything':'/ask-me-anything/' };
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+
+<script src="../../sidebar.js"></script>
+<script>
+const URL_MAP = {
+  'home': '/',
+  'diagnostic': '/burnout-diagnostic/',
+  'blog': '/blog/',
+  'therapy-for-executives': '/therapy-for-executives/',
+  'therapy-for-founders': '/therapy-for-founders/',
+  'imposter-syndrome-therapy': '/imposter-syndrome-therapy/',
+  'executive-burnout-therapy': '/executive-burnout-therapy/',
+  'career-transition-therapy': '/career-transition-therapy/',
+  'ask-me-anything': '/ask-me-anything/'
+};
 function SidebarApp() {
   const [open, setOpen] = React.useState(true);
-  return <Sidebar page="blog" setPage={id => { window.location.href = URL_MAP[id] || '/'; }} open={open} setOpen={setOpen} />;
+  return /*#__PURE__*/React.createElement(Sidebar, {
+    page: "blog",
+    setPage: id => {
+      window.location.href = URL_MAP[id] || '/';
+    },
+    open: open,
+    setOpen: setOpen
+  });
 }
-ReactDOM.createRoot(document.getElementById('sidebar-mount')).render(<SidebarApp />);
+ReactDOM.createRoot(document.getElementById('sidebar-mount')).render(/*#__PURE__*/React.createElement(SidebarApp, null));
 </script>
 </body>
 </html>

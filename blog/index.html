@@ -84,75 +84,79 @@ body {
 </head>
 <body>
 <div id="root"></div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="../sidebar.jsx"></script>
-<script type="text/babel">
-const { useState, useEffect, useRef } = React;
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 
+<script src="../sidebar.js"></script>
+<script>
+const {
+  useState,
+  useEffect,
+  useRef
+} = React;
 const URL_MAP = {
-  'home': '/', 'diagnostic': '/burnout-diagnostic/', 'blog': '/blog/',
+  'home': '/',
+  'diagnostic': '/burnout-diagnostic/',
+  'blog': '/blog/',
   'therapy-for-executives': '/therapy-for-executives/',
   'therapy-for-founders': '/therapy-for-founders/',
   'imposter-syndrome-therapy': '/imposter-syndrome-therapy/',
   'executive-burnout-therapy': '/executive-burnout-therapy/',
   'career-transition-therapy': '/career-transition-therapy/',
-  'ask-me-anything': '/ask-me-anything/',
+  'ask-me-anything': '/ask-me-anything/'
 };
-
 function navigate(id) {
   window.location.href = URL_MAP[id] || '/';
 }
-
 function BlogIndex() {
   const [posts, setPosts] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const mainRef = useRef(null);
-
   useEffect(() => {
-    fetch('/blog/posts.json')
-      .then(r => r.json())
-      .then(setPosts)
-      .catch(() => setPosts([]));
+    fetch('/blog/posts.json').then(r => r.json()).then(setPosts).catch(() => setPosts([]));
   }, []);
-
-  return (
-    <React.Fragment>
-      <div id="sidebar">
-        <Sidebar page="blog" setPage={navigate} open={sidebarOpen} setOpen={setSidebarOpen} />
-      </div>
-      <div id="main-scroll" ref={mainRef}>
-        <div className="blog-page">
-          <h1 className="blog-h1">Writing</h1>
-          <p className="blog-intro">Essays on high-functioning burnout, performance identity, and the psychology of ambition — plus interviews with founders and operators about what success actually costs.</p>
-          <p className="section-label">Recent posts</p>
-          {posts === null && <p className="loading">Loading…</p>}
-          {posts !== null && posts.length === 0 && <p className="loading">No posts yet.</p>}
-          {posts && posts.length > 0 && (
-            <ul className="post-list">
-              {posts.map(p => (
-                <li key={p.slug} className="post-item">
-                  <h2 className="post-title">
-                    <a href={`/blog/${p.slug}/`}>{p.title}</a>
-                  </h2>
-                  {p.description && <p className="post-desc">{p.description}</p>}
-                  <div className="post-meta">
-                    <span>{p.date}</span>
-                    <span style={{opacity: .4}}>·</span>
-                    <span>Aggelos Mouzakitis</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </div>
-    </React.Fragment>
-  );
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    id: "sidebar"
+  }, /*#__PURE__*/React.createElement(Sidebar, {
+    page: "blog",
+    setPage: navigate,
+    open: sidebarOpen,
+    setOpen: setSidebarOpen
+  })), /*#__PURE__*/React.createElement("div", {
+    id: "main-scroll",
+    ref: mainRef
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "blog-page"
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "blog-h1"
+  }, "Writing"), /*#__PURE__*/React.createElement("p", {
+    className: "blog-intro"
+  }, "Essays on high-functioning burnout, performance identity, and the psychology of ambition \u2014 plus interviews with founders and operators about what success actually costs."), /*#__PURE__*/React.createElement("p", {
+    className: "section-label"
+  }, "Recent posts"), posts === null && /*#__PURE__*/React.createElement("p", {
+    className: "loading"
+  }, "Loading\u2026"), posts !== null && posts.length === 0 && /*#__PURE__*/React.createElement("p", {
+    className: "loading"
+  }, "No posts yet."), posts && posts.length > 0 && /*#__PURE__*/React.createElement("ul", {
+    className: "post-list"
+  }, posts.map(p => /*#__PURE__*/React.createElement("li", {
+    key: p.slug,
+    className: "post-item"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "post-title"
+  }, /*#__PURE__*/React.createElement("a", {
+    href: `/blog/${p.slug}/`
+  }, p.title)), p.description && /*#__PURE__*/React.createElement("p", {
+    className: "post-desc"
+  }, p.description), /*#__PURE__*/React.createElement("div", {
+    className: "post-meta"
+  }, /*#__PURE__*/React.createElement("span", null, p.date), /*#__PURE__*/React.createElement("span", {
+    style: {
+      opacity: .4
+    }
+  }, "\xB7"), /*#__PURE__*/React.createElement("span", null, "Aggelos Mouzakitis"))))))));
 }
-
-ReactDOM.createRoot(document.getElementById('root')).render(<BlogIndex />);
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(BlogIndex, null));
 </script>
 </body>
 </html>

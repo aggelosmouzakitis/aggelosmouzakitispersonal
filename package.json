@@ -1,0 +1,22 @@
+{
+  "name": "aggelosmouzakitispersonal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel sidebar.jsx -o sidebar.js && babel content-pages.jsx -o content-pages.js && babel diagnostic.jsx -o diagnostic.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:36993/git/aggelosmouzakitis/aggelosmouzakitispersonal"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.29.7",
+    "@babel/core": "^7.29.7",
+    "@babel/preset-react": "^7.29.7"
+  }
+}
