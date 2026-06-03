@@ -101,6 +101,18 @@ const SOCIALS = [
   { id: 'yt', label: 'YouTube', href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA', Icon: ICONS.YouTube },
 ];
 
+// Real URLs for every nav target, so navigation renders as crawlable <a href> links.
+const NAV_URL = {
+  'home': '/', 'blog': '/blog/', 'ask-me-anything': '/ask-me-anything/',
+  'diagnostic': '/burnout-diagnostic/',
+  'therapy-for-executives': '/therapy-for-executives/',
+  'therapy-for-founders': '/therapy-for-founders/',
+  'imposter-syndrome-therapy': '/imposter-syndrome-therapy/',
+  'executive-burnout-therapy': '/executive-burnout-therapy/',
+  'career-transition-therapy': '/career-transition-therapy/',
+};
+const hrefFor = (id) => NAV_URL[id] || '/';
+
 // ── MOBILE BOTTOM NAV ────────────────────────────────────────────────────────
 function MobileNav({ page, setPage }) {
   const [sheetOpen, setSheetOpen] = React.useState(false);
@@ -112,7 +124,7 @@ function MobileNav({ page, setPage }) {
     background: 'none', border: 'none', cursor: 'pointer',
     color: active ? '#00bf63' : 'rgba(255,255,255,0.5)',
     fontFamily: 'inherit', fontSize: '9px', letterSpacing: '.1em',
-    textTransform: 'uppercase', transition: 'color .15s',
+    textTransform: 'uppercase', transition: 'color .15s', textDecoration: 'none',
   });
 
   return (
@@ -149,43 +161,43 @@ function MobileNav({ page, setPage }) {
         </div>
         {/* Specialty items */}
         {SPECIALTIES.map(s => (
-          <button key={s.id} onClick={() => { setPage(s.id); setSheetOpen(false); }}
+          <a key={s.id} href={hrefFor(s.id)}
             style={{
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
               width: '100%', padding: '14px 20px',
               background: page === s.id ? 'rgba(0,191,99,0.08)' : 'none',
-              border: 'none', borderLeft: page === s.id ? '2px solid #00bf63' : '2px solid transparent',
-              cursor: 'pointer', fontFamily: 'inherit',
+              borderLeft: page === s.id ? '2px solid #00bf63' : '2px solid transparent',
+              cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'none',
               fontSize: '14px', letterSpacing: '.05em',
               color: page === s.id ? '#00bf63' : 'rgba(255,255,255,0.8)',
               textAlign: 'left',
             }}>
             {s.label}
-          </button>
+          </a>
         ))}
         {/* Ask me anything */}
-        <button onClick={() => { setPage('ask-me-anything'); setSheetOpen(false); }}
+        <a href={hrefFor('ask-me-anything')}
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             width: '100%', padding: '14px 20px',
             background: page === 'ask-me-anything' ? 'rgba(0,191,99,0.08)' : 'none',
-            border: 'none', borderLeft: page === 'ask-me-anything' ? '2px solid #00bf63' : '2px solid transparent',
+            borderLeft: page === 'ask-me-anything' ? '2px solid #00bf63' : '2px solid transparent',
             borderTop: '1px solid rgba(255,255,255,0.06)',
-            cursor: 'pointer', fontFamily: 'inherit',
+            cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'none',
             fontSize: '14px', letterSpacing: '.05em',
             color: page === 'ask-me-anything' ? '#00bf63' : 'rgba(255,255,255,0.8)',
             textAlign: 'left',
           }}>
           Ask me anything
-        </button>
+        </a>
         {/* Diagnostic CTA */}
         <div style={{ margin: '12px 20px 4px', padding: '14px', border: '1px solid rgba(0,191,99,0.25)', background: 'rgba(0,191,99,0.04)' }}>
           <div style={{ fontSize: '10px', letterSpacing: '.15em', textTransform: 'uppercase', color: '#00bf63', marginBottom: 8 }}>Free Fulfilment Diagnostic</div>
           <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', marginBottom: 12 }}>45 questions. Your operating pattern + breakdown.</div>
-          <button onClick={() => { setPage('diagnostic'); setSheetOpen(false); }}
-            style={{ width: '100%', padding: '10px', fontFamily: 'inherit', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', background: 'transparent', border: '1px solid #00bf63', color: '#00bf63', cursor: 'pointer' }}>
+          <a href={hrefFor('diagnostic')}
+            style={{ display: 'block', textAlign: 'center', width: '100%', padding: '10px', fontFamily: 'inherit', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', background: 'transparent', border: '1px solid #00bf63', color: '#00bf63', cursor: 'pointer', textDecoration: 'none' }}>
             Take the diagnostic →
-          </button>
+          </a>
         </div>
       </div>
 
@@ -196,12 +208,12 @@ function MobileNav({ page, setPage }) {
         display: 'flex', alignItems: 'stretch', zIndex: 100,
         paddingBottom: 'env(safe-area-inset-bottom)',
       }}>
-        <button style={tabStyle(page === 'home')} onClick={() => { setPage('home'); setSheetOpen(false); }}>
+        <a style={tabStyle(page === 'home')} href={hrefFor('home')}>
           <ICONS.Home /><span>Home</span>
-        </button>
-        <button style={tabStyle(page === 'blog')} onClick={() => { setPage('blog'); setSheetOpen(false); }}>
+        </a>
+        <a style={tabStyle(page === 'blog')} href={hrefFor('blog')}>
           <ICONS.Book /><span>Writing</span>
-        </button>
+        </a>
         <button style={tabStyle(isSpecialty || sheetOpen)} onClick={() => setSheetOpen(v => !v)}>
           <ICONS.Briefcase /><span>Services</span>
         </button>
@@ -210,9 +222,9 @@ function MobileNav({ page, setPage }) {
             <Icon /><span>{label}</span>
           </a>
         ))}
-        <button style={tabStyle(page === 'diagnostic')} onClick={() => { setPage('diagnostic'); setSheetOpen(false); }}>
+        <a style={tabStyle(page === 'diagnostic')} href={hrefFor('diagnostic')}>
           <ICONS.Clipboard /><span>Diagnostic</span>
-        </button>
+        </a>
       </nav>
     </>
   );
@@ -248,6 +260,22 @@ function Sidebar({ page, setPage, open, setOpen }) {
     </button>
   );
 
+  // Collapsed-rail icon as a real link (navigation)
+  const iconNav = (id, Icon, href, active, title) => (
+    <a key={id} href={href} title={title}
+      onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
+      style={{
+        width: SB.WC, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: active ? 'rgba(255,255,255,0.1)' : hovered === id ? 'rgba(255,255,255,0.05)' : 'transparent',
+        textDecoration: 'none',
+        color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+        transition: 'background .12s, color .12s',
+      }}>
+      <Icon />
+    </a>
+  );
+
+  // Collapsed-rail icon as a button (toggles, no navigation)
   const iconBtn = (id, Icon, onClick, active, title) => (
     <button key={id} title={title} onClick={onClick}
       onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
@@ -275,19 +303,35 @@ function Sidebar({ page, setPage, open, setOpen }) {
     </a>
   );
 
+  const navItemStyle = (id, active) => ({
+    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+    width: '100%', padding: '9px 18px',
+    background: active ? 'rgba(255,255,255,0.08)' : hovered === id ? 'rgba(255,255,255,0.04)' : 'transparent',
+    borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
+    cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'none',
+    fontSize: '12.5px', letterSpacing: '.1em', textTransform: 'uppercase',
+    color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+    transition: 'background .12s, color .12s',
+  });
+
+  // Expanded nav row as a real link (navigation)
+  const navLink = (id, label, Icon, active, href, extra) => (
+    <a key={id} href={href}
+      onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
+      style={{ ...navItemStyle(id, active), border: undefined }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <span style={{ display: 'flex', flexShrink: 0 }}><Icon /></span>
+        <span>{label}</span>
+      </div>
+      {extra}
+    </a>
+  );
+
+  // Expanded nav row as a button (toggles, no navigation)
   const navBtn = (id, label, Icon, active, onClick, extra) => (
     <button key={id} onClick={onClick}
       onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
-      style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        width: '100%', padding: '9px 18px',
-        background: active ? 'rgba(255,255,255,0.08)' : hovered === id ? 'rgba(255,255,255,0.04)' : 'transparent',
-        border: 'none', borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
-        cursor: 'pointer', fontFamily: 'inherit',
-        fontSize: '12.5px', letterSpacing: '.1em', textTransform: 'uppercase',
-        color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
-        transition: 'background .12s, color .12s',
-      }}>
+      style={{ ...navItemStyle(id, active), border: 'none' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <span style={{ display: 'flex', flexShrink: 0 }}><Icon /></span>
         <span>{label}</span>
@@ -296,21 +340,21 @@ function Sidebar({ page, setPage, open, setOpen }) {
     </button>
   );
 
-  const subBtn = (id, label, active, onClick) => (
-    <button key={id} onClick={onClick}
+  const subLink = (id, label, active, href) => (
+    <a key={id} href={href}
       onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
       style={{
         display: 'flex', alignItems: 'center',
-        width: '100%', padding: '7px 18px 7px 50px',
+        width: '100%', padding: '7px 18px 7px 50px', textDecoration: 'none',
         background: active ? 'rgba(255,255,255,0.06)' : hovered === id ? 'rgba(255,255,255,0.03)' : 'transparent',
-        border: 'none', borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
+        borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
         cursor: 'pointer', fontFamily: 'inherit',
         fontSize: '12px', letterSpacing: '.07em', textTransform: 'uppercase',
         color: active ? SB.accent : hovered === id ? 'rgba(255,255,255,0.75)' : 'rgba(255,255,255,0.4)',
         transition: 'background .12s, color .12s',
       }}>
       {label}
-    </button>
+    </a>
   );
 
   const sectionLabel = (text) => (
@@ -323,13 +367,13 @@ function Sidebar({ page, setPage, open, setOpen }) {
   if (!open) return (
     <div style={{ width: SB.WC, minWidth: SB.WC, background: SB.bg, borderRight: `1px solid ${SB.border}`, height: '100vh', position: 'relative', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <ToggleBtn />
-      <img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', margin: '22px 0 18px', display: 'block' }} />
+      <a href={hrefFor('home')}><img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', margin: '22px 0 18px', display: 'block' }} /></a>
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '0 12px 4px' }} />
-      {iconBtn('home', ICONS.Home, () => setPage('home'), page === 'home', 'Home')}
-      {iconBtn('blog', ICONS.Book, () => setPage('blog'), page === 'blog', 'Writing')}
-      {iconBtn('ask-me-anything', ICONS.MessageCircle, () => setPage('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything')}
+      {iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home')}
+      {iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing')}
+      {iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything')}
       {iconBtn('spec', ICONS.Briefcase, () => { setOpen(true); setSpecialtiesOpen(true); }, isSpecialty, 'Specialties')}
-      {iconBtn('diag', ICONS.Clipboard, () => setPage('diagnostic'), page === 'diagnostic', 'Free Diagnostic')}
+      {iconNav('diag', ICONS.Clipboard, hrefFor('diagnostic'), page === 'diagnostic', 'Free Diagnostic')}
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '4px 12px' }} />
       {SOCIALS.map(s => iconLink(s))}
       <div style={{ flex: 1 }} />
@@ -343,7 +387,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
       <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', display: 'flex', flexDirection: 'column' }}>
         {/* Profile */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '22px 18px 20px', borderBottom: `1px solid ${SB.border}`, flexShrink: 0 }}>
-          <img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, display: 'block' }} />
+          <a href={hrefFor('home')} style={{ display: 'flex', flexShrink: 0 }}><img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, display: 'block' }} /></a>
           <div style={{ overflow: 'hidden', flex: 1 }}>
             <div style={{ fontSize: '12.5px', letterSpacing: '.1em', textTransform: 'uppercase', color: SB.active, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Aggelos Mouzakitis</div>
             <div style={{ fontSize: '11px', letterSpacing: '.08em', textTransform: 'uppercase', color: SB.muted }}>Coach & Therapist</div>
@@ -352,15 +396,15 @@ function Sidebar({ page, setPage, open, setOpen }) {
 
         {/* Home */}
         <div style={{ padding: '10px 0 0' }}>
-          {navBtn('home', 'Home', ICONS.Home, page === 'home', () => setPage('home'))}
-          {navBtn('blog', 'Writing', ICONS.Book, page === 'blog', () => setPage('blog'))}
-          {navBtn('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', () => setPage('ask-me-anything'))}
+          {navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home'))}
+          {navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog'))}
+          {navLink('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', hrefFor('ask-me-anything'))}
         </div>
 
         {/* Specialties */}
         {navBtn('spec', 'Specialties', ICONS.Briefcase, isSpecialty, () => setSpecialtiesOpen(v => !v), <ICONS.ChevDown isOpen={specialtiesOpen} />)}
         {specialtiesOpen && (
-          <div>{SPECIALTIES.map(s => subBtn(s.id, s.label, page === s.id, () => setPage(s.id)))}</div>
+          <div>{SPECIALTIES.map(s => subLink(s.id, s.label, page === s.id, hrefFor(s.id)))}</div>
         )}
 
         {/* Find me */}
@@ -391,12 +435,12 @@ function Sidebar({ page, setPage, open, setOpen }) {
           <div style={{ border: `1px solid rgba(0,191,99,0.25)`, padding: '18px', background: 'rgba(0,191,99,0.04)' }}>
             <div style={{ fontSize: '10px', letterSpacing: '.16em', textTransform: 'uppercase', color: SB.accent, marginBottom: 8 }}>Free Fulfilment Diagnostic</div>
             <div style={{ fontSize: '12px', color: SB.muted, lineHeight: 1.75, marginBottom: 14 }}>45 questions. 8 minutes.<br />Your operating pattern + breakdown.</div>
-            <button onClick={() => setPage('diagnostic')}
+            <a href={hrefFor('diagnostic')}
               onMouseEnter={e => { e.currentTarget.style.background = SB.accent; e.currentTarget.style.color = '#fff'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = SB.accent; }}
-              style={{ width: '100%', padding: '10px 0', fontFamily: 'inherit', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', background: 'transparent', border: `1px solid ${SB.accent}`, color: SB.accent, cursor: 'pointer', transition: 'background .15s, color .15s' }}>
+              style={{ display: 'block', textAlign: 'center', width: '100%', padding: '10px 0', fontFamily: 'inherit', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', background: 'transparent', border: `1px solid ${SB.accent}`, color: SB.accent, cursor: 'pointer', textDecoration: 'none', transition: 'background .15s, color .15s' }}>
               Start assessment →
-            </button>
+            </a>
           </div>
         </div>
       </div>

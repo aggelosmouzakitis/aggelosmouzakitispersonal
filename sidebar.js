@@ -231,6 +231,20 @@ const SOCIALS = [{
   Icon: ICONS.YouTube
 }];
 
+// Real URLs for every nav target, so navigation renders as crawlable <a href> links.
+const NAV_URL = {
+  'home': '/',
+  'blog': '/blog/',
+  'ask-me-anything': '/ask-me-anything/',
+  'diagnostic': '/burnout-diagnostic/',
+  'therapy-for-executives': '/therapy-for-executives/',
+  'therapy-for-founders': '/therapy-for-founders/',
+  'imposter-syndrome-therapy': '/imposter-syndrome-therapy/',
+  'executive-burnout-therapy': '/executive-burnout-therapy/',
+  'career-transition-therapy': '/career-transition-therapy/'
+};
+const hrefFor = id => NAV_URL[id] || '/';
+
 // ── MOBILE BOTTOM NAV ────────────────────────────────────────────────────────
 function MobileNav({
   page,
@@ -254,7 +268,8 @@ function MobileNav({
     fontSize: '9px',
     letterSpacing: '.1em',
     textTransform: 'uppercase',
-    transition: 'color .15s'
+    transition: 'color .15s',
+    textDecoration: 'none'
   });
   return /*#__PURE__*/React.createElement(React.Fragment, null, sheetOpen && /*#__PURE__*/React.createElement("div", {
     onClick: () => setSheetOpen(false),
@@ -316,12 +331,9 @@ function MobileNav({
       color: 'rgba(255,255,255,0.5)',
       display: 'flex'
     }
-  }, /*#__PURE__*/React.createElement(ICONS.X, null))), SPECIALTIES.map(s => /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement(ICONS.X, null))), SPECIALTIES.map(s => /*#__PURE__*/React.createElement("a", {
     key: s.id,
-    onClick: () => {
-      setPage(s.id);
-      setSheetOpen(false);
-    },
+    href: hrefFor(s.id),
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -329,20 +341,17 @@ function MobileNav({
       width: '100%',
       padding: '14px 20px',
       background: page === s.id ? 'rgba(0,191,99,0.08)' : 'none',
-      border: 'none',
       borderLeft: page === s.id ? '2px solid #00bf63' : '2px solid transparent',
       cursor: 'pointer',
       fontFamily: 'inherit',
+      textDecoration: 'none',
       fontSize: '14px',
       letterSpacing: '.05em',
       color: page === s.id ? '#00bf63' : 'rgba(255,255,255,0.8)',
       textAlign: 'left'
     }
-  }, s.label)), /*#__PURE__*/React.createElement("button", {
-    onClick: () => {
-      setPage('ask-me-anything');
-      setSheetOpen(false);
-    },
+  }, s.label)), /*#__PURE__*/React.createElement("a", {
+    href: hrefFor('ask-me-anything'),
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -350,11 +359,11 @@ function MobileNav({
       width: '100%',
       padding: '14px 20px',
       background: page === 'ask-me-anything' ? 'rgba(0,191,99,0.08)' : 'none',
-      border: 'none',
       borderLeft: page === 'ask-me-anything' ? '2px solid #00bf63' : '2px solid transparent',
       borderTop: '1px solid rgba(255,255,255,0.06)',
       cursor: 'pointer',
       fontFamily: 'inherit',
+      textDecoration: 'none',
       fontSize: '14px',
       letterSpacing: '.05em',
       color: page === 'ask-me-anything' ? '#00bf63' : 'rgba(255,255,255,0.8)',
@@ -381,12 +390,11 @@ function MobileNav({
       color: 'rgba(255,255,255,0.45)',
       marginBottom: 12
     }
-  }, "45 questions. Your operating pattern + breakdown."), /*#__PURE__*/React.createElement("button", {
-    onClick: () => {
-      setPage('diagnostic');
-      setSheetOpen(false);
-    },
+  }, "45 questions. Your operating pattern + breakdown."), /*#__PURE__*/React.createElement("a", {
+    href: hrefFor('diagnostic'),
     style: {
+      display: 'block',
+      textAlign: 'center',
       width: '100%',
       padding: '10px',
       fontFamily: 'inherit',
@@ -396,7 +404,8 @@ function MobileNav({
       background: 'transparent',
       border: '1px solid #00bf63',
       color: '#00bf63',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      textDecoration: 'none'
     }
   }, "Take the diagnostic \u2192"))), /*#__PURE__*/React.createElement("nav", {
     style: {
@@ -412,18 +421,12 @@ function MobileNav({
       zIndex: 100,
       paddingBottom: 'env(safe-area-inset-bottom)'
     }
-  }, /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement("a", {
     style: tabStyle(page === 'home'),
-    onClick: () => {
-      setPage('home');
-      setSheetOpen(false);
-    }
-  }, /*#__PURE__*/React.createElement(ICONS.Home, null), /*#__PURE__*/React.createElement("span", null, "Home")), /*#__PURE__*/React.createElement("button", {
+    href: hrefFor('home')
+  }, /*#__PURE__*/React.createElement(ICONS.Home, null), /*#__PURE__*/React.createElement("span", null, "Home")), /*#__PURE__*/React.createElement("a", {
     style: tabStyle(page === 'blog'),
-    onClick: () => {
-      setPage('blog');
-      setSheetOpen(false);
-    }
+    href: hrefFor('blog')
   }, /*#__PURE__*/React.createElement(ICONS.Book, null), /*#__PURE__*/React.createElement("span", null, "Writing")), /*#__PURE__*/React.createElement("button", {
     style: tabStyle(isSpecialty || sheetOpen),
     onClick: () => setSheetOpen(v => !v)
@@ -441,12 +444,9 @@ function MobileNav({
       ...tabStyle(false),
       textDecoration: 'none'
     }
-  }, /*#__PURE__*/React.createElement(Icon, null), /*#__PURE__*/React.createElement("span", null, label))), /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement(Icon, null), /*#__PURE__*/React.createElement("span", null, label))), /*#__PURE__*/React.createElement("a", {
     style: tabStyle(page === 'diagnostic'),
-    onClick: () => {
-      setPage('diagnostic');
-      setSheetOpen(false);
-    }
+    href: hrefFor('diagnostic')
   }, /*#__PURE__*/React.createElement(ICONS.Clipboard, null), /*#__PURE__*/React.createElement("span", null, "Diagnostic"))));
 }
 
@@ -492,6 +492,28 @@ function Sidebar({
       padding: 0
     }
   }, open ? /*#__PURE__*/React.createElement(ICONS.ChevLeft, null) : /*#__PURE__*/React.createElement(ICONS.ChevRight, null));
+
+  // Collapsed-rail icon as a real link (navigation)
+  const iconNav = (id, Icon, href, active, title) => /*#__PURE__*/React.createElement("a", {
+    key: id,
+    href: href,
+    title: title,
+    onMouseEnter: () => setHovered(id),
+    onMouseLeave: () => setHovered(null),
+    style: {
+      width: SB.WC,
+      height: 48,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: active ? 'rgba(255,255,255,0.1)' : hovered === id ? 'rgba(255,255,255,0.05)' : 'transparent',
+      textDecoration: 'none',
+      color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+      transition: 'background .12s, color .12s'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, null));
+
+  // Collapsed-rail icon as a button (toggles, no navigation)
   const iconBtn = (id, Icon, onClick, active, title) => /*#__PURE__*/React.createElement("button", {
     key: id,
     title: title,
@@ -536,27 +558,33 @@ function Sidebar({
       transition: 'background .12s, color .12s'
     }
   }, /*#__PURE__*/React.createElement(Icon, null));
-  const navBtn = (id, label, Icon, active, onClick, extra) => /*#__PURE__*/React.createElement("button", {
+  const navItemStyle = (id, active) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    padding: '9px 18px',
+    background: active ? 'rgba(255,255,255,0.08)' : hovered === id ? 'rgba(255,255,255,0.04)' : 'transparent',
+    borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
+    cursor: 'pointer',
+    fontFamily: 'inherit',
+    textDecoration: 'none',
+    fontSize: '12.5px',
+    letterSpacing: '.1em',
+    textTransform: 'uppercase',
+    color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+    transition: 'background .12s, color .12s'
+  });
+
+  // Expanded nav row as a real link (navigation)
+  const navLink = (id, label, Icon, active, href, extra) => /*#__PURE__*/React.createElement("a", {
     key: id,
-    onClick: onClick,
+    href: href,
     onMouseEnter: () => setHovered(id),
     onMouseLeave: () => setHovered(null),
     style: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      width: '100%',
-      padding: '9px 18px',
-      background: active ? 'rgba(255,255,255,0.08)' : hovered === id ? 'rgba(255,255,255,0.04)' : 'transparent',
-      border: 'none',
-      borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
-      cursor: 'pointer',
-      fontFamily: 'inherit',
-      fontSize: '12.5px',
-      letterSpacing: '.1em',
-      textTransform: 'uppercase',
-      color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
-      transition: 'background .12s, color .12s'
+      ...navItemStyle(id, active),
+      border: undefined
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -570,9 +598,32 @@ function Sidebar({
       flexShrink: 0
     }
   }, /*#__PURE__*/React.createElement(Icon, null)), /*#__PURE__*/React.createElement("span", null, label)), extra);
-  const subBtn = (id, label, active, onClick) => /*#__PURE__*/React.createElement("button", {
+
+  // Expanded nav row as a button (toggles, no navigation)
+  const navBtn = (id, label, Icon, active, onClick, extra) => /*#__PURE__*/React.createElement("button", {
     key: id,
     onClick: onClick,
+    onMouseEnter: () => setHovered(id),
+    onMouseLeave: () => setHovered(null),
+    style: {
+      ...navItemStyle(id, active),
+      border: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      flexShrink: 0
+    }
+  }, /*#__PURE__*/React.createElement(Icon, null)), /*#__PURE__*/React.createElement("span", null, label)), extra);
+  const subLink = (id, label, active, href) => /*#__PURE__*/React.createElement("a", {
+    key: id,
+    href: href,
     onMouseEnter: () => setHovered(id),
     onMouseLeave: () => setHovered(null),
     style: {
@@ -580,8 +631,8 @@ function Sidebar({
       alignItems: 'center',
       width: '100%',
       padding: '7px 18px 7px 50px',
+      textDecoration: 'none',
       background: active ? 'rgba(255,255,255,0.06)' : hovered === id ? 'rgba(255,255,255,0.03)' : 'transparent',
-      border: 'none',
       borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
       cursor: 'pointer',
       fontFamily: 'inherit',
@@ -616,7 +667,9 @@ function Sidebar({
       flexDirection: 'column',
       alignItems: 'center'
     }
-  }, /*#__PURE__*/React.createElement(ToggleBtn, null), /*#__PURE__*/React.createElement("img", {
+  }, /*#__PURE__*/React.createElement(ToggleBtn, null), /*#__PURE__*/React.createElement("a", {
+    href: hrefFor('home')
+  }, /*#__PURE__*/React.createElement("img", {
     src: "https://aggelosmouzakitis.com/img/aggelos.jpg",
     alt: "Aggelos Mouzakitis",
     style: {
@@ -627,17 +680,17 @@ function Sidebar({
       margin: '22px 0 18px',
       display: 'block'
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
       background: SB.border,
       alignSelf: 'stretch',
       margin: '0 12px 4px'
     }
-  }), iconBtn('home', ICONS.Home, () => setPage('home'), page === 'home', 'Home'), iconBtn('blog', ICONS.Book, () => setPage('blog'), page === 'blog', 'Writing'), iconBtn('ask-me-anything', ICONS.MessageCircle, () => setPage('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything'), iconBtn('spec', ICONS.Briefcase, () => {
+  }), iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home'), iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing'), iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything'), iconBtn('spec', ICONS.Briefcase, () => {
     setOpen(true);
     setSpecialtiesOpen(true);
-  }, isSpecialty, 'Specialties'), iconBtn('diag', ICONS.Clipboard, () => setPage('diagnostic'), page === 'diagnostic', 'Free Diagnostic'), /*#__PURE__*/React.createElement("div", {
+  }, isSpecialty, 'Specialties'), iconNav('diag', ICONS.Clipboard, hrefFor('diagnostic'), page === 'diagnostic', 'Free Diagnostic'), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
       background: SB.border,
@@ -681,6 +734,12 @@ function Sidebar({
       borderBottom: `1px solid ${SB.border}`,
       flexShrink: 0
     }
+  }, /*#__PURE__*/React.createElement("a", {
+    href: hrefFor('home'),
+    style: {
+      display: 'flex',
+      flexShrink: 0
+    }
   }, /*#__PURE__*/React.createElement("img", {
     src: "https://aggelosmouzakitis.com/img/aggelos.jpg",
     alt: "Aggelos Mouzakitis",
@@ -692,7 +751,7 @@ function Sidebar({
       flexShrink: 0,
       display: 'block'
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       overflow: 'hidden',
       flex: 1
@@ -718,9 +777,9 @@ function Sidebar({
     style: {
       padding: '10px 0 0'
     }
-  }, navBtn('home', 'Home', ICONS.Home, page === 'home', () => setPage('home')), navBtn('blog', 'Writing', ICONS.Book, page === 'blog', () => setPage('blog')), navBtn('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', () => setPage('ask-me-anything'))), navBtn('spec', 'Specialties', ICONS.Briefcase, isSpecialty, () => setSpecialtiesOpen(v => !v), /*#__PURE__*/React.createElement(ICONS.ChevDown, {
+  }, navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home')), navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog')), navLink('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', hrefFor('ask-me-anything'))), navBtn('spec', 'Specialties', ICONS.Briefcase, isSpecialty, () => setSpecialtiesOpen(v => !v), /*#__PURE__*/React.createElement(ICONS.ChevDown, {
     isOpen: specialtiesOpen
-  })), specialtiesOpen && /*#__PURE__*/React.createElement("div", null, SPECIALTIES.map(s => subBtn(s.id, s.label, page === s.id, () => setPage(s.id)))), sectionLabel('Find me'), SOCIALS.map(({
+  })), specialtiesOpen && /*#__PURE__*/React.createElement("div", null, SPECIALTIES.map(s => subLink(s.id, s.label, page === s.id, hrefFor(s.id)))), sectionLabel('Find me'), SOCIALS.map(({
     id,
     label,
     href,
@@ -790,8 +849,8 @@ function Sidebar({
       lineHeight: 1.75,
       marginBottom: 14
     }
-  }, "45 questions. 8 minutes.", /*#__PURE__*/React.createElement("br", null), "Your operating pattern + breakdown."), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setPage('diagnostic'),
+  }, "45 questions. 8 minutes.", /*#__PURE__*/React.createElement("br", null), "Your operating pattern + breakdown."), /*#__PURE__*/React.createElement("a", {
+    href: hrefFor('diagnostic'),
     onMouseEnter: e => {
       e.currentTarget.style.background = SB.accent;
       e.currentTarget.style.color = '#fff';
@@ -801,6 +860,8 @@ function Sidebar({
       e.currentTarget.style.color = SB.accent;
     },
     style: {
+      display: 'block',
+      textAlign: 'center',
       width: '100%',
       padding: '10px 0',
       fontFamily: 'inherit',
@@ -811,6 +872,7 @@ function Sidebar({
       border: `1px solid ${SB.accent}`,
       color: SB.accent,
       cursor: 'pointer',
+      textDecoration: 'none',
       transition: 'background .15s, color .15s'
     }
   }, "Start assessment \u2192")))));
