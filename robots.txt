@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
 Disallow: /blog/post-template.html
 Disallow: /blog/sample-post/
 
