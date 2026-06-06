@@ -159,6 +159,55 @@ function FaqItem({
     style: h3Style
   }, q), children);
 }
+function Testimonial({
+  quote,
+  who
+}) {
+  return React.createElement('blockquote', {
+    style: {
+      margin: '0 0 1.6rem',
+      padding: '0 0 0 1rem',
+      borderLeft: '2px solid rgba(0,191,99,0.35)'
+    }
+  }, React.createElement('p', {
+    style: {
+      fontSize: '15px',
+      lineHeight: 1.8,
+      color: '#282726',
+      marginBottom: '.5rem'
+    }
+  }, '\u201C' + quote + '\u201D'), React.createElement('footer', {
+    style: {
+      fontSize: '10px',
+      letterSpacing: '.1em',
+      textTransform: 'uppercase',
+      color: '#999'
+    }
+  }, who));
+}
+function Testimonials({
+  items,
+  mob
+}) {
+  return React.createElement(Section, {
+    label: 'What clients say',
+    mob
+  }, items.map(function (t, i) {
+    return React.createElement(Testimonial, {
+      key: i,
+      quote: t.q,
+      who: t.w
+    });
+  }), React.createElement('p', {
+    style: {
+      marginBottom: 0,
+      marginTop: '.4rem'
+    }
+  }, React.createElement('a', {
+    href: '/reviews/',
+    style: greenLink
+  }, 'Read more client reflections \u2192')));
+}
 
 // ─── HOME PAGE ───────────────────────────────────────────────────────────────
 function HomePage({
@@ -379,7 +428,19 @@ function ExecTherapyPage() {
     q: 'Is this available remotely?'
   }, React.createElement(P, {
     last: true
-  }, "Yes. All sessions are online. Most clients prefer it for flexibility and privacy.")))), React.createElement('hr', {
+  }, "Yes. All sessions are online. Most clients prefer it for flexibility and privacy.")))), React.createElement(Testimonials, {
+    mob,
+    items: [{
+      q: "One of the most useful things is that Aggelos actually understands the environment I work in. I don\u2019t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than \u201cfollow your values.\u201d He understands the game, but he also notices what the game is doing to me.",
+      w: "Anonymous client, Senior operator"
+    }, {
+      q: "Aggelos is direct. He will tell me when I am avoiding something or constructing a very intelligent explanation for why I cannot act. But I have never experienced his directness as judgement. There is enough trust between us that he can challenge me properly, which is exactly what I needed.",
+      w: "Anonymous client, Senior tech professional"
+    }, {
+      q: "I came in expecting a fairly standard coaching conversation. Within the first session, Aggelos understood both the professional problem and the emotional mechanism underneath it. He was warm, but very straightforward, and gave me a way of looking at the situation that I had not considered before. I left with more than advice. I left with a more accurate problem.",
+      w: "Anonymous client, Senior professional"
+    }]
+  }), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
     label: 'Next step',
@@ -478,7 +539,19 @@ function FoundersTherapyPage() {
     q: 'Is this completely confidential?'
   }, React.createElement(P, {
     last: true
-  }, "Yes. It's a private therapeutic relationship governed by professional ethics. Nothing is shared with anyone.")))), React.createElement('hr', {
+  }, "Yes. It's a private therapeutic relationship governed by professional ethics. Nothing is shared with anyone.")))), React.createElement(Testimonials, {
+    mob,
+    items: [{
+      q: "I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don\u2019t have to translate one world into the other for him.",
+      w: "Anonymous client, Founder"
+    }, {
+      q: "There are no motivational speeches or generic frameworks pasted onto every situation. Aggelos pays attention to how I specifically operate. He remembers the contradictions, notices when I change the story and asks the question I was hoping we could avoid. Annoying at times, but usually accurate.",
+      w: "Anonymous client, Founder"
+    }, {
+      q: "I did not want somebody to tell me to work less, lower my standards or become less ambitious. Aggelos understood that immediately. Our work has been about keeping the part of me that wants to build and achieve, while becoming less dependent on winning, comparison and external approval to feel okay. That distinction has been very important to me.",
+      w: "Anonymous client, Founder and executive"
+    }]
+  }), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
     label: 'Next step',
@@ -594,7 +667,19 @@ function ImposterPage() {
     last: true
   }, "Regular coaching usually focuses on managing symptoms: reframing, confidence exercises, tracking achievements. ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/the-coaching-industrys-credibility'
-  }, 'A lot of what gets labeled coaching'), " in this space actually requires therapeutic depth. Therapy goes to the source of the pattern rather than helping you cope with it.")))), React.createElement('hr', {
+  }, 'A lot of what gets labeled coaching'), " in this space actually requires therapeutic depth. Therapy goes to the source of the pattern rather than helping you cope with it.")))), React.createElement(Testimonials, {
+    mob,
+    items: [{
+      q: "From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.",
+      w: "Anonymous client, Tech executive"
+    }, {
+      q: "I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.",
+      w: "Anonymous client, Product leader"
+    }, {
+      q: "I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.",
+      w: "Anonymous client, Technology executive"
+    }]
+  }), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
     label: 'Next step',
@@ -700,7 +785,19 @@ function BurnoutPage() {
     last: true
   }, "Because they operate at the surface. If the burnout is driven by a deeper pattern, like identity fusion with output or ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/why-hard-work-alone-doesnt-advance'
-  }, 'the belief that hard work should be enough on its own'), ", managing symptoms doesn't change the source.")))), React.createElement('hr', {
+  }, 'the belief that hard work should be enough on its own'), ", managing symptoms doesn't change the source.")))), React.createElement(Testimonials, {
+    mob,
+    items: [{
+      q: "Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.",
+      w: "Anonymous client, Consultant and business owner"
+    }, {
+      q: "I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.",
+      w: "Anonymous client, Technology leader"
+    }, {
+      q: "The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.",
+      w: "Anonymous client, Senior tech professional"
+    }]
+  }), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
     label: 'Next step',
@@ -812,7 +909,19 @@ function CareerTransitionPage() {
     q: 'I already made the move and feel worse. What happened?'
   }, React.createElement(P, {
     last: true
-  }, "You probably removed the structure without fully understanding what it was compensating for. The old role was quietly holding things in place: your sense of purpose, your daily identity, your social connections. Without it, those gaps become visible. That's not a sign you made the wrong choice. It's a sign there's deeper work to do — and now you have the space for it.")))), React.createElement('hr', {
+  }, "You probably removed the structure without fully understanding what it was compensating for. The old role was quietly holding things in place: your sense of purpose, your daily identity, your social connections. Without it, those gaps become visible. That's not a sign you made the wrong choice. It's a sign there's deeper work to do — and now you have the space for it.")))), React.createElement(Testimonials, {
+    mob,
+    items: [{
+      q: "We have been working together for a while now, and the sessions have gradually changed the way I make decisions. Aggelos doesn\u2019t tell me what to do or try to make me dependent on his opinion. He helps me separate the real problem from the fear, ego and old patterns wrapped around it. I usually leave with less noise and a much clearer sense of what is mine to do.",
+      w: "Anonymous client, Founder"
+    }, {
+      q: "I had been forcing a business situation to continue because stopping it felt like failure. After one of our exercises, I realised I was trying to manufacture reasons to keep going when I already knew the answer. I had the difficult conversation shortly afterwards. It was not that Aggelos gave me the decision. He helped me stop fighting what I already knew.",
+      w: "Anonymous client, Business owner"
+    }, {
+      q: "I was initially sceptical about somatic and trauma-informed work because I assumed it would be vague or a bit spiritual. It wasn\u2019t. Aggelos explained what we were doing, paid attention to my limits and connected the experience back to patterns I could recognise in my work and relationships. It felt grounded, careful and surprisingly practical.",
+      w: "Anonymous client"
+    }]
+  }), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
     label: 'Next step',
