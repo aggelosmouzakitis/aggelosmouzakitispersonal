@@ -367,7 +367,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
   if (!open) return (
     <div style={{ width: SB.WC, minWidth: SB.WC, background: SB.bg, borderRight: `1px solid ${SB.border}`, height: '100vh', position: 'relative', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <ToggleBtn />
-      <a href={hrefFor('home')}><img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', margin: '22px 0 18px', display: 'block' }} /></a>
+      <a href={hrefFor('home')}><img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" width={38} height={38} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', margin: '22px 0 18px', display: 'block' }} /></a>
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '0 12px 4px' }} />
       {iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home')}
       {iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing')}
@@ -387,7 +387,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
       <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', display: 'flex', flexDirection: 'column' }}>
         {/* Profile */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '22px 18px 20px', borderBottom: `1px solid ${SB.border}`, flexShrink: 0 }}>
-          <a href={hrefFor('home')} style={{ display: 'flex', flexShrink: 0 }}><img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, display: 'block' }} /></a>
+          <a href={hrefFor('home')} style={{ display: 'flex', flexShrink: 0 }}><img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" width={38} height={38} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, display: 'block' }} /></a>
           <div style={{ overflow: 'hidden', flex: 1 }}>
             <div style={{ fontSize: '12.5px', letterSpacing: '.1em', textTransform: 'uppercase', color: SB.active, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Aggelos Mouzakitis</div>
             <div style={{ fontSize: '11px', letterSpacing: '.08em', textTransform: 'uppercase', color: SB.muted }}>Coach & Therapist</div>
