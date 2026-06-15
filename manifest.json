@@ -1,0 +1,19 @@
+{
+  "name": "Aggelos Mouzakitis",
+  "short_name": "Aggelos",
+  "description": "Licensed therapist and high-performance coach for founders, executives, and senior tech operators.",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "background_color": "#F4F2F0",
+  "theme_color": "#1A1918",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "lifestyle", "education"]
+}
