@@ -3,7 +3,7 @@
 // Shared styles — light theme #F4F2F0 bg, #282726 text
 const C = {
   text: '#282726',
-  muted: '#777',
+  muted: '#666',
   accent: '#00bf63',
   border: 'rgba(40,39,38,0.12)',
   sepBorder: 'rgba(40,39,38,0.2)',
