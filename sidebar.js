@@ -3,7 +3,7 @@
 const SB = {
   bg: '#1A1918',
   border: 'rgba(255,255,255,0.08)',
-  muted: '#555',
+  muted: '#888',
   text: 'rgba(255,255,255,0.6)',
   active: '#ffffff',
   accent: '#00bf63',
@@ -640,7 +640,7 @@ function Sidebar({
       fontSize: '12px',
       letterSpacing: '.07em',
       textTransform: 'uppercase',
-      color: active ? SB.accent : hovered === id ? 'rgba(255,255,255,0.75)' : 'rgba(255,255,255,0.4)',
+      color: active ? SB.accent : hovered === id ? 'rgba(255,255,255,0.75)' : 'rgba(255,255,255,0.55)',
       transition: 'background .12s, color .12s'
     }
   }, label);
