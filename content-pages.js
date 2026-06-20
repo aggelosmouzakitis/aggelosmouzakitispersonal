@@ -259,7 +259,7 @@ function HomePage({
       marginBottom: '1.2rem',
       maxWidth: 600
     }
-  }, "I help tech high performers break the deeper patterns behind burnout, shame-driven achievement, overthinking, and emotional fatigue \u2014 through high-trust advisory, body-based nervous system regulation (including somatic shaking techniques), and biomarkers."), React.createElement('p', {
+  }, "I help tech high performers break the deeper patterns behind burnout, shame-driven achievement, overthinking, and emotional fatigue \u2014 through high-trust advisory, nervous system regulation, and data."), React.createElement('p', {
     style: {
       ...pStyle,
       marginBottom: 0,
@@ -275,9 +275,9 @@ function HomePage({
   }, "Usually that means achievement has quietly become the way you regulate your sense of worth. The work is to keep the drive while ending the dependence underneath it — so success feels worth it again.")), React.createElement(Section, {
     label: 'How I work',
     mob
-  }, React.createElement(P, null, React.createElement(Strong, null, "High-trust advisory."), " Grounded in your real context — career decisions, founder stress, leadership, difficult conversations — not abstract coaching."), React.createElement(P, null, React.createElement(Strong, null, "Nervous system regulation."), " The work includes the body, not just thoughts. I use somatic techniques — including neurogenic tremor work, which engages the body's natural stress-discharge mechanism to release tension held in the muscles after sustained pressure. This addresses what analysis can't: the chronic activation that keeps you wired after the laptop closes."), React.createElement(P, {
+  }, React.createElement(P, null, React.createElement(Strong, null, "High-trust advisory."), " Grounded in your real context — career decisions, founder stress, leadership, difficult conversations — not abstract coaching."), React.createElement(P, null, React.createElement(Strong, null, "Nervous system regulation."), " The work includes the body, not just thoughts: how pressure shows up as activation, shutdown, and poor recovery, alongside shame, identity, and the meanings you attach to success and failure."), React.createElement(P, {
     last: true
-  }, React.createElement(Strong, null, "Biomarkers."), " HRV (heart rate variability) is the clearest objective signal of nervous system health. A sustained drop precedes burnout symptoms by weeks; strong overnight HRV signals genuine recovery, not just absence of work. If you wear an Oura, WHOOP, or Apple Watch, we use it. If you don't, I'll explain what to track. This turns 'I feel stressed' into something you can actually see and measure.")), React.createElement(Section, {
+  }, React.createElement(Strong, null, "Data."), " Wearable and behavioural signals — sleep, HRV, stress, recovery — make invisible stress patterns visible. Not biohacking. Pattern recognition.")), React.createElement(Section, {
     label: 'Who I work with',
     mob
   }, React.createElement(P, null, "Founders, executives, product and growth leaders, and senior operators in tech. People doing well by every external measure who sense their relationship with work, performance, and self-worth has become too costly."), React.createElement(P, {
@@ -374,7 +374,7 @@ function ExecTherapyPage() {
     href: 'https://www.ibm.com'
   }, 'IBM'), "'s enterprise portfolio, and I've ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advised 50+ companies'), " on the kind of work my clients carry into sessions every week."), React.createElement(P, null, React.createElement(Strong, null, "That means I already understand the environment you're operating in."), " We don't have to spend time on context-setting, which lets us get to the real work faster."), React.createElement(P, null, "The work combines three things. High-trust advisory grounded in your actual context — no need to translate what a board meeting or a missed quarter actually feels like. Body-based nervous system regulation using somatic techniques, including neurogenic tremor work — the body's natural mechanism for completing a stress cycle and discharging tension that years of high performance have accumulated. And biomarkers: HRV data from wearables (Oura, WHOOP, Apple Watch) that makes the invisible visible — showing what sustained pressure actually costs at the nervous system level, not what you think it does."), React.createElement(P, null, "A lot of it is what I call strategic detachment: learning to play the professional roles, handle pressure, and navigate business dynamics without turning every interaction into a referendum on your worth. The goal isn't less ambition. It's ambition that finally feels fulfilling."), React.createElement(P, {
+  }, 'advised 50+ companies'), " on the kind of work my clients carry into sessions every week."), React.createElement(P, null, React.createElement(Strong, null, "That means I already understand the environment you're operating in."), " We don't have to spend time on context-setting, which lets us get to the real work faster."), React.createElement(P, null, "The work combines three things: high-trust advisory grounded in your real context, nervous system regulation so pressure stops running the show physically, and data from wearables that makes invisible stress patterns visible."), React.createElement(P, null, "A lot of it is what I call strategic detachment: learning to play the professional roles, handle pressure, and navigate business dynamics without turning every interaction into a referendum on your worth. The goal isn't less ambition. It's ambition that finally feels fulfilling."), React.createElement(P, {
     last: true
   }, "I write about the psychology of ambition and performance at ", React.createElement(A, {
     href: 'https://undisguised.io'
@@ -506,7 +506,7 @@ function FoundersTherapyPage() {
     mob
   }, React.createElement(P, null, "I'm a licensed psychotherapist with 18+ years in B2B SaaS, including advising 50+ companies on growth. I've been on the other side of the table where you set targets, defend strategy, and absorb pressure from every direction."), React.createElement(P, null, "When a client comes in carrying the weight of a down round or a co-founder conflict, ", React.createElement(Strong, null, "I don't need them to explain the context"), ". I know what that room feels like. We skip the background and go straight to the work."), React.createElement(P, {
     last: true
-  }, "That high-trust advisory is one part of how I work. The others are body-based nervous system regulation — I use somatic techniques, including neurogenic tremor work, to help the nervous system complete stress cycles that the pace of founding keeps interrupting. And biomarkers: HRV data from wearables (Oura, WHOOP, Apple Watch) that makes the real cost of a down round, a key hire leaving, or a prolonged crunch visible in your physiology, not just your feelings.")), React.createElement(Section, {
+  }, "That high-trust advisory is one part of how I work. The others are nervous system regulation — so the constant activation of founding stops living in your body — and data from wearables (sleep, HRV, recovery) that makes the real cost of crunch periods, travel, and conflict visible instead of guessed at.")), React.createElement(Section, {
     label: 'How it works',
     mob
   }, React.createElement(P, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one, and confidential"), ". Nothing goes to your board, your investors, or your team. This isn't coaching attached to your company. It's a private therapeutic relationship."), React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes and free"), ". We use it to figure out what's going on and whether I'm the right person for it."), React.createElement('div', {
@@ -622,7 +622,7 @@ function ImposterPage() {
     mob
   }, React.createElement(P, null, "I'm a licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advising 50+ companies on growth'), ". I know the environment that amplifies imposter syndrome in tech: the pace, the ambiguity, the constant comparison."), React.createElement(P, null, React.createElement(Strong, null, "We work with the root pattern rather than the symptoms."), " That means going beyond the current role to understand where the conditional sense of worth was established, why it persists, and what it would take to build a sense of self that doesn't depend entirely on the next result."), React.createElement(P, null, "Insight alone rarely shifts this — most high performers have already understood it intellectually. So the work also includes body-based somatic regulation — specifically neurogenic tremor techniques that help the nervous system discharge the chronic vigilance that imposter syndrome produces — so safety stops depending on the next win. And where it helps, HRV data from wearables that shows the gap between what you think you're managing and what your nervous system is already doing."), React.createElement(P, {
+  }, 'advising 50+ companies on growth'), ". I know the environment that amplifies imposter syndrome in tech: the pace, the ambiguity, the constant comparison."), React.createElement(P, null, React.createElement(Strong, null, "We work with the root pattern rather than the symptoms."), " That means going beyond the current role to understand where the conditional sense of worth was established, why it persists, and what it would take to build a sense of self that doesn't depend entirely on the next result."), React.createElement(P, null, "Insight alone rarely shifts this — most high performers have already understood it intellectually. So the work also includes nervous system regulation, so safety stops depending on the next win, and, where it helps, data from wearables that shows the gap between what you think you can handle and what your body is already doing."), React.createElement(P, {
     last: true
   }, "I write about this at ", React.createElement(A, {
     href: 'https://undisguised.io'
@@ -746,7 +746,7 @@ function BurnoutPage() {
     href: 'https://headofgrowth.io'
   }, 'advising 50+ companies on growth'), ". I understand the environment well: the always-on culture, the ambiguity, the pressure to appear certain when you're not."), React.createElement(P, {
     last: true
-  }, "The goal isn't necessarily to make you work less (though that might happen). ", React.createElement(Strong, null, "The goal is a more fulfilling relationship with the work, so it costs less and means more."), " We do that through high-trust advisory grounded in the environment you're actually operating in; somatic nervous system work — including neurogenic tremor techniques that release tension stored in the body after chronic high-stress functioning, not just talk about it; and HRV biomarkers that show, objectively, whether your nervous system is actually recovering or just going through the motions of rest.")), React.createElement(Section, {
+  }, "The goal isn't necessarily to make you work less (though that might happen). ", React.createElement(Strong, null, "The goal is a more fulfilling relationship with the work, so it costs less and means more."), " We do that through high-trust advisory, nervous system regulation so recovery actually lands, and data from wearables (sleep, HRV, stress) that shows what rest alone isn't fixing.")), React.createElement(Section, {
     label: 'Start here',
     mob
   }, React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes, free, and exploratory"), ". We figure out what's underneath the exhaustion and whether therapy is the right approach."), React.createElement('div', {
@@ -780,10 +780,6 @@ function BurnoutPage() {
   }, "Yes, and that's usually what happens. The point isn't to quit. It's to understand ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/youre-creating-the-exact-problem'
   }, "what's creating the problem"), " and change your relationship to the work so the cost comes down.")), React.createElement(FaqItem, {
-    q: "Why do you use somatic techniques and HRV data?"
-  }, React.createElement(P, {
-    last: true
-  }, "Because burnout isn't primarily a thinking problem. The exhaustion lives in the body — in a nervous system that's been in high-alert mode for so long it's forgotten how to downregulate. Talk alone often can't reach that. Somatic techniques, specifically neurogenic tremor work, engage the body's natural stress-discharge mechanism to help complete cycles that chronic performance keeps interrupting. HRV (heart rate variability) turns this from abstract to measurable: if your overnight HRV has been declining for three weeks, that's not a feeling. It's data.")), React.createElement(FaqItem, {
     q: "I've tried regular coaching, meditation, and boundary-setting. Why didn't they work?"
   }, React.createElement(P, {
     last: true
@@ -869,7 +865,7 @@ function CareerTransitionPage() {
     href: 'https://headofgrowth.io'
   }, 'growth advisory'), " to clinical practice. I know what it's like to leave an identity that works, and I know the difference between doing that reactively and doing it with some clarity about what's actually driving the change."), React.createElement(P, {
     last: true
-  }, "The work combines high-trust advisory from someone who made this kind of transition himself; body-based somatic regulation (including neurogenic tremor work) to help the nervous system process the destabilisation that a major transition produces; and — where useful — HRV data from wearables that shows how the transition is actually landing physiologically, not just how you're narrating it. The aim isn't just the next role. It's a working life that feels genuinely fulfilling, not just impressive.")), React.createElement(Section, {
+  }, "The work combines high-trust advisory, nervous system regulation, and — where useful — data from wearables that shows how the transition is actually landing on you. The aim isn't just the next role. It's a working life that feels genuinely fulfilling, not just impressive.")), React.createElement(Section, {
     label: 'Who this is for',
     mob
   }, React.createElement(P, {

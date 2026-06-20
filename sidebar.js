@@ -323,6 +323,7 @@ function MobileNav({
       color: 'rgba(255,255,255,0.4)'
     }
   }, "Specialties"), /*#__PURE__*/React.createElement("button", {
+    "aria-label": "Close menu",
     onClick: () => setSheetOpen(false),
     style: {
       background: 'none',
