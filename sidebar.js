@@ -1,4 +1,4 @@
-// sidebar.jsx — desktop sidebar + mobile bottom nav with bottom sheet
+// sidebar.jsx — desktop sidebar + mobile bottom nav
 
 const SB = {
   bg: '#1A1918',
@@ -24,24 +24,6 @@ const ICONS = {
     d: "M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"
   }), /*#__PURE__*/React.createElement("polyline", {
     points: "9 21 9 12 15 12 15 21"
-  })),
-  Briefcase: () => /*#__PURE__*/React.createElement("svg", {
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "1.6",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, /*#__PURE__*/React.createElement("rect", {
-    x: "2",
-    y: "7",
-    width: "20",
-    height: "14",
-    rx: "2"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"
   })),
   Clipboard: () => /*#__PURE__*/React.createElement("svg", {
     width: "20",
@@ -153,72 +135,8 @@ const ICONS = {
     strokeLinecap: "round"
   }, /*#__PURE__*/React.createElement("polyline", {
     points: "9 18 15 12 9 6"
-  })),
-  ChevDown: ({
-    isOpen
-  }) => /*#__PURE__*/React.createElement("svg", {
-    width: "12",
-    height: "12",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2.5",
-    strokeLinecap: "round",
-    style: {
-      transform: isOpen ? 'rotate(0deg)' : 'rotate(-90deg)',
-      transition: 'transform .18s',
-      flexShrink: 0
-    }
-  }, /*#__PURE__*/React.createElement("polyline", {
-    points: "6 9 12 15 18 9"
-  })),
-  ChevUp: () => /*#__PURE__*/React.createElement("svg", {
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round"
-  }, /*#__PURE__*/React.createElement("polyline", {
-    points: "18 15 12 9 6 15"
-  })),
-  X: () => /*#__PURE__*/React.createElement("svg", {
-    width: "18",
-    height: "18",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round"
-  }, /*#__PURE__*/React.createElement("line", {
-    x1: "18",
-    y1: "6",
-    x2: "6",
-    y2: "18"
-  }), /*#__PURE__*/React.createElement("line", {
-    x1: "6",
-    y1: "6",
-    x2: "18",
-    y2: "18"
   }))
 };
-const SPECIALTIES = [{
-  id: 'therapy-for-executives',
-  label: 'Therapy for Executives'
-}, {
-  id: 'therapy-for-founders',
-  label: 'Therapy for Founders'
-}, {
-  id: 'imposter-syndrome-therapy',
-  label: 'Imposter Syndrome Coaching'
-}, {
-  id: 'executive-burnout-therapy',
-  label: 'Burnout Coaching'
-}, {
-  id: 'career-transition-therapy',
-  label: 'Career Transition Coaching'
-}];
 const SOCIALS = [{
   id: 'li',
   label: 'LinkedIn',
@@ -236,22 +154,14 @@ const NAV_URL = {
   'home': '/',
   'blog': '/blog/',
   'ask-me-anything': '/ask-me-anything/',
-  'diagnostic': '/burnout-diagnostic/',
-  'therapy-for-executives': '/therapy-for-executives/',
-  'therapy-for-founders': '/therapy-for-founders/',
-  'imposter-syndrome-therapy': '/imposter-syndrome-therapy/',
-  'executive-burnout-therapy': '/executive-burnout-therapy/',
-  'career-transition-therapy': '/career-transition-therapy/'
+  'diagnostic': '/burnout-diagnostic/'
 };
 const hrefFor = id => NAV_URL[id] || '/';
 
 // ── MOBILE BOTTOM NAV ────────────────────────────────────────────────────────
 function MobileNav({
-  page,
-  setPage
+  page
 }) {
-  const [sheetOpen, setSheetOpen] = React.useState(false);
-  const isSpecialty = SPECIALTIES.some(s => s.id === page);
   const tabStyle = active => ({
     flex: 1,
     display: 'flex',
@@ -271,144 +181,7 @@ function MobileNav({
     transition: 'color .15s',
     textDecoration: 'none'
   });
-  return /*#__PURE__*/React.createElement(React.Fragment, null, sheetOpen && /*#__PURE__*/React.createElement("div", {
-    onClick: () => setSheetOpen(false),
-    style: {
-      position: 'fixed',
-      inset: 0,
-      background: 'rgba(0,0,0,0.5)',
-      zIndex: 90,
-      backdropFilter: 'blur(2px)'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'fixed',
-      left: 0,
-      right: 0,
-      bottom: 64,
-      background: '#1A1918',
-      borderTop: '1px solid rgba(255,255,255,0.1)',
-      borderRadius: '16px 16px 0 0',
-      zIndex: 91,
-      padding: '0 0 8px',
-      transform: sheetOpen ? 'translateY(0)' : 'translateY(110%)',
-      transition: 'transform .3s cubic-bezier(.32,.72,0,1)',
-      boxShadow: '0 -8px 40px rgba(0,0,0,0.4)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'center',
-      padding: '12px 0 8px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 36,
-      height: 4,
-      borderRadius: 2,
-      background: 'rgba(255,255,255,0.2)'
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: '8px 20px 12px'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: '10px',
-      letterSpacing: '.15em',
-      textTransform: 'uppercase',
-      color: 'rgba(255,255,255,0.4)'
-    }
-  }, "Specialties"), /*#__PURE__*/React.createElement("button", {
-    "aria-label": "Close menu",
-    onClick: () => setSheetOpen(false),
-    style: {
-      background: 'none',
-      border: 'none',
-      cursor: 'pointer',
-      color: 'rgba(255,255,255,0.5)',
-      display: 'flex'
-    }
-  }, /*#__PURE__*/React.createElement(ICONS.X, null))), SPECIALTIES.map(s => /*#__PURE__*/React.createElement("a", {
-    key: s.id,
-    href: hrefFor(s.id),
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      width: '100%',
-      padding: '14px 20px',
-      background: page === s.id ? 'rgba(0,191,99,0.08)' : 'none',
-      borderLeft: page === s.id ? '2px solid #00bf63' : '2px solid transparent',
-      cursor: 'pointer',
-      fontFamily: 'inherit',
-      textDecoration: 'none',
-      fontSize: '14px',
-      letterSpacing: '.05em',
-      color: page === s.id ? '#00bf63' : 'rgba(255,255,255,0.8)',
-      textAlign: 'left'
-    }
-  }, s.label)), /*#__PURE__*/React.createElement("a", {
-    href: hrefFor('ask-me-anything'),
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      width: '100%',
-      padding: '14px 20px',
-      background: page === 'ask-me-anything' ? 'rgba(0,191,99,0.08)' : 'none',
-      borderLeft: page === 'ask-me-anything' ? '2px solid #00bf63' : '2px solid transparent',
-      borderTop: '1px solid rgba(255,255,255,0.06)',
-      cursor: 'pointer',
-      fontFamily: 'inherit',
-      textDecoration: 'none',
-      fontSize: '14px',
-      letterSpacing: '.05em',
-      color: page === 'ask-me-anything' ? '#00bf63' : 'rgba(255,255,255,0.8)',
-      textAlign: 'left'
-    }
-  }, "Ask me anything"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      margin: '12px 20px 4px',
-      padding: '14px',
-      border: '1px solid rgba(0,191,99,0.25)',
-      background: 'rgba(0,191,99,0.04)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: '10px',
-      letterSpacing: '.15em',
-      textTransform: 'uppercase',
-      color: '#00bf63',
-      marginBottom: 8
-    }
-  }, "Free Fulfilment Diagnostic"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: '13px',
-      color: 'rgba(255,255,255,0.45)',
-      marginBottom: 12
-    }
-  }, "45 questions. Your operating pattern + breakdown."), /*#__PURE__*/React.createElement("a", {
-    href: hrefFor('diagnostic'),
-    style: {
-      display: 'block',
-      textAlign: 'center',
-      width: '100%',
-      padding: '10px',
-      fontFamily: 'inherit',
-      fontSize: '11px',
-      letterSpacing: '.12em',
-      textTransform: 'uppercase',
-      background: 'transparent',
-      border: '1px solid #00bf63',
-      color: '#00bf63',
-      cursor: 'pointer',
-      textDecoration: 'none'
-    }
-  }, "Take the diagnostic \u2192"))), /*#__PURE__*/React.createElement("nav", {
+  return /*#__PURE__*/React.createElement("nav", {
     style: {
       position: 'fixed',
       left: 0,
@@ -428,10 +201,10 @@ function MobileNav({
   }, /*#__PURE__*/React.createElement(ICONS.Home, null), /*#__PURE__*/React.createElement("span", null, "Home")), /*#__PURE__*/React.createElement("a", {
     style: tabStyle(page === 'blog'),
     href: hrefFor('blog')
-  }, /*#__PURE__*/React.createElement(ICONS.Book, null), /*#__PURE__*/React.createElement("span", null, "Writing")), /*#__PURE__*/React.createElement("button", {
-    style: tabStyle(isSpecialty || sheetOpen),
-    onClick: () => setSheetOpen(v => !v)
-  }, /*#__PURE__*/React.createElement(ICONS.Briefcase, null), /*#__PURE__*/React.createElement("span", null, "Services")), SOCIALS.map(({
+  }, /*#__PURE__*/React.createElement(ICONS.Book, null), /*#__PURE__*/React.createElement("span", null, "Writing")), /*#__PURE__*/React.createElement("a", {
+    style: tabStyle(page === 'ask-me-anything'),
+    href: hrefFor('ask-me-anything')
+  }, /*#__PURE__*/React.createElement(ICONS.MessageCircle, null), /*#__PURE__*/React.createElement("span", null, "Ask")), SOCIALS.map(({
     id,
     label,
     href,
@@ -448,7 +221,7 @@ function MobileNav({
   }, /*#__PURE__*/React.createElement(Icon, null), /*#__PURE__*/React.createElement("span", null, label))), /*#__PURE__*/React.createElement("a", {
     style: tabStyle(page === 'diagnostic'),
     href: hrefFor('diagnostic')
-  }, /*#__PURE__*/React.createElement(ICONS.Clipboard, null), /*#__PURE__*/React.createElement("span", null, "Diagnostic"))));
+  }, /*#__PURE__*/React.createElement(ICONS.Clipboard, null), /*#__PURE__*/React.createElement("span", null, "Diagnostic")));
 }
 
 // ── DESKTOP SIDEBAR ──────────────────────────────────────────────────────────
@@ -458,7 +231,6 @@ function Sidebar({
   open,
   setOpen
 }) {
-  const [specialtiesOpen, setSpecialtiesOpen] = React.useState(true);
   const [hovered, setHovered] = React.useState(null);
   const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
   React.useEffect(() => {
@@ -467,10 +239,8 @@ function Sidebar({
     return () => window.removeEventListener('resize', fn);
   }, []);
   if (isMobile) return /*#__PURE__*/React.createElement(MobileNav, {
-    page: page,
-    setPage: setPage
+    page: page
   });
-  const isSpecialty = SPECIALTIES.some(s => s.id === page);
   const ToggleBtn = () => /*#__PURE__*/React.createElement("button", {
     onClick: () => setOpen(!open),
     title: open ? 'Collapse' : 'Expand',
@@ -509,27 +279,6 @@ function Sidebar({
       justifyContent: 'center',
       background: active ? 'rgba(255,255,255,0.1)' : hovered === id ? 'rgba(255,255,255,0.05)' : 'transparent',
       textDecoration: 'none',
-      color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
-      transition: 'background .12s, color .12s'
-    }
-  }, /*#__PURE__*/React.createElement(Icon, null));
-
-  // Collapsed-rail icon as a button (toggles, no navigation)
-  const iconBtn = (id, Icon, onClick, active, title) => /*#__PURE__*/React.createElement("button", {
-    key: id,
-    title: title,
-    onClick: onClick,
-    onMouseEnter: () => setHovered(id),
-    onMouseLeave: () => setHovered(null),
-    style: {
-      width: SB.WC,
-      height: 48,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: active ? 'rgba(255,255,255,0.1)' : hovered === id ? 'rgba(255,255,255,0.05)' : 'transparent',
-      border: 'none',
-      cursor: 'pointer',
       color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
       transition: 'background .12s, color .12s'
     }
@@ -599,51 +348,6 @@ function Sidebar({
       flexShrink: 0
     }
   }, /*#__PURE__*/React.createElement(Icon, null)), /*#__PURE__*/React.createElement("span", null, label)), extra);
-
-  // Expanded nav row as a button (toggles, no navigation)
-  const navBtn = (id, label, Icon, active, onClick, extra) => /*#__PURE__*/React.createElement("button", {
-    key: id,
-    onClick: onClick,
-    onMouseEnter: () => setHovered(id),
-    onMouseLeave: () => setHovered(null),
-    style: {
-      ...navItemStyle(id, active),
-      border: 'none'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'flex',
-      flexShrink: 0
-    }
-  }, /*#__PURE__*/React.createElement(Icon, null)), /*#__PURE__*/React.createElement("span", null, label)), extra);
-  const subLink = (id, label, active, href) => /*#__PURE__*/React.createElement("a", {
-    key: id,
-    href: href,
-    onMouseEnter: () => setHovered(id),
-    onMouseLeave: () => setHovered(null),
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      width: '100%',
-      padding: '7px 18px 7px 50px',
-      textDecoration: 'none',
-      background: active ? 'rgba(255,255,255,0.06)' : hovered === id ? 'rgba(255,255,255,0.03)' : 'transparent',
-      borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
-      cursor: 'pointer',
-      fontFamily: 'inherit',
-      fontSize: '12px',
-      letterSpacing: '.07em',
-      textTransform: 'uppercase',
-      color: active ? SB.accent : hovered === id ? 'rgba(255,255,255,0.75)' : 'rgba(255,255,255,0.55)',
-      transition: 'background .12s, color .12s'
-    }
-  }, label);
   const sectionLabel = text => /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: '10px',
@@ -690,10 +394,7 @@ function Sidebar({
       alignSelf: 'stretch',
       margin: '0 12px 4px'
     }
-  }), iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home'), iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing'), iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything'), iconBtn('spec', ICONS.Briefcase, () => {
-    setOpen(true);
-    setSpecialtiesOpen(true);
-  }, isSpecialty, 'Specialties'), iconNav('diag', ICONS.Clipboard, hrefFor('diagnostic'), page === 'diagnostic', 'Free Diagnostic'), /*#__PURE__*/React.createElement("div", {
+  }), iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home'), iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing'), iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything'), iconNav('diag', ICONS.Clipboard, hrefFor('diagnostic'), page === 'diagnostic', 'Free Diagnostic'), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
       background: SB.border,
@@ -782,9 +483,7 @@ function Sidebar({
     style: {
       padding: '10px 0 0'
     }
-  }, navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home')), navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog')), navLink('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', hrefFor('ask-me-anything'))), navBtn('spec', 'Specialties', ICONS.Briefcase, isSpecialty, () => setSpecialtiesOpen(v => !v), /*#__PURE__*/React.createElement(ICONS.ChevDown, {
-    isOpen: specialtiesOpen
-  })), specialtiesOpen && /*#__PURE__*/React.createElement("div", null, SPECIALTIES.map(s => subLink(s.id, s.label, page === s.id, hrefFor(s.id)))), sectionLabel('Find me'), SOCIALS.map(({
+  }, navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home')), navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog')), navLink('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', hrefFor('ask-me-anything'))), sectionLabel('Find me'), SOCIALS.map(({
     id,
     label,
     href,

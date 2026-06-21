@@ -1,4 +1,4 @@
-// sidebar.jsx — desktop sidebar + mobile bottom nav with bottom sheet
+// sidebar.jsx — desktop sidebar + mobile bottom nav
 
 const SB = {
   bg: '#1A1918',
@@ -16,12 +16,6 @@ const ICONS = {
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
       <polyline points="9 21 9 12 15 12 15 21"/>
-    </svg>
-  ),
-  Briefcase: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="7" width="20" height="14" rx="2"/>
-      <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
     </svg>
   ),
   Clipboard: () => (
@@ -70,31 +64,7 @@ const ICONS = {
       <polyline points="9 18 15 12 9 6"/>
     </svg>
   ),
-  ChevDown: ({ isOpen }) => (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
-      style={{ transform: isOpen ? 'rotate(0deg)' : 'rotate(-90deg)', transition: 'transform .18s', flexShrink: 0 }}>
-      <polyline points="6 9 12 15 18 9"/>
-    </svg>
-  ),
-  ChevUp: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-      <polyline points="18 15 12 9 6 15"/>
-    </svg>
-  ),
-  X: () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-    </svg>
-  ),
 };
-
-const SPECIALTIES = [
-  { id: 'therapy-for-executives', label: 'Therapy for Executives' },
-  { id: 'therapy-for-founders', label: 'Therapy for Founders' },
-  { id: 'imposter-syndrome-therapy', label: 'Imposter Syndrome Coaching' },
-  { id: 'executive-burnout-therapy', label: 'Burnout Coaching' },
-  { id: 'career-transition-therapy', label: 'Career Transition Coaching' },
-];
 
 const SOCIALS = [
   { id: 'li', label: 'LinkedIn', href: 'https://linkedin.com/in/growth-product-manager/', Icon: ICONS.LinkedIn },
@@ -105,19 +75,11 @@ const SOCIALS = [
 const NAV_URL = {
   'home': '/', 'blog': '/blog/', 'ask-me-anything': '/ask-me-anything/',
   'diagnostic': '/burnout-diagnostic/',
-  'therapy-for-executives': '/therapy-for-executives/',
-  'therapy-for-founders': '/therapy-for-founders/',
-  'imposter-syndrome-therapy': '/imposter-syndrome-therapy/',
-  'executive-burnout-therapy': '/executive-burnout-therapy/',
-  'career-transition-therapy': '/career-transition-therapy/',
 };
 const hrefFor = (id) => NAV_URL[id] || '/';
 
 // ── MOBILE BOTTOM NAV ────────────────────────────────────────────────────────
-function MobileNav({ page, setPage }) {
-  const [sheetOpen, setSheetOpen] = React.useState(false);
-  const isSpecialty = SPECIALTIES.some(s => s.id === page);
-
+function MobileNav({ page }) {
   const tabStyle = (active) => ({
     flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center',
     justifyContent: 'center', gap: 4, padding: '8px 4px',
@@ -128,111 +90,35 @@ function MobileNav({ page, setPage }) {
   });
 
   return (
-    <>
-      {/* Bottom sheet backdrop */}
-      {sheetOpen && (
-        <div onClick={() => setSheetOpen(false)} style={{
-          position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
-          zIndex: 90, backdropFilter: 'blur(2px)',
-        }} />
-      )}
-
-      {/* Specialties bottom sheet */}
-      <div style={{
-        position: 'fixed', left: 0, right: 0, bottom: 64,
-        background: '#1A1918',
-        borderTop: '1px solid rgba(255,255,255,0.1)',
-        borderRadius: '16px 16px 0 0',
-        zIndex: 91, padding: '0 0 8px',
-        transform: sheetOpen ? 'translateY(0)' : 'translateY(110%)',
-        transition: 'transform .3s cubic-bezier(.32,.72,0,1)',
-        boxShadow: '0 -8px 40px rgba(0,0,0,0.4)',
-      }}>
-        {/* Handle */}
-        <div style={{ display: 'flex', justifyContent: 'center', padding: '12px 0 8px' }}>
-          <div style={{ width: 36, height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.2)' }} />
-        </div>
-        {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 20px 12px' }}>
-          <span style={{ fontSize: '10px', letterSpacing: '.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>Specialties</span>
-          <button aria-label="Close menu" onClick={() => setSheetOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.5)', display: 'flex' }}>
-            <ICONS.X />
-          </button>
-        </div>
-        {/* Specialty items */}
-        {SPECIALTIES.map(s => (
-          <a key={s.id} href={hrefFor(s.id)}
-            style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              width: '100%', padding: '14px 20px',
-              background: page === s.id ? 'rgba(0,191,99,0.08)' : 'none',
-              borderLeft: page === s.id ? '2px solid #00bf63' : '2px solid transparent',
-              cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'none',
-              fontSize: '14px', letterSpacing: '.05em',
-              color: page === s.id ? '#00bf63' : 'rgba(255,255,255,0.8)',
-              textAlign: 'left',
-            }}>
-            {s.label}
-          </a>
-        ))}
-        {/* Ask me anything */}
-        <a href={hrefFor('ask-me-anything')}
-          style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            width: '100%', padding: '14px 20px',
-            background: page === 'ask-me-anything' ? 'rgba(0,191,99,0.08)' : 'none',
-            borderLeft: page === 'ask-me-anything' ? '2px solid #00bf63' : '2px solid transparent',
-            borderTop: '1px solid rgba(255,255,255,0.06)',
-            cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'none',
-            fontSize: '14px', letterSpacing: '.05em',
-            color: page === 'ask-me-anything' ? '#00bf63' : 'rgba(255,255,255,0.8)',
-            textAlign: 'left',
-          }}>
-          Ask me anything
+    <nav style={{
+      position: 'fixed', left: 0, right: 0, bottom: 0, height: 64,
+      background: '#1A1918', borderTop: '1px solid rgba(255,255,255,0.08)',
+      display: 'flex', alignItems: 'stretch', zIndex: 100,
+      paddingBottom: 'env(safe-area-inset-bottom)',
+    }}>
+      <a style={tabStyle(page === 'home')} href={hrefFor('home')}>
+        <ICONS.Home /><span>Home</span>
+      </a>
+      <a style={tabStyle(page === 'blog')} href={hrefFor('blog')}>
+        <ICONS.Book /><span>Writing</span>
+      </a>
+      <a style={tabStyle(page === 'ask-me-anything')} href={hrefFor('ask-me-anything')}>
+        <ICONS.MessageCircle /><span>Ask</span>
+      </a>
+      {SOCIALS.map(({ id, label, href, Icon }) => (
+        <a key={id} href={href} target="_blank" rel="noopener" style={{ ...tabStyle(false), textDecoration: 'none' }}>
+          <Icon /><span>{label}</span>
         </a>
-        {/* Diagnostic CTA */}
-        <div style={{ margin: '12px 20px 4px', padding: '14px', border: '1px solid rgba(0,191,99,0.25)', background: 'rgba(0,191,99,0.04)' }}>
-          <div style={{ fontSize: '10px', letterSpacing: '.15em', textTransform: 'uppercase', color: '#00bf63', marginBottom: 8 }}>Free Fulfilment Diagnostic</div>
-          <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', marginBottom: 12 }}>45 questions. Your operating pattern + breakdown.</div>
-          <a href={hrefFor('diagnostic')}
-            style={{ display: 'block', textAlign: 'center', width: '100%', padding: '10px', fontFamily: 'inherit', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', background: 'transparent', border: '1px solid #00bf63', color: '#00bf63', cursor: 'pointer', textDecoration: 'none' }}>
-            Take the diagnostic →
-          </a>
-        </div>
-      </div>
-
-      {/* Bottom tab bar */}
-      <nav style={{
-        position: 'fixed', left: 0, right: 0, bottom: 0, height: 64,
-        background: '#1A1918', borderTop: '1px solid rgba(255,255,255,0.08)',
-        display: 'flex', alignItems: 'stretch', zIndex: 100,
-        paddingBottom: 'env(safe-area-inset-bottom)',
-      }}>
-        <a style={tabStyle(page === 'home')} href={hrefFor('home')}>
-          <ICONS.Home /><span>Home</span>
-        </a>
-        <a style={tabStyle(page === 'blog')} href={hrefFor('blog')}>
-          <ICONS.Book /><span>Writing</span>
-        </a>
-        <button style={tabStyle(isSpecialty || sheetOpen)} onClick={() => setSheetOpen(v => !v)}>
-          <ICONS.Briefcase /><span>Services</span>
-        </button>
-        {SOCIALS.map(({ id, label, href, Icon }) => (
-          <a key={id} href={href} target="_blank" rel="noopener" style={{ ...tabStyle(false), textDecoration: 'none' }}>
-            <Icon /><span>{label}</span>
-          </a>
-        ))}
-        <a style={tabStyle(page === 'diagnostic')} href={hrefFor('diagnostic')}>
-          <ICONS.Clipboard /><span>Diagnostic</span>
-        </a>
-      </nav>
-    </>
+      ))}
+      <a style={tabStyle(page === 'diagnostic')} href={hrefFor('diagnostic')}>
+        <ICONS.Clipboard /><span>Diagnostic</span>
+      </a>
+    </nav>
   );
 }
 
 // ── DESKTOP SIDEBAR ──────────────────────────────────────────────────────────
 function Sidebar({ page, setPage, open, setOpen }) {
-  const [specialtiesOpen, setSpecialtiesOpen] = React.useState(true);
   const [hovered, setHovered] = React.useState(null);
   const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
 
@@ -242,9 +128,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
     return () => window.removeEventListener('resize', fn);
   }, []);
 
-  if (isMobile) return <MobileNav page={page} setPage={setPage} />;
-
-  const isSpecialty = SPECIALTIES.some(s => s.id === page);
+  if (isMobile) return <MobileNav page={page} />;
 
   const ToggleBtn = () => (
     <button onClick={() => setOpen(!open)} title={open ? 'Collapse' : 'Expand'}
@@ -273,21 +157,6 @@ function Sidebar({ page, setPage, open, setOpen }) {
       }}>
       <Icon />
     </a>
-  );
-
-  // Collapsed-rail icon as a button (toggles, no navigation)
-  const iconBtn = (id, Icon, onClick, active, title) => (
-    <button key={id} title={title} onClick={onClick}
-      onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
-      style={{
-        width: SB.WC, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: active ? 'rgba(255,255,255,0.1)' : hovered === id ? 'rgba(255,255,255,0.05)' : 'transparent',
-        border: 'none', cursor: 'pointer',
-        color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
-        transition: 'background .12s, color .12s',
-      }}>
-      <Icon />
-    </button>
   );
 
   const iconLink = ({ id, label, href, Icon }) => (
@@ -327,36 +196,6 @@ function Sidebar({ page, setPage, open, setOpen }) {
     </a>
   );
 
-  // Expanded nav row as a button (toggles, no navigation)
-  const navBtn = (id, label, Icon, active, onClick, extra) => (
-    <button key={id} onClick={onClick}
-      onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
-      style={{ ...navItemStyle(id, active), border: 'none' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <span style={{ display: 'flex', flexShrink: 0 }}><Icon /></span>
-        <span>{label}</span>
-      </div>
-      {extra}
-    </button>
-  );
-
-  const subLink = (id, label, active, href) => (
-    <a key={id} href={href}
-      onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
-      style={{
-        display: 'flex', alignItems: 'center',
-        width: '100%', padding: '7px 18px 7px 50px', textDecoration: 'none',
-        background: active ? 'rgba(255,255,255,0.06)' : hovered === id ? 'rgba(255,255,255,0.03)' : 'transparent',
-        borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
-        cursor: 'pointer', fontFamily: 'inherit',
-        fontSize: '12px', letterSpacing: '.07em', textTransform: 'uppercase',
-        color: active ? SB.accent : hovered === id ? 'rgba(255,255,255,0.75)' : 'rgba(255,255,255,0.55)',
-        transition: 'background .12s, color .12s',
-      }}>
-      {label}
-    </a>
-  );
-
   const sectionLabel = (text) => (
     <div style={{ fontSize: '10px', letterSpacing: '.18em', textTransform: 'uppercase', color: SB.muted, padding: '18px 18px 6px' }}>
       {text}
@@ -372,7 +211,6 @@ function Sidebar({ page, setPage, open, setOpen }) {
       {iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home')}
       {iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing')}
       {iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything')}
-      {iconBtn('spec', ICONS.Briefcase, () => { setOpen(true); setSpecialtiesOpen(true); }, isSpecialty, 'Specialties')}
       {iconNav('diag', ICONS.Clipboard, hrefFor('diagnostic'), page === 'diagnostic', 'Free Diagnostic')}
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '4px 12px' }} />
       {SOCIALS.map(s => iconLink(s))}
@@ -394,18 +232,12 @@ function Sidebar({ page, setPage, open, setOpen }) {
           </div>
         </div>
 
-        {/* Home */}
+        {/* Navigation */}
         <div style={{ padding: '10px 0 0' }}>
           {navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home'))}
           {navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog'))}
           {navLink('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', hrefFor('ask-me-anything'))}
         </div>
-
-        {/* Specialties */}
-        {navBtn('spec', 'Specialties', ICONS.Briefcase, isSpecialty, () => setSpecialtiesOpen(v => !v), <ICONS.ChevDown isOpen={specialtiesOpen} />)}
-        {specialtiesOpen && (
-          <div>{SPECIALTIES.map(s => subLink(s.id, s.label, page === s.id, hrefFor(s.id)))}</div>
-        )}
 
         {/* Find me */}
         {sectionLabel('Find me')}
