@@ -1,3 +1,28 @@
+# 301 redirects for retired pages (replaces the old meta-refresh stubs)
+[[redirects]]
+  from = "/schedule"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/schedule/*"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/faqs"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/faqs/*"
+  to = "/"
+  status = 301
+  force = true
+
 # Cache static assets for 1 year (immutable)
 [[headers]]
   for = "/*.js"
