@@ -41,11 +41,11 @@
 <style>@font-face { font-family: 'Libre Franklin'; src: /* self-hosted font placeholder */; font-weight: 400; font-style: normal; font-display: swap; }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
-body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
-::selection { background: #282726; color: #F4F2F0; }
+body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+::selection { background: #282726; color: #FFFFFF; }
 #page-wrap { display: flex; height: 100vh; overflow: hidden; }
 #sidebar-mount { position: relative; flex-shrink: 0; }
-#content-area { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; background: #F4F2F0; color: #282726; }
+#content-area { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; background: #FFFFFF; color: #282726; }
 #content-area::-webkit-scrollbar { width: 4px; }
 #content-area::-webkit-scrollbar-thumb { background: rgba(40,39,38,0.15); }
 .article-wrap { max-width: 680px; margin: 0 auto; padding: 4rem 2rem 7rem; }
@@ -72,7 +72,7 @@ body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkM
 .article-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(40,39,38,0.12); }
 .article-footer-label { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: #999; margin-bottom: 1rem; }
 .article-footer p { font-size: 14px; color: #666; margin-bottom: 1rem; line-height: 1.7; }
-.cta-btn { display: inline-block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; background: #282726; color: #F4F2F0; padding: .65rem 1.3rem; text-decoration: none; transition: background .15s; }
+.cta-btn { display: inline-block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; background: #282726; color: #FFFFFF; padding: .65rem 1.3rem; text-decoration: none; transition: background .15s; }
 .cta-btn:hover { background: #1a7f37; color: #fff; }
 .back-link { display: inline-block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #999; text-decoration: none; margin-top: 1.4rem; transition: color .15s; }
 .back-link:hover { color: #282726; }
@@ -81,7 +81,7 @@ body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkM
 <!-- seo-enhancements -->
 <link rel="preconnect" href="https://unpkg.com" crossorigin>
 <link rel="preconnect" href="https://www.googletagmanager.com">
-<meta name="theme-color" content="#F5F5F4">
+<meta name="theme-color" content="#F5F5F5">
 <meta name="author" content="Aggelos Mouzakitis">
 <link rel="alternate" hreflang="en" href="https://aggelosmouzakitis.com/blog/the-high-cost-of-endless-pondering/">
 <link rel="alternate" hreflang="x-default" href="https://aggelosmouzakitis.com/blog/the-high-cost-of-endless-pondering/">
@@ -197,7 +197,7 @@ body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkM
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 
-<script src="../../sidebar.js?v=3"></script>
+<script src="../../sidebar.js?v=4"></script>
 <script>
 const URL_MAP = {
   'home': '/',

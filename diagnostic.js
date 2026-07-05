@@ -436,7 +436,7 @@ function DiagnosticPage() {
       fontSize: '11px',
       letterSpacing: '.12em',
       textTransform: 'uppercase',
-      color: '#F4F2F0',
+      color: '#FFFFFF',
       background: '#282726',
       border: '1px solid #282726',
       padding: '.8rem 1.2rem',

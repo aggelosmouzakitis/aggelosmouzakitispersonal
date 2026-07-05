@@ -1,6 +1,6 @@
 // content-pages.jsx — Home + all specialty pages
 
-// Shared styles — light theme #F4F2F0 bg, #282726 text
+// Shared styles — light theme #FFFFFF bg, #282726 text
 const C = {
   text: '#282726',
   muted: '#666',
@@ -21,7 +21,7 @@ const leadStyle = { marginBottom: '1.4rem', lineHeight: 1.6, fontSize: '23px', f
 const sepStyle = { border: 'none', borderTop: `1px solid ${C.sepBorder}`, margin: '2.5rem 0' };
 const ctaBtn = {
   fontFamily: 'inherit', fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase',
-  color: '#F4F2F0', background: '#282726', border: '1px solid #282726',
+  color: '#FFFFFF', background: '#282726', border: '1px solid #282726',
   textDecoration: 'none', padding: '.8rem 1.5rem', display: 'inline-block',
   cursor: 'pointer', transition: 'background .15s, color .15s',
 };

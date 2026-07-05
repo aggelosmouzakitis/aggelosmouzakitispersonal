@@ -1,7 +1,7 @@
 // sidebar.jsx — desktop sidebar + mobile bottom nav
 
 const SB = {
-  bg: '#F5F5F4',
+  bg: '#F5F5F5',
   border: 'rgba(40,39,38,0.1)',
   muted: '#888',
   text: 'rgba(40,39,38,0.65)',
@@ -92,7 +92,7 @@ function MobileNav({ page }) {
   return (
     <nav style={{
       position: 'fixed', left: 0, right: 0, bottom: 0, height: 64,
-      background: '#F5F5F4', borderTop: '1px solid rgba(40,39,38,0.1)',
+      background: '#F5F5F5', borderTop: '1px solid rgba(40,39,38,0.1)',
       display: 'flex', alignItems: 'stretch', zIndex: 100,
       paddingBottom: 'env(safe-area-inset-bottom)',
     }}>

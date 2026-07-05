@@ -1,6 +1,6 @@
 // content-pages.jsx — Home + all specialty pages
 
-// Shared styles — light theme #F4F2F0 bg, #282726 text
+// Shared styles — light theme #FFFFFF bg, #282726 text
 const C = {
   text: '#282726',
   muted: '#666',
@@ -71,7 +71,7 @@ const ctaBtn = {
   fontSize: '12px',
   letterSpacing: '.1em',
   textTransform: 'uppercase',
-  color: '#F4F2F0',
+  color: '#FFFFFF',
   background: '#282726',
   border: '1px solid #282726',
   textDecoration: 'none',

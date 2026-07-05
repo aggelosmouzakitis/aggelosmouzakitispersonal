@@ -4,8 +4,8 @@
   "description": "Licensed therapist and high-performance coach for founders, executives, and senior tech operators.",
   "start_url": "/",
   "display": "minimal-ui",
-  "background_color": "#F4F2F0",
-  "theme_color": "#F5F5F4",
+  "background_color": "#FFFFFF",
+  "theme_color": "#F5F5F5",
   "lang": "en",
   "icons": [
     {
