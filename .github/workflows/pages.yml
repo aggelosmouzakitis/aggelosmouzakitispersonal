@@ -1,8 +1,14 @@
 name: Deploy staging preview to GitHub Pages
 
-# Manual staging deploy of the current branch to GitHub Pages.
+# Staging deploy of this branch to GitHub Pages.
 # Excludes /blog/ per request — everything else ships as-is.
+# Scoped push trigger (not workflow_dispatch) since workflow_dispatch only
+# works for workflow files already present on the repo's default branch.
 on:
+  push:
+    branches: [claude/site-metadata-schema-rewrite-epm1bo]
+    paths:
+      - '.github/workflows/pages.yml'
   workflow_dispatch: {}
 
 permissions:
