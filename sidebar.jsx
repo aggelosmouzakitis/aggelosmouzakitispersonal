@@ -1,12 +1,12 @@
 // sidebar.jsx — desktop sidebar + mobile bottom nav
 
 const SB = {
-  bg: '#1A1918',
-  border: 'rgba(255,255,255,0.08)',
+  bg: '#F5F5F4',
+  border: 'rgba(40,39,38,0.1)',
   muted: '#888',
-  text: 'rgba(255,255,255,0.6)',
-  active: '#ffffff',
-  accent: '#00bf63',
+  text: 'rgba(40,39,38,0.65)',
+  active: '#282726',
+  accent: '#1a7f37',
   W: 300,
   WC: 68,
 };
@@ -84,7 +84,7 @@ function MobileNav({ page }) {
     flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center',
     justifyContent: 'center', gap: 4, padding: '8px 4px',
     background: 'none', border: 'none', cursor: 'pointer',
-    color: active ? '#00bf63' : 'rgba(255,255,255,0.5)',
+    color: active ? '#1a7f37' : 'rgba(40,39,38,0.55)',
     fontFamily: 'inherit', fontSize: '9px', letterSpacing: '.1em',
     textTransform: 'uppercase', transition: 'color .15s', textDecoration: 'none',
   });
@@ -92,7 +92,7 @@ function MobileNav({ page }) {
   return (
     <nav style={{
       position: 'fixed', left: 0, right: 0, bottom: 0, height: 64,
-      background: '#1A1918', borderTop: '1px solid rgba(255,255,255,0.08)',
+      background: '#F5F5F4', borderTop: '1px solid rgba(40,39,38,0.1)',
       display: 'flex', alignItems: 'stretch', zIndex: 100,
       paddingBottom: 'env(safe-area-inset-bottom)',
     }}>
@@ -138,7 +138,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
         background: '#ffffff', border: '1px solid rgba(200,200,200,0.3)',
         color: '#1A1918', cursor: 'pointer', zIndex: 20,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.55)', padding: 0,
+        boxShadow: '0 2px 8px rgba(0,0,0,0.18)', padding: 0,
       }}>
       {open ? <ICONS.ChevLeft /> : <ICONS.ChevRight />}
     </button>
@@ -150,9 +150,9 @@ function Sidebar({ page, setPage, open, setOpen }) {
       onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
       style={{
         width: SB.WC, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: active ? 'rgba(255,255,255,0.1)' : hovered === id ? 'rgba(255,255,255,0.05)' : 'transparent',
+        background: active ? 'rgba(40,39,38,0.08)' : hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
         textDecoration: 'none',
-        color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+        color: active ? SB.active : hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
         transition: 'background .12s, color .12s',
       }}>
       <Icon />
@@ -164,8 +164,8 @@ function Sidebar({ page, setPage, open, setOpen }) {
       onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
       style={{
         width: SB.WC, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: hovered === id ? 'rgba(255,255,255,0.05)' : 'transparent',
-        color: hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+        background: hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
+        color: hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
         textDecoration: 'none', transition: 'background .12s, color .12s',
       }}>
       <Icon />
@@ -175,11 +175,11 @@ function Sidebar({ page, setPage, open, setOpen }) {
   const navItemStyle = (id, active) => ({
     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
     width: '100%', padding: '9px 18px',
-    background: active ? 'rgba(255,255,255,0.08)' : hovered === id ? 'rgba(255,255,255,0.04)' : 'transparent',
+    background: active ? 'rgba(40,39,38,0.08)' : hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
     borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
     cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'none',
     fontSize: '12.5px', letterSpacing: '.1em', textTransform: 'uppercase',
-    color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+    color: active ? SB.active : hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
     transition: 'background .12s, color .12s',
   });
 
@@ -247,8 +247,8 @@ function Sidebar({ page, setPage, open, setOpen }) {
             style={{
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
               padding: '8px 18px', textDecoration: 'none',
-              background: hovered === id ? 'rgba(255,255,255,0.04)' : 'transparent',
-              color: hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+              background: hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
+              color: hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
               fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase',
               transition: 'color .12s, background .12s',
             }}>
@@ -264,7 +264,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
 
         {/* Diagnostic CTA */}
         <div style={{ padding: '0 16px 22px', flexShrink: 0 }}>
-          <div style={{ border: `1px solid rgba(0,191,99,0.25)`, padding: '18px', background: 'rgba(0,191,99,0.04)' }}>
+          <div style={{ border: `1px solid rgba(26,127,55,0.25)`, padding: '18px', background: 'rgba(26,127,55,0.04)' }}>
             <div style={{ fontSize: '10px', letterSpacing: '.16em', textTransform: 'uppercase', color: SB.accent, marginBottom: 8 }}>Free Fulfilment Diagnostic</div>
             <div style={{ fontSize: '12px', color: SB.muted, lineHeight: 1.75, marginBottom: 14 }}>45 questions. 8 minutes.<br />Your operating pattern + breakdown.</div>
             <a href={hrefFor('diagnostic')}

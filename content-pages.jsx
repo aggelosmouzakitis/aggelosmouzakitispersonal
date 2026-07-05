@@ -4,7 +4,7 @@
 const C = {
   text: '#282726',
   muted: '#666',
-  accent: '#00bf63',
+  accent: '#1a7f37',
   border: 'rgba(40,39,38,0.12)',
   sepBorder: 'rgba(40,39,38,0.2)',
 };
@@ -65,7 +65,7 @@ function FaqItem({ q, children }) {
 }
 
 function Testimonial({ quote, who }) {
-  return React.createElement('blockquote', { style: { margin: '0 0 1.6rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(0,191,99,0.35)' } },
+  return React.createElement('blockquote', { style: { margin: '0 0 1.6rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(26,127,55,0.35)' } },
     React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.8, color: '#282726', marginBottom: '.5rem' } }, '\u201C' + quote + '\u201D'),
     React.createElement('footer', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, who)
   );

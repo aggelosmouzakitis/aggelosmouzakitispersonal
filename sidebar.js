@@ -1,12 +1,12 @@
 // sidebar.jsx — desktop sidebar + mobile bottom nav
 
 const SB = {
-  bg: '#1A1918',
-  border: 'rgba(255,255,255,0.08)',
+  bg: '#F5F5F4',
+  border: 'rgba(40,39,38,0.1)',
   muted: '#888',
-  text: 'rgba(255,255,255,0.6)',
-  active: '#ffffff',
-  accent: '#00bf63',
+  text: 'rgba(40,39,38,0.65)',
+  active: '#282726',
+  accent: '#1a7f37',
   W: 300,
   WC: 68
 };
@@ -173,7 +173,7 @@ function MobileNav({
     background: 'none',
     border: 'none',
     cursor: 'pointer',
-    color: active ? '#00bf63' : 'rgba(255,255,255,0.5)',
+    color: active ? '#1a7f37' : 'rgba(40,39,38,0.55)',
     fontFamily: 'inherit',
     fontSize: '9px',
     letterSpacing: '.1em',
@@ -188,8 +188,8 @@ function MobileNav({
       right: 0,
       bottom: 0,
       height: 64,
-      background: '#1A1918',
-      borderTop: '1px solid rgba(255,255,255,0.08)',
+      background: '#F5F5F4',
+      borderTop: '1px solid rgba(40,39,38,0.1)',
       display: 'flex',
       alignItems: 'stretch',
       zIndex: 100,
@@ -259,7 +259,7 @@ function Sidebar({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      boxShadow: '0 2px 8px rgba(0,0,0,0.55)',
+      boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
       padding: 0
     }
   }, open ? /*#__PURE__*/React.createElement(ICONS.ChevLeft, null) : /*#__PURE__*/React.createElement(ICONS.ChevRight, null));
@@ -277,9 +277,9 @@ function Sidebar({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: active ? 'rgba(255,255,255,0.1)' : hovered === id ? 'rgba(255,255,255,0.05)' : 'transparent',
+      background: active ? 'rgba(40,39,38,0.08)' : hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
       textDecoration: 'none',
-      color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+      color: active ? SB.active : hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
       transition: 'background .12s, color .12s'
     }
   }, /*#__PURE__*/React.createElement(Icon, null));
@@ -302,8 +302,8 @@ function Sidebar({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: hovered === id ? 'rgba(255,255,255,0.05)' : 'transparent',
-      color: hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+      background: hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
+      color: hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
       textDecoration: 'none',
       transition: 'background .12s, color .12s'
     }
@@ -314,7 +314,7 @@ function Sidebar({
     justifyContent: 'space-between',
     width: '100%',
     padding: '9px 18px',
-    background: active ? 'rgba(255,255,255,0.08)' : hovered === id ? 'rgba(255,255,255,0.04)' : 'transparent',
+    background: active ? 'rgba(40,39,38,0.08)' : hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
     borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
     cursor: 'pointer',
     fontFamily: 'inherit',
@@ -322,7 +322,7 @@ function Sidebar({
     fontSize: '12.5px',
     letterSpacing: '.1em',
     textTransform: 'uppercase',
-    color: active ? SB.active : hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+    color: active ? SB.active : hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
     transition: 'background .12s, color .12s'
   });
 
@@ -501,8 +501,8 @@ function Sidebar({
       justifyContent: 'space-between',
       padding: '8px 18px',
       textDecoration: 'none',
-      background: hovered === id ? 'rgba(255,255,255,0.04)' : 'transparent',
-      color: hovered === id ? 'rgba(255,255,255,0.85)' : SB.text,
+      background: hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
+      color: hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
       fontSize: '12px',
       letterSpacing: '.1em',
       textTransform: 'uppercase',
@@ -534,9 +534,9 @@ function Sidebar({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      border: `1px solid rgba(0,191,99,0.25)`,
+      border: `1px solid rgba(26,127,55,0.25)`,
       padding: '18px',
-      background: 'rgba(0,191,99,0.04)'
+      background: 'rgba(26,127,55,0.04)'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {

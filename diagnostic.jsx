@@ -133,7 +133,7 @@ function getSectionLabel(score) {
 function getLevelVisual(score) {
   if (score === null) return { color: '#bbb', pct: 0 };
   const pct = Math.max(0, Math.min(100, ((score - 1) / 4) * 100));
-  if (score <= 2.5) return { color: '#00bf63', pct };
+  if (score <= 2.5) return { color: '#1a7f37', pct };
   if (score <= 3.2) return { color: '#d9a200', pct };
   return { color: '#c0392b', pct };
 }
@@ -411,10 +411,10 @@ function DiagnosticPage() {
     optionBtn: (selected) => ({
       width: '100%',
       textAlign: 'left',
-      border: selected ? '1px solid #00bf63' : '1px solid rgba(40,39,38,.15)',
+      border: selected ? '1px solid #1a7f37' : '1px solid rgba(40,39,38,.15)',
       padding: '1rem',
       borderRadius: '8px',
-      background: selected ? '#00bf63' : 'transparent',
+      background: selected ? '#1a7f37' : 'transparent',
       color: selected ? '#fff' : '#282726',
       fontFamily: 'inherit',
       fontSize: '14px',
@@ -423,7 +423,7 @@ function DiagnosticPage() {
       marginBottom: '.75rem'
     }),
     progressLine: { height: '1px', background: 'rgba(40,39,38,.12)', position: 'relative', marginTop: '.8rem' },
-    progressFill: (pct) => ({ height: '1px', background: '#00bf63', width: pct + '%', transition: 'width .2s ease' }),
+    progressFill: (pct) => ({ height: '1px', background: '#1a7f37', width: pct + '%', transition: 'width .2s ease' }),
     sectionRow: {
       border: '1px solid rgba(40,39,38,.15)',
       padding: '1rem',
@@ -567,13 +567,13 @@ function DiagnosticPage() {
     <div style={C.page} ref={mainRef}>
       <p style={C.eyebrow}>Your result</p>
       <h1 style={{ ...C.h1, marginBottom: '.5rem' }}>{results.grade}</h1>
-      <p style={C.p}>Your score: <span style={{ color: '#00bf63' }}>{fmt(results.overall)}</span> / 5.00</p>
+      <p style={C.p}>Your score: <span style={{ color: '#1a7f37' }}>{fmt(results.overall)}</span> / 5.00</p>
       {results.topDimension && (
         <p style={C.p}>Your highest-load area right now is <span style={{ color: '#282726', borderBottom: '1px solid rgba(40,39,38,.3)' }}>{results.topDimension.title}</span>.</p>
       )}
       <p style={C.p}>{results.desc}</p>
       {results.nextStep && (
-        <div style={{ borderLeft: '2px solid #00bf63', padding: '2px 0 2px 14px', margin: '1.6rem 0' }}>
+        <div style={{ borderLeft: '2px solid #1a7f37', padding: '2px 0 2px 14px', margin: '1.6rem 0' }}>
           <p style={{ ...C.eyebrow, marginBottom: '.5rem' }}>What to do with this</p>
           <p style={{ ...C.p, marginBottom: 0 }}>{results.nextStep}</p>
         </div>
@@ -602,7 +602,7 @@ function DiagnosticPage() {
         })}
       </div>
 
-      <div style={{ border: '1px solid rgba(0,191,99,0.3)', background: 'rgba(0,191,99,0.04)', padding: '1.4rem', marginTop: '2.5rem' }}>
+      <div style={{ border: '1px solid rgba(26,127,55,0.3)', background: 'rgba(26,127,55,0.04)', padding: '1.4rem', marginTop: '2.5rem' }}>
         <p style={{ ...C.eyebrow, marginBottom: '.6rem' }}>Where this goes next</p>
         <p style={{ ...C.p, marginBottom: '1.2rem' }}>A diagnostic shows the pattern. Changing it is the actual work. If any of this landed, the first session is free, 60 minutes, and no strings — we use it to figure out where you are and whether working together makes sense.</p>
         <a

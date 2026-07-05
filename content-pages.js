@@ -4,7 +4,7 @@
 const C = {
   text: '#282726',
   muted: '#666',
-  accent: '#00bf63',
+  accent: '#1a7f37',
   border: 'rgba(40,39,38,0.12)',
   sepBorder: 'rgba(40,39,38,0.2)'
 };
@@ -167,7 +167,7 @@ function Testimonial({
     style: {
       margin: '0 0 1.6rem',
       padding: '0 0 0 1rem',
-      borderLeft: '2px solid rgba(0,191,99,0.35)'
+      borderLeft: '2px solid rgba(26,127,55,0.35)'
     }
   }, React.createElement('p', {
     style: {
