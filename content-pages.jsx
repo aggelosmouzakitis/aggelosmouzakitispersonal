@@ -1,10 +1,10 @@
 // content-pages.jsx — Home + all specialty pages
 
-// Shared styles — light theme #F4F2F0 bg, #282726 text
+// Shared styles — white bg, #282726 text, #10bb82 accent
 const C = {
   text: '#282726',
   muted: '#666',
-  accent: '#00bf63',
+  accent: '#10bb82',
   border: 'rgba(40,39,38,0.12)',
   sepBorder: 'rgba(40,39,38,0.2)',
 };
@@ -20,7 +20,7 @@ const pStyle = { marginBottom: '1.4rem', lineHeight: 1.85, fontSize: '16px', col
 const sepStyle = { border: 'none', borderTop: `1px solid ${C.sepBorder}`, margin: '2.5rem 0' };
 const ctaBtn = {
   fontFamily: 'inherit', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase',
-  color: '#F4F2F0', background: '#282726', border: '1px solid #282726',
+  color: '#FFFFFF', background: '#282726', border: '1px solid #282726',
   textDecoration: 'none', padding: '.7rem 1.4rem', display: 'inline-block',
   cursor: 'pointer', transition: 'background .15s, color .15s',
 };
@@ -78,8 +78,35 @@ function CtaLink({ href, children }) {
   );
 }
 
+// Shared site footer — footer menu + italic signature, used on every page.
+const FOOTER_LINKS = [
+  { label: 'Home', href: '/' },
+  { label: 'Writing', href: '/blog/' },
+  { label: 'Ask me anything', href: '/ask-me-anything/' },
+  { label: 'For founders', href: '/founders/' },
+  { label: 'For solopreneurs', href: '/solopreneurs/' },
+  { label: 'How it works', href: '/how-it-works/' },
+];
+function SiteFooter() {
+  return React.createElement('footer', {
+    style: { marginTop: '4rem', paddingTop: '2.5rem', borderTop: `1px solid ${C.border}`, textAlign: 'center' }
+  },
+    React.createElement('nav', {
+      style: { display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1.4rem', marginBottom: '1.6rem' }
+    },
+      FOOTER_LINKS.map(l => React.createElement('a', {
+        key: l.href, href: l.href,
+        style: { fontSize: '11px', letterSpacing: '.08em', textTransform: 'uppercase', color: C.muted, textDecoration: 'none' }
+      }, l.label))
+    ),
+    React.createElement('p', {
+      style: { fontFamily: 'Georgia, "Times New Roman", serif', fontStyle: 'italic', fontSize: '19px', color: C.text, margin: 0 }
+    }, 'Aggelos Mouzakitis')
+  );
+}
+
 function Testimonial({ quote, who }) {
-  return React.createElement('blockquote', { style: { margin: '0 0 1.6rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(0,191,99,0.35)' } },
+  return React.createElement('blockquote', { style: { margin: '0 0 1.6rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(16,187,130,0.35)' } },
     React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.8, color: '#282726', marginBottom: '.5rem' } }, '\u201C' + quote + '\u201D'),
     React.createElement('footer', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, who)
   );
@@ -92,16 +119,37 @@ function Testimonials({ items, mob }) {
   );
 }
 
+// ─── HERO ────────────────────────────────────────────────────────────────────
+// Structure replicated from the reference site's above-the-fold segment:
+// eyebrow, "Hey, I'm ___." headline, intro copy, CTA — photo on the right.
+function Hero({ mob }) {
+  const wrap = mob
+    ? { display: 'block', marginBottom: '3rem' }
+    : { display: 'grid', gridTemplateColumns: '1.3fr 0.7fr', gap: '3rem', alignItems: 'center', marginBottom: '4rem' };
+  return React.createElement('div', { style: wrap },
+    React.createElement('div', null,
+      React.createElement('p', { style: { fontSize: '11px', letterSpacing: '.15em', textTransform: 'uppercase', color: C.muted, marginBottom: '1.2rem' } }, 'Let me introduce myself'),
+      React.createElement('h1', { style: { ...h1Style, marginBottom: '1.2rem', fontSize: mob ? '26px' : '34px' } }, "Hey, I'm Aggelos."),
+      React.createElement(TBD),
+      React.createElement(CtaLink, { href: '#book' }, 'Book a 15-min fit call')
+    ),
+    React.createElement('div', { style: { maxWidth: mob ? 220 : 320, margin: mob ? '2rem auto 0' : '0' } },
+      React.createElement('img', {
+        src: 'https://aggelosmouzakitis.com/img/aggelos.jpg',
+        alt: 'Aggelos Mouzakitis',
+        style: { width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }
+      })
+    )
+  );
+}
+
 // ─── HOME PAGE ───────────────────────────────────────────────────────────────
 // Skeleton only — headings + placeholders. Copy TBD.
 function HomePage({ setPage }) {
   const mob = useIsMobile();
   const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
   return React.createElement('main', { style: mobPage },
-    React.createElement(Section, { label: 'Hero', mob },
-      React.createElement(TBD),
-      React.createElement(CtaLink, { href: '#book' }, 'Book a 15-min fit call')
-    ),
+    React.createElement(Hero, { mob }),
 
     React.createElement(Section, { label: 'The frame', mob },
       React.createElement(TBD)
@@ -134,7 +182,7 @@ function HomePage({ setPage }) {
       )
     ),
 
-    React.createElement('footer', { style: footerStyle }, '\u00A9 Aggelos Mouzakitis')
+    React.createElement(SiteFooter, null)
   );
 }
 
@@ -176,7 +224,7 @@ function ForkSkeletonPage({ title }) {
       React.createElement(TBD),
       React.createElement(CtaLink, { href: '#book' }, 'Book a 15-min fit call')
     ),
-    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+    React.createElement(SiteFooter, null)
   );
 }
 function FoundersPage() {
@@ -216,7 +264,7 @@ function HowItWorksPage() {
       React.createElement(TBD),
       React.createElement(CtaLink, { href: '#book' }, 'Book a 15-min fit call')
     ),
-    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+    React.createElement(SiteFooter, null)
   );
 }
 
@@ -235,7 +283,7 @@ function DiagnosticTeaserPage() {
       React.createElement(TBD),
       React.createElement(CtaLink, { href: '#' }, 'Start assessment →')
     ),
-    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+    React.createElement(SiteFooter, null)
   );
 }
 
@@ -315,7 +363,7 @@ function ExecTherapyPage() {
         React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
-    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+    React.createElement(SiteFooter, null)
   );
 }
 
@@ -383,7 +431,7 @@ function FoundersTherapyPage() {
         React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
-    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+    React.createElement(SiteFooter, null)
   );
 }
 
@@ -458,7 +506,7 @@ function ImposterPage() {
         React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
-    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+    React.createElement(SiteFooter, null)
   );
 }
 
@@ -529,7 +577,7 @@ function BurnoutPage() {
         React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
-    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+    React.createElement(SiteFooter, null)
   );
 }
 
@@ -605,7 +653,7 @@ function CareerTransitionPage() {
         React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
-    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+    React.createElement(SiteFooter, null)
   );
 }
 

@@ -6,7 +6,7 @@ const SB = {
   muted: '#888',
   text: 'rgba(255,255,255,0.6)',
   active: '#ffffff',
-  accent: '#00bf63',
+  accent: '#10bb82',
   W: 300,
   WC: 68,
 };
@@ -109,7 +109,7 @@ function MobileNav({ page }) {
     flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center',
     justifyContent: 'center', gap: 4, padding: '8px 4px',
     background: 'none', border: 'none', cursor: 'pointer',
-    color: active ? '#00bf63' : 'rgba(255,255,255,0.5)',
+    color: active ? '#10bb82' : 'rgba(255,255,255,0.5)',
     fontFamily: 'inherit', fontSize: '9px', letterSpacing: '.1em',
     textTransform: 'uppercase', transition: 'color .15s', textDecoration: 'none',
   });
@@ -270,6 +270,8 @@ function Sidebar({ page, setPage, open, setOpen }) {
           {navLink('how-it-works', 'How it works', ICONS.List, page === 'how-it-works', hrefFor('how-it-works'))}
         </div>
 
+        <div style={{ height: 1, background: SB.border, margin: '10px 18px 0' }} />
+
         {/* Find me */}
         {sectionLabel('Find me')}
         {SOCIALS.map(({ id, label, href, Icon }) => (
@@ -295,7 +297,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
 
         {/* Diagnostic CTA */}
         <div style={{ padding: '0 16px 22px', flexShrink: 0 }}>
-          <div style={{ border: `1px solid rgba(0,191,99,0.25)`, padding: '18px', background: 'rgba(0,191,99,0.04)' }}>
+          <div style={{ border: `1px solid rgba(16,187,130,0.25)`, padding: '18px', background: 'rgba(16,187,130,0.04)' }}>
             <div style={{ fontSize: '10px', letterSpacing: '.16em', textTransform: 'uppercase', color: SB.accent, marginBottom: 8 }}>Free Fulfilment Diagnostic</div>
             <div style={{ fontSize: '12px', color: SB.muted, lineHeight: 1.75, marginBottom: 14 }}>45 questions. 8 minutes.<br />Your operating pattern + breakdown.</div>
             <a href={hrefFor('diagnostic')}

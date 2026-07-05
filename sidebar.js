@@ -6,7 +6,7 @@ const SB = {
   muted: '#888',
   text: 'rgba(255,255,255,0.6)',
   active: '#ffffff',
-  accent: '#00bf63',
+  accent: '#10bb82',
   W: 300,
   WC: 68
 };
@@ -252,7 +252,7 @@ function MobileNav({
     background: 'none',
     border: 'none',
     cursor: 'pointer',
-    color: active ? '#00bf63' : 'rgba(255,255,255,0.5)',
+    color: active ? '#10bb82' : 'rgba(255,255,255,0.5)',
     fontFamily: 'inherit',
     fontSize: '9px',
     letterSpacing: '.1em',
@@ -562,7 +562,13 @@ function Sidebar({
     style: {
       padding: '10px 0 0'
     }
-  }, navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home')), navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog')), navLink('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', hrefFor('ask-me-anything')), navLink('founders', 'For founders', ICONS.Users, page === 'founders', hrefFor('founders')), navLink('solopreneurs', 'For solopreneurs', ICONS.User, page === 'solopreneurs', hrefFor('solopreneurs')), navLink('how-it-works', 'How it works', ICONS.List, page === 'how-it-works', hrefFor('how-it-works'))), sectionLabel('Find me'), SOCIALS.map(({
+  }, navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home')), navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog')), navLink('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', hrefFor('ask-me-anything')), navLink('founders', 'For founders', ICONS.Users, page === 'founders', hrefFor('founders')), navLink('solopreneurs', 'For solopreneurs', ICONS.User, page === 'solopreneurs', hrefFor('solopreneurs')), navLink('how-it-works', 'How it works', ICONS.List, page === 'how-it-works', hrefFor('how-it-works'))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 1,
+      background: SB.border,
+      margin: '10px 18px 0'
+    }
+  }), sectionLabel('Find me'), SOCIALS.map(({
     id,
     label,
     href,
@@ -613,9 +619,9 @@ function Sidebar({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      border: `1px solid rgba(0,191,99,0.25)`,
+      border: `1px solid rgba(16,187,130,0.25)`,
       padding: '18px',
-      background: 'rgba(0,191,99,0.04)'
+      background: 'rgba(16,187,130,0.04)'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {

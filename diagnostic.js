@@ -130,7 +130,7 @@ function getLevelVisual(score) {
   };
   const pct = Math.max(0, Math.min(100, (score - 1) / 4 * 100));
   if (score <= 2.5) return {
-    color: '#00bf63',
+    color: '#10bb82',
     pct
   };
   if (score <= 3.2) return {
@@ -451,10 +451,10 @@ function DiagnosticPage() {
     optionBtn: selected => ({
       width: '100%',
       textAlign: 'left',
-      border: selected ? '1px solid #00bf63' : '1px solid rgba(40,39,38,.15)',
+      border: selected ? '1px solid #10bb82' : '1px solid rgba(40,39,38,.15)',
       padding: '1rem',
       borderRadius: '8px',
-      background: selected ? '#00bf63' : 'transparent',
+      background: selected ? '#10bb82' : 'transparent',
       color: selected ? '#fff' : '#282726',
       fontFamily: 'inherit',
       fontSize: '14px',
@@ -470,7 +470,7 @@ function DiagnosticPage() {
     },
     progressFill: pct => ({
       height: '1px',
-      background: '#00bf63',
+      background: '#10bb82',
       width: pct + '%',
       transition: 'width .2s ease'
     }),
@@ -681,7 +681,7 @@ function DiagnosticPage() {
     style: C.p
   }, "Your score: ", /*#__PURE__*/React.createElement("span", {
     style: {
-      color: '#00bf63'
+      color: '#10bb82'
     }
   }, fmt(results.overall)), " / 5.00"), results.topDimension && /*#__PURE__*/React.createElement("p", {
     style: C.p
@@ -694,7 +694,7 @@ function DiagnosticPage() {
     style: C.p
   }, results.desc), results.nextStep && /*#__PURE__*/React.createElement("div", {
     style: {
-      borderLeft: '2px solid #00bf63',
+      borderLeft: '2px solid #10bb82',
       padding: '2px 0 2px 14px',
       margin: '1.6rem 0'
     }
@@ -776,8 +776,8 @@ function DiagnosticPage() {
     }, d.interp));
   })), /*#__PURE__*/React.createElement("div", {
     style: {
-      border: '1px solid rgba(0,191,99,0.3)',
-      background: 'rgba(0,191,99,0.04)',
+      border: '1px solid rgba(16,187,130,0.3)',
+      background: 'rgba(16,187,130,0.04)',
       padding: '1.4rem',
       marginTop: '2.5rem'
     }
