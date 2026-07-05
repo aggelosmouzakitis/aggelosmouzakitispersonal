@@ -85,7 +85,7 @@ function MobileNav({ page }) {
     justifyContent: 'center', gap: 4, padding: '8px 4px',
     background: 'none', border: 'none', cursor: 'pointer',
     color: active ? '#1a7f37' : 'rgba(40,39,38,0.55)',
-    fontFamily: 'inherit', fontSize: '9px', letterSpacing: '.1em',
+    fontFamily: 'inherit', fontSize: '10px', letterSpacing: '.06em',
     textTransform: 'uppercase', transition: 'color .15s', textDecoration: 'none',
   });
 
@@ -174,11 +174,11 @@ function Sidebar({ page, setPage, open, setOpen }) {
 
   const navItemStyle = (id, active) => ({
     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-    width: '100%', padding: '9px 18px',
+    width: '100%', padding: '11px 18px',
     background: active ? 'rgba(40,39,38,0.08)' : hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
     borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
     cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'none',
-    fontSize: '12.5px', letterSpacing: '.1em', textTransform: 'uppercase',
+    fontSize: '14px', fontWeight: 500, letterSpacing: '.03em', textTransform: 'uppercase',
     color: active ? SB.active : hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
     transition: 'background .12s, color .12s',
   });
@@ -197,7 +197,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
   );
 
   const sectionLabel = (text) => (
-    <div style={{ fontSize: '10px', letterSpacing: '.18em', textTransform: 'uppercase', color: SB.muted, padding: '18px 18px 6px' }}>
+    <div style={{ fontSize: '11px', letterSpacing: '.14em', textTransform: 'uppercase', color: SB.muted, padding: '18px 18px 6px' }}>
       {text}
     </div>
   );
@@ -227,8 +227,8 @@ function Sidebar({ page, setPage, open, setOpen }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '22px 18px 20px', borderBottom: `1px solid ${SB.border}`, flexShrink: 0 }}>
           <a href={hrefFor('home')} style={{ display: 'flex', flexShrink: 0 }}><img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" width={38} height={38} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, display: 'block' }} /></a>
           <div style={{ overflow: 'hidden', flex: 1 }}>
-            <div style={{ fontSize: '12.5px', letterSpacing: '.1em', textTransform: 'uppercase', color: SB.active, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Aggelos Mouzakitis</div>
-            <div style={{ fontSize: '11px', letterSpacing: '.08em', textTransform: 'uppercase', color: SB.muted }}>Coach & Therapist</div>
+            <div style={{ fontSize: '15px', fontWeight: 700, letterSpacing: '.02em', textTransform: 'uppercase', color: SB.active, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Aggelos Mouzakitis</div>
+            <div style={{ fontSize: '12px', letterSpacing: '.06em', textTransform: 'uppercase', color: SB.muted, marginTop: 2 }}>Coach & Therapist</div>
           </div>
         </div>
 
@@ -246,10 +246,10 @@ function Sidebar({ page, setPage, open, setOpen }) {
             onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
             style={{
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              padding: '8px 18px', textDecoration: 'none',
+              padding: '10px 18px', textDecoration: 'none',
               background: hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
               color: hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
-              fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase',
+              fontSize: '13px', letterSpacing: '.03em', textTransform: 'uppercase',
               transition: 'color .12s, background .12s',
             }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -265,12 +265,12 @@ function Sidebar({ page, setPage, open, setOpen }) {
         {/* Diagnostic CTA */}
         <div style={{ padding: '0 16px 22px', flexShrink: 0 }}>
           <div style={{ border: `1px solid rgba(26,127,55,0.25)`, padding: '18px', background: 'rgba(26,127,55,0.04)' }}>
-            <div style={{ fontSize: '10px', letterSpacing: '.16em', textTransform: 'uppercase', color: SB.accent, marginBottom: 8 }}>Free Fulfilment Diagnostic</div>
-            <div style={{ fontSize: '12px', color: SB.muted, lineHeight: 1.75, marginBottom: 14 }}>45 questions. 8 minutes.<br />Your operating pattern + breakdown.</div>
+            <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: SB.accent, marginBottom: 8 }}>Free Fulfilment Diagnostic</div>
+            <div style={{ fontSize: '13px', color: SB.muted, lineHeight: 1.75, marginBottom: 14 }}>45 questions. 8 minutes.<br />Your operating pattern + breakdown.</div>
             <a href={hrefFor('diagnostic')}
               onMouseEnter={e => { e.currentTarget.style.background = SB.accent; e.currentTarget.style.color = '#fff'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = SB.accent; }}
-              style={{ display: 'block', textAlign: 'center', width: '100%', padding: '10px 0', fontFamily: 'inherit', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', background: 'transparent', border: `1px solid ${SB.accent}`, color: SB.accent, cursor: 'pointer', textDecoration: 'none', transition: 'background .15s, color .15s' }}>
+              style={{ display: 'block', textAlign: 'center', width: '100%', padding: '11px 0', fontFamily: 'inherit', fontSize: '12px', letterSpacing: '.08em', textTransform: 'uppercase', background: 'transparent', border: `1px solid ${SB.accent}`, color: SB.accent, cursor: 'pointer', textDecoration: 'none', transition: 'background .15s, color .15s' }}>
               Start assessment →
             </a>
           </div>

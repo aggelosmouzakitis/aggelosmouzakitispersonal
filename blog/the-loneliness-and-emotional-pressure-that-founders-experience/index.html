@@ -41,7 +41,7 @@
 <style>@font-face { font-family: 'Libre Franklin'; src: /* self-hosted font placeholder */; font-weight: 400; font-style: normal; font-display: swap; }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
-body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 ::selection { background: #282726; color: #F4F2F0; }
 #page-wrap { display: flex; min-height: 100vh; }
 #sidebar-mount { position: relative; flex-shrink: 0; }
@@ -49,18 +49,18 @@ body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkM
 #content-area::-webkit-scrollbar { width: 4px; }
 #content-area::-webkit-scrollbar-thumb { background: rgba(40,39,38,0.15); }
 .article-wrap { max-width: 680px; margin: 0 auto; padding: 4rem 2rem 7rem; }
-.top-back { display: inline-flex; align-items: center; gap: .4rem; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #999; text-decoration: none; margin-bottom: 2rem; transition: color .15s; }
+.top-back { display: inline-flex; align-items: center; gap: .4rem; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #999; text-decoration: none; margin-bottom: 2rem; transition: color .15s; }
 .top-back:hover { color: #282726; }
-.article-eyebrow { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #999; margin-bottom: 1.2rem; }
-.article-title { font-size: 26px; font-weight: 400; line-height: 1.3; color: #282726; letter-spacing: -.02em; margin-bottom: 1rem; }
-.article-desc { font-size: 15px; color: #666; line-height: 1.7; margin-bottom: 1.2rem; }
-.article-meta { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #999; display: flex; align-items: center; gap: .6rem; }
+.article-eyebrow { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #999; margin-bottom: 1.2rem; }
+.article-title { font-size: 30px; font-weight: 400; line-height: 1.3; color: #282726; letter-spacing: -.02em; margin-bottom: 1rem; }
+.article-desc { font-size: 16px; color: #666; line-height: 1.7; margin-bottom: 1.2rem; }
+.article-meta { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #999; display: flex; align-items: center; gap: .6rem; }
 .article-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(40,39,38,0.12); }
-.article-body { font-size: 15px; line-height: 1.85; color: #282726; }
+.article-body { font-size: 17px; line-height: 1.75; color: #282726; }
 .article-body p { margin-bottom: 1.5rem; }
 .article-body p:last-child { margin-bottom: 0; }
-.article-body h2 { font-size: 12px; font-weight: 400; letter-spacing: .15em; text-transform: uppercase; color: #444; margin: 2.5rem 0 1rem; border-bottom: 1px solid rgba(40,39,38,0.15); padding-bottom: .5rem; }
-.article-body h3 { font-size: 15px; font-weight: 400; color: #282726; margin: 2rem 0 .75rem; border-bottom: 1px solid rgba(40,39,38,0.1); padding-bottom: .4rem; }
+.article-body h2 { font-size: 14px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #444; margin: 2.5rem 0 1rem; border-bottom: 1px solid rgba(40,39,38,0.15); padding-bottom: .5rem; }
+.article-body h3 { font-size: 17px; font-weight: 400; color: #282726; margin: 2rem 0 .75rem; border-bottom: 1px solid rgba(40,39,38,0.1); padding-bottom: .4rem; }
 .article-body strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,38,0.3); padding-bottom: 1px; }
 .article-body em { font-style: normal; color: #555; }
 .article-body a { color: #1a7f37; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
@@ -70,13 +70,13 @@ body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkM
 .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.5rem; }
 .article-body li { margin-bottom: .4rem; }
 .article-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(40,39,38,0.12); }
-.article-footer-label { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: #999; margin-bottom: 1rem; }
-.article-footer p { font-size: 13px; color: #666; margin-bottom: 1rem; line-height: 1.7; }
-.cta-btn { display: inline-block; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; background: #282726; color: #F4F2F0; padding: .65rem 1.3rem; text-decoration: none; transition: background .15s; }
+.article-footer-label { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: #999; margin-bottom: 1rem; }
+.article-footer p { font-size: 14px; color: #666; margin-bottom: 1rem; line-height: 1.7; }
+.cta-btn { display: inline-block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; background: #282726; color: #F4F2F0; padding: .65rem 1.3rem; text-decoration: none; transition: background .15s; }
 .cta-btn:hover { background: #1a7f37; color: #fff; }
-.back-link { display: inline-block; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #999; text-decoration: none; margin-top: 1.4rem; transition: color .15s; }
+.back-link { display: inline-block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #999; text-decoration: none; margin-top: 1.4rem; transition: color .15s; }
 .back-link:hover { color: #282726; }
-@media (max-width: 767px) { #page-wrap { display: block; } #sidebar-mount { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; } #content-area { min-height: 100vh; padding-bottom: 80px; } .article-wrap { padding: 2rem 1.2rem 4rem; } .article-title { font-size: 20px; } }</style>
+@media (max-width: 767px) { #page-wrap { display: block; } #sidebar-mount { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; } #content-area { min-height: 100vh; padding-bottom: 80px; } .article-wrap { padding: 2rem 1.2rem 4rem; } .article-title { font-size: 22px; } }</style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aggelosmouzakitis.com/"}, {"@type": "ListItem", "position": 2, "name": "Writing", "item": "https://aggelosmouzakitis.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "The loneliness and emotional pressure that founders experience", "item": "https://aggelosmouzakitis.com/blog/the-loneliness-and-emotional-pressure-that-founders-experience/"}]}</script>
 <!-- seo-enhancements -->
 <link rel="preconnect" href="https://unpkg.com" crossorigin>

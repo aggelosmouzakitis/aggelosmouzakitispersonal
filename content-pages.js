@@ -16,7 +16,7 @@ const pageStyle = {
   color: C.text
 };
 const h1Style = {
-  fontSize: '28px',
+  fontSize: '32px',
   fontWeight: 400,
   lineHeight: 1.4,
   color: C.text,
@@ -24,16 +24,16 @@ const h1Style = {
   letterSpacing: '-.02em'
 };
 const h2Style = {
-  fontSize: '11px',
-  fontWeight: 400,
-  letterSpacing: '.15em',
+  fontSize: '13px',
+  fontWeight: 700,
+  letterSpacing: '.1em',
   textTransform: 'uppercase',
   color: C.muted,
   paddingTop: '.25rem',
   lineHeight: 1.7
 };
 const h3Style = {
-  fontSize: '16px',
+  fontSize: '18px',
   fontWeight: 400,
   lineHeight: 1.7,
   color: C.text,
@@ -49,8 +49,8 @@ const sectionStyle = {
 };
 const pStyle = {
   marginBottom: '1.4rem',
-  lineHeight: 1.85,
-  fontSize: '16px',
+  lineHeight: 1.75,
+  fontSize: '18px',
   color: C.text
 };
 const sepStyle = {
@@ -60,21 +60,21 @@ const sepStyle = {
 };
 const ctaBtn = {
   fontFamily: 'inherit',
-  fontSize: '11px',
-  letterSpacing: '.12em',
+  fontSize: '12px',
+  letterSpacing: '.1em',
   textTransform: 'uppercase',
   color: '#F4F2F0',
   background: '#282726',
   border: '1px solid #282726',
   textDecoration: 'none',
-  padding: '.7rem 1.4rem',
+  padding: '.8rem 1.5rem',
   display: 'inline-block',
   cursor: 'pointer',
   transition: 'background .15s, color .15s'
 };
 const footerStyle = {
   marginTop: '3rem',
-  fontSize: '13px',
+  fontSize: '14px',
   color: C.muted
 };
 const greenLink = {
@@ -243,7 +243,7 @@ function LatestWriting({
     justifyContent: 'space-between',
     alignItems: 'baseline',
     gap: '1.5rem',
-    padding: mob ? '.7rem 0' : '.85rem 0',
+    padding: mob ? '.55rem 0' : '.6rem 0',
     borderTop: first ? `1px solid ${C.border}` : 'none',
     borderBottom: `1px solid ${C.border}`,
     textDecoration: 'none',
@@ -262,14 +262,14 @@ function LatestWriting({
     }
   }, 'Latest Writing'), posts === null && React.createElement('p', {
     style: {
-      fontSize: '11px',
+      fontSize: '12px',
       letterSpacing: '.1em',
       textTransform: 'uppercase',
       color: '#999'
     }
   }, 'Loading…'), posts && posts.length === 0 && React.createElement('p', {
     style: {
-      fontSize: '11px',
+      fontSize: '12px',
       letterSpacing: '.1em',
       textTransform: 'uppercase',
       color: '#999'
@@ -283,12 +283,12 @@ function LatestWriting({
       onMouseLeave: e => e.currentTarget.style.color = C.text
     }, React.createElement('span', {
       style: {
-        fontSize: mob ? '14px' : '15px',
+        fontSize: mob ? '15px' : '17px',
         fontWeight: 600
       }
     }, p.title), React.createElement('span', {
       style: {
-        fontSize: '12px',
+        fontSize: '14px',
         color: '#999',
         whiteSpace: 'nowrap',
         flexShrink: 0
@@ -297,7 +297,8 @@ function LatestWriting({
   }), React.createElement('div', {
     style: {
       textAlign: 'right',
-      marginTop: '1.2rem'
+      marginTop: '1.2rem',
+      fontSize: '14px'
     }
   }, React.createElement(IA, {
     href: '/blog/'

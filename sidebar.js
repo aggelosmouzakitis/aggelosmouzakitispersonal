@@ -175,8 +175,8 @@ function MobileNav({
     cursor: 'pointer',
     color: active ? '#1a7f37' : 'rgba(40,39,38,0.55)',
     fontFamily: 'inherit',
-    fontSize: '9px',
-    letterSpacing: '.1em',
+    fontSize: '10px',
+    letterSpacing: '.06em',
     textTransform: 'uppercase',
     transition: 'color .15s',
     textDecoration: 'none'
@@ -313,14 +313,15 @@ function Sidebar({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    padding: '9px 18px',
+    padding: '11px 18px',
     background: active ? 'rgba(40,39,38,0.08)' : hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
     borderLeft: active ? `2px solid ${SB.accent}` : '2px solid transparent',
     cursor: 'pointer',
     fontFamily: 'inherit',
     textDecoration: 'none',
-    fontSize: '12.5px',
-    letterSpacing: '.1em',
+    fontSize: '14px',
+    fontWeight: 500,
+    letterSpacing: '.03em',
     textTransform: 'uppercase',
     color: active ? SB.active : hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
     transition: 'background .12s, color .12s'
@@ -350,8 +351,8 @@ function Sidebar({
   }, /*#__PURE__*/React.createElement(Icon, null)), /*#__PURE__*/React.createElement("span", null, label)), extra);
   const sectionLabel = text => /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: '10px',
-      letterSpacing: '.18em',
+      fontSize: '11px',
+      letterSpacing: '.14em',
       textTransform: 'uppercase',
       color: SB.muted,
       padding: '18px 18px 6px'
@@ -464,8 +465,9 @@ function Sidebar({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: '12.5px',
-      letterSpacing: '.1em',
+      fontSize: '15px',
+      fontWeight: 700,
+      letterSpacing: '.02em',
       textTransform: 'uppercase',
       color: SB.active,
       whiteSpace: 'nowrap',
@@ -474,10 +476,11 @@ function Sidebar({
     }
   }, "Aggelos Mouzakitis"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: '11px',
-      letterSpacing: '.08em',
+      fontSize: '12px',
+      letterSpacing: '.06em',
       textTransform: 'uppercase',
-      color: SB.muted
+      color: SB.muted,
+      marginTop: 2
     }
   }, "Coach & Therapist"))), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -499,12 +502,12 @@ function Sidebar({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '8px 18px',
+      padding: '10px 18px',
       textDecoration: 'none',
       background: hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
       color: hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
-      fontSize: '12px',
-      letterSpacing: '.1em',
+      fontSize: '13px',
+      letterSpacing: '.03em',
       textTransform: 'uppercase',
       transition: 'color .12s, background .12s'
     }
@@ -540,15 +543,16 @@ function Sidebar({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: '10px',
-      letterSpacing: '.16em',
+      fontSize: '11px',
+      fontWeight: 700,
+      letterSpacing: '.1em',
       textTransform: 'uppercase',
       color: SB.accent,
       marginBottom: 8
     }
   }, "Free Fulfilment Diagnostic"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: '12px',
+      fontSize: '13px',
       color: SB.muted,
       lineHeight: 1.75,
       marginBottom: 14
@@ -567,10 +571,10 @@ function Sidebar({
       display: 'block',
       textAlign: 'center',
       width: '100%',
-      padding: '10px 0',
+      padding: '11px 0',
       fontFamily: 'inherit',
-      fontSize: '11px',
-      letterSpacing: '.12em',
+      fontSize: '12px',
+      letterSpacing: '.08em',
       textTransform: 'uppercase',
       background: 'transparent',
       border: `1px solid ${SB.accent}`,

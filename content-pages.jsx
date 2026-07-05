@@ -12,19 +12,19 @@ const pageStyle = {
   maxWidth: 740, margin: '0 auto', padding: '4rem 2rem 7rem',
   fontFamily: 'inherit', color: C.text,
 };
-const h1Style = { fontSize: '28px', fontWeight: 400, lineHeight: 1.4, color: C.text, marginBottom: '2.5rem', letterSpacing: '-.02em' };
-const h2Style = { fontSize: '11px', fontWeight: 400, letterSpacing: '.15em', textTransform: 'uppercase', color: C.muted, paddingTop: '.25rem', lineHeight: 1.7 };
-const h3Style = { fontSize: '16px', fontWeight: 400, lineHeight: 1.7, color: C.text, marginBottom: '.6rem', borderBottom: `1px solid ${C.border}`, paddingBottom: '.4rem' };
+const h1Style = { fontSize: '32px', fontWeight: 400, lineHeight: 1.4, color: C.text, marginBottom: '2.5rem', letterSpacing: '-.02em' };
+const h2Style = { fontSize: '13px', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: C.muted, paddingTop: '.25rem', lineHeight: 1.7 };
+const h3Style = { fontSize: '18px', fontWeight: 400, lineHeight: 1.7, color: C.text, marginBottom: '.6rem', borderBottom: `1px solid ${C.border}`, paddingBottom: '.4rem' };
 const sectionStyle = { display: 'grid', gridTemplateColumns: '150px 1fr', gap: '0 2.5rem', marginBottom: '3rem' };
-const pStyle = { marginBottom: '1.4rem', lineHeight: 1.85, fontSize: '16px', color: C.text };
+const pStyle = { marginBottom: '1.4rem', lineHeight: 1.75, fontSize: '18px', color: C.text };
 const sepStyle = { border: 'none', borderTop: `1px solid ${C.sepBorder}`, margin: '2.5rem 0' };
 const ctaBtn = {
-  fontFamily: 'inherit', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase',
+  fontFamily: 'inherit', fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase',
   color: '#F4F2F0', background: '#282726', border: '1px solid #282726',
-  textDecoration: 'none', padding: '.7rem 1.4rem', display: 'inline-block',
+  textDecoration: 'none', padding: '.8rem 1.5rem', display: 'inline-block',
   cursor: 'pointer', transition: 'background .15s, color .15s',
 };
-const footerStyle = { marginTop: '3rem', fontSize: '13px', color: C.muted };
+const footerStyle = { marginTop: '3rem', fontSize: '14px', color: C.muted };
 const greenLink = { color: C.accent, textUnderlineOffset: '3px', textDecorationThickness: '1px' };
 const srOnly = { position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 };
 
@@ -91,15 +91,15 @@ function LatestWriting({ mob }) {
   const items = posts ? posts.slice(0, 9) : [];
   const rowStyle = (first) => ({
     display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1.5rem',
-    padding: mob ? '.7rem 0' : '.85rem 0',
+    padding: mob ? '.55rem 0' : '.6rem 0',
     borderTop: first ? `1px solid ${C.border}` : 'none',
     borderBottom: `1px solid ${C.border}`,
     textDecoration: 'none', color: C.text, transition: 'color .15s',
   });
   return React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '3.5rem' } },
     React.createElement('h2', { style: { ...h2Style, color: C.accent, marginBottom: '1.4rem' } }, 'Latest Writing'),
-    posts === null && React.createElement('p', { style: { fontSize: '11px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, 'Loading…'),
-    posts && posts.length === 0 && React.createElement('p', { style: { fontSize: '11px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, 'No posts yet.'),
+    posts === null && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, 'Loading…'),
+    posts && posts.length === 0 && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, 'No posts yet.'),
     items.length > 0 && React.createElement(React.Fragment, null,
       items.map(function (p, i) {
         return React.createElement('a', {
@@ -109,11 +109,11 @@ function LatestWriting({ mob }) {
           onMouseEnter: e => e.currentTarget.style.color = C.accent,
           onMouseLeave: e => e.currentTarget.style.color = C.text,
         },
-          React.createElement('span', { style: { fontSize: mob ? '14px' : '15px', fontWeight: 600 } }, p.title),
-          React.createElement('span', { style: { fontSize: '12px', color: '#999', whiteSpace: 'nowrap', flexShrink: 0 } }, p.date)
+          React.createElement('span', { style: { fontSize: mob ? '15px' : '17px', fontWeight: 600 } }, p.title),
+          React.createElement('span', { style: { fontSize: '14px', color: '#999', whiteSpace: 'nowrap', flexShrink: 0 } }, p.date)
         );
       }),
-      React.createElement('div', { style: { textAlign: 'right', marginTop: '1.2rem' } },
+      React.createElement('div', { style: { textAlign: 'right', marginTop: '1.2rem', fontSize: '14px' } },
         React.createElement(IA, { href: '/blog/' }, 'See all →')
       )
     )
