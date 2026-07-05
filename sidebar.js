@@ -135,6 +135,82 @@ const ICONS = {
     strokeLinecap: "round"
   }, /*#__PURE__*/React.createElement("polyline", {
     points: "9 18 15 12 9 6"
+  })),
+  Users: () => /*#__PURE__*/React.createElement("svg", {
+    width: "19",
+    height: "19",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "9",
+    cy: "7",
+    r: "4"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M23 21v-2a4 4 0 0 0-3-3.87"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M16 3.13a4 4 0 0 1 0 7.75"
+  })),
+  User: () => /*#__PURE__*/React.createElement("svg", {
+    width: "19",
+    height: "19",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "12",
+    cy: "7",
+    r: "4"
+  })),
+  List: () => /*#__PURE__*/React.createElement("svg", {
+    width: "19",
+    height: "19",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("line", {
+    x1: "8",
+    y1: "6",
+    x2: "21",
+    y2: "6"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "8",
+    y1: "12",
+    x2: "21",
+    y2: "12"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "8",
+    y1: "18",
+    x2: "21",
+    y2: "18"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "3",
+    y1: "6",
+    x2: "3.01",
+    y2: "6"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "3",
+    y1: "12",
+    x2: "3.01",
+    y2: "12"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "3",
+    y1: "18",
+    x2: "3.01",
+    y2: "18"
   }))
 };
 const SOCIALS = [{
@@ -154,7 +230,10 @@ const NAV_URL = {
   'home': '/',
   'blog': '/blog/',
   'ask-me-anything': '/ask-me-anything/',
-  'diagnostic': '/burnout-diagnostic/'
+  'diagnostic': '/burnout-diagnostic/',
+  'founders': '/founders/',
+  'solopreneurs': '/solopreneurs/',
+  'how-it-works': '/how-it-works/'
 };
 const hrefFor = id => NAV_URL[id] || '/';
 
@@ -394,7 +473,7 @@ function Sidebar({
       alignSelf: 'stretch',
       margin: '0 12px 4px'
     }
-  }), iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home'), iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing'), iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything'), iconNav('diag', ICONS.Clipboard, hrefFor('diagnostic'), page === 'diagnostic', 'Free Diagnostic'), /*#__PURE__*/React.createElement("div", {
+  }), iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home'), iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing'), iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything'), iconNav('founders', ICONS.Users, hrefFor('founders'), page === 'founders', 'For founders'), iconNav('solopreneurs', ICONS.User, hrefFor('solopreneurs'), page === 'solopreneurs', 'For solopreneurs'), iconNav('how-it-works', ICONS.List, hrefFor('how-it-works'), page === 'how-it-works', 'How it works'), iconNav('diag', ICONS.Clipboard, hrefFor('diagnostic'), page === 'diagnostic', 'Free Diagnostic'), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
       background: SB.border,
@@ -483,7 +562,7 @@ function Sidebar({
     style: {
       padding: '10px 0 0'
     }
-  }, navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home')), navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog')), navLink('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', hrefFor('ask-me-anything'))), sectionLabel('Find me'), SOCIALS.map(({
+  }, navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home')), navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog')), navLink('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', hrefFor('ask-me-anything')), navLink('founders', 'For founders', ICONS.Users, page === 'founders', hrefFor('founders')), navLink('solopreneurs', 'For solopreneurs', ICONS.User, page === 'solopreneurs', hrefFor('solopreneurs')), navLink('how-it-works', 'How it works', ICONS.List, page === 'how-it-works', hrefFor('how-it-works'))), sectionLabel('Find me'), SOCIALS.map(({
     id,
     label,
     href,

@@ -1,3 +1,44 @@
+# 301 redirects — advisor rebrand (Part 4). Old imposter-syndrome-therapy and
+# executive-burnout-therapy pages stay live/unredirected: no destination built
+# yet. burnout-diagnostic stays live too: /diagnostic/ is a teaser page, not
+# the assessment tool, and where the real assessment lands post-rebrand is
+# still undecided.
+[[redirects]]
+  from = "/therapy-for-founders/"
+  to = "/founders/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/therapy-for-founders/*"
+  to = "/founders/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/therapy-for-executives/"
+  to = "/founders/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/therapy-for-executives/*"
+  to = "/founders/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/career-transition-therapy/"
+  to = "/solopreneurs/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/career-transition-therapy/*"
+  to = "/solopreneurs/"
+  status = 301
+  force = true
+
 # 301 redirects for retired pages (replaces the old meta-refresh stubs)
 [[redirects]]
   from = "/schedule"

@@ -63,6 +63,20 @@ function FaqItem({ q, children }) {
     children
   );
 }
+// Skeleton placeholder — marks a body block as not-yet-written.
+function TBD() {
+  return React.createElement('div', { dangerouslySetInnerHTML: { __html: '<!-- content TBD -->' } });
+}
+const forkCardStyle = {
+  display: 'block', flex: '1 1 200px', minWidth: 180, padding: '1.4rem',
+  border: `1px solid ${C.border}`, color: C.text, textDecoration: 'none',
+  fontSize: '15px', letterSpacing: '.02em', textAlign: 'center',
+};
+function CtaLink({ href, children }) {
+  return React.createElement('div', { style: { marginTop: '.5rem' } },
+    React.createElement('a', { href, style: ctaBtn }, children)
+  );
+}
 
 function Testimonial({ quote, who }) {
   return React.createElement('blockquote', { style: { margin: '0 0 1.6rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(0,191,99,0.35)' } },
@@ -79,63 +93,48 @@ function Testimonials({ items, mob }) {
 }
 
 // ─── HOME PAGE ───────────────────────────────────────────────────────────────
+// Skeleton only — headings + placeholders. Copy TBD.
 function HomePage({ setPage }) {
   const mob = useIsMobile();
   const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
-  const mobSection = mob ? { display: 'block', marginBottom: '2rem' } : sectionStyle;
-  const mobH2 = mob ? { ...h2Style, paddingBottom: '.4rem', display: 'block' } : h2Style;
-  const mobH1 = mob ? { ...h1Style, fontSize: '20px' } : h1Style;
   return React.createElement('main', { style: mobPage },
-    React.createElement('header', { style: { marginBottom: mob ? '2rem' : '4rem', borderBottom: `1px solid ${C.border}`, paddingBottom: mob ? '1.5rem' : '3rem' } },
-      React.createElement('p', { style: { fontSize: '10px', letterSpacing: '.15em', textTransform: 'uppercase', color: C.muted, marginBottom: '1.2rem' } }, 'High-Performance Coach & Licensed Therapist'),
-      React.createElement('h1', { style: { ...h1Style, marginBottom: '1.5rem', fontSize: mob ? '22px' : '28px' } },
-        "Find genuine fulfilment without losing your ambition."
-      ),
-      React.createElement('p', { style: { ...pStyle, marginBottom: '1.2rem', maxWidth: 600 } },
-        "I help tech high performers break the deeper patterns behind burnout, shame-driven achievement, overthinking, and emotional fatigue \u2014 through high-trust advisory, nervous system regulation, and data."
-      ),
-      React.createElement('p', { style: { ...pStyle, marginBottom: 0, maxWidth: 600, color: C.muted, fontSize: '15px' } },
-        "I\u2019m Aggelos Mouzakitis, a licensed therapist with 18+ years in B2B SaaS. Based in Ireland, working globally."
+    React.createElement(Section, { label: 'Hero', mob },
+      React.createElement(TBD),
+      React.createElement(CtaLink, { href: '#book' }, 'Book a 15-min fit call')
+    ),
+
+    React.createElement(Section, { label: 'The frame', mob },
+      React.createElement(TBD)
+    ),
+
+    React.createElement(Section, { label: 'Why me', mob },
+      React.createElement(TBD)
+    ),
+
+    React.createElement(Section, { label: 'The fork', mob },
+      React.createElement('div', { style: { display: 'flex', gap: '1rem', flexWrap: 'wrap' } },
+        React.createElement('a', { href: '/founders/', style: forkCardStyle }, 'For founders'),
+        React.createElement('a', { href: '/solopreneurs/', style: forkCardStyle }, 'For solopreneurs')
       )
     ),
 
-    React.createElement(Section, { label: 'What I do', mob },
-      React.createElement(P, null, "Ambition isn’t the problem. Most of the people I work with are still performing well. What has changed is the cost: success starts to feel like relief rather than reward, rest feels unsafe, and setbacks land as personal threats rather than situations to handle."),
-      React.createElement(P, { last: true }, "Usually that means achievement has quietly become the way you regulate your sense of worth. The work is to keep the drive while ending the dependence underneath it — so success feels worth it again.")
+    React.createElement(Section, { label: 'How it works', mob },
+      React.createElement(TBD),
+      React.createElement(CtaLink, { href: '#book' }, 'Book a 15-min fit call')
     ),
 
-    React.createElement(Section, { label: 'How I work', mob },
-      React.createElement(P, null, React.createElement(Strong, null, "High-trust advisory."), " Grounded in your real context — career decisions, founder stress, leadership, difficult conversations — not abstract coaching."),
-      React.createElement(P, null, React.createElement(Strong, null, "Nervous system regulation."), " The work includes the body, not just thoughts: how pressure shows up as activation, shutdown, and poor recovery, alongside shame, identity, and the meanings you attach to success and failure."),
-      React.createElement(P, { last: true }, React.createElement(Strong, null, "Data."), " Wearable and behavioural signals — sleep, HRV, stress, recovery — make invisible stress patterns visible. Not biohacking. Pattern recognition.")
+    React.createElement(Section, { label: 'Proof', mob },
+      React.createElement(TBD)
     ),
 
-    React.createElement(Section, { label: 'Who I work with', mob },
-      React.createElement(P, null, "Founders, executives, product and growth leaders, and senior operators in tech. People doing well by every external measure who sense their relationship with work, performance, and self-worth has become too costly."),
-      React.createElement(P, { last: true },
-        "I write about the psychology of ambition, identity, and performance at ", React.createElement(A, { href: 'https://undisguised.io' }, 'Undisguised'), ". The writing names what most people in high-stakes careers feel but rarely say out loud. The private work is where we change it."
+    React.createElement(Section, { label: 'Writing', mob },
+      React.createElement(TBD),
+      React.createElement('p', { style: { marginTop: '.4rem', marginBottom: 0 } },
+        React.createElement('a', { href: '/blog/', style: greenLink }, 'Read the writing \u2192')
       )
     ),
 
-    React.createElement(Section, { label: 'Background', mob },
-      React.createElement(P, { last: true },
-        "Before training as a therapist I spent 18+ years in B2B SaaS growth, from early-stage startups to ", React.createElement(A, { href: 'https://www.ibm.com' }, 'IBM'), "’s enterprise portfolio, advising 50+ companies. I still work as a fractional growth advisor. ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'More on that →')
-      )
-    ),
-
-    React.createElement(Section, { label: 'Next step', mob },
-      React.createElement(P, null, "The first session is free, 60 minutes, and has no strings. We use it to figure out where you actually are and whether working together makes sense."),
-      React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', {
-          href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
-          style: ctaBtn,
-          onMouseEnter: e => e.currentTarget.style.borderColor = '#fff',
-          onMouseLeave: e => e.currentTarget.style.borderColor = 'rgba(255,255,255,.4)',
-        }, 'Book a free 60-minute session')
-      )
-    ),
-
-    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+    React.createElement('footer', { style: footerStyle }, '\u00A9 Aggelos Mouzakitis')
   );
 }
 
@@ -147,9 +146,97 @@ function SpecialtyPage({ pageId }) {
     'imposter-syndrome-therapy': ImposterPage,
     'executive-burnout-therapy': BurnoutPage,
     'career-transition-therapy': CareerTransitionPage,
+    'founders': FoundersPage,
+    'solopreneurs': SolopreneursPage,
+    'how-it-works': HowItWorksPage,
+    'diagnostic-teaser': DiagnosticTeaserPage,
   };
   const Component = pages[pageId];
   return Component ? React.createElement(Component) : null;
+}
+
+// ─── SKELETON: FOR FOUNDERS / FOR SOLOPRENEURS ──────────────────────────────
+// Same section structure for both. Headings + placeholders. Copy TBD.
+function ForkSkeletonPage({ title }) {
+  const mob = useIsMobile();
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  return React.createElement('main', { style: mobPage },
+    React.createElement(Section, { label: 'Hero', mob },
+      React.createElement(TBD),
+      React.createElement(CtaLink, { href: '#book' }, 'Book a 15-min fit call')
+    ),
+    React.createElement(Section, { label: 'Recognition', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'The reveal', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'How the problem usually looks', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'Why me', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'What the work is', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'Proof', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'FAQ', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'Process', mob },
+      React.createElement(TBD),
+      React.createElement(CtaLink, { href: '#book' }, 'Book a 15-min fit call')
+    ),
+    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+  );
+}
+function FoundersPage() {
+  return React.createElement(ForkSkeletonPage, { title: 'For founders' });
+}
+function SolopreneursPage() {
+  return React.createElement(ForkSkeletonPage, { title: 'For solopreneurs' });
+}
+
+// ─── SKELETON: HOW IT WORKS ──────────────────────────────────────────────────
+function HowItWorksPage() {
+  const mob = useIsMobile();
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  return React.createElement('main', { style: mobPage },
+    React.createElement(Section, { label: 'Hero', mob },
+      React.createElement(TBD),
+      React.createElement(CtaLink, { href: '#book' }, 'Book a 15-min fit call')
+    ),
+    React.createElement(Section, { label: 'The three steps', mob },
+      React.createElement('div', { style: { marginBottom: '1.2rem' } },
+        React.createElement('h3', { style: h3Style }, 'Fit call'),
+        React.createElement(TBD)
+      ),
+      React.createElement('div', { style: { marginBottom: '1.2rem' } },
+        React.createElement('h3', { style: h3Style }, 'Paid session'),
+        React.createElement(TBD)
+      ),
+      React.createElement('div', null,
+        React.createElement('h3', { style: h3Style }, 'Ongoing'),
+        React.createElement(TBD)
+      )
+    ),
+    React.createElement(Section, { label: 'What the diagnostic gives you', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'Pricing logic', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'FAQ', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'CTA', mob },
+      React.createElement(TBD),
+      React.createElement(CtaLink, { href: '#book' }, 'Book a 15-min fit call')
+    ),
+    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+  );
+}
+
+// ─── SKELETON: DIAGNOSTIC TEASER (noindex, link-only) ───────────────────────
+function DiagnosticTeaserPage() {
+  const mob = useIsMobile();
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  return React.createElement('main', { style: mobPage },
+    React.createElement(Section, { label: 'Hero', mob },
+      React.createElement(TBD),
+      React.createElement(CtaLink, { href: '#' }, 'Start assessment →')
+    ),
+    React.createElement(Section, { label: 'What it is', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'What you leave with', mob }, React.createElement(TBD)),
+    React.createElement(Section, { label: 'CTA', mob },
+      React.createElement(TBD),
+      React.createElement(CtaLink, { href: '#' }, 'Start assessment →')
+    ),
+    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+  );
 }
 
 // ─── THERAPY FOR EXECUTIVES ──────────────────────────────────────────────────

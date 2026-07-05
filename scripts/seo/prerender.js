@@ -15,6 +15,10 @@ const PAGES = [
   { f: 'burnout-diagnostic/index.html', faq: false },
   { f: 'blog/index.html', faq: false },
   { f: 'ask-me-anything/index.html', faq: false },
+  { f: 'founders/index.html', faq: false },
+  { f: 'solopreneurs/index.html', faq: false },
+  { f: 'how-it-works/index.html', faq: false },
+  { f: 'diagnostic/index.html', faq: false },
 ];
 
 function injectPrerender(html, inner) {
