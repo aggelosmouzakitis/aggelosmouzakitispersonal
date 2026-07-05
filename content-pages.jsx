@@ -17,6 +17,7 @@ const h2Style = { fontSize: '13px', fontWeight: 700, letterSpacing: '.1em', text
 const h3Style = { fontSize: '18px', fontWeight: 400, lineHeight: 1.7, color: C.text, marginBottom: '.6rem', borderBottom: `1px solid ${C.border}`, paddingBottom: '.4rem' };
 const sectionStyle = { display: 'grid', gridTemplateColumns: '150px 1fr', gap: '0 2.5rem', marginBottom: '3rem' };
 const pStyle = { marginBottom: '1.4rem', lineHeight: 1.75, fontSize: '18px', color: C.text };
+const leadStyle = { marginBottom: '1.4rem', lineHeight: 1.6, fontSize: '23px', fontWeight: 500, letterSpacing: '-.01em', color: C.text };
 const sepStyle = { border: 'none', borderTop: `1px solid ${C.sepBorder}`, margin: '2.5rem 0' };
 const ctaBtn = {
   fontFamily: 'inherit', fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase',
@@ -128,9 +129,13 @@ function HomePage({ setPage }) {
     React.createElement('h1', { style: srOnly }, 'Aggelos Mouzakitis — Licensed Psychotherapist & Coach for Tech Founders'),
 
     React.createElement('div', null,
-      React.createElement(P, null, "Hey, I’m Aggelos. I’m a licensed psychotherapist and before this I spent 18 years in tech, in product and growth, building companies and advising more than 500 of them."),
-      React.createElement(P, null, "These days I work privately with a small number of tech founders and solopreneurs, and it’s usually about a business problem that turns out to trace back to something in them. It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off. Most of the time it isn’t really a business problem, and reading more strategy doesn’t do anything for it, so we start where it actually shows up and follow it down to whatever is driving it."),
-      React.createElement(P, null, "The reason people come to me specifically is that they don’t have to explain their world to a therapist who has never shipped anything, and they don’t have to leave the personal stuff at the door for a coach who only wants the business version. I understand both sides at once, which is the whole point."),
+      React.createElement('p', { style: leadStyle }, "Hey, I’m Aggelos. I’m a licensed psychotherapist and before this I spent 18 years (still counting) in tech, in product and growth, building companies and advising more than 500 of them."),
+      React.createElement(P, null,
+        "These days I work privately with a small number of tech founders and solopreneurs, and it’s usually about ",
+        React.createElement(Strong, null, "a business problem that turns out to trace back to something in them"),
+        ". It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off."
+      ),
+      React.createElement(P, null, "The reason people come to me specifically is that they don’t have to explain their world to a therapist who has never shipped anything, and they don’t have to leave the personal stuff at the door for a coach who only wants the business version. I understand both sides at once, which is the whole point. Also, I’ve been in your shoes. Many times."),
       React.createElement(P, { last: true },
         "I write about all of this on my ", React.createElement(IA, { href: '/blog/' }, 'blog'),
         " and talk about it on my ", React.createElement(A, { href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA' }, 'YouTube channel'),

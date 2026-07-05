@@ -43,9 +43,9 @@
 html, body { height: 100%; }
 body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 ::selection { background: #282726; color: #F4F2F0; }
-#page-wrap { display: flex; min-height: 100vh; }
+#page-wrap { display: flex; height: 100vh; overflow: hidden; }
 #sidebar-mount { position: relative; flex-shrink: 0; }
-#content-area { flex: 1; overflow-y: auto; overflow-x: hidden; background: #F4F2F0; color: #282726; }
+#content-area { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; background: #F4F2F0; color: #282726; }
 #content-area::-webkit-scrollbar { width: 4px; }
 #content-area::-webkit-scrollbar-thumb { background: rgba(40,39,38,0.15); }
 .article-wrap { max-width: 680px; margin: 0 auto; padding: 4rem 2rem 7rem; }
@@ -76,7 +76,7 @@ body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkM
 .cta-btn:hover { background: #1a7f37; color: #fff; }
 .back-link { display: inline-block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #999; text-decoration: none; margin-top: 1.4rem; transition: color .15s; }
 .back-link:hover { color: #282726; }
-@media (max-width: 767px) { #page-wrap { display: block; } #sidebar-mount { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; } #content-area { min-height: 100vh; padding-bottom: 80px; } .article-wrap { padding: 2rem 1.2rem 4rem; } .article-title { font-size: 22px; } }</style>
+@media (max-width: 767px) { #page-wrap { display: block; height: auto; overflow: visible; } #sidebar-mount { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; } #content-area { min-height: 100vh; padding-bottom: 80px; } .article-wrap { padding: 2rem 1.2rem 4rem; } .article-title { font-size: 22px; } }</style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aggelosmouzakitis.com/"}, {"@type": "ListItem", "position": 2, "name": "Writing", "item": "https://aggelosmouzakitis.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "Why hard work alone doesn't advance you", "item": "https://aggelosmouzakitis.com/blog/why-hard-work-alone-doesnt-advance-you/"}]}</script>
 <!-- seo-enhancements -->
 <link rel="preconnect" href="https://unpkg.com" crossorigin>
@@ -160,7 +160,7 @@ body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkM
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 
-<script src="../../sidebar.js?v=2"></script>
+<script src="../../sidebar.js?v=3"></script>
 <script>
 const URL_MAP = {
   'home': '/',

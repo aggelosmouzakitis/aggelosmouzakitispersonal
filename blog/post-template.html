@@ -31,9 +31,9 @@ html, body { height: 100%; }
 body { background: #F5F5F4; font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 ::selection { background: #282726; color: #F4F2F0; }
 /* Layout */
-#page-wrap { display: flex; min-height: 100vh; }
+#page-wrap { display: flex; height: 100vh; overflow: hidden; }
 #sidebar-mount { position: relative; flex-shrink: 0; }
-#content-area { flex: 1; overflow-y: auto; overflow-x: hidden; background: #F4F2F0; color: #282726; }
+#content-area { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; background: #F4F2F0; color: #282726; }
 #content-area::-webkit-scrollbar { width: 4px; }
 #content-area::-webkit-scrollbar-thumb { background: rgba(40,39,38,0.15); }
 /* Article */
