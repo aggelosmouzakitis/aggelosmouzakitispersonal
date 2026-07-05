@@ -26,6 +26,7 @@ const ctaBtn = {
 };
 const footerStyle = { marginTop: '3rem', fontSize: '13px', color: C.muted };
 const greenLink = { color: C.accent, textUnderlineOffset: '3px', textDecorationThickness: '1px' };
+const srOnly = { position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 };
 
 
 // Mobile-responsive hook — never touches desktop layout
@@ -45,6 +46,9 @@ function Strong({ children }) {
 }
 function A({ href, children }) {
   return React.createElement('a', { href, target: '_blank', rel: 'noopener', style: greenLink }, children);
+}
+function IA({ href, children }) {
+  return React.createElement('a', { href, style: greenLink }, children);
 }
 function Section({ label, children, mob }) {
   const ss = mob ? { display: 'block', marginBottom: '2rem' } : sectionStyle;
@@ -78,62 +82,65 @@ function Testimonials({ items, mob }) {
   );
 }
 
+// ─── LATEST WRITING ──────────────────────────────────────────────────────────
+function LatestWriting({ mob }) {
+  const [posts, setPosts] = React.useState(null);
+  React.useEffect(() => {
+    fetch('/blog/posts.json').then(r => r.json()).then(setPosts).catch(() => setPosts([]));
+  }, []);
+  const items = posts ? posts.slice(0, 9) : [];
+  const rowStyle = (first) => ({
+    display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1.5rem',
+    padding: mob ? '.7rem 0' : '.85rem 0',
+    borderTop: first ? `1px solid ${C.border}` : 'none',
+    borderBottom: `1px solid ${C.border}`,
+    textDecoration: 'none', color: C.text, transition: 'color .15s',
+  });
+  return React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '3.5rem' } },
+    React.createElement('h2', { style: { ...h2Style, color: C.accent, marginBottom: '1.4rem' } }, 'Latest Writing'),
+    posts === null && React.createElement('p', { style: { fontSize: '11px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, 'Loading…'),
+    posts && posts.length === 0 && React.createElement('p', { style: { fontSize: '11px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, 'No posts yet.'),
+    items.length > 0 && React.createElement(React.Fragment, null,
+      items.map(function (p, i) {
+        return React.createElement('a', {
+          key: p.slug,
+          href: `/blog/${p.slug}/`,
+          style: rowStyle(i === 0),
+          onMouseEnter: e => e.currentTarget.style.color = C.accent,
+          onMouseLeave: e => e.currentTarget.style.color = C.text,
+        },
+          React.createElement('span', { style: { fontSize: mob ? '14px' : '15px', fontWeight: 600 } }, p.title),
+          React.createElement('span', { style: { fontSize: '12px', color: '#999', whiteSpace: 'nowrap', flexShrink: 0 } }, p.date)
+        );
+      }),
+      React.createElement('div', { style: { textAlign: 'right', marginTop: '1.2rem' } },
+        React.createElement(IA, { href: '/blog/' }, 'See all →')
+      )
+    )
+  );
+}
+
 // ─── HOME PAGE ───────────────────────────────────────────────────────────────
 function HomePage({ setPage }) {
   const mob = useIsMobile();
   const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
-  const mobSection = mob ? { display: 'block', marginBottom: '2rem' } : sectionStyle;
-  const mobH2 = mob ? { ...h2Style, paddingBottom: '.4rem', display: 'block' } : h2Style;
-  const mobH1 = mob ? { ...h1Style, fontSize: '20px' } : h1Style;
   return React.createElement('main', { style: mobPage },
-    React.createElement('header', { style: { marginBottom: mob ? '2rem' : '4rem', borderBottom: `1px solid ${C.border}`, paddingBottom: mob ? '1.5rem' : '3rem' } },
-      React.createElement('p', { style: { fontSize: '10px', letterSpacing: '.15em', textTransform: 'uppercase', color: C.muted, marginBottom: '1.2rem' } }, 'High-Performance Coach & Licensed Therapist'),
-      React.createElement('h1', { style: { ...h1Style, marginBottom: '1.5rem', fontSize: mob ? '22px' : '28px' } },
-        "Find genuine fulfilment without losing your ambition."
-      ),
-      React.createElement('p', { style: { ...pStyle, marginBottom: '1.2rem', maxWidth: 600 } },
-        "I help tech high performers break the deeper patterns behind burnout, shame-driven achievement, overthinking, and emotional fatigue \u2014 through high-trust advisory, nervous system regulation, and data."
-      ),
-      React.createElement('p', { style: { ...pStyle, marginBottom: 0, maxWidth: 600, color: C.muted, fontSize: '15px' } },
-        "I\u2019m Aggelos Mouzakitis, a licensed therapist with 18+ years in B2B SaaS. Based in Ireland, working globally."
-      )
-    ),
+    React.createElement('h1', { style: srOnly }, 'Aggelos Mouzakitis — Licensed Psychotherapist & Coach for Tech Founders'),
 
-    React.createElement(Section, { label: 'What I do', mob },
-      React.createElement(P, null, "Ambition isn’t the problem. Most of the people I work with are still performing well. What has changed is the cost: success starts to feel like relief rather than reward, rest feels unsafe, and setbacks land as personal threats rather than situations to handle."),
-      React.createElement(P, { last: true }, "Usually that means achievement has quietly become the way you regulate your sense of worth. The work is to keep the drive while ending the dependence underneath it — so success feels worth it again.")
-    ),
-
-    React.createElement(Section, { label: 'How I work', mob },
-      React.createElement(P, null, React.createElement(Strong, null, "High-trust advisory."), " Grounded in your real context — career decisions, founder stress, leadership, difficult conversations — not abstract coaching."),
-      React.createElement(P, null, React.createElement(Strong, null, "Nervous system regulation."), " The work includes the body, not just thoughts: how pressure shows up as activation, shutdown, and poor recovery, alongside shame, identity, and the meanings you attach to success and failure."),
-      React.createElement(P, { last: true }, React.createElement(Strong, null, "Data."), " Wearable and behavioural signals — sleep, HRV, stress, recovery — make invisible stress patterns visible. Not biohacking. Pattern recognition.")
-    ),
-
-    React.createElement(Section, { label: 'Who I work with', mob },
-      React.createElement(P, null, "Founders, executives, product and growth leaders, and senior operators in tech. People doing well by every external measure who sense their relationship with work, performance, and self-worth has become too costly."),
+    React.createElement('div', null,
+      React.createElement(P, null, "Hey, I’m Aggelos. I’m a licensed psychotherapist and before this I spent 18 years in tech, in product and growth, building companies and advising more than 500 of them."),
+      React.createElement(P, null, "These days I work privately with a small number of tech founders and solopreneurs, and it’s usually about a business problem that turns out to trace back to something in them. It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off. Most of the time it isn’t really a business problem, and reading more strategy doesn’t do anything for it, so we start where it actually shows up and follow it down to whatever is driving it."),
+      React.createElement(P, null, "The reason people come to me specifically is that they don’t have to explain their world to a therapist who has never shipped anything, and they don’t have to leave the personal stuff at the door for a coach who only wants the business version. I understand both sides at once, which is the whole point."),
       React.createElement(P, { last: true },
-        "I write about the psychology of ambition, identity, and performance at ", React.createElement(A, { href: 'https://undisguised.io' }, 'Undisguised'), ". The writing names what most people in high-stakes careers feel but rarely say out loud. The private work is where we change it."
+        "I write about all of this on my ", React.createElement(IA, { href: '/blog/' }, 'blog'),
+        " and talk about it on my ", React.createElement(A, { href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA' }, 'YouTube channel'),
+        ", mostly the things people in high-stakes careers feel but almost never say out loud. If any of this sounds like you, you can read ",
+        React.createElement(IA, { href: '/about/' }, 'how I work'),
+        ", or just ", React.createElement(IA, { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Getting%20in%20touch' }, 'get in touch'), "."
       )
     ),
 
-    React.createElement(Section, { label: 'Background', mob },
-      React.createElement(P, { last: true },
-        "Before training as a therapist I spent 18+ years in B2B SaaS growth, from early-stage startups to ", React.createElement(A, { href: 'https://www.ibm.com' }, 'IBM'), "’s enterprise portfolio, advising 50+ companies. I still work as a fractional growth advisor. ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'More on that →')
-      )
-    ),
-
-    React.createElement(Section, { label: 'Next step', mob },
-      React.createElement(P, null, "The first session is free, 60 minutes, and has no strings. We use it to figure out where you actually are and whether working together makes sense."),
-      React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', {
-          href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
-          style: ctaBtn,
-          onMouseEnter: e => e.currentTarget.style.borderColor = '#fff',
-          onMouseLeave: e => e.currentTarget.style.borderColor = 'rgba(255,255,255,.4)',
-        }, 'Book a free 60-minute session')
-      )
-    ),
+    React.createElement(LatestWriting, { mob }),
 
     React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
   );
