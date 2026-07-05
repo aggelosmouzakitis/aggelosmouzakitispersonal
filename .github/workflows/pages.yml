@@ -1,0 +1,39 @@
+name: Deploy staging preview to GitHub Pages
+
+# Manual staging deploy of the current branch to GitHub Pages.
+# Excludes /blog/ per request — everything else ships as-is.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble Pages artifact (site minus /blog/)
+        run: |
+          mkdir -p _site
+          rsync -a --exclude 'blog' --exclude '.git' --exclude '.github' --exclude 'node_modules' --exclude '_site' --exclude 'scripts' ./ _site/
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
