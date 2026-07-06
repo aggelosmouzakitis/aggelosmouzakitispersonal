@@ -85,6 +85,25 @@ const footerStyle = {
   fontSize: '14px',
   color: C.muted
 };
+const sectionTitleStyle = {
+  fontSize: '22px',
+  fontWeight: 700,
+  letterSpacing: '-.01em',
+  color: C.accent,
+  marginBottom: '1.2rem',
+  lineHeight: 1.3
+};
+const homeStyle = {
+  maxWidth: 1100,
+  margin: '0 auto',
+  padding: '4rem 2.5rem 7rem',
+  fontFamily: 'inherit',
+  color: C.text
+};
+const homeStyleMobile = {
+  ...homeStyle,
+  padding: '2rem 1.25rem 5rem'
+};
 const greenLink = {
   color: C.accent,
   textUnderlineOffset: '3px',
@@ -265,9 +284,8 @@ function StartHere({
     }
   }, React.createElement('h2', {
     style: {
-      ...h2Style,
-      color: C.accent,
-      marginBottom: '1.4rem'
+      ...sectionTitleStyle,
+      fontSize: mob ? '19px' : '22px'
     }
   }, 'Start Here'), START_HERE_ITEMS.map(function (item, i) {
     return React.createElement('a', {
@@ -278,7 +296,7 @@ function StartHere({
       onMouseLeave: e => e.currentTarget.style.color = C.text
     }, React.createElement('span', {
       style: {
-        fontSize: mob ? '15px' : '17px',
+        fontSize: mob ? '16px' : '18px',
         fontWeight: 600
       }
     }, item.label));
@@ -312,9 +330,8 @@ function LatestWriting({
     }
   }, React.createElement('h2', {
     style: {
-      ...h2Style,
-      color: C.accent,
-      marginBottom: '1.4rem'
+      ...sectionTitleStyle,
+      fontSize: mob ? '19px' : '22px'
     }
   }, 'Latest Writing'), posts === null && React.createElement('p', {
     style: {
@@ -339,7 +356,7 @@ function LatestWriting({
       onMouseLeave: e => e.currentTarget.style.color = C.text
     }, React.createElement('span', {
       style: {
-        fontSize: mob ? '15px' : '17px',
+        fontSize: mob ? '16px' : '18px',
         fontWeight: 600
       }
     }, p.title), React.createElement('span', {
@@ -366,15 +383,45 @@ function HomePage({
   setPage
 }) {
   const mob = useIsMobile();
-  const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
-  } : pageStyle;
+  const mainStyle = mob ? homeStyleMobile : homeStyle;
+  const introRowStyle = mob ? {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.75rem'
+  } : {
+    display: 'flex',
+    gap: '4rem',
+    alignItems: 'center'
+  };
+  const introTextStyle = mob ? {
+    width: '100%'
+  } : {
+    flex: '1.15 1 0',
+    minWidth: 0,
+    maxWidth: 520
+  };
+  const introImgWrapStyle = mob ? {
+    width: '100%'
+  } : {
+    flex: '1 1 0',
+    minWidth: 0
+  };
+  const introImgStyle = {
+    width: '100%',
+    aspectRatio: mob ? '16 / 10' : '4 / 5',
+    objectFit: 'cover',
+    borderRadius: '14px',
+    display: 'block'
+  };
   return React.createElement('main', {
-    style: mobPage
+    style: mainStyle
   }, React.createElement('h1', {
     style: srOnly
-  }, 'Aggelos Mouzakitis — Licensed Psychotherapist & Coach for Tech Founders'), React.createElement('div', null, React.createElement('p', {
+  }, 'Aggelos Mouzakitis — Licensed Psychotherapist & Coach for Tech Founders'), React.createElement('div', {
+    style: introRowStyle
+  }, React.createElement('div', {
+    style: introTextStyle
+  }, React.createElement('p', {
     style: leadStyle
   }, "Hey, I’m Aggelos. I’m a licensed psychotherapist and before this I spent 18 years (still counting) in tech, in product and growth, building companies and advising more than 500 of them."), React.createElement(P, null, "These days I work privately with a small number of tech ", React.createElement(IA, {
     href: '/founders/'
@@ -390,7 +437,16 @@ function HomePage({
     href: '/about/'
   }, 'how I work'), ", or just ", React.createElement(IA, {
     href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Getting%20in%20touch'
-  }, 'get in touch'), ".")), React.createElement(StartHere, {
+  }, 'get in touch'), ".")), React.createElement('div', {
+    style: introImgWrapStyle
+  }, React.createElement('img', {
+    src: 'https://aggelosmouzakitis.com/img/aggelos.webp',
+    alt: 'Aggelos Mouzakitis',
+    loading: 'eager',
+    fetchPriority: 'high',
+    decoding: 'async',
+    style: introImgStyle
+  }))), React.createElement(StartHere, {
     mob
   }), React.createElement(LatestWriting, {
     mob

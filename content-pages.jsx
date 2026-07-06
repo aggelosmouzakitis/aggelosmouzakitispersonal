@@ -26,6 +26,9 @@ const ctaBtn = {
   cursor: 'pointer', transition: 'background .15s, color .15s',
 };
 const footerStyle = { marginTop: '3rem', fontSize: '14px', color: C.muted };
+const sectionTitleStyle = { fontSize: '22px', fontWeight: 700, letterSpacing: '-.01em', color: C.accent, marginBottom: '1.2rem', lineHeight: 1.3 };
+const homeStyle = { maxWidth: 1100, margin: '0 auto', padding: '4rem 2.5rem 7rem', fontFamily: 'inherit', color: C.text };
+const homeStyleMobile = { ...homeStyle, padding: '2rem 1.25rem 5rem' };
 const greenLink = { color: C.accent, textUnderlineOffset: '3px', textDecorationThickness: '1px' };
 const srOnly = { position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 };
 
@@ -97,7 +100,7 @@ function StartHere({ mob }) {
     textDecoration: 'none', color: C.text, transition: 'color .15s',
   });
   return React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '3.5rem' } },
-    React.createElement('h2', { style: { ...h2Style, color: C.accent, marginBottom: '1.4rem' } }, 'Start Here'),
+    React.createElement('h2', { style: { ...sectionTitleStyle, fontSize: mob ? '19px' : '22px' } }, 'Start Here'),
     START_HERE_ITEMS.map(function (item, i) {
       return React.createElement('a', {
         key: item.href,
@@ -106,7 +109,7 @@ function StartHere({ mob }) {
         onMouseEnter: e => e.currentTarget.style.color = C.accent,
         onMouseLeave: e => e.currentTarget.style.color = C.text,
       },
-        React.createElement('span', { style: { fontSize: mob ? '15px' : '17px', fontWeight: 600 } }, item.label)
+        React.createElement('span', { style: { fontSize: mob ? '16px' : '18px', fontWeight: 600 } }, item.label)
       );
     })
   );
@@ -127,7 +130,7 @@ function LatestWriting({ mob }) {
     textDecoration: 'none', color: C.text, transition: 'color .15s',
   });
   return React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '3.5rem' } },
-    React.createElement('h2', { style: { ...h2Style, color: C.accent, marginBottom: '1.4rem' } }, 'Latest Writing'),
+    React.createElement('h2', { style: { ...sectionTitleStyle, fontSize: mob ? '19px' : '22px' } }, 'Latest Writing'),
     posts === null && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, 'Loading…'),
     posts && posts.length === 0 && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, 'No posts yet.'),
     items.length > 0 && React.createElement(React.Fragment, null,
@@ -139,7 +142,7 @@ function LatestWriting({ mob }) {
           onMouseEnter: e => e.currentTarget.style.color = C.accent,
           onMouseLeave: e => e.currentTarget.style.color = C.text,
         },
-          React.createElement('span', { style: { fontSize: mob ? '15px' : '17px', fontWeight: 600 } }, p.title),
+          React.createElement('span', { style: { fontSize: mob ? '16px' : '18px', fontWeight: 600 } }, p.title),
           React.createElement('span', { style: { fontSize: '14px', color: '#999', whiteSpace: 'nowrap', flexShrink: 0 } }, p.date)
         );
       }),
@@ -153,27 +156,49 @@ function LatestWriting({ mob }) {
 // ─── HOME PAGE ───────────────────────────────────────────────────────────────
 function HomePage({ setPage }) {
   const mob = useIsMobile();
-  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
-  return React.createElement('main', { style: mobPage },
+  const mainStyle = mob ? homeStyleMobile : homeStyle;
+  const introRowStyle = mob
+    ? { display: 'flex', flexDirection: 'column', gap: '1.75rem' }
+    : { display: 'flex', gap: '4rem', alignItems: 'center' };
+  const introTextStyle = mob ? { width: '100%' } : { flex: '1.15 1 0', minWidth: 0, maxWidth: 520 };
+  const introImgWrapStyle = mob ? { width: '100%' } : { flex: '1 1 0', minWidth: 0 };
+  const introImgStyle = {
+    width: '100%', aspectRatio: mob ? '16 / 10' : '4 / 5',
+    objectFit: 'cover', borderRadius: '14px', display: 'block',
+  };
+
+  return React.createElement('main', { style: mainStyle },
     React.createElement('h1', { style: srOnly }, 'Aggelos Mouzakitis — Licensed Psychotherapist & Coach for Tech Founders'),
 
-    React.createElement('div', null,
-      React.createElement('p', { style: leadStyle }, "Hey, I’m Aggelos. I’m a licensed psychotherapist and before this I spent 18 years (still counting) in tech, in product and growth, building companies and advising more than 500 of them."),
-      React.createElement(P, null,
-        "These days I work privately with a small number of tech ",
-        React.createElement(IA, { href: '/founders/' }, 'founders'),
-        " and ", React.createElement(IA, { href: '/solopreneurs/' }, 'solopreneurs'),
-        ", and it’s usually about ",
-        React.createElement(Strong, null, "a business problem that turns out to trace back to something in them"),
-        ". It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off."
+    React.createElement('div', { style: introRowStyle },
+      React.createElement('div', { style: introTextStyle },
+        React.createElement('p', { style: leadStyle }, "Hey, I’m Aggelos. I’m a licensed psychotherapist and before this I spent 18 years (still counting) in tech, in product and growth, building companies and advising more than 500 of them."),
+        React.createElement(P, null,
+          "These days I work privately with a small number of tech ",
+          React.createElement(IA, { href: '/founders/' }, 'founders'),
+          " and ", React.createElement(IA, { href: '/solopreneurs/' }, 'solopreneurs'),
+          ", and it’s usually about ",
+          React.createElement(Strong, null, "a business problem that turns out to trace back to something in them"),
+          ". It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off."
+        ),
+        React.createElement(P, null, "The reason people come to me specifically is that they don’t have to explain their world to a therapist who has never shipped anything, and they don’t have to leave the personal stuff at the door for a coach who only wants the business version. I understand both sides at once, which is the whole point. Also, I’ve been in your shoes. Many times."),
+        React.createElement(P, { last: true },
+          "I write about all of this on my ", React.createElement(IA, { href: '/blog/' }, 'blog'),
+          " and talk about it on my ", React.createElement(A, { href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA' }, 'YouTube channel'),
+          ", mostly the things people in high-stakes careers feel but almost never say out loud. If any of this sounds like you, you can read ",
+          React.createElement(IA, { href: '/about/' }, 'how I work'),
+          ", or just ", React.createElement(IA, { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Getting%20in%20touch' }, 'get in touch'), "."
+        )
       ),
-      React.createElement(P, null, "The reason people come to me specifically is that they don’t have to explain their world to a therapist who has never shipped anything, and they don’t have to leave the personal stuff at the door for a coach who only wants the business version. I understand both sides at once, which is the whole point. Also, I’ve been in your shoes. Many times."),
-      React.createElement(P, { last: true },
-        "I write about all of this on my ", React.createElement(IA, { href: '/blog/' }, 'blog'),
-        " and talk about it on my ", React.createElement(A, { href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA' }, 'YouTube channel'),
-        ", mostly the things people in high-stakes careers feel but almost never say out loud. If any of this sounds like you, you can read ",
-        React.createElement(IA, { href: '/about/' }, 'how I work'),
-        ", or just ", React.createElement(IA, { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Getting%20in%20touch' }, 'get in touch'), "."
+      React.createElement('div', { style: introImgWrapStyle },
+        React.createElement('img', {
+          src: 'https://aggelosmouzakitis.com/img/aggelos.webp',
+          alt: 'Aggelos Mouzakitis',
+          loading: 'eager',
+          fetchPriority: 'high',
+          decoding: 'async',
+          style: introImgStyle,
+        })
       )
     ),
 
