@@ -218,10 +218,7 @@ function MobileNav({
       ...tabStyle(false),
       textDecoration: 'none'
     }
-  }, /*#__PURE__*/React.createElement(Icon, null), /*#__PURE__*/React.createElement("span", null, label))), /*#__PURE__*/React.createElement("a", {
-    style: tabStyle(page === 'diagnostic'),
-    href: hrefFor('diagnostic')
-  }, /*#__PURE__*/React.createElement(ICONS.Clipboard, null), /*#__PURE__*/React.createElement("span", null, "Diagnostic")));
+  }, /*#__PURE__*/React.createElement(Icon, null), /*#__PURE__*/React.createElement("span", null, label))));
 }
 
 // ── DESKTOP SIDEBAR ──────────────────────────────────────────────────────────
@@ -395,7 +392,7 @@ function Sidebar({
       alignSelf: 'stretch',
       margin: '0 12px 4px'
     }
-  }), iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home'), iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing'), iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything'), iconNav('diag', ICONS.Clipboard, hrefFor('diagnostic'), page === 'diagnostic', 'Free Diagnostic'), /*#__PURE__*/React.createElement("div", {
+  }), iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home'), iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing'), iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything'), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
       background: SB.border,
@@ -482,7 +479,7 @@ function Sidebar({
       color: SB.muted,
       marginTop: 2
     }
-  }, "Coach & Therapist"))), /*#__PURE__*/React.createElement("div", {
+  }, "Advisor \xB7 Psychotherapist"))), /*#__PURE__*/React.createElement("div", {
     style: {
       padding: '10px 0 0'
     }
@@ -550,15 +547,15 @@ function Sidebar({
       color: SB.accent,
       marginBottom: 8
     }
-  }, "Free Fulfilment Diagnostic"), /*#__PURE__*/React.createElement("div", {
+  }, "Work With Me"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: '13px',
       color: SB.muted,
       lineHeight: 1.75,
       marginBottom: 14
     }
-  }, "45 questions. 8 minutes.", /*#__PURE__*/React.createElement("br", null), "Your operating pattern + breakdown."), /*#__PURE__*/React.createElement("a", {
-    href: hrefFor('diagnostic'),
+  }, "A 15-minute fit call to see if it's a fit."), /*#__PURE__*/React.createElement("a", {
+    href: "#book",
     onMouseEnter: e => {
       e.currentTarget.style.background = SB.accent;
       e.currentTarget.style.color = '#fff';
@@ -583,7 +580,7 @@ function Sidebar({
       textDecoration: 'none',
       transition: 'background .15s, color .15s'
     }
-  }, "Start assessment \u2192")))));
+  }, "Book a fit call \u2192")))));
 }
 Object.assign(window, {
   Sidebar

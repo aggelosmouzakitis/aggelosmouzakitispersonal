@@ -110,9 +110,6 @@ function MobileNav({ page }) {
           <Icon /><span>{label}</span>
         </a>
       ))}
-      <a style={tabStyle(page === 'diagnostic')} href={hrefFor('diagnostic')}>
-        <ICONS.Clipboard /><span>Diagnostic</span>
-      </a>
     </nav>
   );
 }
@@ -211,7 +208,6 @@ function Sidebar({ page, setPage, open, setOpen }) {
       {iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home')}
       {iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing')}
       {iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything')}
-      {iconNav('diag', ICONS.Clipboard, hrefFor('diagnostic'), page === 'diagnostic', 'Free Diagnostic')}
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '4px 12px' }} />
       {SOCIALS.map(s => iconLink(s))}
       <div style={{ flex: 1 }} />
@@ -228,7 +224,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
           <a href={hrefFor('home')} style={{ display: 'flex', flexShrink: 0 }}><img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" width={38} height={38} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, display: 'block' }} /></a>
           <div style={{ overflow: 'hidden', flex: 1 }}>
             <div style={{ fontSize: '15px', fontWeight: 700, letterSpacing: '.02em', textTransform: 'uppercase', color: SB.active, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Aggelos Mouzakitis</div>
-            <div style={{ fontSize: '12px', letterSpacing: '.06em', textTransform: 'uppercase', color: SB.muted, marginTop: 2 }}>Coach & Therapist</div>
+            <div style={{ fontSize: '12px', letterSpacing: '.06em', textTransform: 'uppercase', color: SB.muted, marginTop: 2 }}>Advisor · Psychotherapist</div>
           </div>
         </div>
 
@@ -262,16 +258,16 @@ function Sidebar({ page, setPage, open, setOpen }) {
 
         <div style={{ flex: 1 }} />
 
-        {/* Diagnostic CTA */}
+        {/* Work with me CTA */}
         <div style={{ padding: '0 16px 22px', flexShrink: 0 }}>
           <div style={{ border: `1px solid rgba(26,127,55,0.25)`, padding: '18px', background: 'rgba(26,127,55,0.04)' }}>
-            <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: SB.accent, marginBottom: 8 }}>Free Fulfilment Diagnostic</div>
-            <div style={{ fontSize: '13px', color: SB.muted, lineHeight: 1.75, marginBottom: 14 }}>45 questions. 8 minutes.<br />Your operating pattern + breakdown.</div>
-            <a href={hrefFor('diagnostic')}
+            <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: SB.accent, marginBottom: 8 }}>Work With Me</div>
+            <div style={{ fontSize: '13px', color: SB.muted, lineHeight: 1.75, marginBottom: 14 }}>A 15-minute fit call to see if it's a fit.</div>
+            <a href="#book"
               onMouseEnter={e => { e.currentTarget.style.background = SB.accent; e.currentTarget.style.color = '#fff'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = SB.accent; }}
               style={{ display: 'block', textAlign: 'center', width: '100%', padding: '11px 0', fontFamily: 'inherit', fontSize: '12px', letterSpacing: '.08em', textTransform: 'uppercase', background: 'transparent', border: `1px solid ${SB.accent}`, color: SB.accent, cursor: 'pointer', textDecoration: 'none', transition: 'background .15s, color .15s' }}>
-              Start assessment →
+              Book a fit call →
             </a>
           </div>
         </div>

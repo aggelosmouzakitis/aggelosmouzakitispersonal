@@ -83,6 +83,35 @@ function Testimonials({ items, mob }) {
   );
 }
 
+// ─── START HERE ──────────────────────────────────────────────────────────────
+const START_HERE_ITEMS = [
+  { label: 'For founders →', href: '/founders/' },
+  { label: 'For solopreneurs →', href: '/solopreneurs/' },
+];
+function StartHere({ mob }) {
+  const rowStyle = (first) => ({
+    display: 'flex', alignItems: 'baseline', gap: '1.5rem',
+    padding: mob ? '.55rem 0' : '.6rem 0',
+    borderTop: first ? `1px solid ${C.border}` : 'none',
+    borderBottom: `1px solid ${C.border}`,
+    textDecoration: 'none', color: C.text, transition: 'color .15s',
+  });
+  return React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '3.5rem' } },
+    React.createElement('h2', { style: { ...h2Style, color: C.accent, marginBottom: '1.4rem' } }, 'Start Here'),
+    START_HERE_ITEMS.map(function (item, i) {
+      return React.createElement('a', {
+        key: item.href,
+        href: item.href,
+        style: rowStyle(i === 0),
+        onMouseEnter: e => e.currentTarget.style.color = C.accent,
+        onMouseLeave: e => e.currentTarget.style.color = C.text,
+      },
+        React.createElement('span', { style: { fontSize: mob ? '15px' : '17px', fontWeight: 600 } }, item.label)
+      );
+    })
+  );
+}
+
 // ─── LATEST WRITING ──────────────────────────────────────────────────────────
 function LatestWriting({ mob }) {
   const [posts, setPosts] = React.useState(null);
@@ -131,7 +160,10 @@ function HomePage({ setPage }) {
     React.createElement('div', null,
       React.createElement('p', { style: leadStyle }, "Hey, I’m Aggelos. I’m a licensed psychotherapist and before this I spent 18 years (still counting) in tech, in product and growth, building companies and advising more than 500 of them."),
       React.createElement(P, null,
-        "These days I work privately with a small number of tech founders and solopreneurs, and it’s usually about ",
+        "These days I work privately with a small number of tech ",
+        React.createElement(IA, { href: '/founders/' }, 'founders'),
+        " and ", React.createElement(IA, { href: '/solopreneurs/' }, 'solopreneurs'),
+        ", and it’s usually about ",
         React.createElement(Strong, null, "a business problem that turns out to trace back to something in them"),
         ". It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off."
       ),
@@ -145,6 +177,7 @@ function HomePage({ setPage }) {
       )
     ),
 
+    React.createElement(StartHere, { mob }),
     React.createElement(LatestWriting, { mob }),
 
     React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')

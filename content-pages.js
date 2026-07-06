@@ -237,6 +237,54 @@ function Testimonials({
   }, 'Read more client reflections \u2192')));
 }
 
+// ─── START HERE ──────────────────────────────────────────────────────────────
+const START_HERE_ITEMS = [{
+  label: 'For founders →',
+  href: '/founders/'
+}, {
+  label: 'For solopreneurs →',
+  href: '/solopreneurs/'
+}];
+function StartHere({
+  mob
+}) {
+  const rowStyle = first => ({
+    display: 'flex',
+    alignItems: 'baseline',
+    gap: '1.5rem',
+    padding: mob ? '.55rem 0' : '.6rem 0',
+    borderTop: first ? `1px solid ${C.border}` : 'none',
+    borderBottom: `1px solid ${C.border}`,
+    textDecoration: 'none',
+    color: C.text,
+    transition: 'color .15s'
+  });
+  return React.createElement('div', {
+    style: {
+      marginTop: mob ? '2.5rem' : '3.5rem'
+    }
+  }, React.createElement('h2', {
+    style: {
+      ...h2Style,
+      color: C.accent,
+      marginBottom: '1.4rem'
+    }
+  }, 'Start Here'), START_HERE_ITEMS.map(function (item, i) {
+    return React.createElement('a', {
+      key: item.href,
+      href: item.href,
+      style: rowStyle(i === 0),
+      onMouseEnter: e => e.currentTarget.style.color = C.accent,
+      onMouseLeave: e => e.currentTarget.style.color = C.text
+    }, React.createElement('span', {
+      style: {
+        fontSize: mob ? '15px' : '17px',
+        fontWeight: 600
+      }
+    }, item.label));
+  }));
+}
+
 // ─── LATEST WRITING ──────────────────────────────────────────────────────────
 function LatestWriting({
   mob
@@ -328,7 +376,11 @@ function HomePage({
     style: srOnly
   }, 'Aggelos Mouzakitis — Licensed Psychotherapist & Coach for Tech Founders'), React.createElement('div', null, React.createElement('p', {
     style: leadStyle
-  }, "Hey, I’m Aggelos. I’m a licensed psychotherapist and before this I spent 18 years (still counting) in tech, in product and growth, building companies and advising more than 500 of them."), React.createElement(P, null, "These days I work privately with a small number of tech founders and solopreneurs, and it’s usually about ", React.createElement(Strong, null, "a business problem that turns out to trace back to something in them"), ". It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off."), React.createElement(P, null, "The reason people come to me specifically is that they don’t have to explain their world to a therapist who has never shipped anything, and they don’t have to leave the personal stuff at the door for a coach who only wants the business version. I understand both sides at once, which is the whole point. Also, I’ve been in your shoes. Many times."), React.createElement(P, {
+  }, "Hey, I’m Aggelos. I’m a licensed psychotherapist and before this I spent 18 years (still counting) in tech, in product and growth, building companies and advising more than 500 of them."), React.createElement(P, null, "These days I work privately with a small number of tech ", React.createElement(IA, {
+    href: '/founders/'
+  }, 'founders'), " and ", React.createElement(IA, {
+    href: '/solopreneurs/'
+  }, 'solopreneurs'), ", and it’s usually about ", React.createElement(Strong, null, "a business problem that turns out to trace back to something in them"), ". It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off."), React.createElement(P, null, "The reason people come to me specifically is that they don’t have to explain their world to a therapist who has never shipped anything, and they don’t have to leave the personal stuff at the door for a coach who only wants the business version. I understand both sides at once, which is the whole point. Also, I’ve been in your shoes. Many times."), React.createElement(P, {
     last: true
   }, "I write about all of this on my ", React.createElement(IA, {
     href: '/blog/'
@@ -338,7 +390,9 @@ function HomePage({
     href: '/about/'
   }, 'how I work'), ", or just ", React.createElement(IA, {
     href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Getting%20in%20touch'
-  }, 'get in touch'), ".")), React.createElement(LatestWriting, {
+  }, 'get in touch'), ".")), React.createElement(StartHere, {
+    mob
+  }), React.createElement(LatestWriting, {
     mob
   }), React.createElement('footer', {
     style: footerStyle
