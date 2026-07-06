@@ -266,7 +266,7 @@ function ForFoundersPage() {
   const mob = useIsMobile();
   const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
   return React.createElement('main', { style: mobPage },
-    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.5rem' : '3rem', fontSize: mob ? '20px' : '28px' } }, 'For founders'),
+    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.5rem' : '3rem', fontSize: mob ? '20px' : '28px' } }, 'Founder advisory for business problems that trace back to you'),
 
     React.createElement(Section, { label: 'What you came here for', mob },
       React.createElement(P, null, "You came here about something either business-related that gives you stress, activates inner criticism or prevents you from reaching your goals."),

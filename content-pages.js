@@ -543,7 +543,7 @@ function ForFoundersPage() {
       marginBottom: mob ? '1.5rem' : '3rem',
       fontSize: mob ? '20px' : '28px'
     }
-  }, 'For founders'), React.createElement(Section, {
+  }, 'Founder advisory for business problems that trace back to you'), React.createElement(Section, {
     label: 'What you came here for',
     mob
   }, React.createElement(P, null, "You came here about something either business-related that gives you stress, activates inner criticism or prevents you from reaching your goals."), React.createElement(P, {
