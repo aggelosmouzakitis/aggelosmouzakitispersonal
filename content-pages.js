@@ -440,8 +440,8 @@ function HomePage({
   }, 'get in touch'), ".")), React.createElement('div', {
     style: introImgWrapStyle
   }, React.createElement('img', {
-    src: 'https://aggelosmouzakitis.com/img/aggelos.webp',
-    alt: 'Aggelos Mouzakitis',
+    src: 'https://aggelosmouzakitis.com/img/aggelos-homepage.webp',
+    alt: 'Aggelos Mouzakitis speaking on stage',
     loading: 'eager',
     fetchPriority: 'high',
     decoding: 'async',
