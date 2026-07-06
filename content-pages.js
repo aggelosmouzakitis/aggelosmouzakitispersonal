@@ -257,6 +257,137 @@ function Testimonials({
   }, 'Read more client reflections \u2192')));
 }
 
+// \u2500\u2500\u2500 SITE FOOTER (shared across all pages) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+const FOOTER_COLS = [{
+  label: 'Work with me',
+  links: [{
+    href: '/founders/',
+    label: 'For founders'
+  }, {
+    href: '/solopreneurs/',
+    label: 'For solopreneurs'
+  }, {
+    label: 'How I work',
+    muted: true
+  }, {
+    href: '#book',
+    label: 'Book a fit call'
+  }]
+}, {
+  label: 'Site',
+  links: [{
+    href: '/',
+    label: 'Home'
+  }, {
+    href: '/blog/',
+    label: 'Writing'
+  }, {
+    href: '/ask-me-anything/',
+    label: 'Ask me anything'
+  }]
+}, {
+  label: 'Elsewhere',
+  links: [{
+    href: 'https://linkedin.com/in/growth-product-manager/',
+    label: 'LinkedIn',
+    ext: true
+  }, {
+    href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA',
+    label: 'YouTube',
+    ext: true
+  }]
+}];
+function SiteFooter({
+  mob
+}) {
+  const wrap = {
+    marginTop: mob ? '3.5rem' : '5rem',
+    paddingTop: mob ? '2.5rem' : '3.25rem',
+    borderTop: `1px solid ${C.sepBorder}`
+  };
+  const cols = {
+    display: mob ? 'block' : 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '2.5rem'
+  };
+  const colLabel = {
+    fontSize: '11px',
+    fontWeight: 700,
+    letterSpacing: '.14em',
+    textTransform: 'uppercase',
+    color: C.accent,
+    marginBottom: '1.1rem'
+  };
+  const linkStyle = {
+    display: 'inline-flex',
+    alignItems: 'baseline',
+    gap: '.35rem',
+    fontSize: '15px',
+    color: C.text,
+    textDecoration: 'none',
+    lineHeight: 1.4,
+    transition: 'color .12s'
+  };
+  const mutedStyle = {
+    fontSize: '15px',
+    color: '#aaa',
+    lineHeight: 1.4,
+    cursor: 'default'
+  };
+  const row = {
+    marginBottom: '.75rem'
+  };
+  function fLink(l) {
+    if (l.muted) return React.createElement('div', {
+      style: row,
+      key: l.label
+    }, React.createElement('span', {
+      style: mutedStyle
+    }, l.label));
+    const extra = l.ext ? {
+      target: '_blank',
+      rel: 'noopener'
+    } : {};
+    return React.createElement('div', {
+      style: row,
+      key: l.label
+    }, React.createElement('a', {
+      href: l.href,
+      ...extra,
+      style: linkStyle,
+      onMouseEnter: e => e.currentTarget.style.color = C.accent,
+      onMouseLeave: e => e.currentTarget.style.color = C.text
+    }, l.label, l.ext ? React.createElement('span', {
+      style: {
+        fontSize: '11px',
+        opacity: .5
+      }
+    }, '\u2197') : null));
+  }
+  return React.createElement('footer', {
+    style: wrap
+  }, React.createElement('div', {
+    style: cols
+  }, FOOTER_COLS.map(function (col) {
+    return React.createElement('div', {
+      key: col.label,
+      style: {
+        marginBottom: mob ? '2rem' : 0
+      }
+    }, React.createElement('div', {
+      style: colLabel
+    }, col.label), col.links.map(fLink));
+  })), React.createElement('div', {
+    style: {
+      marginTop: mob ? '1rem' : '2.5rem',
+      paddingTop: '1.5rem',
+      borderTop: `1px solid ${C.border}`,
+      fontSize: '13px',
+      color: C.muted
+    }
+  }, '\u00a9 Aggelos Mouzakitis \u00b7 Advisor \u00b7 Psychotherapist'));
+}
+
 // ─── START HERE ──────────────────────────────────────────────────────────────
 const START_HERE_ITEMS = [{
   label: 'For founders →',
@@ -451,9 +582,9 @@ function HomePage({
     mob
   }), React.createElement(LatestWriting, {
     mob
-  }), React.createElement('footer', {
-    style: footerStyle
-  }, '© Aggelos Mouzakitis'));
+  }), React.createElement(SiteFooter, {
+    mob
+  }));
 }
 
 // ─── SPECIALTY PAGE TEMPLATE ─────────────────────────────────────────────────
@@ -466,7 +597,8 @@ function SpecialtyPage({
     'imposter-syndrome-therapy': ImposterPage,
     'executive-burnout-therapy': BurnoutPage,
     'career-transition-therapy': CareerTransitionPage,
-    'founders': ForFoundersPage
+    'founders': ForFoundersPage,
+    'solopreneurs': SolopreneursPage
   };
   const Component = pages[pageId];
   return Component ? React.createElement(Component) : null;
@@ -624,9 +756,116 @@ function ForFoundersPage() {
     last: true
   }, "I work with a few people at a time and care more about fit than volume. Not here to manage egos or hand you a silver-bullet plan, because nobody has one. I'm here to be your advisor, closer to a friend with real expertise, who helps you become the version of yourself the company actually needs. It runs both ways, with rights and obligations on both sides.")), React.createElement(PersonaHowWeStartSection, {
     mob
-  }), React.createElement('footer', {
-    style: footerStyle
-  }, '© Aggelos Mouzakitis'));
+  }), React.createElement(SiteFooter, {
+    mob
+  }));
+}
+
+// ─── FOR SOLOPRENEURS ────────────────────────────────────────────────────────
+function SolopreneursPage() {
+  const mob = useIsMobile();
+  const mobPage = mob ? {
+    ...pageStyle,
+    padding: '1.5rem 1rem 5rem'
+  } : pageStyle;
+  return React.createElement('main', {
+    style: mobPage
+  }, React.createElement('h1', {
+    style: {
+      ...h1Style,
+      marginBottom: mob ? '1.5rem' : '3rem',
+      fontSize: mob ? '20px' : '28px'
+    }
+  }, 'Solopreneur advisory for business problems that trace back to you'), React.createElement(Section, {
+    label: 'What you came here for',
+    mob
+  }, React.createElement(P, null, "You came here about the business. Typical things I've heard so far include sales you keep not doing, pricing you are afraid to increase, constantly changing directions, lack of focus and procrastination, client conversations that put you on fight or flight, decisions you keep putting off or lack of drive for the business itself. These are just a few examples."), React.createElement(P, {
+    last: true
+  }, "If you're reading this instead of buying another course or joining another community, part of you already suspects you ", React.createElement(Strong, null, "might not need tactical advice only"), ". You'd tell someone else in your position exactly what to do without blinking, and you still don't do it. That tells it all. And there's usually a reason it came up now, this month, and not before.")), React.createElement(Section, {
+    label: 'What it usually turns out to be',
+    mob
+  }, React.createElement(P, null, "Most of the time it traces back to a pattern in you, and usually not the one you assume, and not the one ChatGPT keeps handing you at midnight."), React.createElement(P, null, "Some people name the wrong cause completely. They think they have a marketing problem when the real problem is they can't stand being seen and getting ignored. They think they need a better funnel when they can't yet handle being judged in public. Others have a sharp, honest read on it and still can't shift it. Knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
+    href: '/blog/self-analysis-as-a-meta-way-to-maintain-control/'
+  }, "The same brain that built it can't reason its way out"), ", however smart you are."), React.createElement(P, {
+    last: true
+  }, "Unfortunately, when you work alone, such patterns run straight into the business:"), React.createElement(PatternList, {
+    items: [{
+      cause: 'You avoid being seen',
+      effect: 'no content, no outbound, no clear opinion, weak demand'
+    }, {
+      cause: "You're uncomfortable charging",
+      effect: 'you undercharge, then resent the work'
+    }, {
+      cause: 'You need to be liked',
+      effect: 'bad clients get in, scope creeps, boundaries go'
+    }, {
+      cause: "You don't trust your own read",
+      effect: 'you keep switching niche, offer, direction'
+    }, {
+      cause: "A 'no' feels personal",
+      effect: 'so you keep postponing exposure'
+    }, {
+      cause: "You're in your own head all day",
+      effect: 'decisions go in circles and the drift builds up quietly'
+    }, {
+      cause: 'You confuse thinking with doing',
+      effect: React.createElement(A, {
+        href: '/blog/the-high-cost-of-endless-pondering/'
+      }, 'lots of refining, almost no selling')
+    }]
+  }), React.createElement('div', {
+    style: {
+      marginTop: '1.2rem'
+    }
+  }, React.createElement('a', {
+    href: '#book',
+    style: ctaBtn
+  }, 'Book a fit call →'))), React.createElement('hr', {
+    style: sepStyle
+  }), React.createElement(Section, {
+    label: 'So what we actually do',
+    mob
+  }, React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Carl Jung, but because I've done the job-to-solo-and-back journey myself more than once, including building this practice right now, and I know the terrain. And in 2026, I am telling you, it's brutal, both practically and emotionally."), React.createElement(P, null, "The work runs on two tracks at the same time:"), React.createElement(P, null, React.createElement(Strong, null, "The inner track."), " See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation: sometimes deeper techniques, sometimes behavioural exercises that get you doing the thing you avoid, like actually sending the outreach or holding the price."), React.createElement(P, null, React.createElement(Strong, null, "The business track."), " The decision in front of you, the offer, the pricing, the move you need to make, the plan for where you're going. Real, practical, strategic."), React.createElement(P, {
+    last: true
+  }, "One without the other doesn't hold. Fixing the inside while the pipeline dries up is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")), React.createElement(Section, {
+    label: 'Is this therapy or coaching?',
+    mob
+  }, React.createElement(P, null, "Neither, cleanly."), React.createElement(P, null, "Therapy? Not by the protocol. I'm more direct and action-oriented, I make suggestions early, and I break a lot of the etiquette a therapist is supposed to keep. But it's therapy-informed, and that training is why I can see what's underneath."), React.createElement(P, null, "Coaching? Not that either. No framework I'll hand you to follow. There are coaching elements in how we work on decisions and pricing and positioning, but the framework was never the point."), React.createElement(P, {
+    last: true
+  }, "The honest description: a trusted advisor who's built his own thing and has the expertise to help you sort yourself out and hit your goals. Someone who cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face. When you work alone, this is often the one place you get an honest mirror, and the one place you can be yourself, not the version you perform for clients, your audience or your partner.")), React.createElement('hr', {
+    style: sepStyle
+  }), React.createElement(Section, {
+    label: 'A real example',
+    mob
+  }, React.createElement(P, null, "Someone came to me running his own consultancy. He was doing well, but it didn't feel that way to him. He asked how to grow the business, and underneath that he was worried he wasn't successful enough, stuck doing all the execution himself, running on fight or flight with clients and taking every bit of criticism badly."), React.createElement(P, null, "All that stress had piled into one conclusion: that he wasn't cut out to run a business at all. That was false, but it's a normal place to land when you spend long enough powering through your own resentment. Most of it traced back to ", React.createElement(A, {
+    href: '/blog/the-parent-archetypes-creating-high-performers-with-chronic-self-doubt/'
+  }, 'older family patterns that were still running'), ", the same ones showing up in his marriage. The business problems were almost a copy of what he was dealing with in himself."), React.createElement(P, {
+    last: true
+  }, "Over about six months that turned around. He got his confidence back, started doing things he'd written off as not for him, and grew the business by focusing on the parts he liked and outsourcing the rest. He worked on those patterns everywhere they showed up, not just at work. He didn't need a growth tactic. He needed to stop treating an old story about himself as fact.")), React.createElement(Testimonials, {
+    mob,
+    label: 'What clients say',
+    items: [{
+      q: "I had worked with coaches before, and I'd been in therapy before, but this felt different. He understands the emotional side without losing sight of the actual situation at work. We can talk about pressure or shame, and five minutes later a decision involving my business. I don't have to translate one world into the other.",
+      w: 'Anonymous, solopreneur'
+    }, {
+      q: "No motivational speeches or generic frameworks pasted onto every situation. He pays attention to how I specifically operate, notices when I change the story, and asks the question I was hoping we'd avoid. Annoying at times, usually accurate.",
+      w: 'Anonymous, solopreneur'
+    }, {
+      q: "I didn't want someone telling me to lower my standards or want less. The work has been about keeping the part of me that wants to build, while becoming less dependent on winning and approval to feel okay.",
+      w: 'Anonymous, solopreneur'
+    }]
+  }), React.createElement('hr', {
+    style: sepStyle
+  }), React.createElement(Section, {
+    label: 'Who this is for',
+    mob
+  }, React.createElement(P, null, "Solopreneurs and independent consultants in tech, ideally in Europe, the US or Canada, mostly for timezones."), React.createElement(P, {
+    last: true
+  }, "I work with a few people at a time and care more about fit than volume. I'm not here to manage egos or hand you a silver-bullet plan, because nobody has one. I'm here to be your advisor, closer to a friend with real expertise, who helps you become the version of yourself the business actually needs. It runs both ways, with rights and obligations on both sides.")), React.createElement(PersonaHowWeStartSection, {
+    mob
+  }), React.createElement(SiteFooter, {
+    mob
+  }));
 }
 
 // ─── THERAPY FOR EXECUTIVES ──────────────────────────────────────────────────
@@ -756,9 +995,9 @@ function ExecTherapyPage() {
   }, React.createElement('a', {
     href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement('footer', {
-    style: footerStyle
-  }, '© Aggelos Mouzakitis'));
+  }, 'Get in touch for a free session'))), React.createElement(SiteFooter, {
+    mob
+  }));
 }
 
 // ─── THERAPY FOR FOUNDERS ────────────────────────────────────────────────────
@@ -867,9 +1106,9 @@ function FoundersTherapyPage() {
   }, React.createElement('a', {
     href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement('footer', {
-    style: footerStyle
-  }, '© Aggelos Mouzakitis'));
+  }, 'Get in touch for a free session'))), React.createElement(SiteFooter, {
+    mob
+  }));
 }
 
 // ─── IMPOSTER SYNDROME ───────────────────────────────────────────────────────
@@ -995,9 +1234,9 @@ function ImposterPage() {
   }, React.createElement('a', {
     href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement('footer', {
-    style: footerStyle
-  }, '© Aggelos Mouzakitis'));
+  }, 'Get in touch for a free session'))), React.createElement(SiteFooter, {
+    mob
+  }));
 }
 
 // ─── BURNOUT PAGE ────────────────────────────────────────────────────────────
@@ -1113,9 +1352,9 @@ function BurnoutPage() {
   }, React.createElement('a', {
     href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement('footer', {
-    style: footerStyle
-  }, '© Aggelos Mouzakitis'));
+  }, 'Get in touch for a free session'))), React.createElement(SiteFooter, {
+    mob
+  }));
 }
 
 // ─── CAREER TRANSITION ───────────────────────────────────────────────────────
@@ -1237,9 +1476,9 @@ function CareerTransitionPage() {
   }, React.createElement('a', {
     href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement('footer', {
-    style: footerStyle
-  }, '© Aggelos Mouzakitis'));
+  }, 'Get in touch for a free session'))), React.createElement(SiteFooter, {
+    mob
+  }));
 }
 Object.assign(window, {
   HomePage,

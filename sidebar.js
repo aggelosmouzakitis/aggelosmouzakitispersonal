@@ -97,6 +97,56 @@ const ICONS = {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
   })),
+  Briefcase: () => /*#__PURE__*/React.createElement("svg", {
+    width: "19",
+    height: "19",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("rect", {
+    x: "2",
+    y: "7",
+    width: "20",
+    height: "14",
+    rx: "2"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"
+  })),
+  User: () => /*#__PURE__*/React.createElement("svg", {
+    width: "19",
+    height: "19",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "12",
+    cy: "7",
+    r: "4"
+  })),
+  Compass: () => /*#__PURE__*/React.createElement("svg", {
+    width: "19",
+    height: "19",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "12",
+    cy: "12",
+    r: "10"
+  }), /*#__PURE__*/React.createElement("polygon", {
+    points: "16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"
+  })),
   ExtLink: () => /*#__PURE__*/React.createElement("svg", {
     width: "11",
     height: "11",
@@ -154,7 +204,9 @@ const NAV_URL = {
   'home': '/',
   'blog': '/blog/',
   'ask-me-anything': '/ask-me-anything/',
-  'diagnostic': '/burnout-diagnostic/'
+  'diagnostic': '/burnout-diagnostic/',
+  'founders': '/founders/',
+  'solopreneurs': '/solopreneurs/'
 };
 const hrefFor = id => NAV_URL[id] || '/';
 
@@ -199,26 +251,15 @@ function MobileNav({
     style: tabStyle(page === 'home'),
     href: hrefFor('home')
   }, /*#__PURE__*/React.createElement(ICONS.Home, null), /*#__PURE__*/React.createElement("span", null, "Home")), /*#__PURE__*/React.createElement("a", {
+    style: tabStyle(page === 'founders'),
+    href: hrefFor('founders')
+  }, /*#__PURE__*/React.createElement(ICONS.Briefcase, null), /*#__PURE__*/React.createElement("span", null, "Founders")), /*#__PURE__*/React.createElement("a", {
+    style: tabStyle(page === 'solopreneurs'),
+    href: hrefFor('solopreneurs')
+  }, /*#__PURE__*/React.createElement(ICONS.User, null), /*#__PURE__*/React.createElement("span", null, "Solo")), /*#__PURE__*/React.createElement("a", {
     style: tabStyle(page === 'blog'),
     href: hrefFor('blog')
-  }, /*#__PURE__*/React.createElement(ICONS.Book, null), /*#__PURE__*/React.createElement("span", null, "Writing")), /*#__PURE__*/React.createElement("a", {
-    style: tabStyle(page === 'ask-me-anything'),
-    href: hrefFor('ask-me-anything')
-  }, /*#__PURE__*/React.createElement(ICONS.MessageCircle, null), /*#__PURE__*/React.createElement("span", null, "Ask")), SOCIALS.map(({
-    id,
-    label,
-    href,
-    Icon
-  }) => /*#__PURE__*/React.createElement("a", {
-    key: id,
-    href: href,
-    target: "_blank",
-    rel: "noopener",
-    style: {
-      ...tabStyle(false),
-      textDecoration: 'none'
-    }
-  }, /*#__PURE__*/React.createElement(Icon, null), /*#__PURE__*/React.createElement("span", null, label))));
+  }, /*#__PURE__*/React.createElement(ICONS.Book, null), /*#__PURE__*/React.createElement("span", null, "Writing")));
 }
 
 // ── DESKTOP SIDEBAR ──────────────────────────────────────────────────────────
@@ -305,6 +346,21 @@ function Sidebar({
       transition: 'background .12s, color .12s'
     }
   }, /*#__PURE__*/React.createElement(Icon, null));
+
+  // Collapsed-rail placeholder icon (not yet a link)
+  const iconPlaceholder = (id, Icon, title) => /*#__PURE__*/React.createElement("div", {
+    key: id,
+    title: title,
+    style: {
+      width: SB.WC,
+      height: 48,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'rgba(40,39,38,0.3)',
+      cursor: 'default'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, null));
   const navItemStyle = (id, active) => ({
     display: 'flex',
     alignItems: 'center',
@@ -346,6 +402,30 @@ function Sidebar({
       flexShrink: 0
     }
   }, /*#__PURE__*/React.createElement(Icon, null)), /*#__PURE__*/React.createElement("span", null, label)), extra);
+
+  // Expanded nav placeholder row (not yet a link)
+  const navPlaceholder = (id, label, Icon) => /*#__PURE__*/React.createElement("div", {
+    key: id,
+    title: "Coming soon",
+    style: {
+      ...navItemStyle(id, false),
+      border: undefined,
+      background: 'transparent',
+      color: 'rgba(40,39,38,0.35)',
+      cursor: 'default'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      flexShrink: 0
+    }
+  }, /*#__PURE__*/React.createElement(Icon, null)), /*#__PURE__*/React.createElement("span", null, label)));
   const sectionLabel = text => /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: '11px',
@@ -392,7 +472,7 @@ function Sidebar({
       alignSelf: 'stretch',
       margin: '0 12px 4px'
     }
-  }), iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home'), iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing'), iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything'), /*#__PURE__*/React.createElement("div", {
+  }), iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home'), iconNav('founders', ICONS.Briefcase, hrefFor('founders'), page === 'founders', 'For founders'), iconNav('solopreneurs', ICONS.User, hrefFor('solopreneurs'), page === 'solopreneurs', 'For solopreneurs'), iconPlaceholder('how-i-work', ICONS.Compass, 'How I work — coming soon'), iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing'), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
       background: SB.border,
@@ -483,7 +563,7 @@ function Sidebar({
     style: {
       padding: '10px 0 0'
     }
-  }, navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home')), navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog')), navLink('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', hrefFor('ask-me-anything'))), sectionLabel('Find me'), SOCIALS.map(({
+  }, navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home')), navLink('founders', 'For founders', ICONS.Briefcase, page === 'founders', hrefFor('founders')), navLink('solopreneurs', 'For solopreneurs', ICONS.User, page === 'solopreneurs', hrefFor('solopreneurs')), navPlaceholder('how-i-work', 'How I work', ICONS.Compass), navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog'))), sectionLabel('Find me'), SOCIALS.map(({
     id,
     label,
     href,

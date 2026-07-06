@@ -48,6 +48,24 @@ const ICONS = {
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
     </svg>
   ),
+  Briefcase: () => (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="7" width="20" height="14" rx="2"/>
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+    </svg>
+  ),
+  User: () => (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+      <circle cx="12" cy="7" r="4"/>
+    </svg>
+  ),
+  Compass: () => (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+    </svg>
+  ),
   ExtLink: () => (
     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
       <line x1="7" y1="17" x2="17" y2="7"/>
@@ -75,6 +93,7 @@ const SOCIALS = [
 const NAV_URL = {
   'home': '/', 'blog': '/blog/', 'ask-me-anything': '/ask-me-anything/',
   'diagnostic': '/burnout-diagnostic/',
+  'founders': '/founders/', 'solopreneurs': '/solopreneurs/',
 };
 const hrefFor = (id) => NAV_URL[id] || '/';
 
@@ -99,17 +118,15 @@ function MobileNav({ page }) {
       <a style={tabStyle(page === 'home')} href={hrefFor('home')}>
         <ICONS.Home /><span>Home</span>
       </a>
+      <a style={tabStyle(page === 'founders')} href={hrefFor('founders')}>
+        <ICONS.Briefcase /><span>Founders</span>
+      </a>
+      <a style={tabStyle(page === 'solopreneurs')} href={hrefFor('solopreneurs')}>
+        <ICONS.User /><span>Solo</span>
+      </a>
       <a style={tabStyle(page === 'blog')} href={hrefFor('blog')}>
         <ICONS.Book /><span>Writing</span>
       </a>
-      <a style={tabStyle(page === 'ask-me-anything')} href={hrefFor('ask-me-anything')}>
-        <ICONS.MessageCircle /><span>Ask</span>
-      </a>
-      {SOCIALS.map(({ id, label, href, Icon }) => (
-        <a key={id} href={href} target="_blank" rel="noopener" style={{ ...tabStyle(false), textDecoration: 'none' }}>
-          <Icon /><span>{label}</span>
-        </a>
-      ))}
     </nav>
   );
 }
@@ -169,6 +186,17 @@ function Sidebar({ page, setPage, open, setOpen }) {
     </a>
   );
 
+  // Collapsed-rail placeholder icon (not yet a link)
+  const iconPlaceholder = (id, Icon, title) => (
+    <div key={id} title={title}
+      style={{
+        width: SB.WC, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        color: 'rgba(40,39,38,0.3)', cursor: 'default',
+      }}>
+      <Icon />
+    </div>
+  );
+
   const navItemStyle = (id, active) => ({
     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
     width: '100%', padding: '11px 18px',
@@ -193,6 +221,17 @@ function Sidebar({ page, setPage, open, setOpen }) {
     </a>
   );
 
+  // Expanded nav placeholder row (not yet a link)
+  const navPlaceholder = (id, label, Icon) => (
+    <div key={id} title="Coming soon"
+      style={{ ...navItemStyle(id, false), border: undefined, background: 'transparent', color: 'rgba(40,39,38,0.35)', cursor: 'default' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <span style={{ display: 'flex', flexShrink: 0 }}><Icon /></span>
+        <span>{label}</span>
+      </div>
+    </div>
+  );
+
   const sectionLabel = (text) => (
     <div style={{ fontSize: '11px', letterSpacing: '.14em', textTransform: 'uppercase', color: SB.muted, padding: '18px 18px 6px' }}>
       {text}
@@ -206,8 +245,10 @@ function Sidebar({ page, setPage, open, setOpen }) {
       <a href={hrefFor('home')}><img src="https://aggelosmouzakitis.com/img/aggelos.jpg" alt="Aggelos Mouzakitis" width={38} height={38} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', margin: '22px 0 18px', display: 'block' }} /></a>
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '0 12px 4px' }} />
       {iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home')}
+      {iconNav('founders', ICONS.Briefcase, hrefFor('founders'), page === 'founders', 'For founders')}
+      {iconNav('solopreneurs', ICONS.User, hrefFor('solopreneurs'), page === 'solopreneurs', 'For solopreneurs')}
+      {iconPlaceholder('how-i-work', ICONS.Compass, 'How I work — coming soon')}
       {iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing')}
-      {iconNav('ask-me-anything', ICONS.MessageCircle, hrefFor('ask-me-anything'), page === 'ask-me-anything', 'Ask me anything')}
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '4px 12px' }} />
       {SOCIALS.map(s => iconLink(s))}
       <div style={{ flex: 1 }} />
@@ -231,8 +272,10 @@ function Sidebar({ page, setPage, open, setOpen }) {
         {/* Navigation */}
         <div style={{ padding: '10px 0 0' }}>
           {navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home'))}
+          {navLink('founders', 'For founders', ICONS.Briefcase, page === 'founders', hrefFor('founders'))}
+          {navLink('solopreneurs', 'For solopreneurs', ICONS.User, page === 'solopreneurs', hrefFor('solopreneurs'))}
+          {navPlaceholder('how-i-work', 'How I work', ICONS.Compass)}
           {navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog'))}
-          {navLink('ask-me-anything', 'Ask me anything', ICONS.MessageCircle, page === 'ask-me-anything', hrefFor('ask-me-anything'))}
         </div>
 
         {/* Find me */}
