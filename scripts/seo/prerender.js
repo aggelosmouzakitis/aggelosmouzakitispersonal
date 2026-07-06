@@ -12,10 +12,21 @@ const PAGES = [
   { f: 'imposter-syndrome-therapy/index.html', faq: true },
   { f: 'executive-burnout-therapy/index.html', faq: true },
   { f: 'career-transition-therapy/index.html', faq: true },
+  { f: 'founders/index.html', faq: false },
   { f: 'burnout-diagnostic/index.html', faq: false },
   { f: 'blog/index.html', faq: false },
   { f: 'ask-me-anything/index.html', faq: false },
 ];
+
+// Individual blog posts don't use the #root App shell — they're static articles
+// that mount only the Sidebar into #sidebar-mount. Without a prerendered snapshot,
+// the sidebar (including the "Work With Me" CTA) is invisible until the unpkg
+// React/ReactDOM CDN scripts load, which is why it could look "missing" or
+// inconsistent versus every other page (all of which have a baked-in fallback).
+const BLOG_POST_FILES = fs.readdirSync(ROOT + '/blog', { withFileTypes: true })
+  .filter(d => d.isDirectory())
+  .map(d => `blog/${d.name}/index.html`)
+  .filter(f => fs.existsSync(ROOT + '/' + f));
 
 function injectPrerender(html, inner) {
   // Replace #root (empty or already-populated) with the captured innerHTML.
@@ -23,6 +34,12 @@ function injectPrerender(html, inner) {
   const re = /<div id="root">[\s\S]*?<\/div>(\s*<script)/;
   if (!re.test(html)) throw new Error('root anchor not found');
   return html.replace(re, (m, g1) => '<div id="root">' + inner + '</div>' + g1);
+}
+
+function injectSidebarPrerender(html, inner) {
+  const re = /<div id="sidebar-mount">[\s\S]*?<\/div>(\s*<div id="content-area")/;
+  if (!re.test(html)) throw new Error('sidebar-mount anchor not found');
+  return html.replace(re, (m, g1) => '<div id="sidebar-mount">' + inner + '</div>' + g1);
 }
 
 (async () => {
@@ -83,6 +100,27 @@ function injectPrerender(html, inner) {
     fs.writeFileSync(filePath, html);
 
     report.push({ file: p.f, prerenderChars: inner.length, faqs: faqs.length, jsErrors: errs });
+    await page.close();
+  }
+
+  for (const f of BLOG_POST_FILES) {
+    const page = await ctx.newPage();
+    const errs = [];
+    page.on('pageerror', e => errs.push(String(e)));
+    await page.goto('http://localhost:8099/' + f, { waitUntil: 'load' });
+    try { await page.waitForFunction(() => {
+      const m = document.getElementById('sidebar-mount');
+      return m && m.innerText && m.innerText.trim().length > 20;
+    }, { timeout: 8000 }); } catch (e) {}
+    await page.waitForTimeout(500);
+
+    const inner = await page.evaluate(() => document.getElementById('sidebar-mount').innerHTML);
+    const filePath = ROOT + '/' + f;
+    let html = fs.readFileSync(filePath, 'utf8');
+    html = injectSidebarPrerender(html, inner);
+    fs.writeFileSync(filePath, html);
+
+    report.push({ file: f, prerenderChars: inner.length, jsErrors: errs });
     await page.close();
   }
 

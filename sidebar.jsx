@@ -260,13 +260,13 @@ function Sidebar({ page, setPage, open, setOpen }) {
 
         {/* Work with me CTA */}
         <div style={{ padding: '0 16px 22px', flexShrink: 0 }}>
-          <div style={{ border: `1px solid rgba(26,127,55,0.25)`, padding: '18px', background: 'rgba(26,127,55,0.04)' }}>
-            <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: SB.accent, marginBottom: 8 }}>Work With Me</div>
-            <div style={{ fontSize: '13px', color: SB.muted, lineHeight: 1.75, marginBottom: 14 }}>A 15-minute fit call to see if it's a fit.</div>
+          <div style={{ border: `1.5px solid rgba(26,127,55,0.45)`, padding: '19px', background: 'rgba(26,127,55,0.08)' }}>
+            <div style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: SB.accent, marginBottom: 9 }}>Work With Me</div>
+            <div style={{ fontSize: '14px', fontWeight: 500, color: SB.active, lineHeight: 1.6, marginBottom: 16 }}>A 15-minute fit call to see if it's a fit.</div>
             <a href="#book"
-              onMouseEnter={e => { e.currentTarget.style.background = SB.accent; e.currentTarget.style.color = '#fff'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = SB.accent; }}
-              style={{ display: 'block', textAlign: 'center', width: '100%', padding: '11px 0', fontFamily: 'inherit', fontSize: '12px', letterSpacing: '.08em', textTransform: 'uppercase', background: 'transparent', border: `1px solid ${SB.accent}`, color: SB.accent, cursor: 'pointer', textDecoration: 'none', transition: 'background .15s, color .15s' }}>
+              onMouseEnter={e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = SB.accent; e.currentTarget.style.borderColor = SB.accent; }}
+              style={{ display: 'block', textAlign: 'center', width: '100%', padding: '13px 0', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: SB.accent, border: `1.5px solid ${SB.accent}`, color: '#fff', cursor: 'pointer', textDecoration: 'none', transition: 'background .15s, border-color .15s' }}>
               Book a fit call →
             </a>
           </div>

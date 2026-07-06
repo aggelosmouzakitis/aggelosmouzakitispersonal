@@ -13,7 +13,7 @@ const pageStyle = {
   fontFamily: 'inherit', color: C.text,
 };
 const h1Style = { fontSize: '32px', fontWeight: 400, lineHeight: 1.4, color: C.text, marginBottom: '2.5rem', letterSpacing: '-.02em' };
-const h2Style = { fontSize: '13px', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: C.muted, paddingTop: '.25rem', lineHeight: 1.7 };
+const h2Style = { fontSize: '17px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: C.muted, paddingTop: '.25rem', lineHeight: 1.5 };
 const h3Style = { fontSize: '18px', fontWeight: 400, lineHeight: 1.7, color: C.text, marginBottom: '.6rem', borderBottom: `1px solid ${C.border}`, paddingBottom: '.4rem' };
 const sectionStyle = { display: 'grid', gridTemplateColumns: '150px 1fr', gap: '0 2.5rem', marginBottom: '3rem' };
 const pStyle = { marginBottom: '1.4rem', lineHeight: 1.75, fontSize: '18px', color: C.text };
@@ -78,8 +78,8 @@ function Testimonial({ quote, who }) {
     React.createElement('footer', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, who)
   );
 }
-function Testimonials({ items, mob }) {
-  return React.createElement(Section, { label: 'What clients say', mob },
+function Testimonials({ items, mob, label }) {
+  return React.createElement(Section, { label: label || 'What clients say', mob },
     items.map(function (t, i) { return React.createElement(Testimonial, { key: i, quote: t.q, who: t.w }); }),
     React.createElement('p', { style: { marginBottom: 0, marginTop: '.4rem' } },
       React.createElement('a', { href: '/reviews/', style: greenLink }, 'Read more client reflections \u2192'))
@@ -217,9 +217,113 @@ function SpecialtyPage({ pageId }) {
     'imposter-syndrome-therapy': ImposterPage,
     'executive-burnout-therapy': BurnoutPage,
     'career-transition-therapy': CareerTransitionPage,
+    'founders': ForFoundersPage,
   };
   const Component = pages[pageId];
   return Component ? React.createElement(Component) : null;
+}
+
+// ─── PERSONA PAGE SHARED BLOCKS (identical across /founders/, /solopreneurs/, ...) ──
+function PersonaWorkSection({ mob }) {
+  return React.createElement(Section, { label: 'So what we actually do', mob },
+    React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Freud, but because I've sat in your seat more than once and I know the terrain."),
+    React.createElement(P, null, "The work runs on two tracks at the same time:"),
+    React.createElement(P, null, React.createElement(Strong, null, "The inner track."), " See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation. Sometimes deeper trauma techniques, sometimes behavioural exercises that get you doing the thing you avoid."),
+    React.createElement(P, null, React.createElement(Strong, null, "The business track."), " The decision in front of you, the move you need to make, the plan for where you're going. Real, practical and strategic."),
+    React.createElement(P, { last: true }, "One without the other doesn't hold. Fixing the inside while the company drifts is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")
+  );
+}
+function PersonaTherapyOrCoachingSection({ mob }) {
+  return React.createElement(Section, { label: 'Is this therapy or coaching?', mob },
+    React.createElement(P, null, "Neither, cleanly."),
+    React.createElement(P, null, "Therapy? Not by the protocol. I'm more direct and action-oriented, I make suggestions early, and I break a lot of the etiquette a therapist is supposed to keep. But it's therapy-informed, and that training is why I can see what's underneath."),
+    React.createElement(P, null, "Coaching? Not that either. No framework I'll hand you to follow. There are coaching elements in how we work on decisions, but the framework was never the point."),
+    React.createElement(P, { last: true }, "The honest description: a trusted advisor who's sat in your seat and has the expertise to help you sort yourself out and hit your goals. Someone who cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face. For a lot of founders it's the one place they can be themselves, not the version they perform for the team, the investors, the cofounder or the partner.")
+  );
+}
+function PersonaHowWeStartSection({ mob }) {
+  return React.createElement(Section, { label: 'How we start', mob },
+    React.createElement(P, null, React.createElement(Strong, null, "1. Fit call."), " ~15 minutes, free. Not a session, just to see if we click or if you can't stand me. Both fine."),
+    React.createElement(P, null, React.createElement(Strong, null, "2. One paid session."), " You bring the problem as you see it. We find the one underneath. You leave with a clear read and one real move. Worth it even if we stop there."),
+    React.createElement(P, { last: true }, React.createElement(Strong, null, "3. Ongoing, if it's worth it."), " Private, one to one, for as long as it's genuinely useful. Not a session longer."),
+    React.createElement('div', { style: { marginTop: '1rem' } },
+      React.createElement('a', { href: '#book', style: ctaBtn }, 'Book a fit call →')
+    )
+  );
+}
+function PatternList({ items }) {
+  return React.createElement('div', { style: { marginBottom: '1.4rem' } },
+    items.map(function (it, i) {
+      return React.createElement('p', { key: i, style: { ...pStyle, marginBottom: '.7rem' } },
+        React.createElement(Strong, null, it.cause), ' → ', it.effect
+      );
+    })
+  );
+}
+
+// ─── FOR FOUNDERS ────────────────────────────────────────────────────────────
+function ForFoundersPage() {
+  const mob = useIsMobile();
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  return React.createElement('main', { style: mobPage },
+    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.5rem' : '3rem', fontSize: mob ? '20px' : '28px' } }, 'For founders'),
+
+    React.createElement(Section, { label: 'What you came here for', mob },
+      React.createElement(P, null, "You came here about something either business-related that gives you stress, activates inner criticism or prevents you from reaching your goals."),
+      React.createElement(P, { last: true }, "If you're reading this instead of booking another consultant, part of you already suspects it isn't necessarily a strategy problem. You'd give someone else in your position the right advice without blinking, and you still don't do it yourself. That gap is the tell. And there's usually a reason it surfaced now, this month, and not before.")
+    ),
+
+    React.createElement(Section, { label: 'What it usually turns out to be', mob },
+      React.createElement(P, null, "Most of the time it traces back to a pattern in you. Usually not the one you assume, and not the one ChatGPT keeps handing you at midnight."),
+      React.createElement(P, null,
+        "Some founders name the wrong cause entirely, such as calling the procrastination laziness or the burnout overwork. Others have a sharp, honest read on it and still can't shift the thing. Knowing the pattern and being free of it are different jobs. ",
+        React.createElement(A, { href: '/blog/self-analysis-as-a-meta-way-to-maintain-control/' }, "The same brain that built it can't reason its way out of it"),
+        ", however smart you are."
+      ),
+      React.createElement(P, { last: true }, "And it doesn't stay personal. Founder psychology becomes company architecture:"),
+      React.createElement(PatternList, { items: [
+        { cause: 'You avoid discomfort', effect: 'sales, hiring, firing, pricing and fundraising all keep sliding' },
+        { cause: 'You need control', effect: 'nothing scales past you' },
+        { cause: 'You need to be liked', effect: 'the team stays pleasant and a little weak' },
+        { cause: "You can't sit with uncertainty", effect: 'strategy turns slow, reactive, over-validated' },
+        { cause: 'Your worth is fused to output', effect: "burnout becomes the company's normal speed" },
+        { cause: "You're scared of being exposed", effect: 'metrics, feedback and bad news start to feel like threats' },
+        { cause: 'You feel alone at the top', effect: React.createElement(A, { href: '/blog/the-loneliness-and-emotional-pressure-that-founders-experience/' }, "you lose your read on what's real") },
+      ] }),
+      React.createElement('div', { style: { marginTop: '1.2rem' } },
+        React.createElement('a', { href: '#book', style: ctaBtn }, 'Book a fit call →')
+      )
+    ),
+
+    React.createElement('hr', { style: sepStyle }),
+    React.createElement(PersonaWorkSection, { mob }),
+    React.createElement(PersonaTherapyOrCoachingSection, { mob }),
+
+    React.createElement('hr', { style: sepStyle }),
+    React.createElement(Section, { label: 'A real example', mob },
+      React.createElement(P, null, "A founder came in having lost his motivation. He'd built the company, stopped caring about it, and wanted the drive back. He felt like a failure, was quietly planning his escape, and his marriage was strained because the obsessiveness and the hours had been bleeding into home."),
+      React.createElement(P, { last: true },
+        "We didn't chase the motivation. We worked through the low period so he could think again, then got underneath it, to where the failure feeling came from and why the drive had drained out. Once that was clear, the business decisions stopped feeling impossible. We built a plan for the next chapter, including a clean exit, and he did the work at home. He didn't need more motivation. He needed to understand ",
+        React.createElement(A, { href: '/blog/what-lost-purpose-actually-means-for-many-high-performers/' }, 'what had happened to it'), "."
+      )
+    ),
+
+    React.createElement(Testimonials, { mob, label: 'What founders say', items: [
+      { q: "I had worked with coaches before, and I'd been in therapy before, but this felt different. He understands the emotional side without losing sight of the actual situation at work. We can talk about pressure or shame, and five minutes later a decision involving my team. I don't have to translate one world into the other.", w: 'Anonymous, founder' },
+      { q: "No motivational speeches or generic frameworks pasted onto every situation. He pays attention to how I specifically operate, notices when I change the story, and asks the question I was hoping we'd avoid. Annoying at times, usually accurate.", w: 'Anonymous, founder' },
+      { q: "I didn't want someone telling me to work less or be less ambitious. The work has been about keeping the part of me that wants to build, while becoming less dependent on winning and approval to feel okay.", w: 'Anonymous, founder' },
+    ] }),
+
+    React.createElement('hr', { style: sepStyle }),
+    React.createElement(Section, { label: 'Who this is for', mob },
+      React.createElement(P, null, "Tech founders, ideally in Europe, the US or Canada, mostly for timezones."),
+      React.createElement(P, { last: true }, "I work with a few people at a time and care more about fit than volume. Not here to manage egos or hand you a silver-bullet plan, because nobody has one. I'm here to be your advisor, closer to a friend with real expertise, who helps you become the version of yourself the company actually needs. It runs both ways, with rights and obligations on both sides.")
+    ),
+
+    React.createElement(PersonaHowWeStartSection, { mob }),
+
+    React.createElement('footer', { style: footerStyle }, '© Aggelos Mouzakitis')
+  );
 }
 
 // ─── THERAPY FOR EXECUTIVES ──────────────────────────────────────────────────
