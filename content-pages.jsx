@@ -219,7 +219,7 @@ function HomePage({ setPage }) {
   };
 
   return React.createElement('main', { style: mainStyle },
-    React.createElement('h1', { style: srOnly }, 'Aggelos Mouzakitis — Licensed Psychotherapist & Coach for Tech Founders'),
+    React.createElement('h1', { style: srOnly }, 'Aggelos Mouzakitis — Advisor & Licensed Psychotherapist for Tech Founders & Solopreneurs'),
 
     React.createElement('div', { style: introRowStyle },
       React.createElement('div', { style: introTextStyle },
@@ -251,11 +251,11 @@ function HomePage({ setPage }) {
           decoding: 'async',
           style: introImgStyle,
         }),
-        React.createElement('div', { style: { display: mob ? 'none' : 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '6px', marginTop: '12px', paddingRight: '10px' } },
-          React.createElement('span', { style: { fontFamily: "'Segoe Script','Bradley Hand','Comic Sans MS',cursive", fontStyle: 'italic', fontSize: '16px', color: C.accent, transform: 'rotate(-3deg)', whiteSpace: 'nowrap' } }, 'Friendlier than I look'),
-          React.createElement('svg', { width: 40, height: 34, viewBox: '0 0 40 34', fill: 'none', stroke: C.accent, strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round' },
-            React.createElement('path', { d: 'M4 32 C 4 16, 16 8, 34 6' }),
-            React.createElement('path', { d: 'M26 4 L35 5 L32 13' })
+        React.createElement('div', { style: { display: mob ? 'none' : 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', gap: '2px', marginTop: '2px', paddingRight: '22px' } },
+          React.createElement('span', { style: { fontFamily: "'Segoe Script','Bradley Hand','Comic Sans MS',cursive", fontStyle: 'italic', fontSize: '16px', color: C.accent, transform: 'rotate(-3deg)', whiteSpace: 'nowrap', alignSelf: 'flex-end', marginBottom: '2px' } }, 'Friendlier than I look'),
+          React.createElement('svg', { width: 46, height: 48, viewBox: '0 0 46 48', fill: 'none', stroke: C.accent, strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round' },
+            React.createElement('path', { d: 'M42 3 C 45 24, 34 37, 7 42' }),
+            React.createElement('path', { d: 'M16 34 L5 42 L16 47' })
           )
         )
       )
@@ -539,7 +539,7 @@ function BookPage() {
     React.createElement('h2', { style: { ...h2Style, color: C.accent, marginBottom: '1.2rem' } }, 'Book below'),
     React.createElement('div', {
       className: 'calendly-inline-widget',
-      'data-url': 'https://calendly.com/aggelosmouzakitis?hide_landing_page_details=1&hide_gdpr_banner=1',
+      'data-url': 'https://calendly.com/aggelosmouzakitis/one-to-one',
       style: { minWidth: '320px', height: '700px', marginBottom: '2rem' }
     }),
     React.createElement(P, null,
