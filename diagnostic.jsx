@@ -439,8 +439,8 @@ function DiagnosticPage() {
 
   if (screen === 'intro') return (
     <div style={C.page} ref={mainRef}>
-      <p style={C.eyebrow}>Fulfilment diagnostic</p>
-      <h1 style={C.h1}>The High-Performance Fulfilment Diagnostic</h1>
+      <p style={C.eyebrow}>Diagnostic</p>
+      <h1 style={C.h1}>Starting diagnostic</h1>
       <p style={C.p}>The goal of this diagnostic is not to diagnose you or label you.</p>
       <p style={C.p}>I am using it to get an initial understanding of how your current relationship with work, pressure, responsibility, decisions, conflict, ambition, recovery, and other people is actually operating.</p>
       <p style={C.p}>Around 8 minutes. At the end, you'll get your operating pattern, a level, and a breakdown by section but consider more of a conversation starter.</p>

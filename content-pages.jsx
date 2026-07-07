@@ -473,40 +473,109 @@ function SolopreneursPage() {
 // ─── HOW I WORK ──────────────────────────────────────────────────────────────
 function HowIWorkPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1.1rem 5rem' } : pageStyle;
+
+  const kicker = (txt) => React.createElement('h2', {
+    style: { fontSize: '13px', fontWeight: 700, letterSpacing: '.09em', textTransform: 'uppercase', color: C.muted, margin: '0 0 1.1rem' }
+  }, txt);
+  const block = { marginBottom: mob ? '2.75rem' : '3.5rem' };
+  const cardBase = { border: `1px solid ${C.border}`, borderRadius: '12px', background: '#FFFFFF' };
+  const note = (children, last) => React.createElement('p', {
+    style: { fontSize: '16px', lineHeight: 1.7, color: C.muted, margin: last ? '1.1rem 0 0' : '1.1rem 0 .3rem' }
+  }, children);
+
+  const stepCard = (n, title, tag, body) => React.createElement('div', {
+    style: { ...cardBase, padding: mob ? '1.15rem 1.15rem 1.25rem' : '1.35rem 1.3rem 1.45rem', display: 'flex', flexDirection: 'column', gap: '.7rem' }
+  },
+    React.createElement('div', { style: { display: 'flex', alignItems: 'center', gap: '.65rem' } },
+      React.createElement('span', { style: { width: '30px', height: '30px', flexShrink: 0, borderRadius: '50%', background: C.accent, color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', fontWeight: 700, lineHeight: 1 } }, n),
+      React.createElement('span', { style: { fontSize: '17px', fontWeight: 700, color: C.text } }, title)
+    ),
+    React.createElement('span', { style: { alignSelf: 'flex-start', fontSize: '11px', letterSpacing: '.05em', textTransform: 'uppercase', color: C.accent, background: 'rgba(26,127,55,0.08)', border: '1px solid rgba(26,127,55,0.25)', borderRadius: '999px', padding: '.2rem .65rem' } }, tag),
+    React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.65, color: C.text, margin: 0 } }, body)
+  );
+
+  const trackCard = (title, body) => React.createElement('div', {
+    style: { ...cardBase, padding: mob ? '1.15rem' : '1.35rem', flex: 1 }
+  },
+    React.createElement('h3', { style: { fontSize: '17px', fontWeight: 700, color: C.text, margin: '0 0 .5rem' } }, title),
+    React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.65, color: C.text, margin: 0 } }, body)
+  );
+
+  const cadenceRow = (phase, rhythm, desc, first) => React.createElement('tr', null,
+    React.createElement('td', { style: { width: mob ? '38%' : '32%', verticalAlign: 'top', padding: mob ? '.85rem .8rem' : '1rem 1.2rem', borderTop: first ? 'none' : `1px solid ${C.border}`, fontSize: '16px', fontWeight: 700, color: C.text } }, phase),
+    React.createElement('td', { style: { verticalAlign: 'top', padding: mob ? '.85rem .8rem' : '1rem 1.2rem', borderTop: first ? 'none' : `1px solid ${C.border}`, fontSize: '15px', lineHeight: 1.6, color: C.text } },
+      React.createElement('span', { style: { color: C.accent, fontWeight: 700 } }, rhythm + '. '), desc
+    )
+  );
+
+  const notLine = (txt) => React.createElement('li', { style: { display: 'flex', gap: '.7rem', alignItems: 'baseline', padding: '.55rem 0', fontSize: '16px', lineHeight: 1.55, color: C.text } },
+    React.createElement('span', { style: { color: '#c0392b', fontWeight: 700, flexShrink: 0, fontSize: '15px' } }, '✕'),
+    React.createElement('span', null, txt)
+  );
+
   return React.createElement('main', { style: mobPage },
-    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.5rem' : '2rem', fontSize: mob ? '20px' : '28px' } }, 'How I work'),
-    React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '2rem' : '3rem' } }, "It's a private working relationship, one to one, and it runs in three steps."),
-    React.createElement(Section, { label: 'The three steps', mob },
-      React.createElement(P, null, React.createElement(Strong, null, "1. Fit call — ~15 min, free."), " We see if we click, or if you can't stand me. Not a session. Just so neither of us wastes the other's time."),
-      React.createElement(P, null, React.createElement(Strong, null, "2. Paid session — one session."), " You bring the problem the way you see it. We find the one that's actually brewing underneath it. You leave with a clear read and one real move documented in a handover document. Worth it even if we stop here."),
-      React.createElement(P, null, React.createElement(Strong, null, "3. Ongoing — if it's worth it."), " Private, one to one, for as long as it's genuinely useful. Not a session longer."),
-      React.createElement(P, { last: true }, "Most people start at the fit call, but if you already know you want to work and just want to get going, you can skip straight to the paid session.")
+    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.25rem' : '1.5rem', fontSize: mob ? '26px' : '32px' } }, 'How I work'),
+    React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '2.5rem' : '3.5rem' } }, "It's a private working relationship, one to one, and it runs in three steps."),
+
+    React.createElement('section', { style: block },
+      kicker('The three steps'),
+      React.createElement('div', { style: { display: 'grid', gridTemplateColumns: mob ? '1fr' : 'repeat(3, 1fr)', gap: mob ? '.9rem' : '1rem', alignItems: 'stretch' } },
+        stepCard('1', 'Fit call', '~15 min · free', "We see if we click, or if you can't stand me. Not a session. Just so neither of us wastes the other's time."),
+        stepCard('2', 'Paid session', 'one session', "You bring the problem the way you see it. We find the one that's actually brewing underneath it. You leave with a clear read and one real move, documented in a handover. Worth it even if we stop here."),
+        stepCard('3', 'Ongoing', "if it's worth it", "Private, one to one, for as long as it's genuinely useful. Not a session longer.")
+      ),
+      note("Most people start at the fit call, but if you already know you want to work and just want to get going, you can skip straight to the paid session.", true)
     ),
-    React.createElement(Section, { label: 'What the ongoing work looks like', mob },
-      React.createElement(P, null, "If we continue, it runs on two tracks at the same time."),
-      React.createElement(P, null, React.createElement(Strong, null, "The inner track."), " We find the pattern that's actually driving the problem, then work to rewire it. Awareness first, then the real change, which usually takes more than talking."),
-      React.createElement(P, null, React.createElement(Strong, null, "The business track."), " The decision in front of you, the move you need to make, the plan for where you're going. Practical and strategic."),
-      React.createElement(P, null, "In between sessions, I study our calls, we might monitor your biomarkers together, and I set exercises, diagnostics and measurement techniques so we have a benchmark in place."),
-      React.createElement(P, { last: true }, "One without the other doesn't hold, so we don't split them.")
+
+    React.createElement('section', { style: block },
+      kicker('What the ongoing work looks like'),
+      React.createElement('p', { style: { fontSize: '16px', lineHeight: 1.7, color: C.text, margin: '0 0 1.1rem' } }, "If we continue, it runs on two tracks at the same time."),
+      React.createElement('div', { style: { display: 'flex', flexDirection: mob ? 'column' : 'row', gap: mob ? '.9rem' : '1rem', alignItems: 'stretch' } },
+        trackCard('The inner track', "We find the pattern that's actually driving the problem, then work to rewire it. Awareness first, then the real change, which usually takes more than talking."),
+        trackCard('The business track', "The decision in front of you, the move you need to make, the plan for where you're going. Practical and strategic.")
+      ),
+      note("In between sessions, I study our calls, we might monitor your biomarkers together, and I set exercises, diagnostics and measurement techniques so we have a benchmark in place."),
+      note("One without the other doesn't hold, so we don't split them.", true)
     ),
-    React.createElement(Section, { label: 'Cadence', mob },
-      React.createElement(P, null, React.createElement(Strong, null, "First few months — weekly."), " Builds momentum and trust. The work compounds instead of resetting every session."),
-      React.createElement(P, null, React.createElement(Strong, null, "After that — flexible."), " Once the rhythm is there, we can space it out. It stays as long as it's useful to you."),
-      React.createElement(P, { last: true }, "Between sessions you can reach me when something real comes up. Not a 24/7 line, but you're not on your own until the next slot either.")
+
+    React.createElement('section', { style: block },
+      kicker('Cadence'),
+      React.createElement('div', { style: { ...cardBase, overflow: 'hidden' } },
+        React.createElement('table', { style: { width: '100%', borderCollapse: 'collapse' } },
+          React.createElement('tbody', null,
+            cadenceRow('First few months', 'Weekly', 'Builds momentum and trust. The work compounds instead of resetting every session.', true),
+            cadenceRow('After that', 'Flexible', "Once the rhythm is there, we can space it out. It stays as long as it's useful to you.")
+          )
+        )
+      ),
+      note("Between sessions you can reach me when something real comes up. Not a 24/7 line, but you're not on your own until the next slot either.", true)
     ),
-    React.createElement(Section, { label: 'What it costs', mob },
-      React.createElement(P, { last: true }, "I keep the number of clients small, so I can go deep with each one. I'll give you the specifics on the fit call. What I'll say here is this is premium, ongoing, and priced as a monthly engagement, not by the hour.")
+
+    React.createElement('section', { style: block },
+      kicker('What it costs'),
+      React.createElement('div', { style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(26,127,55,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
+        "I keep the number of clients small, so I can go deep with each one. I'll give you the specifics on the fit call. What I'll say here is this is ",
+        React.createElement('span', { style: { fontWeight: 700 } }, 'premium, ongoing, and priced as a monthly engagement'),
+        ", not by the hour."
+      )
     ),
-    React.createElement(Section, { label: 'What this is not', mob },
-      React.createElement(P, null, "Not therapy by the protocol, though it's therapy-informed."),
-      React.createElement(P, null, "Not coaching with a framework, though it has coaching in it."),
-      React.createElement(P, null, "Not a course, not a program, not a plan I hand you and disappear."),
-      React.createElement(P, { last: true }, "It's a trusted advisory relationship with someone who's sat where you're sitting, cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face."),
-      React.createElement('div', { style: { marginTop: '1.2rem' } },
+
+    React.createElement('section', { style: block },
+      kicker('What this is not'),
+      React.createElement('ul', { style: { listStyle: 'none', margin: '0 0 1.4rem', padding: 0 } },
+        notLine("Not therapy by the protocol, though it's therapy-informed."),
+        notLine("Not coaching with a framework, though it has coaching in it."),
+        notLine("Not a course, not a program, not a plan I hand you and disappear.")
+      ),
+      React.createElement('div', { style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(26,127,55,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
+        "It's a trusted advisory relationship with someone who's sat where you're sitting, cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face."
+      ),
+      React.createElement('div', { style: { marginTop: '1.6rem' } },
         React.createElement('a', { href: '/book/', style: ctaBtn }, 'Book a fit call →')
       )
     ),
+
     React.createElement(SiteFooter, { mob })
   );
 }

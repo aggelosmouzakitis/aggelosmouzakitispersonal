@@ -495,9 +495,9 @@ function DiagnosticPage() {
     ref: mainRef
   }, /*#__PURE__*/React.createElement("p", {
     style: C.eyebrow
-  }, "Fulfilment diagnostic"), /*#__PURE__*/React.createElement("h1", {
+  }, "Diagnostic"), /*#__PURE__*/React.createElement("h1", {
     style: C.h1
-  }, "The High-Performance Fulfilment Diagnostic"), /*#__PURE__*/React.createElement("p", {
+  }, "Starting diagnostic"), /*#__PURE__*/React.createElement("p", {
     style: C.p
   }, "The goal of this diagnostic is not to diagnose you or label you."), /*#__PURE__*/React.createElement("p", {
     style: C.p
