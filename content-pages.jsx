@@ -12,10 +12,13 @@ const pageStyle = {
   maxWidth: 740, margin: '0 auto', padding: '4rem 2rem 7rem',
   fontFamily: 'inherit', color: C.text,
 };
+// Wider canvas for pages that carry visual blocks (cards, aligned tables) in the
+// right-hand content column — gives the Section content room so nothing is squeezed.
+const widePageStyle = { ...pageStyle, maxWidth: 940 };
 const h1Style = { fontSize: '32px', fontWeight: 400, lineHeight: 1.4, color: C.text, marginBottom: '2.5rem', letterSpacing: '-.02em' };
 const h2Style = { fontSize: '17px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: C.muted, paddingTop: '.25rem', lineHeight: 1.5, textWrap: 'balance' };
 const h3Style = { fontSize: '18px', fontWeight: 400, lineHeight: 1.7, color: C.text, marginBottom: '.6rem', borderBottom: `1px solid ${C.border}`, paddingBottom: '.4rem' };
-const sectionStyle = { display: 'grid', gridTemplateColumns: '150px 1fr', gap: '0 2.5rem', marginBottom: '3rem' };
+const sectionStyle = { display: 'grid', gridTemplateColumns: '184px 1fr', gap: '0 2.25rem', marginBottom: '3rem' };
 const pStyle = { marginBottom: '1.4rem', lineHeight: 1.75, fontSize: '18px', color: C.text };
 const leadStyle = { marginBottom: '1.4rem', lineHeight: 1.6, fontSize: '23px', fontWeight: 500, letterSpacing: '-.01em', color: C.text };
 const sepStyle = { border: 'none', borderTop: `1px solid ${C.sepBorder}`, margin: '2.5rem 0' };
@@ -289,17 +292,16 @@ function SpecialtyPage({ pageId }) {
 
 // ─── PERSONA PAGE SHARED BLOCKS (identical across /founders/, /solopreneurs/, ...) ──
 function PersonaWorkSection({ mob }) {
-  return React.createElement('section', { style: { marginBottom: mob ? '2.75rem' : '3rem' } },
-    React.createElement(Kicker, null, 'So what we actually do'),
+  return React.createElement(Section, { label: 'So what we actually do', mob },
     React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Freud, but because I've sat in your seat more than once and I know the terrain."),
     React.createElement(P, null, "The work runs on two tracks at the same time:"),
-    React.createElement(TrackCards, { mob, tracks: [
-      { title: 'The inner track', body: "See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation. Sometimes deeper trauma techniques, sometimes behavioural exercises that get you doing the thing you avoid." },
-      { title: 'The business track', body: "The decision in front of you, the move you need to make, the plan for where you're going. Real, practical and strategic." },
-    ] }),
-    React.createElement('div', { style: { marginTop: '1.3rem' } },
-      React.createElement(P, { last: true }, "One without the other doesn't hold. Fixing the inside while the company drifts is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")
-    )
+    React.createElement('div', { style: { margin: '0 0 1.2rem' } },
+      React.createElement(TrackCards, { mob, tracks: [
+        { title: 'The inner track', body: "See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation. Sometimes deeper trauma techniques, sometimes behavioural exercises that get you doing the thing you avoid." },
+        { title: 'The business track', body: "The decision in front of you, the move you need to make, the plan for where you're going. Real, practical and strategic." },
+      ] })
+    ),
+    React.createElement(P, { last: true }, "One without the other doesn't hold. Fixing the inside while the company drifts is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")
   );
 }
 function PersonaTherapyOrCoachingSection({ mob }) {
@@ -311,8 +313,7 @@ function PersonaTherapyOrCoachingSection({ mob }) {
   );
 }
 function PersonaHowWeStartSection({ mob }) {
-  return React.createElement('section', { style: { marginBottom: mob ? '1rem' : '1.5rem' } },
-    React.createElement(Kicker, null, 'How we start'),
+  return React.createElement(Section, { label: 'How we start', mob },
     React.createElement(StepCards, { mob, steps: [
       { n: '1', title: 'Fit call', tag: '~15 min · free', body: "Not a session, just to see if we click or if you can't stand me. Both fine." },
       { n: '2', title: 'Paid session', tag: 'one session', body: "You bring the problem as you see it. We find the one underneath. You leave with a clear read and one real move. Worth it even if we stop there." },
@@ -353,7 +354,7 @@ function PatternList({ items }) {
 // ─── FOR FOUNDERS ────────────────────────────────────────────────────────────
 function ForFoundersPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
   return React.createElement('main', { style: mobPage },
     React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.5rem' : '3rem', fontSize: mob ? '20px' : '28px' } }, 'Founder advisory for business problems that trace back to you'),
 
@@ -362,8 +363,7 @@ function ForFoundersPage() {
       React.createElement(P, { last: true }, "If you're reading this instead of booking another consultant, part of you already suspects it isn't necessarily a strategy problem. You'd give someone else in your position the right advice without blinking, and you still don't do it yourself. That gap is the tell, and there's usually a reason you're ready to ask for some help now, this month, and not before.")
     ),
 
-    React.createElement('section', { style: { marginBottom: mob ? '2.75rem' : '3rem' } },
-      React.createElement(Kicker, null, 'What it usually turns out to be'),
+    React.createElement(Section, { label: 'What it usually turns out to be', mob },
       React.createElement(P, null, "Most of the time it traces back to a pattern in you. Usually not the one you assume and definitely not the one ChatGPT suggested."),
       React.createElement(P, null,
         "Some founders name the wrong cause entirely, such as calling the procrastination laziness or the burnout overwork. Others have a sharp, honest read on it but still don't know how to get rid of it. Knowing the pattern and being free of it are different jobs. ",
@@ -419,7 +419,7 @@ function ForFoundersPage() {
 // ─── FOR SOLOPRENEURS ────────────────────────────────────────────────────────
 function SolopreneursPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
   return React.createElement('main', { style: mobPage },
     React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.5rem' : '3rem', fontSize: mob ? '20px' : '28px' } }, 'Solopreneur advisory for business problems that trace back to you'),
 
@@ -432,8 +432,7 @@ function SolopreneursPage() {
       )
     ),
 
-    React.createElement('section', { style: { marginBottom: mob ? '2.75rem' : '3rem' } },
-      React.createElement(Kicker, null, 'What it usually turns out to be'),
+    React.createElement(Section, { label: 'What it usually turns out to be', mob },
       React.createElement(P, null, "In lots of cases it traces back to a pattern in you, and usually not the one you assume nor the one ChatGPT eloquently tells you."),
       React.createElement(P, null,
         "Some people name the wrong cause completely. Others have a sharp, honest read on it and still can't shift it. Knowing the pattern and being free of it are different jobs. ",
@@ -456,17 +455,16 @@ function SolopreneursPage() {
     ),
 
     React.createElement('hr', { style: sepStyle }),
-    React.createElement('section', { style: { marginBottom: mob ? '2.75rem' : '3rem' } },
-      React.createElement(Kicker, null, 'So what we actually do'),
+    React.createElement(Section, { label: 'So what we actually do', mob },
       React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Carl Jung, but because I've done the job-to-solo-and-back journey myself more than once, including building this practice right now, and I know the terrain. And in 2026, I am telling you, it's brutal, both practically and emotionally."),
       React.createElement(P, null, "The work runs on two tracks at the same time:"),
-      React.createElement(TrackCards, { mob, tracks: [
-        { title: 'The inner track', body: "See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation: sometimes deeper techniques, sometimes behavioural exercises that get you doing the thing you avoid, like actually sending the outreach or holding the price." },
-        { title: 'The business track', body: "The decision in front of you, the offer, the pricing, the move you need to make, the plan for where you're going. Real, practical, strategic." },
-      ] }),
-      React.createElement('div', { style: { marginTop: '1.3rem' } },
-        React.createElement(P, { last: true }, "One without the other doesn't hold. Fixing the inside while the pipeline dries up is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")
-      )
+      React.createElement('div', { style: { margin: '0 0 1.2rem' } },
+        React.createElement(TrackCards, { mob, tracks: [
+          { title: 'The inner track', body: "See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation: sometimes deeper techniques, sometimes behavioural exercises that get you doing the thing you avoid, like actually sending the outreach or holding the price." },
+          { title: 'The business track', body: "The decision in front of you, the offer, the pricing, the move you need to make, the plan for where you're going. Real, practical, strategic." },
+        ] })
+      ),
+      React.createElement(P, { last: true }, "One without the other doesn't hold. Fixing the inside while the pipeline dries up is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")
     ),
     React.createElement(Section, { label: 'Is this therapy or coaching?', mob },
       React.createElement(P, null, "Neither, cleanly."),

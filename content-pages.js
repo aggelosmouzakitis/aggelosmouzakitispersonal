@@ -15,6 +15,12 @@ const pageStyle = {
   fontFamily: 'inherit',
   color: C.text
 };
+// Wider canvas for pages that carry visual blocks (cards, aligned tables) in the
+// right-hand content column — gives the Section content room so nothing is squeezed.
+const widePageStyle = {
+  ...pageStyle,
+  maxWidth: 940
+};
 const h1Style = {
   fontSize: '32px',
   fontWeight: 400,
@@ -44,8 +50,8 @@ const h3Style = {
 };
 const sectionStyle = {
   display: 'grid',
-  gridTemplateColumns: '150px 1fr',
-  gap: '0 2.5rem',
+  gridTemplateColumns: '184px 1fr',
+  gap: '0 2.25rem',
   marginBottom: '3rem'
 };
 const pStyle = {
@@ -649,11 +655,14 @@ function SpecialtyPage({
 function PersonaWorkSection({
   mob
 }) {
-  return React.createElement('section', {
+  return React.createElement(Section, {
+    label: 'So what we actually do',
+    mob
+  }, React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Freud, but because I've sat in your seat more than once and I know the terrain."), React.createElement(P, null, "The work runs on two tracks at the same time:"), React.createElement('div', {
     style: {
-      marginBottom: mob ? '2.75rem' : '3rem'
+      margin: '0 0 1.2rem'
     }
-  }, React.createElement(Kicker, null, 'So what we actually do'), React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Freud, but because I've sat in your seat more than once and I know the terrain."), React.createElement(P, null, "The work runs on two tracks at the same time:"), React.createElement(TrackCards, {
+  }, React.createElement(TrackCards, {
     mob,
     tracks: [{
       title: 'The inner track',
@@ -662,13 +671,9 @@ function PersonaWorkSection({
       title: 'The business track',
       body: "The decision in front of you, the move you need to make, the plan for where you're going. Real, practical and strategic."
     }]
-  }), React.createElement('div', {
-    style: {
-      marginTop: '1.3rem'
-    }
-  }, React.createElement(P, {
+  })), React.createElement(P, {
     last: true
-  }, "One without the other doesn't hold. Fixing the inside while the company drifts is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")));
+  }, "One without the other doesn't hold. Fixing the inside while the company drifts is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it."));
 }
 function PersonaTherapyOrCoachingSection({
   mob
@@ -683,11 +688,10 @@ function PersonaTherapyOrCoachingSection({
 function PersonaHowWeStartSection({
   mob
 }) {
-  return React.createElement('section', {
-    style: {
-      marginBottom: mob ? '1rem' : '1.5rem'
-    }
-  }, React.createElement(Kicker, null, 'How we start'), React.createElement(StepCards, {
+  return React.createElement(Section, {
+    label: 'How we start',
+    mob
+  }, React.createElement(StepCards, {
     mob,
     steps: [{
       n: '1',
@@ -791,7 +795,7 @@ function ForFoundersPage() {
   const mobPage = mob ? {
     ...pageStyle,
     padding: '1.5rem 1rem 5rem'
-  } : pageStyle;
+  } : widePageStyle;
   return React.createElement('main', {
     style: mobPage
   }, React.createElement('h1', {
@@ -805,11 +809,10 @@ function ForFoundersPage() {
     mob
   }, React.createElement(P, null, "You came here about something either business-related that gives you stress, activates inner criticism or prevents you from reaching your goals."), React.createElement(P, {
     last: true
-  }, "If you're reading this instead of booking another consultant, part of you already suspects it isn't necessarily a strategy problem. You'd give someone else in your position the right advice without blinking, and you still don't do it yourself. That gap is the tell, and there's usually a reason you're ready to ask for some help now, this month, and not before.")), React.createElement('section', {
-    style: {
-      marginBottom: mob ? '2.75rem' : '3rem'
-    }
-  }, React.createElement(Kicker, null, 'What it usually turns out to be'), React.createElement(P, null, "Most of the time it traces back to a pattern in you. Usually not the one you assume and definitely not the one ChatGPT suggested."), React.createElement(P, null, "Some founders name the wrong cause entirely, such as calling the procrastination laziness or the burnout overwork. Others have a sharp, honest read on it but still don't know how to get rid of it. Knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
+  }, "If you're reading this instead of booking another consultant, part of you already suspects it isn't necessarily a strategy problem. You'd give someone else in your position the right advice without blinking, and you still don't do it yourself. That gap is the tell, and there's usually a reason you're ready to ask for some help now, this month, and not before.")), React.createElement(Section, {
+    label: 'What it usually turns out to be',
+    mob
+  }, React.createElement(P, null, "Most of the time it traces back to a pattern in you. Usually not the one you assume and definitely not the one ChatGPT suggested."), React.createElement(P, null, "Some founders name the wrong cause entirely, such as calling the procrastination laziness or the burnout overwork. Others have a sharp, honest read on it but still don't know how to get rid of it. Knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
     href: '/blog/self-analysis-as-a-meta-way-to-maintain-control/'
   }, "The same brain that built it can't reason its way out of it"), ", however smart you are."), React.createElement(P, null, "And it doesn't stay only with you, of course, but gets spilled one way or another into your business:"), React.createElement(PatternList, {
     items: [{
@@ -892,7 +895,7 @@ function SolopreneursPage() {
   const mobPage = mob ? {
     ...pageStyle,
     padding: '1.5rem 1rem 5rem'
-  } : pageStyle;
+  } : widePageStyle;
   return React.createElement('main', {
     style: mobPage
   }, React.createElement('h1', {
@@ -906,11 +909,10 @@ function SolopreneursPage() {
     mob
   }, React.createElement(P, null, "You came here about the business. Typical things I've heard so far include things you avoid, things you are overthinking, things you are afraid of, lack of focus, procrastination and more. The common thread is that they start inside you but get spilled into your business."), React.createElement(P, {
     last: true
-  }, "If you're reading this instead of buying another course or joining another community, part of you already suspects you ", React.createElement(Strong, null, "might not need tactical advice only"), ". You'd tell someone else in your position exactly what to do without blinking, and you still don't do it. That tells it all. And there's usually a reason it came up now, this month, and not before.")), React.createElement('section', {
-    style: {
-      marginBottom: mob ? '2.75rem' : '3rem'
-    }
-  }, React.createElement(Kicker, null, 'What it usually turns out to be'), React.createElement(P, null, "In lots of cases it traces back to a pattern in you, and usually not the one you assume nor the one ChatGPT eloquently tells you."), React.createElement(P, null, "Some people name the wrong cause completely. Others have a sharp, honest read on it and still can't shift it. Knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
+  }, "If you're reading this instead of buying another course or joining another community, part of you already suspects you ", React.createElement(Strong, null, "might not need tactical advice only"), ". You'd tell someone else in your position exactly what to do without blinking, and you still don't do it. That tells it all. And there's usually a reason it came up now, this month, and not before.")), React.createElement(Section, {
+    label: 'What it usually turns out to be',
+    mob
+  }, React.createElement(P, null, "In lots of cases it traces back to a pattern in you, and usually not the one you assume nor the one ChatGPT eloquently tells you."), React.createElement(P, null, "Some people name the wrong cause completely. Others have a sharp, honest read on it and still can't shift it. Knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
     href: '/blog/self-analysis-as-a-meta-way-to-maintain-control/'
   }, "The same brain that built it can't reason its way out"), ", however smart you are."), React.createElement(P, null, "Unfortunately, when you work alone, such patterns run straight into the business:"), React.createElement(PatternList, {
     items: [{
@@ -947,11 +949,14 @@ function SolopreneursPage() {
     style: ctaBtn
   }, 'Book a fit call →'))), React.createElement('hr', {
     style: sepStyle
-  }), React.createElement('section', {
+  }), React.createElement(Section, {
+    label: 'So what we actually do',
+    mob
+  }, React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Carl Jung, but because I've done the job-to-solo-and-back journey myself more than once, including building this practice right now, and I know the terrain. And in 2026, I am telling you, it's brutal, both practically and emotionally."), React.createElement(P, null, "The work runs on two tracks at the same time:"), React.createElement('div', {
     style: {
-      marginBottom: mob ? '2.75rem' : '3rem'
+      margin: '0 0 1.2rem'
     }
-  }, React.createElement(Kicker, null, 'So what we actually do'), React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Carl Jung, but because I've done the job-to-solo-and-back journey myself more than once, including building this practice right now, and I know the terrain. And in 2026, I am telling you, it's brutal, both practically and emotionally."), React.createElement(P, null, "The work runs on two tracks at the same time:"), React.createElement(TrackCards, {
+  }, React.createElement(TrackCards, {
     mob,
     tracks: [{
       title: 'The inner track',
@@ -960,13 +965,9 @@ function SolopreneursPage() {
       title: 'The business track',
       body: "The decision in front of you, the offer, the pricing, the move you need to make, the plan for where you're going. Real, practical, strategic."
     }]
-  }), React.createElement('div', {
-    style: {
-      marginTop: '1.3rem'
-    }
-  }, React.createElement(P, {
+  })), React.createElement(P, {
     last: true
-  }, "One without the other doesn't hold. Fixing the inside while the pipeline dries up is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it."))), React.createElement(Section, {
+  }, "One without the other doesn't hold. Fixing the inside while the pipeline dries up is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")), React.createElement(Section, {
     label: 'Is this therapy or coaching?',
     mob
   }, React.createElement(P, null, "Neither, cleanly."), React.createElement(P, null, "Therapy? Not by the protocol. I'm more direct and action-oriented, I make suggestions early, and I break a lot of the etiquette a therapist is supposed to keep. But it's therapy-informed, and that training is why I can see what's underneath."), React.createElement(P, null, "Coaching? Not that either. No framework I'll hand you to follow. There are coaching elements in how we work on decisions and pricing and positioning, but the framework was never the point."), React.createElement(P, {
