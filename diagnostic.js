@@ -499,11 +499,11 @@ function DiagnosticPage() {
     style: C.h1
   }, "The High-Performance Fulfilment Diagnostic"), /*#__PURE__*/React.createElement("p", {
     style: C.p
-  }, "This isn't designed to label you as burnt out. It's built to show how your current relationship with work, ambition, and pressure is affecting your fulfilment, nervous system, self-trust, relationships, and ability to recover."), /*#__PURE__*/React.createElement("p", {
+  }, "The goal of this diagnostic is not to diagnose you or label you."), /*#__PURE__*/React.createElement("p", {
     style: C.p
-  }, "It's for tech high performers who are still functioning, still ambitious, and still carrying responsibility \u2014 but suspect the way they're succeeding is starting to cost more than it gives back. It looks beyond generic burnout symptoms at the deeper patterns behind pressure, achievement, nervous-system load, emotional fatigue, overthinking, avoidance, and loss of fulfilment."), /*#__PURE__*/React.createElement("p", {
+  }, "I am using it to get an initial understanding of how your current relationship with work, pressure, responsibility, decisions, conflict, ambition, recovery, and other people is actually operating."), /*#__PURE__*/React.createElement("p", {
     style: C.p
-  }, "Around 8 minutes. At the end you'll see your operating pattern, a level, and a breakdown by section."), /*#__PURE__*/React.createElement("div", {
+  }, "Around 8 minutes. At the end, you'll get your operating pattern, a level, and a breakdown by section but consider more of a conversation starter."), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: 'repeat(3,1fr)',

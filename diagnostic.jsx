@@ -441,9 +441,9 @@ function DiagnosticPage() {
     <div style={C.page} ref={mainRef}>
       <p style={C.eyebrow}>Fulfilment diagnostic</p>
       <h1 style={C.h1}>The High-Performance Fulfilment Diagnostic</h1>
-      <p style={C.p}>This isn't designed to label you as burnt out. It's built to show how your current relationship with work, ambition, and pressure is affecting your fulfilment, nervous system, self-trust, relationships, and ability to recover.</p>
-      <p style={C.p}>It's for tech high performers who are still functioning, still ambitious, and still carrying responsibility — but suspect the way they're succeeding is starting to cost more than it gives back. It looks beyond generic burnout symptoms at the deeper patterns behind pressure, achievement, nervous-system load, emotional fatigue, overthinking, avoidance, and loss of fulfilment.</p>
-      <p style={C.p}>Around 8 minutes. At the end you'll see your operating pattern, a level, and a breakdown by section.</p>
+      <p style={C.p}>The goal of this diagnostic is not to diagnose you or label you.</p>
+      <p style={C.p}>I am using it to get an initial understanding of how your current relationship with work, pressure, responsibility, decisions, conflict, ambition, recovery, and other people is actually operating.</p>
+      <p style={C.p}>Around 8 minutes. At the end, you'll get your operating pattern, a level, and a breakdown by section but consider more of a conversation starter.</p>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', margin: '2rem 0' }}>
         {[['Length', '45 questions'], ['Format', '1-5 scale + N/A'], ['Result', 'Level + section breakdown']].map(([label, value]) =>
