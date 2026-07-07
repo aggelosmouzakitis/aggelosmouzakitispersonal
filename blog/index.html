@@ -90,6 +90,13 @@ body {
   .blog-h1 { font-size: 22px; }
   .post-title { font-size: 16px; }
 }
+#main-scroll .hv-card{transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+#main-scroll .hv-card:hover{border-color:rgba(26,127,55,.5);box-shadow:0 8px 26px rgba(26,127,55,.10);transform:translateY(-3px)}
+#main-scroll .hv-row{transition:background .15s ease,color .15s ease}
+#main-scroll .hv-row:hover{background:rgba(26,127,55,.06)}
+#main-scroll a.cta-btn:hover,#main-scroll button.cta-btn:hover{background:#1a7f37;border-color:#1a7f37;color:#fff;box-shadow:0 6px 18px rgba(26,127,55,.28)}
+#main-scroll .opt-btn{transition:border-color .15s ease,background .15s ease}
+#main-scroll .opt-btn:hover{border-color:rgba(26,127,55,.6);background:rgba(26,127,55,.04)}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aggelosmouzakitis.com/"}, {"@type": "ListItem", "position": 2, "name": "Writing", "item": "https://aggelosmouzakitis.com/blog/"}]}</script>
 <!-- seo-enhancements -->
@@ -106,7 +113,7 @@ body {
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 
-<script src="../sidebar.js?v=14"></script>
+<script src="../sidebar.js?v=15"></script>
 <script>
 const {
   useState,

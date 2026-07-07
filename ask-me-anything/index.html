@@ -147,6 +147,13 @@ body {
   .ama-anon-note { font-size: 12px; margin: 1.2rem 0 2rem; }
   .ama-step { font-size: 15px; }
 }
+#main-scroll .hv-card{transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+#main-scroll .hv-card:hover{border-color:rgba(26,127,55,.5);box-shadow:0 8px 26px rgba(26,127,55,.10);transform:translateY(-3px)}
+#main-scroll .hv-row{transition:background .15s ease,color .15s ease}
+#main-scroll .hv-row:hover{background:rgba(26,127,55,.06)}
+#main-scroll a.cta-btn:hover,#main-scroll button.cta-btn:hover{background:#1a7f37;border-color:#1a7f37;color:#fff;box-shadow:0 6px 18px rgba(26,127,55,.28)}
+#main-scroll .opt-btn{transition:border-color .15s ease,background .15s ease}
+#main-scroll .opt-btn:hover{border-color:rgba(26,127,55,.6);background:rgba(26,127,55,.04)}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Ask Me Anything | Aggelos Mouzakitis", "description": "Ask Aggelos anything about burnout, performance identity, imposter syndrome, or the psychology of high achievement. Questions may be answered in a future video.", "url": "https://aggelosmouzakitis.com/ask-me-anything/", "author": {"@type": "Person", "name": "Aggelos Mouzakitis", "url": "https://aggelosmouzakitis.com"}, "isPartOf": {"@type": "WebSite", "name": "Aggelos Mouzakitis", "url": "https://aggelosmouzakitis.com"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aggelosmouzakitis.com/"}, {"@type": "ListItem", "position": 2, "name": "Ask Me Anything", "item": "https://aggelosmouzakitis.com/ask-me-anything/"}]}</script>
@@ -164,7 +171,7 @@ body {
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="../sidebar.js?v=14"></script>
+<script src="../sidebar.js?v=15"></script>
 <script>
 const {
   useState,

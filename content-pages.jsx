@@ -156,6 +156,7 @@ function StartHere({ mob }) {
       return React.createElement('a', {
         key: item.href,
         href: item.href,
+        className: 'hv-row',
         style: rowStyle(i === 0),
         onMouseEnter: e => e.currentTarget.style.color = C.accent,
         onMouseLeave: e => e.currentTarget.style.color = C.text,
@@ -189,6 +190,7 @@ function LatestWriting({ mob }) {
         return React.createElement('a', {
           key: p.slug,
           href: `/blog/${p.slug}/`,
+          className: 'hv-row',
           style: rowStyle(i === 0),
           onMouseEnter: e => e.currentTarget.style.color = C.accent,
           onMouseLeave: e => e.currentTarget.style.color = C.text,
@@ -287,12 +289,17 @@ function SpecialtyPage({ pageId }) {
 
 // ─── PERSONA PAGE SHARED BLOCKS (identical across /founders/, /solopreneurs/, ...) ──
 function PersonaWorkSection({ mob }) {
-  return React.createElement(Section, { label: 'So what we actually do', mob },
+  return React.createElement('section', { style: { marginBottom: mob ? '2.75rem' : '3rem' } },
+    React.createElement(Kicker, null, 'So what we actually do'),
     React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Freud, but because I've sat in your seat more than once and I know the terrain."),
     React.createElement(P, null, "The work runs on two tracks at the same time:"),
-    React.createElement(P, null, React.createElement(Strong, null, "The inner track."), " See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation. Sometimes deeper trauma techniques, sometimes behavioural exercises that get you doing the thing you avoid."),
-    React.createElement(P, null, React.createElement(Strong, null, "The business track."), " The decision in front of you, the move you need to make, the plan for where you're going. Real, practical and strategic."),
-    React.createElement(P, { last: true }, "One without the other doesn't hold. Fixing the inside while the company drifts is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")
+    React.createElement(TrackCards, { mob, tracks: [
+      { title: 'The inner track', body: "See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation. Sometimes deeper trauma techniques, sometimes behavioural exercises that get you doing the thing you avoid." },
+      { title: 'The business track', body: "The decision in front of you, the move you need to make, the plan for where you're going. Real, practical and strategic." },
+    ] }),
+    React.createElement('div', { style: { marginTop: '1.3rem' } },
+      React.createElement(P, { last: true }, "One without the other doesn't hold. Fixing the inside while the company drifts is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")
+    )
   );
 }
 function PersonaTherapyOrCoachingSection({ mob }) {
@@ -304,20 +311,31 @@ function PersonaTherapyOrCoachingSection({ mob }) {
   );
 }
 function PersonaHowWeStartSection({ mob }) {
-  return React.createElement(Section, { label: 'How we start', mob },
-    React.createElement(P, null, React.createElement(Strong, null, "1. Fit call."), " ~15 minutes, free. Not a session, just to see if we click or if you can't stand me. Both fine."),
-    React.createElement(P, null, React.createElement(Strong, null, "2. One paid session."), " You bring the problem as you see it. We find the one underneath. You leave with a clear read and one real move. Worth it even if we stop there."),
-    React.createElement(P, { last: true }, React.createElement(Strong, null, "3. Ongoing, if it's worth it."), " Private, one to one, for as long as it's genuinely useful. Not a session longer."),
-    React.createElement('div', { style: { marginTop: '1rem' } },
-      React.createElement('a', { href: '/book/', style: ctaBtn }, 'Book a fit call →')
+  return React.createElement('section', { style: { marginBottom: mob ? '1rem' : '1.5rem' } },
+    React.createElement(Kicker, null, 'How we start'),
+    React.createElement(StepCards, { mob, steps: [
+      { n: '1', title: 'Fit call', tag: '~15 min · free', body: "Not a session, just to see if we click or if you can't stand me. Both fine." },
+      { n: '2', title: 'Paid session', tag: 'one session', body: "You bring the problem as you see it. We find the one underneath. You leave with a clear read and one real move. Worth it even if we stop there." },
+      { n: '3', title: 'Ongoing', tag: "if it's worth it", body: "Private, one to one, for as long as it's genuinely useful. Not a session longer." },
+    ] }),
+    React.createElement('div', { style: { marginTop: '1.4rem' } },
+      React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
     )
   );
 }
 function PatternList({ items }) {
-  return React.createElement('div', { style: { marginBottom: '1.4rem' } },
+  const mob = useIsMobile();
+  return React.createElement('div', { style: { ...cardBase, overflow: 'hidden', margin: '.4rem 0 1.4rem' } },
     items.map(function (it, i) {
-      return React.createElement('p', { key: i, style: { ...pStyle, marginBottom: '.7rem' } },
-        React.createElement(Strong, null, it.cause), ' → ', it.effect
+      return React.createElement('div', {
+        key: i, className: 'hv-row',
+        style: { display: 'flex', flexDirection: mob ? 'column' : 'row', gap: mob ? '.15rem' : '.9rem', alignItems: mob ? 'flex-start' : 'baseline', padding: mob ? '.8rem 1rem' : '.9rem 1.2rem', borderTop: i ? `1px solid ${C.border}` : 'none', fontSize: '15px', lineHeight: 1.55 }
+      },
+        React.createElement('span', { style: { fontWeight: 700, color: C.text, flexShrink: 0, minWidth: mob ? 'auto' : '38%' } }, it.cause),
+        React.createElement('span', { style: { color: C.text } },
+          React.createElement('span', { style: { color: C.accent, fontWeight: 700, marginRight: '.4rem' } }, '→'),
+          it.effect
+        )
       );
     })
   );
@@ -353,7 +371,7 @@ function ForFoundersPage() {
         { cause: 'You feel alone at the top', effect: React.createElement(A, { href: '/blog/the-loneliness-and-emotional-pressure-that-founders-experience/' }, "you lose your read on what's real") },
       ] }),
       React.createElement('div', { style: { marginTop: '1.2rem' } },
-        React.createElement('a', { href: '/book/', style: ctaBtn }, 'Book a fit call →')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
 
@@ -422,17 +440,22 @@ function SolopreneursPage() {
         { cause: 'You confuse thinking with doing', effect: React.createElement(A, { href: '/blog/the-high-cost-of-endless-pondering/' }, 'lots of refining, almost no selling') },
       ] }),
       React.createElement('div', { style: { marginTop: '1.2rem' } },
-        React.createElement('a', { href: '/book/', style: ctaBtn }, 'Book a fit call →')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
 
     React.createElement('hr', { style: sepStyle }),
-    React.createElement(Section, { label: 'So what we actually do', mob },
+    React.createElement('section', { style: { marginBottom: mob ? '2.75rem' : '3rem' } },
+      React.createElement(Kicker, null, 'So what we actually do'),
       React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Carl Jung, but because I've done the job-to-solo-and-back journey myself more than once, including building this practice right now, and I know the terrain. And in 2026, I am telling you, it's brutal, both practically and emotionally."),
       React.createElement(P, null, "The work runs on two tracks at the same time:"),
-      React.createElement(P, null, React.createElement(Strong, null, "The inner track."), " See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation: sometimes deeper techniques, sometimes behavioural exercises that get you doing the thing you avoid, like actually sending the outreach or holding the price."),
-      React.createElement(P, null, React.createElement(Strong, null, "The business track."), " The decision in front of you, the offer, the pricing, the move you need to make, the plan for where you're going. Real, practical, strategic."),
-      React.createElement(P, { last: true }, "One without the other doesn't hold. Fixing the inside while the pipeline dries up is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")
+      React.createElement(TrackCards, { mob, tracks: [
+        { title: 'The inner track', body: "See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation: sometimes deeper techniques, sometimes behavioural exercises that get you doing the thing you avoid, like actually sending the outreach or holding the price." },
+        { title: 'The business track', body: "The decision in front of you, the offer, the pricing, the move you need to make, the plan for where you're going. Real, practical, strategic." },
+      ] }),
+      React.createElement('div', { style: { marginTop: '1.3rem' } },
+        React.createElement(P, { last: true }, "One without the other doesn't hold. Fixing the inside while the pipeline dries up is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")
+      )
     ),
     React.createElement(Section, { label: 'Is this therapy or coaching?', mob },
       React.createElement(P, null, "Neither, cleanly."),
@@ -471,38 +494,52 @@ function SolopreneursPage() {
 }
 
 // ─── HOW I WORK ──────────────────────────────────────────────────────────────
+// ─── SHARED VISUAL BLOCKS (numbered step cards + two-track cards) ─────────────
+const cardBase = { border: `1px solid ${C.border}`, borderRadius: '12px', background: '#FFFFFF' };
+function Kicker({ children }) {
+  return React.createElement('h2', {
+    style: { fontSize: '13px', fontWeight: 700, letterSpacing: '.09em', textTransform: 'uppercase', color: C.muted, margin: '0 0 1.1rem' }
+  }, children);
+}
+function StepCards({ mob, steps }) {
+  return React.createElement('div', { style: { display: 'grid', gridTemplateColumns: mob ? '1fr' : 'repeat(3, 1fr)', gap: mob ? '.9rem' : '1rem', alignItems: 'stretch' } },
+    steps.map(function (s, i) {
+      return React.createElement('div', {
+        key: i, className: 'hv-card',
+        style: { ...cardBase, padding: mob ? '1.15rem 1.15rem 1.25rem' : '1.35rem 1.3rem 1.45rem', display: 'flex', flexDirection: 'column', gap: '.7rem' }
+      },
+        React.createElement('div', { style: { display: 'flex', alignItems: 'center', gap: '.65rem' } },
+          React.createElement('span', { style: { width: '30px', height: '30px', flexShrink: 0, borderRadius: '50%', background: C.accent, color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', fontWeight: 700, lineHeight: 1 } }, s.n),
+          React.createElement('span', { style: { fontSize: '17px', fontWeight: 700, color: C.text } }, s.title)
+        ),
+        s.tag && React.createElement('span', { style: { alignSelf: 'flex-start', fontSize: '11px', letterSpacing: '.05em', textTransform: 'uppercase', color: C.accent, background: 'rgba(26,127,55,0.08)', border: '1px solid rgba(26,127,55,0.25)', borderRadius: '999px', padding: '.2rem .65rem' } }, s.tag),
+        React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.65, color: C.text, margin: 0 } }, s.body)
+      );
+    })
+  );
+}
+function TrackCards({ mob, tracks }) {
+  return React.createElement('div', { style: { display: 'flex', flexDirection: mob ? 'column' : 'row', gap: mob ? '.9rem' : '1rem', alignItems: 'stretch' } },
+    tracks.map(function (t, i) {
+      return React.createElement('div', { key: i, className: 'hv-card', style: { ...cardBase, padding: mob ? '1.15rem' : '1.35rem', flex: 1 } },
+        React.createElement('h3', { style: { fontSize: '17px', fontWeight: 700, color: C.text, margin: '0 0 .5rem' } }, t.title),
+        React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.65, color: C.text, margin: 0 } }, t.body)
+      );
+    })
+  );
+}
+
 function HowIWorkPage() {
   const mob = useIsMobile();
   const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1.1rem 5rem' } : pageStyle;
 
-  const kicker = (txt) => React.createElement('h2', {
-    style: { fontSize: '13px', fontWeight: 700, letterSpacing: '.09em', textTransform: 'uppercase', color: C.muted, margin: '0 0 1.1rem' }
-  }, txt);
+  const kicker = (txt) => React.createElement(Kicker, null, txt);
   const block = { marginBottom: mob ? '2.75rem' : '3.5rem' };
-  const cardBase = { border: `1px solid ${C.border}`, borderRadius: '12px', background: '#FFFFFF' };
   const note = (children, last) => React.createElement('p', {
     style: { fontSize: '16px', lineHeight: 1.7, color: C.muted, margin: last ? '1.1rem 0 0' : '1.1rem 0 .3rem' }
   }, children);
 
-  const stepCard = (n, title, tag, body) => React.createElement('div', {
-    style: { ...cardBase, padding: mob ? '1.15rem 1.15rem 1.25rem' : '1.35rem 1.3rem 1.45rem', display: 'flex', flexDirection: 'column', gap: '.7rem' }
-  },
-    React.createElement('div', { style: { display: 'flex', alignItems: 'center', gap: '.65rem' } },
-      React.createElement('span', { style: { width: '30px', height: '30px', flexShrink: 0, borderRadius: '50%', background: C.accent, color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', fontWeight: 700, lineHeight: 1 } }, n),
-      React.createElement('span', { style: { fontSize: '17px', fontWeight: 700, color: C.text } }, title)
-    ),
-    React.createElement('span', { style: { alignSelf: 'flex-start', fontSize: '11px', letterSpacing: '.05em', textTransform: 'uppercase', color: C.accent, background: 'rgba(26,127,55,0.08)', border: '1px solid rgba(26,127,55,0.25)', borderRadius: '999px', padding: '.2rem .65rem' } }, tag),
-    React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.65, color: C.text, margin: 0 } }, body)
-  );
-
-  const trackCard = (title, body) => React.createElement('div', {
-    style: { ...cardBase, padding: mob ? '1.15rem' : '1.35rem', flex: 1 }
-  },
-    React.createElement('h3', { style: { fontSize: '17px', fontWeight: 700, color: C.text, margin: '0 0 .5rem' } }, title),
-    React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.65, color: C.text, margin: 0 } }, body)
-  );
-
-  const cadenceRow = (phase, rhythm, desc, first) => React.createElement('tr', null,
+  const cadenceRow = (phase, rhythm, desc, first) => React.createElement('tr', { className: 'hv-row' },
     React.createElement('td', { style: { width: mob ? '38%' : '32%', verticalAlign: 'top', padding: mob ? '.85rem .8rem' : '1rem 1.2rem', borderTop: first ? 'none' : `1px solid ${C.border}`, fontSize: '16px', fontWeight: 700, color: C.text } }, phase),
     React.createElement('td', { style: { verticalAlign: 'top', padding: mob ? '.85rem .8rem' : '1rem 1.2rem', borderTop: first ? 'none' : `1px solid ${C.border}`, fontSize: '15px', lineHeight: 1.6, color: C.text } },
       React.createElement('span', { style: { color: C.accent, fontWeight: 700 } }, rhythm + '. '), desc
@@ -520,21 +557,21 @@ function HowIWorkPage() {
 
     React.createElement('section', { style: block },
       kicker('The three steps'),
-      React.createElement('div', { style: { display: 'grid', gridTemplateColumns: mob ? '1fr' : 'repeat(3, 1fr)', gap: mob ? '.9rem' : '1rem', alignItems: 'stretch' } },
-        stepCard('1', 'Fit call', '~15 min · free', "We see if we click, or if you can't stand me. Not a session. Just so neither of us wastes the other's time."),
-        stepCard('2', 'Paid session', 'one session', "You bring the problem the way you see it. We find the one that's actually brewing underneath it. You leave with a clear read and one real move, documented in a handover. Worth it even if we stop here."),
-        stepCard('3', 'Ongoing', "if it's worth it", "Private, one to one, for as long as it's genuinely useful. Not a session longer.")
-      ),
+      React.createElement(StepCards, { mob, steps: [
+        { n: '1', title: 'Fit call', tag: '~15 min · free', body: "We see if we click, or if you can't stand me. Not a session. Just so neither of us wastes the other's time." },
+        { n: '2', title: 'Paid session', tag: 'one session', body: "You bring the problem the way you see it. We find the one that's actually brewing underneath it. You leave with a clear read and one real move, documented in a handover. Worth it even if we stop here." },
+        { n: '3', title: 'Ongoing', tag: "if it's worth it", body: "Private, one to one, for as long as it's genuinely useful. Not a session longer." },
+      ] }),
       note("Most people start at the fit call, but if you already know you want to work and just want to get going, you can skip straight to the paid session.", true)
     ),
 
     React.createElement('section', { style: block },
       kicker('What the ongoing work looks like'),
       React.createElement('p', { style: { fontSize: '16px', lineHeight: 1.7, color: C.text, margin: '0 0 1.1rem' } }, "If we continue, it runs on two tracks at the same time."),
-      React.createElement('div', { style: { display: 'flex', flexDirection: mob ? 'column' : 'row', gap: mob ? '.9rem' : '1rem', alignItems: 'stretch' } },
-        trackCard('The inner track', "We find the pattern that's actually driving the problem, then work to rewire it. Awareness first, then the real change, which usually takes more than talking."),
-        trackCard('The business track', "The decision in front of you, the move you need to make, the plan for where you're going. Practical and strategic.")
-      ),
+      React.createElement(TrackCards, { mob, tracks: [
+        { title: 'The inner track', body: "We find the pattern that's actually driving the problem, then work to rewire it. Awareness first, then the real change, which usually takes more than talking." },
+        { title: 'The business track', body: "The decision in front of you, the move you need to make, the plan for where you're going. Practical and strategic." },
+      ] }),
       note("In between sessions, I study our calls, we might monitor your biomarkers together, and I set exercises, diagnostics and measurement techniques so we have a benchmark in place."),
       note("One without the other doesn't hold, so we don't split them.", true)
     ),
@@ -554,7 +591,7 @@ function HowIWorkPage() {
 
     React.createElement('section', { style: block },
       kicker('What it costs'),
-      React.createElement('div', { style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(26,127,55,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
+      React.createElement('div', { className: 'hv-card', style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(26,127,55,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
         "I keep the number of clients small, so I can go deep with each one. I'll give you the specifics on the fit call. What I'll say here is this is ",
         React.createElement('span', { style: { fontWeight: 700 } }, 'premium, ongoing, and priced as a monthly engagement'),
         ", not by the hour."
@@ -568,11 +605,11 @@ function HowIWorkPage() {
         notLine("Not coaching with a framework, though it has coaching in it."),
         notLine("Not a course, not a program, not a plan I hand you and disappear.")
       ),
-      React.createElement('div', { style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(26,127,55,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
+      React.createElement('div', { className: 'hv-card', style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(26,127,55,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
         "It's a trusted advisory relationship with someone who's sat where you're sitting, cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face."
       ),
       React.createElement('div', { style: { marginTop: '1.6rem' } },
-        React.createElement('a', { href: '/book/', style: ctaBtn }, 'Book a fit call →')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
 
@@ -670,7 +707,7 @@ function ExecTherapyPage() {
       React.createElement(P, null, "All sessions are ", React.createElement(Strong, null, "remote, one-on-one, and confidential"), ". Most clients are across Europe and the US. Sessions run weekly or biweekly."),
       React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes and free"), ". We use it to figure out what's actually going on and whether working together makes sense. If it doesn't, I'll say so."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
 
@@ -701,7 +738,7 @@ function ExecTherapyPage() {
     React.createElement(Section, { label: 'Next step', mob },
       React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We use it to figure out what's going on and whether working together makes sense."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
     React.createElement(SiteFooter, { mob })
@@ -741,7 +778,7 @@ function FoundersTherapyPage() {
       React.createElement(P, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one, and confidential"), ". Nothing goes to your board, your investors, or your team. This isn't coaching attached to your company. It's a private therapeutic relationship."),
       React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes and free"), ". We use it to figure out what's going on and whether I'm the right person for it."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
 
@@ -769,7 +806,7 @@ function FoundersTherapyPage() {
     React.createElement(Section, { label: 'Next step', mob },
       React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We figure out what's going on and whether working together makes sense."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
     React.createElement(SiteFooter, { mob })
@@ -813,7 +850,7 @@ function ImposterPage() {
     React.createElement(Section, { label: 'Start here', mob },
       React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes, free, and exploratory"), ". We figure out what's driving the pattern and whether I'm the right person to work on it with you."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
 
@@ -844,7 +881,7 @@ function ImposterPage() {
     React.createElement(Section, { label: 'Next step', mob },
       React.createElement(P, null, "The first session is free and has no obligations. We use it to understand what's driving the doubt and whether this is the right approach for you."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
     React.createElement(SiteFooter, { mob })
@@ -884,7 +921,7 @@ function BurnoutPage() {
     React.createElement(Section, { label: 'Start here', mob },
       React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes, free, and exploratory"), ". We figure out what's underneath the exhaustion and whether therapy is the right approach."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
 
@@ -915,7 +952,7 @@ function BurnoutPage() {
     React.createElement(Section, { label: 'Next step', mob },
       React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We figure out what's going on and whether this is the right approach."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
     React.createElement(SiteFooter, { mob })
@@ -960,7 +997,7 @@ function CareerTransitionPage() {
     React.createElement(Section, { label: 'Start here', mob },
       React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes, free, and open"), ". We figure out what's actually driving the transition (or the resistance to it) and whether therapy is the right kind of support for this moment."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
 
@@ -991,7 +1028,7 @@ function CareerTransitionPage() {
     React.createElement(Section, { label: 'Next step', mob },
       React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We use it to understand where you actually are and what kind of support makes sense right now."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
       )
     ),
     React.createElement(SiteFooter, { mob })

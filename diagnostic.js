@@ -512,6 +512,7 @@ function DiagnosticPage() {
     }
   }, [['Length', '45 questions'], ['Format', '1-5 scale + N/A'], ['Result', 'Level + section breakdown']].map(([label, value]) => /*#__PURE__*/React.createElement("div", {
     key: label,
+    className: "hv-card",
     style: C.card
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -528,6 +529,7 @@ function DiagnosticPage() {
       marginTop: '2rem'
     }
   }, /*#__PURE__*/React.createElement("button", {
+    className: "cta-btn",
     style: C.cta,
     onClick: () => {
       setScreen('question');
@@ -569,6 +571,7 @@ function DiagnosticPage() {
     }
   }, currentQ.text), SCALE.map(opt => /*#__PURE__*/React.createElement("button", {
     key: opt.value,
+    className: "opt-btn",
     style: C.optionBtn(currentAnswer === opt.value),
     onClick: () => setAnswers(a => ({
       ...a,
@@ -582,6 +585,7 @@ function DiagnosticPage() {
       marginTop: '2rem'
     }
   }, /*#__PURE__*/React.createElement("button", {
+    className: "cta-btn",
     style: {
       ...C.cta,
       ...C.ctaSec,
@@ -593,6 +597,7 @@ function DiagnosticPage() {
       scrollTop();
     }
   }, "Back"), /*#__PURE__*/React.createElement("button", {
+    className: "cta-btn",
     style: {
       ...C.cta,
       opacity: currentAnswer === undefined ? 0.4 : 1
@@ -651,6 +656,7 @@ function DiagnosticPage() {
       marginTop: '2rem'
     }
   }, /*#__PURE__*/React.createElement("button", {
+    className: "cta-btn",
     style: {
       ...C.cta,
       ...C.ctaSec
@@ -660,6 +666,7 @@ function DiagnosticPage() {
       scrollTop();
     }
   }, "Back"), /*#__PURE__*/React.createElement("button", {
+    className: "cta-btn",
     style: {
       ...C.cta,
       opacity: !email.trim() || sending ? 0.4 : 1
@@ -793,6 +800,7 @@ function DiagnosticPage() {
     }
   }, "A diagnostic shows the pattern. Changing it is the actual work. If any of this landed, the first session is free, 60 minutes, and no strings \u2014 we use it to figure out where you are and whether working together makes sense."), /*#__PURE__*/React.createElement("a", {
     href: "mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session",
+    className: "cta-btn",
     style: {
       ...C.cta,
       textDecoration: 'none'
@@ -805,6 +813,7 @@ function DiagnosticPage() {
       flexWrap: 'wrap'
     }
   }, /*#__PURE__*/React.createElement("button", {
+    className: "cta-btn",
     style: {
       ...C.cta,
       ...C.ctaSec
@@ -818,6 +827,7 @@ function DiagnosticPage() {
       scrollTop();
     }
   }, "Retake assessment"), /*#__PURE__*/React.createElement("button", {
+    className: "cta-btn",
     style: {
       ...C.cta,
       ...C.ctaSec

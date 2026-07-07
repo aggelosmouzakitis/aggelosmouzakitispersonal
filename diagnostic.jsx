@@ -447,7 +447,7 @@ function DiagnosticPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', margin: '2rem 0' }}>
         {[['Length', '45 questions'], ['Format', '1-5 scale + N/A'], ['Result', 'Level + section breakdown']].map(([label, value]) =>
-          <div key={label} style={C.card}>
+          <div key={label} className="hv-card" style={C.card}>
             <div style={{ fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', color: '#888', marginBottom: '.5rem' }}>{label}</div>
             <div>{value}</div>
           </div>
@@ -457,7 +457,7 @@ function DiagnosticPage() {
       <p style={C.note}>This diagnostic is directional, not a clinical diagnosis.</p>
 
       <div style={{ marginTop: '2rem' }}>
-        <button style={C.cta} onClick={() => { setScreen('question'); setIdx(0); scrollTop(); }}>
+        <button className="cta-btn" style={C.cta} onClick={() => { setScreen('question'); setIdx(0); scrollTop(); }}>
           Start assessment
         </button>
       </div>
@@ -483,7 +483,7 @@ function DiagnosticPage() {
       {SCALE.map((opt) =>
         <button
           key={opt.value}
-          style={C.optionBtn(currentAnswer === opt.value)}
+          className="opt-btn" style={C.optionBtn(currentAnswer === opt.value)}
           onClick={() => setAnswers((a) => ({ ...a, [currentQ.key]: opt.value }))}
         >
           {opt.label}
@@ -492,7 +492,7 @@ function DiagnosticPage() {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginTop: '2rem' }}>
         <button
-          style={{ ...C.cta, ...C.ctaSec, opacity: idx === 0 ? 0.4 : 1 }}
+          className="cta-btn" style={{ ...C.cta, ...C.ctaSec, opacity: idx === 0 ? 0.4 : 1 }}
           disabled={idx === 0}
           onClick={() => { setIdx((i) => i - 1); scrollTop(); }}
         >
@@ -500,7 +500,7 @@ function DiagnosticPage() {
         </button>
 
         <button
-          style={{ ...C.cta, opacity: currentAnswer === undefined ? 0.4 : 1 }}
+          className="cta-btn" style={{ ...C.cta, opacity: currentAnswer === undefined ? 0.4 : 1 }}
           disabled={currentAnswer === undefined}
           onClick={() => {
             if (idx < totalQ - 1) {
@@ -548,12 +548,12 @@ function DiagnosticPage() {
       />
 
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginTop: '2rem' }}>
-        <button style={{ ...C.cta, ...C.ctaSec }} onClick={() => { setScreen('question'); scrollTop(); }}>
+        <button className="cta-btn" style={{ ...C.cta, ...C.ctaSec }} onClick={() => { setScreen('question'); scrollTop(); }}>
           Back
         </button>
 
         <button
-          style={{ ...C.cta, opacity: !email.trim() || sending ? 0.4 : 1 }}
+          className="cta-btn" style={{ ...C.cta, opacity: !email.trim() || sending ? 0.4 : 1 }}
           disabled={!email.trim() || sending}
           onClick={handleShowResults}
         >
@@ -607,7 +607,7 @@ function DiagnosticPage() {
         <p style={{ ...C.p, marginBottom: '1.2rem' }}>A diagnostic shows the pattern. Changing it is the actual work. If any of this landed, the first session is free, 60 minutes, and no strings — we use it to figure out where you are and whether working together makes sense.</p>
         <a
           href="mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session"
-          style={{ ...C.cta, textDecoration: 'none' }}
+          className="cta-btn" style={{ ...C.cta, textDecoration: 'none' }}
         >
           Book a free 60-minute session
         </a>
@@ -615,7 +615,7 @@ function DiagnosticPage() {
 
       <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
         <button
-          style={{ ...C.cta, ...C.ctaSec }}
+          className="cta-btn" style={{ ...C.cta, ...C.ctaSec }}
           onClick={() => {
             setAnswers({});
             setIdx(0);
@@ -628,7 +628,7 @@ function DiagnosticPage() {
           Retake assessment
         </button>
 
-        <button style={{ ...C.cta, ...C.ctaSec }} onClick={() => window.print()}>
+        <button className="cta-btn" style={{ ...C.cta, ...C.ctaSec }} onClick={() => window.print()}>
           Print result
         </button>
       </div>
