@@ -387,6 +387,7 @@ function DiagnosticPage() {
 
   const currentQ = FLAT_QUESTIONS[idx];
   const currentAnswer = answers[currentQ?.key];
+  const mob = typeof window !== 'undefined' && window.innerWidth < 768;
 
   const C = {
     page: { maxWidth: 940, margin: '0 auto', padding: '4rem 2rem 7rem', color: '#282726', fontFamily: 'inherit' },
@@ -440,7 +441,6 @@ function DiagnosticPage() {
 
   if (screen === 'intro') return (
     <div style={C.page} ref={mainRef}>
-      <p style={C.eyebrow}>Diagnostic</p>
       <h1 style={C.h1}>Starting diagnostic</h1>
       <p style={C.p}>The goal of this diagnostic is not to diagnose you or label you.</p>
       <p style={C.p}>I am using it to get an initial understanding of how your current relationship with work, pressure, responsibility, decisions, conflict, ambition, recovery, and other people is actually operating.</p>
@@ -463,7 +463,7 @@ function DiagnosticPage() {
         </button>
       </div>
 
-      <footer style={C.footer}>© Aggelos Mouzakitis</footer>
+      {typeof SiteFooter !== 'undefined' && React.createElement(SiteFooter, { mob })}
     </div>
   );
 
@@ -634,7 +634,7 @@ function DiagnosticPage() {
         </button>
       </div>
 
-      <footer style={C.footer}>© Aggelos Mouzakitis</footer>
+      {typeof SiteFooter !== 'undefined' && React.createElement(SiteFooter, { mob })}
     </div>
   );
 

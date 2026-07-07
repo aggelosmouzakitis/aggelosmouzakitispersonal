@@ -393,6 +393,7 @@ function DiagnosticPage() {
   }
   const currentQ = FLAT_QUESTIONS[idx];
   const currentAnswer = answers[currentQ?.key];
+  const mob = typeof window !== 'undefined' && window.innerWidth < 768;
   const C = {
     page: {
       maxWidth: 940,
@@ -501,9 +502,7 @@ function DiagnosticPage() {
   if (screen === 'intro') return /*#__PURE__*/React.createElement("div", {
     style: C.page,
     ref: mainRef
-  }, /*#__PURE__*/React.createElement("p", {
-    style: C.eyebrow
-  }, "Diagnostic"), /*#__PURE__*/React.createElement("h1", {
+  }, /*#__PURE__*/React.createElement("h1", {
     style: C.h1
   }, "Starting diagnostic"), /*#__PURE__*/React.createElement("p", {
     style: C.p
@@ -544,9 +543,9 @@ function DiagnosticPage() {
       setIdx(0);
       scrollTop();
     }
-  }, "Start assessment")), /*#__PURE__*/React.createElement("footer", {
-    style: C.footer
-  }, "\xA9 Aggelos Mouzakitis"));
+  }, "Start assessment")), typeof SiteFooter !== 'undefined' && React.createElement(SiteFooter, {
+    mob
+  }));
   if (screen === 'question') return /*#__PURE__*/React.createElement("div", {
     style: C.page,
     ref: mainRef
@@ -843,9 +842,9 @@ function DiagnosticPage() {
       ...C.ctaSec
     },
     onClick: () => window.print()
-  }, "Print result")), /*#__PURE__*/React.createElement("footer", {
-    style: C.footer
-  }, "\xA9 Aggelos Mouzakitis"));
+  }, "Print result")), typeof SiteFooter !== 'undefined' && React.createElement(SiteFooter, {
+    mob
+  }));
   return null;
 }
 Object.assign(window, {

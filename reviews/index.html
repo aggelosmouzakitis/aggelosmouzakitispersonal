@@ -64,12 +64,20 @@ a:hover { color: #146b2e; }
 .back { display: inline-block; margin-top: 2rem; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #999; text-decoration: none; }
 .back:hover { color: #282726; }
 footer.site { margin-top: 2.5rem; font-size: 14px; color: #777; }
+.site-ft { margin-top: 5rem; padding-top: 3.25rem; border-top: 1px solid rgba(40,39,38,0.2); }
+.site-ft-cols { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; }
+.site-ft-h { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #1a7f37; margin-bottom: 1.1rem; }
+.site-ft-row { margin-bottom: .75rem; }
+.site-ft a { display: inline-flex; align-items: baseline; gap: .35rem; font-size: 15px; color: #282726; text-decoration: none; line-height: 1.4; transition: color .12s; }
+.site-ft a:hover { color: #1a7f37; }
+.site-ft .ext { font-size: 11px; opacity: .5; }
+.site-ft-copy { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(40,39,38,0.12); font-size: 13px; color: #666; }
+@media (max-width: 767px) { .site-ft-cols { display: block; } .site-ft-col { margin-bottom: 2rem; } }
 @media (max-width: 767px) { .wrap { padding: 2rem 1.2rem 4rem; } h1 { font-size: 24px; } }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <p class="eyebrow">Client reflections</p>
   <h1>In their words</h1>
   <p class="lead">Anonymous reflections from founders, executives, and senior tech professionals I have worked with. Shared with permission; identifying details removed.</p>
   <blockquote class="t"><p>“I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don’t have to translate one world into the other for him.”</p><footer>Anonymous client, Founder</footer></blockquote>
@@ -88,8 +96,29 @@ footer.site { margin-top: 2.5rem; font-size: 14px; color: #777; }
   <blockquote class="t"><p>“I came in expecting a fairly standard coaching conversation. Within the first session, Aggelos understood both the professional problem and the emotional mechanism underneath it. He was warm, but very straightforward, and gave me a way of looking at the situation that I had not considered before. I left with more than advice. I left with a more accurate problem.”</p><footer>Anonymous client, Senior professional</footer></blockquote>
   <blockquote class="t"><p>“From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.”</p><footer>Anonymous client, Tech executive</footer></blockquote>
   <p class="cta">The first session is free, 60 minutes, and has no strings. <a href="mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session">Book a free session →</a></p>
-  <a href="/" class="back">← aggelosmouzakitis.com</a>
-  <footer class="site">© Aggelos Mouzakitis</footer>
+  <footer class="site-ft">
+    <div class="site-ft-cols">
+      <div class="site-ft-col">
+        <div class="site-ft-h">Work with me</div>
+        <div class="site-ft-row"><a href="/founders/">For founders</a></div>
+        <div class="site-ft-row"><a href="/solopreneurs/">For solopreneurs</a></div>
+        <div class="site-ft-row"><a href="/how-i-work/">How I work</a></div>
+        <div class="site-ft-row"><a href="/book/">Book a fit call</a></div>
+      </div>
+      <div class="site-ft-col">
+        <div class="site-ft-h">Site</div>
+        <div class="site-ft-row"><a href="/">Home</a></div>
+        <div class="site-ft-row"><a href="/blog/">Writing</a></div>
+        <div class="site-ft-row"><a href="/ask-me-anything/">Ask me anything</a></div>
+      </div>
+      <div class="site-ft-col">
+        <div class="site-ft-h">Elsewhere</div>
+        <div class="site-ft-row"><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener">LinkedIn <span class="ext">↗</span></a></div>
+        <div class="site-ft-row"><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener">YouTube <span class="ext">↗</span></a></div>
+      </div>
+    </div>
+    <div class="site-ft-copy">© Aggelos Mouzakitis · Advisor · Psychotherapist</div>
+  </footer>
 </div>
 </body>
 </html>
