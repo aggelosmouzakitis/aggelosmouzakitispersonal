@@ -267,10 +267,10 @@ const FOOTER_COLS = [{
     href: '/solopreneurs/',
     label: 'For solopreneurs'
   }, {
-    label: 'How I work',
-    muted: true
+    href: '/how-i-work/',
+    label: 'How I work'
   }, {
-    href: '#book',
+    href: '/book/',
     label: 'Book a fit call'
   }]
 }, {
@@ -559,14 +559,14 @@ function HomePage({
     href: '/founders/'
   }, 'founders'), " and ", React.createElement(IA, {
     href: '/solopreneurs/'
-  }, 'solopreneurs'), ", and it’s usually about ", React.createElement(Strong, null, "a business problem that turns out to trace back to something in them"), ". It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off."), React.createElement(P, null, "The reason people come to me specifically is that they don’t have to explain their world to a therapist who has never shipped anything, and they don’t have to leave the personal stuff at the door for a coach who only wants the business version. I understand both sides at once, which is the whole point. Also, I’ve been in your shoes. Many times."), React.createElement(P, {
+  }, 'solopreneurs'), ", and it’s usually about ", React.createElement(Strong, null, "a business that has its roots in something inside you"), ". It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off. ", React.createElement(Strong, null, "But one way or another, it prevents you from reaching your ideal state.")), React.createElement(P, null, "The reason people come to me specifically is that they don’t have to explain their world to a therapist who has never shipped anything, and they don’t have to leave the personal stuff at the door for a coach who only wants the business version. I understand both sides at once, which is the whole point."), React.createElement(P, {
     last: true
   }, "I write about all of this on my ", React.createElement(IA, {
     href: '/blog/'
   }, 'blog'), " and talk about it on my ", React.createElement(A, {
     href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA'
-  }, 'YouTube channel'), ", mostly the things people in high-stakes careers feel but almost never say out loud. If any of this sounds like you, you can read ", React.createElement(IA, {
-    href: '/about/'
+  }, 'YouTube channel'), ". If any of this sounds like you, you can read ", React.createElement(IA, {
+    href: '/how-i-work/'
   }, 'how I work'), ", or just ", React.createElement(IA, {
     href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Getting%20in%20touch'
   }, 'get in touch'), ".")), React.createElement('div', {
@@ -578,7 +578,38 @@ function HomePage({
     fetchPriority: 'high',
     decoding: 'async',
     style: introImgStyle
-  }))), React.createElement(StartHere, {
+  }), React.createElement('div', {
+    style: {
+      display: mob ? 'none' : 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      gap: '6px',
+      marginTop: '12px',
+      paddingRight: '10px'
+    }
+  }, React.createElement('span', {
+    style: {
+      fontFamily: "'Segoe Script','Bradley Hand','Comic Sans MS',cursive",
+      fontStyle: 'italic',
+      fontSize: '16px',
+      color: C.accent,
+      transform: 'rotate(-3deg)',
+      whiteSpace: 'nowrap'
+    }
+  }, 'Friendlier than I look'), React.createElement('svg', {
+    width: 40,
+    height: 34,
+    viewBox: '0 0 40 34',
+    fill: 'none',
+    stroke: C.accent,
+    strokeWidth: 1.7,
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round'
+  }, React.createElement('path', {
+    d: 'M4 32 C 4 16, 16 8, 34 6'
+  }), React.createElement('path', {
+    d: 'M26 4 L35 5 L32 13'
+  }))))), React.createElement(StartHere, {
     mob
   }), React.createElement(LatestWriting, {
     mob
@@ -598,7 +629,9 @@ function SpecialtyPage({
     'executive-burnout-therapy': BurnoutPage,
     'career-transition-therapy': CareerTransitionPage,
     'founders': ForFoundersPage,
-    'solopreneurs': SolopreneursPage
+    'solopreneurs': SolopreneursPage,
+    'how-i-work': HowIWorkPage,
+    'book': BookPage
   };
   const Component = pages[pageId];
   return Component ? React.createElement(Component) : null;
@@ -638,7 +671,7 @@ function PersonaHowWeStartSection({
       marginTop: '1rem'
     }
   }, React.createElement('a', {
-    href: '#book',
+    href: '/book/',
     style: ctaBtn
   }, 'Book a fit call →')));
 }
@@ -680,14 +713,14 @@ function ForFoundersPage() {
     mob
   }, React.createElement(P, null, "You came here about something either business-related that gives you stress, activates inner criticism or prevents you from reaching your goals."), React.createElement(P, {
     last: true
-  }, "If you're reading this instead of booking another consultant, part of you already suspects it isn't necessarily a strategy problem. You'd give someone else in your position the right advice without blinking, and you still don't do it yourself. That gap is the tell. And there's usually a reason it surfaced now, this month, and not before.")), React.createElement(Section, {
+  }, "If you're reading this instead of booking another consultant, part of you already suspects it isn't necessarily a strategy problem. You'd give someone else in your position the right advice without blinking, and you still don't do it yourself. That gap is the tell, and there's usually a reason you're ready to ask for some help now, this month, and not before.")), React.createElement(Section, {
     label: 'What it usually turns out to be',
     mob
-  }, React.createElement(P, null, "Most of the time it traces back to a pattern in you. Usually not the one you assume, and not the one ChatGPT keeps handing you at midnight."), React.createElement(P, null, "Some founders name the wrong cause entirely, such as calling the procrastination laziness or the burnout overwork. Others have a sharp, honest read on it and still can't shift the thing. Knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
+  }, React.createElement(P, null, "Most of the time it traces back to a pattern in you. Usually not the one you assume and definitely not the one ChatGPT suggested."), React.createElement(P, null, "Some founders name the wrong cause entirely, such as calling the procrastination laziness or the burnout overwork. Others have a sharp, honest read on it but still don't know how to get rid of it. Knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
     href: '/blog/self-analysis-as-a-meta-way-to-maintain-control/'
   }, "The same brain that built it can't reason its way out of it"), ", however smart you are."), React.createElement(P, {
     last: true
-  }, "And it doesn't stay personal. Founder psychology becomes company architecture:"), React.createElement(PatternList, {
+  }, "And it doesn't stay only with you, of course, but gets spilled one way or another into your business:"), React.createElement(PatternList, {
     items: [{
       cause: 'You avoid discomfort',
       effect: 'sales, hiring, firing, pricing and fundraising all keep sliding'
@@ -717,7 +750,7 @@ function ForFoundersPage() {
       marginTop: '1.2rem'
     }
   }, React.createElement('a', {
-    href: '#book',
+    href: '/book/',
     style: ctaBtn
   }, 'Book a fit call →'))), React.createElement('hr', {
     style: sepStyle
@@ -779,12 +812,12 @@ function SolopreneursPage() {
   }, 'Solopreneur advisory for business problems that trace back to you'), React.createElement(Section, {
     label: 'What you came here for',
     mob
-  }, React.createElement(P, null, "You came here about the business. Typical things I've heard so far include sales you keep not doing, pricing you are afraid to increase, constantly changing directions, lack of focus and procrastination, client conversations that put you on fight or flight, decisions you keep putting off or lack of drive for the business itself. These are just a few examples."), React.createElement(P, {
+  }, React.createElement(P, null, "You came here about the business. Typical things I've heard so far include things you avoid, things you are overthinking, things you are afraid of, lack of focus, procrastination and more. The common thread is that they start inside you but get spilled into your business."), React.createElement(P, {
     last: true
   }, "If you're reading this instead of buying another course or joining another community, part of you already suspects you ", React.createElement(Strong, null, "might not need tactical advice only"), ". You'd tell someone else in your position exactly what to do without blinking, and you still don't do it. That tells it all. And there's usually a reason it came up now, this month, and not before.")), React.createElement(Section, {
     label: 'What it usually turns out to be',
     mob
-  }, React.createElement(P, null, "Most of the time it traces back to a pattern in you, and usually not the one you assume, and not the one ChatGPT keeps handing you at midnight."), React.createElement(P, null, "Some people name the wrong cause completely. They think they have a marketing problem when the real problem is they can't stand being seen and getting ignored. They think they need a better funnel when they can't yet handle being judged in public. Others have a sharp, honest read on it and still can't shift it. Knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
+  }, React.createElement(P, null, "In lots of cases it traces back to a pattern in you, and usually not the one you assume nor the one ChatGPT eloquently tells you."), React.createElement(P, null, "Some people name the wrong cause completely. Others have a sharp, honest read on it and still can't shift it. Knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
     href: '/blog/self-analysis-as-a-meta-way-to-maintain-control/'
   }, "The same brain that built it can't reason its way out"), ", however smart you are."), React.createElement(P, {
     last: true
@@ -818,7 +851,7 @@ function SolopreneursPage() {
       marginTop: '1.2rem'
     }
   }, React.createElement('a', {
-    href: '#book',
+    href: '/book/',
     style: ctaBtn
   }, 'Book a fit call →'))), React.createElement('hr', {
     style: sepStyle
@@ -864,6 +897,134 @@ function SolopreneursPage() {
   }, "I work with a few people at a time and care more about fit than volume. I'm not here to manage egos or hand you a silver-bullet plan, because nobody has one. I'm here to be your advisor, closer to a friend with real expertise, who helps you become the version of yourself the business actually needs. It runs both ways, with rights and obligations on both sides.")), React.createElement(PersonaHowWeStartSection, {
     mob
   }), React.createElement(SiteFooter, {
+    mob
+  }));
+}
+
+// ─── HOW I WORK ──────────────────────────────────────────────────────────────
+function HowIWorkPage() {
+  const mob = useIsMobile();
+  const mobPage = mob ? {
+    ...pageStyle,
+    padding: '1.5rem 1rem 5rem'
+  } : pageStyle;
+  return React.createElement('main', {
+    style: mobPage
+  }, React.createElement('h1', {
+    style: {
+      ...h1Style,
+      marginBottom: mob ? '1.5rem' : '2rem',
+      fontSize: mob ? '20px' : '28px'
+    }
+  }, 'How I work'), React.createElement('p', {
+    style: {
+      ...leadStyle,
+      marginBottom: mob ? '2rem' : '3rem'
+    }
+  }, "It's a private working relationship, one to one, and it runs in three steps."), React.createElement(Section, {
+    label: 'The three steps',
+    mob
+  }, React.createElement(P, null, React.createElement(Strong, null, "1. Fit call — ~15 min, free."), " We see if we click, or if you can't stand me. Not a session. Just so neither of us wastes the other's time."), React.createElement(P, null, React.createElement(Strong, null, "2. Paid session — one session."), " You bring the problem the way you see it. We find the one that's actually brewing underneath it. You leave with a clear read and one real move documented in a handover document. Worth it even if we stop here."), React.createElement(P, null, React.createElement(Strong, null, "3. Ongoing — if it's worth it."), " Private, one to one, for as long as it's genuinely useful. Not a session longer."), React.createElement(P, {
+    last: true
+  }, "Most people start at the fit call, but if you already know you want to work and just want to get going, you can skip straight to the paid session.")), React.createElement(Section, {
+    label: 'What the ongoing work looks like',
+    mob
+  }, React.createElement(P, null, "If we continue, it runs on two tracks at the same time."), React.createElement(P, null, React.createElement(Strong, null, "The inner track."), " We find the pattern that's actually driving the problem, then work to rewire it. Awareness first, then the real change, which usually takes more than talking."), React.createElement(P, null, React.createElement(Strong, null, "The business track."), " The decision in front of you, the move you need to make, the plan for where you're going. Practical and strategic."), React.createElement(P, null, "In between sessions, I study our calls, we might monitor your biomarkers together, and I set exercises, diagnostics and measurement techniques so we have a benchmark in place."), React.createElement(P, {
+    last: true
+  }, "One without the other doesn't hold, so we don't split them.")), React.createElement(Section, {
+    label: 'Cadence',
+    mob
+  }, React.createElement(P, null, React.createElement(Strong, null, "First few months — weekly."), " Builds momentum and trust. The work compounds instead of resetting every session."), React.createElement(P, null, React.createElement(Strong, null, "After that — flexible."), " Once the rhythm is there, we can space it out. It stays as long as it's useful to you."), React.createElement(P, {
+    last: true
+  }, "Between sessions you can reach me when something real comes up. Not a 24/7 line, but you're not on your own until the next slot either.")), React.createElement(Section, {
+    label: 'What it costs',
+    mob
+  }, React.createElement(P, {
+    last: true
+  }, "I keep the number of clients small, so I can go deep with each one. I'll give you the specifics on the fit call. What I'll say here is this is premium, ongoing, and priced as a monthly engagement, not by the hour.")), React.createElement(Section, {
+    label: 'What this is not',
+    mob
+  }, React.createElement(P, null, "Not therapy by the protocol, though it's therapy-informed."), React.createElement(P, null, "Not coaching with a framework, though it has coaching in it."), React.createElement(P, null, "Not a course, not a program, not a plan I hand you and disappear."), React.createElement(P, {
+    last: true
+  }, "It's a trusted advisory relationship with someone who's sat where you're sitting, cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face."), React.createElement('div', {
+    style: {
+      marginTop: '1.2rem'
+    }
+  }, React.createElement('a', {
+    href: '/book/',
+    style: ctaBtn
+  }, 'Book a fit call →'))), React.createElement(SiteFooter, {
+    mob
+  }));
+}
+
+// ─── BOOK A FIT CALL ─────────────────────────────────────────────────────────
+function BookPage() {
+  const mob = useIsMobile();
+  const mobPage = mob ? {
+    ...pageStyle,
+    padding: '1.5rem 1rem 5rem'
+  } : pageStyle;
+  React.useEffect(function () {
+    if (document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]')) {
+      if (window.Calendly && window.Calendly.initInlineWidgets) window.Calendly.initInlineWidgets();
+      return;
+    }
+    var sc = document.createElement('script');
+    sc.src = 'https://assets.calendly.com/assets/external/widget.js';
+    sc.async = true;
+    document.body.appendChild(sc);
+  }, []);
+  return React.createElement('main', {
+    style: mobPage
+  }, React.createElement('h1', {
+    style: {
+      ...h1Style,
+      marginBottom: mob ? '1.25rem' : '1.75rem',
+      fontSize: mob ? '20px' : '28px'
+    }
+  }, 'Book a fit call'), React.createElement('p', {
+    style: {
+      ...leadStyle,
+      marginBottom: '1.4rem'
+    }
+  }, "Just a short, friendly call to understand what's going on, what you're looking for, and whether working together would actually make sense."), React.createElement(P, null, "If it does, I'll tell you what the next step looks like."), React.createElement(P, {
+    last: true
+  }, "If it doesn't, I'll tell you that too. Politely. Probably."), React.createElement('div', {
+    style: {
+      marginTop: mob ? '2.5rem' : '3.5rem'
+    }
+  }), React.createElement(Section, {
+    label: 'How it usually works',
+    mob
+  }, React.createElement(P, null, React.createElement(Strong, null, "1. Fit call."), " A short call to see if there's a fit."), React.createElement(P, null, React.createElement(Strong, null, "2. Paid session."), " We get into the actual thing. You bring the problem as you see it. We find the more accurate one underneath."), React.createElement(P, {
+    last: true
+  }, React.createElement(Strong, null, "3. Ongoing work."), " If it's useful, we continue. Private, one to one, for as long as it genuinely helps. Not a session longer.")), React.createElement('h2', {
+    style: {
+      ...h2Style,
+      color: C.accent,
+      marginBottom: '1.2rem'
+    }
+  }, 'Book below'), React.createElement('div', {
+    className: 'calendly-inline-widget',
+    'data-url': 'https://calendly.com/aggelosmouzakitis?hide_landing_page_details=1&hide_gdpr_banner=1',
+    style: {
+      minWidth: '320px',
+      height: '700px',
+      marginBottom: '2rem'
+    }
+  }), React.createElement(P, null, "Can't find a slot? Or prefer email because Calendly feels weirdly intimate for a calendar tool? Email me at ", React.createElement(IA, {
+    href: 'mailto:aggelos.mouzakitis@gmail.com'
+  }, 'aggelos.mouzakitis@gmail.com'), "."), React.createElement('hr', {
+    style: sepStyle
+  }), React.createElement(Section, {
+    label: 'One small note',
+    mob
+  }, React.createElement(P, null, "If you have a question but you don't want to start a working relationship, use the ", React.createElement(IA, {
+    href: '/ask-me-anything/'
+  }, 'Ask me anything'), " page instead. That's the better place for one-off questions."), React.createElement(P, {
+    last: true
+  }, "This page is for people who are at least wondering whether they need someone in the room with them for a while.")), React.createElement(SiteFooter, {
     mob
   }));
 }

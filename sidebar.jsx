@@ -93,7 +93,7 @@ const SOCIALS = [
 const NAV_URL = {
   'home': '/', 'blog': '/blog/', 'ask-me-anything': '/ask-me-anything/',
   'diagnostic': '/burnout-diagnostic/',
-  'founders': '/founders/', 'solopreneurs': '/solopreneurs/',
+  'founders': '/founders/', 'solopreneurs': '/solopreneurs/', 'how-i-work': '/how-i-work/', 'book': '/book/',
 };
 const hrefFor = (id) => NAV_URL[id] || '/';
 
@@ -247,7 +247,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
       {iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home')}
       {iconNav('founders', ICONS.Briefcase, hrefFor('founders'), page === 'founders', 'For founders')}
       {iconNav('solopreneurs', ICONS.User, hrefFor('solopreneurs'), page === 'solopreneurs', 'For solopreneurs')}
-      {iconPlaceholder('how-i-work', ICONS.Compass, 'How I work — coming soon')}
+      {iconNav('how-i-work', ICONS.Compass, hrefFor('how-i-work'), page === 'how-i-work', 'How I work')}
       {iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing')}
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '4px 12px' }} />
       {SOCIALS.map(s => iconLink(s))}
@@ -274,7 +274,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
           {navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home'))}
           {navLink('founders', 'For founders', ICONS.Briefcase, page === 'founders', hrefFor('founders'))}
           {navLink('solopreneurs', 'For solopreneurs', ICONS.User, page === 'solopreneurs', hrefFor('solopreneurs'))}
-          {navPlaceholder('how-i-work', 'How I work', ICONS.Compass)}
+          {navLink('how-i-work', 'How I work', ICONS.Compass, page === 'how-i-work', hrefFor('how-i-work'))}
           {navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog'))}
         </div>
 
@@ -306,7 +306,7 @@ function Sidebar({ page, setPage, open, setOpen }) {
           <div style={{ border: `1.5px solid rgba(26,127,55,0.45)`, padding: '19px', background: 'rgba(26,127,55,0.08)' }}>
             <div style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: SB.accent, marginBottom: 9 }}>Work With Me</div>
             <div style={{ fontSize: '14px', fontWeight: 500, color: SB.active, lineHeight: 1.6, marginBottom: 16 }}>A 15-minute fit call to see if it's a fit.</div>
-            <a href="#book"
+            <a href="/book/"
               onMouseEnter={e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; }}
               onMouseLeave={e => { e.currentTarget.style.background = SB.accent; e.currentTarget.style.borderColor = SB.accent; }}
               style={{ display: 'block', textAlign: 'center', width: '100%', padding: '13px 0', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: SB.accent, border: `1.5px solid ${SB.accent}`, color: '#fff', cursor: 'pointer', textDecoration: 'none', transition: 'background .15s, border-color .15s' }}>

@@ -402,15 +402,15 @@ function DiagnosticPage() {
       fontFamily: 'inherit'
     },
     eyebrow: {
-      fontSize: '11px',
-      fontWeight: 400,
-      letterSpacing: '.15em',
+      fontSize: '12px',
+      fontWeight: 700,
+      letterSpacing: '.06em',
       textTransform: 'uppercase',
-      color: '#777',
+      color: '#666',
       lineHeight: 1.7
     },
     h1: {
-      fontSize: '28px',
+      fontSize: '32px',
       fontWeight: 400,
       lineHeight: 1.35,
       color: '#282726',
@@ -418,8 +418,8 @@ function DiagnosticPage() {
     },
     p: {
       marginBottom: '1.4rem',
-      lineHeight: 1.85,
-      fontSize: '16px',
+      lineHeight: 1.75,
+      fontSize: '18px',
       color: '#282726'
     },
     card: {
@@ -427,14 +427,14 @@ function DiagnosticPage() {
       padding: '1rem'
     },
     note: {
-      fontSize: '13px',
+      fontSize: '14px',
       color: '#777',
       lineHeight: 1.7
     },
     cta: {
       fontFamily: 'inherit',
-      fontSize: '11px',
-      letterSpacing: '.12em',
+      fontSize: '12px',
+      letterSpacing: '.1em',
       textTransform: 'uppercase',
       color: '#FFFFFF',
       background: '#282726',
@@ -457,7 +457,7 @@ function DiagnosticPage() {
       background: selected ? '#1a7f37' : 'transparent',
       color: selected ? '#fff' : '#282726',
       fontFamily: 'inherit',
-      fontSize: '14px',
+      fontSize: '16px',
       lineHeight: 1.7,
       cursor: 'pointer',
       marginBottom: '.75rem'
@@ -486,7 +486,7 @@ function DiagnosticPage() {
     },
     footer: {
       marginTop: '3rem',
-      fontSize: '12px',
+      fontSize: '14px',
       color: '#777'
     }
   };

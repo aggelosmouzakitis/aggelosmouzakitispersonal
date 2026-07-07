@@ -390,15 +390,15 @@ function DiagnosticPage() {
 
   const C = {
     page: { maxWidth: 740, margin: '0 auto', padding: '4rem 2rem 7rem', color: '#282726', fontFamily: 'inherit' },
-    eyebrow: { fontSize: '11px', fontWeight: 400, letterSpacing: '.15em', textTransform: 'uppercase', color: '#777', lineHeight: 1.7 },
-    h1: { fontSize: '28px', fontWeight: 400, lineHeight: 1.35, color: '#282726', marginBottom: '1.5rem' },
-    p: { marginBottom: '1.4rem', lineHeight: 1.85, fontSize: '16px', color: '#282726' },
+    eyebrow: { fontSize: '12px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#666', lineHeight: 1.7 },
+    h1: { fontSize: '32px', fontWeight: 400, lineHeight: 1.35, color: '#282726', marginBottom: '1.5rem' },
+    p: { marginBottom: '1.4rem', lineHeight: 1.75, fontSize: '18px', color: '#282726' },
     card: { border: '1px solid rgba(40,39,38,.15)', padding: '1rem' },
-    note: { fontSize: '13px', color: '#777', lineHeight: 1.7 },
+    note: { fontSize: '14px', color: '#777', lineHeight: 1.7 },
     cta: {
       fontFamily: 'inherit',
-      fontSize: '11px',
-      letterSpacing: '.12em',
+      fontSize: '12px',
+      letterSpacing: '.1em',
       textTransform: 'uppercase',
       color: '#FFFFFF',
       background: '#282726',
@@ -417,7 +417,7 @@ function DiagnosticPage() {
       background: selected ? '#1a7f37' : 'transparent',
       color: selected ? '#fff' : '#282726',
       fontFamily: 'inherit',
-      fontSize: '14px',
+      fontSize: '16px',
       lineHeight: 1.7,
       cursor: 'pointer',
       marginBottom: '.75rem'
@@ -434,7 +434,7 @@ function DiagnosticPage() {
       gap: '1rem',
       marginBottom: '.75rem'
     },
-    footer: { marginTop: '3rem', fontSize: '12px', color: '#777' }
+    footer: { marginTop: '3rem', fontSize: '14px', color: '#777' }
   };
 
   if (screen === 'intro') return (

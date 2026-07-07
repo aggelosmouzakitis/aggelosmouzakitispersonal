@@ -206,7 +206,9 @@ const NAV_URL = {
   'ask-me-anything': '/ask-me-anything/',
   'diagnostic': '/burnout-diagnostic/',
   'founders': '/founders/',
-  'solopreneurs': '/solopreneurs/'
+  'solopreneurs': '/solopreneurs/',
+  'how-i-work': '/how-i-work/',
+  'book': '/book/'
 };
 const hrefFor = id => NAV_URL[id] || '/';
 
@@ -472,7 +474,7 @@ function Sidebar({
       alignSelf: 'stretch',
       margin: '0 12px 4px'
     }
-  }), iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home'), iconNav('founders', ICONS.Briefcase, hrefFor('founders'), page === 'founders', 'For founders'), iconNav('solopreneurs', ICONS.User, hrefFor('solopreneurs'), page === 'solopreneurs', 'For solopreneurs'), iconPlaceholder('how-i-work', ICONS.Compass, 'How I work — coming soon'), iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing'), /*#__PURE__*/React.createElement("div", {
+  }), iconNav('home', ICONS.Home, hrefFor('home'), page === 'home', 'Home'), iconNav('founders', ICONS.Briefcase, hrefFor('founders'), page === 'founders', 'For founders'), iconNav('solopreneurs', ICONS.User, hrefFor('solopreneurs'), page === 'solopreneurs', 'For solopreneurs'), iconNav('how-i-work', ICONS.Compass, hrefFor('how-i-work'), page === 'how-i-work', 'How I work'), iconNav('blog', ICONS.Book, hrefFor('blog'), page === 'blog', 'Writing'), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
       background: SB.border,
@@ -563,7 +565,7 @@ function Sidebar({
     style: {
       padding: '10px 0 0'
     }
-  }, navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home')), navLink('founders', 'For founders', ICONS.Briefcase, page === 'founders', hrefFor('founders')), navLink('solopreneurs', 'For solopreneurs', ICONS.User, page === 'solopreneurs', hrefFor('solopreneurs')), navPlaceholder('how-i-work', 'How I work', ICONS.Compass), navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog'))), sectionLabel('Find me'), SOCIALS.map(({
+  }, navLink('home', 'Home', ICONS.Home, page === 'home', hrefFor('home')), navLink('founders', 'For founders', ICONS.Briefcase, page === 'founders', hrefFor('founders')), navLink('solopreneurs', 'For solopreneurs', ICONS.User, page === 'solopreneurs', hrefFor('solopreneurs')), navLink('how-i-work', 'How I work', ICONS.Compass, page === 'how-i-work', hrefFor('how-i-work')), navLink('blog', 'Writing', ICONS.Book, page === 'blog', hrefFor('blog'))), sectionLabel('Find me'), SOCIALS.map(({
     id,
     label,
     href,
@@ -636,7 +638,7 @@ function Sidebar({
       marginBottom: 16
     }
   }, "A 15-minute fit call to see if it's a fit."), /*#__PURE__*/React.createElement("a", {
-    href: "#book",
+    href: "/book/",
     onMouseEnter: e => {
       e.currentTarget.style.background = '#146b2e';
       e.currentTarget.style.borderColor = '#146b2e';

@@ -14,6 +14,8 @@ const PAGES = [
   { f: 'career-transition-therapy/index.html', faq: true },
   { f: 'founders/index.html', faq: false },
   { f: 'solopreneurs/index.html', faq: false },
+  { f: 'how-i-work/index.html', faq: false },
+  { f: 'book/index.html', faq: false },
   { f: 'burnout-diagnostic/index.html', faq: false },
   { f: 'blog/index.html', faq: false },
   { f: 'ask-me-anything/index.html', faq: false },
