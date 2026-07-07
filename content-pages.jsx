@@ -256,11 +256,11 @@ function HomePage({ setPage }) {
           decoding: 'async',
           style: introImgStyle,
         }),
-        React.createElement('div', { style: { display: mob ? 'none' : 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', gap: '0', marginTop: '6px', paddingRight: '26px' } },
+        React.createElement('div', { style: { display: mob ? 'none' : 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', gap: '8px', marginTop: '6px', paddingRight: '26px' } },
           React.createElement('span', { style: { fontFamily: "'Segoe Script','Bradley Hand','Comic Sans MS',cursive", fontStyle: 'italic', fontSize: '16px', color: C.accent, transform: 'rotate(-3deg)', whiteSpace: 'nowrap', alignSelf: 'flex-end' } }, 'Friendlier than I look'),
-          React.createElement('svg', { width: 44, height: 40, viewBox: '0 0 44 40', fill: 'none', stroke: C.accent, strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round', style: { marginLeft: '-12px', marginBottom: '2px' } },
-            React.createElement('path', { d: 'M40 3 C 44 20, 33 30, 5 30' }),
-            React.createElement('path', { d: 'M14 24 L4 30 L13 36' })
+          React.createElement('svg', { width: 44, height: 40, viewBox: '0 0 44 40', fill: 'none', stroke: C.accent, strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round', style: { marginBottom: '2px' } },
+            React.createElement('path', { d: 'M40 3 C 44 20, 33 30, 6 30' }),
+            React.createElement('path', { d: 'M15 24 L5 30 L14 36' })
           )
         )
       )
@@ -540,7 +540,7 @@ function TrackCards({ mob, tracks }) {
 
 function HowIWorkPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1.1rem 5rem' } : pageStyle;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1.1rem 5rem' } : widePageStyle;
 
   const kicker = (txt) => React.createElement(Kicker, null, txt);
   const block = { marginBottom: mob ? '2.75rem' : '3.5rem' };
@@ -629,7 +629,7 @@ function HowIWorkPage() {
 // ─── BOOK A FIT CALL ─────────────────────────────────────────────────────────
 function BookPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
   React.useEffect(function () {
     if (document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]')) {
       if (window.Calendly && window.Calendly.initInlineWidgets) window.Calendly.initInlineWidgets();
@@ -677,7 +677,7 @@ function BookPage() {
 // ─── THERAPY FOR EXECUTIVES ──────────────────────────────────────────────────
 function ExecTherapyPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
   const mobSection = mob ? { display: 'block', marginBottom: '2rem' } : sectionStyle;
   const mobH2 = mob ? { ...h2Style, paddingBottom: '.4rem', display: 'block' } : h2Style;
   const mobH1 = mob ? { ...h1Style, fontSize: '20px' } : h1Style;
@@ -757,7 +757,7 @@ function ExecTherapyPage() {
 // ─── THERAPY FOR FOUNDERS ────────────────────────────────────────────────────
 function FoundersTherapyPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
   const mobSection = mob ? { display: 'block', marginBottom: '2rem' } : sectionStyle;
   const mobH2 = mob ? { ...h2Style, paddingBottom: '.4rem', display: 'block' } : h2Style;
   const mobH1 = mob ? { ...h1Style, fontSize: '20px' } : h1Style;
@@ -825,7 +825,7 @@ function FoundersTherapyPage() {
 // ─── IMPOSTER SYNDROME ───────────────────────────────────────────────────────
 function ImposterPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
   const mobSection = mob ? { display: 'block', marginBottom: '2rem' } : sectionStyle;
   const mobH2 = mob ? { ...h2Style, paddingBottom: '.4rem', display: 'block' } : h2Style;
   const mobH1 = mob ? { ...h1Style, fontSize: '20px' } : h1Style;
@@ -900,7 +900,7 @@ function ImposterPage() {
 // ─── BURNOUT PAGE ────────────────────────────────────────────────────────────
 function BurnoutPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
   const mobSection = mob ? { display: 'block', marginBottom: '2rem' } : sectionStyle;
   const mobH2 = mob ? { ...h2Style, paddingBottom: '.4rem', display: 'block' } : h2Style;
   const mobH1 = mob ? { ...h1Style, fontSize: '20px' } : h1Style;
@@ -971,7 +971,7 @@ function BurnoutPage() {
 // ─── CAREER TRANSITION ───────────────────────────────────────────────────────
 function CareerTransitionPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : pageStyle;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
   const mobSection = mob ? { display: 'block', marginBottom: '2rem' } : sectionStyle;
   const mobH2 = mob ? { ...h2Style, paddingBottom: '.4rem', display: 'block' } : h2Style;
   const mobH1 = mob ? { ...h1Style, fontSize: '20px' } : h1Style;

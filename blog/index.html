@@ -69,17 +69,17 @@ body {
 #main-scroll::-webkit-scrollbar { width: 4px; }
 #main-scroll::-webkit-scrollbar-thumb { background: rgba(40,39,38,0.15); }
 #sidebar { position: relative; flex-shrink: 0; }
-.blog-page { max-width: 740px; margin: 0 auto; padding: 4rem 2rem 7rem; }
-.blog-h1 { font-size: 30px; font-weight: 400; color: #282726; letter-spacing: -.02em; line-height: 1.3; margin-bottom: .6rem; }
-.blog-intro { font-size: 15px; color: #666; line-height: 1.7; margin-bottom: 2.5rem; max-width: 560px; }
+.blog-page { max-width: 940px; margin: 0 auto; padding: 4rem 2rem 7rem; }
+.blog-h1 { font-size: 32px; font-weight: 400; color: #282726; letter-spacing: -.02em; line-height: 1.3; margin-bottom: .6rem; }
+.blog-intro { font-size: 18px; color: #282726; line-height: 1.75; margin-bottom: 2.5rem; }
 .section-label { font-size: 17px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #666; margin-bottom: 1.5rem; }
 .post-list { list-style: none; }
 .post-item { padding: 1.8rem 0; border-bottom: 1px solid rgba(40,39,38,0.1); }
 .post-item:first-child { border-top: 1px solid rgba(40,39,38,0.1); }
-.post-title { font-size: 19px; font-weight: 700; line-height: 1.45; color: #282726; margin-bottom: .5rem; letter-spacing: -.01em; }
+.post-title { font-size: 20px; font-weight: 700; line-height: 1.45; color: #1a7f37; margin-bottom: .5rem; letter-spacing: -.01em; }
 .post-title a { color: #1a7f37; text-decoration: none; transition: color .15s; }
 .post-title a:hover { color: #146b2e; }
-.post-desc { font-size: 14px; color: #666; line-height: 1.65; margin-bottom: .75rem; }
+.post-desc { font-size: 16px; color: #555; line-height: 1.7; margin-bottom: .75rem; }
 .post-meta { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #999; display: flex; align-items: center; gap: .6rem; }
 .loading { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #999; padding: 2rem 0; }
 @media (max-width: 767px) {
@@ -87,8 +87,8 @@ body {
   #sidebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; }
   #main-scroll { height: 100%; padding-bottom: 80px; }
   .blog-page { padding: 2rem 1.2rem 4rem; }
-  .blog-h1 { font-size: 22px; }
-  .post-title { font-size: 16px; }
+  .blog-h1 { font-size: 24px; }
+  .post-title { font-size: 17px; }
 }
 #main-scroll .hv-card{transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
 #main-scroll .hv-card:hover{border-color:rgba(26,127,55,.5);box-shadow:0 8px 26px rgba(26,127,55,.10);transform:translateY(-3px)}
@@ -113,7 +113,7 @@ body {
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 
-<script src="../sidebar.js?v=17"></script>
+<script src="../sidebar.js?v=18"></script>
 <script>
 const {
   useState,

@@ -395,7 +395,7 @@ function DiagnosticPage() {
   const currentAnswer = answers[currentQ?.key];
   const C = {
     page: {
-      maxWidth: 740,
+      maxWidth: 940,
       margin: '0 auto',
       padding: '4rem 2rem 7rem',
       color: '#282726',

@@ -592,7 +592,7 @@ function HomePage({
       display: mob ? 'none' : 'flex',
       alignItems: 'flex-end',
       justifyContent: 'flex-end',
-      gap: '0',
+      gap: '8px',
       marginTop: '6px',
       paddingRight: '26px'
     }
@@ -616,13 +616,12 @@ function HomePage({
     strokeLinecap: 'round',
     strokeLinejoin: 'round',
     style: {
-      marginLeft: '-12px',
       marginBottom: '2px'
     }
   }, React.createElement('path', {
-    d: 'M40 3 C 44 20, 33 30, 5 30'
+    d: 'M40 3 C 44 20, 33 30, 6 30'
   }), React.createElement('path', {
-    d: 'M14 24 L4 30 L13 36'
+    d: 'M15 24 L5 30 L14 36'
   }))))), React.createElement(StartHere, {
     mob
   }), React.createElement(LatestWriting, {
@@ -1144,7 +1143,7 @@ function HowIWorkPage() {
   const mobPage = mob ? {
     ...pageStyle,
     padding: '1.5rem 1.1rem 5rem'
-  } : pageStyle;
+  } : widePageStyle;
   const kicker = txt => React.createElement(Kicker, null, txt);
   const block = {
     marginBottom: mob ? '2.75rem' : '3.5rem'
@@ -1322,7 +1321,7 @@ function BookPage() {
   const mobPage = mob ? {
     ...pageStyle,
     padding: '1.5rem 1rem 5rem'
-  } : pageStyle;
+  } : widePageStyle;
   React.useEffect(function () {
     if (document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]')) {
       if (window.Calendly && window.Calendly.initInlineWidgets) window.Calendly.initInlineWidgets();
@@ -1393,7 +1392,7 @@ function ExecTherapyPage() {
   const mobPage = mob ? {
     ...pageStyle,
     padding: '1.5rem 1rem 5rem'
-  } : pageStyle;
+  } : widePageStyle;
   const mobSection = mob ? {
     display: 'block',
     marginBottom: '2rem'
@@ -1527,7 +1526,7 @@ function FoundersTherapyPage() {
   const mobPage = mob ? {
     ...pageStyle,
     padding: '1.5rem 1rem 5rem'
-  } : pageStyle;
+  } : widePageStyle;
   const mobSection = mob ? {
     display: 'block',
     marginBottom: '2rem'
@@ -1640,7 +1639,7 @@ function ImposterPage() {
   const mobPage = mob ? {
     ...pageStyle,
     padding: '1.5rem 1rem 5rem'
-  } : pageStyle;
+  } : widePageStyle;
   const mobSection = mob ? {
     display: 'block',
     marginBottom: '2rem'
@@ -1770,7 +1769,7 @@ function BurnoutPage() {
   const mobPage = mob ? {
     ...pageStyle,
     padding: '1.5rem 1rem 5rem'
-  } : pageStyle;
+  } : widePageStyle;
   const mobSection = mob ? {
     display: 'block',
     marginBottom: '2rem'
@@ -1890,7 +1889,7 @@ function CareerTransitionPage() {
   const mobPage = mob ? {
     ...pageStyle,
     padding: '1.5rem 1rem 5rem'
-  } : pageStyle;
+  } : widePageStyle;
   const mobSection = mob ? {
     display: 'block',
     marginBottom: '2rem'

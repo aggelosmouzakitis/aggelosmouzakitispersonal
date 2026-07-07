@@ -389,7 +389,7 @@ function DiagnosticPage() {
   const currentAnswer = answers[currentQ?.key];
 
   const C = {
-    page: { maxWidth: 740, margin: '0 auto', padding: '4rem 2rem 7rem', color: '#282726', fontFamily: 'inherit' },
+    page: { maxWidth: 940, margin: '0 auto', padding: '4rem 2rem 7rem', color: '#282726', fontFamily: 'inherit' },
     eyebrow: { fontSize: '12px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#666', lineHeight: 1.7 },
     sectionLabel: { fontSize: '17px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#666', lineHeight: 1.5 },
     h1: { fontSize: '32px', fontWeight: 400, lineHeight: 1.35, color: '#282726', marginBottom: '1.5rem' },
