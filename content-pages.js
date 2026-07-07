@@ -1451,15 +1451,15 @@ function ExecTherapyPage() {
   }, "If you're used to solving problems through effort and analysis, and this particular one isn't responding to either, it might be worth a conversation.")), React.createElement(Section, {
     label: 'How it works',
     mob
-  }, React.createElement(P, null, "All sessions are ", React.createElement(Strong, null, "remote, one-on-one, and confidential"), ". Most clients are across Europe and the US. Sessions run weekly or biweekly."), React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes and free"), ". We use it to figure out what's actually going on and whether working together makes sense. If it doesn't, I'll say so."), React.createElement('div', {
+  }, React.createElement(P, null, "All sessions are ", React.createElement(Strong, null, "remote, one-on-one, and confidential"), ". Most clients are across Europe and the US. Sessions run weekly or biweekly."), React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We use it to figure out what's actually going on and whether working together makes sense. If it doesn't, I'll say so."), React.createElement('div', {
     style: {
       marginTop: '.5rem'
     }
   }, React.createElement('a', {
-    href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
+    href: '/book/',
     className: 'cta-btn',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement('hr', {
+  }, 'Book a fit call →'))), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
     label: 'Common questions',
@@ -1507,15 +1507,15 @@ function ExecTherapyPage() {
   }), React.createElement(Section, {
     label: 'Next step',
     mob
-  }, React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We use it to figure out what's going on and whether working together makes sense."), React.createElement('div', {
+  }, React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We use it to figure out what's going on and whether working together makes sense."), React.createElement('div', {
     style: {
       marginTop: '.5rem'
     }
   }, React.createElement('a', {
-    href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
+    href: '/book/',
     className: 'cta-btn',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement(SiteFooter, {
+  }, 'Book a fit call →'))), React.createElement(SiteFooter, {
     mob
   }));
 }
@@ -1572,15 +1572,15 @@ function FoundersTherapyPage() {
   }, "That high-trust advisory is one part of how I work. The others are nervous system regulation — so the constant activation of founding stops living in your body — and data from wearables (sleep, HRV, recovery) that makes the real cost of crunch periods, travel, and conflict visible instead of guessed at.")), React.createElement(Section, {
     label: 'How it works',
     mob
-  }, React.createElement(P, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one, and confidential"), ". Nothing goes to your board, your investors, or your team. This isn't coaching attached to your company. It's a private therapeutic relationship."), React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes and free"), ". We use it to figure out what's going on and whether I'm the right person for it."), React.createElement('div', {
+  }, React.createElement(P, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one, and confidential"), ". Nothing goes to your board, your investors, or your team. This isn't coaching attached to your company. It's a private therapeutic relationship."), React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We use it to figure out what's going on and whether I'm the right person for it."), React.createElement('div', {
     style: {
       marginTop: '.5rem'
     }
   }, React.createElement('a', {
-    href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
+    href: '/book/',
     className: 'cta-btn',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement('hr', {
+  }, 'Book a fit call →'))), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
     label: 'Common questions',
@@ -1620,15 +1620,15 @@ function FoundersTherapyPage() {
   }), React.createElement(Section, {
     label: 'Next step',
     mob
-  }, React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We figure out what's going on and whether working together makes sense."), React.createElement('div', {
+  }, React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We figure out what's going on and whether working together makes sense."), React.createElement('div', {
     style: {
       marginTop: '.5rem'
     }
   }, React.createElement('a', {
-    href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
+    href: '/book/',
     className: 'cta-btn',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement(SiteFooter, {
+  }, 'Book a fit call →'))), React.createElement(SiteFooter, {
     mob
   }));
 }
@@ -1694,15 +1694,15 @@ function ImposterPage() {
   }, 'Undisguised'), ". The writing explores the patterns. The private work is where they actually move.")), React.createElement(Section, {
     label: 'Start here',
     mob
-  }, React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes, free, and exploratory"), ". We figure out what's driving the pattern and whether I'm the right person to work on it with you."), React.createElement('div', {
+  }, React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We figure out what's driving the pattern and whether I'm the right person to work on it with you."), React.createElement('div', {
     style: {
       marginTop: '.5rem'
     }
   }, React.createElement('a', {
-    href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
+    href: '/book/',
     className: 'cta-btn',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement('hr', {
+  }, 'Book a fit call →'))), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
     label: 'Common questions',
@@ -1750,15 +1750,15 @@ function ImposterPage() {
   }), React.createElement(Section, {
     label: 'Next step',
     mob
-  }, React.createElement(P, null, "The first session is free and has no obligations. We use it to understand what's driving the doubt and whether this is the right approach for you."), React.createElement('div', {
+  }, React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes and no obligations. We use it to understand what's driving the doubt and whether this is the right approach for you."), React.createElement('div', {
     style: {
       marginTop: '.5rem'
     }
   }, React.createElement('a', {
-    href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
+    href: '/book/',
     className: 'cta-btn',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement(SiteFooter, {
+  }, 'Book a fit call →'))), React.createElement(SiteFooter, {
     mob
   }));
 }
@@ -1816,15 +1816,15 @@ function BurnoutPage() {
   }, "The goal isn't necessarily to make you work less (though that might happen). ", React.createElement(Strong, null, "The goal is a more fulfilling relationship with the work, so it costs less and means more."), " We do that through high-trust advisory, nervous system regulation so recovery actually lands, and data from wearables (sleep, HRV, stress) that shows what rest alone isn't fixing.")), React.createElement(Section, {
     label: 'Start here',
     mob
-  }, React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes, free, and exploratory"), ". We figure out what's underneath the exhaustion and whether therapy is the right approach."), React.createElement('div', {
+  }, React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We figure out what's underneath the exhaustion and whether therapy is the right approach."), React.createElement('div', {
     style: {
       marginTop: '.5rem'
     }
   }, React.createElement('a', {
-    href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
+    href: '/book/',
     className: 'cta-btn',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement('hr', {
+  }, 'Book a fit call →'))), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
     label: 'Common questions',
@@ -1870,15 +1870,15 @@ function BurnoutPage() {
   }), React.createElement(Section, {
     label: 'Next step',
     mob
-  }, React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We figure out what's going on and whether this is the right approach."), React.createElement('div', {
+  }, React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We figure out what's going on and whether this is the right approach."), React.createElement('div', {
     style: {
       marginTop: '.5rem'
     }
   }, React.createElement('a', {
-    href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
+    href: '/book/',
     className: 'cta-btn',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement(SiteFooter, {
+  }, 'Book a fit call →'))), React.createElement(SiteFooter, {
     mob
   }));
 }
@@ -1942,15 +1942,15 @@ function CareerTransitionPage() {
   }, React.createElement(Strong, null, "Senior professionals considering a major career change"), " but paralysed by the decision. Executives who were laid off and are dealing with more than just the job search. Leaders who made the move and feel more lost than free. People who ", React.createElement(Strong, null, "keep almost leaving but pull back every time"), ". Anyone at a senior level who suspects the career question is really a question about identity, worth, and what they want from the next phase of their working life.")), React.createElement(Section, {
     label: 'Start here',
     mob
-  }, React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes, free, and open"), ". We figure out what's actually driving the transition (or the resistance to it) and whether therapy is the right kind of support for this moment."), React.createElement('div', {
+  }, React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We figure out what's actually driving the transition (or the resistance to it) and whether therapy is the right kind of support for this moment."), React.createElement('div', {
     style: {
       marginTop: '.5rem'
     }
   }, React.createElement('a', {
-    href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
+    href: '/book/',
     className: 'cta-btn',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement('hr', {
+  }, 'Book a fit call →'))), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
     label: 'Common questions',
@@ -1996,15 +1996,15 @@ function CareerTransitionPage() {
   }), React.createElement(Section, {
     label: 'Next step',
     mob
-  }, React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We use it to understand where you actually are and what kind of support makes sense right now."), React.createElement('div', {
+  }, React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We use it to understand where you actually are and what kind of support makes sense right now."), React.createElement('div', {
     style: {
       marginTop: '.5rem'
     }
   }, React.createElement('a', {
-    href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session',
+    href: '/book/',
     className: 'cta-btn',
     style: ctaBtn
-  }, 'Get in touch for a free session'))), React.createElement(SiteFooter, {
+  }, 'Book a fit call →'))), React.createElement(SiteFooter, {
     mob
   }));
 }

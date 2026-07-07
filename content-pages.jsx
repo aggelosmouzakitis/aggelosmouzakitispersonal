@@ -714,9 +714,9 @@ function ExecTherapyPage() {
 
     React.createElement(Section, { label: 'How it works', mob },
       React.createElement(P, null, "All sessions are ", React.createElement(Strong, null, "remote, one-on-one, and confidential"), ". Most clients are across Europe and the US. Sessions run weekly or biweekly."),
-      React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes and free"), ". We use it to figure out what's actually going on and whether working together makes sense. If it doesn't, I'll say so."),
+      React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We use it to figure out what's actually going on and whether working together makes sense. If it doesn't, I'll say so."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
 
@@ -745,9 +745,9 @@ function ExecTherapyPage() {
     React.createElement(Testimonials, { mob, items: [{q: "One of the most useful things is that Aggelos actually understands the environment I work in. I don\u2019t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than \u201cfollow your values.\u201d He understands the game, but he also notices what the game is doing to me.", w: "Anonymous client, Senior operator"}, {q: "Aggelos is direct. He will tell me when I am avoiding something or constructing a very intelligent explanation for why I cannot act. But I have never experienced his directness as judgement. There is enough trust between us that he can challenge me properly, which is exactly what I needed.", w: "Anonymous client, Senior tech professional"}, {q: "I came in expecting a fairly standard coaching conversation. Within the first session, Aggelos understood both the professional problem and the emotional mechanism underneath it. He was warm, but very straightforward, and gave me a way of looking at the situation that I had not considered before. I left with more than advice. I left with a more accurate problem.", w: "Anonymous client, Senior professional"}] }),
     React.createElement('hr', { style: sepStyle }),
     React.createElement(Section, { label: 'Next step', mob },
-      React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We use it to figure out what's going on and whether working together makes sense."),
+      React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We use it to figure out what's going on and whether working together makes sense."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
     React.createElement(SiteFooter, { mob })
@@ -785,9 +785,9 @@ function FoundersTherapyPage() {
 
     React.createElement(Section, { label: 'How it works', mob },
       React.createElement(P, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one, and confidential"), ". Nothing goes to your board, your investors, or your team. This isn't coaching attached to your company. It's a private therapeutic relationship."),
-      React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes and free"), ". We use it to figure out what's going on and whether I'm the right person for it."),
+      React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We use it to figure out what's going on and whether I'm the right person for it."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
 
@@ -813,9 +813,9 @@ function FoundersTherapyPage() {
     React.createElement(Testimonials, { mob, items: [{q: "I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don\u2019t have to translate one world into the other for him.", w: "Anonymous client, Founder"}, {q: "There are no motivational speeches or generic frameworks pasted onto every situation. Aggelos pays attention to how I specifically operate. He remembers the contradictions, notices when I change the story and asks the question I was hoping we could avoid. Annoying at times, but usually accurate.", w: "Anonymous client, Founder"}, {q: "I did not want somebody to tell me to work less, lower my standards or become less ambitious. Aggelos understood that immediately. Our work has been about keeping the part of me that wants to build and achieve, while becoming less dependent on winning, comparison and external approval to feel okay. That distinction has been very important to me.", w: "Anonymous client, Founder and executive"}] }),
     React.createElement('hr', { style: sepStyle }),
     React.createElement(Section, { label: 'Next step', mob },
-      React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We figure out what's going on and whether working together makes sense."),
+      React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We figure out what's going on and whether working together makes sense."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
     React.createElement(SiteFooter, { mob })
@@ -857,9 +857,9 @@ function ImposterPage() {
     ),
 
     React.createElement(Section, { label: 'Start here', mob },
-      React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes, free, and exploratory"), ". We figure out what's driving the pattern and whether I'm the right person to work on it with you."),
+      React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We figure out what's driving the pattern and whether I'm the right person to work on it with you."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
 
@@ -888,9 +888,9 @@ function ImposterPage() {
     React.createElement(Testimonials, { mob, items: [{q: "From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.", w: "Anonymous client, Tech executive"}, {q: "I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.", w: "Anonymous client, Product leader"}, {q: "I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.", w: "Anonymous client, Technology executive"}] }),
     React.createElement('hr', { style: sepStyle }),
     React.createElement(Section, { label: 'Next step', mob },
-      React.createElement(P, null, "The first session is free and has no obligations. We use it to understand what's driving the doubt and whether this is the right approach for you."),
+      React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes and no obligations. We use it to understand what's driving the doubt and whether this is the right approach for you."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
     React.createElement(SiteFooter, { mob })
@@ -928,9 +928,9 @@ function BurnoutPage() {
     ),
 
     React.createElement(Section, { label: 'Start here', mob },
-      React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes, free, and exploratory"), ". We figure out what's underneath the exhaustion and whether therapy is the right approach."),
+      React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We figure out what's underneath the exhaustion and whether therapy is the right approach."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
 
@@ -959,9 +959,9 @@ function BurnoutPage() {
     React.createElement(Testimonials, { mob, items: [{q: "Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.", w: "Anonymous client, Consultant and business owner"}, {q: "I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.", w: "Anonymous client, Technology leader"}, {q: "The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.", w: "Anonymous client, Senior tech professional"}] }),
     React.createElement('hr', { style: sepStyle }),
     React.createElement(Section, { label: 'Next step', mob },
-      React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We figure out what's going on and whether this is the right approach."),
+      React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We figure out what's going on and whether this is the right approach."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
     React.createElement(SiteFooter, { mob })
@@ -1004,9 +1004,9 @@ function CareerTransitionPage() {
     ),
 
     React.createElement(Section, { label: 'Start here', mob },
-      React.createElement(P, null, "The first session is ", React.createElement(Strong, null, "60 minutes, free, and open"), ". We figure out what's actually driving the transition (or the resistance to it) and whether therapy is the right kind of support for this moment."),
+      React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We figure out what's actually driving the transition (or the resistance to it) and whether therapy is the right kind of support for this moment."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
 
@@ -1035,9 +1035,9 @@ function CareerTransitionPage() {
     React.createElement(Testimonials, { mob, items: [{q: "We have been working together for a while now, and the sessions have gradually changed the way I make decisions. Aggelos doesn\u2019t tell me what to do or try to make me dependent on his opinion. He helps me separate the real problem from the fear, ego and old patterns wrapped around it. I usually leave with less noise and a much clearer sense of what is mine to do.", w: "Anonymous client, Founder"}, {q: "I had been forcing a business situation to continue because stopping it felt like failure. After one of our exercises, I realised I was trying to manufacture reasons to keep going when I already knew the answer. I had the difficult conversation shortly afterwards. It was not that Aggelos gave me the decision. He helped me stop fighting what I already knew.", w: "Anonymous client, Business owner"}, {q: "I was initially sceptical about somatic and trauma-informed work because I assumed it would be vague or a bit spiritual. It wasn\u2019t. Aggelos explained what we were doing, paid attention to my limits and connected the experience back to patterns I could recognise in my work and relationships. It felt grounded, careful and surprisingly practical.", w: "Anonymous client"}] }),
     React.createElement('hr', { style: sepStyle }),
     React.createElement(Section, { label: 'Next step', mob },
-      React.createElement(P, null, "The first session is free, 60 minutes, no obligations. We use it to understand where you actually are and what kind of support makes sense right now."),
+      React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We use it to understand where you actually are and what kind of support makes sense right now."),
       React.createElement('div', { style: { marginTop: '.5rem' } },
-        React.createElement('a', { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session', className: 'cta-btn', style: ctaBtn }, 'Get in touch for a free session')
+        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
     React.createElement(SiteFooter, { mob })
