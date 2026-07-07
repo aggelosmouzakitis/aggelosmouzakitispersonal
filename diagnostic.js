@@ -409,6 +409,14 @@ function DiagnosticPage() {
       color: '#666',
       lineHeight: 1.7
     },
+    sectionLabel: {
+      fontSize: '17px',
+      fontWeight: 700,
+      letterSpacing: '.06em',
+      textTransform: 'uppercase',
+      color: '#666',
+      lineHeight: 1.5
+    },
     h1: {
       fontSize: '32px',
       fontWeight: 400,
@@ -707,7 +715,7 @@ function DiagnosticPage() {
     }
   }, /*#__PURE__*/React.createElement("p", {
     style: {
-      ...C.eyebrow,
+      ...C.sectionLabel,
       marginBottom: '.5rem'
     }
   }, "What to do with this"), /*#__PURE__*/React.createElement("p", {
@@ -723,12 +731,14 @@ function DiagnosticPage() {
     }
   }, /*#__PURE__*/React.createElement("p", {
     style: {
-      ...C.eyebrow,
+      ...C.sectionLabel,
       marginBottom: '1rem'
     }
   }, "Your operating pattern ", /*#__PURE__*/React.createElement("span", {
     style: {
-      color: '#bbb'
+      color: '#bbb',
+      fontWeight: 400,
+      letterSpacing: 0
     }
   }, "\xB7 highest load first")), (results.dimensions || []).map((d, i) => {
     const vis = getLevelVisual(d.score);

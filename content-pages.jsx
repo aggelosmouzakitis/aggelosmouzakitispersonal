@@ -13,7 +13,7 @@ const pageStyle = {
   fontFamily: 'inherit', color: C.text,
 };
 const h1Style = { fontSize: '32px', fontWeight: 400, lineHeight: 1.4, color: C.text, marginBottom: '2.5rem', letterSpacing: '-.02em' };
-const h2Style = { fontSize: '17px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: C.muted, paddingTop: '.25rem', lineHeight: 1.5 };
+const h2Style = { fontSize: '17px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: C.muted, paddingTop: '.25rem', lineHeight: 1.5, textWrap: 'balance' };
 const h3Style = { fontSize: '18px', fontWeight: 400, lineHeight: 1.7, color: C.text, marginBottom: '.6rem', borderBottom: `1px solid ${C.border}`, paddingBottom: '.4rem' };
 const sectionStyle = { display: 'grid', gridTemplateColumns: '150px 1fr', gap: '0 2.5rem', marginBottom: '3rem' };
 const pStyle = { marginBottom: '1.4rem', lineHeight: 1.75, fontSize: '18px', color: C.text };
@@ -253,11 +253,11 @@ function HomePage({ setPage }) {
           decoding: 'async',
           style: introImgStyle,
         }),
-        React.createElement('div', { style: { display: mob ? 'none' : 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', gap: '2px', marginTop: '2px', paddingRight: '22px' } },
-          React.createElement('span', { style: { fontFamily: "'Segoe Script','Bradley Hand','Comic Sans MS',cursive", fontStyle: 'italic', fontSize: '16px', color: C.accent, transform: 'rotate(-3deg)', whiteSpace: 'nowrap', alignSelf: 'flex-end', marginBottom: '2px' } }, 'Friendlier than I look'),
-          React.createElement('svg', { width: 46, height: 48, viewBox: '0 0 46 48', fill: 'none', stroke: C.accent, strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round' },
-            React.createElement('path', { d: 'M42 3 C 45 24, 34 37, 7 42' }),
-            React.createElement('path', { d: 'M16 34 L5 42 L16 47' })
+        React.createElement('div', { style: { display: mob ? 'none' : 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', gap: '0', marginTop: '6px', paddingRight: '26px' } },
+          React.createElement('span', { style: { fontFamily: "'Segoe Script','Bradley Hand','Comic Sans MS',cursive", fontStyle: 'italic', fontSize: '16px', color: C.accent, transform: 'rotate(-3deg)', whiteSpace: 'nowrap', alignSelf: 'flex-end' } }, 'Friendlier than I look'),
+          React.createElement('svg', { width: 44, height: 40, viewBox: '0 0 44 40', fill: 'none', stroke: C.accent, strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round', style: { marginLeft: '-12px', marginBottom: '2px' } },
+            React.createElement('path', { d: 'M40 3 C 44 20, 33 30, 5 30' }),
+            React.createElement('path', { d: 'M14 24 L4 30 L13 36' })
           )
         )
       )
@@ -327,15 +327,24 @@ function PatternList({ items }) {
   const mob = useIsMobile();
   return React.createElement('div', { style: { ...cardBase, overflow: 'hidden', margin: '.4rem 0 1.4rem' } },
     items.map(function (it, i) {
+      if (mob) {
+        return React.createElement('div', {
+          key: i, className: 'hv-row',
+          style: { padding: '.8rem 1rem', borderTop: i ? `1px solid ${C.border}` : 'none', fontSize: '15px', lineHeight: 1.55 }
+        },
+          React.createElement('div', { style: { fontWeight: 700, color: C.text, marginBottom: '.15rem' } }, it.cause),
+          React.createElement('div', { style: { color: C.text } },
+            React.createElement('span', { style: { color: C.accent, fontWeight: 700, marginRight: '.4rem' } }, '→'), it.effect
+          )
+        );
+      }
       return React.createElement('div', {
         key: i, className: 'hv-row',
-        style: { display: 'flex', flexDirection: mob ? 'column' : 'row', gap: mob ? '.15rem' : '.9rem', alignItems: mob ? 'flex-start' : 'baseline', padding: mob ? '.8rem 1rem' : '.9rem 1.2rem', borderTop: i ? `1px solid ${C.border}` : 'none', fontSize: '15px', lineHeight: 1.55 }
+        style: { display: 'grid', gridTemplateColumns: '246px 26px 1fr', alignItems: 'baseline', padding: '.95rem 1.3rem', borderTop: i ? `1px solid ${C.border}` : 'none', fontSize: '15px', lineHeight: 1.55 }
       },
-        React.createElement('span', { style: { fontWeight: 700, color: C.text, flexShrink: 0, minWidth: mob ? 'auto' : '38%' } }, it.cause),
-        React.createElement('span', { style: { color: C.text } },
-          React.createElement('span', { style: { color: C.accent, fontWeight: 700, marginRight: '.4rem' } }, '→'),
-          it.effect
-        )
+        React.createElement('span', { style: { fontWeight: 700, color: C.text } }, it.cause),
+        React.createElement('span', { style: { color: C.accent, fontWeight: 700, textAlign: 'center' } }, '→'),
+        React.createElement('span', { style: { color: C.text } }, it.effect)
       );
     })
   );
@@ -353,14 +362,15 @@ function ForFoundersPage() {
       React.createElement(P, { last: true }, "If you're reading this instead of booking another consultant, part of you already suspects it isn't necessarily a strategy problem. You'd give someone else in your position the right advice without blinking, and you still don't do it yourself. That gap is the tell, and there's usually a reason you're ready to ask for some help now, this month, and not before.")
     ),
 
-    React.createElement(Section, { label: 'What it usually turns out to be', mob },
+    React.createElement('section', { style: { marginBottom: mob ? '2.75rem' : '3rem' } },
+      React.createElement(Kicker, null, 'What it usually turns out to be'),
       React.createElement(P, null, "Most of the time it traces back to a pattern in you. Usually not the one you assume and definitely not the one ChatGPT suggested."),
       React.createElement(P, null,
         "Some founders name the wrong cause entirely, such as calling the procrastination laziness or the burnout overwork. Others have a sharp, honest read on it but still don't know how to get rid of it. Knowing the pattern and being free of it are different jobs. ",
         React.createElement(A, { href: '/blog/self-analysis-as-a-meta-way-to-maintain-control/' }, "The same brain that built it can't reason its way out of it"),
         ", however smart you are."
       ),
-      React.createElement(P, { last: true }, "And it doesn't stay only with you, of course, but gets spilled one way or another into your business:"),
+      React.createElement(P, null, "And it doesn't stay only with you, of course, but gets spilled one way or another into your business:"),
       React.createElement(PatternList, { items: [
         { cause: 'You avoid discomfort', effect: 'sales, hiring, firing, pricing and fundraising all keep sliding' },
         { cause: 'You need control', effect: 'nothing scales past you' },
@@ -422,14 +432,15 @@ function SolopreneursPage() {
       )
     ),
 
-    React.createElement(Section, { label: 'What it usually turns out to be', mob },
+    React.createElement('section', { style: { marginBottom: mob ? '2.75rem' : '3rem' } },
+      React.createElement(Kicker, null, 'What it usually turns out to be'),
       React.createElement(P, null, "In lots of cases it traces back to a pattern in you, and usually not the one you assume nor the one ChatGPT eloquently tells you."),
       React.createElement(P, null,
         "Some people name the wrong cause completely. Others have a sharp, honest read on it and still can't shift it. Knowing the pattern and being free of it are different jobs. ",
         React.createElement(A, { href: '/blog/self-analysis-as-a-meta-way-to-maintain-control/' }, "The same brain that built it can't reason its way out"),
         ", however smart you are."
       ),
-      React.createElement(P, { last: true }, "Unfortunately, when you work alone, such patterns run straight into the business:"),
+      React.createElement(P, null, "Unfortunately, when you work alone, such patterns run straight into the business:"),
       React.createElement(PatternList, { items: [
         { cause: 'You avoid being seen', effect: 'no content, no outbound, no clear opinion, weak demand' },
         { cause: "You're uncomfortable charging", effect: 'you undercharge, then resent the work' },
@@ -498,7 +509,7 @@ function SolopreneursPage() {
 const cardBase = { border: `1px solid ${C.border}`, borderRadius: '12px', background: '#FFFFFF' };
 function Kicker({ children }) {
   return React.createElement('h2', {
-    style: { fontSize: '13px', fontWeight: 700, letterSpacing: '.09em', textTransform: 'uppercase', color: C.muted, margin: '0 0 1.1rem' }
+    style: { fontSize: '17px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: C.muted, margin: '0 0 1.2rem', lineHeight: 1.5, textWrap: 'balance' }
   }, children);
 }
 function StepCards({ mob, steps }) {

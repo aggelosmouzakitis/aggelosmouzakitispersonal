@@ -391,6 +391,7 @@ function DiagnosticPage() {
   const C = {
     page: { maxWidth: 740, margin: '0 auto', padding: '4rem 2rem 7rem', color: '#282726', fontFamily: 'inherit' },
     eyebrow: { fontSize: '12px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#666', lineHeight: 1.7 },
+    sectionLabel: { fontSize: '17px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#666', lineHeight: 1.5 },
     h1: { fontSize: '32px', fontWeight: 400, lineHeight: 1.35, color: '#282726', marginBottom: '1.5rem' },
     p: { marginBottom: '1.4rem', lineHeight: 1.75, fontSize: '18px', color: '#282726' },
     card: { border: '1px solid rgba(40,39,38,.15)', padding: '1rem' },
@@ -574,14 +575,14 @@ function DiagnosticPage() {
       <p style={C.p}>{results.desc}</p>
       {results.nextStep && (
         <div style={{ borderLeft: '2px solid #1a7f37', padding: '2px 0 2px 14px', margin: '1.6rem 0' }}>
-          <p style={{ ...C.eyebrow, marginBottom: '.5rem' }}>What to do with this</p>
+          <p style={{ ...C.sectionLabel, marginBottom: '.5rem' }}>What to do with this</p>
           <p style={{ ...C.p, marginBottom: 0 }}>{results.nextStep}</p>
         </div>
       )}
       <p style={C.note}>This diagnostic is directional, not a clinical diagnosis.</p>
 
       <div style={{ marginTop: '2rem' }}>
-        <p style={{ ...C.eyebrow, marginBottom: '1rem' }}>Your operating pattern <span style={{ color: '#bbb' }}>· highest load first</span></p>
+        <p style={{ ...C.sectionLabel, marginBottom: '1rem' }}>Your operating pattern <span style={{ color: '#bbb', fontWeight: 400, letterSpacing: 0 }}>· highest load first</span></p>
         {(results.dimensions || []).map((d, i) => {
           const vis = getLevelVisual(d.score);
           return (
