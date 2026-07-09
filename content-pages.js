@@ -291,6 +291,9 @@ const FOOTER_COLS = [{
   }, {
     href: '/ask-me-anything/',
     label: 'Ask me anything'
+  }, {
+    href: '/getinterviewed/',
+    label: 'Get interviewed'
   }]
 }, {
   label: 'Elsewhere',

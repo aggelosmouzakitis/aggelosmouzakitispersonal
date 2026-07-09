@@ -101,6 +101,7 @@ const FOOTER_COLS = [
     { href: '/', label: 'Home' },
     { href: '/blog/', label: 'Writing' },
     { href: '/ask-me-anything/', label: 'Ask me anything' },
+    { href: '/getinterviewed/', label: 'Get interviewed' },
   ] },
   { label: 'Elsewhere', links: [
     { href: 'https://linkedin.com/in/growth-product-manager/', label: 'LinkedIn', ext: true },
