@@ -573,7 +573,7 @@ function HomePage({
     href: '/solopreneurs/'
   }, 'solopreneurs'), ", and it’s usually about ", React.createElement(Strong, null, "a business that has its roots in something inside you"), ". It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off. ", React.createElement(Strong, null, "But one way or another, it prevents you from reaching your ideal state.")), React.createElement(P, null, "The reason people come to me specifically is that they don’t have to explain their world to a therapist who has never shipped anything, and they don’t have to leave the personal stuff at the door for a coach who only wants the business version. I understand both sides at once, which is the whole point."), React.createElement(P, {
     last: true
-  }, "I write about all of this on my ", React.createElement(IA, {
+  }, "I write about all of this — founder psychology, burnout, overthinking — on my ", React.createElement(IA, {
     href: '/blog/'
   }, 'blog'), " and talk about it on my ", React.createElement(A, {
     href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA'
@@ -683,7 +683,7 @@ function PersonaTherapyOrCoachingSection({
   return React.createElement(Section, {
     label: 'Is this therapy or coaching?',
     mob
-  }, React.createElement(P, null, "Neither, cleanly."), React.createElement(P, null, "Therapy? Not by the protocol. I'm more direct and action-oriented, I make suggestions early, and I break a lot of the etiquette a therapist is supposed to keep. But it's therapy-informed, and that training is why I can see what's underneath."), React.createElement(P, null, "Coaching? Not that either. No framework I'll hand you to follow. There are coaching elements in how we work on decisions, but the framework was never the point."), React.createElement(P, {
+  }, React.createElement(P, null, "Neither, cleanly."), React.createElement(P, null, "Therapy? Not by the protocol. I'm more direct and action-oriented, I make suggestions early, and I break a lot of the etiquette a therapist is supposed to keep. But it's therapy-informed — I'm a licensed psychotherapist — and that training is why I can see what's underneath."), React.createElement(P, null, "Coaching? Not that either. No framework I'll hand you to follow. There are coaching elements in how we work on decisions, but the framework was never the point."), React.createElement(P, {
     last: true
   }, "The honest description: a trusted advisor who's sat in your seat and has the expertise to help you sort yourself out and hit your goals. Someone who cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face. For a lot of founders it's the one place they can be themselves, not the version they perform for the team, the investors, the cofounder or the partner."));
 }
@@ -882,7 +882,7 @@ function ForFoundersPage() {
   }), React.createElement(Section, {
     label: 'Who this is for',
     mob
-  }, React.createElement(P, null, "Tech founders, ideally in Europe, the US or Canada, mostly for timezones."), React.createElement(P, {
+  }, React.createElement(P, null, "Startup and tech founders, ideally in Europe, the US or Canada, mostly for timezones."), React.createElement(P, {
     last: true
   }, "I work with a few people at a time and care more about fit than volume. Not here to manage egos or hand you a silver-bullet plan, because nobody has one. I'm here to be your advisor, closer to a friend with real expertise, who helps you become the version of yourself the company actually needs. It runs both ways, with rights and obligations on both sides.")), React.createElement(PersonaHowWeStartSection, {
     mob
@@ -909,7 +909,7 @@ function SolopreneursPage() {
   }, 'Solopreneur advisory for business problems that trace back to you'), React.createElement(Section, {
     label: 'What you came here for',
     mob
-  }, React.createElement(P, null, "You came here about the business. Typical things I've heard so far include things you avoid, things you are overthinking, things you are afraid of, lack of focus, procrastination and more. The common thread is that they start inside you but get spilled into your business."), React.createElement(P, {
+  }, React.createElement(P, null, "You came here about your one-person business. Typical things I've heard so far include things you avoid, things you are overthinking, things you are afraid of, lack of focus, procrastination and more. The common thread is that they start inside you but get spilled into your business."), React.createElement(P, {
     last: true
   }, "If you're reading this instead of buying another course or joining another community, part of you already suspects you ", React.createElement(Strong, null, "might not need tactical advice only"), ". You'd tell someone else in your position exactly what to do without blinking, and you still don't do it. That tells it all. And there's usually a reason it came up now, this month, and not before.")), React.createElement(Section, {
     label: 'What it usually turns out to be',
@@ -972,7 +972,7 @@ function SolopreneursPage() {
   }, "One without the other doesn't hold. Fixing the inside while the pipeline dries up is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")), React.createElement(Section, {
     label: 'Is this therapy or coaching?',
     mob
-  }, React.createElement(P, null, "Neither, cleanly."), React.createElement(P, null, "Therapy? Not by the protocol. I'm more direct and action-oriented, I make suggestions early, and I break a lot of the etiquette a therapist is supposed to keep. But it's therapy-informed, and that training is why I can see what's underneath."), React.createElement(P, null, "Coaching? Not that either. No framework I'll hand you to follow. There are coaching elements in how we work on decisions and pricing and positioning, but the framework was never the point."), React.createElement(P, {
+  }, React.createElement(P, null, "Neither, cleanly."), React.createElement(P, null, "Therapy? Not by the protocol. I'm more direct and action-oriented, I make suggestions early, and I break a lot of the etiquette a therapist is supposed to keep. But it's therapy-informed — I'm a licensed psychotherapist — and that training is why I can see what's underneath."), React.createElement(P, null, "Coaching? Not that either. No framework I'll hand you to follow. There are coaching elements in how we work on decisions and pricing and positioning, but the framework was never the point."), React.createElement(P, {
     last: true
   }, "The honest description: a trusted advisor who's built his own thing and has the expertise to help you sort yourself out and hit your goals. Someone who cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face. When you work alone, this is often the one place you get an honest mirror, and the one place you can be yourself, not the version you perform for clients, your audience or your partner.")), React.createElement('hr', {
     style: sepStyle
@@ -1001,7 +1001,7 @@ function SolopreneursPage() {
   }), React.createElement(Section, {
     label: 'Who this is for',
     mob
-  }, React.createElement(P, null, "Solopreneurs and independent consultants in tech, ideally in Europe, the US or Canada, mostly for timezones."), React.createElement(P, {
+  }, React.createElement(P, null, "Solopreneurs, independent consultants and freelancers in tech, ideally in Europe, the US or Canada, mostly for timezones."), React.createElement(P, {
     last: true
   }, "I work with a few people at a time and care more about fit than volume. I'm not here to manage egos or hand you a silver-bullet plan, because nobody has one. I'm here to be your advisor, closer to a friend with real expertise, who helps you become the version of yourself the business actually needs. It runs both ways, with rights and obligations on both sides.")), React.createElement(PersonaHowWeStartSection, {
     mob
@@ -1217,7 +1217,7 @@ function HowIWorkPage() {
       ...leadStyle,
       marginBottom: mob ? '2.5rem' : '3.5rem'
     }
-  }, "It's a private working relationship, one to one, and it runs in three steps."), React.createElement('section', {
+  }, "It's a private advisory relationship, one to one, and it runs in three steps."), React.createElement('section', {
     style: block
   }, kicker('The three steps'), React.createElement(StepCards, {
     mob,
