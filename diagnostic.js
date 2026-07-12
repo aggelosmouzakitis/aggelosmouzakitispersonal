@@ -807,14 +807,14 @@ function DiagnosticPage() {
       ...C.p,
       marginBottom: '1.2rem'
     }
-  }, "A diagnostic shows the pattern. Changing it is the actual work. If any of this landed, the first session is free, 60 minutes, and no strings \u2014 we use it to figure out where you are and whether working together makes sense."), /*#__PURE__*/React.createElement("a", {
-    href: "mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session",
+  }, "A diagnostic shows the pattern. Changing it is the actual work. If any of this landed, the next step is a free 15-minute fit call \u2014 we see where you are and whether working together makes sense."), /*#__PURE__*/React.createElement("a", {
+    href: "/book/",
     className: "cta-btn",
     style: {
       ...C.cta,
       textDecoration: 'none'
     }
-  }, "Book a free 60-minute session")), /*#__PURE__*/React.createElement("div", {
+  }, "Book a fit call")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: '1rem',
