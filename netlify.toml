@@ -63,3 +63,19 @@
   for = "/manifest.json"
   [headers.values]
     Cache-Control = "public, max-age=86400"
+
+# Keep non-content resources out of the index (crawlable so the noindex is seen)
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/blog/posts.json"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/blog/post-template.html"
+  [headers.values]
+    X-Robots-Tag = "noindex"
