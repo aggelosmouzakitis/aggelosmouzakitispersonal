@@ -526,7 +526,7 @@ function DiagnosticPage() {
       fontSize: '11px',
       letterSpacing: '.12em',
       textTransform: 'uppercase',
-      color: '#888',
+      color: '#6e6e6e',
       marginBottom: '.5rem'
     }
   }, label), /*#__PURE__*/React.createElement("div", null, value)))), /*#__PURE__*/React.createElement("p", {
@@ -635,7 +635,7 @@ function DiagnosticPage() {
       fontSize: '11px',
       letterSpacing: '.12em',
       textTransform: 'uppercase',
-      color: '#888',
+      color: '#6e6e6e',
       marginBottom: '.6rem'
     }
   }, "Email"), /*#__PURE__*/React.createElement("input", {
@@ -768,7 +768,7 @@ function DiagnosticPage() {
     }, d.label), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: '13px',
-        color: '#888'
+        color: '#6e6e6e'
       }
     }, fmt(d.score), " / 5.00"))), /*#__PURE__*/React.createElement("div", {
       style: {

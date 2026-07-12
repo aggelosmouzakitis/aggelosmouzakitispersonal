@@ -78,7 +78,7 @@ function FaqItem({ q, children }) {
 function Testimonial({ quote, who }) {
   return React.createElement('blockquote', { style: { margin: '0 0 1.6rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(26,127,55,0.35)' } },
     React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.8, color: '#282726', marginBottom: '.5rem' } }, '\u201C' + quote + '\u201D'),
-    React.createElement('footer', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, who)
+    React.createElement('footer', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, who)
   );
 }
 function Testimonials({ items, mob, label }) {
@@ -187,8 +187,8 @@ function LatestWriting({ mob }) {
   });
   return React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '3.5rem' } },
     React.createElement('h2', { style: { ...sectionTitleStyle, fontSize: mob ? '19px' : '22px' } }, 'Latest Writing'),
-    posts === null && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, 'Loading…'),
-    posts && posts.length === 0 && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#999' } }, 'No posts yet.'),
+    posts === null && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, 'Loading…'),
+    posts && posts.length === 0 && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, 'No posts yet.'),
     items.length > 0 && React.createElement(React.Fragment, null,
       items.map(function (p, i) {
         return React.createElement('a', {
@@ -200,7 +200,7 @@ function LatestWriting({ mob }) {
           onMouseLeave: e => e.currentTarget.style.color = C.text,
         },
           React.createElement('span', { style: { fontSize: mob ? '16px' : '18px', fontWeight: 600 } }, p.title),
-          React.createElement('span', { style: { fontSize: '14px', color: '#999', whiteSpace: 'nowrap', flexShrink: 0 } }, p.date)
+          React.createElement('span', { style: { fontSize: '14px', color: '#767676', whiteSpace: 'nowrap', flexShrink: 0 } }, p.date)
         );
       }),
       React.createElement('div', { style: { textAlign: 'right', marginTop: '1.2rem', fontSize: '14px' } },

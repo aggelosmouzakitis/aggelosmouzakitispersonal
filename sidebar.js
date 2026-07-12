@@ -3,7 +3,7 @@
 const SB = {
   bg: '#F5F5F5',
   border: 'rgba(40,39,38,0.1)',
-  muted: '#888',
+  muted: '#6e6e6e',
   text: 'rgba(40,39,38,0.65)',
   active: '#282726',
   accent: '#1a7f37',
@@ -455,7 +455,7 @@ function Sidebar({
   }, /*#__PURE__*/React.createElement(ToggleBtn, null), /*#__PURE__*/React.createElement("a", {
     href: hrefFor('home')
   }, /*#__PURE__*/React.createElement("img", {
-    src: "https://aggelosmouzakitis.com/img/aggelos.jpg",
+    src: "https://aggelosmouzakitis.com/img/aggelos-96.webp",
     alt: "Aggelos Mouzakitis",
     width: 38,
     height: 38,
@@ -525,7 +525,7 @@ function Sidebar({
       flexShrink: 0
     }
   }, /*#__PURE__*/React.createElement("img", {
-    src: "https://aggelosmouzakitis.com/img/aggelos.jpg",
+    src: "https://aggelosmouzakitis.com/img/aggelos-96.webp",
     alt: "Aggelos Mouzakitis",
     width: 38,
     height: 38,
