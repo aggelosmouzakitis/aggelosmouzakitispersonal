@@ -235,7 +235,7 @@ function Testimonial({
       fontSize: '10px',
       letterSpacing: '.1em',
       textTransform: 'uppercase',
-      color: '#999'
+      color: '#767676'
     }
   }, who));
 }
@@ -481,14 +481,14 @@ function LatestWriting({
       fontSize: '12px',
       letterSpacing: '.1em',
       textTransform: 'uppercase',
-      color: '#999'
+      color: '#767676'
     }
   }, 'Loading…'), posts && posts.length === 0 && React.createElement('p', {
     style: {
       fontSize: '12px',
       letterSpacing: '.1em',
       textTransform: 'uppercase',
-      color: '#999'
+      color: '#767676'
     }
   }, 'No posts yet.'), items.length > 0 && React.createElement(React.Fragment, null, items.map(function (p, i) {
     return React.createElement('a', {
@@ -506,7 +506,7 @@ function LatestWriting({
     }, p.title), React.createElement('span', {
       style: {
         fontSize: '14px',
-        color: '#999',
+        color: '#767676',
         whiteSpace: 'nowrap',
         flexShrink: 0
       }

@@ -449,7 +449,7 @@ function DiagnosticPage() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', margin: '2rem 0' }}>
         {[['Length', '45 questions'], ['Format', '1-5 scale + N/A'], ['Result', 'Level + section breakdown']].map(([label, value]) =>
           <div key={label} className="hv-card" style={C.card}>
-            <div style={{ fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', color: '#888', marginBottom: '.5rem' }}>{label}</div>
+            <div style={{ fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', color: '#6e6e6e', marginBottom: '.5rem' }}>{label}</div>
             <div>{value}</div>
           </div>
         )}
@@ -525,7 +525,7 @@ function DiagnosticPage() {
       <h1 style={C.h1}>Enter your email to view your result.</h1>
       <p style={C.p}>You'll see your level and section breakdown immediately after this.</p>
 
-      <label style={{ display: 'block', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', color: '#888', marginBottom: '.6rem' }}>
+      <label style={{ display: 'block', fontSize: '11px', letterSpacing: '.12em', textTransform: 'uppercase', color: '#6e6e6e', marginBottom: '.6rem' }}>
         Email
       </label>
 
@@ -591,7 +591,7 @@ function DiagnosticPage() {
                 <div>{d.title}</div>
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
                   <div style={{ color: vis.color }}>{d.label}</div>
-                  <div style={{ fontSize: '13px', color: '#888' }}>{fmt(d.score)} / 5.00</div>
+                  <div style={{ fontSize: '13px', color: '#6e6e6e' }}>{fmt(d.score)} / 5.00</div>
                 </div>
               </div>
               <div style={{ height: '3px', background: 'rgba(40,39,38,.08)', borderRadius: '2px' }}>
