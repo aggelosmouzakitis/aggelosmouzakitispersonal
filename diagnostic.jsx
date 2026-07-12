@@ -605,12 +605,12 @@ function DiagnosticPage() {
 
       <div style={{ border: '1px solid rgba(26,127,55,0.3)', background: 'rgba(26,127,55,0.04)', padding: '1.4rem', marginTop: '2.5rem' }}>
         <p style={{ ...C.eyebrow, marginBottom: '.6rem' }}>Where this goes next</p>
-        <p style={{ ...C.p, marginBottom: '1.2rem' }}>A diagnostic shows the pattern. Changing it is the actual work. If any of this landed, the first session is free, 60 minutes, and no strings — we use it to figure out where you are and whether working together makes sense.</p>
+        <p style={{ ...C.p, marginBottom: '1.2rem' }}>A diagnostic shows the pattern. Changing it is the actual work. If any of this landed, the next step is a free 15-minute fit call — we see where you are and whether working together makes sense.</p>
         <a
-          href="mailto:aggelos.mouzakitis@gmail.com?subject=Free%2060-minute%20session"
+          href="/book/"
           className="cta-btn" style={{ ...C.cta, textDecoration: 'none' }}
         >
-          Book a free 60-minute session
+          Book a fit call
         </a>
       </div>
 
