@@ -287,6 +287,10 @@ function SpecialtyPage({ pageId }) {
     'solopreneurs': SolopreneursPage,
     'how-i-work': HowIWorkPage,
     'book': BookPage,
+    'greek-therapist-london': LondonPage,
+    'greek-therapist-manchester': ManchesterPage,
+    'greek-therapist-new-york': NewYorkPage,
+    'greek-therapist-dublin': DublinPage,
     'confidentiality': ConfidentialityPage,
   };
   const Component = pages[pageId];
@@ -1054,6 +1058,238 @@ function locMobPage(mob) {
 function BookCta({ label }) {
   return React.createElement('div', { style: { marginTop: '1.4rem' } },
     React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, label || 'Book a fit call →')
+  );
+}
+
+// ─── GREEK-SPEAKING THERAPIST · LONDON ───────────────────────────────────────
+function LondonPage() {
+  const mob = useIsMobile();
+  return React.createElement('main', { style: locMobPage(mob) },
+    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.5rem' : '2.5rem', fontSize: mob ? '22px' : '30px' } },
+      'Greek-speaking therapist for tech professionals in London'
+    ),
+    React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '2.5rem' : '3rem' } },
+      "If you work in London tech and you’d rather do this in Greek, with someone who also understands your industry, that’s the whole idea here. The work itself is the same one I do with every client. Speaking Greek just takes the translation out of it."
+    ),
+
+    React.createElement(Section, { label: 'Who this is for', mob },
+      React.createElement(P, { last: true }, "Greek-speaking founders, engineers, product managers, designers, consultants and executives working in London tech — fintech, scale-ups, big tech, agencies, the consulting firms. Wherever in the city you ended up.")
+    ),
+
+    React.createElement(Section, { label: 'Why it helps that I speak Greek', mob },
+      React.createElement(P, null, "Therapy works better in the language you actually think and feel in. The family expectations, the humour, the guilt, the particular context of building a life away from Greece — you don’t have to translate any of it or explain it from scratch."),
+      React.createElement(P, { last: true }, "We start from a shared understanding instead of spending sessions building one. That’s the real reason to choose a Greek-speaking therapist over a perfectly good local one.")
+    ),
+
+    React.createElement(Section, { label: 'And I understand the industry', mob },
+      React.createElement(P, { last: true }, "You also don’t have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), ", so runway, reorgs, shipping, the pressure of a senior role — I already follow all of it. It’s the same reason my ", React.createElement(IA, { href: '/founders/' }, 'founder'), " and ", React.createElement(IA, { href: '/solopreneurs/' }, 'solopreneur'), " clients come to me.")
+    ),
+
+    React.createElement(Section, { label: 'The work itself is the same', mob },
+      React.createElement(P, { last: true }, "Nothing about the work changes because you’re in London or because we speak Greek. It’s the same private, one-to-one work I do with everyone — the personal pattern and the real decision in front of you, worked at the same time. How it runs, step by step, is on ", React.createElement(IA, { href: '/how-i-work/' }, 'how I work'), ".")
+    ),
+
+    React.createElement(Section, { label: 'Online sessions', mob },
+      React.createElement(P, { last: true }, "Everything is online, one to one. I’m based in Ireland — same time zone as London — so an early slot before work or an evening one is easy to arrange. There’s no in-person room.")
+    ),
+
+    React.createElement(Section, { label: 'Confidentiality', mob },
+      React.createElement(P, { last: true }, "Private and one to one. I don’t report to anyone and I don’t use identifiable client stories anywhere. Here’s ", React.createElement(IA, { href: '/confidentiality/' }, 'how confidentiality works'), " in detail.")
+    ),
+
+    React.createElement(BookCta, { label: 'Book a fit call \u2192' }),
+
+    React.createElement('hr', { style: sepStyle }),
+    React.createElement(Section, { label: 'Common questions', mob },
+      React.createElement(FaqItem, { q: 'Greek or English?' },
+        React.createElement(P, { last: true }, "Either, and you can switch mid-sentence. Most people move between the two without thinking about it.")
+      ),
+      React.createElement(FaqItem, { q: 'Is the therapy itself any different because it’s in Greek?' },
+        React.createElement(P, { last: true }, "No. Same work, same approach I take with everyone. The Greek, and a shared read on your world, just remove the friction of explaining and translating.")
+      ),
+      React.createElement(FaqItem, { q: 'Are you based in London?' },
+        React.createElement(P, { last: true }, "No — I’m based in Ireland and work online. London is the same time zone, so scheduling is simple. There’s no in-person option.")
+      ),
+      React.createElement(FaqItem, { q: 'What do people usually bring?' },
+        React.createElement(P, { last: true }, "The same things anyone brings — pressure that won’t switch off, a decision they keep circling, burnout, self-doubt, work that has quietly taken over. Nothing London-specific. You just get to talk about it in Greek, with someone who understands the context.")
+      )
+    ),
+
+    React.createElement(SiteFooter, { mob })
+  );
+}
+
+// ─── GREEK-SPEAKING THERAPIST · MANCHESTER ───────────────────────────────────
+function ManchesterPage() {
+  const mob = useIsMobile();
+  return React.createElement('main', { style: locMobPage(mob) },
+    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.5rem' : '2.5rem', fontSize: mob ? '22px' : '30px' } },
+      'Greek-speaking therapist for tech professionals in Manchester'
+    ),
+    React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '2.5rem' : '3rem' } },
+      "If you’re in tech in Manchester and you’d rather talk in Greek, with someone who also knows the industry, that’s what this is. The work is the same one I do with every client — working in your own language just takes the translation out of it."
+    ),
+
+    React.createElement(Section, { label: 'Who this is for', mob },
+      React.createElement(P, { last: true }, "Greek-speaking engineers, developers, product and design people, consultants, agency owners and remote workers in and around Manchester and the wider North of England.")
+    ),
+
+    React.createElement(Section, { label: 'Why it helps that I speak Greek', mob },
+      React.createElement(P, null, "It’s easier to do this in the language you grew up in. The family side, the humour, the expectations, the context of building a life away from Greece — none of it needs translating or explaining first."),
+      React.createElement(P, { last: true }, "You get to be blunt, funny and unsure in your own idiom, and be understood the first time. That, more than anything, is why people look for a Greek-speaking therapist rather than a local one.")
+    ),
+
+    React.createElement(Section, { label: 'And I understand the industry', mob },
+      React.createElement(P, { last: true }, "You also don’t have to explain the work — the pipeline that’s gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), " before training as a psychotherapist, and I’ve done the job-to-independent route myself. It’s the same reason my ", React.createElement(IA, { href: '/solopreneurs/' }, 'solopreneur'), " and ", React.createElement(IA, { href: '/founders/' }, 'founder'), " clients come to me.")
+    ),
+
+    React.createElement(Section, { label: 'The work itself is the same', mob },
+      React.createElement(P, { last: true }, "It’s the same private, one-to-one work I do with everyone, working the personal pattern and the practical decision together. If you work for yourself, that includes the business side — pricing, positioning, the outreach you keep putting off — alongside the pattern underneath it. The full shape of it is on ", React.createElement(IA, { href: '/how-i-work/' }, 'how I work'), ".")
+    ),
+
+    React.createElement(Section, { label: 'Online sessions', mob },
+      React.createElement(P, { last: true }, "Everything is online, one to one. I’m based in Ireland, the same time zone as Manchester, so slots fit easily around work. If you’re remote-first anyway, a video session is just a Tuesday. There’s no in-person room.")
+    ),
+
+    React.createElement(Section, { label: 'Confidentiality', mob },
+      React.createElement(P, { last: true }, "Private, one to one, and it stays that way. Nothing gets reported to anyone and I don’t use identifiable stories. Here’s ", React.createElement(IA, { href: '/confidentiality/' }, 'how confidentiality works'), ".")
+    ),
+
+    React.createElement(BookCta, { label: 'Book a fit call \u2192' }),
+
+    React.createElement('hr', { style: sepStyle }),
+    React.createElement(Section, { label: 'Common questions', mob },
+      React.createElement(FaqItem, { q: 'Do I need to be in Manchester itself?' },
+        React.createElement(P, { last: true }, "No. Sessions are online, so anywhere in the UK works the same. Manchester and the North just happen to be where a lot of my Greek-speaking, remote and independent clients are.")
+      ),
+      React.createElement(FaqItem, { q: 'I work for myself. Can we cover the business too?' },
+        React.createElement(P, { last: true }, "Yes. Pricing, positioning and the outreach you avoid sit alongside the pattern underneath them, because for solo and independent people the two are rarely separate. Same work I do with any solopreneur.")
+      ),
+      React.createElement(FaqItem, { q: 'Greek or English?' },
+        React.createElement(P, { last: true }, "Either, or both in the same session. Working in your own language is the point.")
+      ),
+      React.createElement(FaqItem, { q: 'Is this a different service from the London or Dublin pages?' },
+        React.createElement(P, { last: true }, "No — same person, same offer. The only real differences are who tends to be where and the practical logistics. The therapy itself doesn’t change.")
+      )
+    ),
+
+    React.createElement(SiteFooter, { mob })
+  );
+}
+
+// ─── GREEK-SPEAKING THERAPIST · NEW YORK ─────────────────────────────────────
+function NewYorkPage() {
+  const mob = useIsMobile();
+  return React.createElement('main', { style: locMobPage(mob) },
+    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.5rem' : '2.5rem', fontSize: mob ? '22px' : '30px' } },
+      'Greek-speaking therapist for tech professionals in New York'
+    ),
+    React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '2.5rem' : '3rem' } },
+      "If you’re Greek and working in New York tech, and you’d rather do this in Greek with someone who also understands the industry, that’s the idea. The work is the same one I do with every client — speaking Greek just takes the translation out of it."
+    ),
+
+    React.createElement(Section, { label: 'Who this is for', mob },
+      React.createElement(P, { last: true }, "Greek-speaking engineers, founders, product leaders, designers and operators in New York tech — startups, larger platforms, and the finance-adjacent world the city runs on.")
+    ),
+
+    React.createElement(Section, { label: 'Why it helps that I speak Greek', mob },
+      React.createElement(P, null, "The things that actually run you — family, expectation, the particular pride and guilt of the one who went to the States — tend to live in Greek. In English they stay at a slight, unhelpful distance."),
+      React.createElement(P, { last: true }, "Working in your first language means none of that needs translating, and the cultural context is already understood. That’s the reason to choose this over a local option, not anything different about the therapy.")
+    ),
+
+    React.createElement(Section, { label: 'And I understand the industry', mob },
+      React.createElement(P, { last: true }, "You also don’t have to explain equity, runway, a reorg, or why “just be confident” is useless advice. 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, '500+ companies advised'), " before I trained as a psychotherapist. It’s the same reason my ", React.createElement(IA, { href: '/founders/' }, 'founder'), " and senior ", React.createElement(IA, { href: '/therapy-for-executives/' }, 'executive'), " clients come to me.")
+    ),
+
+    React.createElement(Section, { label: 'The work itself is the same', mob },
+      React.createElement(P, { last: true }, "Nothing about the work changes because you’re in New York. It’s the same one-to-one work I do with everyone, holding the personal pattern and the real situation at work in the same room. The steps are laid out on ", React.createElement(IA, { href: '/how-i-work/' }, 'how I work'), ".")
+    ),
+
+    React.createElement(Section, { label: 'Online, across the time difference', mob },
+      React.createElement(P, { last: true }, "Sessions are online, one to one. I’m based in Ireland, which is about five hours ahead of New York, so in practice they land in your morning. We agree a recurring slot that works for both of us; if the time difference doesn’t fit your schedule, I’ll tell you on the fit call rather than force it.")
+    ),
+
+    React.createElement(Section, { label: 'Confidentiality', mob },
+      React.createElement(P, { last: true }, "Private and one to one. I don’t report to your employer, investors or anyone else, and I don’t use identifiable stories publicly. The detail, including the honest limits, is on the ", React.createElement(IA, { href: '/confidentiality/' }, 'confidentiality page'), ".")
+    ),
+
+    React.createElement(BookCta, { label: 'Book a fit call \u2192' }),
+
+    React.createElement('hr', { style: sepStyle }),
+    React.createElement(Section, { label: 'Common questions', mob },
+      React.createElement(FaqItem, { q: 'You’re in Ireland — how does the time difference work?' },
+        React.createElement(P, { last: true }, "Ireland is about five hours ahead of New York, so sessions usually sit in your morning. We set a fixed recurring slot. If your schedule can’t make the difference work, I’ll say so on the fit call instead of pretending it’s fine.")
+      ),
+      React.createElement(FaqItem, { q: 'Are you a licensed therapist in New York State?' },
+        React.createElement(P, { last: true }, "I’m a licensed psychotherapist and a registered member of the BACP (British Association for Counselling and Psychotherapy). I’m not registered with a New York State board, and this is online work rather than a local clinical service. If you specifically need a New-York-licensed provider — for insurance, say — I’m happy to point you elsewhere on the fit call.")
+      ),
+      React.createElement(FaqItem, { q: 'Greek or English?' },
+        React.createElement(P, { last: true }, "Either, or both in the same session. Working in your first language is the reason to choose this.")
+      ),
+      React.createElement(FaqItem, { q: 'Is it a different kind of therapy because it’s for Greek people abroad?' },
+        React.createElement(P, { last: true }, "No. It’s the offer everyone gets. Being able to do it in Greek, with the context already understood, is the only part that’s specific to you.")
+      )
+    ),
+
+    React.createElement(SiteFooter, { mob })
+  );
+}
+
+// ─── GREEK-SPEAKING THERAPIST · DUBLIN ───────────────────────────────────────
+function DublinPage() {
+  const mob = useIsMobile();
+  return React.createElement('main', { style: locMobPage(mob) },
+    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.5rem' : '2.5rem', fontSize: mob ? '22px' : '30px' } },
+      'Greek-speaking therapist for tech professionals in Dublin'
+    ),
+    React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '2.5rem' : '3rem' } },
+      "If you’re Greek and working in Dublin tech, and you’d rather do this in Greek with someone who also knows the industry, that’s what this is. The work is the same one I do with every client — speaking Greek just removes the translation."
+    ),
+
+    React.createElement(Section, { label: 'Who this is for', mob },
+      React.createElement(P, { last: true }, "Greek-speaking engineers, product managers, operations and consulting people working in Dublin’s multinationals, tech companies and startups.")
+    ),
+
+    React.createElement(Section, { label: 'Why it helps that I speak Greek', mob },
+      React.createElement(P, null, "For people who’ve relocated, a lot of what matters is still tied to Greece — family, expectations, the pull home. It’s the part that’s hardest to explain to someone outside the culture, and the part that lands flat when you have to translate it."),
+      React.createElement(P, { last: true }, "In Greek, with someone who already gets it, you can go straight to it. That’s the reason to choose a Greek-speaking therapist — not anything different about the work.")
+    ),
+
+    React.createElement(Section, { label: 'And I understand the industry', mob },
+      React.createElement(P, { last: true }, "You also don’t have to explain corporate life — the big-org politics, the way a role can quietly take over. 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, '500+ companies advised'), " before I trained as a psychotherapist, including inside a large enterprise. I happen to be based in Ireland myself, which helps with the practicalities, but the real reason to come is that I hold both the work and the Greek context at once.")
+    ),
+
+    React.createElement(Section, { label: 'The work itself is the same', mob },
+      React.createElement(P, { last: true }, "It’s the same private, one-to-one work I do with everyone — the personal pattern and the real decision together, whether that’s the job, the move, or whether to stay at all. How the work runs is on ", React.createElement(IA, { href: '/how-i-work/' }, 'how I work'), ".")
+    ),
+
+    React.createElement(Section, { label: 'Online sessions', mob },
+      React.createElement(P, { last: true }, "Everything is online, one to one. I’m based in Ireland, so we share a time zone and there’s nothing to solve on scheduling — but sessions are by video, not in person. Same country, same working hours; that’s where the convenience begins and ends.")
+    ),
+
+    React.createElement(Section, { label: 'Confidentiality', mob },
+      React.createElement(P, { last: true }, "Private and one to one. Nothing goes back to your employer or manager, and I don’t use identifiable stories publicly. The full detail is on the ", React.createElement(IA, { href: '/confidentiality/' }, 'confidentiality page'), ".")
+    ),
+
+    React.createElement(BookCta, { label: 'Book a fit call \u2192' }),
+
+    React.createElement('hr', { style: sepStyle }),
+    React.createElement(Section, { label: 'Common questions', mob },
+      React.createElement(FaqItem, { q: 'You’re in Ireland too — can we meet in person?' },
+        React.createElement(P, { last: true }, "No, the work is online, one to one, by video — same as for all my clients. Being in the same country and time zone makes scheduling effortless, but there isn’t an in-person room.")
+      ),
+      React.createElement(FaqItem, { q: 'A lot of what’s on my mind is family back in Greece. Is that the right thing to bring?' },
+        React.createElement(P, { last: true }, "Yes. For people who’ve relocated, the tie home is usually central, not a side issue — and it’s the part hardest to explain to someone outside the culture. Working in Greek is exactly what makes it workable.")
+      ),
+      React.createElement(FaqItem, { q: 'Greek or English?' },
+        React.createElement(P, { last: true }, "Either, or both in the same session. Your language, your call.")
+      ),
+      React.createElement(FaqItem, { q: 'Is this a different service because I’m Greek and abroad?' },
+        React.createElement(P, { last: true }, "No. What you’re paying for isn’t a “Greek service” — it’s the ordinary work, minus the part where you’d have to explain your background before we could start.")
+      )
+    ),
+
+    React.createElement(SiteFooter, { mob })
   );
 }
 
