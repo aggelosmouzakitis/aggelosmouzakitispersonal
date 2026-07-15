@@ -101,6 +101,7 @@ const FOOTER_COLS = [
     { href: '/', label: 'Home' },
     { href: '/blog/', label: 'Writing' },
     { href: '/ask-me-anything/', label: 'Ask me anything' },
+    { href: '/confidentiality/', label: 'Confidentiality' },
     { href: '/getinterviewed/', label: 'Get interviewed' },
   ] },
   { label: 'Elsewhere', links: [
@@ -286,6 +287,7 @@ function SpecialtyPage({ pageId }) {
     'solopreneurs': SolopreneursPage,
     'how-i-work': HowIWorkPage,
     'book': BookPage,
+    'confidentiality': ConfidentialityPage,
   };
   const Component = pages[pageId];
   return Component ? React.createElement(Component) : null;
@@ -1041,6 +1043,107 @@ function CareerTransitionPage() {
         React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
+    React.createElement(SiteFooter, { mob })
+  );
+}
+
+// ─── SHARED PAGE HELPERS ─────────────────────────────────────────────────────
+function locMobPage(mob) {
+  return mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
+}
+function BookCta({ label }) {
+  return React.createElement('div', { style: { marginTop: '1.4rem' } },
+    React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, label || 'Book a fit call →')
+  );
+}
+
+// ─── CONFIDENTIALITY ─────────────────────────────────────────────────────────
+function ConfidentialityPage() {
+  const mob = useIsMobile();
+  return React.createElement('main', { style: locMobPage(mob) },
+    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.25rem' : '1.75rem', fontSize: mob ? '24px' : '30px' } }, 'Confidentiality'),
+    React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '2.5rem' : '3rem' } },
+      "People bring me things they haven’t said to their cofounder, their board, their partner or anyone on their team. That only works if discretion is built in from the start, not bolted on afterwards. Here’s how I handle it, and where the honest limits are."
+    ),
+
+    React.createElement(Section, { label: 'Why this page exists', mob },
+      React.createElement(P, null, "Most of my clients are ", React.createElement(IA, { href: '/founders/' }, 'founders'), ", ", React.createElement(IA, { href: '/solopreneurs/' }, 'solopreneurs'), " and senior people in tech. What comes up in the room isn’t only personal. It routinely touches cofounders, employees, leadership teams, investors, boards and customers — and revenue, fundraising, runway, pricing, intellectual property and product plans — alongside career decisions, employment matters, relationships, and health."),
+      React.createElement(P, { last: true }, "In other words, information that could have real professional or reputational consequences in the wrong place. So confidentiality here is not a formality. It’s a condition of the work being possible at all.")
+    ),
+
+    React.createElement(Section, { label: 'What you can rely on', mob },
+      React.createElement(P, null, "The plain version, before the nuance:"),
+      React.createElement(PatternList, { items: [
+        { cause: 'Sessions are confidential', effect: 'what you say in them is treated as private' },
+        { cause: 'No reporting back', effect: 'nothing goes to your employer, investors, board, cofounder, team or partner' },
+        { cause: 'Paying doesn’t buy access', effect: 'if someone else funds the work, they don’t get to hear what was said' },
+        { cause: 'No identifiable stories', effect: 'I don’t use recognisable client material in public without explicit permission' },
+        { cause: 'You can ask first', effect: 'any practical question about confidentiality is fair before you commit' },
+      ] }),
+      React.createElement(P, { last: true }, "None of that is conditional on you being a “good” client or saying comfortable things. Especially not that.")
+    ),
+
+    React.createElement(Section, { label: 'Nothing goes back to the people involved', mob },
+      React.createElement(P, null, "This is the one founders ask about most, so it’s worth being explicit. You can bring, and work on, any of the following without it reaching the people concerned:"),
+      React.createElement('ul', { style: { margin: '0 0 1.2rem', paddingLeft: '1.2rem', lineHeight: 1.9, fontSize: '17px', color: C.text } },
+        React.createElement('li', null, "Doubts about the company, or whether you still believe in it"),
+        React.createElement('li', null, "Frustration with a cofounder, or that the relationship is failing"),
+        React.createElement('li', null, "Concerns about specific employees, or decisions you’re dreading"),
+        React.createElement('li', null, "Investor or board pressure, and how you’re really handling it"),
+        React.createElement('li', null, "Financial fear — runway, revenue, whether it survives the quarter"),
+        React.createElement('li', null, "That you want to leave, sell, or stop"),
+        React.createElement('li', null, "Lost motivation, and personal circumstances bleeding into the company")
+      ),
+      React.createElement(P, { last: true }, "I’m not connected to your cap table or your org chart. I don’t talk to your people. There’s no back channel, including to whoever referred you.")
+    ),
+
+    React.createElement(Section, { label: 'If someone else is paying', mob },
+      React.createElement(P, { last: true }, "Sometimes a company or an investor funds the work. That arrangement covers the invoice and nothing else. The paying party doesn’t receive session content, notes, progress reports or a summary of what you’re working on. If anyone expects otherwise, we sort out those boundaries in writing before we begin, so there’s no ambiguity later.")
+    ),
+
+    React.createElement(Section, { label: 'How I use examples publicly', mob },
+      React.createElement(P, null, "I write and speak about this work — on the ", React.createElement(IA, { href: '/blog/' }, 'blog'), ", on ", React.createElement(A, { href: 'https://undisguised.io' }, 'Undisguised'), " and elsewhere. I don’t use identifiable client stories to do it."),
+      React.createElement(P, { last: true }, "Anything that appears publicly is fictional, materially altered, or a composite assembled from patterns across many people, and constructed so that no individual can be identified — not by a colleague, a cofounder, or the person themselves. If I ever wanted to use something closer to a real, recognisable case, I’d ask you first, explicitly, and a no is simply a no.")
+    ),
+
+    // TODO(confirm): name the actual tools used for video, scheduling, notes and file storage
+    // (and their GDPR / data-processing posture), plus any formal privacy notice or data-retention
+    // period, so this section can be specific rather than general. Kept deliberately vague until confirmed.
+    React.createElement(Section, { label: 'Notes, data and scheduling', mob },
+      React.createElement(P, { last: true }, "Sessions run over video, and scheduling, notes and communication use standard professional tools. I keep records to a considered minimum and handle them accordingly. I’m not going to invent impressive-sounding security claims here — if you want the specifics of what’s stored, where, and for how long, ask on the fit call and I’ll answer plainly.")
+    ),
+
+    React.createElement(Section, { label: 'An NDA, if you want one', mob },
+      React.createElement(P, null, "If it makes the commercial side easier to trust, I’m glad to sign an NDA before we start. For a lot of founders it turns an abstract promise into something concrete, and that’s a reasonable thing to want."),
+      React.createElement(P, { last: true }, "One honest caveat: an NDA reinforces the commercial confidentiality of our relationship, but it doesn’t override the legal, ethical and professional obligations below. No agreement can contract me out of those, and you should be wary of anyone who says theirs can.")
+    ),
+
+    React.createElement(Section, { label: 'The limits — stated plainly', mob },
+      React.createElement(P, null, "I’m not going to promise absolute, unconditional secrecy, because that promise can’t be kept honestly, and a page like this is worth nothing if it overstates. Confidentiality is the strong default. In a narrow set of circumstances it can have limits:"),
+      React.createElement('div', { style: { margin: '.4rem 0 1.2rem' } },
+        React.createElement(TrackCards, { mob, tracks: [
+          { title: 'Serious, imminent risk', body: "If there’s a real and immediate risk of serious harm to you or someone else, I may need to act on that — ideally with you, not around you." },
+          { title: 'Legal and safeguarding', body: "In limited situations the law can require disclosure — for example a court order, or a safeguarding concern involving a child or a vulnerable adult." },
+        ] })
+      ),
+      React.createElement(P, null, "As a psychotherapist I also work within a professional ethical framework (I’m a registered member of the BACP) and I use clinical supervision, which is standard and itself confidential. In supervision, material is discussed in a way that protects your identity."),
+      React.createElement(P, { last: true }, "Where the work is advisory or coaching rather than psychotherapy, the professional frame differs, but the commitment to discretion — and the same narrow limits around serious risk and the law — still applies. If any of this is relevant to your situation, ask me directly and I’ll be specific.")
+      // TODO(confirm): confirm the exact confidentiality-limit wording that matches your practice and
+      // jurisdiction (Ireland-based, working with clients abroad) — specifically (1) the precise legal /
+      // safeguarding grounds you are prepared to state, (2) whether clinical supervision applies to the
+      // advisory/coaching work as well as the psychotherapy, and (3) whether you want to distinguish the
+      // two modes more formally here. Kept general until confirmed; this is not legal advice.
+    ),
+
+    React.createElement(Section, { label: 'This isn’t the paperwork', mob },
+      React.createElement(P, { last: true }, "This page explains how I think about confidentiality. It isn’t a substitute for a formal contract, a privacy notice, a consent form or an NDA. Where those apply, they’re handled separately and take precedence over anything summarised here.")
+    ),
+
+    React.createElement(Section, { label: 'Ask before you commit', mob },
+      React.createElement(P, null, "If confidentiality is the thing standing between you and starting, that’s a good use of a fit call. Bring the specific worry — the cofounder who mustn’t know, the investor, the NDA — and I’ll tell you exactly how it works, including anything I can’t promise."),
+      React.createElement(BookCta, { label: 'Book a fit call →' })
+    ),
+
     React.createElement(SiteFooter, { mob })
   );
 }

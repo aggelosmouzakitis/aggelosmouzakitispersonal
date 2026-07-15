@@ -19,6 +19,7 @@ const PAGES = [
   { f: 'burnout-diagnostic/index.html', faq: false },
   { f: 'blog/index.html', faq: false },
   { f: 'ask-me-anything/index.html', faq: false },
+  { f: 'confidentiality/index.html', faq: false },
 ];
 
 // Individual blog posts don't use the #root App shell — they're static articles
