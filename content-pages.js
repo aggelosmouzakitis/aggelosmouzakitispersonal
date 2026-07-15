@@ -2067,134 +2067,75 @@ function LondonPage() {
       marginBottom: mob ? '1.5rem' : '2.5rem',
       fontSize: mob ? '22px' : '30px'
     }
-  }, 'Greek-speaking therapy for tech professionals in London'), React.createElement('p', {
+  }, 'Greek-speaking therapist for tech professionals in London'), React.createElement('p', {
     style: {
       ...leadStyle,
       marginBottom: mob ? '2.5rem' : '3rem'
     }
-  }, "You built a serious career in one of the most demanding tech markets in the world, in a language and a culture that isn’t your first. This is therapy that speaks both — the work and the Greek part — so you don’t have to translate either one."), React.createElement(Section, {
+  }, "If you work in London tech and you’d rather do this in Greek, with someone who also understands your industry, that’s the whole idea here. The work itself is the same one I do with every client. Speaking Greek just takes the translation out of it."), React.createElement(Section, {
     label: 'Who this is for',
     mob
-  }, React.createElement(P, null, "Greek-speaking founders, engineers, product managers, designers, consultants and executives who moved to London for the work and stayed for the career. Fintech, scale-ups, big tech, agencies, the consulting firms, the ones who ended up somewhere near the City whether they meant to or not."), React.createElement(P, {
+  }, React.createElement(P, {
     last: true
-  }, "People who are doing well on paper and privately carrying something the performance review doesn’t capture.")), React.createElement(Section, {
-    label: 'What London does to you',
+  }, "Greek-speaking founders, engineers, product managers, designers, consultants and executives working in London tech — fintech, scale-ups, big tech, agencies, the consulting firms. Wherever in the city you ended up.")), React.createElement(Section, {
+    label: 'Why it helps that I speak Greek',
     mob
-  }, React.createElement(P, null, "London rewards a very particular setting: always on, always slightly ahead of yourself, always available. It works, for a while. Then the ", React.createElement(IA, {
-    href: '/executive-burnout-therapy/'
-  }, "off switch stops responding"), " and you notice you haven’t had a genuinely undefended thought in months."), React.createElement(P, {
+  }, React.createElement(P, null, "Therapy works better in the language you actually think and feel in. The family expectations, the humour, the guilt, the particular context of building a life away from Greece — you don’t have to translate any of it or explain it from scratch."), React.createElement(P, {
     last: true
-  }, "For a lot of Greek professionals here there’s a second layer underneath it: you didn’t just take a job, you left. There was a version of your life back in Greece, and family who measure success differently, and a quiet arithmetic running in the background about whether all of this was worth it. That doesn’t show up in standups. It shows up at 2am.")), React.createElement(Section, {
-    label: 'Why the Greek part matters here',
+  }, "We start from a shared understanding instead of spending sessions building one. That’s the real reason to choose a Greek-speaking therapist over a perfectly good local one.")), React.createElement(Section, {
+    label: 'And I understand the industry',
     mob
-  }, React.createElement(P, null, "You can do therapy in English. Plenty of people do. But there’s a difference between being understood and being fluent, and the things that actually run you — the family expectations, the guilt, the humour, the particular weight of being the one who left — tend to live in Greek."), React.createElement(P, {
+  }, React.createElement(P, {
     last: true
-  }, "Working in your own language means you don’t spend half the session explaining what a Greek mother’s phone call means, or why “just set a boundary” lands differently when family loyalty was never optional. We skip the cultural footnotes and get to the thing.")), React.createElement(Section, {
-    label: 'Why I also understand the industry',
-    mob
-  }, React.createElement(P, null, "Before I trained as a psychotherapist I spent 18+ years in tech, in product and growth, building companies and ", React.createElement(A, {
+  }, "You also don’t have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advising more than 500 of them'), ". So you don’t have to explain what a runway is, why a reorg is quietly terrifying, or what it costs to be the senior person everyone assumes has it handled."), React.createElement(P, {
-    last: true
-  }, "I understand both sides at once — the London tech pressure and the Greek context underneath it — which is the whole point of coming to someone like me rather than one or the other.")), React.createElement(Section, {
-    label: 'What people bring',
-    mob
-  }, React.createElement(PatternList, {
-    items: [{
-      cause: 'Work that never switches off',
-      effect: 'you’re present with nobody, including yourself'
-    }, {
-      cause: 'Success that doesn’t feel like it',
-      effect: 'the title went up, the relief never arrived'
-    }, {
-      cause: 'The senior-person isolation',
-      effect: 'no one to say the unpolished thing to'
-    }, {
-      cause: 'Family in Greece, life in London',
-      effect: 'guilt and distance you can’t fully resolve either way'
-    }, {
-      cause: 'Identity fused to output',
-      effect: 'a slow week feels like a threat to who you are'
-    }]
-  }), React.createElement(P, {
-    last: true
-  }, "Not everyone brings all of it. Most people bring one, and find the others were connected.")), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'How the work runs',
-    mob
-  }, React.createElement(P, null, "It runs on two tracks at once. We work the ", React.createElement(Strong, null, "inner pattern"), " that’s actually driving the problem, and the ", React.createElement(Strong, null, "real decision"), " in front of you — the move at work, the thing you’re avoiding, the direction you’re unsure of. One without the other doesn’t hold."), React.createElement(StepCards, {
-    mob,
-    steps: [{
-      n: '1',
-      title: 'Fit call',
-      tag: '~15 min · free',
-      body: "A short call, in Greek or English, to see if we click. Not a session."
-    }, {
-      n: '2',
-      title: 'Paid session',
-      tag: 'one session',
-      body: "You bring the problem as you see it. We find the more accurate one underneath, and you leave with a clear read and one real move."
-    }, {
-      n: '3',
-      title: 'Ongoing',
-      tag: "if it’s worth it",
-      body: "Private, one to one, for as long as it’s genuinely useful. Not a session longer."
-    }]
-  }), React.createElement('p', {
-    style: {
-      fontSize: '16px',
-      lineHeight: 1.7,
-      color: C.muted,
-      margin: '1.1rem 0 0'
-    }
-  }, "More detail on ", React.createElement(IA, {
-    href: '/how-i-work/'
-  }, 'how I work'), ", and on the two audiences I work with most: ", React.createElement(IA, {
+  }, 'advised more than 500 companies'), ", so runway, reorgs, shipping, the pressure of a senior role — I already follow all of it. It’s the same reason my ", React.createElement(IA, {
     href: '/founders/'
-  }, 'founders'), " and ", React.createElement(IA, {
+  }, 'founder'), " and ", React.createElement(IA, {
     href: '/solopreneurs/'
-  }, 'solopreneurs'), ".")), React.createElement(Section, {
-    label: 'Sessions are online',
+  }, 'solopreneur'), " clients come to me.")), React.createElement(Section, {
+    label: 'The work itself is the same',
     mob
   }, React.createElement(P, {
     last: true
-  }, "I don’t have a room in London. I’m based in Ireland and work online, one to one, with Greek speakers wherever they are. In practice London is easy — we’re in the same time zone, so an early morning or an evening slot after work is straightforward.")), React.createElement(Section, {
-    label: 'Confidential, and I mean it',
+  }, "Nothing about the work changes because you’re in London or because we speak Greek. It’s the same private, one-to-one work I do with everyone — the personal pattern and the real decision in front of you, worked at the same time. How it runs, step by step, is on ", React.createElement(IA, {
+    href: '/how-i-work/'
+  }, 'how I work'), ".")), React.createElement(Section, {
+    label: 'Online sessions',
     mob
   }, React.createElement(P, {
     last: true
-  }, "London tech is a small world and word travels. What you say stays between us. I don’t report back to anyone, and I don’t use identifiable client stories anywhere. If you want the detail before you commit, read exactly ", React.createElement(IA, {
+  }, "Everything is online, one to one. I’m based in Ireland — same time zone as London — so an early slot before work or an evening one is easy to arrange. There’s no in-person room.")), React.createElement(Section, {
+    label: 'Confidentiality',
+    mob
+  }, React.createElement(P, {
+    last: true
+  }, "Private and one to one. I don’t report to anyone and I don’t use identifiable client stories anywhere. Here’s ", React.createElement(IA, {
     href: '/confidentiality/'
-  }, 'how I handle confidentiality'), ".")), React.createElement(Section, {
-    label: 'Not a career coach',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "This isn’t CV strategy or a promotion playbook, and it isn’t management consulting. Those work on the outside of the problem. When the same pattern keeps producing the same result no matter how good your plan is, the plan was never the issue. That’s the part I work on — with a licensed psychotherapist’s training and an operator’s read on your actual situation.")), React.createElement(BookCta, {
-    label: 'Book a fit call →'
+  }, 'how confidentiality works'), " in detail.")), React.createElement(BookCta, {
+    label: 'Book a fit call \u2192'
   }), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
     label: 'Common questions',
     mob
   }, React.createElement(FaqItem, {
-    q: 'Do sessions happen in Greek or English?'
+    q: 'Greek or English?'
   }, React.createElement(P, {
     last: true
-  }, "Whichever you want, and you can switch mid-sentence — most people do. The point of working with a Greek-speaking therapist is that you never have to pick the language that loses the meaning.")), React.createElement(FaqItem, {
+  }, "Either, and you can switch mid-sentence. Most people move between the two without thinking about it.")), React.createElement(FaqItem, {
+    q: 'Is the therapy itself any different because it’s in Greek?'
+  }, React.createElement(P, {
+    last: true
+  }, "No. Same work, same approach I take with everyone. The Greek, and a shared read on your world, just remove the friction of explaining and translating.")), React.createElement(FaqItem, {
     q: 'Are you based in London?'
   }, React.createElement(P, {
     last: true
-  }, "No. I’m based in Ireland and work online. London clients are in the same time zone, so scheduling is simple. There’s no in-person option.")), React.createElement(FaqItem, {
-    q: 'Is this therapy or is it business advice?'
+  }, "No — I’m based in Ireland and work online. London is the same time zone, so scheduling is simple. There’s no in-person option.")), React.createElement(FaqItem, {
+    q: 'What do people usually bring?'
   }, React.createElement(P, {
     last: true
-  }, "Both, deliberately. I’m a licensed psychotherapist and I spent 18+ years in tech. We work the personal pattern and the work problem in the same room, because for most of my clients they turn out to be the same problem.")), React.createElement(FaqItem, {
-    q: 'I’m functioning fine. Is it “bad enough” to come?'
-  }, React.createElement(P, {
-    last: true
-  }, "Most of the people I see are functioning fine and that’s exactly the issue — the cost is invisible from the outside and very much not from the inside. You don’t need a crisis to have a reason."))), React.createElement(SiteFooter, {
+  }, "The same things anyone brings — pressure that won’t switch off, a decision they keep circling, burnout, self-doubt, work that has quietly taken over. Nothing London-specific. You just get to talk about it in Greek, with someone who understands the context."))), React.createElement(SiteFooter, {
     mob
   }));
 }
@@ -2210,112 +2151,53 @@ function ManchesterPage() {
       marginBottom: mob ? '1.5rem' : '2.5rem',
       fontSize: mob ? '22px' : '30px'
     }
-  }, 'A Greek-speaking therapist for tech professionals in Manchester'), React.createElement('p', {
+  }, 'Greek-speaking therapist for tech professionals in Manchester'), React.createElement('p', {
     style: {
       ...leadStyle,
       marginBottom: mob ? '2.5rem' : '3rem'
     }
-  }, "You’re building a career in tech away from the biggest hub, in your second language, at a distance from home. Therapy in Greek, with someone who knows the industry, so the work doesn’t start with a translation exercise."), React.createElement(Section, {
+  }, "If you’re in tech in Manchester and you’d rather talk in Greek, with someone who also knows the industry, that’s what this is. The work is the same one I do with every client — working in your own language just takes the translation out of it."), React.createElement(Section, {
     label: 'Who this is for',
-    mob
-  }, React.createElement(P, null, "Greek-speaking engineers, developers, product and design people, consultants, agency owners and remote workers in and around Manchester — and the wider North of England and remote-first world it belongs to."), React.createElement(P, {
-    last: true
-  }, "Often people who chose here on purpose: cheaper than London, calmer than London, room to actually build a life. And who sometimes wonder, quietly, whether they stepped slightly off the main track by doing it.")), React.createElement(Section, {
-    label: 'The Manchester version of the problem',
-    mob
-  }, React.createElement(P, null, "This isn’t the London status treadmill and it doesn’t pretend to be. The pressure here is quieter and, in its own way, harder to name. It’s the founder or ", React.createElement(IA, {
-    href: '/solopreneurs/'
-  }, 'agency owner'), " carrying the whole thing with no one around who really gets it. The remote worker whose calendar is full and whose days are strangely empty of people. The person mid-", React.createElement(IA, {
-    href: '/career-transition-therapy/'
-  }, 'career transition'), " who moved for a good reason and hasn’t felt fully landed since."), React.createElement(P, {
-    last: true
-  }, "Less “am I winning” and more “am I building something stable, or just drifting somewhere with good broadband.”")), React.createElement(Section, {
-    label: 'Isolation is the real one',
-    mob
-  }, React.createElement(P, null, "Away from the big hub, working independently or remotely, in a country that isn’t yours, the isolation is structural rather than dramatic. You can go a long time being fine and not quite connected to anyone, and not notice how much that’s costing until the motivation quietly drains out."), React.createElement(P, {
-    last: true
-  }, "Doing this in Greek matters more than people expect. The relief of not performing your competence in a second language, of being blunt and funny and unsure in your own idiom, is itself part of the work.")), React.createElement(Section, {
-    label: 'I know the industry, not just the feelings',
-    mob
-  }, React.createElement(P, null, "I spent 18+ years in product and growth before training as a psychotherapist, and I’ve ", React.createElement(A, {
-    href: 'https://headofgrowth.io'
-  }, 'advised more than 500 companies'), ". I’ve done the job-to-independent-and-back route myself, including building this practice right now, so I know the terrain — the dry pipeline, the pricing you’re scared to raise, the visibility you avoid."), React.createElement(P, {
-    last: true
-  }, "So we don’t spend the first month on context. You get someone who understands the work and the Greek half of the story at the same time.")), React.createElement(Section, {
-    label: 'What people bring',
-    mob
-  }, React.createElement(PatternList, {
-    items: [{
-      cause: 'Working alone, or remotely',
-      effect: 'full days, no one who actually gets it'
-    }, {
-      cause: 'Building away from the hub',
-      effect: 'a nagging sense you’re slightly off the main track'
-    }, {
-      cause: 'Relocation that never fully settled',
-      effect: 'here for years, still not landed'
-    }, {
-      cause: 'Pressure to create stability',
-      effect: 'you keep switching direction to feel safe'
-    }, {
-      cause: 'Avoiding being seen',
-      effect: React.createElement(A, {
-        href: '/blog/the-high-cost-of-endless-pondering/'
-      }, 'lots of refining, almost no selling')
-    }]
-  }), React.createElement(P, {
-    last: true
-  }, "The thread is usually stability — wanting it, and a pattern in you that keeps undercutting it.")), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'How the work runs',
-    mob
-  }, React.createElement(P, null, "Two tracks at once. The ", React.createElement(Strong, null, "inner track"), " finds the pattern and works to change it. The ", React.createElement(Strong, null, "business track"), " is the actual thing in front of you — the offer, the pricing, the direction, the move you keep postponing. Grounded and practical, which suits the place."), React.createElement(StepCards, {
-    mob,
-    steps: [{
-      n: '1',
-      title: 'Fit call',
-      tag: '~15 min · free',
-      body: "Short call, Greek or English, to see if we click. No pitch."
-    }, {
-      n: '2',
-      title: 'Paid session',
-      tag: 'one session',
-      body: "You bring the problem as you see it. We find the one underneath and leave with a clear read and one real move."
-    }, {
-      n: '3',
-      title: 'Ongoing',
-      tag: "if it’s worth it",
-      body: "Private, one to one, for as long as it helps. Not a session longer."
-    }]
-  }), React.createElement('p', {
-    style: {
-      fontSize: '16px',
-      lineHeight: 1.7,
-      color: C.muted,
-      margin: '1.1rem 0 0'
-    }
-  }, "The full version is on ", React.createElement(IA, {
-    href: '/how-i-work/'
-  }, 'how I work'), ".")), React.createElement(Section, {
-    label: 'Online works in your favour here',
     mob
   }, React.createElement(P, {
     last: true
-  }, "Everything is online, one to one. I’m based in Ireland, same time zone as Manchester, so slots are easy to fit around work. If you’re remote-first anyway, a video session is just a Tuesday. There’s no in-person room.")), React.createElement(Section, {
+  }, "Greek-speaking engineers, developers, product and design people, consultants, agency owners and remote workers in and around Manchester and the wider North of England.")), React.createElement(Section, {
+    label: 'Why it helps that I speak Greek',
+    mob
+  }, React.createElement(P, null, "It’s easier to do this in the language you grew up in. The family side, the humour, the expectations, the context of building a life away from Greece — none of it needs translating or explaining first."), React.createElement(P, {
+    last: true
+  }, "You get to be blunt, funny and unsure in your own idiom, and be understood the first time. That, more than anything, is why people look for a Greek-speaking therapist rather than a local one.")), React.createElement(Section, {
+    label: 'And I understand the industry',
+    mob
+  }, React.createElement(P, {
+    last: true
+  }, "You also don’t have to explain the work — the pipeline that’s gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, {
+    href: 'https://headofgrowth.io'
+  }, 'advised more than 500 companies'), " before training as a psychotherapist, and I’ve done the job-to-independent route myself. It’s the same reason my ", React.createElement(IA, {
+    href: '/solopreneurs/'
+  }, 'solopreneur'), " and ", React.createElement(IA, {
+    href: '/founders/'
+  }, 'founder'), " clients come to me.")), React.createElement(Section, {
+    label: 'The work itself is the same',
+    mob
+  }, React.createElement(P, {
+    last: true
+  }, "It’s the same private, one-to-one work I do with everyone, working the personal pattern and the practical decision together. If you work for yourself, that includes the business side — pricing, positioning, the outreach you keep putting off — alongside the pattern underneath it. The full shape of it is on ", React.createElement(IA, {
+    href: '/how-i-work/'
+  }, 'how I work'), ".")), React.createElement(Section, {
+    label: 'Online sessions',
+    mob
+  }, React.createElement(P, {
+    last: true
+  }, "Everything is online, one to one. I’m based in Ireland, the same time zone as Manchester, so slots fit easily around work. If you’re remote-first anyway, a video session is just a Tuesday. There’s no in-person room.")), React.createElement(Section, {
     label: 'Confidentiality',
     mob
   }, React.createElement(P, {
     last: true
-  }, "Private, one to one, and it stays that way. I don’t report to anyone and I don’t use identifiable stories. Here’s ", React.createElement(IA, {
+  }, "Private, one to one, and it stays that way. Nothing gets reported to anyone and I don’t use identifiable stories. Here’s ", React.createElement(IA, {
     href: '/confidentiality/'
-  }, 'how confidentiality actually works'), " if you want specifics before starting.")), React.createElement(Section, {
-    label: 'Not coaching, not consulting',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Plenty of people will sell you a growth framework or a productivity system. If a framework was the answer you’d have solved this already — you’re resourceful. This works on why the same pattern keeps producing the same result, which is where a psychotherapist’s training earns its place.")), React.createElement(BookCta, {
-    label: 'Book a fit call →'
+  }, 'how confidentiality works'), ".")), React.createElement(BookCta, {
+    label: 'Book a fit call \u2192'
   }), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
@@ -2325,19 +2207,19 @@ function ManchesterPage() {
     q: 'Do I need to be in Manchester itself?'
   }, React.createElement(P, {
     last: true
-  }, "No. Sessions are online, so anywhere in the UK works the same. Manchester and the North just happen to be where a lot of my Greek-speaking, remote and independent clients are based.")), React.createElement(FaqItem, {
-    q: 'I work for myself. Can we work on the business too?'
+  }, "No. Sessions are online, so anywhere in the UK works the same. Manchester and the North just happen to be where a lot of my Greek-speaking, remote and independent clients are.")), React.createElement(FaqItem, {
+    q: 'I work for myself. Can we cover the business too?'
   }, React.createElement(P, {
     last: true
-  }, "Yes — that’s half the point. Pricing, positioning, the outreach you avoid: we work those alongside the pattern underneath them, because for solo and independent people the two are rarely separate.")), React.createElement(FaqItem, {
-    q: 'How is this different from the London page?'
+  }, "Yes. Pricing, positioning and the outreach you avoid sit alongside the pattern underneath them, because for solo and independent people the two are rarely separate. Same work I do with any solopreneur.")), React.createElement(FaqItem, {
+    q: 'Greek or English?'
   }, React.createElement(P, {
     last: true
-  }, "Same person, same method. The difference is who tends to come and why: less about status and switching off, more about isolation, independent work and building something stable away from the main hub.")), React.createElement(FaqItem, {
-    q: 'Will it be in Greek?'
+  }, "Either, or both in the same session. Working in your own language is the point.")), React.createElement(FaqItem, {
+    q: 'Is this a different service from the London or Dublin pages?'
   }, React.createElement(P, {
     last: true
-  }, "As much as you like. Working in your own language is exactly why people choose this rather than a local English-speaking therapist."))), React.createElement(SiteFooter, {
+  }, "No — same person, same offer. The only real differences are who tends to be where and the practical logistics. The therapy itself doesn’t change."))), React.createElement(SiteFooter, {
     mob
   }));
 }
@@ -2353,110 +2235,53 @@ function NewYorkPage() {
       marginBottom: mob ? '1.5rem' : '2.5rem',
       fontSize: mob ? '22px' : '30px'
     }
-  }, 'Greek-speaking therapy for tech professionals in New York'), React.createElement('p', {
+  }, 'Greek-speaking therapist for tech professionals in New York'), React.createElement('p', {
     style: {
       ...leadStyle,
       marginBottom: mob ? '2.5rem' : '3rem'
     }
-  }, "You went to New York to compete with the best, and by most measures you’re winning. This is Greek-speaking therapy for the part of that story you don’t get to say out loud when everyone around you is performing success."), React.createElement(Section, {
+  }, "If you’re Greek and working in New York tech, and you’d rather do this in Greek with someone who also understands the industry, that’s the idea. The work is the same one I do with every client — speaking Greek just takes the translation out of it."), React.createElement(Section, {
     label: 'Who this is for',
     mob
-  }, React.createElement(P, null, "Greek-speaking engineers, founders, product leaders, designers and operators in New York tech — startups, larger platforms, the finance-adjacent world the city runs on. People operating across cultures and time zones, often with the extra weight of doing it on a visa, far from home."), React.createElement(P, {
+  }, React.createElement(P, {
     last: true
-  }, "High achievers for whom the achievement hasn’t translated into the internal security it was supposed to buy.")), React.createElement(Section, {
-    label: 'The thing New York is very good at hiding',
+  }, "Greek-speaking engineers, founders, product leaders, designers and operators in New York tech — startups, larger platforms, and the finance-adjacent world the city runs on.")), React.createElement(Section, {
+    label: 'Why it helps that I speak Greek',
     mob
-  }, React.createElement(P, null, "New York runs on intensity, speed, status and comparison. Everyone is doing great. Everyone is raising, shipping, getting promoted, crushing it. It is an environment almost perfectly designed to make sure nobody admits doubt, which is a problem, because ", React.createElement(IA, {
-    href: '/imposter-syndrome-therapy/'
-  }, 'the doubt doesn’t go away when you hide it'), " — it just goes underground and gets louder."), React.createElement(P, {
+  }, React.createElement(P, null, "The things that actually run you — family, expectation, the particular pride and guilt of the one who went to the States — tend to live in Greek. In English they stay at a slight, unhelpful distance."), React.createElement(P, {
     last: true
-  }, "So you keep performing security you don’t feel, in rooms full of people doing the same, and the gap between the two grows. That gap is what people actually come to work on.")), React.createElement(Section, {
-    label: 'Across cultures, and far from home',
+  }, "Working in your first language means none of that needs translating, and the cultural context is already understood. That’s the reason to choose this over a local option, not anything different about the therapy.")), React.createElement(Section, {
+    label: 'And I understand the industry',
     mob
-  }, React.createElement(P, null, "There’s a specific load to being the Greek one in a New York room — operating in American professional culture, tied to a job that may be tied to a visa, holding time-zone-split relationships with family and home. Independence and precarity in the same breath."), React.createElement(P, {
+  }, React.createElement(P, {
     last: true
-  }, "Doing this in Greek is not a comfort feature. The material that runs you — family, expectation, the particular pride and guilt of the one who went to America — lives in Greek. English keeps it at a manageable, and unhelpful, distance.")), React.createElement(Section, {
-    label: 'Why I understand the industry too',
-    mob
-  }, React.createElement(P, null, "18+ years in product and growth before I trained as a psychotherapist, and ", React.createElement(A, {
+  }, "You also don’t have to explain equity, runway, a reorg, or why “just be confident” is useless advice. 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, '500+ companies advised'), ". You don’t explain equity, runway, the politics of a reorg, or why “just be confident” is useless advice in a room engineered around comparison."), React.createElement(P, {
-    last: true
-  }, "I hold the professional context and the Greek one at the same time. That’s the reason to come to me specifically rather than to a coach or a therapist who only sees half.")), React.createElement(Section, {
-    label: 'What people bring',
-    mob
-  }, React.createElement(PatternList, {
-    items: [{
-      cause: 'Winning that doesn’t land',
-      effect: 'the metrics say secure, you don’t feel it'
-    }, {
-      cause: 'Nowhere to admit doubt',
-      effect: 'everyone around you is performing success'
-    }, {
-      cause: 'Relentless comparison',
-      effect: 'your worth recalculated every time you open a feed'
-    }, {
-      cause: 'Visa and job fused',
-      effect: 'the stakes of every work problem quietly doubled'
-    }, {
-      cause: 'Performing across cultures',
-      effect: 'you’ve lost track of which version is actually you'
-    }]
-  }), React.createElement(P, {
-    last: true
-  }, "Impressive on the outside, unsettled underneath, is the usual shape.")), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'How the work runs',
-    mob
-  }, React.createElement(P, null, "Two tracks together: the ", React.createElement(Strong, null, "inner pattern"), " underneath the doubt, and the ", React.createElement(Strong, null, "real situation"), " at work — the decision, the negotiation, the move. We don’t treat the anxiety as noise to suppress and we don’t treat the career as separate from it."), React.createElement(StepCards, {
-    mob,
-    steps: [{
-      n: '1',
-      title: 'Fit call',
-      tag: '~15 min · free',
-      body: "A short call, Greek or English, to see if we click. Not a session."
-    }, {
-      n: '2',
-      title: 'Paid session',
-      tag: 'one session',
-      body: "You bring the problem as you see it. We find the truer one under it, and you leave with a clear read and one real move."
-    }, {
-      n: '3',
-      title: 'Ongoing',
-      tag: "if it’s worth it",
-      body: "Private, one to one, for as long as it’s genuinely useful."
-    }]
-  }), React.createElement('p', {
-    style: {
-      fontSize: '16px',
-      lineHeight: 1.7,
-      color: C.muted,
-      margin: '1.1rem 0 0'
-    }
-  }, "More on ", React.createElement(IA, {
-    href: '/how-i-work/'
-  }, 'how I work'), " and on ", React.createElement(IA, {
+  }, '500+ companies advised'), " before I trained as a psychotherapist. It’s the same reason my ", React.createElement(IA, {
+    href: '/founders/'
+  }, 'founder'), " and senior ", React.createElement(IA, {
     href: '/therapy-for-executives/'
-  }, 'work with senior people'), ".")), React.createElement(Section, {
+  }, 'executive'), " clients come to me.")), React.createElement(Section, {
+    label: 'The work itself is the same',
+    mob
+  }, React.createElement(P, {
+    last: true
+  }, "Nothing about the work changes because you’re in New York. It’s the same one-to-one work I do with everyone, holding the personal pattern and the real situation at work in the same room. The steps are laid out on ", React.createElement(IA, {
+    href: '/how-i-work/'
+  }, 'how I work'), ".")), React.createElement(Section, {
     label: 'Online, across the time difference',
     mob
   }, React.createElement(P, {
     last: true
-  }, "Sessions are online, one to one. I’m based in Ireland, which is five hours ahead of New York, so in practice we tend to land on your morning — my afternoon. It works well for a lot of people, but I’d rather be straight with you: we agree a recurring slot that genuinely fits both sides, and if the time difference doesn’t work for your schedule, I’ll say so on the fit call rather than force it.")), React.createElement(Section, {
+  }, "Sessions are online, one to one. I’m based in Ireland, which is about five hours ahead of New York, so in practice they land in your morning. We agree a recurring slot that works for both of us; if the time difference doesn’t fit your schedule, I’ll tell you on the fit call rather than force it.")), React.createElement(Section, {
     label: 'Confidentiality',
     mob
   }, React.createElement(P, {
     last: true
-  }, "Private and one to one. I don’t report to your employer, investors or anyone else, and I don’t use identifiable stories in anything public. The specifics, including the honest limits, are on the ", React.createElement(IA, {
+  }, "Private and one to one. I don’t report to your employer, investors or anyone else, and I don’t use identifiable stories publicly. The detail, including the honest limits, is on the ", React.createElement(IA, {
     href: '/confidentiality/'
-  }, 'confidentiality page'), ".")), React.createElement(Section, {
-    label: 'Not therapy-lite, not coaching',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "New York will sell you optimisation — a coach, a system, a morning routine. Optimisation assumes the machine is fine and just needs tuning. When the same insecurity survives every win, the problem isn’t throughput. That’s what this works on, with a psychotherapist’s training rather than a pep talk.")), React.createElement(BookCta, {
-    label: 'Book a fit call →'
+  }, 'confidentiality page'), ".")), React.createElement(BookCta, {
+    label: 'Book a fit call \u2192'
   }), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
@@ -2466,19 +2291,19 @@ function NewYorkPage() {
     q: 'You’re in Ireland — how does the time difference work?'
   }, React.createElement(P, {
     last: true
-  }, "Ireland is about five hours ahead of New York, so sessions usually sit in your morning. We set a fixed recurring slot that works for both of us. If your schedule can’t make the difference work, I’ll tell you on the fit call instead of pretending it’s fine.")), React.createElement(FaqItem, {
+  }, "Ireland is about five hours ahead of New York, so sessions usually sit in your morning. We set a fixed recurring slot. If your schedule can’t make the difference work, I’ll say so on the fit call instead of pretending it’s fine.")), React.createElement(FaqItem, {
     q: 'Are you a licensed therapist in New York State?'
   }, React.createElement(P, {
     last: true
-  }, "I’m a licensed psychotherapist and a registered member of the BACP (British Association for Counselling and Psychotherapy). I’m not registered with a New York State licensing board, and this is online work rather than a local clinical service. If you’re specifically after a New-York-licensed provider — for insurance, say — I’m happy to point you elsewhere on the fit call.")), React.createElement(FaqItem, {
-    q: 'Everyone around me seems fine. Why do I feel like this?'
+  }, "I’m a licensed psychotherapist and a registered member of the BACP (British Association for Counselling and Psychotherapy). I’m not registered with a New York State board, and this is online work rather than a local clinical service. If you specifically need a New-York-licensed provider — for insurance, say — I’m happy to point you elsewhere on the fit call.")), React.createElement(FaqItem, {
+    q: 'Greek or English?'
   }, React.createElement(P, {
     last: true
-  }, "Because “fine” is the local performance and almost nobody breaks character. You’re not the exception in the room; you’re the one currently willing to look at it.")), React.createElement(FaqItem, {
-    q: 'Can we do it in Greek?'
+  }, "Either, or both in the same session. Working in your first language is the reason to choose this.")), React.createElement(FaqItem, {
+    q: 'Is it a different kind of therapy because it’s for Greek people abroad?'
   }, React.createElement(P, {
     last: true
-  }, "Yes. In Greek, in English, or both in the same session. Working in your first language is the reason to choose this over a local option."))), React.createElement(SiteFooter, {
+  }, "No. It’s the offer everyone gets. Being able to do it in Greek, with the context already understood, is the only part that’s specific to you."))), React.createElement(SiteFooter, {
     mob
   }));
 }
@@ -2494,108 +2319,49 @@ function DublinPage() {
       marginBottom: mob ? '1.5rem' : '2.5rem',
       fontSize: mob ? '22px' : '30px'
     }
-  }, 'A Greek-speaking therapist for tech professionals in Dublin'), React.createElement('p', {
+  }, 'Greek-speaking therapist for tech professionals in Dublin'), React.createElement('p', {
     style: {
       ...leadStyle,
       marginBottom: mob ? '2.5rem' : '3rem'
     }
-  }, "You relocated to Dublin for a role at a multinational and built a stable, enviable international career. This is Greek-speaking therapy for the quieter question underneath it: whether the life around the career is one you actually want."), React.createElement(Section, {
+  }, "If you’re Greek and working in Dublin tech, and you’d rather do this in Greek with someone who also knows the industry, that’s what this is. The work is the same one I do with every client — speaking Greek just removes the translation."), React.createElement(Section, {
     label: 'Who this is for',
-    mob
-  }, React.createElement(P, null, "Greek-speaking engineers, product managers, operations and consulting people working in Dublin’s multinationals, tech companies and startups. The ones who moved for the job — often the specific job at the specific company — and reorganised an entire life around it."), React.createElement(P, {
-    last: true
-  }, "Stable on paper, and privately less sure than the LinkedIn version suggests.")), React.createElement(Section, {
-    label: 'The Dublin situation',
-    mob
-  }, React.createElement(P, null, "Dublin is a particular kind of place to be a Greek professional: a European tech hub built largely on multinationals, where a lot of people arrived for a role rather than for the city. That creates a specific tension — the career is stable, well paid, genuinely good, and your sense of belonging is thinner than the salary implies."), React.createElement(P, {
-    last: true
-  }, "When the job is also the reason you’re in the country, it quietly acquires more weight than a job should carry. Performance stops being about work and starts being about whether your whole life here holds.")), React.createElement(Section, {
-    label: 'Belonging, and the tie to Greece',
-    mob
-  }, React.createElement(P, null, "You can live in Dublin for years, do well, build a decent life, and still feel provisional — like you’re on a long secondment from your real life. Meanwhile the tie to Greece stays live: family, the pull home, the question of whether you’re building a future here or just postponing a decision about there."), React.createElement(P, {
-    last: true
-  }, "This is the kind of thing that’s genuinely hard to say in English, to someone who needs the Greek family dynamics explained from scratch. In Greek, with someone who already gets it, you can get straight to it.")), React.createElement(Section, {
-    label: 'And I know the industry',
-    mob
-  }, React.createElement(P, null, "Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, {
-    href: 'https://headofgrowth.io'
-  }, 'advised 500+ companies'), ", including inside a large enterprise. So corporate performance culture, the politics of a big org, the way a role can swallow an identity — I don’t need it explained."), React.createElement(P, {
-    last: true
-  }, "I happen to be based in Ireland myself, which occasionally helps, but the actual reason to come is that I hold the work context and the Greek context at once.")), React.createElement(Section, {
-    label: 'What people bring',
-    mob
-  }, React.createElement(PatternList, {
-    items: [{
-      cause: 'The whole life rests on the job',
-      effect: 'every work wobble feels existential'
-    }, {
-      cause: 'Years in, still provisional',
-      effect: 'a good life that doesn’t feel like yours yet'
-    }, {
-      cause: 'Tied to Greece, living here',
-      effect: 'building a future or postponing a decision?'
-    }, {
-      cause: 'Corporate performance culture',
-      effect: 'the role slowly eats the person'
-    }, {
-      cause: 'Stability that feels stuck',
-      effect: React.createElement(IA, {
-        href: '/career-transition-therapy/'
-      }, 'unsure whether to move or stay')
-    }]
-  }), React.createElement(P, {
-    last: true
-  }, "The recurring one: a stable international career, and real doubt about whether the life around it is sustainable.")), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'How the work runs',
-    mob
-  }, React.createElement(P, null, "Two tracks at once. The ", React.createElement(Strong, null, "inner track"), " — the pattern under the doubt, including the parts that trace back home. The ", React.createElement(Strong, null, "practical track"), " — the real decisions: staying, moving, changing role, what you’re actually building and where."), React.createElement(StepCards, {
-    mob,
-    steps: [{
-      n: '1',
-      title: 'Fit call',
-      tag: '~15 min · free',
-      body: "A short call, Greek or English, to see if we click. Not a session."
-    }, {
-      n: '2',
-      title: 'Paid session',
-      tag: 'one session',
-      body: "You bring it as you see it. We find the truer version underneath, and you leave with a clear read and one real move."
-    }, {
-      n: '3',
-      title: 'Ongoing',
-      tag: "if it’s worth it",
-      body: "Private, one to one, for as long as it genuinely helps."
-    }]
-  }), React.createElement('p', {
-    style: {
-      fontSize: '16px',
-      lineHeight: 1.7,
-      color: C.muted,
-      margin: '1.1rem 0 0'
-    }
-  }, "The full version: ", React.createElement(IA, {
-    href: '/how-i-work/'
-  }, 'how I work'), ".")), React.createElement(Section, {
-    label: 'Sessions are online',
     mob
   }, React.createElement(P, {
     last: true
-  }, "Everything is online, one to one. I’m based in Ireland, so we share a time zone and there’s no logistics to solve — but sessions are by video, not in person. Same country, same working hours; that’s where the convenience ends and begins.")), React.createElement(Section, {
+  }, "Greek-speaking engineers, product managers, operations and consulting people working in Dublin’s multinationals, tech companies and startups.")), React.createElement(Section, {
+    label: 'Why it helps that I speak Greek',
+    mob
+  }, React.createElement(P, null, "For people who’ve relocated, a lot of what matters is still tied to Greece — family, expectations, the pull home. It’s the part that’s hardest to explain to someone outside the culture, and the part that lands flat when you have to translate it."), React.createElement(P, {
+    last: true
+  }, "In Greek, with someone who already gets it, you can go straight to it. That’s the reason to choose a Greek-speaking therapist — not anything different about the work.")), React.createElement(Section, {
+    label: 'And I understand the industry',
+    mob
+  }, React.createElement(P, {
+    last: true
+  }, "You also don’t have to explain corporate life — the big-org politics, the way a role can quietly take over. 18+ years in product and growth and ", React.createElement(A, {
+    href: 'https://headofgrowth.io'
+  }, '500+ companies advised'), " before I trained as a psychotherapist, including inside a large enterprise. I happen to be based in Ireland myself, which helps with the practicalities, but the real reason to come is that I hold both the work and the Greek context at once.")), React.createElement(Section, {
+    label: 'The work itself is the same',
+    mob
+  }, React.createElement(P, {
+    last: true
+  }, "It’s the same private, one-to-one work I do with everyone — the personal pattern and the real decision together, whether that’s the job, the move, or whether to stay at all. How the work runs is on ", React.createElement(IA, {
+    href: '/how-i-work/'
+  }, 'how I work'), ".")), React.createElement(Section, {
+    label: 'Online sessions',
+    mob
+  }, React.createElement(P, {
+    last: true
+  }, "Everything is online, one to one. I’m based in Ireland, so we share a time zone and there’s nothing to solve on scheduling — but sessions are by video, not in person. Same country, same working hours; that’s where the convenience begins and ends.")), React.createElement(Section, {
     label: 'Confidentiality',
     mob
   }, React.createElement(P, {
     last: true
-  }, "Private and one to one. Nothing goes back to your employer, your manager or anyone else, and I don’t use identifiable stories publicly. The full detail, including the honest limits, is on the ", React.createElement(IA, {
+  }, "Private and one to one. Nothing goes back to your employer or manager, and I don’t use identifiable stories publicly. The full detail is on the ", React.createElement(IA, {
     href: '/confidentiality/'
-  }, 'confidentiality page'), ".")), React.createElement(Section, {
-    label: 'Not a career coach or a consultant',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "“Should I stay or go” looks like a career question and is usually not only that. A coach optimises the move; a consultant optimises the org. This works on what’s underneath the indecision — which is where the answer actually lives — with a psychotherapist’s training behind it.")), React.createElement(BookCta, {
-    label: 'Book a fit call →'
+  }, 'confidentiality page'), ".")), React.createElement(BookCta, {
+    label: 'Book a fit call \u2192'
   }), React.createElement('hr', {
     style: sepStyle
   }), React.createElement(Section, {
@@ -2606,18 +2372,18 @@ function DublinPage() {
   }, React.createElement(P, {
     last: true
   }, "No, the work is online, one to one, by video — same as for all my clients. Being in the same country and time zone makes scheduling effortless, but there isn’t an in-person room.")), React.createElement(FaqItem, {
-    q: 'A lot of my situation is about family back in Greece. Is that the right thing to bring?'
+    q: 'A lot of what’s on my mind is family back in Greece. Is that the right thing to bring?'
   }, React.createElement(P, {
     last: true
-  }, "Yes. For people who’ve relocated, the tie home is usually central, not a side issue — and it’s the part that’s hardest to explain to someone outside the culture. Working in Greek is exactly why that becomes workable.")), React.createElement(FaqItem, {
-    q: 'I can’t tell if I want to leave Dublin or leave the job. Can therapy help with that?'
-  }, React.createElement(P, {
-    last: true
-  }, "That’s a common and genuinely hard one, and it’s squarely the work. We separate the real decision from the fear, guilt and old patterns wrapped around it, so you’re choosing rather than reacting.")), React.createElement(FaqItem, {
+  }, "Yes. For people who’ve relocated, the tie home is usually central, not a side issue — and it’s the part hardest to explain to someone outside the culture. Working in Greek is exactly what makes it workable.")), React.createElement(FaqItem, {
     q: 'Greek or English?'
   }, React.createElement(P, {
     last: true
-  }, "Either, or both in the same session. Your language, your call."))), React.createElement(SiteFooter, {
+  }, "Either, or both in the same session. Your language, your call.")), React.createElement(FaqItem, {
+    q: 'Is this a different service because I’m Greek and abroad?'
+  }, React.createElement(P, {
+    last: true
+  }, "No. What you’re paying for isn’t a “Greek service” — it’s the ordinary work, minus the part where you’d have to explain your background before we could start."))), React.createElement(SiteFooter, {
     mob
   }));
 }
