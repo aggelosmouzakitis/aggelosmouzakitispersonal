@@ -28,11 +28,15 @@ const PAGES = [
 ];
 const SLUG = Object.fromEntries(PAGES.map((p) => [p.key, p.slug]));
 
-function pathFor(lang, key) {
+// urlPath = path relative to the site root (the deployment/artifact root).
+// pathFor = public URL path, i.e. urlPath prefixed with basePath (for links).
+function urlPath(lang, key) {
   const base = lang === 'en' ? '/en' : '';
   const slug = SLUG[key];
-  return (base + '/' + (slug ? slug + '/' : '')) || '/';
+  return base + '/' + (slug ? slug + '/' : '');
 }
+function pathFor(lang, key) { return config.basePath + urlPath(lang, key); }
+const asset = (p) => config.basePath + p; // prefix a root-relative asset path
 function pathsFor(lang) {
   const o = {};
   PAGES.forEach((p) => { o[p.key] = pathFor(lang, p.key); });
@@ -109,7 +113,7 @@ function copyAssets() {
 
 /* ---- robots + sitemap ---------------------------------------------------- */
 function writeRobots(siteUrl) {
-  writeFile('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`);
+  writeFile('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}${config.basePath}/sitemap.xml\n`);
 }
 function writeSitemap(siteUrl, langs) {
   const today = new Date().toISOString().slice(0, 10);
@@ -152,7 +156,7 @@ function build(langs) {
         canonical: siteUrl + pathFor(lang, key),
         elUrl: siteUrl + pathFor('el', key),
         enUrl: siteUrl + pathFor('en', key),
-        ogImage: siteUrl + `/assets/img/og/somo-${key}-${lang}.png`,
+        ogImage: siteUrl + asset(`/assets/img/og/somo-${key}-${lang}.png`),
       };
       const head = {
         title: meta.title,
@@ -162,7 +166,7 @@ function build(langs) {
       };
       const body = render(ctx);
       const html = C.layout(ctx, head, body);
-      const rel = pathFor(lang, key).replace(/^\//, '') + 'index.html';
+      const rel = urlPath(lang, key).replace(/^\//, '') + 'index.html';
       writeFile(rel, html);
       count++;
     });
@@ -174,15 +178,16 @@ function build(langs) {
     const ctx = {
       lang: 'el', t, page: 'notfound', paths,
       altLang: 'en', altLangLabel: 'EN', altLangFull: 'English',
-      altUrl: '/en/', canonical: siteUrl + '/404', elUrl: siteUrl + '/', enUrl: siteUrl + '/en/',
-      ogImage: siteUrl + '/assets/img/og/somo-home-el.png',
+      altUrl: pathFor('en', 'home'), canonical: siteUrl + asset('/404'),
+      elUrl: siteUrl + pathFor('el', 'home'), enUrl: siteUrl + pathFor('en', 'home'),
+      ogImage: siteUrl + asset('/assets/img/og/somo-home-el.png'),
     };
     const body = `<section class="section" style="min-height:60vh;display:flex;align-items:center"><div class="container">
       <p class="eyebrow">404</p>
       <h1 class="display" style="margin-top:18px">${C.e(t.common.notFoundTitle)}</h1>
       <p class="lead measure" style="margin-top:20px">${C.e(t.common.notFoundBody)}</p>
       <div class="pagehero__actions">
-        <a class="btn btn-primary" href="/">${C.e(t.common.notFoundCta)} <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-primary" href="${C.attr(paths.home)}">${C.e(t.common.notFoundCta)} <span class="arrow" aria-hidden="true">→</span></a>
         ${C.lumaLink(ctx, 'allEvents', { label: t.common.viewExperiences, class: 'btn btn-secondary', placement: '404', analytics: 'luma_all_events_click' })}
       </div>
     </div></section>`;

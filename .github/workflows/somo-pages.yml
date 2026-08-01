@@ -1,0 +1,63 @@
+# Deploy the SOMO site (somo/) to GitHub Pages.
+# One-time setup: repo Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+# The site then publishes at https://<owner>.github.io/<repo>/ .
+# Add a somo/CNAME file with a custom domain to publish at that domain's root instead.
+name: Deploy SOMO to GitHub Pages
+
+on:
+  push:
+    branches: [claude/somo-bilingual-website-0xs83v, main]
+    paths:
+      - 'somo/**'
+      - '.github/workflows/somo-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: somo-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Work out the base path and site origin for the deployment target.
+      # Custom domain (somo/CNAME present) -> served at root, no base path.
+      # Otherwise a project site -> served under /<repo>/.
+      - name: Resolve deployment paths
+        id: cfg
+        run: |
+          if [ -f somo/CNAME ]; then
+            echo "base=" >> "$GITHUB_OUTPUT"
+            echo "site=https://$(tr -d '[:space:]' < somo/CNAME)" >> "$GITHUB_OUTPUT"
+          else
+            echo "base=/${{ github.event.repository.name }}" >> "$GITHUB_OUTPUT"
+            echo "site=https://${{ github.repository_owner }}.github.io" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build SOMO
+        env:
+          BASE_PATH: ${{ steps.cfg.outputs.base }}
+          SITE_URL: ${{ steps.cfg.outputs.site }}
+        run: node somo/src/build.js
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: somo
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

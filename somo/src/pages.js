@@ -88,7 +88,7 @@ function home(ctx) {
   </div>`);
 
   const about = S(`<div class="founder">
-    <div class="founder__photo"><img src="/assets/img/aggelos.jpg" width="600" height="750" alt="${attr(t.about.photoAlt)}" loading="lazy"></div>
+    <div class="founder__photo"><img src="${config.basePath}/assets/img/aggelos.jpg" width="600" height="750" alt="${attr(t.about.photoAlt)}" loading="lazy"></div>
     <div>
       <p class="eyebrow">${e(t.about.eyebrow)}</p>
       <h2 class="h2" style="margin-top:16px">${e(t.about.title)}</h2>
@@ -454,7 +454,7 @@ function about(ctx) {
   </div>`);
 
   const founder = S(`<div class="founder">
-    <div class="founder__photo"><img src="/assets/img/aggelos.jpg" width="600" height="750" alt="${attr(t.founder.photoAlt)}" loading="lazy"></div>
+    <div class="founder__photo"><img src="${config.basePath}/assets/img/aggelos.jpg" width="600" height="750" alt="${attr(t.founder.photoAlt)}" loading="lazy"></div>
     <div>
       <p class="eyebrow">${e(t.founder.eyebrow)}</p>
       <h2 class="h2" style="margin-top:16px">${e(t.founder.name)}</h2>

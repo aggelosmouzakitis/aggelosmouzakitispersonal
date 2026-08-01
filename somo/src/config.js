@@ -17,6 +17,11 @@ const config = {
   // SITE_URL: the production origin (no trailing slash). Used for canonical
   // URLs, hreflang, Open Graph and the sitemap. Set this before launch.
   siteUrl: (env.SITE_URL || 'https://somo.example').replace(/\/$/, ''),
+  // BASE_PATH: sub-path the site is served from. Empty for a domain root (a
+  // custom domain, Netlify, etc.). For a GitHub Pages project site the URL is
+  // https://<owner>.github.io/<repo>/, so set BASE_PATH="/<repo>". All internal
+  // links, assets and metadata are prefixed with it. Leading slash, no trailing.
+  basePath: ('/' + (env.BASE_PATH || '').replace(/^\/+|\/+$/g, '')).replace(/^\/$/, ''),
   siteName: 'SOMO',
   defaultLang: 'el', // Greek is the default language.
 

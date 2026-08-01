@@ -40,6 +40,28 @@ node somo/src/og.js             # (re)generate OG images + favicons
 The generated `*.html`, `sitemap.xml`, `robots.txt` and `404.html` are committed
 so the site can be served with no build step.
 
+## Deploy to GitHub Pages
+
+A workflow at `.github/workflows/somo-pages.yml` publishes this folder to Pages.
+
+1. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions** (one time).
+2. Push to the site branch (or run the workflow manually). It builds and deploys.
+3. Live at `https://<owner>.github.io/<repo>/`.
+
+The workflow rebuilds with the correct `BASE_PATH` automatically, because the
+committed pages use root-relative links (`/assets/…`) that assume a domain root.
+If the `github-pages` environment blocks deploys from a non-default branch, add
+the branch under **Settings → Environments → github-pages → Deployment branches**,
+or merge to `main`.
+
+**Custom domain:** add a `somo/CNAME` file containing your domain (e.g.
+`www.somo.gr`) and set the DNS. The workflow then publishes at the domain root
+with no base path, and the committed root-relative build is already correct.
+
+Base path is only needed for a project URL. Since `basePath` defaults to empty,
+the committed files work as-is for any root deployment (custom domain, Netlify,
+Cloudflare Pages, S3, etc.).
+
 ## Configuration
 
 Everything external lives in `src/config.js` (or as environment variables at
