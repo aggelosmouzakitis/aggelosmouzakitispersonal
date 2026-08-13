@@ -1,0 +1,19 @@
+{
+  "name": "Aggelos Mouzakitis",
+  "short_name": "Aggelos",
+  "description": "Σύμβουλος Ψυχικής Υγείας για στελέχη, founders και επαγγελματίες.",
+  "start_url": ".",
+  "display": "minimal-ui",
+  "background_color": "#FFFFFF",
+  "theme_color": "#F5F5F5",
+  "lang": "el",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "lifestyle", "education"]
+}

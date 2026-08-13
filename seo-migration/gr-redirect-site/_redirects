@@ -1,0 +1,22 @@
+# Netlify _redirects for the aggelosmouzakitis.gr legacy hostname.
+# STAGED, NOT ACTIVE. This file is deployed to a DEDICATED redirect-only Netlify
+# site whose custom domain is aggelosmouzakitis.gr (see README.md). Activate only
+# at Phase 3 cutover, after the /el destination passes QA and DNS is repointed.
+#
+# 9 explicit, permanent, slug-preserving redirects to the /el counterparts.
+# The trailing "!" forces the redirect even if a path/file would otherwise match.
+
+/                       https://aggelosmouzakitis.com/el/                       301!
+/how-i-work/            https://aggelosmouzakitis.com/el/how-i-work/            301!
+/executive-coaching/    https://aggelosmouzakitis.com/el/executive-coaching/   301!
+/burnout/               https://aggelosmouzakitis.com/el/burnout/              301!
+/career-coaching/       https://aggelosmouzakitis.com/el/career-coaching/      301!
+/imposter-syndrome/     https://aggelosmouzakitis.com/el/imposter-syndrome/    301!
+/burnout-diagnostic/    https://aggelosmouzakitis.com/el/burnout-diagnostic/   301!
+/about/                 https://aggelosmouzakitis.com/el/about/                301!
+/confidentiality/       https://aggelosmouzakitis.com/el/confidentiality/      301!
+
+# NO catch-all to the homepage. Everything else is a genuine 404 (real not-found
+# status via the site's 404.html), which preserves semantic redirect quality and
+# avoids soft-404s. Leave the line below in place as the final rule.
+/*                      /404.html                                              404

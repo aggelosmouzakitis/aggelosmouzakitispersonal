@@ -1,0 +1,11 @@
+old_url,new_url,status,reason
+https://aggelosmouzakitis.gr/,https://aggelosmouzakitis.com/el/,301,Greek home -> /el home (permanent; slug preserved)
+https://aggelosmouzakitis.gr/how-i-work/,https://aggelosmouzakitis.com/el/how-i-work/,301,1:1 slug-preserving move to /el
+https://aggelosmouzakitis.gr/executive-coaching/,https://aggelosmouzakitis.com/el/executive-coaching/,301,1:1 slug-preserving move to /el (Greek slug kept; no EN hreflang pair)
+https://aggelosmouzakitis.gr/burnout/,https://aggelosmouzakitis.com/el/burnout/,301,1:1 slug-preserving move to /el (Greek slug kept; no EN hreflang pair)
+https://aggelosmouzakitis.gr/career-coaching/,https://aggelosmouzakitis.com/el/career-coaching/,301,1:1 slug-preserving move to /el (Greek slug kept; no EN hreflang pair)
+https://aggelosmouzakitis.gr/imposter-syndrome/,https://aggelosmouzakitis.com/el/imposter-syndrome/,301,1:1 slug-preserving move to /el (Greek slug kept; EN alt = /imposter-syndrome-therapy/)
+https://aggelosmouzakitis.gr/burnout-diagnostic/,https://aggelosmouzakitis.com/el/burnout-diagnostic/,301,1:1 slug-preserving move to /el (tool)
+https://aggelosmouzakitis.gr/about/,https://aggelosmouzakitis.com/el/about/,301,1:1 slug-preserving move to /el
+https://aggelosmouzakitis.gr/confidentiality/,https://aggelosmouzakitis.com/el/confidentiality/,301,1:1 slug-preserving move to /el
+https://aggelosmouzakitis.gr/*,,404,"NO catch-all to homepage. Any .gr path not listed above returns a genuine 404 (preserves semantic redirect quality, avoids soft-404). Utility paths (/sitemap.xml, /robots.txt, /llms.txt, /404.html) are intentionally NOT redirected; the consolidated .com robots.txt + sitemap.xml supersede them."
