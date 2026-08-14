@@ -1,0 +1,39 @@
+source_url,destination_url,status_code,reason,domain_move,tested,notes
+# ── .com legacy path redirects (Netlify netlify.toml) ──,,,,,,
+https://aggelosmouzakitis.com/how-i-work/,https://aggelosmouzakitis.com/1-to-1/,301,how-i-work core page removed; content merged into / and /1-to-1/,no,build-config,force=true
+https://aggelosmouzakitis.com/founders/,https://aggelosmouzakitis.com/1-to-1/,301,persona page retired; content merged,no,build-config,
+https://aggelosmouzakitis.com/solopreneurs/,https://aggelosmouzakitis.com/,301,persona page retired; best copy became homepage (brief §37),no,build-config,
+https://aggelosmouzakitis.com/therapy-for-founders/,https://aggelosmouzakitis.com/1-to-1/,301,brand no longer 'therapy for founders',no,build-config,
+https://aggelosmouzakitis.com/therapy-for-executives/,https://aggelosmouzakitis.com/1-to-1/,301,executives not a primary audience,no,build-config,
+https://aggelosmouzakitis.com/imposter-syndrome-therapy/,https://aggelosmouzakitis.com/1-to-1/,301,service-category IA removed (interim; may become resource later),no,build-config,revisit if reframed as editorial
+https://aggelosmouzakitis.com/executive-burnout-therapy/,https://aggelosmouzakitis.com/1-to-1/,301,service-category IA removed (interim),no,build-config,revisit if reframed as editorial
+https://aggelosmouzakitis.com/career-transition-therapy/,https://aggelosmouzakitis.com/1-to-1/,301,service-category IA removed (interim),no,build-config,revisit if reframed as editorial
+https://aggelosmouzakitis.com/schedule,https://aggelosmouzakitis.com/,301,pre-existing retired page,no,build-config,already present
+https://aggelosmouzakitis.com/faqs,https://aggelosmouzakitis.com/,301,pre-existing retired page,no,build-config,already present
+# ── .com retained (NO redirect — 200) ──,,,,,,
+https://aggelosmouzakitis.com/greek-speaking-therapist-london/,,200,SEO-ONLY retained; out of nav; needs GSC review,no,n/a,keep indexable
+https://aggelosmouzakitis.com/greek-speaking-therapist-manchester/,,200,SEO-ONLY retained,no,n/a,keep indexable
+https://aggelosmouzakitis.com/greek-speaking-therapist-new-york/,,200,SEO-ONLY retained,no,n/a,keep indexable
+https://aggelosmouzakitis.com/greek-speaking-therapist-dublin/,,200,SEO-ONLY retained,no,n/a,keep indexable
+https://aggelosmouzakitis.com/burnout-diagnostic/,,200,tool retained; secondary CTA,no,n/a,keep indexable
+https://aggelosmouzakitis.com/getinterviewed/,,200,retained; footer link,no,n/a,keep indexable
+https://aggelosmouzakitis.com/ask-me-anything/,,200,retained pending owner decision (else 301 -> /book/),no,n/a,owner decision
+# ── .gr -> .com/el/ semantic path redirects (requires .gr on Netlify) ──,,,,,,
+https://aggelosmouzakitis.gr/,https://aggelosmouzakitis.com/el/,301,domain consolidation,yes,build-config,root -> Greek home
+https://aggelosmouzakitis.gr/about/,https://aggelosmouzakitis.com/el/about/,301,equivalent page,yes,build-config,
+https://aggelosmouzakitis.gr/confidentiality/,https://aggelosmouzakitis.com/el/confidentiality/,301,equivalent page,yes,build-config,
+https://aggelosmouzakitis.gr/how-i-work/,https://aggelosmouzakitis.com/el/1-to-1/,301,how-i-work merged into offer page,yes,build-config,semantic map (not blanket)
+https://aggelosmouzakitis.gr/executive-coaching/,https://aggelosmouzakitis.com/el/1-to-1/,301,closest genuine offer,yes,build-config,semantic map
+https://aggelosmouzakitis.gr/career-coaching/,https://aggelosmouzakitis.com/el/1-to-1/,301,closest genuine offer,yes,build-config,semantic map
+https://aggelosmouzakitis.gr/burnout/,https://aggelosmouzakitis.com/el/,301,no direct equivalent; Greek home (or future resource),yes,build-config,revisit if Greek burnout resource created
+https://aggelosmouzakitis.gr/imposter-syndrome/,https://aggelosmouzakitis.com/el/,301,no direct equivalent; Greek home,yes,build-config,revisit if Greek resource created
+https://aggelosmouzakitis.gr/burnout-diagnostic/,https://aggelosmouzakitis.com/el/,301,diagnostic not yet ported to /el/,yes,build-config,port diagnostic to /el/ later then repoint
+https://aggelosmouzakitis.gr/*,https://aggelosmouzakitis.com/el/,301,catch-all for any unmapped .gr path,yes,build-config,LAST rule only; specific rules above win
+# ── Host/scheme normalisation (both domains, one hop to canonical) ──,,,,,,
+http://aggelosmouzakitis.com/*,https://aggelosmouzakitis.com/:splat,301,force HTTPS,no,platform,Netlify auto (Force HTTPS)
+http://www.aggelosmouzakitis.com/*,https://aggelosmouzakitis.com/:splat,301,www -> apex + HTTPS in one hop,no,platform,set apex as primary domain in Netlify
+https://www.aggelosmouzakitis.com/*,https://aggelosmouzakitis.com/:splat,301,www -> apex,no,platform,Netlify domain settings
+http://aggelosmouzakitis.gr/*,https://aggelosmouzakitis.com/el/:splat-or-mapped,301,force HTTPS before path redirect,yes,platform,ensure single hop via Netlify _redirects
+http://www.aggelosmouzakitis.gr/*,https://aggelosmouzakitis.com/el/...,301,www.gr -> canonical,yes,platform,
+https://www.aggelosmouzakitis.gr/*,https://aggelosmouzakitis.com/el/...,301,www.gr -> canonical,yes,platform,
+# Trailing-slash: directory-style URLs canonically end with '/'. Netlify pretty-URLs handle /path -> /path/. Verify no double redirect.,,,,,,
