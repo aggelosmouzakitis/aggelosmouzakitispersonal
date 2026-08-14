@@ -116,6 +116,7 @@ const FOOTER_COLS_BY_LANG = {
       { href: '/about/', label: 'About' },
       { href: '/blog/', label: 'Writing' },
       { href: '/reviews/', label: 'Reviews' },
+      { href: '/burnout-diagnostic/', label: 'Burnout Diagnostic' },
       { href: '/confidentiality/', label: 'Confidentiality' },
     ] },
     { label: 'Elsewhere', links: [
@@ -133,6 +134,7 @@ const FOOTER_COLS_BY_LANG = {
       { href: '/el/about/', label: 'Σχετικά' },
       { href: '/blog/?lang=el', label: 'Άρθρα' },
       { href: '/el/reviews/', label: 'Κριτικές' },
+      { href: '/burnout-diagnostic/', label: 'Burnout Diagnostic' },
       { href: '/el/confidentiality/', label: 'Εμπιστευτικότητα' },
     ] },
     { label: 'Αλλού', links: [
@@ -331,6 +333,28 @@ function FinalCta({ lang, mob, heading, sub }) {
   );
 }
 
+// ─── FAQ ACCORDION (accessible; answers stay in the DOM for SEO) ─────────────
+function FaqAccordion({ items, mob }) {
+  const [open, setOpen] = React.useState(-1);
+  return React.createElement('div', { style: { ...cardBase, overflow: 'hidden' } },
+    items.map(function (it, i) {
+      const isOpen = open === i;
+      return React.createElement('div', { key: i, style: { borderTop: i ? `1px solid ${C.border}` : 'none' } },
+        React.createElement('button', {
+          onClick: () => setOpen(isOpen ? -1 : i),
+          'aria-expanded': isOpen ? 'true' : 'false',
+          className: 'hv-row',
+          style: { display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', textAlign: 'left', background: 'transparent', border: 'none', cursor: 'pointer', fontFamily: 'inherit', padding: mob ? '1rem 1.1rem' : '1.15rem 1.35rem', fontSize: mob ? '16px' : '17px', fontWeight: 600, color: C.text, lineHeight: 1.5 },
+        },
+          React.createElement('span', null, it.q),
+          React.createElement('span', { 'aria-hidden': 'true', style: { color: C.accent, fontWeight: 700, flexShrink: 0, transform: isOpen ? 'rotate(45deg)' : 'none', transition: 'transform .15s', fontSize: '22px', lineHeight: 1 } }, '+')
+        ),
+        React.createElement('div', { style: { display: isOpen ? 'block' : 'none', padding: mob ? '0 1.1rem 1.1rem' : '0 1.35rem 1.3rem', fontSize: '16px', lineHeight: 1.7, color: C.text } }, it.a)
+      );
+    })
+  );
+}
+
 // ─── HOME PAGE (bilingual) ───────────────────────────────────────────────────
 const HOME = {
   en: {
@@ -405,6 +429,15 @@ const HOME = {
     caseB: "Some of it was straight business: what to sell, what to charge, what to stop doing. Some of it was older patterns that were still running, the same ones showing up at home. Over about six months it turned around — he raised prices, kept the parts he was good at, outsourced the rest, and stopped treating an old story about himself as fact. He didn't need a growth hack. He needed both problems worked at once.",
     finalHeading: "You want to build something of your own. Or you already have, and you know there's much more left in it.",
     finalSub: 'Start with a short fit call. No pitch, no pressure — just whether this is the right room for what you’re trying to do.',
+    faqLabel: 'Common questions',
+    faq: [
+      { q: 'Do I need to already have a business?', a: "No. Existing revenue isn't a requirement — this is for people seriously trying to build, whether you're still employed and planning an exit, freelancing, or already running something small." },
+      { q: 'What kind of people is this for?', a: 'People building something of their own: employed and planning a way out, wanting optionality or independent income, a portfolio career, expertise to turn into a business, already freelancing or consulting, or running something with much more growth left in it.' },
+      { q: 'Is this therapy or business advisory?', a: "Both, on purpose. Some of what's in the way is a real business problem; some is a pattern in you. I work on either without you having to pick a lane first." },
+      { q: "What if I don't know whether my problem is strategic or psychological?", a: "That's normal — and often the first thing we work out together. Frequently it turns out to be both." },
+      { q: 'Can we work on practical things — offer, pricing, sales, acquisition?', a: "Yes. That's the business track, and it's real advisory on the thing you're building — not “clarity” or “accountability”." },
+      { q: 'Do I need to want to leave my job?', a: 'No. Some people want an exit; others just want optionality or an independent income alongside a job they like.' },
+    ],
   },
   el: {
     promise: 'Για ανθρώπους που θέλουν να χτίσουν κάτι δικό τους — ή να κάνουν πολύ μεγαλύτερο αυτό που έχουν ήδη χτίσει.',
@@ -478,6 +511,15 @@ const HOME = {
     caseB: 'Ένα μέρος ήταν καθαρά επιχειρηματικό: τι να πουλά, τι να χρεώνει, τι να σταματήσει. Ένα μέρος ήταν παλιότερα μοτίβα που ακόμη έτρεχαν, τα ίδια που εμφανίζονταν και στο σπίτι. Σε περίπου έξι μήνες άλλαξε — ανέβασε τιμές, κράτησε αυτά που έκανε καλά, ανέθεσε τα υπόλοιπα, και σταμάτησε να παίρνει μια παλιά ιστορία για τον εαυτό του ως δεδομένη. Δεν χρειαζόταν growth hack. Χρειαζόταν να δουλευτούν και τα δύο μαζί.',
     finalHeading: 'Θέλεις να χτίσεις κάτι δικό σου. Ή το έχεις ήδη χτίσει, και ξέρεις ότι υπάρχει πολύ περισσότερο μέσα του.',
     finalSub: 'Ξεκίνα με μια σύντομη γνωριμία. Χωρίς πίεση — απλώς για να δούμε αν αυτό είναι το σωστό δωμάτιο για ό,τι προσπαθείς να κάνεις.',
+    faqLabel: 'Συχνές ερωτήσεις',
+    faq: [
+      { q: 'Χρειάζεται να έχω ήδη επιχείρηση;', a: 'Όχι. Δεν χρειάζεται να έχεις έσοδα — είναι για ανθρώπους που προσπαθούν σοβαρά να χτίσουν κάτι, είτε είσαι ακόμη μισθωτός και σχεδιάζεις έξοδο, είτε δουλεύεις ανεξάρτητα, είτε τρέχεις ήδη κάτι μικρό.' },
+      { q: 'Για ποιους ανθρώπους είναι;', a: 'Για ανθρώπους που χτίζουν κάτι δικό τους: μισθωτούς που σχεδιάζουν έξοδο, όσους θέλουν εναλλακτικές ή ανεξάρτητο εισόδημα, μια portfolio καριέρα, μια εξειδίκευση που μπορεί να γίνει επιχείρηση, ήδη freelancers, ή κάποιον που τρέχει κάτι με πολλή ανάπτυξη ακόμη μέσα του.' },
+      { q: 'Είναι θεραπεία ή συμβουλευτική επιχειρήσεων;', a: 'Και τα δύο, σκόπιμα. Ένα μέρος του εμποδίου είναι πραγματικό επιχειρηματικό πρόβλημα· ένα μέρος είναι μοτίβο μέσα σου. Δουλεύω και τα δύο χωρίς να χρειάζεται να διαλέξεις.' },
+      { q: 'Κι αν δεν ξέρω αν το πρόβλημά μου είναι στρατηγικό ή ψυχολογικό;', a: 'Είναι φυσιολογικό — και συχνά το πρώτο που ξεκαθαρίζουμε μαζί. Πολλές φορές είναι και τα δύο.' },
+      { q: 'Μπορούμε να δουλέψουμε πρακτικά πράγματα — προσφορά, τιμολόγηση, πωλήσεις;', a: 'Ναι. Αυτό είναι το επιχειρηματικό επίπεδο, πραγματική συμβουλευτική για αυτό που χτίζεις — όχι «καθαρότητα» ή «λογοδοσία».' },
+      { q: 'Πρέπει να θέλω να αφήσω τη δουλειά μου;', a: 'Όχι. Κάποιοι θέλουν έξοδο· άλλοι απλώς εναλλακτικές ή ανεξάρτητο εισόδημα παράλληλα με μια δουλειά που τους αρέσει.' },
+    ],
   },
 };
 
@@ -516,56 +558,37 @@ function HomePage({ lang = 'en' }) {
       )
     ),
 
-    React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '4rem' } }),
+    React.createElement('div', { style: { marginTop: mob ? '3.25rem' : '5rem' } }),
 
-    // ── Recognition / diagnosis ──
+    // ── Recognition (fewer examples shown at once) ──
     React.createElement(Section, { label: c.recogLabel, mob },
-      React.createElement('p', { style: { ...leadStyle, fontSize: mob ? '19px' : '21px' } }, c.recogLead),
-      React.createElement(Bullets, { items: c.recog, mob })
-    ),
-
-    // ── Cause → effect ──
-    React.createElement(Section, { label: c.ceLabel, mob },
-      React.createElement(P, null, c.ceLead),
-      React.createElement(PatternList, { items: c.ce }),
-      React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.6, color: C.muted, margin: '.2rem 0 0' } }, c.ceFoot)
-    ),
-
-    // ── Counterpoint ──
-    React.createElement(Section, { label: c.cpLabel, mob },
-      React.createElement(P, null, c.cpLead),
-      React.createElement(Bullets, { items: c.cp, mob }),
-      React.createElement('p', { style: { fontSize: mob ? '17px' : '18px', fontWeight: 600, color: C.text, margin: '1.2rem 0 0', lineHeight: 1.6 } }, c.cpFoot)
+      React.createElement('p', { style: { ...leadStyle, fontSize: mob ? '19px' : '21px', marginBottom: '1.6rem' } }, c.recogLead),
+      React.createElement(Bullets, { items: c.recog.slice(0, 5), mob })
     ),
 
     React.createElement('hr', { style: sepStyle }),
 
-    // ── Two tracks ──
+    // ── The two-track model: pattern → business, and "sometimes it's the business", then both ──
+    React.createElement(Section, { label: c.ceLabel, mob },
+      React.createElement(P, { last: true }, c.ceLead),
+      React.createElement('div', { style: { marginTop: '1.1rem' } }, React.createElement(PatternList, { items: c.ce.slice(0, 5) }))
+    ),
+    React.createElement(Section, { label: c.cpLabel, mob },
+      React.createElement(P, null, c.cpLead),
+      React.createElement(Bullets, { items: c.cp.slice(0, 5), mob }),
+      React.createElement('p', { style: { fontSize: mob ? '18px' : '19px', fontWeight: 600, color: C.text, margin: '1.3rem 0 0', lineHeight: 1.6 } }, c.cpFoot)
+    ),
     React.createElement(Section, { label: c.ttLabel, mob },
       React.createElement('div', { style: { margin: '0 0 1.2rem' } },
         React.createElement(TrackCards, { mob, tracks: c.tt })
       ),
-      React.createElement('p', { style: { fontSize: mob ? '17px' : '18px', fontWeight: 600, color: C.text, margin: '0 0 .6rem', lineHeight: 1.6 } }, c.ttCore),
+      React.createElement('p', { style: { fontSize: mob ? '17px' : '18px', fontWeight: 600, color: C.text, margin: '0 0 .5rem', lineHeight: 1.6 } }, c.ttCore),
       React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.6, color: C.muted, margin: 0 } }, c.ttNote)
-    ),
-
-    // ── Who this is for ──
-    React.createElement(Section, { label: c.whoLabel, mob },
-      React.createElement(P, null, c.whoLead),
-      React.createElement(Bullets, { items: c.who, mob }),
-      React.createElement('p', { style: { fontSize: mob ? '16px' : '17px', color: C.text, margin: '1.1rem 0 0', lineHeight: 1.6 } }, c.whoFoot)
     ),
 
     React.createElement('hr', { style: sepStyle }),
 
-    // ── Why me ──
-    React.createElement(Section, { label: c.whyLabel, mob },
-      React.createElement(P, null, c.whyA),
-      React.createElement('p', { style: { fontSize: mob ? '18px' : '19px', color: C.text, margin: '0 0 .6rem', lineHeight: 1.6 } }, React.createElement(Strong, null, c.whyB)),
-      React.createElement('p', { style: { fontSize: mob ? '18px' : '19px', color: C.text, margin: 0, lineHeight: 1.6 } }, React.createElement(Strong, null, c.whyC))
-    ),
-
-    // ── 1:1 teaser ──
+    // ── One offer ──
     React.createElement(Section, { label: c.offerLabel, mob },
       React.createElement(P, null, c.offerBody),
       React.createElement('p', { style: { margin: 0 } }, React.createElement(IA, { href: pathFor('one-to-one', lang) }, c.offerLink))
@@ -573,10 +596,9 @@ function HomePage({ lang = 'en' }) {
 
     React.createElement('hr', { style: sepStyle }),
 
-    // ── Evidence / case ──
-    React.createElement(Section, { label: c.caseLabel, mob },
-      React.createElement(P, null, c.caseA),
-      React.createElement(P, { last: true }, c.caseB)
+    // ── FAQ (secondary info, progressively disclosed) ──
+    React.createElement(Section, { label: c.faqLabel, mob },
+      React.createElement(FaqAccordion, { items: c.faq, mob })
     ),
 
     // ── Writing ──
@@ -637,6 +659,16 @@ const ONE = {
     notFoot: 'Both professions do real work; this just isn’t either one on its own. The value is being able to move between the business decision and the pattern underneath it without you having to translate one world into the other.',
     evLabel: 'What clients say',
     ctaHeading: 'The first step is a short fit call.',
+    faqLabel: 'Common questions',
+    faq: [
+      { q: 'Do I need to already have a business?', a: "No. Existing revenue isn't a requirement — this is for people seriously trying to build, employed or independent, whether you're planning an exit, freelancing, or already running something small." },
+      { q: 'Is this therapy?', a: "It's therapy-informed and I'm a BACP-registered therapist, but it's not therapy by the protocol — more direct and action-oriented, and always tied to what you're building." },
+      { q: 'Is this business coaching?', a: "There's advisory in it, but no framework I hand you to run. It's real work on the offer, the pricing, the decision in front of you." },
+      { q: 'What kinds of business problems can we work on?', a: 'Offer, positioning, pricing, acquisition, sales, prioritisation, decisions, execution — the practical work of building the thing.' },
+      { q: 'What if the problem turns out not to be psychological?', a: 'Then we treat it as the business problem it is. Not everything is a pattern — sometimes the offer is just weak, or the pricing is wrong, and we fix that.' },
+      { q: 'How do we decide whether to focus on the business or the person?', a: "Week to week, by what's actually blocking progress. Some weeks it's 90% business; some weeks the business barely comes up because something in you is the real blocker." },
+      { q: 'Is this only for people leaving employment?', a: "No — employed, independent, or already running something. What's common is that you're seriously trying to build." },
+    ],
   },
   el: {
     h1: 'Δούλεψε μαζί μου, 1:1',
@@ -684,6 +716,16 @@ const ONE = {
     notFoot: 'Και τα δύο επαγγέλματα κάνουν πραγματική δουλειά· απλώς αυτό δεν είναι κανένα από τα δύο μόνο του. Η αξία είναι να κινούμαι ανάμεσα στην επιχειρηματική απόφαση και το μοτίβο από κάτω, χωρίς να χρειάζεται να μεταφράζεις τον έναν κόσμο στον άλλον.',
     evLabel: 'Τι λένε οι πελάτες',
     ctaHeading: 'Το πρώτο βήμα είναι μια σύντομη γνωριμία.',
+    faqLabel: 'Συχνές ερωτήσεις',
+    faq: [
+      { q: 'Χρειάζεται να έχω ήδη επιχείρηση;', a: 'Όχι. Δεν χρειάζεται να έχεις έσοδα — είναι για ανθρώπους που προσπαθούν σοβαρά να χτίσουν κάτι, μισθωτούς ή ανεξάρτητους, είτε σχεδιάζεις έξοδο, είτε δουλεύεις freelance, είτε τρέχεις ήδη κάτι μικρό.' },
+      { q: 'Είναι θεραπεία;', a: 'Είναι therapy-informed και είμαι Σύμβουλος Ψυχικής Υγείας εγγεγραμμένος στο BACP, αλλά δεν είναι θεραπεία με το πρωτόκολλο — πιο άμεση και προσανατολισμένη στη δράση, πάντα δεμένη με αυτό που χτίζεις.' },
+      { q: 'Είναι business coaching;', a: 'Υπάρχει συμβουλευτική μέσα, αλλά όχι framework που σου δίνω να τρέξεις. Είναι πραγματική δουλειά πάνω στην προσφορά, την τιμολόγηση, την απόφαση μπροστά σου.' },
+      { q: 'Τι επιχειρηματικά προβλήματα μπορούμε να δουλέψουμε;', a: 'Προσφορά, positioning, τιμολόγηση, εύρεση πελατών, πωλήσεις, προτεραιότητες, αποφάσεις, εκτέλεση — την πρακτική δουλειά του χτισίματος.' },
+      { q: 'Κι αν το πρόβλημα δεν είναι τελικά ψυχολογικό;', a: 'Τότε το αντιμετωπίζουμε ως το επιχειρηματικό πρόβλημα που είναι. Δεν είναι όλα μοτίβο — κάποιες φορές η προσφορά είναι απλώς αδύναμη ή η τιμολόγηση λάθος, και το διορθώνουμε.' },
+      { q: 'Πώς αποφασίζουμε αν θα εστιάσουμε στην επιχείρηση ή στον άνθρωπο;', a: 'Εβδομάδα με εβδομάδα, με βάση το τι πραγματικά εμποδίζει την πρόοδο. Κάποιες εβδομάδες είναι 90% επιχείρηση· κάποιες, η επιχείρηση μόλις που αναφέρεται.' },
+      { q: 'Είναι μόνο για όσους αφήνουν τη μισθωτή εργασία;', a: 'Όχι — μισθωτοί, ανεξάρτητοι, ή κάποιος που τρέχει ήδη κάτι. Το κοινό είναι ότι προσπαθείς σοβαρά να χτίσεις.' },
+    ],
   },
 };
 function notLine(txt) {
@@ -725,9 +767,12 @@ function OneToOnePage({ lang = 'en' }) {
       React.createElement('p', { style: { fontSize: '16px', lineHeight: 1.7, color: C.muted, margin: '1.1rem 0 0' } }, c.expectFoot)
     ),
 
-    React.createElement(Section, { label: c.notLabel, mob },
-      React.createElement('ul', { style: { listStyle: 'none', margin: '0 0 1.1rem', padding: 0 } }, c.not.map((t, i) => React.createElement(React.Fragment, { key: i }, notLine(t)))),
-      React.createElement('p', { style: { fontSize: '16px', lineHeight: 1.7, color: C.text, margin: 0 } }, c.notFoot)
+    React.createElement('hr', { style: sepStyle }),
+
+    // FAQ — objections/explanations progressively disclosed (is this therapy?,
+    // is this coaching?, what if it isn't psychological?, etc.)
+    React.createElement(Section, { label: c.faqLabel, mob },
+      React.createElement(FaqAccordion, { items: c.faq, mob })
     ),
 
     React.createElement('hr', { style: sepStyle }),
@@ -2067,4 +2112,4 @@ function renderApp(pageId, lang) {
   );
 }
 
-Object.assign(window, { HomePage, OneToOnePage, AboutPage, ReviewsPage, BookPage, ConfidentialityPage, SpecialtyPage, CoreApp, renderApp });
+Object.assign(window, { HomePage, OneToOnePage, AboutPage, ReviewsPage, BookPage, ConfidentialityPage, SpecialtyPage, CoreApp, renderApp, SiteFooter });

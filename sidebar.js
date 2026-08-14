@@ -47,29 +47,31 @@ const sbPath = (id, lang) => SB_CORE_PATHS[id] && SB_CORE_PATHS[id][lang] || SB_
 const SB_LABELS = {
   en: {
     role: 'Business Advisor + Therapist',
+    home: 'Home',
     oneToOne: '1:1',
     about: 'About',
     writing: 'Writing',
     reviews: 'Reviews',
+    diagnostic: 'Diagnostic',
     findMe: 'Find me',
     workWithMe: 'Work with me',
     ctaSub: 'A 15-minute fit call to see if it fits.',
     book: 'Book a fit call →',
-    bookShort: 'Book',
-    langLabel: 'Language'
+    bookShort: 'Book'
   },
   el: {
     role: 'Σύμβουλος επιχειρήσεων & ψυχικής υγείας',
+    home: 'Αρχική',
     oneToOne: '1:1',
     about: 'Σχετικά',
     writing: 'Άρθρα',
     reviews: 'Κριτικές',
+    diagnostic: 'Burnout Diagnostic',
     findMe: 'Βρες με',
     workWithMe: 'Συνεργασία',
     ctaSub: 'Μια γνωριμία 15 λεπτών για να δούμε αν ταιριάζουμε.',
     book: 'Κλείσε γνωριμία →',
-    bookShort: 'Γνωριμία',
-    langLabel: 'Γλώσσα'
+    bookShort: 'Γνωριμία'
   }
 };
 const sbT = lang => SB_LABELS[lang] || SB_LABELS.en;
@@ -204,6 +206,57 @@ const ICONS = {
   }), /*#__PURE__*/React.createElement("polyline", {
     points: "7 7 17 7 17 17"
   })),
+  Home: () => /*#__PURE__*/React.createElement("svg", {
+    width: "19",
+    height: "19",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"
+  }), /*#__PURE__*/React.createElement("polyline", {
+    points: "9 21 9 12 15 12 15 21"
+  })),
+  Pulse: () => /*#__PURE__*/React.createElement("svg", {
+    width: "18",
+    height: "18",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M22 12h-4l-3 9L9 3l-3 9H2"
+  })),
+  Instagram: () => /*#__PURE__*/React.createElement("svg", {
+    width: "18",
+    height: "18",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.8",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("rect", {
+    x: "2",
+    y: "2",
+    width: "20",
+    height: "20",
+    rx: "5"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "12",
+    cy: "12",
+    r: "4"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "17.5",
+    y1: "6.5",
+    x2: "17.5",
+    y2: "6.5"
+  })),
   ChevLeft: () => /*#__PURE__*/React.createElement("svg", {
     width: "13",
     height: "13",
@@ -237,10 +290,19 @@ const SOCIALS = [{
   label: 'YouTube',
   href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA',
   Icon: ICONS.YouTube
+}, {
+  id: 'ig',
+  label: 'Instagram',
+  href: 'https://www.instagram.com/_aggelosmouzakitis_/',
+  Icon: ICONS.Instagram
 }];
 
-// Nav model: id -> {label(lang), href(lang), Icon}. All real <a href> for crawlers.
+// Primary nav: id -> {label(lang), href(lang), Icon}. All real <a href> for crawlers.
 const NAV_ITEMS = [{
+  id: 'home',
+  key: 'home',
+  Icon: ICONS.Home
+}, {
   id: 'one-to-one',
   key: 'oneToOne',
   Icon: ICONS.OneToOne
@@ -257,6 +319,8 @@ const NAV_ITEMS = [{
   key: 'reviews',
   Icon: ICONS.Quote
 }];
+// Secondary utility link — one shared diagnostic route for both languages.
+const DIAG_HREF = '/burnout-diagnostic/';
 // Which nav id is "active" for a given current page id.
 const activeNav = page => page === 'blog' ? 'blog' : page;
 
@@ -269,7 +333,8 @@ function langHref(page, targetLang) {
 function LangSwitch({
   page,
   lang,
-  compact
+  compact,
+  full
 }) {
   const seg = (l, label) => {
     const active = l === lang;
@@ -279,11 +344,11 @@ function LangSwitch({
       hrefLang: l,
       title: l === 'en' ? 'English' : 'Ελληνικά',
       style: {
-        padding: compact ? '3px 8px' : '4px 10px',
-        fontSize: compact ? '11px' : '12px',
-        fontWeight: 700,
-        letterSpacing: '.04em',
-        textTransform: 'uppercase',
+        padding: full ? '4px 12px' : compact ? '3px 8px' : '4px 10px',
+        fontSize: full ? '12px' : compact ? '11px' : '12px',
+        fontWeight: full ? 600 : 700,
+        letterSpacing: full ? '.02em' : '.04em',
+        textTransform: full ? 'none' : 'uppercase',
         textDecoration: 'none',
         borderRadius: '3px',
         color: active ? '#fff' : SB.text,
@@ -303,7 +368,7 @@ function LangSwitch({
       padding: 2,
       background: '#fff'
     }
-  }, seg('en', 'EN'), seg('el', 'ΕΛ'));
+  }, seg('en', full ? 'English' : 'EN'), seg('el', full ? 'Ελληνικά' : 'ΕΛ'));
 }
 
 // ── MOBILE BOTTOM NAV ────────────────────────────────────────────────────────
@@ -314,19 +379,20 @@ function MobileNav({
   const t = sbT(lang);
   const tabStyle = active => ({
     flex: 1,
+    minWidth: 0,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 4,
-    padding: '8px 2px',
+    gap: 3,
+    padding: '8px 1px',
     background: 'none',
     border: 'none',
     cursor: 'pointer',
     color: active ? '#1a7f37' : 'rgba(40,39,38,0.55)',
     fontFamily: 'inherit',
-    fontSize: '10px',
-    letterSpacing: '.04em',
+    fontSize: '9px',
+    letterSpacing: '.02em',
     textTransform: 'uppercase',
     transition: 'color .15s',
     textDecoration: 'none'
@@ -358,6 +424,9 @@ function MobileNav({
       paddingBottom: 'env(safe-area-inset-bottom)'
     }
   }, /*#__PURE__*/React.createElement("a", {
+    style: tabStyle(act === 'home'),
+    href: sbPath('home', lang)
+  }, /*#__PURE__*/React.createElement(ICONS.Home, null), /*#__PURE__*/React.createElement("span", null, t.home)), /*#__PURE__*/React.createElement("a", {
     style: tabStyle(act === 'one-to-one'),
     href: sbPath('one-to-one', lang)
   }, /*#__PURE__*/React.createElement(ICONS.OneToOne, null), /*#__PURE__*/React.createElement("span", null, t.oneToOne)), /*#__PURE__*/React.createElement("a", {
@@ -537,17 +606,33 @@ function Sidebar({
       height: 38,
       borderRadius: '50%',
       objectFit: 'cover',
-      margin: '22px 0 18px',
+      margin: '22px 0 8px',
       display: 'block'
     }
-  })), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("a", {
+    href: langHref(page, lang === 'en' ? 'el' : 'en'),
+    title: lang === 'en' ? 'Ελληνικά' : 'English',
+    hrefLang: lang === 'en' ? 'el' : 'en',
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 3,
+      color: SB.text,
+      textDecoration: 'none',
+      fontSize: '10px',
+      fontWeight: 700,
+      letterSpacing: '.04em',
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/React.createElement(ICONS.Globe, null), /*#__PURE__*/React.createElement("span", null, lang === 'en' ? 'ΕΛ' : 'EN')), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
       background: SB.border,
       alignSelf: 'stretch',
       margin: '0 12px 4px'
     }
-  }), NAV_ITEMS.map(it => iconNav(it.id, it.Icon, sbPath(it.id, lang), act === it.id, t[it.key])), /*#__PURE__*/React.createElement("div", {
+  }), NAV_ITEMS.map(it => iconNav(it.id, it.Icon, sbPath(it.id, lang), act === it.id, t[it.key])), iconNav('diagnostic', ICONS.Pulse, DIAG_HREF, act === 'diagnostic', t.diagnostic), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
       background: SB.border,
@@ -565,20 +650,7 @@ function Sidebar({
     style: {
       flex: 1
     }
-  }), /*#__PURE__*/React.createElement("a", {
-    href: langHref(page, lang === 'en' ? 'el' : 'en'),
-    title: lang === 'en' ? 'Ελληνικά' : 'English',
-    hrefLang: lang === 'en' ? 'el' : 'en',
-    style: {
-      width: SB.WC,
-      height: 48,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: SB.text,
-      textDecoration: 'none'
-    }
-  }, /*#__PURE__*/React.createElement(ICONS.Globe, null)));
+  }));
 
   // ── EXPANDED ──
   return /*#__PURE__*/React.createElement("div", {
@@ -657,16 +729,45 @@ function Sidebar({
     }
   }, t.role))), /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: '10px 0 0'
-    }
-  }, NAV_ITEMS.map(it => navLink(it.id, t[it.key], it.Icon, act === it.id, sbPath(it.id, lang)))), sectionLabel(t.langLabel), /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '0 18px 4px'
+      padding: '12px 18px',
+      borderBottom: `1px solid ${SB.border}`,
+      display: 'flex',
+      justifyContent: 'center',
+      flexShrink: 0
     }
   }, /*#__PURE__*/React.createElement(LangSwitch, {
     page: page,
-    lang: lang
-  })), sectionLabel(t.findMe), SOCIALS.map(({
+    lang: lang,
+    full: true
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '10px 0 0'
+    }
+  }, NAV_ITEMS.map(it => navLink(it.id, t[it.key], it.Icon, act === it.id, sbPath(it.id, lang)))), /*#__PURE__*/React.createElement("a", {
+    href: DIAG_HREF,
+    onMouseEnter: () => setHovered('diag'),
+    onMouseLeave: () => setHovered(null),
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      padding: '9px 18px',
+      marginTop: '2px',
+      textDecoration: 'none',
+      fontSize: '12px',
+      fontWeight: 500,
+      letterSpacing: '.03em',
+      textTransform: 'uppercase',
+      background: act === 'diagnostic' ? 'rgba(40,39,38,0.06)' : hovered === 'diag' ? 'rgba(40,39,38,0.03)' : 'transparent',
+      color: act === 'diagnostic' ? SB.active : hovered === 'diag' ? 'rgba(40,39,38,0.8)' : 'rgba(40,39,38,0.5)',
+      transition: 'background .12s, color .12s'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      flexShrink: 0
+    }
+  }, /*#__PURE__*/React.createElement(ICONS.Pulse, null)), /*#__PURE__*/React.createElement("span", null, t.diagnostic)), sectionLabel(t.findMe), SOCIALS.map(({
     id,
     label,
     href,

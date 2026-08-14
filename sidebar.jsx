@@ -25,10 +25,10 @@ const SB_CORE_PATHS = {
 const sbPath = (id, lang) => (SB_CORE_PATHS[id] && SB_CORE_PATHS[id][lang]) || (SB_CORE_PATHS[id] && SB_CORE_PATHS[id].en) || '/';
 
 const SB_LABELS = {
-  en: { role: 'Business Advisor + Therapist', oneToOne: '1:1', about: 'About', writing: 'Writing', reviews: 'Reviews',
-        findMe: 'Find me', workWithMe: 'Work with me', ctaSub: 'A 15-minute fit call to see if it fits.', book: 'Book a fit call →', bookShort: 'Book', langLabel: 'Language' },
-  el: { role: 'Σύμβουλος επιχειρήσεων & ψυχικής υγείας', oneToOne: '1:1', about: 'Σχετικά', writing: 'Άρθρα', reviews: 'Κριτικές',
-        findMe: 'Βρες με', workWithMe: 'Συνεργασία', ctaSub: 'Μια γνωριμία 15 λεπτών για να δούμε αν ταιριάζουμε.', book: 'Κλείσε γνωριμία →', bookShort: 'Γνωριμία', langLabel: 'Γλώσσα' },
+  en: { role: 'Business Advisor + Therapist', home: 'Home', oneToOne: '1:1', about: 'About', writing: 'Writing', reviews: 'Reviews', diagnostic: 'Diagnostic',
+        findMe: 'Find me', workWithMe: 'Work with me', ctaSub: 'A 15-minute fit call to see if it fits.', book: 'Book a fit call →', bookShort: 'Book' },
+  el: { role: 'Σύμβουλος επιχειρήσεων & ψυχικής υγείας', home: 'Αρχική', oneToOne: '1:1', about: 'Σχετικά', writing: 'Άρθρα', reviews: 'Κριτικές', diagnostic: 'Burnout Diagnostic',
+        findMe: 'Βρες με', workWithMe: 'Συνεργασία', ctaSub: 'Μια γνωριμία 15 λεπτών για να δούμε αν ταιριάζουμε.', book: 'Κλείσε γνωριμία →', bookShort: 'Γνωριμία' },
 };
 const sbT = (lang) => SB_LABELS[lang] || SB_LABELS.en;
 
@@ -73,6 +73,21 @@ const ICONS = {
       <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
     </svg>
   ),
+  Home: () => (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 12 15 12 15 21"/>
+    </svg>
+  ),
+  Pulse: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+    </svg>
+  ),
+  Instagram: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+    </svg>
+  ),
   ChevLeft: () => (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="15 18 9 12 15 6"/></svg>
   ),
@@ -84,15 +99,19 @@ const ICONS = {
 const SOCIALS = [
   { id: 'li', label: 'LinkedIn', href: 'https://linkedin.com/in/growth-product-manager/', Icon: ICONS.LinkedIn },
   { id: 'yt', label: 'YouTube', href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA', Icon: ICONS.YouTube },
+  { id: 'ig', label: 'Instagram', href: 'https://www.instagram.com/_aggelosmouzakitis_/', Icon: ICONS.Instagram },
 ];
 
-// Nav model: id -> {label(lang), href(lang), Icon}. All real <a href> for crawlers.
+// Primary nav: id -> {label(lang), href(lang), Icon}. All real <a href> for crawlers.
 const NAV_ITEMS = [
+  { id: 'home',       key: 'home',     Icon: ICONS.Home },
   { id: 'one-to-one', key: 'oneToOne', Icon: ICONS.OneToOne },
   { id: 'about',      key: 'about',    Icon: ICONS.User },
   { id: 'blog',       key: 'writing',  Icon: ICONS.Book },
   { id: 'reviews',    key: 'reviews',  Icon: ICONS.Quote },
 ];
+// Secondary utility link — one shared diagnostic route for both languages.
+const DIAG_HREF = '/burnout-diagnostic/';
 // Which nav id is "active" for a given current page id.
 const activeNav = (page) => (page === 'blog' ? 'blog' : page);
 
@@ -102,7 +121,7 @@ function langHref(page, targetLang) {
   if (SB_CORE_PATHS[page]) return sbPath(page, targetLang);
   return targetLang === 'el' ? '/el/' : '/'; // fallback for unmapped pages
 }
-function LangSwitch({ page, lang, compact }) {
+function LangSwitch({ page, lang, compact, full }) {
   const seg = (l, label) => {
     const active = l === lang;
     return (
@@ -111,8 +130,8 @@ function LangSwitch({ page, lang, compact }) {
         hrefLang={l}
         title={l === 'en' ? 'English' : 'Ελληνικά'}
         style={{
-          padding: compact ? '3px 8px' : '4px 10px', fontSize: compact ? '11px' : '12px', fontWeight: 700,
-          letterSpacing: '.04em', textTransform: 'uppercase', textDecoration: 'none', borderRadius: '3px',
+          padding: full ? '4px 12px' : compact ? '3px 8px' : '4px 10px', fontSize: full ? '12px' : compact ? '11px' : '12px', fontWeight: full ? 600 : 700,
+          letterSpacing: full ? '.02em' : '.04em', textTransform: full ? 'none' : 'uppercase', textDecoration: 'none', borderRadius: '3px',
           color: active ? '#fff' : SB.text, background: active ? SB.accent : 'transparent',
           cursor: active ? 'default' : 'pointer', pointerEvents: active ? 'none' : 'auto',
         }}>{label}</a>
@@ -120,7 +139,7 @@ function LangSwitch({ page, lang, compact }) {
   };
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 2, border: `1px solid ${SB.border}`, borderRadius: '5px', padding: 2, background: '#fff' }}>
-      {seg('en', 'EN')}{seg('el', 'ΕΛ')}
+      {seg('en', full ? 'English' : 'EN')}{seg('el', full ? 'Ελληνικά' : 'ΕΛ')}
     </div>
   );
 }
@@ -129,11 +148,11 @@ function LangSwitch({ page, lang, compact }) {
 function MobileNav({ page, lang }) {
   const t = sbT(lang);
   const tabStyle = (active) => ({
-    flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center',
-    justifyContent: 'center', gap: 4, padding: '8px 2px',
+    flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', alignItems: 'center',
+    justifyContent: 'center', gap: 3, padding: '8px 1px',
     background: 'none', border: 'none', cursor: 'pointer',
     color: active ? '#1a7f37' : 'rgba(40,39,38,0.55)',
-    fontFamily: 'inherit', fontSize: '10px', letterSpacing: '.04em',
+    fontFamily: 'inherit', fontSize: '9px', letterSpacing: '.02em',
     textTransform: 'uppercase', transition: 'color .15s', textDecoration: 'none',
   });
   const act = activeNav(page);
@@ -149,6 +168,7 @@ function MobileNav({ page, lang }) {
         display: 'flex', alignItems: 'stretch', zIndex: 100,
         paddingBottom: 'env(safe-area-inset-bottom)',
       }}>
+        <a style={tabStyle(act === 'home')} href={sbPath('home', lang)}><ICONS.Home /><span>{t.home}</span></a>
         <a style={tabStyle(act === 'one-to-one')} href={sbPath('one-to-one', lang)}><ICONS.OneToOne /><span>{t.oneToOne}</span></a>
         <a style={tabStyle(act === 'about')} href={sbPath('about', lang)}><ICONS.User /><span>{t.about}</span></a>
         <a style={tabStyle(act === 'blog')} href={sbPath('blog', lang)}><ICONS.Book /><span>{t.writing}</span></a>
@@ -247,18 +267,20 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
   if (!open) return (
     <div style={{ width: SB.WC, minWidth: SB.WC, background: SB.bg, borderRight: `1px solid ${SB.border}`, height: '100vh', position: 'relative', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <ToggleBtn />
-      <a href={homeHref}><img src="https://aggelosmouzakitis.com/img/aggelos-96.webp" alt="Aggelos Mouzakitis" width={38} height={38} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', margin: '22px 0 18px', display: 'block' }} /></a>
+      <a href={homeHref}><img src="https://aggelosmouzakitis.com/img/aggelos-96.webp" alt="Aggelos Mouzakitis" width={38} height={38} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', margin: '22px 0 8px', display: 'block' }} /></a>
+      {/* Language control directly under the photo */}
+      <a href={langHref(page, lang === 'en' ? 'el' : 'en')} title={lang === 'en' ? 'Ελληνικά' : 'English'} hrefLang={lang === 'en' ? 'el' : 'en'}
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3, color: SB.text, textDecoration: 'none', fontSize: '10px', fontWeight: 700, letterSpacing: '.04em', marginBottom: 8 }}>
+        <ICONS.Globe /><span>{lang === 'en' ? 'ΕΛ' : 'EN'}</span>
+      </a>
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '0 12px 4px' }} />
       {NAV_ITEMS.map(it => iconNav(it.id, it.Icon, sbPath(it.id, lang), act === it.id, t[it.key]))}
+      {iconNav('diagnostic', ICONS.Pulse, DIAG_HREF, act === 'diagnostic', t.diagnostic)}
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '4px 12px' }} />
       {iconNav('book', ICONS.Book, sbPath('book', lang), act === 'book', t.book)}
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '4px 12px' }} />
       {SOCIALS.map(s => iconLink(s))}
       <div style={{ flex: 1 }} />
-      <a href={langHref(page, lang === 'en' ? 'el' : 'en')} title={lang === 'en' ? 'Ελληνικά' : 'English'} hrefLang={lang === 'en' ? 'el' : 'en'}
-        style={{ width: SB.WC, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', color: SB.text, textDecoration: 'none' }}>
-        <ICONS.Globe />
-      </a>
     </div>
   );
 
@@ -276,16 +298,27 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
           </div>
         </div>
 
-        {/* Navigation */}
+        {/* Language — subtle utility directly under the photo/identity */}
+        <div style={{ padding: '12px 18px', borderBottom: `1px solid ${SB.border}`, display: 'flex', justifyContent: 'center', flexShrink: 0 }}>
+          <LangSwitch page={page} lang={lang} full />
+        </div>
+
+        {/* Primary navigation */}
         <div style={{ padding: '10px 0 0' }}>
           {NAV_ITEMS.map(it => navLink(it.id, t[it.key], it.Icon, act === it.id, sbPath(it.id, lang)))}
         </div>
 
-        {/* Language */}
-        {sectionLabel(t.langLabel)}
-        <div style={{ padding: '0 18px 4px' }}>
-          <LangSwitch page={page} lang={lang} />
-        </div>
+        {/* Secondary utility — Burnout Diagnostic (visually secondary to the nav) */}
+        <a href={DIAG_HREF}
+          onMouseEnter={() => setHovered('diag')} onMouseLeave={() => setHovered(null)}
+          style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '9px 18px', marginTop: '2px', textDecoration: 'none',
+            fontSize: '12px', fontWeight: 500, letterSpacing: '.03em', textTransform: 'uppercase',
+            background: act === 'diagnostic' ? 'rgba(40,39,38,0.06)' : hovered === 'diag' ? 'rgba(40,39,38,0.03)' : 'transparent',
+            color: act === 'diagnostic' ? SB.active : hovered === 'diag' ? 'rgba(40,39,38,0.8)' : 'rgba(40,39,38,0.5)',
+            transition: 'background .12s, color .12s' }}>
+          <span style={{ display: 'flex', flexShrink: 0 }}><ICONS.Pulse /></span>
+          <span>{t.diagnostic}</span>
+        </a>
 
         {/* Find me */}
         {sectionLabel(t.findMe)}
