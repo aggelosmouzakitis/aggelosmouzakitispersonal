@@ -26,9 +26,9 @@ const sbPath = (id, lang) => (SB_CORE_PATHS[id] && SB_CORE_PATHS[id][lang]) || (
 
 const SB_LABELS = {
   en: { role: 'Business Advisor + Therapist', oneToOne: '1:1', about: 'About', writing: 'Writing', reviews: 'Reviews',
-        findMe: 'Find me', workWithMe: 'Work with me', ctaSub: 'A 15-minute fit call to see if it fits.', book: 'Book a fit call →', langLabel: 'Language' },
+        findMe: 'Find me', workWithMe: 'Work with me', ctaSub: 'A 15-minute fit call to see if it fits.', book: 'Book a fit call →', bookShort: 'Book', langLabel: 'Language' },
   el: { role: 'Σύμβουλος επιχειρήσεων & ψυχικής υγείας', oneToOne: '1:1', about: 'Σχετικά', writing: 'Άρθρα', reviews: 'Κριτικές',
-        findMe: 'Βρες με', workWithMe: 'Συνεργασία', ctaSub: 'Μια γνωριμία 15 λεπτών για να δούμε αν ταιριάζουμε.', book: 'Κλείσε γνωριμία →', langLabel: 'Γλώσσα' },
+        findMe: 'Βρες με', workWithMe: 'Συνεργασία', ctaSub: 'Μια γνωριμία 15 λεπτών για να δούμε αν ταιριάζουμε.', book: 'Κλείσε γνωριμία →', bookShort: 'Γνωριμία', langLabel: 'Γλώσσα' },
 };
 const sbT = (lang) => SB_LABELS[lang] || SB_LABELS.en;
 
@@ -153,7 +153,7 @@ function MobileNav({ page, lang }) {
         <a style={tabStyle(act === 'about')} href={sbPath('about', lang)}><ICONS.User /><span>{t.about}</span></a>
         <a style={tabStyle(act === 'blog')} href={sbPath('blog', lang)}><ICONS.Book /><span>{t.writing}</span></a>
         <a style={tabStyle(act === 'reviews')} href={sbPath('reviews', lang)}><ICONS.Quote /><span>{t.reviews}</span></a>
-        <a style={{ ...tabStyle(act === 'book'), color: act === 'book' ? '#1a7f37' : '#1a7f37', fontWeight: 700 }} href={sbPath('book', lang)}><ICONS.Book /><span>{t.book.replace(' →', '')}</span></a>
+        <a style={{ ...tabStyle(act === 'book'), color: '#1a7f37', fontWeight: 700 }} href={sbPath('book', lang)}><ICONS.Book /><span>{t.bookShort}</span></a>
       </nav>
     </React.Fragment>
   );

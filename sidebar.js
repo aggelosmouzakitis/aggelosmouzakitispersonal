@@ -55,6 +55,7 @@ const SB_LABELS = {
     workWithMe: 'Work with me',
     ctaSub: 'A 15-minute fit call to see if it fits.',
     book: 'Book a fit call →',
+    bookShort: 'Book',
     langLabel: 'Language'
   },
   el: {
@@ -67,6 +68,7 @@ const SB_LABELS = {
     workWithMe: 'Συνεργασία',
     ctaSub: 'Μια γνωριμία 15 λεπτών για να δούμε αν ταιριάζουμε.',
     book: 'Κλείσε γνωριμία →',
+    bookShort: 'Γνωριμία',
     langLabel: 'Γλώσσα'
   }
 };
@@ -370,11 +372,11 @@ function MobileNav({
   }, /*#__PURE__*/React.createElement(ICONS.Quote, null), /*#__PURE__*/React.createElement("span", null, t.reviews)), /*#__PURE__*/React.createElement("a", {
     style: {
       ...tabStyle(act === 'book'),
-      color: act === 'book' ? '#1a7f37' : '#1a7f37',
+      color: '#1a7f37',
       fontWeight: 700
     },
     href: sbPath('book', lang)
-  }, /*#__PURE__*/React.createElement(ICONS.Book, null), /*#__PURE__*/React.createElement("span", null, t.book.replace(' →', '')))));
+  }, /*#__PURE__*/React.createElement(ICONS.Book, null), /*#__PURE__*/React.createElement("span", null, t.bookShort))));
 }
 
 // ── DESKTOP SIDEBAR ──────────────────────────────────────────────────────────
