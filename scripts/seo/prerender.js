@@ -5,21 +5,27 @@ const reactJs = fs.readFileSync(ROOT + '/node_modules/react/umd/react.production
 const reactDomJs = fs.readFileSync(ROOT + '/node_modules/react-dom/umd/react-dom.production.min.js', 'utf8');
 
 // page key -> { file, url, faq: bool }
+// Core pages (renderApp-based) — English at root, Greek under /el/.
+// Legacy persona/service pages are 301-redirected and no longer prerendered.
 const PAGES = [
+  // Core — English
   { f: 'index.html', faq: false },
-  { f: 'therapy-for-executives/index.html', faq: true },
-  { f: 'therapy-for-founders/index.html', faq: true },
-  { f: 'imposter-syndrome-therapy/index.html', faq: true },
-  { f: 'executive-burnout-therapy/index.html', faq: true },
-  { f: 'career-transition-therapy/index.html', faq: true },
-  { f: 'founders/index.html', faq: false },
-  { f: 'solopreneurs/index.html', faq: false },
-  { f: 'how-i-work/index.html', faq: false },
+  { f: '1-to-1/index.html', faq: false },
+  { f: 'about/index.html', faq: false },
+  { f: 'reviews/index.html', faq: false },
   { f: 'book/index.html', faq: false },
-  { f: 'burnout-diagnostic/index.html', faq: false },
+  { f: 'confidentiality/index.html', faq: false },
+  // Core — Greek (/el/) — same indexable prerender path as English (brief §57)
+  { f: 'el/index.html', faq: false },
+  { f: 'el/1-to-1/index.html', faq: false },
+  { f: 'el/about/index.html', faq: false },
+  { f: 'el/reviews/index.html', faq: false },
+  { f: 'el/book/index.html', faq: false },
+  { f: 'el/confidentiality/index.html', faq: false },
+  // Retained (out of nav, still indexable via their own inline SpecialtyPage mount)
   { f: 'blog/index.html', faq: false },
   { f: 'ask-me-anything/index.html', faq: false },
-  { f: 'confidentiality/index.html', faq: false },
+  { f: 'burnout-diagnostic/index.html', faq: false },
   { f: 'greek-speaking-therapist-london/index.html', faq: true },
   { f: 'greek-speaking-therapist-manchester/index.html', faq: true },
   { f: 'greek-speaking-therapist-new-york/index.html', faq: true },
@@ -53,9 +59,17 @@ function injectSidebarPrerender(html, inner) {
 (async () => {
   const browser = await chromium.launch({ args: ['--ignore-certificate-errors'] });
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 1000 }, ignoreHTTPSErrors: true });
-  await ctx.route(/react@18.*react\.production\.min\.js/, r => r.fulfill({ contentType: 'application/javascript', body: reactJs }));
-  await ctx.route(/react-dom@18.*react-dom\.production\.min\.js/, r => r.fulfill({ contentType: 'application/javascript', body: reactDomJs }));
-  await ctx.route(/googletagmanager\.com|emailjs/, r => r.fulfill({ contentType: 'application/javascript', body: 'window.emailjs={init(){},send(){return Promise.resolve()}};' }));
+  // Single comprehensive router (added last = highest priority). Serves React
+  // locally, stubs analytics/booking, aborts other external hosts so prerender
+  // is fast and never hangs on the network. Local (localhost) assets pass through.
+  await ctx.route('**/*', (route) => {
+    const url = route.request().url();
+    if (/react-dom(\.production\.min)?\.js|react-dom@18/.test(url)) return route.fulfill({ contentType: 'application/javascript', body: reactDomJs });
+    if (/(^|\/)react(\.production\.min)?\.js|react@18/.test(url)) return route.fulfill({ contentType: 'application/javascript', body: reactJs });
+    if (/googletagmanager\.com|emailjs|calendly/.test(url)) return route.fulfill({ contentType: 'application/javascript', body: 'window.emailjs={init(){},send(){return Promise.resolve()}};window.Calendly={initInlineWidgets(){},initBadgeWidget(){}};' });
+    if (url.startsWith('http://localhost') || url.startsWith('http://127.0.0.1')) return route.continue();
+    return route.abort(); // fonts, remote images, anything else external
+  });
 
   const faqOut = {};
   const report = [];
@@ -73,7 +87,7 @@ function injectSidebarPrerender(html, inner) {
     if (p.f === 'blog/index.html') {
       try { await page.waitForSelector('.post-item', { timeout: 8000 }); } catch (e) {}
     }
-    await page.waitForTimeout(800);
+    await page.waitForTimeout(350);
 
     // Capture pre-render HTML
     const inner = await page.evaluate(() => document.getElementById('root').innerHTML);

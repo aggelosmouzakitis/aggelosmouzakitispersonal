@@ -2,6 +2,22 @@
 
 _Status legend: [ ] pending · [x] done · [~] partial/needs-live-env · [!] blocked (owner/DNS)_
 
+## Automated run results (`node scripts/qa-crawl.js`)
+**149 checks PASS · 0 FAIL.** Covers: all 12 core routes exist with prerendered content;
+self-canonical + `<html lang>` correct per language; reciprocal `hreflang` (en/el/x-default) on
+every paired core page; no regulated Greek title terms on `/el/*`; sitemap URLs all resolve to
+files and contain no redirected URLs; every legacy path has a redirect rule (bare + splat) with no
+chains; no internal links to redirected legacy URLs on any core or retained page.
+
+Also verified: `npm run build` exits 0; `node scripts/seo/prerender.js` bakes all core EN+EL pages
++ retained + 27 blog posts with **zero JS errors**; blog language filter renders (All/EN/ΕΛ);
+language switcher lands on the equivalent page (e.g. `/about/ ↔ /el/about/`); Greek nav labels
+baked in; OG image generated for `/1-to-1/`.
+
+**Still requires a live environment / owner action** (marked `[~]`/`[!]` below): real HTTP status of
+redirects (needs deploy), `.gr`→`.com/el/` redirects (needs `.gr` DNS moved to Netlify), Calendly
+widget load in production, GA event tracking, and the owner decisions flagged in `06`.
+
 ## Build & prerender
 - [ ] `npm run build` compiles JSX→JS with no errors
 - [ ] `node scripts/seo/prerender.js` bakes snapshots for every core EN + EL page and `/1-to-1/`
