@@ -18,6 +18,7 @@ const RETAINED = [
   '/greek-speaking-therapist-new-york/',
   '/greek-speaking-therapist-dublin/',
   '/burnout-diagnostic/',
+  '/el/burnout-diagnostic/',
   '/getinterviewed/',
   '/ask-me-anything/',
 ];

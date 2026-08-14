@@ -562,8 +562,8 @@ function HomePage({ lang = 'en' }) {
 
     // ── Recognition (fewer examples shown at once) ──
     React.createElement(Section, { label: c.recogLabel, mob },
-      React.createElement('p', { style: { ...leadStyle, fontSize: mob ? '19px' : '21px', marginBottom: '1.6rem' } }, c.recogLead),
-      React.createElement(Bullets, { items: c.recog.slice(0, 5), mob })
+      React.createElement('p', { style: { ...leadStyle, fontSize: mob ? '19px' : '22px', marginBottom: '1.8rem', maxWidth: '38ch' } }, c.recogLead),
+      React.createElement(Bullets, { items: c.recog.slice(0, 4), mob })
     ),
 
     React.createElement('hr', { style: sepStyle }),
@@ -575,8 +575,8 @@ function HomePage({ lang = 'en' }) {
     ),
     React.createElement(Section, { label: c.cpLabel, mob },
       React.createElement(P, null, c.cpLead),
-      React.createElement(Bullets, { items: c.cp.slice(0, 5), mob }),
-      React.createElement('p', { style: { fontSize: mob ? '18px' : '19px', fontWeight: 600, color: C.text, margin: '1.3rem 0 0', lineHeight: 1.6 } }, c.cpFoot)
+      React.createElement(Bullets, { items: c.cp.slice(0, 4), mob }),
+      React.createElement('p', { style: { fontSize: mob ? '18px' : '20px', fontWeight: 600, color: C.text, margin: '1.4rem 0 0', lineHeight: 1.6 } }, c.cpFoot)
     ),
     React.createElement(Section, { label: c.ttLabel, mob },
       React.createElement('div', { style: { margin: '0 0 1.2rem' } },
@@ -601,8 +601,7 @@ function HomePage({ lang = 'en' }) {
       React.createElement(FaqAccordion, { items: c.faq, mob })
     ),
 
-    // ── Writing ──
-    React.createElement(LatestWriting, { mob, lang }),
+    React.createElement('div', { style: { marginTop: mob ? '1rem' : '2rem' } }),
 
     // ── Final CTA ──
     React.createElement(FinalCta, { lang, mob, heading: c.finalHeading, sub: c.finalSub }),

@@ -1181,11 +1181,12 @@ function HomePage({
   }, React.createElement('p', {
     style: {
       ...leadStyle,
-      fontSize: mob ? '19px' : '21px',
-      marginBottom: '1.6rem'
+      fontSize: mob ? '19px' : '22px',
+      marginBottom: '1.8rem',
+      maxWidth: '38ch'
     }
   }, c.recogLead), React.createElement(Bullets, {
-    items: c.recog.slice(0, 5),
+    items: c.recog.slice(0, 4),
     mob
   })), React.createElement('hr', {
     style: sepStyle
@@ -1206,14 +1207,14 @@ function HomePage({
     label: c.cpLabel,
     mob
   }, React.createElement(P, null, c.cpLead), React.createElement(Bullets, {
-    items: c.cp.slice(0, 5),
+    items: c.cp.slice(0, 4),
     mob
   }), React.createElement('p', {
     style: {
-      fontSize: mob ? '18px' : '19px',
+      fontSize: mob ? '18px' : '20px',
       fontWeight: 600,
       color: C.text,
-      margin: '1.3rem 0 0',
+      margin: '1.4rem 0 0',
       lineHeight: 1.6
     }
   }, c.cpFoot)), React.createElement(Section, {
@@ -1264,11 +1265,10 @@ function HomePage({
   }, React.createElement(FaqAccordion, {
     items: c.faq,
     mob
-  })),
-  // ── Writing ──
-  React.createElement(LatestWriting, {
-    mob,
-    lang
+  })), React.createElement('div', {
+    style: {
+      marginTop: mob ? '1rem' : '2rem'
+    }
   }),
   // ── Final CTA ──
   React.createElement(FinalCta, {

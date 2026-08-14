@@ -25,12 +25,14 @@ const SB_CORE_PATHS = {
 const sbPath = (id, lang) => (SB_CORE_PATHS[id] && SB_CORE_PATHS[id][lang]) || (SB_CORE_PATHS[id] && SB_CORE_PATHS[id].en) || '/';
 
 const SB_LABELS = {
-  en: { role: 'Business Advisor + Therapist', home: 'Home', oneToOne: '1:1', about: 'About', writing: 'Writing', reviews: 'Reviews', diagnostic: 'Diagnostic',
-        findMe: 'Find me', workWithMe: 'Work with me', ctaSub: 'A 15-minute fit call to see if it fits.', book: 'Book a fit call →', bookShort: 'Book' },
-  el: { role: 'Σύμβουλος επιχειρήσεων & ψυχικής υγείας', home: 'Αρχική', oneToOne: '1:1', about: 'Σχετικά', writing: 'Άρθρα', reviews: 'Κριτικές', diagnostic: 'Burnout Diagnostic',
-        findMe: 'Βρες με', workWithMe: 'Συνεργασία', ctaSub: 'Μια γνωριμία 15 λεπτών για να δούμε αν ταιριάζουμε.', book: 'Κλείσε γνωριμία →', bookShort: 'Γνωριμία' },
+  en: { role: 'Business Advisor + Therapist', home: 'Home', workWith: 'Work with me', oneToOne: '1:1', about: 'About', writing: 'Writing', reviews: 'Reviews',
+        findMe: 'Find me', diagHead: 'Burnout Diagnostic', diagSub: 'A short, free self-assessment — see where you actually stand.', diagBtn: 'Take the diagnostic →', diagShort: 'Diagnostic', book: 'Book a fit call →', bookShort: 'Book' },
+  el: { role: 'Σύμβουλος επιχειρήσεων & ψυχικής υγείας', home: 'Αρχική', workWith: 'Συνεργασία', oneToOne: '1:1', about: 'Σχετικά', writing: 'Άρθρα', reviews: 'Κριτικές',
+        findMe: 'Βρες με', diagHead: 'Burnout Diagnostic', diagSub: 'Σύντομη, δωρεάν αυτοαξιολόγηση — δες πού πραγματικά βρίσκεσαι.', diagBtn: 'Κάνε το τεστ →', diagShort: 'Τεστ', book: 'Κλείσε γνωριμία →', bookShort: 'Γνωριμία' },
 };
 const sbT = (lang) => SB_LABELS[lang] || SB_LABELS.en;
+// Diagnostic route is language-aware (Greek diagnostic lives under /el/).
+const diagPath = (lang) => (lang === 'el' ? '/el/burnout-diagnostic/' : '/burnout-diagnostic/');
 
 const ICONS = {
   OneToOne: () => (
@@ -105,13 +107,11 @@ const SOCIALS = [
 // Primary nav: id -> {label(lang), href(lang), Icon}. All real <a href> for crawlers.
 const NAV_ITEMS = [
   { id: 'home',       key: 'home',     Icon: ICONS.Home },
-  { id: 'one-to-one', key: 'oneToOne', Icon: ICONS.OneToOne },
+  { id: 'one-to-one', key: 'workWith', Icon: ICONS.OneToOne },
   { id: 'about',      key: 'about',    Icon: ICONS.User },
   { id: 'blog',       key: 'writing',  Icon: ICONS.Book },
   { id: 'reviews',    key: 'reviews',  Icon: ICONS.Quote },
 ];
-// Secondary utility link — one shared diagnostic route for both languages.
-const DIAG_HREF = '/burnout-diagnostic/';
 // Which nav id is "active" for a given current page id.
 const activeNav = (page) => (page === 'blog' ? 'blog' : page);
 
@@ -173,7 +173,7 @@ function MobileNav({ page, lang }) {
         <a style={tabStyle(act === 'about')} href={sbPath('about', lang)}><ICONS.User /><span>{t.about}</span></a>
         <a style={tabStyle(act === 'blog')} href={sbPath('blog', lang)}><ICONS.Book /><span>{t.writing}</span></a>
         <a style={tabStyle(act === 'reviews')} href={sbPath('reviews', lang)}><ICONS.Quote /><span>{t.reviews}</span></a>
-        <a style={{ ...tabStyle(act === 'book'), color: '#1a7f37', fontWeight: 700 }} href={sbPath('book', lang)}><ICONS.Book /><span>{t.bookShort}</span></a>
+        <a style={{ ...tabStyle(act === 'diagnostic'), color: '#1a7f37', fontWeight: 700 }} href={diagPath(lang)}><ICONS.Pulse /><span>{t.diagShort}</span></a>
       </nav>
     </React.Fragment>
   );
@@ -275,9 +275,8 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
       </a>
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '0 12px 4px' }} />
       {NAV_ITEMS.map(it => iconNav(it.id, it.Icon, sbPath(it.id, lang), act === it.id, t[it.key]))}
-      {iconNav('diagnostic', ICONS.Pulse, DIAG_HREF, act === 'diagnostic', t.diagnostic)}
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '4px 12px' }} />
-      {iconNav('book', ICONS.Book, sbPath('book', lang), act === 'book', t.book)}
+      {iconNav('diagnostic', ICONS.Pulse, diagPath(lang), act === 'diagnostic', t.diagHead)}
       <div style={{ height: 1, background: SB.border, alignSelf: 'stretch', margin: '4px 12px' }} />
       {SOCIALS.map(s => iconLink(s))}
       <div style={{ flex: 1 }} />
@@ -308,18 +307,6 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
           {NAV_ITEMS.map(it => navLink(it.id, t[it.key], it.Icon, act === it.id, sbPath(it.id, lang)))}
         </div>
 
-        {/* Secondary utility — Burnout Diagnostic (visually secondary to the nav) */}
-        <a href={DIAG_HREF}
-          onMouseEnter={() => setHovered('diag')} onMouseLeave={() => setHovered(null)}
-          style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '9px 18px', marginTop: '2px', textDecoration: 'none',
-            fontSize: '12px', fontWeight: 500, letterSpacing: '.03em', textTransform: 'uppercase',
-            background: act === 'diagnostic' ? 'rgba(40,39,38,0.06)' : hovered === 'diag' ? 'rgba(40,39,38,0.03)' : 'transparent',
-            color: act === 'diagnostic' ? SB.active : hovered === 'diag' ? 'rgba(40,39,38,0.8)' : 'rgba(40,39,38,0.5)',
-            transition: 'background .12s, color .12s' }}>
-          <span style={{ display: 'flex', flexShrink: 0 }}><ICONS.Pulse /></span>
-          <span>{t.diagnostic}</span>
-        </a>
-
         {/* Find me */}
         {sectionLabel(t.findMe)}
         {SOCIALS.map(({ id, label, href, Icon }) => (
@@ -343,16 +330,18 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
 
         <div style={{ flex: 1 }} />
 
-        {/* Work with me CTA */}
+        {/* Primary CTA — Burnout Diagnostic */}
         <div style={{ padding: '0 16px 22px', flexShrink: 0 }}>
           <div style={{ border: `1.5px solid rgba(26,127,55,0.45)`, padding: '19px', background: 'rgba(26,127,55,0.08)' }}>
-            <div style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: SB.accent, marginBottom: 9 }}>{t.workWithMe}</div>
-            <div style={{ fontSize: '14px', fontWeight: 500, color: SB.active, lineHeight: 1.6, marginBottom: 16 }}>{t.ctaSub}</div>
-            <a href={sbPath('book', lang)}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '13px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: SB.accent, marginBottom: 9 }}>
+              <span style={{ display: 'flex' }}><ICONS.Pulse /></span><span>{t.diagHead}</span>
+            </div>
+            <div style={{ fontSize: '14px', fontWeight: 500, color: SB.active, lineHeight: 1.6, marginBottom: 16 }}>{t.diagSub}</div>
+            <a href={diagPath(lang)}
               onMouseEnter={e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; }}
               onMouseLeave={e => { e.currentTarget.style.background = SB.accent; e.currentTarget.style.borderColor = SB.accent; }}
               style={{ display: 'block', textAlign: 'center', width: '100%', padding: '13px 0', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: SB.accent, border: `1.5px solid ${SB.accent}`, color: '#fff', cursor: 'pointer', textDecoration: 'none', transition: 'background .15s, border-color .15s' }}>
-              {t.book}
+              {t.diagBtn}
             </a>
           </div>
         </div>

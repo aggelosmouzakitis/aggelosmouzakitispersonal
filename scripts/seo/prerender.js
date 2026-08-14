@@ -26,6 +26,7 @@ const PAGES = [
   { f: 'blog/index.html', faq: false },
   { f: 'ask-me-anything/index.html', faq: false },
   { f: 'burnout-diagnostic/index.html', faq: false },
+  { f: 'el/burnout-diagnostic/index.html', faq: false },
   { f: 'greek-speaking-therapist-london/index.html', faq: true },
   { f: 'greek-speaking-therapist-manchester/index.html', faq: true },
   { f: 'greek-speaking-therapist-new-york/index.html', faq: true },

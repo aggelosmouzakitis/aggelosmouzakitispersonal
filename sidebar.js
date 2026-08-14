@@ -48,33 +48,39 @@ const SB_LABELS = {
   en: {
     role: 'Business Advisor + Therapist',
     home: 'Home',
+    workWith: 'Work with me',
     oneToOne: '1:1',
     about: 'About',
     writing: 'Writing',
     reviews: 'Reviews',
-    diagnostic: 'Diagnostic',
     findMe: 'Find me',
-    workWithMe: 'Work with me',
-    ctaSub: 'A 15-minute fit call to see if it fits.',
+    diagHead: 'Burnout Diagnostic',
+    diagSub: 'A short, free self-assessment — see where you actually stand.',
+    diagBtn: 'Take the diagnostic →',
+    diagShort: 'Diagnostic',
     book: 'Book a fit call →',
     bookShort: 'Book'
   },
   el: {
     role: 'Σύμβουλος επιχειρήσεων & ψυχικής υγείας',
     home: 'Αρχική',
+    workWith: 'Συνεργασία',
     oneToOne: '1:1',
     about: 'Σχετικά',
     writing: 'Άρθρα',
     reviews: 'Κριτικές',
-    diagnostic: 'Burnout Diagnostic',
     findMe: 'Βρες με',
-    workWithMe: 'Συνεργασία',
-    ctaSub: 'Μια γνωριμία 15 λεπτών για να δούμε αν ταιριάζουμε.',
+    diagHead: 'Burnout Diagnostic',
+    diagSub: 'Σύντομη, δωρεάν αυτοαξιολόγηση — δες πού πραγματικά βρίσκεσαι.',
+    diagBtn: 'Κάνε το τεστ →',
+    diagShort: 'Τεστ',
     book: 'Κλείσε γνωριμία →',
     bookShort: 'Γνωριμία'
   }
 };
 const sbT = lang => SB_LABELS[lang] || SB_LABELS.en;
+// Diagnostic route is language-aware (Greek diagnostic lives under /el/).
+const diagPath = lang => lang === 'el' ? '/el/burnout-diagnostic/' : '/burnout-diagnostic/';
 const ICONS = {
   OneToOne: () => /*#__PURE__*/React.createElement("svg", {
     width: "19",
@@ -304,7 +310,7 @@ const NAV_ITEMS = [{
   Icon: ICONS.Home
 }, {
   id: 'one-to-one',
-  key: 'oneToOne',
+  key: 'workWith',
   Icon: ICONS.OneToOne
 }, {
   id: 'about',
@@ -319,8 +325,6 @@ const NAV_ITEMS = [{
   key: 'reviews',
   Icon: ICONS.Quote
 }];
-// Secondary utility link — one shared diagnostic route for both languages.
-const DIAG_HREF = '/burnout-diagnostic/';
 // Which nav id is "active" for a given current page id.
 const activeNav = page => page === 'blog' ? 'blog' : page;
 
@@ -440,12 +444,12 @@ function MobileNav({
     href: sbPath('reviews', lang)
   }, /*#__PURE__*/React.createElement(ICONS.Quote, null), /*#__PURE__*/React.createElement("span", null, t.reviews)), /*#__PURE__*/React.createElement("a", {
     style: {
-      ...tabStyle(act === 'book'),
+      ...tabStyle(act === 'diagnostic'),
       color: '#1a7f37',
       fontWeight: 700
     },
-    href: sbPath('book', lang)
-  }, /*#__PURE__*/React.createElement(ICONS.Book, null), /*#__PURE__*/React.createElement("span", null, t.bookShort))));
+    href: diagPath(lang)
+  }, /*#__PURE__*/React.createElement(ICONS.Pulse, null), /*#__PURE__*/React.createElement("span", null, t.diagShort))));
 }
 
 // ── DESKTOP SIDEBAR ──────────────────────────────────────────────────────────
@@ -632,14 +636,14 @@ function Sidebar({
       alignSelf: 'stretch',
       margin: '0 12px 4px'
     }
-  }), NAV_ITEMS.map(it => iconNav(it.id, it.Icon, sbPath(it.id, lang), act === it.id, t[it.key])), iconNav('diagnostic', ICONS.Pulse, DIAG_HREF, act === 'diagnostic', t.diagnostic), /*#__PURE__*/React.createElement("div", {
+  }), NAV_ITEMS.map(it => iconNav(it.id, it.Icon, sbPath(it.id, lang), act === it.id, t[it.key])), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
       background: SB.border,
       alignSelf: 'stretch',
       margin: '4px 12px'
     }
-  }), iconNav('book', ICONS.Book, sbPath('book', lang), act === 'book', t.book), /*#__PURE__*/React.createElement("div", {
+  }), iconNav('diagnostic', ICONS.Pulse, diagPath(lang), act === 'diagnostic', t.diagHead), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 1,
       background: SB.border,
@@ -743,31 +747,7 @@ function Sidebar({
     style: {
       padding: '10px 0 0'
     }
-  }, NAV_ITEMS.map(it => navLink(it.id, t[it.key], it.Icon, act === it.id, sbPath(it.id, lang)))), /*#__PURE__*/React.createElement("a", {
-    href: DIAG_HREF,
-    onMouseEnter: () => setHovered('diag'),
-    onMouseLeave: () => setHovered(null),
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12,
-      padding: '9px 18px',
-      marginTop: '2px',
-      textDecoration: 'none',
-      fontSize: '12px',
-      fontWeight: 500,
-      letterSpacing: '.03em',
-      textTransform: 'uppercase',
-      background: act === 'diagnostic' ? 'rgba(40,39,38,0.06)' : hovered === 'diag' ? 'rgba(40,39,38,0.03)' : 'transparent',
-      color: act === 'diagnostic' ? SB.active : hovered === 'diag' ? 'rgba(40,39,38,0.8)' : 'rgba(40,39,38,0.5)',
-      transition: 'background .12s, color .12s'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'flex',
-      flexShrink: 0
-    }
-  }, /*#__PURE__*/React.createElement(ICONS.Pulse, null)), /*#__PURE__*/React.createElement("span", null, t.diagnostic)), sectionLabel(t.findMe), SOCIALS.map(({
+  }, NAV_ITEMS.map(it => navLink(it.id, t[it.key], it.Icon, act === it.id, sbPath(it.id, lang)))), sectionLabel(t.findMe), SOCIALS.map(({
     id,
     label,
     href,
@@ -824,14 +804,21 @@ function Sidebar({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
       fontSize: '13px',
       fontWeight: 700,
-      letterSpacing: '.08em',
+      letterSpacing: '.06em',
       textTransform: 'uppercase',
       color: SB.accent,
       marginBottom: 9
     }
-  }, t.workWithMe), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex'
+    }
+  }, /*#__PURE__*/React.createElement(ICONS.Pulse, null)), /*#__PURE__*/React.createElement("span", null, t.diagHead)), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: '14px',
       fontWeight: 500,
@@ -839,8 +826,8 @@ function Sidebar({
       lineHeight: 1.6,
       marginBottom: 16
     }
-  }, t.ctaSub), /*#__PURE__*/React.createElement("a", {
-    href: sbPath('book', lang),
+  }, t.diagSub), /*#__PURE__*/React.createElement("a", {
+    href: diagPath(lang),
     onMouseEnter: e => {
       e.currentTarget.style.background = '#146b2e';
       e.currentTarget.style.borderColor = '#146b2e';
@@ -866,7 +853,7 @@ function Sidebar({
       textDecoration: 'none',
       transition: 'background .15s, border-color .15s'
     }
-  }, t.book)))));
+  }, t.diagBtn)))));
 }
 Object.assign(window, {
   Sidebar
