@@ -883,6 +883,111 @@ function FaqAccordion({
   }));
 }
 
+// ── Homepage building blocks ─────────────────────────────────────────────────
+function TwoColBoard({
+  mob,
+  leftLabel,
+  leftItems,
+  rightLabel,
+  rightItems
+}) {
+  const col = (label, items) => React.createElement('div', {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, React.createElement('div', {
+    style: {
+      fontSize: '12px',
+      fontWeight: 700,
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: C.accent,
+      marginBottom: '1.1rem'
+    }
+  }, label), React.createElement('ul', {
+    style: {
+      listStyle: 'none',
+      margin: 0,
+      padding: 0
+    }
+  }, items.map((it, i) => React.createElement('li', {
+    key: i,
+    style: {
+      display: 'flex',
+      gap: '.7rem',
+      alignItems: 'baseline',
+      padding: '.55rem 0',
+      fontSize: mob ? '15px' : '16px',
+      lineHeight: 1.55,
+      color: C.text,
+      borderTop: i ? `1px solid ${C.border}` : 'none'
+    }
+  }, React.createElement('span', {
+    style: {
+      color: C.accent,
+      flexShrink: 0,
+      fontWeight: 700
+    }
+  }, '·'), React.createElement('span', null, it)))));
+  return React.createElement('div', {
+    style: {
+      ...cardBase,
+      display: 'flex',
+      flexDirection: mob ? 'column' : 'row',
+      gap: mob ? '1.75rem' : '3.5rem',
+      padding: mob ? '1.6rem' : '2.5rem 3rem',
+      background: '#fff',
+      boxShadow: '0 10px 40px rgba(40,39,38,.06)'
+    }
+  }, col(leftLabel, leftItems), !mob && React.createElement('div', {
+    style: {
+      width: 1,
+      background: C.border,
+      alignSelf: 'stretch'
+    }
+  }), col(rightLabel, rightItems));
+}
+function QCard({
+  mob,
+  label,
+  body,
+  q
+}) {
+  return React.createElement('div', {
+    className: 'hv-card',
+    style: {
+      ...cardBase,
+      padding: mob ? '1.3rem' : '1.6rem',
+      flex: 1
+    }
+  }, React.createElement('div', {
+    style: {
+      fontSize: '12px',
+      fontWeight: 700,
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: C.accent,
+      marginBottom: '.8rem'
+    }
+  }, label), React.createElement('p', {
+    style: {
+      fontSize: '15px',
+      lineHeight: 1.65,
+      color: C.text,
+      margin: '0 0 1rem'
+    }
+  }, body), React.createElement('p', {
+    style: {
+      fontSize: mob ? '15px' : '16px',
+      fontWeight: 600,
+      color: C.text,
+      margin: 0,
+      lineHeight: 1.5
+    }
+  }, q));
+}
+
 // ─── HOME PAGE (bilingual) ───────────────────────────────────────────────────
 const HOME = {
   en: {
@@ -892,78 +997,21 @@ const HOME = {
     introB: "Today I work 1:1 and with groups of people building something of their own. Sometimes the problem is clearly business. Sometimes it's more complicated and includes you.",
     introC: "Quite often, business and psychology collide to the point where it's hard to tell yourself where the problem actually is.",
     recogLabel: 'You may recognise some of this',
-    recog: [{
-      lead: "You've been meaning to start for a long time.",
-      support: "You're still getting ready."
-    }, {
-      lead: 'You need more customers.',
-      support: 'Everything except selling keeps making it onto the to-do list.'
-    }, {
-      lead: "You know you're undercharging.",
-      support: "The number still hasn't changed.",
-      big: true
-    }, {
-      lead: 'Your direction gets difficult,',
-      support: 'and another one suddenly starts looking better.'
-    }, {
-      lead: 'The business depends on you.',
-      support: 'Maybe more than it actually needs to.',
-      big: true
-    }, {
-      lead: 'On paper, things are going well.',
-      support: "You feel less and less connected to what you're building.",
-      big: true
-    }, {
-      lead: 'You reached something you worked hard for.',
-      support: "Now you're not sure you want the next level, or just think you should."
-    }, {
-      lead: 'You understand your patterns.',
-      support: 'They keep happening anyway.',
-      big: true
-    }],
-    sigHead: "Sometimes the work is tactical. Sometimes it's psychological.",
-    sigHint: 'Choose a problem →',
-    sigBiz: 'The business',
-    sigYou: 'You',
-    sigProblems: [{
-      p: 'Not enough customers',
-      business: 'Acquisition may simply not work.',
-      you: 'You may be avoiding selling or visibility.'
-    }, {
-      p: 'Undercharging',
-      business: 'Your pricing may genuinely be below the market.',
-      you: 'Asking for more may feel like exposure.'
-    }, {
-      p: 'Everything depends on me',
-      business: 'Roles or processes may genuinely be poor.',
-      you: 'You may struggle to let go of control.'
-    }, {
-      p: 'I keep changing direction',
-      business: 'The strategy may genuinely be wrong.',
-      you: 'Commitment may get uncomfortable once the novelty disappears.'
-    }, {
-      p: "I can't make the decision",
-      business: 'You may genuinely be missing information.',
-      you: 'You may be avoiding what the decision forces you to face.'
-    }, {
-      p: "I've lost interest in what I built",
-      business: 'The business may need its next version.',
-      you: 'You may no longer want what your identity was organised around.'
-    }, {
-      p: 'I avoid being visible',
-      business: 'The channel or the positioning may be wrong.',
-      you: 'Being seen may feel more exposing than the business can afford.'
-    }, {
-      p: 'The business has stalled',
-      business: 'The model may have hit a real ceiling.',
-      you: 'You may be quietly protecting yourself from the next risk.'
-    }],
-    sigConcl1: 'Same visible problem. Very different things may need fixing.',
-    sigConcl2: "The hard part is working out what you're actually dealing with.",
-    teaserHead: 'One relationship. Both sides of the problem are welcome.',
-    teaserBiz: 'Offer · pricing · customers · decisions',
-    teaserYou: 'avoidance · identity · control · uncertainty',
-    teaserNote: "You don't need to know which one you have before you come in.",
+    recog: ["You've been meaning to start something for a long time. You're still getting ready.", 'You need more customers. Somehow, everything except selling keeps making it onto the to-do list.', "You know you're undercharging. The number still hasn't changed.", "Every time the direction you've chosen gets difficult, another one suddenly starts looking better.", "The business depends on you for almost everything. You're not sure how much of that is actually necessary.", "On paper, things are going well. You feel less and less connected to what you're building.", "You got somewhere you worked hard to reach. Now you're not sure whether you want the next level, or just think you should.", 'You understand your patterns extremely well. They keep happening anyway.'],
+    bizLabel: 'The business',
+    youLabel: 'You',
+    bvyHead: "Sometimes the work is tactical. Sometimes it's psychological.",
+    bvySub: "The hard part is knowing which one you're actually dealing with.",
+    bvyBusiness: ['Your offer is still weak.', "Your positioning isn't clear enough.", "You don't have a reliable way to find customers.", "Your pricing doesn't make sense.", "You're trying to move five things at once.", "You don't know which move actually matters most right now."],
+    bvyYou: ['You know you need to sell. You keep avoiding it.', "A no lands much more personally than you'd like.", 'Being visible feels strangely threatening, even though you know the business needs it.', "You keep changing direction before the previous one has had time to work.", 'Your sense of worth is a little too tied to how well the business is doing.', "You can explain the pattern perfectly. That hasn't stopped you repeating it."],
+    bvyUnder: "Sometimes the answer is a better business move. Sometimes it's deeper work. Quite often, we need to work on both before it's obvious which one was holding the other back.",
+    oneRelHead: 'One relationship. Both sides of the problem are welcome.',
+    oneRelBizList: 'Offer, positioning, pricing, customers, sales, priorities, decisions, execution.',
+    oneRelBizQ: 'What does the business actually need now?',
+    oneRelYouList: 'Avoidance, rejection, fear of visibility, perfectionism, money, self-doubt, control, identity, uncertainty, commitment.',
+    oneRelYouQ: 'What makes getting there harder than it needs to be?',
+    oneRelNote1: "Some weeks we'll barely talk psychology. Other weeks, the tactical problem can wait because something else needs attention first.",
+    oneRelNote2: "You don't need to know which one you have before you come in.",
     faqLabel: 'Common questions',
     faq: [{
       q: 'Do I need to already have a business?',
@@ -975,7 +1023,7 @@ const HOME = {
       q: "What if I don't know which one the problem is?",
       a: "Good. You don't need to diagnose yourself before we talk. Working that out is part of the job."
     }],
-    finalHeading: 'Building something is hard enough without getting in your own way.',
+    finalHeading: "Building something is hard enough without getting in your own way.",
     finalSub: "If you have something you're trying to start, fix or grow, tell me what's going on."
   },
   el: {
@@ -985,78 +1033,21 @@ const HOME = {
     introB: 'Σήμερα δουλεύω 1:1 και σε groups με ανθρώπους που χτίζουν κάτι δικό τους.',
     introC: 'Μερικές φορές το πρόβλημα είναι καθαρά business. Μερικές φορές είναι πιο περίπλοκο και περιλαμβάνει και εσένα. Και αρκετά συχνά, τα δύο μπλέκονται τόσο που δεν είναι καθόλου ξεκάθαρο πού ακριβώς βρίσκεται το πρόβλημα.',
     recogLabel: 'Μήπως σου θυμίζει κάτι;',
-    recog: [{
-      lead: 'Θέλεις καιρό να ξεκινήσεις.',
-      support: 'Ακόμα ετοιμάζεσαι.'
-    }, {
-      lead: 'Χρειάζεσαι περισσότερους πελάτες.',
-      support: 'Πάντα βρίσκεται κάτι πιο επείγον από το να πουλήσεις.'
-    }, {
-      lead: 'Ξέρεις ότι χρεώνεις λίγο.',
-      support: 'Η τιμή, όμως, παραμένει ίδια.',
-      big: true
-    }, {
-      lead: 'Η κατεύθυνσή σου δυσκολεύει,',
-      support: 'και ξαφνικά μια άλλη μοιάζει καλύτερη.'
-    }, {
-      lead: 'Η επιχείρηση εξαρτάται από εσένα.',
-      support: 'Ίσως περισσότερο απ’ όσο χρειάζεται.',
-      big: true
-    }, {
-      lead: 'Στα χαρτιά, όλα πάνε καλά.',
-      support: 'Εσύ νιώθεις όλο και λιγότερη σύνδεση με αυτό που χτίζεις.',
-      big: true
-    }, {
-      lead: 'Έφτασες κάπου που ήθελες πολύ.',
-      support: 'Τώρα δεν ξέρεις αν θες το επόμενο επίπεδο ή απλώς νομίζεις ότι πρέπει.'
-    }, {
-      lead: 'Καταλαβαίνεις τα μοτίβα σου.',
-      support: 'Συνεχίζουν να επαναλαμβάνονται.',
-      big: true
-    }],
-    sigHead: 'Κάποιες φορές η δουλειά είναι πρακτική. Κάποιες, ψυχολογική.',
-    sigHint: 'Διάλεξε ένα πρόβλημα →',
-    sigBiz: 'Το business',
-    sigYou: 'Εσύ',
-    sigProblems: [{
-      p: 'Λίγοι πελάτες',
-      business: 'Η απόκτηση πελατών μπορεί απλώς να μη λειτουργεί.',
-      you: 'Μπορεί να αποφεύγεις τις πωλήσεις ή την έκθεση.'
-    }, {
-      p: 'Χρεώνεις λίγο',
-      business: 'Οι τιμές σου μπορεί πραγματικά να είναι κάτω από την αγορά.',
-      you: 'Το να ζητήσεις περισσότερα μοιάζει με έκθεση.'
-    }, {
-      p: 'Όλα περνούν από εσένα',
-      business: 'Οι ρόλοι ή οι διαδικασίες μπορεί όντως να είναι κακοί.',
-      you: 'Μπορεί να δυσκολεύεσαι να αφήσεις τον έλεγχο.'
-    }, {
-      p: 'Αλλάζεις συνέχεια κατεύθυνση',
-      business: 'Η στρατηγική μπορεί όντως να είναι λάθος.',
-      you: 'Η δέσμευση δυσκολεύει μόλις περάσει η νεωτερικότητα.'
-    }, {
-      p: 'Δεν παίρνεις την απόφαση',
-      business: 'Μπορεί όντως να σου λείπει πληροφορία.',
-      you: 'Μπορεί να αποφεύγεις αυτό που σε αναγκάζει να δεις η απόφαση.'
-    }, {
-      p: 'Έχασες το ενδιαφέρον σου',
-      business: 'Το business μπορεί να χρειάζεται την επόμενη εκδοχή του.',
-      you: 'Μπορεί να μη θες πια αυτό γύρω από το οποίο χτίστηκε η ταυτότητά σου.'
-    }, {
-      p: 'Αποφεύγεις την έκθεση',
-      business: 'Το κανάλι ή το positioning μπορεί να είναι λάθος.',
-      you: 'Το να σε βλέπουν μοιάζει πιο εκθετικό απ’ όσο αντέχει το business.'
-    }, {
-      p: 'Το business έχει κολλήσει',
-      business: 'Το μοντέλο μπορεί να έχει πιάσει ταβάνι.',
-      you: 'Μπορεί να προστατεύεις τον εαυτό σου από το επόμενο ρίσκο.'
-    }],
-    sigConcl1: 'Ίδιο ορατό πρόβλημα. Πολύ διαφορετικά πράγματα μπορεί να χρειάζονται δουλειά.',
-    sigConcl2: 'Το δύσκολο είναι να καταλάβεις τι πραγματικά έχεις μπροστά σου.',
-    teaserHead: 'Μία συνεργασία. Και οι δύο πλευρές του προβλήματος χωράνε.',
-    teaserBiz: 'Offer · τιμές · πελάτες · αποφάσεις',
-    teaserYou: 'αποφυγή · ταυτότητα · έλεγχος · αβεβαιότητα',
-    teaserNote: 'Δεν χρειάζεται να ξέρεις ποιο από τα δύο έχεις πριν έρθεις.',
+    recog: ['Θέλεις καιρό να ξεκινήσεις κάτι. Ακόμα ετοιμάζεσαι.', "Χρειάζεσαι περισσότερους πελάτες. Παρ' όλα αυτά, πάντα βρίσκεται κάτι πιο επείγον από το να πουλήσεις.", 'Ξέρεις ότι χρεώνεις λίγο. Η τιμή, όμως, παραμένει ίδια.', 'Κάθε φορά που η κατεύθυνση που διάλεξες δυσκολεύει, εμφανίζεται μια καινούρια που ξαφνικά μοιάζει καλύτερη.', 'Η επιχείρηση εξαρτάται από εσένα σχεδόν για τα πάντα.', 'Στα χαρτιά, τα πράγματα πάνε καλά. Εσύ, όμως, νιώθεις όλο και λιγότερο σύνδεση με αυτό που χτίζεις.', 'Έφτασες κάπου που ήθελες πολύ. Όμως τώρα δεν ξέρεις αν θέλεις πραγματικά να πας στο επόμενο επίπεδο ή απλώς πιστεύεις ότι θα έπρεπε να το θέλεις.', 'Καταλαβαίνεις πολύ καλά τα μοτίβα σου. Παραδόξως, συνεχίζεις να τα επαναλαμβάνεις.'],
+    bizLabel: 'Το business',
+    youLabel: 'Εσύ',
+    bvyHead: 'Κάποιες φορές χρειάζεται business προσέγγιση. Άλλες, ψυχολογικό σκάψιμο.',
+    bvySub: 'Πολλές φορές, είναι δύσκολο να ξεχωρίσεις τι από τα δύο έχεις πραγματικά μπροστά σου.',
+    bvyBusiness: ['Το offer σου είναι ακόμα αδύναμο.', 'Το positioning δεν είναι αρκετά ξεκάθαρο.', 'Δεν έχεις σταθερό τρόπο να βρίσκεις πελάτες.', 'Η τιμολόγηση δεν βγάζει νόημα.', 'Κυνηγάς πέντε πράγματα ταυτόχρονα.', 'Δεν ξέρεις ποια κίνηση έχει πραγματικά σημασία τώρα.'],
+    bvyYou: ['Ξέρεις ότι πρέπει να πουλήσεις. Όμως, το αποφεύγεις.', "Ένα «όχι» σε χτυπάει πιο προσωπικά απ' όσο θα ήθελες.", 'Ο φόβος έκθεσης σε κρατά πίσω, παρότι ξέρεις ότι χωρίς έκθεση δύσκολα έρχεται ζήτηση.', 'Αλλάζεις κατεύθυνση πριν προλάβει να δουλέψει η προηγούμενη.', "Η αξία σου έχει συνδεθεί λίγο περισσότερο απ' όσο θα ήθελες με το πώς πάει η δουλειά.", 'Μπορείς να εξηγήσεις τέλεια πού είναι το πρόβλημα, αλλά δεν περνάς στη δράση.'],
+    bvyUnder: 'Κάποιες φορές η απάντηση είναι μια καλύτερη business προσέγγιση ή ένα διαφορετικό τακτικό πλάνο. Άλλες φορές χρειάζεται να πάμε πιο βαθιά — και αρκετά συχνά πρέπει να δουλέψουμε και τα δύο μέχρι να εντοπίσουμε πού είναι το πρόβλημα.',
+    oneRelHead: 'Μία συνεργασία όπου χωράνε και το business και εσύ.',
+    oneRelBizList: 'Offer, positioning, τιμές, πελάτες, πωλήσεις, προτεραιότητες, αποφάσεις, εκτέλεση.',
+    oneRelBizQ: 'Τι χρειάζεται πραγματικά το business τώρα;',
+    oneRelYouList: 'Αποφυγή, απόρριψη, φόβος έκθεσης, τελειομανία, χρήματα, αμφιβολία, control, ταυτότητα, αβεβαιότητα, δέσμευση.',
+    oneRelYouQ: 'Τι σε δυσκολεύει να φτάσεις εκεί που θέλεις;',
+    oneRelNote1: 'Κάποιες φορές θα μιλήσουμε σχεδόν μόνο για το business. Άλλες, το tactical κομμάτι μπορεί να περιμένει λίγο γιατί υπάρχει κάτι σημαντικότερο από κάτω.',
+    oneRelNote2: 'Δεν χρειάζεται να έχεις όλες τις απαντήσεις προκειμένου να μιλήσουμε.',
     faqLabel: 'Συχνές ερωτήσεις',
     faq: [{
       q: 'Πρέπει να έχω ήδη επιχείρηση;',
@@ -1072,169 +1063,69 @@ const HOME = {
     finalSub: 'Αν προσπαθείς να ξεκινήσεις, να ξεκολλήσεις ή να αναπτύξεις κάτι παραπάνω, έλα να το συζητήσουμε.'
   }
 };
-
-// Homepage signature section — one problem active at a time; hover (desktop) or
-// tap (mobile) reveals a business reading and a psychological reading of the
-// same visible problem. The whole point: same symptom, very different work.
-function ProblemSelector({
-  c,
-  mob
-}) {
-  const [active, setActive] = React.useState(0);
-  const ACC = '#5cc98b'; // brand green, lightened for contrast on the dark band
-  const dim = 'rgba(255,255,255,.55)';
-  const p = c.sigProblems[active];
-  const list = React.createElement('div', {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '.15rem'
-    }
-  }, React.createElement('div', {
-    style: {
-      fontSize: '11px',
-      fontWeight: 700,
-      letterSpacing: '.14em',
-      textTransform: 'uppercase',
-      color: ACC,
-      marginBottom: '1rem'
-    }
-  }, c.sigHint), c.sigProblems.map((it, i) => {
-    const on = i === active;
-    return React.createElement('button', {
-      key: i,
-      onClick: () => setActive(i),
-      onMouseEnter: () => !mob && setActive(i),
-      'aria-pressed': on ? 'true' : 'false',
-      style: {
-        textAlign: 'left',
-        background: 'transparent',
-        border: 'none',
-        cursor: 'pointer',
-        fontFamily: 'inherit',
-        padding: '.5rem 0',
-        display: 'flex',
-        gap: '.7rem',
-        alignItems: 'baseline',
-        fontSize: mob ? '19px' : '22px',
-        fontWeight: on ? 600 : 400,
-        letterSpacing: '-.01em',
-        lineHeight: 1.3,
-        color: on ? '#fff' : dim,
-        transition: 'color .15s'
-      }
-    }, React.createElement('span', {
-      'aria-hidden': 'true',
-      style: {
-        color: ACC,
-        opacity: on ? 1 : 0,
-        transition: 'opacity .15s',
-        flexShrink: 0
-      }
-    }, '—'), React.createElement('span', null, it.p));
-  }));
-  const explain = (label, text) => React.createElement('div', {
-    style: {
-      marginBottom: '1.6rem'
-    }
-  }, React.createElement('div', {
-    style: {
-      fontSize: '11px',
-      fontWeight: 700,
-      letterSpacing: '.14em',
-      textTransform: 'uppercase',
-      color: ACC,
-      marginBottom: '.5rem'
-    }
-  }, label), React.createElement('p', {
-    style: {
-      fontSize: mob ? '17px' : '19px',
-      lineHeight: 1.55,
-      color: 'rgba(255,255,255,.92)',
-      margin: 0
-    }
-  }, text));
-  const panel = React.createElement('div', {
-    style: {
-      borderLeft: mob ? 'none' : '1px solid rgba(255,255,255,.15)',
-      paddingLeft: mob ? 0 : '2.5rem'
-    }
-  }, React.createElement('div', {
-    style: {
-      fontSize: mob ? '20px' : '23px',
-      fontWeight: 600,
-      color: '#fff',
-      letterSpacing: '-.01em',
-      margin: '0 0 1.4rem'
-    }
-  }, p.p), explain(c.sigBiz, p.business), explain(c.sigYou, p.you));
-  return React.createElement('div', null, React.createElement('h2', {
-    style: {
-      fontSize: mob ? '25px' : '34px',
-      fontWeight: 500,
-      letterSpacing: '-.02em',
-      lineHeight: 1.2,
-      color: '#fff',
-      margin: '0 0 2.5rem',
-      maxWidth: '20ch'
-    }
-  }, c.sigHead), React.createElement('div', {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: mob ? '1fr' : '1fr 1fr',
-      gap: mob ? '2rem' : '3rem',
-      alignItems: 'start'
-    }
-  }, list, panel), React.createElement('div', {
-    style: {
-      marginTop: mob ? '2.5rem' : '3.5rem',
-      paddingTop: '1.75rem',
-      borderTop: '1px solid rgba(255,255,255,.15)'
-    }
-  }, React.createElement('p', {
-    style: {
-      fontSize: mob ? '18px' : '21px',
-      fontWeight: 600,
-      color: '#fff',
-      letterSpacing: '-.01em',
-      margin: '0 0 .4rem',
-      lineHeight: 1.4
-    }
-  }, c.sigConcl1), React.createElement('p', {
-    style: {
-      fontSize: mob ? '16px' : '18px',
-      color: 'rgba(255,255,255,.7)',
-      margin: 0,
-      lineHeight: 1.5
-    }
-  }, c.sigConcl2)));
-}
 function HomePage({
   lang = 'en'
 }) {
   const mob = useIsMobile();
   const c = HOME[lang] || HOME.en;
   const u = tUI(lang);
-  const pad = mob ? '0 1.25rem' : '0 2.5rem';
-  const inner = (children, st) => React.createElement('div', {
+  const mainStyle = mob ? homeStyleMobile : homeStyle;
+  const introRowStyle = mob ? {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.75rem'
+  } : {
+    display: 'flex',
+    gap: '4rem',
+    alignItems: 'center'
+  };
+  const introTextStyle = mob ? {
+    width: '100%'
+  } : {
+    flex: '1.15 1 0',
+    minWidth: 0,
+    maxWidth: 560
+  };
+  const introImgWrapStyle = mob ? {
+    width: '100%'
+  } : {
+    flex: '1 1 0',
+    minWidth: 0
+  };
+  const introImgStyle = {
+    width: '100%',
+    aspectRatio: mob ? '16 / 10' : '4 / 5',
+    objectFit: 'cover',
+    borderRadius: '14px',
+    display: 'block'
+  };
+  const sectionGap = React.createElement('div', {
     style: {
-      maxWidth: 1080,
-      margin: '0 auto',
-      padding: pad,
-      ...(st || {})
+      marginTop: mob ? '3.5rem' : '6rem'
     }
-  }, children);
-  const gap = mob ? '3.5rem' : '6rem';
-
+  });
+  const headingStyle = {
+    fontSize: mob ? '24px' : '30px',
+    fontWeight: 500,
+    letterSpacing: '-.02em',
+    lineHeight: 1.25,
+    color: C.text,
+    margin: '0 0 .6rem'
+  };
+  const subStyle = {
+    fontSize: mob ? '17px' : '19px',
+    color: C.muted,
+    lineHeight: 1.5,
+    margin: '0 0 1.8rem'
+  };
+  return React.createElement('main', {
+    style: mainStyle
+  },
   // ── Hero ──
-  const heroText = React.createElement('div', {
-    style: mob ? {
-      width: '100%'
-    } : {
-      flex: '1 1 0',
-      minWidth: 0,
-      maxWidth: 560
-    }
+  React.createElement('div', {
+    style: introRowStyle
+  }, React.createElement('div', {
+    style: introTextStyle
   }, React.createElement('div', {
     style: {
       fontSize: '12px',
@@ -1246,10 +1137,10 @@ function HomePage({
     }
   }, u.role), React.createElement('h1', {
     style: {
-      fontSize: mob ? '28px' : '38px',
+      fontSize: mob ? '27px' : '36px',
       fontWeight: 500,
-      lineHeight: 1.15,
-      letterSpacing: '-.025em',
+      lineHeight: 1.2,
+      letterSpacing: '-.02em',
       color: C.text,
       margin: '0 0 1.1rem'
     }
@@ -1266,27 +1157,15 @@ function HomePage({
   }, c.introC), React.createElement(CtaRow, {
     lang,
     mob
-  }));
-  const heroImg = React.createElement('div', {
-    style: mob ? {
-      width: '100%'
-    } : {
-      flex: '1.05 1 0',
-      minWidth: 0
-    }
+  })), React.createElement('div', {
+    style: introImgWrapStyle
   }, React.createElement('img', {
     src: 'https://aggelosmouzakitis.com/img/aggelos-homepage.webp',
     alt: u.imgAlt,
     loading: 'eager',
     fetchPriority: 'high',
     decoding: 'async',
-    style: {
-      width: '100%',
-      aspectRatio: mob ? '16 / 10' : '4 / 5',
-      objectFit: 'cover',
-      borderRadius: '14px',
-      display: 'block'
-    }
+    style: introImgStyle
   }), React.createElement('div', {
     style: {
       display: mob ? 'none' : 'flex',
@@ -1322,171 +1201,101 @@ function HomePage({
     d: 'M40 3 C 44 20, 33 30, 6 30'
   }), React.createElement('path', {
     d: 'M15 24 L5 30 L14 36'
-  }))));
-
-  // ── Recognition (editorial two-column; no cards) ──
-  const recogItems = React.createElement('div', {
+  }))))), sectionGap,
+  // ── Recognition (two columns) ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.recogLabel), React.createElement('div', {
     style: {
+      columnGap: mob ? 0 : '3rem',
       columnCount: mob ? 1 : 2,
-      columnGap: mob ? 0 : '4rem',
-      marginTop: mob ? '1.75rem' : '2.5rem'
+      marginTop: '1.4rem'
     }
-  }, c.recog.map((r, i) => React.createElement('div', {
+  }, c.recog.map((it, i) => React.createElement('p', {
     key: i,
     style: {
       breakInside: 'avoid',
-      marginBottom: r.big ? mob ? '2rem' : '2.75rem' : mob ? '1.6rem' : '2.25rem'
-    }
-  }, React.createElement('p', {
-    style: {
-      fontSize: r.big ? mob ? '21px' : '25px' : mob ? '17px' : '19px',
-      fontWeight: 600,
-      letterSpacing: '-.01em',
-      lineHeight: 1.25,
+      fontSize: mob ? '16px' : '17px',
+      lineHeight: 1.6,
       color: C.text,
-      margin: '0 0 .35rem'
+      margin: '0 0 1.1rem'
     }
-  }, r.lead), React.createElement('p', {
+  }, it))), sectionGap,
+  // ── Business vs You — the main visual object ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.bvyHead), React.createElement('p', {
+    style: subStyle
+  }, c.bvySub), React.createElement(TwoColBoard, {
+    mob,
+    leftLabel: c.bizLabel,
+    leftItems: c.bvyBusiness,
+    rightLabel: c.youLabel,
+    rightItems: c.bvyYou
+  }), React.createElement('p', {
     style: {
-      fontSize: r.big ? mob ? '16px' : '18px' : '16px',
-      color: C.muted,
-      lineHeight: 1.5,
-      margin: 0
-    }
-  }, r.support))));
-
-  // ── 1:1 teaser (typography as the visual object; no cards) ──
-  const teaser = React.createElement('div', {
-    style: {
-      textAlign: mob ? 'left' : 'center',
-      maxWidth: 820,
-      margin: '0 auto'
-    }
-  }, React.createElement('h2', {
-    style: {
-      fontSize: mob ? '25px' : '34px',
-      fontWeight: 500,
-      letterSpacing: '-.02em',
-      lineHeight: 1.2,
+      fontSize: mob ? '17px' : '18px',
+      lineHeight: 1.65,
       color: C.text,
-      margin: '0 0 1.8rem'
+      margin: '1.8rem 0 0',
+      maxWidth: '62ch'
     }
-  }, c.teaserHead), React.createElement('div', {
+  }, c.bvyUnder), sectionGap,
+  // ── Short 1:1 section ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.oneRelHead), React.createElement('div', {
     style: {
       display: 'flex',
       flexDirection: mob ? 'column' : 'row',
-      gap: mob ? '.5rem' : '1.5rem',
-      justifyContent: 'center',
-      alignItems: mob ? 'flex-start' : 'center',
-      fontSize: mob ? '15px' : '17px',
-      letterSpacing: '.01em',
-      color: C.text
+      gap: mob ? '1rem' : '1.25rem',
+      marginTop: '1.4rem'
     }
-  }, React.createElement('span', null, c.teaserBiz), React.createElement('span', {
-    'aria-hidden': 'true',
+  }, React.createElement(QCard, {
+    mob,
+    label: c.bizLabel,
+    body: c.oneRelBizList,
+    q: c.oneRelBizQ
+  }), React.createElement(QCard, {
+    mob,
+    label: c.youLabel,
+    body: c.oneRelYouList,
+    q: c.oneRelYouQ
+  })), React.createElement('p', {
     style: {
-      color: C.accent,
-      display: mob ? 'none' : 'inline'
+      fontSize: '16px',
+      lineHeight: 1.7,
+      color: C.muted,
+      margin: '1.6rem 0 0'
     }
-  }, '·'), React.createElement('span', {
+  }, c.oneRelNote1), React.createElement('p', {
     style: {
-      color: C.muted
-    }
-  }, c.teaserYou)), React.createElement('p', {
-    style: {
-      fontSize: mob ? '18px' : '20px',
-      fontWeight: 500,
+      fontSize: mob ? '17px' : '18px',
+      fontWeight: 600,
       color: C.text,
-      lineHeight: 1.5,
-      margin: mob ? '1.6rem 0 0' : '2rem 0 0'
+      margin: '.6rem 0 0',
+      lineHeight: 1.6
     }
-  }, c.teaserNote), React.createElement('p', {
+  }, c.oneRelNote2), React.createElement('p', {
     style: {
-      margin: '1.4rem 0 0'
+      margin: '1.3rem 0 0'
     }
   }, React.createElement(IA, {
     href: pathFor('one-to-one', lang)
-  }, u.seeOneToOne + ' →')));
-  return React.createElement('main', {
+  }, u.seeOneToOne + ' →')), sectionGap,
+  // ── FAQ (max 3) ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.faqLabel), React.createElement('div', {
     style: {
-      width: '100%',
-      color: C.text,
-      fontFamily: 'inherit'
+      marginTop: '1.4rem'
     }
-  },
-  // Hero
-  React.createElement('section', {
-    style: {
-      paddingTop: mob ? '2rem' : '4rem'
-    }
-  }, inner(React.createElement('div', {
-    style: mob ? {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '1.75rem'
-    } : {
-      display: 'flex',
-      gap: '4rem',
-      alignItems: 'center'
-    }
-  }, heroText, heroImg))),
-  // Recognition
-  React.createElement('section', {
-    style: {
-      paddingTop: gap
-    }
-  }, inner(React.createElement(React.Fragment, null, React.createElement('h2', {
-    style: {
-      fontSize: mob ? '13px' : '14px',
-      fontWeight: 700,
-      letterSpacing: '.14em',
-      textTransform: 'uppercase',
-      color: C.muted,
-      margin: 0
-    }
-  }, c.recogLabel), recogItems))),
-  // Signature — full-width dark band
-  React.createElement('section', {
-    style: {
-      marginTop: gap,
-      background: '#1e2136',
-      padding: mob ? '3rem 0' : '4.75rem 0'
-    }
-  }, inner(React.createElement(ProblemSelector, {
-    c,
-    mob
-  }))),
-  // 1:1 teaser
-  React.createElement('section', {
-    style: {
-      paddingTop: gap
-    }
-  }, inner(teaser)),
-  // FAQ (quiet)
-  React.createElement('section', {
-    style: {
-      paddingTop: gap
-    }
-  }, inner(React.createElement(React.Fragment, null, React.createElement('h2', {
-    style: {
-      fontSize: mob ? '24px' : '30px',
-      fontWeight: 500,
-      letterSpacing: '-.02em',
-      lineHeight: 1.25,
-      color: C.text,
-      margin: '0 0 1.4rem'
-    }
-  }, c.faqLabel), React.createElement(FaqAccordion, {
+  }, React.createElement(FaqAccordion, {
     items: c.faq,
     mob
-  })))),
-  // Final CTA + footer
-  React.createElement('section', {
-    style: {
-      paddingTop: mob ? '2.5rem' : '3.5rem',
-      paddingBottom: mob ? '4rem' : '6rem'
-    }
-  }, inner(React.createElement(React.Fragment, null, React.createElement(FinalCta, {
+  })),
+  // ── Final CTA ──
+  React.createElement(FinalCta, {
     lang,
     mob,
     heading: c.finalHeading,
@@ -1494,7 +1303,7 @@ function HomePage({
   }), React.createElement(SiteFooter, {
     mob,
     lang
-  })))));
+  }));
 }
 
 // ─── 1:1 OFFER PAGE (bilingual) ──────────────────────────────────────────────
@@ -1503,59 +1312,33 @@ const ONE = {
     h1: 'Work with me, 1:1',
     lead: "Private work on the business you're building and whatever in you is getting tangled up with it.",
     intro: ["Some problems need a tactical answer. Others need deeper work. Often, it's not obvious which one you're dealing with until we get into it.", "The point of 1:1 is that we don't have to choose one lens in advance."],
-    bizLabel: 'Business',
+    workLabel: 'What can we work on?',
+    bizLabel: 'The business',
+    bizBody: 'Offer, positioning, pricing, customer acquisition, sales, priorities, difficult decisions, execution.',
+    bizNote: "Sometimes you need somebody to look at the business and say: this is the problem, this is noise, and this is what I'd do next.",
     youLabel: 'You',
-    bothLabel: 'Both',
-    diagLabel: 'How the work works',
-    diagBring: "You bring what's happening.",
-    diagWork: "We work out what we're actually dealing with.",
-    diagBranches: [{
-      k: 'Business',
-      d: 'Something genuinely needs fixing in the business.'
-    }, {
-      k: 'Both',
-      d: 'Business and psychology are tangled together.'
-    }, {
-      k: 'You',
-      d: 'The strategy may be fine. Something personal is making it hard to act on.'
-    }],
-    diagOut: 'Work on what actually needs work.',
-    scenLabel: 'What that looks like in practice',
-    scenarios: [{
-      n: '01',
-      surface: 'You need more customers.',
-      business: 'Acquisition may not work.',
-      you: 'You may have avoided properly selling for six months.'
-    }, {
-      n: '02',
-      surface: 'Everything still goes through you.',
-      business: 'Roles or processes may genuinely be poor.',
-      you: 'Letting go of control may feel much harder than it should.'
-    }, {
-      n: '03',
-      surface: 'You keep changing direction.',
-      business: 'The current strategy may actually be wrong.',
-      you: 'Every strategy may start looking wrong once commitment becomes uncomfortable.'
-    }, {
-      n: '04',
-      surface: 'You got what you wanted.',
-      business: 'The next version of the company may need to change.',
-      you: 'You may no longer want the thing your identity has been organised around wanting.'
-    }],
+    youBody: 'Avoidance, fear of visibility, rejection, self-doubt, perfectionism, control, identity, money, uncertainty, commitment.',
+    youNote: 'Sometimes the strategy is already good enough. The difficult bit is getting yourself to actually execute it.',
+    workUnder: "And sometimes both the tactical and the personal need to be worked together. That's usually where this gets interesting.",
+    lookLabel: 'What does the work actually look like?',
+    lookLead: 'You bring whatever is live.',
+    lookMaybes: ["Maybe you don't know how to get the next ten customers.", "Maybe you know exactly what conversation you need to have and you've been avoiding it for three months.", 'Maybe the company is growing but everything still has to go through you.', "Maybe something that used to matter enormously to you suddenly doesn't, and you're not sure what that means for the business.", "Maybe you've analysed the problem so thoroughly that analysis itself has become part of the problem."],
+    lookMid: "We work with what's actually there.",
+    lookClose: ["I may challenge the business decision. I may challenge the story you're telling yourself about it.", "Sometimes we'll make a plan. Sometimes we'll stay with something uncomfortable long enough to understand why it keeps showing up.", "The goal isn't to turn everything into psychology. It's to get a more accurate read on what is happening, then do something useful with it."],
     howLabel: 'How it starts',
     steps: [{
-      n: '01',
+      n: '1',
       title: 'Fit call',
       tag: '~15 min · free',
-      body: "We talk briefly about what you're building, what's going on and whether I seem like the right person for it. A fit check, not a free session."
+      body: "We talk briefly about what you're building, what's going on and whether I seem like the right person for it. It's a fit check, not a free session."
     }, {
-      n: '02',
+      n: '2',
       title: 'First session',
-      body: "We get properly into the problem. You don't need the “right” version of it — bring it as you see it. You leave with a clearer read and a concrete next move."
+      body: "We get properly into the problem. You don't need to arrive with the “right” version of it — bring it as you currently understand it. By the end, I want us to have a better read on what's actually going on and a concrete next move. Even if we decide not to continue, the session should be useful on its own."
     }, {
-      n: '03',
+      n: '3',
       title: 'If it makes sense, we continue',
-      body: 'Private, ongoing 1:1 work — for as long as it stays genuinely useful.'
+      body: 'Private, ongoing 1:1 work.'
     }],
     faqLabel: 'Common questions',
     faq: [{
@@ -1578,59 +1361,33 @@ const ONE = {
     h1: '1:1 Συνεργασία',
     lead: '1:1 συμβουλευτική προσανατολισμένη και στο business που χτίζεις αλλά και σε ό,τι φέρνεις εσύ στο τραπέζι σαν άνθρωπος που μπορεί να δημιουργεί εμπόδια.',
     intro: ['Κάποια προβλήματα θέλουν μια πρακτική business λύση. Άλλα χρειάζονται πιο βαθιά δουλειά. Και αρκετά συχνά, δεν είναι ξεκάθαρο ποιο από τα δύο έχεις μπροστά σου μέχρι να αρχίσουμε να το ξετυλίγουμε.', 'Στο 1:1 δεν χρειάζεται να διαλέξουμε από πριν.'],
-    bizLabel: 'Business',
+    workLabel: 'Τι μπορούμε να δουλέψουμε',
+    bizLabel: 'Το business',
+    bizBody: 'Offer, positioning, τιμές, πελάτες, πωλήσεις, προτεραιότητες, δύσκολες αποφάσεις, εκτέλεση.',
+    bizNote: 'Μερικές φορές χρειάζεσαι κάποιον να κοιτάξει το business και να σου πει: αυτό είναι το πρόβλημα, αυτό είναι θόρυβος και αυτό θα έκανα μετά.',
     youLabel: 'Εσύ',
-    bothLabel: 'Και τα δύο',
-    diagLabel: 'Πώς δουλεύουμε',
-    diagBring: 'Φέρνεις αυτό που συμβαίνει.',
-    diagWork: 'Βρίσκουμε τι πραγματικά έχουμε μπροστά μας.',
-    diagBranches: [{
-      k: 'Business',
-      d: 'Κάτι όντως χρειάζεται δουλειά στο business.'
-    }, {
-      k: 'Και τα δύο',
-      d: 'Business και ψυχολογία είναι μπλεγμένα μαζί.'
-    }, {
-      k: 'Εσύ',
-      d: 'Η στρατηγική μπορεί να είναι μια χαρά. Κάτι προσωπικό κάνει δύσκολο το να δράσεις.'
-    }],
-    diagOut: 'Δουλεύουμε αυτό που πραγματικά χρειάζεται δουλειά.',
-    scenLabel: 'Πώς φαίνεται στην πράξη',
-    scenarios: [{
-      n: '01',
-      surface: 'Χρειάζεσαι περισσότερους πελάτες.',
-      business: 'Η απόκτηση πελατών μπορεί να μη λειτουργεί.',
-      you: 'Μπορεί να απέφυγες να πουλήσεις σοβαρά για έξι μήνες.'
-    }, {
-      n: '02',
-      surface: 'Όλα περνούν ακόμα από εσένα.',
-      business: 'Οι ρόλοι ή οι διαδικασίες μπορεί όντως να είναι κακοί.',
-      you: 'Το να αφήσεις τον έλεγχο μπορεί να είναι πολύ πιο δύσκολο απ’ όσο θα έπρεπε.'
-    }, {
-      n: '03',
-      surface: 'Αλλάζεις συνέχεια κατεύθυνση.',
-      business: 'Η τρέχουσα στρατηγική μπορεί όντως να είναι λάθος.',
-      you: 'Κάθε στρατηγική μοιάζει λάθος μόλις η δέσμευση γίνει άβολη.'
-    }, {
-      n: '04',
-      surface: 'Πέτυχες αυτό που ήθελες.',
-      business: 'Η επόμενη εκδοχή της εταιρείας μπορεί να χρειάζεται αλλαγή.',
-      you: 'Μπορεί να μη θες πια αυτό γύρω από το οποίο έχει οργανωθεί η ταυτότητά σου.'
-    }],
+    youBody: 'Αποφυγή, φόβος έκθεσης, απόρριψη, αμφιβολία, τελειομανία, control, ταυτότητα, χρήματα, αβεβαιότητα, δέσμευση.',
+    youNote: 'Μερικές φορές το strategy είναι ήδη μια χαρά. Το δύσκολο πολλές φορές είναι να το εφαρμόσεις.',
+    workUnder: 'Και κάποιες φορές συμβαίνουν και τα δύο μαζί. Εκεί συνήθως αρχίζει το ενδιαφέρον κομμάτι της δουλειάς μας.',
+    lookLabel: 'Πώς είναι στην πράξη;',
+    lookLead: 'Φέρνεις αυτό που σε απασχολεί τώρα.',
+    lookMaybes: ['Μπορεί να μην ξέρεις πώς θα βρεις τους επόμενους πελάτες.', 'Μπορεί να ξέρεις ακριβώς ποια συζήτηση πρέπει να κάνεις και να την αποφεύγεις εδώ και τρεις μήνες.', 'Μπορεί το business να μεγαλώνει αλλά όλα να πρέπει ακόμα να περνούν από εσένα.', 'Μπορεί κάτι που κάποτε ήθελες πάρα πολύ να μη σε γεμίζει πια και να μην ξέρεις τι σημαίνει αυτό για όσα έχεις χτίσει.', 'Ή μπορεί να έχεις αναλύσει το πρόβλημα τόσο πολύ, που η ίδια η ανάλυση έχει γίνει μέρος του προβλήματος.'],
+    lookMid: 'Δουλεύουμε αυτό που υπάρχει πραγματικά μπροστά μας.',
+    lookClose: ['Μπορεί να αμφισβητήσω μια business απόφαση. Μπορεί να αμφισβητήσω την ιστορία που λες στον εαυτό σου γύρω από αυτήν.', 'Κάποιες φορές θα δουλέψουμε πάνω σε ένα πλάνο. Άλλες θα χρειαστεί να μείνουμε λίγο περισσότερο σε κάτι που αποφεύγεις, μέχρι να καταλάβουμε γιατί αυτό επιστρέφει συνέχεια.', 'Δεν ψάχνουμε ψυχολογική εξήγηση για τα πάντα. Προσπαθούμε να καταλάβουμε καλύτερα τι πραγματικά συμβαίνει και μετά να εξάγουμε κάτι χρήσιμο με αυτό.'],
     howLabel: 'Πώς ξεκινάμε',
     steps: [{
-      n: '01',
+      n: '1',
       title: 'Γνωριμία',
       tag: '~15 λεπτά · δωρεάν',
-      body: 'Μου λες πολύ σύντομα τι χτίζεις και τι συμβαίνει. Βλέπουμε αν ταιριάζουμε. Είναι γνωριμία, όχι δωρεάν συνεδρία.'
+      body: 'Μου λες πολύ σύντομα τι χτίζεις και τι συμβαίνει. Βλέπουμε αν ταιριάζουμε και αν είμαι ο σωστός άνθρωπος για σένα. Είναι γνωριμία, όχι δωρεάν συνεδρία.'
     }, {
-      n: '02',
+      n: '2',
       title: 'Πρώτη συνεδρία',
-      body: "Μπαίνουμε κανονικά στο θέμα. Δεν χρειάζεται η «σωστή» εκδοχή — φέρ' το όπως το βλέπεις. Φεύγεις με πιο καθαρή εικόνα και ένα συγκεκριμένο επόμενο βήμα."
+      body: "Εδώ μπαίνουμε κανονικά στο θέμα. Δεν χρειάζεται να έχεις καταλάβει ακριβώς ποιο είναι το πρόβλημα — φέρ' το όπως το βλέπεις τώρα. Μέχρι το τέλος θέλω να έχουμε πιο καθαρή εικόνα για το τι πραγματικά συμβαίνει και ένα συγκεκριμένο επόμενο βήμα. Ακόμα κι αν δεν συνεχίσουμε μαζί, η πρώτη συνεδρία θα σου δώσει τεράστια αξία."
     }, {
-      n: '03',
+      n: '3',
       title: 'Αν έχει νόημα, συνεχίζουμε',
-      body: 'Ιδιωτικά, 1:1 — για όσο παραμένει πραγματικά χρήσιμο.'
+      body: 'Ιδιωτικά, 1:1.'
     }],
     faqLabel: 'Συχνές ερωτήσεις',
     faq: [{
@@ -1650,101 +1407,29 @@ const ONE = {
     ctaSub: 'Θα βρούμε τι πραγματικά χρειάζεται.'
   }
 };
-
-// Vertical "how the work works" diagram, built from type — readable in seconds.
-function ServiceDiagram({
-  c,
-  mob
-}) {
-  const chev = React.createElement('div', {
-    'aria-hidden': 'true',
-    style: {
-      color: C.accent,
-      fontSize: '22px',
-      lineHeight: 1,
-      margin: '.9rem 0'
-    }
-  }, '↓');
-  const stage = (txt, big) => React.createElement('p', {
-    style: {
-      fontSize: big ? mob ? '20px' : '24px' : mob ? '17px' : '19px',
-      fontWeight: 600,
-      letterSpacing: '-.01em',
-      color: big ? C.accent : C.text,
-      margin: 0,
-      lineHeight: 1.35,
-      maxWidth: '30ch'
-    }
-  }, txt);
-  const branches = React.createElement('div', {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: mob ? '1fr' : 'repeat(3, 1fr)',
-      gap: mob ? '1.1rem' : '0',
-      width: '100%',
-      maxWidth: 760,
-      border: `1px solid ${C.border}`,
-      borderRadius: '14px',
-      overflow: 'hidden',
-      background: '#fff'
-    }
-  }, c.diagBranches.map((br, i) => React.createElement('div', {
-    key: i,
-    style: {
-      padding: mob ? '1.1rem 1.2rem' : '1.4rem 1.5rem',
-      borderLeft: !mob && i ? `1px solid ${C.border}` : 'none',
-      borderTop: mob && i ? `1px solid ${C.border}` : 'none'
-    }
-  }, React.createElement('div', {
-    style: {
-      fontSize: '11px',
-      fontWeight: 700,
-      letterSpacing: '.12em',
-      textTransform: 'uppercase',
-      color: C.accent,
-      marginBottom: '.5rem'
-    }
-  }, br.k), React.createElement('p', {
-    style: {
-      fontSize: '15px',
-      lineHeight: 1.55,
-      color: C.text,
-      margin: 0
-    }
-  }, br.d))));
-  return React.createElement('div', {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      textAlign: 'center'
-    }
-  }, stage(c.diagBring), chev, stage(c.diagWork), chev, branches, chev, stage(c.diagOut, true));
-}
 function OneToOnePage({
   lang = 'en'
 }) {
   const mob = useIsMobile();
   const c = ONE[lang] || ONE.en;
   const u = tUI(lang);
-  const pad = mob ? '0 1.1rem' : '0 2.5rem';
-  const inner = (children, st) => React.createElement('div', {
-    style: {
-      maxWidth: 1040,
-      margin: '0 auto',
-      padding: pad,
-      ...(st || {})
-    }
-  }, children);
-  const gap = mob ? '3.25rem' : '5.5rem';
-  const H2 = {
+  const mobPage = mob ? {
+    ...pageStyle,
+    padding: '1.5rem 1.1rem 5rem'
+  } : widePageStyle;
+  const headingStyle = {
     fontSize: mob ? '24px' : '30px',
     fontWeight: 500,
     letterSpacing: '-.02em',
     lineHeight: 1.25,
     color: C.text,
-    margin: '0 0 1.6rem'
+    margin: '0 0 1.3rem'
   };
+  const gap = React.createElement('div', {
+    style: {
+      marginTop: mob ? '3.25rem' : '5rem'
+    }
+  });
   const primaryBtn = {
     display: 'inline-block',
     textAlign: 'center',
@@ -1760,16 +1445,45 @@ function OneToOnePage({
     textDecoration: 'none',
     borderRadius: '2px'
   };
-
-  // ── Hero — copy + editorial portrait (different photo from homepage) ──
-  const heroText = React.createElement('div', {
-    style: mob ? {
-      width: '100%'
-    } : {
-      flex: '1.2 1 0',
-      minWidth: 0
+  const bizYouCard = (label, body, note) => React.createElement('div', {
+    className: 'hv-card',
+    style: {
+      ...cardBase,
+      padding: mob ? '1.3rem' : '1.7rem',
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '.85rem'
     }
   }, React.createElement('div', {
+    style: {
+      fontSize: '12px',
+      fontWeight: 700,
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: C.accent
+    }
+  }, label), React.createElement('p', {
+    style: {
+      fontSize: mob ? '15px' : '16px',
+      lineHeight: 1.6,
+      color: C.text,
+      margin: 0
+    }
+  }, body), React.createElement('p', {
+    style: {
+      fontSize: '15px',
+      lineHeight: 1.65,
+      color: C.muted,
+      fontStyle: 'italic',
+      margin: 0
+    }
+  }, note));
+  return React.createElement('main', {
+    style: mobPage
+  },
+  // ── Hero (short) ──
+  React.createElement('div', {
     style: {
       fontSize: '12px',
       fontWeight: 700,
@@ -1780,10 +1494,10 @@ function OneToOnePage({
     }
   }, u.role), React.createElement('h1', {
     style: {
-      fontSize: mob ? '28px' : '38px',
+      fontSize: mob ? '27px' : '36px',
       fontWeight: 500,
-      lineHeight: 1.15,
-      letterSpacing: '-.025em',
+      lineHeight: 1.2,
+      letterSpacing: '-.02em',
       color: C.text,
       margin: '0 0 1.1rem'
     }
@@ -1791,7 +1505,7 @@ function OneToOnePage({
     style: {
       ...leadStyle,
       fontSize: mob ? '19px' : '22px',
-      marginBottom: '1.4rem'
+      marginBottom: '1.5rem'
     }
   }, c.lead), c.intro.map((t, i) => React.createElement(P, {
     key: i,
@@ -1812,245 +1526,88 @@ function OneToOnePage({
       e.currentTarget.style.background = C.accent;
       e.currentTarget.style.borderColor = C.accent;
     }
-  }, u.book + ' →')));
-  const heroImg = React.createElement('div', {
-    style: mob ? {
-      width: '100%'
-    } : {
-      flex: '1 1 0',
-      minWidth: 0
-    }
-  }, React.createElement('img', {
-    src: 'https://aggelosmouzakitis.com/img/aggelos.webp',
-    alt: u.imgAlt,
-    loading: 'eager',
-    fetchPriority: 'high',
-    decoding: 'async',
-    style: {
-      width: '100%',
-      aspectRatio: mob ? '4 / 3' : '4 / 5',
-      objectFit: 'cover',
-      borderRadius: '14px',
-      display: 'block'
-    }
-  }));
-
-  // ── Four scenarios — alternating alignment/width, no card grid ──
-  const scenario = (s, i) => {
-    const rightAlign = i % 2 === 1;
-    return React.createElement('div', {
-      key: i,
-      style: {
-        maxWidth: mob ? '100%' : '68%',
-        marginLeft: !mob && rightAlign ? 'auto' : '0',
-        marginTop: i ? mob ? '2.5rem' : '3.25rem' : 0,
-        paddingTop: i ? '2rem' : 0,
-        borderTop: i ? `1px solid ${C.border}` : 'none',
-        textAlign: !mob && rightAlign ? 'right' : 'left'
-      }
-    }, React.createElement('div', {
-      style: {
-        fontSize: mob ? '13px' : '14px',
-        fontWeight: 700,
-        letterSpacing: '.14em',
-        color: C.accent,
-        marginBottom: '.6rem'
-      }
-    }, s.n), React.createElement('p', {
-      style: {
-        fontSize: mob ? '20px' : '25px',
-        fontWeight: 600,
-        letterSpacing: '-.01em',
-        lineHeight: 1.25,
-        color: C.text,
-        margin: '0 0 1rem'
-      }
-    }, s.surface), React.createElement('p', {
-      style: {
-        fontSize: mob ? '15px' : '16px',
-        lineHeight: 1.6,
-        color: C.text,
-        margin: '0 0 .4rem'
-      }
-    }, React.createElement('span', {
-      style: {
-        fontWeight: 700,
-        color: C.accent,
-        textTransform: 'uppercase',
-        fontSize: '12px',
-        letterSpacing: '.08em',
-        marginRight: '.5rem'
-      }
-    }, c.bizLabel), s.business), React.createElement('p', {
-      style: {
-        fontSize: mob ? '15px' : '16px',
-        lineHeight: 1.6,
-        color: C.muted,
-        margin: 0
-      }
-    }, React.createElement('span', {
-      style: {
-        fontWeight: 700,
-        color: C.accent,
-        textTransform: 'uppercase',
-        fontSize: '12px',
-        letterSpacing: '.08em',
-        marginRight: '.5rem'
-      }
-    }, c.youLabel), s.you));
-  };
-
-  // ── How it starts — numbered sequence, not cards ──
-  const seq = React.createElement('div', {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: mob ? '1fr' : 'repeat(3, 1fr)',
-      gap: mob ? '2rem' : '2.5rem',
-      marginTop: '2rem'
-    }
-  }, c.steps.map((s, i) => React.createElement('div', {
-    key: i,
-    style: {
-      borderTop: `2px solid ${C.accent}`,
-      paddingTop: '1rem'
-    }
-  }, React.createElement('div', {
-    style: {
-      fontSize: mob ? '30px' : '38px',
-      fontWeight: 600,
-      letterSpacing: '-.02em',
-      color: C.accent,
-      lineHeight: 1,
-      marginBottom: '.8rem'
-    }
-  }, s.n), React.createElement('div', {
+  }, u.book + ' →')), gap,
+  // ── What can we work on? (Business / You — main visual anchor) ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.workLabel), React.createElement('div', {
     style: {
       display: 'flex',
-      alignItems: 'baseline',
-      gap: '.6rem',
-      flexWrap: 'wrap',
-      marginBottom: '.5rem'
+      flexDirection: mob ? 'column' : 'row',
+      gap: mob ? '1rem' : '1.25rem'
     }
-  }, React.createElement('span', {
+  }, bizYouCard(c.bizLabel, c.bizBody, c.bizNote), bizYouCard(c.youLabel, c.youBody, c.youNote)), React.createElement('p', {
     style: {
-      fontSize: '17px',
-      fontWeight: 700,
-      color: C.text
-    }
-  }, s.title), s.tag && React.createElement('span', {
-    style: {
-      fontSize: '11px',
-      letterSpacing: '.05em',
-      textTransform: 'uppercase',
-      color: C.accent
-    }
-  }, s.tag)), React.createElement('p', {
-    style: {
-      fontSize: '15px',
+      fontSize: mob ? '17px' : '18px',
       lineHeight: 1.65,
-      color: C.muted,
-      margin: 0
-    }
-  }, s.body))));
-  return React.createElement('main', {
-    style: {
-      width: '100%',
       color: C.text,
-      fontFamily: 'inherit'
+      margin: '1.6rem 0 0',
+      maxWidth: '62ch'
     }
-  },
-  // Hero
-  React.createElement('section', {
+  }, c.workUnder), gap,
+  // ── What does the work actually look like? (conversational) ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.lookLabel), React.createElement('p', {
     style: {
-      paddingTop: mob ? '2rem' : '4rem'
+      fontSize: mob ? '18px' : '20px',
+      fontWeight: 600,
+      color: C.text,
+      margin: '0 0 1.4rem',
+      lineHeight: 1.5
     }
-  }, inner(React.createElement('div', {
-    style: mob ? {
+  }, c.lookLead), React.createElement('div', {
+    style: {
+      borderLeft: `2px solid ${C.accent}`,
+      paddingLeft: mob ? '1.1rem' : '1.5rem',
+      margin: '0 0 1.6rem',
       display: 'flex',
       flexDirection: 'column',
-      gap: '1.75rem'
-    } : {
-      display: 'flex',
-      gap: '3.5rem',
-      alignItems: 'center'
+      gap: '.9rem'
     }
-  }, heroText, heroImg))),
-  // Service diagram
-  React.createElement('section', {
+  }, c.lookMaybes.map((t, i) => React.createElement('p', {
+    key: i,
     style: {
-      paddingTop: gap
+      fontSize: mob ? '16px' : '17px',
+      lineHeight: 1.6,
+      color: C.text,
+      margin: 0
     }
-  }, inner(React.createElement(React.Fragment, null, React.createElement('div', {
+  }, t))), React.createElement('p', {
     style: {
-      fontSize: mob ? '13px' : '14px',
-      fontWeight: 700,
-      letterSpacing: '.14em',
-      textTransform: 'uppercase',
-      color: C.muted,
-      textAlign: 'center',
-      marginBottom: '2rem'
+      fontSize: mob ? '17px' : '18px',
+      fontWeight: 600,
+      color: C.text,
+      margin: '0 0 1.4rem'
     }
-  }, c.diagLabel), React.createElement(ServiceDiagram, {
-    c,
-    mob
-  })))),
-  // Four scenarios
-  React.createElement('section', {
+  }, c.lookMid), c.lookClose.map((t, i) => React.createElement('p', {
+    key: i,
     style: {
-      paddingTop: gap
+      ...pStyle,
+      fontSize: mob ? '16px' : '17px',
+      marginBottom: '1.2rem'
     }
-  }, inner(React.createElement(React.Fragment, null, React.createElement('h2', {
-    style: H2
-  }, c.scenLabel), React.createElement('div', {
+  }, t)), gap,
+  // ── How it starts (compact numbered cards) ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.howLabel), React.createElement(StepCards, {
+    mob,
+    steps: c.steps
+  }), gap,
+  // ── Common questions ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.faqLabel), React.createElement('div', {
     style: {
-      marginTop: '1.5rem'
+      marginTop: '.2rem'
     }
-  }, c.scenarios.map((s, i) => scenario(s, i)))))),
-  // Full-width photography pause (no text)
-  React.createElement('section', {
-    style: {
-      marginTop: gap
-    }
-  }, React.createElement('img', {
-    src: 'https://aggelosmouzakitis.com/img/aggelos-homepage.webp',
-    alt: '',
-    'aria-hidden': 'true',
-    loading: 'lazy',
-    decoding: 'async',
-    style: {
-      width: '100%',
-      height: mob ? '220px' : '400px',
-      objectFit: 'cover',
-      objectPosition: 'center 30%',
-      display: 'block'
-    }
-  })),
-  // How it starts
-  React.createElement('section', {
-    style: {
-      paddingTop: gap
-    }
-  }, inner(React.createElement(React.Fragment, null, React.createElement('h2', {
-    style: H2
-  }, c.howLabel), seq))),
-  // FAQ
-  React.createElement('section', {
-    style: {
-      paddingTop: gap
-    }
-  }, inner(React.createElement(React.Fragment, null, React.createElement('h2', {
-    style: H2
-  }, c.faqLabel), React.createElement(FaqAccordion, {
+  }, React.createElement(FaqAccordion, {
     items: c.faq,
     mob
-  })))),
-  // Final CTA + footer
-  React.createElement('section', {
-    style: {
-      paddingTop: mob ? '2.5rem' : '3.5rem',
-      paddingBottom: mob ? '4rem' : '6rem'
-    }
-  }, inner(React.createElement(React.Fragment, null, React.createElement(FinalCta, {
+  })),
+  // ── Final CTA ──
+  React.createElement(FinalCta, {
     lang,
     mob,
     heading: c.ctaHeading,
@@ -2058,7 +1615,7 @@ function OneToOnePage({
   }), React.createElement(SiteFooter, {
     mob,
     lang
-  })))));
+  }));
 }
 
 // ─── ABOUT PAGE (bilingual) ──────────────────────────────────────────────────
