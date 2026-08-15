@@ -20,6 +20,25 @@ const RETAINED = [
   '/getinterviewed/',
   '/ask-me-anything/',
 ];
+// Restored English SEO landing pages (persona + specialty). Single search intent
+// each; no genuine EL equivalent, so no cross-language hreflang.
+const EN_SEO = [
+  '/founders/',
+  '/solopreneurs/',
+  '/therapy-for-founders/',
+  '/therapy-for-executives/',
+  '/imposter-syndrome-therapy/',
+  '/executive-burnout-therapy/',
+  '/career-transition-therapy/',
+];
+// Greek SEO landing pages under /el/ (mined from the retired .gr site). Single
+// search intent each; no genuine EN equivalent, so no cross-language hreflang.
+const EL_SEO = [
+  '/el/executive-coaching/',
+  '/el/burnout/',
+  '/el/career-coaching/',
+  '/el/imposter-syndrome/',
+];
 
 const posts = JSON.parse(fs.readFileSync(path.join(ROOT, 'blog/posts.json'), 'utf8'));
 
@@ -45,6 +64,10 @@ for (const p of CORE.slice(1)) parts.push(pairedUrl(p, p === '/1-to-1/' ? '0.9' 
 parts.push(plainUrl(O + BLOG_INDEX, '0.9', 'weekly'));
 // Retained SEO pages
 for (const p of RETAINED) parts.push(plainUrl(O + p, '0.6'));
+// Restored English SEO landing pages
+for (const p of EN_SEO) parts.push(plainUrl(O + p, '0.6'));
+// Greek SEO landing pages
+for (const p of EL_SEO) parts.push(plainUrl(O + p, '0.6'));
 // Blog posts
 for (const post of posts) parts.push(plainUrl(O + '/blog/' + post.slug + '/', '0.7'));
 
@@ -55,4 +78,4 @@ ${parts.join('\n')}
 `;
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml);
 const count = (xml.match(/<loc>/g) || []).length;
-console.log(`sitemap.xml written — ${count} URLs (${CORE.length * 2} core, 1 blog index, ${RETAINED.length} retained, ${posts.length} posts)`);
+console.log(`sitemap.xml written — ${count} URLs (${CORE.length * 2} core, 1 blog index, ${RETAINED.length} retained, ${EN_SEO.length} en-seo, ${EL_SEO.length} el-seo, ${posts.length} posts)`);

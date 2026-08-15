@@ -50,7 +50,7 @@ const SB_CORE_PATHS = {
 const sbPath = (id, lang) => SB_CORE_PATHS[id] && SB_CORE_PATHS[id][lang] || SB_CORE_PATHS[id] && SB_CORE_PATHS[id].en || '/';
 const SB_LABELS = {
   en: {
-    role: 'Business Advisor + Licensed Psychotherapist',
+    role: 'Business Growth Advisor + Licensed Psychotherapist',
     home: 'Home',
     workWith: 'Work with me',
     oneToOne: '1:1',
@@ -66,7 +66,7 @@ const SB_LABELS = {
     bookShort: 'Book'
   },
   el: {
-    role: 'Business Advisor + Ψυχοθεραπευτής',
+    role: 'Business Growth Advisor + Ψυχοθεραπευτής',
     home: 'Αρχική',
     workWith: 'Συνεργασία',
     oneToOne: '1:1',

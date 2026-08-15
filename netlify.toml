@@ -17,89 +17,22 @@
   status = 301
   force = true
 
-# founders (persona) → 1:1
+# el/how-i-work → el/1-to-1 (Greek method page merged into the Greek offer page)
 [[redirects]]
-  from = "/founders"
-  to = "/1-to-1/"
+  from = "/el/how-i-work"
+  to = "/el/1-to-1/"
   status = 301
   force = true
 [[redirects]]
-  from = "/founders/*"
-  to = "/1-to-1/"
-  status = 301
-  force = true
-
-# solopreneurs (persona) → home (best copy became the homepage, brief §37)
-[[redirects]]
-  from = "/solopreneurs"
-  to = "/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/solopreneurs/*"
-  to = "/"
+  from = "/el/how-i-work/*"
+  to = "/el/1-to-1/"
   status = 301
   force = true
 
-# therapy-for-founders → 1:1 (brand no longer "therapy for founders")
-[[redirects]]
-  from = "/therapy-for-founders"
-  to = "/1-to-1/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/therapy-for-founders/*"
-  to = "/1-to-1/"
-  status = 301
-  force = true
-
-# therapy-for-executives → 1:1 (executives not a primary audience)
-[[redirects]]
-  from = "/therapy-for-executives"
-  to = "/1-to-1/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/therapy-for-executives/*"
-  to = "/1-to-1/"
-  status = 301
-  force = true
-
-# imposter-syndrome-therapy → 1:1 (service-category IA removed; interim)
-[[redirects]]
-  from = "/imposter-syndrome-therapy"
-  to = "/1-to-1/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/imposter-syndrome-therapy/*"
-  to = "/1-to-1/"
-  status = 301
-  force = true
-
-# executive-burnout-therapy → 1:1 (interim)
-[[redirects]]
-  from = "/executive-burnout-therapy"
-  to = "/1-to-1/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/executive-burnout-therapy/*"
-  to = "/1-to-1/"
-  status = 301
-  force = true
-
-# career-transition-therapy → 1:1 (interim)
-[[redirects]]
-  from = "/career-transition-therapy"
-  to = "/1-to-1/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/career-transition-therapy/*"
-  to = "/1-to-1/"
-  status = 301
-  force = true
+# NOTE: /founders/, /solopreneurs/, /therapy-for-founders/, /therapy-for-executives/,
+# /imposter-syndrome-therapy/, /executive-burnout-therapy/ and /career-transition-therapy/
+# were previously 301'd here. They are now restored as indexable SEO landing pages
+# (200, self-canonical, in sitemap.xml + prerender), so their redirects were removed.
 
 # ─── Pre-existing retired pages ──────────────────────────────────────────────
 [[redirects]]

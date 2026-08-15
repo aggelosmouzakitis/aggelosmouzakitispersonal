@@ -144,7 +144,7 @@ const FOOTER_COLS_BY_LANG = {
     ] },
   ],
 };
-const FOOTER_COPYLINE = { en: '© Aggelos Mouzakitis · Business Advisor + Licensed Psychotherapist', el: '© Άγγελος Μουζακίτης · Business Advisor + Ψυχοθεραπευτής' };
+const FOOTER_COPYLINE = { en: '© Aggelos Mouzakitis · Business Growth Advisor + Licensed Psychotherapist', el: '© Άγγελος Μουζακίτης · Business Growth Advisor + Ψυχοθεραπευτής' };
 
 function SiteFooter({ mob, lang = 'en' }) {
   const FOOTER_COLS = FOOTER_COLS_BY_LANG[lang] || FOOTER_COLS_BY_LANG.en;
@@ -257,7 +257,7 @@ function LatestWriting({ mob, lang = 'en' }) {
 // ─── SHARED UI STRINGS + CTA HELPERS (bilingual) ─────────────────────────────
 const UI = {
   en: {
-    role: 'Business Advisor + Licensed Psychotherapist',
+    role: 'Business Growth Advisor + Licensed Psychotherapist',
     seeOneToOne: 'See how 1:1 works',
     book: 'Book a fit call',
     readMore: 'Read more client reflections →',
@@ -265,7 +265,7 @@ const UI = {
     imgAlt: 'Aggelos Mouzakitis speaking on stage',
   },
   el: {
-    role: 'Business Advisor + Ψυχοθεραπευτής',
+    role: 'Business Growth Advisor + Ψυχοθεραπευτής',
     seeOneToOne: 'Δες την 1:1 συνεργασία',
     book: 'Κλείσε μια γνωριμία',
     readMore: 'Διάβασε κι άλλες σκέψεις πελατών →',
@@ -435,18 +435,18 @@ const HOME = {
   },
   el: {
     promise: 'Χτίζεις κάτι δικό σου; Ας το πάμε παρακάτω.',
-    tagline: 'Βρίσκουμε τι χρειάζεται η επιχείρηση και τι σε εμποδίζει να το πετύχεις. Business και ψυχολογία, μαζί.',
-    introA: 'Πέρασα 18+ χρόνια στο product και το growth, χτίζοντας δικές μου εταιρείες και συμβουλεύοντας περισσότερες από 500. Παράλληλα εκπαιδεύτηκα ως ψυχοθεραπευτής.',
-    introB: 'Σήμερα δουλεύω 1:1 και σε groups με ανθρώπους που χτίζουν κάτι δικό τους.',
-    introC: 'Μερικές φορές το πρόβλημα είναι καθαρά business. Μερικές φορές είναι πιο περίπλοκο και περιλαμβάνει και εσένα. Και αρκετά συχνά, τα δύο μπλέκονται τόσο που δεν είναι καθόλου ξεκάθαρο πού ακριβώς βρίσκεται το πρόβλημα.',
+    tagline: 'Ξεκαθαρίζουμε τι χρειάζεται το business και τι σε κρατάει πίσω. Business και ψυχολογία, μαζί.',
+    introA: 'Πέρασα 18+ χρόνια στο product και το growth, χτίζοντας δικές μου εταιρείες και συμβουλεύοντας πάνω από 500 επιχειρήσεις. Παράλληλα εκπαιδεύτηκα ως ψυχοθεραπευτής.',
+    introB: 'Σήμερα δουλεύω 1:1 και με ομάδες ανθρώπων που χτίζουν κάτι δικό τους.',
+    introC: 'Μερικές φορές το πρόβλημα είναι καθαρά business. Μερικές φορές είναι πιο περίπλοκο και έχει να κάνει και με εσένα. Και αρκετά συχνά, τα δύο μπλέκονται τόσο που δεν είναι καθόλου ξεκάθαρο πού ακριβώς είναι το πρόβλημα.',
     recogLabel: 'Μήπως σου θυμίζει κάτι;',
     recog: [
       'Θέλεις καιρό να ξεκινήσεις κάτι. Ακόμα ετοιμάζεσαι.',
-      "Χρειάζεσαι περισσότερους πελάτες. Παρ' όλα αυτά, πάντα βρίσκεται κάτι πιο επείγον από το να πουλήσεις.",
+      "Χρειάζεσαι περισσότερους πελάτες. Κι όμως, πάντα βρίσκεται κάτι πιο επείγον από το να πουλήσεις.",
       'Ξέρεις ότι χρεώνεις λίγο. Η τιμή, όμως, παραμένει ίδια.',
       'Κάθε φορά που η κατεύθυνση που διάλεξες δυσκολεύει, εμφανίζεται μια καινούρια που ξαφνικά μοιάζει καλύτερη.',
-      'Η επιχείρηση εξαρτάται από εσένα σχεδόν για τα πάντα.',
-      'Στα χαρτιά, τα πράγματα πάνε καλά. Εσύ, όμως, νιώθεις όλο και λιγότερο σύνδεση με αυτό που χτίζεις.',
+      'Η επιχείρηση εξαρτάται από εσένα σχεδόν για τα πάντα. Δεν ξέρεις πόσο από αυτό είναι όντως απαραίτητο.',
+      'Στα χαρτιά, τα πράγματα πάνε καλά. Εσύ, όμως, νιώθεις όλο και λιγότερο συνδεδεμένος με αυτό που χτίζεις.',
       'Έφτασες κάπου που ήθελες πολύ. Όμως τώρα δεν ξέρεις αν θέλεις πραγματικά να πας στο επόμενο επίπεδο ή απλώς πιστεύεις ότι θα έπρεπε να το θέλεις.',
       'Καταλαβαίνεις πολύ καλά τα μοτίβα σου. Παραδόξως, συνεχίζεις να τα επαναλαμβάνεις.',
     ],
@@ -457,7 +457,7 @@ const HOME = {
       'Το offer σου είναι ακόμα αδύναμο.',
       'Το positioning δεν είναι αρκετά ξεκάθαρο.',
       'Δεν έχεις σταθερό τρόπο να βρίσκεις πελάτες.',
-      'Η τιμολόγηση δεν βγάζει νόημα.',
+      'Το pricing σου δεν βγάζει νόημα.',
       'Κυνηγάς πέντε πράγματα ταυτόχρονα.',
       'Δεν ξέρεις ποια κίνηση έχει πραγματικά σημασία τώρα.',
     ],
@@ -466,21 +466,21 @@ const HOME = {
       "Ένα «όχι» σε χτυπάει πιο προσωπικά απ' όσο θα ήθελες.",
       'Ο φόβος έκθεσης σε κρατά πίσω, παρότι ξέρεις ότι χωρίς έκθεση δύσκολα έρχεται ζήτηση.',
       'Αλλάζεις κατεύθυνση πριν προλάβει να δουλέψει η προηγούμενη.',
-      "Η αξία σου έχει συνδεθεί λίγο περισσότερο απ' όσο θα ήθελες με το πώς πάει η δουλειά.",
+      "Το πώς πάει το business επηρεάζει λίγο περισσότερο απ' όσο θα ήθελες το πώς βλέπεις τον εαυτό σου.",
       'Μπορείς να εξηγήσεις τέλεια πού είναι το πρόβλημα, αλλά δεν περνάς στη δράση.',
     ],
-    bvyUnder: 'Κάποιες φορές η απάντηση είναι μια καλύτερη business προσέγγιση ή ένα διαφορετικό τακτικό πλάνο. Άλλες φορές χρειάζεται να πάμε πιο βαθιά — και αρκετά συχνά πρέπει να δουλέψουμε και τα δύο μέχρι να εντοπίσουμε πού είναι το πρόβλημα.',
-    oneRelHead: 'Μία συνεργασία όπου χωράνε και το business και εσύ.',
+    bvyUnder: 'Κάποιες φορές η απάντηση είναι μια καλύτερη business προσέγγιση ή ένα διαφορετικό πρακτικό πλάνο. Άλλες φορές χρειάζεται να πάμε πιο βαθιά — και αρκετά συχνά πρέπει να δουλέψουμε και τα δύο μέχρι να ξεκαθαρίσει ποιο από τα δύο κρατάει πίσω το άλλο.',
+    oneRelHead: 'Μία συνεργασία όπου δουλεύουμε και το business και ό,τι δικό σου μπαίνει στη μέση.',
     oneRelBizList: 'Offer, positioning, τιμές, πελάτες, πωλήσεις, προτεραιότητες, αποφάσεις, εκτέλεση.',
     oneRelBizQ: 'Τι χρειάζεται πραγματικά το business τώρα;',
-    oneRelYouList: 'Αποφυγή, απόρριψη, φόβος έκθεσης, τελειομανία, χρήματα, αμφιβολία, control, ταυτότητα, αβεβαιότητα, δέσμευση.',
+    oneRelYouList: 'Αποφυγή, απόρριψη, φόβος έκθεσης, τελειομανία, χρήματα, αμφιβολία, ανάγκη για έλεγχο, ταυτότητα, αβεβαιότητα, δέσμευση.',
     oneRelYouQ: 'Τι σε δυσκολεύει να φτάσεις εκεί που θέλεις;',
-    oneRelNote1: 'Κάποιες φορές θα μιλήσουμε σχεδόν μόνο για το business. Άλλες, το tactical κομμάτι μπορεί να περιμένει λίγο γιατί υπάρχει κάτι σημαντικότερο από κάτω.',
+    oneRelNote1: 'Κάποιες φορές θα μιλήσουμε σχεδόν μόνο για το business. Άλλες, το πρακτικό κομμάτι μπορεί να περιμένει λίγο γιατί υπάρχει κάτι πιο σημαντικό που πρέπει να δούμε πρώτα.',
     oneRelNote2: 'Δεν χρειάζεται να έχεις όλες τις απαντήσεις προκειμένου να μιλήσουμε.',
     faqLabel: 'Συχνές ερωτήσεις',
     faq: [
-      { q: 'Πρέπει να έχω ήδη επιχείρηση;', a: 'Όχι. Μπορεί να ξεκινάς τώρα, να δουλεύεις ως freelancer ή consultant, να χτίζεις κάτι παράλληλα με τη δουλειά σου ή να έχεις ήδη μια κανονική επιχείρηση. Το κοινό είναι ότι προσπαθείς σοβαρά να χτίσεις κάτι δικό σου.' },
-      { q: 'Είναι ψυχοθεραπεία ή συμβουλευτική επιχειρήσεων;', a: 'Είναι και τα δύο παράλληλα. Είμαι business advisor και ψυχοθεραπευτής. Αν το πρόβλημα είναι το business, δουλεύουμε το business. Αν μπαίνει κάτι δικό σου στη μέση, μπορούμε να δουλέψουμε κι αυτό.' },
+      { q: 'Πρέπει να έχω ήδη επιχείρηση;', a: 'Όχι. Μπορεί να ξεκινάς τώρα, να δουλεύεις ως freelancer ή consultant, να χτίζεις κάτι παράλληλα με τη δουλειά σου ή να τρέχεις ήδη τη δική σου επιχείρηση. Το κοινό είναι ότι προσπαθείς σοβαρά να χτίσεις κάτι δικό σου.' },
+      { q: 'Είναι ψυχοθεραπεία ή συμβουλευτική επιχειρήσεων;', a: 'Είναι και τα δύο παράλληλα. Είμαι business growth advisor και ψυχοθεραπευτής. Αν το πρόβλημα είναι το business, δουλεύουμε το business. Αν μπαίνει κάτι δικό σου στη μέση, μπορούμε να δουλέψουμε κι αυτό.' },
       { q: 'Κι αν δεν ξέρω ποιο από τα δύο είναι;', a: 'Δεν χρειάζεται να έρθεις με διάγνωση. Το να ξεκαθαρίσουμε τι πραγματικά συμβαίνει είναι μέρος της δουλειάς.' },
     ],
     finalHeading: 'Το να χτίσεις κάτι δικό σου είναι ήδη αρκετά δύσκολο.',
@@ -616,23 +616,23 @@ const ONE = {
   },
   el: {
     h1: '1:1 Συνεργασία',
-    lead: '1:1 συμβουλευτική προσανατολισμένη και στο business που χτίζεις αλλά και σε ό,τι φέρνεις εσύ στο τραπέζι σαν άνθρωπος που μπορεί να δημιουργεί εμπόδια.',
+    lead: 'Δουλεύουμε 1:1 πάνω στο business που χτίζεις και σε ό,τι δικό σου έχει μπλεχτεί μαζί του.',
     intro: [
-      'Κάποια προβλήματα θέλουν μια πρακτική business λύση. Άλλα χρειάζονται πιο βαθιά δουλειά. Και αρκετά συχνά, δεν είναι ξεκάθαρο ποιο από τα δύο έχεις μπροστά σου μέχρι να αρχίσουμε να το ξετυλίγουμε.',
+      'Κάποια προβλήματα θέλουν μια πρακτική λύση στο business. Άλλα χρειάζονται πιο βαθιά δουλειά. Και αρκετά συχνά, δεν είναι ξεκάθαρο ποιο από τα δύο έχεις μπροστά σου μέχρι να μπούμε στο θέμα.',
       'Στο 1:1 δεν χρειάζεται να διαλέξουμε από πριν.',
     ],
     workLabel: 'Τι μπορούμε να δουλέψουμε',
     bizLabel: 'Το business',
     bizBody: 'Offer, positioning, τιμές, πελάτες, πωλήσεις, προτεραιότητες, δύσκολες αποφάσεις, εκτέλεση.',
-    bizNote: 'Μερικές φορές χρειάζεσαι κάποιον να κοιτάξει το business και να σου πει: αυτό είναι το πρόβλημα, αυτό είναι θόρυβος και αυτό θα έκανα μετά.',
+    bizNote: 'Μερικές φορές χρειάζεσαι κάποιον να κοιτάξει το business και να σου πει: αυτό είναι το πρόβλημα, αυτό είναι θόρυβος και, στη θέση σου, από εδώ θα ξεκινούσα.',
     youLabel: 'Εσύ',
-    youBody: 'Αποφυγή, φόβος έκθεσης, απόρριψη, αμφιβολία, τελειομανία, control, ταυτότητα, χρήματα, αβεβαιότητα, δέσμευση.',
-    youNote: 'Μερικές φορές το strategy είναι ήδη μια χαρά. Το δύσκολο πολλές φορές είναι να το εφαρμόσεις.',
-    workUnder: 'Και κάποιες φορές συμβαίνουν και τα δύο μαζί. Εκεί συνήθως αρχίζει το ενδιαφέρον κομμάτι της δουλειάς μας.',
+    youBody: 'Αποφυγή, φόβος έκθεσης, απόρριψη, αμφιβολία, τελειομανία, ανάγκη για έλεγχο, ταυτότητα, χρήματα, αβεβαιότητα, δέσμευση.',
+    youNote: 'Μερικές φορές η στρατηγική είναι ήδη αρκετά καλή. Το δύσκολο πολλές φορές είναι να την εφαρμόσεις.',
+    workUnder: 'Και κάποιες φορές συμβαίνουν και τα δύο μαζί. Εκεί συνήθως είναι που μπλέκει το πράγμα.',
     lookLabel: 'Πώς είναι στην πράξη;',
     lookLead: 'Φέρνεις αυτό που σε απασχολεί τώρα.',
     lookMaybes: [
-      'Μπορεί να μην ξέρεις πώς θα βρεις τους επόμενους πελάτες.',
+      'Μπορεί να μην ξέρεις πώς θα βρεις τους επόμενους δέκα πελάτες.',
       'Μπορεί να ξέρεις ακριβώς ποια συζήτηση πρέπει να κάνεις και να την αποφεύγεις εδώ και τρεις μήνες.',
       'Μπορεί το business να μεγαλώνει αλλά όλα να πρέπει ακόμα να περνούν από εσένα.',
       'Μπορεί κάτι που κάποτε ήθελες πάρα πολύ να μη σε γεμίζει πια και να μην ξέρεις τι σημαίνει αυτό για όσα έχεις χτίσει.',
@@ -640,25 +640,25 @@ const ONE = {
     ],
     lookMid: 'Δουλεύουμε αυτό που υπάρχει πραγματικά μπροστά μας.',
     lookClose: [
-      'Μπορεί να αμφισβητήσω μια business απόφαση. Μπορεί να αμφισβητήσω την ιστορία που λες στον εαυτό σου γύρω από αυτήν.',
-      'Κάποιες φορές θα δουλέψουμε πάνω σε ένα πλάνο. Άλλες θα χρειαστεί να μείνουμε λίγο περισσότερο σε κάτι που αποφεύγεις, μέχρι να καταλάβουμε γιατί αυτό επιστρέφει συνέχεια.',
+      'Μπορεί να αμφισβητήσω μια απόφαση που έχεις πάρει για το business. Μπορεί να αμφισβητήσω τον τρόπο που την έχεις εξηγήσει στον εαυτό σου.',
+      'Κάποιες φορές θα δουλέψουμε πάνω σε ένα πλάνο. Άλλες θα χρειαστεί να μείνουμε λίγο περισσότερο σε κάτι άβολο, μέχρι να καταλάβουμε γιατί συνεχίζεις να το αποφεύγεις.',
       'Δεν ψάχνουμε ψυχολογική εξήγηση για τα πάντα. Προσπαθούμε να καταλάβουμε καλύτερα τι πραγματικά συμβαίνει και μετά να εξάγουμε κάτι χρήσιμο με αυτό.',
     ],
     howLabel: 'Πώς ξεκινάμε',
     steps: [
-      { n: '1', title: 'Γνωριμία', tag: '~15 λεπτά · δωρεάν', body: 'Μου λες πολύ σύντομα τι χτίζεις και τι συμβαίνει. Βλέπουμε αν ταιριάζουμε και αν είμαι ο σωστός άνθρωπος για σένα. Είναι γνωριμία, όχι δωρεάν συνεδρία.' },
+      { n: '1', title: 'Γνωριμία', tag: '~15 λεπτά · δωρεάν', body: 'Μου λες πολύ σύντομα τι χτίζεις και τι συμβαίνει. Βλέπουμε αν ταιριάζουμε και αν μπορώ πραγματικά να βοηθήσω. Είναι γνωριμία, όχι δωρεάν συνεδρία.' },
       { n: '2', title: 'Πρώτη συνεδρία', body: "Εδώ μπαίνουμε κανονικά στο θέμα. Δεν χρειάζεται να έχεις καταλάβει ακριβώς ποιο είναι το πρόβλημα — φέρ' το όπως το βλέπεις τώρα. Μέχρι το τέλος θέλω να έχουμε πιο καθαρή εικόνα για το τι πραγματικά συμβαίνει και ένα συγκεκριμένο επόμενο βήμα. Ακόμα κι αν δεν συνεχίσουμε μαζί, η πρώτη συνεδρία θα σου δώσει τεράστια αξία." },
       { n: '3', title: 'Αν έχει νόημα, συνεχίζουμε', body: 'Ιδιωτικά, 1:1.' },
     ],
     faqLabel: 'Συχνές ερωτήσεις',
     faq: [
-      { q: 'Είναι ψυχοθεραπεία;', a: 'Κάποιες φορές η δουλειά μας θα μπει σε θέματα που είναι ξεκάθαρα ψυχοθεραπευτικά. Είμαι εκπαιδευμένος και εγγεγραμμένος ψυχοθεραπευτής, οπότε δεν χρειάζεται να σταματήσουμε επειδή το θέμα έγινε προσωπικό. Από την άλλη, εδώ το business δεν είναι απλώς το context. Είναι κι αυτό μέρος της δουλειάς.' },
-      { q: 'Είναι business coaching;', a: 'Ναι αλλά όχι αποκλειστικά. Θα έχω άποψη για το business. Μπορούμε να δουλέψουμε κανονικά offer, positioning, τιμές, πελάτες ή μια δύσκολη απόφαση που έχεις μπροστά σου. Δεν έχω μια έτοιμη μέθοδο από την οποία περνάω όλους τους πελάτες.' },
+      { q: 'Είναι ψυχοθεραπεία;', a: 'Κάποιες φορές η δουλειά μας θα μπει σε θέματα που είναι ξεκάθαρα ψυχοθεραπευτικά. Έχω MSc Integrative Counselling & Psychotherapy και είμαι εγγεγραμμένο μέλος του BACP, οπότε δεν χρειάζεται να σταματήσουμε επειδή το θέμα έγινε προσωπικό. Από την άλλη, εδώ το business δεν είναι απλώς το context. Είναι κι αυτό μέρος της δουλειάς.' },
+      { q: 'Είναι business coaching;', a: 'Ναι αλλά όχι αποκλειστικά. Θα έχω άποψη για το business. Μπορούμε να δουλέψουμε κανονικά πάνω σε offer, positioning, τιμές, πελάτες ή μια δύσκολη απόφαση που έχεις μπροστά σου. Δεν έχω μια έτοιμη μέθοδο που εφαρμόζω σε όλους.' },
       { q: 'Κι αν δεν ξέρω αν το πρόβλημα είναι business ή ψυχολογικό;', a: 'Δεν χρειάζεται να ξέρεις. Αρκετές φορές, αυτό είναι το πρώτο πράγμα που πρέπει να ξεκαθαρίσουμε.' },
-      { q: 'Πρέπει να έχω ήδη επιχείρηση;', a: 'Όχι. Μπορεί να ξεκινάς τώρα, να χτίζεις κάτι παράλληλα με τη δουλειά σου, να είσαι freelancer ή consultant, ή να τρέχεις ήδη μια κανονική επιχείρηση. Το σημαντικό είναι να προσπαθείς πραγματικά να χτίσεις κάτι δικό σου.' },
+      { q: 'Πρέπει να έχω ήδη επιχείρηση;', a: 'Όχι. Μπορεί να ξεκινάς τώρα, να χτίζεις κάτι παράλληλα με τη δουλειά σου, να είσαι freelancer ή consultant, ή να τρέχεις ήδη τη δική σου επιχείρηση. Το σημαντικό είναι να προσπαθείς πραγματικά να χτίσεις κάτι δικό σου.' },
     ],
     ctaHeading: 'Φέρε το πρόβλημα όπως το βλέπεις τώρα.',
-    ctaSub: 'Θα βρούμε τι πραγματικά χρειάζεται.',
+    ctaSub: 'Θα βρούμε τι χρειάζεται να γίνει.',
   },
 };
 
@@ -730,7 +730,7 @@ function OneToOnePage({ lang = 'en' }) {
 const ABOUT = {
   en: {
     h1: 'About',
-    role: 'Business Advisor + Licensed Psychotherapist',
+    role: 'Business Growth Advisor + Licensed Psychotherapist',
     creds: 'MSc Integrative Counselling & Psychotherapy (University of Derby) · BACP-registered · Based in Ireland, working globally',
     lead: 'Two careers that kept running into the same problem.',
     intro: [
@@ -771,28 +771,28 @@ const ABOUT = {
   },
   el: {
     h1: 'Λίγα για μένα',
-    role: 'Business Advisor + Ψυχοθεραπευτής',
+    role: 'Business Growth Advisor + Ψυχοθεραπευτής',
     creds: 'MSc Integrative Counselling & Psychotherapy (University of Derby) · Εγγεγραμμένος στο BACP · Έδρα στην Ιρλανδία, δουλεύω παγκόσμια',
-    lead: 'Δύο καριέρες που κατέληγαν να συναντιούνται συνέχεια.',
+    lead: 'Δύο καριέρες που όλο κατέληγαν στο ίδιο σημείο.',
     intro: [
       'Πέρασα 18+ χρόνια στην τεχνολογία, κυρίως στο product και το growth. Έχτισα δικές μου εταιρείες, δούλεψα σε startups και μεγάλους οργανισμούς και συμβούλεψα περισσότερες από 500 επιχειρήσεις.',
-      'Οπότε αν μιλάμε για offer, pricing, πελάτες, μια πρόσληψη, μια πώληση που αποφεύγεις ή μια business απόφαση που δεν μπορείς να κλείσεις, δεν χρειάζεται να μου εξηγήσεις όλο το context.',
+      'Οπότε αν μιλάμε για offer, pricing, πελάτες, μια πρόσληψη, μια συζήτηση πώλησης που αποφεύγεις ή μια απόφαση που δεν μπορείς να πάρεις, δεν χρειάζεται να μου εξηγήσεις όλο το context.',
       'Αυτόν τον κόσμο τον ξέρω.',
     ],
     sections: [
-      { label: 'Κάπου εκεί άρχισε να εμφανίζεται η ψυχολογία εκεί που κανείς δεν την είχε καλέσει.', body: [
-        'Ξανά και ξανά έβλεπα business προβλήματα που ήταν μόνο εν μέρει business προβλήματα.',
+      { label: 'Κάπου εκεί άρχισε να εμφανίζεται η ψυχολογία χωρίς να την έχει καλέσει κανείς.', body: [
+        'Ξανά και ξανά έβλεπα προβλήματα που έμοιαζαν business, αλλά μόνο μέχρι ένα σημείο.',
         'Κάποιος ήξερε ότι έπρεπε να πουλήσει και δεν το έκανε.',
-        'Κάποιος άλλαζε συνέχεια μια απολύτως λογική στρατηγική.',
-        'Κάποιος είχε προσλάβει καλούς συνεργάτες αλλά δυσκολευόταν να αποδεσμευτεί από το control.',
-        'Κάποιος είχε αρκετή πληροφορία για να πάρει μια απόφαση και συνέχιζε να ψάχνει κι άλλη.',
+        'Κάποιος άλλαζε συνέχεια στρατηγική, παρότι αυτή που είχε ήταν απολύτως λογική.',
+        'Κάποιος είχε προσλάβει καλούς συνεργάτες αλλά δυσκολευόταν να αφήσει τον έλεγχο.',
+        'Κάποιος είχε αρκετά δεδομένα για να πάρει μια απόφαση και συνέχιζε να ψάχνει κι άλλα.',
         'Το business είχε σημασία. Απλώς δεν ήταν όλη η ιστορία.',
-        'Έτσι εκπαιδεύτηκα ως ψυχοθεραπευτής.',
+        'Έτσι εκπαιδεύτηκα στην ψυχοθεραπεία. Έχω MSc Integrative Counselling & Psychotherapy από το University of Derby και είμαι εγγεγραμμένο μέλος του BACP.',
       ] },
       { label: 'Και μετά άρχισα να βλέπω το ίδιο πράγμα από την άλλη πλευρά.', body: [
-        'Στην ψυχολογική δουλειά συναντούσα φιλόδοξους ανθρώπους με απολύτως πραγματικά business προβλήματα.',
+        'Στην ψυχολογική δουλειά συναντούσα φιλόδοξους ανθρώπους με πραγματικά προβλήματα στο business.',
         'Και μερικές φορές αυτό που χρειάζονταν δεν ήταν μια ψυχολογική εξήγηση.',
-        'Το offer ήταν αδύναμο. Οι τιμές λάθος. Δεν υπήρχε σταθερός τρόπος να έρθουν πελάτες. Ή απλώς η business απόφαση ήταν κακή.',
+        'Το offer ήταν αδύναμο. Οι τιμές λάθος. Δεν υπήρχε σταθερός τρόπος να έρθουν πελάτες. Ή απλώς η απόφαση ήταν κακή.',
         'Η ψυχοθεραπεία δεν είναι φτιαγμένη για να σε βοηθήσει με αυτό.',
       ] },
       { label: 'Κάπως έτσι, οι δύο καριέρες σταμάτησαν να μοιάζουν τόσο random.', body: [
@@ -889,13 +889,13 @@ const REVIEWS_ITEMS = [
     qEl: "Στην αρχή ήμουν επιφυλακτικός με τη σωματική και trauma-informed δουλειά, γιατί υπέθετα ότι θα ήταν ασαφής ή λίγο «πνευματική». Δεν ήταν. Ο Άγγελος εξήγησε τι κάναμε, έδωσε προσοχή στα όριά μου και σύνδεσε την εμπειρία με μοτίβα που μπορούσα να αναγνωρίσω στη δουλειά και στις σχέσεις μου. Ένιωσα ότι ήταν γειωμένο, προσεκτικό και απροσδόκητα πρακτικό." },
   { w: 'Anonymous client, Product leader', wEl: 'Ανώνυμος πελάτης, Product leader',
     q: "I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.",
-    qEl: "Εμπιστεύομαι τον Άγγελο γιατί δεν προσπαθεί συνέχεια να με καθησυχάσει. Ακούει προσεκτικά, αλλά δεν συμφωνεί αυτόματα με την εκδοχή των γεγονότων που φέρνω στη συνεδρία. Κάποιες φορές επισημαίνει κάτι που θα προτιμούσα να μην δω. Κατά κάποιον τρόπο, αυτή η ειλικρίνεια έκανε τη δουλειά να νιώθεται πιο ασφαλής, όχι λιγότερο." },
+    qEl: "Εμπιστεύομαι τον Άγγελο γιατί δεν προσπαθεί συνέχεια να με καθησυχάσει. Ακούει προσεκτικά, αλλά δεν συμφωνεί αυτόματα με την εκδοχή των γεγονότων που φέρνω στη συνεδρία. Κάποιες φορές επισημαίνει κάτι που θα προτιμούσα να μην δω. Κατά κάποιον τρόπο, αυτή η ειλικρίνεια έκανε τη δουλειά να μοιάζει πιο ασφαλής, όχι λιγότερο." },
   { w: 'Anonymous client, Technology executive', wEl: 'Ανώνυμος πελάτης, Στέλεχος τεχνολογίας',
     q: "I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.",
     qEl: "Άρχισα να δουλεύω με τον Άγγελο σε μια μπερδεμένη περίοδο της καριέρας μου. Στα χαρτιά, τα πράγματα πήγαιναν καλά, αλλά μέσα μου αμφισβητούσα σχεδόν τα πάντα. Μέσα σε αρκετές συνεδρίες, με βοήθησε να καταλάβω ποιες ανησυχίες ήταν βάσιμες και ποιες μεγεθύνονταν από παλιούς φόβους γύρω από την απόδοση, την αποτυχία και το πώς με έβλεπαν οι άλλοι. Νιώθω πιο γειωμένος τώρα, παρότι δεν έχουν λυθεί όλα." },
   { w: 'Anonymous client, Tech executive', wEl: 'Ανώνυμος πελάτης, Στέλεχος τεχνολογίας',
     q: "From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.",
-    qEl: "Απ’ έξω, εξακολουθούσα να λειτουργώ και να αποδίδω σε υψηλό επίπεδο, οπότε ήταν δύσκολο να εξηγήσω γιατί κάτι ένιωθα ότι δεν πήγαινε καλά. Ο Άγγελος κατάλαβε ότι το πρόβλημα δεν ήταν απλώς ο φόρτος δουλειάς. Δουλέψαμε πάνω στον τρόπο που συνδέω το επίτευγμα με την ασφάλεια, την αξία και την ανακούφιση. Εξακολουθώ να είμαι φιλόδοξος, αλλά η επιτυχία αρχίζει να νιώθεται λιγότερο σαν οριακή διαφυγή από την αποτυχία." },
+    qEl: "Απ’ έξω, εξακολουθούσα να λειτουργώ και να αποδίδω σε υψηλό επίπεδο, οπότε ήταν δύσκολο να εξηγήσω γιατί κάτι ένιωθα ότι δεν πήγαινε καλά. Ο Άγγελος κατάλαβε ότι το πρόβλημα δεν ήταν απλώς ο φόρτος δουλειάς. Δουλέψαμε πάνω στον τρόπο που συνδέω το επίτευγμα με την ασφάλεια, την αξία και την ανακούφιση. Εξακολουθώ να είμαι φιλόδοξος, αλλά η επιτυχία αρχίζει να μοιάζει λιγότερο με οριακή διαφυγή από την αποτυχία." },
 ];
 const REVIEWS = {
   en: {
@@ -907,8 +907,8 @@ const REVIEWS = {
   },
   el: {
     h1: 'Τι λένε άνθρωποι που έχουν δουλέψει μαζί μου',
-    lead: 'Μερικά πράγματα που έχουν πει άνθρωποι μετά τη δουλειά μας.',
-    sub: 'Τα ονόματα και τα στοιχεία που θα μπορούσαν να τους ταυτοποιήσουν έχουν αφαιρεθεί. Τα λόγια είναι δικά τους.',
+    lead: 'Μερικά πράγματα που μου έχουν πει άνθρωποι αφού δουλέψαμε μαζί.',
+    sub: 'Έχω αφαιρέσει ονόματα και λεπτομέρειες που θα μπορούσαν να δείξουν ποιοι είναι. Τα λόγια είναι δικά τους. Οι κριτικές δόθηκαν στα αγγλικά και εμφανίζονται εδώ μεταφρασμένα — μπορείς να δεις το πρωτότυπο κάτω από κάθε κριτική.',
     toggle: 'Αρχικό κείμενο στα αγγλικά',
     ctaHeading: 'Ξεκινά με μια σύντομη, δωρεάν γνωριμία.',
   },
@@ -998,6 +998,9 @@ function PersonaHowWeStartSection({ mob }) {
     ] }),
     React.createElement('div', { style: { marginTop: '1.4rem' } },
       React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
+    ),
+    React.createElement('p', { style: { marginTop: '1.1rem', fontSize: '15px', color: C.muted } },
+      "It's the same ongoing 1:1 work — ", React.createElement(IA, { href: '/1-to-1/' }, 'see how 1:1 works'), '.'
     )
   );
 }
@@ -1376,6 +1379,19 @@ function BookPage({ lang = 'en' }) {
   );
 }
 
+// ─── RELATED INTERNAL LINKS (SEO landing pages → 1:1 + siblings) ─────────────
+function RelatedLinks({ mob, items, heading }) {
+  return React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '3.25rem' } },
+    React.createElement('h2', { style: { ...sectionTitleStyle, fontSize: mob ? '19px' : '22px' } }, heading || 'Related'),
+    React.createElement('ul', { style: { listStyle: 'none', margin: '.4rem 0 0', padding: 0 } },
+      items.map((it, i) => React.createElement('li', {
+        key: i,
+        style: { padding: mob ? '.55rem 0' : '.5rem 0', borderTop: `1px solid ${C.border}`, fontSize: mob ? '16px' : '17px', lineHeight: 1.5 },
+      }, React.createElement(IA, { href: it.href }, it.label)))
+    )
+  );
+}
+
 // ─── THERAPY FOR EXECUTIVES ──────────────────────────────────────────────────
 function ExecTherapyPage() {
   const mob = useIsMobile();
@@ -1401,9 +1417,9 @@ function ExecTherapyPage() {
     ),
 
     React.createElement(Section, { label: 'How I work', mob },
-      React.createElement(P, null, "I'm a licensed psychotherapist with 18+ years in B2B SaaS. I've led growth strategy at startups and inside ", React.createElement(A, { href: 'https://www.ibm.com' }, 'IBM'), "'s enterprise portfolio, and I've ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised 500+ companies'), " on the kind of work my clients carry into sessions every week."),
+      React.createElement(P, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS. I've led growth strategy at startups and inside ", React.createElement(A, { href: 'https://www.ibm.com' }, 'IBM'), "'s enterprise portfolio, and I've ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised 500+ companies'), " on the kind of work my clients carry into sessions every week."),
       React.createElement(P, null, React.createElement(Strong, null, "That means I already understand the environment you're operating in."), " We don't have to spend time on context-setting, which lets us get to the real work faster."),
-      React.createElement(P, null, "The work combines three things: high-trust advisory grounded in your real context, nervous system regulation so pressure stops running the show physically, and data from wearables that makes invisible stress patterns visible."),
+      React.createElement(P, null, "So the work runs on two tracks at once. Sometimes the problem is genuinely business — a decision, a team, a strategy call — and we work it as advisory. Sometimes it's the pattern underneath: why identity fused with output, why slowing down feels dangerous. Often it's both, and part of the job is telling which one you're actually dealing with."),
       React.createElement(P, null, "A lot of it is what I call strategic detachment: learning to play the professional roles, handle pressure, and navigate business dynamics without turning every interaction into a referendum on your worth. The goal isn't less ambition. It's ambition that finally feels fulfilling."),
       React.createElement(P, { last: true }, "I write about the psychology of ambition and performance at ", React.createElement(A, { href: 'https://undisguised.io' }, 'Undisguised'), " (5,000+ subscribers). The writing explores the patterns. The private work is where we actually address them.")
     ),
@@ -1452,6 +1468,11 @@ function ExecTherapyPage() {
         React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
+    React.createElement(RelatedLinks, { mob, items: [
+      { href: '/1-to-1/', label: 'Work with me, 1:1 →' },
+      { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
+      { href: '/imposter-syndrome-therapy/', label: 'Imposter syndrome →' },
+    ] }),
     React.createElement(SiteFooter, { mob })
   );
 }
@@ -1480,9 +1501,9 @@ function FoundersTherapyPage() {
     ),
 
     React.createElement(Section, { label: 'Why I understand this', mob },
-      React.createElement(P, null, "I'm a licensed psychotherapist with 18+ years in B2B SaaS, including advising 500+ companies on growth. I've been on the other side of the table where you set targets, defend strategy, and absorb pressure from every direction."),
+      React.createElement(P, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS, including advising 500+ companies on growth. I've been on the other side of the table where you set targets, defend strategy, and absorb pressure from every direction."),
       React.createElement(P, null, "When a client comes in carrying the weight of a down round or a co-founder conflict, ", React.createElement(Strong, null, "I don't need them to explain the context"), ". I know what that room feels like. We skip the background and go straight to the work."),
-      React.createElement(P, { last: true }, "That high-trust advisory is one part of how I work. The others are nervous system regulation — so the constant activation of founding stops living in your body — and data from wearables (sleep, HRV, recovery) that makes the real cost of crunch periods, travel, and conflict visible instead of guessed at.")
+      React.createElement(P, { last: true }, "So the work runs on two tracks at once. Sometimes what you bring is the business itself — the decision, the co-founder conflict, the strategy — and we work it directly. Sometimes it's the weight underneath: the identity fusion, the isolation, the pattern that keeps repeating. Usually it's both, tangled together, and part of the work is telling them apart.")
     ),
 
     React.createElement(Section, { label: 'How it works', mob },
@@ -1520,6 +1541,11 @@ function FoundersTherapyPage() {
         React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
+    React.createElement(RelatedLinks, { mob, items: [
+      { href: '/1-to-1/', label: 'Work with me, 1:1 →' },
+      { href: '/founders/', label: 'Founder advisory →' },
+      { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
+    ] }),
     React.createElement(SiteFooter, { mob })
   );
 }
@@ -1552,9 +1578,9 @@ function ImposterPage() {
     ),
 
     React.createElement(Section, { label: 'How I work with this', mob },
-      React.createElement(P, null, "I'm a licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advising 500+ companies on growth'), ". I know the environment that amplifies imposter syndrome in tech: the pace, the ambiguity, the constant comparison."),
+      React.createElement(P, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advising 500+ companies on growth'), ". I know the environment that amplifies imposter syndrome in tech: the pace, the ambiguity, the constant comparison."),
       React.createElement(P, null, React.createElement(Strong, null, "We work with the root pattern rather than the symptoms."), " That means going beyond the current role to understand where the conditional sense of worth was established, why it persists, and what it would take to build a sense of self that doesn't depend entirely on the next result."),
-      React.createElement(P, null, "Insight alone rarely shifts this — most high performers have already understood it intellectually. So the work also includes nervous system regulation, so safety stops depending on the next win, and, where it helps, data from wearables that shows the gap between what you think you can handle and what your body is already doing."),
+      React.createElement(P, null, "Insight alone rarely shifts this — most high performers have already understood it intellectually. So we work at two levels at once: the real professional situation in front of you, and the older pattern that keeps the doubt alive no matter what the evidence says. Sometimes the answer is a concrete business move, sometimes it's the deeper work, and often it's both."),
       React.createElement(P, { last: true }, "I write about this at ", React.createElement(A, { href: 'https://undisguised.io' }, 'Undisguised'), ". The writing explores the patterns. The private work is where they actually move.")
     ),
 
@@ -1595,6 +1621,11 @@ function ImposterPage() {
         React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
+    React.createElement(RelatedLinks, { mob, items: [
+      { href: '/1-to-1/', label: 'Work with me, 1:1 →' },
+      { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
+      { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
+    ] }),
     React.createElement(SiteFooter, { mob })
   );
 }
@@ -1625,8 +1656,8 @@ function BurnoutPage() {
 
     React.createElement(Section, { label: 'How I work with this', mob },
       React.createElement(P, null, React.createElement(Strong, null, "This work goes to the level of the pattern, not the symptoms."), " We look at what's driving the overwork: what it would mean to stop, what you're avoiding by staying in motion, why the idea of doing less feels threatening rather than freeing."),
-      React.createElement(P, null, "I'm a licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advising 500+ companies on growth'), ". I understand the environment well: the always-on culture, the ambiguity, the pressure to appear certain when you're not."),
-      React.createElement(P, { last: true }, "The goal isn't necessarily to make you work less (though that might happen). ", React.createElement(Strong, null, "The goal is a more fulfilling relationship with the work, so it costs less and means more."), " We do that through high-trust advisory, nervous system regulation so recovery actually lands, and data from wearables (sleep, HRV, stress) that shows what rest alone isn't fixing.")
+      React.createElement(P, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advising 500+ companies on growth'), ". I understand the environment well: the always-on culture, the ambiguity, the pressure to appear certain when you're not."),
+      React.createElement(P, { last: true }, "The goal isn't necessarily to make you work less (though that might happen). ", React.createElement(Strong, null, "The goal is a more fulfilling relationship with the work, so it costs less and means more."), " We work on two tracks at once: the practical situation — the role, the load, the decisions you keep postponing — and the pattern underneath that keeps you overfunctioning. Sometimes the fix is a business change, sometimes it's the deeper work, and usually it's both.")
     ),
 
     React.createElement(Section, { label: 'Start here', mob },
@@ -1666,6 +1697,11 @@ function BurnoutPage() {
         React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
+    React.createElement(RelatedLinks, { mob, items: [
+      { href: '/1-to-1/', label: 'Work with me, 1:1 →' },
+      { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
+      { href: '/career-transition-therapy/', label: 'Career transition →' },
+    ] }),
     React.createElement(SiteFooter, { mob })
   );
 }
@@ -1697,8 +1733,8 @@ function CareerTransitionPage() {
     React.createElement(Section, { label: 'Why a therapist, not a career coach', mob },
       React.createElement(P, null, "Career coaching helps you figure out what to do next. ", React.createElement(Strong, null, "Therapeutically-informed coaching helps you understand why you're stuck"), ", what the transition is actually about at a deeper level, and what needs to shift internally for any external change to hold."),
       React.createElement(P, null, "Without that internal work, people tend to recreate the same patterns in new settings. ", React.createElement(A, { href: 'https://www.undisguised.io/p/youre-creating-the-exact-problem' }, 'They end up building the same problem in a different context.'), ""),
-      React.createElement(P, null, "I'm a licensed psychotherapist who made this kind of transition myself — from 18+ years in B2B SaaS and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'growth advisory'), " to clinical practice. I know what it's like to leave an identity that works, and I know the difference between doing that reactively and doing it with some clarity about what's actually driving the change."),
-      React.createElement(P, { last: true }, "The work combines high-trust advisory, nervous system regulation, and — where useful — data from wearables that shows how the transition is actually landing on you. The aim isn't just the next role. It's a working life that feels genuinely fulfilling, not just impressive.")
+      React.createElement(P, null, "I'm a business growth advisor and licensed psychotherapist who made this kind of transition myself — from 18+ years in B2B SaaS and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'growth advisory'), " to clinical practice. I know what it's like to leave an identity that works, and I know the difference between doing that reactively and doing it with some clarity about what's actually driving the change."),
+      React.createElement(P, { last: true }, "So the work runs on two tracks at once: the practical side of the move — options, risk, the actual plan — and what makes it hard underneath, the identity and worth questions the strategy can't touch. Sometimes you mostly need the plan, sometimes the deeper work, often both. The aim isn't just the next role. It's a working life that feels genuinely fulfilling, not just impressive.")
     ),
 
     React.createElement(Section, { label: 'Who this is for', mob },
@@ -1742,6 +1778,11 @@ function CareerTransitionPage() {
         React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
+    React.createElement(RelatedLinks, { mob, items: [
+      { href: '/1-to-1/', label: 'Work with me, 1:1 →' },
+      { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
+      { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
+    ] }),
     React.createElement(SiteFooter, { mob })
   );
 }
@@ -2128,6 +2169,256 @@ function ConfidentialityPage({ lang = 'en' }) {
   );
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// GREEK SEO LANDING PAGES (/el/*) — mined from the retired .gr site, re-authored
+// to the current positioning (Business Growth Advisor + Ψυχοθεραπευτής; business,
+// psychology, or both). Each keeps its own search intent; none duplicates /el/1-to-1/.
+// ═══════════════════════════════════════════════════════════════════════════
+const EL_ROLE = 'Business Growth Advisor + Ψυχοθεραπευτής';
+function ElRoleEyebrow() {
+  return React.createElement('div', { style: { fontSize: '12px', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: C.accent, marginBottom: '1rem' } }, EL_ROLE);
+}
+function ElH1({ mob, children }) {
+  return React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.5rem' : '2.5rem', fontSize: mob ? '22px' : '30px' } }, children);
+}
+
+// ─── /el/executive-coaching/ ─────────────────────────────────────────────────
+function ElExecutiveCoachingPage() {
+  const mob = useIsMobile();
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
+  return React.createElement('main', { style: mobPage },
+    React.createElement(ElRoleEyebrow, null),
+    React.createElement(ElH1, { mob }, 'Executive Coaching για στελέχη που συνεχίζουν να αποδίδουν με όλο και μεγαλύτερο προσωπικό κόστος'),
+
+    React.createElement(Section, { label: 'Το ζήτημα', mob },
+      React.createElement(P, null, 'Είσαι καλός στη δουλειά σου, οι άλλοι το βλέπουν και τα αποτελέσματα το επιβεβαιώνουν. Κάπου στην πορεία, όμως, το κόστος του να συνεχίζεις έτσι μεγάλωσε — και δεν διορθώνεται με καλύτερο delegation, λίγες μέρες άδεια ή άλλο ένα productivity hack.'),
+      React.createElement(P, null, 'Για κάποιους είναι η απομόνωση που συνοδεύει έναν senior ρόλο. Για άλλους, η ταυτότητα έχει δεθεί τόσο με την απόδοση ώστε η επιβράδυνση ή η αμφιβολία να μοιάζουν απειλητικές. Ή υπάρχει η αίσθηση ότι μία λάθος απόφαση αρκεί για να θέσει σε κίνδυνο όσα έχτισες.'),
+      React.createElement(P, { last: true }, 'Αυτά συνήθως δεν λύνονται με άλλο ένα leadership framework, αλλά με έναν διαφορετικό χώρο και ένα διαφορετικό είδος συζήτησης.')
+    ),
+
+    React.createElement(Section, { label: 'Τι δουλεύουμε', mob },
+      React.createElement(P, null, 'Μπορεί να έρχεσαι με μια συγκεκριμένη απόφαση που δεν μπορείς να συζητήσεις ανοιχτά με την ομάδα, το board ή τους επενδυτές. Ή να βλέπεις ότι τα ίδια προβλήματα επιστρέφουν:'),
+      React.createElement(Bullets, { mob, items: [
+        'δυσκολεύεσαι να εμπιστευτείς ή να αναθέσεις',
+        'αναλαμβάνεις περισσότερα από όσα σου αναλογούν',
+        'αποφεύγεις μια απόφαση παρότι ξέρεις ότι δεν περιμένει',
+        'αντιδράς με τον ίδιο τρόπο σε διαφορετικές ομάδες και συνεργασίες',
+        'συνεχίζεις να αποδίδεις, αλλά νιώθεις ότι πλησιάζεις τα όριά σου',
+      ] }),
+      React.createElement(P, { last: true }, 'Σε υψηλά επίπεδα ευθύνης η απομόνωση είναι συχνά δομική: πολλοί εξαρτώνται από εσένα, αλλά ελάχιστοι είναι εκείνοι μπροστά στους οποίους μπορείς να μιλήσεις χωρίς να διαχειρίζεσαι ταυτόχρονα την εικόνα σου.')
+    ),
+
+    React.createElement(Section, { label: 'Γιατί μπορώ να καταλάβω το περιβάλλον σου', mob },
+      React.createElement(P, null, 'Πριν εκπαιδευτώ στην ψυχοθεραπεία, πέρασα 18+ χρόνια στην τεχνολογία, το product και το growth. Έχω υπάρξει founder, έχω δουλέψει σε startups και μεγάλους οργανισμούς και έχω συμβουλέψει πάνω από 500 επιχειρήσεις. Δεν χρειάζεται να μου μεταφράσεις τον επαγγελματικό σου κόσμο.'),
+      React.createElement(P, { last: true }, React.createElement(Strong, null, 'Δεν ψυχολογικοποιούμε κάθε επαγγελματική δυσκολία.'), ' Προσπαθούμε να ξεχωρίσουμε πότε το πρόβλημα είναι πρακτικό business, πότε είναι ψυχολογικό και πότε, όπως συμβαίνει συχνά, είναι και τα δύο.')
+    ),
+
+    React.createElement(Section, { label: 'Με ποιους δουλεύω', mob },
+      React.createElement(P, null, 'Founders, C-level, VPs, directors και senior professionals — κυρίως στην τεχνολογία, αλλά όχι μόνο. Το σημείο εκκίνησης μπορεί να είναι:'),
+      React.createElement(Bullets, { mob, items: [
+        React.createElement(IA, { href: '/el/burnout/' }, 'burnout'),
+        React.createElement(IA, { href: '/el/imposter-syndrome/' }, 'imposter syndrome'),
+        'μια δύσκολη απόφαση που αναβάλλεται',
+        'απομόνωση στον ρόλο',
+        'σύγκρουση με συνεργάτες ή επενδυτές',
+        'η αίσθηση ότι δεν θέλεις πια τη ζωή που συνοδεύει την επιτυχία σου',
+      ] })
+    ),
+
+    React.createElement(Section, { label: 'Πώς ξεκινάμε', mob },
+      React.createElement(P, { last: true }, 'Οι συνεδρίες γίνονται online, ατομικά και με πλήρη εμπιστευτικότητα. Ξεκινάμε με μια σύντομη, δωρεάν γνωριμία ~15 λεπτών, για να δούμε τι πραγματικά συμβαίνει και αν ταιριάζουμε.'),
+      React.createElement(CtaRow, { lang: 'el', mob })
+    ),
+
+    React.createElement('hr', { style: sepStyle }),
+    React.createElement(Section, { label: 'Συχνές ερωτήσεις', mob },
+      React.createElement(FaqAccordion, { mob, items: [
+        { q: 'Σε τι διαφέρει από το κλασικό coaching στελεχών;', a: 'Το κλασικό coaching συνήθως εστιάζει σε leadership skills, στόχους, στρατηγική και performance. Αυτά μπορεί να είναι μέρος της δουλειάς, αλλά εξετάζουμε και γιατί, παρά τις γνώσεις και την εμπειρία σου, το ίδιο πρόβλημα επιστρέφει — ή γιατί ξέρεις τι πρέπει να κάνεις αλλά δεν το κάνεις.' },
+        { q: 'Χρειάζομαι coaching ή κάτι πιο ψυχολογικό;', a: 'Δεν χρειάζεται να το αποφασίσεις εσύ από πριν. Αν το θέμα είναι κυρίως μια απόφαση ή ένας στόχος, δουλεύεται σε επίπεδο coaching. Αν τα ίδια μοτίβα επιστρέφουν σε διαφορετικούς ρόλους και σχέσεις, πάμε βαθύτερα. Συχνά δουλεύουμε και στα δύο.' },
+        { q: 'Είναι εμπιστευτικό;', a: React.createElement(React.Fragment, null, 'Ναι. Δεν ενημερώνεται η ομάδα σου, το HR, ο εργοδότης, το board ή οι επενδυτές. Περισσότερα στη σελίδα ', React.createElement(IA, { href: '/el/confidentiality/' }, 'Εμπιστευτικότητα'), '.') },
+      ] })
+    ),
+    React.createElement(RelatedLinks, { mob, heading: 'Σχετικά θέματα', items: [
+      { href: '/el/1-to-1/', label: '1:1 Συνεργασία →' },
+      { href: '/el/burnout/', label: 'Burnout →' },
+      { href: '/el/imposter-syndrome/', label: 'Imposter Syndrome →' },
+    ] }),
+    React.createElement(SiteFooter, { mob, lang: 'el' })
+  );
+}
+
+// ─── /el/burnout/ ────────────────────────────────────────────────────────────
+function ElBurnoutPage() {
+  const mob = useIsMobile();
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
+  return React.createElement('main', { style: mobPage },
+    React.createElement(ElRoleEyebrow, null),
+    React.createElement(ElH1, { mob }, 'Πήρες άδεια, ξεκουράστηκες και γύρισες νιώθοντας ακριβώς το ίδιο'),
+    React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '2rem' : '2.5rem' } }, 'Ίσως το πρόβλημα δεν είναι απλώς ότι δουλεύεις πολύ.'),
+
+    React.createElement(Section, { label: 'Τι είναι το burnout', mob },
+      React.createElement(P, null, 'Η συνηθισμένη συμβουλή είναι να ξεκουραστείς περισσότερο, να βάλεις όρια και να διαχειριστείς το άγχος σου. Μερικές φορές αρκεί. Άλλες, παίρνεις άδεια, κοιμάσαι περισσότερο, απομακρύνεσαι για λίγο και επιστρέφεις στο ίδιο βάρος.'),
+      React.createElement(P, null, 'Το burnout — η επαγγελματική εξουθένωση — συνδέεται με παρατεταμένη εργασιακή πίεση που δεν έχει αντιμετωπιστεί ουσιαστικά. Εμφανίζεται ως μόνιμη εξάντληση, αποστασιοποίηση από τη δουλειά, ευερεθιστότητα, δυσκολία συγκέντρωσης ή η αίσθηση ότι δεν έχεις πια τίποτα να δώσεις.'),
+      React.createElement(P, { last: true }, 'Δεν είναι μια δύσκολη εβδομάδα, αλλά μια κατάσταση όπου η πίεση έχει γίνει ο κανονικοποιημένος τρόπος λειτουργίας σου.')
+    ),
+
+    React.createElement(Section, { label: 'Τι το συντηρεί', mob },
+      React.createElement(P, null, 'Το burnout σπάνια οφείλεται σε έναν μόνο παράγοντα. Μπορεί να υπάρχει υπερβολικός φόρτος, αβεβαιότητα, έλλειψη ελέγχου ή μια δουλειά που απαιτεί περισσότερα από όσα μπορείς πλέον να δώσεις. Συχνά, όμως, υπάρχει και κάτι βαθύτερο:'),
+      React.createElement(Bullets, { mob, items: [
+        'η ανάγκη να αποδεικνύεις συνεχώς την αξία σου',
+        'η δυσκολία να απογοητεύσεις τους άλλους',
+        'η αίσθηση ότι όλα εξαρτώνται από εσένα',
+        'η αδυναμία να σταματήσεις χωρίς ενοχές',
+        'η ταύτιση της αξίας σου με την απόδοση',
+      ] }),
+      React.createElement(P, { last: true }, 'Όταν αυτά συνδυάζονται με πραγματική επαγγελματική πίεση, η ξεκούραση ανακουφίζει προσωρινά αλλά δεν αλλάζει αυτό που σε επιστρέφει στην ίδια κατάσταση.')
+    ),
+
+    React.createElement(Section, { label: 'Πώς δουλεύουμε', mob },
+      React.createElement(P, null, 'Ξεκινάμε από την πραγματική συνθήκη της δουλειάς σου: τι άλλαξε, πότε άρχισε να γίνεται επίπονο, τι απαιτεί αντικειμενικά ο ρόλος, ποια κομμάτια της πίεσης προέρχονται από το περιβάλλον και ποια συνδέονται με τον τρόπο που έχεις μάθει να λειτουργείς.'),
+      React.createElement(P, { last: true }, React.createElement(Strong, null, 'Κάποιες φορές το ζητούμενο είναι μια business αλλαγή· άλλες, μια πιο βαθιά δουλειά· συχνά, και τα δύο.'), ' Στόχος δεν είναι να γίνεις απλώς πιο ανθεκτικός σε μια κατάσταση που σου κάνει κακό, αλλά να λειτουργείς με λιγότερο προσωπικό κόστος και να δεις καθαρά τι χρειάζεται πραγματικά να αλλάξει.')
+    ),
+
+    React.createElement(Section, { label: 'Δες πού βρίσκεσαι', mob },
+      React.createElement(P, { last: true }, React.createElement(React.Fragment, null,
+        'Δεν είναι πάντα εύκολο να ξεχωρίσεις αν αυτό που περνάς είναι burnout, προσωρινή εξάντληση ή ένδειξη ότι η δουλειά σου δεν σου ταιριάζει πια. Το ',
+        React.createElement(IA, { href: '/el/startingdiagnostic/' }, 'Starting Diagnostic'),
+        ' είναι ένα σύντομο, δωρεάν εργαλείο αυτοαξιολόγησης που θα σε βοηθήσει να δεις πιο καθαρά τι συμβαίνει.')),
+      React.createElement(CtaRow, { lang: 'el', mob, primaryTo: 'diagnostic', primaryLabel: 'Ξεκίνα το Starting Diagnostic', secondaryTo: 'book' })
+    ),
+
+    React.createElement('hr', { style: sepStyle }),
+    React.createElement(Section, { label: 'Συχνές ερωτήσεις', mob },
+      React.createElement(FaqAccordion, { mob, items: [
+        { q: 'Πώς ξεχωρίζει το burnout από την απλή κούραση;', a: 'Η κούραση υποχωρεί όταν ξεκουραστείς πραγματικά. Στο burnout, η ξεκούραση βοηθά προσωρινά αλλά το βάρος επιστρέφει σχεδόν αμέσως — μαζί με αποστασιοποίηση και απώλεια νοήματος.' },
+        { q: 'Γιατί η άδεια ή οι διακοπές δεν αρκούν;', a: 'Επειδή η ξεκούραση αντιμετωπίζει την εξάντληση, όχι ό,τι τη δημιουργεί. Αν επιστρέψεις στον ίδιο φόρτο, στην ίδια αίσθηση ευθύνης και στον ίδιο τρόπο λειτουργίας, είναι πιθανό να επιστρέψει και το burnout.' },
+        { q: 'Πότε αξίζει να ζητήσω υποστήριξη;', a: 'Όταν η εξάντληση επιμένει και επηρεάζει τον ύπνο, τις σχέσεις ή τη συγκέντρωσή σου, ή όταν έχεις ήδη δοκιμάσει ξεκούραση και όρια αλλά επιστρέφεις σταθερά στην ίδια κατάσταση. Δεν χρειάζεται να περιμένεις μέχρι να μη μπορείς πλέον να δουλέψεις.' },
+      ] })
+    ),
+    React.createElement(RelatedLinks, { mob, heading: 'Σχετικά θέματα', items: [
+      { href: '/el/1-to-1/', label: '1:1 Συνεργασία →' },
+      { href: '/el/executive-coaching/', label: 'Executive Coaching →' },
+      { href: '/el/career-coaching/', label: 'Career Coaching →' },
+    ] }),
+    React.createElement(SiteFooter, { mob, lang: 'el' })
+  );
+}
+
+// ─── /el/career-coaching/ ────────────────────────────────────────────────────
+function ElCareerCoachingPage() {
+  const mob = useIsMobile();
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
+  return React.createElement('main', { style: mobPage },
+    React.createElement(ElRoleEyebrow, null),
+    React.createElement(ElH1, { mob }, 'Το επόμενο επαγγελματικό βήμα μπορεί να είναι το εύκολο. Το δύσκολο είναι να προσπεράσεις τους φόβους της αλλαγής'),
+
+    React.createElement(Section, { label: 'Η πραγματική μετάβαση', mob },
+      React.createElement(P, null, 'Μπορεί να έχεις περάσει χρόνια χτίζοντας μια καριέρα που σήμερα δεν σε εκφράζει πια. Ίσως σκέφτεσαι να φύγεις, να αλλάξεις κλάδο, να επιστρέψεις στην Ελλάδα, να μετακομίσεις στο εξωτερικό ή να αρχίσεις να δουλεύεις για τον εαυτό σου.'),
+      React.createElement(P, null, 'Συχνά το πρακτικό μέρος είναι το πιο απλό: ποιες επιλογές υπάρχουν, πόσα χρήματα χρειάζεσαι, τι δεξιότητες έχεις, ποιο είναι το ρίσκο, ποια βήματα πρέπει να γίνουν.'),
+      React.createElement(P, { last: true }, 'Το δύσκολο είναι να καταλάβεις τι πραγματικά θέλεις και γιατί, παρότι σκέφτεσαι την αλλαγή εδώ και καιρό, παραμένεις στο ίδιο σημείο.')
+    ),
+
+    React.createElement(Section, { label: 'Γιατί είναι τόσο δύσκολη', mob },
+      React.createElement(P, null, 'Η καριέρα σου δεν είναι μόνο αυτό που κάνεις· είναι συχνά μέρος του τρόπου με τον οποίο βλέπεις τον εαυτό σου και σε βλέπουν οι άλλοι. Μπορεί να αντιπροσωπεύει ασφάλεια, κύρος, οικονομική ανεξαρτησία, αναγνώριση ή χρόνια προσπάθειας που δεν θέλεις να θεωρήσεις χαμένα.'),
+      React.createElement(P, { last: true }, 'Γι’ αυτό μια αλλαγή δεν είναι μόνο απόφαση για την επόμενη δουλειά. Ακόμη και όταν είναι σωστή, μπορεί να συνοδεύεται από φόβο, αμφιβολία και πραγματικό πένθος για ό,τι τελειώνει.')
+    ),
+
+    React.createElement(Section, { label: 'Πώς δουλεύουμε', mob },
+      React.createElement(P, null, 'Δεν ξεκινάμε με την υπόθεση ότι πρέπει οπωσδήποτε να αλλάξεις καριέρα. Ξεκινάμε εξετάζοντας τι δεν λειτουργεί σήμερα, τι έχεις ήδη δοκιμάσει, τι φοβάσαι ότι θα χάσεις, τι θέλεις πραγματικά να αλλάξει και ποιο κόστος είσαι διατεθειμένος να αναλάβεις.'),
+      React.createElement(P, { last: true }, React.createElement(Strong, null, 'Δουλεύουμε και το πρακτικό μέρος της απόφασης και ό,τι την κάνει δύσκολη ψυχολογικά.'), ' Στόχος δεν είναι να σε πείσω να φύγεις ή να μείνεις, αλλά να πάρεις μια απόφαση που καταλαβαίνεις, αντέχεις και μπορείς να υποστηρίξεις στην πράξη.')
+    ),
+
+    React.createElement(Section, { label: 'Γιατί μπορώ να καταλάβω αυτή τη μετάβαση', mob },
+      React.createElement(P, null, 'Έχω περάσει 18+ χρόνια στην τεχνολογία, το product και το growth. Έχτισα δικές μου εταιρείες, δούλεψα σε startups και μεγάλους οργανισμούς και βρέθηκα ο ίδιος μπροστά σε αποφάσεις που δεν ήταν μόνο επαγγελματικές.'),
+      React.createElement(P, { last: true }, 'Παράλληλα είμαι ψυχοθεραπευτής, με MSc Integrative Counselling & Psychotherapy και εγγραφή στο BACP. Δεν χρειάζεται να διαλέξουμε ανάμεσα σε στρατηγική και αυτογνωσία — μια σοβαρή αλλαγή καριέρας χρειάζεται συνήθως και τα δύο.')
+    ),
+
+    React.createElement(Section, { label: 'Δεν ξέρεις αν φταίει η καριέρα ή το burnout;', mob },
+      React.createElement(P, { last: true }, React.createElement(React.Fragment, null,
+        'Μερικές φορές η επιθυμία να φύγεις σημαίνει ότι η καριέρα σου δεν σου ταιριάζει πια. Άλλες, ότι έχεις εξαντληθεί τόσο ώστε τίποτα να μη φαίνεται βιώσιμο. Το ',
+        React.createElement(IA, { href: '/el/startingdiagnostic/' }, 'Starting Diagnostic'),
+        ' μπορεί να σε βοηθήσει να ξεχωρίσεις τι από τα δύο συμβαίνει.')),
+      React.createElement(CtaRow, { lang: 'el', mob })
+    ),
+
+    React.createElement('hr', { style: sepStyle }),
+    React.createElement(Section, { label: 'Συχνές ερωτήσεις', mob },
+      React.createElement(FaqAccordion, { mob, items: [
+        { q: 'Σκέφτομαι να αλλάξω καριέρα αλλά δεν μπορώ να αποφασίσω. Μπορείς να βοηθήσεις;', a: 'Ναι. Δεν χρειάζεται να έχεις ήδη αποφασίσει ότι θα φύγεις. Δουλεύουμε να καταλάβουμε τι ακριβώς δεν λειτουργεί, τι περιμένεις από μια αλλαγή και ποιο μέρος της αμφιβολίας σου είναι χρήσιμη προσοχή και ποιο φόβος που σε κρατά ακίνητο.' },
+        { q: 'Σε τι διαφέρει από έναν κλασικό σύμβουλο καριέρας;', a: 'Ένας κλασικός σύμβουλος καριέρας εστιάζει στις δεξιότητες, το βιογραφικό και την αγορά εργασίας. Δουλεύουμε κι αυτά όταν χρειάζεται, αλλά το κέντρο είναι η ίδια η απόφαση: γιατί δεν μπορείς να δεσμευτείς, τι φοβάσαι ότι θα χάσεις και τι θα χρειαστεί για να στηρίξεις μια αλλαγή στην πράξη.' },
+        { q: 'Απολύθηκα και νιώθω χαμένος. Είναι φυσιολογικό;', a: 'Ναι. Μια απόλυση, ειδικά ύστερα από χρόνια σε έναν ρόλο, δεν είναι μόνο απώλεια εισοδήματος — επηρεάζει την αυτοπεποίθηση, την ταυτότητα και την καθημερινή δομή. Πριν πιεστείς να βρεις αμέσως «το επόμενο», μπορεί να χρειάζεται να καταλάβεις τι ακριβώς τελείωσε και τι δεν θέλεις να επαναλάβεις.' },
+      ] })
+    ),
+    React.createElement(RelatedLinks, { mob, heading: 'Σχετικά θέματα', items: [
+      { href: '/el/1-to-1/', label: '1:1 Συνεργασία →' },
+      { href: '/el/burnout/', label: 'Burnout →' },
+      { href: '/el/executive-coaching/', label: 'Executive Coaching →' },
+    ] }),
+    React.createElement(SiteFooter, { mob, lang: 'el' })
+  );
+}
+
+// ─── /el/imposter-syndrome/ ──────────────────────────────────────────────────
+function ElImposterPage() {
+  const mob = useIsMobile();
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
+  return React.createElement('main', { style: mobPage },
+    React.createElement(ElRoleEyebrow, null),
+    React.createElement(ElH1, { mob }, 'Imposter Syndrome: βλέπεις ότι τα καταφέρνεις. Απλώς δεν το πιστεύεις πραγματικά'),
+    React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '1.5rem' : '1.75rem' } }, 'Η εμπειρία, οι ικανότητες και οι επιτυχίες σου είναι πραγματικές.'),
+    React.createElement(P, { last: true }, 'Το ίδιο πραγματική είναι και η επίμονη αίσθηση ότι δεν αξίζεις τη θέση σου ή ότι κάποια στιγμή οι άλλοι θα καταλάβουν πως δεν είσαι τόσο καλός όσο νομίζουν.'),
+
+    React.createElement(Section, { label: 'Το μοτίβο', mob },
+      React.createElement(P, null, 'Οι αποδείξεις υπάρχουν: αποτελέσματα, εμπειρία, θετικό feedback, άνθρωποι που σε εμπιστεύονται. Παρ’ όλα αυτά, η αμφιβολία δεν υποχωρεί. Κάθε επιτυχία προσφέρει προσωρινή ανακούφιση και πολύ γρήγορα ο πήχης ανεβαίνει ξανά.'),
+      React.createElement(P, { last: true }, 'Αντί η επιτυχία να χτίζει σταδιακά την αυτοπεποίθησή σου, μετατρέπεται σε άλλη μία απόδειξη που πρέπει να επαναλάβεις. Το πρόβλημα δεν είναι ότι δεν έχεις αποδείξεις· είναι ότι τίποτα δεν μένει απόδειξη για πολύ.')
+    ),
+
+    React.createElement(Section, { label: 'Συνηθισμένα σημάδια', mob },
+      React.createElement(Bullets, { mob, items: [
+        'φόβος ότι κάποια στιγμή θα «αποκαλυφθείς»',
+        'δυσκολία να αναγνωρίσεις πραγματικά την επιτυχία σου',
+        'απόδοση των επιτυχιών στην τύχη ή στη βοήθεια άλλων',
+        'υπερπροετοιμασία για να μην αφήσεις περιθώριο λάθους',
+        'τελειομανία και σύγκριση με ανθρώπους που θεωρείς πιο ικανούς',
+        'έντονη αμφιβολία μετά από μια προαγωγή ή μεγαλύτερη ευθύνη',
+      ] }),
+      React.createElement(P, { last: true }, 'Η αμφιβολία μπορεί να είναι αληθινή ως συναίσθημα. Δεν σημαίνει ότι είναι ακριβής ως αξιολόγηση της ικανότητάς σου.')
+    ),
+
+    React.createElement(Section, { label: 'Πώς το δουλεύουμε', mob },
+      React.createElement(P, null, 'Δεν προσπαθώ απλώς να σε πείσω ότι είσαι αρκετά καλός — πιθανότατα το έχεις ακούσει πολλές φορές. Η διαβεβαίωση ανακουφίζει προσωρινά, χωρίς να αλλάζει τον μηχανισμό που παράγει ξανά την αμφιβολία.'),
+      React.createElement(P, { last: true }, React.createElement(Strong, null, 'Το δουλεύουμε μέσα στο πραγματικό επαγγελματικό πλαίσιο, όχι αποκομμένο από τη δουλειά και την καριέρα σου.'), ' Εξετάζουμε πότε εμφανίζεται πιο έντονα, τι σημαίνει για εσένα ένα λάθος, γιατί η αξία σου εξαρτάται τόσο από την απόδοση και τι σε αναγκάζει να αποδεικνύεις ξανά κάτι που έχει ήδη αποδειχθεί. Στόχος δεν είναι να εξαφανιστεί κάθε αμφιβολία, αλλά να μη χρειάζεται να κερδίζεις διαρκώς το δικαίωμα να βρίσκεσαι εκεί που ήδη είσαι.')
+    ),
+
+    React.createElement(Section, { label: 'Πού συνδέεται', mob },
+      React.createElement(P, { last: true }, React.createElement(React.Fragment, null,
+        'Το Imposter Syndrome σπάνια λειτουργεί μόνο του. Συχνά συνδέεται με το ',
+        React.createElement(IA, { href: '/el/executive-coaching/' }, 'Executive Coaching'),
+        ', όταν εντείνεται ύστερα από προαγωγή· με το ',
+        React.createElement(IA, { href: '/el/burnout/' }, 'burnout'),
+        ', όταν η ανάγκη να μην αποτύχεις οδηγεί σε υπερβολική δουλειά· και με το ',
+        React.createElement(IA, { href: '/el/career-coaching/' }, 'Career Coaching'),
+        ', όταν η αμφιβολία σε εμποδίζει να διεκδικήσεις ή να αλλάξεις κατεύθυνση.')),
+      React.createElement(CtaRow, { lang: 'el', mob })
+    ),
+
+    React.createElement('hr', { style: sepStyle }),
+    React.createElement(Section, { label: 'Συχνές ερωτήσεις', mob },
+      React.createElement(FaqAccordion, { mob, items: [
+        { q: 'Είναι το Imposter Syndrome πραγματική διάγνωση;', a: 'Όχι. Δεν είναι κλινική διάγνωση, αλλά ένας όρος που περιγράφει ένα επαναλαμβανόμενο μοτίβο αμφιβολίας: έχεις αντικειμενικές αποδείξεις ικανότητας, αλλά δυσκολεύεσαι να τις εσωτερικεύσεις. Παρότι δεν είναι διάγνωση, επηρεάζει ουσιαστικά τον τρόπο που εργάζεσαι και αποφασίζεις.' },
+        { q: 'Γιατί εμφανίζεται συχνά σε ανθρώπους με υψηλές επιδόσεις;', a: 'Επειδή για πολλούς η επίδοση δεν είναι μόνο αποτέλεσμα ικανότητας· είναι ο τρόπος με τον οποίο κερδίζουν ασφάλεια και αποδοχή. Όταν η αξία σου έχει δεθεί με το να τα καταφέρνεις, κάθε επιτυχία δημιουργεί και την υποχρέωση να το αποδείξεις ξανά.' },
+        { q: 'Ξέρω λογικά ότι είμαι καλός. Γιατί νιώθω ακόμα απατεώνας;', a: 'Επειδή η λογική αναγνώριση και η συναισθηματική πεποίθηση δεν είναι το ίδιο. Τα κομπλιμέντα και οι αποδείξεις απαντούν στη λογική αμφιβολία, όχι στον μηχανισμό που τη δημιουργεί.' },
+      ] })
+    ),
+    React.createElement(RelatedLinks, { mob, heading: 'Σχετικά θέματα', items: [
+      { href: '/el/1-to-1/', label: '1:1 Συνεργασία →' },
+      { href: '/el/executive-coaching/', label: 'Executive Coaching →' },
+      { href: '/el/burnout/', label: 'Burnout →' },
+    ] }),
+    React.createElement(SiteFooter, { mob, lang: 'el' })
+  );
+}
+
 // ─── APP MOUNT (bilingual, central) ──────────────────────────────────────────
 // Every core index.html calls renderApp(pageId, lang). Legacy/SEO pages still
 // use SpecialtyPage via their own inline scripts.
@@ -2139,11 +2430,19 @@ const CORE_PAGES = {
   'book': BookPage,
   'confidentiality': ConfidentialityPage,
 };
+// Greek-only SEO landing pages — mounted via renderApp('el-…', 'el') so they get
+// the current Greek sidebar/footer. Unpaired (no English equivalent, no hreflang).
+const EL_SEO_PAGES = {
+  'el-executive-coaching': ElExecutiveCoachingPage,
+  'el-burnout': ElBurnoutPage,
+  'el-career-coaching': ElCareerCoachingPage,
+  'el-imposter-syndrome': ElImposterPage,
+};
 function CoreApp({ pageId, lang }) {
   const [open, setOpen] = React.useState(true);
   const mainRef = React.useRef(null);
   React.useEffect(() => { if (mainRef.current) mainRef.current.scrollTop = 0; }, [pageId]);
-  const Page = CORE_PAGES[pageId] || HomePage;
+  const Page = CORE_PAGES[pageId] || EL_SEO_PAGES[pageId] || HomePage;
   return React.createElement(React.Fragment, null,
     React.createElement('div', { id: 'sidebar' },
       React.createElement(Sidebar, { page: pageId, lang: lang, open: open, setOpen: setOpen })),

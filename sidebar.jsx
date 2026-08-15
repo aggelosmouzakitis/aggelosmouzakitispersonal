@@ -26,9 +26,9 @@ const SB_CORE_PATHS = {
 const sbPath = (id, lang) => (SB_CORE_PATHS[id] && SB_CORE_PATHS[id][lang]) || (SB_CORE_PATHS[id] && SB_CORE_PATHS[id].en) || '/';
 
 const SB_LABELS = {
-  en: { role: 'Business Advisor + Licensed Psychotherapist', home: 'Home', workWith: 'Work with me', oneToOne: '1:1', about: 'About', writing: 'Writing', reviews: 'Reviews',
+  en: { role: 'Business Growth Advisor + Licensed Psychotherapist', home: 'Home', workWith: 'Work with me', oneToOne: '1:1', about: 'About', writing: 'Writing', reviews: 'Reviews',
         findMe: 'Find me', diagHead: 'Starting Diagnostic', diagSub: "10 minutes on the business, what's getting in the way, and where the two meet.", diagBtn: 'START →', diagShort: 'Diagnostic', book: 'Book a fit call →', bookShort: 'Book' },
-  el: { role: 'Business Advisor + Ψυχοθεραπευτής', home: 'Αρχική', workWith: 'Συνεργασία', oneToOne: '1:1', about: 'Σχετικά', writing: 'Άρθρα', reviews: 'Κριτικές',
+  el: { role: 'Business Growth Advisor + Ψυχοθεραπευτής', home: 'Αρχική', workWith: 'Συνεργασία', oneToOne: '1:1', about: 'Σχετικά', writing: 'Άρθρα', reviews: 'Κριτικές',
         findMe: 'Βρες με', diagHead: 'Starting Diagnostic', diagSub: '10 λεπτά για το business, τι το κρατάει πίσω και πού μπαίνεις εσύ μέσα σε αυτό.', diagBtn: 'ΞΕΚΙΝΑ →', diagShort: 'Τεστ', book: 'Κλείσε γνωριμία →', bookShort: 'Γνωριμία' },
 };
 const sbT = (lang) => SB_LABELS[lang] || SB_LABELS.en;

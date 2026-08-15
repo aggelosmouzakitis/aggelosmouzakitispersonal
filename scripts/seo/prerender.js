@@ -31,6 +31,19 @@ const PAGES = [
   { f: 'greek-speaking-therapist-manchester/index.html', faq: true },
   { f: 'greek-speaking-therapist-new-york/index.html', faq: true },
   { f: 'greek-speaking-therapist-dublin/index.html', faq: true },
+  // Restored English SEO landing pages (persona mounts + specialty SpecialtyPage mounts)
+  { f: 'founders/index.html', faq: false },
+  { f: 'solopreneurs/index.html', faq: false },
+  { f: 'therapy-for-founders/index.html', faq: true },
+  { f: 'therapy-for-executives/index.html', faq: true },
+  { f: 'imposter-syndrome-therapy/index.html', faq: true },
+  { f: 'executive-burnout-therapy/index.html', faq: true },
+  { f: 'career-transition-therapy/index.html', faq: true },
+  // Greek SEO landing pages (/el/*) — renderApp('el-…','el'), same indexable path
+  { f: 'el/executive-coaching/index.html', faq: false },
+  { f: 'el/burnout/index.html', faq: false },
+  { f: 'el/career-coaching/index.html', faq: false },
+  { f: 'el/imposter-syndrome/index.html', faq: false },
 ];
 
 // Individual blog posts don't use the #root App shell — they're static articles
