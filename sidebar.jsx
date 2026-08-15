@@ -211,10 +211,20 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
     </button>
   );
 
+  // High-contrast tooltip for the collapsed rail — appears immediately on
+  // hover/focus (no native-title delay), positioned just right of the icon.
+  const TIP = {
+    position: 'absolute', left: '100%', top: '50%', transform: 'translateY(-50%)', marginLeft: 10,
+    background: '#282726', color: '#fff', padding: '5px 10px', borderRadius: 6,
+    fontSize: '12px', fontWeight: 600, letterSpacing: '.02em', lineHeight: 1.2, whiteSpace: 'nowrap',
+    textTransform: 'none', boxShadow: '0 4px 14px rgba(0,0,0,.28)', zIndex: 200, pointerEvents: 'none',
+  };
   const iconNav = (id, Icon, href, active, title) => (
-    <a key={id} href={href} title={title}
+    <a key={id} href={href} aria-label={title}
       onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
+      onFocus={() => setHovered(id)} onBlur={() => setHovered(null)}
       style={{
+        position: 'relative',
         width: SB.WC, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center',
         background: active ? 'rgba(40,39,38,0.08)' : hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
         textDecoration: 'none',
@@ -222,19 +232,23 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
         transition: 'background .12s, color .12s',
       }}>
       <Icon />
+      {hovered === id && <span style={TIP}>{title}</span>}
     </a>
   );
 
   const iconLink = ({ id, label, href, Icon }) => (
-    <a key={id} href={href} target="_blank" rel="noopener" title={label}
+    <a key={id} href={href} target="_blank" rel="noopener" aria-label={label}
       onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)}
+      onFocus={() => setHovered(id)} onBlur={() => setHovered(null)}
       style={{
+        position: 'relative',
         width: SB.WC, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center',
         background: hovered === id ? 'rgba(40,39,38,0.04)' : 'transparent',
         color: hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
         textDecoration: 'none', transition: 'background .12s, color .12s',
       }}>
       <Icon />
+      {hovered === id && <span style={TIP}>{label}</span>}
     </a>
   );
 

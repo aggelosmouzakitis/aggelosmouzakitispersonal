@@ -499,13 +499,39 @@ function Sidebar({
       padding: 0
     }
   }, open ? /*#__PURE__*/React.createElement(ICONS.ChevLeft, null) : /*#__PURE__*/React.createElement(ICONS.ChevRight, null));
+
+  // High-contrast tooltip for the collapsed rail — appears immediately on
+  // hover/focus (no native-title delay), positioned just right of the icon.
+  const TIP = {
+    position: 'absolute',
+    left: '100%',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    marginLeft: 10,
+    background: '#282726',
+    color: '#fff',
+    padding: '5px 10px',
+    borderRadius: 6,
+    fontSize: '12px',
+    fontWeight: 600,
+    letterSpacing: '.02em',
+    lineHeight: 1.2,
+    whiteSpace: 'nowrap',
+    textTransform: 'none',
+    boxShadow: '0 4px 14px rgba(0,0,0,.28)',
+    zIndex: 200,
+    pointerEvents: 'none'
+  };
   const iconNav = (id, Icon, href, active, title) => /*#__PURE__*/React.createElement("a", {
     key: id,
     href: href,
-    title: title,
+    "aria-label": title,
     onMouseEnter: () => setHovered(id),
     onMouseLeave: () => setHovered(null),
+    onFocus: () => setHovered(id),
+    onBlur: () => setHovered(null),
     style: {
+      position: 'relative',
       width: SB.WC,
       height: 48,
       display: 'flex',
@@ -516,7 +542,9 @@ function Sidebar({
       color: active ? SB.active : hovered === id ? 'rgba(40,39,38,0.85)' : SB.text,
       transition: 'background .12s, color .12s'
     }
-  }, /*#__PURE__*/React.createElement(Icon, null));
+  }, /*#__PURE__*/React.createElement(Icon, null), hovered === id && /*#__PURE__*/React.createElement("span", {
+    style: TIP
+  }, title));
   const iconLink = ({
     id,
     label,
@@ -527,10 +555,13 @@ function Sidebar({
     href: href,
     target: "_blank",
     rel: "noopener",
-    title: label,
+    "aria-label": label,
     onMouseEnter: () => setHovered(id),
     onMouseLeave: () => setHovered(null),
+    onFocus: () => setHovered(id),
+    onBlur: () => setHovered(null),
     style: {
+      position: 'relative',
       width: SB.WC,
       height: 44,
       display: 'flex',
@@ -541,7 +572,9 @@ function Sidebar({
       textDecoration: 'none',
       transition: 'background .12s, color .12s'
     }
-  }, /*#__PURE__*/React.createElement(Icon, null));
+  }, /*#__PURE__*/React.createElement(Icon, null), hovered === id && /*#__PURE__*/React.createElement("span", {
+    style: TIP
+  }, label));
   const navItemStyle = (id, active) => ({
     display: 'flex',
     alignItems: 'center',

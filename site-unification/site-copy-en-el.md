@@ -40,47 +40,51 @@ Quite often, business and psychology collide to the point where it's hard to tel
 
 #### You may recognise some of this
 
-- You've been meaning to start something for a long time. You're still getting ready.
-- You need more customers. Somehow, everything except selling keeps making it onto the to-do list.
-- You know you're undercharging. The number still hasn't changed.
-- Every time the direction you've chosen gets difficult, another one suddenly starts looking better.
-- The business depends on you for almost everything. You're not sure how much of that is actually necessary.
-- On paper, things are going well. You feel less and less connected to what you're building.
-- You got somewhere you worked hard to reach. Now you're not sure whether you want the next level, or just think you should.
-- You understand your patterns extremely well. They keep happening anyway.
+- **You've been meaning to start for a long time.** You're still getting ready.
 
-#### Sometimes the work is tactical. Sometimes it's psychological.
+- **You need more customers.** Everything except selling keeps making it onto the to-do list.
 
-_The hard part is knowing which one you're actually dealing with._
+- **You know you're undercharging.** The number still hasn't changed.
 
-**The business**
+- **Your direction gets difficult,** and another one suddenly starts looking better.
 
-- Your offer is still weak.
-- Your positioning isn't clear enough.
-- You don't have a reliable way to find customers.
-- Your pricing doesn't make sense.
-- You're trying to move five things at once.
-- You don't know which move actually matters most right now.
-**You**
+- **The business depends on you.** Maybe more than it actually needs to.
 
-- You know you need to sell. You keep avoiding it.
-- A no lands much more personally than you'd like.
-- Being visible feels strangely threatening, even though you know the business needs it.
-- You keep changing direction before the previous one has had time to work.
-- Your sense of worth is a little too tied to how well the business is doing.
-- You can explain the pattern perfectly. That hasn't stopped you repeating it.
-Sometimes the answer is a better business move. Sometimes it's deeper work. Quite often, we need to work on both before it's obvious which one was holding the other back.
+- **On paper, things are going well.** You feel less and less connected to what you're building.
+
+- **You reached something you worked hard for.** Now you're not sure you want the next level, or just think you should.
+
+- **You understand your patterns.** They keep happening anyway.
+
+
+#### Signature section — Sometimes the work is tactical. Sometimes it's psychological.
+
+_Interactive: one problem active at a time reveals a business reading and a psychological reading._
+
+- **Not enough customers** → The business: Acquisition may simply not work. · You: You may be avoiding selling or visibility.
+
+- **Undercharging** → The business: Your pricing may genuinely be below the market. · You: Asking for more may feel like exposure.
+
+- **Everything depends on me** → The business: Roles or processes may genuinely be poor. · You: You may struggle to let go of control.
+
+- **I keep changing direction** → The business: The strategy may genuinely be wrong. · You: Commitment may get uncomfortable once the novelty disappears.
+
+- **I can't make the decision** → The business: You may genuinely be missing information. · You: You may be avoiding what the decision forces you to face.
+
+- **I've lost interest in what I built** → The business: The business may need its next version. · You: You may no longer want what your identity was organised around.
+
+- **I avoid being visible** → The business: The channel or the positioning may be wrong. · You: Being seen may feel more exposing than the business can afford.
+
+- **The business has stalled** → The business: The model may have hit a real ceiling. · You: You may be quietly protecting yourself from the next risk.
+
+**Same visible problem. Very different things may need fixing.** The hard part is working out what you're actually dealing with.
 
 
 #### One relationship. Both sides of the problem are welcome.
 
-**The business:** Offer, positioning, pricing, customers, sales, priorities, decisions, execution. — _What does the business actually need now?_
+Offer · pricing · customers · decisions  |  avoidance · identity · control · uncertainty
 
-**You:** Avoidance, rejection, fear of visibility, perfectionism, money, self-doubt, control, identity, uncertainty, commitment. — _What makes getting there harder than it needs to be?_
-
-Some weeks we'll barely talk psychology. Other weeks, the tactical problem can wait because something else needs attention first.
-
-**You don't need to know which one you have before you come in.**
+_You don't need to know which one you have before you come in._
 
 
 #### Common questions
@@ -120,47 +124,51 @@ If you have something you're trying to start, fix or grow, tell me what's going 
 
 #### Μήπως σου θυμίζει κάτι;
 
-- Θέλεις καιρό να ξεκινήσεις κάτι. Ακόμα ετοιμάζεσαι.
-- Χρειάζεσαι περισσότερους πελάτες. Παρ' όλα αυτά, πάντα βρίσκεται κάτι πιο επείγον από το να πουλήσεις.
-- Ξέρεις ότι χρεώνεις λίγο. Η τιμή, όμως, παραμένει ίδια.
-- Κάθε φορά που η κατεύθυνση που διάλεξες δυσκολεύει, εμφανίζεται μια καινούρια που ξαφνικά μοιάζει καλύτερη.
-- Η επιχείρηση εξαρτάται από εσένα σχεδόν για τα πάντα.
-- Στα χαρτιά, τα πράγματα πάνε καλά. Εσύ, όμως, νιώθεις όλο και λιγότερο σύνδεση με αυτό που χτίζεις.
-- Έφτασες κάπου που ήθελες πολύ. Όμως τώρα δεν ξέρεις αν θέλεις πραγματικά να πας στο επόμενο επίπεδο ή απλώς πιστεύεις ότι θα έπρεπε να το θέλεις.
-- Καταλαβαίνεις πολύ καλά τα μοτίβα σου. Παραδόξως, συνεχίζεις να τα επαναλαμβάνεις.
+- **Θέλεις καιρό να ξεκινήσεις.** Ακόμα ετοιμάζεσαι.
 
-#### Κάποιες φορές χρειάζεται business προσέγγιση. Άλλες, ψυχολογικό σκάψιμο.
+- **Χρειάζεσαι περισσότερους πελάτες.** Πάντα βρίσκεται κάτι πιο επείγον από το να πουλήσεις.
 
-_Πολλές φορές, είναι δύσκολο να ξεχωρίσεις τι από τα δύο έχεις πραγματικά μπροστά σου._
+- **Ξέρεις ότι χρεώνεις λίγο.** Η τιμή, όμως, παραμένει ίδια.
 
-**Το business**
+- **Η κατεύθυνσή σου δυσκολεύει,** και ξαφνικά μια άλλη μοιάζει καλύτερη.
 
-- Το offer σου είναι ακόμα αδύναμο.
-- Το positioning δεν είναι αρκετά ξεκάθαρο.
-- Δεν έχεις σταθερό τρόπο να βρίσκεις πελάτες.
-- Η τιμολόγηση δεν βγάζει νόημα.
-- Κυνηγάς πέντε πράγματα ταυτόχρονα.
-- Δεν ξέρεις ποια κίνηση έχει πραγματικά σημασία τώρα.
-**Εσύ**
+- **Η επιχείρηση εξαρτάται από εσένα.** Ίσως περισσότερο απ’ όσο χρειάζεται.
 
-- Ξέρεις ότι πρέπει να πουλήσεις. Όμως, το αποφεύγεις.
-- Ένα «όχι» σε χτυπάει πιο προσωπικά απ' όσο θα ήθελες.
-- Ο φόβος έκθεσης σε κρατά πίσω, παρότι ξέρεις ότι χωρίς έκθεση δύσκολα έρχεται ζήτηση.
-- Αλλάζεις κατεύθυνση πριν προλάβει να δουλέψει η προηγούμενη.
-- Η αξία σου έχει συνδεθεί λίγο περισσότερο απ' όσο θα ήθελες με το πώς πάει η δουλειά.
-- Μπορείς να εξηγήσεις τέλεια πού είναι το πρόβλημα, αλλά δεν περνάς στη δράση.
-Κάποιες φορές η απάντηση είναι μια καλύτερη business προσέγγιση ή ένα διαφορετικό τακτικό πλάνο. Άλλες φορές χρειάζεται να πάμε πιο βαθιά — και αρκετά συχνά πρέπει να δουλέψουμε και τα δύο μέχρι να εντοπίσουμε πού είναι το πρόβλημα.
+- **Στα χαρτιά, όλα πάνε καλά.** Εσύ νιώθεις όλο και λιγότερη σύνδεση με αυτό που χτίζεις.
+
+- **Έφτασες κάπου που ήθελες πολύ.** Τώρα δεν ξέρεις αν θες το επόμενο επίπεδο ή απλώς νομίζεις ότι πρέπει.
+
+- **Καταλαβαίνεις τα μοτίβα σου.** Συνεχίζουν να επαναλαμβάνονται.
 
 
-#### Μία συνεργασία όπου χωράνε και το business και εσύ.
+#### Signature section — Κάποιες φορές η δουλειά είναι πρακτική. Κάποιες, ψυχολογική.
 
-**Το business:** Offer, positioning, τιμές, πελάτες, πωλήσεις, προτεραιότητες, αποφάσεις, εκτέλεση. — _Τι χρειάζεται πραγματικά το business τώρα;_
+_Interactive: one problem active at a time reveals a business reading and a psychological reading._
 
-**Εσύ:** Αποφυγή, απόρριψη, φόβος έκθεσης, τελειομανία, χρήματα, αμφιβολία, control, ταυτότητα, αβεβαιότητα, δέσμευση. — _Τι σε δυσκολεύει να φτάσεις εκεί που θέλεις;_
+- **Λίγοι πελάτες** → Το business: Η απόκτηση πελατών μπορεί απλώς να μη λειτουργεί. · Εσύ: Μπορεί να αποφεύγεις τις πωλήσεις ή την έκθεση.
 
-Κάποιες φορές θα μιλήσουμε σχεδόν μόνο για το business. Άλλες, το tactical κομμάτι μπορεί να περιμένει λίγο γιατί υπάρχει κάτι σημαντικότερο από κάτω.
+- **Χρεώνεις λίγο** → Το business: Οι τιμές σου μπορεί πραγματικά να είναι κάτω από την αγορά. · Εσύ: Το να ζητήσεις περισσότερα μοιάζει με έκθεση.
 
-**Δεν χρειάζεται να έχεις όλες τις απαντήσεις προκειμένου να μιλήσουμε.**
+- **Όλα περνούν από εσένα** → Το business: Οι ρόλοι ή οι διαδικασίες μπορεί όντως να είναι κακοί. · Εσύ: Μπορεί να δυσκολεύεσαι να αφήσεις τον έλεγχο.
+
+- **Αλλάζεις συνέχεια κατεύθυνση** → Το business: Η στρατηγική μπορεί όντως να είναι λάθος. · Εσύ: Η δέσμευση δυσκολεύει μόλις περάσει η νεωτερικότητα.
+
+- **Δεν παίρνεις την απόφαση** → Το business: Μπορεί όντως να σου λείπει πληροφορία. · Εσύ: Μπορεί να αποφεύγεις αυτό που σε αναγκάζει να δεις η απόφαση.
+
+- **Έχασες το ενδιαφέρον σου** → Το business: Το business μπορεί να χρειάζεται την επόμενη εκδοχή του. · Εσύ: Μπορεί να μη θες πια αυτό γύρω από το οποίο χτίστηκε η ταυτότητά σου.
+
+- **Αποφεύγεις την έκθεση** → Το business: Το κανάλι ή το positioning μπορεί να είναι λάθος. · Εσύ: Το να σε βλέπουν μοιάζει πιο εκθετικό απ’ όσο αντέχει το business.
+
+- **Το business έχει κολλήσει** → Το business: Το μοντέλο μπορεί να έχει πιάσει ταβάνι. · Εσύ: Μπορεί να προστατεύεις τον εαυτό σου από το επόμενο ρίσκο.
+
+**Ίδιο ορατό πρόβλημα. Πολύ διαφορετικά πράγματα μπορεί να χρειάζονται δουλειά.** Το δύσκολο είναι να καταλάβεις τι πραγματικά έχεις μπροστά σου.
+
+
+#### Μία συνεργασία. Και οι δύο πλευρές του προβλήματος χωράνε.
+
+Offer · τιμές · πελάτες · αποφάσεις  |  αποφυγή · ταυτότητα · έλεγχος · αβεβαιότητα
+
+_Δεν χρειάζεται να ξέρεις ποιο από τα δύο έχεις πριν έρθεις._
 
 
 #### Συχνές ερωτήσεις
@@ -201,44 +209,53 @@ Some problems need a tactical answer. Others need deeper work. Often, it's not o
 The point of 1:1 is that we don't have to choose one lens in advance.
 
 
-#### What can we work on?
+#### How the work works (diagram)
 
-**The business** — Offer, positioning, pricing, customer acquisition, sales, priorities, difficult decisions, execution.
+You bring what's happening.  ↓  We work out what we're actually dealing with.
 
-_Sometimes you need somebody to look at the business and say: this is the problem, this is noise, and this is what I'd do next._
+- **Business** — Something genuinely needs fixing in the business.
 
-**You** — Avoidance, fear of visibility, rejection, self-doubt, perfectionism, control, identity, money, uncertainty, commitment.
+- **Both** — Business and psychology are tangled together.
 
-_Sometimes the strategy is already good enough. The difficult bit is getting yourself to actually execute it._
+- **You** — The strategy may be fine. Something personal is making it hard to act on.
 
-And sometimes both the tactical and the personal need to be worked together. That's usually where this gets interesting.
+↓ **Work on what actually needs work.**
 
 
-#### What does the work actually look like?
+#### What that looks like in practice
 
-**You bring whatever is live.**
+**01 · You need more customers.**
 
-- Maybe you don't know how to get the next ten customers.
-- Maybe you know exactly what conversation you need to have and you've been avoiding it for three months.
-- Maybe the company is growing but everything still has to go through you.
-- Maybe something that used to matter enormously to you suddenly doesn't, and you're not sure what that means for the business.
-- Maybe you've analysed the problem so thoroughly that analysis itself has become part of the problem.
-**We work with what's actually there.**
+- Business: Acquisition may not work.
 
-I may challenge the business decision. I may challenge the story you're telling yourself about it.
+- You: You may have avoided properly selling for six months.
 
-Sometimes we'll make a plan. Sometimes we'll stay with something uncomfortable long enough to understand why it keeps showing up.
+**02 · Everything still goes through you.**
 
-The goal isn't to turn everything into psychology. It's to get a more accurate read on what is happening, then do something useful with it.
+- Business: Roles or processes may genuinely be poor.
+
+- You: Letting go of control may feel much harder than it should.
+
+**03 · You keep changing direction.**
+
+- Business: The current strategy may actually be wrong.
+
+- You: Every strategy may start looking wrong once commitment becomes uncomfortable.
+
+**04 · You got what you wanted.**
+
+- Business: The next version of the company may need to change.
+
+- You: You may no longer want the thing your identity has been organised around wanting.
 
 
 #### How it starts
 
-**1. Fit call** (~15 min · free) — We talk briefly about what you're building, what's going on and whether I seem like the right person for it. It's a fit check, not a free session.
+**01. Fit call** (~15 min · free) — We talk briefly about what you're building, what's going on and whether I seem like the right person for it. A fit check, not a free session.
 
-**2. First session** — We get properly into the problem. You don't need to arrive with the “right” version of it — bring it as you currently understand it. By the end, I want us to have a better read on what's actually going on and a concrete next move. Even if we decide not to continue, the session should be useful on its own.
+**02. First session** — We get properly into the problem. You don't need the “right” version of it — bring it as you see it. You leave with a clearer read and a concrete next move.
 
-**3. If it makes sense, we continue** — Private, ongoing 1:1 work.
+**03. If it makes sense, we continue** — Private, ongoing 1:1 work — for as long as it stays genuinely useful.
 
 
 #### Common questions
@@ -278,44 +295,53 @@ We'll work out what it actually needs.
 Στο 1:1 δεν χρειάζεται να διαλέξουμε από πριν.
 
 
-#### Τι μπορούμε να δουλέψουμε
+#### Πώς δουλεύουμε (diagram)
 
-**Το business** — Offer, positioning, τιμές, πελάτες, πωλήσεις, προτεραιότητες, δύσκολες αποφάσεις, εκτέλεση.
+Φέρνεις αυτό που συμβαίνει.  ↓  Βρίσκουμε τι πραγματικά έχουμε μπροστά μας.
 
-_Μερικές φορές χρειάζεσαι κάποιον να κοιτάξει το business και να σου πει: αυτό είναι το πρόβλημα, αυτό είναι θόρυβος και αυτό θα έκανα μετά._
+- **Business** — Κάτι όντως χρειάζεται δουλειά στο business.
 
-**Εσύ** — Αποφυγή, φόβος έκθεσης, απόρριψη, αμφιβολία, τελειομανία, control, ταυτότητα, χρήματα, αβεβαιότητα, δέσμευση.
+- **Και τα δύο** — Business και ψυχολογία είναι μπλεγμένα μαζί.
 
-_Μερικές φορές το strategy είναι ήδη μια χαρά. Το δύσκολο πολλές φορές είναι να το εφαρμόσεις._
+- **Εσύ** — Η στρατηγική μπορεί να είναι μια χαρά. Κάτι προσωπικό κάνει δύσκολο το να δράσεις.
 
-Και κάποιες φορές συμβαίνουν και τα δύο μαζί. Εκεί συνήθως αρχίζει το ενδιαφέρον κομμάτι της δουλειάς μας.
+↓ **Δουλεύουμε αυτό που πραγματικά χρειάζεται δουλειά.**
 
 
-#### Πώς είναι στην πράξη;
+#### Πώς φαίνεται στην πράξη
 
-**Φέρνεις αυτό που σε απασχολεί τώρα.**
+**01 · Χρειάζεσαι περισσότερους πελάτες.**
 
-- Μπορεί να μην ξέρεις πώς θα βρεις τους επόμενους πελάτες.
-- Μπορεί να ξέρεις ακριβώς ποια συζήτηση πρέπει να κάνεις και να την αποφεύγεις εδώ και τρεις μήνες.
-- Μπορεί το business να μεγαλώνει αλλά όλα να πρέπει ακόμα να περνούν από εσένα.
-- Μπορεί κάτι που κάποτε ήθελες πάρα πολύ να μη σε γεμίζει πια και να μην ξέρεις τι σημαίνει αυτό για όσα έχεις χτίσει.
-- Ή μπορεί να έχεις αναλύσει το πρόβλημα τόσο πολύ, που η ίδια η ανάλυση έχει γίνει μέρος του προβλήματος.
-**Δουλεύουμε αυτό που υπάρχει πραγματικά μπροστά μας.**
+- Business: Η απόκτηση πελατών μπορεί να μη λειτουργεί.
 
-Μπορεί να αμφισβητήσω μια business απόφαση. Μπορεί να αμφισβητήσω την ιστορία που λες στον εαυτό σου γύρω από αυτήν.
+- Εσύ: Μπορεί να απέφυγες να πουλήσεις σοβαρά για έξι μήνες.
 
-Κάποιες φορές θα δουλέψουμε πάνω σε ένα πλάνο. Άλλες θα χρειαστεί να μείνουμε λίγο περισσότερο σε κάτι που αποφεύγεις, μέχρι να καταλάβουμε γιατί αυτό επιστρέφει συνέχεια.
+**02 · Όλα περνούν ακόμα από εσένα.**
 
-Δεν ψάχνουμε ψυχολογική εξήγηση για τα πάντα. Προσπαθούμε να καταλάβουμε καλύτερα τι πραγματικά συμβαίνει και μετά να εξάγουμε κάτι χρήσιμο με αυτό.
+- Business: Οι ρόλοι ή οι διαδικασίες μπορεί όντως να είναι κακοί.
+
+- Εσύ: Το να αφήσεις τον έλεγχο μπορεί να είναι πολύ πιο δύσκολο απ’ όσο θα έπρεπε.
+
+**03 · Αλλάζεις συνέχεια κατεύθυνση.**
+
+- Business: Η τρέχουσα στρατηγική μπορεί όντως να είναι λάθος.
+
+- Εσύ: Κάθε στρατηγική μοιάζει λάθος μόλις η δέσμευση γίνει άβολη.
+
+**04 · Πέτυχες αυτό που ήθελες.**
+
+- Business: Η επόμενη εκδοχή της εταιρείας μπορεί να χρειάζεται αλλαγή.
+
+- Εσύ: Μπορεί να μη θες πια αυτό γύρω από το οποίο έχει οργανωθεί η ταυτότητά σου.
 
 
 #### Πώς ξεκινάμε
 
-**1. Γνωριμία** (~15 λεπτά · δωρεάν) — Μου λες πολύ σύντομα τι χτίζεις και τι συμβαίνει. Βλέπουμε αν ταιριάζουμε και αν είμαι ο σωστός άνθρωπος για σένα. Είναι γνωριμία, όχι δωρεάν συνεδρία.
+**01. Γνωριμία** (~15 λεπτά · δωρεάν) — Μου λες πολύ σύντομα τι χτίζεις και τι συμβαίνει. Βλέπουμε αν ταιριάζουμε. Είναι γνωριμία, όχι δωρεάν συνεδρία.
 
-**2. Πρώτη συνεδρία** — Εδώ μπαίνουμε κανονικά στο θέμα. Δεν χρειάζεται να έχεις καταλάβει ακριβώς ποιο είναι το πρόβλημα — φέρ' το όπως το βλέπεις τώρα. Μέχρι το τέλος θέλω να έχουμε πιο καθαρή εικόνα για το τι πραγματικά συμβαίνει και ένα συγκεκριμένο επόμενο βήμα. Ακόμα κι αν δεν συνεχίσουμε μαζί, η πρώτη συνεδρία θα σου δώσει τεράστια αξία.
+**02. Πρώτη συνεδρία** — Μπαίνουμε κανονικά στο θέμα. Δεν χρειάζεται η «σωστή» εκδοχή — φέρ' το όπως το βλέπεις. Φεύγεις με πιο καθαρή εικόνα και ένα συγκεκριμένο επόμενο βήμα.
 
-**3. Αν έχει νόημα, συνεχίζουμε** — Ιδιωτικά, 1:1.
+**03. Αν έχει νόημα, συνεχίζουμε** — Ιδιωτικά, 1:1 — για όσο παραμένει πραγματικά χρήσιμο.
 
 
 #### Συχνές ερωτήσεις
@@ -871,7 +897,7 @@ CTA: START →
 
 #### Section 1 — What are you building?
 
-**Which best describes where you are right now?**
+**Which of these describe where you are right now? (pick any that apply)**
 
 - Employed and thinking seriously about building something
 - Building something alongside a job
@@ -981,7 +1007,7 @@ CTA: START →
 
 Fields: Name · Email · Website / LinkedIn (optional)
 
-Consent: Send my answers to Aggelos. I understand this isn't a clinical diagnostic or an automated assessment.
+Consent: undefined
 
 CTA: SEND MY DIAGNOSTIC →
 
@@ -1018,7 +1044,7 @@ CTA: ΞΕΚΙΝΑ →
 
 #### Section 1 — Τι χτίζεις;
 
-**Πού βρίσκεσαι αυτή τη στιγμή;**
+**Πού βρίσκεσαι αυτή τη στιγμή; (διάλεξε όσα ισχύουν)**
 
 - Μισθωτός και σκέφτομαι σοβαρά να χτίσω κάτι δικό μου
 - Χτίζω κάτι παράλληλα με τη δουλειά μου
@@ -1128,7 +1154,7 @@ CTA: ΞΕΚΙΝΑ →
 
 Fields: Όνομα · Email · Website / LinkedIn (προαιρετικό)
 
-Consent: Στείλε τις απαντήσεις μου στον Άγγελο. Καταλαβαίνω ότι αυτό δεν είναι κλινική διάγνωση ή αυτοματοποιημένο τεστ.
+Consent: undefined
 
 CTA: ΑΠΟΣΤΟΛΗ →
 

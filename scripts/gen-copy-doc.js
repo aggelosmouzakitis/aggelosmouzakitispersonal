@@ -45,25 +45,23 @@ function home(c) {
   P('**Promise (H1):** ' + c.promise);
   P('**Tagline:** ' + c.tagline);
   P(c.introA); P(c.introB); P(c.introC);
-  H(4, c.recogLabel); bul(c.recog);
-  H(4, c.bvyHead); P('_' + c.bvySub + '_');
-  P('**' + c.bizLabel + '**'); bul(c.bvyBusiness);
-  P('**' + c.youLabel + '**'); bul(c.bvyYou);
-  P(c.bvyUnder);
-  H(4, c.oneRelHead);
-  P('**' + c.bizLabel + ':** ' + c.oneRelBizList + ' — _' + c.oneRelBizQ + '_');
-  P('**' + c.youLabel + ':** ' + c.oneRelYouList + ' — _' + c.oneRelYouQ + '_');
-  P(c.oneRelNote1); P('**' + c.oneRelNote2 + '**');
+  H(4, c.recogLabel); c.recog.forEach(r => P('- **' + r.lead + '** ' + r.support));
+  H(4, 'Signature section — ' + c.sigHead);
+  P('_Interactive: one problem active at a time reveals a business reading and a psychological reading._');
+  c.sigProblems.forEach(s => P('- **' + s.p + '** → ' + c.sigBiz + ': ' + s.business + ' · ' + c.sigYou + ': ' + s.you));
+  P('**' + c.sigConcl1 + '** ' + c.sigConcl2);
+  H(4, c.teaserHead); P(c.teaserBiz + '  |  ' + c.teaserYou); P('_' + c.teaserNote + '_');
   H(4, c.faqLabel); c.faq.forEach(f => { P('**Q. ' + f.q + '**'); P(f.a); });
   H(4, 'Final CTA'); P('**' + c.finalHeading + '**'); P(c.finalSub);
 }
 function one(c) {
   P('**H1:** ' + c.h1); P('**Lead:** ' + c.lead); c.intro.forEach(P);
-  H(4, c.workLabel);
-  P('**' + c.bizLabel + '** — ' + c.bizBody); P('_' + c.bizNote + '_');
-  P('**' + c.youLabel + '** — ' + c.youBody); P('_' + c.youNote + '_');
-  P(c.workUnder);
-  H(4, c.lookLabel); P('**' + c.lookLead + '**'); bul(c.lookMaybes); P('**' + c.lookMid + '**'); c.lookClose.forEach(P);
+  H(4, c.diagLabel + ' (diagram)');
+  P(c.diagBring + '  ↓  ' + c.diagWork);
+  c.diagBranches.forEach(br => P('- **' + br.k + '** — ' + br.d));
+  P('↓ **' + c.diagOut + '**');
+  H(4, c.scenLabel);
+  c.scenarios.forEach(s => { P('**' + s.n + ' · ' + s.surface + '**'); P('- ' + c.bizLabel + ': ' + s.business); P('- ' + c.youLabel + ': ' + s.you); });
   H(4, c.howLabel); c.steps.forEach(s => P(`**${s.n}. ${s.title}**${s.tag ? ' (' + s.tag + ')' : ''} — ${s.body}`));
   H(4, c.faqLabel); c.faq.forEach(f => { P('**Q. ' + f.q + '**'); P(f.a); });
   H(4, 'CTA'); P('**' + c.ctaHeading + '**'); P(c.ctaSub);

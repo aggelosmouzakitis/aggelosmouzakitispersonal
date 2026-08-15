@@ -31,11 +31,11 @@ const DIAG = {
       section: 'Section',
       of: 'of',
       progress: 'complete',
-      required: 'Please add your name, a valid email and tick the box so I can send this.'
+      required: 'Please add your name and a valid email so I can send this.'
     },
     s1: {
       label: 'What are you building?',
-      stageQ: 'Which best describes where you are right now?',
+      stageQ: 'Which of these describe where you are right now? (pick any that apply)',
       stage: ['Employed and thinking seriously about building something', 'Building something alongside a job', 'Freelancer / independent professional', 'Consultant / advisor', 'Solopreneur', 'Founder / business owner', 'Something else'],
       timeQ: 'How long have you been actively working on it?',
       time: ['Not started yet', 'Less than 6 months', '6–12 months', '1–3 years', '3+ years'],
@@ -62,7 +62,7 @@ const DIAG = {
       name: 'Name',
       email: 'Email',
       website: 'Website / LinkedIn (optional)',
-      consent: "Send my answers to Aggelos. I understand this isn't a clinical diagnostic or an automated assessment.",
+      notice: "Your answers come straight to Aggelos. He reads them himself and replies personally — this isn't a clinical diagnostic or an automated assessment.",
       submit: 'SEND MY DIAGNOSTIC →',
       sending: 'Sending…'
     },
@@ -90,11 +90,11 @@ const DIAG = {
       section: 'Ενότητα',
       of: 'από',
       progress: 'ολοκληρώθηκε',
-      required: 'Συμπλήρωσε όνομα, ένα έγκυρο email και τσέκαρε το κουτί για να μπορέσω να το λάβω.'
+      required: 'Συμπλήρωσε όνομα και ένα έγκυρο email για να μπορέσω να το λάβω.'
     },
     s1: {
       label: 'Τι χτίζεις;',
-      stageQ: 'Πού βρίσκεσαι αυτή τη στιγμή;',
+      stageQ: 'Πού βρίσκεσαι αυτή τη στιγμή; (διάλεξε όσα ισχύουν)',
       stage: ['Μισθωτός και σκέφτομαι σοβαρά να χτίσω κάτι δικό μου', 'Χτίζω κάτι παράλληλα με τη δουλειά μου', 'Freelancer / ελεύθερος επαγγελματίας', 'Consultant / σύμβουλος', 'Solopreneur', 'Founder / ιδιοκτήτης επιχείρησης', 'Κάτι άλλο'],
       timeQ: 'Πόσο καιρό ασχολείσαι ενεργά με αυτό;',
       time: ['Δεν έχω ξεκινήσει ακόμα', 'Λιγότερο από 6 μήνες', '6–12 μήνες', '1–3 χρόνια', 'Πάνω από 3 χρόνια'],
@@ -121,7 +121,7 @@ const DIAG = {
       name: 'Όνομα',
       email: 'Email',
       website: 'Website / LinkedIn (προαιρετικό)',
-      consent: 'Στείλε τις απαντήσεις μου στον Άγγελο. Καταλαβαίνω ότι αυτό δεν είναι κλινική διάγνωση ή αυτοματοποιημένο τεστ.',
+      notice: 'Οι απαντήσεις σου πάνε κατευθείαν στον Άγγελο. Τις διαβάζει ο ίδιος και απαντά προσωπικά — δεν είναι κλινική διάγνωση ή αυτοματοποιημένο τεστ.',
       submit: 'ΑΠΟΣΤΟΛΗ →',
       sending: 'Αποστολή…'
     },
@@ -158,48 +158,225 @@ const DIMENSIONS = [{
   key: 'Pressure / disconnection',
   qs: [20, 27, 28, 30]
 }];
+
+// ── Presentational sub-components at module scope, so controlled inputs keep
+// focus and scroll position across re-renders (defining them inside the page
+// component made React remount the textarea on every keystroke). ─────────────
+function DField({
+  label,
+  value,
+  onChange,
+  C,
+  rows
+}) {
+  return React.createElement('div', {
+    style: {
+      marginBottom: '2.1rem'
+    }
+  }, React.createElement('p', {
+    style: C.qLabel
+  }, label), React.createElement('textarea', {
+    rows: rows || 3,
+    value: value || '',
+    onChange: e => onChange(e.target.value),
+    style: {
+      ...C.field,
+      resize: 'vertical'
+    }
+  }));
+}
+function DChoice({
+  label,
+  options,
+  C,
+  selected,
+  onPick,
+  multi
+}) {
+  return React.createElement('div', {
+    style: {
+      marginBottom: '2.1rem'
+    }
+  }, React.createElement('p', {
+    style: C.qLabel
+  }, label), options.map((o, i) => {
+    const on = multi ? (selected || []).includes(i) : selected === i;
+    const box = multi ? React.createElement('span', {
+      'aria-hidden': 'true',
+      style: {
+        width: 18,
+        height: 18,
+        flexShrink: 0,
+        borderRadius: 4,
+        border: '1.5px solid ' + (on ? '#1a7f37' : 'rgba(40,39,38,.4)'),
+        background: on ? '#1a7f37' : 'transparent',
+        color: '#fff',
+        fontSize: 12,
+        lineHeight: '16px',
+        textAlign: 'center',
+        marginRight: '.7rem',
+        display: 'inline-block'
+      }
+    }, on ? '✓' : '') : null;
+    return React.createElement('button', {
+      key: i,
+      className: 'opt-btn',
+      style: {
+        ...C.choice(on),
+        display: 'flex',
+        alignItems: 'center'
+      },
+      onClick: () => onPick(i)
+    }, box, React.createElement('span', null, o));
+  }));
+}
+function DScale({
+  text,
+  value,
+  onPick,
+  C,
+  low,
+  high
+}) {
+  return React.createElement('div', {
+    style: C.row
+  }, React.createElement('p', {
+    style: {
+      ...C.qLabel,
+      marginBottom: '.9rem',
+      fontWeight: 500
+    }
+  }, text), React.createElement('div', {
+    style: {
+      display: 'flex',
+      gap: '.5rem'
+    }
+  }, [1, 2, 3, 4, 5].map(v => React.createElement('button', {
+    key: v,
+    className: 'opt-btn',
+    style: C.scaleBtn(value === v),
+    onClick: () => onPick(v)
+  }, v))), React.createElement('div', {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      marginTop: '.5rem'
+    }
+  }, React.createElement('span', {
+    style: {
+      fontSize: '12px',
+      color: '#8a8a8a'
+    }
+  }, low), React.createElement('span', {
+    style: {
+      fontSize: '12px',
+      color: '#8a8a8a'
+    }
+  }, high)));
+}
+function DProg({
+  n,
+  progress,
+  C,
+  t
+}) {
+  return React.createElement('div', {
+    style: {
+      marginBottom: '2rem'
+    }
+  }, React.createElement('div', {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      gap: '1rem'
+    }
+  }, React.createElement('p', {
+    style: C.eyebrow
+  }, t.nav.section + ' ' + n + ' ' + t.nav.of + ' 5'), React.createElement('p', {
+    style: C.eyebrow
+  }, progress + '% ' + t.nav.progress)), React.createElement('div', {
+    style: C.progLine
+  }, React.createElement('div', {
+    style: C.progFill(progress)
+  })));
+}
+function DNav({
+  onBack,
+  onNext,
+  nextLabel,
+  C,
+  t
+}) {
+  return React.createElement('div', {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      gap: '1rem',
+      marginTop: '2.5rem'
+    }
+  }, React.createElement('button', {
+    className: 'cta-btn',
+    style: {
+      ...C.cta,
+      ...C.ctaSec
+    },
+    onClick: onBack
+  }, t.nav.back), React.createElement('button', {
+    className: 'cta-btn',
+    style: C.cta,
+    onClick: onNext
+  }, nextLabel || t.nav.next));
+}
 function DiagnosticPage({
   lang = 'en'
 }) {
   const {
     useState,
+    useEffect,
     useRef
   } = React;
   const t = DIAG[lang] || DIAG.en;
   const [screen, setScreen] = useState('intro'); // intro | 1 | 2 | 3 | 4 | 5 | done
   const [ans, setAns] = useState({}); // scored: b1..b8, x1..x10, i1..i12
-  const [prof, setProf] = useState({}); // stage/time/rev + goal/problem
+  const [prof, setProf] = useState({
+    stage: []
+  }); // stage (multi) + time/rev + goal/problem
   const [opens, setOpens] = useState({}); // s5 open answers 0..3
   const [name, setName] = useState('');
   const [emailV, setEmailV] = useState('');
   const [website, setWebsite] = useState('');
-  const [consent, setConsent] = useState(false);
   const [sending, setSending] = useState(false);
   const [err, setErr] = useState('');
-  const mainRef = useRef(null);
-  const scrollTop = () => {
-    if (mainRef.current) mainRef.current.scrollTop = 0;
-  };
   const bookHref = lang === 'el' ? '/el/book/' : '/book/';
   const mob = typeof window !== 'undefined' && window.innerWidth < 768;
+
+  // Scroll the real scrolling container (#main-scroll) — and the window as a
+  // fallback — to the top whenever the screen changes.
+  const scrollTop = () => {
+    const s = typeof document !== 'undefined' && document.getElementById('main-scroll');
+    if (s) s.scrollTop = 0;
+    if (typeof window !== 'undefined' && window.scrollTo) window.scrollTo(0, 0);
+  };
+  useEffect(() => {
+    scrollTop();
+  }, [screen]);
+  const go = s => {
+    setScreen(s);
+    scrollTop();
+  };
   const SCORED = [{
     pfx: 'b',
-    section: t.s2,
-    base: 0
+    section: t.s2
   }, {
     pfx: 'x',
-    section: t.s3,
-    base: 8
+    section: t.s3
   }, {
     pfx: 'i',
-    section: t.s4,
-    base: 18
+    section: t.s4
   }];
   const totalScored = 30;
   const answeredScored = SCORED.reduce((n, s) => n + s.section.statements.filter((_, i) => ans[s.pfx + (i + 1)] !== undefined).length, 0);
   const progress = Math.round(answeredScored / totalScored * 100);
-
-  // Global Q number (1..30) → stored answer value or undefined.
   function valByQ(q) {
     if (q <= 8) return ans['b' + q];
     if (q <= 18) return ans['x' + (q - 8)];
@@ -211,12 +388,10 @@ function DiagnosticPage({
   function fmt(v) {
     return v === null ? '—' : v.toFixed(1);
   }
-
-  // ── Structured internal report (English labels; content stays verbatim) ──────
   function buildReport() {
     const L = [];
     const line = s => L.push(s);
-    const enS = DIAG.en; // stable English statement labels for Aggelos
+    const enS = DIAG.en;
     line('STARTING DIAGNOSTIC — new submission');
     line('Language: ' + (lang === 'el' ? 'Greek (/el/)' : 'English'));
     line('Submitted: ' + new Date().toISOString());
@@ -228,7 +403,8 @@ function DiagnosticPage({
     line('Website / LinkedIn: ' + (website || '—'));
     line('');
     line('── WHERE THEY ARE ──');
-    line('Stage: ' + (prof.stage != null ? enS.s1.stage[prof.stage] : '—'));
+    const stages = (prof.stage || []).map(i => enS.s1.stage[i]).filter(Boolean);
+    line('Stage: ' + (stages.length ? stages.join('; ') : '—'));
     line('Time building: ' + (prof.time != null ? enS.s1.time[prof.time] : '—'));
     line('Revenue stage: ' + (prof.rev != null ? enS.s1.rev[prof.rev] : '—'));
     line('');
@@ -236,32 +412,29 @@ function DiagnosticPage({
     line('12-month goal: ' + (prof.goal || '—'));
     line('Biggest problem now: ' + (prof.problem || '—'));
     line('');
-    const dumpScored = (title, pfx, enStatements, startNo) => {
+    const dump = (title, pfx, statements, startNo) => {
       line('── ' + title + ' (1 = not true at all, 5 = very true) ──');
-      enStatements.forEach((st, i) => {
+      statements.forEach((st, i) => {
         const v = ans[pfx + (i + 1)];
         line(startNo + i + '. ' + st + ' => ' + (v === undefined ? '—' : v));
       });
       line('');
     };
-    dumpScored('BUSINESS', 'b', enS.s2.statements, 1);
-    dumpScored('BEHAVIOUR / EXECUTION', 'x', enS.s3.statements, 9);
-    dumpScored('IDENTITY / PRESSURE', 'i', enS.s4.statements, 19);
+    dump('BUSINESS', 'b', enS.s2.statements, 1);
+    dump('BEHAVIOUR / EXECUTION', 'x', enS.s3.statements, 9);
+    dump('IDENTITY / PRESSURE', 'i', enS.s4.statements, 19);
     line('── OPEN ANSWERS (verbatim) ──');
     enS.s5.opens.forEach((label, i) => {
       line(label);
       line(opens[i] || '—');
       line('');
     });
-    // Internal scanning aids — never shown to the user.
     line('── INTERNAL SIGNALS (scanning aids only — NOT a diagnosis) ──');
     DIMENSIONS.forEach(d => {
       const vals = d.qs.map(valByQ).filter(v => typeof v === 'number');
       line(d.key + (d.positive ? ' (higher = stronger)' : '') + ': ' + fmt(avg(vals)) + ' / 5  (' + vals.length + '/' + d.qs.length + ' answered)');
     });
     line('');
-    // Five strongest signals from the behaviour + identity statements (Q9–30),
-    // where a high value means the pattern is present.
     const psych = [];
     for (let q = 9; q <= 30; q++) {
       const v = valByQ(q);
@@ -282,7 +455,7 @@ function DiagnosticPage({
   function submit() {
     const em = emailV.trim();
     const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
-    if (!name.trim() || !validEmail || !consent) {
+    if (!name.trim() || !validEmail) {
       setErr(t.nav.required);
       return;
     }
@@ -301,17 +474,15 @@ function DiagnosticPage({
     };
     const finish = () => {
       setSending(false);
-      setScreen('done');
-      scrollTop();
+      go('done');
     };
     let done = false;
-    const go = () => {
+    const done1 = () => {
       if (!done) {
         done = true;
         finish();
       }
     };
-    // Best-effort backup log to the sheet (unknown columns are ignored).
     try {
       fetch(GOOGLE_SHEET_WEB_APP_URL, {
         method: 'POST',
@@ -320,17 +491,15 @@ function DiagnosticPage({
       }).catch(() => {});
     } catch (e) {}
     if (window.emailjs) {
-      emailjs.send('service_i4xq7vg', 'template_wdsrbdo', payload).then(go).catch(e => {
+      emailjs.send('service_i4xq7vg', 'template_wdsrbdo', payload).then(done1).catch(e => {
         console.error('Email error:', e);
-        go();
+        done1();
       });
-      setTimeout(go, 6000); // never trap the user if the network stalls
+      setTimeout(done1, 6000);
     } else {
-      go();
+      done1();
     }
   }
-
-  // ── Styles ───────────────────────────────────────────────────────────────
   const ACC = '#1a7f37';
   const C = {
     page: {
@@ -468,213 +637,91 @@ function DiagnosticPage({
     mob,
     lang
   }) : null;
-  function ChoiceGroup({
-    q,
-    options,
-    valueKey
-  }) {
-    return /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginBottom: '2.25rem'
-      }
-    }, /*#__PURE__*/React.createElement("p", {
-      style: C.qLabel
-    }, q), options.map((o, i) => /*#__PURE__*/React.createElement("button", {
-      key: i,
-      className: "opt-btn",
-      style: C.choice(prof[valueKey] === i),
-      onClick: () => setProf(p => ({
-        ...p,
-        [valueKey]: i
-      }))
-    }, o)));
-  }
-  function OpenField({
-    q,
-    value,
-    onChange,
-    rows
-  }) {
-    return /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginBottom: '2.25rem'
-      }
-    }, /*#__PURE__*/React.createElement("p", {
-      style: C.qLabel
-    }, q), /*#__PURE__*/React.createElement("textarea", {
-      rows: rows || 3,
-      value: value || '',
-      onChange: e => onChange(e.target.value),
-      style: {
-        ...C.field,
-        resize: 'vertical'
-      }
-    }));
-  }
-  function ScaleRow({
-    text,
-    pfx,
-    i
-  }) {
-    const key = pfx + (i + 1);
-    return /*#__PURE__*/React.createElement("div", {
-      style: C.row
-    }, /*#__PURE__*/React.createElement("p", {
-      style: {
-        ...C.qLabel,
-        marginBottom: '.9rem',
-        fontWeight: 500
-      }
-    }, text), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        gap: '.5rem'
-      }
-    }, [1, 2, 3, 4, 5].map(v => /*#__PURE__*/React.createElement("button", {
-      key: v,
-      className: "opt-btn",
-      style: C.scaleBtn(ans[key] === v),
-      onClick: () => setAns(a => ({
-        ...a,
-        [key]: v
-      }))
-    }, v))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        marginTop: '.5rem'
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: '12px',
-        color: '#8a8a8a'
-      }
-    }, t.scale.low), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: '12px',
-        color: '#8a8a8a'
-      }
-    }, t.scale.high)));
-  }
-  function NavRow({
-    onBack,
-    onNext,
-    nextLabel
-  }) {
-    return /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        gap: '1rem',
-        marginTop: '2.5rem'
-      }
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "cta-btn",
-      style: {
-        ...C.cta,
-        ...C.ctaSec
-      },
-      onClick: onBack
-    }, t.nav.back), /*#__PURE__*/React.createElement("button", {
-      className: "cta-btn",
-      style: C.cta,
-      onClick: onNext
-    }, nextLabel || t.nav.next));
-  }
-  function ProgressHead({
-    n
-  }) {
-    return /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginBottom: '2rem'
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        gap: '1rem'
-      }
-    }, /*#__PURE__*/React.createElement("p", {
-      style: C.eyebrow
-    }, t.nav.section, " ", n, " ", t.nav.of, " 5"), /*#__PURE__*/React.createElement("p", {
-      style: C.eyebrow
-    }, progress, "% ", t.nav.progress)), /*#__PURE__*/React.createElement("div", {
-      style: C.progLine
-    }, /*#__PURE__*/React.createElement("div", {
-      style: C.progFill(progress)
-    })));
-  }
-
-  // ── Screens ─────────────────────────────────────────────────────────────
-  if (screen === 'intro') return /*#__PURE__*/React.createElement("div", {
-    style: C.page,
-    ref: mainRef
-  }, /*#__PURE__*/React.createElement("div", {
+  const toggleStage = i => setProf(p => {
+    const cur = p.stage || [];
+    return {
+      ...p,
+      stage: cur.includes(i) ? cur.filter(x => x !== i) : [...cur, i]
+    };
+  });
+  if (screen === 'intro') return React.createElement('div', {
+    style: C.page
+  }, React.createElement('div', {
     style: {
       ...C.eyebrow,
       color: ACC,
       marginBottom: '1rem'
     }
-  }, t.dir), /*#__PURE__*/React.createElement("h1", {
+  }, t.dir), React.createElement('h1', {
     style: C.h1
-  }, t.intro.h1), t.intro.p.map((x, i) => /*#__PURE__*/React.createElement("p", {
+  }, t.intro.h1), t.intro.p.map((x, i) => React.createElement('p', {
     key: i,
     style: C.p
-  }, x)), /*#__PURE__*/React.createElement("p", {
+  }, x)), React.createElement('p', {
     style: {
       ...C.note,
       marginBottom: '2rem'
     }
-  }, t.intro.duration), /*#__PURE__*/React.createElement("button", {
-    className: "cta-btn",
+  }, t.intro.duration), React.createElement('button', {
+    className: 'cta-btn',
     style: C.cta,
-    onClick: () => {
-      setScreen(1);
-      scrollTop();
-    }
+    onClick: () => go(1)
   }, t.intro.start), footer());
-  if (screen === 1) return /*#__PURE__*/React.createElement("div", {
-    style: C.page,
-    ref: mainRef
-  }, /*#__PURE__*/React.createElement(ProgressHead, {
-    n: 1
-  }), /*#__PURE__*/React.createElement("h2", {
+  if (screen === 1) return React.createElement('div', {
+    style: C.page
+  }, React.createElement(DProg, {
+    n: 1,
+    progress,
+    C,
+    t
+  }), React.createElement('h2', {
     style: C.sectionH
-  }, t.s1.label), /*#__PURE__*/React.createElement(ChoiceGroup, {
-    q: t.s1.stageQ,
+  }, t.s1.label), React.createElement(DChoice, {
+    label: t.s1.stageQ,
     options: t.s1.stage,
-    valueKey: "stage"
-  }), /*#__PURE__*/React.createElement(ChoiceGroup, {
-    q: t.s1.timeQ,
+    C,
+    selected: prof.stage,
+    onPick: toggleStage,
+    multi: true
+  }), React.createElement(DChoice, {
+    label: t.s1.timeQ,
     options: t.s1.time,
-    valueKey: "time"
-  }), /*#__PURE__*/React.createElement(ChoiceGroup, {
-    q: t.s1.revQ,
+    C,
+    selected: prof.time,
+    onPick: i => setProf(p => ({
+      ...p,
+      time: i
+    }))
+  }), React.createElement(DChoice, {
+    label: t.s1.revQ,
     options: t.s1.rev,
-    valueKey: "rev"
-  }), /*#__PURE__*/React.createElement(OpenField, {
-    q: t.s1.goalQ,
+    C,
+    selected: prof.rev,
+    onPick: i => setProf(p => ({
+      ...p,
+      rev: i
+    }))
+  }), React.createElement(DField, {
+    label: t.s1.goalQ,
     value: prof.goal,
     onChange: v => setProf(p => ({
       ...p,
       goal: v
-    }))
-  }), /*#__PURE__*/React.createElement(OpenField, {
-    q: t.s1.problemQ,
+    })),
+    C
+  }), React.createElement(DField, {
+    label: t.s1.problemQ,
     value: prof.problem,
     onChange: v => setProf(p => ({
       ...p,
       problem: v
-    }))
-  }), /*#__PURE__*/React.createElement(NavRow, {
-    onBack: () => {
-      setScreen('intro');
-      scrollTop();
-    },
-    onNext: () => {
-      setScreen(2);
-      scrollTop();
-    }
+    })),
+    C
+  }), React.createElement(DNav, {
+    onBack: () => go('intro'),
+    onNext: () => go(2),
+    C,
+    t
   }));
   if (screen === 2 || screen === 3 || screen === 4) {
     const cfg = {
@@ -687,145 +734,133 @@ function DiagnosticPage({
       3: 'x',
       4: 'i'
     }[screen];
-    return /*#__PURE__*/React.createElement("div", {
-      style: C.page,
-      ref: mainRef
-    }, /*#__PURE__*/React.createElement(ProgressHead, {
-      n: screen
-    }), /*#__PURE__*/React.createElement("h2", {
+    return React.createElement('div', {
+      style: C.page
+    }, React.createElement(DProg, {
+      n: screen,
+      progress,
+      C,
+      t
+    }), React.createElement('h2', {
       style: C.sectionH
-    }, cfg.label), cfg.statements.map((st, i) => /*#__PURE__*/React.createElement(ScaleRow, {
+    }, cfg.label), cfg.statements.map((st, i) => React.createElement(DScale, {
       key: i,
       text: st,
-      pfx: pfx,
-      i: i
-    })), /*#__PURE__*/React.createElement(NavRow, {
-      onBack: () => {
-        setScreen(screen - 1);
-        scrollTop();
-      },
-      onNext: () => {
-        setScreen(screen + 1);
-        scrollTop();
-      }
+      value: ans[pfx + (i + 1)],
+      onPick: v => setAns(a => ({
+        ...a,
+        [pfx + (i + 1)]: v
+      })),
+      C,
+      low: t.scale.low,
+      high: t.scale.high
+    })), React.createElement(DNav, {
+      onBack: () => go(screen - 1),
+      onNext: () => go(screen + 1),
+      C,
+      t
     }));
   }
-  if (screen === 5) return /*#__PURE__*/React.createElement("div", {
-    style: C.page,
-    ref: mainRef
-  }, /*#__PURE__*/React.createElement(ProgressHead, {
-    n: 5
-  }), /*#__PURE__*/React.createElement("h2", {
+  if (screen === 5) return React.createElement('div', {
+    style: C.page
+  }, React.createElement(DProg, {
+    n: 5,
+    progress,
+    C,
+    t
+  }), React.createElement('h2', {
     style: C.sectionH
-  }, t.s5.label), t.s5.opens.map((q, i) => /*#__PURE__*/React.createElement(OpenField, {
+  }, t.s5.label), t.s5.opens.map((q, i) => React.createElement(DField, {
     key: i,
-    q: q,
+    label: q,
     value: opens[i],
     onChange: v => setOpens(o => ({
       ...o,
       [i]: v
-    }))
-  })), /*#__PURE__*/React.createElement("div", {
+    })),
+    C
+  })), React.createElement('div', {
     style: {
       borderTop: '1px solid rgba(40,39,38,.14)',
       paddingTop: '2rem',
       marginTop: '.5rem'
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, React.createElement('div', {
     style: {
       marginBottom: '1.2rem'
     }
-  }, /*#__PURE__*/React.createElement("label", {
+  }, React.createElement('label', {
     style: {
       ...C.eyebrow,
       display: 'block',
       marginBottom: '.5rem'
     }
-  }, t.s5.name), /*#__PURE__*/React.createElement("input", {
-    type: "text",
+  }, t.s5.name), React.createElement('input', {
+    type: 'text',
     value: name,
     onChange: e => setName(e.target.value),
     style: C.field
-  })), /*#__PURE__*/React.createElement("div", {
+  })), React.createElement('div', {
     style: {
       marginBottom: '1.2rem'
     }
-  }, /*#__PURE__*/React.createElement("label", {
+  }, React.createElement('label', {
     style: {
       ...C.eyebrow,
       display: 'block',
       marginBottom: '.5rem'
     }
-  }, t.s5.email), /*#__PURE__*/React.createElement("input", {
-    type: "email",
+  }, t.s5.email), React.createElement('input', {
+    type: 'email',
     value: emailV,
     onChange: e => setEmailV(e.target.value),
-    placeholder: "you@example.com",
+    placeholder: 'you@example.com',
     style: C.field
-  })), /*#__PURE__*/React.createElement("div", {
+  })), React.createElement('div', {
     style: {
       marginBottom: '1.4rem'
     }
-  }, /*#__PURE__*/React.createElement("label", {
+  }, React.createElement('label', {
     style: {
       ...C.eyebrow,
       display: 'block',
       marginBottom: '.5rem'
     }
-  }, t.s5.website), /*#__PURE__*/React.createElement("input", {
-    type: "text",
+  }, t.s5.website), React.createElement('input', {
+    type: 'text',
     value: website,
     onChange: e => setWebsite(e.target.value),
     style: C.field
-  })), /*#__PURE__*/React.createElement("label", {
+  })), React.createElement('p', {
     style: {
-      display: 'flex',
-      gap: '.7rem',
-      alignItems: 'flex-start',
-      cursor: 'pointer',
-      marginBottom: '1.5rem'
+      fontSize: '14px',
+      lineHeight: 1.65,
+      color: '#666',
+      margin: '0 0 1.5rem',
+      paddingLeft: '.9rem',
+      borderLeft: '2px solid ' + ACC
     }
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "checkbox",
-    checked: consent,
-    onChange: e => setConsent(e.target.checked),
-    style: {
-      marginTop: '4px',
-      width: 18,
-      height: 18,
-      accentColor: ACC,
-      flexShrink: 0
-    }
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: '15px',
-      lineHeight: 1.6,
-      color: '#282726'
-    }
-  }, t.s5.consent)), err && /*#__PURE__*/React.createElement("p", {
+  }, t.s5.notice), err && React.createElement('p', {
     style: {
       color: '#c0392b',
       fontSize: '14px',
       margin: '0 0 1rem'
     }
-  }, err), /*#__PURE__*/React.createElement("div", {
+  }, err), React.createElement('div', {
     style: {
       display: 'flex',
       justifyContent: 'space-between',
       gap: '1rem'
     }
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "cta-btn",
+  }, React.createElement('button', {
+    className: 'cta-btn',
     style: {
       ...C.cta,
       ...C.ctaSec
     },
-    onClick: () => {
-      setScreen(4);
-      scrollTop();
-    }
-  }, t.nav.back), /*#__PURE__*/React.createElement("button", {
-    className: "cta-btn",
+    onClick: () => go(4)
+  }, t.nav.back), React.createElement('button', {
+    className: 'cta-btn',
     style: {
       ...C.cta,
       opacity: sending ? 0.5 : 1
@@ -833,23 +868,22 @@ function DiagnosticPage({
     disabled: sending,
     onClick: submit
   }, sending ? t.s5.sending : t.s5.submit))));
-  if (screen === 'done') return /*#__PURE__*/React.createElement("div", {
-    style: C.page,
-    ref: mainRef
-  }, /*#__PURE__*/React.createElement("div", {
+  if (screen === 'done') return React.createElement('div', {
+    style: C.page
+  }, React.createElement('div', {
     style: {
       ...C.eyebrow,
       color: ACC,
       marginBottom: '1rem'
     }
-  }, t.dir), /*#__PURE__*/React.createElement("h1", {
+  }, t.dir), React.createElement('h1', {
     style: C.h1
-  }, t.done.h1), t.done.p.map((x, i) => /*#__PURE__*/React.createElement("p", {
+  }, t.done.h1), t.done.p.map((x, i) => React.createElement('p', {
     key: i,
     style: C.p
-  }, x)), /*#__PURE__*/React.createElement("a", {
+  }, x)), React.createElement('a', {
     href: bookHref,
-    className: "cta-btn",
+    className: 'cta-btn',
     style: {
       ...C.cta,
       marginTop: '.8rem'
