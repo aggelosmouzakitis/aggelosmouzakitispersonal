@@ -1,128 +1,155 @@
 // gen-copy-doc.js — assemble the full bilingual website copy into one Markdown
-// document. Marketing pages are extracted verbatim from the compiled bundle so
-// the copy is exactly what ships. Run: node scripts/gen-copy-doc.js
+// document, extracted verbatim from the compiled bundles so the copy is exactly
+// what ships. Run: node scripts/gen-copy-doc.js
 const fs = require('fs'), vm = require('vm'), path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const OUT = path.join(ROOT, 'site-unification', 'site-copy-en-el.md');
 
-// ── Extract data objects from content-pages.js ───────────────────────────────
-let code = fs.readFileSync(path.join(ROOT, 'content-pages.js'), 'utf8');
-const sb = { console, fetch: () => Promise.resolve({ json: () => Promise.resolve([]) }),
-  window: { innerWidth: 1200, addEventListener() {}, removeEventListener() {} },
-  document: { getElementById: () => ({}), querySelector: () => null, createElement: () => ({}), body: { appendChild() {} } } };
-sb.React = { createElement: () => ({}), useState: v => [v, () => {}], useEffect() {}, useRef: () => ({ current: null }), Fragment: 'F' };
-sb.ReactDOM = { createRoot: () => ({ render() {} }) };
-sb.globalThis = sb;
-code += '\n;globalThis.__C__={HOME:HOME,ONE:ONE,ABOUT:ABOUT,REVIEWS:REVIEWS,RI:REVIEWS_ITEMS,BOOK:BOOK,UI:UI};';
-vm.createContext(sb); vm.runInContext(code, sb, { timeout: 5000 });
-const C = sb.__C__;
+function runExtract(file, exportStmt, extraStub) {
+  let code = fs.readFileSync(path.join(ROOT, file), 'utf8');
+  const sb = {
+    console,
+    fetch: () => Promise.resolve({ json: () => Promise.resolve([]) }),
+    window: { innerWidth: 1200, addEventListener() {}, removeEventListener() {}, location: { href: '' } },
+    document: { getElementById: () => ({}), querySelector: () => null, createElement: () => ({}), body: { appendChild() {} } },
+  };
+  sb.React = { createElement: () => ({}), useState: v => [v, () => {}], useEffect() {}, useRef: () => ({ current: null }), Fragment: 'F' };
+  sb.ReactDOM = { createRoot: () => ({ render() {} }) };
+  Object.assign(sb, extraStub || {});
+  sb.globalThis = sb;
+  code += '\n;' + exportStmt;
+  vm.createContext(sb);
+  vm.runInContext(code, sb, { timeout: 5000 });
+  return sb.__OUT__;
+}
 
+const C = runExtract('content-pages.js',
+  'globalThis.__OUT__={HOME:HOME,ONE:ONE,ABOUT:ABOUT,REVIEWS:REVIEWS,RI:REVIEWS_ITEMS,BOOK:BOOK,UI:UI,CONF:CONF,FOOTER:FOOTER_COPYLINE};');
+const DIAG = runExtract('diagnostic.js', 'globalThis.__OUT__=DIAG;');
 const posts = JSON.parse(fs.readFileSync(path.join(ROOT, 'blog/posts.json'), 'utf8'));
 
-// ── Confidentiality copy: pull sentence-like strings from the two components ──
-const jsx = fs.readFileSync(path.join(ROOT, 'content-pages.jsx'), 'utf8');
-function slice(name) { const i = jsx.indexOf('function ' + name); return i < 0 ? '' : jsx.slice(i, i + 9000); }
-function sentences(txt) {
-  const out = []; const re = /["'`]([^"'`]{22,}?)["'`]/g; let m;
-  while ((m = re.exec(txt))) {
-    const s = m[1];
-    if (!/\s/.test(s)) continue;                                   // needs a space
-    if (/\d+px|rgba|#[0-9a-f]{3}|solid |flex|grid|1fr|inherit|translate|:\s|\.\d+rem/i.test(s)) continue; // CSS noise
-    if (/createElement|function|href|http/.test(s)) continue;
-    out.push(s.replace(/\\u2019/g, '’').replace(/\s+/g, ' ').trim());
-  }
-  return [...new Set(out)];
-}
-const confEn = sentences(slice('ConfidentialityPage')).filter(s => !/Εμπιστ|Σε τι|Γιατί|Τίποτα|Τα όρια/.test(s));
-const confEl = sentences(slice('ConfidentialityPageEl'));
-
-// ── Build markdown ───────────────────────────────────────────────────────────
+// ── Markdown helpers ─────────────────────────────────────────────────────────
 const L = [];
 const H = (n, t) => L.push('\n' + '#'.repeat(n) + ' ' + t + '\n');
 const P = (t) => L.push(t + '\n');
 const bul = (arr) => arr.forEach(x => L.push('- ' + x));
-function pageEN_EL(title, enBlocks, elBlocks) {
+const rule = () => L.push('\n---');
+function bilingual(title, enFn, elFn) {
   H(2, title);
-  H(3, '🇬🇧 English'); enBlocks();
-  H(3, '🇬🇷 Ελληνικά'); elBlocks();
-  L.push('\n---');
+  H(3, '🇬🇧 English'); enFn();
+  H(3, '🇬🇷 Ελληνικά'); elFn();
+  rule();
 }
-function homeBlocks(c) {
-  P('**Role:** ' + (c === C.HOME.en ? 'Business Advisor + Therapist' : 'Σύμβουλος επιχειρήσεων & ψυχικής υγείας'));
+
+function home(c) {
   P('**Promise (H1):** ' + c.promise);
   P('**Tagline:** ' + c.tagline);
-  P(c.introA); P(c.introB);
-  H(4, c.recogLabel); P('_' + c.recogLead + '_'); bul(c.recog);
-  H(4, c.ceLabel); P(c.ceLead); bul(c.ce.map(x => `**${x.cause}** → ${x.effect}`)); P('_' + c.ceFoot + '_');
-  H(4, c.cpLabel); P(c.cpLead); bul(c.cp); P('**' + c.cpFoot + '**');
-  H(4, c.ttLabel); bul(c.tt.map(x => `**${x.title}** — ${x.body}`)); P('**' + c.ttCore + '**'); P('_' + c.ttNote + '_');
-  H(4, c.offerLabel); P(c.offerBody); P('→ ' + c.offerLink);
+  P(c.introA); P(c.introB); P(c.introC);
+  H(4, c.recogLabel); bul(c.recog);
+  H(4, c.bvyHead); P('_' + c.bvySub + '_');
+  P('**' + c.bizLabel + '**'); bul(c.bvyBusiness);
+  P('**' + c.youLabel + '**'); bul(c.bvyYou);
+  P(c.bvyUnder);
+  H(4, c.oneRelHead);
+  P('**' + c.bizLabel + ':** ' + c.oneRelBizList + ' — _' + c.oneRelBizQ + '_');
+  P('**' + c.youLabel + ':** ' + c.oneRelYouList + ' — _' + c.oneRelYouQ + '_');
+  P(c.oneRelNote1); P('**' + c.oneRelNote2 + '**');
   H(4, c.faqLabel); c.faq.forEach(f => { P('**Q. ' + f.q + '**'); P(f.a); });
   H(4, 'Final CTA'); P('**' + c.finalHeading + '**'); P(c.finalSub);
 }
-function oneBlocks(c) {
-  P('**H1:** ' + c.h1); P('**Lead:** ' + c.lead); P(c.intro);
-  H(4, c.whoLabel); P(c.whoLead); bul(c.who);
-  H(4, c.workLabel); bul(c.tracks.map(x => `**${x.title}** — ${x.body}`)); P('_' + c.workFoot + '_');
-  H(4, c.howLabel); bul(c.steps.map(s => `**${s.n}. ${s.title}** (${s.tag}) — ${s.body}`)); P('_' + c.howNote + '_');
-  H(4, c.expectLabel); bul(c.expect); P('_' + c.expectFoot + '_');
+function one(c) {
+  P('**H1:** ' + c.h1); P('**Lead:** ' + c.lead); c.intro.forEach(P);
+  H(4, c.workLabel);
+  P('**' + c.bizLabel + '** — ' + c.bizBody); P('_' + c.bizNote + '_');
+  P('**' + c.youLabel + '** — ' + c.youBody); P('_' + c.youNote + '_');
+  P(c.workUnder);
+  H(4, c.lookLabel); P('**' + c.lookLead + '**'); bul(c.lookMaybes); P('**' + c.lookMid + '**'); c.lookClose.forEach(P);
+  H(4, c.howLabel); c.steps.forEach(s => P(`**${s.n}. ${s.title}**${s.tag ? ' (' + s.tag + ')' : ''} — ${s.body}`));
   H(4, c.faqLabel); c.faq.forEach(f => { P('**Q. ' + f.q + '**'); P(f.a); });
-  H(4, 'CTA'); P('**' + c.ctaHeading + '**');
+  H(4, 'CTA'); P('**' + c.ctaHeading + '**'); P(c.ctaSub);
 }
-function aboutBlocks(c) {
-  P('**H1:** ' + c.h1); P('**Role:** ' + c.role); P('**Credentials:** ' + c.creds); P('**Lead:** ' + c.lead);
+function about(c) {
+  P('**H1:** ' + c.h1); P('**Role:** ' + c.role); P('**Credentials:** ' + c.creds);
+  P('**Lead:** ' + c.lead); c.intro.forEach(P);
   c.sections.forEach(s => { H(4, s.label); s.body.forEach(P); });
-  H(4, 'CTA'); P('**' + c.ctaHeading + '**');
+  H(4, 'CTA'); P('**' + c.ctaHeading + '**'); P('→ ' + c.ctaLabel);
 }
-function bookBlocks(c) {
-  P('**H1:** ' + c.h1); P('**Lead:** ' + c.lead); P(c.p1); P(c.p2);
-  H(4, c.howLabel); P(`**${c.s1a}**${c.s1b}`); P(`**${c.s2a}**${c.s2b}`); P(`**${c.s3a}**${c.s3b}`);
-  H(4, c.whoLabel); P(c.who);
+function book(c) {
+  P('**H1:** ' + c.h1); c.intro.forEach(P);
+  P('_[' + c.bookBelow + ' — calendar embed]_');
+  P('**' + c.crossLead + '** ' + c.crossBody + ' → ' + c.crossBtn);
+}
+function conf(c) {
+  P('**H1:** ' + c.h1); c.intro.forEach(P);
+  c.sections.forEach(s => {
+    H(4, s.label);
+    s.body.forEach(P);
+    if (s.list) bul(s.list);
+    if (s.after) s.after.forEach(P);
+  });
+}
+function diag(c) {
+  P('**Intro (H1):** ' + c.intro.h1);
+  c.intro.p.forEach(P); P('_' + c.intro.duration + '_'); P('CTA: ' + c.intro.start);
+  H(4, 'Section 1 — ' + c.s1.label);
+  P('**' + c.s1.stageQ + '**'); bul(c.s1.stage);
+  P('**' + c.s1.timeQ + '**'); bul(c.s1.time);
+  P('**' + c.s1.revQ + '**'); bul(c.s1.rev);
+  P('**' + c.s1.goalQ + '** _(open answer)_');
+  P('**' + c.s1.problemQ + '** _(open answer)_');
+  const scored = (sec) => { H(4, 'Section — ' + sec.label + ' _(1 = ' + c.scale.low + ' → 5 = ' + c.scale.high + ')_'); sec.statements.forEach((s, i) => P((i + 1) + '. ' + s)); };
+  scored(c.s2); scored(c.s3); scored(c.s4);
+  H(4, 'Section 5 — ' + c.s5.label);
+  c.s5.opens.forEach(o => P('- ' + o + ' _(open answer)_'));
+  P('Fields: ' + c.s5.name + ' · ' + c.s5.email + ' · ' + c.s5.website);
+  P('Consent: ' + c.s5.consent);
+  P('CTA: ' + c.s5.submit);
+  H(4, 'After submission');
+  P('**' + c.done.h1 + '**'); c.done.p.forEach(P); P('CTA: ' + c.done.book);
 }
 
-// Header
+// ── Header ───────────────────────────────────────────────────────────────────
 L.push('# Aggelos Mouzakitis — Website Copy (English + Ελληνικά)');
-L.push('\n_Generated from the live source (`content-pages.jsx`, `blog/posts.json`, and the Greek diagnostic). One brand, one offer (1:1), two languages._\n');
+L.push('\n_Generated from the live source. One brand, one core offer (1:1), two languages. Business Advisor + Licensed Psychotherapist._\n');
 
-// Navigation + CTAs + footer labels
 H(2, 'Navigation, CTAs & footer labels');
 P('| | English | Ελληνικά |');
 P('|---|---|---|');
-P('| Role | Business Advisor + Therapist | Σύμβουλος επιχειρήσεων & ψυχικής υγείας |');
+P('| Role | ' + C.UI.en.role + ' | ' + C.UI.el.role + ' |');
 P('| Nav | Home · Work with me · About · Writing · Reviews | Αρχική · Συνεργασία · Σχετικά · Άρθρα · Κριτικές |');
-P('| Sidebar CTA | Burnout Diagnostic — “' + C.UI.en.book + '” replaced by → Take the diagnostic | Burnout Diagnostic → Κάνε το τεστ |');
-P('| Primary CTAs | ' + C.UI.en.seeOneToOne + ' · ' + C.UI.en.book + ' | ' + C.UI.el.seeOneToOne + ' · ' + C.UI.el.book + ' |');
-P('| Footer | © Aggelos Mouzakitis · Business Advisor + Therapist | © Άγγελος Μουζακίτης · Σύμβουλος επιχειρήσεων & ψυχικής υγείας |');
-L.push('\n---');
+P('| Primary CTA | ' + C.UI.en.book + ' | ' + C.UI.el.book + ' |');
+P('| Sidebar CTA | Starting Diagnostic · START → | Starting Diagnostic · ΞΕΚΙΝΑ → |');
+P('| Footer | ' + C.FOOTER.en + ' | ' + C.FOOTER.el + ' |');
+rule();
 
-pageEN_EL('Homepage ( / and /el/ )', () => homeBlocks(C.HOME.en), () => homeBlocks(C.HOME.el));
-pageEN_EL('Work with me — 1:1 ( /1-to-1/ and /el/1-to-1/ )', () => oneBlocks(C.ONE.en), () => oneBlocks(C.ONE.el));
-pageEN_EL('About ( /about/ and /el/about/ )', () => aboutBlocks(C.ABOUT.en), () => aboutBlocks(C.ABOUT.el));
+bilingual('Homepage ( / and /el/ )', () => home(C.HOME.en), () => home(C.HOME.el));
+bilingual('Work with me — 1:1 ( /1-to-1/ and /el/1-to-1/ )', () => one(C.ONE.en), () => one(C.ONE.el));
+bilingual('About ( /about/ and /el/about/ )', () => about(C.ABOUT.en), () => about(C.ABOUT.el));
 
 // Reviews
 H(2, 'Reviews ( /reviews/ and /el/reviews/ )');
-H(3, '🇬🇧 English'); P('**H1:** ' + C.REVIEWS.en.h1); P(C.REVIEWS.en.lead);
-H(3, '🇬🇷 Ελληνικά'); P('**H1:** ' + C.REVIEWS.el.h1); P(C.REVIEWS.el.lead); if (C.REVIEWS.el.note) P('_' + C.REVIEWS.el.note + '_');
-H(3, 'Testimonials (verbatim, shown in both languages)');
-C.RI.forEach((t, i) => { P(`${i + 1}. “${t.q}” — _${t.w}_`); });
-L.push('\n---');
+H(3, '🇬🇧 English'); P('**H1:** ' + C.REVIEWS.en.h1); P(C.REVIEWS.en.lead); P('_' + C.REVIEWS.en.sub + '_');
+H(3, '🇬🇷 Ελληνικά'); P('**H1:** ' + C.REVIEWS.el.h1); P(C.REVIEWS.el.lead); P('_' + C.REVIEWS.el.sub + '_');
+P('_(Greek page shows the translation first, with a per-testimonial "' + C.REVIEWS.el.toggle + '" toggle revealing the original English.)_');
+H(3, 'Testimonials (shown order; English original + Greek translation)');
+C.RI.forEach((tt, i) => {
+  P(`**${i + 1}. ${tt.w}**`);
+  P('🇬🇧 “' + tt.q + '”');
+  P('🇬🇷 “' + tt.qEl + '”');
+});
+rule();
 
-pageEN_EL('Book a fit call ( /book/ and /el/book/ )', () => bookBlocks(C.BOOK.en), () => bookBlocks(C.BOOK.el));
-
-// Confidentiality
-H(2, 'Confidentiality ( /confidentiality/ and /el/confidentiality/ )');
-H(3, '🇬🇧 English'); bul(confEn);
-H(3, '🇬🇷 Ελληνικά'); bul(confEl);
-L.push('\n---');
+bilingual('Book a fit call ( /book/ and /el/book/ )', () => book(C.BOOK.en), () => book(C.BOOK.el));
+bilingual('Confidentiality ( /confidentiality/ and /el/confidentiality/ )', () => conf(C.CONF.en), () => conf(C.CONF.el));
+bilingual('Starting Diagnostic ( /startingdiagnostic/ and /el/startingdiagnostic/ )', () => diag(DIAG.en), () => diag(DIAG.el));
 
 // Blog
 H(2, 'Writing / Blog ( /blog/ )');
-P('**Intro (EN):** Notes on building something of your own — and the business and psychological problems that show up while you do it.');
-P('**Intro (EL):** Σημειώσεις για το χτίσιμο κάτι δικού σου — και τα επιχειρηματικά και ψυχολογικά προβλήματα που εμφανίζονται στην πορεία.');
+P('**Intro (EN):** Notes on building something of your own: customers, pricing, decisions, avoidance, ambition, identity, and all the places where business and psychology start getting mixed together.');
+P('**Intro (EL):** Για το πώς χτίζεις κάτι δικό σου: πελάτες, τιμές, αποφάσεις, φόβος έκθεσης, φιλοδοξία, ταυτότητα και όλα τα σημεία όπου business και ψυχολογία αρχίζουν να μπλέκονται.');
 P('\nPosts (' + posts.length + ', filterable All / English / Ελληνικά):\n');
 posts.forEach(p => P(`- **${p.title}** _(${p.lang})_ — ${p.date}. ${p.description}`));
-L.push('\n---');
+rule();
 
 fs.writeFileSync(OUT, L.join('\n') + '\n');
 console.log('wrote', path.relative(ROOT, OUT), '—', L.join('\n').length, 'chars');
-console.log('confidentiality: EN', confEn.length, 'lines, EL', confEl.length, 'lines');

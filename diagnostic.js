@@ -1,4 +1,8 @@
-// diagnostic.jsx — Interactive burnout diagnostic with EmailJS + Google Sheets tracking
+// diagnostic.jsx — Starting Diagnostic (bilingual EN/EL).
+// No user-facing score and no automated result. The user answers + submits
+// name/email; Aggelos receives a structured internal email and reviews it himself.
+// Internal averages + strongest signals are scanning aids only, never a diagnosis,
+// and are never shown to the user.
 
 const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby-gv3oCFT2q5KXvVnqRzS4PAzcMjPB8Gls5qodZJ3v4_9HKGqJHMdBCw7YYbEzIE2d/exec';
 if (window.emailjs) {
@@ -6,399 +10,333 @@ if (window.emailjs) {
     publicKey: 'bfBcHLXj2nKaev_lT'
   });
 }
-const DIAG_SECTIONS = [{
-  id: 'self-worth',
-  title: 'Self-worth through achievement',
-  sheetKey: 'self_worth',
-  questions: ['A bad period at work can mess with my confidence significantly.', 'When I am not doing well professionally, I tend to become harsher on myself.', 'It is easier to feel good about myself when things are going well professionally.']
-}, {
-  id: 'shame-guilt-pressure',
-  title: 'Shame, guilt, and pressure',
-  sheetKey: 'shame_guilt_pressure',
-  questions: ['I find it hard to relax when there is still work to be done.', 'I can sit down to rest and still feel like I should be productive.', 'I tend to focus on what is still missing.']
-}, {
-  id: 'comparison',
-  title: 'Comparison, shame, and not-enoughness',
-  sheetKey: 'comparison',
-  questions: ['Seeing other people do well makes me worry about my performance.', 'When someone in my close network is moving fast, I tend to think about where I am falling short.', 'I can have objectively good results and still feel behind my goals.']
-}, {
-  id: 'vulnerability',
-  title: 'Fear of vulnerability',
-  sheetKey: 'vulnerability',
-  questions: ['I feel uneasy with the idea of people close to me seeing me weak.', 'If I am struggling, my instinct is usually to keep it to myself.', 'I would rather deal with something alone than let people see me unsure or messy.']
-}, {
-  id: 'grind',
-  title: 'Pride in grind and pressure',
-  sheetKey: 'grind',
-  questions: ['I am used to carrying a lot without complaining about it.', 'Part of me takes pride in how much pressure I can handle.', 'Slowing down can feel uncomfortable, even when it seems like I need it.']
-}, {
-  id: 'identity',
-  title: 'Identity and persona',
-  sheetKey: 'identity',
-  questions: ['People know me as someone who gets things done.', 'Being capable is a big part of how I see myself.', 'Letting people down hits me hard, especially when they expect a lot from me.', 'People often tell me I am too hard on myself or that I push myself too much.']
-}, {
-  id: 'relationships',
-  title: 'Interpersonal relationships',
-  sheetKey: 'relationships',
-  questions: ['When work is heavy, I have less patience for people who do not get it.', 'When I am stressed, I can become harder to interact with.', 'There are times when I feel too loaded to really be present with other people.', 'My relationship with my partner has suffered because of how I carry stress.', 'There are times when I feel distant from my partner, or they feel unsupported by me.']
-}, {
-  id: 'drive-meaning',
-  title: 'Loss of drive and meaning',
-  sheetKey: 'drive_meaning',
-  questions: ['I have started feeling resentful about parts of work I used to take pride in.', 'I miss the times when work felt easier to enjoy.']
-}, {
-  id: 'numbness',
-  title: 'Emotional numbness and detachment',
-  sheetKey: 'numbness',
-  questions: ['I can get through a full day and still feel emotionally flat.', 'Things that used to matter to me do not land the same way now.', 'I can be productive and still feel disconnected from what I am doing.', 'I often feel less like myself and more like I am just operating.', 'There are moments when I wonder what all this effort is really for.']
-}, {
-  id: 'cynicism',
-  title: 'Cynicism and depersonalisation',
-  sheetKey: 'cynicism',
-  questions: ['I have become more cynical about work than I used to be.', 'Some parts of work now feel mechanical, even when I do them well.', 'There are moments when I feel more detached than engaged.']
-}, {
-  id: 'nervous-system',
-  title: 'Nervous-system overload',
-  sheetKey: 'nervous_system',
-  questions: ['I can be tired and still feel unable to fully settle.', 'Sleep does not always leave me feeling properly reset.', 'Stress has started showing up in my body through things like headaches, muscle tension, stomach issues, nausea, or similar symptoms.', 'My body can stay tense even when I am not actively working.']
-}, {
-  id: 'tech-activation',
-  title: 'Tech-specific constant activation',
-  sheetKey: 'tech_activation',
-  questions: ['Even when I am off, part of me still feels on call.', 'I check work things in moments that should be personal time.', 'It is hard for me to feel fully off duty.', 'My mind stays connected to work more than I want.', 'I feel a pull to reply quickly even when I do not have to.', 'I often turn to AI, self-help content, or similar inputs to figure myself out, but it rarely leads to real change.', 'I consume advice about burnout, stress, or performance, but still find myself stuck in the same patterns.']
-}];
-const FLAT_QUESTIONS = [];
-DIAG_SECTIONS.forEach(section => {
-  section.questions.forEach((text, index) => {
-    FLAT_QUESTIONS.push({
-      key: section.id + '-' + index,
-      sectionId: section.id,
-      sectionTitle: section.title,
-      text
-    });
-  });
-});
-const SCALE = [{
-  value: 1,
-  label: 'Strongly disagree'
-}, {
-  value: 2,
-  label: 'Disagree'
-}, {
-  value: 3,
-  label: 'Neither agree nor disagree'
-}, {
-  value: 4,
-  label: 'Agree'
-}, {
-  value: 5,
-  label: 'Strongly agree'
-}, {
-  value: 'na',
-  label: 'N/A'
-}];
-function avg(vals) {
-  if (!vals.length) return null;
-  return vals.reduce((a, b) => a + b, 0) / vals.length;
-}
-function getGrade(score) {
-  if (score === null) return 'Insufficient data';
-  if (score <= 2.25) return 'Level 1 — Stable but stretched';
-  if (score <= 2.9) return 'Level 2 — Performing at a cost';
-  if (score <= 3.5) return 'Level 3 — High-functioning depletion';
-  return 'Level 4 — Fulfilment breakdown';
-}
-function getDesc(score) {
-  if (score === null) return 'There is not enough data to score this assessment yet.';
-  if (score <= 2.25) return 'You are still functioning, but some parts of your operating system are starting to show strain. This is not crisis repair. It is prevention, self-awareness, and small adjustments before the cost grows.';
-  if (score <= 2.9) return 'You are still delivering, but success is starting to cost you more than it gives back. You may notice emotional fatigue, slower recovery, more irritability, less fulfilment, or a stronger dependence on achievement to feel okay.';
-  if (score <= 3.5) return 'You may still look capable from the outside, but internally your system is under significant load. This is where emotional flatness, avoidance, relationship strain, and nervous-system overload become harder to ignore.';
-  return 'At this stage the issue is no longer only stress. The way you are operating may be disconnected from your wellbeing, values, body, relationships, and sense of self. The goal is not simply to rest more — it is to rebuild your relationship with ambition and success.';
-}
-function getSectionLabel(score) {
-  if (score === null) return 'Insufficient data';
-  if (score <= 2.5) return 'Low';
-  if (score <= 3.2) return 'Elevated';
-  return 'High';
-}
 
-// Colour + fill for the per-dimension level bar (display-only).
-function getLevelVisual(score) {
-  if (score === null) return {
-    color: '#bbb',
-    pct: 0
-  };
-  const pct = Math.max(0, Math.min(100, (score - 1) / 4 * 100));
-  if (score <= 2.5) return {
-    color: '#1a7f37',
-    pct
-  };
-  if (score <= 3.2) return {
-    color: '#d9a200',
-    pct
-  };
-  return {
-    color: '#c0392b',
-    pct
-  };
-}
-function fmt(score) {
-  return score === null ? 'N/A' : score.toFixed(2);
-}
+// ── Content (bilingual) ──────────────────────────────────────────────────────
+const DIAG = {
+  en: {
+    dir: 'Starting Diagnostic',
+    intro: {
+      h1: 'Starting Diagnostic',
+      p: ["Give me ten minutes and I'll have a much better idea of what you're building, where it's getting stuck and what might actually be going on.", "This isn't a personality test and there isn't an automated score waiting at the end.", "Some questions are about the business. Some are about you. That's deliberate.", "Answer quickly rather than trying to get every answer exactly right. When you're done, I'll receive your responses and review them myself."],
+      duration: 'About 8–10 minutes.',
+      start: 'START →'
+    },
+    scale: {
+      low: 'Not true at all',
+      high: 'Very true'
+    },
+    nav: {
+      back: 'Back',
+      next: 'Continue',
+      section: 'Section',
+      of: 'of',
+      progress: 'complete',
+      required: 'Please add your name, a valid email and tick the box so I can send this.'
+    },
+    s1: {
+      label: 'What are you building?',
+      stageQ: 'Which best describes where you are right now?',
+      stage: ['Employed and thinking seriously about building something', 'Building something alongside a job', 'Freelancer / independent professional', 'Consultant / advisor', 'Solopreneur', 'Founder / business owner', 'Something else'],
+      timeQ: 'How long have you been actively working on it?',
+      time: ['Not started yet', 'Less than 6 months', '6–12 months', '1–3 years', '3+ years'],
+      revQ: 'Roughly where is the business today?',
+      rev: ['No revenue yet', 'Some occasional revenue', 'Consistent revenue, but not enough', 'Healthy business that I want to grow substantially', 'Established business/team', 'Not applicable yet'],
+      goalQ: 'What are you most trying to achieve over the next 12 months?',
+      problemQ: 'What feels like the biggest problem right now?'
+    },
+    s2: {
+      label: 'The business',
+      statements: ['I have a clear offer that people understand quickly.', "I know who I'm trying to sell to.", 'I have a reasonably reliable way of getting in front of potential customers.', 'I talk to potential customers often enough.', 'My pricing makes commercial sense.', 'I know what the most important next move in the business is.', "I'm focused enough for my efforts to compound.", "I know what is working and what I'm mostly hoping will work."]
+    },
+    s3: {
+      label: 'Getting yourself to do it',
+      statements: ["I often know what the sensible business move is and still don't do it.", 'I spend too much time preparing, researching or improving things before putting them in front of people.', 'Selling or promoting myself feels more uncomfortable than it objectively needs to.', 'A rejection can affect me long after the situation itself is over.', 'I avoid asking for the amount of money I genuinely think my work is worth.', "I change direction before I've really tested the direction I'm already in.", "I keep reopening decisions I've already made.", 'I can explain some of my patterns very well without actually changing them.', 'When something matters a lot to me, I tend to make it more complicated.', 'I sometimes use productive-looking work to avoid the thing that actually matters.']
+    },
+    s4: {
+      label: 'You inside the business',
+      statements: ['How well the business is doing affects how I feel about myself.', 'I find it hard to slow down when there is still something I could be doing.', 'I feel uncomfortable when people see me uncertain, struggling or not in control.', 'Being the capable person who figures things out is an important part of my identity.', 'I take responsibility for things that other people could probably handle without me.', 'Letting go of control feels riskier than keeping too much of it.', "I sometimes wonder who I'd be if I stopped pushing so hard.", "I've reached things I used to want badly and felt surprisingly little when I got there.", "The business occupies my mind even when I'm technically not working.", 'Work pressure leaks into my mood, body or relationships.', "I sometimes struggle to tell whether I'm moving toward something I want or away from something I'm afraid of.", "I have thoughts or doubts about my work that I don't feel comfortable saying to the people around me."]
+    },
+    s5: {
+      label: "What's happening now?",
+      opens: ['If we worked together and it went really well, what would be different six months from now?', 'What have you already tried to solve this?', "What do you suspect might be getting in your way, even if you're not sure?", "Is there anything about the business, your work or yourself that you haven't said elsewhere in this diagnostic but think I should know? (optional)"],
+      name: 'Name',
+      email: 'Email',
+      website: 'Website / LinkedIn (optional)',
+      consent: "Send my answers to Aggelos. I understand this isn't a clinical diagnostic or an automated assessment.",
+      submit: 'SEND MY DIAGNOSTIC →',
+      sending: 'Sending…'
+    },
+    done: {
+      h1: 'Got it.',
+      p: ['Your answers are with me.', "I read these myself. I'll come back to you by email once I've had a proper look.", 'If you already know you want to talk, you can also book a fit call below.'],
+      book: 'BOOK A FIT CALL →'
+    }
+  },
+  el: {
+    dir: 'Starting Diagnostic',
+    intro: {
+      h1: 'Starting Diagnostic',
+      p: ['Δώσε μου δέκα λεπτά και θα έχω πολύ καλύτερη εικόνα για το τι χτίζεις, πού έχει κολλήσει και τι μπορεί πραγματικά να συμβαίνει.', 'Δεν είναι personality test και δεν θα εμφανιστεί κάποιο αυτόματο score στο τέλος.', 'Κάποιες ερωτήσεις αφορούν το business. Κάποιες εσένα. Αυτό είναι σκόπιμο.', 'Απάντησε σχετικά γρήγορα, χωρίς να προσπαθήσεις να βρεις την «τέλεια» απάντηση. Όταν τελειώσεις, οι απαντήσεις θα έρθουν σε μένα και θα τις διαβάσω ο ίδιος.'],
+      duration: 'Περίπου 8–10 λεπτά.',
+      start: 'ΞΕΚΙΝΑ →'
+    },
+    scale: {
+      low: 'Καθόλου',
+      high: 'Πάρα πολύ'
+    },
+    nav: {
+      back: 'Πίσω',
+      next: 'Συνέχεια',
+      section: 'Ενότητα',
+      of: 'από',
+      progress: 'ολοκληρώθηκε',
+      required: 'Συμπλήρωσε όνομα, ένα έγκυρο email και τσέκαρε το κουτί για να μπορέσω να το λάβω.'
+    },
+    s1: {
+      label: 'Τι χτίζεις;',
+      stageQ: 'Πού βρίσκεσαι αυτή τη στιγμή;',
+      stage: ['Μισθωτός και σκέφτομαι σοβαρά να χτίσω κάτι δικό μου', 'Χτίζω κάτι παράλληλα με τη δουλειά μου', 'Freelancer / ελεύθερος επαγγελματίας', 'Consultant / σύμβουλος', 'Solopreneur', 'Founder / ιδιοκτήτης επιχείρησης', 'Κάτι άλλο'],
+      timeQ: 'Πόσο καιρό ασχολείσαι ενεργά με αυτό;',
+      time: ['Δεν έχω ξεκινήσει ακόμα', 'Λιγότερο από 6 μήνες', '6–12 μήνες', '1–3 χρόνια', 'Πάνω από 3 χρόνια'],
+      revQ: 'Πού βρίσκεται περίπου το business σήμερα;',
+      rev: ['Δεν έχει έσοδα ακόμα', 'Έχει κάποια περιστασιακά έσοδα', 'Έχει σταθερά έσοδα, αλλά όχι όσα θέλω', 'Πηγαίνει καλά και θέλω να το μεγαλώσω σημαντικά', 'Είναι ήδη οργανωμένη επιχείρηση / ομάδα', 'Δεν έχει εφαρμογή ακόμα'],
+      goalQ: 'Τι θέλεις περισσότερο να έχει αλλάξει μέσα στους επόμενους 12 μήνες;',
+      problemQ: 'Αν έπρεπε να διαλέξεις ένα, ποιο είναι το μεγαλύτερο πρόβλημα αυτή τη στιγμή;'
+    },
+    s2: {
+      label: 'Το business',
+      statements: ['Το offer μου είναι ξεκάθαρο και ο κόσμος καταλαβαίνει εύκολα τι πουλάω.', 'Ξέρω σε ποιους ακριβώς προσπαθώ να πουλήσω.', 'Έχω έναν σχετικά σταθερό τρόπο να βρίσκω πιθανούς πελάτες.', 'Μιλάω με πιθανούς πελάτες αρκετά συχνά.', 'Οι τιμές μου βγάζουν εμπορικό νόημα.', 'Ξέρω ποια είναι η σημαντικότερη επόμενη κίνηση για το business.', 'Είμαι αρκετά συγκεντρωμένος σε μία κατεύθυνση ώστε η προσπάθεια να αρχίσει να συσσωρεύεται.', 'Ξέρω τι πραγματικά δουλεύει και τι απλώς ελπίζω ότι θα δουλέψει.']
+    },
+    s3: {
+      label: 'Το να το κάνεις εσύ',
+      statements: ["Συχνά ξέρω ποια είναι η λογική business κίνηση και παρ' όλα αυτά δεν την κάνω.", 'Περνάω υπερβολικό χρόνο προετοιμάζοντας, ψάχνοντας ή βελτιώνοντας κάτι πριν το βγάλω προς τα έξω.', "Το να πουλήσω ή να προωθήσω τον εαυτό μου με δυσκολεύει περισσότερο απ' όσο θα έπρεπε.", 'Μια απόρριψη μπορεί να με επηρεάζει πολύ αφού το ίδιο το γεγονός έχει τελειώσει.', 'Δυσκολεύομαι να ζητήσω τα χρήματα που πραγματικά πιστεύω ότι αξίζει η δουλειά μου.', 'Αλλάζω κατεύθυνση πριν δοκιμάσω πραγματικά αυτή που ήδη έχω.', 'Ξανανοίγω αποφάσεις που θεωρητικά έχω ήδη πάρει.', 'Μπορώ να εξηγήσω πολύ καλά κάποια μοτίβα μου χωρίς αυτό να σημαίνει ότι τα αλλάζω.', 'Όσο περισσότερο με νοιάζει κάτι, τόσο πιο περίπλοκο τείνω να το κάνω.', 'Μερικές φορές γεμίζω τη μέρα με χρήσιμη δουλειά για να αποφύγω αυτή που πραγματικά έχει σημασία.']
+    },
+    s4: {
+      label: 'Εσύ μέσα στο business',
+      statements: ['Το πόσο καλά πηγαίνει το business επηρεάζει το πώς νιώθω για τον εαυτό μου.', 'Δυσκολεύομαι να χαλαρώσω όταν ξέρω ότι υπάρχει κάτι ακόμα που θα μπορούσα να κάνω.', 'Με δυσκολεύει να με βλέπουν οι άλλοι να αμφιβάλλω, να δυσκολεύομαι ή να μην έχω τον έλεγχο.', 'Το να είμαι αυτός που «θα βρει τη λύση» είναι σημαντικό κομμάτι της ταυτότητάς μου.', 'Αναλαμβάνω πράγματα που πιθανότατα θα μπορούσαν να χειριστούν και άλλοι χωρίς εμένα.', 'Το να αφήσω λίγο το control μου φαίνεται πιο επικίνδυνο από το να κρατάω υπερβολικά πολύ.', 'Μερικές φορές αναρωτιέμαι ποιος θα ήμουν αν σταματούσα να πιέζω τόσο πολύ.', "Έχω πετύχει πράγματα που κάποτε ήθελα πάρα πολύ και όταν τα κατάφερα ένιωσα πολύ λιγότερα απ' όσα περίμενα.", 'Το business συνεχίζει να τρέχει στο μυαλό μου ακόμα κι όταν θεωρητικά δεν δουλεύω.', 'Η πίεση της δουλειάς περνάει στη διάθεσή μου, στο σώμα μου ή στις σχέσεις μου.', 'Μερικές φορές δυσκολεύομαι να καταλάβω αν κινούμαι προς κάτι που θέλω ή απλώς τρέχω μακριά από κάτι που φοβάμαι.', 'Υπάρχουν πράγματα που σκέφτομαι για τη δουλειά μου και δεν νιώθω ότι μπορώ να τα πω εύκολα στους ανθρώπους γύρω μου.']
+    },
+    s5: {
+      label: 'Τι συμβαίνει τώρα;',
+      opens: ['Αν δουλεύαμε μαζί και πήγαινε πραγματικά καλά, τι θα ήταν διαφορετικό σε έξι μήνες από σήμερα;', 'Τι έχεις ήδη δοκιμάσει για να λύσεις αυτό το πρόβλημα;', 'Τι υποψιάζεσαι ότι μπορεί να σε κρατάει πίσω, ακόμη κι αν δεν είσαι σίγουρος;', 'Υπάρχει κάτι για το business, τη δουλειά ή εσένα που δεν σε ρώτησα αλλά θεωρείς ότι θα έπρεπε να ξέρω; (προαιρετικό)'],
+      name: 'Όνομα',
+      email: 'Email',
+      website: 'Website / LinkedIn (προαιρετικό)',
+      consent: 'Στείλε τις απαντήσεις μου στον Άγγελο. Καταλαβαίνω ότι αυτό δεν είναι κλινική διάγνωση ή αυτοματοποιημένο τεστ.',
+      submit: 'ΑΠΟΣΤΟΛΗ →',
+      sending: 'Αποστολή…'
+    },
+    done: {
+      h1: 'Το πήρα.',
+      p: ['Οι απαντήσεις σου ήρθαν σε μένα.', 'Τις διαβάζω ο ίδιος και θα σου απαντήσω με email αφού τις δω κανονικά.', 'Αν ξέρεις ήδη ότι θέλεις να μιλήσουμε, μπορείς να κλείσεις και μια σύντομη γνωριμία.'],
+      book: 'ΚΛΕΙΣΕ ΜΙΑ ΓΝΩΡΙΜΙΑ →'
+    }
+  }
+};
 
-// Display-only grouping: the 12 scored sections roll up into 7 dimensions for the
-// on-screen result. The Sheet + EmailJS payloads still use the original 12 sections,
-// so no automation changes are needed. Each dimension carries three copy variants
-// (low / elevated / high) so the interpretation flexes with the person's score.
+// Internal dimension map (scanning aids only). Global question numbers:
+// Business Q1–8, Behaviour Q9–18, Identity Q19–30.
 const DIMENSIONS = [{
-  id: 'achievement-self-worth',
-  title: 'Achievement & self-worth',
-  sectionIds: ['self-worth', 'comparison'],
-  base: 'How strongly your sense of worth is tied to achievement, progress, and external performance.',
-  interps: {
-    low: 'Your worth doesn’t seem to live or die by the last result. That’s a stable base most high performers don’t have.',
-    elevated: 'Your sense of worth is leaning on achievement more than you might like. Good periods lift you; bad ones cut deeper than the facts justify.',
-    high: 'Right now your worth is closely fused with performance. Wins reassure briefly, setbacks feel personal, and the bar keeps moving. This is the engine underneath a lot of the rest.'
-  }
+  key: 'Business clarity',
+  qs: [1, 2, 3, 4, 5, 6, 7, 8],
+  positive: true
 }, {
-  id: 'pressure-internal-demand',
-  title: 'Pressure & internal demand',
-  sectionIds: ['shame-guilt-pressure', 'grind'],
-  base: 'How much pressure you create internally, even when no one is directly demanding more from you.',
-  interps: {
-    low: 'You can ease off without guilt running the show. The pressure you carry looks mostly external, not self-generated.',
-    elevated: 'A fair amount of your pressure is self-imposed. Rest comes with a tax, and "enough" keeps getting redefined upward.',
-    high: 'Most of the pressure is coming from inside. Slowing down feels unsafe rather than restorative, and the demand rarely lets up even when the work does.'
-  }
+  key: 'Execution / avoidance',
+  qs: [9, 10, 16, 18]
 }, {
-  id: 'identity-vulnerability',
-  title: 'Identity & vulnerability',
-  sectionIds: ['identity', 'vulnerability'],
-  base: 'How much your professional identity depends on being capable, composed, and hard to disappoint.',
-  interps: {
-    low: 'You can be seen as unsure or struggling without it threatening who you are. That flexibility is protective.',
-    elevated: 'Being the capable, composed one matters enough that showing strain feels risky. You likely carry more alone than you need to.',
-    high: 'Your identity is heavily invested in being capable and hard to disappoint. Vulnerability feels dangerous, so the strain stays hidden — which is exactly what keeps it going.'
-  }
+  key: 'Visibility / rejection',
+  qs: [11, 12, 13]
 }, {
-  id: 'emotional-availability',
-  title: 'Emotional availability & relationships',
-  sectionIds: ['relationships'],
-  base: 'Whether your current operating mode is reducing your emotional availability outside work.',
-  interps: {
-    low: 'Work pressure isn’t obviously bleeding into how present you are with the people close to you.',
-    elevated: 'Some of the load is spilling into your relationships — less patience, less presence, a shorter fuse than you’d want.',
-    high: 'Your operating mode is costing you outside work. The people closest to you are likely getting the depleted version, and that gap tends to compound.'
-  }
+  key: 'Decision / commitment',
+  qs: [14, 15, 17, 29]
 }, {
-  id: 'meaning-fulfilment',
-  title: 'Meaning & fulfilment',
-  sectionIds: ['drive-meaning', 'numbness', 'cynicism'],
-  base: 'Whether success is still emotionally rewarding, or whether you are performing without enough meaning or satisfaction.',
-  interps: {
-    low: 'The work still gives something back. You’re not just performing on momentum — there’s real engagement here.',
-    elevated: 'The reward is thinning out. You’re still delivering, but more of it feels like motion than meaning, and the satisfaction doesn’t land like it used to.',
-    high: 'This is the one that matters most for fulfilment. Success isn’t paying you back emotionally right now — flatness, detachment, and "what is this all for?" are showing up underneath the output.'
-  }
+  key: 'Identity / self-worth',
+  qs: [19, 22, 25, 26]
 }, {
-  id: 'nervous-system-load',
-  title: 'Nervous-system load',
-  sectionIds: ['nervous-system'],
-  base: 'How much your body is carrying the pressure, even when your mind thinks you are managing.',
-  interps: {
-    low: 'Your body seems to be recovering reasonably well. The system isn’t stuck in a constant state of activation.',
-    elevated: 'Your body is holding some of this — tension, uneven sleep, a hum that doesn’t fully switch off. Recovery isn’t quite keeping up.',
-    high: 'Your nervous system is under real load. Tired-but-wired, poor recovery, physical symptoms — the body is signalling what the mind is overriding. This rarely resolves with willpower alone.'
-  }
+  key: 'Control',
+  qs: [21, 23, 24]
 }, {
-  id: 'tech-activation',
-  title: 'Tech-specific activation',
-  sectionIds: ['tech-activation'],
-  base: 'How much your work environment keeps you mentally and physiologically activated, even off the clock.',
-  interps: {
-    low: 'You can get genuinely off-duty. Work isn’t keeping a permanent background process running in your head.',
-    elevated: 'You’re rarely fully off. Part of you stays on call, checking, half-connected — which quietly blocks real recovery.',
-    high: 'You’re almost always activated. Fully switching off feels out of reach, and the constant low-grade "on" state is one of the harder patterns to interrupt without a deliberate approach.'
-  }
+  key: 'Pressure / disconnection',
+  qs: [20, 27, 28, 30]
 }];
-function pickInterp(dim, score) {
-  if (score === null) return dim.base;
-  if (score <= 2.5) return dim.interps.low;
-  if (score <= 3.2) return dim.interps.elevated;
-  return dim.interps.high;
-}
-
-// Roll the 12 section results into the 7 display dimensions, scoring each dimension
-// from the underlying question answers (not an average-of-averages).
-function getDimensionResults(sections, answers) {
-  return DIMENSIONS.map(dim => {
-    const keys = [];
-    dim.sectionIds.forEach(sid => {
-      const section = DIAG_SECTIONS.find(s => s.id === sid);
-      if (section) section.questions.forEach((_, i) => keys.push(sid + '-' + i));
-    });
-    const nums = keys.map(k => answers[k]).filter(v => typeof v === 'number');
-    const answeredCount = keys.filter(k => answers[k] !== undefined).length;
-    const threshold = Math.ceil(keys.length * 0.7);
-    const score = answeredCount >= threshold ? avg(nums) : null;
-    return {
-      id: dim.id,
-      title: dim.title,
-      interp: pickInterp(dim, score),
-      score,
-      label: getSectionLabel(score)
-    };
-  });
-}
-
-// Per-level "what to do with this" beat, in fulfilment language (display-only).
-function getNextStep(score) {
-  if (score === null) return '';
-  if (score <= 2.25) return 'The useful move here is prevention: notice which areas are starting to draw down, and adjust before the cost climbs.';
-  if (score <= 2.9) return 'This is the stage where small structural and internal shifts pay off most — before "performing at a cost" hardens into something heavier.';
-  if (score <= 3.5) return 'At this level, managing symptoms usually isn’t enough. The work is to address what’s driving the load underneath — identity, pressure, recovery — not just to rest harder.';
-  return 'This isn’t a willpower problem and rest alone won’t resolve it. The work is to rebuild your relationship with ambition and success so it stops costing you this much.';
-}
-
-// Highest-load dimension, for the headline line on the result screen (display-only).
-function getTopDimension(dimensions) {
-  const scored = (dimensions || []).filter(d => typeof d.score === 'number');
-  if (!scored.length) return null;
-  return scored.reduce((top, d) => d.score > top.score ? d : top, scored[0]);
-}
-function DiagnosticPage() {
+function DiagnosticPage({
+  lang = 'en'
+}) {
   const {
     useState,
     useRef
   } = React;
-  const [screen, setScreen] = useState('intro');
-  const [answers, setAnswers] = useState({});
-  const [idx, setIdx] = useState(0);
-  const [email, setEmail] = useState('');
+  const t = DIAG[lang] || DIAG.en;
+  const [screen, setScreen] = useState('intro'); // intro | 1 | 2 | 3 | 4 | 5 | done
+  const [ans, setAns] = useState({}); // scored: b1..b8, x1..x10, i1..i12
+  const [prof, setProf] = useState({}); // stage/time/rev + goal/problem
+  const [opens, setOpens] = useState({}); // s5 open answers 0..3
+  const [name, setName] = useState('');
+  const [emailV, setEmailV] = useState('');
+  const [website, setWebsite] = useState('');
+  const [consent, setConsent] = useState(false);
   const [sending, setSending] = useState(false);
-  const [results, setResults] = useState(null);
+  const [err, setErr] = useState('');
   const mainRef = useRef(null);
   const scrollTop = () => {
     if (mainRef.current) mainRef.current.scrollTop = 0;
   };
-  const totalQ = FLAT_QUESTIONS.length;
-  const answered = Object.keys(answers).filter(k => answers[k] !== undefined).length;
-  const progress = Math.round(answered / totalQ * 100);
-  function getOverallScore() {
-    const nums = Object.values(answers).filter(v => typeof v === 'number');
-    return avg(nums);
-  }
-  function getSectionResults() {
-    return DIAG_SECTIONS.map(section => {
-      const keys = section.questions.map((_, i) => section.id + '-' + i);
-      const nums = keys.map(k => answers[k]).filter(v => typeof v === 'number');
-      const answeredCount = keys.filter(k => answers[k] !== undefined).length;
-      const threshold = Math.ceil(keys.length * 0.7);
-      const score = answeredCount >= threshold ? avg(nums) : null;
-      return {
-        id: section.id,
-        title: section.title,
-        sheetKey: section.sheetKey,
-        score,
-        label: getSectionLabel(score)
-      };
-    });
-  }
-  function buildSectionBreakdownText(sections) {
-    return sections.map(section => {
-      return section.title + ': ' + section.label + ' (' + fmt(section.score) + ' / 5.00)';
-    }).join('\n');
-  }
-  function buildAnswersText() {
-    return FLAT_QUESTIONS.map((question, index) => {
-      const answer = answers[question.key];
-      const answerLabel = answer === undefined ? 'No answer' : answer === 'na' ? 'N/A' : String(answer);
-      return index + 1 + '. [' + question.sectionTitle + '] ' + question.text + ' => ' + answerLabel;
-    }).join('\n');
-  }
-  function calculateResults() {
-    const overall = getOverallScore();
-    const sections = getSectionResults();
-    const dimensions = getDimensionResults(sections, answers);
-    // Sort by severity (highest load first); unscored dimensions sink to the bottom.
-    const sortedDimensions = [...dimensions].sort((a, b) => {
-      const av = typeof a.score === 'number' ? a.score : -1;
-      const bv = typeof b.score === 'number' ? b.score : -1;
-      return bv - av;
-    });
-    return {
-      overall,
-      grade: getGrade(overall),
-      desc: getDesc(overall),
-      nextStep: getNextStep(overall),
-      sections,
-      dimensions: sortedDimensions,
-      topDimension: getTopDimension(dimensions)
-    };
-  }
-  function sendResultsEmail(payload) {
-    if (!window.emailjs) {
-      return Promise.reject(new Error('EmailJS is not loaded'));
-    }
-    return emailjs.send('service_i4xq7vg', 'template_wdsrbdo', payload);
-  }
-  function sendResultsToSheet(calculated, trimmedEmail) {
-    const sectionScores = {};
-    calculated.sections.forEach(section => {
-      sectionScores[section.sheetKey] = fmt(section.score);
-    });
-    return fetch(GOOGLE_SHEET_WEB_APP_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify({
-        email: trimmedEmail,
-        overall_score: fmt(calculated.overall),
-        overall_grade: calculated.grade,
-        self_worth: sectionScores.self_worth || '',
-        shame_guilt_pressure: sectionScores.shame_guilt_pressure || '',
-        comparison: sectionScores.comparison || '',
-        vulnerability: sectionScores.vulnerability || '',
-        grind: sectionScores.grind || '',
-        identity: sectionScores.identity || '',
-        relationships: sectionScores.relationships || '',
-        drive_meaning: sectionScores.drive_meaning || '',
-        numbness: sectionScores.numbness || '',
-        cynicism: sectionScores.cynicism || '',
-        nervous_system: sectionScores.nervous_system || '',
-        tech_activation: sectionScores.tech_activation || '',
-        section_breakdown: buildSectionBreakdownText(calculated.sections),
-        all_answers: buildAnswersText(),
-        page_url: window.location.href
-      })
-    });
-  }
-  function handleShowResults() {
-    const trimmedEmail = email.trim();
-    if (!trimmedEmail) return;
-    const calculated = calculateResults();
-    setSending(true);
-    sendResultsToSheet(calculated, trimmedEmail).catch(err => console.error('Sheet error:', err));
-    sendResultsEmail({
-      user_email: trimmedEmail,
-      overall_score: fmt(calculated.overall),
-      overall_grade: calculated.grade,
-      section_breakdown: buildSectionBreakdownText(calculated.sections),
-      all_answers: buildAnswersText(),
-      page_url: window.location.href
-    }).catch(err => console.error('Email error:', err));
-    setResults(calculated);
-    setScreen('results');
-    setTimeout(scrollTop, 50);
-    setSending(false);
-  }
-  const currentQ = FLAT_QUESTIONS[idx];
-  const currentAnswer = answers[currentQ?.key];
+  const bookHref = lang === 'el' ? '/el/book/' : '/book/';
   const mob = typeof window !== 'undefined' && window.innerWidth < 768;
+  const SCORED = [{
+    pfx: 'b',
+    section: t.s2,
+    base: 0
+  }, {
+    pfx: 'x',
+    section: t.s3,
+    base: 8
+  }, {
+    pfx: 'i',
+    section: t.s4,
+    base: 18
+  }];
+  const totalScored = 30;
+  const answeredScored = SCORED.reduce((n, s) => n + s.section.statements.filter((_, i) => ans[s.pfx + (i + 1)] !== undefined).length, 0);
+  const progress = Math.round(answeredScored / totalScored * 100);
+
+  // Global Q number (1..30) → stored answer value or undefined.
+  function valByQ(q) {
+    if (q <= 8) return ans['b' + q];
+    if (q <= 18) return ans['x' + (q - 8)];
+    return ans['i' + (q - 18)];
+  }
+  function avg(vals) {
+    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+  }
+  function fmt(v) {
+    return v === null ? '—' : v.toFixed(1);
+  }
+
+  // ── Structured internal report (English labels; content stays verbatim) ──────
+  function buildReport() {
+    const L = [];
+    const line = s => L.push(s);
+    const enS = DIAG.en; // stable English statement labels for Aggelos
+    line('STARTING DIAGNOSTIC — new submission');
+    line('Language: ' + (lang === 'el' ? 'Greek (/el/)' : 'English'));
+    line('Submitted: ' + new Date().toISOString());
+    line('Page: ' + (typeof window !== 'undefined' ? window.location.href : ''));
+    line('');
+    line('── PERSON ──');
+    line('Name: ' + (name || '—'));
+    line('Email: ' + (emailV || '—'));
+    line('Website / LinkedIn: ' + (website || '—'));
+    line('');
+    line('── WHERE THEY ARE ──');
+    line('Stage: ' + (prof.stage != null ? enS.s1.stage[prof.stage] : '—'));
+    line('Time building: ' + (prof.time != null ? enS.s1.time[prof.time] : '—'));
+    line('Revenue stage: ' + (prof.rev != null ? enS.s1.rev[prof.rev] : '—'));
+    line('');
+    line('── WHAT THEY WANT ──');
+    line('12-month goal: ' + (prof.goal || '—'));
+    line('Biggest problem now: ' + (prof.problem || '—'));
+    line('');
+    const dumpScored = (title, pfx, enStatements, startNo) => {
+      line('── ' + title + ' (1 = not true at all, 5 = very true) ──');
+      enStatements.forEach((st, i) => {
+        const v = ans[pfx + (i + 1)];
+        line(startNo + i + '. ' + st + ' => ' + (v === undefined ? '—' : v));
+      });
+      line('');
+    };
+    dumpScored('BUSINESS', 'b', enS.s2.statements, 1);
+    dumpScored('BEHAVIOUR / EXECUTION', 'x', enS.s3.statements, 9);
+    dumpScored('IDENTITY / PRESSURE', 'i', enS.s4.statements, 19);
+    line('── OPEN ANSWERS (verbatim) ──');
+    enS.s5.opens.forEach((label, i) => {
+      line(label);
+      line(opens[i] || '—');
+      line('');
+    });
+    // Internal scanning aids — never shown to the user.
+    line('── INTERNAL SIGNALS (scanning aids only — NOT a diagnosis) ──');
+    DIMENSIONS.forEach(d => {
+      const vals = d.qs.map(valByQ).filter(v => typeof v === 'number');
+      line(d.key + (d.positive ? ' (higher = stronger)' : '') + ': ' + fmt(avg(vals)) + ' / 5  (' + vals.length + '/' + d.qs.length + ' answered)');
+    });
+    line('');
+    // Five strongest signals from the behaviour + identity statements (Q9–30),
+    // where a high value means the pattern is present.
+    const psych = [];
+    for (let q = 9; q <= 30; q++) {
+      const v = valByQ(q);
+      if (typeof v === 'number') {
+        const st = q <= 18 ? enS.s3.statements[q - 9] : enS.s4.statements[q - 19];
+        psych.push({
+          q,
+          v,
+          st
+        });
+      }
+    }
+    psych.sort((a, b) => b.v - a.v);
+    line('Five strongest signals (Q9–30, high = pattern present):');
+    psych.slice(0, 5).forEach((p, i) => line(i + 1 + '. [' + p.v + '/5] Q' + p.q + ' — ' + p.st));
+    return L.join('\n');
+  }
+  function submit() {
+    const em = emailV.trim();
+    const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+    if (!name.trim() || !validEmail || !consent) {
+      setErr(t.nav.required);
+      return;
+    }
+    setErr('');
+    setSending(true);
+    const report = buildReport();
+    const payload = {
+      user_email: em,
+      user_name: name.trim(),
+      user_website: website.trim(),
+      overall_grade: 'Starting Diagnostic submission',
+      overall_score: '—',
+      section_breakdown: 'Starting Diagnostic — see full structured answers below.',
+      all_answers: report,
+      page_url: typeof window !== 'undefined' ? window.location.href : ''
+    };
+    const finish = () => {
+      setSending(false);
+      setScreen('done');
+      scrollTop();
+    };
+    let done = false;
+    const go = () => {
+      if (!done) {
+        done = true;
+        finish();
+      }
+    };
+    // Best-effort backup log to the sheet (unknown columns are ignored).
+    try {
+      fetch(GOOGLE_SHEET_WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(payload)
+      }).catch(() => {});
+    } catch (e) {}
+    if (window.emailjs) {
+      emailjs.send('service_i4xq7vg', 'template_wdsrbdo', payload).then(go).catch(e => {
+        console.error('Email error:', e);
+        go();
+      });
+      setTimeout(go, 6000); // never trap the user if the network stalls
+    } else {
+      go();
+    }
+  }
+
+  // ── Styles ───────────────────────────────────────────────────────────────
+  const ACC = '#1a7f37';
   const C = {
     page: {
-      maxWidth: 940,
+      maxWidth: 820,
       margin: '0 auto',
-      padding: '4rem 2rem 7rem',
+      padding: mob ? '2rem 1.25rem 6rem' : '4rem 2.5rem 7rem',
       color: '#282726',
       fontFamily: 'inherit'
     },
@@ -408,32 +346,36 @@ function DiagnosticPage() {
       letterSpacing: '.06em',
       textTransform: 'uppercase',
       color: '#666',
-      lineHeight: 1.7
-    },
-    sectionLabel: {
-      fontSize: '17px',
-      fontWeight: 700,
-      letterSpacing: '.06em',
-      textTransform: 'uppercase',
-      color: '#666',
-      lineHeight: 1.5
+      lineHeight: 1.6
     },
     h1: {
-      fontSize: '32px',
-      fontWeight: 400,
-      lineHeight: 1.35,
+      fontSize: mob ? '27px' : '34px',
+      fontWeight: 500,
+      lineHeight: 1.2,
+      letterSpacing: '-.02em',
       color: '#282726',
-      marginBottom: '1.5rem'
+      margin: '0 0 1.25rem'
     },
     p: {
-      marginBottom: '1.4rem',
-      lineHeight: 1.75,
-      fontSize: '18px',
+      margin: '0 0 1.2rem',
+      lineHeight: 1.7,
+      fontSize: mob ? '17px' : '18px',
       color: '#282726'
     },
-    card: {
-      border: '1px solid rgba(40,39,38,.15)',
-      padding: '1rem'
+    sectionH: {
+      fontSize: mob ? '22px' : '27px',
+      fontWeight: 500,
+      letterSpacing: '-.02em',
+      lineHeight: 1.25,
+      color: '#282726',
+      margin: '0 0 1.5rem'
+    },
+    qLabel: {
+      fontSize: mob ? '16px' : '17px',
+      fontWeight: 600,
+      color: '#282726',
+      margin: '0 0 .9rem',
+      lineHeight: 1.5
     },
     note: {
       fontSize: '14px',
@@ -442,384 +384,435 @@ function DiagnosticPage() {
     },
     cta: {
       fontFamily: 'inherit',
-      fontSize: '12px',
-      letterSpacing: '.1em',
+      fontWeight: 700,
+      fontSize: '13px',
+      letterSpacing: '.06em',
       textTransform: 'uppercase',
-      color: '#FFFFFF',
-      background: '#282726',
-      border: '1px solid #282726',
-      padding: '.8rem 1.2rem',
+      color: '#fff',
+      background: ACC,
+      border: '1.5px solid ' + ACC,
+      borderRadius: '2px',
+      padding: '.9rem 1.7rem',
       display: 'inline-block',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      textDecoration: 'none'
     },
     ctaSec: {
       background: 'transparent',
       color: '#282726',
-      borderColor: 'rgba(40,39,38,.3)'
+      border: '1.5px solid rgba(40,39,38,.35)'
     },
-    optionBtn: selected => ({
+    choice: sel => ({
       width: '100%',
       textAlign: 'left',
-      border: selected ? '1px solid #1a7f37' : '1px solid rgba(40,39,38,.15)',
-      padding: '1rem',
-      borderRadius: '8px',
-      background: selected ? '#1a7f37' : 'transparent',
-      color: selected ? '#fff' : '#282726',
+      border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)',
+      padding: mob ? '.8rem .9rem' : '.85rem 1rem',
+      borderRadius: '10px',
+      background: sel ? 'rgba(26,127,55,.08)' : '#fff',
+      color: '#282726',
       fontFamily: 'inherit',
-      fontSize: '16px',
-      lineHeight: 1.7,
+      fontSize: mob ? '15px' : '16px',
+      lineHeight: 1.5,
       cursor: 'pointer',
-      marginBottom: '.75rem'
+      marginBottom: '.6rem',
+      transition: 'border-color .12s, background .12s'
     }),
-    progressLine: {
-      height: '1px',
-      background: 'rgba(40,39,38,.12)',
-      position: 'relative',
-      marginTop: '.8rem'
-    },
-    progressFill: pct => ({
-      height: '1px',
-      background: '#1a7f37',
-      width: pct + '%',
-      transition: 'width .2s ease'
-    }),
-    sectionRow: {
-      border: '1px solid rgba(40,39,38,.15)',
-      padding: '1rem',
-      borderRadius: '8px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'flex-start',
-      gap: '1rem',
-      marginBottom: '.75rem'
-    },
-    footer: {
-      marginTop: '3rem',
-      fontSize: '14px',
-      color: '#777'
-    }
-  };
-  if (screen === 'intro') return /*#__PURE__*/React.createElement("div", {
-    style: C.page,
-    ref: mainRef
-  }, /*#__PURE__*/React.createElement("h1", {
-    style: C.h1
-  }, "Starting diagnostic"), /*#__PURE__*/React.createElement("p", {
-    style: C.p
-  }, "The goal of this diagnostic is not to diagnose you or label you."), /*#__PURE__*/React.createElement("p", {
-    style: C.p
-  }, "I am using it to get an initial understanding of how your current relationship with work, pressure, responsibility, decisions, conflict, ambition, recovery, and other people is actually operating."), /*#__PURE__*/React.createElement("p", {
-    style: C.p
-  }, "Around 8 minutes. At the end, you'll get your operating pattern, a level, and a breakdown by section but consider more of a conversation starter."), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
-      gap: '1rem',
-      margin: '2rem 0'
-    }
-  }, [['Length', '45 questions'], ['Format', '1-5 scale + N/A'], ['Result', 'Level + section breakdown']].map(([label, value]) => /*#__PURE__*/React.createElement("div", {
-    key: label,
-    className: "hv-card",
-    style: C.card
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: '11px',
-      letterSpacing: '.12em',
-      textTransform: 'uppercase',
-      color: '#6e6e6e',
-      marginBottom: '.5rem'
-    }
-  }, label), /*#__PURE__*/React.createElement("div", null, value)))), /*#__PURE__*/React.createElement("p", {
-    style: C.note
-  }, "This diagnostic is directional, not a clinical diagnosis."), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '2rem'
-    }
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "cta-btn",
-    style: C.cta,
-    onClick: () => {
-      setScreen('question');
-      setIdx(0);
-      scrollTop();
-    }
-  }, "Start assessment")), typeof SiteFooter !== 'undefined' && React.createElement(SiteFooter, {
-    mob
-  }));
-  if (screen === 'question') return /*#__PURE__*/React.createElement("div", {
-    style: C.page,
-    ref: mainRef
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: '2rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      gap: '1rem',
-      marginBottom: '.8rem'
-    }
-  }, /*#__PURE__*/React.createElement("p", {
-    style: C.eyebrow
-  }, "Question ", idx + 1, " of ", totalQ), /*#__PURE__*/React.createElement("p", {
-    style: C.eyebrow
-  }, progress, "% complete")), /*#__PURE__*/React.createElement("div", {
-    style: C.progressLine
-  }, /*#__PURE__*/React.createElement("div", {
-    style: C.progressFill(progress)
-  }))), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: '20px',
-      lineHeight: 1.85,
-      marginBottom: '1.8rem',
-      fontWeight: 400,
-      color: '#282726'
-    }
-  }, currentQ.text), SCALE.map(opt => /*#__PURE__*/React.createElement("button", {
-    key: opt.value,
-    className: "opt-btn",
-    style: C.optionBtn(currentAnswer === opt.value),
-    onClick: () => setAnswers(a => ({
-      ...a,
-      [currentQ.key]: opt.value
-    }))
-  }, opt.label)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      gap: '1rem',
-      marginTop: '2rem'
-    }
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "cta-btn",
-    style: {
-      ...C.cta,
-      ...C.ctaSec,
-      opacity: idx === 0 ? 0.4 : 1
-    },
-    disabled: idx === 0,
-    onClick: () => {
-      setIdx(i => i - 1);
-      scrollTop();
-    }
-  }, "Back"), /*#__PURE__*/React.createElement("button", {
-    className: "cta-btn",
-    style: {
-      ...C.cta,
-      opacity: currentAnswer === undefined ? 0.4 : 1
-    },
-    disabled: currentAnswer === undefined,
-    onClick: () => {
-      if (idx < totalQ - 1) {
-        setIdx(i => i + 1);
-        scrollTop();
-      } else {
-        setScreen('gate');
-        scrollTop();
-      }
-    }
-  }, idx === totalQ - 1 ? 'Continue' : 'Next')));
-  if (screen === 'gate') return /*#__PURE__*/React.createElement("div", {
-    style: C.page,
-    ref: mainRef
-  }, /*#__PURE__*/React.createElement("p", {
-    style: C.eyebrow
-  }, "One last step"), /*#__PURE__*/React.createElement("h1", {
-    style: C.h1
-  }, "Enter your email to view your result."), /*#__PURE__*/React.createElement("p", {
-    style: C.p
-  }, "You'll see your level and section breakdown immediately after this."), /*#__PURE__*/React.createElement("label", {
-    style: {
-      display: 'block',
-      fontSize: '11px',
-      letterSpacing: '.12em',
-      textTransform: 'uppercase',
-      color: '#6e6e6e',
-      marginBottom: '.6rem'
-    }
-  }, "Email"), /*#__PURE__*/React.createElement("input", {
-    type: "email",
-    placeholder: "you@example.com",
-    value: email,
-    onChange: e => setEmail(e.target.value),
-    style: {
+    field: {
       width: '100%',
       border: '1px solid rgba(40,39,38,.2)',
-      padding: '1rem',
-      borderRadius: '8px',
-      background: 'transparent',
+      padding: '.85rem 1rem',
+      borderRadius: '10px',
+      background: '#fff',
       color: '#282726',
       fontFamily: 'inherit',
-      fontSize: '14px',
-      lineHeight: 1.7,
+      fontSize: '16px',
+      lineHeight: 1.6,
       outline: 'none'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      gap: '1rem',
-      marginTop: '2rem'
-    }
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "cta-btn",
-    style: {
-      ...C.cta,
-      ...C.ctaSec
     },
-    onClick: () => {
-      setScreen('question');
-      scrollTop();
-    }
-  }, "Back"), /*#__PURE__*/React.createElement("button", {
-    className: "cta-btn",
-    style: {
-      ...C.cta,
-      opacity: !email.trim() || sending ? 0.4 : 1
+    scaleBtn: sel => ({
+      flex: 1,
+      minWidth: 0,
+      padding: mob ? '.7rem 0' : '.75rem 0',
+      border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)',
+      background: sel ? ACC : '#fff',
+      color: sel ? '#fff' : '#282726',
+      fontFamily: 'inherit',
+      fontSize: '15px',
+      fontWeight: 600,
+      borderRadius: '8px',
+      cursor: 'pointer',
+      transition: 'border-color .12s, background .12s'
+    }),
+    progLine: {
+      height: '2px',
+      background: 'rgba(40,39,38,.12)',
+      borderRadius: '2px',
+      marginTop: '.7rem'
     },
-    disabled: !email.trim() || sending,
-    onClick: handleShowResults
-  }, sending ? 'Sending...' : 'Show results')));
-  if (screen === 'results' && results) return /*#__PURE__*/React.createElement("div", {
-    style: C.page,
-    ref: mainRef
-  }, /*#__PURE__*/React.createElement("p", {
-    style: C.eyebrow
-  }, "Your result"), /*#__PURE__*/React.createElement("h1", {
-    style: {
-      ...C.h1,
-      marginBottom: '.5rem'
+    progFill: pct => ({
+      height: '2px',
+      background: ACC,
+      width: pct + '%',
+      borderRadius: '2px',
+      transition: 'width .25s ease'
+    }),
+    row: {
+      border: '1px solid rgba(40,39,38,.14)',
+      borderRadius: '12px',
+      padding: mob ? '1.1rem' : '1.25rem 1.35rem',
+      marginBottom: '.9rem',
+      background: '#fff'
     }
-  }, results.grade), /*#__PURE__*/React.createElement("p", {
-    style: C.p
-  }, "Your score: ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: '#1a7f37'
-    }
-  }, fmt(results.overall)), " / 5.00"), results.topDimension && /*#__PURE__*/React.createElement("p", {
-    style: C.p
-  }, "Your highest-load area right now is ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: '#282726',
-      borderBottom: '1px solid rgba(40,39,38,.3)'
-    }
-  }, results.topDimension.title), "."), /*#__PURE__*/React.createElement("p", {
-    style: C.p
-  }, results.desc), results.nextStep && /*#__PURE__*/React.createElement("div", {
-    style: {
-      borderLeft: '2px solid #1a7f37',
-      padding: '2px 0 2px 14px',
-      margin: '1.6rem 0'
-    }
-  }, /*#__PURE__*/React.createElement("p", {
-    style: {
-      ...C.sectionLabel,
-      marginBottom: '.5rem'
-    }
-  }, "What to do with this"), /*#__PURE__*/React.createElement("p", {
-    style: {
-      ...C.p,
-      marginBottom: 0
-    }
-  }, results.nextStep)), /*#__PURE__*/React.createElement("p", {
-    style: C.note
-  }, "This diagnostic is directional, not a clinical diagnosis."), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '2rem'
-    }
-  }, /*#__PURE__*/React.createElement("p", {
-    style: {
-      ...C.sectionLabel,
-      marginBottom: '1rem'
-    }
-  }, "Your operating pattern ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: '#bbb',
-      fontWeight: 400,
-      letterSpacing: 0
-    }
-  }, "\xB7 highest load first")), (results.dimensions || []).map((d, i) => {
-    const vis = getLevelVisual(d.score);
+  };
+  const footer = () => typeof SiteFooter !== 'undefined' ? React.createElement(SiteFooter, {
+    mob,
+    lang
+  }) : null;
+  function ChoiceGroup({
+    q,
+    options,
+    valueKey
+  }) {
     return /*#__PURE__*/React.createElement("div", {
-      key: i,
       style: {
-        ...C.sectionRow,
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        gap: '.6rem'
+        marginBottom: '2.25rem'
+      }
+    }, /*#__PURE__*/React.createElement("p", {
+      style: C.qLabel
+    }, q), options.map((o, i) => /*#__PURE__*/React.createElement("button", {
+      key: i,
+      className: "opt-btn",
+      style: C.choice(prof[valueKey] === i),
+      onClick: () => setProf(p => ({
+        ...p,
+        [valueKey]: i
+      }))
+    }, o)));
+  }
+  function OpenField({
+    q,
+    value,
+    onChange,
+    rows
+  }) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginBottom: '2.25rem'
+      }
+    }, /*#__PURE__*/React.createElement("p", {
+      style: C.qLabel
+    }, q), /*#__PURE__*/React.createElement("textarea", {
+      rows: rows || 3,
+      value: value || '',
+      onChange: e => onChange(e.target.value),
+      style: {
+        ...C.field,
+        resize: 'vertical'
+      }
+    }));
+  }
+  function ScaleRow({
+    text,
+    pfx,
+    i
+  }) {
+    const key = pfx + (i + 1);
+    return /*#__PURE__*/React.createElement("div", {
+      style: C.row
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        ...C.qLabel,
+        marginBottom: '.9rem',
+        fontWeight: 500
+      }
+    }, text), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: '.5rem'
+      }
+    }, [1, 2, 3, 4, 5].map(v => /*#__PURE__*/React.createElement("button", {
+      key: v,
+      className: "opt-btn",
+      style: C.scaleBtn(ans[key] === v),
+      onClick: () => setAns(a => ({
+        ...a,
+        [key]: v
+      }))
+    }, v))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginTop: '.5rem'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: '12px',
+        color: '#8a8a8a'
+      }
+    }, t.scale.low), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: '12px',
+        color: '#8a8a8a'
+      }
+    }, t.scale.high)));
+  }
+  function NavRow({
+    onBack,
+    onNext,
+    nextLabel
+  }) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        gap: '1rem',
+        marginTop: '2.5rem'
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "cta-btn",
+      style: {
+        ...C.cta,
+        ...C.ctaSec
+      },
+      onClick: onBack
+    }, t.nav.back), /*#__PURE__*/React.createElement("button", {
+      className: "cta-btn",
+      style: C.cta,
+      onClick: onNext
+    }, nextLabel || t.nav.next));
+  }
+  function ProgressHead({
+    n
+  }) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginBottom: '2rem'
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'flex-start',
         gap: '1rem'
       }
-    }, /*#__PURE__*/React.createElement("div", null, d.title), /*#__PURE__*/React.createElement("div", {
-      style: {
-        textAlign: 'right',
-        flexShrink: 0
-      }
+    }, /*#__PURE__*/React.createElement("p", {
+      style: C.eyebrow
+    }, t.nav.section, " ", n, " ", t.nav.of, " 5"), /*#__PURE__*/React.createElement("p", {
+      style: C.eyebrow
+    }, progress, "% ", t.nav.progress)), /*#__PURE__*/React.createElement("div", {
+      style: C.progLine
     }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        color: vis.color
-      }
-    }, d.label), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: '13px',
-        color: '#6e6e6e'
-      }
-    }, fmt(d.score), " / 5.00"))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        height: '3px',
-        background: 'rgba(40,39,38,.08)',
-        borderRadius: '2px'
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        height: '3px',
-        width: vis.pct + '%',
-        background: vis.color,
-        borderRadius: '2px'
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: '13px',
-        color: '#777',
-        lineHeight: 1.65
-      }
-    }, d.interp));
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      border: '1px solid rgba(26,127,55,0.3)',
-      background: 'rgba(26,127,55,0.04)',
-      padding: '1.4rem',
-      marginTop: '2.5rem'
-    }
-  }, /*#__PURE__*/React.createElement("p", {
+      style: C.progFill(progress)
+    })));
+  }
+
+  // ── Screens ─────────────────────────────────────────────────────────────
+  if (screen === 'intro') return /*#__PURE__*/React.createElement("div", {
+    style: C.page,
+    ref: mainRef
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       ...C.eyebrow,
-      marginBottom: '.6rem'
+      color: ACC,
+      marginBottom: '1rem'
     }
-  }, "Where this goes next"), /*#__PURE__*/React.createElement("p", {
+  }, t.dir), /*#__PURE__*/React.createElement("h1", {
+    style: C.h1
+  }, t.intro.h1), t.intro.p.map((x, i) => /*#__PURE__*/React.createElement("p", {
+    key: i,
+    style: C.p
+  }, x)), /*#__PURE__*/React.createElement("p", {
     style: {
-      ...C.p,
+      ...C.note,
+      marginBottom: '2rem'
+    }
+  }, t.intro.duration), /*#__PURE__*/React.createElement("button", {
+    className: "cta-btn",
+    style: C.cta,
+    onClick: () => {
+      setScreen(1);
+      scrollTop();
+    }
+  }, t.intro.start), footer());
+  if (screen === 1) return /*#__PURE__*/React.createElement("div", {
+    style: C.page,
+    ref: mainRef
+  }, /*#__PURE__*/React.createElement(ProgressHead, {
+    n: 1
+  }), /*#__PURE__*/React.createElement("h2", {
+    style: C.sectionH
+  }, t.s1.label), /*#__PURE__*/React.createElement(ChoiceGroup, {
+    q: t.s1.stageQ,
+    options: t.s1.stage,
+    valueKey: "stage"
+  }), /*#__PURE__*/React.createElement(ChoiceGroup, {
+    q: t.s1.timeQ,
+    options: t.s1.time,
+    valueKey: "time"
+  }), /*#__PURE__*/React.createElement(ChoiceGroup, {
+    q: t.s1.revQ,
+    options: t.s1.rev,
+    valueKey: "rev"
+  }), /*#__PURE__*/React.createElement(OpenField, {
+    q: t.s1.goalQ,
+    value: prof.goal,
+    onChange: v => setProf(p => ({
+      ...p,
+      goal: v
+    }))
+  }), /*#__PURE__*/React.createElement(OpenField, {
+    q: t.s1.problemQ,
+    value: prof.problem,
+    onChange: v => setProf(p => ({
+      ...p,
+      problem: v
+    }))
+  }), /*#__PURE__*/React.createElement(NavRow, {
+    onBack: () => {
+      setScreen('intro');
+      scrollTop();
+    },
+    onNext: () => {
+      setScreen(2);
+      scrollTop();
+    }
+  }));
+  if (screen === 2 || screen === 3 || screen === 4) {
+    const cfg = {
+      2: t.s2,
+      3: t.s3,
+      4: t.s4
+    }[screen];
+    const pfx = {
+      2: 'b',
+      3: 'x',
+      4: 'i'
+    }[screen];
+    return /*#__PURE__*/React.createElement("div", {
+      style: C.page,
+      ref: mainRef
+    }, /*#__PURE__*/React.createElement(ProgressHead, {
+      n: screen
+    }), /*#__PURE__*/React.createElement("h2", {
+      style: C.sectionH
+    }, cfg.label), cfg.statements.map((st, i) => /*#__PURE__*/React.createElement(ScaleRow, {
+      key: i,
+      text: st,
+      pfx: pfx,
+      i: i
+    })), /*#__PURE__*/React.createElement(NavRow, {
+      onBack: () => {
+        setScreen(screen - 1);
+        scrollTop();
+      },
+      onNext: () => {
+        setScreen(screen + 1);
+        scrollTop();
+      }
+    }));
+  }
+  if (screen === 5) return /*#__PURE__*/React.createElement("div", {
+    style: C.page,
+    ref: mainRef
+  }, /*#__PURE__*/React.createElement(ProgressHead, {
+    n: 5
+  }), /*#__PURE__*/React.createElement("h2", {
+    style: C.sectionH
+  }, t.s5.label), t.s5.opens.map((q, i) => /*#__PURE__*/React.createElement(OpenField, {
+    key: i,
+    q: q,
+    value: opens[i],
+    onChange: v => setOpens(o => ({
+      ...o,
+      [i]: v
+    }))
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderTop: '1px solid rgba(40,39,38,.14)',
+      paddingTop: '2rem',
+      marginTop: '.5rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
       marginBottom: '1.2rem'
     }
-  }, "A diagnostic shows the pattern. Changing it is the actual work. If any of this landed, the next step is a free 15-minute fit call \u2014 we see where you are and whether working together makes sense."), /*#__PURE__*/React.createElement("a", {
-    href: "/book/",
-    className: "cta-btn",
+  }, /*#__PURE__*/React.createElement("label", {
     style: {
-      ...C.cta,
-      textDecoration: 'none'
+      ...C.eyebrow,
+      display: 'block',
+      marginBottom: '.5rem'
     }
-  }, "Book a fit call")), /*#__PURE__*/React.createElement("div", {
+  }, t.s5.name), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: name,
+    onChange: e => setName(e.target.value),
+    style: C.field
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: '1.2rem'
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    style: {
+      ...C.eyebrow,
+      display: 'block',
+      marginBottom: '.5rem'
+    }
+  }, t.s5.email), /*#__PURE__*/React.createElement("input", {
+    type: "email",
+    value: emailV,
+    onChange: e => setEmailV(e.target.value),
+    placeholder: "you@example.com",
+    style: C.field
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: '1.4rem'
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    style: {
+      ...C.eyebrow,
+      display: 'block',
+      marginBottom: '.5rem'
+    }
+  }, t.s5.website), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: website,
+    onChange: e => setWebsite(e.target.value),
+    style: C.field
+  })), /*#__PURE__*/React.createElement("label", {
     style: {
       display: 'flex',
-      gap: '1rem',
-      marginTop: '2rem',
-      flexWrap: 'wrap'
+      gap: '.7rem',
+      alignItems: 'flex-start',
+      cursor: 'pointer',
+      marginBottom: '1.5rem'
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    checked: consent,
+    onChange: e => setConsent(e.target.checked),
+    style: {
+      marginTop: '4px',
+      width: 18,
+      height: 18,
+      accentColor: ACC,
+      flexShrink: 0
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: '15px',
+      lineHeight: 1.6,
+      color: '#282726'
+    }
+  }, t.s5.consent)), err && /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: '#c0392b',
+      fontSize: '14px',
+      margin: '0 0 1rem'
+    }
+  }, err), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      gap: '1rem'
     }
   }, /*#__PURE__*/React.createElement("button", {
     className: "cta-btn",
@@ -828,23 +821,40 @@ function DiagnosticPage() {
       ...C.ctaSec
     },
     onClick: () => {
-      setAnswers({});
-      setIdx(0);
-      setEmail('');
-      setResults(null);
-      setScreen('intro');
+      setScreen(4);
       scrollTop();
     }
-  }, "Retake assessment"), /*#__PURE__*/React.createElement("button", {
+  }, t.nav.back), /*#__PURE__*/React.createElement("button", {
     className: "cta-btn",
     style: {
       ...C.cta,
-      ...C.ctaSec
+      opacity: sending ? 0.5 : 1
     },
-    onClick: () => window.print()
-  }, "Print result")), typeof SiteFooter !== 'undefined' && React.createElement(SiteFooter, {
-    mob
-  }));
+    disabled: sending,
+    onClick: submit
+  }, sending ? t.s5.sending : t.s5.submit))));
+  if (screen === 'done') return /*#__PURE__*/React.createElement("div", {
+    style: C.page,
+    ref: mainRef
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...C.eyebrow,
+      color: ACC,
+      marginBottom: '1rem'
+    }
+  }, t.dir), /*#__PURE__*/React.createElement("h1", {
+    style: C.h1
+  }, t.done.h1), t.done.p.map((x, i) => /*#__PURE__*/React.createElement("p", {
+    key: i,
+    style: C.p
+  }, x)), /*#__PURE__*/React.createElement("a", {
+    href: bookHref,
+    className: "cta-btn",
+    style: {
+      ...C.cta,
+      marginTop: '.8rem'
+    }
+  }, t.done.book), footer());
   return null;
 }
 Object.assign(window, {

@@ -34,6 +34,10 @@ const SB_CORE_PATHS = {
     en: '/book/',
     el: '/el/book/'
   },
+  'diagnostic': {
+    en: '/startingdiagnostic/',
+    el: '/el/startingdiagnostic/'
+  },
   'confidentiality': {
     en: '/confidentiality/',
     el: '/el/confidentiality/'
@@ -46,7 +50,7 @@ const SB_CORE_PATHS = {
 const sbPath = (id, lang) => SB_CORE_PATHS[id] && SB_CORE_PATHS[id][lang] || SB_CORE_PATHS[id] && SB_CORE_PATHS[id].en || '/';
 const SB_LABELS = {
   en: {
-    role: 'Business Advisor + Therapist',
+    role: 'Business Advisor + Licensed Psychotherapist',
     home: 'Home',
     workWith: 'Work with me',
     oneToOne: '1:1',
@@ -54,15 +58,15 @@ const SB_LABELS = {
     writing: 'Writing',
     reviews: 'Reviews',
     findMe: 'Find me',
-    diagHead: 'Burnout Diagnostic',
-    diagSub: 'A short, free self-assessment — see where you actually stand.',
-    diagBtn: 'Take the diagnostic →',
+    diagHead: 'Starting Diagnostic',
+    diagSub: "10 minutes on the business, what's getting in the way, and where the two meet.",
+    diagBtn: 'START →',
     diagShort: 'Diagnostic',
     book: 'Book a fit call →',
     bookShort: 'Book'
   },
   el: {
-    role: 'Σύμβουλος επιχειρήσεων & ψυχικής υγείας',
+    role: 'Business Advisor + Ψυχοθεραπευτής',
     home: 'Αρχική',
     workWith: 'Συνεργασία',
     oneToOne: '1:1',
@@ -70,17 +74,17 @@ const SB_LABELS = {
     writing: 'Άρθρα',
     reviews: 'Κριτικές',
     findMe: 'Βρες με',
-    diagHead: 'Burnout Diagnostic',
-    diagSub: 'Σύντομη, δωρεάν αυτοαξιολόγηση — δες πού πραγματικά βρίσκεσαι.',
-    diagBtn: 'Κάνε το τεστ →',
+    diagHead: 'Starting Diagnostic',
+    diagSub: '10 λεπτά για το business, τι το κρατάει πίσω και πού μπαίνεις εσύ μέσα σε αυτό.',
+    diagBtn: 'ΞΕΚΙΝΑ →',
     diagShort: 'Τεστ',
     book: 'Κλείσε γνωριμία →',
     bookShort: 'Γνωριμία'
   }
 };
 const sbT = lang => SB_LABELS[lang] || SB_LABELS.en;
-// Diagnostic route is language-aware (Greek diagnostic lives under /el/).
-const diagPath = lang => lang === 'el' ? '/el/burnout-diagnostic/' : '/burnout-diagnostic/';
+// Starting Diagnostic route is language-aware.
+const diagPath = lang => lang === 'el' ? '/el/startingdiagnostic/' : '/startingdiagnostic/';
 const ICONS = {
   OneToOne: () => /*#__PURE__*/React.createElement("svg", {
     width: "19",

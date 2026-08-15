@@ -1,6 +1,6 @@
 # Aggelos Mouzakitis — Website Copy (English + Ελληνικά)
 
-_Generated from the live source (`content-pages.jsx`, `blog/posts.json`, and the Greek diagnostic). One brand, one offer (1:1), two languages._
+_Generated from the live source. One brand, one core offer (1:1), two languages. Business Advisor + Licensed Psychotherapist._
 
 
 ## Navigation, CTAs & footer labels
@@ -9,15 +9,15 @@ _Generated from the live source (`content-pages.jsx`, `blog/posts.json`, and the
 
 |---|---|---|
 
-| Role | Business Advisor + Therapist | Σύμβουλος επιχειρήσεων & ψυχικής υγείας |
+| Role | Business Advisor + Licensed Psychotherapist | Business Advisor + Ψυχοθεραπευτής |
 
 | Nav | Home · Work with me · About · Writing · Reviews | Αρχική · Συνεργασία · Σχετικά · Άρθρα · Κριτικές |
 
-| Sidebar CTA | Burnout Diagnostic — “Book a fit call” replaced by → Take the diagnostic | Burnout Diagnostic → Κάνε το τεστ |
+| Primary CTA | Book a fit call | Κλείσε μια γνωριμία |
 
-| Primary CTAs | See how 1:1 works · Book a fit call | Δες πώς λειτουργεί το 1:1 · Κλείσε μια γνωριμία |
+| Sidebar CTA | Starting Diagnostic · START → | Starting Diagnostic · ΞΕΚΙΝΑ → |
 
-| Footer | © Aggelos Mouzakitis · Business Advisor + Therapist | © Άγγελος Μουζακίτης · Σύμβουλος επιχειρήσεων & ψυχικής υγείας |
+| Footer | © Aggelos Mouzakitis · Business Advisor + Licensed Psychotherapist | © Άγγελος Μουζακίτης · Business Advisor + Ψυχοθεραπευτής |
 
 
 ---
@@ -27,210 +27,162 @@ _Generated from the live source (`content-pages.jsx`, `blog/posts.json`, and the
 
 ### 🇬🇧 English
 
-**Role:** Business Advisor + Therapist
+**Promise (H1):** Build something of your own. Or take what you've already built much further.
 
-**Promise (H1):** For people who want to build something of their own — or make what they've already built much bigger.
+**Tagline:** Figure out what the business needs. Work through what gets in the way. Business and psychology, together.
 
-**Tagline:** Build the business. Work on the person building it.
+I spent 18+ years in product and growth, building companies and advising more than 500 of them. I also trained as a psychotherapist.
 
-I'm a business advisor and a therapist. Before this I spent 18+ years in product and growth — building companies and advising more than 500 of them.
+Today I work 1:1 and with groups of people building something of their own. Sometimes the problem is clearly business. Sometimes it's more complicated and includes you.
 
-I work privately, 1:1, with people who are seriously trying to build. We work on the business itself, and on whatever in you is affecting your ability to build it.
-
-
-#### Read this if it sounds familiar
-
-_You probably don't need one more piece of generic advice. You need to move something that hasn't moved._
-
-- You've wanted to start something for a long time, and you're still preparing.
-- You know you need customers, and you keep working on everything except selling.
-- You have clients, and you know you're undercharging.
-- You keep refining or changing the offer instead of actually testing it.
-- You want out of employment, and your plan is still a plan.
-- You want optionality, but you haven't built the thing that would give you optionality.
-- You're freelancing well enough to survive, but nowhere near what you think this could be.
-- You're doing a lot of thinking, learning and tweaking — and not enough commercial movement.
-
-#### How a pattern reaches the business
-
-Some of what's slowing the business down isn't a business problem. It starts in you and ends up in the numbers.
-
-- **You avoid being seen** → not enough people know you exist
-- **A "no" feels too personal** → you avoid selling
-- **You're uncomfortable asking for money** → you underprice
-- **You don't trust your own judgment** → you keep changing direction
-- **You need certainty before acting** → you prepare instead of launching
-- **You overthink decisions** → the business moves slowly
-- **You need everyone to like you** → your boundaries get commercially expensive
-_These illustrate the mechanism. They don't all apply to everyone — the point is that the pattern shows up as a business result._
+Quite often, business and psychology collide to the point where it's hard to tell yourself where the problem actually is.
 
 
-#### And sometimes it really is the business
+#### You may recognise some of this
 
-Just as often, no psychological interpretation is needed. The problem is exactly what it looks like:
+- You've been meaning to start something for a long time. You're still getting ready.
+- You need more customers. Somehow, everything except selling keeps making it onto the to-do list.
+- You know you're undercharging. The number still hasn't changed.
+- Every time the direction you've chosen gets difficult, another one suddenly starts looking better.
+- The business depends on you for almost everything. You're not sure how much of that is actually necessary.
+- On paper, things are going well. You feel less and less connected to what you're building.
+- You got somewhere you worked hard to reach. Now you're not sure whether you want the next level, or just think you should.
+- You understand your patterns extremely well. They keep happening anyway.
 
-- Your offer is weak.
-- Your positioning is unclear.
-- Nobody knows why they should buy.
-- You don't have a way of acquiring customers.
-- Your pricing is structurally wrong.
-- You're pursuing five priorities at once.
-- You're simply not doing enough selling.
-**That's why we work on both — and why the first job is often telling the two apart.**
+#### Sometimes the work is tactical. Sometimes it's psychological.
+
+_The hard part is knowing which one you're actually dealing with._
+
+**The business**
+
+- Your offer is still weak.
+- Your positioning isn't clear enough.
+- You don't have a reliable way to find customers.
+- Your pricing doesn't make sense.
+- You're trying to move five things at once.
+- You don't know which move actually matters most right now.
+**You**
+
+- You know you need to sell. You keep avoiding it.
+- A no lands much more personally than you'd like.
+- Being visible feels strangely threatening, even though you know the business needs it.
+- You keep changing direction before the previous one has had time to work.
+- Your sense of worth is a little too tied to how well the business is doing.
+- You can explain the pattern perfectly. That hasn't stopped you repeating it.
+Sometimes the answer is a better business move. Sometimes it's deeper work. Quite often, we need to work on both before it's obvious which one was holding the other back.
 
 
-#### Two tracks, one engagement
+#### One relationship. Both sides of the problem are welcome.
 
-- **The business track** — Offer, positioning, pricing, acquisition, sales, experiments, priorities, decisions, execution. The question it answers: what does the business actually need next?
-- **The person building it** — Avoidance, visibility, rejection, perfectionism, money, self-doubt, control, identity, uncertainty, commitment. The question it answers: what in you affects whether you can actually do it?
-**Some weeks the problem is mostly the business. Some weeks it's mostly you. Usually they affect each other.**
+**The business:** Offer, positioning, pricing, customers, sales, priorities, decisions, execution. — _What does the business actually need now?_
 
-_It's not a fixed split of session time — some conversations are all business, some are all you. The point is that I can work on either without changing rooms._
+**You:** Avoidance, rejection, fear of visibility, perfectionism, money, self-doubt, control, identity, uncertainty, commitment. — _What makes getting there harder than it needs to be?_
 
+Some weeks we'll barely talk psychology. Other weeks, the tactical problem can wait because something else needs attention first.
 
-#### Working together
-
-There's one way to work with me: 1:1. Private work on what you're trying to build, and whatever is affecting your ability to build it.
-
-→ See what 1:1 actually involves →
+**You don't need to know which one you have before you come in.**
 
 
 #### Common questions
 
 **Q. Do I need to already have a business?**
 
-No. Existing revenue isn't a requirement — this is for people seriously trying to build, whether you're still employed and planning an exit, freelancing, or already running something small.
-
-**Q. What kind of people is this for?**
-
-People building something of their own: employed and planning a way out, wanting optionality or independent income, a portfolio career, expertise to turn into a business, already freelancing or consulting, or running something with much more growth left in it.
+No. You can be starting, freelancing, consulting, building alongside a job, or already running something established. The common bit is that you're seriously trying to build something of your own.
 
 **Q. Is this therapy or business advisory?**
 
-Both, on purpose. Some of what's in the way is a real business problem; some is a pattern in you. I work on either without you having to pick a lane first.
+It can involve both. I'm a business advisor and a psychotherapist. If the problem is the business, we'll work on the business. If something in you is getting in the way, we can work there too.
 
-**Q. What if I don't know whether my problem is strategic or psychological?**
+**Q. What if I don't know which one the problem is?**
 
-That's normal — and often the first thing we work out together. Frequently it turns out to be both.
-
-**Q. Can we work on practical things — offer, pricing, sales, acquisition?**
-
-Yes. That's the business track, and it's real advisory on the thing you're building — not “clarity” or “accountability”.
-
-**Q. Do I need to want to leave my job?**
-
-No. Some people want an exit; others just want optionality or an independent income alongside a job they like.
+Good. You don't need to diagnose yourself before we talk. Working that out is part of the job.
 
 
 #### Final CTA
 
-**You want to build something of your own. Or you already have, and you know there's much more left in it.**
+**Building something is hard enough without getting in your own way.**
 
-Start with a short fit call. No pitch, no pressure — just whether this is the right room for what you’re trying to do.
+If you have something you're trying to start, fix or grow, tell me what's going on.
 
 
 ### 🇬🇷 Ελληνικά
 
-**Role:** Σύμβουλος επιχειρήσεων & ψυχικής υγείας
+**Promise (H1):** Χτίζεις κάτι δικό σου; Ας το πάμε παρακάτω.
 
-**Promise (H1):** Για ανθρώπους που θέλουν να χτίσουν κάτι δικό τους — ή να κάνουν πολύ μεγαλύτερο αυτό που έχουν ήδη χτίσει.
+**Tagline:** Βρίσκουμε τι χρειάζεται η επιχείρηση και τι σε εμποδίζει να το πετύχεις. Business και ψυχολογία, μαζί.
 
-**Tagline:** Χτίσε την επιχείρηση. Δούλεψε με τον άνθρωπο που τη χτίζει.
+Πέρασα 18+ χρόνια στο product και το growth, χτίζοντας δικές μου εταιρείες και συμβουλεύοντας περισσότερες από 500. Παράλληλα εκπαιδεύτηκα ως ψυχοθεραπευτής.
 
-Είμαι σύμβουλος επιχειρήσεων και Σύμβουλος Ψυχικής Υγείας. Πριν από αυτό, πέρασα 18+ χρόνια στο product και το growth — έχτισα δικές μου εταιρείες και συμβούλεψα περισσότερες από 500.
+Σήμερα δουλεύω 1:1 και σε groups με ανθρώπους που χτίζουν κάτι δικό τους.
 
-Δουλεύω ιδιωτικά, 1:1, με ανθρώπους που προσπαθούν σοβαρά να χτίσουν κάτι. Δουλεύουμε την ίδια την επιχείρηση, αλλά και ό,τι μέσα σου επηρεάζει την ικανότητά σου να τη χτίσεις.
-
-
-#### Διάβασέ το αν σου θυμίζει κάτι
-
-_Μάλλον δεν χρειάζεσαι άλλη μια γενική συμβουλή. Χρειάζεται να κουνηθεί κάτι που δεν έχει κουνηθεί._
-
-- Θέλεις καιρό να ξεκινήσεις κάτι, και ακόμη προετοιμάζεσαι.
-- Ξέρεις ότι χρειάζεσαι πελάτες, και δουλεύεις τα πάντα εκτός από το να πουλάς.
-- Έχεις πελάτες, και ξέρεις ότι υποχρεώνεις.
-- Ξαναφτιάχνεις ή αλλάζεις συνέχεια την προσφορά αντί να τη δοκιμάσεις στην πράξη.
-- Θέλεις να φύγεις από τη μισθωτή εργασία, και το σχέδιο παραμένει σχέδιο.
-- Θέλεις εναλλακτικές, αλλά δεν έχεις χτίσει αυτό που θα σου τις έδινε.
-- Δουλεύεις ανεξάρτητα αρκετά για να επιβιώνεις, αλλά πολύ μακριά από αυτό που πιστεύεις ότι μπορεί να γίνει.
-- Σκέφτεσαι, μαθαίνεις και βελτιώνεις πολλά — και κινείσαι εμπορικά λίγο.
-
-#### Πώς ένα μοτίβο φτάνει στην επιχείρηση
-
-Ένα μέρος από αυτά που καθυστερούν την επιχείρηση δεν είναι επιχειρηματικό πρόβλημα. Ξεκινά μέσα σου και καταλήγει στα νούμερα.
-
-- **Αποφεύγεις να σε δουν** → λίγοι ξέρουν ότι υπάρχεις
-- **Ένα «όχι» το παίρνεις προσωπικά** → σταματάς να πουλάς
-- **Σε δυσκολεύει να ζητήσεις χρήματα** → υποτιμολογείς
-- **Δεν εμπιστεύεσαι την κρίση σου** → αλλάζεις συνεχώς κατεύθυνση
-- **Θέλεις βεβαιότητα πριν κινηθείς** → προετοιμάζεσαι αντί να ξεκινήσεις
-- **Σκέφτεσαι υπερβολικά κάθε απόφαση** → η επιχείρηση κινείται αργά
-- **Θέλεις να σε συμπαθούν όλοι** → τα όριά σου κοστίζουν εμπορικά
-_Δείχνουν τον μηχανισμό. Δεν ισχύουν όλα για όλους — το θέμα είναι ότι το μοτίβο εμφανίζεται ως επιχειρηματικό αποτέλεσμα._
+Μερικές φορές το πρόβλημα είναι καθαρά business. Μερικές φορές είναι πιο περίπλοκο και περιλαμβάνει και εσένα. Και αρκετά συχνά, τα δύο μπλέκονται τόσο που δεν είναι καθόλου ξεκάθαρο πού ακριβώς βρίσκεται το πρόβλημα.
 
 
-#### Και μερικές φορές φταίει πράγματι η επιχείρηση
+#### Μήπως σου θυμίζει κάτι;
 
-Εξίσου συχνά, δεν χρειάζεται καμία ψυχολογική ερμηνεία. Το πρόβλημα είναι ακριβώς αυτό που φαίνεται:
+- Θέλεις καιρό να ξεκινήσεις κάτι. Ακόμα ετοιμάζεσαι.
+- Χρειάζεσαι περισσότερους πελάτες. Παρ' όλα αυτά, πάντα βρίσκεται κάτι πιο επείγον από το να πουλήσεις.
+- Ξέρεις ότι χρεώνεις λίγο. Η τιμή, όμως, παραμένει ίδια.
+- Κάθε φορά που η κατεύθυνση που διάλεξες δυσκολεύει, εμφανίζεται μια καινούρια που ξαφνικά μοιάζει καλύτερη.
+- Η επιχείρηση εξαρτάται από εσένα σχεδόν για τα πάντα.
+- Στα χαρτιά, τα πράγματα πάνε καλά. Εσύ, όμως, νιώθεις όλο και λιγότερο σύνδεση με αυτό που χτίζεις.
+- Έφτασες κάπου που ήθελες πολύ. Όμως τώρα δεν ξέρεις αν θέλεις πραγματικά να πας στο επόμενο επίπεδο ή απλώς πιστεύεις ότι θα έπρεπε να το θέλεις.
+- Καταλαβαίνεις πολύ καλά τα μοτίβα σου. Παραδόξως, συνεχίζεις να τα επαναλαμβάνεις.
 
-- Η προσφορά σου είναι αδύναμη.
-- Το positioning σου είναι θολό.
-- Κανείς δεν καταλαβαίνει γιατί να αγοράσει.
-- Δεν έχεις τρόπο να βρίσκεις πελάτες.
-- Η τιμολόγησή σου δεν βγάζει νόημα.
-- Κυνηγάς πέντε προτεραιότητες ταυτόχρονα.
-- Απλώς δεν πουλάς αρκετά.
-**Γι’ αυτό δουλεύουμε και τα δύο — και γι’ αυτό η πρώτη δουλειά είναι συχνά να ξεχωρίσουμε το ένα από το άλλο.**
+#### Κάποιες φορές χρειάζεται business προσέγγιση. Άλλες, ψυχολογικό σκάψιμο.
+
+_Πολλές φορές, είναι δύσκολο να ξεχωρίσεις τι από τα δύο έχεις πραγματικά μπροστά σου._
+
+**Το business**
+
+- Το offer σου είναι ακόμα αδύναμο.
+- Το positioning δεν είναι αρκετά ξεκάθαρο.
+- Δεν έχεις σταθερό τρόπο να βρίσκεις πελάτες.
+- Η τιμολόγηση δεν βγάζει νόημα.
+- Κυνηγάς πέντε πράγματα ταυτόχρονα.
+- Δεν ξέρεις ποια κίνηση έχει πραγματικά σημασία τώρα.
+**Εσύ**
+
+- Ξέρεις ότι πρέπει να πουλήσεις. Όμως, το αποφεύγεις.
+- Ένα «όχι» σε χτυπάει πιο προσωπικά απ' όσο θα ήθελες.
+- Ο φόβος έκθεσης σε κρατά πίσω, παρότι ξέρεις ότι χωρίς έκθεση δύσκολα έρχεται ζήτηση.
+- Αλλάζεις κατεύθυνση πριν προλάβει να δουλέψει η προηγούμενη.
+- Η αξία σου έχει συνδεθεί λίγο περισσότερο απ' όσο θα ήθελες με το πώς πάει η δουλειά.
+- Μπορείς να εξηγήσεις τέλεια πού είναι το πρόβλημα, αλλά δεν περνάς στη δράση.
+Κάποιες φορές η απάντηση είναι μια καλύτερη business προσέγγιση ή ένα διαφορετικό τακτικό πλάνο. Άλλες φορές χρειάζεται να πάμε πιο βαθιά — και αρκετά συχνά πρέπει να δουλέψουμε και τα δύο μέχρι να εντοπίσουμε πού είναι το πρόβλημα.
 
 
-#### Δύο επίπεδα, μία συνεργασία
+#### Μία συνεργασία όπου χωράνε και το business και εσύ.
 
-- **Το επιχειρηματικό επίπεδο** — Προσφορά, positioning, τιμολόγηση, εύρεση πελατών, πωλήσεις, πειράματα, προτεραιότητες, αποφάσεις, εκτέλεση. Το ερώτημα: τι χρειάζεται πραγματικά η επιχείρηση μετά;
-- **Ο άνθρωπος που τη χτίζει** — Αποφυγή, ορατότητα, απόρριψη, τελειομανία, χρήμα, αυτοαμφισβήτηση, έλεγχος, ταυτότητα, αβεβαιότητα, δέσμευση. Το ερώτημα: τι μέσα σου επηρεάζει το αν μπορείς πραγματικά να το κάνεις;
-**Κάποιες εβδομάδες το πρόβλημα είναι κυρίως η επιχείρηση. Κάποιες, κυρίως εσύ. Συνήθως αλληλοεπηρεάζονται.**
+**Το business:** Offer, positioning, τιμές, πελάτες, πωλήσεις, προτεραιότητες, αποφάσεις, εκτέλεση. — _Τι χρειάζεται πραγματικά το business τώρα;_
 
-_Δεν είναι σταθερός καταμερισμός του χρόνου — κάποιες συζητήσεις είναι όλες επιχείρηση, κάποιες όλες εσύ. Το θέμα είναι ότι μπορώ να δουλέψω και τα δύο χωρίς να αλλάξω δωμάτιο._
+**Εσύ:** Αποφυγή, απόρριψη, φόβος έκθεσης, τελειομανία, χρήματα, αμφιβολία, control, ταυτότητα, αβεβαιότητα, δέσμευση. — _Τι σε δυσκολεύει να φτάσεις εκεί που θέλεις;_
 
+Κάποιες φορές θα μιλήσουμε σχεδόν μόνο για το business. Άλλες, το tactical κομμάτι μπορεί να περιμένει λίγο γιατί υπάρχει κάτι σημαντικότερο από κάτω.
 
-#### Πώς συνεργαζόμαστε
-
-Υπάρχει ένας τρόπος να δουλέψουμε μαζί: 1:1. Ιδιωτική δουλειά πάνω σε αυτό που προσπαθείς να χτίσεις, και σε ό,τι επηρεάζει την ικανότητά σου να το χτίσεις.
-
-→ Δες τι περιλαμβάνει το 1:1 →
+**Δεν χρειάζεται να έχεις όλες τις απαντήσεις προκειμένου να μιλήσουμε.**
 
 
 #### Συχνές ερωτήσεις
 
-**Q. Χρειάζεται να έχω ήδη επιχείρηση;**
+**Q. Πρέπει να έχω ήδη επιχείρηση;**
 
-Όχι. Δεν χρειάζεται να έχεις έσοδα — είναι για ανθρώπους που προσπαθούν σοβαρά να χτίσουν κάτι, είτε είσαι ακόμη μισθωτός και σχεδιάζεις έξοδο, είτε δουλεύεις ανεξάρτητα, είτε τρέχεις ήδη κάτι μικρό.
+Όχι. Μπορεί να ξεκινάς τώρα, να δουλεύεις ως freelancer ή consultant, να χτίζεις κάτι παράλληλα με τη δουλειά σου ή να έχεις ήδη μια κανονική επιχείρηση. Το κοινό είναι ότι προσπαθείς σοβαρά να χτίσεις κάτι δικό σου.
 
-**Q. Για ποιους ανθρώπους είναι;**
+**Q. Είναι ψυχοθεραπεία ή συμβουλευτική επιχειρήσεων;**
 
-Για ανθρώπους που χτίζουν κάτι δικό τους: μισθωτούς που σχεδιάζουν έξοδο, όσους θέλουν εναλλακτικές ή ανεξάρτητο εισόδημα, μια portfolio καριέρα, μια εξειδίκευση που μπορεί να γίνει επιχείρηση, ήδη freelancers, ή κάποιον που τρέχει κάτι με πολλή ανάπτυξη ακόμη μέσα του.
+Είναι και τα δύο παράλληλα. Είμαι business advisor και ψυχοθεραπευτής. Αν το πρόβλημα είναι το business, δουλεύουμε το business. Αν μπαίνει κάτι δικό σου στη μέση, μπορούμε να δουλέψουμε κι αυτό.
 
-**Q. Είναι θεραπεία ή συμβουλευτική επιχειρήσεων;**
+**Q. Κι αν δεν ξέρω ποιο από τα δύο είναι;**
 
-Και τα δύο, σκόπιμα. Ένα μέρος του εμποδίου είναι πραγματικό επιχειρηματικό πρόβλημα· ένα μέρος είναι μοτίβο μέσα σου. Δουλεύω και τα δύο χωρίς να χρειάζεται να διαλέξεις.
-
-**Q. Κι αν δεν ξέρω αν το πρόβλημά μου είναι στρατηγικό ή ψυχολογικό;**
-
-Είναι φυσιολογικό — και συχνά το πρώτο που ξεκαθαρίζουμε μαζί. Πολλές φορές είναι και τα δύο.
-
-**Q. Μπορούμε να δουλέψουμε πρακτικά πράγματα — προσφορά, τιμολόγηση, πωλήσεις;**
-
-Ναι. Αυτό είναι το επιχειρηματικό επίπεδο, πραγματική συμβουλευτική για αυτό που χτίζεις — όχι «καθαρότητα» ή «λογοδοσία».
-
-**Q. Πρέπει να θέλω να αφήσω τη δουλειά μου;**
-
-Όχι. Κάποιοι θέλουν έξοδο· άλλοι απλώς εναλλακτικές ή ανεξάρτητο εισόδημα παράλληλα με μια δουλειά που τους αρέσει.
+Δεν χρειάζεται να έρθεις με διάγνωση. Το να ξεκαθαρίσουμε τι πραγματικά συμβαίνει είναι μέρος της δουλειάς.
 
 
 #### Final CTA
 
-**Θέλεις να χτίσεις κάτι δικό σου. Ή το έχεις ήδη χτίσει, και ξέρεις ότι υπάρχει πολύ περισσότερο μέσα του.**
+**Το να χτίσεις κάτι δικό σου είναι ήδη αρκετά δύσκολο.**
 
-Ξεκίνα με μια σύντομη γνωριμία. Χωρίς πίεση — απλώς για να δούμε αν αυτό είναι το σωστό δωμάτιο για ό,τι προσπαθείς να κάνεις.
+Αν προσπαθείς να ξεκινήσεις, να ξεκολλήσεις ή να αναπτύξεις κάτι παραπάνω, έλα να το συζητήσουμε.
 
 
 ---
@@ -242,164 +194,154 @@ _Δεν είναι σταθερός καταμερισμός του χρόνου
 
 **H1:** Work with me, 1:1
 
-**Lead:** One private engagement that works on two things at once: what you’re building, and whatever in you is affecting your ability to build it.
+**Lead:** Private work on the business you're building and whatever in you is getting tangled up with it.
 
-This is business advisory and psychological work in the same room. Practically, the objective is simple: help you build the thing — and remove what's getting in the way, whether that turns out to be strategic, behavioural, or both.
+Some problems need a tactical answer. Others need deeper work. Often, it's not obvious which one you're dealing with until we get into it.
 
-
-#### Who it’s for
-
-Someone seriously trying to:
-
-- start something of their own
-- create an independent source of income
-- move toward self-employment
-- grow an existing small business
-- grow a freelance or consulting practice
-- create more optionality alongside a job
-- turn an underperforming small business into something substantially stronger
-
-#### What we work on
-
-- **Business** — Offer, positioning, pricing, acquisition, sales, prioritisation, decisions, execution. Real advisory on the thing you’re building — not "clarity" or "accountability".
-- **The person** — Whatever psychological pattern is materially affecting progress — avoidance, visibility, charging, self-doubt, control, commitment. Worked in terms of how it hits the business, not as generic mental health.
-_Some weeks it’s 90% business. Some weeks the business barely comes up because something in you is the actual blocker. The engagement holds both without switching provider._
+The point of 1:1 is that we don't have to choose one lens in advance.
 
 
-#### How the engagement works
+#### What can we work on?
 
-- **1. Fit call** (~15 min · free) — A short call to see if we click and whether I’m the right person for what you’re trying to build. Not a session.
-- **2. First paid session** (one session) — You bring the problem as you see it. We find the more accurate one underneath, and you leave with a clear read and one real move — worth it even if we stop there.
-- **3. Ongoing** (if it’s worth it) — Private, 1:1, online. Weekly at first so the work compounds, then flexible. It continues only as long as it’s genuinely useful.
-_Sessions are online and one-to-one. It’s priced as a premium, ongoing monthly engagement rather than by the hour — I keep the number of clients small, and I’ll give you the specifics on the fit call. Between sessions you can reach me when something real comes up; not a 24/7 line, but you’re not on your own until the next slot either._
+**The business** — Offer, positioning, pricing, customer acquisition, sales, priorities, difficult decisions, execution.
+
+_Sometimes you need somebody to look at the business and say: this is the problem, this is noise, and this is what I'd do next._
+
+**You** — Avoidance, fear of visibility, rejection, self-doubt, perfectionism, control, identity, money, uncertainty, commitment.
+
+_Sometimes the strategy is already good enough. The difficult bit is getting yourself to actually execute it._
+
+And sometimes both the tactical and the personal need to be worked together. That's usually where this gets interesting.
 
 
-#### What to expect
+#### What does the work actually look like?
 
-- clearer commercial direction
-- better business decisions, made faster
-- more consistent execution
-- more willingness to do the commercially necessary things that feel uncomfortable
-- a straight read on whether the real constraint is strategic, behavioural, or both
-_What I won’t promise: specific revenue, income, customer numbers, or a psychological outcome. Anyone who guarantees those is selling you something._
+**You bring whatever is live.**
+
+- Maybe you don't know how to get the next ten customers.
+- Maybe you know exactly what conversation you need to have and you've been avoiding it for three months.
+- Maybe the company is growing but everything still has to go through you.
+- Maybe something that used to matter enormously to you suddenly doesn't, and you're not sure what that means for the business.
+- Maybe you've analysed the problem so thoroughly that analysis itself has become part of the problem.
+**We work with what's actually there.**
+
+I may challenge the business decision. I may challenge the story you're telling yourself about it.
+
+Sometimes we'll make a plan. Sometimes we'll stay with something uncomfortable long enough to understand why it keeps showing up.
+
+The goal isn't to turn everything into psychology. It's to get a more accurate read on what is happening, then do something useful with it.
+
+
+#### How it starts
+
+**1. Fit call** (~15 min · free) — We talk briefly about what you're building, what's going on and whether I seem like the right person for it. It's a fit check, not a free session.
+
+**2. First session** — We get properly into the problem. You don't need to arrive with the “right” version of it — bring it as you currently understand it. By the end, I want us to have a better read on what's actually going on and a concrete next move. Even if we decide not to continue, the session should be useful on its own.
+
+**3. If it makes sense, we continue** — Private, ongoing 1:1 work.
 
 
 #### Common questions
 
-**Q. Do I need to already have a business?**
-
-No. Existing revenue isn't a requirement — this is for people seriously trying to build, employed or independent, whether you're planning an exit, freelancing, or already running something small.
-
 **Q. Is this therapy?**
 
-It's therapy-informed and I'm a BACP-registered therapist, but it's not therapy by the protocol — more direct and action-oriented, and always tied to what you're building.
+Sometimes the work goes into territory you would absolutely recognise as psychotherapy. I'm a trained and registered psychotherapist, so we don't have to stop because the problem got personal. But this isn't a conventional therapy relationship where the business is merely context. The business itself is part of the work.
 
 **Q. Is this business coaching?**
 
-There's advisory in it, but no framework I hand you to run. It's real work on the offer, the pricing, the decision in front of you.
+Not really. I will give you an opinion on the business. We can work directly on your offer, pricing, positioning, customer acquisition or a decision in front of you. I don't have a framework that every client gets taken through.
 
-**Q. What kinds of business problems can we work on?**
+**Q. What if I don't know whether the problem is business or psychological?**
 
-Offer, positioning, pricing, acquisition, sales, prioritisation, decisions, execution — the practical work of building the thing.
+You don't need to. Quite often, that's the first thing we need to work out.
 
-**Q. What if the problem turns out not to be psychological?**
+**Q. Do I need to already have a business?**
 
-Then we treat it as the business problem it is. Not everything is a pattern — sometimes the offer is just weak, or the pricing is wrong, and we fix that.
-
-**Q. How do we decide whether to focus on the business or the person?**
-
-Week to week, by what's actually blocking progress. Some weeks it's 90% business; some weeks the business barely comes up because something in you is the real blocker.
-
-**Q. Is this only for people leaving employment?**
-
-No — employed, independent, or already running something. What's common is that you're seriously trying to build.
+No. You can be trying to start, building alongside a job, freelancing, consulting or already running an established business. What matters is that you're genuinely trying to build something of your own.
 
 
 #### CTA
 
-**The first step is a short fit call.**
+**Bring me the problem as you currently understand it.**
+
+We'll work out what it actually needs.
 
 
 ### 🇬🇷 Ελληνικά
 
-**H1:** Δούλεψε μαζί μου, 1:1
+**H1:** 1:1 Συνεργασία
 
-**Lead:** Μία ιδιωτική συνεργασία που δουλεύει δύο πράγματα ταυτόχρονα: αυτό που χτίζεις, και ό,τι μέσα σου επηρεάζει την ικανότητά σου να το χτίσεις.
+**Lead:** 1:1 συμβουλευτική προσανατολισμένη και στο business που χτίζεις αλλά και σε ό,τι φέρνεις εσύ στο τραπέζι σαν άνθρωπος που μπορεί να δημιουργεί εμπόδια.
 
-Είναι συμβουλευτική επιχειρήσεων και ψυχολογική δουλειά στο ίδιο δωμάτιο. Πρακτικά, ο στόχος είναι απλός: να χτίσεις το πράγμα — και να φύγει ό,τι σε εμποδίζει, είτε αυτό είναι στρατηγικό, είτε συμπεριφορικό, είτε και τα δύο.
+Κάποια προβλήματα θέλουν μια πρακτική business λύση. Άλλα χρειάζονται πιο βαθιά δουλειά. Και αρκετά συχνά, δεν είναι ξεκάθαρο ποιο από τα δύο έχεις μπροστά σου μέχρι να αρχίσουμε να το ξετυλίγουμε.
 
-
-#### Για ποιους είναι
-
-Για κάποιον που προσπαθεί σοβαρά να:
-
-- ξεκινήσει κάτι δικό του
-- δημιουργήσει ανεξάρτητο εισόδημα
-- κινηθεί προς την ανεξάρτητη εργασία
-- μεγαλώσει μια υπάρχουσα μικρή επιχείρηση
-- αναπτύξει μια πρακτική freelance ή συμβουλευτικής
-- δημιουργήσει εναλλακτικές παράλληλα με μια δουλειά
-- μετατρέψει μια μικρή επιχείρηση που υποαποδίδει σε κάτι ουσιαστικά ισχυρότερο
-
-#### Τι δουλεύουμε
-
-- **Επιχείρηση** — Προσφορά, positioning, τιμολόγηση, εύρεση πελατών, πωλήσεις, προτεραιότητες, αποφάσεις, εκτέλεση. Πραγματική συμβουλευτική για αυτό που χτίζεις — όχι «καθαρότητα» ή «λογοδοσία».
-- **Ο άνθρωπος** — Όποιο ψυχολογικό μοτίβο επηρεάζει ουσιαστικά την πρόοδο — αποφυγή, ορατότητα, χρέωση, αυτοαμφισβήτηση, έλεγχος, δέσμευση. Δουλεύεται ως προς το πώς χτυπά την επιχείρηση, όχι ως γενική ψυχική υγεία.
-_Κάποιες εβδομάδες είναι 90% επιχείρηση. Κάποιες, η επιχείρηση μόλις που αναφέρεται, γιατί κάτι μέσα σου είναι το πραγματικό εμπόδιο. Η συνεργασία κρατά και τα δύο χωρίς να αλλάξεις άνθρωπο._
+Στο 1:1 δεν χρειάζεται να διαλέξουμε από πριν.
 
 
-#### Πώς λειτουργεί η συνεργασία
+#### Τι μπορούμε να δουλέψουμε
 
-- **1. Γνωριμία** (~15 λεπτά · δωρεάν) — Μια σύντομη κλήση για να δούμε αν ταιριάζουμε και αν είμαι ο σωστός άνθρωπος για αυτό που χτίζεις. Δεν είναι συνεδρία.
-- **2. Πρώτη συνεδρία** (μία συνεδρία) — Φέρνεις το πρόβλημα όπως το βλέπεις. Βρίσκουμε το πιο ακριβές από κάτω, και φεύγεις με μια καθαρή εικόνα και μία πραγματική κίνηση — αξίζει ακόμη κι αν σταματήσουμε εκεί.
-- **3. Συνέχεια** (αν αξίζει) — Ιδιωτικά, 1:1, online. Στην αρχή εβδομαδιαία ώστε να χτίζεται η δουλειά, μετά ευέλικτα. Συνεχίζει μόνο όσο είναι πραγματικά χρήσιμο.
-_Οι συνεδρίες είναι online και ατομικές. Τιμολογείται ως premium, σταθερή μηνιαία συνεργασία και όχι με την ώρα — κρατώ μικρό αριθμό πελατών, και θα σου πω τις λεπτομέρειες στη γνωριμία. Ανάμεσα στις συνεδρίες μπορείς να με βρεις όταν προκύψει κάτι ουσιαστικό· δεν είναι γραμμή 24/7, αλλά ούτε μένεις μόνος μέχρι το επόμενο ραντεβού._
+**Το business** — Offer, positioning, τιμές, πελάτες, πωλήσεις, προτεραιότητες, δύσκολες αποφάσεις, εκτέλεση.
+
+_Μερικές φορές χρειάζεσαι κάποιον να κοιτάξει το business και να σου πει: αυτό είναι το πρόβλημα, αυτό είναι θόρυβος και αυτό θα έκανα μετά._
+
+**Εσύ** — Αποφυγή, φόβος έκθεσης, απόρριψη, αμφιβολία, τελειομανία, control, ταυτότητα, χρήματα, αβεβαιότητα, δέσμευση.
+
+_Μερικές φορές το strategy είναι ήδη μια χαρά. Το δύσκολο πολλές φορές είναι να το εφαρμόσεις._
+
+Και κάποιες φορές συμβαίνουν και τα δύο μαζί. Εκεί συνήθως αρχίζει το ενδιαφέρον κομμάτι της δουλειάς μας.
 
 
-#### Τι να περιμένεις
+#### Πώς είναι στην πράξη;
 
-- πιο καθαρή εμπορική κατεύθυνση
-- καλύτερες επιχειρηματικές αποφάσεις, πιο γρήγορα
-- πιο σταθερή εκτέλεση
-- μεγαλύτερη διάθεση να κάνεις τα εμπορικά αναγκαία που σε δυσκολεύουν
-- μια ειλικρινή εικόνα για το αν το πραγματικό εμπόδιο είναι στρατηγικό, συμπεριφορικό ή και τα δύο
-_Τι δεν υπόσχομαι: συγκεκριμένα έσοδα, εισόδημα, αριθμό πελατών ή ψυχολογικό αποτέλεσμα. Όποιος τα εγγυάται, σου πουλάει κάτι._
+**Φέρνεις αυτό που σε απασχολεί τώρα.**
+
+- Μπορεί να μην ξέρεις πώς θα βρεις τους επόμενους πελάτες.
+- Μπορεί να ξέρεις ακριβώς ποια συζήτηση πρέπει να κάνεις και να την αποφεύγεις εδώ και τρεις μήνες.
+- Μπορεί το business να μεγαλώνει αλλά όλα να πρέπει ακόμα να περνούν από εσένα.
+- Μπορεί κάτι που κάποτε ήθελες πάρα πολύ να μη σε γεμίζει πια και να μην ξέρεις τι σημαίνει αυτό για όσα έχεις χτίσει.
+- Ή μπορεί να έχεις αναλύσει το πρόβλημα τόσο πολύ, που η ίδια η ανάλυση έχει γίνει μέρος του προβλήματος.
+**Δουλεύουμε αυτό που υπάρχει πραγματικά μπροστά μας.**
+
+Μπορεί να αμφισβητήσω μια business απόφαση. Μπορεί να αμφισβητήσω την ιστορία που λες στον εαυτό σου γύρω από αυτήν.
+
+Κάποιες φορές θα δουλέψουμε πάνω σε ένα πλάνο. Άλλες θα χρειαστεί να μείνουμε λίγο περισσότερο σε κάτι που αποφεύγεις, μέχρι να καταλάβουμε γιατί αυτό επιστρέφει συνέχεια.
+
+Δεν ψάχνουμε ψυχολογική εξήγηση για τα πάντα. Προσπαθούμε να καταλάβουμε καλύτερα τι πραγματικά συμβαίνει και μετά να εξάγουμε κάτι χρήσιμο με αυτό.
+
+
+#### Πώς ξεκινάμε
+
+**1. Γνωριμία** (~15 λεπτά · δωρεάν) — Μου λες πολύ σύντομα τι χτίζεις και τι συμβαίνει. Βλέπουμε αν ταιριάζουμε και αν είμαι ο σωστός άνθρωπος για σένα. Είναι γνωριμία, όχι δωρεάν συνεδρία.
+
+**2. Πρώτη συνεδρία** — Εδώ μπαίνουμε κανονικά στο θέμα. Δεν χρειάζεται να έχεις καταλάβει ακριβώς ποιο είναι το πρόβλημα — φέρ' το όπως το βλέπεις τώρα. Μέχρι το τέλος θέλω να έχουμε πιο καθαρή εικόνα για το τι πραγματικά συμβαίνει και ένα συγκεκριμένο επόμενο βήμα. Ακόμα κι αν δεν συνεχίσουμε μαζί, η πρώτη συνεδρία θα σου δώσει τεράστια αξία.
+
+**3. Αν έχει νόημα, συνεχίζουμε** — Ιδιωτικά, 1:1.
 
 
 #### Συχνές ερωτήσεις
 
-**Q. Χρειάζεται να έχω ήδη επιχείρηση;**
+**Q. Είναι ψυχοθεραπεία;**
 
-Όχι. Δεν χρειάζεται να έχεις έσοδα — είναι για ανθρώπους που προσπαθούν σοβαρά να χτίσουν κάτι, μισθωτούς ή ανεξάρτητους, είτε σχεδιάζεις έξοδο, είτε δουλεύεις freelance, είτε τρέχεις ήδη κάτι μικρό.
-
-**Q. Είναι θεραπεία;**
-
-Είναι therapy-informed και είμαι Σύμβουλος Ψυχικής Υγείας εγγεγραμμένος στο BACP, αλλά δεν είναι θεραπεία με το πρωτόκολλο — πιο άμεση και προσανατολισμένη στη δράση, πάντα δεμένη με αυτό που χτίζεις.
+Κάποιες φορές η δουλειά μας θα μπει σε θέματα που είναι ξεκάθαρα ψυχοθεραπευτικά. Είμαι εκπαιδευμένος και εγγεγραμμένος ψυχοθεραπευτής, οπότε δεν χρειάζεται να σταματήσουμε επειδή το θέμα έγινε προσωπικό. Από την άλλη, εδώ το business δεν είναι απλώς το context. Είναι κι αυτό μέρος της δουλειάς.
 
 **Q. Είναι business coaching;**
 
-Υπάρχει συμβουλευτική μέσα, αλλά όχι framework που σου δίνω να τρέξεις. Είναι πραγματική δουλειά πάνω στην προσφορά, την τιμολόγηση, την απόφαση μπροστά σου.
+Ναι αλλά όχι αποκλειστικά. Θα έχω άποψη για το business. Μπορούμε να δουλέψουμε κανονικά offer, positioning, τιμές, πελάτες ή μια δύσκολη απόφαση που έχεις μπροστά σου. Δεν έχω μια έτοιμη μέθοδο από την οποία περνάω όλους τους πελάτες.
 
-**Q. Τι επιχειρηματικά προβλήματα μπορούμε να δουλέψουμε;**
+**Q. Κι αν δεν ξέρω αν το πρόβλημα είναι business ή ψυχολογικό;**
 
-Προσφορά, positioning, τιμολόγηση, εύρεση πελατών, πωλήσεις, προτεραιότητες, αποφάσεις, εκτέλεση — την πρακτική δουλειά του χτισίματος.
+Δεν χρειάζεται να ξέρεις. Αρκετές φορές, αυτό είναι το πρώτο πράγμα που πρέπει να ξεκαθαρίσουμε.
 
-**Q. Κι αν το πρόβλημα δεν είναι τελικά ψυχολογικό;**
+**Q. Πρέπει να έχω ήδη επιχείρηση;**
 
-Τότε το αντιμετωπίζουμε ως το επιχειρηματικό πρόβλημα που είναι. Δεν είναι όλα μοτίβο — κάποιες φορές η προσφορά είναι απλώς αδύναμη ή η τιμολόγηση λάθος, και το διορθώνουμε.
-
-**Q. Πώς αποφασίζουμε αν θα εστιάσουμε στην επιχείρηση ή στον άνθρωπο;**
-
-Εβδομάδα με εβδομάδα, με βάση το τι πραγματικά εμποδίζει την πρόοδο. Κάποιες εβδομάδες είναι 90% επιχείρηση· κάποιες, η επιχείρηση μόλις που αναφέρεται.
-
-**Q. Είναι μόνο για όσους αφήνουν τη μισθωτή εργασία;**
-
-Όχι — μισθωτοί, ανεξάρτητοι, ή κάποιος που τρέχει ήδη κάτι. Το κοινό είναι ότι προσπαθείς σοβαρά να χτίσεις.
+Όχι. Μπορεί να ξεκινάς τώρα, να χτίζεις κάτι παράλληλα με τη δουλειά σου, να είσαι freelancer ή consultant, ή να τρέχεις ήδη μια κανονική επιχείρηση. Το σημαντικό είναι να προσπαθείς πραγματικά να χτίσεις κάτι δικό σου.
 
 
 #### CTA
 
-**Το πρώτο βήμα είναι μια σύντομη γνωριμία.**
+**Φέρε το πρόβλημα όπως το βλέπεις τώρα.**
+
+Θα βρούμε τι πραγματικά χρειάζεται.
 
 
 ---
@@ -411,90 +353,144 @@ _Τι δεν υπόσχομαι: συγκεκριμένα έσοδα, εισόδ
 
 **H1:** About
 
-**Role:** Business Advisor + Therapist
+**Role:** Business Advisor + Licensed Psychotherapist
 
-**Credentials:** BACP-registered · MSc Integrative Counselling & Psychotherapy · Based in Ireland, working globally
+**Credentials:** MSc Integrative Counselling & Psychotherapy (University of Derby) · BACP-registered · Based in Ireland, working globally
 
-**Lead:** I help people build something of their own — and work with whatever in them is affecting that. The reason I can do both isn’t a slogan; it’s two separate careers that ended up pointing at the same problem.
+**Lead:** Two careers that kept running into the same problem.
 
+I spent 18+ years in tech, mostly in product and growth. I built my own companies, worked inside startups and large organisations, and advised more than 500 businesses.
 
-#### The business career
+So if we're talking about your offer, pricing, customer acquisition, a hire, a sale you're avoiding or a business decision you can't settle, you don't need to translate the commercial side for me.
 
-I spent 18+ years in tech, in product and growth — building my own companies, working inside startups and large organisations, and advising more than 500 businesses.
-
-So when we talk about your offer, your pricing, the sale you’re avoiding or the hire you keep postponing, I’m not translating it into therapy language. I’ve done the work and I know the terrain.
-
-
-#### The therapy training
-
-Alongside that I trained as a therapist — an MSc in Integrative Counselling & Psychotherapy (University of Derby) and registration with the BACP. That training is why I can see the pattern underneath a business problem, and actually work with it, rather than just naming it.
+I know that world.
 
 
-#### Why the two converged
+#### Then psychology started showing up in places it wasn't invited.
 
-I kept meeting the same thing from both directions. As an advisor, the business problem often traced back to something in the person. As a therapist, ambitious people were carrying real commercial problems that pure therapy wasn’t equipped to touch.
+Again and again, I'd see a business problem that was only partly a business problem.
 
-Working across both isn’t a gimmick. It’s the only honest way I’ve found to help — because the constraint is often on one side, sometimes the other, and frequently both at once.
+Someone knew they needed to sell but wouldn’t.
+
+Someone kept changing a perfectly reasonable strategy.
+
+Someone had hired good people but struggled to let go of control.
+
+Someone had enough information to make a decision and kept looking for more.
+
+The strategy mattered. But it wasn't the whole story.
+
+So I trained as a psychotherapist: MSc Integrative Counselling & Psychotherapy at the University of Derby, and registration with the BACP.
 
 
-#### Both sides of the desk
+#### Then the same thing happened from the other direction.
 
-I understand employment and I understand trying to build something independent, because I’ve done both — including building this practice right now. I know what it is to have a lot to lose, and I know what it is to start from nothing.
+In psychological work, I'd meet ambitious people dealing with very real business problems.
+
+And sometimes a psychological explanation wasn't what they needed.
+
+Their offer was weak. Their pricing was wrong. They had no reliable way of finding customers. They were making a bad business decision.
+
+Psychotherapy isn't designed to tell you that.
 
 
-#### Ambition isn’t the pathology
+#### Eventually, the two careers stopped looking random.
 
-I’m not here to convince ambitious people that wanting more is secretly unhealthy. Wanting to build is not a symptom. The work is to help you build what you actually want, while understanding the patterns that get in the way of building it.
+Sometimes the problem is clearly business.
+
+Sometimes it's personal.
+
+And quite often they collide so much that you can't tell where one ends and the other begins.
+
+That's the work I find most interesting.
+
+
+#### I'm not here to tell you to want less.
+
+Ambition isn't a symptom.
+
+I don't want to convince you that wanting a bigger business, more money, more independence or more impact is secretly unhealthy.
+
+I want to help you build what you actually want without automatically assuming that either the business or you must be the problem.
 
 
 #### CTA
 
-**If any of this sounds like you, start with a short fit call.**
+**Usually, we need to look before we know.**
+
+→ See how 1:1 works
 
 
 ### 🇬🇷 Ελληνικά
 
-**H1:** Σχετικά
+**H1:** Λίγα για μένα
 
-**Role:** Σύμβουλος επιχειρήσεων & ψυχικής υγείας
+**Role:** Business Advisor + Ψυχοθεραπευτής
 
-**Credentials:** Εγγεγραμμένος στο BACP · MSc Integrative Counselling & Psychotherapy · Έδρα στην Ιρλανδία, δουλεύω παγκόσμια
+**Credentials:** MSc Integrative Counselling & Psychotherapy (University of Derby) · Εγγεγραμμένος στο BACP · Έδρα στην Ιρλανδία, δουλεύω παγκόσμια
 
-**Lead:** Βοηθώ ανθρώπους να χτίσουν κάτι δικό τους — και δουλεύω με ό,τι μέσα τους το επηρεάζει. Ο λόγος που μπορώ να κάνω και τα δύο δεν είναι σλόγκαν· είναι δύο ξεχωριστές πορείες που κατέληξαν να δείχνουν το ίδιο πρόβλημα.
+**Lead:** Δύο καριέρες που κατέληγαν να συναντιούνται συνέχεια.
 
+Πέρασα 18+ χρόνια στην τεχνολογία, κυρίως στο product και το growth. Έχτισα δικές μου εταιρείες, δούλεψα σε startups και μεγάλους οργανισμούς και συμβούλεψα περισσότερες από 500 επιχειρήσεις.
 
-#### Η επιχειρηματική πορεία
+Οπότε αν μιλάμε για offer, pricing, πελάτες, μια πρόσληψη, μια πώληση που αποφεύγεις ή μια business απόφαση που δεν μπορείς να κλείσεις, δεν χρειάζεται να μου εξηγήσεις όλο το context.
 
-Πέρασα 18+ χρόνια στην τεχνολογία, στο product και το growth — έχτισα δικές μου εταιρείες, δούλεψα σε startups και μεγάλους οργανισμούς, και συμβούλεψα περισσότερες από 500 επιχειρήσεις.
-
-Έτσι, όταν μιλάμε για την προσφορά σου, την τιμολόγηση, την πώληση που αποφεύγεις ή την πρόσληψη που αναβάλλεις, δεν το μεταφράζω σε γλώσσα θεραπείας. Έχω κάνει τη δουλειά και ξέρω το έδαφος.
-
-
-#### Η εκπαίδευση στη συμβουλευτική
-
-Παράλληλα εκπαιδεύτηκα ως Σύμβουλος Ψυχικής Υγείας — MSc in Integrative Counselling & Psychotherapy (University of Derby) και εγγραφή στο BACP. Αυτή η εκπαίδευση είναι ο λόγος που μπορώ να δω το μοτίβο κάτω από ένα επιχειρηματικό πρόβλημα, και να δουλέψω πραγματικά με αυτό, αντί απλώς να το ονομάσω.
+Αυτόν τον κόσμο τον ξέρω.
 
 
-#### Γιατί συνέκλιναν τα δύο
+#### Κάπου εκεί άρχισε να εμφανίζεται η ψυχολογία εκεί που κανείς δεν την είχε καλέσει.
 
-Συναντούσα το ίδιο πράγμα κι από τις δύο κατευθύνσεις. Ως σύμβουλος, το επιχειρηματικό πρόβλημα συχνά κατέληγε σε κάτι μέσα στον άνθρωπο. Ως Σύμβουλος Ψυχικής Υγείας, φιλόδοξοι άνθρωποι κουβαλούσαν πραγματικά εμπορικά προβλήματα που η καθαρή θεραπεία δεν ήταν εξοπλισμένη να αγγίξει.
+Ξανά και ξανά έβλεπα business προβλήματα που ήταν μόνο εν μέρει business προβλήματα.
 
-Το να δουλεύω και τα δύο δεν είναι κόλπο. Είναι ο μόνος ειλικρινής τρόπος που έχω βρει να βοηθήσω — γιατί το εμπόδιο είναι συχνά στη μία πλευρά, κάποιες φορές στην άλλη, και πολύ συχνά και στις δύο μαζί.
+Κάποιος ήξερε ότι έπρεπε να πουλήσει και δεν το έκανε.
+
+Κάποιος άλλαζε συνέχεια μια απολύτως λογική στρατηγική.
+
+Κάποιος είχε προσλάβει καλούς συνεργάτες αλλά δυσκολευόταν να αποδεσμευτεί από το control.
+
+Κάποιος είχε αρκετή πληροφορία για να πάρει μια απόφαση και συνέχιζε να ψάχνει κι άλλη.
+
+Το business είχε σημασία. Απλώς δεν ήταν όλη η ιστορία.
+
+Έτσι εκπαιδεύτηκα ως ψυχοθεραπευτής.
 
 
-#### Και τις δύο πλευρές
+#### Και μετά άρχισα να βλέπω το ίδιο πράγμα από την άλλη πλευρά.
 
-Καταλαβαίνω τη μισθωτή εργασία και καταλαβαίνω το να προσπαθείς να χτίσεις κάτι ανεξάρτητο, γιατί έχω κάνει και τα δύο — μαζί με το χτίσιμο αυτής της πρακτικής τώρα. Ξέρω τι σημαίνει να έχεις πολλά να χάσεις, και ξέρω τι σημαίνει να ξεκινάς από το μηδέν.
+Στην ψυχολογική δουλειά συναντούσα φιλόδοξους ανθρώπους με απολύτως πραγματικά business προβλήματα.
+
+Και μερικές φορές αυτό που χρειάζονταν δεν ήταν μια ψυχολογική εξήγηση.
+
+Το offer ήταν αδύναμο. Οι τιμές λάθος. Δεν υπήρχε σταθερός τρόπος να έρθουν πελάτες. Ή απλώς η business απόφαση ήταν κακή.
+
+Η ψυχοθεραπεία δεν είναι φτιαγμένη για να σε βοηθήσει με αυτό.
 
 
-#### Η φιλοδοξία δεν είναι παθολογία
+#### Κάπως έτσι, οι δύο καριέρες σταμάτησαν να μοιάζουν τόσο random.
 
-Δεν είμαι εδώ για να πείσω φιλόδοξους ανθρώπους ότι το να θέλουν περισσότερα είναι κρυφά ανθυγιεινό. Το να θέλεις να χτίσεις δεν είναι σύμπτωμα. Η δουλειά είναι να σε βοηθήσω να χτίσεις αυτό που πραγματικά θέλεις, κατανοώντας τα μοτίβα που μπαίνουν εμπόδιο.
+Μερικές φορές το πρόβλημα είναι καθαρά business.
+
+Μερικές φορές είναι προσωπικό.
+
+Και αρκετά συχνά μπλέκονται τόσο, που δεν είναι καθόλου ξεκάθαρο πού τελειώνει το ένα και αρχίζει το άλλο.
+
+Αυτό είναι το σημείο που με ενδιαφέρει περισσότερο.
+
+
+#### Δεν είμαι εδώ για να σου πω να θέλεις λιγότερα.
+
+Η φιλοδοξία δεν είναι σύμπτωμα.
+
+Δεν θέλω να σε πείσω ότι το να θέλεις μεγαλύτερο business, περισσότερα χρήματα, περισσότερη ανεξαρτησία ή μεγαλύτερο impact είναι κατά βάθος ανθυγιεινό.
+
+Θέλω να σε βοηθήσω να χτίσεις αυτό που πραγματικά θέλεις, χωρίς να υποθέτουμε από πριν ότι το πρόβλημα πρέπει να είναι είτε το business είτε εσύ.
 
 
 #### CTA
 
-**Αν αναγνωρίζεις κάτι από τα παραπάνω, ξεκίνα με μια σύντομη γνωριμία.**
+**Πρώτα κοιτάμε. Μετά αποφασίζουμε.**
+
+→ Δες την 1:1 συνεργασία
 
 
 ---
@@ -504,51 +500,115 @@ I’m not here to convince ambitious people that wanting more is secretly unheal
 
 ### 🇬🇧 English
 
-**H1:** In their words
+**H1:** What people say
 
-Anonymous reflections from people I’ve worked with — founders, operators and independents building something of their own. Shared with permission; identifying details removed.
+A few things people have said after working with me.
+
+_Names and identifying details are removed. The words are theirs._
 
 
 ### 🇬🇷 Ελληνικά
 
-**H1:** Με τα λόγια τους
+**H1:** Τι λένε άνθρωποι που έχουν δουλέψει μαζί μου
 
-Ανώνυμες σκέψεις από ανθρώπους με τους οποίους έχω δουλέψει — founders, στελέχη και ανεξάρτητους επαγγελματίες που χτίζουν κάτι δικό τους. Κοινοποιούνται με άδεια· τα στοιχεία ταυτότητας έχουν αφαιρεθεί.
+Μερικά πράγματα που έχουν πει άνθρωποι μετά τη δουλειά μας.
 
-_Οι μαρτυρίες παρατίθενται στην αρχική τους γλώσσα (αγγλικά), όπως ειπώθηκαν — δεν τις μεταφράζω ή τις αναδιατυπώνω._
+_Τα ονόματα και τα στοιχεία που θα μπορούσαν να τους ταυτοποιήσουν έχουν αφαιρεθεί. Τα λόγια είναι δικά τους._
+
+_(Greek page shows the translation first, with a per-testimonial "Αρχικό κείμενο στα αγγλικά" toggle revealing the original English.)_
 
 
-### Testimonials (verbatim, shown in both languages)
+### Testimonials (shown order; English original + Greek translation)
 
-1. “I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don’t have to translate one world into the other for him.” — _Anonymous client, Founder_
+**1. Anonymous client, Founder**
 
-2. “Aggelos is direct. He will tell me when I am avoiding something or constructing a very intelligent explanation for why I cannot act. But I have never experienced his directness as judgement. There is enough trust between us that he can challenge me properly, which is exactly what I needed.” — _Anonymous client, Senior tech professional_
+🇬🇧 “I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don’t have to translate one world into the other for him.”
 
-3. “I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.” — _Anonymous client, Technology leader_
+🇬🇷 “Είχα δουλέψει με coaches στο παρελθόν, είχα κάνει και θεραπεία, αλλά αυτό ένιωσα ότι ήταν διαφορετικό. Ο Άγγελος καταλαβαίνει τη συναισθηματική πλευρά χωρίς να χάνει από τα μάτια του την πραγματική κατάσταση που αντιμετωπίζω στη δουλειά. Μπορούμε να μιλήσουμε για πίεση, ντροπή ή για κάτι που συμβαίνει στο σώμα μου, και πέντε λεπτά αργότερα να συζητάμε μια απόφαση που αφορά την ομάδα ή το business μου. Δεν χρειάζεται να του μεταφράζω τον έναν κόσμο στον άλλον.”
 
-4. “One of the most useful things is that Aggelos actually understands the environment I work in. I don’t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than “follow your values.” He understands the game, but he also notices what the game is doing to me.” — _Anonymous client, Senior operator_
+**2. Anonymous client, Senior professional**
 
-5. “We have been working together for a while now, and the sessions have gradually changed the way I make decisions. Aggelos doesn’t tell me what to do or try to make me dependent on his opinion. He helps me separate the real problem from the fear, ego and old patterns wrapped around it. I usually leave with less noise and a much clearer sense of what is mine to do.” — _Anonymous client, Founder_
+🇬🇧 “I came in expecting a fairly standard coaching conversation. Within the first session, Aggelos understood both the professional problem and the emotional mechanism underneath it. He was warm, but very straightforward, and gave me a way of looking at the situation that I had not considered before. I left with more than advice. I left with a more accurate problem.”
 
-6. “I was initially sceptical about somatic and trauma-informed work because I assumed it would be vague or a bit spiritual. It wasn’t. Aggelos explained what we were doing, paid attention to my limits and connected the experience back to patterns I could recognise in my work and relationships. It felt grounded, careful and surprisingly practical.” — _Anonymous client_
+🇬🇷 “Ήρθα περιμένοντας μια αρκετά τυπική συζήτηση coaching. Μέσα στην πρώτη κιόλας συνεδρία, ο Άγγελος κατάλαβε και το επαγγελματικό πρόβλημα και τον συναισθηματικό μηχανισμό από κάτω του. Ήταν ζεστός, αλλά πολύ ευθύς, και μου έδωσε έναν τρόπο να δω την κατάσταση που δεν είχα σκεφτεί πριν. Έφυγα με κάτι παραπάνω από συμβουλές. Έφυγα με ένα πιο ακριβές πρόβλημα.”
 
-7. “I had been forcing a business situation to continue because stopping it felt like failure. After one of our exercises, I realised I was trying to manufacture reasons to keep going when I already knew the answer. I had the difficult conversation shortly afterwards. It was not that Aggelos gave me the decision. He helped me stop fighting what I already knew.” — _Anonymous client, Business owner_
+**3. Anonymous client, Business owner**
 
-8. “I did not want somebody to tell me to work less, lower my standards or become less ambitious. Aggelos understood that immediately. Our work has been about keeping the part of me that wants to build and achieve, while becoming less dependent on winning, comparison and external approval to feel okay. That distinction has been very important to me.” — _Anonymous client, Founder and executive_
+🇬🇧 “I had been forcing a business situation to continue because stopping it felt like failure. After one of our exercises, I realised I was trying to manufacture reasons to keep going when I already knew the answer. I had the difficult conversation shortly afterwards. It was not that Aggelos gave me the decision. He helped me stop fighting what I already knew.”
 
-9. “I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.” — _Anonymous client, Product leader_
+🇬🇷 “Πίεζα μια επιχειρηματική κατάσταση να συνεχιστεί, επειδή το να τη σταματήσω έμοιαζε με αποτυχία. Μετά από μία από τις ασκήσεις μας, συνειδητοποίησα ότι προσπαθούσα να κατασκευάσω λόγους για να συνεχίσω, ενώ ήδη ήξερα την απάντηση. Έκανα τη δύσκολη συζήτηση λίγο αργότερα. Δεν ήταν ότι ο Άγγελος μου έδωσε την απόφαση. Με βοήθησε να σταματήσω να παλεύω με αυτό που ήδη ήξερα.”
 
-10. “The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.” — _Anonymous client, Senior tech professional_
+**4. Anonymous client, Founder**
 
-11. “I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.” — _Anonymous client, Technology executive_
+🇬🇧 “There are no motivational speeches or generic frameworks pasted onto every situation. Aggelos pays attention to how I specifically operate. He remembers the contradictions, notices when I change the story and asks the question I was hoping we could avoid. Annoying at times, but usually accurate.”
 
-12. “There are no motivational speeches or generic frameworks pasted onto every situation. Aggelos pays attention to how I specifically operate. He remembers the contradictions, notices when I change the story and asks the question I was hoping we could avoid. Annoying at times, but usually accurate.” — _Anonymous client, Founder_
+🇬🇷 “Δεν υπάρχουν εμψυχωτικοί λόγοι ή γενικά frameworks κολλημένα πάνω σε κάθε κατάσταση. Ο Άγγελος προσέχει πώς λειτουργώ συγκεκριμένα εγώ. Θυμάται τις αντιφάσεις, αντιλαμβάνεται πότε αλλάζω την ιστορία και κάνει την ερώτηση που έλπιζα ότι θα μπορούσαμε να αποφύγουμε. Ενοχλητικό κάποιες φορές, αλλά συνήθως εύστοχο.”
 
-13. “Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.” — _Anonymous client, Consultant and business owner_
+**5. Anonymous client, Founder**
 
-14. “I came in expecting a fairly standard coaching conversation. Within the first session, Aggelos understood both the professional problem and the emotional mechanism underneath it. He was warm, but very straightforward, and gave me a way of looking at the situation that I had not considered before. I left with more than advice. I left with a more accurate problem.” — _Anonymous client, Senior professional_
+🇬🇧 “We have been working together for a while now, and the sessions have gradually changed the way I make decisions. Aggelos doesn’t tell me what to do or try to make me dependent on his opinion. He helps me separate the real problem from the fear, ego and old patterns wrapped around it. I usually leave with less noise and a much clearer sense of what is mine to do.”
 
-15. “From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.” — _Anonymous client, Tech executive_
+🇬🇷 “Δουλεύουμε μαζί εδώ και αρκετό καιρό, και οι συνεδρίες έχουν αλλάξει σταδιακά τον τρόπο που παίρνω αποφάσεις. Ο Άγγελος δεν μου λέει τι να κάνω ούτε προσπαθεί να με κάνει να εξαρτώμαι από τη γνώμη του. Με βοηθά να ξεχωρίσω το πραγματικό πρόβλημα από τον φόβο, το ego και τα παλιά μοτίβα που είναι τυλιγμένα γύρω του. Συνήθως φεύγω με λιγότερο θόρυβο και πολύ πιο καθαρή αίσθηση του τι είναι δικό μου να κάνω.”
+
+**6. Anonymous client, Senior tech professional**
+
+🇬🇧 “The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.”
+
+🇬🇷 “Οι συζητήσεις πάνε πιο βαθιά από το συνηθισμένο coaching, αλλά και πάλι φεύγω με κάτι αξιοποιήσιμο. Κάποιες φορές είναι μια απόφαση, κάποιες μια δύσκολη συζήτηση που πρέπει να κάνω, και κάποιες φορές είναι απλώς το να παρατηρήσω τη στιγμή που το σώμα μου μπαίνει σε κατάσταση απειλής, πριν το μυαλό μου φτιάξει μια ιστορία γύρω από αυτό. Είναι ένας σπάνιος συνδυασμός βάθους και πρακτικότητας.”
+
+**7. Anonymous client, Senior tech professional**
+
+🇬🇧 “Aggelos is direct. He will tell me when I am avoiding something or constructing a very intelligent explanation for why I cannot act. But I have never experienced his directness as judgement. There is enough trust between us that he can challenge me properly, which is exactly what I needed.”
+
+🇬🇷 “Ο Άγγελος είναι ευθύς. Θα μου πει όταν αποφεύγω κάτι ή όταν κατασκευάζω μια πολύ έξυπνη εξήγηση για το γιατί δεν μπορώ να δράσω. Όμως ποτέ δεν βίωσα την ευθύτητά του ως κριτική. Υπάρχει αρκετή εμπιστοσύνη μεταξύ μας ώστε να μπορεί να με προκαλέσει σωστά, που είναι ακριβώς αυτό που χρειαζόμουν.”
+
+**8. Anonymous client, Founder and executive**
+
+🇬🇧 “I did not want somebody to tell me to work less, lower my standards or become less ambitious. Aggelos understood that immediately. Our work has been about keeping the part of me that wants to build and achieve, while becoming less dependent on winning, comparison and external approval to feel okay. That distinction has been very important to me.”
+
+🇬🇷 “Δεν ήθελα κάποιον να μου πει να δουλεύω λιγότερο, να χαμηλώσω τον πήχη ή να γίνω λιγότερο φιλόδοξος. Ο Άγγελος το κατάλαβε αμέσως. Η δουλειά μας ήταν να κρατήσουμε το κομμάτι μου που θέλει να χτίζει και να πετυχαίνει, ενώ ταυτόχρονα γίνομαι λιγότερο εξαρτημένος από το να νικάω, τη σύγκριση και την εξωτερική επιβεβαίωση για να νιώθω καλά. Αυτή η διάκριση ήταν πολύ σημαντική για μένα.”
+
+**9. Anonymous client, Consultant and business owner**
+
+🇬🇧 “Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.”
+
+🇬🇷 “Πριν αρχίσουμε να δουλεύουμε μαζί, ένα δύσκολο email ή ένα πρόβλημα με έναν πελάτη μπορούσε να επηρεάσει ολόκληρη τη μέρα μου. Ένιωθα αμέσως υπεύθυνος για τα πάντα και άρχιζα να προσπαθώ να ελέγξω το πώς με έβλεπαν. Ανιχνεύσαμε αυτή την αντίδραση πολύ πιο πίσω από την άμεση κατάσταση στη δουλειά. Ακόμα νιώθω πίεση, αλλά μπορώ να την αναγνωρίσω νωρίτερα και δεν πιστεύω πια κάθε συμπέρασμα που παράγει το νευρικό μου σύστημα.”
+
+**10. Anonymous client, Technology leader**
+
+🇬🇧 “I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.”
+
+🇬🇷 “Καταλάβαινα ήδη πολλά από τα μοτίβα μου σε διανοητικό επίπεδο. Αυτό ήταν εν μέρει το πρόβλημα. Μπορούσα να εξηγήσω τον εαυτό μου πολύ καλά και παρ’ όλα αυτά να επαναλαμβάνω την ίδια συμπεριφορά. Η δουλειά με τον Άγγελο με βοήθησε να αναγνωρίζω τι συμβαίνει σε σωματικό επίπεδο, όχι απλώς να το αναλύω εκ των υστέρων. Αυτό έκανε τη δουλειά πολύ πιο πραγματική και, σιγά σιγά, άλλαξε τον τρόπο που αντιδρώ κάτω από πίεση.”
+
+**11. Anonymous client, Senior operator**
+
+🇬🇧 “One of the most useful things is that Aggelos actually understands the environment I work in. I don’t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than “follow your values.” He understands the game, but he also notices what the game is doing to me.”
+
+🇬🇷 “Ένα από τα πιο χρήσιμα πράγματα είναι ότι ο Άγγελος πραγματικά καταλαβαίνει το περιβάλλον στο οποίο δουλεύω. Δεν χρειάζεται να του εξηγήσω τα εταιρικά παιχνίδια, την πίεση ενός startup, τα targets, τους επενδυτές ή γιατί μια απόφαση καριέρας μπορεί να είναι πιο περίπλοκη από το «ακολούθησε τις αξίες σου». Καταλαβαίνει το παιχνίδι, αλλά προσέχει και το τι μου κάνει αυτό το παιχνίδι.”
+
+**12. Anonymous client**
+
+🇬🇧 “I was initially sceptical about somatic and trauma-informed work because I assumed it would be vague or a bit spiritual. It wasn’t. Aggelos explained what we were doing, paid attention to my limits and connected the experience back to patterns I could recognise in my work and relationships. It felt grounded, careful and surprisingly practical.”
+
+🇬🇷 “Στην αρχή ήμουν επιφυλακτικός με τη σωματική και trauma-informed δουλειά, γιατί υπέθετα ότι θα ήταν ασαφής ή λίγο «πνευματική». Δεν ήταν. Ο Άγγελος εξήγησε τι κάναμε, έδωσε προσοχή στα όριά μου και σύνδεσε την εμπειρία με μοτίβα που μπορούσα να αναγνωρίσω στη δουλειά και στις σχέσεις μου. Ένιωσα ότι ήταν γειωμένο, προσεκτικό και απροσδόκητα πρακτικό.”
+
+**13. Anonymous client, Product leader**
+
+🇬🇧 “I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.”
+
+🇬🇷 “Εμπιστεύομαι τον Άγγελο γιατί δεν προσπαθεί συνέχεια να με καθησυχάσει. Ακούει προσεκτικά, αλλά δεν συμφωνεί αυτόματα με την εκδοχή των γεγονότων που φέρνω στη συνεδρία. Κάποιες φορές επισημαίνει κάτι που θα προτιμούσα να μην δω. Κατά κάποιον τρόπο, αυτή η ειλικρίνεια έκανε τη δουλειά να νιώθεται πιο ασφαλής, όχι λιγότερο.”
+
+**14. Anonymous client, Technology executive**
+
+🇬🇧 “I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.”
+
+🇬🇷 “Άρχισα να δουλεύω με τον Άγγελο σε μια μπερδεμένη περίοδο της καριέρας μου. Στα χαρτιά, τα πράγματα πήγαιναν καλά, αλλά μέσα μου αμφισβητούσα σχεδόν τα πάντα. Μέσα σε αρκετές συνεδρίες, με βοήθησε να καταλάβω ποιες ανησυχίες ήταν βάσιμες και ποιες μεγεθύνονταν από παλιούς φόβους γύρω από την απόδοση, την αποτυχία και το πώς με έβλεπαν οι άλλοι. Νιώθω πιο γειωμένος τώρα, παρότι δεν έχουν λυθεί όλα.”
+
+**15. Anonymous client, Tech executive**
+
+🇬🇧 “From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.”
+
+🇬🇷 “Απ’ έξω, εξακολουθούσα να λειτουργώ και να αποδίδω σε υψηλό επίπεδο, οπότε ήταν δύσκολο να εξηγήσω γιατί κάτι ένιωθα ότι δεν πήγαινε καλά. Ο Άγγελος κατάλαβε ότι το πρόβλημα δεν ήταν απλώς ο φόρτος δουλειάς. Δουλέψαμε πάνω στον τρόπο που συνδέω το επίτευγμα με την ασφάλεια, την αξία και την ανακούφιση. Εξακολουθώ να είμαι φιλόδοξος, αλλά η επιτυχία αρχίζει να νιώθεται λιγότερο σαν οριακή διαφυγή από την αποτυχία.”
 
 
 ---
@@ -560,50 +620,42 @@ _Οι μαρτυρίες παρατίθενται στην αρχική τους
 
 **H1:** Book a fit call
 
-**Lead:** A short, friendly call to understand what you're building, what's getting in the way, and whether working together would actually make sense.
+15 minutes to tell me what you're building, what's going on and whether it makes sense for us to work together.
 
-If it does, I'll tell you what the next step looks like.
+You don't need to prepare anything.
 
-If it doesn't, I'll tell you that too. Politely. Probably.
+This isn't a free session and I'm not going to squeeze a sales pitch into fifteen minutes.
 
+Tell me the real situation. I'll ask a few questions.
 
-#### How it usually works
+If I think I can help, I'll tell you what the next step looks like.
 
-**1. Fit call.** A short call to see if there's a fit. Not a session.
+If I don't, I'll tell you that too. Politely. Probably.
 
-**2. First session.** We get into the actual thing — the business, and whatever's underneath it. You bring the problem as you see it; we find the more accurate one.
+_[Book below — calendar embed]_
 
-**3. Ongoing.** If it's useful, we continue. Private, 1:1, for as long as it genuinely helps.
-
-
-#### Who should book
-
-This call is for people seriously trying to build something of their own, or to grow what they’ve already built. Come with the real situation — we’ll work out whether I’m the right person for it.
+**Not sure whether to book?** Take the Starting Diagnostic first and give me a little more context. → Take the Starting Diagnostic
 
 
 ### 🇬🇷 Ελληνικά
 
 **H1:** Κλείσε μια γνωριμία
 
-**Lead:** Μια σύντομη, φιλική κλήση για να καταλάβω τι χτίζεις, τι σε εμποδίζει, και αν η συνεργασία μας βγάζει πραγματικά νόημα.
+15 λεπτά για να μου πεις τι χτίζεις, τι συμβαίνει και αν έχει νόημα να δουλέψουμε μαζί.
 
-Αν βγάζει, θα σου πω πώς είναι το επόμενο βήμα.
+Δεν χρειάζεται να προετοιμάσεις τίποτα.
 
-Αν δεν βγάζει, θα σου το πω κι αυτό. Ευγενικά. Μάλλον.
+Δεν είναι δωρεάν συνεδρία και δεν πρόκειται να στριμώξω sales pitch σε δεκαπέντε λεπτά.
 
+Πες μου την πραγματική κατάσταση. Θα σου κάνω μερικές ερωτήσεις.
 
-#### Πώς λειτουργεί συνήθως
+Αν πιστεύω ότι μπορώ να βοηθήσω, θα σου πω ποιο είναι το επόμενο βήμα.
 
-**1. Γνωριμία.** Μια σύντομη κλήση για να δούμε αν ταιριάζουμε. Δεν είναι συνεδρία.
+Αν όχι, θα σου το πω κι αυτό. Ευγενικά. Μάλλον.
 
-**2. Πρώτη συνεδρία.** Μπαίνουμε στο πραγματικό θέμα — την επιχείρηση, και ό,τι υπάρχει από κάτω. Φέρνεις το πρόβλημα όπως το βλέπεις· βρίσκουμε το πιο ακριβές.
+_[Κλείσε ραντεβού παρακάτω — calendar embed]_
 
-**3. Συνέχεια.** Αν είναι χρήσιμο, συνεχίζουμε. Ιδιωτικά, 1:1, όσο πραγματικά βοηθά.
-
-
-#### Για ποιους είναι
-
-Αυτή η κλήση είναι για ανθρώπους που προσπαθούν σοβαρά να χτίσουν κάτι δικό τους, ή να μεγαλώσουν αυτό που έχουν ήδη χτίσει. Έλα με την πραγματική κατάσταση — θα δούμε αν είμαι ο σωστός άνθρωπος για αυτήν.
+**Δεν είσαι ακόμα σίγουρος αν θέλεις να κλείσεις;** Κάνε πρώτα το Starting Diagnostic και δώσε μου λίγο περισσότερο context. → Starting Diagnostic
 
 
 ---
@@ -613,78 +665,494 @@ This call is for people seriously trying to build something of their own, or to 
 
 ### 🇬🇧 English
 
-- People bring me things they haven’t said to a cofounder, an investor, a partner or anyone on their team. That only works if discretion is built in from the start, not bolted on afterwards. Here’s how I handle it, and where the honest limits are.
-- what you say in them is treated as private
-- nothing goes to your employer, investors, board, cofounder, team or partner
-- Paying doesn’t buy access
-- if someone else funds the work, they don’t get to hear what was said
-- No identifiable stories
-- I don’t use recognisable client material in public without explicit permission
-- any practical question about confidentiality is fair before you commit
-- None of that is conditional on you being a “good” client or saying comfortable things. Especially not that.
-- Nothing goes back to the people involved
-- This is the one clients ask about most, so it’s worth being explicit. You can bring, and work on, any of the following without it reaching the people concerned:
-- Doubts about the company, or whether you still believe in it
-- Frustration with a cofounder, or that the relationship is failing
-- Concerns about specific employees, or decisions you’re dreading
-- Investor or board pressure, and how you’re really handling it
-- Financial fear — runway, revenue, whether it survives the quarter
-- That you want to leave, sell, or stop
-- Lost motivation, and personal circumstances bleeding into the company
-- I’m not connected to your cap table or your org chart. I don’t talk to your people. There’s no back channel, including to whoever referred you.
-- If someone else is paying
-- Sometimes a company or an investor funds the work. That arrangement covers the invoice and nothing else. The paying party doesn’t receive session content, notes, progress reports or a summary of what you’re working on. If anyone expects otherwise, we sort out those boundaries in writing before we begin, so there’s no ambiguity later.
-- How I use examples publicly
-- I write and speak about this work — on the
-- and elsewhere. I don’t use identifiable client stories to do it.
-- Anything that appears publicly is fictional, materially altered, or a composite assembled from patterns across many people, and constructed so that no individual can be identified — not by a colleague, a cofounder, or the person themselves. If I ever wanted to use something closer to a real, recognisable case, I’d ask you first, explicitly, and a no is simply a no.
-- Notes, data and scheduling
-- Sessions run over video, and scheduling, notes and communication use standard professional tools. I keep records to a considered minimum and handle them accordingly. I’m not going to invent impressive-sounding security claims here — if you want the specifics of what’s stored, where, and for how long, ask on the fit call and I’ll answer plainly.
-- An NDA, if you want one
-- If it makes the commercial side easier to trust, I’m glad to sign an NDA before we start. For a lot of founders it turns an abstract promise into something concrete, and that’s a reasonable thing to want.
-- The limits — stated plainly
-- I’m not going to promise absolute, unconditional secrecy, because that promise can’t be kept honestly, and a page like this is worth nothing if it overstates. Confidentiality is the strong default. In a narrow set of circumstances it can have limits:
-- If there’s a real and immediate risk of serious harm to you or someone else, I may need to act on that — ideally with you, not around you.
-- Legal and safeguarding
-- In limited situations the law can require disclosure — for example a court order, or a safeguarding concern involving a child or a vulnerable adult.
-- As a psychotherapist I also work within a professional ethical framework (I’m a registered member of the BACP) and I use clinical supervision, which is standard and itself confidential. In supervision, material is discussed in a way that protects your identity.
-- Where the work is advisory or coaching rather than psychotherapy, the professional frame differs, but the commitment to discretion — and the same narrow limits around serious risk and the law — still applies. If any of this is relevant to your situation, ask me directly and I’ll be specific.
-- This isn’t the paperwork
+**H1:** Confidentiality
+
+People bring me things they haven't said to a cofounder, investor, employee, partner or sometimes anyone else.
+
+That only works if privacy isn't vague.
+
+Here's what you can expect.
+
+
+#### What you say stays private
+
+I don't send session content to your employer, investors, board, cofounder, team, partner or whoever referred you.
+
+That remains true if somebody else is paying for the work.
+
+Paying the invoice doesn't buy access to the conversation.
+
+The limits to confidentiality are explained below.
+
+
+#### You can talk about the actual thing
+
+That includes things like:
+
+- doubts about the company or whether you still want it
+- problems with a cofounder
+- employees you're worried about or decisions you're avoiding
+- investor or board pressure
+- runway, revenue and financial fear
+- wanting to leave, sell or stop
+- things happening in your personal life that are affecting the work
+I don't have a back channel to the people involved.
+
+
+#### If somebody else pays
+
+Sometimes a company, investor or another party funds the work.
+
+They pay the invoice.
+
+They do not receive session content, notes, progress reports or a summary of what we're working on.
+
+If they expect something different, we establish that before the work starts.
+
+
+#### Stories and content
+
+I write and speak publicly about the kinds of problems I work with.
+
+I don't publish identifiable client material without explicit permission.
+
+Anything based on client work is fictionalised, materially altered or combined from patterns across different people so that an individual can't reasonably be identified.
+
+If I ever wanted to use something recognisably close to your real situation, I'd ask first.
+
+A no is a no.
+
+
+#### Notes and data
+
+I keep records to a considered minimum and use standard professional tools for scheduling, communication and sessions.
+
+If you want to know exactly what I store, where and for how long, ask me. I'll answer plainly.
+
+
+#### NDA
+
+If an NDA makes the commercial side easier to trust, I'm happy to discuss signing one before we start.
+
+
+#### The limits
+
+I won't promise absolute secrecy because that wouldn't be an honest promise.
+
+Confidentiality is the default, but there are narrow circumstances where it can have limits, including serious and immediate risk of harm and situations where disclosure is legally required.
+
+As a BACP-registered psychotherapist, I also use clinical supervision. This is itself confidential, and material is discussed in a way intended to protect client identity.
+
+If any of these limits are particularly relevant to your situation, ask me before we start and I'll be specific.
+
+
+#### This page isn't the contract
+
+This is a plain-language explanation of how I approach confidentiality.
+
+It doesn't replace the actual agreement, privacy information, consent documentation or an NDA where one applies.
+
+If confidentiality is the thing stopping you from starting, ask me about the exact thing you're worried about.
+
 
 ### 🇬🇷 Ελληνικά
 
-- Οι άνθρωποι που δουλεύουν μαζί μου συχνά μοιράζονται πράγματα που δεν μπορούν να συζητήσουν ελεύθερα με συνεργάτες, επενδυτές, cofounders ή ακόμη και με ανθρώπους από το προσωπικό τους περιβάλλον. Αυτό δεν είναι παρενέργεια της δουλειάς αλλά βασική προϋπόθεσή της.
-- Γιατί υπάρχει αυτή η σελίδα
-- Οι άνθρωποι που έρχονται σε μένα χτίζουν κάτι δικό τους — κάποιοι είναι μισθωτοί, κάποιοι ανεξάρτητοι, κάποιοι τρέχουν μια εταιρεία. Οι συζητήσεις μας μπορεί να αγγίζουν cofounders, εργαζομένους, επενδυτές και πελάτες — και έσοδα, τιμολόγηση, runway, σχέδια προϊόντος — μαζί με αποφάσεις καριέρας, σχέσεις και υγεία.
-- Πληροφορίες, δηλαδή, που μπορεί να έχουν πραγματικές επαγγελματικές ή προσωπικές συνέπειες αν βγουν από το πλαίσιο στο οποίο ειπώθηκαν. Η εμπιστευτικότητα εδώ δεν είναι τυπικότητα· είναι αυτό που επιτρέπει να γίνει η δουλειά με ειλικρίνεια.
-- Σε τι μπορείς να βασιστείς
-- Οι συνεδρίες είναι εμπιστευτικές
-- όσα λες μένουν ιδιωτικά, μέσα στα όρια παρακάτω
-- τίποτα δεν πάει σε εργοδότη, επενδυτές, board, cofounder, ομάδα ή οικογένεια
-- Η πληρωμή δεν αγοράζει πρόσβαση
-- αν κάποιος άλλος χρηματοδοτεί, δεν μαθαίνει τι ειπώθηκε
-- Καμία αναγνωρίσιμη ιστορία
-- δεν χρησιμοποιώ αναγνωρίσιμο υλικό δημόσια χωρίς ρητή άδεια
-- Μπορείς να ρωτήσεις πρώτα
-- κάθε πρακτική ερώτηση για την εμπιστευτικότητα είναι θεμιτή πριν δεσμευτείς
-- Τίποτα δεν επιστρέφει στους ανθρώπους γύρω σου
-- Μπορείς να φέρεις και να δουλέψεις οτιδήποτε από τα παρακάτω χωρίς να φτάσει στους ανθρώπους που αφορά:
-- Αν υπάρχει πραγματικός και άμεσος κίνδυνος σοβαρής βλάβης για εσένα ή κάποιον άλλον, μπορεί να χρειαστεί να ενεργήσω — ιδανικά μαζί σου, όχι γύρω σου.
-- Σε περιορισμένες περιπτώσεις ο νόμος μπορεί να απαιτεί κοινοποίηση — για παράδειγμα μια δικαστική εντολή, ή ζήτημα προστασίας παιδιού ή ευάλωτου προσώπου.
-- Ως Σύμβουλος Ψυχικής Υγείας δουλεύω μέσα σε επαγγελματικό δεοντολογικό πλαίσιο (εγγεγραμμένος στο BACP) και χρησιμοποιώ κλινική εποπτεία, που είναι standard και η ίδια εμπιστευτική. Στην εποπτεία, το υλικό συζητείται με τρόπο που προστατεύει την ταυτότητά σου.
-- Αυτή η σελίδα δεν είναι το νομικό έγγραφο
-- Η σελίδα εξηγεί πώς σκέφτομαι την εμπιστευτικότητα. Δεν αντικαθιστά τη συμφωνία συνεργασίας, την ενημέρωση για τα προσωπικά δεδομένα, μια φόρμα συναίνεσης ή ένα NDA. Όπου ισχύουν, αυτά τα έγγραφα υπερισχύουν όσων συνοψίζονται εδώ.
-- Ρώτησε πριν δεσμευτείς
-- Αν η εμπιστευτικότητα είναι αυτό που σε εμποδίζει να ξεκινήσεις, είναι καλή χρήση μιας γνωριμίας. Φέρε τη συγκεκριμένη ανησυχία — τον cofounder που δεν πρέπει να μάθει, τον επενδυτή, το NDA — και θα σου πω ακριβώς πώς λειτουργεί, μαζί με ό,τι δεν μπορώ να υποσχεθώ.
-- }) ); } // ─── APP MOUNT (bilingual, central) ────────────────────────────────────────── // Every core index.html calls renderApp(pageId, lang). Legacy/SEO pages still // use SpecialtyPage via their own inline scripts. const CORE_PAGES = {
+**H1:** Εμπιστευτικότητα
+
+Οι άνθρωποι που δουλεύουν μαζί μου λένε πράγματα που μπορεί να μην έχουν πει σε cofounder, επενδυτή, συνεργάτη, σύντροφο ή καμιά φορά σε κανέναν.
+
+Αυτό λειτουργεί μόνο αν είναι ξεκάθαρο τι μένει μεταξύ μας.
+
+Οπότε, χωρίς νομικίστικα:
+
+
+#### Όσα λες μένουν μεταξύ μας
+
+Δεν στέλνω το περιεχόμενο των συζητήσεών μας σε εργοδότη, επενδυτές, board, cofounder, ομάδα, σύντροφο ή σε αυτόν που σε παρέπεμψε σε μένα.
+
+Το ίδιο ισχύει και αν κάποιος άλλος πληρώνει για τη συνεργασία.
+
+Το ότι κάποιος πληρώνει τον λογαριασμό δεν του δίνει πρόσβαση στη συζήτηση.
+
+Τα όρια της εμπιστευτικότητας εξηγούνται πιο κάτω.
+
+
+#### Μπορείς να μιλήσεις για το πραγματικό θέμα
+
+Για παράδειγμα:
+
+- αμφιβολίες για το business ή για το αν το θέλεις ακόμα
+- προβλήματα με cofounder
+- εργαζομένους που σε προβληματίζουν ή αποφάσεις που αποφεύγεις
+- πίεση από επενδυτές ή board
+- runway, έσοδα και οικονομικό φόβο
+- σκέψεις να φύγεις, να πουλήσεις ή να σταματήσεις
+- προσωπικά πράγματα που έχουν αρχίσει να επηρεάζουν τη δουλειά
+Δεν υπάρχει κάποια δεύτερη γραμμή επικοινωνίας με τους ανθρώπους που αφορούν αυτά.
+
+
+#### Αν πληρώνει κάποιος άλλος
+
+Μερικές φορές τη συνεργασία πληρώνει μια εταιρεία, ένας επενδυτής ή κάποιος άλλος.
+
+Αυτός πληρώνει το invoice.
+
+Δεν παίρνει το περιεχόμενο των συνεδριών, σημειώσεις, progress report ή περίληψη του τι δουλεύουμε.
+
+Αν περιμένει κάτι διαφορετικό, το ξεκαθαρίζουμε πριν ξεκινήσουμε.
+
+
+#### Ιστορίες και περιεχόμενο
+
+Γράφω και μιλάω δημόσια για θέματα που συναντώ στη δουλειά μου.
+
+Δεν χρησιμοποιώ αναγνωρίσιμο υλικό πελατών χωρίς ξεκάθαρη άδεια.
+
+Όταν κάτι βασίζεται σε δουλειά με πελάτες, είναι φανταστικό, αρκετά αλλαγμένο ή συνδυασμός μοτίβων από διαφορετικούς ανθρώπους, ώστε να μην μπορεί να ταυτοποιηθεί κάποιος συγκεκριμένος.
+
+Αν ποτέ ήθελα να χρησιμοποιήσω κάτι που μοιάζει αναγνωρίσιμα με τη δική σου πραγματική ιστορία, θα σε ρωτούσα πρώτα.
+
+Το όχι είναι όχι.
+
+
+#### Σημειώσεις και δεδομένα
+
+Κρατάω τα αρχεία που χρειάζονται στο ελάχιστο που θεωρώ απαραίτητο και χρησιμοποιώ επαγγελματικά εργαλεία για συνεδρίες, επικοινωνία και scheduling.
+
+Αν θέλεις να ξέρεις ακριβώς τι κρατάω, πού και για πόσο, ρώτησέ με. Θα σου απαντήσω συγκεκριμένα.
+
+
+#### NDA
+
+Αν ένα NDA σε βοηθά να νιώσεις πιο ασφαλής για το business κομμάτι, μπορούμε να το συζητήσουμε πριν ξεκινήσουμε.
+
+
+#### Τα όρια
+
+Δεν πρόκειται να υποσχεθώ απόλυτη μυστικότητα, γιατί δεν θα ήταν ειλικρινής υπόσχεση.
+
+Η εμπιστευτικότητα είναι ο κανόνας. Υπάρχουν όμως περιορισμένες περιπτώσεις όπου μπορεί να έχει όρια, όπως άμεσος και σοβαρός κίνδυνος βλάβης ή περιπτώσεις όπου η γνωστοποίηση απαιτείται από τον νόμο.
+
+Ως ψυχοθεραπευτής εγγεγραμμένος στο BACP χρησιμοποιώ επίσης κλινική εποπτεία. Η εποπτεία είναι και η ίδια εμπιστευτική και το υλικό συζητείται με τρόπο που προστατεύει την ταυτότητα του πελάτη.
+
+Αν κάποιος από αυτούς τους περιορισμούς έχει ιδιαίτερη σημασία για τη δική σου περίπτωση, ρώτησέ με πριν ξεκινήσουμε.
+
+
+#### Αυτή η σελίδα δεν είναι το συμβόλαιο
+
+Είναι μια απλή εξήγηση του τρόπου με τον οποίο χειρίζομαι την εμπιστευτικότητα.
+
+Δεν αντικαθιστά τη συμφωνία συνεργασίας, την ενημέρωση για τα προσωπικά δεδομένα, τα έγγραφα συναίνεσης ή ένα NDA όπου χρειάζεται.
+
+Αν η εμπιστευτικότητα είναι αυτό που σε κάνει να διστάζεις, πες μου ακριβώς τι σε ανησυχεί.
+
+
+---
+
+## Starting Diagnostic ( /startingdiagnostic/ and /el/startingdiagnostic/ )
+
+
+### 🇬🇧 English
+
+**Intro (H1):** Starting Diagnostic
+
+Give me ten minutes and I'll have a much better idea of what you're building, where it's getting stuck and what might actually be going on.
+
+This isn't a personality test and there isn't an automated score waiting at the end.
+
+Some questions are about the business. Some are about you. That's deliberate.
+
+Answer quickly rather than trying to get every answer exactly right. When you're done, I'll receive your responses and review them myself.
+
+_About 8–10 minutes._
+
+CTA: START →
+
+
+#### Section 1 — What are you building?
+
+**Which best describes where you are right now?**
+
+- Employed and thinking seriously about building something
+- Building something alongside a job
+- Freelancer / independent professional
+- Consultant / advisor
+- Solopreneur
+- Founder / business owner
+- Something else
+**How long have you been actively working on it?**
+
+- Not started yet
+- Less than 6 months
+- 6–12 months
+- 1–3 years
+- 3+ years
+**Roughly where is the business today?**
+
+- No revenue yet
+- Some occasional revenue
+- Consistent revenue, but not enough
+- Healthy business that I want to grow substantially
+- Established business/team
+- Not applicable yet
+**What are you most trying to achieve over the next 12 months?** _(open answer)_
+
+**What feels like the biggest problem right now?** _(open answer)_
+
+
+#### Section — The business _(1 = Not true at all → 5 = Very true)_
+
+1. I have a clear offer that people understand quickly.
+
+2. I know who I'm trying to sell to.
+
+3. I have a reasonably reliable way of getting in front of potential customers.
+
+4. I talk to potential customers often enough.
+
+5. My pricing makes commercial sense.
+
+6. I know what the most important next move in the business is.
+
+7. I'm focused enough for my efforts to compound.
+
+8. I know what is working and what I'm mostly hoping will work.
+
+
+#### Section — Getting yourself to do it _(1 = Not true at all → 5 = Very true)_
+
+1. I often know what the sensible business move is and still don't do it.
+
+2. I spend too much time preparing, researching or improving things before putting them in front of people.
+
+3. Selling or promoting myself feels more uncomfortable than it objectively needs to.
+
+4. A rejection can affect me long after the situation itself is over.
+
+5. I avoid asking for the amount of money I genuinely think my work is worth.
+
+6. I change direction before I've really tested the direction I'm already in.
+
+7. I keep reopening decisions I've already made.
+
+8. I can explain some of my patterns very well without actually changing them.
+
+9. When something matters a lot to me, I tend to make it more complicated.
+
+10. I sometimes use productive-looking work to avoid the thing that actually matters.
+
+
+#### Section — You inside the business _(1 = Not true at all → 5 = Very true)_
+
+1. How well the business is doing affects how I feel about myself.
+
+2. I find it hard to slow down when there is still something I could be doing.
+
+3. I feel uncomfortable when people see me uncertain, struggling or not in control.
+
+4. Being the capable person who figures things out is an important part of my identity.
+
+5. I take responsibility for things that other people could probably handle without me.
+
+6. Letting go of control feels riskier than keeping too much of it.
+
+7. I sometimes wonder who I'd be if I stopped pushing so hard.
+
+8. I've reached things I used to want badly and felt surprisingly little when I got there.
+
+9. The business occupies my mind even when I'm technically not working.
+
+10. Work pressure leaks into my mood, body or relationships.
+
+11. I sometimes struggle to tell whether I'm moving toward something I want or away from something I'm afraid of.
+
+12. I have thoughts or doubts about my work that I don't feel comfortable saying to the people around me.
+
+
+#### Section 5 — What's happening now?
+
+- If we worked together and it went really well, what would be different six months from now? _(open answer)_
+
+- What have you already tried to solve this? _(open answer)_
+
+- What do you suspect might be getting in your way, even if you're not sure? _(open answer)_
+
+- Is there anything about the business, your work or yourself that you haven't said elsewhere in this diagnostic but think I should know? (optional) _(open answer)_
+
+Fields: Name · Email · Website / LinkedIn (optional)
+
+Consent: Send my answers to Aggelos. I understand this isn't a clinical diagnostic or an automated assessment.
+
+CTA: SEND MY DIAGNOSTIC →
+
+
+#### After submission
+
+**Got it.**
+
+Your answers are with me.
+
+I read these myself. I'll come back to you by email once I've had a proper look.
+
+If you already know you want to talk, you can also book a fit call below.
+
+CTA: BOOK A FIT CALL →
+
+
+### 🇬🇷 Ελληνικά
+
+**Intro (H1):** Starting Diagnostic
+
+Δώσε μου δέκα λεπτά και θα έχω πολύ καλύτερη εικόνα για το τι χτίζεις, πού έχει κολλήσει και τι μπορεί πραγματικά να συμβαίνει.
+
+Δεν είναι personality test και δεν θα εμφανιστεί κάποιο αυτόματο score στο τέλος.
+
+Κάποιες ερωτήσεις αφορούν το business. Κάποιες εσένα. Αυτό είναι σκόπιμο.
+
+Απάντησε σχετικά γρήγορα, χωρίς να προσπαθήσεις να βρεις την «τέλεια» απάντηση. Όταν τελειώσεις, οι απαντήσεις θα έρθουν σε μένα και θα τις διαβάσω ο ίδιος.
+
+_Περίπου 8–10 λεπτά._
+
+CTA: ΞΕΚΙΝΑ →
+
+
+#### Section 1 — Τι χτίζεις;
+
+**Πού βρίσκεσαι αυτή τη στιγμή;**
+
+- Μισθωτός και σκέφτομαι σοβαρά να χτίσω κάτι δικό μου
+- Χτίζω κάτι παράλληλα με τη δουλειά μου
+- Freelancer / ελεύθερος επαγγελματίας
+- Consultant / σύμβουλος
+- Solopreneur
+- Founder / ιδιοκτήτης επιχείρησης
+- Κάτι άλλο
+**Πόσο καιρό ασχολείσαι ενεργά με αυτό;**
+
+- Δεν έχω ξεκινήσει ακόμα
+- Λιγότερο από 6 μήνες
+- 6–12 μήνες
+- 1–3 χρόνια
+- Πάνω από 3 χρόνια
+**Πού βρίσκεται περίπου το business σήμερα;**
+
+- Δεν έχει έσοδα ακόμα
+- Έχει κάποια περιστασιακά έσοδα
+- Έχει σταθερά έσοδα, αλλά όχι όσα θέλω
+- Πηγαίνει καλά και θέλω να το μεγαλώσω σημαντικά
+- Είναι ήδη οργανωμένη επιχείρηση / ομάδα
+- Δεν έχει εφαρμογή ακόμα
+**Τι θέλεις περισσότερο να έχει αλλάξει μέσα στους επόμενους 12 μήνες;** _(open answer)_
+
+**Αν έπρεπε να διαλέξεις ένα, ποιο είναι το μεγαλύτερο πρόβλημα αυτή τη στιγμή;** _(open answer)_
+
+
+#### Section — Το business _(1 = Καθόλου → 5 = Πάρα πολύ)_
+
+1. Το offer μου είναι ξεκάθαρο και ο κόσμος καταλαβαίνει εύκολα τι πουλάω.
+
+2. Ξέρω σε ποιους ακριβώς προσπαθώ να πουλήσω.
+
+3. Έχω έναν σχετικά σταθερό τρόπο να βρίσκω πιθανούς πελάτες.
+
+4. Μιλάω με πιθανούς πελάτες αρκετά συχνά.
+
+5. Οι τιμές μου βγάζουν εμπορικό νόημα.
+
+6. Ξέρω ποια είναι η σημαντικότερη επόμενη κίνηση για το business.
+
+7. Είμαι αρκετά συγκεντρωμένος σε μία κατεύθυνση ώστε η προσπάθεια να αρχίσει να συσσωρεύεται.
+
+8. Ξέρω τι πραγματικά δουλεύει και τι απλώς ελπίζω ότι θα δουλέψει.
+
+
+#### Section — Το να το κάνεις εσύ _(1 = Καθόλου → 5 = Πάρα πολύ)_
+
+1. Συχνά ξέρω ποια είναι η λογική business κίνηση και παρ' όλα αυτά δεν την κάνω.
+
+2. Περνάω υπερβολικό χρόνο προετοιμάζοντας, ψάχνοντας ή βελτιώνοντας κάτι πριν το βγάλω προς τα έξω.
+
+3. Το να πουλήσω ή να προωθήσω τον εαυτό μου με δυσκολεύει περισσότερο απ' όσο θα έπρεπε.
+
+4. Μια απόρριψη μπορεί να με επηρεάζει πολύ αφού το ίδιο το γεγονός έχει τελειώσει.
+
+5. Δυσκολεύομαι να ζητήσω τα χρήματα που πραγματικά πιστεύω ότι αξίζει η δουλειά μου.
+
+6. Αλλάζω κατεύθυνση πριν δοκιμάσω πραγματικά αυτή που ήδη έχω.
+
+7. Ξανανοίγω αποφάσεις που θεωρητικά έχω ήδη πάρει.
+
+8. Μπορώ να εξηγήσω πολύ καλά κάποια μοτίβα μου χωρίς αυτό να σημαίνει ότι τα αλλάζω.
+
+9. Όσο περισσότερο με νοιάζει κάτι, τόσο πιο περίπλοκο τείνω να το κάνω.
+
+10. Μερικές φορές γεμίζω τη μέρα με χρήσιμη δουλειά για να αποφύγω αυτή που πραγματικά έχει σημασία.
+
+
+#### Section — Εσύ μέσα στο business _(1 = Καθόλου → 5 = Πάρα πολύ)_
+
+1. Το πόσο καλά πηγαίνει το business επηρεάζει το πώς νιώθω για τον εαυτό μου.
+
+2. Δυσκολεύομαι να χαλαρώσω όταν ξέρω ότι υπάρχει κάτι ακόμα που θα μπορούσα να κάνω.
+
+3. Με δυσκολεύει να με βλέπουν οι άλλοι να αμφιβάλλω, να δυσκολεύομαι ή να μην έχω τον έλεγχο.
+
+4. Το να είμαι αυτός που «θα βρει τη λύση» είναι σημαντικό κομμάτι της ταυτότητάς μου.
+
+5. Αναλαμβάνω πράγματα που πιθανότατα θα μπορούσαν να χειριστούν και άλλοι χωρίς εμένα.
+
+6. Το να αφήσω λίγο το control μου φαίνεται πιο επικίνδυνο από το να κρατάω υπερβολικά πολύ.
+
+7. Μερικές φορές αναρωτιέμαι ποιος θα ήμουν αν σταματούσα να πιέζω τόσο πολύ.
+
+8. Έχω πετύχει πράγματα που κάποτε ήθελα πάρα πολύ και όταν τα κατάφερα ένιωσα πολύ λιγότερα απ' όσα περίμενα.
+
+9. Το business συνεχίζει να τρέχει στο μυαλό μου ακόμα κι όταν θεωρητικά δεν δουλεύω.
+
+10. Η πίεση της δουλειάς περνάει στη διάθεσή μου, στο σώμα μου ή στις σχέσεις μου.
+
+11. Μερικές φορές δυσκολεύομαι να καταλάβω αν κινούμαι προς κάτι που θέλω ή απλώς τρέχω μακριά από κάτι που φοβάμαι.
+
+12. Υπάρχουν πράγματα που σκέφτομαι για τη δουλειά μου και δεν νιώθω ότι μπορώ να τα πω εύκολα στους ανθρώπους γύρω μου.
+
+
+#### Section 5 — Τι συμβαίνει τώρα;
+
+- Αν δουλεύαμε μαζί και πήγαινε πραγματικά καλά, τι θα ήταν διαφορετικό σε έξι μήνες από σήμερα; _(open answer)_
+
+- Τι έχεις ήδη δοκιμάσει για να λύσεις αυτό το πρόβλημα; _(open answer)_
+
+- Τι υποψιάζεσαι ότι μπορεί να σε κρατάει πίσω, ακόμη κι αν δεν είσαι σίγουρος; _(open answer)_
+
+- Υπάρχει κάτι για το business, τη δουλειά ή εσένα που δεν σε ρώτησα αλλά θεωρείς ότι θα έπρεπε να ξέρω; (προαιρετικό) _(open answer)_
+
+Fields: Όνομα · Email · Website / LinkedIn (προαιρετικό)
+
+Consent: Στείλε τις απαντήσεις μου στον Άγγελο. Καταλαβαίνω ότι αυτό δεν είναι κλινική διάγνωση ή αυτοματοποιημένο τεστ.
+
+CTA: ΑΠΟΣΤΟΛΗ →
+
+
+#### After submission
+
+**Το πήρα.**
+
+Οι απαντήσεις σου ήρθαν σε μένα.
+
+Τις διαβάζω ο ίδιος και θα σου απαντήσω με email αφού τις δω κανονικά.
+
+Αν ξέρεις ήδη ότι θέλεις να μιλήσουμε, μπορείς να κλείσεις και μια σύντομη γνωριμία.
+
+CTA: ΚΛΕΙΣΕ ΜΙΑ ΓΝΩΡΙΜΙΑ →
+
 
 ---
 
 ## Writing / Blog ( /blog/ )
 
-**Intro (EN):** Notes on building something of your own — and the business and psychological problems that show up while you do it.
+**Intro (EN):** Notes on building something of your own: customers, pricing, decisions, avoidance, ambition, identity, and all the places where business and psychology start getting mixed together.
 
-**Intro (EL):** Σημειώσεις για το χτίσιμο κάτι δικού σου — και τα επιχειρηματικά και ψυχολογικά προβλήματα που εμφανίζονται στην πορεία.
+**Intro (EL):** Για το πώς χτίζεις κάτι δικό σου: πελάτες, τιμές, αποφάσεις, φόβος έκθεσης, φιλοδοξία, ταυτότητα και όλα τα σημεία όπου business και ψυχολογία αρχίζουν να μπλέκονται.
 
 
 Posts (27, filterable All / English / Ελληνικά):
@@ -746,154 +1214,3 @@ Posts (27, filterable All / English / Ελληνικά):
 
 
 ---
-
-## Burnout Diagnostic — Greek ( /el/burnout-diagnostic/ )
-
-_The Greek self-assessment migrated verbatim from the retired .gr site. (The English tool at /burnout-diagnostic/ is the existing separate "fulfilment" diagnostic, unchanged.)_
-
-### Intro
-**Burnout Diagnostic**
-
-Σκοπός του Burnout Diagnostic δεν είναι να σου δώσει διάγνωση ή να σου βάλει μια ταμπέλα.
-
-Στόχος του είναι να σου δώσει μια πρώτη, οργανωμένη εικόνα για το πώς επηρεάζουν σήμερα τη σχέση σου με τη δουλειά η πίεση, η ευθύνη, η φιλοδοξία, η ανάκαμψη, η αυτοεκτίμηση και οι σχέσεις σου.
-
-Χρειάζονται περίπου οκτώ λεπτά. Στο τέλος θα δεις το συνολικό επίπεδο επιβάρυνσης και μια ανάλυση των περιοχών που φαίνεται να σε επηρεάζουν περισσότερο. Δες το αποτέλεσμα ως αφετηρία για σκέψη και συζήτηση, όχι ως κλινική διάγνωση.
-
-| Διάρκεια | Μορφή | Αποτέλεσμα |
-|---|---|---|
-| Περίπου 8 λεπτά | 45 ερωτήσεις, κλίμακα 1–5 | Συνολικό επίπεδο και ανάλυση 7 περιοχών |
-
-_Ενδεικτικό εργαλείο αυτοαξιολόγησης. Δεν αποτελεί κλινική διάγνωση._  ·  Start: **Ξεκίνα**
-
-### Scale
-1=Διαφωνώ απόλυτα, 2=Διαφωνώ, 3=Ούτε συμφωνώ ούτε διαφωνώ, 4=Συμφωνώ, 5=Συμφωνώ απόλυτα, na=Δ/Α
-
-### Sections & questions (45)
-**Αυτοεκτίμηση και επιτεύγματα**
-- Μια κακή περίοδος στη δουλειά μπορεί να επηρεάσει σημαντικά την αυτοπεποίθησή μου.
-- Όταν δεν τα πηγαίνω καλά επαγγελματικά, γίνομαι πιο αυστηρός με τον εαυτό μου.
-- Μου είναι ευκολότερο να νιώθω καλά με τον εαυτό μου όταν τα επαγγελματικά μου πηγαίνουν καλά.
-
-**Ενοχή και εσωτερική πίεση**
-- Δυσκολεύομαι να χαλαρώσω όταν γνωρίζω ότι υπάρχει ακόμη δουλειά που πρέπει να γίνει.
-- Μπορεί να κάθομαι να ξεκουραστώ και να σκέφτομαι ότι θα έπρεπε να είμαι παραγωγικός.
-- Τείνω να εστιάζω περισσότερο σε όσα δεν έχω ακόμη καταφέρει παρά σε όσα έχω ήδη κάνει.
-
-**Σύγκριση και αίσθηση ανεπάρκειας**
-- Όταν βλέπω άλλους να προοδεύουν, αρχίζω να αμφισβητώ τη δική μου απόδοση.
-- Όταν ένας άνθρωπος κοντά μου προχωρά γρήγορα, σκέφτομαι αμέσως σε ποια σημεία έχω μείνει πίσω.
-- Μπορεί να έχω αντικειμενικά καλά αποτελέσματα και παρ’ όλα αυτά να νιώθω ότι δεν έχω προχωρήσει αρκετά.
-
-**Δυσκολία με την ευαλωτότητα**
-- Νιώθω άβολα όταν οι άνθρωποι που είναι κοντά μου με βλέπουν να δυσκολεύομαι ή να αμφιβάλλω.
-- Όταν περνάω μια δύσκολη περίοδο, το πρώτο μου ένστικτο είναι να το κρατήσω για τον εαυτό μου.
-- Προτιμώ να αντιμετωπίζω κάτι χωρίς βοήθεια παρά να δείξω ότι δεν είμαι σίγουρος ή ότι δεν έχω τον έλεγχο.
-
-**Υπερηφάνεια για την αντοχή**
-- Έχω συνηθίσει να αναλαμβάνω πολλά χωρίς να λέω ότι δυσκολεύομαι.
-- Ένα μέρος μου νιώθει υπερηφάνεια για το πόση πίεση μπορώ να αντέξω.
-- Το να επιβραδύνω μου προκαλεί δυσφορία, ακόμη και όταν γνωρίζω ότι το χρειάζομαι.
-
-**Ταυτότητα και εικόνα**
-- Οι άλλοι με βλέπουν ως τον άνθρωπο που θα βρει τρόπο να τα καταφέρει.
-- Το να θεωρώ τον εαυτό μου ικανό αποτελεί σημαντικό μέρος της ταυτότητάς μου.
-- Με επηρεάζει έντονα όταν απογοητεύω ανθρώπους που περιμένουν πολλά από εμένα.
-- Οι άλλοι μου λένε συχνά ότι είμαι υπερβολικά αυστηρός με τον εαυτό μου ή ότι πιέζομαι περισσότερο απ’ όσο χρειάζεται.
-
-**Σχέσεις και συναισθηματική παρουσία**
-- Όταν η δουλειά είναι ιδιαίτερα απαιτητική, έχω λιγότερη υπομονή με ανθρώπους που δεν καταλαβαίνουν την πίεση που περνάω.
-- Όταν έχω έντονο stress, γίνομαι πιο απότομος, κλειστός ή δύσκολος στην επικοινωνία.
-- Υπάρχουν περίοδοι που είμαι τόσο φορτωμένος ώστε δεν είμαι πραγματικά παρών με τους ανθρώπους γύρω μου.
-- Η σχέση με τον ή τη σύντροφό μου έχει επηρεαστεί από τον τρόπο που μεταφέρω το άγχος της δουλειάς στην προσωπική μου ζωή.
-- Υπάρχουν στιγμές που ο ή η σύντροφός μου με νιώθει απόμακρο, απών ή συναισθηματικά μη διαθέσιμο.
-
-**Απώλεια κινήτρου και νοήματος**
-- Έχω αρχίσει να δυσανασχετώ με κομμάτια της δουλειάς που παλαιότερα μου έδιναν ικανοποίηση.
-- Μου λείπει η περίοδος κατά την οποία ήταν ευκολότερο να νιώσω ενδιαφέρον ή χαρά για τη δουλειά μου.
-
-**Συναισθηματικό μούδιασμα και αποσύνδεση**
-- Μπορεί να περάσει ολόκληρη ημέρα και να νιώθω συναισθηματικά επίπεδος ή άδειος.
-- Πράγματα που παλαιότερα με ενδιέφεραν δεν με αγγίζουν πια με τον ίδιο τρόπο.
-- Μπορώ να συνεχίζω να είμαι παραγωγικός, ενώ νιώθω αποσυνδεδεμένος από αυτό που κάνω.
-- Συχνά νιώθω λιγότερο σαν τον εαυτό μου και περισσότερο σαν να εκτελώ απλώς τις υποχρεώσεις μου.
-- Υπάρχουν στιγμές που αναρωτιέμαι ποιο είναι τελικά το νόημα όλης αυτής της προσπάθειας.
-
-**Κυνισμός και αποστασιοποίηση**
-- Έχω γίνει πιο κυνικός απέναντι στη δουλειά μου απ’ ό,τι ήμουν παλαιότερα.
-- Ορισμένα κομμάτια της δουλειάς έχουν γίνει μηχανικά, ακόμη και όταν εξακολουθώ να τα εκτελώ καλά.
-- Υπάρχουν περίοδοι που νιώθω περισσότερο παρατηρητής παρά πραγματικά μέρος αυτού που κάνω.
-
-**Σωματική και νευρική επιβάρυνση**
-- Μπορεί να είμαι εξαντλημένος και παρ’ όλα αυτά να μην μπορώ να χαλαρώσω πραγματικά.
-- Ο ύπνος δεν με αφήνει πάντοτε να νιώθω ουσιαστικά ξεκούραστος.
-- Το άγχος έχει αρχίσει να εμφανίζεται και σωματικά, για παράδειγμα ως πονοκέφαλος, μυϊκή ένταση, στομαχική ενόχληση ή ναυτία.
-- Το σώμα μου παραμένει σε ένταση ακόμη και όταν δεν εργάζομαι.
-
-**Διαρκής σύνδεση με τη δουλειά**
-- Ακόμη και όταν δεν εργάζομαι, ένα μέρος μου παραμένει σε ετοιμότητα.
-- Ελέγχω μηνύματα ή θέματα της δουλειάς σε χρόνο που θα ήθελα να είναι πραγματικά προσωπικός.
-- Μου είναι δύσκολο να αισθανθώ ότι είμαι εντελώς εκτός δουλειάς.
-- Το μυαλό μου παραμένει απασχολημένο με τη δουλειά περισσότερο απ’ όσο θα ήθελα.
-- Νιώθω πίεση να απαντήσω γρήγορα, ακόμη και όταν δεν είναι πραγματικά απαραίτητο.
-- Όταν δυσκολεύομαι, καταφεύγω συχνά σε AI, self-help περιεχόμενο ή άλλες γρήγορες λύσεις, αλλά σπάνια αλλάζει κάτι ουσιαστικά.
-- Διαβάζω ή ακούω συχνά συμβουλές για burnout, άγχος και απόδοση, αλλά παραμένω παγιδευμένος στα ίδια μοτίβα.
-
-### Result levels
-**Επίπεδο 1 — Σταθερά, με πρώτες ενδείξεις πίεσης**
-Συνεχίζεις να λειτουργείς σχετικά σταθερά. Υπάρχουν, όμως, ορισμένες πρώτες ενδείξεις ότι κάποιες περιοχές αρχίζουν να σε επιβαρύνουν. Δεν μιλάμε για κατάσταση κρίσης. Αυτό είναι το κατάλληλο σημείο για πρόληψη, μεγαλύτερη επίγνωση και μικρές αλλαγές πριν το κόστος γίνει σημαντικότερο.
-_Next: Δες ποιες περιοχές αρχίζουν να σου αφαιρούν περισσότερη ενέργεια και αντιμετώπισέ τες πριν παγιωθούν. Οι μικρές αλλαγές έχουν μεγαλύτερη επίδραση όταν γίνονται νωρίς._
-
-**Επίπεδο 2 — Αποδίδεις, αλλά με αυξανόμενο κόστος**
-Εξακολουθείς να ανταποκρίνεσαι στις απαιτήσεις, αλλά η προσπάθεια αρχίζει να σου κοστίζει περισσότερο απ’ όσο σου επιστρέφει. Μπορεί να παρατηρείς μεγαλύτερη συναισθηματική κόπωση, πιο αργή ανάκαμψη, ευερεθιστότητα, λιγότερη ικανοποίηση ή μεγαλύτερη εξάρτηση από τα αποτελέσματα για να νιώσεις καλά με τον εαυτό σου.
-_Next: Αυτό είναι το σημείο στο οποίο οι πρακτικές και ψυχολογικές αλλαγές μπορούν να αποδώσουν περισσότερο. Μην περιμένεις μέχρι η «απόδοση με κόστος» να γίνει ο μόνιμος τρόπος λειτουργίας σου._
-
-**Επίπεδο 3 — Υψηλή λειτουργικότητα, εσωτερική εξάντληση**
-Εξωτερικά μπορεί να συνεχίζεις να ανταποκρίνεσαι και να φαίνεται ότι όλα λειτουργούν. Εσωτερικά, όμως, η επιβάρυνση είναι σημαντική. Η συναισθηματική αποσύνδεση, η ένταση στις σχέσεις, η αδυναμία να χαλαρώσεις και τα σωματικά σημάδια γίνονται όλο και δυσκολότερο να αγνοηθούν.
-_Next: Σε αυτό το επίπεδο, η απλή διαχείριση των συμπτωμάτων συνήθως δεν αρκεί. Χρειάζεται να εξεταστεί τι συντηρεί το φορτίο: ο τρόπος που δουλεύεις, η σχέση σου με την απόδοση, τα όρια, η ταυτότητα και οι πραγματικές συνθήκες του επαγγελματικού περιβάλλοντος._
-
-**Επίπεδο 4 — Έντονη εξουθένωση και αποσύνδεση**
-Σε αυτό το επίπεδο, το ζήτημα δεν περιορίζεται πλέον στο εργασιακό άγχος. Ο τρόπος που λειτουργείς φαίνεται να επηρεάζει ουσιαστικά την ενέργεια, το σώμα, τις σχέσεις, την αίσθηση νοήματος και τη σχέση σου με τον ίδιο σου τον εαυτό. Μπορεί να συνεχίζεις να λειτουργείς εξωτερικά, αλλά η σύνδεση με την ικανοποίηση, τις αξίες και τη ζωή έξω από τη δουλειά έχει μειωθεί σημαντικά.
-_Next: Δεν είναι θέμα περισσότερης θέλησης, πειθαρχίας ή καλύτερου time management. Χρειάζεται σοβαρή επανεξέταση του τρόπου με τον οποίο σχετίζεσαι με τη δουλειά, την επιτυχία και τη φιλοδοξία — καθώς και των πραγματικών συνθηκών που σε κρατούν σε αυτή την κατάσταση._
-
-### Dimensions (7) — low / medium / high interpretations
-**Επιτεύγματα και αυτοεκτίμηση**
-- _Low:_ Η αίσθηση της αξίας σου δεν φαίνεται να εξαρτάται έντονα από το τελευταίο επαγγελματικό αποτέλεσμα. Μπορείς να περάσεις μια δύσκολη περίοδο χωρίς να μετατρέπεται αυτόματα σε αμφισβήτηση ολόκληρου του εαυτού σου. Αυτή είναι μια σημαντική προστατευτική βάση.
-- _Medium:_ Η αυτοεκτίμησή σου στηρίζεται στα επαγγελματικά αποτελέσματα περισσότερο απ’ όσο ίσως θα ήθελες. Οι καλές περίοδοι σε ανεβάζουν, ενώ οι δυσκολίες σε επηρεάζουν βαθύτερα απ’ όσο δικαιολογούν τα ίδια τα γεγονότα.
-- _High:_ Αυτή την περίοδο, η αίσθηση της αξίας σου φαίνεται να είναι στενά δεμένη με την απόδοση. Οι επιτυχίες σε καθησυχάζουν προσωρινά, οι αποτυχίες βιώνονται προσωπικά και ο πήχης μετακινείται διαρκώς ψηλότερα. Αυτό το μοτίβο συχνά τροφοδοτεί αρκετές από τις υπόλοιπες περιοχές επιβάρυνσης.
-
-**Εσωτερική πίεση και απαιτήσεις**
-- _Low:_ Φαίνεται ότι μπορείς να ξεκουραστείς χωρίς να κυριαρχούν οι ενοχές. Η πίεση που νιώθεις προέρχεται κυρίως από τις πραγματικές απαιτήσεις του περιβάλλοντος και λιγότερο από μια μόνιμη εσωτερική απαίτηση.
-- _Medium:_ Ένα σημαντικό μέρος της πίεσης φαίνεται να προέρχεται από εσένα. Η ξεκούραση συνοδεύεται από ενοχή και το σημείο στο οποίο λες «έκανα αρκετά» μετακινείται συνεχώς.
-- _High:_ Η μεγαλύτερη πίεση φαίνεται να δημιουργείται εσωτερικά. Το να επιβραδύνεις μοιάζει περισσότερο επικίνδυνο παρά ανακουφιστικό. Η απαίτηση να συνεχίσεις, να πετύχεις ή να αποδείξεις σπάνια υποχωρεί πραγματικά.
-
-**Ταυτότητα και ευαλωτότητα**
-- _Low:_ Μπορείς να δείξεις ότι αμφιβάλλεις ή δυσκολεύεσαι χωρίς να αισθάνεσαι ότι απειλείται η εικόνα ή η ταυτότητά σου. Αυτή η ευελιξία σε βοηθά να ζητάς υποστήριξη πριν η πίεση γίνει υπερβολική.
-- _Medium:_ Το να είσαι ο ικανός και συγκροτημένος άνθρωπος έχει σημαντικό βάρος για την εικόνα που έχεις για τον εαυτό σου. Το να δείξεις ότι δυσκολεύεσαι μπορεί να σου φαίνεται ριψοκίνδυνο, με αποτέλεσμα να αναλαμβάνεις περισσότερα μόνος σου απ’ όσο χρειάζεται.
-- _High:_ Η ταυτότητά σου είναι έντονα επενδεδυμένη στο να είσαι ικανός, αξιόπιστος και δύσκολο να απογοητεύσεις. Η ευαλωτότητα μοιάζει επικίνδυνη, οπότε η πίεση μένει κρυμμένη. Αυτό περιορίζει την υποστήριξη που μπορείς να δεχτείς και συντηρεί την εξάντληση.
-
-**Συναισθηματική διαθεσιμότητα και σχέσεις**
-- _Low:_ Η επαγγελματική πίεση δεν φαίνεται να επηρεάζει σημαντικά το πόσο παρών είσαι με τους ανθρώπους που βρίσκονται κοντά σου. Υπάρχει ακόμη ουσιαστικός χώρος για σύνδεση έξω από τη δουλειά.
-- _Medium:_ Μέρος της επαγγελματικής πίεσης περνά στις σχέσεις σου. Μπορεί να έχεις λιγότερη υπομονή, μικρότερη συναισθηματική διαθεσιμότητα ή να είσαι πιο απότομος και απόμακρος απ’ όσο θα ήθελες.
-- _High:_ Ο τρόπος με τον οποίο λειτουργείς στη δουλειά έχει αρχίσει να έχει σημαντικό κόστος και στις προσωπικές σου σχέσεις. Οι άνθρωποι που βρίσκονται πιο κοντά σου μπορεί να συναντούν κυρίως την εξαντλημένη, κλειστή ή απούσα εκδοχή σου. Αν δεν αλλάξει κάτι, αυτή η απόσταση συνήθως μεγαλώνει.
-
-**Νόημα και ικανοποίηση**
-- _Low:_ Η δουλειά εξακολουθεί να σου επιστρέφει κάτι ουσιαστικό. Δεν λειτουργείς μόνο από συνήθεια ή υποχρέωση. Υπάρχει ακόμη ενδιαφέρον, σύνδεση ή πραγματική ικανοποίηση.
-- _Medium:_ Η ανταμοιβή που παίρνεις από τη δουλειά έχει αρχίσει να μειώνεται. Μπορεί να εξακολουθείς να αποδίδεις, αλλά η κίνηση συνεχίζεται περισσότερο από συνήθεια, ευθύνη ή φόρα παρά από πραγματικό ενδιαφέρον.
-- _High:_ Η επιτυχία δεν φαίνεται πλέον να σε ανταμείβει συναισθηματικά. Μπορεί να υπάρχει μούδιασμα, αποστασιοποίηση και η επίμονη σκέψη «για ποιο λόγο γίνεται όλη αυτή η προσπάθεια;», ακόμη και όταν εξωτερικά συνεχίζεις να τα καταφέρνεις. Αυτή είναι μια από τις σημαντικότερες περιοχές ως προς τη συνολική αίσθηση πληρότητας.
-
-**Σωματική και νευρική επιβάρυνση**
-- _Low:_ Το σώμα σου φαίνεται να ανακάμπτει σχετικά αποτελεσματικά από την πίεση. Δεν υπάρχουν ισχυρές ενδείξεις ότι παραμένεις σε συνεχή κατάσταση έντασης.
-- _Medium:_ Το σώμα σου φαίνεται να κουβαλά μέρος της πίεσης. Μπορεί να υπάρχει μυϊκή ένταση, ασταθής ύπνος, δυσκολία να χαλαρώσεις ή μια χαμηλή αλλά επίμονη αίσθηση εσωτερικής ενεργοποίησης. Η ανάκαμψη δεν προλαβαίνει να ολοκληρωθεί.
-- _High:_ Η σωματική και νευρική επιβάρυνση είναι σημαντική. Μπορεί να νιώθεις ταυτόχρονα εξαντλημένος και σε ένταση, να μην ανακάμπτεις με τον ύπνο ή να εμφανίζεις σωματικά συμπτώματα. Το σώμα φαίνεται να εκφράζει αυτό που το μυαλό έχει μάθει να προσπερνά. Αυτή η κατάσταση σπάνια αλλάζει μόνο με περισσότερη θέληση.
-
-**Διαρκής σύνδεση με τη δουλειά**
-- _Low:_ Μπορείς να είσαι πραγματικά εκτός δουλειάς. Όταν τελειώνει η εργασία, δεν παραμένει μονίμως ανοιχτή στο παρασκήνιο του μυαλού σου. Αυτό επιτρέπει ουσιαστική ανάκαμψη.
-- _Medium:_ Σπάνια αισθάνεσαι ότι είσαι εντελώς εκτός. Ένα μέρος σου παραμένει σε ετοιμότητα, ελέγχει μηνύματα ή συνεχίζει να σκέφτεται τα ανοιχτά θέματα. Αυτό περιορίζει αθόρυβα την ποιότητα της ξεκούρασης.
-- _High:_ Βρίσκεσαι σχεδόν μόνιμα σε επαγγελματική εγρήγορση. Το μυαλό παραμένει συνδεδεμένο με τη δουλειά ακόμη και όταν δεν εργάζεσαι. Η αίσθηση ότι πρέπει να είσαι διαθέσιμος, ενημερωμένος ή έτοιμος να ανταποκριθείς δυσκολεύει σημαντικά την πραγματική αποφόρτιση. Αυτό είναι ένα από τα δυσκολότερα μοτίβα να αλλάξει χωρίς συνειδητό και συγκεκριμένο σχέδιο.
-
-### Results & gate UI strings
-- Email gate: Συμπλήρωσε το email σου για να δεις το αποτέλεσμα. / Θα δεις το επίπεδο και την ανάλυσή σου αμέσως μετά.
-- Results: Η περιοχή με τη μεγαλύτερη επιβάρυνση αυτή τη στιγμή είναι: · Ανάλυση ανά περιοχή — από τη μεγαλύτερη προς τη μικρότερη επιβάρυνση
-- Result CTA: **Επικοινωνία** — Το αποτέλεσμα δείχνει πού φαίνεται να συγκεντρώνεται το μεγαλύτερο φορτίο. Δεν αλλάζει όμως από μόνο του τον τρόπο που δουλεύεις, αντιδράς ή εξαντλείσαι. Αν αναγνώρισες κάτι σημαντικό στο αποτέλεσμα, μπορείς να επικοινωνήσεις μαζί μου. Θα δούμε τι συμβαίνει, τι χρειάζεσαι και αν έχει νόημα να δουλέψουμε μαζί.
-

@@ -126,6 +126,28 @@
   status = 301
   force = true
 
+# ─── Burnout Diagnostic → Starting Diagnostic (replaced) ─────────────────────
+[[redirects]]
+  from = "/burnout-diagnostic"
+  to = "/startingdiagnostic/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/burnout-diagnostic/*"
+  to = "/startingdiagnostic/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/burnout-diagnostic"
+  to = "/el/startingdiagnostic/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/burnout-diagnostic/*"
+  to = "/el/startingdiagnostic/"
+  status = 301
+  force = true
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Headers
 # ─────────────────────────────────────────────────────────────────────────────

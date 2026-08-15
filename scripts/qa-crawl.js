@@ -13,7 +13,7 @@ const ok = (m) => { pass++; };
 const bad = (m) => { fail++; problems.push(m); };
 
 const LEGACY = ['/founders/', '/solopreneurs/', '/how-i-work/', '/therapy-for-founders/', '/therapy-for-executives/', '/imposter-syndrome-therapy/', '/executive-burnout-therapy/', '/career-transition-therapy/'];
-const CORE = ['/', '/1-to-1/', '/about/', '/reviews/', '/book/', '/confidentiality/'];
+const CORE = ['/', '/1-to-1/', '/about/', '/reviews/', '/book/', '/startingdiagnostic/', '/confidentiality/'];
 
 function urlToFile(u) {
   let p = u.replace(O, '');
@@ -68,10 +68,12 @@ for (const p of CORE) {
   if (hl.en !== enUrl || hl.el !== elUrl || hl['x-default'] !== enUrl) bad(`EL hreflang wrong on ${elUrl}: ${JSON.stringify(hl)}`); else ok();
 }
 
-console.log('── Greek pages: no regulated title terms ──');
+// "Ψυχοθεραπευτής" is now the client-approved Greek title (psychotherapy is
+// unregulated in Greece). "Ψυχολόγος" remains a protected title we must not claim.
+console.log('── Greek pages: no protected "psychologist" term ──');
 for (const p of CORE) {
   const el = read(O + '/el' + p); if (!el) continue;
-  if (/Ψυχοθεραπευτ|Ψυχολόγο/.test(el)) bad(`REGULATED TERM on /el${p}`); else ok();
+  if (/Ψυχολόγο/.test(el)) bad(`PROTECTED TERM (psychologist) on /el${p}`); else ok();
 }
 
 console.log('── Sitemap ↔ files, and no redirected URLs ──');
@@ -99,7 +101,7 @@ for (const t of tos) {
 
 console.log('── Internal links: no links to redirected legacy URLs (core + retained) ──');
 const scan = [...allCore,
-  O + '/blog/', O + '/getinterviewed/', O + '/ask-me-anything/', O + '/burnout-diagnostic/',
+  O + '/blog/', O + '/getinterviewed/', O + '/ask-me-anything/', O + '/startingdiagnostic/', O + '/el/startingdiagnostic/',
   O + '/greek-speaking-therapist-london/', O + '/greek-speaking-therapist-manchester/',
   O + '/greek-speaking-therapist-new-york/', O + '/greek-speaking-therapist-dublin/'];
 for (const u of scan) {

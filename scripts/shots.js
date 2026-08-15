@@ -11,7 +11,8 @@ const shots = [
   { url: 'index.html', name: 'home-mobile', w: 390, h: 1600, mobile: true },
   { url: 'blog/index.html', name: 'blog-desktop', w: 1280, h: 900 },
   { url: 'reviews/index.html', name: 'reviews-desktop', w: 1280, h: 1100 },
-  { url: 'el/burnout-diagnostic/index.html', name: 'el-diagnostic', w: 1280, h: 1000 },
+  { url: 'startingdiagnostic/index.html', name: 'diagnostic', w: 1280, h: 1200 },
+  { url: 'el/startingdiagnostic/index.html', name: 'el-diagnostic', w: 1280, h: 1200 },
   { url: 'el/index.html', name: 'home-el-mobile', w: 390, h: 1500, mobile: true },
 ];
 (async () => {

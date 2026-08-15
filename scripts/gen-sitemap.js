@@ -5,10 +5,10 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const O = 'https://aggelosmouzakitis.com';
-const TODAY = '2026-08-14';
+const TODAY = '2026-08-15';
 
 // Paired core pages (English + Greek) — get hreflang alternates
-const CORE = ['/', '/1-to-1/', '/about/', '/reviews/', '/book/', '/confidentiality/'];
+const CORE = ['/', '/1-to-1/', '/about/', '/reviews/', '/book/', '/startingdiagnostic/', '/confidentiality/'];
 // Single blog (English chrome canonical) — one entry, no fake /el alternate
 const BLOG_INDEX = '/blog/';
 // Retained single-language SEO pages (English) — no cross-language hreflang
@@ -17,8 +17,6 @@ const RETAINED = [
   '/greek-speaking-therapist-manchester/',
   '/greek-speaking-therapist-new-york/',
   '/greek-speaking-therapist-dublin/',
-  '/burnout-diagnostic/',
-  '/el/burnout-diagnostic/',
   '/getinterviewed/',
   '/ask-me-anything/',
 ];

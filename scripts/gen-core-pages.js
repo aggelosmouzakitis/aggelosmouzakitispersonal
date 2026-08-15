@@ -8,7 +8,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const ORIGIN = 'https://aggelosmouzakitis.com';
 const GA = 'G-KV83RRF6ZM';
-const SIDEBAR_V = 30, CONTENT_V = 30;
+const SIDEBAR_V = 31, CONTENT_V = 31;
 
 // Shared CSS (from the original index.html — design system preserved 1:1)
 const CSS = `
@@ -50,13 +50,13 @@ a:focus-visible,button:focus-visible { outline: 3px solid #1a7f37; outline-offse
 // Person JSON-LD (verified facts only; per-language jobTitle per brief §48/§55)
 function personLd(lang) {
   const en = {
-    jobTitle: ['Business Advisor', 'Psychotherapist'],
-    description: "Business advisor and BACP-registered therapist for people building something of their own. 18+ years in product and growth, having built companies and advised more than 500 of them. The work runs on two tracks at once: the business you're building and whatever in you affects how you build it.",
+    jobTitle: ['Business Advisor', 'Licensed Psychotherapist'],
+    description: "Business advisor and licensed psychotherapist (BACP-registered) for people building something of their own. 18+ years in product and growth, having built companies and advised more than 500 of them. The work runs on two tracks at once: the business you're building and whatever in you affects how you build it.",
     knowsAbout: ['Business Advisory', 'Offer & Positioning', 'Pricing', 'Customer Acquisition', 'Sales', 'Founder Psychology', 'Solopreneur Advisory', 'Decision-Making', 'Product & Growth Strategy'],
   };
   const el = {
-    jobTitle: ['Σύμβουλος Ψυχικής Υγείας', 'Σύμβουλος Επιχειρήσεων'],
-    description: 'Σύμβουλος επιχειρήσεων και Σύμβουλος Ψυχικής Υγείας για ανθρώπους που χτίζουν κάτι δικό τους. 18+ χρόνια σε product και growth, με εμπειρία ως founder και συμβουλευτική σε 500+ επιχειρήσεις.',
+    jobTitle: ['Business Advisor', 'Ψυχοθεραπευτής'],
+    description: 'Σύμβουλος επιχειρήσεων και ψυχοθεραπευτής για ανθρώπους που χτίζουν κάτι δικό τους. 18+ χρόνια σε product και growth, με εμπειρία ως founder και συμβουλευτική σε 500+ επιχειρήσεις.',
     knowsAbout: ['Συμβουλευτική Επιχειρήσεων', 'Positioning', 'Τιμολόγηση', 'Εύρεση Πελατών', 'Πωλήσεις', 'Ψυχολογία Founders', 'Λήψη Αποφάσεων'],
   };
   const c = lang === 'el' ? el : en;
@@ -89,10 +89,10 @@ function canonical(page, lang) {
 const PAGES = [
   {
     id: 'home', path: '/', dir: '', schemaType: 'WebPage', og: 'home.png', preloadHero: true,
-    en: { title: 'Aggelos Mouzakitis — Business Advisor + Therapist', crumb: 'Home',
-      desc: "Business advisor and therapist for people building something of their own. I work on the business you're building and on whatever in you affects how you build it." },
-    el: { title: 'Άγγελος Μουζακίτης — Σύμβουλος επιχειρήσεων & ψυχικής υγείας', crumb: 'Αρχική',
-      desc: 'Σύμβουλος επιχειρήσεων και Σύμβουλος Ψυχικής Υγείας για ανθρώπους που χτίζουν κάτι δικό τους. Δουλεύουμε την επιχείρηση και ό,τι μέσα σου επηρεάζει το χτίσιμό της.' },
+    en: { title: 'Aggelos Mouzakitis — Business Advisor + Licensed Psychotherapist', crumb: 'Home',
+      desc: "Business advisor and licensed psychotherapist for people building something of their own. I work on the business you're building and on whatever in you affects how you build it." },
+    el: { title: 'Άγγελος Μουζακίτης — Business Advisor + Ψυχοθεραπευτής', crumb: 'Αρχική',
+      desc: 'Σύμβουλος επιχειρήσεων και ψυχοθεραπευτής για ανθρώπους που χτίζουν κάτι δικό τους. Δουλεύουμε την επιχείρηση και ό,τι μέσα σου επηρεάζει το χτίσιμό της.' },
   },
   {
     id: 'one-to-one', path: '/1-to-1/', dir: '1-to-1', schemaType: 'WebPage', og: 'one-to-one.png',
@@ -104,9 +104,9 @@ const PAGES = [
   {
     id: 'about', path: '/about/', dir: 'about', schemaType: 'ProfilePage', og: 'about.png',
     en: { title: 'About — Aggelos Mouzakitis', crumb: 'About',
-      desc: 'Business advisor and BACP-registered therapist. 18+ years in product and growth, having advised 500+ companies, plus an MSc in Integrative Counselling & Psychotherapy.' },
+      desc: 'Business advisor and licensed psychotherapist (BACP-registered). 18+ years in product and growth, having advised 500+ companies, plus an MSc in Integrative Counselling & Psychotherapy.' },
     el: { title: 'Σχετικά — Άγγελος Μουζακίτης', crumb: 'Σχετικά',
-      desc: 'Σύμβουλος επιχειρήσεων και Σύμβουλος Ψυχικής Υγείας. 18+ χρόνια σε product & growth, 500+ επιχειρήσεις, MSc Integrative Counselling & Psychotherapy, εγγεγραμμένος στο BACP.' },
+      desc: 'Σύμβουλος επιχειρήσεων και ψυχοθεραπευτής. 18+ χρόνια σε product & growth, 500+ επιχειρήσεις, MSc Integrative Counselling & Psychotherapy, εγγεγραμμένος στο BACP.' },
   },
   {
     id: 'reviews', path: '/reviews/', dir: 'reviews', schemaType: 'WebPage', og: 'reviews.png',

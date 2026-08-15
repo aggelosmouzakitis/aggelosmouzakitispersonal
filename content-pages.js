@@ -288,6 +288,10 @@ const CORE_PATHS = {
     en: '/book/',
     el: '/el/book/'
   },
+  'diagnostic': {
+    en: '/startingdiagnostic/',
+    el: '/el/startingdiagnostic/'
+  },
   'confidentiality': {
     en: '/confidentiality/',
     el: '/el/confidentiality/'
@@ -325,8 +329,8 @@ const FOOTER_COLS_BY_LANG = {
       href: '/reviews/',
       label: 'Reviews'
     }, {
-      href: '/burnout-diagnostic/',
-      label: 'Burnout Diagnostic'
+      href: '/startingdiagnostic/',
+      label: 'Starting Diagnostic'
     }, {
       href: '/confidentiality/',
       label: 'Confidentiality'
@@ -367,8 +371,8 @@ const FOOTER_COLS_BY_LANG = {
       href: '/el/reviews/',
       label: 'Κριτικές'
     }, {
-      href: '/burnout-diagnostic/',
-      label: 'Burnout Diagnostic'
+      href: '/el/startingdiagnostic/',
+      label: 'Starting Diagnostic'
     }, {
       href: '/el/confidentiality/',
       label: 'Εμπιστευτικότητα'
@@ -387,8 +391,8 @@ const FOOTER_COLS_BY_LANG = {
   }]
 };
 const FOOTER_COPYLINE = {
-  en: '© Aggelos Mouzakitis · Business Advisor + Therapist',
-  el: '© Άγγελος Μουζακίτης · Σύμβουλος επιχειρήσεων & ψυχικής υγείας'
+  en: '© Aggelos Mouzakitis · Business Advisor + Licensed Psychotherapist',
+  el: '© Άγγελος Μουζακίτης · Business Advisor + Ψυχοθεραπευτής'
 };
 function SiteFooter({
   mob,
@@ -631,7 +635,7 @@ function LatestWriting({
 // ─── SHARED UI STRINGS + CTA HELPERS (bilingual) ─────────────────────────────
 const UI = {
   en: {
-    role: 'Business Advisor + Therapist',
+    role: 'Business Advisor + Licensed Psychotherapist',
     seeOneToOne: 'See how 1:1 works',
     book: 'Book a fit call',
     readMore: 'Read more client reflections →',
@@ -639,8 +643,8 @@ const UI = {
     imgAlt: 'Aggelos Mouzakitis speaking on stage'
   },
   el: {
-    role: 'Σύμβουλος επιχειρήσεων & ψυχικής υγείας',
-    seeOneToOne: 'Δες πώς λειτουργεί το 1:1',
+    role: 'Business Advisor + Ψυχοθεραπευτής',
+    seeOneToOne: 'Δες την 1:1 συνεργασία',
     book: 'Κλείσε μια γνωριμία',
     readMore: 'Διάβασε κι άλλες σκέψεις πελατών →',
     friendlier: 'Πιο φιλικός απ’ ό,τι δείχνω',
@@ -879,175 +883,184 @@ function FaqAccordion({
   }));
 }
 
+// ── Homepage building blocks ─────────────────────────────────────────────────
+function TwoColBoard({
+  mob,
+  leftLabel,
+  leftItems,
+  rightLabel,
+  rightItems
+}) {
+  const col = (label, items) => React.createElement('div', {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, React.createElement('div', {
+    style: {
+      fontSize: '12px',
+      fontWeight: 700,
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: C.accent,
+      marginBottom: '1.1rem'
+    }
+  }, label), React.createElement('ul', {
+    style: {
+      listStyle: 'none',
+      margin: 0,
+      padding: 0
+    }
+  }, items.map((it, i) => React.createElement('li', {
+    key: i,
+    style: {
+      display: 'flex',
+      gap: '.7rem',
+      alignItems: 'baseline',
+      padding: '.55rem 0',
+      fontSize: mob ? '15px' : '16px',
+      lineHeight: 1.55,
+      color: C.text,
+      borderTop: i ? `1px solid ${C.border}` : 'none'
+    }
+  }, React.createElement('span', {
+    style: {
+      color: C.accent,
+      flexShrink: 0,
+      fontWeight: 700
+    }
+  }, '·'), React.createElement('span', null, it)))));
+  return React.createElement('div', {
+    style: {
+      ...cardBase,
+      display: 'flex',
+      flexDirection: mob ? 'column' : 'row',
+      gap: mob ? '1.75rem' : '3.5rem',
+      padding: mob ? '1.6rem' : '2.5rem 3rem',
+      background: '#fff',
+      boxShadow: '0 10px 40px rgba(40,39,38,.06)'
+    }
+  }, col(leftLabel, leftItems), !mob && React.createElement('div', {
+    style: {
+      width: 1,
+      background: C.border,
+      alignSelf: 'stretch'
+    }
+  }), col(rightLabel, rightItems));
+}
+function QCard({
+  mob,
+  label,
+  body,
+  q
+}) {
+  return React.createElement('div', {
+    className: 'hv-card',
+    style: {
+      ...cardBase,
+      padding: mob ? '1.3rem' : '1.6rem',
+      flex: 1
+    }
+  }, React.createElement('div', {
+    style: {
+      fontSize: '12px',
+      fontWeight: 700,
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: C.accent,
+      marginBottom: '.8rem'
+    }
+  }, label), React.createElement('p', {
+    style: {
+      fontSize: '15px',
+      lineHeight: 1.65,
+      color: C.text,
+      margin: '0 0 1rem'
+    }
+  }, body), React.createElement('p', {
+    style: {
+      fontSize: mob ? '15px' : '16px',
+      fontWeight: 600,
+      color: C.text,
+      margin: 0,
+      lineHeight: 1.5
+    }
+  }, q));
+}
+
 // ─── HOME PAGE (bilingual) ───────────────────────────────────────────────────
 const HOME = {
   en: {
-    promise: "For people who want to build something of their own — or make what they've already built much bigger.",
-    tagline: 'Build the business. Work on the person building it.',
-    introA: "I'm a business advisor and a therapist. Before this I spent 18+ years in product and growth — building companies and advising more than 500 of them.",
-    introB: "I work privately, 1:1, with people who are seriously trying to build. We work on the business itself, and on whatever in you is affecting your ability to build it.",
-    recogLabel: 'Read this if it sounds familiar',
-    recogLead: "You probably don't need one more piece of generic advice. You need to move something that hasn't moved.",
-    recog: ["You've wanted to start something for a long time, and you're still preparing.", "You know you need customers, and you keep working on everything except selling.", "You have clients, and you know you're undercharging.", "You keep refining or changing the offer instead of actually testing it.", "You want out of employment, and your plan is still a plan.", "You want optionality, but you haven't built the thing that would give you optionality.", "You're freelancing well enough to survive, but nowhere near what you think this could be.", "You're doing a lot of thinking, learning and tweaking — and not enough commercial movement."],
-    ceLabel: 'How a pattern reaches the business',
-    ceLead: "Some of what's slowing the business down isn't a business problem. It starts in you and ends up in the numbers.",
-    ce: [{
-      cause: 'You avoid being seen',
-      effect: 'not enough people know you exist'
-    }, {
-      cause: 'A "no" feels too personal',
-      effect: 'you avoid selling'
-    }, {
-      cause: "You're uncomfortable asking for money",
-      effect: 'you underprice'
-    }, {
-      cause: "You don't trust your own judgment",
-      effect: 'you keep changing direction'
-    }, {
-      cause: 'You need certainty before acting',
-      effect: 'you prepare instead of launching'
-    }, {
-      cause: 'You overthink decisions',
-      effect: 'the business moves slowly'
-    }, {
-      cause: 'You need everyone to like you',
-      effect: 'your boundaries get commercially expensive'
-    }],
-    ceFoot: "These illustrate the mechanism. They don't all apply to everyone — the point is that the pattern shows up as a business result.",
-    cpLabel: 'And sometimes it really is the business',
-    cpLead: "Just as often, no psychological interpretation is needed. The problem is exactly what it looks like:",
-    cp: ['Your offer is weak.', 'Your positioning is unclear.', 'Nobody knows why they should buy.', "You don't have a way of acquiring customers.", 'Your pricing is structurally wrong.', "You're pursuing five priorities at once.", "You're simply not doing enough selling."],
-    cpFoot: "That's why we work on both — and why the first job is often telling the two apart.",
-    ttLabel: 'Two tracks, one engagement',
-    tt: [{
-      title: 'The business track',
-      body: 'Offer, positioning, pricing, acquisition, sales, experiments, priorities, decisions, execution. The question it answers: what does the business actually need next?'
-    }, {
-      title: 'The person building it',
-      body: 'Avoidance, visibility, rejection, perfectionism, money, self-doubt, control, identity, uncertainty, commitment. The question it answers: what in you affects whether you can actually do it?'
-    }],
-    ttCore: "Some weeks the problem is mostly the business. Some weeks it's mostly you. Usually they affect each other.",
-    ttNote: "It's not a fixed split of session time — some conversations are all business, some are all you. The point is that I can work on either without changing rooms.",
-    whoLabel: 'Who this is for',
-    whoLead: 'You want something of your own. Maybe you:',
-    who: ['have a job and want to build your way out', 'like your job but want optionality', 'want an independent income stream', 'want a portfolio career instead of one employer', 'have expertise you think could become a business', 'already freelance or consult', "have something working, and know there's substantially more growth in it"],
-    whoFoot: 'The common denominator: you are seriously trying to build. Existing revenue is not a requirement.',
-    whyLabel: 'Why me',
-    whyA: "The useful part is the combination. I've done the practical work — product, growth, building and advising businesses — and I'm a trained, BACP-registered therapist. Most people who can do one of those can't do the other.",
-    whyB: "You shouldn't have to explain business to someone who only understands psychology.",
-    whyC: "And you shouldn't have to leave half of yourself outside the room with someone who only understands tactics.",
-    offerLabel: 'Working together',
-    offerBody: "There's one way to work with me: 1:1. Private work on what you're trying to build, and whatever is affecting your ability to build it.",
-    offerLink: 'See what 1:1 actually involves →',
-    caseLabel: 'One example',
-    caseA: "Someone came to me running his own consultancy. He was doing well, but it didn't feel that way. He asked how to grow, and underneath that he was worried he wasn't cut out to run a business at all — stuck doing all the execution himself, taking every piece of client criticism badly.",
-    caseB: "Some of it was straight business: what to sell, what to charge, what to stop doing. Some of it was older patterns that were still running, the same ones showing up at home. Over about six months it turned around — he raised prices, kept the parts he was good at, outsourced the rest, and stopped treating an old story about himself as fact. He didn't need a growth hack. He needed both problems worked at once.",
-    finalHeading: "You want to build something of your own. Or you already have, and you know there's much more left in it.",
-    finalSub: 'Start with a short fit call. No pitch, no pressure — just whether this is the right room for what you’re trying to do.',
+    promise: "Build something of your own. Or take what you've already built much further.",
+    tagline: 'Figure out what the business needs. Work through what gets in the way. Business and psychology, together.',
+    introA: 'I spent 18+ years in product and growth, building companies and advising more than 500 of them. I also trained as a psychotherapist.',
+    introB: "Today I work 1:1 and with groups of people building something of their own. Sometimes the problem is clearly business. Sometimes it's more complicated and includes you.",
+    introC: "Quite often, business and psychology collide to the point where it's hard to tell yourself where the problem actually is.",
+    recogLabel: 'You may recognise some of this',
+    recog: ["You've been meaning to start something for a long time. You're still getting ready.", 'You need more customers. Somehow, everything except selling keeps making it onto the to-do list.', "You know you're undercharging. The number still hasn't changed.", "Every time the direction you've chosen gets difficult, another one suddenly starts looking better.", "The business depends on you for almost everything. You're not sure how much of that is actually necessary.", "On paper, things are going well. You feel less and less connected to what you're building.", "You got somewhere you worked hard to reach. Now you're not sure whether you want the next level, or just think you should.", 'You understand your patterns extremely well. They keep happening anyway.'],
+    bizLabel: 'The business',
+    youLabel: 'You',
+    bvyHead: "Sometimes the work is tactical. Sometimes it's psychological.",
+    bvySub: "The hard part is knowing which one you're actually dealing with.",
+    bvyBusiness: ['Your offer is still weak.', "Your positioning isn't clear enough.", "You don't have a reliable way to find customers.", "Your pricing doesn't make sense.", "You're trying to move five things at once.", "You don't know which move actually matters most right now."],
+    bvyYou: ['You know you need to sell. You keep avoiding it.', "A no lands much more personally than you'd like.", 'Being visible feels strangely threatening, even though you know the business needs it.', "You keep changing direction before the previous one has had time to work.", 'Your sense of worth is a little too tied to how well the business is doing.', "You can explain the pattern perfectly. That hasn't stopped you repeating it."],
+    bvyUnder: "Sometimes the answer is a better business move. Sometimes it's deeper work. Quite often, we need to work on both before it's obvious which one was holding the other back.",
+    oneRelHead: 'One relationship. Both sides of the problem are welcome.',
+    oneRelBizList: 'Offer, positioning, pricing, customers, sales, priorities, decisions, execution.',
+    oneRelBizQ: 'What does the business actually need now?',
+    oneRelYouList: 'Avoidance, rejection, fear of visibility, perfectionism, money, self-doubt, control, identity, uncertainty, commitment.',
+    oneRelYouQ: 'What makes getting there harder than it needs to be?',
+    oneRelNote1: "Some weeks we'll barely talk psychology. Other weeks, the tactical problem can wait because something else needs attention first.",
+    oneRelNote2: "You don't need to know which one you have before you come in.",
     faqLabel: 'Common questions',
     faq: [{
       q: 'Do I need to already have a business?',
-      a: "No. Existing revenue isn't a requirement — this is for people seriously trying to build, whether you're still employed and planning an exit, freelancing, or already running something small."
-    }, {
-      q: 'What kind of people is this for?',
-      a: 'People building something of their own: employed and planning a way out, wanting optionality or independent income, a portfolio career, expertise to turn into a business, already freelancing or consulting, or running something with much more growth left in it.'
+      a: "No. You can be starting, freelancing, consulting, building alongside a job, or already running something established. The common bit is that you're seriously trying to build something of your own."
     }, {
       q: 'Is this therapy or business advisory?',
-      a: "Both, on purpose. Some of what's in the way is a real business problem; some is a pattern in you. I work on either without you having to pick a lane first."
+      a: "It can involve both. I'm a business advisor and a psychotherapist. If the problem is the business, we'll work on the business. If something in you is getting in the way, we can work there too."
     }, {
-      q: "What if I don't know whether my problem is strategic or psychological?",
-      a: "That's normal — and often the first thing we work out together. Frequently it turns out to be both."
-    }, {
-      q: 'Can we work on practical things — offer, pricing, sales, acquisition?',
-      a: "Yes. That's the business track, and it's real advisory on the thing you're building — not “clarity” or “accountability”."
-    }, {
-      q: 'Do I need to want to leave my job?',
-      a: 'No. Some people want an exit; others just want optionality or an independent income alongside a job they like.'
-    }]
+      q: "What if I don't know which one the problem is?",
+      a: "Good. You don't need to diagnose yourself before we talk. Working that out is part of the job."
+    }],
+    finalHeading: "Building something is hard enough without getting in your own way.",
+    finalSub: "If you have something you're trying to start, fix or grow, tell me what's going on."
   },
   el: {
-    promise: 'Για ανθρώπους που θέλουν να χτίσουν κάτι δικό τους — ή να κάνουν πολύ μεγαλύτερο αυτό που έχουν ήδη χτίσει.',
-    tagline: 'Χτίσε την επιχείρηση. Δούλεψε με τον άνθρωπο που τη χτίζει.',
-    introA: 'Είμαι σύμβουλος επιχειρήσεων και Σύμβουλος Ψυχικής Υγείας. Πριν από αυτό, πέρασα 18+ χρόνια στο product και το growth — έχτισα δικές μου εταιρείες και συμβούλεψα περισσότερες από 500.',
-    introB: 'Δουλεύω ιδιωτικά, 1:1, με ανθρώπους που προσπαθούν σοβαρά να χτίσουν κάτι. Δουλεύουμε την ίδια την επιχείρηση, αλλά και ό,τι μέσα σου επηρεάζει την ικανότητά σου να τη χτίσεις.',
-    recogLabel: 'Διάβασέ το αν σου θυμίζει κάτι',
-    recogLead: 'Μάλλον δεν χρειάζεσαι άλλη μια γενική συμβουλή. Χρειάζεται να κουνηθεί κάτι που δεν έχει κουνηθεί.',
-    recog: ['Θέλεις καιρό να ξεκινήσεις κάτι, και ακόμη προετοιμάζεσαι.', 'Ξέρεις ότι χρειάζεσαι πελάτες, και δουλεύεις τα πάντα εκτός από το να πουλάς.', 'Έχεις πελάτες, και ξέρεις ότι υποχρεώνεις.', 'Ξαναφτιάχνεις ή αλλάζεις συνέχεια την προσφορά αντί να τη δοκιμάσεις στην πράξη.', 'Θέλεις να φύγεις από τη μισθωτή εργασία, και το σχέδιο παραμένει σχέδιο.', 'Θέλεις εναλλακτικές, αλλά δεν έχεις χτίσει αυτό που θα σου τις έδινε.', 'Δουλεύεις ανεξάρτητα αρκετά για να επιβιώνεις, αλλά πολύ μακριά από αυτό που πιστεύεις ότι μπορεί να γίνει.', 'Σκέφτεσαι, μαθαίνεις και βελτιώνεις πολλά — και κινείσαι εμπορικά λίγο.'],
-    ceLabel: 'Πώς ένα μοτίβο φτάνει στην επιχείρηση',
-    ceLead: 'Ένα μέρος από αυτά που καθυστερούν την επιχείρηση δεν είναι επιχειρηματικό πρόβλημα. Ξεκινά μέσα σου και καταλήγει στα νούμερα.',
-    ce: [{
-      cause: 'Αποφεύγεις να σε δουν',
-      effect: 'λίγοι ξέρουν ότι υπάρχεις'
-    }, {
-      cause: 'Ένα «όχι» το παίρνεις προσωπικά',
-      effect: 'σταματάς να πουλάς'
-    }, {
-      cause: 'Σε δυσκολεύει να ζητήσεις χρήματα',
-      effect: 'υποτιμολογείς'
-    }, {
-      cause: 'Δεν εμπιστεύεσαι την κρίση σου',
-      effect: 'αλλάζεις συνεχώς κατεύθυνση'
-    }, {
-      cause: 'Θέλεις βεβαιότητα πριν κινηθείς',
-      effect: 'προετοιμάζεσαι αντί να ξεκινήσεις'
-    }, {
-      cause: 'Σκέφτεσαι υπερβολικά κάθε απόφαση',
-      effect: 'η επιχείρηση κινείται αργά'
-    }, {
-      cause: 'Θέλεις να σε συμπαθούν όλοι',
-      effect: 'τα όριά σου κοστίζουν εμπορικά'
-    }],
-    ceFoot: 'Δείχνουν τον μηχανισμό. Δεν ισχύουν όλα για όλους — το θέμα είναι ότι το μοτίβο εμφανίζεται ως επιχειρηματικό αποτέλεσμα.',
-    cpLabel: 'Και μερικές φορές φταίει πράγματι η επιχείρηση',
-    cpLead: 'Εξίσου συχνά, δεν χρειάζεται καμία ψυχολογική ερμηνεία. Το πρόβλημα είναι ακριβώς αυτό που φαίνεται:',
-    cp: ['Η προσφορά σου είναι αδύναμη.', 'Το positioning σου είναι θολό.', 'Κανείς δεν καταλαβαίνει γιατί να αγοράσει.', 'Δεν έχεις τρόπο να βρίσκεις πελάτες.', 'Η τιμολόγησή σου δεν βγάζει νόημα.', 'Κυνηγάς πέντε προτεραιότητες ταυτόχρονα.', 'Απλώς δεν πουλάς αρκετά.'],
-    cpFoot: 'Γι’ αυτό δουλεύουμε και τα δύο — και γι’ αυτό η πρώτη δουλειά είναι συχνά να ξεχωρίσουμε το ένα από το άλλο.',
-    ttLabel: 'Δύο επίπεδα, μία συνεργασία',
-    tt: [{
-      title: 'Το επιχειρηματικό επίπεδο',
-      body: 'Προσφορά, positioning, τιμολόγηση, εύρεση πελατών, πωλήσεις, πειράματα, προτεραιότητες, αποφάσεις, εκτέλεση. Το ερώτημα: τι χρειάζεται πραγματικά η επιχείρηση μετά;'
-    }, {
-      title: 'Ο άνθρωπος που τη χτίζει',
-      body: 'Αποφυγή, ορατότητα, απόρριψη, τελειομανία, χρήμα, αυτοαμφισβήτηση, έλεγχος, ταυτότητα, αβεβαιότητα, δέσμευση. Το ερώτημα: τι μέσα σου επηρεάζει το αν μπορείς πραγματικά να το κάνεις;'
-    }],
-    ttCore: 'Κάποιες εβδομάδες το πρόβλημα είναι κυρίως η επιχείρηση. Κάποιες, κυρίως εσύ. Συνήθως αλληλοεπηρεάζονται.',
-    ttNote: 'Δεν είναι σταθερός καταμερισμός του χρόνου — κάποιες συζητήσεις είναι όλες επιχείρηση, κάποιες όλες εσύ. Το θέμα είναι ότι μπορώ να δουλέψω και τα δύο χωρίς να αλλάξω δωμάτιο.',
-    whoLabel: 'Για ποιους είναι',
-    whoLead: 'Θέλεις κάτι δικό σου. Ίσως:',
-    who: ['έχεις δουλειά και θέλεις να χτίσεις την έξοδό σου', 'σου αρέσει η δουλειά σου αλλά θέλεις εναλλακτικές', 'θέλεις ένα ανεξάρτητο εισόδημα', 'θέλεις μια portfolio καριέρα αντί για έναν εργοδότη', 'έχεις μια εξειδίκευση που πιστεύεις ότι μπορεί να γίνει επιχείρηση', 'ήδη δουλεύεις ανεξάρτητα ή ως σύμβουλος', 'έχεις κάτι που δουλεύει, και ξέρεις ότι υπάρχει πολύ περισσότερη ανάπτυξη μέσα του'],
-    whoFoot: 'Ο κοινός παρονομαστής: προσπαθείς σοβαρά να χτίσεις. Δεν χρειάζεται να έχεις ήδη έσοδα.',
-    whyLabel: 'Γιατί εγώ',
-    whyA: 'Το χρήσιμο είναι ο συνδυασμός. Έχω κάνει την πρακτική δουλειά — product, growth, χτίσιμο και συμβουλευτική επιχειρήσεων — και είμαι εκπαιδευμένος Σύμβουλος Ψυχικής Υγείας, εγγεγραμμένος στο BACP. Οι περισσότεροι που κάνουν το ένα, δεν κάνουν το άλλο.',
-    whyB: 'Δεν θα έπρεπε να εξηγείς την επιχείρησή σου σε κάποιον που καταλαβαίνει μόνο από ψυχολογία.',
-    whyC: 'Και δεν θα έπρεπε να αφήνεις το μισό σου εαυτό έξω από το δωμάτιο με κάποιον που καταλαβαίνει μόνο από τακτικές.',
-    offerLabel: 'Πώς συνεργαζόμαστε',
-    offerBody: 'Υπάρχει ένας τρόπος να δουλέψουμε μαζί: 1:1. Ιδιωτική δουλειά πάνω σε αυτό που προσπαθείς να χτίσεις, και σε ό,τι επηρεάζει την ικανότητά σου να το χτίσεις.',
-    offerLink: 'Δες τι περιλαμβάνει το 1:1 →',
-    caseLabel: 'Ένα παράδειγμα',
-    caseA: 'Κάποιος ήρθε με τη δική του συμβουλευτική εταιρεία. Τα πήγαινε καλά, αλλά δεν το ένιωθε έτσι. Ρώτησε πώς να μεγαλώσει, και από κάτω φοβόταν ότι δεν ήταν φτιαγμένος να τρέχει επιχείρηση — έκανε μόνος του όλη την εκτέλεση και έπαιρνε κάθε κριτική πελάτη πολύ βαριά.',
-    caseB: 'Ένα μέρος ήταν καθαρά επιχειρηματικό: τι να πουλά, τι να χρεώνει, τι να σταματήσει. Ένα μέρος ήταν παλιότερα μοτίβα που ακόμη έτρεχαν, τα ίδια που εμφανίζονταν και στο σπίτι. Σε περίπου έξι μήνες άλλαξε — ανέβασε τιμές, κράτησε αυτά που έκανε καλά, ανέθεσε τα υπόλοιπα, και σταμάτησε να παίρνει μια παλιά ιστορία για τον εαυτό του ως δεδομένη. Δεν χρειαζόταν growth hack. Χρειαζόταν να δουλευτούν και τα δύο μαζί.',
-    finalHeading: 'Θέλεις να χτίσεις κάτι δικό σου. Ή το έχεις ήδη χτίσει, και ξέρεις ότι υπάρχει πολύ περισσότερο μέσα του.',
-    finalSub: 'Ξεκίνα με μια σύντομη γνωριμία. Χωρίς πίεση — απλώς για να δούμε αν αυτό είναι το σωστό δωμάτιο για ό,τι προσπαθείς να κάνεις.',
+    promise: 'Χτίζεις κάτι δικό σου; Ας το πάμε παρακάτω.',
+    tagline: 'Βρίσκουμε τι χρειάζεται η επιχείρηση και τι σε εμποδίζει να το πετύχεις. Business και ψυχολογία, μαζί.',
+    introA: 'Πέρασα 18+ χρόνια στο product και το growth, χτίζοντας δικές μου εταιρείες και συμβουλεύοντας περισσότερες από 500. Παράλληλα εκπαιδεύτηκα ως ψυχοθεραπευτής.',
+    introB: 'Σήμερα δουλεύω 1:1 και σε groups με ανθρώπους που χτίζουν κάτι δικό τους.',
+    introC: 'Μερικές φορές το πρόβλημα είναι καθαρά business. Μερικές φορές είναι πιο περίπλοκο και περιλαμβάνει και εσένα. Και αρκετά συχνά, τα δύο μπλέκονται τόσο που δεν είναι καθόλου ξεκάθαρο πού ακριβώς βρίσκεται το πρόβλημα.',
+    recogLabel: 'Μήπως σου θυμίζει κάτι;',
+    recog: ['Θέλεις καιρό να ξεκινήσεις κάτι. Ακόμα ετοιμάζεσαι.', "Χρειάζεσαι περισσότερους πελάτες. Παρ' όλα αυτά, πάντα βρίσκεται κάτι πιο επείγον από το να πουλήσεις.", 'Ξέρεις ότι χρεώνεις λίγο. Η τιμή, όμως, παραμένει ίδια.', 'Κάθε φορά που η κατεύθυνση που διάλεξες δυσκολεύει, εμφανίζεται μια καινούρια που ξαφνικά μοιάζει καλύτερη.', 'Η επιχείρηση εξαρτάται από εσένα σχεδόν για τα πάντα.', 'Στα χαρτιά, τα πράγματα πάνε καλά. Εσύ, όμως, νιώθεις όλο και λιγότερο σύνδεση με αυτό που χτίζεις.', 'Έφτασες κάπου που ήθελες πολύ. Όμως τώρα δεν ξέρεις αν θέλεις πραγματικά να πας στο επόμενο επίπεδο ή απλώς πιστεύεις ότι θα έπρεπε να το θέλεις.', 'Καταλαβαίνεις πολύ καλά τα μοτίβα σου. Παραδόξως, συνεχίζεις να τα επαναλαμβάνεις.'],
+    bizLabel: 'Το business',
+    youLabel: 'Εσύ',
+    bvyHead: 'Κάποιες φορές χρειάζεται business προσέγγιση. Άλλες, ψυχολογικό σκάψιμο.',
+    bvySub: 'Πολλές φορές, είναι δύσκολο να ξεχωρίσεις τι από τα δύο έχεις πραγματικά μπροστά σου.',
+    bvyBusiness: ['Το offer σου είναι ακόμα αδύναμο.', 'Το positioning δεν είναι αρκετά ξεκάθαρο.', 'Δεν έχεις σταθερό τρόπο να βρίσκεις πελάτες.', 'Η τιμολόγηση δεν βγάζει νόημα.', 'Κυνηγάς πέντε πράγματα ταυτόχρονα.', 'Δεν ξέρεις ποια κίνηση έχει πραγματικά σημασία τώρα.'],
+    bvyYou: ['Ξέρεις ότι πρέπει να πουλήσεις. Όμως, το αποφεύγεις.', "Ένα «όχι» σε χτυπάει πιο προσωπικά απ' όσο θα ήθελες.", 'Ο φόβος έκθεσης σε κρατά πίσω, παρότι ξέρεις ότι χωρίς έκθεση δύσκολα έρχεται ζήτηση.', 'Αλλάζεις κατεύθυνση πριν προλάβει να δουλέψει η προηγούμενη.', "Η αξία σου έχει συνδεθεί λίγο περισσότερο απ' όσο θα ήθελες με το πώς πάει η δουλειά.", 'Μπορείς να εξηγήσεις τέλεια πού είναι το πρόβλημα, αλλά δεν περνάς στη δράση.'],
+    bvyUnder: 'Κάποιες φορές η απάντηση είναι μια καλύτερη business προσέγγιση ή ένα διαφορετικό τακτικό πλάνο. Άλλες φορές χρειάζεται να πάμε πιο βαθιά — και αρκετά συχνά πρέπει να δουλέψουμε και τα δύο μέχρι να εντοπίσουμε πού είναι το πρόβλημα.',
+    oneRelHead: 'Μία συνεργασία όπου χωράνε και το business και εσύ.',
+    oneRelBizList: 'Offer, positioning, τιμές, πελάτες, πωλήσεις, προτεραιότητες, αποφάσεις, εκτέλεση.',
+    oneRelBizQ: 'Τι χρειάζεται πραγματικά το business τώρα;',
+    oneRelYouList: 'Αποφυγή, απόρριψη, φόβος έκθεσης, τελειομανία, χρήματα, αμφιβολία, control, ταυτότητα, αβεβαιότητα, δέσμευση.',
+    oneRelYouQ: 'Τι σε δυσκολεύει να φτάσεις εκεί που θέλεις;',
+    oneRelNote1: 'Κάποιες φορές θα μιλήσουμε σχεδόν μόνο για το business. Άλλες, το tactical κομμάτι μπορεί να περιμένει λίγο γιατί υπάρχει κάτι σημαντικότερο από κάτω.',
+    oneRelNote2: 'Δεν χρειάζεται να έχεις όλες τις απαντήσεις προκειμένου να μιλήσουμε.',
     faqLabel: 'Συχνές ερωτήσεις',
     faq: [{
-      q: 'Χρειάζεται να έχω ήδη επιχείρηση;',
-      a: 'Όχι. Δεν χρειάζεται να έχεις έσοδα — είναι για ανθρώπους που προσπαθούν σοβαρά να χτίσουν κάτι, είτε είσαι ακόμη μισθωτός και σχεδιάζεις έξοδο, είτε δουλεύεις ανεξάρτητα, είτε τρέχεις ήδη κάτι μικρό.'
+      q: 'Πρέπει να έχω ήδη επιχείρηση;',
+      a: 'Όχι. Μπορεί να ξεκινάς τώρα, να δουλεύεις ως freelancer ή consultant, να χτίζεις κάτι παράλληλα με τη δουλειά σου ή να έχεις ήδη μια κανονική επιχείρηση. Το κοινό είναι ότι προσπαθείς σοβαρά να χτίσεις κάτι δικό σου.'
     }, {
-      q: 'Για ποιους ανθρώπους είναι;',
-      a: 'Για ανθρώπους που χτίζουν κάτι δικό τους: μισθωτούς που σχεδιάζουν έξοδο, όσους θέλουν εναλλακτικές ή ανεξάρτητο εισόδημα, μια portfolio καριέρα, μια εξειδίκευση που μπορεί να γίνει επιχείρηση, ήδη freelancers, ή κάποιον που τρέχει κάτι με πολλή ανάπτυξη ακόμη μέσα του.'
+      q: 'Είναι ψυχοθεραπεία ή συμβουλευτική επιχειρήσεων;',
+      a: 'Είναι και τα δύο παράλληλα. Είμαι business advisor και ψυχοθεραπευτής. Αν το πρόβλημα είναι το business, δουλεύουμε το business. Αν μπαίνει κάτι δικό σου στη μέση, μπορούμε να δουλέψουμε κι αυτό.'
     }, {
-      q: 'Είναι θεραπεία ή συμβουλευτική επιχειρήσεων;',
-      a: 'Και τα δύο, σκόπιμα. Ένα μέρος του εμποδίου είναι πραγματικό επιχειρηματικό πρόβλημα· ένα μέρος είναι μοτίβο μέσα σου. Δουλεύω και τα δύο χωρίς να χρειάζεται να διαλέξεις.'
-    }, {
-      q: 'Κι αν δεν ξέρω αν το πρόβλημά μου είναι στρατηγικό ή ψυχολογικό;',
-      a: 'Είναι φυσιολογικό — και συχνά το πρώτο που ξεκαθαρίζουμε μαζί. Πολλές φορές είναι και τα δύο.'
-    }, {
-      q: 'Μπορούμε να δουλέψουμε πρακτικά πράγματα — προσφορά, τιμολόγηση, πωλήσεις;',
-      a: 'Ναι. Αυτό είναι το επιχειρηματικό επίπεδο, πραγματική συμβουλευτική για αυτό που χτίζεις — όχι «καθαρότητα» ή «λογοδοσία».'
-    }, {
-      q: 'Πρέπει να θέλω να αφήσω τη δουλειά μου;',
-      a: 'Όχι. Κάποιοι θέλουν έξοδο· άλλοι απλώς εναλλακτικές ή ανεξάρτητο εισόδημα παράλληλα με μια δουλειά που τους αρέσει.'
-    }]
+      q: 'Κι αν δεν ξέρω ποιο από τα δύο είναι;',
+      a: 'Δεν χρειάζεται να έρθεις με διάγνωση. Το να ξεκαθαρίσουμε τι πραγματικά συμβαίνει είναι μέρος της δουλειάς.'
+    }],
+    finalHeading: 'Το να χτίσεις κάτι δικό σου είναι ήδη αρκετά δύσκολο.',
+    finalSub: 'Αν προσπαθείς να ξεκινήσεις, να ξεκολλήσεις ή να αναπτύξεις κάτι παραπάνω, έλα να το συζητήσουμε.'
   }
 };
 function HomePage({
@@ -1071,7 +1084,7 @@ function HomePage({
   } : {
     flex: '1.15 1 0',
     minWidth: 0,
-    maxWidth: 540
+    maxWidth: 560
   };
   const introImgWrapStyle = mob ? {
     width: '100%'
@@ -1086,6 +1099,25 @@ function HomePage({
     borderRadius: '14px',
     display: 'block'
   };
+  const sectionGap = React.createElement('div', {
+    style: {
+      marginTop: mob ? '3.5rem' : '6rem'
+    }
+  });
+  const headingStyle = {
+    fontSize: mob ? '24px' : '30px',
+    fontWeight: 500,
+    letterSpacing: '-.02em',
+    lineHeight: 1.25,
+    color: C.text,
+    margin: '0 0 .6rem'
+  };
+  const subStyle = {
+    fontSize: mob ? '17px' : '19px',
+    color: C.muted,
+    lineHeight: 1.5,
+    margin: '0 0 1.8rem'
+  };
   return React.createElement('main', {
     style: mainStyle
   },
@@ -1098,31 +1130,31 @@ function HomePage({
     style: {
       fontSize: '12px',
       fontWeight: 700,
-      letterSpacing: '.16em',
+      letterSpacing: '.14em',
       textTransform: 'uppercase',
       color: C.accent,
-      marginBottom: '1rem'
+      marginBottom: '1.1rem'
     }
   }, u.role), React.createElement('h1', {
     style: {
-      fontSize: mob ? '26px' : '34px',
+      fontSize: mob ? '27px' : '36px',
       fontWeight: 500,
-      lineHeight: 1.25,
+      lineHeight: 1.2,
       letterSpacing: '-.02em',
       color: C.text,
-      margin: '0 0 1rem'
+      margin: '0 0 1.1rem'
     }
   }, c.promise), React.createElement('p', {
     style: {
       fontSize: mob ? '17px' : '19px',
       fontWeight: 600,
       color: C.accent,
-      margin: '0 0 1.4rem',
-      lineHeight: 1.4
+      margin: '0 0 1.5rem',
+      lineHeight: 1.45
     }
-  }, c.tagline), React.createElement(P, null, c.introA), React.createElement(P, {
+  }, c.tagline), React.createElement(P, null, c.introA), React.createElement(P, null, c.introB), React.createElement(P, {
     last: true
-  }, c.introB), React.createElement(CtaRow, {
+  }, c.introC), React.createElement(CtaRow, {
     lang,
     mob
   })), React.createElement('div', {
@@ -1169,107 +1201,99 @@ function HomePage({
     d: 'M40 3 C 44 20, 33 30, 6 30'
   }), React.createElement('path', {
     d: 'M15 24 L5 30 L14 36'
-  }))))), React.createElement('div', {
+  }))))), sectionGap,
+  // ── Recognition (two columns) ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.recogLabel), React.createElement('div', {
     style: {
-      marginTop: mob ? '3.25rem' : '5rem'
+      columnGap: mob ? 0 : '3rem',
+      columnCount: mob ? 1 : 2,
+      marginTop: '1.4rem'
     }
-  }),
-  // ── Recognition (fewer examples shown at once) ──
-  React.createElement(Section, {
-    label: c.recogLabel,
-    mob
-  }, React.createElement('p', {
+  }, c.recog.map((it, i) => React.createElement('p', {
+    key: i,
     style: {
-      ...leadStyle,
-      fontSize: mob ? '19px' : '22px',
-      marginBottom: '1.8rem',
-      maxWidth: '38ch'
+      breakInside: 'avoid',
+      fontSize: mob ? '16px' : '17px',
+      lineHeight: 1.6,
+      color: C.text,
+      margin: '0 0 1.1rem'
     }
-  }, c.recogLead), React.createElement(Bullets, {
-    items: c.recog.slice(0, 4),
-    mob
-  })), React.createElement('hr', {
-    style: sepStyle
-  }),
-  // ── The two-track model: pattern → business, and "sometimes it's the business", then both ──
-  React.createElement(Section, {
-    label: c.ceLabel,
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, c.ceLead), React.createElement('div', {
-    style: {
-      marginTop: '1.1rem'
-    }
-  }, React.createElement(PatternList, {
-    items: c.ce.slice(0, 5)
-  }))), React.createElement(Section, {
-    label: c.cpLabel,
-    mob
-  }, React.createElement(P, null, c.cpLead), React.createElement(Bullets, {
-    items: c.cp.slice(0, 4),
-    mob
+  }, it))), sectionGap,
+  // ── Business vs You — the main visual object ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.bvyHead), React.createElement('p', {
+    style: subStyle
+  }, c.bvySub), React.createElement(TwoColBoard, {
+    mob,
+    leftLabel: c.bizLabel,
+    leftItems: c.bvyBusiness,
+    rightLabel: c.youLabel,
+    rightItems: c.bvyYou
   }), React.createElement('p', {
     style: {
-      fontSize: mob ? '18px' : '20px',
-      fontWeight: 600,
+      fontSize: mob ? '17px' : '18px',
+      lineHeight: 1.65,
       color: C.text,
-      margin: '1.4rem 0 0',
-      lineHeight: 1.6
+      margin: '1.8rem 0 0',
+      maxWidth: '62ch'
     }
-  }, c.cpFoot)), React.createElement(Section, {
-    label: c.ttLabel,
-    mob
-  }, React.createElement('div', {
+  }, c.bvyUnder), sectionGap,
+  // ── Short 1:1 section ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.oneRelHead), React.createElement('div', {
     style: {
-      margin: '0 0 1.2rem'
+      display: 'flex',
+      flexDirection: mob ? 'column' : 'row',
+      gap: mob ? '1rem' : '1.25rem',
+      marginTop: '1.4rem'
     }
-  }, React.createElement(TrackCards, {
+  }, React.createElement(QCard, {
     mob,
-    tracks: c.tt
+    label: c.bizLabel,
+    body: c.oneRelBizList,
+    q: c.oneRelBizQ
+  }), React.createElement(QCard, {
+    mob,
+    label: c.youLabel,
+    body: c.oneRelYouList,
+    q: c.oneRelYouQ
   })), React.createElement('p', {
+    style: {
+      fontSize: '16px',
+      lineHeight: 1.7,
+      color: C.muted,
+      margin: '1.6rem 0 0'
+    }
+  }, c.oneRelNote1), React.createElement('p', {
     style: {
       fontSize: mob ? '17px' : '18px',
       fontWeight: 600,
       color: C.text,
-      margin: '0 0 .5rem',
+      margin: '.6rem 0 0',
       lineHeight: 1.6
     }
-  }, c.ttCore), React.createElement('p', {
+  }, c.oneRelNote2), React.createElement('p', {
     style: {
-      fontSize: '15px',
-      lineHeight: 1.6,
-      color: C.muted,
-      margin: 0
-    }
-  }, c.ttNote)), React.createElement('hr', {
-    style: sepStyle
-  }),
-  // ── One offer ──
-  React.createElement(Section, {
-    label: c.offerLabel,
-    mob
-  }, React.createElement(P, null, c.offerBody), React.createElement('p', {
-    style: {
-      margin: 0
+      margin: '1.3rem 0 0'
     }
   }, React.createElement(IA, {
     href: pathFor('one-to-one', lang)
-  }, c.offerLink))), React.createElement('hr', {
-    style: sepStyle
-  }),
-  // ── FAQ (secondary info, progressively disclosed) ──
-  React.createElement(Section, {
-    label: c.faqLabel,
-    mob
+  }, u.seeOneToOne + ' →')), sectionGap,
+  // ── FAQ (max 3) ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.faqLabel), React.createElement('div', {
+    style: {
+      marginTop: '1.4rem'
+    }
   }, React.createElement(FaqAccordion, {
     items: c.faq,
     mob
-  })), React.createElement('div', {
-    style: {
-      marginTop: mob ? '1rem' : '2rem'
-    }
-  }),
+  })),
   // ── Final CTA ──
   React.createElement(FinalCta, {
     lang,
@@ -1286,264 +1310,308 @@ function HomePage({
 const ONE = {
   en: {
     h1: 'Work with me, 1:1',
-    lead: 'One private engagement that works on two things at once: what you’re building, and whatever in you is affecting your ability to build it.',
-    intro: "This is business advisory and psychological work in the same room. Practically, the objective is simple: help you build the thing — and remove what's getting in the way, whether that turns out to be strategic, behavioural, or both.",
-    whoLabel: 'Who it’s for',
-    whoLead: 'Someone seriously trying to:',
-    who: ['start something of their own', 'create an independent source of income', 'move toward self-employment', 'grow an existing small business', 'grow a freelance or consulting practice', 'create more optionality alongside a job', 'turn an underperforming small business into something substantially stronger'],
-    workLabel: 'What we work on',
-    tracks: [{
-      title: 'Business',
-      body: 'Offer, positioning, pricing, acquisition, sales, prioritisation, decisions, execution. Real advisory on the thing you’re building — not "clarity" or "accountability".'
-    }, {
-      title: 'The person',
-      body: 'Whatever psychological pattern is materially affecting progress — avoidance, visibility, charging, self-doubt, control, commitment. Worked in terms of how it hits the business, not as generic mental health.'
-    }],
-    workFoot: 'Some weeks it’s 90% business. Some weeks the business barely comes up because something in you is the actual blocker. The engagement holds both without switching provider.',
-    howLabel: 'How the engagement works',
+    lead: "Private work on the business you're building and whatever in you is getting tangled up with it.",
+    intro: ["Some problems need a tactical answer. Others need deeper work. Often, it's not obvious which one you're dealing with until we get into it.", "The point of 1:1 is that we don't have to choose one lens in advance."],
+    workLabel: 'What can we work on?',
+    bizLabel: 'The business',
+    bizBody: 'Offer, positioning, pricing, customer acquisition, sales, priorities, difficult decisions, execution.',
+    bizNote: "Sometimes you need somebody to look at the business and say: this is the problem, this is noise, and this is what I'd do next.",
+    youLabel: 'You',
+    youBody: 'Avoidance, fear of visibility, rejection, self-doubt, perfectionism, control, identity, money, uncertainty, commitment.',
+    youNote: 'Sometimes the strategy is already good enough. The difficult bit is getting yourself to actually execute it.',
+    workUnder: "And sometimes both the tactical and the personal need to be worked together. That's usually where this gets interesting.",
+    lookLabel: 'What does the work actually look like?',
+    lookLead: 'You bring whatever is live.',
+    lookMaybes: ["Maybe you don't know how to get the next ten customers.", "Maybe you know exactly what conversation you need to have and you've been avoiding it for three months.", 'Maybe the company is growing but everything still has to go through you.', "Maybe something that used to matter enormously to you suddenly doesn't, and you're not sure what that means for the business.", "Maybe you've analysed the problem so thoroughly that analysis itself has become part of the problem."],
+    lookMid: "We work with what's actually there.",
+    lookClose: ["I may challenge the business decision. I may challenge the story you're telling yourself about it.", "Sometimes we'll make a plan. Sometimes we'll stay with something uncomfortable long enough to understand why it keeps showing up.", "The goal isn't to turn everything into psychology. It's to get a more accurate read on what is happening, then do something useful with it."],
+    howLabel: 'How it starts',
     steps: [{
       n: '1',
       title: 'Fit call',
       tag: '~15 min · free',
-      body: 'A short call to see if we click and whether I’m the right person for what you’re trying to build. Not a session.'
+      body: "We talk briefly about what you're building, what's going on and whether I seem like the right person for it. It's a fit check, not a free session."
     }, {
       n: '2',
-      title: 'First paid session',
-      tag: 'one session',
-      body: 'You bring the problem as you see it. We find the more accurate one underneath, and you leave with a clear read and one real move — worth it even if we stop there.'
+      title: 'First session',
+      body: "We get properly into the problem. You don't need to arrive with the “right” version of it — bring it as you currently understand it. By the end, I want us to have a better read on what's actually going on and a concrete next move. Even if we decide not to continue, the session should be useful on its own."
     }, {
       n: '3',
-      title: 'Ongoing',
-      tag: 'if it’s worth it',
-      body: 'Private, 1:1, online. Weekly at first so the work compounds, then flexible. It continues only as long as it’s genuinely useful.'
+      title: 'If it makes sense, we continue',
+      body: 'Private, ongoing 1:1 work.'
     }],
-    howNote: 'Sessions are online and one-to-one. It’s priced as a premium, ongoing monthly engagement rather than by the hour — I keep the number of clients small, and I’ll give you the specifics on the fit call. Between sessions you can reach me when something real comes up; not a 24/7 line, but you’re not on your own until the next slot either.',
-    expectLabel: 'What to expect',
-    expect: ['clearer commercial direction', 'better business decisions, made faster', 'more consistent execution', 'more willingness to do the commercially necessary things that feel uncomfortable', 'a straight read on whether the real constraint is strategic, behavioural, or both'],
-    expectFoot: 'What I won’t promise: specific revenue, income, customer numbers, or a psychological outcome. Anyone who guarantees those is selling you something.',
-    notLabel: 'What this is not',
-    not: ['Not conventional business coaching — there’s no framework I hand you to run.', 'Not generic mindset or confidence coaching.', 'Not psychotherapy detached from the business.'],
-    notFoot: 'Both professions do real work; this just isn’t either one on its own. The value is being able to move between the business decision and the pattern underneath it without you having to translate one world into the other.',
-    evLabel: 'What clients say',
-    ctaHeading: 'The first step is a short fit call.',
     faqLabel: 'Common questions',
     faq: [{
-      q: 'Do I need to already have a business?',
-      a: "No. Existing revenue isn't a requirement — this is for people seriously trying to build, employed or independent, whether you're planning an exit, freelancing, or already running something small."
-    }, {
       q: 'Is this therapy?',
-      a: "It's therapy-informed and I'm a BACP-registered therapist, but it's not therapy by the protocol — more direct and action-oriented, and always tied to what you're building."
+      a: "Sometimes the work goes into territory you would absolutely recognise as psychotherapy. I'm a trained and registered psychotherapist, so we don't have to stop because the problem got personal. But this isn't a conventional therapy relationship where the business is merely context. The business itself is part of the work."
     }, {
       q: 'Is this business coaching?',
-      a: "There's advisory in it, but no framework I hand you to run. It's real work on the offer, the pricing, the decision in front of you."
+      a: "Not really. I will give you an opinion on the business. We can work directly on your offer, pricing, positioning, customer acquisition or a decision in front of you. I don't have a framework that every client gets taken through."
     }, {
-      q: 'What kinds of business problems can we work on?',
-      a: 'Offer, positioning, pricing, acquisition, sales, prioritisation, decisions, execution — the practical work of building the thing.'
+      q: "What if I don't know whether the problem is business or psychological?",
+      a: "You don't need to. Quite often, that's the first thing we need to work out."
     }, {
-      q: 'What if the problem turns out not to be psychological?',
-      a: 'Then we treat it as the business problem it is. Not everything is a pattern — sometimes the offer is just weak, or the pricing is wrong, and we fix that.'
-    }, {
-      q: 'How do we decide whether to focus on the business or the person?',
-      a: "Week to week, by what's actually blocking progress. Some weeks it's 90% business; some weeks the business barely comes up because something in you is the real blocker."
-    }, {
-      q: 'Is this only for people leaving employment?',
-      a: "No — employed, independent, or already running something. What's common is that you're seriously trying to build."
-    }]
+      q: 'Do I need to already have a business?',
+      a: "No. You can be trying to start, building alongside a job, freelancing, consulting or already running an established business. What matters is that you're genuinely trying to build something of your own."
+    }],
+    ctaHeading: 'Bring me the problem as you currently understand it.',
+    ctaSub: "We'll work out what it actually needs."
   },
   el: {
-    h1: 'Δούλεψε μαζί μου, 1:1',
-    lead: 'Μία ιδιωτική συνεργασία που δουλεύει δύο πράγματα ταυτόχρονα: αυτό που χτίζεις, και ό,τι μέσα σου επηρεάζει την ικανότητά σου να το χτίσεις.',
-    intro: 'Είναι συμβουλευτική επιχειρήσεων και ψυχολογική δουλειά στο ίδιο δωμάτιο. Πρακτικά, ο στόχος είναι απλός: να χτίσεις το πράγμα — και να φύγει ό,τι σε εμποδίζει, είτε αυτό είναι στρατηγικό, είτε συμπεριφορικό, είτε και τα δύο.',
-    whoLabel: 'Για ποιους είναι',
-    whoLead: 'Για κάποιον που προσπαθεί σοβαρά να:',
-    who: ['ξεκινήσει κάτι δικό του', 'δημιουργήσει ανεξάρτητο εισόδημα', 'κινηθεί προς την ανεξάρτητη εργασία', 'μεγαλώσει μια υπάρχουσα μικρή επιχείρηση', 'αναπτύξει μια πρακτική freelance ή συμβουλευτικής', 'δημιουργήσει εναλλακτικές παράλληλα με μια δουλειά', 'μετατρέψει μια μικρή επιχείρηση που υποαποδίδει σε κάτι ουσιαστικά ισχυρότερο'],
-    workLabel: 'Τι δουλεύουμε',
-    tracks: [{
-      title: 'Επιχείρηση',
-      body: 'Προσφορά, positioning, τιμολόγηση, εύρεση πελατών, πωλήσεις, προτεραιότητες, αποφάσεις, εκτέλεση. Πραγματική συμβουλευτική για αυτό που χτίζεις — όχι «καθαρότητα» ή «λογοδοσία».'
-    }, {
-      title: 'Ο άνθρωπος',
-      body: 'Όποιο ψυχολογικό μοτίβο επηρεάζει ουσιαστικά την πρόοδο — αποφυγή, ορατότητα, χρέωση, αυτοαμφισβήτηση, έλεγχος, δέσμευση. Δουλεύεται ως προς το πώς χτυπά την επιχείρηση, όχι ως γενική ψυχική υγεία.'
-    }],
-    workFoot: 'Κάποιες εβδομάδες είναι 90% επιχείρηση. Κάποιες, η επιχείρηση μόλις που αναφέρεται, γιατί κάτι μέσα σου είναι το πραγματικό εμπόδιο. Η συνεργασία κρατά και τα δύο χωρίς να αλλάξεις άνθρωπο.',
-    howLabel: 'Πώς λειτουργεί η συνεργασία',
+    h1: '1:1 Συνεργασία',
+    lead: '1:1 συμβουλευτική προσανατολισμένη και στο business που χτίζεις αλλά και σε ό,τι φέρνεις εσύ στο τραπέζι σαν άνθρωπος που μπορεί να δημιουργεί εμπόδια.',
+    intro: ['Κάποια προβλήματα θέλουν μια πρακτική business λύση. Άλλα χρειάζονται πιο βαθιά δουλειά. Και αρκετά συχνά, δεν είναι ξεκάθαρο ποιο από τα δύο έχεις μπροστά σου μέχρι να αρχίσουμε να το ξετυλίγουμε.', 'Στο 1:1 δεν χρειάζεται να διαλέξουμε από πριν.'],
+    workLabel: 'Τι μπορούμε να δουλέψουμε',
+    bizLabel: 'Το business',
+    bizBody: 'Offer, positioning, τιμές, πελάτες, πωλήσεις, προτεραιότητες, δύσκολες αποφάσεις, εκτέλεση.',
+    bizNote: 'Μερικές φορές χρειάζεσαι κάποιον να κοιτάξει το business και να σου πει: αυτό είναι το πρόβλημα, αυτό είναι θόρυβος και αυτό θα έκανα μετά.',
+    youLabel: 'Εσύ',
+    youBody: 'Αποφυγή, φόβος έκθεσης, απόρριψη, αμφιβολία, τελειομανία, control, ταυτότητα, χρήματα, αβεβαιότητα, δέσμευση.',
+    youNote: 'Μερικές φορές το strategy είναι ήδη μια χαρά. Το δύσκολο πολλές φορές είναι να το εφαρμόσεις.',
+    workUnder: 'Και κάποιες φορές συμβαίνουν και τα δύο μαζί. Εκεί συνήθως αρχίζει το ενδιαφέρον κομμάτι της δουλειάς μας.',
+    lookLabel: 'Πώς είναι στην πράξη;',
+    lookLead: 'Φέρνεις αυτό που σε απασχολεί τώρα.',
+    lookMaybes: ['Μπορεί να μην ξέρεις πώς θα βρεις τους επόμενους πελάτες.', 'Μπορεί να ξέρεις ακριβώς ποια συζήτηση πρέπει να κάνεις και να την αποφεύγεις εδώ και τρεις μήνες.', 'Μπορεί το business να μεγαλώνει αλλά όλα να πρέπει ακόμα να περνούν από εσένα.', 'Μπορεί κάτι που κάποτε ήθελες πάρα πολύ να μη σε γεμίζει πια και να μην ξέρεις τι σημαίνει αυτό για όσα έχεις χτίσει.', 'Ή μπορεί να έχεις αναλύσει το πρόβλημα τόσο πολύ, που η ίδια η ανάλυση έχει γίνει μέρος του προβλήματος.'],
+    lookMid: 'Δουλεύουμε αυτό που υπάρχει πραγματικά μπροστά μας.',
+    lookClose: ['Μπορεί να αμφισβητήσω μια business απόφαση. Μπορεί να αμφισβητήσω την ιστορία που λες στον εαυτό σου γύρω από αυτήν.', 'Κάποιες φορές θα δουλέψουμε πάνω σε ένα πλάνο. Άλλες θα χρειαστεί να μείνουμε λίγο περισσότερο σε κάτι που αποφεύγεις, μέχρι να καταλάβουμε γιατί αυτό επιστρέφει συνέχεια.', 'Δεν ψάχνουμε ψυχολογική εξήγηση για τα πάντα. Προσπαθούμε να καταλάβουμε καλύτερα τι πραγματικά συμβαίνει και μετά να εξάγουμε κάτι χρήσιμο με αυτό.'],
+    howLabel: 'Πώς ξεκινάμε',
     steps: [{
       n: '1',
       title: 'Γνωριμία',
       tag: '~15 λεπτά · δωρεάν',
-      body: 'Μια σύντομη κλήση για να δούμε αν ταιριάζουμε και αν είμαι ο σωστός άνθρωπος για αυτό που χτίζεις. Δεν είναι συνεδρία.'
+      body: 'Μου λες πολύ σύντομα τι χτίζεις και τι συμβαίνει. Βλέπουμε αν ταιριάζουμε και αν είμαι ο σωστός άνθρωπος για σένα. Είναι γνωριμία, όχι δωρεάν συνεδρία.'
     }, {
       n: '2',
       title: 'Πρώτη συνεδρία',
-      tag: 'μία συνεδρία',
-      body: 'Φέρνεις το πρόβλημα όπως το βλέπεις. Βρίσκουμε το πιο ακριβές από κάτω, και φεύγεις με μια καθαρή εικόνα και μία πραγματική κίνηση — αξίζει ακόμη κι αν σταματήσουμε εκεί.'
+      body: "Εδώ μπαίνουμε κανονικά στο θέμα. Δεν χρειάζεται να έχεις καταλάβει ακριβώς ποιο είναι το πρόβλημα — φέρ' το όπως το βλέπεις τώρα. Μέχρι το τέλος θέλω να έχουμε πιο καθαρή εικόνα για το τι πραγματικά συμβαίνει και ένα συγκεκριμένο επόμενο βήμα. Ακόμα κι αν δεν συνεχίσουμε μαζί, η πρώτη συνεδρία θα σου δώσει τεράστια αξία."
     }, {
       n: '3',
-      title: 'Συνέχεια',
-      tag: 'αν αξίζει',
-      body: 'Ιδιωτικά, 1:1, online. Στην αρχή εβδομαδιαία ώστε να χτίζεται η δουλειά, μετά ευέλικτα. Συνεχίζει μόνο όσο είναι πραγματικά χρήσιμο.'
+      title: 'Αν έχει νόημα, συνεχίζουμε',
+      body: 'Ιδιωτικά, 1:1.'
     }],
-    howNote: 'Οι συνεδρίες είναι online και ατομικές. Τιμολογείται ως premium, σταθερή μηνιαία συνεργασία και όχι με την ώρα — κρατώ μικρό αριθμό πελατών, και θα σου πω τις λεπτομέρειες στη γνωριμία. Ανάμεσα στις συνεδρίες μπορείς να με βρεις όταν προκύψει κάτι ουσιαστικό· δεν είναι γραμμή 24/7, αλλά ούτε μένεις μόνος μέχρι το επόμενο ραντεβού.',
-    expectLabel: 'Τι να περιμένεις',
-    expect: ['πιο καθαρή εμπορική κατεύθυνση', 'καλύτερες επιχειρηματικές αποφάσεις, πιο γρήγορα', 'πιο σταθερή εκτέλεση', 'μεγαλύτερη διάθεση να κάνεις τα εμπορικά αναγκαία που σε δυσκολεύουν', 'μια ειλικρινή εικόνα για το αν το πραγματικό εμπόδιο είναι στρατηγικό, συμπεριφορικό ή και τα δύο'],
-    expectFoot: 'Τι δεν υπόσχομαι: συγκεκριμένα έσοδα, εισόδημα, αριθμό πελατών ή ψυχολογικό αποτέλεσμα. Όποιος τα εγγυάται, σου πουλάει κάτι.',
-    notLabel: 'Τι δεν είναι',
-    not: ['Δεν είναι κλασικό business coaching — δεν υπάρχει framework που σου δίνω να τρέξεις.', 'Δεν είναι γενικό coaching νοοτροπίας ή αυτοπεποίθησης.', 'Δεν είναι ψυχοθεραπεία αποκομμένη από την επιχείρηση.'],
-    notFoot: 'Και τα δύο επαγγέλματα κάνουν πραγματική δουλειά· απλώς αυτό δεν είναι κανένα από τα δύο μόνο του. Η αξία είναι να κινούμαι ανάμεσα στην επιχειρηματική απόφαση και το μοτίβο από κάτω, χωρίς να χρειάζεται να μεταφράζεις τον έναν κόσμο στον άλλον.',
-    evLabel: 'Τι λένε οι πελάτες',
-    ctaHeading: 'Το πρώτο βήμα είναι μια σύντομη γνωριμία.',
     faqLabel: 'Συχνές ερωτήσεις',
     faq: [{
-      q: 'Χρειάζεται να έχω ήδη επιχείρηση;',
-      a: 'Όχι. Δεν χρειάζεται να έχεις έσοδα — είναι για ανθρώπους που προσπαθούν σοβαρά να χτίσουν κάτι, μισθωτούς ή ανεξάρτητους, είτε σχεδιάζεις έξοδο, είτε δουλεύεις freelance, είτε τρέχεις ήδη κάτι μικρό.'
-    }, {
-      q: 'Είναι θεραπεία;',
-      a: 'Είναι therapy-informed και είμαι Σύμβουλος Ψυχικής Υγείας εγγεγραμμένος στο BACP, αλλά δεν είναι θεραπεία με το πρωτόκολλο — πιο άμεση και προσανατολισμένη στη δράση, πάντα δεμένη με αυτό που χτίζεις.'
+      q: 'Είναι ψυχοθεραπεία;',
+      a: 'Κάποιες φορές η δουλειά μας θα μπει σε θέματα που είναι ξεκάθαρα ψυχοθεραπευτικά. Είμαι εκπαιδευμένος και εγγεγραμμένος ψυχοθεραπευτής, οπότε δεν χρειάζεται να σταματήσουμε επειδή το θέμα έγινε προσωπικό. Από την άλλη, εδώ το business δεν είναι απλώς το context. Είναι κι αυτό μέρος της δουλειάς.'
     }, {
       q: 'Είναι business coaching;',
-      a: 'Υπάρχει συμβουλευτική μέσα, αλλά όχι framework που σου δίνω να τρέξεις. Είναι πραγματική δουλειά πάνω στην προσφορά, την τιμολόγηση, την απόφαση μπροστά σου.'
+      a: 'Ναι αλλά όχι αποκλειστικά. Θα έχω άποψη για το business. Μπορούμε να δουλέψουμε κανονικά offer, positioning, τιμές, πελάτες ή μια δύσκολη απόφαση που έχεις μπροστά σου. Δεν έχω μια έτοιμη μέθοδο από την οποία περνάω όλους τους πελάτες.'
     }, {
-      q: 'Τι επιχειρηματικά προβλήματα μπορούμε να δουλέψουμε;',
-      a: 'Προσφορά, positioning, τιμολόγηση, εύρεση πελατών, πωλήσεις, προτεραιότητες, αποφάσεις, εκτέλεση — την πρακτική δουλειά του χτισίματος.'
+      q: 'Κι αν δεν ξέρω αν το πρόβλημα είναι business ή ψυχολογικό;',
+      a: 'Δεν χρειάζεται να ξέρεις. Αρκετές φορές, αυτό είναι το πρώτο πράγμα που πρέπει να ξεκαθαρίσουμε.'
     }, {
-      q: 'Κι αν το πρόβλημα δεν είναι τελικά ψυχολογικό;',
-      a: 'Τότε το αντιμετωπίζουμε ως το επιχειρηματικό πρόβλημα που είναι. Δεν είναι όλα μοτίβο — κάποιες φορές η προσφορά είναι απλώς αδύναμη ή η τιμολόγηση λάθος, και το διορθώνουμε.'
-    }, {
-      q: 'Πώς αποφασίζουμε αν θα εστιάσουμε στην επιχείρηση ή στον άνθρωπο;',
-      a: 'Εβδομάδα με εβδομάδα, με βάση το τι πραγματικά εμποδίζει την πρόοδο. Κάποιες εβδομάδες είναι 90% επιχείρηση· κάποιες, η επιχείρηση μόλις που αναφέρεται.'
-    }, {
-      q: 'Είναι μόνο για όσους αφήνουν τη μισθωτή εργασία;',
-      a: 'Όχι — μισθωτοί, ανεξάρτητοι, ή κάποιος που τρέχει ήδη κάτι. Το κοινό είναι ότι προσπαθείς σοβαρά να χτίσεις.'
-    }]
+      q: 'Πρέπει να έχω ήδη επιχείρηση;',
+      a: 'Όχι. Μπορεί να ξεκινάς τώρα, να χτίζεις κάτι παράλληλα με τη δουλειά σου, να είσαι freelancer ή consultant, ή να τρέχεις ήδη μια κανονική επιχείρηση. Το σημαντικό είναι να προσπαθείς πραγματικά να χτίσεις κάτι δικό σου.'
+    }],
+    ctaHeading: 'Φέρε το πρόβλημα όπως το βλέπεις τώρα.',
+    ctaSub: 'Θα βρούμε τι πραγματικά χρειάζεται.'
   }
 };
-function notLine(txt) {
-  return React.createElement('li', {
-    style: {
-      display: 'flex',
-      gap: '.7rem',
-      alignItems: 'baseline',
-      padding: '.55rem 0',
-      fontSize: '16px',
-      lineHeight: 1.55,
-      color: C.text
-    }
-  }, React.createElement('span', {
-    style: {
-      color: '#c0392b',
-      fontWeight: 700,
-      flexShrink: 0,
-      fontSize: '15px'
-    }
-  }, '✕'), React.createElement('span', null, txt));
-}
 function OneToOnePage({
   lang = 'en'
 }) {
   const mob = useIsMobile();
   const c = ONE[lang] || ONE.en;
+  const u = tUI(lang);
   const mobPage = mob ? {
     ...pageStyle,
     padding: '1.5rem 1.1rem 5rem'
   } : widePageStyle;
-  const ev = REVIEWS_ITEMS.slice(0, 3);
+  const headingStyle = {
+    fontSize: mob ? '24px' : '30px',
+    fontWeight: 500,
+    letterSpacing: '-.02em',
+    lineHeight: 1.25,
+    color: C.text,
+    margin: '0 0 1.3rem'
+  };
+  const gap = React.createElement('div', {
+    style: {
+      marginTop: mob ? '3.25rem' : '5rem'
+    }
+  });
+  const primaryBtn = {
+    display: 'inline-block',
+    textAlign: 'center',
+    padding: '.9rem 1.8rem',
+    fontFamily: 'inherit',
+    fontWeight: 700,
+    fontSize: '13px',
+    letterSpacing: '.06em',
+    textTransform: 'uppercase',
+    background: C.accent,
+    border: `1.5px solid ${C.accent}`,
+    color: '#fff',
+    textDecoration: 'none',
+    borderRadius: '2px'
+  };
+  const bizYouCard = (label, body, note) => React.createElement('div', {
+    className: 'hv-card',
+    style: {
+      ...cardBase,
+      padding: mob ? '1.3rem' : '1.7rem',
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '.85rem'
+    }
+  }, React.createElement('div', {
+    style: {
+      fontSize: '12px',
+      fontWeight: 700,
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: C.accent
+    }
+  }, label), React.createElement('p', {
+    style: {
+      fontSize: mob ? '15px' : '16px',
+      lineHeight: 1.6,
+      color: C.text,
+      margin: 0
+    }
+  }, body), React.createElement('p', {
+    style: {
+      fontSize: '15px',
+      lineHeight: 1.65,
+      color: C.muted,
+      fontStyle: 'italic',
+      margin: 0
+    }
+  }, note));
   return React.createElement('main', {
     style: mobPage
-  }, React.createElement('h1', {
+  },
+  // ── Hero (short) ──
+  React.createElement('div', {
     style: {
-      ...h1Style,
-      marginBottom: mob ? '1.25rem' : '1.5rem',
-      fontSize: mob ? '26px' : '32px'
+      fontSize: '12px',
+      fontWeight: 700,
+      letterSpacing: '.14em',
+      textTransform: 'uppercase',
+      color: C.accent,
+      marginBottom: '1rem'
+    }
+  }, u.role), React.createElement('h1', {
+    style: {
+      fontSize: mob ? '27px' : '36px',
+      fontWeight: 500,
+      lineHeight: 1.2,
+      letterSpacing: '-.02em',
+      color: C.text,
+      margin: '0 0 1.1rem'
     }
   }, c.h1), React.createElement('p', {
     style: {
       ...leadStyle,
-      marginBottom: mob ? '1.4rem' : '1.6rem'
+      fontSize: mob ? '19px' : '22px',
+      marginBottom: '1.5rem'
     }
-  }, c.lead), React.createElement('p', {
+  }, c.lead), c.intro.map((t, i) => React.createElement(P, {
+    key: i,
+    last: i === c.intro.length - 1
+  }, t)), React.createElement('div', {
+    style: {
+      marginTop: '1.6rem'
+    }
+  }, React.createElement('a', {
+    href: pathFor('book', lang),
+    className: 'cta-btn',
+    style: primaryBtn,
+    onMouseEnter: e => {
+      e.currentTarget.style.background = '#146b2e';
+      e.currentTarget.style.borderColor = '#146b2e';
+    },
+    onMouseLeave: e => {
+      e.currentTarget.style.background = C.accent;
+      e.currentTarget.style.borderColor = C.accent;
+    }
+  }, u.book + ' →')), gap,
+  // ── What can we work on? (Business / You — main visual anchor) ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.workLabel), React.createElement('div', {
+    style: {
+      display: 'flex',
+      flexDirection: mob ? 'column' : 'row',
+      gap: mob ? '1rem' : '1.25rem'
+    }
+  }, bizYouCard(c.bizLabel, c.bizBody, c.bizNote), bizYouCard(c.youLabel, c.youBody, c.youNote)), React.createElement('p', {
+    style: {
+      fontSize: mob ? '17px' : '18px',
+      lineHeight: 1.65,
+      color: C.text,
+      margin: '1.6rem 0 0',
+      maxWidth: '62ch'
+    }
+  }, c.workUnder), gap,
+  // ── What does the work actually look like? (conversational) ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.lookLabel), React.createElement('p', {
+    style: {
+      fontSize: mob ? '18px' : '20px',
+      fontWeight: 600,
+      color: C.text,
+      margin: '0 0 1.4rem',
+      lineHeight: 1.5
+    }
+  }, c.lookLead), React.createElement('div', {
+    style: {
+      borderLeft: `2px solid ${C.accent}`,
+      paddingLeft: mob ? '1.1rem' : '1.5rem',
+      margin: '0 0 1.6rem',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '.9rem'
+    }
+  }, c.lookMaybes.map((t, i) => React.createElement('p', {
+    key: i,
+    style: {
+      fontSize: mob ? '16px' : '17px',
+      lineHeight: 1.6,
+      color: C.text,
+      margin: 0
+    }
+  }, t))), React.createElement('p', {
+    style: {
+      fontSize: mob ? '17px' : '18px',
+      fontWeight: 600,
+      color: C.text,
+      margin: '0 0 1.4rem'
+    }
+  }, c.lookMid), c.lookClose.map((t, i) => React.createElement('p', {
+    key: i,
     style: {
       ...pStyle,
-      marginBottom: mob ? '2.5rem' : '3.25rem'
+      fontSize: mob ? '16px' : '17px',
+      marginBottom: '1.2rem'
     }
-  }, c.intro), React.createElement(Section, {
-    label: c.whoLabel,
-    mob
-  }, React.createElement(P, null, c.whoLead), React.createElement(Bullets, {
-    items: c.who,
-    mob
-  })), React.createElement(Section, {
-    label: c.workLabel,
-    mob
-  }, React.createElement(TrackCards, {
-    mob,
-    tracks: c.tracks
-  }), React.createElement('p', {
-    style: {
-      fontSize: '16px',
-      lineHeight: 1.7,
-      color: C.muted,
-      margin: '1.1rem 0 0'
-    }
-  }, c.workFoot)), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement('section', {
-    style: {
-      marginBottom: mob ? '2.75rem' : '3.5rem'
-    }
-  }, React.createElement(Kicker, null, c.howLabel), React.createElement(StepCards, {
+  }, t)), gap,
+  // ── How it starts (compact numbered cards) ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.howLabel), React.createElement(StepCards, {
     mob,
     steps: c.steps
-  }), React.createElement('p', {
+  }), gap,
+  // ── Common questions ──
+  React.createElement('h2', {
+    style: headingStyle
+  }, c.faqLabel), React.createElement('div', {
     style: {
-      fontSize: '16px',
-      lineHeight: 1.7,
-      color: C.muted,
-      margin: '1.1rem 0 0'
+      marginTop: '.2rem'
     }
-  }, c.howNote)), React.createElement(Section, {
-    label: c.expectLabel,
-    mob
-  }, React.createElement(Bullets, {
-    items: c.expect,
-    mob
-  }), React.createElement('p', {
-    style: {
-      fontSize: '16px',
-      lineHeight: 1.7,
-      color: C.muted,
-      margin: '1.1rem 0 0'
-    }
-  }, c.expectFoot)), React.createElement('hr', {
-    style: sepStyle
-  }),
-  // FAQ — objections/explanations progressively disclosed (is this therapy?,
-  // is this coaching?, what if it isn't psychological?, etc.)
-  React.createElement(Section, {
-    label: c.faqLabel,
-    mob
   }, React.createElement(FaqAccordion, {
     items: c.faq,
     mob
-  })), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: c.evLabel,
-    mob
-  }, ev.map((t, i) => React.createElement(Testimonial, {
-    key: i,
-    quote: t.q,
-    who: t.w
-  })), React.createElement('p', {
-    style: {
-      marginBottom: 0,
-      marginTop: '.4rem'
-    }
-  }, React.createElement(IA, {
-    href: pathFor('reviews', lang)
-  }, tUI(lang).readMore))), React.createElement(FinalCta, {
+  })),
+  // ── Final CTA ──
+  React.createElement(FinalCta, {
     lang,
     mob,
-    heading: c.ctaHeading
+    heading: c.ctaHeading,
+    sub: c.ctaSub
   }), React.createElement(SiteFooter, {
     mob,
     lang
@@ -1554,49 +1622,47 @@ function OneToOnePage({
 const ABOUT = {
   en: {
     h1: 'About',
-    role: 'Business Advisor + Therapist',
-    creds: 'BACP-registered · MSc Integrative Counselling & Psychotherapy · Based in Ireland, working globally',
-    lead: 'I help people build something of their own — and work with whatever in them is affecting that. The reason I can do both isn’t a slogan; it’s two separate careers that ended up pointing at the same problem.',
+    role: 'Business Advisor + Licensed Psychotherapist',
+    creds: 'MSc Integrative Counselling & Psychotherapy (University of Derby) · BACP-registered · Based in Ireland, working globally',
+    lead: 'Two careers that kept running into the same problem.',
+    intro: ['I spent 18+ years in tech, mostly in product and growth. I built my own companies, worked inside startups and large organisations, and advised more than 500 businesses.', "So if we're talking about your offer, pricing, customer acquisition, a hire, a sale you're avoiding or a business decision you can't settle, you don't need to translate the commercial side for me.", 'I know that world.'],
     sections: [{
-      label: 'The business career',
-      body: ["I spent 18+ years in tech, in product and growth — building my own companies, working inside startups and large organisations, and advising more than 500 businesses.", "So when we talk about your offer, your pricing, the sale you’re avoiding or the hire you keep postponing, I’m not translating it into therapy language. I’ve done the work and I know the terrain."]
+      label: "Then psychology started showing up in places it wasn't invited.",
+      body: ["Again and again, I'd see a business problem that was only partly a business problem.", 'Someone knew they needed to sell but wouldn’t.', 'Someone kept changing a perfectly reasonable strategy.', 'Someone had hired good people but struggled to let go of control.', 'Someone had enough information to make a decision and kept looking for more.', "The strategy mattered. But it wasn't the whole story.", 'So I trained as a psychotherapist: MSc Integrative Counselling & Psychotherapy at the University of Derby, and registration with the BACP.']
     }, {
-      label: 'The therapy training',
-      body: ["Alongside that I trained as a therapist — an MSc in Integrative Counselling & Psychotherapy (University of Derby) and registration with the BACP. That training is why I can see the pattern underneath a business problem, and actually work with it, rather than just naming it."]
+      label: 'Then the same thing happened from the other direction.',
+      body: ["In psychological work, I'd meet ambitious people dealing with very real business problems.", "And sometimes a psychological explanation wasn't what they needed.", 'Their offer was weak. Their pricing was wrong. They had no reliable way of finding customers. They were making a bad business decision.', "Psychotherapy isn't designed to tell you that."]
     }, {
-      label: 'Why the two converged',
-      body: ["I kept meeting the same thing from both directions. As an advisor, the business problem often traced back to something in the person. As a therapist, ambitious people were carrying real commercial problems that pure therapy wasn’t equipped to touch.", "Working across both isn’t a gimmick. It’s the only honest way I’ve found to help — because the constraint is often on one side, sometimes the other, and frequently both at once."]
+      label: 'Eventually, the two careers stopped looking random.',
+      body: ['Sometimes the problem is clearly business.', "Sometimes it's personal.", "And quite often they collide so much that you can't tell where one ends and the other begins.", "That's the work I find most interesting."]
     }, {
-      label: 'Both sides of the desk',
-      body: ["I understand employment and I understand trying to build something independent, because I’ve done both — including building this practice right now. I know what it is to have a lot to lose, and I know what it is to start from nothing."]
-    }, {
-      label: 'Ambition isn’t the pathology',
-      body: ["I’m not here to convince ambitious people that wanting more is secretly unhealthy. Wanting to build is not a symptom. The work is to help you build what you actually want, while understanding the patterns that get in the way of building it."]
+      label: "I'm not here to tell you to want less.",
+      body: ["Ambition isn't a symptom.", "I don't want to convince you that wanting a bigger business, more money, more independence or more impact is secretly unhealthy.", 'I want to help you build what you actually want without automatically assuming that either the business or you must be the problem.']
     }],
-    ctaHeading: 'If any of this sounds like you, start with a short fit call.'
+    ctaHeading: 'Usually, we need to look before we know.',
+    ctaLabel: 'See how 1:1 works'
   },
   el: {
-    h1: 'Σχετικά',
-    role: 'Σύμβουλος επιχειρήσεων & ψυχικής υγείας',
-    creds: 'Εγγεγραμμένος στο BACP · MSc Integrative Counselling & Psychotherapy · Έδρα στην Ιρλανδία, δουλεύω παγκόσμια',
-    lead: 'Βοηθώ ανθρώπους να χτίσουν κάτι δικό τους — και δουλεύω με ό,τι μέσα τους το επηρεάζει. Ο λόγος που μπορώ να κάνω και τα δύο δεν είναι σλόγκαν· είναι δύο ξεχωριστές πορείες που κατέληξαν να δείχνουν το ίδιο πρόβλημα.',
+    h1: 'Λίγα για μένα',
+    role: 'Business Advisor + Ψυχοθεραπευτής',
+    creds: 'MSc Integrative Counselling & Psychotherapy (University of Derby) · Εγγεγραμμένος στο BACP · Έδρα στην Ιρλανδία, δουλεύω παγκόσμια',
+    lead: 'Δύο καριέρες που κατέληγαν να συναντιούνται συνέχεια.',
+    intro: ['Πέρασα 18+ χρόνια στην τεχνολογία, κυρίως στο product και το growth. Έχτισα δικές μου εταιρείες, δούλεψα σε startups και μεγάλους οργανισμούς και συμβούλεψα περισσότερες από 500 επιχειρήσεις.', 'Οπότε αν μιλάμε για offer, pricing, πελάτες, μια πρόσληψη, μια πώληση που αποφεύγεις ή μια business απόφαση που δεν μπορείς να κλείσεις, δεν χρειάζεται να μου εξηγήσεις όλο το context.', 'Αυτόν τον κόσμο τον ξέρω.'],
     sections: [{
-      label: 'Η επιχειρηματική πορεία',
-      body: ['Πέρασα 18+ χρόνια στην τεχνολογία, στο product και το growth — έχτισα δικές μου εταιρείες, δούλεψα σε startups και μεγάλους οργανισμούς, και συμβούλεψα περισσότερες από 500 επιχειρήσεις.', 'Έτσι, όταν μιλάμε για την προσφορά σου, την τιμολόγηση, την πώληση που αποφεύγεις ή την πρόσληψη που αναβάλλεις, δεν το μεταφράζω σε γλώσσα θεραπείας. Έχω κάνει τη δουλειά και ξέρω το έδαφος.']
+      label: 'Κάπου εκεί άρχισε να εμφανίζεται η ψυχολογία εκεί που κανείς δεν την είχε καλέσει.',
+      body: ['Ξανά και ξανά έβλεπα business προβλήματα που ήταν μόνο εν μέρει business προβλήματα.', 'Κάποιος ήξερε ότι έπρεπε να πουλήσει και δεν το έκανε.', 'Κάποιος άλλαζε συνέχεια μια απολύτως λογική στρατηγική.', 'Κάποιος είχε προσλάβει καλούς συνεργάτες αλλά δυσκολευόταν να αποδεσμευτεί από το control.', 'Κάποιος είχε αρκετή πληροφορία για να πάρει μια απόφαση και συνέχιζε να ψάχνει κι άλλη.', 'Το business είχε σημασία. Απλώς δεν ήταν όλη η ιστορία.', 'Έτσι εκπαιδεύτηκα ως ψυχοθεραπευτής.']
     }, {
-      label: 'Η εκπαίδευση στη συμβουλευτική',
-      body: ['Παράλληλα εκπαιδεύτηκα ως Σύμβουλος Ψυχικής Υγείας — MSc in Integrative Counselling & Psychotherapy (University of Derby) και εγγραφή στο BACP. Αυτή η εκπαίδευση είναι ο λόγος που μπορώ να δω το μοτίβο κάτω από ένα επιχειρηματικό πρόβλημα, και να δουλέψω πραγματικά με αυτό, αντί απλώς να το ονομάσω.']
+      label: 'Και μετά άρχισα να βλέπω το ίδιο πράγμα από την άλλη πλευρά.',
+      body: ['Στην ψυχολογική δουλειά συναντούσα φιλόδοξους ανθρώπους με απολύτως πραγματικά business προβλήματα.', 'Και μερικές φορές αυτό που χρειάζονταν δεν ήταν μια ψυχολογική εξήγηση.', 'Το offer ήταν αδύναμο. Οι τιμές λάθος. Δεν υπήρχε σταθερός τρόπος να έρθουν πελάτες. Ή απλώς η business απόφαση ήταν κακή.', 'Η ψυχοθεραπεία δεν είναι φτιαγμένη για να σε βοηθήσει με αυτό.']
     }, {
-      label: 'Γιατί συνέκλιναν τα δύο',
-      body: ['Συναντούσα το ίδιο πράγμα κι από τις δύο κατευθύνσεις. Ως σύμβουλος, το επιχειρηματικό πρόβλημα συχνά κατέληγε σε κάτι μέσα στον άνθρωπο. Ως Σύμβουλος Ψυχικής Υγείας, φιλόδοξοι άνθρωποι κουβαλούσαν πραγματικά εμπορικά προβλήματα που η καθαρή θεραπεία δεν ήταν εξοπλισμένη να αγγίξει.', 'Το να δουλεύω και τα δύο δεν είναι κόλπο. Είναι ο μόνος ειλικρινής τρόπος που έχω βρει να βοηθήσω — γιατί το εμπόδιο είναι συχνά στη μία πλευρά, κάποιες φορές στην άλλη, και πολύ συχνά και στις δύο μαζί.']
+      label: 'Κάπως έτσι, οι δύο καριέρες σταμάτησαν να μοιάζουν τόσο random.',
+      body: ['Μερικές φορές το πρόβλημα είναι καθαρά business.', 'Μερικές φορές είναι προσωπικό.', 'Και αρκετά συχνά μπλέκονται τόσο, που δεν είναι καθόλου ξεκάθαρο πού τελειώνει το ένα και αρχίζει το άλλο.', 'Αυτό είναι το σημείο που με ενδιαφέρει περισσότερο.']
     }, {
-      label: 'Και τις δύο πλευρές',
-      body: ['Καταλαβαίνω τη μισθωτή εργασία και καταλαβαίνω το να προσπαθείς να χτίσεις κάτι ανεξάρτητο, γιατί έχω κάνει και τα δύο — μαζί με το χτίσιμο αυτής της πρακτικής τώρα. Ξέρω τι σημαίνει να έχεις πολλά να χάσεις, και ξέρω τι σημαίνει να ξεκινάς από το μηδέν.']
-    }, {
-      label: 'Η φιλοδοξία δεν είναι παθολογία',
-      body: ['Δεν είμαι εδώ για να πείσω φιλόδοξους ανθρώπους ότι το να θέλουν περισσότερα είναι κρυφά ανθυγιεινό. Το να θέλεις να χτίσεις δεν είναι σύμπτωμα. Η δουλειά είναι να σε βοηθήσω να χτίσεις αυτό που πραγματικά θέλεις, κατανοώντας τα μοτίβα που μπαίνουν εμπόδιο.']
+      label: 'Δεν είμαι εδώ για να σου πω να θέλεις λιγότερα.',
+      body: ['Η φιλοδοξία δεν είναι σύμπτωμα.', 'Δεν θέλω να σε πείσω ότι το να θέλεις μεγαλύτερο business, περισσότερα χρήματα, περισσότερη ανεξαρτησία ή μεγαλύτερο impact είναι κατά βάθος ανθυγιεινό.', 'Θέλω να σε βοηθήσω να χτίσεις αυτό που πραγματικά θέλεις, χωρίς να υποθέτουμε από πριν ότι το πρόβλημα πρέπει να είναι είτε το business είτε εσύ.']
     }],
-    ctaHeading: 'Αν αναγνωρίζεις κάτι από τα παραπάνω, ξεκίνα με μια σύντομη γνωριμία.'
+    ctaHeading: 'Πρώτα κοιτάμε. Μετά αποφασίζουμε.',
+    ctaLabel: 'Δες την 1:1 συνεργασία'
   }
 };
 function AboutPage({
@@ -1608,12 +1674,20 @@ function AboutPage({
     ...pageStyle,
     padding: '1.5rem 1.1rem 5rem'
   } : widePageStyle;
+  const subhead = {
+    fontSize: mob ? '20px' : '24px',
+    fontWeight: 500,
+    letterSpacing: '-.01em',
+    lineHeight: 1.3,
+    color: C.text,
+    margin: mob ? '2.5rem 0 1rem' : '3.25rem 0 1.1rem'
+  };
   return React.createElement('main', {
     style: mobPage
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: '1.5rem',
+      marginBottom: '1.25rem',
       fontSize: mob ? '26px' : '32px'
     }
   }, c.h1), React.createElement('div', {
@@ -1621,8 +1695,8 @@ function AboutPage({
       display: 'flex',
       gap: '1.2rem',
       alignItems: 'center',
-      marginBottom: '2.5rem',
-      paddingBottom: '2rem',
+      marginBottom: '2.25rem',
+      paddingBottom: '1.75rem',
       borderBottom: `1px solid ${C.border}`
     }
   }, React.createElement('img', {
@@ -1643,99 +1717,234 @@ function AboutPage({
       fontSize: '12px',
       letterSpacing: '.12em',
       textTransform: 'uppercase',
-      color: '#777'
+      color: C.accent,
+      fontWeight: 700
     }
   }, c.role), React.createElement('div', {
     style: {
       fontSize: '12px',
       letterSpacing: '.04em',
       color: '#767676',
-      marginTop: '4px',
+      marginTop: '5px',
       lineHeight: 1.5
     }
   }, c.creds))), React.createElement('p', {
     style: {
       ...leadStyle,
-      marginBottom: mob ? '2rem' : '2.5rem'
+      marginBottom: mob ? '1.5rem' : '1.75rem'
     }
-  }, c.lead), c.sections.map((s, i) => React.createElement(Section, {
+  }, c.lead), c.intro.map((p, i) => React.createElement(P, {
     key: i,
-    label: s.label,
-    mob
-  }, s.body.map((p, j) => React.createElement(P, {
+    last: i === c.intro.length - 1
+  }, p)), c.sections.map((s, i) => React.createElement(React.Fragment, {
+    key: i
+  }, React.createElement('h2', {
+    style: subhead
+  }, s.label), s.body.map((p, j) => React.createElement(P, {
     key: j,
     last: j === s.body.length - 1
-  }, p)))), React.createElement(FinalCta, {
-    lang,
-    mob,
-    heading: c.ctaHeading
-  }), React.createElement(SiteFooter, {
+  }, p)))), React.createElement('div', {
+    style: {
+      marginTop: mob ? '3rem' : '4rem',
+      padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem',
+      border: `1.5px solid rgba(26,127,55,.4)`,
+      background: 'rgba(26,127,55,.06)',
+      borderRadius: '14px'
+    }
+  }, React.createElement('p', {
+    style: {
+      fontSize: mob ? '19px' : '23px',
+      fontWeight: 500,
+      letterSpacing: '-.01em',
+      lineHeight: 1.5,
+      color: C.text,
+      margin: 0
+    }
+  }, c.ctaHeading), React.createElement('a', {
+    href: pathFor('one-to-one', lang),
+    className: 'cta-btn',
+    style: {
+      display: 'inline-block',
+      marginTop: '1.4rem',
+      padding: '.9rem 1.8rem',
+      fontFamily: 'inherit',
+      fontWeight: 700,
+      fontSize: '13px',
+      letterSpacing: '.06em',
+      textTransform: 'uppercase',
+      background: C.accent,
+      border: `1.5px solid ${C.accent}`,
+      color: '#fff',
+      textDecoration: 'none',
+      borderRadius: '2px'
+    },
+    onMouseEnter: e => {
+      e.currentTarget.style.background = '#146b2e';
+      e.currentTarget.style.borderColor = '#146b2e';
+    },
+    onMouseLeave: e => {
+      e.currentTarget.style.background = C.accent;
+      e.currentTarget.style.borderColor = C.accent;
+    }
+  }, c.ctaLabel + ' →')), React.createElement(SiteFooter, {
     mob,
     lang
   }));
 }
 
 // ─── REVIEWS (verbatim testimonials — do not rewrite client words) ────────────
+// English is the original, spoken language of every testimonial. On the Greek
+// page a faithful Greek translation shows first, with the original English
+// available via a per-testimonial toggle. Order follows the approved spec.
 const REVIEWS_ITEMS = [{
+  w: 'Anonymous client, Founder',
+  wEl: 'Ανώνυμος πελάτης, Founder',
   q: "I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don’t have to translate one world into the other for him.",
-  w: 'Anonymous client, Founder'
+  qEl: "Είχα δουλέψει με coaches στο παρελθόν, είχα κάνει και θεραπεία, αλλά αυτό ένιωσα ότι ήταν διαφορετικό. Ο Άγγελος καταλαβαίνει τη συναισθηματική πλευρά χωρίς να χάνει από τα μάτια του την πραγματική κατάσταση που αντιμετωπίζω στη δουλειά. Μπορούμε να μιλήσουμε για πίεση, ντροπή ή για κάτι που συμβαίνει στο σώμα μου, και πέντε λεπτά αργότερα να συζητάμε μια απόφαση που αφορά την ομάδα ή το business μου. Δεν χρειάζεται να του μεταφράζω τον έναν κόσμο στον άλλον."
 }, {
-  q: "Aggelos is direct. He will tell me when I am avoiding something or constructing a very intelligent explanation for why I cannot act. But I have never experienced his directness as judgement. There is enough trust between us that he can challenge me properly, which is exactly what I needed.",
-  w: 'Anonymous client, Senior tech professional'
-}, {
-  q: "I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.",
-  w: 'Anonymous client, Technology leader'
-}, {
-  q: "One of the most useful things is that Aggelos actually understands the environment I work in. I don’t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than “follow your values.” He understands the game, but he also notices what the game is doing to me.",
-  w: 'Anonymous client, Senior operator'
-}, {
-  q: "We have been working together for a while now, and the sessions have gradually changed the way I make decisions. Aggelos doesn’t tell me what to do or try to make me dependent on his opinion. He helps me separate the real problem from the fear, ego and old patterns wrapped around it. I usually leave with less noise and a much clearer sense of what is mine to do.",
-  w: 'Anonymous client, Founder'
-}, {
-  q: "I was initially sceptical about somatic and trauma-informed work because I assumed it would be vague or a bit spiritual. It wasn’t. Aggelos explained what we were doing, paid attention to my limits and connected the experience back to patterns I could recognise in my work and relationships. It felt grounded, careful and surprisingly practical.",
-  w: 'Anonymous client'
-}, {
-  q: "I had been forcing a business situation to continue because stopping it felt like failure. After one of our exercises, I realised I was trying to manufacture reasons to keep going when I already knew the answer. I had the difficult conversation shortly afterwards. It was not that Aggelos gave me the decision. He helped me stop fighting what I already knew.",
-  w: 'Anonymous client, Business owner'
-}, {
-  q: "I did not want somebody to tell me to work less, lower my standards or become less ambitious. Aggelos understood that immediately. Our work has been about keeping the part of me that wants to build and achieve, while becoming less dependent on winning, comparison and external approval to feel okay. That distinction has been very important to me.",
-  w: 'Anonymous client, Founder and executive'
-}, {
-  q: "I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.",
-  w: 'Anonymous client, Product leader'
-}, {
-  q: "The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.",
-  w: 'Anonymous client, Senior tech professional'
-}, {
-  q: "I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.",
-  w: 'Anonymous client, Technology executive'
-}, {
-  q: "There are no motivational speeches or generic frameworks pasted onto every situation. Aggelos pays attention to how I specifically operate. He remembers the contradictions, notices when I change the story and asks the question I was hoping we could avoid. Annoying at times, but usually accurate.",
-  w: 'Anonymous client, Founder'
-}, {
-  q: "Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.",
-  w: 'Anonymous client, Consultant and business owner'
-}, {
+  w: 'Anonymous client, Senior professional',
+  wEl: 'Ανώνυμος πελάτης, Έμπειρος επαγγελματίας',
   q: "I came in expecting a fairly standard coaching conversation. Within the first session, Aggelos understood both the professional problem and the emotional mechanism underneath it. He was warm, but very straightforward, and gave me a way of looking at the situation that I had not considered before. I left with more than advice. I left with a more accurate problem.",
-  w: 'Anonymous client, Senior professional'
+  qEl: "Ήρθα περιμένοντας μια αρκετά τυπική συζήτηση coaching. Μέσα στην πρώτη κιόλας συνεδρία, ο Άγγελος κατάλαβε και το επαγγελματικό πρόβλημα και τον συναισθηματικό μηχανισμό από κάτω του. Ήταν ζεστός, αλλά πολύ ευθύς, και μου έδωσε έναν τρόπο να δω την κατάσταση που δεν είχα σκεφτεί πριν. Έφυγα με κάτι παραπάνω από συμβουλές. Έφυγα με ένα πιο ακριβές πρόβλημα."
 }, {
+  w: 'Anonymous client, Business owner',
+  wEl: 'Ανώνυμος πελάτης, Ιδιοκτήτης επιχείρησης',
+  q: "I had been forcing a business situation to continue because stopping it felt like failure. After one of our exercises, I realised I was trying to manufacture reasons to keep going when I already knew the answer. I had the difficult conversation shortly afterwards. It was not that Aggelos gave me the decision. He helped me stop fighting what I already knew.",
+  qEl: "Πίεζα μια επιχειρηματική κατάσταση να συνεχιστεί, επειδή το να τη σταματήσω έμοιαζε με αποτυχία. Μετά από μία από τις ασκήσεις μας, συνειδητοποίησα ότι προσπαθούσα να κατασκευάσω λόγους για να συνεχίσω, ενώ ήδη ήξερα την απάντηση. Έκανα τη δύσκολη συζήτηση λίγο αργότερα. Δεν ήταν ότι ο Άγγελος μου έδωσε την απόφαση. Με βοήθησε να σταματήσω να παλεύω με αυτό που ήδη ήξερα."
+}, {
+  w: 'Anonymous client, Founder',
+  wEl: 'Ανώνυμος πελάτης, Founder',
+  q: "There are no motivational speeches or generic frameworks pasted onto every situation. Aggelos pays attention to how I specifically operate. He remembers the contradictions, notices when I change the story and asks the question I was hoping we could avoid. Annoying at times, but usually accurate.",
+  qEl: "Δεν υπάρχουν εμψυχωτικοί λόγοι ή γενικά frameworks κολλημένα πάνω σε κάθε κατάσταση. Ο Άγγελος προσέχει πώς λειτουργώ συγκεκριμένα εγώ. Θυμάται τις αντιφάσεις, αντιλαμβάνεται πότε αλλάζω την ιστορία και κάνει την ερώτηση που έλπιζα ότι θα μπορούσαμε να αποφύγουμε. Ενοχλητικό κάποιες φορές, αλλά συνήθως εύστοχο."
+}, {
+  w: 'Anonymous client, Founder',
+  wEl: 'Ανώνυμος πελάτης, Founder',
+  q: "We have been working together for a while now, and the sessions have gradually changed the way I make decisions. Aggelos doesn’t tell me what to do or try to make me dependent on his opinion. He helps me separate the real problem from the fear, ego and old patterns wrapped around it. I usually leave with less noise and a much clearer sense of what is mine to do.",
+  qEl: "Δουλεύουμε μαζί εδώ και αρκετό καιρό, και οι συνεδρίες έχουν αλλάξει σταδιακά τον τρόπο που παίρνω αποφάσεις. Ο Άγγελος δεν μου λέει τι να κάνω ούτε προσπαθεί να με κάνει να εξαρτώμαι από τη γνώμη του. Με βοηθά να ξεχωρίσω το πραγματικό πρόβλημα από τον φόβο, το ego και τα παλιά μοτίβα που είναι τυλιγμένα γύρω του. Συνήθως φεύγω με λιγότερο θόρυβο και πολύ πιο καθαρή αίσθηση του τι είναι δικό μου να κάνω."
+}, {
+  w: 'Anonymous client, Senior tech professional',
+  wEl: 'Ανώνυμος πελάτης, Έμπειρος επαγγελματίας τεχνολογίας',
+  q: "The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.",
+  qEl: "Οι συζητήσεις πάνε πιο βαθιά από το συνηθισμένο coaching, αλλά και πάλι φεύγω με κάτι αξιοποιήσιμο. Κάποιες φορές είναι μια απόφαση, κάποιες μια δύσκολη συζήτηση που πρέπει να κάνω, και κάποιες φορές είναι απλώς το να παρατηρήσω τη στιγμή που το σώμα μου μπαίνει σε κατάσταση απειλής, πριν το μυαλό μου φτιάξει μια ιστορία γύρω από αυτό. Είναι ένας σπάνιος συνδυασμός βάθους και πρακτικότητας."
+}, {
+  w: 'Anonymous client, Senior tech professional',
+  wEl: 'Ανώνυμος πελάτης, Έμπειρος επαγγελματίας τεχνολογίας',
+  q: "Aggelos is direct. He will tell me when I am avoiding something or constructing a very intelligent explanation for why I cannot act. But I have never experienced his directness as judgement. There is enough trust between us that he can challenge me properly, which is exactly what I needed.",
+  qEl: "Ο Άγγελος είναι ευθύς. Θα μου πει όταν αποφεύγω κάτι ή όταν κατασκευάζω μια πολύ έξυπνη εξήγηση για το γιατί δεν μπορώ να δράσω. Όμως ποτέ δεν βίωσα την ευθύτητά του ως κριτική. Υπάρχει αρκετή εμπιστοσύνη μεταξύ μας ώστε να μπορεί να με προκαλέσει σωστά, που είναι ακριβώς αυτό που χρειαζόμουν."
+}, {
+  w: 'Anonymous client, Founder and executive',
+  wEl: 'Ανώνυμος πελάτης, Founder και στέλεχος',
+  q: "I did not want somebody to tell me to work less, lower my standards or become less ambitious. Aggelos understood that immediately. Our work has been about keeping the part of me that wants to build and achieve, while becoming less dependent on winning, comparison and external approval to feel okay. That distinction has been very important to me.",
+  qEl: "Δεν ήθελα κάποιον να μου πει να δουλεύω λιγότερο, να χαμηλώσω τον πήχη ή να γίνω λιγότερο φιλόδοξος. Ο Άγγελος το κατάλαβε αμέσως. Η δουλειά μας ήταν να κρατήσουμε το κομμάτι μου που θέλει να χτίζει και να πετυχαίνει, ενώ ταυτόχρονα γίνομαι λιγότερο εξαρτημένος από το να νικάω, τη σύγκριση και την εξωτερική επιβεβαίωση για να νιώθω καλά. Αυτή η διάκριση ήταν πολύ σημαντική για μένα."
+}, {
+  w: 'Anonymous client, Consultant and business owner',
+  wEl: 'Ανώνυμος πελάτης, Σύμβουλος και ιδιοκτήτης επιχείρησης',
+  q: "Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.",
+  qEl: "Πριν αρχίσουμε να δουλεύουμε μαζί, ένα δύσκολο email ή ένα πρόβλημα με έναν πελάτη μπορούσε να επηρεάσει ολόκληρη τη μέρα μου. Ένιωθα αμέσως υπεύθυνος για τα πάντα και άρχιζα να προσπαθώ να ελέγξω το πώς με έβλεπαν. Ανιχνεύσαμε αυτή την αντίδραση πολύ πιο πίσω από την άμεση κατάσταση στη δουλειά. Ακόμα νιώθω πίεση, αλλά μπορώ να την αναγνωρίσω νωρίτερα και δεν πιστεύω πια κάθε συμπέρασμα που παράγει το νευρικό μου σύστημα."
+}, {
+  w: 'Anonymous client, Technology leader',
+  wEl: 'Ανώνυμος πελάτης, Ηγέτης στην τεχνολογία',
+  q: "I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.",
+  qEl: "Καταλάβαινα ήδη πολλά από τα μοτίβα μου σε διανοητικό επίπεδο. Αυτό ήταν εν μέρει το πρόβλημα. Μπορούσα να εξηγήσω τον εαυτό μου πολύ καλά και παρ’ όλα αυτά να επαναλαμβάνω την ίδια συμπεριφορά. Η δουλειά με τον Άγγελο με βοήθησε να αναγνωρίζω τι συμβαίνει σε σωματικό επίπεδο, όχι απλώς να το αναλύω εκ των υστέρων. Αυτό έκανε τη δουλειά πολύ πιο πραγματική και, σιγά σιγά, άλλαξε τον τρόπο που αντιδρώ κάτω από πίεση."
+}, {
+  w: 'Anonymous client, Senior operator',
+  wEl: 'Ανώνυμος πελάτης, Έμπειρο στέλεχος',
+  q: "One of the most useful things is that Aggelos actually understands the environment I work in. I don’t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than “follow your values.” He understands the game, but he also notices what the game is doing to me.",
+  qEl: "Ένα από τα πιο χρήσιμα πράγματα είναι ότι ο Άγγελος πραγματικά καταλαβαίνει το περιβάλλον στο οποίο δουλεύω. Δεν χρειάζεται να του εξηγήσω τα εταιρικά παιχνίδια, την πίεση ενός startup, τα targets, τους επενδυτές ή γιατί μια απόφαση καριέρας μπορεί να είναι πιο περίπλοκη από το «ακολούθησε τις αξίες σου». Καταλαβαίνει το παιχνίδι, αλλά προσέχει και το τι μου κάνει αυτό το παιχνίδι."
+}, {
+  w: 'Anonymous client',
+  wEl: 'Ανώνυμος πελάτης',
+  q: "I was initially sceptical about somatic and trauma-informed work because I assumed it would be vague or a bit spiritual. It wasn’t. Aggelos explained what we were doing, paid attention to my limits and connected the experience back to patterns I could recognise in my work and relationships. It felt grounded, careful and surprisingly practical.",
+  qEl: "Στην αρχή ήμουν επιφυλακτικός με τη σωματική και trauma-informed δουλειά, γιατί υπέθετα ότι θα ήταν ασαφής ή λίγο «πνευματική». Δεν ήταν. Ο Άγγελος εξήγησε τι κάναμε, έδωσε προσοχή στα όριά μου και σύνδεσε την εμπειρία με μοτίβα που μπορούσα να αναγνωρίσω στη δουλειά και στις σχέσεις μου. Ένιωσα ότι ήταν γειωμένο, προσεκτικό και απροσδόκητα πρακτικό."
+}, {
+  w: 'Anonymous client, Product leader',
+  wEl: 'Ανώνυμος πελάτης, Product leader',
+  q: "I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.",
+  qEl: "Εμπιστεύομαι τον Άγγελο γιατί δεν προσπαθεί συνέχεια να με καθησυχάσει. Ακούει προσεκτικά, αλλά δεν συμφωνεί αυτόματα με την εκδοχή των γεγονότων που φέρνω στη συνεδρία. Κάποιες φορές επισημαίνει κάτι που θα προτιμούσα να μην δω. Κατά κάποιον τρόπο, αυτή η ειλικρίνεια έκανε τη δουλειά να νιώθεται πιο ασφαλής, όχι λιγότερο."
+}, {
+  w: 'Anonymous client, Technology executive',
+  wEl: 'Ανώνυμος πελάτης, Στέλεχος τεχνολογίας',
+  q: "I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.",
+  qEl: "Άρχισα να δουλεύω με τον Άγγελο σε μια μπερδεμένη περίοδο της καριέρας μου. Στα χαρτιά, τα πράγματα πήγαιναν καλά, αλλά μέσα μου αμφισβητούσα σχεδόν τα πάντα. Μέσα σε αρκετές συνεδρίες, με βοήθησε να καταλάβω ποιες ανησυχίες ήταν βάσιμες και ποιες μεγεθύνονταν από παλιούς φόβους γύρω από την απόδοση, την αποτυχία και το πώς με έβλεπαν οι άλλοι. Νιώθω πιο γειωμένος τώρα, παρότι δεν έχουν λυθεί όλα."
+}, {
+  w: 'Anonymous client, Tech executive',
+  wEl: 'Ανώνυμος πελάτης, Στέλεχος τεχνολογίας',
   q: "From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.",
-  w: 'Anonymous client, Tech executive'
+  qEl: "Απ’ έξω, εξακολουθούσα να λειτουργώ και να αποδίδω σε υψηλό επίπεδο, οπότε ήταν δύσκολο να εξηγήσω γιατί κάτι ένιωθα ότι δεν πήγαινε καλά. Ο Άγγελος κατάλαβε ότι το πρόβλημα δεν ήταν απλώς ο φόρτος δουλειάς. Δουλέψαμε πάνω στον τρόπο που συνδέω το επίτευγμα με την ασφάλεια, την αξία και την ανακούφιση. Εξακολουθώ να είμαι φιλόδοξος, αλλά η επιτυχία αρχίζει να νιώθεται λιγότερο σαν οριακή διαφυγή από την αποτυχία."
 }];
 const REVIEWS = {
   en: {
-    h1: 'In their words',
-    lead: 'Anonymous reflections from people I’ve worked with — founders, operators and independents building something of their own. Shared with permission; identifying details removed.',
-    note: null,
+    h1: 'What people say',
+    lead: 'A few things people have said after working with me.',
+    sub: 'Names and identifying details are removed. The words are theirs.',
+    toggle: null,
     ctaHeading: 'It starts with a short, free fit call.'
   },
   el: {
-    h1: 'Με τα λόγια τους',
-    lead: 'Ανώνυμες σκέψεις από ανθρώπους με τους οποίους έχω δουλέψει — founders, στελέχη και ανεξάρτητους επαγγελματίες που χτίζουν κάτι δικό τους. Κοινοποιούνται με άδεια· τα στοιχεία ταυτότητας έχουν αφαιρεθεί.',
-    note: 'Οι μαρτυρίες παρατίθενται στην αρχική τους γλώσσα (αγγλικά), όπως ειπώθηκαν — δεν τις μεταφράζω ή τις αναδιατυπώνω.',
+    h1: 'Τι λένε άνθρωποι που έχουν δουλέψει μαζί μου',
+    lead: 'Μερικά πράγματα που έχουν πει άνθρωποι μετά τη δουλειά μας.',
+    sub: 'Τα ονόματα και τα στοιχεία που θα μπορούσαν να τους ταυτοποιήσουν έχουν αφαιρεθεί. Τα λόγια είναι δικά τους.',
+    toggle: 'Αρχικό κείμενο στα αγγλικά',
     ctaHeading: 'Ξεκινά με μια σύντομη, δωρεάν γνωριμία.'
   }
 };
+function ReviewCard({
+  t,
+  lang,
+  toggleLabel
+}) {
+  const [open, setOpen] = React.useState(false);
+  const el = lang === 'el';
+  const quote = el ? t.qEl : t.q;
+  const who = el ? t.wEl : t.w;
+  return React.createElement('blockquote', {
+    style: {
+      breakInside: 'avoid',
+      margin: '0 0 1.9rem',
+      padding: '0 0 0 1rem',
+      borderLeft: '2px solid rgba(26,127,55,0.35)'
+    }
+  }, React.createElement('p', {
+    style: {
+      fontSize: '15px',
+      lineHeight: 1.8,
+      color: '#282726',
+      margin: '0 0 .5rem'
+    }
+  }, '“' + quote + '”'), React.createElement('footer', {
+    style: {
+      fontSize: '10px',
+      letterSpacing: '.1em',
+      textTransform: 'uppercase',
+      color: '#767676'
+    }
+  }, who), el && React.createElement('button', {
+    onClick: () => setOpen(!open),
+    'aria-expanded': open ? 'true' : 'false',
+    style: {
+      marginTop: '.8rem',
+      background: 'transparent',
+      border: 'none',
+      padding: 0,
+      cursor: 'pointer',
+      fontFamily: 'inherit',
+      fontSize: '12px',
+      fontWeight: 600,
+      color: C.accent,
+      letterSpacing: '.02em'
+    }
+  }, toggleLabel + ' ' + (open ? '↑' : '↓')), el && open && React.createElement('p', {
+    style: {
+      marginTop: '.7rem',
+      paddingTop: '.7rem',
+      borderTop: `1px solid ${C.border}`,
+      fontSize: '14px',
+      lineHeight: 1.75,
+      color: C.muted,
+      fontStyle: 'italic'
+    }
+  }, '“' + t.q + '”'));
+}
 function ReviewsPage({
   lang = 'en'
 }) {
@@ -1756,30 +1965,26 @@ function ReviewsPage({
   }, c.h1), React.createElement('p', {
     style: {
       ...leadStyle,
-      marginBottom: c.note ? '1rem' : '2.5rem'
+      marginBottom: '.8rem'
     }
-  }, c.lead), c.note && React.createElement('p', {
+  }, c.lead), React.createElement('p', {
     style: {
-      fontSize: '14px',
+      fontSize: '15px',
       color: C.muted,
-      fontStyle: 'italic',
-      marginBottom: '2.5rem'
+      lineHeight: 1.6,
+      marginBottom: mob ? '2rem' : '2.75rem'
     }
-  }, c.note), React.createElement('div', {
+  }, c.sub), React.createElement('div', {
     style: {
       columnGap: mob ? 0 : '2.5rem',
       columnCount: mob ? 1 : 2
     }
-  }, REVIEWS_ITEMS.map((t, i) => React.createElement('div', {
+  }, REVIEWS_ITEMS.map((t, i) => React.createElement(ReviewCard, {
     key: i,
-    style: {
-      breakInside: 'avoid',
-      marginBottom: '.4rem'
-    }
-  }, React.createElement(Testimonial, {
-    quote: t.q,
-    who: t.w
-  })))), React.createElement(FinalCta, {
+    t,
+    lang,
+    toggleLabel: c.toggle
+  }))), React.createElement(FinalCta, {
     lang,
     mob,
     heading: c.ctaHeading
@@ -2482,37 +2687,21 @@ function HowIWorkPage() {
 const BOOK = {
   en: {
     h1: 'Book a fit call',
-    lead: "A short, friendly call to understand what you're building, what's getting in the way, and whether working together would actually make sense.",
-    p1: "If it does, I'll tell you what the next step looks like.",
-    p2: "If it doesn't, I'll tell you that too. Politely. Probably.",
-    howLabel: 'How it usually works',
-    s1a: '1. Fit call.',
-    s1b: " A short call to see if there's a fit. Not a session.",
-    s2a: '2. First session.',
-    s2b: " We get into the actual thing — the business, and whatever's underneath it. You bring the problem as you see it; we find the more accurate one.",
-    s3a: '3. Ongoing.',
-    s3b: " If it's useful, we continue. Private, 1:1, for as long as it genuinely helps.",
+    intro: ["15 minutes to tell me what you're building, what's going on and whether it makes sense for us to work together.", "You don't need to prepare anything.", "This isn't a free session and I'm not going to squeeze a sales pitch into fifteen minutes.", "Tell me the real situation. I'll ask a few questions.", "If I think I can help, I'll tell you what the next step looks like.", "If I don't, I'll tell you that too. Politely. Probably."],
     bookBelow: 'Book below',
     emailPre: "Can't find a slot, or prefer email? Reach me at ",
-    who: 'This call is for people seriously trying to build something of their own, or to grow what they’ve already built. Come with the real situation — we’ll work out whether I’m the right person for it.',
-    whoLabel: 'Who should book'
+    crossLead: 'Not sure whether to book?',
+    crossBody: 'Take the Starting Diagnostic first and give me a little more context.',
+    crossBtn: 'Take the Starting Diagnostic'
   },
   el: {
     h1: 'Κλείσε μια γνωριμία',
-    lead: 'Μια σύντομη, φιλική κλήση για να καταλάβω τι χτίζεις, τι σε εμποδίζει, και αν η συνεργασία μας βγάζει πραγματικά νόημα.',
-    p1: 'Αν βγάζει, θα σου πω πώς είναι το επόμενο βήμα.',
-    p2: 'Αν δεν βγάζει, θα σου το πω κι αυτό. Ευγενικά. Μάλλον.',
-    howLabel: 'Πώς λειτουργεί συνήθως',
-    s1a: '1. Γνωριμία.',
-    s1b: ' Μια σύντομη κλήση για να δούμε αν ταιριάζουμε. Δεν είναι συνεδρία.',
-    s2a: '2. Πρώτη συνεδρία.',
-    s2b: ' Μπαίνουμε στο πραγματικό θέμα — την επιχείρηση, και ό,τι υπάρχει από κάτω. Φέρνεις το πρόβλημα όπως το βλέπεις· βρίσκουμε το πιο ακριβές.',
-    s3a: '3. Συνέχεια.',
-    s3b: ' Αν είναι χρήσιμο, συνεχίζουμε. Ιδιωτικά, 1:1, όσο πραγματικά βοηθά.',
+    intro: ['15 λεπτά για να μου πεις τι χτίζεις, τι συμβαίνει και αν έχει νόημα να δουλέψουμε μαζί.', 'Δεν χρειάζεται να προετοιμάσεις τίποτα.', 'Δεν είναι δωρεάν συνεδρία και δεν πρόκειται να στριμώξω sales pitch σε δεκαπέντε λεπτά.', 'Πες μου την πραγματική κατάσταση. Θα σου κάνω μερικές ερωτήσεις.', 'Αν πιστεύω ότι μπορώ να βοηθήσω, θα σου πω ποιο είναι το επόμενο βήμα.', 'Αν όχι, θα σου το πω κι αυτό. Ευγενικά. Μάλλον.'],
     bookBelow: 'Κλείσε ραντεβού παρακάτω',
     emailPre: 'Δεν βρίσκεις διαθέσιμη ώρα ή προτιμάς email; Βρες με στο ',
-    who: 'Αυτή η κλήση είναι για ανθρώπους που προσπαθούν σοβαρά να χτίσουν κάτι δικό τους, ή να μεγαλώσουν αυτό που έχουν ήδη χτίσει. Έλα με την πραγματική κατάσταση — θα δούμε αν είμαι ο σωστός άνθρωπος για αυτήν.',
-    whoLabel: 'Για ποιους είναι'
+    crossLead: 'Δεν είσαι ακόμα σίγουρος αν θέλεις να κλείσεις;',
+    crossBody: 'Κάνε πρώτα το Starting Diagnostic και δώσε μου λίγο περισσότερο context.',
+    crossBtn: 'Starting Diagnostic'
   }
 };
 function BookPage({
@@ -2539,30 +2728,17 @@ function BookPage({
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.25rem' : '1.75rem',
+      marginBottom: mob ? '1.25rem' : '1.5rem',
       fontSize: mob ? '24px' : '30px'
     }
-  }, c.h1), React.createElement('p', {
-    style: {
-      ...leadStyle,
-      marginBottom: '1.4rem'
-    }
-  }, c.lead), React.createElement(P, null, c.p1), React.createElement(P, {
-    last: true
-  }, c.p2), React.createElement('div', {
-    style: {
-      marginTop: mob ? '2.5rem' : '3.5rem'
-    }
-  }), React.createElement(Section, {
-    label: c.howLabel,
-    mob
-  }, React.createElement(P, null, React.createElement(Strong, null, c.s1a), c.s1b), React.createElement(P, null, React.createElement(Strong, null, c.s2a), c.s2b), React.createElement(P, {
-    last: true
-  }, React.createElement(Strong, null, c.s3a), c.s3b)), React.createElement('h2', {
+  }, c.h1), c.intro.map((p, i) => React.createElement(P, {
+    key: i,
+    last: i === c.intro.length - 1
+  }, p)), React.createElement('h2', {
     style: {
       ...h2Style,
       color: C.accent,
-      marginBottom: '1.2rem'
+      margin: mob ? '2.25rem 0 1.1rem' : '2.75rem 0 1.2rem'
     }
   }, c.bookBelow), React.createElement('div', {
     className: 'calendly-inline-widget',
@@ -2570,20 +2746,37 @@ function BookPage({
     style: {
       minWidth: '320px',
       height: '700px',
-      marginBottom: '2rem'
+      marginBottom: '1.5rem'
     }
   }), React.createElement(P, {
     last: true
   }, c.emailPre, React.createElement(IA, {
     href: 'mailto:aggelos.mouzakitis@gmail.com'
-  }, 'aggelos.mouzakitis@gmail.com'), "."), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: c.whoLabel,
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, c.who)), React.createElement(SiteFooter, {
+  }, 'aggelos.mouzakitis@gmail.com'), "."), React.createElement('div', {
+    style: {
+      marginTop: mob ? '2.5rem' : '3rem',
+      padding: mob ? '1.5rem 1.4rem' : '1.8rem 2rem',
+      border: `1px solid ${C.border}`,
+      background: '#fff',
+      borderRadius: '14px'
+    }
+  }, React.createElement('p', {
+    style: {
+      fontSize: mob ? '17px' : '18px',
+      fontWeight: 600,
+      color: C.text,
+      margin: '0 0 .5rem'
+    }
+  }, c.crossLead), React.createElement('p', {
+    style: {
+      fontSize: '16px',
+      lineHeight: 1.65,
+      color: C.muted,
+      margin: '0 0 1.1rem'
+    }
+  }, c.crossBody), React.createElement(IA, {
+    href: pathFor('diagnostic', lang)
+  }, c.crossBtn + ' →')), React.createElement(SiteFooter, {
     mob,
     lang
   }));
@@ -3566,235 +3759,131 @@ function DublinPage() {
   }));
 }
 
-// ─── CONFIDENTIALITY ─────────────────────────────────────────────────────────
+// ─── CONFIDENTIALITY (bilingual, plain-language trust page) ───────────────────
+const CONF = {
+  en: {
+    h1: 'Confidentiality',
+    intro: ["People bring me things they haven't said to a cofounder, investor, employee, partner or sometimes anyone else.", "That only works if privacy isn't vague.", "Here's what you can expect."],
+    sections: [{
+      label: 'What you say stays private',
+      body: ["I don't send session content to your employer, investors, board, cofounder, team, partner or whoever referred you.", 'That remains true if somebody else is paying for the work.', "Paying the invoice doesn't buy access to the conversation.", 'The limits to confidentiality are explained below.']
+    }, {
+      label: 'You can talk about the actual thing',
+      body: ['That includes things like:'],
+      list: ['doubts about the company or whether you still want it', 'problems with a cofounder', "employees you're worried about or decisions you're avoiding", 'investor or board pressure', 'runway, revenue and financial fear', 'wanting to leave, sell or stop', 'things happening in your personal life that are affecting the work'],
+      after: ["I don't have a back channel to the people involved."]
+    }, {
+      label: 'If somebody else pays',
+      body: ['Sometimes a company, investor or another party funds the work.', 'They pay the invoice.', "They do not receive session content, notes, progress reports or a summary of what we're working on.", 'If they expect something different, we establish that before the work starts.']
+    }, {
+      label: 'Stories and content',
+      body: ['I write and speak publicly about the kinds of problems I work with.', "I don't publish identifiable client material without explicit permission.", "Anything based on client work is fictionalised, materially altered or combined from patterns across different people so that an individual can't reasonably be identified.", "If I ever wanted to use something recognisably close to your real situation, I'd ask first.", 'A no is a no.']
+    }, {
+      label: 'Notes and data',
+      body: ['I keep records to a considered minimum and use standard professional tools for scheduling, communication and sessions.', "If you want to know exactly what I store, where and for how long, ask me. I'll answer plainly."]
+    }, {
+      label: 'NDA',
+      body: ["If an NDA makes the commercial side easier to trust, I'm happy to discuss signing one before we start."]
+    }, {
+      label: 'The limits',
+      body: ["I won't promise absolute secrecy because that wouldn't be an honest promise.", 'Confidentiality is the default, but there are narrow circumstances where it can have limits, including serious and immediate risk of harm and situations where disclosure is legally required.', 'As a BACP-registered psychotherapist, I also use clinical supervision. This is itself confidential, and material is discussed in a way intended to protect client identity.', "If any of these limits are particularly relevant to your situation, ask me before we start and I'll be specific."]
+    }, {
+      label: "This page isn't the contract",
+      body: ['This is a plain-language explanation of how I approach confidentiality.', "It doesn't replace the actual agreement, privacy information, consent documentation or an NDA where one applies.", "If confidentiality is the thing stopping you from starting, ask me about the exact thing you're worried about."]
+    }]
+  },
+  el: {
+    h1: 'Εμπιστευτικότητα',
+    intro: ['Οι άνθρωποι που δουλεύουν μαζί μου λένε πράγματα που μπορεί να μην έχουν πει σε cofounder, επενδυτή, συνεργάτη, σύντροφο ή καμιά φορά σε κανέναν.', 'Αυτό λειτουργεί μόνο αν είναι ξεκάθαρο τι μένει μεταξύ μας.', 'Οπότε, χωρίς νομικίστικα:'],
+    sections: [{
+      label: 'Όσα λες μένουν μεταξύ μας',
+      body: ['Δεν στέλνω το περιεχόμενο των συζητήσεών μας σε εργοδότη, επενδυτές, board, cofounder, ομάδα, σύντροφο ή σε αυτόν που σε παρέπεμψε σε μένα.', 'Το ίδιο ισχύει και αν κάποιος άλλος πληρώνει για τη συνεργασία.', 'Το ότι κάποιος πληρώνει τον λογαριασμό δεν του δίνει πρόσβαση στη συζήτηση.', 'Τα όρια της εμπιστευτικότητας εξηγούνται πιο κάτω.']
+    }, {
+      label: 'Μπορείς να μιλήσεις για το πραγματικό θέμα',
+      body: ['Για παράδειγμα:'],
+      list: ['αμφιβολίες για το business ή για το αν το θέλεις ακόμα', 'προβλήματα με cofounder', 'εργαζομένους που σε προβληματίζουν ή αποφάσεις που αποφεύγεις', 'πίεση από επενδυτές ή board', 'runway, έσοδα και οικονομικό φόβο', 'σκέψεις να φύγεις, να πουλήσεις ή να σταματήσεις', 'προσωπικά πράγματα που έχουν αρχίσει να επηρεάζουν τη δουλειά'],
+      after: ['Δεν υπάρχει κάποια δεύτερη γραμμή επικοινωνίας με τους ανθρώπους που αφορούν αυτά.']
+    }, {
+      label: 'Αν πληρώνει κάποιος άλλος',
+      body: ['Μερικές φορές τη συνεργασία πληρώνει μια εταιρεία, ένας επενδυτής ή κάποιος άλλος.', 'Αυτός πληρώνει το invoice.', 'Δεν παίρνει το περιεχόμενο των συνεδριών, σημειώσεις, progress report ή περίληψη του τι δουλεύουμε.', 'Αν περιμένει κάτι διαφορετικό, το ξεκαθαρίζουμε πριν ξεκινήσουμε.']
+    }, {
+      label: 'Ιστορίες και περιεχόμενο',
+      body: ['Γράφω και μιλάω δημόσια για θέματα που συναντώ στη δουλειά μου.', 'Δεν χρησιμοποιώ αναγνωρίσιμο υλικό πελατών χωρίς ξεκάθαρη άδεια.', 'Όταν κάτι βασίζεται σε δουλειά με πελάτες, είναι φανταστικό, αρκετά αλλαγμένο ή συνδυασμός μοτίβων από διαφορετικούς ανθρώπους, ώστε να μην μπορεί να ταυτοποιηθεί κάποιος συγκεκριμένος.', 'Αν ποτέ ήθελα να χρησιμοποιήσω κάτι που μοιάζει αναγνωρίσιμα με τη δική σου πραγματική ιστορία, θα σε ρωτούσα πρώτα.', 'Το όχι είναι όχι.']
+    }, {
+      label: 'Σημειώσεις και δεδομένα',
+      body: ['Κρατάω τα αρχεία που χρειάζονται στο ελάχιστο που θεωρώ απαραίτητο και χρησιμοποιώ επαγγελματικά εργαλεία για συνεδρίες, επικοινωνία και scheduling.', 'Αν θέλεις να ξέρεις ακριβώς τι κρατάω, πού και για πόσο, ρώτησέ με. Θα σου απαντήσω συγκεκριμένα.']
+    }, {
+      label: 'NDA',
+      body: ['Αν ένα NDA σε βοηθά να νιώσεις πιο ασφαλής για το business κομμάτι, μπορούμε να το συζητήσουμε πριν ξεκινήσουμε.']
+    }, {
+      label: 'Τα όρια',
+      body: ['Δεν πρόκειται να υποσχεθώ απόλυτη μυστικότητα, γιατί δεν θα ήταν ειλικρινής υπόσχεση.', 'Η εμπιστευτικότητα είναι ο κανόνας. Υπάρχουν όμως περιορισμένες περιπτώσεις όπου μπορεί να έχει όρια, όπως άμεσος και σοβαρός κίνδυνος βλάβης ή περιπτώσεις όπου η γνωστοποίηση απαιτείται από τον νόμο.', 'Ως ψυχοθεραπευτής εγγεγραμμένος στο BACP χρησιμοποιώ επίσης κλινική εποπτεία. Η εποπτεία είναι και η ίδια εμπιστευτική και το υλικό συζητείται με τρόπο που προστατεύει την ταυτότητα του πελάτη.', 'Αν κάποιος από αυτούς τους περιορισμούς έχει ιδιαίτερη σημασία για τη δική σου περίπτωση, ρώτησέ με πριν ξεκινήσουμε.']
+    }, {
+      label: 'Αυτή η σελίδα δεν είναι το συμβόλαιο',
+      body: ['Είναι μια απλή εξήγηση του τρόπου με τον οποίο χειρίζομαι την εμπιστευτικότητα.', 'Δεν αντικαθιστά τη συμφωνία συνεργασίας, την ενημέρωση για τα προσωπικά δεδομένα, τα έγγραφα συναίνεσης ή ένα NDA όπου χρειάζεται.', 'Αν η εμπιστευτικότητα είναι αυτό που σε κάνει να διστάζεις, πες μου ακριβώς τι σε ανησυχεί.']
+    }]
+  }
+};
 function ConfidentialityPage({
   lang = 'en'
 }) {
-  if (lang === 'el') return React.createElement(ConfidentialityPageEl);
   const mob = useIsMobile();
-  return React.createElement('main', {
-    style: locMobPage(mob)
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.25rem' : '1.75rem',
-      fontSize: mob ? '24px' : '30px'
-    }
-  }, 'Confidentiality'), React.createElement('p', {
-    style: {
-      ...leadStyle,
-      marginBottom: mob ? '2.5rem' : '3rem'
-    }
-  }, "People bring me things they haven’t said to a cofounder, an investor, a partner or anyone on their team. That only works if discretion is built in from the start, not bolted on afterwards. Here’s how I handle it, and where the honest limits are."), React.createElement(Section, {
-    label: 'Why this page exists',
-    mob
-  }, React.createElement(P, null, "The people I work with are building something of their own — some employed, some independent, some running a company. What comes up in the room isn’t only personal. It routinely touches cofounders, employees, investors, boards and customers — and revenue, pricing, runway, product plans and intellectual property — alongside career decisions, employment matters, relationships, and health."), React.createElement(P, {
-    last: true
-  }, "In other words, information that could have real professional or reputational consequences in the wrong place. So confidentiality here is not a formality. It’s a condition of the work being possible at all.")), React.createElement(Section, {
-    label: 'What you can rely on',
-    mob
-  }, React.createElement(P, null, "The plain version, before the nuance:"), React.createElement(PatternList, {
-    items: [{
-      cause: 'Sessions are confidential',
-      effect: 'what you say in them is treated as private'
-    }, {
-      cause: 'No reporting back',
-      effect: 'nothing goes to your employer, investors, board, cofounder, team or partner'
-    }, {
-      cause: 'Paying doesn’t buy access',
-      effect: 'if someone else funds the work, they don’t get to hear what was said'
-    }, {
-      cause: 'No identifiable stories',
-      effect: 'I don’t use recognisable client material in public without explicit permission'
-    }, {
-      cause: 'You can ask first',
-      effect: 'any practical question about confidentiality is fair before you commit'
-    }]
-  }), React.createElement(P, {
-    last: true
-  }, "None of that is conditional on you being a “good” client or saying comfortable things. Especially not that.")), React.createElement(Section, {
-    label: 'Nothing goes back to the people involved',
-    mob
-  }, React.createElement(P, null, "This is the one clients ask about most, so it’s worth being explicit. You can bring, and work on, any of the following without it reaching the people concerned:"), React.createElement('ul', {
-    style: {
-      margin: '0 0 1.2rem',
-      paddingLeft: '1.2rem',
-      lineHeight: 1.9,
-      fontSize: '17px',
-      color: C.text
-    }
-  }, React.createElement('li', null, "Doubts about the company, or whether you still believe in it"), React.createElement('li', null, "Frustration with a cofounder, or that the relationship is failing"), React.createElement('li', null, "Concerns about specific employees, or decisions you’re dreading"), React.createElement('li', null, "Investor or board pressure, and how you’re really handling it"), React.createElement('li', null, "Financial fear — runway, revenue, whether it survives the quarter"), React.createElement('li', null, "That you want to leave, sell, or stop"), React.createElement('li', null, "Lost motivation, and personal circumstances bleeding into the company")), React.createElement(P, {
-    last: true
-  }, "I’m not connected to your cap table or your org chart. I don’t talk to your people. There’s no back channel, including to whoever referred you.")), React.createElement(Section, {
-    label: 'If someone else is paying',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Sometimes a company or an investor funds the work. That arrangement covers the invoice and nothing else. The paying party doesn’t receive session content, notes, progress reports or a summary of what you’re working on. If anyone expects otherwise, we sort out those boundaries in writing before we begin, so there’s no ambiguity later.")), React.createElement(Section, {
-    label: 'How I use examples publicly',
-    mob
-  }, React.createElement(P, null, "I write and speak about this work — on the ", React.createElement(IA, {
-    href: '/blog/'
-  }, 'blog'), ", on ", React.createElement(A, {
-    href: 'https://undisguised.io'
-  }, 'Undisguised'), " and elsewhere. I don’t use identifiable client stories to do it."), React.createElement(P, {
-    last: true
-  }, "Anything that appears publicly is fictional, materially altered, or a composite assembled from patterns across many people, and constructed so that no individual can be identified — not by a colleague, a cofounder, or the person themselves. If I ever wanted to use something closer to a real, recognisable case, I’d ask you first, explicitly, and a no is simply a no.")),
-  // TODO(confirm): name the actual tools used for video, scheduling, notes and file storage
-  // (and their GDPR / data-processing posture), plus any formal privacy notice or data-retention
-  // period, so this section can be specific rather than general. Kept deliberately vague until confirmed.
-  React.createElement(Section, {
-    label: 'Notes, data and scheduling',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Sessions run over video, and scheduling, notes and communication use standard professional tools. I keep records to a considered minimum and handle them accordingly. I’m not going to invent impressive-sounding security claims here — if you want the specifics of what’s stored, where, and for how long, ask on the fit call and I’ll answer plainly.")), React.createElement(Section, {
-    label: 'An NDA, if you want one',
-    mob
-  }, React.createElement(P, null, "If it makes the commercial side easier to trust, I’m glad to sign an NDA before we start. For a lot of founders it turns an abstract promise into something concrete, and that’s a reasonable thing to want."), React.createElement(P, {
-    last: true
-  }, "One honest caveat: an NDA reinforces the commercial confidentiality of our relationship, but it doesn’t override the legal, ethical and professional obligations below. No agreement can contract me out of those, and you should be wary of anyone who says theirs can.")), React.createElement(Section, {
-    label: 'The limits — stated plainly',
-    mob
-  }, React.createElement(P, null, "I’m not going to promise absolute, unconditional secrecy, because that promise can’t be kept honestly, and a page like this is worth nothing if it overstates. Confidentiality is the strong default. In a narrow set of circumstances it can have limits:"), React.createElement('div', {
-    style: {
-      margin: '.4rem 0 1.2rem'
-    }
-  }, React.createElement(TrackCards, {
-    mob,
-    tracks: [{
-      title: 'Serious, imminent risk',
-      body: "If there’s a real and immediate risk of serious harm to you or someone else, I may need to act on that — ideally with you, not around you."
-    }, {
-      title: 'Legal and safeguarding',
-      body: "In limited situations the law can require disclosure — for example a court order, or a safeguarding concern involving a child or a vulnerable adult."
-    }]
-  })), React.createElement(P, null, "As a psychotherapist I also work within a professional ethical framework (I’m a registered member of the BACP) and I use clinical supervision, which is standard and itself confidential. In supervision, material is discussed in a way that protects your identity."), React.createElement(P, {
-    last: true
-  }, "Where the work is advisory or coaching rather than psychotherapy, the professional frame differs, but the commitment to discretion — and the same narrow limits around serious risk and the law — still applies. If any of this is relevant to your situation, ask me directly and I’ll be specific.")
-  // TODO(confirm): confirm the exact confidentiality-limit wording that matches your practice and
-  // jurisdiction (Ireland-based, working with clients abroad) — specifically (1) the precise legal /
-  // safeguarding grounds you are prepared to state, (2) whether clinical supervision applies to the
-  // advisory/coaching work as well as the psychotherapy, and (3) whether you want to distinguish the
-  // two modes more formally here. Kept general until confirmed; this is not legal advice.
-  ), React.createElement(Section, {
-    label: 'This isn’t the paperwork',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "This page explains how I think about confidentiality. It isn’t a substitute for a formal contract, a privacy notice, a consent form or an NDA. Where those apply, they’re handled separately and take precedence over anything summarised here.")), React.createElement(Section, {
-    label: 'Ask before you commit',
-    mob
-  }, React.createElement(P, null, "If confidentiality is the thing standing between you and starting, that’s a good use of a fit call. Bring the specific worry — the cofounder who mustn’t know, the investor, the NDA — and I’ll tell you exactly how it works, including anything I can’t promise."), React.createElement(BookCta, {
-    lang: 'en'
-  })), React.createElement(SiteFooter, {
-    mob,
-    lang: 'en'
-  }));
-}
-
-// ─── CONFIDENTIALITY (Greek) — reuses the strong .gr asset, audience broadened ─
-function ConfidentialityPageEl() {
-  const mob = useIsMobile();
-  const liStyle = {
-    marginBottom: '.5rem'
+  const c = CONF[lang] || CONF.en;
+  const bodyP = {
+    fontSize: mob ? '17px' : '18px',
+    lineHeight: 1.7,
+    color: C.text,
+    margin: '0 0 .8rem'
   };
   return React.createElement('main', {
     style: locMobPage(mob)
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.25rem' : '1.75rem',
+      marginBottom: mob ? '1.25rem' : '1.5rem',
       fontSize: mob ? '24px' : '30px'
     }
-  }, 'Εμπιστευτικότητα'), React.createElement('p', {
+  }, c.h1), c.intro.map((t, i) => i === 0 ? React.createElement('p', {
+    key: i,
     style: {
       ...leadStyle,
-      marginBottom: mob ? '2.5rem' : '3rem'
+      marginBottom: '.7rem'
     }
-  }, 'Οι άνθρωποι που δουλεύουν μαζί μου συχνά μοιράζονται πράγματα που δεν μπορούν να συζητήσουν ελεύθερα με συνεργάτες, επενδυτές, cofounders ή ακόμη και με ανθρώπους από το προσωπικό τους περιβάλλον. Αυτό δεν είναι παρενέργεια της δουλειάς αλλά βασική προϋπόθεσή της.'), React.createElement(Section, {
-    label: 'Γιατί υπάρχει αυτή η σελίδα',
-    mob
-  }, React.createElement(P, null, 'Οι άνθρωποι που έρχονται σε μένα χτίζουν κάτι δικό τους — κάποιοι είναι μισθωτοί, κάποιοι ανεξάρτητοι, κάποιοι τρέχουν μια εταιρεία. Οι συζητήσεις μας μπορεί να αγγίζουν cofounders, εργαζομένους, επενδυτές και πελάτες — και έσοδα, τιμολόγηση, runway, σχέδια προϊόντος — μαζί με αποφάσεις καριέρας, σχέσεις και υγεία.'), React.createElement(P, {
-    last: true
-  }, 'Πληροφορίες, δηλαδή, που μπορεί να έχουν πραγματικές επαγγελματικές ή προσωπικές συνέπειες αν βγουν από το πλαίσιο στο οποίο ειπώθηκαν. Η εμπιστευτικότητα εδώ δεν είναι τυπικότητα· είναι αυτό που επιτρέπει να γίνει η δουλειά με ειλικρίνεια.')), React.createElement(Section, {
-    label: 'Σε τι μπορείς να βασιστείς',
-    mob
-  }, React.createElement(PatternList, {
-    items: [{
-      cause: 'Οι συνεδρίες είναι εμπιστευτικές',
-      effect: 'όσα λες μένουν ιδιωτικά, μέσα στα όρια παρακάτω'
-    }, {
-      cause: 'Δεν ενημερώνω τρίτους',
-      effect: 'τίποτα δεν πάει σε εργοδότη, επενδυτές, board, cofounder, ομάδα ή οικογένεια'
-    }, {
-      cause: 'Η πληρωμή δεν αγοράζει πρόσβαση',
-      effect: 'αν κάποιος άλλος χρηματοδοτεί, δεν μαθαίνει τι ειπώθηκε'
-    }, {
-      cause: 'Καμία αναγνωρίσιμη ιστορία',
-      effect: 'δεν χρησιμοποιώ αναγνωρίσιμο υλικό δημόσια χωρίς ρητή άδεια'
-    }, {
-      cause: 'Μπορείς να ρωτήσεις πρώτα',
-      effect: 'κάθε πρακτική ερώτηση για την εμπιστευτικότητα είναι θεμιτή πριν δεσμευτείς'
-    }]
-  })), React.createElement(Section, {
-    label: 'Τίποτα δεν επιστρέφει στους ανθρώπους γύρω σου',
-    mob
-  }, React.createElement(P, null, 'Μπορείς να φέρεις και να δουλέψεις οτιδήποτε από τα παρακάτω χωρίς να φτάσει στους ανθρώπους που αφορά:'), React.createElement('ul', {
+  }, t) : React.createElement('p', {
+    key: i,
+    style: bodyP
+  }, t)), React.createElement('div', {
     style: {
-      margin: '0 0 1.2rem',
+      marginBottom: mob ? '2rem' : '2.75rem'
+    }
+  }), c.sections.map((s, i) => React.createElement(Section, {
+    key: i,
+    label: s.label,
+    mob
+  }, s.body.map((p, j) => React.createElement(P, {
+    key: 'b' + j,
+    last: !s.list && !s.after && j === s.body.length - 1
+  }, p)), s.list && React.createElement('ul', {
+    style: {
+      margin: '0 0 1.1rem',
       paddingLeft: '1.2rem',
       lineHeight: 1.9,
-      fontSize: '17px',
+      fontSize: mob ? '16px' : '17px',
       color: C.text
     }
-  }, React.createElement('li', {
-    style: liStyle
-  }, 'Αμφιβολίες για την εταιρεία ή τον ρόλο σου'), React.createElement('li', {
-    style: liStyle
-  }, 'Ένταση με έναν cofounder ή συνεργάτη'), React.createElement('li', {
-    style: liStyle
-  }, 'Ανησυχίες για εργαζομένους ή αποφάσεις που φοβάσαι να πάρεις'), React.createElement('li', {
-    style: liStyle
-  }, 'Πίεση από επενδυτές ή το board'), React.createElement('li', {
-    style: liStyle
-  }, 'Οικονομικό φόβο — runway, έσοδα, το επόμενο τρίμηνο'), React.createElement('li', {
-    style: liStyle
-  }, 'Την επιθυμία να φύγεις, να πουλήσεις ή να σταματήσεις'), React.createElement('li', {
-    style: liStyle
-  }, 'Απώλεια κινήτρου και προσωπικά ζητήματα που περνούν στη δουλειά')), React.createElement(P, {
-    last: true
-  }, 'Δεν έχω θέση στο cap table σου ούτε στο οργανόγραμμα. Δεν μιλάω στους ανθρώπους σου. Δεν υπάρχει δεύτερο κανάλι, ούτε προς όποιον σε σύστησε.')), React.createElement(Section, {
-    label: 'Τα όρια — με ειλικρίνεια',
-    mob
-  }, React.createElement(P, null, 'Δεν θα υποσχεθώ απόλυτη, ανεπιφύλακτη μυστικότητα, γιατί αυτή η υπόσχεση δεν κρατιέται με ειλικρίνεια. Η εμπιστευτικότητα είναι ο ισχυρός κανόνας. Σε ελάχιστες περιπτώσεις μπορεί να έχει όρια:'), React.createElement('div', {
+  }, s.list.map((li, k) => React.createElement('li', {
+    key: 'l' + k,
     style: {
-      margin: '.4rem 0 1.2rem'
+      marginBottom: '.35rem'
     }
-  }, React.createElement(TrackCards, {
+  }, li))), s.after && s.after.map((p, j) => React.createElement(P, {
+    key: 'a' + j,
+    last: j === s.after.length - 1
+  }, p)))), React.createElement(BookCta, {
+    lang
+  }), React.createElement(SiteFooter, {
     mob,
-    tracks: [{
-      title: 'Σοβαρός, άμεσος κίνδυνος',
-      body: 'Αν υπάρχει πραγματικός και άμεσος κίνδυνος σοβαρής βλάβης για εσένα ή κάποιον άλλον, μπορεί να χρειαστεί να ενεργήσω — ιδανικά μαζί σου, όχι γύρω σου.'
-    }, {
-      title: 'Νόμος και προστασία',
-      body: 'Σε περιορισμένες περιπτώσεις ο νόμος μπορεί να απαιτεί κοινοποίηση — για παράδειγμα μια δικαστική εντολή, ή ζήτημα προστασίας παιδιού ή ευάλωτου προσώπου.'
-    }]
-  })), React.createElement(P, {
-    last: true
-  }, 'Ως Σύμβουλος Ψυχικής Υγείας δουλεύω μέσα σε επαγγελματικό δεοντολογικό πλαίσιο (εγγεγραμμένος στο BACP) και χρησιμοποιώ κλινική εποπτεία, που είναι standard και η ίδια εμπιστευτική. Στην εποπτεία, το υλικό συζητείται με τρόπο που προστατεύει την ταυτότητά σου.')), React.createElement(Section, {
-    label: 'Αυτή η σελίδα δεν είναι το νομικό έγγραφο',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, 'Η σελίδα εξηγεί πώς σκέφτομαι την εμπιστευτικότητα. Δεν αντικαθιστά τη συμφωνία συνεργασίας, την ενημέρωση για τα προσωπικά δεδομένα, μια φόρμα συναίνεσης ή ένα NDA. Όπου ισχύουν, αυτά τα έγγραφα υπερισχύουν όσων συνοψίζονται εδώ.')), React.createElement(Section, {
-    label: 'Ρώτησε πριν δεσμευτείς',
-    mob
-  }, React.createElement(P, null, 'Αν η εμπιστευτικότητα είναι αυτό που σε εμποδίζει να ξεκινήσεις, είναι καλή χρήση μιας γνωριμίας. Φέρε τη συγκεκριμένη ανησυχία — τον cofounder που δεν πρέπει να μάθει, τον επενδυτή, το NDA — και θα σου πω ακριβώς πώς λειτουργεί, μαζί με ό,τι δεν μπορώ να υποσχεθώ.'), React.createElement(BookCta, {
-    lang: 'el'
-  })), React.createElement(SiteFooter, {
-    mob,
-    lang: 'el'
+    lang
   }));
 }
 
