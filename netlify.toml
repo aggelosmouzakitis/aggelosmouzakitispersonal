@@ -1,4 +1,107 @@
-# 301 redirects for retired pages (replaces the old meta-refresh stubs)
+# ─────────────────────────────────────────────────────────────────────────────
+# Repositioning migration — legacy persona/service URLs → new architecture.
+# See site-unification/04-redirect-map.csv. All 301, force=true so the redirect
+# wins even though the old index.html files still exist. Bare + splat forms are
+# both listed so /founders and /founders/ each resolve in a single hop.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# how-i-work → 1:1 (core page removed; method content merged into / and /1-to-1/)
+[[redirects]]
+  from = "/how-i-work"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/how-i-work/*"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+
+# founders (persona) → 1:1
+[[redirects]]
+  from = "/founders"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/founders/*"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+
+# solopreneurs (persona) → home (best copy became the homepage, brief §37)
+[[redirects]]
+  from = "/solopreneurs"
+  to = "/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/solopreneurs/*"
+  to = "/"
+  status = 301
+  force = true
+
+# therapy-for-founders → 1:1 (brand no longer "therapy for founders")
+[[redirects]]
+  from = "/therapy-for-founders"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/therapy-for-founders/*"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+
+# therapy-for-executives → 1:1 (executives not a primary audience)
+[[redirects]]
+  from = "/therapy-for-executives"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/therapy-for-executives/*"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+
+# imposter-syndrome-therapy → 1:1 (service-category IA removed; interim)
+[[redirects]]
+  from = "/imposter-syndrome-therapy"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/imposter-syndrome-therapy/*"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+
+# executive-burnout-therapy → 1:1 (interim)
+[[redirects]]
+  from = "/executive-burnout-therapy"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/executive-burnout-therapy/*"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+
+# career-transition-therapy → 1:1 (interim)
+[[redirects]]
+  from = "/career-transition-therapy"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/career-transition-therapy/*"
+  to = "/1-to-1/"
+  status = 301
+  force = true
+
+# ─── Pre-existing retired pages ──────────────────────────────────────────────
 [[redirects]]
   from = "/schedule"
   to = "/"
@@ -22,6 +125,32 @@
   to = "/"
   status = 301
   force = true
+
+# ─── Burnout Diagnostic → Starting Diagnostic (replaced) ─────────────────────
+[[redirects]]
+  from = "/burnout-diagnostic"
+  to = "/startingdiagnostic/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/burnout-diagnostic/*"
+  to = "/startingdiagnostic/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/burnout-diagnostic"
+  to = "/el/startingdiagnostic/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/burnout-diagnostic/*"
+  to = "/el/startingdiagnostic/"
+  status = 301
+  force = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Headers
+# ─────────────────────────────────────────────────────────────────────────────
 
 # Cache static assets for 1 year (immutable)
 [[headers]]

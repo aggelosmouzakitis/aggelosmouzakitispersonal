@@ -90,26 +90,64 @@ function Testimonials({ items, mob, label }) {
 }
 
 // \u2500\u2500\u2500 SITE FOOTER (shared across all pages) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
-const FOOTER_COLS = [
-  { label: 'Work with me', links: [
-    { href: '/founders/', label: 'For founders' },
-    { href: '/solopreneurs/', label: 'For solopreneurs' },
-    { href: '/how-i-work/', label: 'How I work' },
-    { href: '/book/', label: 'Book a fit call' },
-  ] },
-  { label: 'Site', links: [
-    { href: '/', label: 'Home' },
-    { href: '/blog/', label: 'Writing' },
-    { href: '/ask-me-anything/', label: 'Ask me anything' },
-    { href: '/confidentiality/', label: 'Confidentiality' },
-    { href: '/getinterviewed/', label: 'Get interviewed' },
-  ] },
-  { label: 'Elsewhere', links: [
-    { href: 'https://linkedin.com/in/growth-product-manager/', label: 'LinkedIn', ext: true },
-    { href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA', label: 'YouTube', ext: true },
-  ] },
-];
-function SiteFooter({ mob }) {
+// ─── BILINGUAL PATH MODEL (mirrors sidebar.jsx) ───────────────────────────────
+// One offer, two languages. English core at root, Greek core under /el/.
+const CORE_PATHS = {
+  'home':            { en: '/',                 el: '/el/' },
+  'one-to-one':      { en: '/1-to-1/',          el: '/el/1-to-1/' },
+  'about':           { en: '/about/',           el: '/el/about/' },
+  'reviews':         { en: '/reviews/',         el: '/el/reviews/' },
+  'book':            { en: '/book/',            el: '/el/book/' },
+  'diagnostic':      { en: '/startingdiagnostic/', el: '/el/startingdiagnostic/' },
+  'confidentiality': { en: '/confidentiality/', el: '/el/confidentiality/' },
+  // One blog for both languages (Greek enters it filtered — no second blog).
+  'blog':            { en: '/blog/',            el: '/blog/?lang=el' },
+};
+const pathFor = (id, lang) => (CORE_PATHS[id] && CORE_PATHS[id][lang]) || (CORE_PATHS[id] && CORE_PATHS[id].en) || '/';
+const isEl = (lang) => lang === 'el';
+
+const FOOTER_COLS_BY_LANG = {
+  en: [
+    { label: 'Work with me', links: [
+      { href: '/1-to-1/', label: '1:1' },
+      { href: '/book/', label: 'Book a fit call' },
+    ] },
+    { label: 'Site', links: [
+      { href: '/', label: 'Home' },
+      { href: '/about/', label: 'About' },
+      { href: '/blog/', label: 'Writing' },
+      { href: '/reviews/', label: 'Reviews' },
+      { href: '/startingdiagnostic/', label: 'Starting Diagnostic' },
+      { href: '/confidentiality/', label: 'Confidentiality' },
+    ] },
+    { label: 'Elsewhere', links: [
+      { href: 'https://linkedin.com/in/growth-product-manager/', label: 'LinkedIn', ext: true },
+      { href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA', label: 'YouTube', ext: true },
+    ] },
+  ],
+  el: [
+    { label: 'Συνεργασία', links: [
+      { href: '/el/1-to-1/', label: '1:1' },
+      { href: '/el/book/', label: 'Κλείσε γνωριμία' },
+    ] },
+    { label: 'Χάρτης', links: [
+      { href: '/el/', label: 'Αρχική' },
+      { href: '/el/about/', label: 'Σχετικά' },
+      { href: '/blog/?lang=el', label: 'Άρθρα' },
+      { href: '/el/reviews/', label: 'Κριτικές' },
+      { href: '/el/startingdiagnostic/', label: 'Starting Diagnostic' },
+      { href: '/el/confidentiality/', label: 'Εμπιστευτικότητα' },
+    ] },
+    { label: 'Αλλού', links: [
+      { href: 'https://linkedin.com/in/growth-product-manager/', label: 'LinkedIn', ext: true },
+      { href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA', label: 'YouTube', ext: true },
+    ] },
+  ],
+};
+const FOOTER_COPYLINE = { en: '© Aggelos Mouzakitis · Business Advisor + Licensed Psychotherapist', el: '© Άγγελος Μουζακίτης · Business Advisor + Ψυχοθεραπευτής' };
+
+function SiteFooter({ mob, lang = 'en' }) {
+  const FOOTER_COLS = FOOTER_COLS_BY_LANG[lang] || FOOTER_COLS_BY_LANG.en;
   const wrap = { marginTop: mob ? '3.5rem' : '5rem', paddingTop: mob ? '2.5rem' : '3.25rem', borderTop: `1px solid ${C.sepBorder}` };
   const cols = { display: mob ? 'block' : 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2.5rem' };
   const colLabel = { fontSize: '11px', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: C.accent, marginBottom: '1.1rem' };
@@ -137,7 +175,7 @@ function SiteFooter({ mob }) {
       })
     ),
     React.createElement('div', { style: { marginTop: mob ? '1rem' : '2.5rem', paddingTop: '1.5rem', borderTop: `1px solid ${C.border}`, fontSize: '13px', color: C.muted } },
-      '\u00a9 Aggelos Mouzakitis \u00b7 Advisor \u00b7 Psychotherapist'
+      FOOTER_COPYLINE[lang] || FOOTER_COPYLINE.en
     )
   );
 }
@@ -173,12 +211,17 @@ function StartHere({ mob }) {
 }
 
 // ─── LATEST WRITING ──────────────────────────────────────────────────────────
-function LatestWriting({ mob }) {
+function LatestWriting({ mob, lang = 'en' }) {
   const [posts, setPosts] = React.useState(null);
   React.useEffect(() => {
     fetch('/blog/posts.json').then(r => r.json()).then(setPosts).catch(() => setPosts([]));
   }, []);
-  const items = posts ? posts.slice(0, 9) : [];
+  const T = {
+    en: { head: 'Latest writing', loading: 'Loading…', empty: 'No posts yet.', all: 'See all →' },
+    el: { head: 'Πρόσφατα άρθρα', loading: 'Φόρτωση…', empty: 'Δεν υπάρχουν άρθρα ακόμη.', all: 'Δες όλα →' },
+  }[lang] || null;
+  const t = T || { head: 'Latest writing', loading: 'Loading…', empty: 'No posts yet.', all: 'See all →' };
+  const items = posts ? posts.slice(0, 8) : [];
   const rowStyle = (first) => ({
     display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1.5rem',
     padding: mob ? '.55rem 0' : '.6rem 0',
@@ -187,9 +230,9 @@ function LatestWriting({ mob }) {
     textDecoration: 'none', color: C.text, transition: 'color .15s',
   });
   return React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '3.5rem' } },
-    React.createElement('h2', { style: { ...sectionTitleStyle, fontSize: mob ? '19px' : '22px' } }, 'Latest Writing'),
-    posts === null && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, 'Loading…'),
-    posts && posts.length === 0 && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, 'No posts yet.'),
+    React.createElement('h2', { style: { ...sectionTitleStyle, fontSize: mob ? '19px' : '22px' } }, t.head),
+    posts === null && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, t.loading),
+    posts && posts.length === 0 && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, t.empty),
     items.length > 0 && React.createElement(React.Fragment, null,
       items.map(function (p, i) {
         return React.createElement('a', {
@@ -205,73 +248,746 @@ function LatestWriting({ mob }) {
         );
       }),
       React.createElement('div', { style: { textAlign: 'right', marginTop: '1.2rem', fontSize: '14px' } },
-        React.createElement(IA, { href: '/blog/' }, 'See all →')
+        React.createElement(IA, { href: pathFor('blog', lang) }, t.all)
       )
     )
   );
 }
 
-// ─── HOME PAGE ───────────────────────────────────────────────────────────────
-function HomePage({ setPage }) {
+// ─── SHARED UI STRINGS + CTA HELPERS (bilingual) ─────────────────────────────
+const UI = {
+  en: {
+    role: 'Business Advisor + Licensed Psychotherapist',
+    seeOneToOne: 'See how 1:1 works',
+    book: 'Book a fit call',
+    readMore: 'Read more client reflections →',
+    friendlier: 'Friendlier than I look',
+    imgAlt: 'Aggelos Mouzakitis speaking on stage',
+  },
+  el: {
+    role: 'Business Advisor + Ψυχοθεραπευτής',
+    seeOneToOne: 'Δες την 1:1 συνεργασία',
+    book: 'Κλείσε μια γνωριμία',
+    readMore: 'Διάβασε κι άλλες σκέψεις πελατών →',
+    friendlier: 'Πιο φιλικός απ’ ό,τι δείχνω',
+    imgAlt: 'Ο Άγγελος Μουζακίτης σε ομιλία',
+  },
+};
+const tUI = (lang) => UI[lang] || UI.en;
+
+// Primary + secondary CTA row, language-aware targets.
+function CtaRow({ lang, mob, primaryTo = 'one-to-one', primaryLabel, secondaryTo = 'book', secondaryLabel }) {
+  const u = tUI(lang);
+  const primary = {
+    display: 'inline-block', textAlign: 'center', padding: '.85rem 1.6rem', fontFamily: 'inherit',
+    fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase',
+    background: C.accent, border: `1.5px solid ${C.accent}`, color: '#fff', textDecoration: 'none',
+    borderRadius: '2px', transition: 'background .15s, border-color .15s',
+  };
+  const secondary = {
+    display: 'inline-block', textAlign: 'center', padding: '.85rem 1.6rem', fontFamily: 'inherit',
+    fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase',
+    background: 'transparent', border: `1.5px solid rgba(40,39,38,.35)`, color: C.text, textDecoration: 'none',
+    borderRadius: '2px', transition: 'border-color .15s, color .15s',
+  };
+  return React.createElement('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '.8rem', marginTop: '1.6rem' } },
+    React.createElement('a', {
+      href: pathFor(primaryTo, lang), className: 'cta-btn', style: primary,
+      onMouseEnter: e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; },
+      onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
+    }, (primaryLabel || u.seeOneToOne) + ' →'),
+    React.createElement('a', {
+      href: pathFor(secondaryTo, lang), style: secondary,
+      onMouseEnter: e => { e.currentTarget.style.borderColor = C.accent; e.currentTarget.style.color = C.accent; },
+      onMouseLeave: e => { e.currentTarget.style.borderColor = 'rgba(40,39,38,.35)'; e.currentTarget.style.color = C.text; },
+    }, secondaryLabel || u.book),
+  );
+}
+
+// Accent-marked situation/bullet list.
+function Bullets({ items, mob }) {
+  return React.createElement('ul', { style: { listStyle: 'none', margin: '.2rem 0 0', padding: 0 } },
+    items.map((it, i) => React.createElement('li', {
+      key: i,
+      style: { display: 'flex', gap: '.7rem', alignItems: 'baseline', padding: mob ? '.5rem 0' : '.45rem 0', fontSize: mob ? '16px' : '17px', lineHeight: 1.6, color: C.text, borderTop: i ? `1px solid ${C.border}` : 'none' },
+    },
+      React.createElement('span', { style: { color: C.accent, fontWeight: 700, flexShrink: 0 } }, '—'),
+      React.createElement('span', null, it)
+    ))
+  );
+}
+
+// Emphatic final CTA block.
+function FinalCta({ lang, mob, heading, sub }) {
+  const u = tUI(lang);
+  return React.createElement('div', {
+    style: { marginTop: mob ? '3rem' : '4rem', padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem', border: `1.5px solid rgba(26,127,55,.4)`, background: 'rgba(26,127,55,.06)', borderRadius: '14px' },
+  },
+    React.createElement('p', { style: { fontSize: mob ? '19px' : '23px', fontWeight: 500, letterSpacing: '-.01em', lineHeight: 1.5, color: C.text, margin: 0 } }, heading),
+    sub && React.createElement('p', { style: { fontSize: '16px', lineHeight: 1.7, color: C.muted, margin: '.9rem 0 0' } }, sub),
+    React.createElement('a', {
+      href: pathFor('book', lang), className: 'cta-btn',
+      style: { display: 'inline-block', marginTop: '1.4rem', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#fff', textDecoration: 'none', borderRadius: '2px' },
+      onMouseEnter: e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; },
+      onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
+    }, u.book + ' →')
+  );
+}
+
+// ─── FAQ ACCORDION (accessible; answers stay in the DOM for SEO) ─────────────
+function FaqAccordion({ items, mob }) {
+  const [open, setOpen] = React.useState(-1);
+  return React.createElement('div', { style: { ...cardBase, overflow: 'hidden' } },
+    items.map(function (it, i) {
+      const isOpen = open === i;
+      return React.createElement('div', { key: i, style: { borderTop: i ? `1px solid ${C.border}` : 'none' } },
+        React.createElement('button', {
+          onClick: () => setOpen(isOpen ? -1 : i),
+          'aria-expanded': isOpen ? 'true' : 'false',
+          className: 'hv-row',
+          style: { display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', textAlign: 'left', background: 'transparent', border: 'none', cursor: 'pointer', fontFamily: 'inherit', padding: mob ? '1rem 1.1rem' : '1.15rem 1.35rem', fontSize: mob ? '16px' : '17px', fontWeight: 600, color: C.text, lineHeight: 1.5 },
+        },
+          React.createElement('span', null, it.q),
+          React.createElement('span', { 'aria-hidden': 'true', style: { color: C.accent, fontWeight: 700, flexShrink: 0, transform: isOpen ? 'rotate(45deg)' : 'none', transition: 'transform .15s', fontSize: '22px', lineHeight: 1 } }, '+')
+        ),
+        React.createElement('div', { style: { display: isOpen ? 'block' : 'none', padding: mob ? '0 1.1rem 1.1rem' : '0 1.35rem 1.3rem', fontSize: '16px', lineHeight: 1.7, color: C.text } }, it.a)
+      );
+    })
+  );
+}
+
+// ─── HOME PAGE (bilingual) ───────────────────────────────────────────────────
+const HOME = {
+  en: {
+    promise: "Build something of your own. Or take what you've already built much further.",
+    tagline: 'Figure out what the business needs. Work through what gets in the way. Business and psychology, together.',
+    introA: 'I spent 18+ years in product and growth, building companies and advising more than 500 of them. I also trained as a psychotherapist.',
+    introB: "Today I work 1:1 and with groups of people building something of their own. Sometimes the problem is clearly business. Sometimes it's more complicated and includes you.",
+    introC: "Quite often, business and psychology collide to the point where it's hard to tell yourself where the problem actually is.",
+    recogLabel: 'You may recognise some of this',
+    recog: [
+      { lead: "You've been meaning to start for a long time.", support: "You're still getting ready." },
+      { lead: 'You need more customers.', support: 'Everything except selling keeps making it onto the to-do list.' },
+      { lead: "You know you're undercharging.", support: "The number still hasn't changed.", big: true },
+      { lead: 'Your direction gets difficult,', support: 'and another one suddenly starts looking better.' },
+      { lead: 'The business depends on you.', support: 'Maybe more than it actually needs to.', big: true },
+      { lead: 'On paper, things are going well.', support: "You feel less and less connected to what you're building.", big: true },
+      { lead: 'You reached something you worked hard for.', support: "Now you're not sure you want the next level, or just think you should." },
+      { lead: 'You understand your patterns.', support: 'They keep happening anyway.', big: true },
+    ],
+    sigHead: "Sometimes the work is tactical. Sometimes it's psychological.",
+    sigHint: 'Choose a problem →',
+    sigBiz: 'The business', sigYou: 'You',
+    sigProblems: [
+      { p: 'Not enough customers', business: 'Acquisition may simply not work.', you: 'You may be avoiding selling or visibility.' },
+      { p: 'Undercharging', business: 'Your pricing may genuinely be below the market.', you: 'Asking for more may feel like exposure.' },
+      { p: 'Everything depends on me', business: 'Roles or processes may genuinely be poor.', you: 'You may struggle to let go of control.' },
+      { p: 'I keep changing direction', business: 'The strategy may genuinely be wrong.', you: 'Commitment may get uncomfortable once the novelty disappears.' },
+      { p: "I can't make the decision", business: 'You may genuinely be missing information.', you: 'You may be avoiding what the decision forces you to face.' },
+      { p: "I've lost interest in what I built", business: 'The business may need its next version.', you: 'You may no longer want what your identity was organised around.' },
+      { p: 'I avoid being visible', business: 'The channel or the positioning may be wrong.', you: 'Being seen may feel more exposing than the business can afford.' },
+      { p: 'The business has stalled', business: 'The model may have hit a real ceiling.', you: 'You may be quietly protecting yourself from the next risk.' },
+    ],
+    sigConcl1: 'Same visible problem. Very different things may need fixing.',
+    sigConcl2: "The hard part is working out what you're actually dealing with.",
+    teaserHead: 'One relationship. Both sides of the problem are welcome.',
+    teaserBiz: 'Offer · pricing · customers · decisions',
+    teaserYou: 'avoidance · identity · control · uncertainty',
+    teaserNote: "You don't need to know which one you have before you come in.",
+    faqLabel: 'Common questions',
+    faq: [
+      { q: 'Do I need to already have a business?', a: "No. You can be starting, freelancing, consulting, building alongside a job, or already running something established. The common bit is that you're seriously trying to build something of your own." },
+      { q: 'Is this therapy or business advisory?', a: "It can involve both. I'm a business advisor and a psychotherapist. If the problem is the business, we'll work on the business. If something in you is getting in the way, we can work there too." },
+      { q: "What if I don't know which one the problem is?", a: "Good. You don't need to diagnose yourself before we talk. Working that out is part of the job." },
+    ],
+    finalHeading: 'Building something is hard enough without getting in your own way.',
+    finalSub: "If you have something you're trying to start, fix or grow, tell me what's going on.",
+  },
+  el: {
+    promise: 'Χτίζεις κάτι δικό σου; Ας το πάμε παρακάτω.',
+    tagline: 'Βρίσκουμε τι χρειάζεται η επιχείρηση και τι σε εμποδίζει να το πετύχεις. Business και ψυχολογία, μαζί.',
+    introA: 'Πέρασα 18+ χρόνια στο product και το growth, χτίζοντας δικές μου εταιρείες και συμβουλεύοντας περισσότερες από 500. Παράλληλα εκπαιδεύτηκα ως ψυχοθεραπευτής.',
+    introB: 'Σήμερα δουλεύω 1:1 και σε groups με ανθρώπους που χτίζουν κάτι δικό τους.',
+    introC: 'Μερικές φορές το πρόβλημα είναι καθαρά business. Μερικές φορές είναι πιο περίπλοκο και περιλαμβάνει και εσένα. Και αρκετά συχνά, τα δύο μπλέκονται τόσο που δεν είναι καθόλου ξεκάθαρο πού ακριβώς βρίσκεται το πρόβλημα.',
+    recogLabel: 'Μήπως σου θυμίζει κάτι;',
+    recog: [
+      { lead: 'Θέλεις καιρό να ξεκινήσεις.', support: 'Ακόμα ετοιμάζεσαι.' },
+      { lead: 'Χρειάζεσαι περισσότερους πελάτες.', support: 'Πάντα βρίσκεται κάτι πιο επείγον από το να πουλήσεις.' },
+      { lead: 'Ξέρεις ότι χρεώνεις λίγο.', support: 'Η τιμή, όμως, παραμένει ίδια.', big: true },
+      { lead: 'Η κατεύθυνσή σου δυσκολεύει,', support: 'και ξαφνικά μια άλλη μοιάζει καλύτερη.' },
+      { lead: 'Η επιχείρηση εξαρτάται από εσένα.', support: 'Ίσως περισσότερο απ’ όσο χρειάζεται.', big: true },
+      { lead: 'Στα χαρτιά, όλα πάνε καλά.', support: 'Εσύ νιώθεις όλο και λιγότερη σύνδεση με αυτό που χτίζεις.', big: true },
+      { lead: 'Έφτασες κάπου που ήθελες πολύ.', support: 'Τώρα δεν ξέρεις αν θες το επόμενο επίπεδο ή απλώς νομίζεις ότι πρέπει.' },
+      { lead: 'Καταλαβαίνεις τα μοτίβα σου.', support: 'Συνεχίζουν να επαναλαμβάνονται.', big: true },
+    ],
+    sigHead: 'Κάποιες φορές η δουλειά είναι πρακτική. Κάποιες, ψυχολογική.',
+    sigHint: 'Διάλεξε ένα πρόβλημα →',
+    sigBiz: 'Το business', sigYou: 'Εσύ',
+    sigProblems: [
+      { p: 'Λίγοι πελάτες', business: 'Η απόκτηση πελατών μπορεί απλώς να μη λειτουργεί.', you: 'Μπορεί να αποφεύγεις τις πωλήσεις ή την έκθεση.' },
+      { p: 'Χρεώνεις λίγο', business: 'Οι τιμές σου μπορεί πραγματικά να είναι κάτω από την αγορά.', you: 'Το να ζητήσεις περισσότερα μοιάζει με έκθεση.' },
+      { p: 'Όλα περνούν από εσένα', business: 'Οι ρόλοι ή οι διαδικασίες μπορεί όντως να είναι κακοί.', you: 'Μπορεί να δυσκολεύεσαι να αφήσεις τον έλεγχο.' },
+      { p: 'Αλλάζεις συνέχεια κατεύθυνση', business: 'Η στρατηγική μπορεί όντως να είναι λάθος.', you: 'Η δέσμευση δυσκολεύει μόλις περάσει η νεωτερικότητα.' },
+      { p: 'Δεν παίρνεις την απόφαση', business: 'Μπορεί όντως να σου λείπει πληροφορία.', you: 'Μπορεί να αποφεύγεις αυτό που σε αναγκάζει να δεις η απόφαση.' },
+      { p: 'Έχασες το ενδιαφέρον σου', business: 'Το business μπορεί να χρειάζεται την επόμενη εκδοχή του.', you: 'Μπορεί να μη θες πια αυτό γύρω από το οποίο χτίστηκε η ταυτότητά σου.' },
+      { p: 'Αποφεύγεις την έκθεση', business: 'Το κανάλι ή το positioning μπορεί να είναι λάθος.', you: 'Το να σε βλέπουν μοιάζει πιο εκθετικό απ’ όσο αντέχει το business.' },
+      { p: 'Το business έχει κολλήσει', business: 'Το μοντέλο μπορεί να έχει πιάσει ταβάνι.', you: 'Μπορεί να προστατεύεις τον εαυτό σου από το επόμενο ρίσκο.' },
+    ],
+    sigConcl1: 'Ίδιο ορατό πρόβλημα. Πολύ διαφορετικά πράγματα μπορεί να χρειάζονται δουλειά.',
+    sigConcl2: 'Το δύσκολο είναι να καταλάβεις τι πραγματικά έχεις μπροστά σου.',
+    teaserHead: 'Μία συνεργασία. Και οι δύο πλευρές του προβλήματος χωράνε.',
+    teaserBiz: 'Offer · τιμές · πελάτες · αποφάσεις',
+    teaserYou: 'αποφυγή · ταυτότητα · έλεγχος · αβεβαιότητα',
+    teaserNote: 'Δεν χρειάζεται να ξέρεις ποιο από τα δύο έχεις πριν έρθεις.',
+    faqLabel: 'Συχνές ερωτήσεις',
+    faq: [
+      { q: 'Πρέπει να έχω ήδη επιχείρηση;', a: 'Όχι. Μπορεί να ξεκινάς τώρα, να δουλεύεις ως freelancer ή consultant, να χτίζεις κάτι παράλληλα με τη δουλειά σου ή να έχεις ήδη μια κανονική επιχείρηση. Το κοινό είναι ότι προσπαθείς σοβαρά να χτίσεις κάτι δικό σου.' },
+      { q: 'Είναι ψυχοθεραπεία ή συμβουλευτική επιχειρήσεων;', a: 'Είναι και τα δύο παράλληλα. Είμαι business advisor και ψυχοθεραπευτής. Αν το πρόβλημα είναι το business, δουλεύουμε το business. Αν μπαίνει κάτι δικό σου στη μέση, μπορούμε να δουλέψουμε κι αυτό.' },
+      { q: 'Κι αν δεν ξέρω ποιο από τα δύο είναι;', a: 'Δεν χρειάζεται να έρθεις με διάγνωση. Το να ξεκαθαρίσουμε τι πραγματικά συμβαίνει είναι μέρος της δουλειάς.' },
+    ],
+    finalHeading: 'Το να χτίσεις κάτι δικό σου είναι ήδη αρκετά δύσκολο.',
+    finalSub: 'Αν προσπαθείς να ξεκινήσεις, να ξεκολλήσεις ή να αναπτύξεις κάτι παραπάνω, έλα να το συζητήσουμε.',
+  },
+};
+
+// Homepage signature section — one problem active at a time; hover (desktop) or
+// tap (mobile) reveals a business reading and a psychological reading of the
+// same visible problem. The whole point: same symptom, very different work.
+function ProblemSelector({ c, mob }) {
+  const [active, setActive] = React.useState(0);
+  const ACC = '#5cc98b'; // brand green, lightened for contrast on the dark band
+  const dim = 'rgba(255,255,255,.55)';
+  const p = c.sigProblems[active];
+  const list = React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: '.15rem' } },
+    React.createElement('div', { style: { fontSize: '11px', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: ACC, marginBottom: '1rem' } }, c.sigHint),
+    c.sigProblems.map((it, i) => {
+      const on = i === active;
+      return React.createElement('button', {
+        key: i, onClick: () => setActive(i), onMouseEnter: () => !mob && setActive(i),
+        'aria-pressed': on ? 'true' : 'false',
+        style: { textAlign: 'left', background: 'transparent', border: 'none', cursor: 'pointer', fontFamily: 'inherit', padding: '.5rem 0', display: 'flex', gap: '.7rem', alignItems: 'baseline',
+          fontSize: mob ? '19px' : '22px', fontWeight: on ? 600 : 400, letterSpacing: '-.01em', lineHeight: 1.3,
+          color: on ? '#fff' : dim, transition: 'color .15s' },
+      },
+        React.createElement('span', { 'aria-hidden': 'true', style: { color: ACC, opacity: on ? 1 : 0, transition: 'opacity .15s', flexShrink: 0 } }, '—'),
+        React.createElement('span', null, it.p));
+    })
+  );
+  const explain = (label, text) => React.createElement('div', { style: { marginBottom: '1.6rem' } },
+    React.createElement('div', { style: { fontSize: '11px', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: ACC, marginBottom: '.5rem' } }, label),
+    React.createElement('p', { style: { fontSize: mob ? '17px' : '19px', lineHeight: 1.55, color: 'rgba(255,255,255,.92)', margin: 0 } }, text)
+  );
+  const panel = React.createElement('div', { style: { borderLeft: mob ? 'none' : '1px solid rgba(255,255,255,.15)', paddingLeft: mob ? 0 : '2.5rem' } },
+    React.createElement('div', { style: { fontSize: mob ? '20px' : '23px', fontWeight: 600, color: '#fff', letterSpacing: '-.01em', margin: '0 0 1.4rem' } }, p.p),
+    explain(c.sigBiz, p.business),
+    explain(c.sigYou, p.you)
+  );
+  return React.createElement('div', null,
+    React.createElement('h2', { style: { fontSize: mob ? '25px' : '34px', fontWeight: 500, letterSpacing: '-.02em', lineHeight: 1.2, color: '#fff', margin: '0 0 2.5rem', maxWidth: '20ch' } }, c.sigHead),
+    React.createElement('div', { style: { display: 'grid', gridTemplateColumns: mob ? '1fr' : '1fr 1fr', gap: mob ? '2rem' : '3rem', alignItems: 'start' } }, list, panel),
+    React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '3.5rem', paddingTop: '1.75rem', borderTop: '1px solid rgba(255,255,255,.15)' } },
+      React.createElement('p', { style: { fontSize: mob ? '18px' : '21px', fontWeight: 600, color: '#fff', letterSpacing: '-.01em', margin: '0 0 .4rem', lineHeight: 1.4 } }, c.sigConcl1),
+      React.createElement('p', { style: { fontSize: mob ? '16px' : '18px', color: 'rgba(255,255,255,.7)', margin: 0, lineHeight: 1.5 } }, c.sigConcl2)
+    )
+  );
+}
+
+function HomePage({ lang = 'en' }) {
   const mob = useIsMobile();
-  const mainStyle = mob ? homeStyleMobile : homeStyle;
-  const introRowStyle = mob
-    ? { display: 'flex', flexDirection: 'column', gap: '1.75rem' }
-    : { display: 'flex', gap: '4rem', alignItems: 'center' };
-  const introTextStyle = mob ? { width: '100%' } : { flex: '1.15 1 0', minWidth: 0, maxWidth: 520 };
-  const introImgWrapStyle = mob ? { width: '100%' } : { flex: '1 1 0', minWidth: 0 };
-  const introImgStyle = {
-    width: '100%', aspectRatio: mob ? '16 / 10' : '4 / 5',
-    objectFit: 'cover', borderRadius: '14px', display: 'block',
+  const c = HOME[lang] || HOME.en;
+  const u = tUI(lang);
+  const pad = mob ? '0 1.25rem' : '0 2.5rem';
+  const inner = (children, st) => React.createElement('div', { style: { maxWidth: 1080, margin: '0 auto', padding: pad, ...(st || {}) } }, children);
+  const gap = mob ? '3.5rem' : '6rem';
+
+  // ── Hero ──
+  const heroText = React.createElement('div', { style: mob ? { width: '100%' } : { flex: '1 1 0', minWidth: 0, maxWidth: 560 } },
+    React.createElement('div', { style: { fontSize: '12px', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: C.accent, marginBottom: '1.1rem' } }, u.role),
+    React.createElement('h1', { style: { fontSize: mob ? '28px' : '38px', fontWeight: 500, lineHeight: 1.15, letterSpacing: '-.025em', color: C.text, margin: '0 0 1.1rem' } }, c.promise),
+    React.createElement('p', { style: { fontSize: mob ? '17px' : '19px', fontWeight: 600, color: C.accent, margin: '0 0 1.5rem', lineHeight: 1.45 } }, c.tagline),
+    React.createElement(P, null, c.introA),
+    React.createElement(P, null, c.introB),
+    React.createElement(P, { last: true }, c.introC),
+    React.createElement(CtaRow, { lang, mob })
+  );
+  const heroImg = React.createElement('div', { style: mob ? { width: '100%' } : { flex: '1.05 1 0', minWidth: 0 } },
+    React.createElement('img', { src: 'https://aggelosmouzakitis.com/img/aggelos-homepage.webp', alt: u.imgAlt, loading: 'eager', fetchPriority: 'high', decoding: 'async', style: { width: '100%', aspectRatio: mob ? '16 / 10' : '4 / 5', objectFit: 'cover', borderRadius: '14px', display: 'block' } }),
+    React.createElement('div', { style: { display: mob ? 'none' : 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', gap: '8px', marginTop: '6px', paddingRight: '26px' } },
+      React.createElement('span', { style: { fontFamily: "'Segoe Script','Bradley Hand','Comic Sans MS',cursive", fontStyle: 'italic', fontSize: '16px', color: C.accent, transform: 'rotate(-3deg)', whiteSpace: 'nowrap', alignSelf: 'flex-end' } }, u.friendlier),
+      React.createElement('svg', { width: 44, height: 40, viewBox: '0 0 44 40', fill: 'none', stroke: C.accent, strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round', style: { marginBottom: '2px' } },
+        React.createElement('path', { d: 'M40 3 C 44 20, 33 30, 6 30' }),
+        React.createElement('path', { d: 'M15 24 L5 30 L14 36' })
+      )
+    )
+  );
+
+  // ── Recognition (editorial two-column; no cards) ──
+  const recogItems = React.createElement('div', { style: { columnCount: mob ? 1 : 2, columnGap: mob ? 0 : '4rem', marginTop: mob ? '1.75rem' : '2.5rem' } },
+    c.recog.map((r, i) => React.createElement('div', { key: i, style: { breakInside: 'avoid', marginBottom: r.big ? (mob ? '2rem' : '2.75rem') : (mob ? '1.6rem' : '2.25rem') } },
+      React.createElement('p', { style: { fontSize: r.big ? (mob ? '21px' : '25px') : (mob ? '17px' : '19px'), fontWeight: 600, letterSpacing: '-.01em', lineHeight: 1.25, color: C.text, margin: '0 0 .35rem' } }, r.lead),
+      React.createElement('p', { style: { fontSize: r.big ? (mob ? '16px' : '18px') : '16px', color: C.muted, lineHeight: 1.5, margin: 0 } }, r.support)
+    ))
+  );
+
+  // ── 1:1 teaser (typography as the visual object; no cards) ──
+  const teaser = React.createElement('div', { style: { textAlign: mob ? 'left' : 'center', maxWidth: 820, margin: '0 auto' } },
+    React.createElement('h2', { style: { fontSize: mob ? '25px' : '34px', fontWeight: 500, letterSpacing: '-.02em', lineHeight: 1.2, color: C.text, margin: '0 0 1.8rem' } }, c.teaserHead),
+    React.createElement('div', { style: { display: 'flex', flexDirection: mob ? 'column' : 'row', gap: mob ? '.5rem' : '1.5rem', justifyContent: 'center', alignItems: mob ? 'flex-start' : 'center', fontSize: mob ? '15px' : '17px', letterSpacing: '.01em', color: C.text } },
+      React.createElement('span', null, c.teaserBiz),
+      React.createElement('span', { 'aria-hidden': 'true', style: { color: C.accent, display: mob ? 'none' : 'inline' } }, '·'),
+      React.createElement('span', { style: { color: C.muted } }, c.teaserYou)
+    ),
+    React.createElement('p', { style: { fontSize: mob ? '18px' : '20px', fontWeight: 500, color: C.text, lineHeight: 1.5, margin: mob ? '1.6rem 0 0' : '2rem 0 0' } }, c.teaserNote),
+    React.createElement('p', { style: { margin: '1.4rem 0 0' } }, React.createElement(IA, { href: pathFor('one-to-one', lang) }, u.seeOneToOne + ' →'))
+  );
+
+  return React.createElement('main', { style: { width: '100%', color: C.text, fontFamily: 'inherit' } },
+    // Hero
+    React.createElement('section', { style: { paddingTop: mob ? '2rem' : '4rem' } },
+      inner(React.createElement('div', { style: mob ? { display: 'flex', flexDirection: 'column', gap: '1.75rem' } : { display: 'flex', gap: '4rem', alignItems: 'center' } }, heroText, heroImg))
+    ),
+    // Recognition
+    React.createElement('section', { style: { paddingTop: gap } },
+      inner(React.createElement(React.Fragment, null,
+        React.createElement('h2', { style: { fontSize: mob ? '13px' : '14px', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: C.muted, margin: 0 } }, c.recogLabel),
+        recogItems
+      ))
+    ),
+    // Signature — full-width dark band
+    React.createElement('section', { style: { marginTop: gap, background: '#1e2136', padding: mob ? '3rem 0' : '4.75rem 0' } },
+      inner(React.createElement(ProblemSelector, { c, mob }))
+    ),
+    // 1:1 teaser
+    React.createElement('section', { style: { paddingTop: gap } }, inner(teaser)),
+    // FAQ (quiet)
+    React.createElement('section', { style: { paddingTop: gap } },
+      inner(React.createElement(React.Fragment, null,
+        React.createElement('h2', { style: { fontSize: mob ? '24px' : '30px', fontWeight: 500, letterSpacing: '-.02em', lineHeight: 1.25, color: C.text, margin: '0 0 1.4rem' } }, c.faqLabel),
+        React.createElement(FaqAccordion, { items: c.faq, mob })
+      ))
+    ),
+    // Final CTA + footer
+    React.createElement('section', { style: { paddingTop: mob ? '2.5rem' : '3.5rem', paddingBottom: mob ? '4rem' : '6rem' } },
+      inner(React.createElement(React.Fragment, null,
+        React.createElement(FinalCta, { lang, mob, heading: c.finalHeading, sub: c.finalSub }),
+        React.createElement(SiteFooter, { mob, lang })
+      ))
+    )
+  );
+}
+
+// ─── 1:1 OFFER PAGE (bilingual) ──────────────────────────────────────────────
+const ONE = {
+  en: {
+    h1: 'Work with me, 1:1',
+    lead: "Private work on the business you're building and whatever in you is getting tangled up with it.",
+    intro: [
+      "Some problems need a tactical answer. Others need deeper work. Often, it's not obvious which one you're dealing with until we get into it.",
+      "The point of 1:1 is that we don't have to choose one lens in advance.",
+    ],
+    bizLabel: 'Business', youLabel: 'You', bothLabel: 'Both',
+    diagLabel: 'How the work works',
+    diagBring: "You bring what's happening.",
+    diagWork: "We work out what we're actually dealing with.",
+    diagBranches: [
+      { k: 'Business', d: 'Something genuinely needs fixing in the business.' },
+      { k: 'Both', d: 'Business and psychology are tangled together.' },
+      { k: 'You', d: 'The strategy may be fine. Something personal is making it hard to act on.' },
+    ],
+    diagOut: 'Work on what actually needs work.',
+    scenLabel: 'What that looks like in practice',
+    scenarios: [
+      { n: '01', surface: 'You need more customers.', business: 'Acquisition may not work.', you: 'You may have avoided properly selling for six months.' },
+      { n: '02', surface: 'Everything still goes through you.', business: 'Roles or processes may genuinely be poor.', you: 'Letting go of control may feel much harder than it should.' },
+      { n: '03', surface: 'You keep changing direction.', business: 'The current strategy may actually be wrong.', you: 'Every strategy may start looking wrong once commitment becomes uncomfortable.' },
+      { n: '04', surface: 'You got what you wanted.', business: 'The next version of the company may need to change.', you: 'You may no longer want the thing your identity has been organised around wanting.' },
+    ],
+    howLabel: 'How it starts',
+    steps: [
+      { n: '01', title: 'Fit call', tag: '~15 min · free', body: "We talk briefly about what you're building, what's going on and whether I seem like the right person for it. A fit check, not a free session." },
+      { n: '02', title: 'First session', body: "We get properly into the problem. You don't need the “right” version of it — bring it as you see it. You leave with a clearer read and a concrete next move." },
+      { n: '03', title: 'If it makes sense, we continue', body: 'Private, ongoing 1:1 work — for as long as it stays genuinely useful.' },
+    ],
+    faqLabel: 'Common questions',
+    faq: [
+      { q: 'Is this therapy?', a: "Sometimes the work goes into territory you would absolutely recognise as psychotherapy. I'm a trained and registered psychotherapist, so we don't have to stop because the problem got personal. But this isn't a conventional therapy relationship where the business is merely context. The business itself is part of the work." },
+      { q: 'Is this business coaching?', a: "Not really. I will give you an opinion on the business. We can work directly on your offer, pricing, positioning, customer acquisition or a decision in front of you. I don't have a framework that every client gets taken through." },
+      { q: "What if I don't know whether the problem is business or psychological?", a: "You don't need to. Quite often, that's the first thing we need to work out." },
+      { q: 'Do I need to already have a business?', a: "No. You can be trying to start, building alongside a job, freelancing, consulting or already running an established business. What matters is that you're genuinely trying to build something of your own." },
+    ],
+    ctaHeading: 'Bring me the problem as you currently understand it.',
+    ctaSub: "We'll work out what it actually needs.",
+  },
+  el: {
+    h1: '1:1 Συνεργασία',
+    lead: '1:1 συμβουλευτική προσανατολισμένη και στο business που χτίζεις αλλά και σε ό,τι φέρνεις εσύ στο τραπέζι σαν άνθρωπος που μπορεί να δημιουργεί εμπόδια.',
+    intro: [
+      'Κάποια προβλήματα θέλουν μια πρακτική business λύση. Άλλα χρειάζονται πιο βαθιά δουλειά. Και αρκετά συχνά, δεν είναι ξεκάθαρο ποιο από τα δύο έχεις μπροστά σου μέχρι να αρχίσουμε να το ξετυλίγουμε.',
+      'Στο 1:1 δεν χρειάζεται να διαλέξουμε από πριν.',
+    ],
+    bizLabel: 'Business', youLabel: 'Εσύ', bothLabel: 'Και τα δύο',
+    diagLabel: 'Πώς δουλεύουμε',
+    diagBring: 'Φέρνεις αυτό που συμβαίνει.',
+    diagWork: 'Βρίσκουμε τι πραγματικά έχουμε μπροστά μας.',
+    diagBranches: [
+      { k: 'Business', d: 'Κάτι όντως χρειάζεται δουλειά στο business.' },
+      { k: 'Και τα δύο', d: 'Business και ψυχολογία είναι μπλεγμένα μαζί.' },
+      { k: 'Εσύ', d: 'Η στρατηγική μπορεί να είναι μια χαρά. Κάτι προσωπικό κάνει δύσκολο το να δράσεις.' },
+    ],
+    diagOut: 'Δουλεύουμε αυτό που πραγματικά χρειάζεται δουλειά.',
+    scenLabel: 'Πώς φαίνεται στην πράξη',
+    scenarios: [
+      { n: '01', surface: 'Χρειάζεσαι περισσότερους πελάτες.', business: 'Η απόκτηση πελατών μπορεί να μη λειτουργεί.', you: 'Μπορεί να απέφυγες να πουλήσεις σοβαρά για έξι μήνες.' },
+      { n: '02', surface: 'Όλα περνούν ακόμα από εσένα.', business: 'Οι ρόλοι ή οι διαδικασίες μπορεί όντως να είναι κακοί.', you: 'Το να αφήσεις τον έλεγχο μπορεί να είναι πολύ πιο δύσκολο απ’ όσο θα έπρεπε.' },
+      { n: '03', surface: 'Αλλάζεις συνέχεια κατεύθυνση.', business: 'Η τρέχουσα στρατηγική μπορεί όντως να είναι λάθος.', you: 'Κάθε στρατηγική μοιάζει λάθος μόλις η δέσμευση γίνει άβολη.' },
+      { n: '04', surface: 'Πέτυχες αυτό που ήθελες.', business: 'Η επόμενη εκδοχή της εταιρείας μπορεί να χρειάζεται αλλαγή.', you: 'Μπορεί να μη θες πια αυτό γύρω από το οποίο έχει οργανωθεί η ταυτότητά σου.' },
+    ],
+    howLabel: 'Πώς ξεκινάμε',
+    steps: [
+      { n: '01', title: 'Γνωριμία', tag: '~15 λεπτά · δωρεάν', body: 'Μου λες πολύ σύντομα τι χτίζεις και τι συμβαίνει. Βλέπουμε αν ταιριάζουμε. Είναι γνωριμία, όχι δωρεάν συνεδρία.' },
+      { n: '02', title: 'Πρώτη συνεδρία', body: "Μπαίνουμε κανονικά στο θέμα. Δεν χρειάζεται η «σωστή» εκδοχή — φέρ' το όπως το βλέπεις. Φεύγεις με πιο καθαρή εικόνα και ένα συγκεκριμένο επόμενο βήμα." },
+      { n: '03', title: 'Αν έχει νόημα, συνεχίζουμε', body: 'Ιδιωτικά, 1:1 — για όσο παραμένει πραγματικά χρήσιμο.' },
+    ],
+    faqLabel: 'Συχνές ερωτήσεις',
+    faq: [
+      { q: 'Είναι ψυχοθεραπεία;', a: 'Κάποιες φορές η δουλειά μας θα μπει σε θέματα που είναι ξεκάθαρα ψυχοθεραπευτικά. Είμαι εκπαιδευμένος και εγγεγραμμένος ψυχοθεραπευτής, οπότε δεν χρειάζεται να σταματήσουμε επειδή το θέμα έγινε προσωπικό. Από την άλλη, εδώ το business δεν είναι απλώς το context. Είναι κι αυτό μέρος της δουλειάς.' },
+      { q: 'Είναι business coaching;', a: 'Ναι αλλά όχι αποκλειστικά. Θα έχω άποψη για το business. Μπορούμε να δουλέψουμε κανονικά offer, positioning, τιμές, πελάτες ή μια δύσκολη απόφαση που έχεις μπροστά σου. Δεν έχω μια έτοιμη μέθοδο από την οποία περνάω όλους τους πελάτες.' },
+      { q: 'Κι αν δεν ξέρω αν το πρόβλημα είναι business ή ψυχολογικό;', a: 'Δεν χρειάζεται να ξέρεις. Αρκετές φορές, αυτό είναι το πρώτο πράγμα που πρέπει να ξεκαθαρίσουμε.' },
+      { q: 'Πρέπει να έχω ήδη επιχείρηση;', a: 'Όχι. Μπορεί να ξεκινάς τώρα, να χτίζεις κάτι παράλληλα με τη δουλειά σου, να είσαι freelancer ή consultant, ή να τρέχεις ήδη μια κανονική επιχείρηση. Το σημαντικό είναι να προσπαθείς πραγματικά να χτίσεις κάτι δικό σου.' },
+    ],
+    ctaHeading: 'Φέρε το πρόβλημα όπως το βλέπεις τώρα.',
+    ctaSub: 'Θα βρούμε τι πραγματικά χρειάζεται.',
+  },
+};
+
+// Vertical "how the work works" diagram, built from type — readable in seconds.
+function ServiceDiagram({ c, mob }) {
+  const chev = React.createElement('div', { 'aria-hidden': 'true', style: { color: C.accent, fontSize: '22px', lineHeight: 1, margin: '.9rem 0' } }, '↓');
+  const stage = (txt, big) => React.createElement('p', { style: { fontSize: big ? (mob ? '20px' : '24px') : (mob ? '17px' : '19px'), fontWeight: 600, letterSpacing: '-.01em', color: big ? C.accent : C.text, margin: 0, lineHeight: 1.35, maxWidth: '30ch' } }, txt);
+  const branches = React.createElement('div', { style: { display: 'grid', gridTemplateColumns: mob ? '1fr' : 'repeat(3, 1fr)', gap: mob ? '1.1rem' : '0', width: '100%', maxWidth: 760, border: `1px solid ${C.border}`, borderRadius: '14px', overflow: 'hidden', background: '#fff' } },
+    c.diagBranches.map((br, i) => React.createElement('div', { key: i, style: { padding: mob ? '1.1rem 1.2rem' : '1.4rem 1.5rem', borderLeft: (!mob && i) ? `1px solid ${C.border}` : 'none', borderTop: (mob && i) ? `1px solid ${C.border}` : 'none' } },
+      React.createElement('div', { style: { fontSize: '11px', fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: C.accent, marginBottom: '.5rem' } }, br.k),
+      React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.55, color: C.text, margin: 0 } }, br.d)
+    ))
+  );
+  return React.createElement('div', { style: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' } },
+    stage(c.diagBring), chev, stage(c.diagWork), chev, branches, chev, stage(c.diagOut, true)
+  );
+}
+
+function OneToOnePage({ lang = 'en' }) {
+  const mob = useIsMobile();
+  const c = ONE[lang] || ONE.en;
+  const u = tUI(lang);
+  const pad = mob ? '0 1.1rem' : '0 2.5rem';
+  const inner = (children, st) => React.createElement('div', { style: { maxWidth: 1040, margin: '0 auto', padding: pad, ...(st || {}) } }, children);
+  const gap = mob ? '3.25rem' : '5.5rem';
+  const H2 = { fontSize: mob ? '24px' : '30px', fontWeight: 500, letterSpacing: '-.02em', lineHeight: 1.25, color: C.text, margin: '0 0 1.6rem' };
+  const primaryBtn = { display: 'inline-block', textAlign: 'center', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#fff', textDecoration: 'none', borderRadius: '2px' };
+
+  // ── Hero — copy + editorial portrait (different photo from homepage) ──
+  const heroText = React.createElement('div', { style: mob ? { width: '100%' } : { flex: '1.2 1 0', minWidth: 0 } },
+    React.createElement('div', { style: { fontSize: '12px', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: C.accent, marginBottom: '1rem' } }, u.role),
+    React.createElement('h1', { style: { fontSize: mob ? '28px' : '38px', fontWeight: 500, lineHeight: 1.15, letterSpacing: '-.025em', color: C.text, margin: '0 0 1.1rem' } }, c.h1),
+    React.createElement('p', { style: { ...leadStyle, fontSize: mob ? '19px' : '22px', marginBottom: '1.4rem' } }, c.lead),
+    c.intro.map((t, i) => React.createElement(P, { key: i, last: i === c.intro.length - 1 }, t)),
+    React.createElement('div', { style: { marginTop: '1.6rem' } },
+      React.createElement('a', { href: pathFor('book', lang), className: 'cta-btn', style: primaryBtn,
+        onMouseEnter: e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; },
+        onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; } }, u.book + ' →'))
+  );
+  const heroImg = React.createElement('div', { style: mob ? { width: '100%' } : { flex: '1 1 0', minWidth: 0 } },
+    React.createElement('img', { src: 'https://aggelosmouzakitis.com/img/aggelos.webp', alt: u.imgAlt, loading: 'eager', fetchPriority: 'high', decoding: 'async', style: { width: '100%', aspectRatio: mob ? '4 / 3' : '4 / 5', objectFit: 'cover', borderRadius: '14px', display: 'block' } })
+  );
+
+  // ── Four scenarios — alternating alignment/width, no card grid ──
+  const scenario = (s, i) => {
+    const rightAlign = i % 2 === 1;
+    return React.createElement('div', { key: i, style: { maxWidth: mob ? '100%' : '68%', marginLeft: (!mob && rightAlign) ? 'auto' : '0', marginTop: i ? (mob ? '2.5rem' : '3.25rem') : 0, paddingTop: i ? '2rem' : 0, borderTop: i ? `1px solid ${C.border}` : 'none', textAlign: (!mob && rightAlign) ? 'right' : 'left' } },
+      React.createElement('div', { style: { fontSize: mob ? '13px' : '14px', fontWeight: 700, letterSpacing: '.14em', color: C.accent, marginBottom: '.6rem' } }, s.n),
+      React.createElement('p', { style: { fontSize: mob ? '20px' : '25px', fontWeight: 600, letterSpacing: '-.01em', lineHeight: 1.25, color: C.text, margin: '0 0 1rem' } }, s.surface),
+      React.createElement('p', { style: { fontSize: mob ? '15px' : '16px', lineHeight: 1.6, color: C.text, margin: '0 0 .4rem' } },
+        React.createElement('span', { style: { fontWeight: 700, color: C.accent, textTransform: 'uppercase', fontSize: '12px', letterSpacing: '.08em', marginRight: '.5rem' } }, c.bizLabel), s.business),
+      React.createElement('p', { style: { fontSize: mob ? '15px' : '16px', lineHeight: 1.6, color: C.muted, margin: 0 } },
+        React.createElement('span', { style: { fontWeight: 700, color: C.accent, textTransform: 'uppercase', fontSize: '12px', letterSpacing: '.08em', marginRight: '.5rem' } }, c.youLabel), s.you)
+    );
   };
 
-  return React.createElement('main', { style: mainStyle },
-    React.createElement('h1', { style: srOnly }, 'Aggelos Mouzakitis — Advisor & Licensed Psychotherapist for Tech Founders & Solopreneurs'),
-
-    React.createElement('div', { style: introRowStyle },
-      React.createElement('div', { style: introTextStyle },
-        React.createElement('p', { style: leadStyle }, "Hey, I’m Aggelos. I’m a licensed psychotherapist and before this I spent 18 years (still counting) in tech, in product and growth, building companies and advising more than 500 of them."),
-        React.createElement(P, null,
-          "These days I work privately with a small number of tech ",
-          React.createElement(IA, { href: '/founders/' }, 'founders'),
-          " and ", React.createElement(IA, { href: '/solopreneurs/' }, 'solopreneurs'),
-          ", and it’s usually about ",
-          React.createElement(Strong, null, "a business that has its roots in something inside you"),
-          ". It might be a decision you keep circling, or something you keep avoiding, or a kind of pressure that never really switches off. ",
-          React.createElement(Strong, null, "But one way or another, it prevents you from reaching your ideal state.")
-        ),
-        React.createElement(P, null, "The reason people come to me specifically is that they don’t have to explain their world to a therapist who has never shipped anything, and they don’t have to leave the personal stuff at the door for a coach who only wants the business version. I understand both sides at once, which is the whole point."),
-        React.createElement(P, { last: true },
-          "I write about all of this — founder psychology, burnout, overthinking — on my ", React.createElement(IA, { href: '/blog/' }, 'blog'),
-          " and talk about it on my ", React.createElement(A, { href: 'https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA' }, 'YouTube channel'),
-          ". If any of this sounds like you, you can read ",
-          React.createElement(IA, { href: '/how-i-work/' }, 'how I work'),
-          ", or just ", React.createElement(IA, { href: 'mailto:aggelos.mouzakitis@gmail.com?subject=Getting%20in%20touch' }, 'get in touch'), "."
-        )
+  // ── How it starts — numbered sequence, not cards ──
+  const seq = React.createElement('div', { style: { display: 'grid', gridTemplateColumns: mob ? '1fr' : 'repeat(3, 1fr)', gap: mob ? '2rem' : '2.5rem', marginTop: '2rem' } },
+    c.steps.map((s, i) => React.createElement('div', { key: i, style: { borderTop: `2px solid ${C.accent}`, paddingTop: '1rem' } },
+      React.createElement('div', { style: { fontSize: mob ? '30px' : '38px', fontWeight: 600, letterSpacing: '-.02em', color: C.accent, lineHeight: 1, marginBottom: '.8rem' } }, s.n),
+      React.createElement('div', { style: { display: 'flex', alignItems: 'baseline', gap: '.6rem', flexWrap: 'wrap', marginBottom: '.5rem' } },
+        React.createElement('span', { style: { fontSize: '17px', fontWeight: 700, color: C.text } }, s.title),
+        s.tag && React.createElement('span', { style: { fontSize: '11px', letterSpacing: '.05em', textTransform: 'uppercase', color: C.accent } }, s.tag)
       ),
-      React.createElement('div', { style: introImgWrapStyle },
-        React.createElement('img', {
-          src: 'https://aggelosmouzakitis.com/img/aggelos-homepage.webp',
-          alt: 'Aggelos Mouzakitis speaking on stage',
-          loading: 'eager',
-          fetchPriority: 'high',
-          decoding: 'async',
-          style: introImgStyle,
-        }),
-        React.createElement('div', { style: { display: mob ? 'none' : 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', gap: '8px', marginTop: '6px', paddingRight: '26px' } },
-          React.createElement('span', { style: { fontFamily: "'Segoe Script','Bradley Hand','Comic Sans MS',cursive", fontStyle: 'italic', fontSize: '16px', color: C.accent, transform: 'rotate(-3deg)', whiteSpace: 'nowrap', alignSelf: 'flex-end' } }, 'Friendlier than I look'),
-          React.createElement('svg', { width: 44, height: 40, viewBox: '0 0 44 40', fill: 'none', stroke: C.accent, strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round', style: { marginBottom: '2px' } },
-            React.createElement('path', { d: 'M40 3 C 44 20, 33 30, 6 30' }),
-            React.createElement('path', { d: 'M15 24 L5 30 L14 36' })
-          )
-        )
+      React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.65, color: C.muted, margin: 0 } }, s.body)
+    ))
+  );
+
+  return React.createElement('main', { style: { width: '100%', color: C.text, fontFamily: 'inherit' } },
+    // Hero
+    React.createElement('section', { style: { paddingTop: mob ? '2rem' : '4rem' } },
+      inner(React.createElement('div', { style: mob ? { display: 'flex', flexDirection: 'column', gap: '1.75rem' } : { display: 'flex', gap: '3.5rem', alignItems: 'center' } }, heroText, heroImg))
+    ),
+    // Service diagram
+    React.createElement('section', { style: { paddingTop: gap } },
+      inner(React.createElement(React.Fragment, null,
+        React.createElement('div', { style: { fontSize: mob ? '13px' : '14px', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: C.muted, textAlign: 'center', marginBottom: '2rem' } }, c.diagLabel),
+        React.createElement(ServiceDiagram, { c, mob })
+      ))
+    ),
+    // Four scenarios
+    React.createElement('section', { style: { paddingTop: gap } },
+      inner(React.createElement(React.Fragment, null,
+        React.createElement('h2', { style: H2 }, c.scenLabel),
+        React.createElement('div', { style: { marginTop: '1.5rem' } }, c.scenarios.map((s, i) => scenario(s, i)))
+      ))
+    ),
+    // Full-width photography pause (no text)
+    React.createElement('section', { style: { marginTop: gap } },
+      React.createElement('img', { src: 'https://aggelosmouzakitis.com/img/aggelos-homepage.webp', alt: '', 'aria-hidden': 'true', loading: 'lazy', decoding: 'async', style: { width: '100%', height: mob ? '220px' : '400px', objectFit: 'cover', objectPosition: 'center 30%', display: 'block' } })
+    ),
+    // How it starts
+    React.createElement('section', { style: { paddingTop: gap } },
+      inner(React.createElement(React.Fragment, null,
+        React.createElement('h2', { style: H2 }, c.howLabel),
+        seq
+      ))
+    ),
+    // FAQ
+    React.createElement('section', { style: { paddingTop: gap } },
+      inner(React.createElement(React.Fragment, null,
+        React.createElement('h2', { style: H2 }, c.faqLabel),
+        React.createElement(FaqAccordion, { items: c.faq, mob })
+      ))
+    ),
+    // Final CTA + footer
+    React.createElement('section', { style: { paddingTop: mob ? '2.5rem' : '3.5rem', paddingBottom: mob ? '4rem' : '6rem' } },
+      inner(React.createElement(React.Fragment, null,
+        React.createElement(FinalCta, { lang, mob, heading: c.ctaHeading, sub: c.ctaSub }),
+        React.createElement(SiteFooter, { mob, lang })
+      ))
+    )
+  );
+}
+
+// ─── ABOUT PAGE (bilingual) ──────────────────────────────────────────────────
+const ABOUT = {
+  en: {
+    h1: 'About',
+    role: 'Business Advisor + Licensed Psychotherapist',
+    creds: 'MSc Integrative Counselling & Psychotherapy (University of Derby) · BACP-registered · Based in Ireland, working globally',
+    lead: 'Two careers that kept running into the same problem.',
+    intro: [
+      'I spent 18+ years in tech, mostly in product and growth. I built my own companies, worked inside startups and large organisations, and advised more than 500 businesses.',
+      "So if we're talking about your offer, pricing, customer acquisition, a hire, a sale you're avoiding or a business decision you can't settle, you don't need to translate the commercial side for me.",
+      'I know that world.',
+    ],
+    sections: [
+      { label: "Then psychology started showing up in places it wasn't invited.", body: [
+        "Again and again, I'd see a business problem that was only partly a business problem.",
+        'Someone knew they needed to sell but wouldn’t.',
+        'Someone kept changing a perfectly reasonable strategy.',
+        'Someone had hired good people but struggled to let go of control.',
+        'Someone had enough information to make a decision and kept looking for more.',
+        "The strategy mattered. But it wasn't the whole story.",
+        'So I trained as a psychotherapist: MSc Integrative Counselling & Psychotherapy at the University of Derby, and registration with the BACP.',
+      ] },
+      { label: 'Then the same thing happened from the other direction.', body: [
+        "In psychological work, I'd meet ambitious people dealing with very real business problems.",
+        "And sometimes a psychological explanation wasn't what they needed.",
+        'Their offer was weak. Their pricing was wrong. They had no reliable way of finding customers. They were making a bad business decision.',
+        "Psychotherapy isn't designed to tell you that.",
+      ] },
+      { label: 'Eventually, the two careers stopped looking random.', body: [
+        'Sometimes the problem is clearly business.',
+        "Sometimes it's personal.",
+        "And quite often they collide so much that you can't tell where one ends and the other begins.",
+        "That's the work I find most interesting.",
+      ] },
+      { label: "I'm not here to tell you to want less.", body: [
+        "Ambition isn't a symptom.",
+        "I don't want to convince you that wanting a bigger business, more money, more independence or more impact is secretly unhealthy.",
+        'I want to help you build what you actually want without automatically assuming that either the business or you must be the problem.',
+      ] },
+    ],
+    ctaHeading: 'Usually, we need to look before we know.',
+    ctaLabel: 'See how 1:1 works',
+  },
+  el: {
+    h1: 'Λίγα για μένα',
+    role: 'Business Advisor + Ψυχοθεραπευτής',
+    creds: 'MSc Integrative Counselling & Psychotherapy (University of Derby) · Εγγεγραμμένος στο BACP · Έδρα στην Ιρλανδία, δουλεύω παγκόσμια',
+    lead: 'Δύο καριέρες που κατέληγαν να συναντιούνται συνέχεια.',
+    intro: [
+      'Πέρασα 18+ χρόνια στην τεχνολογία, κυρίως στο product και το growth. Έχτισα δικές μου εταιρείες, δούλεψα σε startups και μεγάλους οργανισμούς και συμβούλεψα περισσότερες από 500 επιχειρήσεις.',
+      'Οπότε αν μιλάμε για offer, pricing, πελάτες, μια πρόσληψη, μια πώληση που αποφεύγεις ή μια business απόφαση που δεν μπορείς να κλείσεις, δεν χρειάζεται να μου εξηγήσεις όλο το context.',
+      'Αυτόν τον κόσμο τον ξέρω.',
+    ],
+    sections: [
+      { label: 'Κάπου εκεί άρχισε να εμφανίζεται η ψυχολογία εκεί που κανείς δεν την είχε καλέσει.', body: [
+        'Ξανά και ξανά έβλεπα business προβλήματα που ήταν μόνο εν μέρει business προβλήματα.',
+        'Κάποιος ήξερε ότι έπρεπε να πουλήσει και δεν το έκανε.',
+        'Κάποιος άλλαζε συνέχεια μια απολύτως λογική στρατηγική.',
+        'Κάποιος είχε προσλάβει καλούς συνεργάτες αλλά δυσκολευόταν να αποδεσμευτεί από το control.',
+        'Κάποιος είχε αρκετή πληροφορία για να πάρει μια απόφαση και συνέχιζε να ψάχνει κι άλλη.',
+        'Το business είχε σημασία. Απλώς δεν ήταν όλη η ιστορία.',
+        'Έτσι εκπαιδεύτηκα ως ψυχοθεραπευτής.',
+      ] },
+      { label: 'Και μετά άρχισα να βλέπω το ίδιο πράγμα από την άλλη πλευρά.', body: [
+        'Στην ψυχολογική δουλειά συναντούσα φιλόδοξους ανθρώπους με απολύτως πραγματικά business προβλήματα.',
+        'Και μερικές φορές αυτό που χρειάζονταν δεν ήταν μια ψυχολογική εξήγηση.',
+        'Το offer ήταν αδύναμο. Οι τιμές λάθος. Δεν υπήρχε σταθερός τρόπος να έρθουν πελάτες. Ή απλώς η business απόφαση ήταν κακή.',
+        'Η ψυχοθεραπεία δεν είναι φτιαγμένη για να σε βοηθήσει με αυτό.',
+      ] },
+      { label: 'Κάπως έτσι, οι δύο καριέρες σταμάτησαν να μοιάζουν τόσο random.', body: [
+        'Μερικές φορές το πρόβλημα είναι καθαρά business.',
+        'Μερικές φορές είναι προσωπικό.',
+        'Και αρκετά συχνά μπλέκονται τόσο, που δεν είναι καθόλου ξεκάθαρο πού τελειώνει το ένα και αρχίζει το άλλο.',
+        'Αυτό είναι το σημείο που με ενδιαφέρει περισσότερο.',
+      ] },
+      { label: 'Δεν είμαι εδώ για να σου πω να θέλεις λιγότερα.', body: [
+        'Η φιλοδοξία δεν είναι σύμπτωμα.',
+        'Δεν θέλω να σε πείσω ότι το να θέλεις μεγαλύτερο business, περισσότερα χρήματα, περισσότερη ανεξαρτησία ή μεγαλύτερο impact είναι κατά βάθος ανθυγιεινό.',
+        'Θέλω να σε βοηθήσω να χτίσεις αυτό που πραγματικά θέλεις, χωρίς να υποθέτουμε από πριν ότι το πρόβλημα πρέπει να είναι είτε το business είτε εσύ.',
+      ] },
+    ],
+    ctaHeading: 'Πρώτα κοιτάμε. Μετά αποφασίζουμε.',
+    ctaLabel: 'Δες την 1:1 συνεργασία',
+  },
+};
+function AboutPage({ lang = 'en' }) {
+  const mob = useIsMobile();
+  const c = ABOUT[lang] || ABOUT.en;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1.1rem 5rem' } : widePageStyle;
+  const subhead = { fontSize: mob ? '20px' : '24px', fontWeight: 500, letterSpacing: '-.01em', lineHeight: 1.3, color: C.text, margin: mob ? '2.5rem 0 1rem' : '3.25rem 0 1.1rem' };
+  return React.createElement('main', { style: mobPage },
+    React.createElement('h1', { style: { ...h1Style, marginBottom: '1.25rem', fontSize: mob ? '26px' : '32px' } }, c.h1),
+    React.createElement('div', { style: { display: 'flex', gap: '1.2rem', alignItems: 'center', marginBottom: '2.25rem', paddingBottom: '1.75rem', borderBottom: `1px solid ${C.border}` } },
+      React.createElement('img', { src: 'https://aggelosmouzakitis.com/img/aggelos.webp', alt: 'Aggelos Mouzakitis', width: 64, height: 64, style: { width: 64, height: 64, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, display: 'block' } }),
+      React.createElement('div', null,
+        React.createElement('div', { style: { fontSize: '12px', letterSpacing: '.12em', textTransform: 'uppercase', color: C.accent, fontWeight: 700 } }, c.role),
+        React.createElement('div', { style: { fontSize: '12px', letterSpacing: '.04em', color: '#767676', marginTop: '5px', lineHeight: 1.5 } }, c.creds)
       )
     ),
+    React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '1.5rem' : '1.75rem' } }, c.lead),
+    c.intro.map((p, i) => React.createElement(P, { key: i, last: i === c.intro.length - 1 }, p)),
+    c.sections.map((s, i) => React.createElement(React.Fragment, { key: i },
+      React.createElement('h2', { style: subhead }, s.label),
+      s.body.map((p, j) => React.createElement(P, { key: j, last: j === s.body.length - 1 }, p))
+    )),
+    React.createElement('div', {
+      style: { marginTop: mob ? '3rem' : '4rem', padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem', border: `1.5px solid rgba(26,127,55,.4)`, background: 'rgba(26,127,55,.06)', borderRadius: '14px' },
+    },
+      React.createElement('p', { style: { fontSize: mob ? '19px' : '23px', fontWeight: 500, letterSpacing: '-.01em', lineHeight: 1.5, color: C.text, margin: 0 } }, c.ctaHeading),
+      React.createElement('a', {
+        href: pathFor('one-to-one', lang), className: 'cta-btn',
+        style: { display: 'inline-block', marginTop: '1.4rem', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#fff', textDecoration: 'none', borderRadius: '2px' },
+        onMouseEnter: e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; },
+        onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
+      }, c.ctaLabel + ' →')
+    ),
+    React.createElement(SiteFooter, { mob, lang })
+  );
+}
 
-    React.createElement(StartHere, { mob }),
-    React.createElement(LatestWriting, { mob }),
-
-    React.createElement(SiteFooter, { mob })
+// ─── REVIEWS (verbatim testimonials — do not rewrite client words) ────────────
+// English is the original, spoken language of every testimonial. On the Greek
+// page a faithful Greek translation shows first, with the original English
+// available via a per-testimonial toggle. Order follows the approved spec.
+const REVIEWS_ITEMS = [
+  { w: 'Anonymous client, Founder', wEl: 'Ανώνυμος πελάτης, Founder',
+    q: "I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don’t have to translate one world into the other for him.",
+    qEl: "Είχα δουλέψει με coaches στο παρελθόν, είχα κάνει και θεραπεία, αλλά αυτό ένιωσα ότι ήταν διαφορετικό. Ο Άγγελος καταλαβαίνει τη συναισθηματική πλευρά χωρίς να χάνει από τα μάτια του την πραγματική κατάσταση που αντιμετωπίζω στη δουλειά. Μπορούμε να μιλήσουμε για πίεση, ντροπή ή για κάτι που συμβαίνει στο σώμα μου, και πέντε λεπτά αργότερα να συζητάμε μια απόφαση που αφορά την ομάδα ή το business μου. Δεν χρειάζεται να του μεταφράζω τον έναν κόσμο στον άλλον." },
+  { w: 'Anonymous client, Senior professional', wEl: 'Ανώνυμος πελάτης, Έμπειρος επαγγελματίας',
+    q: "I came in expecting a fairly standard coaching conversation. Within the first session, Aggelos understood both the professional problem and the emotional mechanism underneath it. He was warm, but very straightforward, and gave me a way of looking at the situation that I had not considered before. I left with more than advice. I left with a more accurate problem.",
+    qEl: "Ήρθα περιμένοντας μια αρκετά τυπική συζήτηση coaching. Μέσα στην πρώτη κιόλας συνεδρία, ο Άγγελος κατάλαβε και το επαγγελματικό πρόβλημα και τον συναισθηματικό μηχανισμό από κάτω του. Ήταν ζεστός, αλλά πολύ ευθύς, και μου έδωσε έναν τρόπο να δω την κατάσταση που δεν είχα σκεφτεί πριν. Έφυγα με κάτι παραπάνω από συμβουλές. Έφυγα με ένα πιο ακριβές πρόβλημα." },
+  { w: 'Anonymous client, Business owner', wEl: 'Ανώνυμος πελάτης, Ιδιοκτήτης επιχείρησης',
+    q: "I had been forcing a business situation to continue because stopping it felt like failure. After one of our exercises, I realised I was trying to manufacture reasons to keep going when I already knew the answer. I had the difficult conversation shortly afterwards. It was not that Aggelos gave me the decision. He helped me stop fighting what I already knew.",
+    qEl: "Πίεζα μια επιχειρηματική κατάσταση να συνεχιστεί, επειδή το να τη σταματήσω έμοιαζε με αποτυχία. Μετά από μία από τις ασκήσεις μας, συνειδητοποίησα ότι προσπαθούσα να κατασκευάσω λόγους για να συνεχίσω, ενώ ήδη ήξερα την απάντηση. Έκανα τη δύσκολη συζήτηση λίγο αργότερα. Δεν ήταν ότι ο Άγγελος μου έδωσε την απόφαση. Με βοήθησε να σταματήσω να παλεύω με αυτό που ήδη ήξερα." },
+  { w: 'Anonymous client, Founder', wEl: 'Ανώνυμος πελάτης, Founder',
+    q: "There are no motivational speeches or generic frameworks pasted onto every situation. Aggelos pays attention to how I specifically operate. He remembers the contradictions, notices when I change the story and asks the question I was hoping we could avoid. Annoying at times, but usually accurate.",
+    qEl: "Δεν υπάρχουν εμψυχωτικοί λόγοι ή γενικά frameworks κολλημένα πάνω σε κάθε κατάσταση. Ο Άγγελος προσέχει πώς λειτουργώ συγκεκριμένα εγώ. Θυμάται τις αντιφάσεις, αντιλαμβάνεται πότε αλλάζω την ιστορία και κάνει την ερώτηση που έλπιζα ότι θα μπορούσαμε να αποφύγουμε. Ενοχλητικό κάποιες φορές, αλλά συνήθως εύστοχο." },
+  { w: 'Anonymous client, Founder', wEl: 'Ανώνυμος πελάτης, Founder',
+    q: "We have been working together for a while now, and the sessions have gradually changed the way I make decisions. Aggelos doesn’t tell me what to do or try to make me dependent on his opinion. He helps me separate the real problem from the fear, ego and old patterns wrapped around it. I usually leave with less noise and a much clearer sense of what is mine to do.",
+    qEl: "Δουλεύουμε μαζί εδώ και αρκετό καιρό, και οι συνεδρίες έχουν αλλάξει σταδιακά τον τρόπο που παίρνω αποφάσεις. Ο Άγγελος δεν μου λέει τι να κάνω ούτε προσπαθεί να με κάνει να εξαρτώμαι από τη γνώμη του. Με βοηθά να ξεχωρίσω το πραγματικό πρόβλημα από τον φόβο, το ego και τα παλιά μοτίβα που είναι τυλιγμένα γύρω του. Συνήθως φεύγω με λιγότερο θόρυβο και πολύ πιο καθαρή αίσθηση του τι είναι δικό μου να κάνω." },
+  { w: 'Anonymous client, Senior tech professional', wEl: 'Ανώνυμος πελάτης, Έμπειρος επαγγελματίας τεχνολογίας',
+    q: "The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.",
+    qEl: "Οι συζητήσεις πάνε πιο βαθιά από το συνηθισμένο coaching, αλλά και πάλι φεύγω με κάτι αξιοποιήσιμο. Κάποιες φορές είναι μια απόφαση, κάποιες μια δύσκολη συζήτηση που πρέπει να κάνω, και κάποιες φορές είναι απλώς το να παρατηρήσω τη στιγμή που το σώμα μου μπαίνει σε κατάσταση απειλής, πριν το μυαλό μου φτιάξει μια ιστορία γύρω από αυτό. Είναι ένας σπάνιος συνδυασμός βάθους και πρακτικότητας." },
+  { w: 'Anonymous client, Senior tech professional', wEl: 'Ανώνυμος πελάτης, Έμπειρος επαγγελματίας τεχνολογίας',
+    q: "Aggelos is direct. He will tell me when I am avoiding something or constructing a very intelligent explanation for why I cannot act. But I have never experienced his directness as judgement. There is enough trust between us that he can challenge me properly, which is exactly what I needed.",
+    qEl: "Ο Άγγελος είναι ευθύς. Θα μου πει όταν αποφεύγω κάτι ή όταν κατασκευάζω μια πολύ έξυπνη εξήγηση για το γιατί δεν μπορώ να δράσω. Όμως ποτέ δεν βίωσα την ευθύτητά του ως κριτική. Υπάρχει αρκετή εμπιστοσύνη μεταξύ μας ώστε να μπορεί να με προκαλέσει σωστά, που είναι ακριβώς αυτό που χρειαζόμουν." },
+  { w: 'Anonymous client, Founder and executive', wEl: 'Ανώνυμος πελάτης, Founder και στέλεχος',
+    q: "I did not want somebody to tell me to work less, lower my standards or become less ambitious. Aggelos understood that immediately. Our work has been about keeping the part of me that wants to build and achieve, while becoming less dependent on winning, comparison and external approval to feel okay. That distinction has been very important to me.",
+    qEl: "Δεν ήθελα κάποιον να μου πει να δουλεύω λιγότερο, να χαμηλώσω τον πήχη ή να γίνω λιγότερο φιλόδοξος. Ο Άγγελος το κατάλαβε αμέσως. Η δουλειά μας ήταν να κρατήσουμε το κομμάτι μου που θέλει να χτίζει και να πετυχαίνει, ενώ ταυτόχρονα γίνομαι λιγότερο εξαρτημένος από το να νικάω, τη σύγκριση και την εξωτερική επιβεβαίωση για να νιώθω καλά. Αυτή η διάκριση ήταν πολύ σημαντική για μένα." },
+  { w: 'Anonymous client, Consultant and business owner', wEl: 'Ανώνυμος πελάτης, Σύμβουλος και ιδιοκτήτης επιχείρησης',
+    q: "Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.",
+    qEl: "Πριν αρχίσουμε να δουλεύουμε μαζί, ένα δύσκολο email ή ένα πρόβλημα με έναν πελάτη μπορούσε να επηρεάσει ολόκληρη τη μέρα μου. Ένιωθα αμέσως υπεύθυνος για τα πάντα και άρχιζα να προσπαθώ να ελέγξω το πώς με έβλεπαν. Ανιχνεύσαμε αυτή την αντίδραση πολύ πιο πίσω από την άμεση κατάσταση στη δουλειά. Ακόμα νιώθω πίεση, αλλά μπορώ να την αναγνωρίσω νωρίτερα και δεν πιστεύω πια κάθε συμπέρασμα που παράγει το νευρικό μου σύστημα." },
+  { w: 'Anonymous client, Technology leader', wEl: 'Ανώνυμος πελάτης, Ηγέτης στην τεχνολογία',
+    q: "I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.",
+    qEl: "Καταλάβαινα ήδη πολλά από τα μοτίβα μου σε διανοητικό επίπεδο. Αυτό ήταν εν μέρει το πρόβλημα. Μπορούσα να εξηγήσω τον εαυτό μου πολύ καλά και παρ’ όλα αυτά να επαναλαμβάνω την ίδια συμπεριφορά. Η δουλειά με τον Άγγελο με βοήθησε να αναγνωρίζω τι συμβαίνει σε σωματικό επίπεδο, όχι απλώς να το αναλύω εκ των υστέρων. Αυτό έκανε τη δουλειά πολύ πιο πραγματική και, σιγά σιγά, άλλαξε τον τρόπο που αντιδρώ κάτω από πίεση." },
+  { w: 'Anonymous client, Senior operator', wEl: 'Ανώνυμος πελάτης, Έμπειρο στέλεχος',
+    q: "One of the most useful things is that Aggelos actually understands the environment I work in. I don’t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than “follow your values.” He understands the game, but he also notices what the game is doing to me.",
+    qEl: "Ένα από τα πιο χρήσιμα πράγματα είναι ότι ο Άγγελος πραγματικά καταλαβαίνει το περιβάλλον στο οποίο δουλεύω. Δεν χρειάζεται να του εξηγήσω τα εταιρικά παιχνίδια, την πίεση ενός startup, τα targets, τους επενδυτές ή γιατί μια απόφαση καριέρας μπορεί να είναι πιο περίπλοκη από το «ακολούθησε τις αξίες σου». Καταλαβαίνει το παιχνίδι, αλλά προσέχει και το τι μου κάνει αυτό το παιχνίδι." },
+  { w: 'Anonymous client', wEl: 'Ανώνυμος πελάτης',
+    q: "I was initially sceptical about somatic and trauma-informed work because I assumed it would be vague or a bit spiritual. It wasn’t. Aggelos explained what we were doing, paid attention to my limits and connected the experience back to patterns I could recognise in my work and relationships. It felt grounded, careful and surprisingly practical.",
+    qEl: "Στην αρχή ήμουν επιφυλακτικός με τη σωματική και trauma-informed δουλειά, γιατί υπέθετα ότι θα ήταν ασαφής ή λίγο «πνευματική». Δεν ήταν. Ο Άγγελος εξήγησε τι κάναμε, έδωσε προσοχή στα όριά μου και σύνδεσε την εμπειρία με μοτίβα που μπορούσα να αναγνωρίσω στη δουλειά και στις σχέσεις μου. Ένιωσα ότι ήταν γειωμένο, προσεκτικό και απροσδόκητα πρακτικό." },
+  { w: 'Anonymous client, Product leader', wEl: 'Ανώνυμος πελάτης, Product leader',
+    q: "I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.",
+    qEl: "Εμπιστεύομαι τον Άγγελο γιατί δεν προσπαθεί συνέχεια να με καθησυχάσει. Ακούει προσεκτικά, αλλά δεν συμφωνεί αυτόματα με την εκδοχή των γεγονότων που φέρνω στη συνεδρία. Κάποιες φορές επισημαίνει κάτι που θα προτιμούσα να μην δω. Κατά κάποιον τρόπο, αυτή η ειλικρίνεια έκανε τη δουλειά να νιώθεται πιο ασφαλής, όχι λιγότερο." },
+  { w: 'Anonymous client, Technology executive', wEl: 'Ανώνυμος πελάτης, Στέλεχος τεχνολογίας',
+    q: "I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.",
+    qEl: "Άρχισα να δουλεύω με τον Άγγελο σε μια μπερδεμένη περίοδο της καριέρας μου. Στα χαρτιά, τα πράγματα πήγαιναν καλά, αλλά μέσα μου αμφισβητούσα σχεδόν τα πάντα. Μέσα σε αρκετές συνεδρίες, με βοήθησε να καταλάβω ποιες ανησυχίες ήταν βάσιμες και ποιες μεγεθύνονταν από παλιούς φόβους γύρω από την απόδοση, την αποτυχία και το πώς με έβλεπαν οι άλλοι. Νιώθω πιο γειωμένος τώρα, παρότι δεν έχουν λυθεί όλα." },
+  { w: 'Anonymous client, Tech executive', wEl: 'Ανώνυμος πελάτης, Στέλεχος τεχνολογίας',
+    q: "From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.",
+    qEl: "Απ’ έξω, εξακολουθούσα να λειτουργώ και να αποδίδω σε υψηλό επίπεδο, οπότε ήταν δύσκολο να εξηγήσω γιατί κάτι ένιωθα ότι δεν πήγαινε καλά. Ο Άγγελος κατάλαβε ότι το πρόβλημα δεν ήταν απλώς ο φόρτος δουλειάς. Δουλέψαμε πάνω στον τρόπο που συνδέω το επίτευγμα με την ασφάλεια, την αξία και την ανακούφιση. Εξακολουθώ να είμαι φιλόδοξος, αλλά η επιτυχία αρχίζει να νιώθεται λιγότερο σαν οριακή διαφυγή από την αποτυχία." },
+];
+const REVIEWS = {
+  en: {
+    h1: 'What people say',
+    lead: 'A few things people have said after working with me.',
+    sub: 'Names and identifying details are removed. The words are theirs.',
+    toggle: null,
+    ctaHeading: 'It starts with a short, free fit call.',
+  },
+  el: {
+    h1: 'Τι λένε άνθρωποι που έχουν δουλέψει μαζί μου',
+    lead: 'Μερικά πράγματα που έχουν πει άνθρωποι μετά τη δουλειά μας.',
+    sub: 'Τα ονόματα και τα στοιχεία που θα μπορούσαν να τους ταυτοποιήσουν έχουν αφαιρεθεί. Τα λόγια είναι δικά τους.',
+    toggle: 'Αρχικό κείμενο στα αγγλικά',
+    ctaHeading: 'Ξεκινά με μια σύντομη, δωρεάν γνωριμία.',
+  },
+};
+function ReviewCard({ t, lang, toggleLabel }) {
+  const [open, setOpen] = React.useState(false);
+  const el = lang === 'el';
+  const quote = el ? t.qEl : t.q;
+  const who = el ? t.wEl : t.w;
+  return React.createElement('blockquote', { style: { breakInside: 'avoid', margin: '0 0 1.9rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(26,127,55,0.35)' } },
+    React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.8, color: '#282726', margin: '0 0 .5rem' } }, '“' + quote + '”'),
+    React.createElement('footer', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, who),
+    el && React.createElement('button', {
+      onClick: () => setOpen(!open),
+      'aria-expanded': open ? 'true' : 'false',
+      style: { marginTop: '.8rem', background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: '12px', fontWeight: 600, color: C.accent, letterSpacing: '.02em' },
+    }, toggleLabel + ' ' + (open ? '↑' : '↓')),
+    el && open && React.createElement('p', { style: { marginTop: '.7rem', paddingTop: '.7rem', borderTop: `1px solid ${C.border}`, fontSize: '14px', lineHeight: 1.75, color: C.muted, fontStyle: 'italic' } }, '“' + t.q + '”')
+  );
+}
+function ReviewsPage({ lang = 'en' }) {
+  const mob = useIsMobile();
+  const c = REVIEWS[lang] || REVIEWS.en;
+  const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1.1rem 5rem' } : widePageStyle;
+  return React.createElement('main', { style: mobPage },
+    React.createElement('h1', { style: { ...h1Style, marginBottom: '1rem', fontSize: mob ? '26px' : '32px' } }, c.h1),
+    React.createElement('p', { style: { ...leadStyle, marginBottom: '.8rem' } }, c.lead),
+    React.createElement('p', { style: { fontSize: '15px', color: C.muted, lineHeight: 1.6, marginBottom: mob ? '2rem' : '2.75rem' } }, c.sub),
+    React.createElement('div', { style: { columnGap: mob ? 0 : '2.5rem', columnCount: mob ? 1 : 2 } },
+      REVIEWS_ITEMS.map((t, i) => React.createElement(ReviewCard, { key: i, t, lang, toggleLabel: c.toggle }))
+    ),
+    React.createElement(FinalCta, { lang, mob, heading: c.ctaHeading }),
+    React.createElement(SiteFooter, { mob, lang })
   );
 }
 
@@ -634,8 +1350,43 @@ function HowIWorkPage() {
 }
 
 // ─── BOOK A FIT CALL ─────────────────────────────────────────────────────────
-function BookPage() {
+const BOOK = {
+  en: {
+    h1: 'Book a fit call',
+    intro: [
+      "15 minutes to tell me what you're building, what's going on and whether it makes sense for us to work together.",
+      "You don't need to prepare anything.",
+      "This isn't a free session and I'm not going to squeeze a sales pitch into fifteen minutes.",
+      "Tell me the real situation. I'll ask a few questions.",
+      "If I think I can help, I'll tell you what the next step looks like.",
+      "If I don't, I'll tell you that too. Politely. Probably.",
+    ],
+    bookBelow: 'Book below',
+    emailPre: "Can't find a slot, or prefer email? Reach me at ",
+    crossLead: 'Not sure whether to book?',
+    crossBody: 'Take the Starting Diagnostic first and give me a little more context.',
+    crossBtn: 'Take the Starting Diagnostic',
+  },
+  el: {
+    h1: 'Κλείσε μια γνωριμία',
+    intro: [
+      '15 λεπτά για να μου πεις τι χτίζεις, τι συμβαίνει και αν έχει νόημα να δουλέψουμε μαζί.',
+      'Δεν χρειάζεται να προετοιμάσεις τίποτα.',
+      'Δεν είναι δωρεάν συνεδρία και δεν πρόκειται να στριμώξω sales pitch σε δεκαπέντε λεπτά.',
+      'Πες μου την πραγματική κατάσταση. Θα σου κάνω μερικές ερωτήσεις.',
+      'Αν πιστεύω ότι μπορώ να βοηθήσω, θα σου πω ποιο είναι το επόμενο βήμα.',
+      'Αν όχι, θα σου το πω κι αυτό. Ευγενικά. Μάλλον.',
+    ],
+    bookBelow: 'Κλείσε ραντεβού παρακάτω',
+    emailPre: 'Δεν βρίσκεις διαθέσιμη ώρα ή προτιμάς email; Βρες με στο ',
+    crossLead: 'Δεν είσαι ακόμα σίγουρος αν θέλεις να κλείσεις;',
+    crossBody: 'Κάνε πρώτα το Starting Diagnostic και δώσε μου λίγο περισσότερο context.',
+    crossBtn: 'Starting Diagnostic',
+  },
+};
+function BookPage({ lang = 'en' }) {
   const mob = useIsMobile();
+  const c = BOOK[lang] || BOOK.en;
   const mobPage = mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
   React.useEffect(function () {
     if (document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]')) {
@@ -648,36 +1399,26 @@ function BookPage() {
     document.body.appendChild(sc);
   }, []);
   return React.createElement('main', { style: mobPage },
-    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.25rem' : '1.75rem', fontSize: mob ? '20px' : '28px' } }, 'Book a fit call'),
-    React.createElement('p', { style: { ...leadStyle, marginBottom: '1.4rem' } }, "Just a short, friendly call to understand what's going on, what you're looking for, and whether working together would actually make sense."),
-    React.createElement(P, null, "If it does, I'll tell you what the next step looks like."),
-    React.createElement(P, { last: true }, "If it doesn't, I'll tell you that too. Politely. Probably."),
-    React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '3.5rem' } }),
-    React.createElement(Section, { label: 'How it usually works', mob },
-      React.createElement(P, null, React.createElement(Strong, null, "1. Fit call."), " A short call to see if there's a fit."),
-      React.createElement(P, null, React.createElement(Strong, null, "2. Paid session."), " We get into the actual thing. You bring the problem as you see it. We find the more accurate one underneath."),
-      React.createElement(P, { last: true }, React.createElement(Strong, null, "3. Ongoing work."), " If it's useful, we continue. Private, one to one, for as long as it genuinely helps. Not a session longer.")
-    ),
-    React.createElement('h2', { style: { ...h2Style, color: C.accent, marginBottom: '1.2rem' } }, 'Book below'),
+    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.25rem' : '1.5rem', fontSize: mob ? '24px' : '30px' } }, c.h1),
+    c.intro.map((p, i) => React.createElement(P, { key: i, last: i === c.intro.length - 1 }, p)),
+    React.createElement('h2', { style: { ...h2Style, color: C.accent, margin: mob ? '2.25rem 0 1.1rem' : '2.75rem 0 1.2rem' } }, c.bookBelow),
     React.createElement('div', {
       className: 'calendly-inline-widget',
       'data-url': 'https://calendly.com/aggelosmouzakitis/one-to-one',
-      style: { minWidth: '320px', height: '700px', marginBottom: '2rem' }
+      style: { minWidth: '320px', height: '700px', marginBottom: '1.5rem' }
     }),
-    React.createElement(P, null,
-      "Can't find a slot? Or prefer email because Calendly feels weirdly intimate for a calendar tool? Email me at ",
+    React.createElement(P, { last: true },
+      c.emailPre,
       React.createElement(IA, { href: 'mailto:aggelos.mouzakitis@gmail.com' }, 'aggelos.mouzakitis@gmail.com'), "."
     ),
-    React.createElement('hr', { style: sepStyle }),
-    React.createElement(Section, { label: 'One small note', mob },
-      React.createElement(P, null,
-        "If you have a question but you don't want to start a working relationship, use the ",
-        React.createElement(IA, { href: '/ask-me-anything/' }, 'Ask me anything'),
-        " page instead. That's the better place for one-off questions."
-      ),
-      React.createElement(P, { last: true }, "This page is for people who are at least wondering whether they need someone in the room with them for a while.")
+    React.createElement('div', {
+      style: { marginTop: mob ? '2.5rem' : '3rem', padding: mob ? '1.5rem 1.4rem' : '1.8rem 2rem', border: `1px solid ${C.border}`, background: '#fff', borderRadius: '14px' },
+    },
+      React.createElement('p', { style: { fontSize: mob ? '17px' : '18px', fontWeight: 600, color: C.text, margin: '0 0 .5rem' } }, c.crossLead),
+      React.createElement('p', { style: { fontSize: '16px', lineHeight: 1.65, color: C.muted, margin: '0 0 1.1rem' } }, c.crossBody),
+      React.createElement(IA, { href: pathFor('diagnostic', lang) }, c.crossBtn + ' →')
     ),
-    React.createElement(SiteFooter, { mob })
+    React.createElement(SiteFooter, { mob, lang })
   );
 }
 
@@ -1055,9 +1796,9 @@ function CareerTransitionPage() {
 function locMobPage(mob) {
   return mob ? { ...pageStyle, padding: '1.5rem 1rem 5rem' } : widePageStyle;
 }
-function BookCta({ label }) {
+function BookCta({ label, lang = 'en' }) {
   return React.createElement('div', { style: { marginTop: '1.4rem' } },
-    React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, label || 'Book a fit call →')
+    React.createElement('a', { href: pathFor('book', lang), className: 'cta-btn', style: ctaBtn }, label || (tUI(lang).book + ' →'))
   );
 }
 
@@ -1082,11 +1823,11 @@ function LondonPage() {
     ),
 
     React.createElement(Section, { label: 'And I understand the industry', mob },
-      React.createElement(P, { last: true }, "You also don’t have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), ", so runway, reorgs, shipping, the pressure of a senior role — I already follow all of it. It’s the same reason my ", React.createElement(IA, { href: '/founders/' }, 'founder'), " and ", React.createElement(IA, { href: '/solopreneurs/' }, 'solopreneur'), " clients come to me.")
+      React.createElement(P, { last: true }, "You also don’t have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), ", so runway, reorgs, shipping, the pressure of a senior role — I already follow all of it. It’s the same reason my ", React.createElement(IA, { href: '/1-to-1/' }, 'founder'), " and ", React.createElement(IA, { href: '/1-to-1/' }, 'solopreneur'), " clients come to me.")
     ),
 
     React.createElement(Section, { label: 'The work itself is the same', mob },
-      React.createElement(P, { last: true }, "Nothing about the work changes because you’re in London or because we speak Greek. It’s the same private, one-to-one work I do with everyone — the personal pattern and the real decision in front of you, worked at the same time. How it runs, step by step, is on ", React.createElement(IA, { href: '/how-i-work/' }, 'how I work'), ".")
+      React.createElement(P, { last: true }, "Nothing about the work changes because you’re in London or because we speak Greek. It’s the same private, one-to-one work I do with everyone — the personal pattern and the real decision in front of you, worked at the same time. How it runs, step by step, is on ", React.createElement(IA, { href: '/1-to-1/' }, 'how I work'), ".")
     ),
 
     React.createElement(Section, { label: 'Online sessions', mob },
@@ -1140,11 +1881,11 @@ function ManchesterPage() {
     ),
 
     React.createElement(Section, { label: 'And I understand the industry', mob },
-      React.createElement(P, { last: true }, "You also don’t have to explain the work — the pipeline that’s gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), " before training as a psychotherapist, and I’ve done the job-to-independent route myself. It’s the same reason my ", React.createElement(IA, { href: '/solopreneurs/' }, 'solopreneur'), " and ", React.createElement(IA, { href: '/founders/' }, 'founder'), " clients come to me.")
+      React.createElement(P, { last: true }, "You also don’t have to explain the work — the pipeline that’s gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), " before training as a psychotherapist, and I’ve done the job-to-independent route myself. It’s the same reason my ", React.createElement(IA, { href: '/1-to-1/' }, 'solopreneur'), " and ", React.createElement(IA, { href: '/1-to-1/' }, 'founder'), " clients come to me.")
     ),
 
     React.createElement(Section, { label: 'The work itself is the same', mob },
-      React.createElement(P, { last: true }, "It’s the same private, one-to-one work I do with everyone, working the personal pattern and the practical decision together. If you work for yourself, that includes the business side — pricing, positioning, the outreach you keep putting off — alongside the pattern underneath it. The full shape of it is on ", React.createElement(IA, { href: '/how-i-work/' }, 'how I work'), ".")
+      React.createElement(P, { last: true }, "It’s the same private, one-to-one work I do with everyone, working the personal pattern and the practical decision together. If you work for yourself, that includes the business side — pricing, positioning, the outreach you keep putting off — alongside the pattern underneath it. The full shape of it is on ", React.createElement(IA, { href: '/1-to-1/' }, 'how I work'), ".")
     ),
 
     React.createElement(Section, { label: 'Online sessions', mob },
@@ -1198,11 +1939,11 @@ function NewYorkPage() {
     ),
 
     React.createElement(Section, { label: 'And I understand the industry', mob },
-      React.createElement(P, { last: true }, "You also don’t have to explain equity, runway, a reorg, or why “just be confident” is useless advice. 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, '500+ companies advised'), " before I trained as a psychotherapist. It’s the same reason my ", React.createElement(IA, { href: '/founders/' }, 'founder'), " and senior ", React.createElement(IA, { href: '/therapy-for-executives/' }, 'executive'), " clients come to me.")
+      React.createElement(P, { last: true }, "You also don’t have to explain equity, runway, a reorg, or why “just be confident” is useless advice. 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, '500+ companies advised'), " before I trained as a psychotherapist. It’s the same reason my ", React.createElement(IA, { href: '/1-to-1/' }, 'founder'), " and senior ", React.createElement(IA, { href: '/1-to-1/' }, 'executive'), " clients come to me.")
     ),
 
     React.createElement(Section, { label: 'The work itself is the same', mob },
-      React.createElement(P, { last: true }, "Nothing about the work changes because you’re in New York. It’s the same one-to-one work I do with everyone, holding the personal pattern and the real situation at work in the same room. The steps are laid out on ", React.createElement(IA, { href: '/how-i-work/' }, 'how I work'), ".")
+      React.createElement(P, { last: true }, "Nothing about the work changes because you’re in New York. It’s the same one-to-one work I do with everyone, holding the personal pattern and the real situation at work in the same room. The steps are laid out on ", React.createElement(IA, { href: '/1-to-1/' }, 'how I work'), ".")
     ),
 
     React.createElement(Section, { label: 'Online, across the time difference', mob },
@@ -1260,7 +2001,7 @@ function DublinPage() {
     ),
 
     React.createElement(Section, { label: 'The work itself is the same', mob },
-      React.createElement(P, { last: true }, "It’s the same private, one-to-one work I do with everyone — the personal pattern and the real decision together, whether that’s the job, the move, or whether to stay at all. How the work runs is on ", React.createElement(IA, { href: '/how-i-work/' }, 'how I work'), ".")
+      React.createElement(P, { last: true }, "It’s the same private, one-to-one work I do with everyone — the personal pattern and the real decision together, whether that’s the job, the move, or whether to stay at all. How the work runs is on ", React.createElement(IA, { href: '/1-to-1/' }, 'how I work'), ".")
     ),
 
     React.createElement(Section, { label: 'Online sessions', mob },
@@ -1293,95 +2034,173 @@ function DublinPage() {
   );
 }
 
-// ─── CONFIDENTIALITY ─────────────────────────────────────────────────────────
-function ConfidentialityPage() {
+// ─── CONFIDENTIALITY (bilingual, plain-language trust page) ───────────────────
+const CONF = {
+  en: {
+    h1: 'Confidentiality',
+    intro: [
+      "People bring me things they haven't said to a cofounder, investor, employee, partner or sometimes anyone else.",
+      "That only works if privacy isn't vague.",
+      "Here's what you can expect.",
+    ],
+    sections: [
+      { label: 'What you say stays private', body: [
+        "I don't send session content to your employer, investors, board, cofounder, team, partner or whoever referred you.",
+        'That remains true if somebody else is paying for the work.',
+        "Paying the invoice doesn't buy access to the conversation.",
+        'The limits to confidentiality are explained below.',
+      ] },
+      { label: 'You can talk about the actual thing', body: ['That includes things like:'],
+        list: [
+          'doubts about the company or whether you still want it',
+          'problems with a cofounder',
+          "employees you're worried about or decisions you're avoiding",
+          'investor or board pressure',
+          'runway, revenue and financial fear',
+          'wanting to leave, sell or stop',
+          'things happening in your personal life that are affecting the work',
+        ],
+        after: ["I don't have a back channel to the people involved."] },
+      { label: 'If somebody else pays', body: [
+        'Sometimes a company, investor or another party funds the work.',
+        'They pay the invoice.',
+        "They do not receive session content, notes, progress reports or a summary of what we're working on.",
+        'If they expect something different, we establish that before the work starts.',
+      ] },
+      { label: 'Stories and content', body: [
+        'I write and speak publicly about the kinds of problems I work with.',
+        "I don't publish identifiable client material without explicit permission.",
+        "Anything based on client work is fictionalised, materially altered or combined from patterns across different people so that an individual can't reasonably be identified.",
+        "If I ever wanted to use something recognisably close to your real situation, I'd ask first.",
+        'A no is a no.',
+      ] },
+      { label: 'Notes and data', body: [
+        'I keep records to a considered minimum and use standard professional tools for scheduling, communication and sessions.',
+        "If you want to know exactly what I store, where and for how long, ask me. I'll answer plainly.",
+      ] },
+      { label: 'NDA', body: [
+        "If an NDA makes the commercial side easier to trust, I'm happy to discuss signing one before we start.",
+      ] },
+      { label: 'The limits', body: [
+        "I won't promise absolute secrecy because that wouldn't be an honest promise.",
+        'Confidentiality is the default, but there are narrow circumstances where it can have limits, including serious and immediate risk of harm and situations where disclosure is legally required.',
+        'As a BACP-registered psychotherapist, I also use clinical supervision. This is itself confidential, and material is discussed in a way intended to protect client identity.',
+        "If any of these limits are particularly relevant to your situation, ask me before we start and I'll be specific.",
+      ] },
+      { label: "This page isn't the contract", body: [
+        'This is a plain-language explanation of how I approach confidentiality.',
+        "It doesn't replace the actual agreement, privacy information, consent documentation or an NDA where one applies.",
+        "If confidentiality is the thing stopping you from starting, ask me about the exact thing you're worried about.",
+      ] },
+    ],
+  },
+  el: {
+    h1: 'Εμπιστευτικότητα',
+    intro: [
+      'Οι άνθρωποι που δουλεύουν μαζί μου λένε πράγματα που μπορεί να μην έχουν πει σε cofounder, επενδυτή, συνεργάτη, σύντροφο ή καμιά φορά σε κανέναν.',
+      'Αυτό λειτουργεί μόνο αν είναι ξεκάθαρο τι μένει μεταξύ μας.',
+      'Οπότε, χωρίς νομικίστικα:',
+    ],
+    sections: [
+      { label: 'Όσα λες μένουν μεταξύ μας', body: [
+        'Δεν στέλνω το περιεχόμενο των συζητήσεών μας σε εργοδότη, επενδυτές, board, cofounder, ομάδα, σύντροφο ή σε αυτόν που σε παρέπεμψε σε μένα.',
+        'Το ίδιο ισχύει και αν κάποιος άλλος πληρώνει για τη συνεργασία.',
+        'Το ότι κάποιος πληρώνει τον λογαριασμό δεν του δίνει πρόσβαση στη συζήτηση.',
+        'Τα όρια της εμπιστευτικότητας εξηγούνται πιο κάτω.',
+      ] },
+      { label: 'Μπορείς να μιλήσεις για το πραγματικό θέμα', body: ['Για παράδειγμα:'],
+        list: [
+          'αμφιβολίες για το business ή για το αν το θέλεις ακόμα',
+          'προβλήματα με cofounder',
+          'εργαζομένους που σε προβληματίζουν ή αποφάσεις που αποφεύγεις',
+          'πίεση από επενδυτές ή board',
+          'runway, έσοδα και οικονομικό φόβο',
+          'σκέψεις να φύγεις, να πουλήσεις ή να σταματήσεις',
+          'προσωπικά πράγματα που έχουν αρχίσει να επηρεάζουν τη δουλειά',
+        ],
+        after: ['Δεν υπάρχει κάποια δεύτερη γραμμή επικοινωνίας με τους ανθρώπους που αφορούν αυτά.'] },
+      { label: 'Αν πληρώνει κάποιος άλλος', body: [
+        'Μερικές φορές τη συνεργασία πληρώνει μια εταιρεία, ένας επενδυτής ή κάποιος άλλος.',
+        'Αυτός πληρώνει το invoice.',
+        'Δεν παίρνει το περιεχόμενο των συνεδριών, σημειώσεις, progress report ή περίληψη του τι δουλεύουμε.',
+        'Αν περιμένει κάτι διαφορετικό, το ξεκαθαρίζουμε πριν ξεκινήσουμε.',
+      ] },
+      { label: 'Ιστορίες και περιεχόμενο', body: [
+        'Γράφω και μιλάω δημόσια για θέματα που συναντώ στη δουλειά μου.',
+        'Δεν χρησιμοποιώ αναγνωρίσιμο υλικό πελατών χωρίς ξεκάθαρη άδεια.',
+        'Όταν κάτι βασίζεται σε δουλειά με πελάτες, είναι φανταστικό, αρκετά αλλαγμένο ή συνδυασμός μοτίβων από διαφορετικούς ανθρώπους, ώστε να μην μπορεί να ταυτοποιηθεί κάποιος συγκεκριμένος.',
+        'Αν ποτέ ήθελα να χρησιμοποιήσω κάτι που μοιάζει αναγνωρίσιμα με τη δική σου πραγματική ιστορία, θα σε ρωτούσα πρώτα.',
+        'Το όχι είναι όχι.',
+      ] },
+      { label: 'Σημειώσεις και δεδομένα', body: [
+        'Κρατάω τα αρχεία που χρειάζονται στο ελάχιστο που θεωρώ απαραίτητο και χρησιμοποιώ επαγγελματικά εργαλεία για συνεδρίες, επικοινωνία και scheduling.',
+        'Αν θέλεις να ξέρεις ακριβώς τι κρατάω, πού και για πόσο, ρώτησέ με. Θα σου απαντήσω συγκεκριμένα.',
+      ] },
+      { label: 'NDA', body: [
+        'Αν ένα NDA σε βοηθά να νιώσεις πιο ασφαλής για το business κομμάτι, μπορούμε να το συζητήσουμε πριν ξεκινήσουμε.',
+      ] },
+      { label: 'Τα όρια', body: [
+        'Δεν πρόκειται να υποσχεθώ απόλυτη μυστικότητα, γιατί δεν θα ήταν ειλικρινής υπόσχεση.',
+        'Η εμπιστευτικότητα είναι ο κανόνας. Υπάρχουν όμως περιορισμένες περιπτώσεις όπου μπορεί να έχει όρια, όπως άμεσος και σοβαρός κίνδυνος βλάβης ή περιπτώσεις όπου η γνωστοποίηση απαιτείται από τον νόμο.',
+        'Ως ψυχοθεραπευτής εγγεγραμμένος στο BACP χρησιμοποιώ επίσης κλινική εποπτεία. Η εποπτεία είναι και η ίδια εμπιστευτική και το υλικό συζητείται με τρόπο που προστατεύει την ταυτότητα του πελάτη.',
+        'Αν κάποιος από αυτούς τους περιορισμούς έχει ιδιαίτερη σημασία για τη δική σου περίπτωση, ρώτησέ με πριν ξεκινήσουμε.',
+      ] },
+      { label: 'Αυτή η σελίδα δεν είναι το συμβόλαιο', body: [
+        'Είναι μια απλή εξήγηση του τρόπου με τον οποίο χειρίζομαι την εμπιστευτικότητα.',
+        'Δεν αντικαθιστά τη συμφωνία συνεργασίας, την ενημέρωση για τα προσωπικά δεδομένα, τα έγγραφα συναίνεσης ή ένα NDA όπου χρειάζεται.',
+        'Αν η εμπιστευτικότητα είναι αυτό που σε κάνει να διστάζεις, πες μου ακριβώς τι σε ανησυχεί.',
+      ] },
+    ],
+  },
+};
+function ConfidentialityPage({ lang = 'en' }) {
   const mob = useIsMobile();
+  const c = CONF[lang] || CONF.en;
+  const bodyP = { fontSize: mob ? '17px' : '18px', lineHeight: 1.7, color: C.text, margin: '0 0 .8rem' };
   return React.createElement('main', { style: locMobPage(mob) },
-    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.25rem' : '1.75rem', fontSize: mob ? '24px' : '30px' } }, 'Confidentiality'),
-    React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '2.5rem' : '3rem' } },
-      "People bring me things they haven’t said to their cofounder, their board, their partner or anyone on their team. That only works if discretion is built in from the start, not bolted on afterwards. Here’s how I handle it, and where the honest limits are."
-    ),
-
-    React.createElement(Section, { label: 'Why this page exists', mob },
-      React.createElement(P, null, "Most of my clients are ", React.createElement(IA, { href: '/founders/' }, 'founders'), ", ", React.createElement(IA, { href: '/solopreneurs/' }, 'solopreneurs'), " and senior people in tech. What comes up in the room isn’t only personal. It routinely touches cofounders, employees, leadership teams, investors, boards and customers — and revenue, fundraising, runway, pricing, intellectual property and product plans — alongside career decisions, employment matters, relationships, and health."),
-      React.createElement(P, { last: true }, "In other words, information that could have real professional or reputational consequences in the wrong place. So confidentiality here is not a formality. It’s a condition of the work being possible at all.")
-    ),
-
-    React.createElement(Section, { label: 'What you can rely on', mob },
-      React.createElement(P, null, "The plain version, before the nuance:"),
-      React.createElement(PatternList, { items: [
-        { cause: 'Sessions are confidential', effect: 'what you say in them is treated as private' },
-        { cause: 'No reporting back', effect: 'nothing goes to your employer, investors, board, cofounder, team or partner' },
-        { cause: 'Paying doesn’t buy access', effect: 'if someone else funds the work, they don’t get to hear what was said' },
-        { cause: 'No identifiable stories', effect: 'I don’t use recognisable client material in public without explicit permission' },
-        { cause: 'You can ask first', effect: 'any practical question about confidentiality is fair before you commit' },
-      ] }),
-      React.createElement(P, { last: true }, "None of that is conditional on you being a “good” client or saying comfortable things. Especially not that.")
-    ),
-
-    React.createElement(Section, { label: 'Nothing goes back to the people involved', mob },
-      React.createElement(P, null, "This is the one founders ask about most, so it’s worth being explicit. You can bring, and work on, any of the following without it reaching the people concerned:"),
-      React.createElement('ul', { style: { margin: '0 0 1.2rem', paddingLeft: '1.2rem', lineHeight: 1.9, fontSize: '17px', color: C.text } },
-        React.createElement('li', null, "Doubts about the company, or whether you still believe in it"),
-        React.createElement('li', null, "Frustration with a cofounder, or that the relationship is failing"),
-        React.createElement('li', null, "Concerns about specific employees, or decisions you’re dreading"),
-        React.createElement('li', null, "Investor or board pressure, and how you’re really handling it"),
-        React.createElement('li', null, "Financial fear — runway, revenue, whether it survives the quarter"),
-        React.createElement('li', null, "That you want to leave, sell, or stop"),
-        React.createElement('li', null, "Lost motivation, and personal circumstances bleeding into the company")
-      ),
-      React.createElement(P, { last: true }, "I’m not connected to your cap table or your org chart. I don’t talk to your people. There’s no back channel, including to whoever referred you.")
-    ),
-
-    React.createElement(Section, { label: 'If someone else is paying', mob },
-      React.createElement(P, { last: true }, "Sometimes a company or an investor funds the work. That arrangement covers the invoice and nothing else. The paying party doesn’t receive session content, notes, progress reports or a summary of what you’re working on. If anyone expects otherwise, we sort out those boundaries in writing before we begin, so there’s no ambiguity later.")
-    ),
-
-    React.createElement(Section, { label: 'How I use examples publicly', mob },
-      React.createElement(P, null, "I write and speak about this work — on the ", React.createElement(IA, { href: '/blog/' }, 'blog'), ", on ", React.createElement(A, { href: 'https://undisguised.io' }, 'Undisguised'), " and elsewhere. I don’t use identifiable client stories to do it."),
-      React.createElement(P, { last: true }, "Anything that appears publicly is fictional, materially altered, or a composite assembled from patterns across many people, and constructed so that no individual can be identified — not by a colleague, a cofounder, or the person themselves. If I ever wanted to use something closer to a real, recognisable case, I’d ask you first, explicitly, and a no is simply a no.")
-    ),
-
-    // TODO(confirm): name the actual tools used for video, scheduling, notes and file storage
-    // (and their GDPR / data-processing posture), plus any formal privacy notice or data-retention
-    // period, so this section can be specific rather than general. Kept deliberately vague until confirmed.
-    React.createElement(Section, { label: 'Notes, data and scheduling', mob },
-      React.createElement(P, { last: true }, "Sessions run over video, and scheduling, notes and communication use standard professional tools. I keep records to a considered minimum and handle them accordingly. I’m not going to invent impressive-sounding security claims here — if you want the specifics of what’s stored, where, and for how long, ask on the fit call and I’ll answer plainly.")
-    ),
-
-    React.createElement(Section, { label: 'An NDA, if you want one', mob },
-      React.createElement(P, null, "If it makes the commercial side easier to trust, I’m glad to sign an NDA before we start. For a lot of founders it turns an abstract promise into something concrete, and that’s a reasonable thing to want."),
-      React.createElement(P, { last: true }, "One honest caveat: an NDA reinforces the commercial confidentiality of our relationship, but it doesn’t override the legal, ethical and professional obligations below. No agreement can contract me out of those, and you should be wary of anyone who says theirs can.")
-    ),
-
-    React.createElement(Section, { label: 'The limits — stated plainly', mob },
-      React.createElement(P, null, "I’m not going to promise absolute, unconditional secrecy, because that promise can’t be kept honestly, and a page like this is worth nothing if it overstates. Confidentiality is the strong default. In a narrow set of circumstances it can have limits:"),
-      React.createElement('div', { style: { margin: '.4rem 0 1.2rem' } },
-        React.createElement(TrackCards, { mob, tracks: [
-          { title: 'Serious, imminent risk', body: "If there’s a real and immediate risk of serious harm to you or someone else, I may need to act on that — ideally with you, not around you." },
-          { title: 'Legal and safeguarding', body: "In limited situations the law can require disclosure — for example a court order, or a safeguarding concern involving a child or a vulnerable adult." },
-        ] })
-      ),
-      React.createElement(P, null, "As a psychotherapist I also work within a professional ethical framework (I’m a registered member of the BACP) and I use clinical supervision, which is standard and itself confidential. In supervision, material is discussed in a way that protects your identity."),
-      React.createElement(P, { last: true }, "Where the work is advisory or coaching rather than psychotherapy, the professional frame differs, but the commitment to discretion — and the same narrow limits around serious risk and the law — still applies. If any of this is relevant to your situation, ask me directly and I’ll be specific.")
-      // TODO(confirm): confirm the exact confidentiality-limit wording that matches your practice and
-      // jurisdiction (Ireland-based, working with clients abroad) — specifically (1) the precise legal /
-      // safeguarding grounds you are prepared to state, (2) whether clinical supervision applies to the
-      // advisory/coaching work as well as the psychotherapy, and (3) whether you want to distinguish the
-      // two modes more formally here. Kept general until confirmed; this is not legal advice.
-    ),
-
-    React.createElement(Section, { label: 'This isn’t the paperwork', mob },
-      React.createElement(P, { last: true }, "This page explains how I think about confidentiality. It isn’t a substitute for a formal contract, a privacy notice, a consent form or an NDA. Where those apply, they’re handled separately and take precedence over anything summarised here.")
-    ),
-
-    React.createElement(Section, { label: 'Ask before you commit', mob },
-      React.createElement(P, null, "If confidentiality is the thing standing between you and starting, that’s a good use of a fit call. Bring the specific worry — the cofounder who mustn’t know, the investor, the NDA — and I’ll tell you exactly how it works, including anything I can’t promise."),
-      React.createElement(BookCta, { label: 'Book a fit call →' })
-    ),
-
-    React.createElement(SiteFooter, { mob })
+    React.createElement('h1', { style: { ...h1Style, marginBottom: mob ? '1.25rem' : '1.5rem', fontSize: mob ? '24px' : '30px' } }, c.h1),
+    c.intro.map((t, i) => i === 0
+      ? React.createElement('p', { key: i, style: { ...leadStyle, marginBottom: '.7rem' } }, t)
+      : React.createElement('p', { key: i, style: bodyP }, t)),
+    React.createElement('div', { style: { marginBottom: mob ? '2rem' : '2.75rem' } }),
+    c.sections.map((s, i) => React.createElement(Section, { key: i, label: s.label, mob },
+      s.body.map((p, j) => React.createElement(P, { key: 'b' + j, last: !s.list && !s.after && j === s.body.length - 1 }, p)),
+      s.list && React.createElement('ul', { style: { margin: '0 0 1.1rem', paddingLeft: '1.2rem', lineHeight: 1.9, fontSize: mob ? '16px' : '17px', color: C.text } },
+        s.list.map((li, k) => React.createElement('li', { key: 'l' + k, style: { marginBottom: '.35rem' } }, li))),
+      s.after && s.after.map((p, j) => React.createElement(P, { key: 'a' + j, last: j === s.after.length - 1 }, p))
+    )),
+    React.createElement(BookCta, { lang }),
+    React.createElement(SiteFooter, { mob, lang })
   );
 }
 
-Object.assign(window, { HomePage, SpecialtyPage });
+// ─── APP MOUNT (bilingual, central) ──────────────────────────────────────────
+// Every core index.html calls renderApp(pageId, lang). Legacy/SEO pages still
+// use SpecialtyPage via their own inline scripts.
+const CORE_PAGES = {
+  'home': HomePage,
+  'one-to-one': OneToOnePage,
+  'about': AboutPage,
+  'reviews': ReviewsPage,
+  'book': BookPage,
+  'confidentiality': ConfidentialityPage,
+};
+function CoreApp({ pageId, lang }) {
+  const [open, setOpen] = React.useState(true);
+  const mainRef = React.useRef(null);
+  React.useEffect(() => { if (mainRef.current) mainRef.current.scrollTop = 0; }, [pageId]);
+  const Page = CORE_PAGES[pageId] || HomePage;
+  return React.createElement(React.Fragment, null,
+    React.createElement('div', { id: 'sidebar' },
+      React.createElement(Sidebar, { page: pageId, lang: lang, open: open, setOpen: setOpen })),
+    React.createElement('div', { id: 'main-scroll', ref: mainRef },
+      React.createElement(Page, { lang: lang }))
+  );
+}
+function renderApp(pageId, lang) {
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    React.createElement(CoreApp, { pageId: pageId, lang: lang || 'en' })
+  );
+}
+
+Object.assign(window, { HomePage, OneToOnePage, AboutPage, ReviewsPage, BookPage, ConfidentialityPage, SpecialtyPage, CoreApp, renderApp, SiteFooter });
