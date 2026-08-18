@@ -75,7 +75,7 @@ const SB_LABELS = {
     reviews: 'Κριτικές',
     findMe: 'Βρες με',
     diagHead: 'Starting Diagnostic',
-    diagSub: '10 λεπτά για το business, τι το κρατάει πίσω και πού μπαίνεις εσύ μέσα σε αυτό.',
+    diagSub: '10 λεπτά για το business σου: τι το φρενάρει και πού μπαίνεις εσύ στην εξίσωση.',
     diagBtn: 'ΞΕΚΙΝΑ →',
     diagShort: 'Τεστ',
     book: 'Κλείσε γνωριμία →',
