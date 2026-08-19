@@ -282,7 +282,7 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
   if (!open) return (
     <div style={{ width: SB.WC, minWidth: SB.WC, background: SB.bg, borderRight: `1px solid ${SB.border}`, height: '100vh', position: 'relative', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <ToggleBtn />
-      <a href={homeHref}><img src="https://aggelosmouzakitis.com/img/aggelos-96.webp" alt="Aggelos Mouzakitis" width={38} height={38} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', margin: '22px 0 8px', display: 'block' }} /></a>
+      <a href={homeHref}><img src="https://aggelosmouzakitis.com/img/aggelos-96.webp?v=2" alt="Aggelos Mouzakitis" width={38} height={38} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', margin: '22px 0 8px', display: 'block' }} /></a>
       {/* Language control directly under the photo */}
       <a href={langHref(page, lang === 'en' ? 'el' : 'en')} title={lang === 'en' ? 'Ελληνικά' : 'English'} hrefLang={lang === 'en' ? 'el' : 'en'}
         style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3, color: SB.text, textDecoration: 'none', fontSize: '10px', fontWeight: 700, letterSpacing: '.04em', marginBottom: 8 }}>
@@ -305,7 +305,7 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
       <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', display: 'flex', flexDirection: 'column' }}>
         {/* Profile */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '22px 18px 20px', borderBottom: `1px solid ${SB.border}`, flexShrink: 0 }}>
-          <a href={homeHref} style={{ display: 'flex', flexShrink: 0 }}><img src="https://aggelosmouzakitis.com/img/aggelos-96.webp" alt="Aggelos Mouzakitis" width={38} height={38} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, display: 'block' }} /></a>
+          <a href={homeHref} style={{ display: 'flex', flexShrink: 0 }}><img src="https://aggelosmouzakitis.com/img/aggelos-96.webp?v=2" alt="Aggelos Mouzakitis" width={38} height={38} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, display: 'block' }} /></a>
           <div style={{ overflow: 'hidden', flex: 1 }}>
             <div style={{ fontSize: '15px', fontWeight: 700, letterSpacing: '.02em', textTransform: 'uppercase', color: SB.active, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Aggelos Mouzakitis</div>
             <div style={{ fontSize: '11px', letterSpacing: '.05em', textTransform: 'uppercase', color: SB.muted, marginTop: 3, lineHeight: 1.35 }}>{t.role}</div>
