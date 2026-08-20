@@ -638,7 +638,7 @@ function Sidebar({
   }, /*#__PURE__*/React.createElement(ToggleBtn, null), /*#__PURE__*/React.createElement("a", {
     href: homeHref
   }, /*#__PURE__*/React.createElement("img", {
-    src: "https://aggelosmouzakitis.com/img/aggelos-96.webp?v=2",
+    src: "https://aggelosmouzakitis.com/img/aggelos-96.webp?v=3",
     alt: "Aggelos Mouzakitis",
     width: 38,
     height: 38,
@@ -731,7 +731,7 @@ function Sidebar({
       flexShrink: 0
     }
   }, /*#__PURE__*/React.createElement("img", {
-    src: "https://aggelosmouzakitis.com/img/aggelos-96.webp?v=2",
+    src: "https://aggelosmouzakitis.com/img/aggelos-96.webp?v=3",
     alt: "Aggelos Mouzakitis",
     width: 38,
     height: 38,
