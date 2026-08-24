@@ -45,6 +45,10 @@ const SB_CORE_PATHS = {
   'blog': {
     en: '/blog/',
     el: '/blog/?lang=el'
+  },
+  'ask-me-anything': {
+    en: '/ask-me-anything/',
+    el: '/ask-me-anything/el'
   }
 };
 const sbPath = (id, lang) => SB_CORE_PATHS[id] && SB_CORE_PATHS[id][lang] || SB_CORE_PATHS[id] && SB_CORE_PATHS[id].en || '/';

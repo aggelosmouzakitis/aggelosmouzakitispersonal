@@ -81,6 +81,17 @@
   status = 301
   force = true
 
+# ─── Greek "Ask Me Anything" — exact QR-code URL (no trailing slash) ──────────
+# The printed QR code points to /ask-me-anything/el exactly. Serve the Greek
+# page directly at that path with a 200 rewrite so the URL stays as-is (no
+# redirect to a trailing slash). The trailing-slash form still resolves normally
+# via the directory index.
+[[redirects]]
+  from = "/ask-me-anything/el"
+  to = "/ask-me-anything/el/index.html"
+  status = 200
+  force = true
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Headers
 # ─────────────────────────────────────────────────────────────────────────────
