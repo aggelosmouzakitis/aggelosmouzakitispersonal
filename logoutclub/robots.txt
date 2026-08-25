@@ -1,0 +1,7 @@
+# Logout Club microsite — served at https://logoutclub.gr/robots.txt
+# (and https://logoutclub.aggelosmouzakitis.com/robots.txt) via the domain
+# rewrite in netlify.toml.
+User-agent: *
+Allow: /
+
+Sitemap: https://logoutclub.gr/sitemap.xml
