@@ -1,10 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Logout Club">
-  <rect width="1000" height="1000" rx="215" fill="#111111"/>
-  <g transform="translate(0,1000) scale(1,-1)" fill="#F3F0E8">
-    <rect x="36.9" y="204.1" width="182.9" height="601.8" rx="91.4"/>
-<rect x="36.9" y="623.0" width="297.9" height="182.9" rx="91.4"/>
-<rect x="36.9" y="204.1" width="297.9" height="182.9" rx="91.4"/>
-<rect x="222.7" y="413.6" width="531.0" height="182.9" rx="91.4"/>
-<path d="M677.0,805.9 L1054.6,505.0 L677.0,204.1 Z" stroke="#F3F0E8" stroke-width="54.3" stroke-linejoin="round"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Logout Club">
+<rect width="64" height="64" rx="14" fill="#242321"></rect>
+<path d="M7 16h9v21h12v10H7z" fill="#F3F0E7"></path>
+<path d="M50.5 25.6a9 9 0 100 12.8" fill="none" stroke="#F3F0E7" stroke-width="8"></path>
 </svg>

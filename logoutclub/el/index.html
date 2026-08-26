@@ -6,7 +6,7 @@
 
 <title>Logout Club Αθήνα | Πραγματικές στιγμές. Χωρίς οθόνες.</title>
 <meta name="description" content="Ένα club στην Αθήνα που διοργανώνει phone-free βόλτες, παιχνίδια και μικρές περιπέτειες για ανθρώπους που περνούν το μεγαλύτερο μέρος της ημέρας τους online.">
-<meta name="theme-color" content="#F3F0E8">
+<meta name="theme-color" content="#F3F0E7">
 <meta name="author" content="Logout Club">
 
 <link rel="canonical" href="https://logoutclub.gr/el/">
@@ -34,10 +34,9 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-<link rel="preload" href="../fonts/bagel-fat-one-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400..900&family=Alfa+Slab+One&family=Commissioner:wght@100..900&display=swap">
 
 <link rel="stylesheet" href="../logoutclub.css">
 
@@ -56,13 +55,15 @@
 <header class="lc-nav">
   <div class="wrap lc-nav__inner">
     <a class="lc-nav__brand" href="#top" aria-label="Logout Club — αρχική">
-      <span class="wordmark" role="img" aria-label="Logout Club"></span>
+      <span class="wordmark" role="img" aria-label="Logout Club">
+        <span class="wordmark__a" aria-hidden="true"><i>L</i><i>O</i><i>G</i><i>O</i><i>U</i><i>T</i></span>
+        <span class="wordmark__b" aria-hidden="true"><b>CLUB</b></span>
+      </span>
     </a>
     <button class="lc-nav__toggle" aria-expanded="false" aria-controls="lc-menu" aria-label="Μενού">
       <span></span>
     </button>
     <nav class="lc-nav__links" id="lc-menu" aria-label="Κύρια πλοήγηση">
-      <a class="lc-nav__link" href="#events">Events</a>
       <a class="lc-nav__link" href="#experiences">Experiences</a>
       <a class="lc-nav__link" href="#how-it-works">Πώς λειτουργεί</a>
       <a class="lc-nav__link" href="#faq">FAQ</a>
@@ -70,6 +71,7 @@
         <a href="../" hreflang="en" data-lang-switch>EN</a>
         <a href="./" hreflang="el" aria-current="true">ΕΛ</a>
       </span>
+      <a class="btn lc-nav__cta" href="#events">Επόμενα events <span class="btn__arrow" aria-hidden="true">→</span></a>
     </nav>
   </div>
 </header>
@@ -77,50 +79,90 @@
 <main id="top">
 
 <!-- ============================= HERO ============================= -->
-<section class="section hero">
-  <div class="wrap">
-    <p class="hero__top hero__reveal d1">
-      <span class="hero__stamp"><span class="mark" style="width:1.05em;height:1.05em;vertical-align:-.18em;display:inline-block"></span>&nbsp; Ένα phone-free club · Αθήνα</span>
-    </p>
+<section class="band band--paper hero pad">
+  <div class="wrap hero__grid">
+    <div>
+      <p class="hero__stamp"><span class="sticker">Ένα phone-free club · Αθήνα</span></p>
 
-    <div class="hero__wordmark hero__reveal d2">
-      <span class="wordmark" role="img" aria-label="Logout Club"></span>
+      <h1 class="h-xl">Πραγματικές στιγμές.<br>Χωρίς οθόνες.</h1>
+      <p class="hero__sub lede">Phone-free βόλτες, παιχνίδια και μικρές περιπέτειες για ανθρώπους που περνούν το μεγαλύτερο μέρος της ημέρας τους online.</p>
+
+      <div class="hero__cta cta-row">
+        <a class="btn btn--lg" href="#events">Δες τα επόμενα events <span class="btn__arrow" aria-hidden="true">→</span></a>
+        <a class="tlink" href="#experiences">Τι κάνουμε</a>
+      </div>
+
+      <p class="hero__meta">
+        <span>Δύο ώρες</span><i style="background:var(--coral)" aria-hidden="true"></i>
+        <span>Χωρίς οθόνες</span><i style="background:var(--cobalt)" aria-hidden="true"></i>
+        <span>Αθήνα</span>
+      </p>
     </div>
 
-    <div class="hero__lower">
-      <div>
-        <h1 class="hero__tagline hero__reveal d3">Πραγματικές στιγμές.<br>Χωρίς οθόνες.</h1>
-        <p class="hero__sub hero__reveal d3">Phone-free βόλτες, παιχνίδια και μικρές περιπέτειες για ανθρώπους που περνούν το μεγαλύτερο μέρος της ημέρας τους online.</p>
-      </div>
-      <div class="hero__cta hero__reveal d4">
-        <a class="btn btn--lg" href="#events">Δες τα επόμενα events <span class="btn__arrow" aria-hidden="true">→</span></a>
-        <span class="hero__scrawl" aria-hidden="true">
-          <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M60 8 C 74 30, 40 44, 60 80"/>
-            <path d="M44 64 L60 82 L76 64"/>
-          </svg>
-        </span>
-      </div>
+    <div class="hero__art">
+      <svg class="hero__scene" viewBox="0 0 560 440" role="img" aria-label="Three people around a table with cards, books and coffee, their phones set aside in a phone-free tray">
+        <rect x="98" y="4" width="104" height="40" rx="20" fill="#1A7F37" stroke="#242321" stroke-width="5"></rect>
+        <circle cx="150" cy="62" r="25" fill="#F3F0E7" stroke="#242321" stroke-width="5"></circle>
+        <rect x="278" y="2" width="104" height="40" rx="20" fill="#3157D5" stroke="#242321" stroke-width="5"></rect>
+        <circle cx="330" cy="60" r="25" fill="#F3F0E7" stroke="#242321" stroke-width="5"></circle>
+        <rect x="148" y="392" width="104" height="40" rx="20" fill="#C9B8E8" stroke="#242321" stroke-width="5"></rect>
+        <circle cx="200" cy="362" r="25" fill="#F3F0E7" stroke="#242321" stroke-width="5"></circle>
+
+        <path d="M242 100c82 0 148 48 148 106s-68 108-150 108S92 268 92 210 160 100 242 100Z" fill="#F3F0E7" stroke="#242321" stroke-width="6"></path>
+
+        <g transform="rotate(-13 160 190)">
+          <rect x="136" y="157" width="48" height="66" rx="7" fill="#F3F0E7" stroke="#242321" stroke-width="5"></rect>
+          <circle cx="160" cy="190" r="13" fill="#E86643"></circle>
+        </g>
+        <g transform="rotate(11 196 208)">
+          <rect x="172" y="175" width="48" height="66" rx="7" fill="#F3F0E7" stroke="#242321" stroke-width="5"></rect>
+          <path d="M196 194l13 24h-26l13-24z" fill="#3157D5"></path>
+        </g>
+        <g transform="rotate(-6 250 160)">
+          <rect x="205" y="131" width="90" height="58" rx="6" fill="#C9B8E8" stroke="#242321" stroke-width="5"></rect>
+          <path d="M250 131v58" stroke="#242321" stroke-width="5"></path>
+        </g>
+        <circle cx="292" cy="248" r="23" fill="#F3F0E7" stroke="#242321" stroke-width="5"></circle>
+        <circle cx="292" cy="248" r="9" fill="#E86643"></circle>
+        <circle cx="152" cy="268" r="21" fill="#F3F0E7" stroke="#242321" stroke-width="5"></circle>
+        <circle cx="152" cy="268" r="8" fill="#1A7F37"></circle>
+
+        <g transform="rotate(6 470 348)">
+          <rect x="398" y="302" width="144" height="92" rx="14" fill="#C9B8E8" stroke="#242321" stroke-width="6"></rect>
+          <rect x="414" y="318" width="32" height="60" rx="6" fill="#F3F0E7" stroke="#242321" stroke-width="5"></rect>
+          <rect x="454" y="318" width="32" height="60" rx="6" fill="#F3F0E7" stroke="#242321" stroke-width="5"></rect>
+          <rect x="494" y="318" width="32" height="60" rx="6" fill="#F3F0E7" stroke="#242321" stroke-width="5"></rect>
+        </g>
+        <g transform="rotate(-4 466 268)">
+          <rect x="386" y="248" width="160" height="40" rx="20" fill="#E86643" stroke="#242321" stroke-width="5"></rect>
+          <text x="466" y="275" text-anchor="middle" font-family="Commissioner, sans-serif" font-size="18" font-weight="800" letter-spacing="1.2" fill="#242321">PHONE-FREE</text>
+        </g>
+      </svg>
     </div>
   </div>
 </section>
 
 <!-- ============================= EVENTS / LUMA ============================= -->
-<section class="section" id="events" aria-labelledby="events-title">
+<section class="band band--cobalt pad" id="events" aria-labelledby="events-title">
   <div class="wrap">
     <div class="events__head reveal">
       <div>
         <p class="eyebrow">Προσεχώς</p>
-        <h2 class="h-lg" id="events-title">Επόμενα events</h2>
+        <h2 class="h-lg" id="events-title" style="margin-top:16px">Επόμενα events</h2>
       </div>
-      <p class="events__intro">Διάλεξε κάτι που θα ήθελες πραγματικά να κάνεις. Εμείς θα φροντίσουμε τη δομή. Εσύ χρειάζεται μόνο να έρθεις.</p>
+      <p class="lede">Διάλεξε κάτι που θα ήθελες πραγματικά να κάνεις. Εμείς θα φροντίσουμε τη δομή. Εσύ χρειάζεται μόνο να έρθεις.</p>
     </div>
 
     <div class="luma-frame reveal">
-      <span class="luma-frame__tab"><span class="mark" style="width:1em;height:1em;display:inline-block"></span> Ζωντανό ημερολόγιο</span>
+      <span class="luma-frame__tab">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="4" stroke="currentColor" stroke-width="2.4"></rect><path d="M8 3v4M16 3v4M3 11h18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg></span>
+        Ζωντανό ημερολόγιο
+      </span>
+
+      <!-- The real calendar is injected here from config.js (lumaCalendarUrl). -->
       <div id="luma-mount" data-embed-title="Logout Club — επόμενα events στο Luma">
         <div class="luma-ph" id="luma-placeholder">
-          <span class="luma-ph__badge" aria-hidden="true">LC</span>
+          <span class="luma-ph__badge" aria-hidden="true">LUMA EMBED</span>
           <p class="luma-ph__title">Τα επόμενα events μας εμφανίζονται εδώ.</p>
           <p class="luma-ph__note">Εδώ θα εμφανίζεται το ζωντανό ημερολόγιο του Logout Club, μέσω Luma — της μοναδικής πηγής αλήθειας για ημερομηνίες, εγγραφές και εισιτήρια. Πρόσθεσε το URL του ημερολογίου στο <code>config.js</code> και θα εμφανιστεί εδώ.</p>
         </div>
@@ -129,19 +171,25 @@
 
     <div class="events__foot reveal">
       <a class="luma-link" id="luma-link" href="#events" hidden>Δες όλα τα events στο Luma</a>
-      <p class="events__note">Το Luma είναι η μοναδική πηγή αλήθειας για ημερομηνίες, εγγραφές, τιμές εισιτηρίων και διαθεσιμότητα.</p>
+      <p class="events__note small">Το Luma είναι η μοναδική πηγή αλήθειας για ημερομηνίες, εγγραφές, τιμές εισιτηρίων και διαθεσιμότητα.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================= INTRODUCTION ============================= -->
-<section class="section" aria-labelledby="intro-title">
-  <div class="wrap intro__grid">
+<!-- ============================= WHY ============================= -->
+<section class="band band--paper pad" aria-labelledby="intro-title">
+  <div class="wrap split split--wide">
     <div class="reveal">
       <p class="eyebrow">Γιατί</p>
-      <h2 class="h-lg" id="intro-title">Η μέρα σου έχει ήδη αρκετό screen&nbsp;time.</h2>
+      <h2 class="h-lg" id="intro-title" style="margin-top:18px">Η μέρα σου έχει ήδη αρκετό screen&nbsp;time.</h2>
+      <div class="figure-note">
+        <span style="color:var(--green);width:64px;flex:none" aria-hidden="true">
+          <svg viewBox="0 0 64 24" fill="none"><path d="M2 12h44" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path><path d="M44 4l10 8-10 8" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <span>Κάτι που συμβαίνει πραγματικά γύρω σου</span>
+      </div>
     </div>
-    <div class="intro__body prose reveal">
+    <div class="prose reveal" style="font-size:18px">
       <p>Εκεί δουλεύεις, επικοινωνείς, ψυχαγωγείσαι και κανονίζεις πράγματα που συχνά δεν γίνονται ποτέ.</p>
       <p>Το Logout Club σου δίνει έναν απλό λόγο να αφήσεις το κινητό και να κάνεις κάτι που συμβαίνει πραγματικά γύρω σου.</p>
       <p>Δεν έχει διαλέξεις για digital detox ούτε κάτι που πρέπει να βελτιώσεις πάνω σου. Απλώς έρχεσαι, αφήνεις την οθόνη και συμμετέχεις.</p>
@@ -149,44 +197,111 @@
   </div>
 </section>
 
-<!-- ============================= EXPERIENCES ============================= -->
-<section class="section" id="experiences" aria-labelledby="exp-title">
-  <div class="wrap">
-    <div class="exp__head reveal">
-      <div>
-        <p class="eyebrow">Experiences</p>
-        <h2 class="h-lg" id="exp-title">Διαφορετικοί τρόποι να κάνεις logout.</h2>
+<!-- ============================= MANIFESTO ============================= -->
+<section class="band band--ink pad" aria-labelledby="af-title">
+  <div class="wrap statement">
+    <div class="reveal">
+      <h2 class="statement__title" id="af-title">Πρώτα έρχεται η δραστηριότητα.</h2>
+      <div class="statement__body prose" style="margin-top:30px">
+        <p>Το Logout Club δεν είναι networking event και κανείς δεν θα σου ζητήσει να παρουσιάσεις τον εαυτό σου σε ένα δωμάτιο γεμάτο αγνώστους.</p>
+        <p>Κάθε event δίνει στους ανθρώπους <strong>κάτι που αξίζει να κάνουν μαζί.</strong> Έτσι η συζήτηση προκύπτει πιο εύκολα, χωρίς να είναι ποτέ υποχρεωτική.</p>
+        <p>Έλα μόνος ή φέρε κάποιον μαζί σου. Και τα δύο λειτουργούν.</p>
       </div>
+    </div>
+    <div class="statement__art reveal" aria-hidden="true">
+      <svg viewBox="0 0 300 260" fill="none">
+        <g transform="rotate(-14 96 150)">
+          <rect x="42" y="86" width="108" height="146" rx="10" fill="#F3F0E7" stroke="#E86643" stroke-width="5"></rect>
+          <circle cx="96" cy="159" r="26" fill="#E86643"></circle>
+        </g>
+        <g transform="rotate(6 168 150)">
+          <rect x="114" y="76" width="108" height="146" rx="10" fill="#F3F0E7" stroke="#E86643" stroke-width="5"></rect>
+          <path d="M168 118l16 30h-32l16-30z" fill="#E86643"></path>
+          <path d="M144 176h48" stroke="#E86643" stroke-width="5" stroke-linecap="round"></path>
+        </g>
+        <g transform="rotate(19 234 168)">
+          <rect x="186" y="106" width="96" height="124" rx="16" fill="#C9B8E8" stroke="#F3F0E7" stroke-width="5"></rect>
+          <circle cx="214" cy="140" r="7" fill="#242321"></circle>
+          <circle cx="254" cy="140" r="7" fill="#242321"></circle>
+          <circle cx="234" cy="168" r="7" fill="#242321"></circle>
+          <circle cx="214" cy="196" r="7" fill="#242321"></circle>
+          <circle cx="254" cy="196" r="7" fill="#242321"></circle>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= EXPERIENCES ============================= -->
+<section class="band band--lav pad" id="experiences" aria-labelledby="exp-title">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">Experiences</p>
+      <h2 class="h-lg" id="exp-title" style="margin-top:18px;max-width:20ch">Διαφορετικοί τρόποι να κάνεις logout.</h2>
     </div>
 
     <div class="exp__grid reveal">
       <article class="exp-card">
-        <span class="exp-card__num" aria-hidden="true">01</span>
-        <h3 class="exp-card__name">Slow Sundays</h3>
+        <div class="exp-card__top">
+          <span class="exp-card__num" aria-hidden="true">01</span>
+          <span class="exp-card__art" aria-hidden="true">
+            <svg viewBox="0 0 74 74" fill="none">
+              <path d="M8 16c10-5 20-5 29 2v42c-9-7-19-7-29-2V16z" fill="#F3F0E7" stroke="#242321" stroke-width="4"></path>
+              <path d="M66 16c-10-5-20-5-29 2v42c9-7 19-7 29-2V16z" fill="#3157D5" stroke="#242321" stroke-width="4"></path>
+            </svg>
+          </span>
+        </div>
+        <h3 class="h-md">Slow Sundays</h3>
         <p class="exp-card__desc"><strong>Μερικές ώρες χωρίς βιασύνη, σε ένα συγκεκριμένο μέρος.</strong> Διάβασε, γράψε, ζωγράφισε, κάνε Journaling, λύσε Puzzles ή φέρε οποιαδήποτε offline δραστηριότητα σου αρέσει. Ξεκινάμε με προσωπικό χρόνο ησυχίας και στη συνέχεια υπάρχει χώρος για συζήτηση, παιχνίδια και κοινές δραστηριότητες, μόνο αν θέλεις να συμμετέχεις.</p>
         <p class="exp-card__label">Τα editions μπορεί να περιλαμβάνουν</p>
         <p class="exp-card__eds">Offline Hours · Reading Parties · Writing Hours · Draw &amp; Make · Journaling · Puzzles · Bring Your Own Offline Thing</p>
       </article>
 
       <article class="exp-card">
-        <span class="exp-card__num" aria-hidden="true">02</span>
-        <h3 class="exp-card__name">Offline Walks</h3>
+        <div class="exp-card__top">
+          <span class="exp-card__num" aria-hidden="true">02</span>
+          <span class="exp-card__art" aria-hidden="true">
+            <svg viewBox="0 0 74 74" fill="none">
+              <path d="M10 64c0-16 16-12 22-22 6-11-8-14-6-24 2-8 14-10 22-6" stroke="#242321" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 11"></path>
+              <path d="M54 10c7 0 12 5 12 12 0 9-12 20-12 20S42 31 42 22c0-7 5-12 12-12z" fill="#1A7F37" stroke="#242321" stroke-width="4"></path>
+              <circle cx="54" cy="22" r="4" fill="#F3F0E7"></circle>
+            </svg>
+          </span>
+        </div>
+        <h3 class="h-md">Offline Walks</h3>
         <p class="exp-card__desc"><strong>Χαλαρές βόλτες στην πόλη ή στη φύση,</strong> χωρίς να περνάμε ολόκληρη τη διαδρομή κοιτάζοντας μια οθόνη. Κάποιες φορές απλώς περπατάμε. Άλλες φορές μπορεί να υπάρχει φωτογραφία, σχέδιο, observation prompts ή ένας προορισμός στον οποίο αξίζει να σταματήσουμε.</p>
         <p class="exp-card__label">Τα editions μπορεί να περιλαμβάνουν</p>
         <p class="exp-card__eds">Nature Walks · City Walks · Photo Walks · Sunset Walks · Easy Hikes · Walk &amp; Sketch</p>
       </article>
 
       <article class="exp-card">
-        <span class="exp-card__num" aria-hidden="true">03</span>
-        <h3 class="exp-card__name">Game Nights</h3>
+        <div class="exp-card__top">
+          <span class="exp-card__num" aria-hidden="true">03</span>
+          <span class="exp-card__art" aria-hidden="true">
+            <svg viewBox="0 0 74 74" fill="none">
+              <rect x="6" y="14" width="34" height="48" rx="6" fill="#F3F0E7" stroke="#242321" stroke-width="4" transform="rotate(-10 23 38)"></rect>
+              <rect x="34" y="18" width="34" height="48" rx="6" fill="#E86643" stroke="#242321" stroke-width="4" transform="rotate(9 51 42)"></rect>
+              <circle cx="45" cy="34" r="4.5" fill="#242321"></circle>
+              <circle cx="57" cy="50" r="4.5" fill="#242321"></circle>
+            </svg>
+          </span>
+        </div>
+        <h3 class="h-md">Game Nights</h3>
         <p class="exp-card__desc"><strong>Παιχνίδια με κάρτες, επιτραπέζια και δικά μας formats</strong> που σε βάζουν εύκολα στο παιχνίδι, χωρίς υποχρεωτικές συστάσεις και αμήχανο small talk. Το Terrible Advice Club είναι ένα από τα παιχνίδια που δημιουργήθηκαν για το Logout Club. Θα ακολουθήσουν περισσότερα παιχνίδια και ακόμη περισσότερες κακές αποφάσεις.</p>
         <p class="exp-card__label">Τα editions μπορεί να περιλαμβάνουν</p>
         <p class="exp-card__eds">Terrible Advice Club · Analog Games · Card Games · Board Games · Team Challenges</p>
       </article>
 
       <article class="exp-card">
-        <span class="exp-card__num" aria-hidden="true">04</span>
-        <h3 class="exp-card__name">Special Editions</h3>
+        <div class="exp-card__top">
+          <span class="exp-card__num" aria-hidden="true">04</span>
+          <span class="exp-card__art" aria-hidden="true">
+            <svg viewBox="0 0 74 74" fill="none">
+              <path d="M37 6l7 20 21 1-16 13 6 21-18-12-18 12 6-21L9 27l21-1 7-20z" fill="#3157D5" stroke="#242321" stroke-width="4" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </div>
+        <h3 class="h-md">Special Editions</h3>
         <p class="exp-card__desc"><strong>Περιστασιακά πειράματα που δεν χωράνε απόλυτα στο σταθερό μας πρόγραμμα.</strong> Ένα phone-free picnic, collaborative cooking, μια επίσκεψη σε μουσείο, live μουσική, μια ημερήσια εκδρομή ή κάτι που πρότεινε το community. Θα δοκιμάζουμε τις ιδέες που συγκεντρώνουν το μεγαλύτερο ενδιαφέρον.</p>
         <p class="exp-card__label">Πιθανά editions</p>
         <p class="exp-card__eds">Phone-free Picnics · Collaborative Cooking · Museum Visits · Supper Clubs · Day Trips · Community Experiments</p>
@@ -195,92 +310,120 @@
 
     <div class="exp__cta reveal">
       <a class="btn btn--ghost" href="#events" data-suggest data-suggest-subject="Ιδέα δραστηριότητας για το Logout Club">Πρότεινε μια δραστηριότητα <span class="btn__arrow" aria-hidden="true">→</span></a>
+      <span class="tape">Το Terrible Advice Club ζει μέσα στα Game Nights</span>
     </div>
-  </div>
-</section>
-
-<!-- ============================= ACTIVITY FIRST (manifesto) ============================= -->
-<section class="section section--ink" aria-labelledby="af-title">
-  <div class="wrap manifesto">
-    <h2 class="manifesto__title reveal" id="af-title">Πρώτα έρχεται η δραστηριότητα.</h2>
-    <div class="manifesto__body prose reveal">
-      <p>Το Logout Club δεν είναι networking event και κανείς δεν θα σου ζητήσει να παρουσιάσεις τον εαυτό σου σε ένα δωμάτιο γεμάτο αγνώστους.</p>
-      <p>Κάθε event δίνει στους ανθρώπους <strong>κάτι που αξίζει να κάνουν μαζί.</strong> Έτσι η συζήτηση προκύπτει πιο εύκολα, χωρίς να είναι ποτέ υποχρεωτική.</p>
-      <p>Έλα μόνος ή φέρε κάποιον μαζί σου. Και τα δύο λειτουργούν.</p>
-    </div>
-    <span class="manifesto__mark mark" aria-hidden="true"></span>
   </div>
 </section>
 
 <!-- ============================= HOW IT WORKS ============================= -->
-<section class="section" id="how-it-works" aria-labelledby="hiw-title">
+<section class="band band--paper pad" id="how-it-works" aria-labelledby="hiw-title">
   <div class="wrap">
     <div class="reveal">
       <p class="eyebrow">Πώς λειτουργεί</p>
-      <h2 class="h-lg" id="hiw-title">Τέσσερα βήματα. Αυτό είναι όλο.</h2>
+      <h2 class="h-lg" id="hiw-title" style="margin-top:18px;max-width:24ch">Τέσσερα βήματα. Αυτό είναι όλο.</h2>
     </div>
     <ol class="steps reveal">
       <li class="step">
         <span class="step__n" aria-hidden="true">1</span>
-        <h3 class="step__t">Διάλεξε ένα event</h3>
+        <span class="step__art" aria-hidden="true">
+          <svg viewBox="0 0 52 52" fill="none"><path d="M6 16h40v8a6 6 0 000 12v8H6v-8a6 6 0 000-12v-8z" fill="#F3F0E7" stroke="#242321" stroke-width="3.5"></path><path d="M26 20v12" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="3 5"></path></svg>
+        </span>
+        <h3 class="h-sm">Διάλεξε ένα event</h3>
         <p class="step__d">Επίλεξε κάτι που θα ήθελες πραγματικά να κάνεις, ακόμη και αν δεν γνώριζες κανέναν καινούριο.</p>
       </li>
       <li class="step">
         <span class="step__n" aria-hidden="true">2</span>
-        <h3 class="step__t">Έλα</h3>
+        <span class="step__art" aria-hidden="true">
+          <svg viewBox="0 0 52 52" fill="none"><path d="M12 44V12a4 4 0 014-4h20a4 4 0 014 4v32" stroke="#242321" stroke-width="3.5" stroke-linecap="round"></path><path d="M6 44h40" stroke="#242321" stroke-width="3.5" stroke-linecap="round"></path><circle cx="32" cy="26" r="3" fill="currentColor"></circle></svg>
+        </span>
+        <h3 class="h-sm">Έλα</h3>
         <p class="step__d">Μπορείς να έρθεις μόνος ή με παρέα. Δεν χρειάζεται να προετοιμάσεις κάτι, εκτός αν η περιγραφή ζητάει να φέρεις βιβλίο, παιχνίδι ή κάποιο άλλο υλικό.</p>
       </li>
       <li class="step">
         <span class="step__n" aria-hidden="true">3</span>
-        <h3 class="step__t">Άφησε το κινητό σου να ξεκουραστεί</h3>
+        <span class="step__art" aria-hidden="true">
+          <svg viewBox="0 0 52 52" fill="none"><rect x="14" y="8" width="24" height="36" rx="5" fill="#F3F0E7" stroke="#242321" stroke-width="3.5"></rect><rect x="14" y="26" width="24" height="18" rx="5" fill="currentColor"></rect><path d="M20 12h12" stroke="#242321" stroke-width="3" stroke-linecap="round"></path></svg>
+        </span>
+        <h3 class="h-sm">Άφησε το κινητό σου να ξεκουραστεί</h3>
         <p class="step__d">Τα κινητά παραμένουν κλειστά και εκτός οπτικού πεδίου. Ο ακριβής τρόπος μπορεί να αλλάζει ανάλογα με το event.</p>
       </li>
       <li class="step">
         <span class="step__n" aria-hidden="true">4</span>
-        <h3 class="step__t">Πάρε μέρος</h3>
+        <span class="step__art" aria-hidden="true">
+          <svg viewBox="0 0 52 52" fill="none"><path d="M10 20h26v14a8 8 0 01-8 8H18a8 8 0 01-8-8V20z" fill="#F3F0E7" stroke="#242321" stroke-width="3.5"></path><path d="M36 24h5a5 5 0 010 10h-5" stroke="#242321" stroke-width="3.5"></path><path d="M18 8c0 4 8 4 8 8" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"></path></svg>
+        </span>
+        <h3 class="h-sm">Πάρε μέρος</h3>
         <p class="step__d">Κάθε event έχει έναν host και μια απλή δομή. Αρκετή καθοδήγηση ώστε να μην υπάρχει αμηχανία, χωρίς να μετατρέπουμε τον ελεύθερο χρόνο σου σε ακόμη ένα workshop.</p>
       </li>
     </ol>
   </div>
 </section>
 
-<!-- ============================= AUDIENCE ============================= -->
-<section class="section" aria-labelledby="aud-title">
-  <div class="wrap audience">
+<!-- ============================= CLOSING THE LAPTOP ============================= -->
+<section class="band band--green pad" aria-labelledby="close-title">
+  <div class="wrap statement">
     <div class="reveal">
-      <p class="eyebrow">Για ποιους</p>
-      <h2 class="h-lg" id="aud-title">Για ανθρώπους που ζουν online.</h2>
-      <div class="audience__tags" style="margin-top:1.4rem" aria-hidden="true">
-        <span class="tag">Developers</span>
-        <span class="tag">Founders</span>
-        <span class="tag">Designers</span>
-        <span class="tag">Creators</span>
-        <span class="tag">Remote workers</span>
+      <h2 class="statement__title" id="close-title">Το να κλείσεις το laptop δεν σημαίνει πάντα ότι έκανες logout.</h2>
+      <div class="statement__body prose" style="margin-top:30px">
+        <p>Τελειώνουμε τη δουλειά και ανοίγουμε μια άλλη οθόνη. Η ξεκούραση γίνεται scrolling, η συζήτηση γίνεται messaging και ένα ελεύθερο βράδυ εξαφανίζεται χωρίς να το καταλάβουμε.</p>
+        <p><strong>Το Logout Club δεν είναι productivity hack.</strong> Απλώς βάζει κάτι πραγματικά offline στο ημερολόγιό σου, πριν καλύψει τον χώρο ακόμη μία οθόνη.</p>
       </div>
     </div>
-    <div class="audience__body prose reveal">
+    <div class="statement__art reveal" aria-hidden="true">
+      <svg viewBox="0 0 300 230" fill="none">
+        <rect x="46" y="70" width="208" height="26" rx="9" fill="#C9B8E8" stroke="#F4F1E6" stroke-width="5"></rect>
+        <path d="M62 70l14-42h148l14 42" fill="none" stroke="#F4F1E6" stroke-width="5" stroke-linejoin="round"></path>
+        <path d="M150 132v56" stroke="#F4F1E6" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 12"></path>
+        <path d="M132 172l18 20 18-20" stroke="#F4F1E6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= AUDIENCE ============================= -->
+<section class="band band--paper2 pad" aria-labelledby="aud-title">
+  <div class="wrap split">
+    <div class="reveal">
+      <p class="eyebrow">Για ποιους</p>
+      <h2 class="h-lg" id="aud-title" style="margin-top:18px">Για ανθρώπους που ζουν online.</h2>
+      <ul class="community__list" style="margin-top:26px" aria-hidden="true">
+        <li>Developers</li>
+        <li>Founders</li>
+        <li>Designers</li>
+        <li>Creators</li>
+        <li>Remote workers</li>
+      </ul>
+    </div>
+    <div class="prose reveal" style="font-size:18px">
       <p>Developers, founders, designers, creators, remote workers και οποιοσδήποτε περνάει μεγάλο μέρος της δουλειάς, της ψυχαγωγίας και της κοινωνικής του ζωής μπροστά σε μια οθόνη.</p>
       <p>Δεν χρειάζεται να εργάζεσαι στην τεχνολογία. Αρκεί να θέλεις να περάσεις μερικές ώρες μακριά από το κινητό σου.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================= CLOSING THE LAPTOP (inverted) ============================= -->
-<section class="section section--ink" aria-labelledby="close-title">
-  <div class="wrap">
-    <h2 class="closing__title reveal" id="close-title">Το να κλείσεις το laptop δεν σημαίνει πάντα ότι έκανες logout.</h2>
-    <div class="closing__body reveal">
-      <p>Τελειώνουμε τη δουλειά και ανοίγουμε μια άλλη οθόνη. Η ξεκούραση γίνεται scrolling, η συζήτηση γίνεται messaging και ένα ελεύθερο βράδυ εξαφανίζεται χωρίς να το καταλάβουμε.</p>
-      <p><strong>Το Logout Club δεν είναι productivity hack.</strong> Απλώς βάζει κάτι πραγματικά offline στο ημερολόγιό σου, πριν καλύψει τον χώρο ακόμη μία οθόνη.</p>
+<!-- ============================= COMMUNITY INPUT ============================= -->
+<section class="band band--coral pad-sm" aria-labelledby="community-title">
+  <div class="wrap community">
+    <div class="reveal">
+      <p class="eyebrow">Community</p>
+      <h2 class="h-lg" id="community-title" style="margin-top:18px;max-width:18ch">Πρότεινε μια δραστηριότητα.</h2>
+      <p class="lede" style="margin-top:20px;max-width:38ch">Θα δοκιμάζουμε τις ιδέες που συγκεντρώνουν το μεγαλύτερο ενδιαφέρον.</p>
+    </div>
+    <div class="community__card reveal">
+      <span class="tape tape--accent" style="align-self:flex-start;background:var(--ink);color:var(--paper)">Ιδέες ευπρόσδεκτες</span>
+      <p class="prose">Ένα phone-free picnic, collaborative cooking, μια επίσκεψη σε μουσείο, live μουσική, μια ημερήσια εκδρομή ή κάτι που πρότεινε το community.</p>
+      <div class="cta-row">
+        <a class="btn" href="#events" data-suggest data-suggest-subject="Ιδέα δραστηριότητας για το Logout Club">Πρότεινε μια δραστηριότητα <span class="btn__arrow" aria-hidden="true">→</span></a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================= FAQ ============================= -->
-<section class="section" id="faq" aria-labelledby="faq-title">
+<section class="band band--paper pad" id="faq" aria-labelledby="faq-title">
   <div class="wrap faq__wrap">
     <p class="eyebrow reveal">FAQ</p>
-    <h2 class="h-lg reveal" id="faq-title">Συχνές ερωτήσεις.</h2>
+    <h2 class="h-lg reveal" id="faq-title" style="margin-top:18px">Συχνές ερωτήσεις.</h2>
     <div class="faq__list reveal">
 
       <div class="faq__item">
@@ -360,12 +503,12 @@
 </section>
 
 <!-- ============================= FINAL CTA ============================= -->
-<section class="section final">
-  <div class="wrap">
-    <div class="final__inner reveal">
+<section class="band band--ink final pad">
+  <div class="wrap final__inner reveal">
+    <div>
       <h2 class="final__title">Βρες κάτι για το οποίο αξίζει να κάνεις logout.</h2>
       <p class="final__sub">Μερικές ώρες χωρίς notifications, feeds ή ακόμη έναν λόγο να κοιτάξεις το κινητό σου.</p>
-      <div class="cta-row">
+      <div class="final__cta cta-row">
         <a class="btn btn--lg" href="#events">Δες τα επόμενα events <span class="btn__arrow" aria-hidden="true">→</span></a>
         <a class="btn btn--ghost btn--lg" href="#events" data-suggest data-suggest-subject="Ιδέα για Special Edition στο Logout Club">Πρότεινε ένα Special Edition</a>
       </div>
@@ -380,7 +523,10 @@
   <div class="wrap">
     <div class="lc-foot__grid">
       <div>
-        <span class="wordmark" role="img" aria-label="Logout Club"></span>
+        <span class="wordmark wordmark--rev lc-foot__brand" role="img" aria-label="Logout Club">
+          <span class="wordmark__a" aria-hidden="true"><i>L</i><i>O</i><i>G</i><i>O</i><i>U</i><i>T</i></span>
+          <span class="wordmark__b" aria-hidden="true"><b>CLUB</b></span>
+        </span>
         <p class="lc-foot__tag">Πραγματικές στιγμές. Χωρίς οθόνες.</p>
         <p class="lc-foot__place">Αθήνα, Ελλάδα</p>
       </div>

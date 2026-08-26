@@ -5,33 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page not found | Logout Club</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#F3F0E8">
+<meta name="theme-color" content="#F3F0E7">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400..900&family=Alfa+Slab+One&family=Commissioner:wght@100..900&display=swap">
 <link rel="stylesheet" href="logoutclub.css">
 <style>
-  .nf { min-height: 82vh; display: flex; flex-direction: column; justify-content: center; }
-  .nf__code { font-family: var(--font-display); font-size: clamp(4rem, 22vw, 12rem);
-    line-height: .9; color: var(--ink); }
-  .nf__title { font-size: clamp(1.6rem, 1rem + 3vw, 3rem); font-weight: 800;
-    letter-spacing: -.02em; margin-top: 1rem; }
-  .nf__sub { color: var(--ink-70); max-width: 44ch; margin-top: 1rem;
-    font-size: clamp(1.05rem, 1rem + .5vw, 1.2rem); }
-  .nf .btn { margin-top: 2rem; align-self: flex-start; }
+  .nf{min-height:82vh;display:flex;flex-direction:column;justify-content:center;gap:22px;align-items:flex-start}
+  .nf__code{font-family:var(--display);font-size:clamp(96px,26vw,240px);line-height:.8;color:var(--band);
+    text-shadow:-3px -3px 0 var(--ink),3px -3px 0 var(--ink),-3px 3px 0 var(--ink),3px 3px 0 var(--ink),12px 13px 0 var(--coral)}
+  .nf__sub{max-width:44ch;font-size:clamp(17px,1.4vw,20px);line-height:1.55;opacity:.85}
 </style>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
-<main class="wrap nf">
-  <a href="./" aria-label="Logout Club — home" style="display:inline-block">
-    <span class="wordmark" role="img" aria-label="Logout Club" style="height:26px"></span>
-  </a>
-  <p class="nf__code" aria-hidden="true">404</p>
-  <h1 class="nf__title">This page logged off.</h1>
-  <p class="nf__sub">The page you were after isn&rsquo;t here. Head back and find something worth logging out for.</p>
-  <a class="btn" href="./">Back to Logout Club <span aria-hidden="true">→</span></a>
+<main class="band band--paper">
+  <div class="wrap nf">
+    <a href="./" aria-label="Logout Club — home" style="--wm:40px;display:inline-flex">
+      <span class="wordmark" role="img" aria-label="Logout Club">
+        <span class="wordmark__a" aria-hidden="true"><i>L</i><i>O</i><i>G</i><i>O</i><i>U</i><i>T</i></span>
+        <span class="wordmark__b" aria-hidden="true"><b>CLUB</b></span>
+      </span>
+    </a>
+    <p class="nf__code" aria-hidden="true">404</p>
+    <h1 class="h-xl" style="font-size:clamp(34px,6vw,64px)">This page logged off.</h1>
+    <p class="nf__sub">The page you were after isn&rsquo;t here. Head back and find something worth logging out for.</p>
+    <a class="btn btn--lg" href="./">Back to Logout Club <span class="btn__arrow" aria-hidden="true">→</span></a>
+  </div>
 </main>
 </body>
 </html>

@@ -1,10 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="currentColor" role="img" aria-label="Logout Club">
-  <title>Logout Club</title>
-  <g transform="translate(0,1000) scale(1,-1)">
-    <rect x="-2.4" y="173.6" width="198.4" height="652.8" rx="99.2"/>
-<rect x="-2.4" y="628.0" width="323.2" height="198.4" rx="99.2"/>
-<rect x="-2.4" y="173.6" width="323.2" height="198.4" rx="99.2"/>
-<rect x="199.2" y="400.8" width="576.0" height="198.4" rx="99.2"/>
-<path d="M692.0,826.4 L1101.6,500.0 L692.0,173.6 Z" stroke="currentColor" stroke-width="58.9" stroke-linejoin="round"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Logout Club">
+<rect width="512" height="512" rx="112" fill="#242321"></rect>
+<path d="M56 128h72v168h96v80H56z" fill="#F3F0E7"></path>
+<path d="M404 205a72 72 0 100 102" fill="none" stroke="#F3F0E7" stroke-width="64"></path>
 </svg>
