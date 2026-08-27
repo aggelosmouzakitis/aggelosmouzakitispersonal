@@ -167,15 +167,22 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
-# Logout Club microsite static assets (immutable)
-[[headers]]
-  for = "/logoutclub/fonts/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+# Logout Club microsite — fingerprinted/stable assets stay immutable
 [[headers]]
   for = "/logoutclub/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+# ...but config.js + logoutclub.js load without a version fingerprint and change
+# over time (config.js is meant to be edited to plug in real URLs), so they must
+# revalidate instead of inheriting the immutable 1-year cache from /*.js above.
+[[headers]]
+  for = "/logoutclub/config.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+[[headers]]
+  for = "/logoutclub/logoutclub.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 # Keep non-content resources out of the index (crawlable so the noindex is seen)
 [[headers]]

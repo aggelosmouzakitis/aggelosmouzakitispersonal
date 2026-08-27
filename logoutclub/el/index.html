@@ -162,9 +162,8 @@
       <!-- The real calendar is injected here from config.js (lumaCalendarUrl). -->
       <div id="luma-mount" data-embed-title="Logout Club — επόμενα events στο Luma">
         <div class="luma-ph" id="luma-placeholder">
-          <span class="luma-ph__badge" aria-hidden="true">LUMA EMBED</span>
-          <p class="luma-ph__title">Τα επόμενα events μας εμφανίζονται εδώ.</p>
-          <p class="luma-ph__note">Εδώ θα εμφανίζεται το ζωντανό ημερολόγιο του Logout Club, μέσω Luma — της μοναδικής πηγής αλήθειας για ημερομηνίες, εγγραφές και εισιτήρια. Πρόσθεσε το URL του ημερολογίου στο <code>config.js</code> και θα εμφανιστεί εδώ.</p>
+          <p class="luma-ph__title">Φόρτωση των επόμενων events…</p>
+          <p class="luma-ph__note">Το ημερολόγιό μας φιλοξενείται στο Luma. Αν δεν εμφανιστεί, δες τα events με τον σύνδεσμο «Δες όλα τα events στο Luma» πιο κάτω.</p>
         </div>
       </div>
     </div>
@@ -544,7 +543,7 @@
 </footer>
 
 <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
-<script src="../config.js" defer></script>
-<script src="../logoutclub.js" defer></script>
+<script src="../config.js?v=2" defer></script>
+<script src="../logoutclub.js?v=2" defer></script>
 </body>
 </html>
