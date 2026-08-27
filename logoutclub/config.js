@@ -17,7 +17,7 @@ window.LOGOUT_CLUB_CONFIG = {
 
   /* Public Luma calendar page (the human-facing URL, e.g. https://lu.ma/logoutclub).
      Used for the "View on Luma" fallback link and the footer.                 */
-  lumaPageUrl: "",
+  lumaPageUrl: "https://luma.com/logoutclub",
 
   /* -- Social + contact ------------------------------------------------------ */
   instagramUrl: "",              // e.g. "https://www.instagram.com/logoutclub"
