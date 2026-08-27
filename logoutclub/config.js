@@ -13,7 +13,7 @@ window.LOGOUT_CLUB_CONFIG = {
      2. Copy ONLY the src URL from the <iframe> it gives you and paste it below.
         It looks like:  https://lu.ma/embed/calendar/cal-xxxxxxxxxxxxxxx/events
      Leaving this "" keeps the placeholder in the real layout.                 */
-  lumaCalendarUrl: "",
+  lumaCalendarUrl: "https://luma.com/embed/calendar/cal-pVY5LuBeHk0f1u7/events",
 
   /* Public Luma calendar page (the human-facing URL, e.g. https://lu.ma/logoutclub).
      Used for the "View on Luma" fallback link and the footer.                 */
