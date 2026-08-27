@@ -111,7 +111,6 @@ const NAV_ITEMS = [
   { id: 'home',       key: 'home',     Icon: ICONS.Home },
   { id: 'one-to-one', key: 'workWith', Icon: ICONS.OneToOne },
   { id: 'about',      key: 'about',    Icon: ICONS.User },
-  { id: 'blog',       key: 'writing',  Icon: ICONS.Book },
   { id: 'reviews',    key: 'reviews',  Icon: ICONS.Quote },
 ];
 // Which nav id is "active" for a given current page id.
@@ -173,7 +172,6 @@ function MobileNav({ page, lang }) {
         <a style={tabStyle(act === 'home')} href={sbPath('home', lang)}><ICONS.Home /><span>{t.home}</span></a>
         <a style={tabStyle(act === 'one-to-one')} href={sbPath('one-to-one', lang)}><ICONS.OneToOne /><span>{t.oneToOne}</span></a>
         <a style={tabStyle(act === 'about')} href={sbPath('about', lang)}><ICONS.User /><span>{t.about}</span></a>
-        <a style={tabStyle(act === 'blog')} href={sbPath('blog', lang)}><ICONS.Book /><span>{t.writing}</span></a>
         <a style={tabStyle(act === 'reviews')} href={sbPath('reviews', lang)}><ICONS.Quote /><span>{t.reviews}</span></a>
         <a style={{ ...tabStyle(act === 'diagnostic'), color: '#1a7f37', fontWeight: 700 }} href={diagPath(lang)}><ICONS.Pulse /><span>{t.diagShort}</span></a>
       </nav>

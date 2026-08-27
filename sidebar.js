@@ -325,10 +325,6 @@ const NAV_ITEMS = [{
   key: 'about',
   Icon: ICONS.User
 }, {
-  id: 'blog',
-  key: 'writing',
-  Icon: ICONS.Book
-}, {
   id: 'reviews',
   key: 'reviews',
   Icon: ICONS.Quote
@@ -445,9 +441,6 @@ function MobileNav({
     style: tabStyle(act === 'about'),
     href: sbPath('about', lang)
   }, /*#__PURE__*/React.createElement(ICONS.User, null), /*#__PURE__*/React.createElement("span", null, t.about)), /*#__PURE__*/React.createElement("a", {
-    style: tabStyle(act === 'blog'),
-    href: sbPath('blog', lang)
-  }, /*#__PURE__*/React.createElement(ICONS.Book, null), /*#__PURE__*/React.createElement("span", null, t.writing)), /*#__PURE__*/React.createElement("a", {
     style: tabStyle(act === 'reviews'),
     href: sbPath('reviews', lang)
   }, /*#__PURE__*/React.createElement(ICONS.Quote, null), /*#__PURE__*/React.createElement("span", null, t.reviews)), /*#__PURE__*/React.createElement("a", {
