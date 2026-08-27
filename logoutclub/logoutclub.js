@@ -103,7 +103,7 @@
     var url = (CFG.lumaCalendarUrl || "").trim();
     if (url) {
       var ph = $("#luma-placeholder");
-      if (ph) ph.hidden = true;
+      if (ph) ph.remove();   // remove entirely so no placeholder box/whitespace remains
       var frame = doc.createElement("iframe");
       frame.className = "luma-embed";
       frame.src = url;
