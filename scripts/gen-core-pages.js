@@ -8,7 +8,8 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const ORIGIN = 'https://aggelosmouzakitis.com';
 const GA = 'G-KV83RRF6ZM';
-const SIDEBAR_V = 32, CONTENT_V = 33;
+const SIDEBAR_V = 32, CONTENT_V = 34;
+const CHROME_V = 1, V2_V = 1;
 
 // Shared CSS (from the original index.html — design system preserved 1:1)
 const CSS = `
@@ -26,8 +27,8 @@ body {
   flex: 1; overflow-y: auto; overflow-x: hidden;
   background: #FFFFFF; color: #282726;
 }
-#main-scroll a { color: #1a7f37; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-#main-scroll a:hover { color: #146b2e; text-decoration-thickness: 2px; }
+#main-scroll a { color: #059669; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+#main-scroll a:hover { color: #059669; text-decoration-thickness: 2px; }
 #main-scroll a.cta-btn, #main-scroll a.cta-btn:hover { color: #fff; text-decoration: none; }
 #main-scroll strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,38,.3); padding-bottom: 1px; }
 #main-scroll::-webkit-scrollbar { width: 4px; }
@@ -40,11 +41,11 @@ body {
 }
 @media print { #sidebar { display: none !important; } #main-scroll { overflow: visible; } #root { display: block; } }
 #main-scroll .hv-card{transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
-#main-scroll .hv-card:hover{border-color:rgba(26,127,55,.5);box-shadow:0 8px 26px rgba(26,127,55,.10);transform:translateY(-3px)}
+#main-scroll .hv-card:hover{border-color:rgba(5,150,105,.5);box-shadow:0 8px 26px rgba(5,150,105,.10);transform:translateY(-3px)}
 #main-scroll .hv-row{transition:background .15s ease,color .15s ease}
-#main-scroll .hv-row:hover{background:rgba(26,127,55,.06)}
-#main-scroll a.cta-btn:hover,#main-scroll button.cta-btn:hover{box-shadow:0 6px 18px rgba(26,127,55,.28)}
-a:focus-visible,button:focus-visible { outline: 3px solid #1a7f37; outline-offset: 2px; border-radius: 2px; }
+#main-scroll .hv-row:hover{background:rgba(5,150,105,.06)}
+#main-scroll a.cta-btn:hover,#main-scroll button.cta-btn:hover{box-shadow:0 6px 18px rgba(5,150,105,.28)}
+a:focus-visible,button:focus-visible { outline: 3px solid #059669; outline-offset: 2px; border-radius: 2px; }
 `;
 
 // Person JSON-LD (verified facts only; per-language jobTitle per brief §48/§55)
@@ -168,6 +169,7 @@ function render(page, lang) {
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -203,6 +205,8 @@ ${ldTags}
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/sidebar.js?v=${SIDEBAR_V}"></script>
+<script src="/site-chrome.js?v=${CHROME_V}"></script>
+<script src="/core-pages-v2.js?v=${V2_V}"></script>
 <script src="/content-pages.js?v=${CONTENT_V}"></script>
 <script>renderApp(${JSON.stringify(page.id)}, ${JSON.stringify(lang)});</script>
 </body>

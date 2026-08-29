@@ -4,7 +4,7 @@
 const C = {
   text: '#282726',
   muted: '#666',
-  accent: '#1a7f37',
+  accent: '#059669',
   border: 'rgba(40,39,38,0.12)',
   sepBorder: 'rgba(40,39,38,0.2)',
 };
@@ -76,7 +76,7 @@ function FaqItem({ q, children }) {
 }
 
 function Testimonial({ quote, who }) {
-  return React.createElement('blockquote', { style: { margin: '0 0 1.6rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(26,127,55,0.35)' } },
+  return React.createElement('blockquote', { style: { margin: '0 0 1.6rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(5,150,105,0.35)' } },
     React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.8, color: '#282726', marginBottom: '.5rem' } }, '\u201C' + quote + '\u201D'),
     React.createElement('footer', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, who)
   );
@@ -293,7 +293,7 @@ function CtaRow({ lang, mob, primaryTo = 'one-to-one', primaryLabel, secondaryTo
   return React.createElement('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '.8rem', marginTop: '1.6rem' } },
     React.createElement('a', {
       href: pathFor(primaryTo, lang), className: 'cta-btn', style: primary,
-      onMouseEnter: e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; },
+      onMouseEnter: e => { e.currentTarget.style.background = '#059669'; e.currentTarget.style.borderColor = '#059669'; },
       onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
     }, (primaryLabel || u.seeOneToOne) + ' →'),
     React.createElement('a', {
@@ -321,14 +321,14 @@ function Bullets({ items, mob }) {
 function FinalCta({ lang, mob, heading, sub }) {
   const u = tUI(lang);
   return React.createElement('div', {
-    style: { marginTop: mob ? '3rem' : '4rem', padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem', border: `1.5px solid rgba(26,127,55,.4)`, background: 'rgba(26,127,55,.06)', borderRadius: '14px' },
+    style: { marginTop: mob ? '3rem' : '4rem', padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem', border: `1.5px solid rgba(5,150,105,.4)`, background: 'rgba(5,150,105,.06)', borderRadius: '14px' },
   },
     React.createElement('p', { style: { fontSize: mob ? '19px' : '23px', fontWeight: 500, letterSpacing: '-.01em', lineHeight: 1.5, color: C.text, margin: 0 } }, heading),
     sub && React.createElement('p', { style: { fontSize: '16px', lineHeight: 1.7, color: C.muted, margin: '.9rem 0 0' } }, sub),
     React.createElement('a', {
       href: pathFor('book', lang), className: 'cta-btn',
       style: { display: 'inline-block', marginTop: '1.4rem', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#fff', textDecoration: 'none', borderRadius: '2px' },
-      onMouseEnter: e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; },
+      onMouseEnter: e => { e.currentTarget.style.background = '#059669'; e.currentTarget.style.borderColor = '#059669'; },
       onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
     }, u.book + ' →')
   );
@@ -686,7 +686,7 @@ function OneToOnePage({ lang = 'en' }) {
     React.createElement('div', { style: { marginTop: '1.6rem' } },
       React.createElement('a', {
         href: pathFor('book', lang), className: 'cta-btn', style: primaryBtn,
-        onMouseEnter: e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; },
+        onMouseEnter: e => { e.currentTarget.style.background = '#059669'; e.currentTarget.style.borderColor = '#059669'; },
         onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
       }, u.book + ' →')
     ),
@@ -832,13 +832,13 @@ function AboutPage({ lang = 'en' }) {
       s.body.map((p, j) => React.createElement(P, { key: j, last: j === s.body.length - 1 }, p))
     )),
     React.createElement('div', {
-      style: { marginTop: mob ? '3rem' : '4rem', padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem', border: `1.5px solid rgba(26,127,55,.4)`, background: 'rgba(26,127,55,.06)', borderRadius: '14px' },
+      style: { marginTop: mob ? '3rem' : '4rem', padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem', border: `1.5px solid rgba(5,150,105,.4)`, background: 'rgba(5,150,105,.06)', borderRadius: '14px' },
     },
       React.createElement('p', { style: { fontSize: mob ? '19px' : '23px', fontWeight: 500, letterSpacing: '-.01em', lineHeight: 1.5, color: C.text, margin: 0 } }, c.ctaHeading),
       React.createElement('a', {
         href: pathFor('one-to-one', lang), className: 'cta-btn',
         style: { display: 'inline-block', marginTop: '1.4rem', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#fff', textDecoration: 'none', borderRadius: '2px' },
-        onMouseEnter: e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; },
+        onMouseEnter: e => { e.currentTarget.style.background = '#059669'; e.currentTarget.style.borderColor = '#059669'; },
         onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
       }, c.ctaLabel + ' →')
     ),
@@ -918,7 +918,7 @@ function ReviewCard({ t, lang, toggleLabel }) {
   const el = lang === 'el';
   const quote = el ? t.qEl : t.q;
   const who = el ? t.wEl : t.w;
-  return React.createElement('blockquote', { style: { breakInside: 'avoid', margin: '0 0 1.9rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(26,127,55,0.35)' } },
+  return React.createElement('blockquote', { style: { breakInside: 'avoid', margin: '0 0 1.9rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(5,150,105,0.35)' } },
     React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.8, color: '#282726', margin: '0 0 .5rem' } }, '“' + quote + '”'),
     React.createElement('footer', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, who),
     el && React.createElement('button', {
@@ -1201,7 +1201,7 @@ function StepCards({ mob, steps }) {
           React.createElement('span', { style: { width: '30px', height: '30px', flexShrink: 0, borderRadius: '50%', background: C.accent, color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', fontWeight: 700, lineHeight: 1 } }, s.n),
           React.createElement('span', { style: { fontSize: '17px', fontWeight: 700, color: C.text } }, s.title)
         ),
-        s.tag && React.createElement('span', { style: { alignSelf: 'flex-start', fontSize: '11px', letterSpacing: '.05em', textTransform: 'uppercase', color: C.accent, background: 'rgba(26,127,55,0.08)', border: '1px solid rgba(26,127,55,0.25)', borderRadius: '999px', padding: '.2rem .65rem' } }, s.tag),
+        s.tag && React.createElement('span', { style: { alignSelf: 'flex-start', fontSize: '11px', letterSpacing: '.05em', textTransform: 'uppercase', color: C.accent, background: 'rgba(5,150,105,0.08)', border: '1px solid rgba(5,150,105,0.25)', borderRadius: '999px', padding: '.2rem .65rem' } }, s.tag),
         React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.65, color: C.text, margin: 0 } }, s.body)
       );
     })
@@ -1280,7 +1280,7 @@ function HowIWorkPage() {
 
     React.createElement('section', { style: block },
       kicker('What it costs'),
-      React.createElement('div', { className: 'hv-card', style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(26,127,55,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
+      React.createElement('div', { className: 'hv-card', style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(5,150,105,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
         "I keep the number of clients small, so I can go deep with each one. I'll give you the specifics on the fit call. What I'll say here is this is ",
         React.createElement('span', { style: { fontWeight: 700 } }, 'premium, ongoing, and priced as a monthly engagement'),
         ", not by the hour."
@@ -1294,7 +1294,7 @@ function HowIWorkPage() {
         notLine("Not coaching with a framework, though it has coaching in it."),
         notLine("Not a course, not a program, not a plan I hand you and disappear.")
       ),
-      React.createElement('div', { className: 'hv-card', style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(26,127,55,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
+      React.createElement('div', { className: 'hv-card', style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(5,150,105,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
         "It's a trusted advisory relationship with someone who's sat where you're sitting, cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face."
       ),
       React.createElement('div', { style: { marginTop: '1.6rem' } },
@@ -2439,16 +2439,33 @@ const EL_SEO_PAGES = {
   'el-imposter-syndrome': ElImposterPage,
 };
 function CoreApp({ pageId, lang }) {
-  const [open, setOpen] = React.useState(true);
-  const mainRef = React.useRef(null);
-  React.useEffect(() => { if (mainRef.current) mainRef.current.scrollTop = 0; }, [pageId]);
+  // Redesigned pages (core-pages-v2.js) receive the production copy as props so
+  // no wording is duplicated outside this file.
+  const V2 = {
+    home: window.HomePageV2,
+    about: window.AboutPageV2,
+    reviews: window.ReviewsPageV2,
+  }[pageId];
+  if (V2) {
+    return React.createElement(V2, {
+      lang: lang,
+      copy: {
+        home: HOME[lang] || HOME.en,
+        about: ABOUT[lang] || ABOUT.en,
+        reviews: REVIEWS[lang] || REVIEWS.en,
+        reviewItems: REVIEWS_ITEMS,
+        ui: tUI(lang),
+      },
+    });
+  }
+  // Every other indexed route keeps its existing content and gets the shared
+  // chrome + universal reading typography. Form/embed pages use the centred
+  // form container so third-party internals are untouched.
   const Page = CORE_PAGES[pageId] || EL_SEO_PAGES[pageId] || HomePage;
-  return React.createElement(React.Fragment, null,
-    React.createElement('div', { id: 'sidebar' },
-      React.createElement(Sidebar, { page: pageId, lang: lang, open: open, setOpen: setOpen })),
-    React.createElement('div', { id: 'main-scroll', ref: mainRef },
-      React.createElement(Page, { lang: lang }))
-  );
+  const FORM_PAGES = ['book', 'diagnostic', 'startingdiagnostic'];
+  return React.createElement(window.LegacyShell, {
+    page: pageId, lang: lang, form: FORM_PAGES.indexOf(pageId) !== -1,
+  }, React.createElement(Page, { lang: lang }));
 }
 function renderApp(pageId, lang) {
   ReactDOM.createRoot(document.getElementById('root')).render(
