@@ -48,38 +48,15 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","@id":"https://aggelosmouzakitis.com/about/#webpage","url":"https://aggelosmouzakitis.com/about/","name":"About — Aggelos Mouzakitis","inLanguage":"en","isPartOf":{"@id":"https://aggelosmouzakitis.com/#website"},"about":{"@id":"https://aggelosmouzakitis.com/#person"}}</script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html, body, #root { height: 100%; }
-body {
-  background: #F5F5F5;
-  font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  font-size: 16px; line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-}
-::selection { background: #282726; color: #FFFFFF; }
-#root { display: flex; overflow: hidden; }
-#main-scroll {
-  flex: 1; overflow-y: auto; overflow-x: hidden;
-  background: #FFFFFF; color: #282726;
-}
-#main-scroll a { color: #059669; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-#main-scroll a:hover { color: #059669; text-decoration-thickness: 2px; }
-#main-scroll a.cta-btn, #main-scroll a.cta-btn:hover { color: #fff; text-decoration: none; }
-#main-scroll strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,38,.3); padding-bottom: 1px; }
-#main-scroll::-webkit-scrollbar { width: 4px; }
-#main-scroll::-webkit-scrollbar-thumb { background: rgba(40,39,38,0.15); }
-#sidebar { position: relative; flex-shrink: 0; }
-@media (max-width: 767px) {
-  #root { display: block; height: 100%; }
-  #sidebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; width: 100% !important; }
-  #main-scroll { height: 100%; padding-bottom: 80px; }
-}
-@media print { #sidebar { display: none !important; } #main-scroll { overflow: visible; } #root { display: block; } }
-#main-scroll .hv-card{transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
-#main-scroll .hv-card:hover{border-color:rgba(5,150,105,.5);box-shadow:0 8px 26px rgba(5,150,105,.10);transform:translateY(-3px)}
-#main-scroll .hv-row{transition:background .15s ease,color .15s ease}
-#main-scroll .hv-row:hover{background:rgba(5,150,105,.06)}
-#main-scroll a.cta-btn:hover,#main-scroll button.cta-btn:hover{box-shadow:0 6px 18px rgba(5,150,105,.28)}
-a:focus-visible,button:focus-visible { outline: 3px solid #059669; outline-offset: 2px; border-radius: 2px; }
+html { scroll-behavior: smooth; }
+body { background: #181A1C; color: #FFFFFF; font-family: 'Inter', system-ui, sans-serif; font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+#root { display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: #059669; color: #FFFFFF; }
+img { max-width: 100%; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #059669; outline-offset: 2px; border-radius: 2px; }
+@media (prefers-reduced-motion: reduce){ *{transition-duration:.001ms!important;animation-duration:.001ms!important} }
+@media print { .site-hdr, .site-ftr, .cta-strip { display: none !important; } }
 </style>
 </head>
 <body>
@@ -96,7 +73,7 @@ body{background:#181A1C;color:#FFFFFF;font-family:"Inter",system-ui,sans-serif;f
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #059669;outline-offset:2px;border-radius:2px}
 img{max-width:100%}
 
-.site-container{width:min(1228px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
+.site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
 
 .site-hdr{width:100%;height:86px;background:#181A1C;border-bottom:1px solid rgba(255,255,255,0.16)}
 .site-hdr__in{height:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center}
@@ -144,7 +121,7 @@ img{max-width:100%}
 .u-hero h1{margin:0;max-width:15ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(52px,5.8vw,82px);font-weight:780;line-height:0.96;letter-spacing:-0.05em;color:#181A1C}
 .u-hero p{max-width:65ch;margin:32px 0 0;font-size:21px;line-height:1.55;color:#282726}
 .u-main{background:#F4F1EA;padding-block:0 96px;color:#181A1C}
-.u-read{width:min(780px,calc(100% - 40px));margin-inline:auto;font-size:19px;line-height:1.72;color:#181A1C}
+.u-read{width:min(740px,calc(100% - 40px));margin-inline:auto;font-size:19px;line-height:1.72;color:#181A1C}
 .u-read h1{font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,5vw,68px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;margin:0 0 32px}
 .u-read h2{margin:80px 0 24px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(36px,4vw,50px);font-weight:780;line-height:1.04;letter-spacing:-0.04em}
 .u-read h3{margin:48px 0 16px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(26px,3vw,34px);font-weight:750;line-height:1.1;letter-spacing:-0.03em}
@@ -191,70 +168,70 @@ img{max-width:100%}
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
 </style><style>
-/* Home hero — two columns: copy left, horizontal photograph right */
+/* ── Home hero — copy left, horizontal photograph right (brief §2 geometry) ── */
 .home-hero{background:#F4F1EA;padding-block:72px}
-.home-hero__grid{min-height:590px;display:grid;grid-template-columns:minmax(min-content,1fr) minmax(380px,520px);gap:clamp(48px,5vw,72px);align-items:center}
-html[lang="el"] .home-hero__grid{grid-template-columns:minmax(min-content,1fr) minmax(300px,520px)}
-.home-hero__copy{min-width:0;align-self:center}
-.home-hero__title{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-weight:800;line-height:0.92;letter-spacing:-0.055em;color:#181A1C;white-space:nowrap}
-html[lang="en"] .home-hero__title{font-size:clamp(76px,6.4vw,92px)}
-html[lang="el"] .home-hero__title{font-size:clamp(68px,5.6vw,82px);letter-spacing:-0.054em}
-.home-hero__roles{margin-top:32px;font-size:19px;font-weight:600;line-height:1.45;color:#282726}
-.home-hero__photo{position:relative;width:100%;max-width:520px;margin:0;padding-left:12px;padding-bottom:12px;align-self:center;justify-self:end}
+.home-hero__grid{min-height:680px;display:grid;grid-template-columns:minmax(0,1fr) minmax(520px,600px);gap:clamp(40px,4vw,56px);align-items:center}
+.home-hero__copy{min-width:0}
+.home-hero__title{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-weight:800;line-height:0.86;letter-spacing:-0.06em;color:#181A1C;text-wrap:balance}
+.home-hero__title span{display:block}
+html[lang="en"] .home-hero__title{font-size:clamp(116px,9.4vw,144px)}
+html[lang="el"] .home-hero__title{font-size:clamp(96px,7.8vw,118px);letter-spacing:-0.055em}
+.home-hero__roles{margin-top:32px;padding-left:20px;border-left:3px solid #059669;font-size:20px;font-weight:600;line-height:1.45;color:#282726}
+.home-hero__photo{position:relative;width:min(100%,600px);margin:0;padding-left:12px;padding-bottom:12px;justify-self:end}
 .home-hero__photo img{position:relative;z-index:2;display:block;width:100%;height:auto;aspect-ratio:3 / 2;object-fit:cover;object-position:50% 50%;border-radius:0;filter:grayscale(100%) contrast(1.06)}
-.home-hero__photo-vertical{position:absolute;z-index:1;left:0;top:28px;bottom:0;width:12px;background:#059669}
-.home-hero__photo-horizontal{position:absolute;z-index:1;left:0;right:0;bottom:0;height:12px;background:#059669}
-@media (max-width:1100px){
+.home-hero__photo span.v{position:absolute;z-index:1;left:0;top:28px;bottom:0;width:12px;background:#059669}
+.home-hero__photo span.h{position:absolute;z-index:1;left:0;right:28px;bottom:0;height:12px;background:#059669}
+@media (min-width:1120px) and (max-width:1319px){
+  .home-hero__grid{grid-template-columns:minmax(0,1fr) minmax(440px,520px)}
+}
+@media (max-width:1119px){
   .home-hero{padding-block:64px 72px}
-  .home-hero__grid,html[lang="el"] .home-hero__grid{min-height:0;grid-template-columns:1fr;gap:48px;align-items:start}
-  .home-hero__copy{width:100%}
-  .home-hero__photo{width:min(100%,720px);max-width:none;justify-self:start}
-  html[lang="en"] .home-hero__title{font-size:clamp(64px,8.5vw,84px)}
-  html[lang="el"] .home-hero__title{font-size:clamp(58px,7.6vw,76px)}
+  .home-hero__grid{min-height:0;grid-template-columns:1fr;gap:44px;align-items:start}
+  .home-hero__photo{width:min(100%,760px);justify-self:start}
+  html[lang="en"] .home-hero__title{font-size:clamp(80px,11vw,120px)}
+  html[lang="el"] .home-hero__title{font-size:clamp(68px,9.5vw,104px)}
 }
 @media (max-width:600px){
-  .home-hero{padding-block:48px 64px}
-  .home-hero__grid{gap:36px}
-  html[lang="en"] .home-hero__title,html[lang="el"] .home-hero__title{font-size:clamp(44px,12vw,58px);line-height:0.95;letter-spacing:-0.05em;white-space:normal;text-wrap:balance;max-width:100%}
-  .home-hero__roles{margin-top:24px;font-size:17px}
+  .home-hero{padding-block:48px 60px}
+  .home-hero__grid{gap:32px}
+  html[lang="en"] .home-hero__title{font-size:clamp(58px,16vw,72px);line-height:0.9}
+  html[lang="el"] .home-hero__title{font-size:clamp(50px,14vw,64px);line-height:0.92}
+  .home-hero__roles{margin-top:24px;font-size:16px}
   .home-hero__photo{width:100%;padding-left:8px;padding-bottom:8px}
-  .home-hero__photo-vertical{top:20px;width:8px}
-  .home-hero__photo-horizontal{height:8px}
+  .home-hero__photo span.v{top:20px;width:8px}
+  .home-hero__photo span.h{height:8px}
 }
 
-/* Home sections */
-.sec{padding-block:clamp(64px,8vw,96px)}
-.sec--tight{padding-top:0}
+/* ── Home dark canvas sections ── */
+.home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(64px,8vw,96px)}
 .sec__n{font-size:13px;font-weight:700;letter-spacing:0.12em;color:#059669}
-.sec__h{margin:16px 0 16px;max-width:19ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
-.sec__sub{margin:0 0 48px;max-width:52ch;font-size:19px;line-height:1.6;color:#C2C6CA}
-.offer{background:#181A1C;border-radius:12px;padding:clamp(32px,4.5vw,68px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);gap:clamp(40px,6vw,80px);align-items:start;margin-top:64px}
-.offer__eyebrow{font-size:21px;font-weight:700;line-height:1.25;color:#059669;max-width:34ch}
-.offer__h{margin:22px 0 0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,4.6vw,66px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;max-width:16ch;text-wrap:pretty}
-.offer p{margin:0;font-size:18px;line-height:1.55;color:#fff;max-width:48ch}
-.offer p + p{margin-top:22px;font-weight:600}
-.offer .pill--green{margin-top:32px}
-.offer__micro{margin-top:20px!important;font-size:15px!important;font-weight:400!important;color:#C2C6CA!important}
-.panel-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.panel{border-radius:12px;padding:clamp(32px,4.5vw,56px);display:grid;align-content:start;gap:24px;min-width:0}
-.panel h3{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(30px,3vw,40px);font-weight:800;line-height:0.98;letter-spacing:-0.035em}
-.panel ul{margin:0;padding-left:20px;display:grid;gap:12px}
-.panel li{font-size:18px;line-height:1.55}
-.panel--paper{background:#F4F1EA;color:#181A1C}
-.panel--black{background:#050505;color:#fff}
-.sec__after{margin:32px 0 0;max-width:62ch;font-size:18px;line-height:1.65;color:#fff}
-.recog{columns:2;column-gap:64px;color:#fff}
-.recog p{break-inside:avoid;margin:0 0 20px;font-size:18px;line-height:1.6;max-width:44ch}
-.paper-panel{background:#F4F1EA;color:#181A1C;border-radius:12px;padding:clamp(32px,5vw,72px);min-height:440px;display:flex;align-items:center}
-.paper-panel__n{font-size:13px;font-weight:700;letter-spacing:0.12em;color:#059669}
-.paper-panel h2{margin:16px 0 0;max-width:20ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:#181A1C}
-.paper-panel p{margin:24px 0 0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch}
-.paper-panel__cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:32px;margin-top:32px}
-.paper-panel__lbl{font-size:13px;font-weight:700;letter-spacing:0.12em;color:#059669}
-.paper-panel__more{display:inline-flex;gap:8px;margin-top:28px;font-weight:700;color:#181A1C;border-bottom:2px solid #059669;padding-bottom:2px}
+.sec__h{margin:16px 0 48px;max-width:19ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.sec__h2l{margin:16px 0 48px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
+.sec__h2l span{display:block}
+
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:24px;align-items:stretch}
+.split__cell{height:100%;min-height:360px;padding:clamp(32px,4.5vw,56px);border-radius:12px;display:grid;grid-template-rows:auto 1fr;align-content:start;gap:24px}
+.split__cell h3{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-weight:800;line-height:0.98;letter-spacing:-0.035em;text-wrap:balance;white-space:nowrap}
+html[lang="en"] .split__cell h3{font-size:clamp(34px,3.2vw,44px)}
+html[lang="el"] .split__cell h3{font-size:clamp(24px,2.4vw,34px)}
+.split__cell p{margin:0;font-size:18px;line-height:1.55;max-width:40ch;text-wrap:pretty}
+.split--paper{background:#F4F1EA;color:#181A1C}
+.split--black{background:#050505;color:#fff}
+
+.opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:#F4F1EA;border-radius:12px;overflow:hidden}
+.opinion img{display:block;width:100%;height:100%;min-height:520px;object-fit:cover;object-position:42% 50%}
+.opinion__body{padding:clamp(32px,4.5vw,56px);min-width:0;display:grid;align-content:start;gap:24px}
+.opinion__body p{margin:0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
+.opinion__q{margin:8px 0 0;border-top:2px solid #059669;padding-top:24px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-weight:750;font-size:clamp(28px,2.5vw,38px);line-height:1.2;letter-spacing:-0.035em;color:#181A1C;max-width:32ch;text-wrap:pretty}
+
+.cont{min-height:440px;background:#F4F1EA;border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
+.cont__in{max-width:760px}
+.cont__h{margin:16px 0 0;max-width:20ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:#181A1C;text-wrap:pretty}
+.cont p{margin:24px 0 0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
+
 .rule-arrow{display:flex;align-items:center;gap:10px;width:min(320px,60%);margin:0 0 48px}
 .rule-arrow div{flex:1;height:2px;background:#059669}
-.rule-arrow span{color:#059669;line-height:1}
+.rule-arrow span{color:#059669;line-height:1;font-size:18px}
 .media{display:grid;grid-template-columns:7fr 5fr;grid-template-rows:repeat(2,minmax(0,1fr));min-height:520px;border-radius:12px;overflow:hidden}
 .media__cell{padding:clamp(32px,3.5vw,56px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;min-width:0;transition:background .18s,filter .18s}
 .media__cell h3{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-weight:800;line-height:0.9;letter-spacing:-0.045em}
@@ -262,64 +239,63 @@ html[lang="el"] .home-hero__title{font-size:clamp(68px,5.6vw,82px);letter-spacin
 .media__arw{font-size:38px;line-height:1;transition:transform .18s}
 .media__cell:hover .media__arw{transform:translate(5px,-5px)}
 .media__kicker{font-size:14px;font-weight:700;letter-spacing:0.12em;margin-bottom:16px}
-.media__cell p{margin:0;font-size:18px;line-height:1.55;max-width:36ch}
+.media__cell p{margin:0;font-size:18px;line-height:1.55;max-width:36ch;text-wrap:pretty}
 .media__read{grid-row:1 / span 2;background:#059669;color:#fff}
 .media__read:hover{filter:brightness(0.9)}
 .media__read h3{font-size:clamp(64px,6vw,92px)}
 .media__watch{background:#050505;color:#fff}
 .media__watch:hover{background:#0e0e0e}
 .media__watch h3{font-size:clamp(44px,4vw,64px)}
-.media__watch .media__arw{font-size:32px}
+.media__watch p{font-size:17px;line-height:1.5;max-width:34ch}
 .media__follow{background:#F4F1EA;color:#181A1C}
 .media__follow h3{font-size:clamp(44px,4vw,64px)}
 .icon-row{display:flex;align-items:center;gap:16px}
 .icon-btn{width:48px;height:48px;border-radius:50%;background:#181A1C;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .18s}
 .icon-btn:hover{background:#059669;transform:translateY(-3px)}
-@media (max-width:1140px){.panel-2{grid-template-columns:1fr}}
 @media (max-width:960px){
   .media{grid-template-columns:1fr;grid-template-rows:auto;min-height:0}
-  .media__read{grid-row:auto}
-  .media__cell{min-height:320px}
+  .media__read{grid-row:auto}.media__cell{min-height:320px}
+  .opinion{grid-template-columns:1fr}.opinion img{min-height:320px}
 }
-@media (max-width:900px){.offer{grid-template-columns:1fr;gap:36px}.offer__h{font-size:clamp(40px,11vw,54px);max-width:100%}}
-@media (max-width:760px){.recog{columns:1}}
+@media (max-width:1140px){.split{grid-template-columns:1fr;grid-auto-rows:auto}.split__cell{min-height:0}}
+@media (max-width:520px){.split__cell h3,html[lang="el"] .split__cell h3{white-space:normal}}
 
-/* Why me */
-.why-hero{background:#F4F1EA;padding-block:96px 88px}
-.why-hero__grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(360px,0.9fr);gap:80px;align-items:end}
+/* ── Why me ── */
+.why-hero{background:#F4F1EA;padding-block:80px 72px}
+.why-hero__grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,0.85fr);gap:64px;align-items:center}
 .why-hero__over{font-size:13px;font-weight:700;letter-spacing:0.12em;color:#059669}
-.why-hero h1{margin:16px 0 0;max-width:13ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(58px,6vw,84px);font-weight:780;line-height:0.94;letter-spacing:-0.05em;color:#181A1C}
-.why-hero__intro{margin:28px 0 0;max-width:56ch;font-size:19px;line-height:1.7;color:#282726}
-.why-hero__creds{margin-top:24px;font-size:15px;line-height:1.6;color:#5E6264}
-.why-hero img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 40%;border-radius:12px}
-.cred-row{display:grid;grid-template-columns:72px minmax(220px,0.7fr) 1.3fr;gap:32px;padding:32px 0;border-top:1px solid rgba(24,26,28,0.20);align-items:start}
+.why-hero h1{margin:16px 0 0;max-width:15ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:#181A1C;text-wrap:balance}
+.why-hero__intro{margin:24px 0 0;max-width:56ch;font-size:19px;line-height:1.7;color:#282726}
+.why-hero__creds{margin-top:20px;font-size:15px;line-height:1.6;color:#5E6264}
+.why-hero img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 38%;border-radius:12px}
+.cred-row{display:grid;grid-template-columns:64px minmax(200px,0.7fr) 1.3fr;gap:32px;padding:28px 0;border-top:1px solid rgba(24,26,28,0.20);align-items:start}
 .cred-row:last-of-type{border-bottom:1px solid rgba(24,26,28,0.20)}
-.cred-row__n{font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:20px;font-weight:800;color:#059669}
-.cred-row h3{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:24px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:#181A1C}
-.cred-row p{margin:0;font-size:18px;line-height:1.6;color:#282726}
-@media (max-width:900px){.why-hero{padding-block:64px 56px}.why-hero__grid{grid-template-columns:1fr;gap:40px}}
-@media (max-width:700px){.cred-row{grid-template-columns:1fr;gap:12px}}
+.cred-row .n{font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:19px;font-weight:800;color:#059669}
+.cred-row h3{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:22px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:#181A1C}
+.cred-row p{margin:0;font-size:17px;line-height:1.6;color:#282726}
+@media (max-width:900px){.why-hero{padding-block:56px 48px}.why-hero__grid{grid-template-columns:1fr;gap:36px}}
+@media (max-width:700px){.cred-row{grid-template-columns:1fr;gap:10px}.why-hero h1{font-size:clamp(40px,10vw,52px)}}
 
-/* Reviews */
-.rev-hero{background:#F4F1EA;padding-block:96px 72px}
-.rev-hero__grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:80px;align-items:start}
-.rev-hero h1{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(52px,5.6vw,80px);font-weight:780;line-height:0.94;letter-spacing:-0.05em;color:#181A1C}
-.rev-hero__lead{margin:0 0 16px;font-size:20px;line-height:1.6;color:#282726;max-width:60ch}
+/* ── Reviews (no giant opening testimonial) ── */
+.rev-hero{background:#F4F1EA;padding-block:80px 56px}
+.rev-hero__grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
+.rev-hero h1{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:#181A1C}
+.rev-hero__lead{margin:0 0 14px;font-size:20px;line-height:1.6;color:#282726;max-width:60ch}
 .rev-hero__note{font-size:15px;line-height:1.6;color:#5E6264}
-.rev-feature{max-width:24ch;margin:64px 0 0;padding-top:32px;border-top:4px solid #059669;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(34px,4.2vw,54px);font-weight:750;line-height:1.1;letter-spacing:-0.035em;color:#181A1C;text-wrap:pretty}
-.rev-feature__who{margin-top:24px;font-family:"Inter",system-ui,sans-serif;font-size:14px;font-weight:400;letter-spacing:0;color:#5E6264}
+.rev-lead{max-width:900px;margin:56px 0 0;padding-top:28px;border-top:4px solid #059669}
+.rev-lead p{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(24px,2.3vw,28px);font-weight:600;line-height:1.46;letter-spacing:-0.01em;color:#181A1C;text-wrap:pretty}
+.rev-lead .who{margin-top:22px;font-size:14px;color:#5E6264}
+.rev-lead button,.rev-item button{margin-top:16px;background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:#059669}
+.rev-lead .orig,.rev-item .orig{margin-top:16px;padding-top:16px;border-top:1px solid rgba(24,26,28,0.20);font-size:16px;line-height:1.7;color:#5E6264;font-style:italic}
 .rev-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px}
-.rev-item{border-top:1px solid rgba(24,26,28,0.20);padding:40px 0 56px;min-width:0}
-.rev-item p{margin:0;font-size:20px;line-height:1.65;color:#181A1C}
-.rev-item__who{margin-top:24px;font-size:14px;color:#5E6264}
-.rev-item button{margin-top:16px;background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:#059669}
-.rev-item__orig{margin-top:16px!important;padding-top:16px;border-top:1px solid rgba(24,26,28,0.20);font-size:16px!important;line-height:1.7!important;color:#5E6264!important;font-style:italic}
-@media (max-width:900px){.rev-hero{padding-block:64px 56px}.rev-hero__grid{grid-template-columns:1fr;gap:32px}}
-@media (max-width:800px){.rev-grid{grid-template-columns:1fr}}
-</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__mark" href="/"><b>AGGELOS</b><i></i><em>MOUZAKITIS</em></a><nav class="site-hdr__nav"><a href="/">Home</a><a href="/about/" aria-current="page">Why me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/el/about/" hreflang="el">Ελληνικά</a><a class="pill pill--light" href="/startingdiagnostic/"><span>START</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main><section class="why-hero"><div class="site-container why-hero__grid"><div><div class="why-hero__over">WHY ME</div><h1>Two careers that kept running into the same problem.</h1><p class="why-hero__intro">I spent 18+ years in tech, mostly in product and growth. I built my own companies, worked inside startups and large organisations, and advised more than 500 businesses.</p><div class="why-hero__creds">Business Growth Advisor + Licensed Psychotherapist</div></div><img src="/img/aggelos-opinion.jpeg" alt="Aggelos Mouzakitis" width="900" height="1125" loading="eager" decoding="async"></div></section><section class="u-main"><div class="site-container"><div class="cred-row"><div class="cred-row__n">01</div><h3>MSc Integrative Counselling &amp; Psychotherapy (University of Derby)</h3><p></p></div><div class="cred-row"><div class="cred-row__n">02</div><h3>BACP-registered</h3><p></p></div><div class="cred-row"><div class="cred-row__n">03</div><h3>Based in Ireland, working globally</h3><p></p></div></div><div class="u-read" style="margin-top: 80px;"><p>So if we're talking about your offer, pricing, customer acquisition, a hire, a sale you're avoiding or a business decision you can't settle, you don't need to translate the commercial side for me.</p><p>I know that world.</p><h2>Then psychology started showing up in places it wasn't invited.</h2><p>Again and again, I'd see a business problem that was only partly a business problem.</p><p>Someone knew they needed to sell but wouldn’t.</p><p>Someone kept changing a perfectly reasonable strategy.</p><p>Someone had hired good people but struggled to let go of control.</p><p>Someone had enough information to make a decision and kept looking for more.</p><p>The strategy mattered. But it wasn't the whole story.</p><p>So I trained as a psychotherapist: MSc Integrative Counselling &amp; Psychotherapy at the University of Derby, and registration with the BACP.</p><hr><h2>Then the same thing happened from the other direction.</h2><p>In psychological work, I'd meet ambitious people dealing with very real business problems.</p><p>And sometimes a psychological explanation wasn't what they needed.</p><p>Their offer was weak. Their pricing was wrong. They had no reliable way of finding customers. They were making a bad business decision.</p><p>Psychotherapy isn't designed to tell you that.</p><hr><h2>Eventually, the two careers stopped looking random.</h2><p>Sometimes the problem is clearly business.</p><p>Sometimes it's personal.</p><p>And quite often they collide so much that you can't tell where one ends and the other begins.</p><p>That's the work I find most interesting.</p><hr><h2>I'm not here to tell you to want less.</h2><p>Ambition isn't a symptom.</p><p>I don't want to convince you that wanting a bigger business, more money, more independence or more impact is secretly unhealthy.</p><p>I want to help you build what you actually want without automatically assuming that either the business or you must be the problem.</p></div></section><section class="cta-strip"><div class="site-container"><h2 class="cta-strip__h">Usually, we need to look before we know.</h2><div><a class="pill pill--green" href="/startingdiagnostic/"><span>See how 1:1 works</span><span>→</span></a></div><a class="cta-strip__sub" href="/confidentiality/"><span>Confidentiality</span><span>→</span></a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__mark"><b>AGGELOS</b><i></i><em>MOUZAKITIS</em></div><div class="site-ftr__roles"><div>Business Growth Advisor</div><div style="margin-top: 8px;">Licensed Psychotherapist (BACP)</div></div></div><nav><div class="site-ftr__head">NAVIGATE</div><a href="/">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a><a href="/startingdiagnostic/">Apply</a></nav><nav><div class="site-ftr__head">CONTENT</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Articles ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a></nav><nav><div class="site-ftr__head">FOLLOW</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. All rights reserved.</div><nav><a href="/confidentiality/">Confidentiality</a><a href="/confidentiality/#terms">Terms</a><a href="/confidentiality/#privacy">Privacy</a></nav></div></div></footer></div>
+.rev-item{border-top:1px solid rgba(24,26,28,0.20);padding:36px 0 44px;min-width:0}
+.rev-item p{margin:0;font-size:19px;line-height:1.72;color:#181A1C}
+.rev-item .who{margin-top:22px;font-size:14px;color:#5E6264}
+@media (max-width:900px){.rev-hero{padding-block:56px 48px}.rev-hero__grid{grid-template-columns:1fr;gap:28px}}
+@media (max-width:800px){.rev-grid{grid-template-columns:1fr}.rev-lead p{font-size:24px}}
+</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__mark" href="/"><b>AGGELOS</b><i></i><em>MOUZAKITIS</em></a><nav class="site-hdr__nav"><a href="/">Home</a><a href="/about/" aria-current="page">Why me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/el/about/" hreflang="el">Ελληνικά</a><a class="pill pill--light" href="/startingdiagnostic/"><span>START</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main><section class="why-hero"><div class="site-container why-hero__grid"><div><div class="why-hero__over">WHY ME</div><h1>Two careers that kept running into the same problem.</h1><p class="why-hero__intro">I spent 18+ years in tech, mostly in product and growth. I built my own companies, worked inside startups and large organisations, and advised more than 500 businesses.</p><div class="why-hero__creds">Business Growth Advisor + Licensed Psychotherapist</div></div><img src="/img/aggelos-opinion.jpeg" alt="Aggelos Mouzakitis" width="900" height="1125" loading="eager" decoding="async"></div></section><section class="u-main"><div class="site-container"><div class="cred-row"><div class="n">01</div><h3>Product and growth</h3><p>18+ years in tech, mostly in product and growth, inside startups and large organisations.</p></div><div class="cred-row"><div class="n">02</div><h3>Companies advised</h3><p>Built my own companies and advised more than 500 businesses.</p></div><div class="cred-row"><div class="n">03</div><h3>Psychotherapy training</h3><p>MSc Integrative Counselling &amp; Psychotherapy, University of Derby.</p></div><div class="cred-row"><div class="n">04</div><h3>Professional registration</h3><p>Registered member of the BACP. Based in Ireland, working globally.</p></div></div><div class="u-read" style="margin-top: 72px;"><p>So if we're talking about your offer, pricing, customer acquisition, a hire, a sale you're avoiding or a business decision you can't settle, you don't need to translate the commercial side for me.</p><p>I know that world.</p><h2>Then psychology started showing up in places it wasn't invited.</h2><p>Again and again, I'd see a business problem that was only partly a business problem.</p><p>Someone knew they needed to sell but wouldn’t.</p><p>Someone kept changing a perfectly reasonable strategy.</p><p>Someone had hired good people but struggled to let go of control.</p><p>Someone had enough information to make a decision and kept looking for more.</p><p>The strategy mattered. But it wasn't the whole story.</p><p>So I trained as a psychotherapist: MSc Integrative Counselling &amp; Psychotherapy at the University of Derby, and registration with the BACP.</p><hr><h2>Then the same thing happened from the other direction.</h2><p>In psychological work, I'd meet ambitious people dealing with very real business problems.</p><p>And sometimes a psychological explanation wasn't what they needed.</p><p>Their offer was weak. Their pricing was wrong. They had no reliable way of finding customers. They were making a bad business decision.</p><p>Psychotherapy isn't designed to tell you that.</p><hr><h2>Eventually, the two careers stopped looking random.</h2><p>Sometimes the problem is clearly business.</p><p>Sometimes it's personal.</p><p>And quite often they collide so much that you can't tell where one ends and the other begins.</p><p>That's the work I find most interesting.</p><hr><h2>I'm not here to tell you to want less.</h2><p>Ambition isn't a symptom.</p><p>I don't want to convince you that wanting a bigger business, more money, more independence or more impact is secretly unhealthy.</p><p>I want to help you build what you actually want without automatically assuming that either the business or you must be the problem.</p></div></section><section class="cta-strip"><div class="site-container"><h2 class="cta-strip__h">Usually, we need to look before we know.</h2><div><a class="pill pill--green" href="/startingdiagnostic/"><span>Apply for a working session</span><span>→</span></a></div><a class="cta-strip__sub" href="/confidentiality/"><span>Confidentiality</span><span>→</span></a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__mark"><b>AGGELOS</b><i></i><em>MOUZAKITIS</em></div><div class="site-ftr__roles"><div>Private business &amp; career advisor</div><div style="margin-top: 8px;">BACP-registered psychotherapist</div></div></div><nav><div class="site-ftr__head">NAVIGATE</div><a href="/">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a><a href="/startingdiagnostic/">Apply</a></nav><nav><div class="site-ftr__head">CONTENT</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Articles ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a></nav><nav><div class="site-ftr__head">FOLLOW</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. All rights reserved.</div><nav><a href="/confidentiality/">Confidentiality</a><a href="/confidentiality/#terms">Terms</a><a href="/confidentiality/#privacy">Privacy</a></nav></div></div></footer></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
-<script src="/sidebar.js?v=32"></script>
 <script src="/site-chrome.js?v=1"></script>
 <script src="/core-pages-v2.js?v=1"></script>
 <script src="/content-pages.js?v=34"></script>

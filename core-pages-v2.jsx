@@ -1,83 +1,130 @@
 // core-pages-v2.jsx — redesigned Home / Why me (About) / Reviews.
-// Loaded after site-chrome.js, before content-pages.js.
-//
-// These components are PRESENTATIONAL ONLY. Every string is passed in from
-// content-pages.jsx via the `copy` prop (HOME / ABOUT / REVIEWS / REVIEWS_ITEMS
-// / tUI), so no production wording is duplicated, invented or edited here.
+// Loaded after site-chrome.js, before content-pages.js. Presentational only.
+//   Home copy: ported verbatim from the approved Homepage.dc.html mockup (HOME_V2).
+//   About/Reviews copy: the real production ABOUT / REVIEWS / REVIEWS_ITEMS, passed
+//   in via the `copy` prop by CoreApp — never placeholders.
 // Exposes on window: HomePageV2, AboutPageV2, ReviewsPageV2, PAGE_V2_CSS.
 
 const V2 = window.SITE;
 const v2Ext = { target: '_blank', rel: 'noopener noreferrer' };
 const arr = (x) => (Array.isArray(x) ? x : []);
 
-const HERO_NAME = { en: 'Hi, I’m Aggelos.', el: 'Γεια, είμαι ο Άγγελος.' };
+// ─── Homepage copy — verbatim from Homepage.dc.html (mockup content object) ────
+const HOME_V2 = {
+  en: {
+    heroL1: 'Hi, I’m', heroL2: 'Aggelos.',
+    splitIntro: 'You won’t have to choose between practical advice and psychological depth.',
+    leftH: 'WHAT WE CHANGE',
+    leftP: 'The offer, marketing, career move, client mix or the way the business runs.',
+    rightH: 'WHAT GETS IN THE WAY',
+    rightP: 'Fear, shame, avoidance or pressure at home may be shaping what you do. We work there too.',
+    opinionL1: 'YOU WILL GET', opinionL2: 'AN OPINION.',
+    opinionParas: [
+      'I ask enough questions to understand the situation, then tell you what I think.',
+      'If I see a practical move, I suggest it. If your story does not add up, I say so.',
+      'You can tell me the part you normally edit out. I will not think less of you. I will not let you bullshit yourself either.',
+    ],
+    opinionQuote: '“I left with more than advice. I left understanding what the problem actually was.”',
+    contMarker: '03 / IF WE CONTINUE',
+    contH: 'We agree on one concrete outcome and how long we will work towards it.',
+    contP: 'We meet weekly or every other week, and you have WhatsApp access between sessions.',
+    mediaIntro: 'Want to see how I think?',
+    readP: 'Essays about work, ambition, psychology and where they overlap.',
+    watchP: 'Short videos, longer conversations and the occasional useful rant.',
+    finalH: 'IF WORKING HARDER WAS GOING TO FIX THIS, IT PROBABLY WOULD HAVE BY NOW.',
+    contAlt: 'Aggelos Mouzakitis',
+  },
+  el: {
+    heroL1: 'Γεια, είμαι', heroL2: 'ο Άγγελος.',
+    splitIntro: 'Δεν χρειάζεται να διαλέξεις αν το θέμα είναι επαγγελματικό ή προσωπικό.',
+    leftH: 'ΤΙ ΑΛΛΑΖΟΥΜΕ',
+    leftP: 'Το offer, το marketing, η επόμενη κίνηση στην καριέρα σου, οι πελάτες ή ο τρόπος που λειτουργεί η επιχείρησή σου.',
+    rightH: 'ΤΙ ΜΠΑΙΝΕΙ ΣΤΗ ΜΕΣΗ',
+    rightP: 'Ο φόβος, η ντροπή, η αποφυγή ή η πίεση στο σπίτι μπορεί να επηρεάζουν τη δουλειά και τις αποφάσεις σου. Πιάνουμε και αυτό το κομμάτι.',
+    opinionL1: 'ΘΑ ΣΟΥ ΠΩ', opinionL2: 'ΤΗ ΓΝΩΜΗ ΜΟΥ.',
+    opinionParas: [
+      'Θα κάνω όσες ερωτήσεις χρειαστούν για να καταλάβω τι συμβαίνει. Μετά θα σου πω πώς το βλέπω.',
+      'Αν βλέπω κάτι συγκεκριμένο που μπορείς να κάνεις, θα στο προτείνω. Αν αυτά που μου λες δεν στέκουν, θα σου το πω.',
+      'Μπορείς να μου πεις και αυτό που συνήθως αφήνεις απ’ έξω. Δεν θα σε δω διαφορετικά. Δεν θα σε αφήσω όμως να λες μαλακίες στον εαυτό σου.',
+    ],
+    opinionQuote: '«Έφυγα με κάτι περισσότερο από συμβουλές. Έφυγα έχοντας καταλάβει ποιο ήταν πραγματικά το πρόβλημα.»',
+    contMarker: '03 / ΑΝ ΣΥΝΕΧΙΣΟΥΜΕ',
+    contH: 'Συμφωνούμε τι ακριβώς θέλεις να πετύχεις και για πόσο θα δουλέψουμε πάνω σε αυτό.',
+    contP: 'Μιλάμε κάθε εβδομάδα και μπορείς να μου γράφεις στο WhatsApp ανάμεσα στις συναντήσεις.',
+    mediaIntro: 'Θέλεις να δεις πώς σκέφτομαι;',
+    readP: 'Κείμενα για τη δουλειά, τη φιλοδοξία, την ψυχολογία και εκεί που μπλέκονται.',
+    watchP: 'Μικρά βίντεο, μεγαλύτερες συζητήσεις και πού και πού κάποιο χρήσιμο rant.',
+    finalH: 'ΑΝ ΛΥΝΟΤΑΝ ΜΕ ΠΕΡΙΣΣΟΤΕΡΗ ΔΟΥΛΕΙΑ, ΜΑΛΛΟΝ ΘΑ ΕΙΧΕ ΛΥΘΕΙ ΗΔΗ.',
+    contAlt: 'Άγγελος Μουζακίτης',
+  },
+};
 
 // ─── Page-section CSS ────────────────────────────────────────────────────────
 const PAGE_V2_CSS = `
-/* Home hero — two columns: copy left, horizontal photograph right */
+/* ── Home hero — copy left, horizontal photograph right (brief §2 geometry) ── */
 .home-hero{background:${V2.paper};padding-block:72px}
-.home-hero__grid{min-height:590px;display:grid;grid-template-columns:minmax(min-content,1fr) minmax(380px,520px);gap:clamp(48px,5vw,72px);align-items:center}
-html[lang="el"] .home-hero__grid{grid-template-columns:minmax(min-content,1fr) minmax(300px,520px)}
-.home-hero__copy{min-width:0;align-self:center}
-.home-hero__title{margin:0;font-family:${V2.display};font-weight:800;line-height:0.92;letter-spacing:-0.055em;color:${V2.ink};white-space:nowrap}
-html[lang="en"] .home-hero__title{font-size:clamp(76px,6.4vw,92px)}
-html[lang="el"] .home-hero__title{font-size:clamp(68px,5.6vw,82px);letter-spacing:-0.054em}
-.home-hero__roles{margin-top:32px;font-size:19px;font-weight:600;line-height:1.45;color:${V2.ink2}}
-.home-hero__photo{position:relative;width:100%;max-width:520px;margin:0;padding-left:12px;padding-bottom:12px;align-self:center;justify-self:end}
+.home-hero__grid{min-height:680px;display:grid;grid-template-columns:minmax(0,1fr) minmax(520px,600px);gap:clamp(40px,4vw,56px);align-items:center}
+.home-hero__copy{min-width:0}
+.home-hero__title{margin:0;font-family:${V2.display};font-weight:800;line-height:0.86;letter-spacing:-0.06em;color:${V2.ink};text-wrap:balance}
+.home-hero__title span{display:block}
+html[lang="en"] .home-hero__title{font-size:clamp(116px,9.4vw,144px)}
+html[lang="el"] .home-hero__title{font-size:clamp(96px,7.8vw,118px);letter-spacing:-0.055em}
+.home-hero__roles{margin-top:32px;padding-left:20px;border-left:3px solid ${V2.green};font-size:20px;font-weight:600;line-height:1.45;color:${V2.ink2}}
+.home-hero__photo{position:relative;width:min(100%,600px);margin:0;padding-left:12px;padding-bottom:12px;justify-self:end}
 .home-hero__photo img{position:relative;z-index:2;display:block;width:100%;height:auto;aspect-ratio:3 / 2;object-fit:cover;object-position:50% 50%;border-radius:0;filter:grayscale(100%) contrast(1.06)}
-.home-hero__photo-vertical{position:absolute;z-index:1;left:0;top:28px;bottom:0;width:12px;background:${V2.green}}
-.home-hero__photo-horizontal{position:absolute;z-index:1;left:0;right:0;bottom:0;height:12px;background:${V2.green}}
-@media (max-width:1100px){
+.home-hero__photo span.v{position:absolute;z-index:1;left:0;top:28px;bottom:0;width:12px;background:${V2.green}}
+.home-hero__photo span.h{position:absolute;z-index:1;left:0;right:28px;bottom:0;height:12px;background:${V2.green}}
+@media (min-width:1120px) and (max-width:1319px){
+  .home-hero__grid{grid-template-columns:minmax(0,1fr) minmax(440px,520px)}
+}
+@media (max-width:1119px){
   .home-hero{padding-block:64px 72px}
-  .home-hero__grid,html[lang="el"] .home-hero__grid{min-height:0;grid-template-columns:1fr;gap:48px;align-items:start}
-  .home-hero__copy{width:100%}
-  .home-hero__photo{width:min(100%,720px);max-width:none;justify-self:start}
-  html[lang="en"] .home-hero__title{font-size:clamp(64px,8.5vw,84px)}
-  html[lang="el"] .home-hero__title{font-size:clamp(58px,7.6vw,76px)}
+  .home-hero__grid{min-height:0;grid-template-columns:1fr;gap:44px;align-items:start}
+  .home-hero__photo{width:min(100%,760px);justify-self:start}
+  html[lang="en"] .home-hero__title{font-size:clamp(80px,11vw,120px)}
+  html[lang="el"] .home-hero__title{font-size:clamp(68px,9.5vw,104px)}
 }
 @media (max-width:600px){
-  .home-hero{padding-block:48px 64px}
-  .home-hero__grid{gap:36px}
-  html[lang="en"] .home-hero__title,html[lang="el"] .home-hero__title{font-size:clamp(44px,12vw,58px);line-height:0.95;letter-spacing:-0.05em;white-space:normal;text-wrap:balance;max-width:100%}
-  .home-hero__roles{margin-top:24px;font-size:17px}
+  .home-hero{padding-block:48px 60px}
+  .home-hero__grid{gap:32px}
+  html[lang="en"] .home-hero__title{font-size:clamp(58px,16vw,72px);line-height:0.9}
+  html[lang="el"] .home-hero__title{font-size:clamp(50px,14vw,64px);line-height:0.92}
+  .home-hero__roles{margin-top:24px;font-size:16px}
   .home-hero__photo{width:100%;padding-left:8px;padding-bottom:8px}
-  .home-hero__photo-vertical{top:20px;width:8px}
-  .home-hero__photo-horizontal{height:8px}
+  .home-hero__photo span.v{top:20px;width:8px}
+  .home-hero__photo span.h{height:8px}
 }
 
-/* Home sections */
-.sec{padding-block:clamp(64px,8vw,96px)}
-.sec--tight{padding-top:0}
+/* ── Home dark canvas sections ── */
+.home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(64px,8vw,96px)}
 .sec__n{font-size:13px;font-weight:700;letter-spacing:0.12em;color:${V2.green}}
-.sec__h{margin:16px 0 16px;max-width:19ch;font-family:${V2.display};font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
-.sec__sub{margin:0 0 48px;max-width:52ch;font-size:19px;line-height:1.6;color:${V2.onDark}}
-.offer{background:${V2.ink};border-radius:12px;padding:clamp(32px,4.5vw,68px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);gap:clamp(40px,6vw,80px);align-items:start;margin-top:64px}
-.offer__eyebrow{font-size:21px;font-weight:700;line-height:1.25;color:${V2.green};max-width:34ch}
-.offer__h{margin:22px 0 0;font-family:${V2.display};font-size:clamp(44px,4.6vw,66px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;max-width:16ch;text-wrap:pretty}
-.offer p{margin:0;font-size:18px;line-height:1.55;color:#fff;max-width:48ch}
-.offer p + p{margin-top:22px;font-weight:600}
-.offer .pill--green{margin-top:32px}
-.offer__micro{margin-top:20px!important;font-size:15px!important;font-weight:400!important;color:${V2.onDark}!important}
-.panel-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.panel{border-radius:12px;padding:clamp(32px,4.5vw,56px);display:grid;align-content:start;gap:24px;min-width:0}
-.panel h3{margin:0;font-family:${V2.display};font-size:clamp(30px,3vw,40px);font-weight:800;line-height:0.98;letter-spacing:-0.035em}
-.panel ul{margin:0;padding-left:20px;display:grid;gap:12px}
-.panel li{font-size:18px;line-height:1.55}
-.panel--paper{background:${V2.paper};color:${V2.ink}}
-.panel--black{background:${V2.black};color:#fff}
-.sec__after{margin:32px 0 0;max-width:62ch;font-size:18px;line-height:1.65;color:#fff}
-.recog{columns:2;column-gap:64px;color:#fff}
-.recog p{break-inside:avoid;margin:0 0 20px;font-size:18px;line-height:1.6;max-width:44ch}
-.paper-panel{background:${V2.paper};color:${V2.ink};border-radius:12px;padding:clamp(32px,5vw,72px);min-height:440px;display:flex;align-items:center}
-.paper-panel__n{font-size:13px;font-weight:700;letter-spacing:0.12em;color:${V2.green}}
-.paper-panel h2{margin:16px 0 0;max-width:20ch;font-family:${V2.display};font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:${V2.ink}}
-.paper-panel p{margin:24px 0 0;font-size:18px;line-height:1.55;color:${V2.ink2};max-width:52ch}
-.paper-panel__cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:32px;margin-top:32px}
-.paper-panel__lbl{font-size:13px;font-weight:700;letter-spacing:0.12em;color:${V2.green}}
-.paper-panel__more{display:inline-flex;gap:8px;margin-top:28px;font-weight:700;color:${V2.ink};border-bottom:2px solid ${V2.green};padding-bottom:2px}
+.sec__h{margin:16px 0 48px;max-width:19ch;font-family:${V2.display};font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.sec__h2l{margin:16px 0 48px;font-family:${V2.display};font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
+.sec__h2l span{display:block}
+
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:24px;align-items:stretch}
+.split__cell{height:100%;min-height:360px;padding:clamp(32px,4.5vw,56px);border-radius:12px;display:grid;grid-template-rows:auto 1fr;align-content:start;gap:24px}
+.split__cell h3{margin:0;font-family:${V2.display};font-weight:800;line-height:0.98;letter-spacing:-0.035em;text-wrap:balance;white-space:nowrap}
+html[lang="en"] .split__cell h3{font-size:clamp(34px,3.2vw,44px)}
+html[lang="el"] .split__cell h3{font-size:clamp(24px,2.4vw,34px)}
+.split__cell p{margin:0;font-size:18px;line-height:1.55;max-width:40ch;text-wrap:pretty}
+.split--paper{background:${V2.paper};color:${V2.ink}}
+.split--black{background:${V2.black};color:#fff}
+
+.opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:${V2.paper};border-radius:12px;overflow:hidden}
+.opinion img{display:block;width:100%;height:100%;min-height:520px;object-fit:cover;object-position:42% 50%}
+.opinion__body{padding:clamp(32px,4.5vw,56px);min-width:0;display:grid;align-content:start;gap:24px}
+.opinion__body p{margin:0;font-size:18px;line-height:1.55;color:${V2.ink2};max-width:52ch;text-wrap:pretty}
+.opinion__q{margin:8px 0 0;border-top:2px solid ${V2.green};padding-top:24px;font-family:${V2.display};font-weight:750;font-size:clamp(28px,2.5vw,38px);line-height:1.2;letter-spacing:-0.035em;color:${V2.ink};max-width:32ch;text-wrap:pretty}
+
+.cont{min-height:440px;background:${V2.paper};border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
+.cont__in{max-width:760px}
+.cont__h{margin:16px 0 0;max-width:20ch;font-family:${V2.display};font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:${V2.ink};text-wrap:pretty}
+.cont p{margin:24px 0 0;font-size:18px;line-height:1.55;color:${V2.ink2};max-width:52ch;text-wrap:pretty}
+
 .rule-arrow{display:flex;align-items:center;gap:10px;width:min(320px,60%);margin:0 0 48px}
 .rule-arrow div{flex:1;height:2px;background:${V2.green}}
-.rule-arrow span{color:${V2.green};line-height:1}
+.rule-arrow span{color:${V2.green};line-height:1;font-size:18px}
 .media{display:grid;grid-template-columns:7fr 5fr;grid-template-rows:repeat(2,minmax(0,1fr));min-height:520px;border-radius:12px;overflow:hidden}
 .media__cell{padding:clamp(32px,3.5vw,56px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;min-width:0;transition:background .18s,filter .18s}
 .media__cell h3{margin:0;font-family:${V2.display};font-weight:800;line-height:0.9;letter-spacing:-0.045em}
@@ -85,240 +132,215 @@ html[lang="el"] .home-hero__title{font-size:clamp(68px,5.6vw,82px);letter-spacin
 .media__arw{font-size:38px;line-height:1;transition:transform .18s}
 .media__cell:hover .media__arw{transform:translate(5px,-5px)}
 .media__kicker{font-size:14px;font-weight:700;letter-spacing:0.12em;margin-bottom:16px}
-.media__cell p{margin:0;font-size:18px;line-height:1.55;max-width:36ch}
+.media__cell p{margin:0;font-size:18px;line-height:1.55;max-width:36ch;text-wrap:pretty}
 .media__read{grid-row:1 / span 2;background:${V2.green};color:#fff}
 .media__read:hover{filter:brightness(0.9)}
 .media__read h3{font-size:clamp(64px,6vw,92px)}
 .media__watch{background:${V2.black};color:#fff}
 .media__watch:hover{background:#0e0e0e}
 .media__watch h3{font-size:clamp(44px,4vw,64px)}
-.media__watch .media__arw{font-size:32px}
+.media__watch p{font-size:17px;line-height:1.5;max-width:34ch}
 .media__follow{background:${V2.paper};color:${V2.ink}}
 .media__follow h3{font-size:clamp(44px,4vw,64px)}
 .icon-row{display:flex;align-items:center;gap:16px}
 .icon-btn{width:48px;height:48px;border-radius:50%;background:${V2.ink};color:#fff;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .18s}
 .icon-btn:hover{background:${V2.green};transform:translateY(-3px)}
-@media (max-width:1140px){.panel-2{grid-template-columns:1fr}}
 @media (max-width:960px){
   .media{grid-template-columns:1fr;grid-template-rows:auto;min-height:0}
-  .media__read{grid-row:auto}
-  .media__cell{min-height:320px}
+  .media__read{grid-row:auto}.media__cell{min-height:320px}
+  .opinion{grid-template-columns:1fr}.opinion img{min-height:320px}
 }
-@media (max-width:900px){.offer{grid-template-columns:1fr;gap:36px}.offer__h{font-size:clamp(40px,11vw,54px);max-width:100%}}
-@media (max-width:760px){.recog{columns:1}}
+@media (max-width:1140px){.split{grid-template-columns:1fr;grid-auto-rows:auto}.split__cell{min-height:0}}
+@media (max-width:520px){.split__cell h3,html[lang="el"] .split__cell h3{white-space:normal}}
 
-/* Why me */
-.why-hero{background:${V2.paper};padding-block:96px 88px}
-.why-hero__grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(360px,0.9fr);gap:80px;align-items:end}
+/* ── Why me ── */
+.why-hero{background:${V2.paper};padding-block:80px 72px}
+.why-hero__grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,0.85fr);gap:64px;align-items:center}
 .why-hero__over{font-size:13px;font-weight:700;letter-spacing:0.12em;color:${V2.green}}
-.why-hero h1{margin:16px 0 0;max-width:13ch;font-family:${V2.display};font-size:clamp(58px,6vw,84px);font-weight:780;line-height:0.94;letter-spacing:-0.05em;color:${V2.ink}}
-.why-hero__intro{margin:28px 0 0;max-width:56ch;font-size:19px;line-height:1.7;color:${V2.ink2}}
-.why-hero__creds{margin-top:24px;font-size:15px;line-height:1.6;color:${V2.meta}}
-.why-hero img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 40%;border-radius:12px}
-.cred-row{display:grid;grid-template-columns:72px minmax(220px,0.7fr) 1.3fr;gap:32px;padding:32px 0;border-top:1px solid ${V2.rule};align-items:start}
+.why-hero h1{margin:16px 0 0;max-width:15ch;font-family:${V2.display};font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:${V2.ink};text-wrap:balance}
+.why-hero__intro{margin:24px 0 0;max-width:56ch;font-size:19px;line-height:1.7;color:${V2.ink2}}
+.why-hero__creds{margin-top:20px;font-size:15px;line-height:1.6;color:${V2.meta}}
+.why-hero img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 38%;border-radius:12px}
+.cred-row{display:grid;grid-template-columns:64px minmax(200px,0.7fr) 1.3fr;gap:32px;padding:28px 0;border-top:1px solid ${V2.rule};align-items:start}
 .cred-row:last-of-type{border-bottom:1px solid ${V2.rule}}
-.cred-row__n{font-family:${V2.display};font-size:20px;font-weight:800;color:${V2.green}}
-.cred-row h3{margin:0;font-family:${V2.display};font-size:24px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:${V2.ink}}
-.cred-row p{margin:0;font-size:18px;line-height:1.6;color:${V2.ink2}}
-@media (max-width:900px){.why-hero{padding-block:64px 56px}.why-hero__grid{grid-template-columns:1fr;gap:40px}}
-@media (max-width:700px){.cred-row{grid-template-columns:1fr;gap:12px}}
+.cred-row .n{font-family:${V2.display};font-size:19px;font-weight:800;color:${V2.green}}
+.cred-row h3{margin:0;font-family:${V2.display};font-size:22px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:${V2.ink}}
+.cred-row p{margin:0;font-size:17px;line-height:1.6;color:${V2.ink2}}
+@media (max-width:900px){.why-hero{padding-block:56px 48px}.why-hero__grid{grid-template-columns:1fr;gap:36px}}
+@media (max-width:700px){.cred-row{grid-template-columns:1fr;gap:10px}.why-hero h1{font-size:clamp(40px,10vw,52px)}}
 
-/* Reviews */
-.rev-hero{background:${V2.paper};padding-block:96px 72px}
-.rev-hero__grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:80px;align-items:start}
-.rev-hero h1{margin:0;font-family:${V2.display};font-size:clamp(52px,5.6vw,80px);font-weight:780;line-height:0.94;letter-spacing:-0.05em;color:${V2.ink}}
-.rev-hero__lead{margin:0 0 16px;font-size:20px;line-height:1.6;color:${V2.ink2};max-width:60ch}
+/* ── Reviews (no giant opening testimonial) ── */
+.rev-hero{background:${V2.paper};padding-block:80px 56px}
+.rev-hero__grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
+.rev-hero h1{margin:0;font-family:${V2.display};font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:${V2.ink}}
+.rev-hero__lead{margin:0 0 14px;font-size:20px;line-height:1.6;color:${V2.ink2};max-width:60ch}
 .rev-hero__note{font-size:15px;line-height:1.6;color:${V2.meta}}
-.rev-feature{max-width:24ch;margin:64px 0 0;padding-top:32px;border-top:4px solid ${V2.green};font-family:${V2.display};font-size:clamp(34px,4.2vw,54px);font-weight:750;line-height:1.1;letter-spacing:-0.035em;color:${V2.ink};text-wrap:pretty}
-.rev-feature__who{margin-top:24px;font-family:${V2.body};font-size:14px;font-weight:400;letter-spacing:0;color:${V2.meta}}
+.rev-lead{max-width:900px;margin:56px 0 0;padding-top:28px;border-top:4px solid ${V2.green}}
+.rev-lead p{margin:0;font-family:${V2.display};font-size:clamp(24px,2.3vw,28px);font-weight:600;line-height:1.46;letter-spacing:-0.01em;color:${V2.ink};text-wrap:pretty}
+.rev-lead .who{margin-top:22px;font-size:14px;color:${V2.meta}}
+.rev-lead button,.rev-item button{margin-top:16px;background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:${V2.green}}
+.rev-lead .orig,.rev-item .orig{margin-top:16px;padding-top:16px;border-top:1px solid ${V2.rule};font-size:16px;line-height:1.7;color:${V2.meta};font-style:italic}
 .rev-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px}
-.rev-item{border-top:1px solid ${V2.rule};padding:40px 0 56px;min-width:0}
-.rev-item p{margin:0;font-size:20px;line-height:1.65;color:${V2.ink}}
-.rev-item__who{margin-top:24px;font-size:14px;color:${V2.meta}}
-.rev-item button{margin-top:16px;background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:${V2.green}}
-.rev-item__orig{margin-top:16px!important;padding-top:16px;border-top:1px solid ${V2.rule};font-size:16px!important;line-height:1.7!important;color:${V2.meta}!important;font-style:italic}
-@media (max-width:900px){.rev-hero{padding-block:64px 56px}.rev-hero__grid{grid-template-columns:1fr;gap:32px}}
-@media (max-width:800px){.rev-grid{grid-template-columns:1fr}}
+.rev-item{border-top:1px solid ${V2.rule};padding:36px 0 44px;min-width:0}
+.rev-item p{margin:0;font-size:19px;line-height:1.72;color:${V2.ink}}
+.rev-item .who{margin-top:22px;font-size:14px;color:${V2.meta}}
+@media (max-width:900px){.rev-hero{padding-block:56px 48px}.rev-hero__grid{grid-template-columns:1fr;gap:28px}}
+@media (max-width:800px){.rev-grid{grid-template-columns:1fr}.rev-lead p{font-size:24px}}
 `;
 function PageV2Styles() {
   return React.createElement('style', { dangerouslySetInnerHTML: { __html: PAGE_V2_CSS } });
 }
 
 // ─── HOME ────────────────────────────────────────────────────────────────────
-function HomePageV2({ lang = 'en', copy }) {
-  const c = (copy && copy.home) || {};
-  const u = (copy && copy.ui) || {};
+function HomePageV2({ lang = 'en' }) {
+  const c = HOME_V2[lang] || HOME_V2.en;
   const t = window.cT(lang);
-  const el = lang === 'el';
-  const media = el
-    ? { intro: 'Θέλεις να δεις πώς σκέφτομαι;',
-        read: 'Κείμενα για τη δουλειά, τη φιλοδοξία, την ψυχολογία και εκεί που μπλέκονται.',
-        watch: 'Βίντεο και συζητήσεις για την επιχείρηση, την καριέρα και το κομμάτι που γίνεται προσωπικό.' }
-    : { intro: 'Want to see how I think?',
-        read: 'Essays about work, ambition, psychology and where they overlap.',
-        watch: 'Videos and conversations about business, career and the part that gets personal.' };
-
   return React.createElement(React.Fragment, null,
     React.createElement(window.ChromeStyles), React.createElement(PageV2Styles),
     React.createElement(window.SiteHeader, { page: 'home', lang }),
     React.createElement('main', null,
 
+      // Hero
       React.createElement('section', { className: 'home-hero' },
         React.createElement('div', { className: 'site-container home-hero__grid' },
           React.createElement('div', { className: 'home-hero__copy' },
-            React.createElement('h1', { className: 'home-hero__title' }, HERO_NAME[lang] || HERO_NAME.en),
+            React.createElement('h1', { className: 'home-hero__title' },
+              React.createElement('span', null, c.heroL1),
+              React.createElement('span', null, c.heroL2)
+            ),
             React.createElement('div', { className: 'home-hero__roles' },
               React.createElement('div', null, t.role1),
               React.createElement('div', null, t.role2)
             )
           ),
           React.createElement('figure', { className: 'home-hero__photo' },
-            React.createElement('span', { className: 'home-hero__photo-vertical' }),
-            React.createElement('span', { className: 'home-hero__photo-horizontal' }),
+            React.createElement('span', { className: 'v' }),
+            React.createElement('span', { className: 'h' }),
             React.createElement('img', {
-              src: '/img/aggelos-homepage.webp', alt: u.imgAlt || 'Aggelos Mouzakitis',
+              src: '/img/aggelos-homepage.webp', alt: 'Aggelos Mouzakitis',
               width: 1560, height: 1040, loading: 'eager', fetchpriority: 'high', decoding: 'async',
             })
           )
         )
       ),
 
-      React.createElement('section', { style: { background: V2.paper, paddingBottom: 96 } },
-        React.createElement('div', { className: 'site-container' },
-          React.createElement('div', { className: 'offer' },
-            React.createElement('div', null,
-              React.createElement('div', { className: 'offer__eyebrow' }, c.tagline),
-              React.createElement('h2', { className: 'offer__h' }, c.promise)
-            ),
-            React.createElement('div', null,
-              React.createElement('p', null, c.introA),
-              React.createElement('p', null, c.introB),
-              React.createElement('a', { className: 'pill pill--green', href: window.cPath('diagnostic', lang) },
-                React.createElement('span', null, t.ctaBtn), React.createElement('span', null, '→')),
-              React.createElement('p', { className: 'offer__micro' }, c.introC)
-            )
-          )
-        )
-      ),
+      React.createElement('div', { className: 'home-flow' },
 
-      React.createElement('section', { className: 'sec' },
-        React.createElement('div', { className: 'site-container' },
-          React.createElement('div', { className: 'sec__n' }, '01'),
-          React.createElement('h2', { className: 'sec__h' }, c.bvyHead),
-          c.bvySub ? React.createElement('p', { className: 'sec__sub' }, c.bvySub) : null,
-          React.createElement('div', { className: 'panel-2' },
-            React.createElement('div', { className: 'panel panel--paper' },
-              React.createElement('h3', null, c.bizLabel),
-              React.createElement('ul', null, arr(c.bvyBusiness).map((x, i) => React.createElement('li', { key: i }, x)))
-            ),
-            React.createElement('div', { className: 'panel panel--black' },
-              React.createElement('h3', null, c.youLabel),
-              React.createElement('ul', null, arr(c.bvyYou).map((x, i) => React.createElement('li', { key: i }, x)))
-            )
-          ),
-          React.createElement('p', { className: 'sec__after' }, c.bvyUnder)
-        )
-      ),
-
-      React.createElement('section', { className: 'sec sec--tight' },
-        React.createElement('div', { className: 'site-container' },
-          React.createElement('div', { className: 'sec__n' }, '02'),
-          React.createElement('h2', { className: 'sec__h', style: { marginBottom: 48 } }, c.recogLabel),
-          React.createElement('div', { className: 'recog' },
-            arr(c.recog).map((x, i) => React.createElement('p', { key: i }, x))
-          )
-        )
-      ),
-
-      React.createElement('section', { className: 'sec sec--tight' },
-        React.createElement('div', { className: 'site-container' },
-          React.createElement('div', { className: 'paper-panel' },
-            React.createElement('div', null,
-              React.createElement('div', { className: 'paper-panel__n' }, '03'),
-              React.createElement('h2', null, c.oneRelHead),
-              React.createElement('div', { className: 'paper-panel__cols' },
-                React.createElement('div', null,
-                  React.createElement('div', { className: 'paper-panel__lbl' }, c.bizLabel),
-                  React.createElement('p', null, c.oneRelBizList),
-                  React.createElement('p', { style: { fontWeight: 600 } }, c.oneRelBizQ)
-                ),
-                React.createElement('div', null,
-                  React.createElement('div', { className: 'paper-panel__lbl' }, c.youLabel),
-                  React.createElement('p', null, c.oneRelYouList),
-                  React.createElement('p', { style: { fontWeight: 600 } }, c.oneRelYouQ)
-                )
+        // 01 — split
+        React.createElement('section', null,
+          React.createElement('div', { className: 'site-container' },
+            React.createElement('div', { className: 'sec__n' }, '01'),
+            React.createElement('h2', { className: 'sec__h' }, c.splitIntro),
+            React.createElement('div', { className: 'split' },
+              React.createElement('div', { className: 'split__cell split--paper' },
+                React.createElement('h3', null, c.leftH),
+                React.createElement('p', null, c.leftP)
               ),
-              React.createElement('p', null, c.oneRelNote1),
-              React.createElement('p', { style: { fontWeight: 600 } }, c.oneRelNote2),
-              React.createElement('a', { className: 'paper-panel__more', href: window.cPath('one-to-one', lang) },
-                (u.seeOneToOne || '1:1') + ' →')
+              React.createElement('div', { className: 'split__cell split--black' },
+                React.createElement('h3', null, c.rightH),
+                React.createElement('p', null, c.rightP)
+              )
             )
           )
-        )
-      ),
+        ),
 
-      React.createElement('section', { className: 'sec sec--tight' },
-        React.createElement('div', { className: 'site-container' },
-          React.createElement('div', { className: 'sec__n' }, '04'),
-          React.createElement('h2', { className: 'sec__h' }, media.intro),
-          React.createElement('div', { className: 'rule-arrow' },
-            React.createElement('div'), React.createElement('span', null, '→')),
-          React.createElement('div', { className: 'media' },
-            React.createElement('a', { className: 'media__cell media__read', href: window.EXTERNAL.undisguised, ...v2Ext },
-              React.createElement('div', { className: 'media__top' },
-                React.createElement('h3', null, 'READ'),
-                React.createElement('span', { className: 'media__arw' }, '↗')),
-              React.createElement('div', null,
-                React.createElement('div', { className: 'media__kicker' }, 'UNDISGUISED'),
-                React.createElement('p', null, media.read))
+        // 02 — you will get an opinion
+        React.createElement('section', null,
+          React.createElement('div', { className: 'site-container' },
+            React.createElement('div', { className: 'sec__n' }, '02'),
+            React.createElement('h2', { className: 'sec__h2l' },
+              React.createElement('span', null, c.opinionL1),
+              React.createElement('span', null, c.opinionL2)
             ),
-            React.createElement('a', { className: 'media__cell media__watch', href: window.EXTERNAL.youtube, ...v2Ext },
-              React.createElement('div', { className: 'media__top' },
-                React.createElement('h3', null, 'WATCH'),
-                React.createElement('span', { className: 'media__arw' }, '↗')),
-              React.createElement('div', null,
-                React.createElement('div', { className: 'media__kicker' }, 'YOUTUBE'),
-                React.createElement('p', null, media.watch))
-            ),
-            React.createElement('div', { className: 'media__cell media__follow' },
-              React.createElement('h3', null, 'FOLLOW'),
-              React.createElement('div', { className: 'icon-row' },
-                React.createElement('a', { className: 'icon-btn', href: window.EXTERNAL.linkedin, 'aria-label': 'LinkedIn', ...v2Ext },
-                  React.createElement(window.BrandIcon, { name: 'LinkedIn', size: 21 })),
-                React.createElement('a', { className: 'icon-btn', href: window.EXTERNAL.instagram, 'aria-label': 'Instagram', ...v2Ext },
-                  React.createElement(window.BrandIcon, { name: 'Instagram', size: 21 })),
-                React.createElement('a', { className: 'icon-btn', href: window.EXTERNAL.tiktok, 'aria-label': 'TikTok', ...v2Ext },
-                  React.createElement(window.BrandIcon, { name: 'TikTok', size: 20 }))
+            React.createElement('div', { className: 'opinion' },
+              React.createElement('img', { src: '/img/aggelos-continuation.jpeg', alt: c.contAlt, width: 900, height: 1125, loading: 'lazy', decoding: 'async' }),
+              React.createElement('div', { className: 'opinion__body' },
+                c.opinionParas.map((p, i) => React.createElement('p', { key: i }, p)),
+                React.createElement('blockquote', { className: 'opinion__q' }, c.opinionQuote)
+              )
+            )
+          )
+        ),
+
+        // 03 — if we continue
+        React.createElement('section', null,
+          React.createElement('div', { className: 'site-container' },
+            React.createElement('div', { className: 'cont' },
+              React.createElement('div', { className: 'cont__in' },
+                React.createElement('div', { className: 'sec__n' }, c.contMarker),
+                React.createElement('h2', { className: 'cont__h' }, c.contH),
+                React.createElement('p', null, c.contP)
+              )
+            )
+          )
+        ),
+
+        // 04 — media
+        React.createElement('section', null,
+          React.createElement('div', { className: 'site-container' },
+            React.createElement('div', { className: 'sec__n' }, '04'),
+            React.createElement('h2', { className: 'sec__h', style: { marginBottom: 24 } }, c.mediaIntro),
+            React.createElement('div', { className: 'rule-arrow' },
+              React.createElement('div'), React.createElement('span', null, '→')),
+            React.createElement('div', { className: 'media' },
+              React.createElement('a', { className: 'media__cell media__read', href: window.EXTERNAL.undisguised, ...v2Ext },
+                React.createElement('div', { className: 'media__top' },
+                  React.createElement('h3', null, 'READ'), React.createElement('span', { className: 'media__arw' }, '↗')),
+                React.createElement('div', null,
+                  React.createElement('div', { className: 'media__kicker' }, 'UNDISGUISED'),
+                  React.createElement('p', null, c.readP))
+              ),
+              React.createElement('a', { className: 'media__cell media__watch', href: window.EXTERNAL.youtube, ...v2Ext },
+                React.createElement('div', { className: 'media__top' },
+                  React.createElement('h3', null, 'WATCH'), React.createElement('span', { className: 'media__arw', style: { fontSize: 32 } }, '↗')),
+                React.createElement('div', null,
+                  React.createElement('div', { className: 'media__kicker' }, 'YOUTUBE'),
+                  React.createElement('p', null, c.watchP))
+              ),
+              React.createElement('div', { className: 'media__cell media__follow' },
+                React.createElement('h3', null, 'FOLLOW'),
+                React.createElement('div', { className: 'icon-row' },
+                  React.createElement('a', { className: 'icon-btn', href: window.EXTERNAL.linkedin, 'aria-label': 'LinkedIn', ...v2Ext },
+                    React.createElement(window.BrandIcon, { name: 'LinkedIn', size: 21 })),
+                  React.createElement('a', { className: 'icon-btn', href: window.EXTERNAL.instagram, 'aria-label': 'Instagram', ...v2Ext },
+                    React.createElement(window.BrandIcon, { name: 'Instagram', size: 21 })),
+                  React.createElement('a', { className: 'icon-btn', href: window.EXTERNAL.tiktok, 'aria-label': 'TikTok', ...v2Ext },
+                    React.createElement(window.BrandIcon, { name: 'TikTok', size: 20 }))
+                )
               )
             )
           )
         )
       ),
 
-      arr(c.faq).length ? React.createElement('section', { className: 'sec sec--tight' },
-        React.createElement('div', { className: 'site-container u-faq u-faq--dark', style: { maxWidth: 900 } },
-          React.createElement('h2', { className: 'sec__h', style: { marginBottom: 24 } }, c.faqLabel),
-          arr(c.faq).map((f, i) => React.createElement('details', { key: i },
-            React.createElement('summary', null, f.q),
-            React.createElement('p', null, f.a)
-          ))
-        )
-      ) : null,
-
-      React.createElement(window.BlackCtaStrip, { lang, heading: c.finalHeading })
+      React.createElement(window.BlackCtaStrip, { lang, heading: c.finalH })
     ),
     React.createElement(window.SiteFooterX, { lang })
   );
 }
 
 // ─── WHY ME (route stays /about/) ────────────────────────────────────────────
-// Credential rows are assembled from the production ABOUT copy only:
-// `creds` is split on its existing "·" separators, so no new claims are added.
+// Credential rows use only verified production facts (mirrors the About copy /
+// Person JSON-LD): 18+ yrs product & growth, 500+ companies, MSc Derby, BACP.
+const WHY_CREDS = {
+  en: [
+    { n: '01', h: 'Product and growth', p: '18+ years in tech, mostly in product and growth, inside startups and large organisations.' },
+    { n: '02', h: 'Companies advised', p: 'Built my own companies and advised more than 500 businesses.' },
+    { n: '03', h: 'Psychotherapy training', p: 'MSc Integrative Counselling & Psychotherapy, University of Derby.' },
+    { n: '04', h: 'Professional registration', p: 'Registered member of the BACP. Based in Ireland, working globally.' },
+  ],
+  el: [
+    { n: '01', h: 'Product και growth', p: '18+ χρόνια στην τεχνολογία, κυρίως στο product και το growth, σε startups και μεγάλους οργανισμούς.' },
+    { n: '02', h: 'Επιχειρήσεις', p: 'Έχτισα δικές μου εταιρείες και συμβούλεψα περισσότερες από 500 επιχειρήσεις.' },
+    { n: '03', h: 'Εκπαίδευση στην ψυχοθεραπεία', p: 'MSc Integrative Counselling & Psychotherapy, University of Derby.' },
+    { n: '04', h: 'Επαγγελματική εγγραφή', p: 'Εγγεγραμμένο μέλος του BACP. Έδρα στην Ιρλανδία, δουλεύω παγκόσμια.' },
+  ],
+};
 function AboutPageV2({ lang = 'en', copy }) {
   const c = (copy && copy.about) || {};
   const t = window.cT(lang);
-  const rows = String(c.creds || '').split('·').map(s => s.trim()).filter(Boolean);
   const intro = arr(c.intro);
+  const creds = WHY_CREDS[lang] || WHY_CREDS.en;
   return React.createElement(React.Fragment, null,
     React.createElement(window.ChromeStyles), React.createElement(PageV2Styles),
     React.createElement(window.SiteHeader, { page: 'about', lang }),
@@ -326,26 +348,23 @@ function AboutPageV2({ lang = 'en', copy }) {
       React.createElement('section', { className: 'why-hero' },
         React.createElement('div', { className: 'site-container why-hero__grid' },
           React.createElement('div', null,
-            React.createElement('div', { className: 'why-hero__over' }, String(t.why).toUpperCase()),
+            React.createElement('div', { className: 'why-hero__over' }, String(t.why || '').toUpperCase()),
             React.createElement('h1', null, c.lead),
             intro[0] ? React.createElement('p', { className: 'why-hero__intro' }, intro[0]) : null,
-            React.createElement('div', { className: 'why-hero__creds' }, c.role)
+            c.role ? React.createElement('div', { className: 'why-hero__creds' }, c.role) : null
           ),
-          React.createElement('img', {
-            src: '/img/aggelos-opinion.jpeg', alt: 'Aggelos Mouzakitis',
-            width: 900, height: 1125, loading: 'eager', decoding: 'async',
-          })
+          React.createElement('img', { src: '/img/aggelos-opinion.jpeg', alt: 'Aggelos Mouzakitis', width: 900, height: 1125, loading: 'eager', decoding: 'async' })
         )
       ),
       React.createElement('section', { className: 'u-main' },
-        rows.length ? React.createElement('div', { className: 'site-container' },
-          rows.map((r, i) => React.createElement('div', { className: 'cred-row', key: i },
-            React.createElement('div', { className: 'cred-row__n' }, '0' + (i + 1)),
-            React.createElement('h3', null, r),
-            React.createElement('p', null, '')
+        React.createElement('div', { className: 'site-container' },
+          creds.map((r) => React.createElement('div', { className: 'cred-row', key: r.n },
+            React.createElement('div', { className: 'n' }, r.n),
+            React.createElement('h3', null, r.h),
+            React.createElement('p', null, r.p)
           ))
-        ) : null,
-        React.createElement('div', { className: 'u-read', style: { marginTop: rows.length ? 80 : 0 } },
+        ),
+        React.createElement('div', { className: 'u-read', style: { marginTop: 72 } },
           intro.slice(1).map((p, i) => React.createElement('p', { key: 'i' + i }, p)),
           arr(c.sections).map((s, i) => React.createElement(React.Fragment, { key: i },
             i > 0 ? React.createElement('hr') : null,
@@ -354,30 +373,30 @@ function AboutPageV2({ lang = 'en', copy }) {
           ))
         )
       ),
-      React.createElement(window.BlackCtaStrip, { lang, heading: c.ctaHeading, label: c.ctaLabel })
+      React.createElement(window.BlackCtaStrip, { lang, heading: c.ctaHeading })
     ),
     React.createElement(window.SiteFooterX, { lang })
   );
 }
 
 // ─── REVIEWS ─────────────────────────────────────────────────────────────────
-function ReviewItemV2({ t, lang, toggleLabel }) {
+function RevQuote({ t, lang, toggleLabel, cls }) {
   const [open, setOpen] = React.useState(false);
   const el = lang === 'el';
-  return React.createElement('div', { className: 'rev-item' },
+  return React.createElement('div', { className: cls },
     React.createElement('p', null, '“' + (el ? t.qEl : t.q) + '”'),
-    React.createElement('div', { className: 'rev-item__who' }, el ? t.wEl : t.w),
+    React.createElement('div', { className: 'who' }, el ? t.wEl : t.w),
     el && toggleLabel ? React.createElement('button', {
       type: 'button', onClick: () => setOpen(!open), 'aria-expanded': open ? 'true' : 'false',
     }, toggleLabel + ' ' + (open ? '↑' : '↓')) : null,
-    el && open ? React.createElement('p', { className: 'rev-item__orig' }, '“' + t.q + '”') : null
+    el && open ? React.createElement('p', { className: 'orig' }, '“' + t.q + '”') : null
   );
 }
 function ReviewsPageV2({ lang = 'en', copy }) {
   const c = (copy && copy.reviews) || {};
   const items = arr(copy && copy.reviewItems);
-  const el = lang === 'el';
   const first = items[0];
+  const rest = items.slice(1);
   return React.createElement(React.Fragment, null,
     React.createElement(window.ChromeStyles), React.createElement(PageV2Styles),
     React.createElement(window.SiteHeader, { page: 'reviews', lang }),
@@ -391,15 +410,12 @@ function ReviewsPageV2({ lang = 'en', copy }) {
               React.createElement('div', { className: 'rev-hero__note' }, c.sub)
             )
           ),
-          first ? React.createElement('blockquote', { className: 'rev-feature' },
-            '“' + (el ? first.qEl : first.q) + '”',
-            React.createElement('div', { className: 'rev-feature__who' }, el ? first.wEl : first.w)
-          ) : null
+          first ? React.createElement(RevQuote, { t: first, lang, toggleLabel: c.toggle, cls: 'rev-lead' }) : null
         )
       ),
       React.createElement('section', { className: 'u-main' },
         React.createElement('div', { className: 'site-container rev-grid' },
-          items.slice(1).map((t, i) => React.createElement(ReviewItemV2, { key: i, t, lang, toggleLabel: c.toggle }))
+          rest.map((t, i) => React.createElement(RevQuote, { key: i, t, lang, toggleLabel: c.toggle, cls: 'rev-item' }))
         )
       ),
       React.createElement(window.BlackCtaStrip, { lang, heading: c.ctaHeading })

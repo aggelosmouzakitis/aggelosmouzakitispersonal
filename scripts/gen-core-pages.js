@@ -14,38 +14,15 @@ const CHROME_V = 1, V2_V = 1;
 // Shared CSS (from the original index.html — design system preserved 1:1)
 const CSS = `
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html, body, #root { height: 100%; }
-body {
-  background: #F5F5F5;
-  font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  font-size: 16px; line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-}
-::selection { background: #282726; color: #FFFFFF; }
-#root { display: flex; overflow: hidden; }
-#main-scroll {
-  flex: 1; overflow-y: auto; overflow-x: hidden;
-  background: #FFFFFF; color: #282726;
-}
-#main-scroll a { color: #059669; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-#main-scroll a:hover { color: #059669; text-decoration-thickness: 2px; }
-#main-scroll a.cta-btn, #main-scroll a.cta-btn:hover { color: #fff; text-decoration: none; }
-#main-scroll strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,38,.3); padding-bottom: 1px; }
-#main-scroll::-webkit-scrollbar { width: 4px; }
-#main-scroll::-webkit-scrollbar-thumb { background: rgba(40,39,38,0.15); }
-#sidebar { position: relative; flex-shrink: 0; }
-@media (max-width: 767px) {
-  #root { display: block; height: 100%; }
-  #sidebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; width: 100% !important; }
-  #main-scroll { height: 100%; padding-bottom: 80px; }
-}
-@media print { #sidebar { display: none !important; } #main-scroll { overflow: visible; } #root { display: block; } }
-#main-scroll .hv-card{transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
-#main-scroll .hv-card:hover{border-color:rgba(5,150,105,.5);box-shadow:0 8px 26px rgba(5,150,105,.10);transform:translateY(-3px)}
-#main-scroll .hv-row{transition:background .15s ease,color .15s ease}
-#main-scroll .hv-row:hover{background:rgba(5,150,105,.06)}
-#main-scroll a.cta-btn:hover,#main-scroll button.cta-btn:hover{box-shadow:0 6px 18px rgba(5,150,105,.28)}
-a:focus-visible,button:focus-visible { outline: 3px solid #059669; outline-offset: 2px; border-radius: 2px; }
+html { scroll-behavior: smooth; }
+body { background: #181A1C; color: #FFFFFF; font-family: 'Inter', system-ui, sans-serif; font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+#root { display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: #059669; color: #FFFFFF; }
+img { max-width: 100%; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #059669; outline-offset: 2px; border-radius: 2px; }
+@media (prefers-reduced-motion: reduce){ *{transition-duration:.001ms!important;animation-duration:.001ms!important} }
+@media print { .site-hdr, .site-ftr, .cta-strip { display: none !important; } }
 `;
 
 // Person JSON-LD (verified facts only; per-language jobTitle per brief §48/§55)
@@ -204,7 +181,6 @@ ${ldTags}
 <div id="root"></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
-<script src="/sidebar.js?v=${SIDEBAR_V}"></script>
 <script src="/site-chrome.js?v=${CHROME_V}"></script>
 <script src="/core-pages-v2.js?v=${V2_V}"></script>
 <script src="/content-pages.js?v=${CONTENT_V}"></script>

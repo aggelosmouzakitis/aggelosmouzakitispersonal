@@ -16,6 +16,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -69,9 +70,11 @@ strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,3
 @media (max-width: 767px) { .site-ft-cols { display: block; } .site-ft-col { margin-bottom: 2rem; } }
 @media (max-width: 767px) { .wrap { padding: 2rem 1.2rem 4rem; } h1 { font-size: 24px; } .lead { font-size: 20px; } }
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
 </head>
 <body>
-<div class="wrap">
+<div id="gi-hdr"></div>
+<main class="u-main" style="padding-block:64px 96px"><div class="u-read">
   <h1>Get interviewed</h1>
   <p class="lead">I'm interviewing founders and solopreneurs in tech about what it actually took to get where they are.</p>
 
@@ -83,30 +86,14 @@ strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,3
 
   <div class="reach">Reach me at <a href="mailto:aggelos.mouzakitis@gmail.com?subject=Get%20interviewed">aggelos.mouzakitis@gmail.com</a>.</div>
 
-  <footer class="site-ft">
-    <div class="site-ft-cols">
-      <div class="site-ft-col">
-        <div class="site-ft-h">Work with me</div>
-        <div class="site-ft-row"><a href="/1-to-1/">1:1</a></div>
-        <div class="site-ft-row"><a href="/reviews/">Reviews</a></div>
-        <div class="site-ft-row"><a href="/book/">Book a fit call</a></div>
-      </div>
-      <div class="site-ft-col">
-        <div class="site-ft-h">Site</div>
-        <div class="site-ft-row"><a href="/">Home</a></div>
-        <div class="site-ft-row"><a href="/about/">About</a></div>
-        <div class="site-ft-row"><a href="/blog/">Writing</a></div>
-        <div class="site-ft-row"><a href="/confidentiality/">Confidentiality</a></div>
-        <div class="site-ft-row"><a href="/ask-me-anything/">Ask me anything</a></div>
-      </div>
-      <div class="site-ft-col">
-        <div class="site-ft-h">Elsewhere</div>
-        <div class="site-ft-row"><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener">LinkedIn <span class="ext">↗</span></a></div>
-        <div class="site-ft-row"><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener">YouTube <span class="ext">↗</span></a></div>
-      </div>
-    </div>
-    <div class="site-ft-copy">© Aggelos Mouzakitis · Business Growth Advisor + Therapist</div>
-  </footer>
-</div>
+</div></main>
+<div id="gi-ftr"></div>
+<script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
+<script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
+<script src="/site-chrome.js?v=1"></script>
+<script>
+ReactDOM.createRoot(document.getElementById('gi-hdr')).render(React.createElement(React.Fragment,null,React.createElement(window.ChromeStyles),React.createElement(window.SiteHeader,{page:'getinterviewed',lang:'en'})));
+ReactDOM.createRoot(document.getElementById('gi-ftr')).render(React.createElement(window.SiteFooterX,{lang:'en'}));
+</script>
 </body>
 </html>

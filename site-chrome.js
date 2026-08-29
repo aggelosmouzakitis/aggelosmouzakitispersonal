@@ -80,8 +80,8 @@ const CHROME_T = {
     apply: 'Apply',
     start: 'START',
     other: 'Ελληνικά',
-    role1: 'Business Growth Advisor',
-    role2: 'Licensed Psychotherapist (BACP)',
+    role1: 'Private business & career advisor',
+    role2: 'BACP-registered psychotherapist',
     navigate: 'NAVIGATE',
     content: 'CONTENT',
     follow: 'FOLLOW',
@@ -90,7 +90,7 @@ const CHROME_T = {
     terms: 'Terms',
     privacy: 'Privacy',
     ctaHeading: 'If working harder was going to fix this, it probably would have by now.',
-    ctaBtn: 'Start here',
+    ctaBtn: 'Apply for a working session',
     menu: 'Menu',
     rights: 'All rights reserved.'
   },
@@ -101,8 +101,8 @@ const CHROME_T = {
     apply: 'Ζήτησε γνωριμία',
     start: 'ΞΕΚΙΝΑ',
     other: 'English',
-    role1: 'Business Growth Advisor',
-    role2: 'Ψυχοθεραπευτής (BACP)',
+    role1: 'Σύμβουλος επιχειρήσεων & καριέρας',
+    role2: 'Σύμβουλος ψυχικής υγείας',
     navigate: 'ΠΛΟΗΓΗΣΗ',
     content: 'ΠΕΡΙΕΧΟΜΕΝΟ',
     follow: 'ΑΚΟΛΟΥΘΗΣΕ',
@@ -111,7 +111,7 @@ const CHROME_T = {
     terms: 'Όροι χρήσης',
     privacy: 'Πολιτική απορρήτου',
     ctaHeading: 'Αν λυνόταν με περισσότερη δουλειά, μάλλον θα είχε λυθεί ήδη.',
-    ctaBtn: 'Ξεκίνα εδώ',
+    ctaBtn: 'Ζήτησε μια πρώτη συνάντηση',
     menu: 'Μενού',
     rights: 'Με επιφύλαξη παντός δικαιώματος.'
   }
@@ -136,7 +136,7 @@ body{background:${SITE.ink};color:${SITE.white};font-family:${SITE.body};font-si
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid ${SITE.green};outline-offset:2px;border-radius:2px}
 img{max-width:100%}
 
-.site-container{width:min(1228px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
+.site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
 
 .site-hdr{width:100%;height:86px;background:${SITE.ink};border-bottom:1px solid ${SITE.ruleOnDark}}
 .site-hdr__in{height:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center}
@@ -184,7 +184,7 @@ img{max-width:100%}
 .u-hero h1{margin:0;max-width:15ch;font-family:${SITE.display};font-size:clamp(52px,5.8vw,82px);font-weight:780;line-height:0.96;letter-spacing:-0.05em;color:${SITE.ink}}
 .u-hero p{max-width:65ch;margin:32px 0 0;font-size:21px;line-height:1.55;color:${SITE.ink2}}
 .u-main{background:${SITE.paper};padding-block:0 96px;color:${SITE.ink}}
-.u-read{width:min(780px,calc(100% - 40px));margin-inline:auto;font-size:19px;line-height:1.72;color:${SITE.ink}}
+.u-read{width:min(740px,calc(100% - 40px));margin-inline:auto;font-size:19px;line-height:1.72;color:${SITE.ink}}
 .u-read h1{font-family:${SITE.display};font-size:clamp(44px,5vw,68px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;margin:0 0 32px}
 .u-read h2{margin:80px 0 24px;font-family:${SITE.display};font-size:clamp(36px,4vw,50px);font-weight:780;line-height:1.04;letter-spacing:-0.04em}
 .u-read h3{margin:48px 0 16px;font-family:${SITE.display};font-size:clamp(26px,3vw,34px);font-weight:750;line-height:1.1;letter-spacing:-0.03em}
