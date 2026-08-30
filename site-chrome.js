@@ -8,12 +8,14 @@
 
 const SITE = {
   green: '#059669',
-  ink: '#181A1C',
+  ink: '#1A1C1D',
   ink2: '#282726',
-  paper: '#F4F1EA',
+  heroInk: '#111315',
+  paper: '#F3F0E8',
   black: '#050505',
   white: '#FFFFFF',
   onDark: '#C2C6CA',
+  greyOnDark: '#9DA19E',
   meta: '#5E6264',
   rule: 'rgba(24,26,28,0.20)',
   ruleOnDark: 'rgba(255,255,255,0.16)',
@@ -78,7 +80,7 @@ const CHROME_T = {
     why: 'Why me',
     reviews: 'Reviews',
     apply: 'Apply',
-    start: 'START',
+    start: 'APPLY',
     other: 'Ελληνικά',
     role1: 'Private business & career advisor',
     role2: 'BACP-registered psychotherapist',
@@ -99,7 +101,7 @@ const CHROME_T = {
     why: 'Γιατί εμένα',
     reviews: 'Κριτικές',
     apply: 'Ζήτησε γνωριμία',
-    start: 'ΞΕΚΙΝΑ',
+    start: 'ΣΥΝΑΝΤΗΣΗ',
     other: 'English',
     role1: 'Σύμβουλος επιχειρήσεων & καριέρας',
     role2: 'Σύμβουλος ψυχικής υγείας',
@@ -138,30 +140,31 @@ img{max-width:100%}
 
 .site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
 
-.site-hdr{width:100%;height:86px;background:${SITE.ink};border-bottom:1px solid ${SITE.ruleOnDark}}
-.site-hdr__in{height:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center}
-.site-hdr__mark{display:flex;align-items:center;gap:10px;color:#fff;white-space:nowrap}
-.site-hdr__mark b{font-family:${SITE.display};font-size:18px;font-weight:800;letter-spacing:-0.025em}
-.site-hdr__mark i{display:block;width:1px;height:22px;background:${SITE.green}}
-.site-hdr__mark em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:0.14em}
-.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:32px}
-.site-hdr__nav a{font-size:14px;font-weight:500;padding:6px 0;border-bottom:2px solid transparent;opacity:.72;transition:opacity .18s}
+.site-hdr{width:100%;min-height:70px;background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16)}
+.site-hdr__in{min-height:70px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
+.site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:${SITE.paper};font-family:${SITE.display};font-size:17px;font-weight:500;line-height:1;letter-spacing:-0.02em;white-space:nowrap}
+.site-hdr__brand span{color:${SITE.green}}
+.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:22px}
+.site-hdr__nav a{color:${SITE.paper};font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
 .site-hdr__nav a:hover{opacity:1}
 .site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:${SITE.green}}
-.site-hdr__end{display:flex;align-items:center;gap:24px}
-.site-hdr__lang{font-size:14px;font-weight:500;opacity:.72;transition:opacity .18s}
+.site-hdr__end{display:flex;align-items:center;gap:14px}
+.site-hdr__lang{color:${SITE.paper};font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;transition:opacity .18s}
 .site-hdr__lang:hover{opacity:1}
+.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 17px;background:${SITE.green};color:#fff;font-size:12px;font-weight:600;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hdr-cta:hover{filter:brightness(0.9);gap:11px}
 .site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
-.site-hdr__burger span{display:block;width:24px;height:2px;background:#fff}
-.site-menu{background:${SITE.black};border-bottom:1px solid ${SITE.ruleOnDark};padding-block:24px 32px}
+.site-hdr__burger span{display:block;width:24px;height:2px;background:${SITE.paper}}
+.site-menu{background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16);padding-block:20px 28px}
 .site-menu .site-container{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
-.site-menu a{font-size:18px}
+.site-menu a{color:${SITE.paper};font-size:16px;text-transform:uppercase;letter-spacing:0.03em}
+.site-menu .hdr-cta{align-self:stretch;justify-content:center;min-height:48px;font-size:13px}
 
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
-.pill--light{height:38px;padding-inline:18px;background:#fff;color:${SITE.ink};font-size:12px;letter-spacing:0.04em}
-.pill--light:hover{gap:12px}
 .pill--green{height:60px;padding-inline:36px;background:${SITE.green};color:#fff;font-size:16px}
 .pill--green:hover{gap:12px;filter:brightness(0.9)}
+.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:0 20px;background:${SITE.green};color:#fff;font-size:14px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hero-cta:hover{filter:brightness(0.9);gap:13px}
 
 .cta-strip{padding-block:clamp(72px,9vw,110px);text-align:center;background:${SITE.ink}}
 .cta-strip__h{margin:0 auto;max-width:20ch;font-family:${SITE.display};font-size:clamp(36px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
@@ -217,9 +220,8 @@ img{max-width:100%}
 .u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:${SITE.green}}
 
 @media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:900px){
-  .site-hdr{height:72px}
-  .site-hdr__nav,.site-hdr__end{display:none}
+@media (max-width:680px){
+  .site-hdr__nav,.site-hdr__lang{display:none}
   .site-hdr__burger{display:flex}
 }
 @media (max-width:640px){
@@ -268,9 +270,10 @@ function Wordmark({
   lang
 }) {
   return React.createElement('a', {
-    className: 'site-hdr__mark',
-    href: cPath('home', lang)
-  }, React.createElement('b', null, 'AGGELOS'), React.createElement('i', null), React.createElement('em', null, 'MOUZAKITIS'));
+    className: 'site-hdr__brand',
+    href: cPath('home', lang),
+    'aria-label': 'Aggelos Mouzakitis'
+  }, 'Aggelos', React.createElement('span', null, '.'));
 }
 
 // ─── HEADER ──────────────────────────────────────────────────────────────────
@@ -318,7 +321,7 @@ function SiteHeader({
     href: langHref,
     hrefLang: other
   }, t.other), React.createElement('a', {
-    className: 'pill pill--light',
+    className: 'hdr-cta',
     href: cPath('diagnostic', lang)
   }, React.createElement('span', null, t.start), React.createElement('span', null, '→'))), React.createElement('button', {
     className: 'site-hdr__burger',
@@ -337,12 +340,8 @@ function SiteHeader({
       color: SITE.onDark
     }
   }, t.other), React.createElement('a', {
-    className: 'pill pill--green',
-    href: cPath('diagnostic', lang),
-    style: {
-      alignSelf: 'stretch',
-      justifyContent: 'center'
-    }
+    className: 'hdr-cta',
+    href: cPath('diagnostic', lang)
   }, React.createElement('span', null, t.start), React.createElement('span', null, '→')))));
 }
 
@@ -388,8 +387,11 @@ function SiteFooterX({
   }, React.createElement('div', {
     className: 'site-ftr__cols'
   }, React.createElement('div', null, React.createElement('div', {
-    className: 'site-hdr__mark'
-  }, React.createElement('b', null, 'AGGELOS'), React.createElement('i', null), React.createElement('em', null, 'MOUZAKITIS')), React.createElement('div', {
+    className: 'site-hdr__brand',
+    style: {
+      fontSize: 20
+    }
+  }, 'Aggelos', React.createElement('span', null, '.')), React.createElement('div', {
     className: 'site-ftr__roles'
   }, React.createElement('div', null, t.role1), React.createElement('div', {
     style: {

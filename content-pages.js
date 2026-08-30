@@ -230,7 +230,7 @@ function Testimonial({
       color: '#282726',
       marginBottom: '.5rem'
     }
-  }, '\u201C' + quote + '\u201D'), React.createElement('footer', {
+  }, '\u201C' + quote + '\u201D'), React.createElement('div', {
     style: {
       fontSize: '10px',
       letterSpacing: '.1em',
@@ -398,6 +398,10 @@ function SiteFooter({
   mob,
   lang = 'en'
 }) {
+  // Legacy footer retired: the shared SiteFooterX (site-chrome) now renders the
+  // single footer on every page via the universal shell. Rendering null here
+  // removes the duplicate footer from every wrapped legacy component.
+  return null;
   const FOOTER_COLS = FOOTER_COLS_BY_LANG[lang] || FOOTER_COLS_BY_LANG.en;
   const wrap = {
     marginTop: mob ? '3.5rem' : '5rem',
@@ -1911,7 +1915,7 @@ function ReviewCard({
       color: '#282726',
       margin: '0 0 .5rem'
     }
-  }, '“' + quote + '”'), React.createElement('footer', {
+  }, '“' + quote + '”'), React.createElement('div', {
     style: {
       fontSize: '10px',
       letterSpacing: '.1em',

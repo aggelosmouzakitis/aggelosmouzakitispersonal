@@ -15,7 +15,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -49,7 +49,7 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { background: #181A1C; color: #FFFFFF; font-family: 'Inter', system-ui, sans-serif; font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body { background: #1A1C1D; color: #FFFFFF; font-family: 'Inter', system-ui, sans-serif; font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 #root { display: block; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: #059669; color: #FFFFFF; }
@@ -64,9 +64,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 html,body,#root{height:auto}
 #root{display:block;overflow:visible}
 #sidebar{display:none!important}
-#main-scroll{overflow:visible;background:#181A1C;color:#FFFFFF}
+#main-scroll{overflow:visible;background:#1A1C1D;color:#FFFFFF}
 #main-scroll::-webkit-scrollbar{width:0}
-body{background:#181A1C;color:#FFFFFF;font-family:"Inter",system-ui,sans-serif;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body{background:#1A1C1D;color:#FFFFFF;font-family:"Inter",system-ui,sans-serif;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
 ::selection{background:#059669;color:#fff}
 #main-scroll a,a{color:inherit;text-decoration:none}
 #main-scroll strong{border:0;padding:0;color:inherit;font-weight:600}
@@ -75,38 +75,39 @@ img{max-width:100%}
 
 .site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
 
-.site-hdr{width:100%;height:86px;background:#181A1C;border-bottom:1px solid rgba(255,255,255,0.16)}
-.site-hdr__in{height:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center}
-.site-hdr__mark{display:flex;align-items:center;gap:10px;color:#fff;white-space:nowrap}
-.site-hdr__mark b{font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:18px;font-weight:800;letter-spacing:-0.025em}
-.site-hdr__mark i{display:block;width:1px;height:22px;background:#059669}
-.site-hdr__mark em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:0.14em}
-.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:32px}
-.site-hdr__nav a{font-size:14px;font-weight:500;padding:6px 0;border-bottom:2px solid transparent;opacity:.72;transition:opacity .18s}
+.site-hdr{width:100%;min-height:70px;background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16)}
+.site-hdr__in{min-height:70px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
+.site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:#F3F0E8;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:17px;font-weight:500;line-height:1;letter-spacing:-0.02em;white-space:nowrap}
+.site-hdr__brand span{color:#059669}
+.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:22px}
+.site-hdr__nav a{color:#F3F0E8;font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
 .site-hdr__nav a:hover{opacity:1}
 .site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:#059669}
-.site-hdr__end{display:flex;align-items:center;gap:24px}
-.site-hdr__lang{font-size:14px;font-weight:500;opacity:.72;transition:opacity .18s}
+.site-hdr__end{display:flex;align-items:center;gap:14px}
+.site-hdr__lang{color:#F3F0E8;font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;transition:opacity .18s}
 .site-hdr__lang:hover{opacity:1}
+.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 17px;background:#059669;color:#fff;font-size:12px;font-weight:600;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hdr-cta:hover{filter:brightness(0.9);gap:11px}
 .site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
-.site-hdr__burger span{display:block;width:24px;height:2px;background:#fff}
-.site-menu{background:#050505;border-bottom:1px solid rgba(255,255,255,0.16);padding-block:24px 32px}
+.site-hdr__burger span{display:block;width:24px;height:2px;background:#F3F0E8}
+.site-menu{background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16);padding-block:20px 28px}
 .site-menu .site-container{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
-.site-menu a{font-size:18px}
+.site-menu a{color:#F3F0E8;font-size:16px;text-transform:uppercase;letter-spacing:0.03em}
+.site-menu .hdr-cta{align-self:stretch;justify-content:center;min-height:48px;font-size:13px}
 
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
-.pill--light{height:38px;padding-inline:18px;background:#fff;color:#181A1C;font-size:12px;letter-spacing:0.04em}
-.pill--light:hover{gap:12px}
 .pill--green{height:60px;padding-inline:36px;background:#059669;color:#fff;font-size:16px}
 .pill--green:hover{gap:12px;filter:brightness(0.9)}
+.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:0 20px;background:#059669;color:#fff;font-size:14px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hero-cta:hover{filter:brightness(0.9);gap:13px}
 
-.cta-strip{padding-block:clamp(72px,9vw,110px);text-align:center;background:#181A1C}
+.cta-strip{padding-block:clamp(72px,9vw,110px);text-align:center;background:#1A1C1D}
 .cta-strip__h{margin:0 auto;max-width:20ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(36px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
 .cta-strip .pill--green{margin-top:44px}
 .cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:#C2C6CA;transition:gap .18s,color .18s}
 .cta-strip__sub:hover{gap:12px;color:#fff}
 
-.site-ftr{border-top:2px solid #059669;padding-block:64px 32px;background:#181A1C}
+.site-ftr{border-top:2px solid #059669;padding-block:64px 32px;background:#1A1C1D}
 .site-ftr__cols{display:grid;grid-template-columns:minmax(280px,1.4fr) repeat(3,minmax(130px,0.55fr));gap:48px;align-items:start}
 .site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#059669;margin-bottom:20px}
 .site-ftr nav a{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.4;margin-bottom:12px;transition:color .18s}
@@ -117,11 +118,11 @@ img{max-width:100%}
 .site-ftr__legal nav{display:flex;flex-wrap:wrap;gap:12px 24px}
 .site-ftr__legal nav a{display:inline;margin:0}
 
-.u-hero{background:#F4F1EA;padding-block:88px 72px}
-.u-hero h1{margin:0;max-width:15ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(52px,5.8vw,82px);font-weight:780;line-height:0.96;letter-spacing:-0.05em;color:#181A1C}
+.u-hero{background:#F3F0E8;padding-block:88px 72px}
+.u-hero h1{margin:0;max-width:15ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(52px,5.8vw,82px);font-weight:780;line-height:0.96;letter-spacing:-0.05em;color:#1A1C1D}
 .u-hero p{max-width:65ch;margin:32px 0 0;font-size:21px;line-height:1.55;color:#282726}
-.u-main{background:#F4F1EA;padding-block:0 96px;color:#181A1C}
-.u-read{width:min(740px,calc(100% - 40px));margin-inline:auto;font-size:19px;line-height:1.72;color:#181A1C}
+.u-main{background:#F3F0E8;padding-block:0 96px;color:#1A1C1D}
+.u-read{width:min(740px,calc(100% - 40px));margin-inline:auto;font-size:19px;line-height:1.72;color:#1A1C1D}
 .u-read h1{font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,5vw,68px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;margin:0 0 32px}
 .u-read h2{margin:80px 0 24px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(36px,4vw,50px);font-weight:780;line-height:1.04;letter-spacing:-0.04em}
 .u-read h3{margin:48px 0 16px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(26px,3vw,34px);font-weight:750;line-height:1.1;letter-spacing:-0.03em}
@@ -145,7 +146,7 @@ img{max-width:100%}
 .u-faq--dark summary{color:#fff}
 .u-faq--dark details > *:not(summary){color:#C2C6CA}
 
-.u-related a{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid rgba(24,26,28,0.20);color:#181A1C}
+.u-related a{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid rgba(24,26,28,0.20);color:#1A1C1D}
 .u-related a:last-child{border-bottom:1px solid rgba(24,26,28,0.20)}
 .u-related a:hover{color:#059669}
 
@@ -154,9 +155,8 @@ img{max-width:100%}
 .u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:#059669}
 
 @media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:900px){
-  .site-hdr{height:72px}
-  .site-hdr__nav,.site-hdr__end{display:none}
+@media (max-width:680px){
+  .site-hdr__nav,.site-hdr__lang{display:none}
   .site-hdr__burger{display:flex}
 }
 @media (max-width:640px){
@@ -168,46 +168,49 @@ img{max-width:100%}
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
 </style><style>
-/* ── Home hero — copy left, horizontal photograph right (brief §2 geometry) ── */
-.home-hero{background:#F4F1EA;padding-block:72px}
-.home-hero__grid{min-height:680px;display:grid;grid-template-columns:minmax(0,1fr) minmax(520px,600px);gap:clamp(40px,4vw,56px);align-items:center}
-.home-hero__copy{min-width:0}
-.home-hero__title{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-weight:800;line-height:0.86;letter-spacing:-0.06em;color:#181A1C;text-wrap:balance}
-.home-hero__title span{display:block}
-html[lang="en"] .home-hero__title{font-size:clamp(116px,9.4vw,144px)}
-html[lang="el"] .home-hero__title{font-size:clamp(96px,7.8vw,118px);letter-spacing:-0.055em}
-.home-hero__roles{margin-top:32px;padding-left:20px;border-left:3px solid #059669;font-size:20px;font-weight:600;line-height:1.45;color:#282726}
-.home-hero__photo{position:relative;width:min(100%,600px);margin:0;padding-left:12px;padding-bottom:12px;justify-self:end}
-.home-hero__photo img{position:relative;z-index:2;display:block;width:100%;height:auto;aspect-ratio:3 / 2;object-fit:cover;object-position:50% 50%;border-radius:0;filter:grayscale(100%) contrast(1.06)}
-.home-hero__photo span.v{position:absolute;z-index:1;left:0;top:28px;bottom:0;width:12px;background:#059669}
-.home-hero__photo span.h{position:absolute;z-index:1;left:0;right:28px;bottom:0;height:12px;background:#059669}
-@media (min-width:1120px) and (max-width:1319px){
-  .home-hero__grid{grid-template-columns:minmax(0,1fr) minmax(440px,520px)}
+/* ── Home hero — copy left, circular photograph right (approved visual pass) ── */
+.home-hero{background:#F3F0E8;color:#111315}
+.home-hero__grid{max-width:1280px;margin-inline:auto;min-height:444px;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(260px,0.86fr);align-items:center;gap:clamp(34px,4vw,64px);padding:clamp(48px,5vw,72px) clamp(24px,5vw,72px)}
+.home-hero__copy{min-width:0;color:#111315}
+.home-hero__eyebrow{max-width:520px;color:#059669;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:12px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
+.home-hero__intro{margin:14px 0 15px;color:#111315;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:16px;font-weight:400;line-height:1.3}
+.home-hero__title{max-width:600px;margin:0 0 22px;font-family:"Archivo Black","Inter Tight","Inter",system-ui,sans-serif;font-weight:400;line-height:0.94;letter-spacing:-0.065em;color:#111315}
+html[lang="en"] .home-hero__title{font-size:clamp(48px,5vw,72px)}
+html[lang="el"] .home-hero__title{font-size:clamp(40px,4vw,58px)}
+.home-hero__title .human{position:relative;z-index:0;white-space:nowrap}
+.home-hero__title .human::after{content:"";position:absolute;z-index:-1;left:-0.03em;right:-0.03em;bottom:0.04em;height:0.16em;background:#059669}
+.home-hero__support{max-width:505px;margin:0 0 25px;color:#111315;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:17px;font-weight:400;line-height:1.48}
+.home-hero__photo{position:relative;width:min(100%,clamp(300px,30vw,430px));aspect-ratio:1;justify-self:center}
+.home-hero__photo::before{content:"";position:absolute;inset:8% -3% -2% 9%;border-radius:50%;background:#059669}
+.home-hero__frame{position:absolute;inset:0;overflow:hidden;border-radius:50%}
+.home-hero__frame img{width:100%;height:100%;object-fit:cover;object-position:56% 44%;transform:scale(1.58);filter:grayscale(1) contrast(1.08)}
+@media (max-width:680px){
+  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:38px 20px 44px;min-height:0}
+  html[lang="en"] .home-hero__title{font-size:clamp(42px,12vw,58px)}
+  html[lang="el"] .home-hero__title{font-size:clamp(36px,10vw,50px)}
+  .home-hero__photo{width:min(78%,300px);justify-self:start}
 }
-@media (max-width:1119px){
-  .home-hero{padding-block:64px 72px}
-  .home-hero__grid{min-height:0;grid-template-columns:1fr;gap:44px;align-items:start}
-  .home-hero__photo{width:min(100%,760px);justify-self:start}
-  html[lang="en"] .home-hero__title{font-size:clamp(80px,11vw,120px)}
-  html[lang="el"] .home-hero__title{font-size:clamp(68px,9.5vw,104px)}
-}
-@media (max-width:600px){
-  .home-hero{padding-block:48px 60px}
-  .home-hero__grid{gap:32px}
-  html[lang="en"] .home-hero__title{font-size:clamp(58px,16vw,72px);line-height:0.9}
-  html[lang="el"] .home-hero__title{font-size:clamp(50px,14vw,64px);line-height:0.92}
-  .home-hero__roles{margin-top:24px;font-size:16px}
-  .home-hero__photo{width:100%;padding-left:8px;padding-bottom:8px}
-  .home-hero__photo span.v{top:20px;width:8px}
-  .home-hero__photo span.h{height:8px}
-}
+
+/* ── Manifesto — "The whole point" (full-width dark) ── */
+.home-manifesto{width:100%;background:#1A1C1D}
+.home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(48px,5vw,68px) clamp(24px,5vw,72px)}
+.home-manifesto__label{margin-bottom:17px;color:#059669;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
+.home-manifesto__copy{font-family:"Archivo Black","Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
+.home-manifesto__muted,.home-manifesto__green{display:block}
+.home-manifesto__muted{color:#9DA19E}
+.home-manifesto__green{color:#059669}
+.home-manifesto__copy mark{padding:0 0.08em 0.02em;background:#F3F0E8;color:#1A1C1D;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+@media (max-width:680px){.home-manifesto__inner{padding:40px 20px 46px}.home-manifesto__copy{font-size:clamp(34px,10vw,48px)}}
 
 /* ── Home dark canvas sections ── */
 .home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(64px,8vw,96px)}
-.sec__n{font-size:13px;font-weight:700;letter-spacing:0.12em;color:#059669}
-.sec__h{margin:16px 0 48px;max-width:19ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
-.sec__h2l{margin:16px 0 48px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
+.sec__n{font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669}
+.sec__h{margin:22px 0 48px;max-width:19ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.sec__h2l{margin:22px 0 48px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
 .sec__h2l span{display:block}
+.cont-marker{display:flex;align-items:baseline;gap:10px}
+.cont-marker .n{font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669}
+.cont-marker .lbl{font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
 
 .split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:24px;align-items:stretch}
 .split__cell{height:100%;min-height:360px;padding:clamp(32px,4.5vw,56px);border-radius:12px;display:grid;grid-template-rows:auto 1fr;align-content:start;gap:24px}
@@ -215,18 +218,18 @@ html[lang="el"] .home-hero__title{font-size:clamp(96px,7.8vw,118px);letter-spaci
 html[lang="en"] .split__cell h3{font-size:clamp(34px,3.2vw,44px)}
 html[lang="el"] .split__cell h3{font-size:clamp(24px,2.4vw,34px)}
 .split__cell p{margin:0;font-size:18px;line-height:1.55;max-width:40ch;text-wrap:pretty}
-.split--paper{background:#F4F1EA;color:#181A1C}
+.split--paper{background:#F3F0E8;color:#1A1C1D}
 .split--black{background:#050505;color:#fff}
 
-.opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:#F4F1EA;border-radius:12px;overflow:hidden}
+.opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:#F3F0E8;border-radius:12px;overflow:hidden}
 .opinion img{display:block;width:100%;height:100%;min-height:520px;object-fit:cover;object-position:42% 50%}
 .opinion__body{padding:clamp(32px,4.5vw,56px);min-width:0;display:grid;align-content:start;gap:24px}
 .opinion__body p{margin:0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
-.opinion__q{margin:8px 0 0;border-top:2px solid #059669;padding-top:24px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-weight:750;font-size:clamp(28px,2.5vw,38px);line-height:1.2;letter-spacing:-0.035em;color:#181A1C;max-width:32ch;text-wrap:pretty}
+.opinion__q{margin:8px 0 0;border-top:2px solid #059669;padding-top:24px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-weight:750;font-size:clamp(28px,2.5vw,38px);line-height:1.2;letter-spacing:-0.035em;color:#1A1C1D;max-width:32ch;text-wrap:pretty}
 
-.cont{min-height:440px;background:#F4F1EA;border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
+.cont{min-height:440px;background:#F3F0E8;border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
 .cont__in{max-width:760px}
-.cont__h{margin:16px 0 0;max-width:20ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:#181A1C;text-wrap:pretty}
+.cont__h{margin:16px 0 0;max-width:20ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:#1A1C1D;text-wrap:pretty}
 .cont p{margin:24px 0 0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
 
 .rule-arrow{display:flex;align-items:center;gap:10px;width:min(320px,60%);margin:0 0 48px}
@@ -247,10 +250,10 @@ html[lang="el"] .split__cell h3{font-size:clamp(24px,2.4vw,34px)}
 .media__watch:hover{background:#0e0e0e}
 .media__watch h3{font-size:clamp(44px,4vw,64px)}
 .media__watch p{font-size:17px;line-height:1.5;max-width:34ch}
-.media__follow{background:#F4F1EA;color:#181A1C}
+.media__follow{background:#F3F0E8;color:#1A1C1D}
 .media__follow h3{font-size:clamp(44px,4vw,64px)}
 .icon-row{display:flex;align-items:center;gap:16px}
-.icon-btn{width:48px;height:48px;border-radius:50%;background:#181A1C;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .18s}
+.icon-btn{width:48px;height:48px;border-radius:50%;background:#1A1C1D;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .18s}
 .icon-btn:hover{background:#059669;transform:translateY(-3px)}
 @media (max-width:960px){
   .media{grid-template-columns:1fr;grid-template-rows:auto;min-height:0}
@@ -261,39 +264,39 @@ html[lang="el"] .split__cell h3{font-size:clamp(24px,2.4vw,34px)}
 @media (max-width:520px){.split__cell h3,html[lang="el"] .split__cell h3{white-space:normal}}
 
 /* ── Why me ── */
-.why-hero{background:#F4F1EA;padding-block:80px 72px}
+.why-hero{background:#F3F0E8;padding-block:80px 72px}
 .why-hero__grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,0.85fr);gap:64px;align-items:center}
 .why-hero__over{font-size:13px;font-weight:700;letter-spacing:0.12em;color:#059669}
-.why-hero h1{margin:16px 0 0;max-width:15ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:#181A1C;text-wrap:balance}
+.why-hero h1{margin:16px 0 0;max-width:15ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:#1A1C1D;text-wrap:balance}
 .why-hero__intro{margin:24px 0 0;max-width:56ch;font-size:19px;line-height:1.7;color:#282726}
 .why-hero__creds{margin-top:20px;font-size:15px;line-height:1.6;color:#5E6264}
 .why-hero img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 38%;border-radius:12px}
 .cred-row{display:grid;grid-template-columns:64px minmax(200px,0.7fr) 1.3fr;gap:32px;padding:28px 0;border-top:1px solid rgba(24,26,28,0.20);align-items:start}
 .cred-row:last-of-type{border-bottom:1px solid rgba(24,26,28,0.20)}
 .cred-row .n{font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:19px;font-weight:800;color:#059669}
-.cred-row h3{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:22px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:#181A1C}
+.cred-row h3{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:22px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:#1A1C1D}
 .cred-row p{margin:0;font-size:17px;line-height:1.6;color:#282726}
 @media (max-width:900px){.why-hero{padding-block:56px 48px}.why-hero__grid{grid-template-columns:1fr;gap:36px}}
 @media (max-width:700px){.cred-row{grid-template-columns:1fr;gap:10px}.why-hero h1{font-size:clamp(40px,10vw,52px)}}
 
 /* ── Reviews (no giant opening testimonial) ── */
-.rev-hero{background:#F4F1EA;padding-block:80px 56px}
+.rev-hero{background:#F3F0E8;padding-block:80px 56px}
 .rev-hero__grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
-.rev-hero h1{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:#181A1C}
+.rev-hero h1{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:#1A1C1D}
 .rev-hero__lead{margin:0 0 14px;font-size:20px;line-height:1.6;color:#282726;max-width:60ch}
 .rev-hero__note{font-size:15px;line-height:1.6;color:#5E6264}
 .rev-lead{max-width:900px;margin:56px 0 0;padding-top:28px;border-top:4px solid #059669}
-.rev-lead p{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(24px,2.3vw,28px);font-weight:600;line-height:1.46;letter-spacing:-0.01em;color:#181A1C;text-wrap:pretty}
+.rev-lead p{margin:0;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(24px,2.3vw,28px);font-weight:600;line-height:1.46;letter-spacing:-0.01em;color:#1A1C1D;text-wrap:pretty}
 .rev-lead .who{margin-top:22px;font-size:14px;color:#5E6264}
 .rev-lead button,.rev-item button{margin-top:16px;background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:#059669}
 .rev-lead .orig,.rev-item .orig{margin-top:16px;padding-top:16px;border-top:1px solid rgba(24,26,28,0.20);font-size:16px;line-height:1.7;color:#5E6264;font-style:italic}
 .rev-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px}
 .rev-item{border-top:1px solid rgba(24,26,28,0.20);padding:36px 0 44px;min-width:0}
-.rev-item p{margin:0;font-size:19px;line-height:1.72;color:#181A1C}
+.rev-item p{margin:0;font-size:19px;line-height:1.72;color:#1A1C1D}
 .rev-item .who{margin-top:22px;font-size:14px;color:#5E6264}
 @media (max-width:900px){.rev-hero{padding-block:56px 48px}.rev-hero__grid{grid-template-columns:1fr;gap:28px}}
 @media (max-width:800px){.rev-grid{grid-template-columns:1fr}.rev-lead p{font-size:24px}}
-</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__mark" href="/el/"><b>AGGELOS</b><i></i><em>MOUZAKITIS</em></a><nav class="site-hdr__nav"><a href="/el/">Αρχική</a><a href="/el/about/">Γιατί εμένα</a><a href="/el/reviews/" aria-current="page">Κριτικές</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/reviews/" hreflang="en">English</a><a class="pill pill--light" href="/el/startingdiagnostic/"><span>ΞΕΚΙΝΑ</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Μενού" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main><section class="rev-hero"><div class="site-container"><div class="rev-hero__grid"><h1>Τι λένε άνθρωποι που έχουν δουλέψει μαζί μου</h1><div><p class="rev-hero__lead">Μερικά πράγματα που μου έχουν πει άνθρωποι αφού δουλέψαμε μαζί.</p><div class="rev-hero__note">Έχω αφαιρέσει ονόματα και λεπτομέρειες που θα μπορούσαν να δείξουν ποιοι είναι. Τα λόγια είναι δικά τους. Οι κριτικές δόθηκαν στα αγγλικά και εμφανίζονται εδώ μεταφρασμένα — μπορείς να δεις το πρωτότυπο κάτω από κάθε κριτική.</div></div></div><div class="rev-lead"><p>“Είχα δουλέψει με coaches στο παρελθόν, είχα κάνει και θεραπεία, αλλά αυτό ένιωσα ότι ήταν διαφορετικό. Ο Άγγελος καταλαβαίνει τη συναισθηματική πλευρά χωρίς να χάνει από τα μάτια του την πραγματική κατάσταση που αντιμετωπίζω στη δουλειά. Μπορούμε να μιλήσουμε για πίεση, ντροπή ή για κάτι που συμβαίνει στο σώμα μου, και πέντε λεπτά αργότερα να συζητάμε μια απόφαση που αφορά την ομάδα ή το business μου. Δεν χρειάζεται να του μεταφράζω τον έναν κόσμο στον άλλον.”</p><div class="who">Ανώνυμος πελάτης, Founder</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div></div></section><section class="u-main"><div class="site-container rev-grid"><div class="rev-item"><p>“Ήρθα περιμένοντας μια αρκετά τυπική συζήτηση coaching. Μέσα στην πρώτη κιόλας συνεδρία, ο Άγγελος κατάλαβε και το επαγγελματικό πρόβλημα και τον συναισθηματικό μηχανισμό από κάτω του. Ήταν ζεστός, αλλά πολύ ευθύς, και μου έδωσε έναν τρόπο να δω την κατάσταση που δεν είχα σκεφτεί πριν. Έφυγα με κάτι παραπάνω από συμβουλές. Έφυγα με ένα πιο ακριβές πρόβλημα.”</p><div class="who">Ανώνυμος πελάτης, Έμπειρος επαγγελματίας</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Πίεζα μια επιχειρηματική κατάσταση να συνεχιστεί, επειδή το να τη σταματήσω έμοιαζε με αποτυχία. Μετά από μία από τις ασκήσεις μας, συνειδητοποίησα ότι προσπαθούσα να κατασκευάσω λόγους για να συνεχίσω, ενώ ήδη ήξερα την απάντηση. Έκανα τη δύσκολη συζήτηση λίγο αργότερα. Δεν ήταν ότι ο Άγγελος μου έδωσε την απόφαση. Με βοήθησε να σταματήσω να παλεύω με αυτό που ήδη ήξερα.”</p><div class="who">Ανώνυμος πελάτης, Ιδιοκτήτης επιχείρησης</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Δεν υπάρχουν εμψυχωτικοί λόγοι ή γενικά frameworks κολλημένα πάνω σε κάθε κατάσταση. Ο Άγγελος προσέχει πώς λειτουργώ συγκεκριμένα εγώ. Θυμάται τις αντιφάσεις, αντιλαμβάνεται πότε αλλάζω την ιστορία και κάνει την ερώτηση που έλπιζα ότι θα μπορούσαμε να αποφύγουμε. Ενοχλητικό κάποιες φορές, αλλά συνήθως εύστοχο.”</p><div class="who">Ανώνυμος πελάτης, Founder</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Δουλεύουμε μαζί εδώ και αρκετό καιρό, και οι συνεδρίες έχουν αλλάξει σταδιακά τον τρόπο που παίρνω αποφάσεις. Ο Άγγελος δεν μου λέει τι να κάνω ούτε προσπαθεί να με κάνει να εξαρτώμαι από τη γνώμη του. Με βοηθά να ξεχωρίσω το πραγματικό πρόβλημα από τον φόβο, το ego και τα παλιά μοτίβα που είναι τυλιγμένα γύρω του. Συνήθως φεύγω με λιγότερο θόρυβο και πολύ πιο καθαρή αίσθηση του τι είναι δικό μου να κάνω.”</p><div class="who">Ανώνυμος πελάτης, Founder</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Οι συζητήσεις πάνε πιο βαθιά από το συνηθισμένο coaching, αλλά και πάλι φεύγω με κάτι αξιοποιήσιμο. Κάποιες φορές είναι μια απόφαση, κάποιες μια δύσκολη συζήτηση που πρέπει να κάνω, και κάποιες φορές είναι απλώς το να παρατηρήσω τη στιγμή που το σώμα μου μπαίνει σε κατάσταση απειλής, πριν το μυαλό μου φτιάξει μια ιστορία γύρω από αυτό. Είναι ένας σπάνιος συνδυασμός βάθους και πρακτικότητας.”</p><div class="who">Ανώνυμος πελάτης, Έμπειρος επαγγελματίας τεχνολογίας</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Ο Άγγελος είναι ευθύς. Θα μου πει όταν αποφεύγω κάτι ή όταν κατασκευάζω μια πολύ έξυπνη εξήγηση για το γιατί δεν μπορώ να δράσω. Όμως ποτέ δεν βίωσα την ευθύτητά του ως κριτική. Υπάρχει αρκετή εμπιστοσύνη μεταξύ μας ώστε να μπορεί να με προκαλέσει σωστά, που είναι ακριβώς αυτό που χρειαζόμουν.”</p><div class="who">Ανώνυμος πελάτης, Έμπειρος επαγγελματίας τεχνολογίας</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Δεν ήθελα κάποιον να μου πει να δουλεύω λιγότερο, να χαμηλώσω τον πήχη ή να γίνω λιγότερο φιλόδοξος. Ο Άγγελος το κατάλαβε αμέσως. Η δουλειά μας ήταν να κρατήσουμε το κομμάτι μου που θέλει να χτίζει και να πετυχαίνει, ενώ ταυτόχρονα γίνομαι λιγότερο εξαρτημένος από το να νικάω, τη σύγκριση και την εξωτερική επιβεβαίωση για να νιώθω καλά. Αυτή η διάκριση ήταν πολύ σημαντική για μένα.”</p><div class="who">Ανώνυμος πελάτης, Founder και στέλεχος</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Πριν αρχίσουμε να δουλεύουμε μαζί, ένα δύσκολο email ή ένα πρόβλημα με έναν πελάτη μπορούσε να επηρεάσει ολόκληρη τη μέρα μου. Ένιωθα αμέσως υπεύθυνος για τα πάντα και άρχιζα να προσπαθώ να ελέγξω το πώς με έβλεπαν. Ανιχνεύσαμε αυτή την αντίδραση πολύ πιο πίσω από την άμεση κατάσταση στη δουλειά. Ακόμα νιώθω πίεση, αλλά μπορώ να την αναγνωρίσω νωρίτερα και δεν πιστεύω πια κάθε συμπέρασμα που παράγει το νευρικό μου σύστημα.”</p><div class="who">Ανώνυμος πελάτης, Σύμβουλος και ιδιοκτήτης επιχείρησης</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Καταλάβαινα ήδη πολλά από τα μοτίβα μου σε διανοητικό επίπεδο. Αυτό ήταν εν μέρει το πρόβλημα. Μπορούσα να εξηγήσω τον εαυτό μου πολύ καλά και παρ’ όλα αυτά να επαναλαμβάνω την ίδια συμπεριφορά. Η δουλειά με τον Άγγελο με βοήθησε να αναγνωρίζω τι συμβαίνει σε σωματικό επίπεδο, όχι απλώς να το αναλύω εκ των υστέρων. Αυτό έκανε τη δουλειά πολύ πιο πραγματική και, σιγά σιγά, άλλαξε τον τρόπο που αντιδρώ κάτω από πίεση.”</p><div class="who">Ανώνυμος πελάτης, Ηγέτης στην τεχνολογία</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Ένα από τα πιο χρήσιμα πράγματα είναι ότι ο Άγγελος πραγματικά καταλαβαίνει το περιβάλλον στο οποίο δουλεύω. Δεν χρειάζεται να του εξηγήσω τα εταιρικά παιχνίδια, την πίεση ενός startup, τα targets, τους επενδυτές ή γιατί μια απόφαση καριέρας μπορεί να είναι πιο περίπλοκη από το «ακολούθησε τις αξίες σου». Καταλαβαίνει το παιχνίδι, αλλά προσέχει και το τι μου κάνει αυτό το παιχνίδι.”</p><div class="who">Ανώνυμος πελάτης, Έμπειρο στέλεχος</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Στην αρχή ήμουν επιφυλακτικός με τη σωματική και trauma-informed δουλειά, γιατί υπέθετα ότι θα ήταν ασαφής ή λίγο «πνευματική». Δεν ήταν. Ο Άγγελος εξήγησε τι κάναμε, έδωσε προσοχή στα όριά μου και σύνδεσε την εμπειρία με μοτίβα που μπορούσα να αναγνωρίσω στη δουλειά και στις σχέσεις μου. Ένιωσα ότι ήταν γειωμένο, προσεκτικό και απροσδόκητα πρακτικό.”</p><div class="who">Ανώνυμος πελάτης</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Εμπιστεύομαι τον Άγγελο γιατί δεν προσπαθεί συνέχεια να με καθησυχάσει. Ακούει προσεκτικά, αλλά δεν συμφωνεί αυτόματα με την εκδοχή των γεγονότων που φέρνω στη συνεδρία. Κάποιες φορές επισημαίνει κάτι που θα προτιμούσα να μην δω. Κατά κάποιον τρόπο, αυτή η ειλικρίνεια έκανε τη δουλειά να μοιάζει πιο ασφαλής, όχι λιγότερο.”</p><div class="who">Ανώνυμος πελάτης, Product leader</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Άρχισα να δουλεύω με τον Άγγελο σε μια μπερδεμένη περίοδο της καριέρας μου. Στα χαρτιά, τα πράγματα πήγαιναν καλά, αλλά μέσα μου αμφισβητούσα σχεδόν τα πάντα. Μέσα σε αρκετές συνεδρίες, με βοήθησε να καταλάβω ποιες ανησυχίες ήταν βάσιμες και ποιες μεγεθύνονταν από παλιούς φόβους γύρω από την απόδοση, την αποτυχία και το πώς με έβλεπαν οι άλλοι. Νιώθω πιο γειωμένος τώρα, παρότι δεν έχουν λυθεί όλα.”</p><div class="who">Ανώνυμος πελάτης, Στέλεχος τεχνολογίας</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Απ’ έξω, εξακολουθούσα να λειτουργώ και να αποδίδω σε υψηλό επίπεδο, οπότε ήταν δύσκολο να εξηγήσω γιατί κάτι ένιωθα ότι δεν πήγαινε καλά. Ο Άγγελος κατάλαβε ότι το πρόβλημα δεν ήταν απλώς ο φόρτος δουλειάς. Δουλέψαμε πάνω στον τρόπο που συνδέω το επίτευγμα με την ασφάλεια, την αξία και την ανακούφιση. Εξακολουθώ να είμαι φιλόδοξος, αλλά η επιτυχία αρχίζει να μοιάζει λιγότερο με οριακή διαφυγή από την αποτυχία.”</p><div class="who">Ανώνυμος πελάτης, Στέλεχος τεχνολογίας</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div></div></section><section class="cta-strip"><div class="site-container"><h2 class="cta-strip__h">Ξεκινά με μια σύντομη, δωρεάν γνωριμία.</h2><div><a class="pill pill--green" href="/el/startingdiagnostic/"><span>Ζήτησε μια πρώτη συνάντηση</span><span>→</span></a></div><a class="cta-strip__sub" href="/el/confidentiality/"><span>Εμπιστευτικότητα</span><span>→</span></a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__mark"><b>AGGELOS</b><i></i><em>MOUZAKITIS</em></div><div class="site-ftr__roles"><div>Σύμβουλος επιχειρήσεων &amp; καριέρας</div><div style="margin-top: 8px;">Σύμβουλος ψυχικής υγείας</div></div></div><nav><div class="site-ftr__head">ΠΛΟΗΓΗΣΗ</div><a href="/el/">Αρχική</a><a href="/el/about/">Γιατί εμένα</a><a href="/el/reviews/">Κριτικές</a><a href="/el/startingdiagnostic/">Ζήτησε γνωριμία</a></nav><nav><div class="site-ftr__head">ΠΕΡΙΕΧΟΜΕΝΟ</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Κείμενα ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a></nav><nav><div class="site-ftr__head">ΑΚΟΛΟΥΘΗΣΕ</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. Με επιφύλαξη παντός δικαιώματος.</div><nav><a href="/el/confidentiality/">Εμπιστευτικότητα</a><a href="/el/confidentiality/#terms">Όροι χρήσης</a><a href="/el/confidentiality/#privacy">Πολιτική απορρήτου</a></nav></div></div></footer></div>
+</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/el/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/el/">Αρχική</a><a href="/el/about/">Γιατί εμένα</a><a href="/el/reviews/" aria-current="page">Κριτικές</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/reviews/" hreflang="en">English</a><a class="hdr-cta" href="/el/startingdiagnostic/"><span>ΣΥΝΑΝΤΗΣΗ</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Μενού" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main><section class="rev-hero"><div class="site-container"><div class="rev-hero__grid"><h1>Τι λένε άνθρωποι που έχουν δουλέψει μαζί μου</h1><div><p class="rev-hero__lead">Μερικά πράγματα που μου έχουν πει άνθρωποι αφού δουλέψαμε μαζί.</p><div class="rev-hero__note">Έχω αφαιρέσει ονόματα και λεπτομέρειες που θα μπορούσαν να δείξουν ποιοι είναι. Τα λόγια είναι δικά τους. Οι κριτικές δόθηκαν στα αγγλικά και εμφανίζονται εδώ μεταφρασμένα — μπορείς να δεις το πρωτότυπο κάτω από κάθε κριτική.</div></div></div><div class="rev-lead"><p>“Είχα δουλέψει με coaches στο παρελθόν, είχα κάνει και θεραπεία, αλλά αυτό ένιωσα ότι ήταν διαφορετικό. Ο Άγγελος καταλαβαίνει τη συναισθηματική πλευρά χωρίς να χάνει από τα μάτια του την πραγματική κατάσταση που αντιμετωπίζω στη δουλειά. Μπορούμε να μιλήσουμε για πίεση, ντροπή ή για κάτι που συμβαίνει στο σώμα μου, και πέντε λεπτά αργότερα να συζητάμε μια απόφαση που αφορά την ομάδα ή το business μου. Δεν χρειάζεται να του μεταφράζω τον έναν κόσμο στον άλλον.”</p><div class="who">Ανώνυμος πελάτης, Founder</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div></div></section><section class="u-main"><div class="site-container rev-grid"><div class="rev-item"><p>“Ήρθα περιμένοντας μια αρκετά τυπική συζήτηση coaching. Μέσα στην πρώτη κιόλας συνεδρία, ο Άγγελος κατάλαβε και το επαγγελματικό πρόβλημα και τον συναισθηματικό μηχανισμό από κάτω του. Ήταν ζεστός, αλλά πολύ ευθύς, και μου έδωσε έναν τρόπο να δω την κατάσταση που δεν είχα σκεφτεί πριν. Έφυγα με κάτι παραπάνω από συμβουλές. Έφυγα με ένα πιο ακριβές πρόβλημα.”</p><div class="who">Ανώνυμος πελάτης, Έμπειρος επαγγελματίας</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Πίεζα μια επιχειρηματική κατάσταση να συνεχιστεί, επειδή το να τη σταματήσω έμοιαζε με αποτυχία. Μετά από μία από τις ασκήσεις μας, συνειδητοποίησα ότι προσπαθούσα να κατασκευάσω λόγους για να συνεχίσω, ενώ ήδη ήξερα την απάντηση. Έκανα τη δύσκολη συζήτηση λίγο αργότερα. Δεν ήταν ότι ο Άγγελος μου έδωσε την απόφαση. Με βοήθησε να σταματήσω να παλεύω με αυτό που ήδη ήξερα.”</p><div class="who">Ανώνυμος πελάτης, Ιδιοκτήτης επιχείρησης</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Δεν υπάρχουν εμψυχωτικοί λόγοι ή γενικά frameworks κολλημένα πάνω σε κάθε κατάσταση. Ο Άγγελος προσέχει πώς λειτουργώ συγκεκριμένα εγώ. Θυμάται τις αντιφάσεις, αντιλαμβάνεται πότε αλλάζω την ιστορία και κάνει την ερώτηση που έλπιζα ότι θα μπορούσαμε να αποφύγουμε. Ενοχλητικό κάποιες φορές, αλλά συνήθως εύστοχο.”</p><div class="who">Ανώνυμος πελάτης, Founder</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Δουλεύουμε μαζί εδώ και αρκετό καιρό, και οι συνεδρίες έχουν αλλάξει σταδιακά τον τρόπο που παίρνω αποφάσεις. Ο Άγγελος δεν μου λέει τι να κάνω ούτε προσπαθεί να με κάνει να εξαρτώμαι από τη γνώμη του. Με βοηθά να ξεχωρίσω το πραγματικό πρόβλημα από τον φόβο, το ego και τα παλιά μοτίβα που είναι τυλιγμένα γύρω του. Συνήθως φεύγω με λιγότερο θόρυβο και πολύ πιο καθαρή αίσθηση του τι είναι δικό μου να κάνω.”</p><div class="who">Ανώνυμος πελάτης, Founder</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Οι συζητήσεις πάνε πιο βαθιά από το συνηθισμένο coaching, αλλά και πάλι φεύγω με κάτι αξιοποιήσιμο. Κάποιες φορές είναι μια απόφαση, κάποιες μια δύσκολη συζήτηση που πρέπει να κάνω, και κάποιες φορές είναι απλώς το να παρατηρήσω τη στιγμή που το σώμα μου μπαίνει σε κατάσταση απειλής, πριν το μυαλό μου φτιάξει μια ιστορία γύρω από αυτό. Είναι ένας σπάνιος συνδυασμός βάθους και πρακτικότητας.”</p><div class="who">Ανώνυμος πελάτης, Έμπειρος επαγγελματίας τεχνολογίας</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Ο Άγγελος είναι ευθύς. Θα μου πει όταν αποφεύγω κάτι ή όταν κατασκευάζω μια πολύ έξυπνη εξήγηση για το γιατί δεν μπορώ να δράσω. Όμως ποτέ δεν βίωσα την ευθύτητά του ως κριτική. Υπάρχει αρκετή εμπιστοσύνη μεταξύ μας ώστε να μπορεί να με προκαλέσει σωστά, που είναι ακριβώς αυτό που χρειαζόμουν.”</p><div class="who">Ανώνυμος πελάτης, Έμπειρος επαγγελματίας τεχνολογίας</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Δεν ήθελα κάποιον να μου πει να δουλεύω λιγότερο, να χαμηλώσω τον πήχη ή να γίνω λιγότερο φιλόδοξος. Ο Άγγελος το κατάλαβε αμέσως. Η δουλειά μας ήταν να κρατήσουμε το κομμάτι μου που θέλει να χτίζει και να πετυχαίνει, ενώ ταυτόχρονα γίνομαι λιγότερο εξαρτημένος από το να νικάω, τη σύγκριση και την εξωτερική επιβεβαίωση για να νιώθω καλά. Αυτή η διάκριση ήταν πολύ σημαντική για μένα.”</p><div class="who">Ανώνυμος πελάτης, Founder και στέλεχος</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Πριν αρχίσουμε να δουλεύουμε μαζί, ένα δύσκολο email ή ένα πρόβλημα με έναν πελάτη μπορούσε να επηρεάσει ολόκληρη τη μέρα μου. Ένιωθα αμέσως υπεύθυνος για τα πάντα και άρχιζα να προσπαθώ να ελέγξω το πώς με έβλεπαν. Ανιχνεύσαμε αυτή την αντίδραση πολύ πιο πίσω από την άμεση κατάσταση στη δουλειά. Ακόμα νιώθω πίεση, αλλά μπορώ να την αναγνωρίσω νωρίτερα και δεν πιστεύω πια κάθε συμπέρασμα που παράγει το νευρικό μου σύστημα.”</p><div class="who">Ανώνυμος πελάτης, Σύμβουλος και ιδιοκτήτης επιχείρησης</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Καταλάβαινα ήδη πολλά από τα μοτίβα μου σε διανοητικό επίπεδο. Αυτό ήταν εν μέρει το πρόβλημα. Μπορούσα να εξηγήσω τον εαυτό μου πολύ καλά και παρ’ όλα αυτά να επαναλαμβάνω την ίδια συμπεριφορά. Η δουλειά με τον Άγγελο με βοήθησε να αναγνωρίζω τι συμβαίνει σε σωματικό επίπεδο, όχι απλώς να το αναλύω εκ των υστέρων. Αυτό έκανε τη δουλειά πολύ πιο πραγματική και, σιγά σιγά, άλλαξε τον τρόπο που αντιδρώ κάτω από πίεση.”</p><div class="who">Ανώνυμος πελάτης, Ηγέτης στην τεχνολογία</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Ένα από τα πιο χρήσιμα πράγματα είναι ότι ο Άγγελος πραγματικά καταλαβαίνει το περιβάλλον στο οποίο δουλεύω. Δεν χρειάζεται να του εξηγήσω τα εταιρικά παιχνίδια, την πίεση ενός startup, τα targets, τους επενδυτές ή γιατί μια απόφαση καριέρας μπορεί να είναι πιο περίπλοκη από το «ακολούθησε τις αξίες σου». Καταλαβαίνει το παιχνίδι, αλλά προσέχει και το τι μου κάνει αυτό το παιχνίδι.”</p><div class="who">Ανώνυμος πελάτης, Έμπειρο στέλεχος</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Στην αρχή ήμουν επιφυλακτικός με τη σωματική και trauma-informed δουλειά, γιατί υπέθετα ότι θα ήταν ασαφής ή λίγο «πνευματική». Δεν ήταν. Ο Άγγελος εξήγησε τι κάναμε, έδωσε προσοχή στα όριά μου και σύνδεσε την εμπειρία με μοτίβα που μπορούσα να αναγνωρίσω στη δουλειά και στις σχέσεις μου. Ένιωσα ότι ήταν γειωμένο, προσεκτικό και απροσδόκητα πρακτικό.”</p><div class="who">Ανώνυμος πελάτης</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Εμπιστεύομαι τον Άγγελο γιατί δεν προσπαθεί συνέχεια να με καθησυχάσει. Ακούει προσεκτικά, αλλά δεν συμφωνεί αυτόματα με την εκδοχή των γεγονότων που φέρνω στη συνεδρία. Κάποιες φορές επισημαίνει κάτι που θα προτιμούσα να μην δω. Κατά κάποιον τρόπο, αυτή η ειλικρίνεια έκανε τη δουλειά να μοιάζει πιο ασφαλής, όχι λιγότερο.”</p><div class="who">Ανώνυμος πελάτης, Product leader</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Άρχισα να δουλεύω με τον Άγγελο σε μια μπερδεμένη περίοδο της καριέρας μου. Στα χαρτιά, τα πράγματα πήγαιναν καλά, αλλά μέσα μου αμφισβητούσα σχεδόν τα πάντα. Μέσα σε αρκετές συνεδρίες, με βοήθησε να καταλάβω ποιες ανησυχίες ήταν βάσιμες και ποιες μεγεθύνονταν από παλιούς φόβους γύρω από την απόδοση, την αποτυχία και το πώς με έβλεπαν οι άλλοι. Νιώθω πιο γειωμένος τώρα, παρότι δεν έχουν λυθεί όλα.”</p><div class="who">Ανώνυμος πελάτης, Στέλεχος τεχνολογίας</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Απ’ έξω, εξακολουθούσα να λειτουργώ και να αποδίδω σε υψηλό επίπεδο, οπότε ήταν δύσκολο να εξηγήσω γιατί κάτι ένιωθα ότι δεν πήγαινε καλά. Ο Άγγελος κατάλαβε ότι το πρόβλημα δεν ήταν απλώς ο φόρτος δουλειάς. Δουλέψαμε πάνω στον τρόπο που συνδέω το επίτευγμα με την ασφάλεια, την αξία και την ανακούφιση. Εξακολουθώ να είμαι φιλόδοξος, αλλά η επιτυχία αρχίζει να μοιάζει λιγότερο με οριακή διαφυγή από την αποτυχία.”</p><div class="who">Ανώνυμος πελάτης, Στέλεχος τεχνολογίας</div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div></div></section><section class="cta-strip"><div class="site-container"><h2 class="cta-strip__h">Ξεκινά με μια σύντομη, δωρεάν γνωριμία.</h2><div><a class="pill pill--green" href="/el/startingdiagnostic/"><span>Ζήτησε μια πρώτη συνάντηση</span><span>→</span></a></div><a class="cta-strip__sub" href="/el/confidentiality/"><span>Εμπιστευτικότητα</span><span>→</span></a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__brand" style="font-size: 20px;">Aggelos<span>.</span></div><div class="site-ftr__roles"><div>Σύμβουλος επιχειρήσεων &amp; καριέρας</div><div style="margin-top: 8px;">Σύμβουλος ψυχικής υγείας</div></div></div><nav><div class="site-ftr__head">ΠΛΟΗΓΗΣΗ</div><a href="/el/">Αρχική</a><a href="/el/about/">Γιατί εμένα</a><a href="/el/reviews/">Κριτικές</a><a href="/el/startingdiagnostic/">Ζήτησε γνωριμία</a></nav><nav><div class="site-ftr__head">ΠΕΡΙΕΧΟΜΕΝΟ</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Κείμενα ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a></nav><nav><div class="site-ftr__head">ΑΚΟΛΟΥΘΗΣΕ</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. Με επιφύλαξη παντός δικαιώματος.</div><nav><a href="/el/confidentiality/">Εμπιστευτικότητα</a><a href="/el/confidentiality/#terms">Όροι χρήσης</a><a href="/el/confidentiality/#privacy">Πολιτική απορρήτου</a></nav></div></div></footer></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/site-chrome.js?v=1"></script>

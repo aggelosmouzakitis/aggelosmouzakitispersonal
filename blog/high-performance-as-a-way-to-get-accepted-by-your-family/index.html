@@ -92,9 +92,9 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
 html,body,#root{height:auto}
 #root{display:block;overflow:visible}
 #sidebar{display:none!important}
-#main-scroll{overflow:visible;background:#181A1C;color:#FFFFFF}
+#main-scroll{overflow:visible;background:#1A1C1D;color:#FFFFFF}
 #main-scroll::-webkit-scrollbar{width:0}
-body{background:#181A1C;color:#FFFFFF;font-family:"Inter",system-ui,sans-serif;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body{background:#1A1C1D;color:#FFFFFF;font-family:"Inter",system-ui,sans-serif;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
 ::selection{background:#059669;color:#fff}
 #main-scroll a,a{color:inherit;text-decoration:none}
 #main-scroll strong{border:0;padding:0;color:inherit;font-weight:600}
@@ -103,38 +103,39 @@ img{max-width:100%}
 
 .site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
 
-.site-hdr{width:100%;height:86px;background:#181A1C;border-bottom:1px solid rgba(255,255,255,0.16)}
-.site-hdr__in{height:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center}
-.site-hdr__mark{display:flex;align-items:center;gap:10px;color:#fff;white-space:nowrap}
-.site-hdr__mark b{font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:18px;font-weight:800;letter-spacing:-0.025em}
-.site-hdr__mark i{display:block;width:1px;height:22px;background:#059669}
-.site-hdr__mark em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:0.14em}
-.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:32px}
-.site-hdr__nav a{font-size:14px;font-weight:500;padding:6px 0;border-bottom:2px solid transparent;opacity:.72;transition:opacity .18s}
+.site-hdr{width:100%;min-height:70px;background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16)}
+.site-hdr__in{min-height:70px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
+.site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:#F3F0E8;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:17px;font-weight:500;line-height:1;letter-spacing:-0.02em;white-space:nowrap}
+.site-hdr__brand span{color:#059669}
+.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:22px}
+.site-hdr__nav a{color:#F3F0E8;font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
 .site-hdr__nav a:hover{opacity:1}
 .site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:#059669}
-.site-hdr__end{display:flex;align-items:center;gap:24px}
-.site-hdr__lang{font-size:14px;font-weight:500;opacity:.72;transition:opacity .18s}
+.site-hdr__end{display:flex;align-items:center;gap:14px}
+.site-hdr__lang{color:#F3F0E8;font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;transition:opacity .18s}
 .site-hdr__lang:hover{opacity:1}
+.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 17px;background:#059669;color:#fff;font-size:12px;font-weight:600;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hdr-cta:hover{filter:brightness(0.9);gap:11px}
 .site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
-.site-hdr__burger span{display:block;width:24px;height:2px;background:#fff}
-.site-menu{background:#050505;border-bottom:1px solid rgba(255,255,255,0.16);padding-block:24px 32px}
+.site-hdr__burger span{display:block;width:24px;height:2px;background:#F3F0E8}
+.site-menu{background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16);padding-block:20px 28px}
 .site-menu .site-container{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
-.site-menu a{font-size:18px}
+.site-menu a{color:#F3F0E8;font-size:16px;text-transform:uppercase;letter-spacing:0.03em}
+.site-menu .hdr-cta{align-self:stretch;justify-content:center;min-height:48px;font-size:13px}
 
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
-.pill--light{height:38px;padding-inline:18px;background:#fff;color:#181A1C;font-size:12px;letter-spacing:0.04em}
-.pill--light:hover{gap:12px}
 .pill--green{height:60px;padding-inline:36px;background:#059669;color:#fff;font-size:16px}
 .pill--green:hover{gap:12px;filter:brightness(0.9)}
+.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:0 20px;background:#059669;color:#fff;font-size:14px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hero-cta:hover{filter:brightness(0.9);gap:13px}
 
-.cta-strip{padding-block:clamp(72px,9vw,110px);text-align:center;background:#181A1C}
+.cta-strip{padding-block:clamp(72px,9vw,110px);text-align:center;background:#1A1C1D}
 .cta-strip__h{margin:0 auto;max-width:20ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(36px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
 .cta-strip .pill--green{margin-top:44px}
 .cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:#C2C6CA;transition:gap .18s,color .18s}
 .cta-strip__sub:hover{gap:12px;color:#fff}
 
-.site-ftr{border-top:2px solid #059669;padding-block:64px 32px;background:#181A1C}
+.site-ftr{border-top:2px solid #059669;padding-block:64px 32px;background:#1A1C1D}
 .site-ftr__cols{display:grid;grid-template-columns:minmax(280px,1.4fr) repeat(3,minmax(130px,0.55fr));gap:48px;align-items:start}
 .site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#059669;margin-bottom:20px}
 .site-ftr nav a{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.4;margin-bottom:12px;transition:color .18s}
@@ -145,11 +146,11 @@ img{max-width:100%}
 .site-ftr__legal nav{display:flex;flex-wrap:wrap;gap:12px 24px}
 .site-ftr__legal nav a{display:inline;margin:0}
 
-.u-hero{background:#F4F1EA;padding-block:88px 72px}
-.u-hero h1{margin:0;max-width:15ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(52px,5.8vw,82px);font-weight:780;line-height:0.96;letter-spacing:-0.05em;color:#181A1C}
+.u-hero{background:#F3F0E8;padding-block:88px 72px}
+.u-hero h1{margin:0;max-width:15ch;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(52px,5.8vw,82px);font-weight:780;line-height:0.96;letter-spacing:-0.05em;color:#1A1C1D}
 .u-hero p{max-width:65ch;margin:32px 0 0;font-size:21px;line-height:1.55;color:#282726}
-.u-main{background:#F4F1EA;padding-block:0 96px;color:#181A1C}
-.u-read{width:min(740px,calc(100% - 40px));margin-inline:auto;font-size:19px;line-height:1.72;color:#181A1C}
+.u-main{background:#F3F0E8;padding-block:0 96px;color:#1A1C1D}
+.u-read{width:min(740px,calc(100% - 40px));margin-inline:auto;font-size:19px;line-height:1.72;color:#1A1C1D}
 .u-read h1{font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(44px,5vw,68px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;margin:0 0 32px}
 .u-read h2{margin:80px 0 24px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(36px,4vw,50px);font-weight:780;line-height:1.04;letter-spacing:-0.04em}
 .u-read h3{margin:48px 0 16px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:clamp(26px,3vw,34px);font-weight:750;line-height:1.1;letter-spacing:-0.03em}
@@ -173,7 +174,7 @@ img{max-width:100%}
 .u-faq--dark summary{color:#fff}
 .u-faq--dark details > *:not(summary){color:#C2C6CA}
 
-.u-related a{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid rgba(24,26,28,0.20);color:#181A1C}
+.u-related a{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid rgba(24,26,28,0.20);color:#1A1C1D}
 .u-related a:last-child{border-bottom:1px solid rgba(24,26,28,0.20)}
 .u-related a:hover{color:#059669}
 
@@ -182,9 +183,8 @@ img{max-width:100%}
 .u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:#059669}
 
 @media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:900px){
-  .site-hdr{height:72px}
-  .site-hdr__nav,.site-hdr__end{display:none}
+@media (max-width:680px){
+  .site-hdr__nav,.site-hdr__lang{display:none}
   .site-hdr__burger{display:flex}
 }
 @media (max-width:640px){
@@ -195,7 +195,7 @@ img{max-width:100%}
 }
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
-</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__mark" href="/"><b>AGGELOS</b><i></i><em>MOUZAKITIS</em></a><nav class="site-hdr__nav"><a href="/">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/blog/" hreflang="el">Ελληνικά</a><a class="pill pill--light" href="/startingdiagnostic/"><span>START</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header></div>
+</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/blog/" hreflang="el">Ελληνικά</a><a class="hdr-cta" href="/startingdiagnostic/"><span>APPLY</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header></div>
   <div id="content-area">
     <div class="article-wrap">
       <a href="/blog/" class="top-back">← Writing</a>
@@ -239,7 +239,7 @@ img{max-width:100%}
         <p>That process is slower and less dramatic than it sounds. But it’s the only version of high performance that doesn’t eventually eat the person alive.</p>
         <p>_ **</p>
       </article>
-      <footer class="article-footer">
+      <div class="article-footer">
         <div class="author-bio" style="display:flex;gap:1rem;align-items:flex-start;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(40,39,38,0.12);"><img src="https://aggelosmouzakitis.com/img/aggelos.webp" alt="Aggelos Mouzakitis" width="48" height="48" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;display:block;"><p style="font-size:13px;color:#666;line-height:1.7;margin:0;"><strong style="color:#282726;font-weight:400;border-bottom:1px solid rgba(40,39,38,.3);">Aggelos Mouzakitis</strong> is a licensed psychotherapist (BACP) and advisor for tech founders and solopreneurs, with 18+ years in product and growth. He works the business problem in front of you and the pattern underneath it at the same time. <a href="/" style="color:#059669;">More on how I work →</a></p></div>
         
         <p class="related-service" style="font-size:15px;color:#666;margin-bottom:1rem;line-height:1.7;">Recognise this pattern? <a href="/founders/" style="color:#059669;">Advisory for founders →</a></p>
@@ -248,7 +248,7 @@ img{max-width:100%}
         <a href="mailto:aggelos.mouzakitis@gmail.com?subject=15-minute%20fit%20call" class="cta-btn">Book a fit call</a>
         <br>
         <a href="/blog/" class="back-link">← Back to writing</a>
-      </footer>
+      </div>
     </div>
   </div>
 </div>

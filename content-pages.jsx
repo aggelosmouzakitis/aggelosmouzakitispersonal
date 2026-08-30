@@ -78,7 +78,7 @@ function FaqItem({ q, children }) {
 function Testimonial({ quote, who }) {
   return React.createElement('blockquote', { style: { margin: '0 0 1.6rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(5,150,105,0.35)' } },
     React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.8, color: '#282726', marginBottom: '.5rem' } }, '\u201C' + quote + '\u201D'),
-    React.createElement('footer', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, who)
+    React.createElement('div', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, who)
   );
 }
 function Testimonials({ items, mob, label }) {
@@ -147,6 +147,10 @@ const FOOTER_COLS_BY_LANG = {
 const FOOTER_COPYLINE = { en: '© Aggelos Mouzakitis · Business Growth Advisor + Licensed Psychotherapist', el: '© Άγγελος Μουζακίτης · Business Growth Advisor + Ψυχοθεραπευτής' };
 
 function SiteFooter({ mob, lang = 'en' }) {
+  // Legacy footer retired: the shared SiteFooterX (site-chrome) now renders the
+  // single footer on every page via the universal shell. Rendering null here
+  // removes the duplicate footer from every wrapped legacy component.
+  return null;
   const FOOTER_COLS = FOOTER_COLS_BY_LANG[lang] || FOOTER_COLS_BY_LANG.en;
   const wrap = { marginTop: mob ? '3.5rem' : '5rem', paddingTop: mob ? '2.5rem' : '3.25rem', borderTop: `1px solid ${C.sepBorder}` };
   const cols = { display: mob ? 'block' : 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2.5rem' };
@@ -920,7 +924,7 @@ function ReviewCard({ t, lang, toggleLabel }) {
   const who = el ? t.wEl : t.w;
   return React.createElement('blockquote', { style: { breakInside: 'avoid', margin: '0 0 1.9rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(5,150,105,0.35)' } },
     React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.8, color: '#282726', margin: '0 0 .5rem' } }, '“' + quote + '”'),
-    React.createElement('footer', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, who),
+    React.createElement('div', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, who),
     el && React.createElement('button', {
       onClick: () => setOpen(!open),
       'aria-expanded': open ? 'true' : 'false',

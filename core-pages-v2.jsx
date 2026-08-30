@@ -12,12 +12,21 @@ const arr = (x) => (Array.isArray(x) ? x : []);
 // ─── Homepage copy — verbatim from Homepage.dc.html (mockup content object) ────
 const HOME_V2 = {
   en: {
-    heroL1: 'Hi, I’m', heroL2: 'Aggelos.',
+    eyebrow: 'BUSINESS & CAREER ADVISOR · BACP-REGISTERED PSYCHOTHERAPIST',
+    intro: 'Hi, I’m Aggelos.',
+    h1pre: 'Practical help for the business, the career and ',
+    h1human: 'the person',
+    h1post: ' behind them.',
+    support: 'For people who are good at what they do and have reached something that more work alone won’t fix.',
+    mLabel: 'THE WHOLE POINT',
+    mMuted: 'You know your work.',
+    mGreenPre: 'Now let’s make your career or business ',
+    mMark: 'work for you.',
     splitIntro: 'You won’t have to choose between practical advice and psychological depth.',
     leftH: 'WHAT WE CHANGE',
-    leftP: 'The offer, marketing, career move, client mix or the way the business runs.',
+    leftP: 'We can work on the offer, marketing, career move, client mix or the way the business runs.',
     rightH: 'WHAT GETS IN THE WAY',
-    rightP: 'Fear, shame, avoidance or pressure at home may be shaping what you do. We work there too.',
+    rightP: 'If fear, shame, avoidance or pressure at home is shaping what you do, we work there too.',
     opinionL1: 'YOU WILL GET', opinionL2: 'AN OPINION.',
     opinionParas: [
       'I ask enough questions to understand the situation, then tell you what I think.',
@@ -25,7 +34,7 @@ const HOME_V2 = {
       'You can tell me the part you normally edit out. I will not think less of you. I will not let you bullshit yourself either.',
     ],
     opinionQuote: '“I left with more than advice. I left understanding what the problem actually was.”',
-    contMarker: '03 / IF WE CONTINUE',
+    contNum: '03', contLabel: '/ IF WE CONTINUE',
     contH: 'We agree on one concrete outcome and how long we will work towards it.',
     contP: 'We meet weekly or every other week, and you have WhatsApp access between sessions.',
     mediaIntro: 'Want to see how I think?',
@@ -35,12 +44,21 @@ const HOME_V2 = {
     contAlt: 'Aggelos Mouzakitis',
   },
   el: {
-    heroL1: 'Γεια, είμαι', heroL2: 'ο Άγγελος.',
+    eyebrow: 'ΣΥΜΒΟΥΛΟΣ ΕΠΙΧΕΙΡΗΣΕΩΝ & ΚΑΡΙΕΡΑΣ · ΣΥΜΒΟΥΛΟΣ ΨΥΧΙΚΗΣ ΥΓΕΙΑΣ',
+    intro: 'Γεια, είμαι ο Άγγελος.',
+    h1pre: 'Πρακτική βοήθεια για την επιχείρηση, την καριέρα και ',
+    h1human: 'τον άνθρωπο',
+    h1post: ' πίσω από όλα αυτά.',
+    support: 'Για ανθρώπους που είναι καλοί σε αυτό που κάνουν και έχουν φτάσει σε κάτι που δεν λύνεται μόνο με περισσότερη δουλειά.',
+    mLabel: 'ΤΟ ΖΗΤΟΥΜΕΝΟ',
+    mMuted: 'Ξέρεις καλά τη δουλειά σου.',
+    mGreenPre: 'Πάμε να κάνουμε την καριέρα ή την επιχείρησή σου ',
+    mMark: 'να δουλεύει για σένα.',
     splitIntro: 'Δεν χρειάζεται να διαλέξεις αν το θέμα είναι επαγγελματικό ή προσωπικό.',
     leftH: 'ΤΙ ΑΛΛΑΖΟΥΜΕ',
-    leftP: 'Το offer, το marketing, η επόμενη κίνηση στην καριέρα σου, οι πελάτες ή ο τρόπος που λειτουργεί η επιχείρησή σου.',
+    leftP: 'Μπορούμε να δουλέψουμε το offer, το marketing, την επόμενη κίνηση στην καριέρα σου, τους πελάτες ή τον τρόπο που λειτουργεί η επιχείρησή σου.',
     rightH: 'ΤΙ ΜΠΑΙΝΕΙ ΣΤΗ ΜΕΣΗ',
-    rightP: 'Ο φόβος, η ντροπή, η αποφυγή ή η πίεση στο σπίτι μπορεί να επηρεάζουν τη δουλειά και τις αποφάσεις σου. Πιάνουμε και αυτό το κομμάτι.',
+    rightP: 'Αν ο φόβος, η ντροπή, η αποφυγή ή η πίεση στο σπίτι επηρεάζουν τη δουλειά και τις αποφάσεις σου, πιάνουμε και αυτό το κομμάτι.',
     opinionL1: 'ΘΑ ΣΟΥ ΠΩ', opinionL2: 'ΤΗ ΓΝΩΜΗ ΜΟΥ.',
     opinionParas: [
       'Θα κάνω όσες ερωτήσεις χρειαστούν για να καταλάβω τι συμβαίνει. Μετά θα σου πω πώς το βλέπω.',
@@ -48,7 +66,7 @@ const HOME_V2 = {
       'Μπορείς να μου πεις και αυτό που συνήθως αφήνεις απ’ έξω. Δεν θα σε δω διαφορετικά. Δεν θα σε αφήσω όμως να λες μαλακίες στον εαυτό σου.',
     ],
     opinionQuote: '«Έφυγα με κάτι περισσότερο από συμβουλές. Έφυγα έχοντας καταλάβει ποιο ήταν πραγματικά το πρόβλημα.»',
-    contMarker: '03 / ΑΝ ΣΥΝΕΧΙΣΟΥΜΕ',
+    contNum: '03', contLabel: '/ ΑΝ ΣΥΝΕΧΙΣΟΥΜΕ',
     contH: 'Συμφωνούμε τι ακριβώς θέλεις να πετύχεις και για πόσο θα δουλέψουμε πάνω σε αυτό.',
     contP: 'Μιλάμε κάθε εβδομάδα και μπορείς να μου γράφεις στο WhatsApp ανάμεσα στις συναντήσεις.',
     mediaIntro: 'Θέλεις να δεις πώς σκέφτομαι;',
@@ -61,46 +79,49 @@ const HOME_V2 = {
 
 // ─── Page-section CSS ────────────────────────────────────────────────────────
 const PAGE_V2_CSS = `
-/* ── Home hero — copy left, horizontal photograph right (brief §2 geometry) ── */
-.home-hero{background:${V2.paper};padding-block:72px}
-.home-hero__grid{min-height:680px;display:grid;grid-template-columns:minmax(0,1fr) minmax(520px,600px);gap:clamp(40px,4vw,56px);align-items:center}
-.home-hero__copy{min-width:0}
-.home-hero__title{margin:0;font-family:${V2.display};font-weight:800;line-height:0.86;letter-spacing:-0.06em;color:${V2.ink};text-wrap:balance}
-.home-hero__title span{display:block}
-html[lang="en"] .home-hero__title{font-size:clamp(116px,9.4vw,144px)}
-html[lang="el"] .home-hero__title{font-size:clamp(96px,7.8vw,118px);letter-spacing:-0.055em}
-.home-hero__roles{margin-top:32px;padding-left:20px;border-left:3px solid ${V2.green};font-size:20px;font-weight:600;line-height:1.45;color:${V2.ink2}}
-.home-hero__photo{position:relative;width:min(100%,600px);margin:0;padding-left:12px;padding-bottom:12px;justify-self:end}
-.home-hero__photo img{position:relative;z-index:2;display:block;width:100%;height:auto;aspect-ratio:3 / 2;object-fit:cover;object-position:50% 50%;border-radius:0;filter:grayscale(100%) contrast(1.06)}
-.home-hero__photo span.v{position:absolute;z-index:1;left:0;top:28px;bottom:0;width:12px;background:${V2.green}}
-.home-hero__photo span.h{position:absolute;z-index:1;left:0;right:28px;bottom:0;height:12px;background:${V2.green}}
-@media (min-width:1120px) and (max-width:1319px){
-  .home-hero__grid{grid-template-columns:minmax(0,1fr) minmax(440px,520px)}
+/* ── Home hero — copy left, circular photograph right (approved visual pass) ── */
+.home-hero{background:${V2.paper};color:${V2.heroInk}}
+.home-hero__grid{max-width:1280px;margin-inline:auto;min-height:444px;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(260px,0.86fr);align-items:center;gap:clamp(34px,4vw,64px);padding:clamp(48px,5vw,72px) clamp(24px,5vw,72px)}
+.home-hero__copy{min-width:0;color:${V2.heroInk}}
+.home-hero__eyebrow{max-width:520px;color:${V2.green};font-family:${V2.display};font-size:12px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
+.home-hero__intro{margin:14px 0 15px;color:${V2.heroInk};font-family:${V2.display};font-size:16px;font-weight:400;line-height:1.3}
+.home-hero__title{max-width:600px;margin:0 0 22px;font-family:"Archivo Black",${V2.display};font-weight:400;line-height:0.94;letter-spacing:-0.065em;color:${V2.heroInk}}
+html[lang="en"] .home-hero__title{font-size:clamp(48px,5vw,72px)}
+html[lang="el"] .home-hero__title{font-size:clamp(40px,4vw,58px)}
+.home-hero__title .human{position:relative;z-index:0;white-space:nowrap}
+.home-hero__title .human::after{content:"";position:absolute;z-index:-1;left:-0.03em;right:-0.03em;bottom:0.04em;height:0.16em;background:${V2.green}}
+.home-hero__support{max-width:505px;margin:0 0 25px;color:${V2.heroInk};font-family:${V2.display};font-size:17px;font-weight:400;line-height:1.48}
+.home-hero__photo{position:relative;width:min(100%,clamp(300px,30vw,430px));aspect-ratio:1;justify-self:center}
+.home-hero__photo::before{content:"";position:absolute;inset:8% -3% -2% 9%;border-radius:50%;background:${V2.green}}
+.home-hero__frame{position:absolute;inset:0;overflow:hidden;border-radius:50%}
+.home-hero__frame img{width:100%;height:100%;object-fit:cover;object-position:56% 44%;transform:scale(1.58);filter:grayscale(1) contrast(1.08)}
+@media (max-width:680px){
+  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:38px 20px 44px;min-height:0}
+  html[lang="en"] .home-hero__title{font-size:clamp(42px,12vw,58px)}
+  html[lang="el"] .home-hero__title{font-size:clamp(36px,10vw,50px)}
+  .home-hero__photo{width:min(78%,300px);justify-self:start}
 }
-@media (max-width:1119px){
-  .home-hero{padding-block:64px 72px}
-  .home-hero__grid{min-height:0;grid-template-columns:1fr;gap:44px;align-items:start}
-  .home-hero__photo{width:min(100%,760px);justify-self:start}
-  html[lang="en"] .home-hero__title{font-size:clamp(80px,11vw,120px)}
-  html[lang="el"] .home-hero__title{font-size:clamp(68px,9.5vw,104px)}
-}
-@media (max-width:600px){
-  .home-hero{padding-block:48px 60px}
-  .home-hero__grid{gap:32px}
-  html[lang="en"] .home-hero__title{font-size:clamp(58px,16vw,72px);line-height:0.9}
-  html[lang="el"] .home-hero__title{font-size:clamp(50px,14vw,64px);line-height:0.92}
-  .home-hero__roles{margin-top:24px;font-size:16px}
-  .home-hero__photo{width:100%;padding-left:8px;padding-bottom:8px}
-  .home-hero__photo span.v{top:20px;width:8px}
-  .home-hero__photo span.h{height:8px}
-}
+
+/* ── Manifesto — "The whole point" (full-width dark) ── */
+.home-manifesto{width:100%;background:${V2.ink}}
+.home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(48px,5vw,68px) clamp(24px,5vw,72px)}
+.home-manifesto__label{margin-bottom:17px;color:${V2.green};font-family:${V2.display};font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
+.home-manifesto__copy{font-family:"Archivo Black",${V2.display};font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
+.home-manifesto__muted,.home-manifesto__green{display:block}
+.home-manifesto__muted{color:${V2.greyOnDark}}
+.home-manifesto__green{color:${V2.green}}
+.home-manifesto__copy mark{padding:0 0.08em 0.02em;background:${V2.paper};color:${V2.ink};box-decoration-break:clone;-webkit-box-decoration-break:clone}
+@media (max-width:680px){.home-manifesto__inner{padding:40px 20px 46px}.home-manifesto__copy{font-size:clamp(34px,10vw,48px)}}
 
 /* ── Home dark canvas sections ── */
 .home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(64px,8vw,96px)}
-.sec__n{font-size:13px;font-weight:700;letter-spacing:0.12em;color:${V2.green}}
-.sec__h{margin:16px 0 48px;max-width:19ch;font-family:${V2.display};font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
-.sec__h2l{margin:16px 0 48px;font-family:${V2.display};font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
+.sec__n{font-family:${V2.display};font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:${V2.green}}
+.sec__h{margin:22px 0 48px;max-width:19ch;font-family:${V2.display};font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.sec__h2l{margin:22px 0 48px;font-family:${V2.display};font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
 .sec__h2l span{display:block}
+.cont-marker{display:flex;align-items:baseline;gap:10px}
+.cont-marker .n{font-family:${V2.display};font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:${V2.green}}
+.cont-marker .lbl{font-family:${V2.display};font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:${V2.green}}
 
 .split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:24px;align-items:stretch}
 .split__cell{height:100%;min-height:360px;padding:clamp(32px,4.5vw,56px);border-radius:12px;display:grid;grid-template-rows:auto 1fr;align-content:start;gap:24px}
@@ -200,26 +221,42 @@ function HomePageV2({ lang = 'en' }) {
     React.createElement(window.SiteHeader, { page: 'home', lang }),
     React.createElement('main', null,
 
-      // Hero
+      // Hero — eyebrow, intro, positioning H1, supporting line, CTA + circular photo
       React.createElement('section', { className: 'home-hero' },
-        React.createElement('div', { className: 'site-container home-hero__grid' },
+        React.createElement('div', { className: 'home-hero__grid' },
           React.createElement('div', { className: 'home-hero__copy' },
+            React.createElement('div', { className: 'home-hero__eyebrow' }, c.eyebrow),
+            React.createElement('div', { className: 'home-hero__intro' }, c.intro),
             React.createElement('h1', { className: 'home-hero__title' },
-              React.createElement('span', null, c.heroL1),
-              React.createElement('span', null, c.heroL2)
+              c.h1pre,
+              React.createElement('span', { className: 'human' }, c.h1human),
+              c.h1post
             ),
-            React.createElement('div', { className: 'home-hero__roles' },
-              React.createElement('div', null, t.role1),
-              React.createElement('div', null, t.role2)
-            )
+            React.createElement('p', { className: 'home-hero__support' }, c.support),
+            React.createElement('a', { className: 'hero-cta', href: window.cPath('diagnostic', lang) },
+              React.createElement('span', null, t.ctaBtn), React.createElement('span', null, '→'))
           ),
           React.createElement('figure', { className: 'home-hero__photo' },
-            React.createElement('span', { className: 'v' }),
-            React.createElement('span', { className: 'h' }),
-            React.createElement('img', {
-              src: '/img/aggelos-homepage.webp', alt: 'Aggelos Mouzakitis',
-              width: 1560, height: 1040, loading: 'eager', fetchpriority: 'high', decoding: 'async',
-            })
+            React.createElement('div', { className: 'home-hero__frame' },
+              React.createElement('img', {
+                src: '/img/aggelos-homepage.webp', alt: 'Aggelos Mouzakitis',
+                width: 1560, height: 1040, loading: 'eager', fetchpriority: 'high', decoding: 'async',
+              })
+            )
+          )
+        )
+      ),
+
+      // Manifesto — "The whole point"
+      React.createElement('section', { className: 'home-manifesto' },
+        React.createElement('div', { className: 'home-manifesto__inner' },
+          React.createElement('div', { className: 'home-manifesto__label' }, c.mLabel),
+          React.createElement('div', { className: 'home-manifesto__copy' },
+            React.createElement('span', { className: 'home-manifesto__muted' }, c.mMuted),
+            React.createElement('span', { className: 'home-manifesto__green' },
+              c.mGreenPre,
+              React.createElement('mark', null, c.mMark)
+            )
           )
         )
       ),
@@ -267,7 +304,10 @@ function HomePageV2({ lang = 'en' }) {
           React.createElement('div', { className: 'site-container' },
             React.createElement('div', { className: 'cont' },
               React.createElement('div', { className: 'cont__in' },
-                React.createElement('div', { className: 'sec__n' }, c.contMarker),
+                React.createElement('div', { className: 'cont-marker' },
+                  React.createElement('span', { className: 'n' }, c.contNum),
+                  React.createElement('span', { className: 'lbl' }, c.contLabel)
+                ),
                 React.createElement('h2', { className: 'cont__h' }, c.contH),
                 React.createElement('p', null, c.contP)
               )
