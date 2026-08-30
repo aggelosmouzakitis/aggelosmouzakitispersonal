@@ -209,118 +209,142 @@ img{max-width:100%}
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
 </style><style>
-/* ── Home hero — copy left, circular photograph right (approved visual pass) ── */
-.home-hero{background:#F3F0E8;color:#111315}
-.home-hero__grid{max-width:1280px;margin-inline:auto;min-height:444px;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(260px,0.86fr);align-items:center;gap:clamp(34px,4vw,64px);padding:clamp(48px,5vw,72px) clamp(24px,5vw,72px)}
-.home-hero__copy{min-width:0;color:#111315}
-.home-hero__eyebrow{max-width:520px;color:#059669;font-family:var(--font-heading);font-size:12px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
-.home-hero__intro{margin:14px 0 15px;color:#111315;font-family:var(--font-heading);font-size:16px;font-weight:400;line-height:1.3}
-.home-hero__title{max-width:600px;margin:0 0 22px;font-family:var(--font-display);font-synthesis:none;font-weight:400;line-height:0.94;letter-spacing:-0.065em;color:#111315}
-html[lang="en"] .home-hero__title{font-size:clamp(48px,5vw,72px)}
-/* Archivo Black has no Greek glyphs — use Inter Tight 800 so EL matches EN weight */
-html[lang="el"] .home-hero__title{font-size:clamp(40px,4vw,58px);font-family:var(--font-heading);font-weight:800;letter-spacing:-0.05em}
-.home-hero__title .human{position:relative;z-index:0;white-space:nowrap}
-.home-hero__title .human::after{content:"";position:absolute;z-index:-1;left:-0.03em;right:-0.03em;bottom:0.04em;height:0.16em;background:#059669}
-.home-hero__support{max-width:505px;margin:0 0 25px;color:#111315;font-family:var(--font-heading);font-size:17px;font-weight:400;line-height:1.48}
-.home-hero__photo{position:relative;width:min(100%,clamp(300px,30vw,430px));aspect-ratio:1;justify-self:center}
-.home-hero__photo::before{content:"";position:absolute;inset:8% -3% -2% 9%;border-radius:50%;background:#059669}
-.home-hero__frame{position:absolute;inset:0;overflow:hidden;border-radius:50%}
-.home-hero__frame img{width:100%;height:100%;object-fit:cover;object-position:56% 44%;transform:scale(1.58);filter:grayscale(1) contrast(1.08)}
-@media (max-width:680px){
-  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:38px 20px 44px;min-height:0}
-  html[lang="en"] .home-hero__title{font-size:clamp(42px,12vw,58px)}
-  html[lang="el"] .home-hero__title{font-size:clamp(36px,10vw,50px)}
-  .home-hero__photo{width:min(78%,300px);justify-self:start}
+:root{
+  --am-paper:#f3f0e8;
+  --am-ink:#171919;
+  --am-dark:#1b1d1d;
+  --am-green:#059669;
+  --am-grey:#a5aaa6;
+  --am-container:1080px;
+  --am-gutter:clamp(24px, 5vw, 56px);
+  --am-section-space:clamp(58px, 8vw, 84px);
 }
+.amx-page{width:100%;overflow:clip;color:var(--am-ink);background:var(--am-paper);font-family:var(--font-body)}
+.amx-page,.amx-page *{box-sizing:border-box}
+.amx-container{width:min(100%, var(--am-container));margin-inline:auto;padding-inline:var(--am-gutter)}
+.amx-paper{color:var(--am-ink);background:var(--am-paper)}
+.amx-dark{color:var(--am-paper);background:var(--am-dark)}
+.amx-green{color:var(--am-ink);background:var(--am-green)}
+.amx-section{padding-block:var(--am-section-space)}
+.amx-label{margin:0;color:var(--am-green);font:700 12px/1.3 var(--font-body);letter-spacing:0.07em;text-transform:uppercase}
+.amx-display,.amx-heading,.amx-subheading{margin:0;color:inherit;font-synthesis:none}
+.amx-display{font-family:var(--font-display);font-size:clamp(42px, 6.4vw, 64px);font-weight:400;line-height:0.98;letter-spacing:-0.045em}
+html[lang^="el"] .amx-display{font-family:var(--font-heading);font-weight:800;line-height:1.04;letter-spacing:-0.035em}
+.amx-heading{font-family:var(--font-heading);font-size:clamp(34px, 5vw, 52px);font-weight:800;line-height:1;letter-spacing:-0.045em}
+html[lang^="el"] .amx-heading{line-height:1.04;letter-spacing:-0.035em}
+.amx-subheading{font-family:var(--font-heading);font-size:24px;font-weight:800;line-height:1.08;letter-spacing:-0.025em}
+html[lang^="el"] .amx-subheading{line-height:1.13;letter-spacing:-0.018em}
+.amx-body{margin:0;color:inherit;font:400 17px/1.55 var(--font-body)}
+html[lang^="el"] .amx-body{line-height:1.62}
+.amx-button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding-inline:21px;border:0;border-radius:0;color:#ffffff;background:var(--am-green);font:600 14px/1 var(--font-body);text-decoration:none}
+.amx-button:focus-visible,.amx-content-link:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+.amx-section-head{display:grid;grid-template-columns:44px minmax(0, 1fr);gap:20px;align-items:start;margin-bottom:36px}
+.amx-number{padding-top:4px;color:var(--am-green);font:800 16px/1 var(--font-heading);letter-spacing:-0.03em}
 
-/* ── Manifesto — "The whole point" (full-width dark) ── */
-.home-manifesto{width:100%;background:#1A1C1D}
-.home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(48px,5vw,68px) clamp(24px,5vw,72px)}
-.home-manifesto__label{margin-bottom:17px;color:#059669;font-family:var(--font-heading);font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
-.home-manifesto__copy{font-family:var(--font-display);font-synthesis:none;font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
-html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weight:800;letter-spacing:-0.045em}
-.home-manifesto__muted,.home-manifesto__green{display:block}
-.home-manifesto__muted{color:#9DA19E}
-.home-manifesto__green{color:#059669}
-.home-manifesto__copy mark{padding:0 0.08em 0.02em;background:#F3F0E8;color:#1A1C1D;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-@media (max-width:680px){.home-manifesto__inner{padding:40px 20px 46px}.home-manifesto__copy{font-size:clamp(34px,10vw,48px)}}
+/* HOME HERO */
+.amx-hero{display:grid;grid-template-columns:minmax(0, 1.25fr) minmax(240px, 0.75fr);gap:clamp(38px, 6vw, 72px);align-items:center;padding-block:clamp(58px, 8vw, 88px)}
+.amx-hero-copy{min-width:0}
+.amx-hero .amx-display{max-width:650px;margin-top:16px}
+.amx-hero .amx-body{max-width:610px;margin:22px 0 26px}
+.amx-hero-photo{position:relative;width:min(100%, 310px);aspect-ratio:1;justify-self:end}
+.amx-hero-photo::before{content:"";position:absolute;inset:8% -4% -2% 10%;border-radius:50%;background:var(--am-green)}
+.amx-hero-photo img{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;border-radius:50%;object-fit:cover;object-position:50% 50%;filter:grayscale(1)}
 
-/* ── Home dark canvas sections ── */
-.home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(64px,8vw,96px)}
-.sec__n{font-family:var(--font-heading);font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669}
-.sec__h{margin:22px 0 48px;max-width:19ch;font-family:var(--font-heading);font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
-.sec__h2l{margin:22px 0 48px;font-family:var(--font-heading);font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
-.sec__h2l span{display:block}
-.cont-marker{display:flex;align-items:baseline;gap:10px}
-.cont-marker .n{font-family:var(--font-heading);font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669}
-.cont-marker .lbl{font-family:var(--font-heading);font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
+/* THE WHOLE POINT */
+.amx-manifesto .amx-container{padding-block:clamp(54px, 7vw, 74px)}
+.amx-manifesto .amx-heading{max-width:880px;margin-top:16px}
+.amx-manifesto-muted{color:var(--am-grey)}
+.amx-manifesto-green{color:var(--am-green)}
 
-.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:24px;align-items:stretch}
-.split__cell{height:100%;min-height:360px;padding:clamp(32px,4.5vw,56px);border-radius:12px;display:grid;grid-template-rows:auto 1fr;align-content:start;gap:24px}
-.split__cell h3{margin:0;font-family:var(--font-heading);font-weight:800;line-height:0.98;letter-spacing:-0.035em;text-wrap:balance;white-space:nowrap}
-html[lang="en"] .split__cell h3{font-size:clamp(34px,3.2vw,44px)}
-html[lang="el"] .split__cell h3{font-size:clamp(24px,2.4vw,34px)}
-.split__cell p{margin:0;font-size:18px;line-height:1.55;max-width:40ch;text-wrap:pretty}
-.split--paper{background:#F3F0E8;color:#1A1C1D}
-.split--black{background:#050505;color:#fff}
+/* HOME 01 */
+.amx-lede{max-width:730px;margin:-14px 0 38px 64px}
+.amx-duality{position:relative;width:min(100%, 860px);min-height:485px;margin-inline:auto}
+.amx-circle{position:absolute;top:0;width:58%;aspect-ratio:1;display:flex;flex-direction:column;justify-content:center;border-radius:50%}
+.amx-circle-left{left:0;padding:52px 150px 52px 60px;color:#ffffff;background:var(--am-dark)}
+.amx-circle-right{right:0;align-items:flex-end;padding:52px 60px 52px 150px;color:var(--am-ink);background:var(--am-green);text-align:right}
+.amx-circle .amx-subheading{max-width:240px}
+.amx-circle-list{max-width:230px;margin:18px 0 0;padding:0;list-style:none;color:inherit;font:400 14px/1.65 var(--font-body)}
+.amx-overlap-photo{position:absolute;z-index:3;top:50%;left:50%;width:138px;aspect-ratio:1;transform:translate(-50%, -50%);overflow:hidden;border:8px solid var(--am-paper);border-radius:50%;background:var(--am-dark)}
+.amx-overlap-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:50% 18%}
+.amx-overlap-label{position:absolute;z-index:4;top:calc(50% + 84px);left:50%;min-width:126px;padding:8px 12px;transform:translateX(-50%);color:#ffffff;background:var(--am-dark);font:600 11px/1 var(--font-body);text-align:center;text-transform:uppercase}
 
-.opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:#F3F0E8;border-radius:12px;overflow:hidden}
-.opinion img{display:block;width:100%;height:100%;min-height:520px;object-fit:cover;object-position:42% 50%}
-.opinion__body{padding:clamp(32px,4.5vw,56px);min-width:0;display:grid;align-content:start;gap:24px}
-.opinion__body p{margin:0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
-.opinion__q{margin:8px 0 0;border-top:2px solid #059669;padding-top:24px;font-family:var(--font-heading);font-weight:750;font-size:clamp(28px,2.5vw,38px);line-height:1.2;letter-spacing:-0.035em;color:#1A1C1D;max-width:32ch;text-wrap:pretty}
+/* HOME 02 */
+.amx-opinion{display:grid;grid-template-columns:minmax(230px, 0.75fr) minmax(0, 1.25fr);margin-left:64px}
+.amx-opinion-photo{min-height:390px;overflow:hidden;background:var(--am-dark)}
+.amx-opinion-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
+.amx-opinion-copy{padding:clamp(30px, 5vw, 48px);color:var(--am-ink);background:var(--am-paper)}
+.amx-opinion-copy .amx-body + .amx-body{margin-top:18px}
+.amx-quote{margin-top:28px;padding-top:24px;border-top:2px solid var(--am-green);color:var(--am-ink);font-family:var(--font-heading);font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-0.025em}
+.amx-proof{display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));margin-top:34px;border-top:1px solid rgb(243 240 232 / 18%);border-bottom:1px solid rgb(243 240 232 / 18%)}
+.amx-proof-item{min-height:104px;display:flex;flex-direction:column;justify-content:center;padding:20px;border-right:1px solid rgb(243 240 232 / 18%)}
+.amx-proof-item:last-child{border-right:0}
+.amx-proof-value{color:var(--am-green);font:800 22px/1 var(--font-heading)}
+.amx-proof-label{margin-top:8px;color:var(--am-paper);font:400 12px/1.35 var(--font-body)}
 
-.cont{min-height:440px;background:#F3F0E8;border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
-.cont__in{max-width:760px}
-.cont__h{margin:16px 0 0;max-width:20ch;font-family:var(--font-heading);font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:#1A1C1D;text-wrap:pretty}
-.cont p{margin:24px 0 0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
+/* HOME 03 */
+.amx-engagement-grid{display:grid;grid-template-columns:44px minmax(0, 720px);gap:20px}
+.amx-engagement-copy .amx-body{max-width:680px;margin-top:24px}
 
-.rule-arrow{display:flex;align-items:center;gap:10px;width:min(320px,60%);margin:0 0 48px}
-.rule-arrow div{flex:1;height:2px;background:#059669}
-.rule-arrow span{color:#059669;line-height:1;font-size:18px}
-.media{display:grid;grid-template-columns:7fr 5fr;grid-template-rows:repeat(2,minmax(0,1fr));min-height:520px;border-radius:12px;overflow:hidden}
-.media__cell{padding:clamp(32px,3.5vw,56px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;min-width:0;transition:background .18s,filter .18s}
-.media__cell h3{margin:0;font-family:var(--font-heading);font-weight:800;line-height:0.9;letter-spacing:-0.045em}
-.media__top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
-.media__arw{font-size:38px;line-height:1;transition:transform .18s}
-.media__cell:hover .media__arw{transform:translate(5px,-5px)}
-.media__kicker{font-size:14px;font-weight:700;letter-spacing:0.12em;margin-bottom:16px}
-.media__cell p{margin:0;font-size:18px;line-height:1.55;max-width:36ch;text-wrap:pretty}
-.media__read{grid-row:1 / span 2;background:#059669;color:#fff}
-.media__read:hover{filter:brightness(0.9)}
-.media__read h3{font-size:clamp(64px,6vw,92px)}
-.media__watch{background:#050505;color:#fff}
-.media__watch:hover{background:#0e0e0e}
-.media__watch h3{font-size:clamp(44px,4vw,64px)}
-.media__watch p{font-size:17px;line-height:1.5;max-width:34ch}
-.media__follow{background:#F3F0E8;color:#1A1C1D}
-.media__follow h3{font-size:clamp(44px,4vw,64px)}
-.icon-row{display:flex;align-items:center;gap:16px}
-.icon-btn{width:48px;height:48px;border-radius:50%;background:#1A1C1D;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .18s}
-.icon-btn:hover{background:#059669;transform:translateY(-3px)}
-@media (max-width:960px){
-  .media{grid-template-columns:1fr;grid-template-rows:auto;min-height:0}
-  .media__read{grid-row:auto}.media__cell{min-height:320px}
-  .opinion{grid-template-columns:1fr}.opinion img{min-height:320px}
+/* HOME 04 */
+.amx-content-links{display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));margin-left:64px;border-top:1px solid rgb(243 240 232 / 20%)}
+.amx-content-link{min-height:190px;display:flex;flex-direction:column;justify-content:space-between;padding:26px 24px;color:var(--am-paper);border-right:1px solid rgb(243 240 232 / 20%);text-decoration:none}
+.amx-content-link:last-child{border-right:0}
+.amx-content-link .amx-body{color:var(--am-grey);font-size:15px}
+.amx-content-link .amx-body a{color:var(--am-green);text-decoration:underline;text-underline-offset:3px}
+.amx-content-arrow{color:var(--am-green);font-size:22px}
+
+/* FINAL CTA */
+.amx-final{text-align:center}
+.amx-final .amx-heading{max-width:770px;margin-inline:auto}
+.amx-final .amx-button{margin-top:28px}
+.amx-final-link{display:block;margin-top:18px;color:#626764;font:400 13px/1.4 var(--font-body)}
+
+/* WHY ME */
+.amx-why-hero{padding-block:clamp(62px, 8vw, 88px)}
+.amx-why-hero .amx-display{max-width:920px;margin-top:16px}
+.amx-why-hero .amx-body{max-width:800px;margin-top:24px}
+.amx-fact-bar{padding-block:24px}
+.amx-fact-bar .amx-body{font-weight:600}
+.amx-story-grid{display:grid;grid-template-columns:150px minmax(0, 700px);gap:36px;justify-content:center}
+.amx-story-copy .amx-body + .amx-body{margin-top:22px}
+.amx-reading-copy{max-width:750px;margin:28px 0 0 64px}
+.amx-reading-copy .amx-body + .amx-body{margin-top:20px}
+.amx-case-list{margin-left:64px;border-top:1px solid rgb(243 240 232 / 20%)}
+.amx-case{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding-block:26px;border-bottom:1px solid rgb(243 240 232 / 20%)}
+.amx-case .amx-body:last-child{color:var(--am-green)}
+
+@media (min-width: 721px) and (max-width: 840px){
+  .amx-duality{min-height:410px}
+  .amx-circle-left{padding:42px 110px 42px 42px}
+  .amx-circle-right{padding:42px 42px 42px 110px}
+  .amx-circle .amx-subheading{font-size:21px}
+  .amx-circle-list{font-size:13px}
 }
-@media (max-width:1140px){.split{grid-template-columns:1fr;grid-auto-rows:auto}.split__cell{min-height:0}}
-@media (max-width:520px){.split__cell h3,html[lang="el"] .split__cell h3{white-space:normal}}
-
-/* ── Why me ── */
-.why-hero{background:#F3F0E8;padding-block:80px 72px}
-.why-hero__grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,0.85fr);gap:64px;align-items:center}
-.why-hero__over{font-size:13px;font-weight:700;letter-spacing:0.12em;color:#059669}
-.why-hero h1{margin:16px 0 0;max-width:15ch;font-family:var(--font-heading);font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:#1A1C1D;text-wrap:balance}
-.why-hero__intro{margin:24px 0 0;max-width:56ch;font-size:19px;line-height:1.7;color:#282726}
-.why-hero__creds{margin-top:20px;font-size:15px;line-height:1.6;color:#5E6264}
-.why-hero img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 38%;border-radius:12px}
-.cred-row{display:grid;grid-template-columns:64px minmax(200px,0.7fr) 1.3fr;gap:32px;padding:28px 0;border-top:1px solid rgba(24,26,28,0.20);align-items:start}
-.cred-row:last-of-type{border-bottom:1px solid rgba(24,26,28,0.20)}
-.cred-row .n{font-family:var(--font-heading);font-size:19px;font-weight:800;color:#059669}
-.cred-row h3{margin:0;font-family:var(--font-heading);font-size:22px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:#1A1C1D}
-.cred-row p{margin:0;font-size:17px;line-height:1.6;color:#282726}
-@media (max-width:900px){.why-hero{padding-block:56px 48px}.why-hero__grid{grid-template-columns:1fr;gap:36px}}
-@media (max-width:700px){.cred-row{grid-template-columns:1fr;gap:10px}.why-hero h1{font-size:clamp(40px,10vw,52px)}}
+@media (max-width: 720px){
+  .amx-hero{grid-template-columns:1fr}
+  .amx-hero-photo{width:min(72%, 280px);justify-self:center}
+  .amx-section-head,.amx-engagement-grid{grid-template-columns:1fr;gap:14px}
+  .amx-lede,.amx-opinion,.amx-content-links,.amx-reading-copy,.amx-case-list{margin-left:0}
+  .amx-opinion,.amx-proof,.amx-content-links,.amx-case{grid-template-columns:1fr}
+  .amx-proof-item,.amx-content-link{border-right:0;border-bottom:1px solid rgb(243 240 232 / 18%)}
+  .amx-proof-item:last-child,.amx-content-link:last-child{border-bottom:0}
+  .amx-opinion-photo{min-height:320px}
+  .amx-story-grid{grid-template-columns:1fr;gap:18px}
+  .amx-duality{min-height:clamp(510px, 95vw, 650px)}
+  .amx-circle{width:min(90%, 430px);left:50%;right:auto;transform:translateX(-50%)}
+  .amx-circle-left{top:0;padding:46px 115px 110px 46px}
+  .amx-circle-right{top:clamp(170px, 32vw, 235px);padding:115px 46px 46px 115px}
+  .amx-overlap-photo{top:clamp(225px, 46vw, 331px)}
+  .amx-overlap-label{top:clamp(307px, calc(46vw + 82px), 413px)}
+}
+@media (max-width: 470px){
+  .amx-display{font-size:clamp(38px, 12vw, 48px)}
+  .amx-heading{font-size:clamp(32px, 10vw, 42px)}
+  .amx-circle .amx-subheading{font-size:20px}
+  .amx-circle-list{font-size:12px}
+  .amx-circle-left{padding-left:34px;padding-right:100px}
+  .amx-circle-right{padding-right:34px;padding-left:100px}
+}
 
 /* ── Reviews (no giant opening testimonial) ── */
 .rev-hero{background:#F3F0E8;padding-block:80px 56px}
@@ -342,11 +366,11 @@ html[lang="el"] .split__cell h3{font-size:clamp(24px,2.4vw,34px)}
 .rev-avatar__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)}
 @media (max-width:900px){.rev-hero{padding-block:56px 48px}.rev-hero__grid{grid-template-columns:1fr;gap:28px}}
 @media (max-width:800px){.rev-grid{grid-template-columns:1fr}.rev-lead p{font-size:22px}}
-</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/" aria-current="page">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/el/" hreflang="el">Ελληνικά</a><a class="hdr-cta" href="/startingdiagnostic/"><span>APPLY</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main><section class="home-hero"><div class="home-hero__grid"><div class="home-hero__copy"><div class="home-hero__eyebrow">BUSINESS &amp; CAREER ADVISOR · BACP-REGISTERED PSYCHOTHERAPIST</div><div class="home-hero__intro">Hi, I’m Aggelos.</div><h1 class="home-hero__title">Practical help for the business, the career and <span class="human">the person</span> behind them.</h1><p class="home-hero__support">For people who are good at what they do and have reached something that more work alone won’t fix.</p><a class="hero-cta" href="/startingdiagnostic/"><span>Apply for a working session</span><span>→</span></a></div><figure class="home-hero__photo"><div class="home-hero__frame"><img src="/img/aggelos-homepage.webp" alt="Aggelos Mouzakitis" width="1560" height="1040" loading="eager" fetchpriority="high" decoding="async"></div></figure></div></section><section class="home-manifesto"><div class="home-manifesto__inner"><div class="home-manifesto__label">THE WHOLE POINT</div><div class="home-manifesto__copy"><span class="home-manifesto__muted">You know your work.</span><span class="home-manifesto__green">Now let’s make your career or business <mark>work for you.</mark></span></div></div></section><div class="home-flow"><section><div class="site-container"><div class="sec__n">01</div><h2 class="sec__h">You won’t have to choose between practical advice and psychological depth.</h2><div class="split"><div class="split__cell split--paper"><h3>WHAT WE CHANGE</h3><p>We can work on the offer, marketing, career move, client mix or the way the business runs.</p></div><div class="split__cell split--black"><h3>WHAT GETS IN THE WAY</h3><p>If fear, shame, avoidance or pressure at home is shaping what you do, we work there too.</p></div></div></div></section><section><div class="site-container"><div class="sec__n">02</div><h2 class="sec__h2l"><span>YOU WILL GET</span><span>AN OPINION.</span></h2><div class="opinion"><img src="/img/aggelos-continuation.jpeg" alt="Aggelos Mouzakitis" width="900" height="1125" loading="lazy" decoding="async"><div class="opinion__body"><p>I ask enough questions to understand the situation, then tell you what I think.</p><p>If I see a practical move, I suggest it. If your story does not add up, I say so.</p><p>You can tell me the part you normally edit out. I will not think less of you. I will not let you bullshit yourself either.</p><blockquote class="opinion__q">“I left with more than advice. I left understanding what the problem actually was.”</blockquote></div></div></div></section><section><div class="site-container"><div class="cont"><div class="cont__in"><div class="cont-marker"><span class="n">03</span><span class="lbl">/ IF WE CONTINUE</span></div><h2 class="cont__h">We agree on one concrete outcome and how long we will work towards it.</h2><p>We meet weekly or every other week, and you have WhatsApp access between sessions.</p></div></div></div></section><section><div class="site-container"><div class="sec__n">04</div><h2 class="sec__h" style="margin-bottom: 24px;">Want to see how I think?</h2><div class="rule-arrow"><div></div><span>→</span></div><div class="media"><a class="media__cell media__read" href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer"><div class="media__top"><h3>READ</h3><span class="media__arw">↗</span></div><div><div class="media__kicker">UNDISGUISED</div><p>Essays about work, ambition, psychology and where they overlap.</p></div></a><a class="media__cell media__watch" href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer"><div class="media__top"><h3>WATCH</h3><span class="media__arw" style="font-size: 32px;">↗</span></div><div><div class="media__kicker">YOUTUBE</div><p>Short videos, longer conversations and the occasional useful rant.</p></div></a><div class="media__cell media__follow"><h3>FOLLOW</h3><div class="icon-row"><a class="icon-btn" href="https://linkedin.com/in/growth-product-manager/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a><a class="icon-btn" href="https://www.instagram.com/_aggelosmouzakitis_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg></a><a class="icon-btn" href="https://www.tiktok.com/@aggelosmouz" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg></a></div></div></div></div></section></div><section class="cta-strip"><div class="site-container"><h2 class="cta-strip__h">IF WORKING HARDER WAS GOING TO FIX THIS, IT PROBABLY WOULD HAVE BY NOW.</h2><div><a class="pill pill--green" href="/startingdiagnostic/"><span>Apply for a working session</span><span>→</span></a></div><a class="cta-strip__sub" href="/confidentiality/"><span>Confidentiality</span><span>→</span></a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__brand" style="font-size: 20px;">Aggelos<span>.</span></div><div class="site-ftr__roles"><div>Private business &amp; career advisor</div><div style="margin-top: 8px;">BACP-registered psychotherapist</div></div></div><nav><div class="site-ftr__head">NAVIGATE</div><a href="/">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a><a href="/startingdiagnostic/">Apply</a></nav><nav><div class="site-ftr__head">CONTENT</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Articles ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a></nav><nav><div class="site-ftr__head">FOLLOW</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. All rights reserved.</div><nav><a href="/confidentiality/">Confidentiality</a><a href="/confidentiality/#terms">Terms</a><a href="/confidentiality/#privacy">Privacy</a></nav></div></div></footer></div>
+</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/" aria-current="page">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/el/" hreflang="el">Ελληνικά</a><a class="hdr-cta" href="/startingdiagnostic/"><span>APPLY</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main class="amx-page"><section class="amx-paper"><div class="amx-container amx-hero"><div class="amx-hero-copy"><p class="amx-label">BUSINESS &amp; CAREER ADVISER · BACP-REGISTERED PSYCHOTHERAPIST</p><h1 class="amx-display">Business strategy. Personal psychology. Same conversation.</h1><p class="amx-body">Offers, marketing, clients and career moves — plus the fear, avoidance and relationships shaping them.</p><a class="amx-button" href="/startingdiagnostic/">Apply for a working session →</a></div><div class="amx-hero-photo"><img src="/img/aggelos-homepage.webp" alt="Aggelos Mouzakitis speaking on stage" width="620" height="620" loading="eager" fetchpriority="high" decoding="async"></div></div></section><section class="amx-dark amx-manifesto"><div class="amx-container"><p class="amx-label">THE WHOLE POINT</p><h2 class="amx-heading"><span class="amx-manifesto-muted">You know your work. </span><span class="amx-manifesto-green">Now let’s make your career or business work for you.</span></h2></div></section><section class="amx-paper amx-section"><div class="amx-container"><div class="amx-section-head"><div class="amx-number">01</div><h2 class="amx-heading">A weak offer needs business advice. Avoiding a good one is a different problem.</h2></div><p class="amx-body amx-lede">The same goes for the career move, the client you need to fire or the conversation you keep postponing.</p><div class="amx-duality"><div class="amx-circle amx-circle-left"><h3 class="amx-subheading">Business &amp; career</h3><ul class="amx-circle-list"><li>Offer, positioning &amp; GTM</li><li>Pricing, sales &amp; clients</li><li>Promotions &amp; career moves</li></ul></div><div class="amx-circle amx-circle-right"><h3 class="amx-subheading">Psychology &amp; relationships</h3><ul class="amx-circle-list"><li>Fear, shame &amp; avoidance</li><li>Self-criticism &amp; procrastination</li><li>Boundaries at work &amp; home</li></ul></div><div class="amx-overlap-photo"><img src="/img/aggelos-overlap.webp" alt="" width="138" height="138" loading="lazy" decoding="async"></div><div class="amx-overlap-label">Aggelos</div></div></div></section><section class="amx-dark amx-section"><div class="amx-container"><div class="amx-section-head"><div class="amx-number">02</div><h2 class="amx-heading">You will get an opinion.</h2></div><div class="amx-opinion"><div class="amx-opinion-photo"><img src="/img/aggelos-continuation.jpeg" alt="" width="520" height="650" loading="lazy" decoding="async"></div><div class="amx-opinion-copy"><p class="amx-body">I ask enough questions to understand the situation, then I tell you what I think. If the offer is weak, we fix it. If the offer is fine and you are avoiding the sales work, we deal with the avoidance.</p><p class="amx-body">You can say what you normally leave out. I will not judge you, and I will not pretend your explanation makes sense when it does not.</p><blockquote class="amx-quote">“I left with more than advice. I left understanding what the problem actually was.”</blockquote></div></div><div class="amx-proof"><div class="amx-proof-item"><div class="amx-proof-value">7 years</div><div class="amx-proof-label">running a growth consultancy</div></div><div class="amx-proof-item"><div class="amx-proof-value">100+</div><div class="amx-proof-label">technology companies</div></div><div class="amx-proof-item"><div class="amx-proof-value">100+</div><div class="amx-proof-label">founder mentoring sessions</div></div><div class="amx-proof-item"><div class="amx-proof-value">BACP</div><div class="amx-proof-label">registered psychotherapist</div></div></div></div></section><section class="amx-paper amx-section"><div class="amx-container amx-engagement-grid"><div class="amx-number">03</div><div class="amx-engagement-copy"><h2 class="amx-heading">We agree on one outcome and a fixed timeframe.</h2><p class="amx-body">You have access to me in the calls and on WhatsApp between them. The work is built around the outcome, not a pre-written programme.</p></div></div></section><section class="amx-dark amx-section"><div class="amx-container"><div class="amx-section-head"><div class="amx-number">04</div><h2 class="amx-heading">Want to see how I think?</h2></div><div class="amx-content-links"><a class="amx-content-link" href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer"><div><h3 class="amx-subheading">Read</h3><p class="amx-body">Essays about work, ambition and psychology.</p></div><span class="amx-content-arrow">↗</span></a><a class="amx-content-link" href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer"><div><h3 class="amx-subheading">Watch</h3><p class="amx-body">Videos, conversations and useful rants.</p></div><span class="amx-content-arrow">↗</span></a><div class="amx-content-link"><div><h3 class="amx-subheading">Follow</h3><p class="amx-body"><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer">LinkedIn</a>, <a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer">Instagram</a> and <a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer">TikTok</a>.</p></div></div></div></div></section><section class="amx-paper amx-section amx-final"><div class="amx-container"><h2 class="amx-heading">If working harder was going to fix this, it probably would have by now.</h2><a class="amx-button" href="/startingdiagnostic/">Apply for a working session →</a><a class="amx-final-link" href="/confidentiality/">Confidentiality →</a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__brand" style="font-size: 20px;">Aggelos<span>.</span></div><div class="site-ftr__roles"><div>Private business &amp; career advisor</div><div style="margin-top: 8px;">BACP-registered psychotherapist</div></div></div><nav><div class="site-ftr__head">NAVIGATE</div><a href="/">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a><a href="/startingdiagnostic/">Apply</a></nav><nav><div class="site-ftr__head">CONTENT</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Articles ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a></nav><nav><div class="site-ftr__head">FOLLOW</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. All rights reserved.</div><nav><a href="/confidentiality/">Confidentiality</a><a href="/confidentiality/#terms">Terms</a><a href="/confidentiality/#privacy">Privacy</a></nav></div></div></footer></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/site-chrome.js?v=2"></script>
-<script src="/core-pages-v2.js?v=2"></script>
+<script src="/core-pages-v2.js?v=3"></script>
 <script src="/content-pages.js?v=35"></script>
 <script>renderApp("home", "en");</script>
 </body>
