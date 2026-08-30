@@ -19,8 +19,12 @@ const SITE = {
   meta: '#5E6264',
   rule: 'rgba(24,26,28,0.20)',
   ruleOnDark: 'rgba(255,255,255,0.16)',
-  display: '"Inter Tight","Inter",system-ui,sans-serif',
-  body: '"Inter",system-ui,sans-serif'
+  // Type roles map onto global CSS custom properties (defined in :root below and
+  // in the core-shell <head>). display = heading face (Inter Tight); archivo =
+  // display face (Archivo Black EN / Inter Tight 800 EL); body = Inter.
+  display: 'var(--font-heading)',
+  body: 'var(--font-body)',
+  archivo: 'var(--font-display)'
 };
 
 // Bilingual route map — mirrors CORE_PATHS in content-pages.jsx.
@@ -126,6 +130,12 @@ const cT = lang => CHROME_T[lang] || CHROME_T.en;
 // and its old accent link colour. Rather than rewrite that generator's CSS,
 // the first block below neutralises those rules with equal-or-higher specificity.
 const CHROME_CSS = `
+:root{
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-heading:"Inter Tight","Inter",system-ui,sans-serif;
+  --font-display:"Archivo Black","Inter Tight","Inter",system-ui,sans-serif;
+  --brand-green:${SITE.green};
+}
 html,body,#root{height:auto}
 #root{display:block;overflow:visible}
 #sidebar{display:none!important}
@@ -167,7 +177,7 @@ img{max-width:100%}
 .hero-cta:hover{filter:brightness(0.9);gap:13px}
 
 .cta-strip{padding-block:clamp(72px,9vw,110px);text-align:center;background:${SITE.ink}}
-.cta-strip__h{margin:0 auto;max-width:20ch;font-family:${SITE.display};font-size:clamp(36px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.cta-strip__h{margin:0 auto;max-width:20ch;font-family:${SITE.display};font-synthesis:none;font-size:clamp(36px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
 .cta-strip .pill--green{margin-top:44px}
 .cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:${SITE.onDark};transition:gap .18s,color .18s}
 .cta-strip__sub:hover{gap:12px;color:#fff}
@@ -184,21 +194,38 @@ img{max-width:100%}
 .site-ftr__legal nav a{display:inline;margin:0}
 
 .u-hero{background:${SITE.paper};padding-block:88px 72px}
-.u-hero h1{margin:0;max-width:15ch;font-family:${SITE.display};font-size:clamp(52px,5.8vw,82px);font-weight:780;line-height:0.96;letter-spacing:-0.05em;color:${SITE.ink}}
+.u-hero h1{margin:0;max-width:15ch;font-family:${SITE.display};font-synthesis:none;font-size:clamp(52px,5.8vw,82px);font-weight:800;line-height:0.96;letter-spacing:-0.05em;color:${SITE.ink}}
 .u-hero p{max-width:65ch;margin:32px 0 0;font-size:21px;line-height:1.55;color:${SITE.ink2}}
 .u-main{background:${SITE.paper};padding-block:0 96px;color:${SITE.ink}}
-.u-read{width:min(740px,calc(100% - 40px));margin-inline:auto;font-size:19px;line-height:1.72;color:${SITE.ink}}
-.u-read h1{font-family:${SITE.display};font-size:clamp(44px,5vw,68px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;margin:0 0 32px}
-.u-read h2{margin:80px 0 24px;font-family:${SITE.display};font-size:clamp(36px,4vw,50px);font-weight:780;line-height:1.04;letter-spacing:-0.04em}
-.u-read h3{margin:48px 0 16px;font-family:${SITE.display};font-size:clamp(26px,3vw,34px);font-weight:750;line-height:1.1;letter-spacing:-0.03em}
-.u-read p + p{margin-top:24px}
-.u-read ul,.u-read ol{margin:24px 0;padding-left:24px}
-.u-read li + li{margin-top:12px}
-#main-scroll .u-read a,.u-read a{color:${SITE.green};text-decoration:underline;text-underline-offset:3px}
-.u-read blockquote{margin:48px 0;padding-left:28px;border-left:4px solid ${SITE.green};font-family:${SITE.display};font-size:28px;line-height:1.3}
-.u-read hr{border:0;border-top:1px solid ${SITE.green};opacity:.45;margin:64px 0}
-.u-read img{display:block;height:auto;margin:48px 0}
+
+/* ── Shared inner-page shell: asymmetrical editorial grid (rail | reading column | gutter) ── */
+.u-shell{max-width:1180px;margin-inline:auto;padding-inline:clamp(24px,5vw,72px);display:grid;grid-template-columns:minmax(120px,170px) minmax(0,760px) minmax(0,1fr);column-gap:clamp(28px,4vw,64px)}
+.u-shell--wide{grid-template-columns:minmax(120px,170px) minmax(0,860px) minmax(0,1fr)}
+.u-shell__rail{grid-column:1;min-width:0}
+.u-shell__rail::before{content:"";display:block;width:100%;height:3px;background:var(--brand-green,${SITE.green})}
+.u-shell__rail .u-eyebrow{display:block;margin-top:16px;font-family:${SITE.body};font-size:12px;font-weight:700;line-height:1.4;letter-spacing:0.10em;text-transform:uppercase;color:${SITE.green}}
+.u-shell__body{grid-column:2;min-width:0}
+.u-shell__gutter{grid-column:3}
+
+.u-read,.u-shell__body{font-size:19px;line-height:1.72;color:${SITE.ink}}
+.u-read{width:min(740px,calc(100% - 40px));margin-inline:auto}
+.u-read h1,.u-shell__body h1{font-family:${SITE.display};font-synthesis:none;font-size:clamp(48px,5vw,64px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;margin:0 0 32px}
+.u-read h2,.u-shell__body h2{margin:80px 0 24px;font-family:${SITE.display};font-synthesis:none;font-size:clamp(32px,3.6vw,46px);font-weight:800;line-height:1.04;letter-spacing:-0.04em}
+.u-read h3,.u-shell__body h3{margin:48px 0 16px;font-family:${SITE.display};font-synthesis:none;font-size:clamp(24px,2.8vw,32px);font-weight:750;line-height:1.1;letter-spacing:-0.03em}
+.u-read p + p,.u-shell__body p + p{margin-top:24px}
+.u-read ul,.u-read ol,.u-shell__body ul,.u-shell__body ol{margin:24px 0;padding-left:24px}
+.u-read li + li,.u-shell__body li + li{margin-top:12px}
+#main-scroll .u-read a,.u-read a,.u-shell__body a{color:${SITE.green};text-decoration:underline;text-underline-offset:3px}
+.u-read blockquote,.u-shell__body blockquote{margin:48px 0;padding-left:28px;border-left:4px solid ${SITE.green};font-family:${SITE.display};font-size:28px;line-height:1.3}
+.u-read hr,.u-shell__body hr{border:0;border-top:1px solid ${SITE.green};opacity:.45;margin:64px 0}
+.u-read img,.u-shell__body img{display:block;height:auto;margin:48px 0}
 .u-form{width:min(760px,calc(100% - 40px));margin-inline:auto}
+
+/* One shared branded callout for deeper pages (dark band, warm text, green rule) */
+.u-callout{margin:40px 0;padding:26px 30px;background:${SITE.ink};color:${SITE.paper};border-left:3px solid ${SITE.green};border-radius:2px}
+.u-callout :is(p,li){color:${SITE.paper}}
+.u-callout > *:first-child{margin-top:0}
+.u-callout > *:last-child{margin-bottom:0}
 
 .u-faq details{border-top:1px solid ${SITE.rule};padding:20px 0}
 .u-faq details:last-of-type{border-bottom:1px solid ${SITE.rule}}
@@ -224,11 +251,24 @@ img{max-width:100%}
   .site-hdr__nav,.site-hdr__lang{display:none}
   .site-hdr__burger{display:flex}
 }
+@media (max-width:900px){
+  .u-shell,.u-shell--wide{grid-template-columns:1fr;column-gap:0}
+  .u-shell__rail{grid-column:1;margin-bottom:20px}
+  .u-shell__rail::before{width:56px}
+  .u-shell__rail .u-eyebrow{margin-top:12px}
+  .u-shell__body{grid-column:1}
+  .u-shell__gutter{display:none}
+}
 @media (max-width:640px){
   .site-ftr__cols{grid-template-columns:1fr;gap:40px}
   .site-ftr__legal{flex-direction:column;align-items:flex-start;gap:20px}
   .u-hero{padding-block:56px 48px}
-  .u-read{font-size:18px}
+  .u-read,.u-shell__body{font-size:18px}
+  .u-read h2,.u-shell__body h2{margin-top:56px}
+}
+@media (max-width:420px){
+  .pill--green{padding-inline:22px;font-size:15px;max-width:100%}
+  .cta-strip__h{font-size:clamp(28px,7.6vw,36px)}
 }
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
@@ -469,15 +509,42 @@ function UniversalContentLayout({
 // heading, copy, slug, canonical or structured data changes.
 // form=true swaps the reading column for the centred form container so third-
 // party embeds keep their own internals untouched.
+function InnerShell({
+  children,
+  wide,
+  eyebrow
+}) {
+  return React.createElement('div', {
+    className: wide ? 'u-shell u-shell--wide' : 'u-shell'
+  }, React.createElement('div', {
+    className: 'u-shell__rail'
+  }, eyebrow ? React.createElement('span', {
+    className: 'u-eyebrow'
+  }, eyebrow) : null), React.createElement('div', {
+    className: 'u-shell__body'
+  }, children));
+}
 function LegacyShell({
   page,
   lang = 'en',
   children,
   form,
   wide,
-  cta = true
+  cta = true,
+  eyebrow,
+  bare
 }) {
-  const inner = form ? 'u-form' : wide ? 'site-container' : 'u-read';
+  // form → centred form/embed container (no rail); bare → raw wide container;
+  // otherwise → the shared inner-page shell (editorial rail + reading column).
+  let inner;
+  if (form) inner = React.createElement('div', {
+    className: 'u-form'
+  }, children);else if (bare) inner = React.createElement('div', {
+    className: 'site-container'
+  }, children);else inner = React.createElement(InnerShell, {
+    wide,
+    eyebrow
+  }, children);
   return React.createElement(React.Fragment, null, React.createElement(ChromeStyles), React.createElement(SiteHeader, {
     page,
     lang
@@ -486,9 +553,7 @@ function LegacyShell({
     style: {
       paddingBlock: '64px 96px'
     }
-  }, React.createElement('div', {
-    className: inner
-  }, children)), cta ? React.createElement(BlackCtaStrip, {
+  }, inner), cta ? React.createElement(BlackCtaStrip, {
     lang
   }) : null), React.createElement(SiteFooterX, {
     lang

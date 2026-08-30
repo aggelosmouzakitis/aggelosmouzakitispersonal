@@ -13,9 +13,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -49,10 +46,8 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
-body { background: #FFFFFF; color: #282726; font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+body { background: #FFFFFF; color: #282726; font-family: var(--font-body,"Inter",system-ui,sans-serif); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 ::selection { background: #282726; color: #FFFFFF; }
-.wrap { max-width: 940px; margin: 0 auto; padding: 4rem 2rem 7rem; }
-h1 { font-size: 32px; font-weight: 400; line-height: 1.4; letter-spacing: -.02em; margin-bottom: 1.2rem; }
 .lead { font-size: 23px; font-weight: 500; line-height: 1.5; letter-spacing: -.01em; color: #282726; margin-bottom: 2.5rem; }
 p { font-size: 18px; line-height: 1.75; color: #282726; margin-bottom: 1.4rem; max-width: 680px; }
 a { color: #059669; text-underline-offset: 3px; text-decoration-thickness: 1px; }
@@ -67,14 +62,13 @@ strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,3
 
 
 
-@media (max-width: 767px) {   }
-@media (max-width: 767px) { .wrap { padding: 2rem 1.2rem 4rem; } h1 { font-size: 24px; } .lead { font-size: 20px; } }
+@media (max-width: 767px) { .lead { font-size: 20px; } }
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
+
 </head>
 <body>
 <div id="gi-hdr"></div>
-<main class="u-main" style="padding-block:64px 96px"><div class="u-read">
+<main class="u-main" style="padding-block:64px 96px"><div class="u-shell"><div class="u-shell__rail"></div><div class="u-shell__body">
   <h1>Get interviewed</h1>
   <p class="lead">I'm interviewing founders and solopreneurs in tech about what it actually took to get where they are.</p>
 
@@ -86,11 +80,11 @@ strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,3
 
   <div class="reach">Reach me at <a href="mailto:aggelos.mouzakitis@gmail.com?subject=Get%20interviewed">aggelos.mouzakitis@gmail.com</a>.</div>
 
-</div></main>
+</div></div></main>
 <div id="gi-ftr"></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
-<script src="/site-chrome.js?v=1"></script>
+<script src="/site-chrome.js?v=2"></script>
 <script>
 ReactDOM.createRoot(document.getElementById('gi-hdr')).render(React.createElement(React.Fragment,null,React.createElement(window.ChromeStyles),React.createElement(window.SiteHeader,{page:'getinterviewed',lang:'en'})));
 ReactDOM.createRoot(document.getElementById('gi-ftr')).render(React.createElement(window.SiteFooterX,{lang:'en'}));

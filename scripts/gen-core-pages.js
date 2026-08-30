@@ -8,14 +8,20 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const ORIGIN = 'https://aggelosmouzakitis.com';
 const GA = 'G-KV83RRF6ZM';
-const SIDEBAR_V = 32, CONTENT_V = 34;
-const CHROME_V = 1, V2_V = 1;
+const SIDEBAR_V = 32, CONTENT_V = 35;
+const CHROME_V = 2, V2_V = 2;
 
 // Shared CSS (from the original index.html — design system preserved 1:1)
 const CSS = `
+:root{
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-display: "Archivo Black", "Inter Tight", "Inter", system-ui, sans-serif;
+  --brand-green: #059669;
+}
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { background: #1A1C1D; color: #FFFFFF; font-family: 'Inter', system-ui, sans-serif; font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body { background: #1A1C1D; color: #FFFFFF; font-family: var(--font-body); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 #root { display: block; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: #059669; color: #FFFFFF; }
@@ -89,9 +95,9 @@ const PAGES = [
   {
     id: 'reviews', path: '/reviews/', dir: 'reviews', schemaType: 'WebPage', og: 'reviews.png',
     en: { title: 'Reviews — in their words | Aggelos Mouzakitis', crumb: 'Reviews',
-      desc: "Anonymous reflections from founders, operators and independents I've worked with. Shared with permission; identifying details removed." },
+      desc: "Feedback from founders, operators and independents I've worked with. Some named, some anonymous — the words are theirs, shared with permission." },
     el: { title: 'Κριτικές — με τα λόγια τους | Άγγελος Μουζακίτης', crumb: 'Κριτικές',
-      desc: 'Ανώνυμες σκέψεις από founders, στελέχη και ανεξάρτητους επαγγελματίες με τους οποίους έχω δουλέψει. Κοινοποιούνται με άδεια.' },
+      desc: 'Σχόλια από founders, στελέχη και ανεξάρτητους επαγγελματίες με τους οποίους έχω δουλέψει. Κάποιοι επώνυμα, κάποιοι ανώνυμα — τα λόγια είναι δικά τους.' },
   },
   {
     id: 'book', path: '/book/', dir: 'book', schemaType: 'WebPage', og: 'book.png',
@@ -143,9 +149,6 @@ function render(page, lang) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">

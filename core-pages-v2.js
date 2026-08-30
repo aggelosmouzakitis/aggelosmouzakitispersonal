@@ -84,9 +84,10 @@ const PAGE_V2_CSS = `
 .home-hero__copy{min-width:0;color:${V2.heroInk}}
 .home-hero__eyebrow{max-width:520px;color:${V2.green};font-family:${V2.display};font-size:12px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
 .home-hero__intro{margin:14px 0 15px;color:${V2.heroInk};font-family:${V2.display};font-size:16px;font-weight:400;line-height:1.3}
-.home-hero__title{max-width:600px;margin:0 0 22px;font-family:"Archivo Black",${V2.display};font-weight:400;line-height:0.94;letter-spacing:-0.065em;color:${V2.heroInk}}
+.home-hero__title{max-width:600px;margin:0 0 22px;font-family:${V2.archivo};font-synthesis:none;font-weight:400;line-height:0.94;letter-spacing:-0.065em;color:${V2.heroInk}}
 html[lang="en"] .home-hero__title{font-size:clamp(48px,5vw,72px)}
-html[lang="el"] .home-hero__title{font-size:clamp(40px,4vw,58px)}
+/* Archivo Black has no Greek glyphs — use Inter Tight 800 so EL matches EN weight */
+html[lang="el"] .home-hero__title{font-size:clamp(40px,4vw,58px);font-family:${V2.display};font-weight:800;letter-spacing:-0.05em}
 .home-hero__title .human{position:relative;z-index:0;white-space:nowrap}
 .home-hero__title .human::after{content:"";position:absolute;z-index:-1;left:-0.03em;right:-0.03em;bottom:0.04em;height:0.16em;background:${V2.green}}
 .home-hero__support{max-width:505px;margin:0 0 25px;color:${V2.heroInk};font-family:${V2.display};font-size:17px;font-weight:400;line-height:1.48}
@@ -105,7 +106,8 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4vw,58px)}
 .home-manifesto{width:100%;background:${V2.ink}}
 .home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(48px,5vw,68px) clamp(24px,5vw,72px)}
 .home-manifesto__label{margin-bottom:17px;color:${V2.green};font-family:${V2.display};font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
-.home-manifesto__copy{font-family:"Archivo Black",${V2.display};font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
+.home-manifesto__copy{font-family:${V2.archivo};font-synthesis:none;font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
+html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;letter-spacing:-0.045em}
 .home-manifesto__muted,.home-manifesto__green{display:block}
 .home-manifesto__muted{color:${V2.greyOnDark}}
 .home-manifesto__green{color:${V2.green}}
@@ -196,16 +198,19 @@ html[lang="el"] .split__cell h3{font-size:clamp(24px,2.4vw,34px)}
 .rev-hero__lead{margin:0 0 14px;font-size:20px;line-height:1.6;color:${V2.ink2};max-width:60ch}
 .rev-hero__note{font-size:15px;line-height:1.6;color:${V2.meta}}
 .rev-lead{max-width:900px;margin:56px 0 0;padding-top:28px;border-top:4px solid ${V2.green}}
-.rev-lead p{margin:0;font-family:${V2.display};font-size:clamp(24px,2.3vw,28px);font-weight:600;line-height:1.46;letter-spacing:-0.01em;color:${V2.ink};text-wrap:pretty}
-.rev-lead .who{margin-top:22px;font-size:14px;color:${V2.meta}}
+.rev-lead p{margin:0;font-family:${V2.display};font-size:clamp(21px,2.1vw,25px);font-weight:600;line-height:1.5;letter-spacing:-0.01em;color:${V2.ink};text-wrap:pretty}
 .rev-lead button,.rev-item button{margin-top:16px;background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:${V2.green}}
 .rev-lead .orig,.rev-item .orig{margin-top:16px;padding-top:16px;border-top:1px solid ${V2.rule};font-size:16px;line-height:1.7;color:${V2.meta};font-style:italic}
-.rev-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px}
+.rev-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px;align-items:start}
 .rev-item{border-top:1px solid ${V2.rule};padding:36px 0 44px;min-width:0}
 .rev-item p{margin:0;font-size:19px;line-height:1.72;color:${V2.ink}}
-.rev-item .who{margin-top:22px;font-size:14px;color:${V2.meta}}
+/* Reviewer credit: restrained grayscale avatar (self-hosted photo, else initials) + name */
+.rev-cred{display:flex;align-items:center;gap:14px;margin-top:22px}
+.rev-cred .who{margin:0;font-size:14px;color:${V2.meta}}
+.rev-avatar{position:relative;flex:0 0 auto;width:60px;height:60px;border-radius:50%;overflow:hidden;background:${V2.ink};color:${V2.paper};display:flex;align-items:center;justify-content:center;font-family:${V2.display};font-size:17px;font-weight:700;line-height:1}
+.rev-avatar__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)}
 @media (max-width:900px){.rev-hero{padding-block:56px 48px}.rev-hero__grid{grid-template-columns:1fr;gap:28px}}
-@media (max-width:800px){.rev-grid{grid-template-columns:1fr}.rev-lead p{font-size:24px}}
+@media (max-width:800px){.rev-grid{grid-template-columns:1fr}.rev-lead p{font-size:22px}}
 `;
 function PageV2Styles() {
   return React.createElement('style', {
@@ -496,6 +501,30 @@ function AboutPageV2({
 }
 
 // ─── REVIEWS ─────────────────────────────────────────────────────────────────
+// Restrained reviewer avatar: self-hosted grayscale photo layered over initials.
+// If the photo is missing or fails to load, the initials remain (never a fake face).
+function RevAvatar({
+  photo,
+  name
+}) {
+  const [failed, setFailed] = React.useState(false);
+  const initials = String(name || '').trim().split(/\s+/).slice(0, 2).map(s => s[0] || '').join('').toUpperCase();
+  return React.createElement('span', {
+    className: 'rev-avatar',
+    'aria-hidden': 'true'
+  }, React.createElement('span', {
+    className: 'rev-avatar__i'
+  }, initials), photo && !failed ? React.createElement('img', {
+    className: 'rev-avatar__img',
+    src: photo,
+    alt: '',
+    loading: 'lazy',
+    decoding: 'async',
+    width: 120,
+    height: 120,
+    onError: () => setFailed(true)
+  }) : null);
+}
 function RevQuote({
   t,
   lang,
@@ -504,15 +533,23 @@ function RevQuote({
 }) {
   const [open, setOpen] = React.useState(false);
   const el = lang === 'el';
+  // Only offer the original-English toggle when a distinct Greek translation exists
+  // (the named GrowthMentor reviews are English-only, so no toggle for those).
+  const hasOrig = el && toggleLabel && t.qEl && t.qEl !== t.q;
   return React.createElement('div', {
     className: cls
   }, React.createElement('p', null, '“' + (el ? t.qEl : t.q) + '”'), React.createElement('div', {
+    className: 'rev-cred'
+  }, t.name ? React.createElement(RevAvatar, {
+    photo: t.photo,
+    name: t.name
+  }) : null, React.createElement('div', {
     className: 'who'
-  }, el ? t.wEl : t.w), el && toggleLabel ? React.createElement('button', {
+  }, el ? t.wEl : t.w)), hasOrig ? React.createElement('button', {
     type: 'button',
     onClick: () => setOpen(!open),
     'aria-expanded': open ? 'true' : 'false'
-  }, toggleLabel + ' ' + (open ? '↑' : '↓')) : null, el && open ? React.createElement('p', {
+  }, toggleLabel + ' ' + (open ? '↑' : '↓')) : null, hasOrig && open ? React.createElement('p', {
     className: 'orig'
   }, '“' + t.q + '”') : null);
 }

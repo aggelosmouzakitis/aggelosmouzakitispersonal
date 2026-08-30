@@ -8,51 +8,54 @@ const C = {
   border: 'rgba(40,39,38,0.12)',
   sepBorder: 'rgba(40,39,38,0.2)'
 };
+// These content pages now render inside the shared inner-page shell (rail +
+// reading column, in site-chrome.jsx). The shell supplies horizontal insets and
+// the max reading width; `.u-main` supplies vertical padding. So the page wrapper
+// only carries inherited type + colour — no max-width or centring of its own.
 const pageStyle = {
-  maxWidth: 740,
-  margin: '0 auto',
-  padding: '4rem 2rem 7rem',
   fontFamily: 'inherit',
   color: C.text
 };
-// Wider canvas for pages that carry visual blocks (cards, aligned tables) in the
-// right-hand content column — gives the Section content room so nothing is squeezed.
 const widePageStyle = {
-  ...pageStyle,
-  maxWidth: 940
+  ...pageStyle
 };
+// Inner-page H1 — expressive Inter Tight hierarchy (compact variant so long
+// service-page headlines don't overflow the reading column). Never plain Inter.
 const h1Style = {
-  fontSize: '32px',
-  fontWeight: 400,
-  lineHeight: 1.4,
+  fontFamily: 'var(--font-heading)',
+  fontSynthesis: 'none',
+  fontSize: 'clamp(34px,4.2vw,50px)',
+  fontWeight: 800,
+  lineHeight: 1.02,
   color: C.text,
   marginBottom: '2.5rem',
-  letterSpacing: '-.02em'
+  letterSpacing: '-.035em'
 };
 const h2Style = {
-  fontSize: '17px',
+  fontFamily: 'var(--font-heading)',
+  fontSize: '13px',
   fontWeight: 700,
-  letterSpacing: '.06em',
+  letterSpacing: '.1em',
   textTransform: 'uppercase',
-  color: C.muted,
-  paddingTop: '.25rem',
-  lineHeight: 1.5,
+  color: C.accent,
+  lineHeight: 1.4,
   textWrap: 'balance'
 };
 const h3Style = {
+  fontFamily: 'var(--font-heading)',
   fontSize: '18px',
-  fontWeight: 400,
-  lineHeight: 1.7,
+  fontWeight: 700,
+  lineHeight: 1.4,
   color: C.text,
   marginBottom: '.6rem',
   borderBottom: `1px solid ${C.border}`,
-  paddingBottom: '.4rem'
+  paddingBottom: '.4rem',
+  letterSpacing: '-.01em'
 };
 const sectionStyle = {
-  display: 'grid',
-  gridTemplateColumns: '184px 1fr',
-  gap: '0 2.25rem',
-  marginBottom: '3rem'
+  marginTop: '3.5rem',
+  paddingTop: '2rem',
+  borderTop: `1px solid ${C.border}`
 };
 const pStyle = {
   marginBottom: '1.4rem',
@@ -175,19 +178,20 @@ function Section({
   children,
   mob
 }) {
+  // Long-form rhythm: each section is a full-width block opened by a subtle top
+  // divider and an Inter Tight kicker label (no left-column grid, no card).
   const ss = mob ? {
-    display: 'block',
-    marginBottom: '2rem'
+    marginTop: '2.4rem',
+    paddingTop: '1.6rem',
+    borderTop: `1px solid ${C.border}`
   } : sectionStyle;
-  const hs = mob ? {
-    ...h2Style,
-    paddingBottom: '.5rem',
-    display: 'block'
-  } : h2Style;
   return React.createElement('section', {
     style: ss
   }, React.createElement('h2', {
-    style: hs
+    style: {
+      ...h2Style,
+      margin: '0 0 1.15rem'
+    }
   }, label), React.createElement('div', null, children));
 }
 function P({
@@ -1109,10 +1113,12 @@ function HomePage({
     }
   });
   const headingStyle = {
-    fontSize: mob ? '24px' : '30px',
-    fontWeight: 500,
-    letterSpacing: '-.02em',
-    lineHeight: 1.25,
+    fontFamily: 'var(--font-heading)',
+    fontSynthesis: 'none',
+    fontSize: mob ? '22px' : '28px',
+    fontWeight: 750,
+    letterSpacing: '-.03em',
+    lineHeight: 1.15,
     color: C.text,
     margin: '0 0 .6rem'
   };
@@ -1141,11 +1147,7 @@ function HomePage({
     }
   }, u.role), React.createElement('h1', {
     style: {
-      fontSize: mob ? '27px' : '36px',
-      fontWeight: 500,
-      lineHeight: 1.2,
-      letterSpacing: '-.02em',
-      color: C.text,
+      ...h1Style,
       margin: '0 0 1.1rem'
     }
   }, c.promise), React.createElement('p', {
@@ -1418,14 +1420,15 @@ function OneToOnePage({
   const c = ONE[lang] || ONE.en;
   const u = tUI(lang);
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1.1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   const headingStyle = {
-    fontSize: mob ? '24px' : '30px',
-    fontWeight: 500,
-    letterSpacing: '-.02em',
-    lineHeight: 1.25,
+    fontFamily: 'var(--font-heading)',
+    fontSynthesis: 'none',
+    fontSize: mob ? '22px' : '28px',
+    fontWeight: 750,
+    letterSpacing: '-.03em',
+    lineHeight: 1.15,
     color: C.text,
     margin: '0 0 1.3rem'
   };
@@ -1498,11 +1501,7 @@ function OneToOnePage({
     }
   }, u.role), React.createElement('h1', {
     style: {
-      fontSize: mob ? '27px' : '36px',
-      fontWeight: 500,
-      lineHeight: 1.2,
-      letterSpacing: '-.02em',
-      color: C.text,
+      ...h1Style,
       margin: '0 0 1.1rem'
     }
   }, c.h1), React.createElement('p', {
@@ -1675,8 +1674,7 @@ function AboutPage({
   const mob = useIsMobile();
   const c = ABOUT[lang] || ABOUT.en;
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1.1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   const subhead = {
     fontSize: mob ? '20px' : '24px',
@@ -1691,8 +1689,7 @@ function AboutPage({
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: '1.25rem',
-      fontSize: mob ? '26px' : '32px'
+      marginBottom: '1.25rem'
     }
   }, c.h1), React.createElement('div', {
     style: {
@@ -1797,10 +1794,12 @@ function AboutPage({
 }
 
 // ─── REVIEWS (verbatim testimonials — do not rewrite client words) ────────────
-// English is the original, spoken language of every testimonial. On the Greek
-// page a faithful Greek translation shows first, with the original English
-// available via a per-testimonial toggle. Order follows the approved spec.
-const REVIEWS_ITEMS = [{
+// Two sources, one published mix (see REVIEWS_ITEMS below):
+//   • REVIEWS_ANON — anonymised reflections; English original + faithful Greek
+//     translation with a per-testimonial toggle on the Greek page.
+//   • REVIEWS_NAMED — named, consented GrowthMentor reviews (verbatim, English
+//     only; shown in English on both languages as no translation was supplied).
+const REVIEWS_ANON = [{
   w: 'Anonymous client, Founder',
   wEl: 'Ανώνυμος πελάτης, Founder',
   q: "I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don’t have to translate one world into the other for him.",
@@ -1876,18 +1875,131 @@ const REVIEWS_ITEMS = [{
   q: "From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.",
   qEl: "Απ’ έξω, εξακολουθούσα να λειτουργώ και να αποδίδω σε υψηλό επίπεδο, οπότε ήταν δύσκολο να εξηγήσω γιατί κάτι ένιωθα ότι δεν πήγαινε καλά. Ο Άγγελος κατάλαβε ότι το πρόβλημα δεν ήταν απλώς ο φόρτος δουλειάς. Δουλέψαμε πάνω στον τρόπο που συνδέω το επίτευγμα με την ασφάλεια, την αξία και την ανακούφιση. Εξακολουθώ να είμαι φιλόδοξος, αλλά η επιτυχία αρχίζει να μοιάζει λιγότερο με οριακή διαφυγή από την αποτυχία."
 }];
+// Named, consented client reviews — verbatim from the approved GrowthMentor export.
+// Photos are self-hosted by scripts/fetch-review-photos.js into /img/reviews/;
+// until a photo exists the card shows a restrained initials avatar (never a fake face).
+const REVIEWS_NAMED = [{
+  name: "Greg Weinstein",
+  w: "Greg Weinstein",
+  wEl: "Greg Weinstein",
+  photo: "/img/reviews/greg-weinstein.jpg",
+  q: "My session with Aggelos was thoughtful and uniquely well rounded. He brought more than just strategic perspective. His background as a psychotherapist really stood out... in the way he listened, the questions he asked, and how he went deeper than the surface details. I'd strongly recommend a session with him for anyone looking for practical and perceptive insights.",
+  qEl: "My session with Aggelos was thoughtful and uniquely well rounded. He brought more than just strategic perspective. His background as a psychotherapist really stood out... in the way he listened, the questions he asked, and how he went deeper than the surface details. I'd strongly recommend a session with him for anyone looking for practical and perceptive insights."
+}, {
+  name: "Marianna Tzaerli",
+  w: "Marianna Tzaerli",
+  wEl: "Marianna Tzaerli",
+  photo: "/img/reviews/marianna-tzaerli.jpg",
+  q: "Aggelos was the best person to have as a sounding board while I navigate a challenging time in my career. He listened, was empathetic and provided me with some actionable ideas to get myself \"unstuck\". Highly recommend!",
+  qEl: "Aggelos was the best person to have as a sounding board while I navigate a challenging time in my career. He listened, was empathetic and provided me with some actionable ideas to get myself \"unstuck\". Highly recommend!"
+}, {
+  name: "Thomas Parkinson",
+  w: "Thomas Parkinson",
+  wEl: "Thomas Parkinson",
+  photo: "/img/reviews/thomas-parkinson.jpg",
+  q: "Just got off a call with Aggelos, and it was really good and insightful. He asked me lots of questions before the call and did his research about me, which I appreciated. At the start of the call, he gave a quick summary of what he learned about me, and I updated him with new info. We discussed product positioning, packaging, market fit, and pricing. I left with a clear four-step action plan to help me develop the right pricing model for my customers, and he told me exactly how to find the needed info. If you're thinking about getting advice, I highly recommend Aggelos",
+  qEl: "Just got off a call with Aggelos, and it was really good and insightful. He asked me lots of questions before the call and did his research about me, which I appreciated. At the start of the call, he gave a quick summary of what he learned about me, and I updated him with new info. We discussed product positioning, packaging, market fit, and pricing. I left with a clear four-step action plan to help me develop the right pricing model for my customers, and he told me exactly how to find the needed info. If you're thinking about getting advice, I highly recommend Aggelos"
+}, {
+  name: "Amritha Mani",
+  w: "Amritha Mani",
+  wEl: "Amritha Mani",
+  photo: "/img/reviews/amritha-mani.jpg",
+  q: "Aggelos is an incredible mentor to connect with. I had been feeling stuck for a few weeks now, but his combination of direct, honest and compassionate feedback helped me to see my own blindspots. Aggelos will challenge you to think beyond where you are now and break through. Looking forward to another session - thank you Aggelos!",
+  qEl: "Aggelos is an incredible mentor to connect with. I had been feeling stuck for a few weeks now, but his combination of direct, honest and compassionate feedback helped me to see my own blindspots. Aggelos will challenge you to think beyond where you are now and break through. Looking forward to another session - thank you Aggelos!"
+}, {
+  name: "Micah McGuire",
+  w: "Micah McGuire",
+  wEl: "Micah McGuire",
+  photo: "/img/reviews/micah-mcguire.jpg",
+  q: "Mind-blowing session. I went from \"I'm unsure of what we should test next with GTM\" to: \"I've got 5 different possible experiments and all I need to do is flesh them out and prioritize.\" Plus, got some GREAT insights on content ideas as a completely unexpected bonus. Highly recommend Aggelos if you need to get clarity on GTM!",
+  qEl: "Mind-blowing session. I went from \"I'm unsure of what we should test next with GTM\" to: \"I've got 5 different possible experiments and all I need to do is flesh them out and prioritize.\" Plus, got some GREAT insights on content ideas as a completely unexpected bonus. Highly recommend Aggelos if you need to get clarity on GTM!"
+}, {
+  name: "Agnieszka Wojtkun",
+  w: "Agnieszka Wojtkun",
+  wEl: "Agnieszka Wojtkun",
+  photo: "/img/reviews/agnieszka-wojtkun.jpg",
+  q: "If you're REALLY looking for insightful feedback on your brand positioning and not just for compliments about your work that will lead you nowhere, Aggelos is the person for you. I came to him with a question about how as a newbie in consulting world should I sell my services and I got exactly what I needed - pointed out weaknesses followed up with clear directions and a structured approach on how to define my target clients and to create offers that would suit them. Phew, much work ahead of me but hey, that's what I wanted to hear and I know where to start now :) Thanks again, Aggelos! Next time we'll turn the roasting table. Be prepared! ;)",
+  qEl: "If you're REALLY looking for insightful feedback on your brand positioning and not just for compliments about your work that will lead you nowhere, Aggelos is the person for you. I came to him with a question about how as a newbie in consulting world should I sell my services and I got exactly what I needed - pointed out weaknesses followed up with clear directions and a structured approach on how to define my target clients and to create offers that would suit them. Phew, much work ahead of me but hey, that's what I wanted to hear and I know where to start now :) Thanks again, Aggelos! Next time we'll turn the roasting table. Be prepared! ;)"
+}, {
+  name: "Tanuj",
+  w: "Tanuj",
+  wEl: "Tanuj",
+  photo: "/img/reviews/tanuj.jpg",
+  q: "It was a wonderful session and helped me to figure out why I do I have certain behaviour and how do I make it better. He also helped me with understanding myself better and the reason the why I follow those pattern's. Wonderful session and would recommend anyone who are working on improving themselves to be better",
+  qEl: "It was a wonderful session and helped me to figure out why I do I have certain behaviour and how do I make it better. He also helped me with understanding myself better and the reason the why I follow those pattern's. Wonderful session and would recommend anyone who are working on improving themselves to be better"
+}, {
+  name: "Indie Ludbrook",
+  w: "Indie Ludbrook",
+  wEl: "Indie Ludbrook",
+  photo: "/img/reviews/indie-ludbrook.jpg",
+  q: "Where do I start?! I was given a strong recommendation to book a call with Aggelos, and it's safe to say, I wish I had met him sooner. Within moments of our call, his expertise shone through, delivering exceptional value and insights that would have taken significantly longer to figure out on our own. He came prepared and quickly pinpointed critical areas in our research strategy that needed addressing, proving fantastic resources and actionable advice on the best next steps. Arguably one of the best mentors I have come across. If you are looking for someone with serious customer research chops, I cannot recommend Aggelos enough. :-)",
+  qEl: "Where do I start?! I was given a strong recommendation to book a call with Aggelos, and it's safe to say, I wish I had met him sooner. Within moments of our call, his expertise shone through, delivering exceptional value and insights that would have taken significantly longer to figure out on our own. He came prepared and quickly pinpointed critical areas in our research strategy that needed addressing, proving fantastic resources and actionable advice on the best next steps. Arguably one of the best mentors I have come across. If you are looking for someone with serious customer research chops, I cannot recommend Aggelos enough. :-)"
+}, {
+  name: "Spyros Tsoukalas",
+  w: "Spyros Tsoukalas",
+  wEl: "Spyros Tsoukalas",
+  photo: "/img/reviews/spyros-tsoukalas.jpg",
+  q: "Aggelos is amazing with pricing. In 30 minutes, he managed to save me a lot of time and money from my next steps, offering guidance for my company's pricing and positioning efforts. Highly recommended! Thanks you Aggelos!",
+  qEl: "Aggelos is amazing with pricing. In 30 minutes, he managed to save me a lot of time and money from my next steps, offering guidance for my company's pricing and positioning efforts. Highly recommended! Thanks you Aggelos!"
+}, {
+  name: "Pierrick L'Ebraly",
+  w: "Pierrick L'Ebraly",
+  wEl: "Pierrick L'Ebraly",
+  photo: "/img/reviews/pierrick-lebraly.jpg",
+  q: "Aggelos is super cash and to the point, but very considerate about long term impact of his recommendations - definitely the man you need if in front of tricky choices!",
+  qEl: "Aggelos is super cash and to the point, but very considerate about long term impact of his recommendations - definitely the man you need if in front of tricky choices!"
+}];
+// Published mix — strongest, most on-positioning reviews first; named and anonymous
+// interleaved (never grouped). item[0] is the lead; the rest form the two-column grid.
+// First six ≈ four named + two anonymous (psychological depth / the combined offer).
+const REVIEWS_ITEMS = [REVIEWS_NAMED[0],
+// Greg Weinstein — strategy + psychotherapist depth (lead)
+REVIEWS_ANON[0],
+// combined offer: no need to translate one world into the other
+REVIEWS_NAMED[1],
+// Marianna Tzaerli — career, unstuck, empathetic + actionable
+REVIEWS_NAMED[2],
+// Thomas Parkinson — positioning/pricing, four-step action plan
+REVIEWS_ANON[1],
+// professional problem + emotional mechanism → a more accurate problem
+REVIEWS_NAMED[3],
+// Amritha Mani — blindspots, direct + compassionate challenge
+REVIEWS_NAMED[4],
+// Micah McGuire — GTM clarity, tangible outcome
+REVIEWS_ANON[10],
+// understands the game and what it does to me
+REVIEWS_NAMED[5],
+// Agnieszka Wojtkun — no fluff, weaknesses, structure, offers
+REVIEWS_ANON[7],
+// keep the ambition, less dependent on winning and approval
+REVIEWS_NAMED[6],
+// Tanuj — patterns/behaviour, understanding myself better
+REVIEWS_ANON[2],
+// stopped fighting what I already knew — a real decision
+REVIEWS_NAMED[7],
+// Indie Ludbrook — expertise, rapid diagnosis, research strategy
+REVIEWS_ANON[14],
+// achievement fused to safety and worth
+REVIEWS_NAMED[8],
+// Spyros Tsoukalas — pricing + positioning, tangible
+REVIEWS_ANON[5],
+// depth + practicality; noticing the body before the story
+REVIEWS_NAMED[9],
+// Pierrick L'Ebraly — direct, considered, tricky choices
+REVIEWS_ANON[13] // confusing career period: legitimate vs amplified fears
+];
 const REVIEWS = {
   en: {
     h1: 'What people say',
     lead: 'A few things people have said after working with me.',
-    sub: 'Names and identifying details are removed. The words are theirs.',
+    sub: 'Feedback from people I’ve worked with. Some chose to remain anonymous.',
     toggle: null,
     ctaHeading: 'It starts with a short, free fit call.'
   },
   el: {
     h1: 'Τι λένε άνθρωποι που έχουν δουλέψει μαζί μου',
     lead: 'Μερικά πράγματα που μου έχουν πει άνθρωποι αφού δουλέψαμε μαζί.',
-    sub: 'Έχω αφαιρέσει ονόματα και λεπτομέρειες που θα μπορούσαν να δείξουν ποιοι είναι. Τα λόγια είναι δικά τους. Οι κριτικές δόθηκαν στα αγγλικά και εμφανίζονται εδώ μεταφρασμένα — μπορείς να δεις το πρωτότυπο κάτω από κάθε κριτική.',
+    sub: 'Σχόλια από ανθρώπους με τους οποίους έχω δουλέψει. Κάποιοι επέλεξαν να παραμείνουν ανώνυμοι.',
     toggle: 'Αρχικό κείμενο στα αγγλικά',
     ctaHeading: 'Ξεκινά με μια σύντομη, δωρεάν γνωριμία.'
   }
@@ -1955,16 +2067,14 @@ function ReviewsPage({
   const mob = useIsMobile();
   const c = REVIEWS[lang] || REVIEWS.en;
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1.1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   return React.createElement('main', {
     style: mobPage
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: '1rem',
-      fontSize: mob ? '26px' : '32px'
+      marginBottom: '1rem'
     }
   }, c.h1), React.createElement('p', {
     style: {
@@ -2172,16 +2282,14 @@ function PatternList({
 function ForFoundersPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   return React.createElement('main', {
     style: mobPage
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem',
-      fontSize: mob ? '20px' : '28px'
+      marginBottom: mob ? '1.5rem' : '3rem'
     }
   }, 'Founder advisory for business problems that trace back to you'), React.createElement(Section, {
     label: 'What you came here for',
@@ -2272,16 +2380,14 @@ function ForFoundersPage() {
 function SolopreneursPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   return React.createElement('main', {
     style: mobPage
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem',
-      fontSize: mob ? '20px' : '28px'
+      marginBottom: mob ? '1.5rem' : '3rem'
     }
   }, 'Solopreneur advisory for business problems that trace back to you'), React.createElement(Section, {
     label: 'What you came here for',
@@ -2521,8 +2627,7 @@ function TrackCards({
 function HowIWorkPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1.1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   const kicker = txt => React.createElement(Kicker, null, txt);
   const block = {
@@ -2586,8 +2691,7 @@ function HowIWorkPage() {
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.25rem' : '1.5rem',
-      fontSize: mob ? '26px' : '32px'
+      marginBottom: mob ? '1.25rem' : '1.5rem'
     }
   }, 'How I work'), React.createElement('p', {
     style: {
@@ -2722,8 +2826,7 @@ function BookPage({
   const mob = useIsMobile();
   const c = BOOK[lang] || BOOK.en;
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   React.useEffect(function () {
     if (document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]')) {
@@ -2740,8 +2843,7 @@ function BookPage({
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.25rem' : '1.5rem',
-      fontSize: mob ? '24px' : '30px'
+      marginBottom: mob ? '1.25rem' : '1.5rem'
     }
   }, c.h1), c.intro.map((p, i) => React.createElement(P, {
     key: i,
@@ -2832,8 +2934,7 @@ function RelatedLinks({
 function ExecTherapyPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   const mobSection = mob ? {
     display: 'block',
@@ -2853,8 +2954,7 @@ function ExecTherapyPage() {
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem',
-      fontSize: mob ? '20px' : '28px'
+      marginBottom: mob ? '1.5rem' : '3rem'
     }
   }, 'Therapy for executives who have done everything right and still feel like something is off'), React.createElement(Section, {
     label: 'The problem',
@@ -2978,8 +3078,7 @@ function ExecTherapyPage() {
 function FoundersTherapyPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   const mobSection = mob ? {
     display: 'block',
@@ -2999,8 +3098,7 @@ function FoundersTherapyPage() {
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem',
-      fontSize: mob ? '20px' : '28px'
+      marginBottom: mob ? '1.5rem' : '3rem'
     }
   }, 'Therapy for founders who have no one to be honest with about what this actually costs'), React.createElement(Section, {
     label: 'The founder problem',
@@ -3103,8 +3201,7 @@ function FoundersTherapyPage() {
 function ImposterPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   const mobSection = mob ? {
     display: 'block',
@@ -3124,8 +3221,7 @@ function ImposterPage() {
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem',
-      fontSize: mob ? '20px' : '28px'
+      marginBottom: mob ? '1.5rem' : '3rem'
     }
   }, 'You can see the evidence that you\u2019re good at this. You just can\u2019t feel it.'), React.createElement(Section, {
     label: 'The pattern',
@@ -3245,8 +3341,7 @@ function ImposterPage() {
 function BurnoutPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   const mobSection = mob ? {
     display: 'block',
@@ -3266,8 +3361,7 @@ function BurnoutPage() {
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem',
-      fontSize: mob ? '20px' : '28px'
+      marginBottom: mob ? '1.5rem' : '3rem'
     }
   }, 'You took the vacation. You came back feeling the same way. The problem probably isn\u2019t the workload.'), React.createElement(Section, {
     label: 'Executive burnout',
@@ -3377,8 +3471,7 @@ function BurnoutPage() {
 function CareerTransitionPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   const mobSection = mob ? {
     display: 'block',
@@ -3398,8 +3491,7 @@ function CareerTransitionPage() {
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem',
-      fontSize: mob ? '20px' : '28px'
+      marginBottom: mob ? '1.5rem' : '3rem'
     }
   }, 'The next role isn\u2019t the hard part. Figuring out who you are without this one is.'), React.createElement(Section, {
     label: 'The real transition',
@@ -3514,8 +3606,7 @@ function CareerTransitionPage() {
 // ─── SHARED PAGE HELPERS ─────────────────────────────────────────────────────
 function locMobPage(mob) {
   return mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
 }
 function BookCta({
@@ -3541,8 +3632,7 @@ function LondonPage() {
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '2.5rem',
-      fontSize: mob ? '22px' : '30px'
+      marginBottom: mob ? '1.5rem' : '2.5rem'
     }
   }, 'Greek-speaking therapist for tech professionals in London'), React.createElement('p', {
     style: {
@@ -3625,8 +3715,7 @@ function ManchesterPage() {
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '2.5rem',
-      fontSize: mob ? '22px' : '30px'
+      marginBottom: mob ? '1.5rem' : '2.5rem'
     }
   }, 'Greek-speaking therapist for tech professionals in Manchester'), React.createElement('p', {
     style: {
@@ -3709,8 +3798,7 @@ function NewYorkPage() {
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '2.5rem',
-      fontSize: mob ? '22px' : '30px'
+      marginBottom: mob ? '1.5rem' : '2.5rem'
     }
   }, 'Greek-speaking therapist for tech professionals in New York'), React.createElement('p', {
     style: {
@@ -3793,8 +3881,7 @@ function DublinPage() {
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '2.5rem',
-      fontSize: mob ? '22px' : '30px'
+      marginBottom: mob ? '1.5rem' : '2.5rem'
     }
   }, 'Greek-speaking therapist for tech professionals in Dublin'), React.createElement('p', {
     style: {
@@ -3946,8 +4033,7 @@ function ConfidentialityPage({
   }, React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.25rem' : '1.5rem',
-      fontSize: mob ? '24px' : '30px'
+      marginBottom: mob ? '1.25rem' : '1.5rem'
     }
   }, c.h1), c.intro.map((t, i) => i === 0 ? React.createElement('p', {
     key: i,
@@ -4018,8 +4104,7 @@ function ElH1({
   return React.createElement('h1', {
     style: {
       ...h1Style,
-      marginBottom: mob ? '1.5rem' : '2.5rem',
-      fontSize: mob ? '22px' : '30px'
+      marginBottom: mob ? '1.5rem' : '2.5rem'
     }
   }, children);
 }
@@ -4028,8 +4113,7 @@ function ElH1({
 function ElExecutiveCoachingPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   return React.createElement('main', {
     style: mobPage
@@ -4113,8 +4197,7 @@ function ElExecutiveCoachingPage() {
 function ElBurnoutPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   return React.createElement('main', {
     style: mobPage
@@ -4196,8 +4279,7 @@ function ElBurnoutPage() {
 function ElCareerCoachingPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   return React.createElement('main', {
     style: mobPage
@@ -4273,8 +4355,7 @@ function ElCareerCoachingPage() {
 function ElImposterPage() {
   const mob = useIsMobile();
   const mobPage = mob ? {
-    ...pageStyle,
-    padding: '1.5rem 1rem 5rem'
+    ...pageStyle
   } : widePageStyle;
   return React.createElement('main', {
     style: mobPage

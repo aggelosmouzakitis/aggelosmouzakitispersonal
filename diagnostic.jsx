@@ -382,7 +382,7 @@ function DiagnosticPage({ lang = 'en' }) {
   const C = {
     page: { maxWidth: 820, margin: '0 auto', padding: mob ? '2rem 1.25rem 6rem' : '4rem 2.5rem 7rem', color: '#282726', fontFamily: 'inherit' },
     eyebrow: { fontSize: '12px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#666', lineHeight: 1.6 },
-    h1: { fontSize: mob ? '27px' : '34px', fontWeight: 500, lineHeight: 1.2, letterSpacing: '-.02em', color: '#282726', margin: '0 0 1.25rem' },
+    h1: { fontFamily: 'var(--font-heading)', fontSynthesis: 'none', fontSize: mob ? '30px' : '44px', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-.035em', color: '#282726', margin: '0 0 1.25rem' },
     p: { margin: '0 0 1.2rem', lineHeight: 1.7, fontSize: mob ? '17px' : '18px', color: '#282726' },
     sectionH: { fontSize: mob ? '22px' : '27px', fontWeight: 500, letterSpacing: '-.02em', lineHeight: 1.25, color: '#282726', margin: '0 0 1.5rem' },
     qLabel: { fontSize: mob ? '16px' : '17px', fontWeight: 600, color: '#282726', margin: '0 0 .9rem', lineHeight: 1.5 },

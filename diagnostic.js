@@ -529,10 +529,12 @@ function DiagnosticPage({
       lineHeight: 1.6
     },
     h1: {
-      fontSize: mob ? '27px' : '34px',
-      fontWeight: 500,
-      lineHeight: 1.2,
-      letterSpacing: '-.02em',
+      fontFamily: 'var(--font-heading)',
+      fontSynthesis: 'none',
+      fontSize: mob ? '30px' : '44px',
+      fontWeight: 800,
+      lineHeight: 1.05,
+      letterSpacing: '-.035em',
       color: '#282726',
       margin: '0 0 1.25rem'
     },

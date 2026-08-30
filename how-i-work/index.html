@@ -13,9 +13,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -42,7 +39,7 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html, body, #root { height: 100%; }
-body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+body { background: #F5F5F5; font-family: var(--font-body,"Inter",system-ui,sans-serif); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 ::selection { background: #282726; color: #FFFFFF; }
 #root { display: flex; overflow: hidden; }
 #main-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; background: #FFFFFF; color: #282726; }
@@ -74,8 +71,8 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
 <div id="root"></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
-<script src="../site-chrome.js?v=1"></script>
-<script src="../content-pages.js?v=34"></script>
+<script src="../site-chrome.js?v=2"></script>
+<script src="../content-pages.js?v=35"></script>
 <script>
 const { useState, useEffect, useRef } = React;
 const SPECIALTY_IDS = ['therapy-for-executives', 'therapy-for-founders', 'imposter-syndrome-therapy', 'executive-burnout-therapy', 'career-transition-therapy', 'founders', 'solopreneurs', 'how-i-work', 'book'];
