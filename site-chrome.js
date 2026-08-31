@@ -85,7 +85,7 @@ const CHROME_T = {
     reviews: 'Reviews',
     apply: 'Apply',
     start: 'APPLY',
-    other: 'Ελληνικά',
+    other: 'ΕΛΛΗΝΙΚΑ',
     role1: 'Private business & career advisor',
     role2: 'BACP-registered psychotherapist',
     navigate: 'NAVIGATE',
@@ -150,18 +150,18 @@ img{max-width:100%}
 
 .site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
 
-.site-hdr{width:100%;min-height:70px;background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16)}
-.site-hdr__in{min-height:70px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
-.site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:${SITE.paper};font-family:${SITE.display};font-size:17px;font-weight:500;line-height:1;letter-spacing:-0.02em;white-space:nowrap}
+.site-hdr{width:100%;min-height:76px;background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16)}
+.site-hdr__in{width:min(100% - 64px,1280px);min-height:76px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
+.site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:${SITE.paper};font-family:${SITE.display};font-size:26px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
 .site-hdr__brand span{color:${SITE.green}}
-.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:22px}
-.site-hdr__nav a{color:${SITE.paper};font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
+.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:30px}
+.site-hdr__nav a{color:${SITE.paper};font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
 .site-hdr__nav a:hover{opacity:1}
 .site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:${SITE.green}}
 .site-hdr__end{display:flex;align-items:center;gap:14px}
-.site-hdr__lang{color:${SITE.paper};font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;transition:opacity .18s}
+.site-hdr__lang{color:${SITE.paper};font-size:13px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:0.045em;opacity:.82;transition:opacity .18s}
 .site-hdr__lang:hover{opacity:1}
-.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 17px;background:${SITE.green};color:#fff;font-size:12px;font-weight:600;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:${SITE.green};color:#fff;font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hdr-cta:hover{filter:brightness(0.9);gap:11px}
 .site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
 .site-hdr__burger span{display:block;width:24px;height:2px;background:${SITE.paper}}
@@ -248,7 +248,9 @@ img{max-width:100%}
 
 @media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:680px){
-  .site-hdr__nav,.site-hdr__lang{display:none}
+  .site-hdr,.site-hdr__in{min-height:68px}
+  .site-hdr__brand{font-size:23px}
+  .site-hdr__nav,.site-hdr__lang,.site-hdr__end{display:none}
   .site-hdr__burger{display:flex}
 }
 @media (max-width:900px){

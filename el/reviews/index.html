@@ -84,18 +84,18 @@ img{max-width:100%}
 
 .site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
 
-.site-hdr{width:100%;min-height:70px;background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16)}
-.site-hdr__in{min-height:70px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
-.site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:#F3F0E8;font-family:var(--font-heading);font-size:17px;font-weight:500;line-height:1;letter-spacing:-0.02em;white-space:nowrap}
+.site-hdr{width:100%;min-height:76px;background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16)}
+.site-hdr__in{width:min(100% - 64px,1280px);min-height:76px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
+.site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:#F3F0E8;font-family:var(--font-heading);font-size:26px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
 .site-hdr__brand span{color:#059669}
-.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:22px}
-.site-hdr__nav a{color:#F3F0E8;font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
+.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:30px}
+.site-hdr__nav a{color:#F3F0E8;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
 .site-hdr__nav a:hover{opacity:1}
 .site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:#059669}
 .site-hdr__end{display:flex;align-items:center;gap:14px}
-.site-hdr__lang{color:#F3F0E8;font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;transition:opacity .18s}
+.site-hdr__lang{color:#F3F0E8;font-size:13px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:0.045em;opacity:.82;transition:opacity .18s}
 .site-hdr__lang:hover{opacity:1}
-.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 17px;background:#059669;color:#fff;font-size:12px;font-weight:600;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:#059669;color:#fff;font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hdr-cta:hover{filter:brightness(0.9);gap:11px}
 .site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
 .site-hdr__burger span{display:block;width:24px;height:2px;background:#F3F0E8}
@@ -182,7 +182,9 @@ img{max-width:100%}
 
 @media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:680px){
-  .site-hdr__nav,.site-hdr__lang{display:none}
+  .site-hdr,.site-hdr__in{min-height:68px}
+  .site-hdr__brand{font-size:23px}
+  .site-hdr__nav,.site-hdr__lang,.site-hdr__end{display:none}
   .site-hdr__burger{display:flex}
 }
 @media (max-width:900px){
@@ -207,6 +209,137 @@ img{max-width:100%}
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
 </style><style>
+/* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
+.home-hero{background:#F3F0E8;color:#111315}
+.home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(410px,0.86fr);align-items:center;gap:48px;padding-block:52px 64px}
+.home-hero__copy{position:relative;z-index:2;min-width:0;max-width:720px;color:#111315}
+.home-hero__eyebrow{max-width:520px;color:#059669;font-family:var(--font-heading);font-size:13px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
+.home-hero__title{max-width:720px;margin:14px 0 22px;font-family:var(--font-display);font-synthesis:none;font-weight:400;line-height:0.9;letter-spacing:-0.055em;color:#111315}
+html[lang="en"] .home-hero__title{font-size:clamp(62px,5.4vw,80px)}
+html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:var(--font-heading);font-weight:800;line-height:0.98;letter-spacing:-0.045em}
+.home-hero__title .human{position:relative;z-index:0;white-space:nowrap}
+.home-hero__title .human::after{content:"";position:absolute;z-index:-1;left:-0.03em;right:-0.03em;bottom:0.04em;height:0.14em;background:#059669}
+.home-hero__support{max-width:640px;margin:0 0 26px;color:#111315;font-family:var(--font-heading);font-size:20px;font-weight:400;line-height:1.42}
+.home-hero__photo{position:relative;z-index:1;width:clamp(420px,34vw,500px);max-width:100%;aspect-ratio:1;justify-self:end}
+.home-hero__photo::before{content:"";position:absolute;inset:8% -3% -2% 9%;border-radius:50%;background:#059669}
+.home-hero__frame{position:absolute;inset:0;overflow:hidden;border-radius:50%}
+.home-hero__frame img{width:100%;height:100%;object-fit:cover;object-position:56% 44%;transform:scale(1.58);filter:grayscale(1) contrast(1.08)}
+@media (max-width:959px) and (min-width:521px){
+  .home-hero__grid{grid-template-columns:minmax(0,1.08fr) minmax(280px,0.92fr);gap:24px;padding-inline:24px}
+  html[lang="en"] .home-hero__title{font-size:clamp(46px,7vw,62px)}
+  html[lang="el"] .home-hero__title{font-size:clamp(40px,6vw,54px)}
+  .home-hero__photo{width:min(100%,390px)}
+}
+@media (max-width:520px){
+  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:38px 20px 48px;min-height:0}
+  html[lang="en"] .home-hero__title{font-size:clamp(46px,14vw,62px)}
+  html[lang="el"] .home-hero__title{font-size:clamp(38px,11vw,52px)}
+  .home-hero__photo{width:min(82%,310px);justify-self:center}
+}
+
+/* ── Manifesto — "The whole point" (full-width dark) ── */
+.home-manifesto{width:100%;background:#1A1C1D}
+.home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(48px,5vw,68px) clamp(24px,5vw,72px)}
+.home-manifesto__label{margin-bottom:17px;color:#059669;font-family:var(--font-heading);font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
+.home-manifesto__copy{font-family:var(--font-display);font-synthesis:none;font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
+html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weight:800;letter-spacing:-0.045em}
+.home-manifesto__muted,.home-manifesto__green{display:block}
+.home-manifesto__muted{color:#9DA19E}
+.home-manifesto__green{color:#059669}
+.home-manifesto__copy mark{padding:0 0.08em 0.02em;background:#F3F0E8;color:#1A1C1D;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+@media (max-width:680px){.home-manifesto__inner{padding:40px 20px 46px}.home-manifesto__copy{font-size:clamp(34px,10vw,48px)}}
+
+/* ── Section 01 — dual-field component (dark business / green psychology, portrait on the seam) ── */
+.am-duality-section{overflow:hidden;padding:clamp(72px,7.5vw,108px) 24px clamp(84px,8.5vw,122px);background:#f3f0e8}
+.am-duality-section__inner{width:min(100%,1140px);margin-inline:auto}
+.am-duality-section__heading{display:grid;grid-template-columns:54px minmax(0,880px);gap:22px;align-items:start;margin-bottom:clamp(62px,7vw,92px)}
+.am-duality-section__number{padding-top:8px;color:#059669;font-family:var(--font-heading);font-size:15px;line-height:1;font-weight:800}
+.am-duality-section__title{max-width:880px;margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(43px,4.25vw,61px);line-height:0.98;letter-spacing:-0.052em;font-weight:800;color:#181a1c}
+.am-duality{--am-photo-width:clamp(224px,21.5vw,250px);--am-photo-height:clamp(382px,36.7vw,426px);position:relative;isolation:isolate;width:min(100%,1000px);min-height:360px;margin-inline:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.am-duality__side{min-width:0;min-height:360px;display:flex;align-items:center}
+.am-duality__side--business{padding:52px 160px 52px 50px;background:#181a1c;color:#ffffff}
+.am-duality__side--psychology{padding:52px 50px 52px 180px;background:#059669;color:#181a1c;text-align:right}
+.am-duality__side--psychology .am-duality__copy{margin-left:auto}
+.am-duality__copy{width:100%;max-width:270px}
+.am-duality__label{margin:0 0 20px;font-family:var(--font-body);font-size:13px;line-height:1;font-weight:800;letter-spacing:0.075em;text-transform:uppercase}
+.am-duality__statement{margin:0;font-family:var(--font-heading);font-size:clamp(20px,1.8vw,24px);line-height:1.27;letter-spacing:-0.028em;font-weight:700}
+.am-duality__portrait{position:absolute;z-index:3;left:50%;top:50%;width:var(--am-photo-width);height:var(--am-photo-height);margin:0;transform:translate(-50%,-50%);overflow:hidden;background:#181a1c}
+.am-duality__portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(100%)}
+@media (max-width:900px) and (min-width:701px){
+  .am-duality-section__heading{grid-template-columns:42px minmax(0,1fr);gap:16px}
+  .am-duality{--am-photo-width:210px;--am-photo-height:360px}
+  .am-duality__side--business{padding:48px 130px 48px 38px}
+  .am-duality__side--psychology{padding:48px 38px 48px 145px}
+  .am-duality__statement{font-size:19px}
+}
+@media (max-width:700px){
+  .am-duality-section{padding-inline:20px}
+  .am-duality-section__heading{display:block;margin-bottom:58px}
+  .am-duality-section__number{display:block;margin-bottom:22px;padding:0}
+  .am-duality-section__title{font-size:clamp(39px,10.5vw,49px)}
+  .am-duality{--am-mobile-top:270px;--am-mobile-bottom:300px;--am-photo-width:clamp(144px,39vw,160px);--am-photo-height:clamp(224px,60vw,242px);min-height:calc(var(--am-mobile-top) + var(--am-mobile-bottom));grid-template-columns:1fr;grid-template-rows:var(--am-mobile-top) var(--am-mobile-bottom)}
+  .am-duality__side{min-height:0;justify-content:center;text-align:center}
+  .am-duality__side--psychology{text-align:center}
+  .am-duality__side--psychology .am-duality__copy{margin-left:0;margin-right:0}
+  .am-duality__side--business{padding:38px 18px 112px}
+  .am-duality__side--psychology{padding:178px 18px 34px}
+  .am-duality__copy{max-width:330px}
+  .am-duality__label{margin-bottom:17px;font-size:11px}
+  .am-duality__statement{font-size:clamp(17px,4.7vw,20px);line-height:1.3}
+  .am-duality__portrait{top:calc(var(--am-mobile-top) + 25px)}
+}
+@media (max-width:370px){
+  .am-duality-section{padding-inline:16px}
+  .am-duality__statement{font-size:16px}
+}
+
+/* ── Home dark canvas sections 02–04 ── */
+.home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(64px,8vw,96px)}
+.sec__n{font-family:var(--font-heading);font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669}
+.sec__h{margin:22px 0 48px;max-width:19ch;font-family:var(--font-heading);font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.sec__h2l{margin:22px 0 48px;font-family:var(--font-heading);font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
+.sec__h2l span{display:block}
+.cont-marker{display:flex;align-items:baseline;gap:10px}
+.cont-marker .n{font-family:var(--font-heading);font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669}
+.cont-marker .lbl{font-family:var(--font-heading);font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
+.opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:#F3F0E8;border-radius:12px;overflow:hidden}
+.opinion img{display:block;width:100%;height:100%;min-height:520px;object-fit:cover;object-position:42% 50%}
+.opinion__body{padding:clamp(32px,4.5vw,56px);min-width:0;display:grid;align-content:start;gap:24px}
+.opinion__body p{margin:0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
+.opinion__q{margin:8px 0 0;border-top:2px solid #059669;padding-top:24px;font-family:var(--font-heading);font-weight:750;font-size:clamp(28px,2.5vw,38px);line-height:1.2;letter-spacing:-0.035em;color:#1A1C1D;max-width:32ch;text-wrap:pretty}
+.cont{min-height:440px;background:#F3F0E8;border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
+.cont__in{max-width:760px}
+.cont__h{margin:16px 0 0;max-width:20ch;font-family:var(--font-heading);font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:#1A1C1D;text-wrap:pretty}
+.cont p{margin:24px 0 0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
+.rule-arrow{display:flex;align-items:center;gap:10px;width:min(320px,60%);margin:0 0 48px}
+.rule-arrow div{flex:1;height:2px;background:#059669}
+.rule-arrow span{color:#059669;line-height:1;font-size:18px}
+.media{display:grid;grid-template-columns:7fr 5fr;grid-template-rows:repeat(2,minmax(0,1fr));min-height:520px;border-radius:12px;overflow:hidden}
+.media__cell{padding:clamp(32px,3.5vw,56px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;min-width:0;transition:background .18s,filter .18s}
+.media__cell h3{margin:0;font-family:var(--font-heading);font-weight:800;line-height:0.9;letter-spacing:-0.045em}
+.media__top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.media__arw{font-size:38px;line-height:1;transition:transform .18s}
+.media__cell:hover .media__arw{transform:translate(5px,-5px)}
+.media__kicker{font-size:14px;font-weight:700;letter-spacing:0.12em;margin-bottom:16px}
+.media__cell p{margin:0;font-size:18px;line-height:1.55;max-width:36ch;text-wrap:pretty}
+.media__read{grid-row:1 / span 2;background:#059669;color:#fff}
+.media__read:hover{filter:brightness(0.9)}
+.media__read h3{font-size:clamp(64px,6vw,92px)}
+.media__watch{background:#050505;color:#fff}
+.media__watch:hover{background:#0e0e0e}
+.media__watch h3{font-size:clamp(44px,4vw,64px)}
+.media__watch p{font-size:17px;line-height:1.5;max-width:34ch}
+.media__follow{background:#F3F0E8;color:#1A1C1D}
+.media__follow h3{font-size:clamp(44px,4vw,64px)}
+.icon-row{display:flex;align-items:center;gap:16px}
+.icon-btn{width:48px;height:48px;border-radius:50%;background:#1A1C1D;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .18s}
+.icon-btn:hover{background:#059669;transform:translateY(-3px)}
+@media (max-width:960px){
+  .media{grid-template-columns:1fr;grid-template-rows:auto;min-height:0}
+  .media__read{grid-row:auto}.media__cell{min-height:320px}
+  .opinion{grid-template-columns:1fr}.opinion img{min-height:320px}
+}
+
 :root{
   --am-paper:#f3f0e8;
   --am-ink:#171919;
@@ -239,58 +372,6 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .amx-section-head{display:grid;grid-template-columns:44px minmax(0, 1fr);gap:20px;align-items:start;margin-bottom:36px}
 .amx-number{padding-top:4px;color:var(--am-green);font:800 16px/1 var(--font-heading);letter-spacing:-0.03em}
 
-/* HOME HERO */
-.amx-hero{display:grid;grid-template-columns:minmax(0, 1.25fr) minmax(240px, 0.75fr);gap:clamp(38px, 6vw, 72px);align-items:center;padding-block:clamp(58px, 8vw, 88px)}
-.amx-hero-copy{min-width:0}
-.amx-hero .amx-display{max-width:650px;margin-top:16px}
-.amx-hero .amx-body{max-width:610px;margin:22px 0 26px}
-.amx-hero-photo{position:relative;width:min(100%, 310px);aspect-ratio:1;justify-self:end}
-.amx-hero-photo::before{content:"";position:absolute;inset:8% -4% -2% 10%;border-radius:50%;background:var(--am-green)}
-.amx-hero-photo img{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;border-radius:50%;object-fit:cover;object-position:50% 50%;filter:grayscale(1)}
-
-/* THE WHOLE POINT */
-.amx-manifesto .amx-container{padding-block:clamp(54px, 7vw, 74px)}
-.amx-manifesto .amx-heading{max-width:880px;margin-top:16px}
-.amx-manifesto-muted{color:var(--am-grey)}
-.amx-manifesto-green{color:var(--am-green)}
-
-/* HOME 01 */
-.amx-lede{max-width:730px;margin:-14px 0 38px 64px}
-.amx-duality{position:relative;width:min(100%, 860px);min-height:485px;margin-inline:auto}
-.amx-circle{position:absolute;top:0;width:58%;aspect-ratio:1;display:flex;flex-direction:column;justify-content:center;border-radius:50%}
-.amx-circle-left{left:0;padding:52px 150px 52px 60px;color:#ffffff;background:var(--am-dark)}
-.amx-circle-right{right:0;align-items:flex-end;padding:52px 60px 52px 150px;color:var(--am-ink);background:var(--am-green);text-align:right}
-.amx-circle .amx-subheading{max-width:240px}
-.amx-circle-list{max-width:230px;margin:18px 0 0;padding:0;list-style:none;color:inherit;font:400 14px/1.65 var(--font-body)}
-.amx-overlap-photo{position:absolute;z-index:3;top:50%;left:50%;width:138px;aspect-ratio:1;transform:translate(-50%, -50%);overflow:hidden;border:8px solid var(--am-paper);border-radius:50%;background:var(--am-dark)}
-.amx-overlap-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:50% 18%}
-.amx-overlap-label{position:absolute;z-index:4;top:calc(50% + 84px);left:50%;min-width:126px;padding:8px 12px;transform:translateX(-50%);color:#ffffff;background:var(--am-dark);font:600 11px/1 var(--font-body);text-align:center;text-transform:uppercase}
-
-/* HOME 02 */
-.amx-opinion{display:grid;grid-template-columns:minmax(230px, 0.75fr) minmax(0, 1.25fr);margin-left:64px}
-.amx-opinion-photo{min-height:390px;overflow:hidden;background:var(--am-dark)}
-.amx-opinion-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
-.amx-opinion-copy{padding:clamp(30px, 5vw, 48px);color:var(--am-ink);background:var(--am-paper)}
-.amx-opinion-copy .amx-body + .amx-body{margin-top:18px}
-.amx-quote{margin-top:28px;padding-top:24px;border-top:2px solid var(--am-green);color:var(--am-ink);font-family:var(--font-heading);font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-0.025em}
-.amx-proof{display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));margin-top:34px;border-top:1px solid rgb(243 240 232 / 18%);border-bottom:1px solid rgb(243 240 232 / 18%)}
-.amx-proof-item{min-height:104px;display:flex;flex-direction:column;justify-content:center;padding:20px;border-right:1px solid rgb(243 240 232 / 18%)}
-.amx-proof-item:last-child{border-right:0}
-.amx-proof-value{color:var(--am-green);font:800 22px/1 var(--font-heading)}
-.amx-proof-label{margin-top:8px;color:var(--am-paper);font:400 12px/1.35 var(--font-body)}
-
-/* HOME 03 */
-.amx-engagement-grid{display:grid;grid-template-columns:44px minmax(0, 720px);gap:20px}
-.amx-engagement-copy .amx-body{max-width:680px;margin-top:24px}
-
-/* HOME 04 */
-.amx-content-links{display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));margin-left:64px;border-top:1px solid rgb(243 240 232 / 20%)}
-.amx-content-link{min-height:190px;display:flex;flex-direction:column;justify-content:space-between;padding:26px 24px;color:var(--am-paper);border-right:1px solid rgb(243 240 232 / 20%);text-decoration:none}
-.amx-content-link:last-child{border-right:0}
-.amx-content-link .amx-body{color:var(--am-grey);font-size:15px}
-.amx-content-link .amx-body a{color:var(--am-green);text-decoration:underline;text-underline-offset:3px}
-.amx-content-arrow{color:var(--am-green);font-size:22px}
-
 /* FINAL CTA */
 .amx-final{text-align:center}
 .amx-final .amx-heading{max-width:770px;margin-inline:auto}
@@ -311,37 +392,15 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .amx-case{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding-block:26px;border-bottom:1px solid rgb(243 240 232 / 20%)}
 .amx-case .amx-body:last-child{color:var(--am-green)}
 
-@media (min-width: 721px) and (max-width: 840px){
-  .amx-duality{min-height:410px}
-  .amx-circle-left{padding:42px 110px 42px 42px}
-  .amx-circle-right{padding:42px 42px 42px 110px}
-  .amx-circle .amx-subheading{font-size:21px}
-  .amx-circle-list{font-size:13px}
-}
 @media (max-width: 720px){
-  .amx-hero{grid-template-columns:1fr}
-  .amx-hero-photo{width:min(72%, 280px);justify-self:center}
-  .amx-section-head,.amx-engagement-grid{grid-template-columns:1fr;gap:14px}
-  .amx-lede,.amx-opinion,.amx-content-links,.amx-reading-copy,.amx-case-list{margin-left:0}
-  .amx-opinion,.amx-proof,.amx-content-links,.amx-case{grid-template-columns:1fr}
-  .amx-proof-item,.amx-content-link{border-right:0;border-bottom:1px solid rgb(243 240 232 / 18%)}
-  .amx-proof-item:last-child,.amx-content-link:last-child{border-bottom:0}
-  .amx-opinion-photo{min-height:320px}
+  .amx-section-head{grid-template-columns:1fr;gap:14px}
+  .amx-reading-copy,.amx-case-list{margin-left:0}
+  .amx-case{grid-template-columns:1fr}
   .amx-story-grid{grid-template-columns:1fr;gap:18px}
-  .amx-duality{min-height:clamp(510px, 95vw, 650px)}
-  .amx-circle{width:min(90%, 430px);left:50%;right:auto;transform:translateX(-50%)}
-  .amx-circle-left{top:0;padding:46px 115px 110px 46px}
-  .amx-circle-right{top:clamp(170px, 32vw, 235px);padding:115px 46px 46px 115px}
-  .amx-overlap-photo{top:clamp(225px, 46vw, 331px)}
-  .amx-overlap-label{top:clamp(307px, calc(46vw + 82px), 413px)}
 }
 @media (max-width: 470px){
   .amx-display{font-size:clamp(38px, 12vw, 48px)}
   .amx-heading{font-size:clamp(32px, 10vw, 42px)}
-  .amx-circle .amx-subheading{font-size:20px}
-  .amx-circle-list{font-size:12px}
-  .amx-circle-left{padding-left:34px;padding-right:100px}
-  .amx-circle-right{padding-right:34px;padding-left:100px}
 }
 
 /* ── Reviews (no giant opening testimonial) ── */
@@ -367,8 +426,8 @@ html[lang^="el"] .amx-body{line-height:1.62}
 </style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/el/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/el/">Αρχική</a><a href="/el/about/">Γιατί εμένα</a><a href="/el/reviews/" aria-current="page">Κριτικές</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/reviews/" hreflang="en">English</a><a class="hdr-cta" href="/el/startingdiagnostic/"><span>ΣΥΝΑΝΤΗΣΗ</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Μενού" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main><section class="rev-hero"><div class="site-container"><div class="rev-hero__grid"><h1>Τι λένε άνθρωποι που έχουν δουλέψει μαζί μου</h1><div><p class="rev-hero__lead">Μερικά πράγματα που μου έχουν πει άνθρωποι αφού δουλέψαμε μαζί.</p><div class="rev-hero__note">Σχόλια από ανθρώπους με τους οποίους έχω δουλέψει. Κάποιοι επέλεξαν να παραμείνουν ανώνυμοι.</div></div></div><div class="rev-lead"><p>“My session with Aggelos was thoughtful and uniquely well rounded. He brought more than just strategic perspective. His background as a psychotherapist really stood out... in the way he listened, the questions he asked, and how he went deeper than the surface details. I'd strongly recommend a session with him for anyone looking for practical and perceptive insights.”</p><div class="rev-cred"><span class="rev-avatar" aria-hidden="true"><span class="rev-avatar__i">GW</span></span><div class="who">Greg Weinstein</div></div></div></div></section><section class="u-main"><div class="site-container rev-grid"><div class="rev-item"><p>“Είχα δουλέψει με coaches στο παρελθόν, είχα κάνει και θεραπεία, αλλά αυτό ένιωσα ότι ήταν διαφορετικό. Ο Άγγελος καταλαβαίνει τη συναισθηματική πλευρά χωρίς να χάνει από τα μάτια του την πραγματική κατάσταση που αντιμετωπίζω στη δουλειά. Μπορούμε να μιλήσουμε για πίεση, ντροπή ή για κάτι που συμβαίνει στο σώμα μου, και πέντε λεπτά αργότερα να συζητάμε μια απόφαση που αφορά την ομάδα ή το business μου. Δεν χρειάζεται να του μεταφράζω τον έναν κόσμο στον άλλον.”</p><div class="rev-cred"><div class="who">Ανώνυμος πελάτης, Founder</div></div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Aggelos was the best person to have as a sounding board while I navigate a challenging time in my career. He listened, was empathetic and provided me with some actionable ideas to get myself "unstuck". Highly recommend!”</p><div class="rev-cred"><span class="rev-avatar" aria-hidden="true"><span class="rev-avatar__i">MT</span></span><div class="who">Marianna Tzaerli</div></div></div><div class="rev-item"><p>“Just got off a call with Aggelos, and it was really good and insightful. He asked me lots of questions before the call and did his research about me, which I appreciated. At the start of the call, he gave a quick summary of what he learned about me, and I updated him with new info. We discussed product positioning, packaging, market fit, and pricing. I left with a clear four-step action plan to help me develop the right pricing model for my customers, and he told me exactly how to find the needed info. If you're thinking about getting advice, I highly recommend Aggelos”</p><div class="rev-cred"><span class="rev-avatar" aria-hidden="true"><span class="rev-avatar__i">TP</span></span><div class="who">Thomas Parkinson</div></div></div><div class="rev-item"><p>“Ήρθα περιμένοντας μια αρκετά τυπική συζήτηση coaching. Μέσα στην πρώτη κιόλας συνεδρία, ο Άγγελος κατάλαβε και το επαγγελματικό πρόβλημα και τον συναισθηματικό μηχανισμό από κάτω του. Ήταν ζεστός, αλλά πολύ ευθύς, και μου έδωσε έναν τρόπο να δω την κατάσταση που δεν είχα σκεφτεί πριν. Έφυγα με κάτι παραπάνω από συμβουλές. Έφυγα με ένα πιο ακριβές πρόβλημα.”</p><div class="rev-cred"><div class="who">Ανώνυμος πελάτης, Έμπειρος επαγγελματίας</div></div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Aggelos is an incredible mentor to connect with. I had been feeling stuck for a few weeks now, but his combination of direct, honest and compassionate feedback helped me to see my own blindspots. Aggelos will challenge you to think beyond where you are now and break through. Looking forward to another session - thank you Aggelos!”</p><div class="rev-cred"><span class="rev-avatar" aria-hidden="true"><span class="rev-avatar__i">AM</span></span><div class="who">Amritha Mani</div></div></div><div class="rev-item"><p>“Mind-blowing session. I went from "I'm unsure of what we should test next with GTM" to: "I've got 5 different possible experiments and all I need to do is flesh them out and prioritize." Plus, got some GREAT insights on content ideas as a completely unexpected bonus. Highly recommend Aggelos if you need to get clarity on GTM!”</p><div class="rev-cred"><span class="rev-avatar" aria-hidden="true"><span class="rev-avatar__i">MM</span></span><div class="who">Micah McGuire</div></div></div><div class="rev-item"><p>“Ένα από τα πιο χρήσιμα πράγματα είναι ότι ο Άγγελος πραγματικά καταλαβαίνει το περιβάλλον στο οποίο δουλεύω. Δεν χρειάζεται να του εξηγήσω τα εταιρικά παιχνίδια, την πίεση ενός startup, τα targets, τους επενδυτές ή γιατί μια απόφαση καριέρας μπορεί να είναι πιο περίπλοκη από το «ακολούθησε τις αξίες σου». Καταλαβαίνει το παιχνίδι, αλλά προσέχει και το τι μου κάνει αυτό το παιχνίδι.”</p><div class="rev-cred"><div class="who">Ανώνυμος πελάτης, Έμπειρο στέλεχος</div></div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“If you're REALLY looking for insightful feedback on your brand positioning and not just for compliments about your work that will lead you nowhere, Aggelos is the person for you. I came to him with a question about how as a newbie in consulting world should I sell my services and I got exactly what I needed - pointed out weaknesses followed up with clear directions and a structured approach on how to define my target clients and to create offers that would suit them. Phew, much work ahead of me but hey, that's what I wanted to hear and I know where to start now :) Thanks again, Aggelos! Next time we'll turn the roasting table. Be prepared! ;)”</p><div class="rev-cred"><span class="rev-avatar" aria-hidden="true"><span class="rev-avatar__i">AW</span></span><div class="who">Agnieszka Wojtkun</div></div></div><div class="rev-item"><p>“Δεν ήθελα κάποιον να μου πει να δουλεύω λιγότερο, να χαμηλώσω τον πήχη ή να γίνω λιγότερο φιλόδοξος. Ο Άγγελος το κατάλαβε αμέσως. Η δουλειά μας ήταν να κρατήσουμε το κομμάτι μου που θέλει να χτίζει και να πετυχαίνει, ενώ ταυτόχρονα γίνομαι λιγότερο εξαρτημένος από το να νικάω, τη σύγκριση και την εξωτερική επιβεβαίωση για να νιώθω καλά. Αυτή η διάκριση ήταν πολύ σημαντική για μένα.”</p><div class="rev-cred"><div class="who">Ανώνυμος πελάτης, Founder και στέλεχος</div></div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“It was a wonderful session and helped me to figure out why I do I have certain behaviour and how do I make it better. He also helped me with understanding myself better and the reason the why I follow those pattern's. Wonderful session and would recommend anyone who are working on improving themselves to be better”</p><div class="rev-cred"><span class="rev-avatar" aria-hidden="true"><span class="rev-avatar__i">T</span></span><div class="who">Tanuj</div></div></div><div class="rev-item"><p>“Πίεζα μια επιχειρηματική κατάσταση να συνεχιστεί, επειδή το να τη σταματήσω έμοιαζε με αποτυχία. Μετά από μία από τις ασκήσεις μας, συνειδητοποίησα ότι προσπαθούσα να κατασκευάσω λόγους για να συνεχίσω, ενώ ήδη ήξερα την απάντηση. Έκανα τη δύσκολη συζήτηση λίγο αργότερα. Δεν ήταν ότι ο Άγγελος μου έδωσε την απόφαση. Με βοήθησε να σταματήσω να παλεύω με αυτό που ήδη ήξερα.”</p><div class="rev-cred"><div class="who">Ανώνυμος πελάτης, Ιδιοκτήτης επιχείρησης</div></div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Where do I start?! I was given a strong recommendation to book a call with Aggelos, and it's safe to say, I wish I had met him sooner. Within moments of our call, his expertise shone through, delivering exceptional value and insights that would have taken significantly longer to figure out on our own. He came prepared and quickly pinpointed critical areas in our research strategy that needed addressing, proving fantastic resources and actionable advice on the best next steps. Arguably one of the best mentors I have come across. If you are looking for someone with serious customer research chops, I cannot recommend Aggelos enough. :-)”</p><div class="rev-cred"><span class="rev-avatar" aria-hidden="true"><span class="rev-avatar__i">IL</span></span><div class="who">Indie Ludbrook</div></div></div><div class="rev-item"><p>“Απ’ έξω, εξακολουθούσα να λειτουργώ και να αποδίδω σε υψηλό επίπεδο, οπότε ήταν δύσκολο να εξηγήσω γιατί κάτι ένιωθα ότι δεν πήγαινε καλά. Ο Άγγελος κατάλαβε ότι το πρόβλημα δεν ήταν απλώς ο φόρτος δουλειάς. Δουλέψαμε πάνω στον τρόπο που συνδέω το επίτευγμα με την ασφάλεια, την αξία και την ανακούφιση. Εξακολουθώ να είμαι φιλόδοξος, αλλά η επιτυχία αρχίζει να μοιάζει λιγότερο με οριακή διαφυγή από την αποτυχία.”</p><div class="rev-cred"><div class="who">Ανώνυμος πελάτης, Στέλεχος τεχνολογίας</div></div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Aggelos is amazing with pricing. In 30 minutes, he managed to save me a lot of time and money from my next steps, offering guidance for my company's pricing and positioning efforts. Highly recommended! Thanks you Aggelos!”</p><div class="rev-cred"><span class="rev-avatar" aria-hidden="true"><span class="rev-avatar__i">ST</span><img class="rev-avatar__img" src="/img/reviews/spyros-tsoukalas.jpg" alt="" loading="lazy" decoding="async" width="120" height="120"></span><div class="who">Spyros Tsoukalas</div></div></div><div class="rev-item"><p>“Οι συζητήσεις πάνε πιο βαθιά από το συνηθισμένο coaching, αλλά και πάλι φεύγω με κάτι αξιοποιήσιμο. Κάποιες φορές είναι μια απόφαση, κάποιες μια δύσκολη συζήτηση που πρέπει να κάνω, και κάποιες φορές είναι απλώς το να παρατηρήσω τη στιγμή που το σώμα μου μπαίνει σε κατάσταση απειλής, πριν το μυαλό μου φτιάξει μια ιστορία γύρω από αυτό. Είναι ένας σπάνιος συνδυασμός βάθους και πρακτικότητας.”</p><div class="rev-cred"><div class="who">Ανώνυμος πελάτης, Έμπειρος επαγγελματίας τεχνολογίας</div></div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div><div class="rev-item"><p>“Aggelos is super cash and to the point, but very considerate about long term impact of his recommendations - definitely the man you need if in front of tricky choices!”</p><div class="rev-cred"><span class="rev-avatar" aria-hidden="true"><span class="rev-avatar__i">PL</span><img class="rev-avatar__img" src="/img/reviews/pierrick-lebraly.jpg" alt="" loading="lazy" decoding="async" width="120" height="120"></span><div class="who">Pierrick L'Ebraly</div></div></div><div class="rev-item"><p>“Άρχισα να δουλεύω με τον Άγγελο σε μια μπερδεμένη περίοδο της καριέρας μου. Στα χαρτιά, τα πράγματα πήγαιναν καλά, αλλά μέσα μου αμφισβητούσα σχεδόν τα πάντα. Μέσα σε αρκετές συνεδρίες, με βοήθησε να καταλάβω ποιες ανησυχίες ήταν βάσιμες και ποιες μεγεθύνονταν από παλιούς φόβους γύρω από την απόδοση, την αποτυχία και το πώς με έβλεπαν οι άλλοι. Νιώθω πιο γειωμένος τώρα, παρότι δεν έχουν λυθεί όλα.”</p><div class="rev-cred"><div class="who">Ανώνυμος πελάτης, Στέλεχος τεχνολογίας</div></div><button type="button" aria-expanded="false">Αρχικό κείμενο στα αγγλικά ↓</button></div></div></section><section class="cta-strip"><div class="site-container"><h2 class="cta-strip__h">Ξεκινά με μια σύντομη, δωρεάν γνωριμία.</h2><div><a class="pill pill--green" href="/el/startingdiagnostic/"><span>Ζήτησε μια πρώτη συνάντηση</span><span>→</span></a></div><a class="cta-strip__sub" href="/el/confidentiality/"><span>Εμπιστευτικότητα</span><span>→</span></a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__brand" style="font-size: 20px;">Aggelos<span>.</span></div><div class="site-ftr__roles"><div>Σύμβουλος επιχειρήσεων &amp; καριέρας</div><div style="margin-top: 8px;">Σύμβουλος ψυχικής υγείας</div></div></div><nav><div class="site-ftr__head">ΠΛΟΗΓΗΣΗ</div><a href="/el/">Αρχική</a><a href="/el/about/">Γιατί εμένα</a><a href="/el/reviews/">Κριτικές</a><a href="/el/startingdiagnostic/">Ζήτησε γνωριμία</a></nav><nav><div class="site-ftr__head">ΠΕΡΙΕΧΟΜΕΝΟ</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Κείμενα ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a></nav><nav><div class="site-ftr__head">ΑΚΟΛΟΥΘΗΣΕ</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. Με επιφύλαξη παντός δικαιώματος.</div><nav><a href="/el/confidentiality/">Εμπιστευτικότητα</a><a href="/el/confidentiality/#terms">Όροι χρήσης</a><a href="/el/confidentiality/#privacy">Πολιτική απορρήτου</a></nav></div></div></footer></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
-<script src="/site-chrome.js?v=2"></script>
-<script src="/core-pages-v2.js?v=3"></script>
+<script src="/site-chrome.js?v=3"></script>
+<script src="/core-pages-v2.js?v=4"></script>
 <script src="/content-pages.js?v=35"></script>
 <script>renderApp("reviews", "el");</script>
 </body>

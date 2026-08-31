@@ -12,111 +12,66 @@ const v2Ext = {
 };
 const arr = x => Array.isArray(x) ? x : [];
 
-// ─── Homepage copy — verbatim from the approved implementation brief ───────────
+// ─── Homepage copy — restored approved values (Homepage.dc.html mockup object).
+// The personal first-person intro is intentionally removed (offer-first hero).
 const HOME_V2 = {
   en: {
-    heroEyebrow: 'BUSINESS & CAREER ADVISER · BACP-REGISTERED PSYCHOTHERAPIST',
-    heroH1: 'Business strategy. Personal psychology. Same conversation.',
-    heroBody: 'Offers, marketing, clients and career moves — plus the fear, avoidance and relationships shaping them.',
-    heroCta: 'Apply for a working session',
-    heroAlt: 'Aggelos Mouzakitis speaking on stage',
+    eyebrow: 'BUSINESS & CAREER ADVISOR · BACP-REGISTERED PSYCHOTHERAPIST',
+    h1pre: 'Practical help for the business, the career and ',
+    h1human: 'the person',
+    h1post: ' behind them.',
+    support: 'For people who are good at what they do and have reached something that more work alone won’t fix.',
     mLabel: 'THE WHOLE POINT',
     mMuted: 'You know your work.',
-    mGreen: 'Now let’s make your career or business work for you.',
-    s1h: 'A weak offer needs business advice. Avoiding a good one is a different problem.',
-    s1deck: 'The same goes for the career move, the client you need to fire or the conversation you keep postponing.',
-    s1leftH: 'Business & career',
-    s1left: ['Offer, positioning & GTM', 'Pricing, sales & clients', 'Promotions & career moves'],
-    s1rightH: 'Psychology & relationships',
-    s1right: ['Fear, shame & avoidance', 'Self-criticism & procrastination', 'Boundaries at work & home'],
-    s1centre: 'Aggelos',
-    s2h: 'You will get an opinion.',
-    s2p1: 'I ask enough questions to understand the situation, then I tell you what I think. If the offer is weak, we fix it. If the offer is fine and you are avoiding the sales work, we deal with the avoidance.',
-    s2p2: 'You can say what you normally leave out. I will not judge you, and I will not pretend your explanation makes sense when it does not.',
-    s2quote: '“I left with more than advice. I left understanding what the problem actually was.”',
-    proof: [{
-      v: '7 years',
-      l: 'running a growth consultancy'
-    }, {
-      v: '100+',
-      l: 'technology companies'
-    }, {
-      v: '100+',
-      l: 'founder mentoring sessions'
-    }, {
-      v: 'BACP',
-      l: 'registered psychotherapist'
-    }],
-    s3h: 'We agree on one outcome and a fixed timeframe.',
-    s3body: 'You have access to me in the calls and on WhatsApp between them. The work is built around the outcome, not a pre-written programme.',
-    s4h: 'Want to see how I think?',
-    s4read: {
-      t: 'Read',
-      b: 'Essays about work, ambition and psychology.'
-    },
-    s4watch: {
-      t: 'Watch',
-      b: 'Videos, conversations and useful rants.'
-    },
-    s4follow: {
-      t: 'Follow'
-    },
-    s4and: ' and ',
-    finalH: 'If working harder was going to fix this, it probably would have by now.',
-    finalCta: 'Apply for a working session',
-    confidentiality: 'Confidentiality'
+    mGreenPre: 'Now let’s make your career or business ',
+    mMark: 'work for you.',
+    splitIntro: 'You won’t have to choose between practical advice and psychological depth.',
+    leftH: 'WHAT WE CHANGE',
+    leftP: 'We can work on the offer, marketing, career move, client mix or the way the business runs.',
+    rightH: 'WHAT GETS IN THE WAY',
+    rightP: 'If fear, shame, avoidance or pressure at home is shaping what you do, we work there too.',
+    opinionL1: 'YOU WILL GET',
+    opinionL2: 'AN OPINION.',
+    opinionParas: ['I ask enough questions to understand the situation, then tell you what I think.', 'If I see a practical move, I suggest it. If your story does not add up, I say so.', 'You can tell me the part you normally edit out. I will not think less of you. I will not let you bullshit yourself either.'],
+    opinionQuote: '“I left with more than advice. I left understanding what the problem actually was.”',
+    contNum: '03',
+    contLabel: '/ IF WE CONTINUE',
+    contH: 'We agree on one concrete outcome and how long we will work towards it.',
+    contP: 'We meet weekly or every other week, and you have WhatsApp access between sessions.',
+    mediaIntro: 'Want to see how I think?',
+    readP: 'Essays about work, ambition, psychology and where they overlap.',
+    watchP: 'Short videos, longer conversations and the occasional useful rant.',
+    finalH: 'IF WORKING HARDER WAS GOING TO FIX THIS, IT PROBABLY WOULD HAVE BY NOW.',
+    contAlt: 'Aggelos Mouzakitis'
   },
   el: {
-    heroEyebrow: 'ΣΥΜΒΟΥΛΟΣ BUSINESS & ΚΑΡΙΕΡΑΣ · BACP-REGISTERED ΨΥΧΟΘΕΡΑΠΕΥΤΗΣ',
-    heroH1: 'Business και ψυχολογία. Στην ίδια συζήτηση.',
-    heroBody: 'Offer, marketing, πελάτες και καριέρα, μαζί με τον φόβο, την αποφυγή και τις σχέσεις που επηρεάζουν τις αποφάσεις σου.',
-    heroCta: 'Κάνε αίτηση για μία πρώτη συνάντηση',
-    heroAlt: 'Ο Άγγελος Μουζακίτης σε ομιλία',
+    eyebrow: 'ΣΥΜΒΟΥΛΟΣ ΕΠΙΧΕΙΡΗΣΕΩΝ & ΚΑΡΙΕΡΑΣ · ΣΥΜΒΟΥΛΟΣ ΨΥΧΙΚΗΣ ΥΓΕΙΑΣ',
+    h1pre: 'Πρακτική βοήθεια για την επιχείρηση, την καριέρα και ',
+    h1human: 'τον άνθρωπο',
+    h1post: ' πίσω από όλα αυτά.',
+    support: 'Για ανθρώπους που είναι καλοί σε αυτό που κάνουν και έχουν φτάσει σε κάτι που δεν λύνεται μόνο με περισσότερη δουλειά.',
     mLabel: 'ΤΟ ΖΗΤΟΥΜΕΝΟ',
-    mMuted: 'Ξέρεις τη δουλειά σου.',
-    mGreen: 'Τώρα πάμε να κάνουμε την καριέρα ή την επιχείρησή σου να δουλεύει για σένα.',
-    s1h: 'Ένα κακό offer θέλει καλύτερη στρατηγική. Το να αποφεύγεις ένα καλό offer είναι άλλο πρόβλημα.',
-    s1deck: 'Το ίδιο ισχύει για την επόμενη κίνηση στην καριέρα, τον πελάτη που πρέπει να διώξεις ή τη συζήτηση που αναβάλλεις.',
-    s1leftH: 'Business & καριέρα',
-    s1left: ['Offer, positioning & GTM', 'Τιμολόγηση, πωλήσεις & πελάτες', 'Προαγωγές & επόμενες κινήσεις'],
-    s1rightH: 'Ψυχολογία & σχέσεις',
-    s1right: ['Φόβος, ντροπή & αποφυγή', 'Αυτοκριτική & αναβλητικότητα', 'Όρια στη δουλειά & στο σπίτι'],
-    s1centre: 'Aggelos',
-    s2h: 'Θα ακούσεις τη γνώμη μου.',
-    s2p1: 'Κάνω όσες ερωτήσεις χρειάζονται και μετά σου λέω τι πιστεύω. Αν το offer είναι αδύναμο, το φτιάχνουμε. Αν είναι καλό και αποφεύγεις να το πουλήσεις, δουλεύουμε την αποφυγή.',
-    s2p2: 'Μπορείς να πεις αυτά που συνήθως αφήνεις απ’ έξω. Δεν θα σε κρίνω και δεν θα κάνω πως η εξήγησή σου βγάζει νόημα, αν δεν βγάζει.',
-    s2quote: '«Έφυγα με κάτι περισσότερο από συμβουλές. Κατάλαβα ποιο ήταν πραγματικά το πρόβλημα.»',
-    proof: [{
-      v: '7 χρόνια',
-      l: 'με δική μου growth consultancy'
-    }, {
-      v: '100+',
-      l: 'εταιρείες τεχνολογίας'
-    }, {
-      v: '100+',
-      l: 'συνεδρίες mentoring με founders'
-    }, {
-      v: 'BACP',
-      l: 'registered ψυχοθεραπευτής'
-    }],
-    s3h: 'Συμφωνούμε σε έναν συγκεκριμένο στόχο και σε συγκεκριμένο χρονικό πλαίσιο.',
-    s3body: 'Έχεις πρόσβαση σε εμένα στις συναντήσεις και στο WhatsApp ενδιάμεσα. Η συνεργασία χτίζεται γύρω από τον στόχο σου, όχι γύρω από ένα έτοιμο πρόγραμμα.',
-    s4h: 'Θέλεις να δεις πώς σκέφτομαι;',
-    s4read: {
-      t: 'Διάβασε',
-      b: 'Κείμενα για δουλειά, φιλοδοξία και ψυχολογία.'
-    },
-    s4watch: {
-      t: 'Δες',
-      b: 'Βίντεο, συζητήσεις και χρήσιμα rants.'
-    },
-    s4follow: {
-      t: 'Ακολούθησε'
-    },
-    s4and: ' και ',
-    finalH: 'Αν λυνόταν με περισσότερη δουλειά, μάλλον θα είχε λυθεί ήδη.',
-    finalCta: 'Κάνε αίτηση για μία πρώτη συνάντηση',
-    confidentiality: 'Εμπιστευτικότητα'
+    mMuted: 'Ξέρεις καλά τη δουλειά σου.',
+    mGreenPre: 'Πάμε να κάνουμε την καριέρα ή την επιχείρησή σου ',
+    mMark: 'να δουλεύει για σένα.',
+    splitIntro: 'Δεν χρειάζεται να διαλέξεις αν το θέμα είναι επαγγελματικό ή προσωπικό.',
+    leftH: 'ΤΙ ΑΛΛΑΖΟΥΜΕ',
+    leftP: 'Μπορούμε να δουλέψουμε το offer, το marketing, την επόμενη κίνηση στην καριέρα σου, τους πελάτες ή τον τρόπο που λειτουργεί η επιχείρησή σου.',
+    rightH: 'ΤΙ ΜΠΑΙΝΕΙ ΣΤΗ ΜΕΣΗ',
+    rightP: 'Αν ο φόβος, η ντροπή, η αποφυγή ή η πίεση στο σπίτι επηρεάζουν τη δουλειά και τις αποφάσεις σου, πιάνουμε και αυτό το κομμάτι.',
+    opinionL1: 'ΘΑ ΣΟΥ ΠΩ',
+    opinionL2: 'ΤΗ ΓΝΩΜΗ ΜΟΥ.',
+    opinionParas: ['Θα κάνω όσες ερωτήσεις χρειαστούν για να καταλάβω τι συμβαίνει. Μετά θα σου πω πώς το βλέπω.', 'Αν βλέπω κάτι συγκεκριμένο που μπορείς να κάνεις, θα στο προτείνω. Αν αυτά που μου λες δεν στέκουν, θα σου το πω.', 'Μπορείς να μου πεις και αυτό που συνήθως αφήνεις απ’ έξω. Δεν θα σε δω διαφορετικά. Δεν θα σε αφήσω όμως να λες μαλακίες στον εαυτό σου.'],
+    opinionQuote: '«Έφυγα με κάτι περισσότερο από συμβουλές. Έφυγα έχοντας καταλάβει ποιο ήταν πραγματικά το πρόβλημα.»',
+    contNum: '03',
+    contLabel: '/ ΑΝ ΣΥΝΕΧΙΣΟΥΜΕ',
+    contH: 'Συμφωνούμε τι ακριβώς θέλεις να πετύχεις και για πόσο θα δουλέψουμε πάνω σε αυτό.',
+    contP: 'Μιλάμε κάθε εβδομάδα και μπορείς να μου γράφεις στο WhatsApp ανάμεσα στις συναντήσεις.',
+    mediaIntro: 'Θέλεις να δεις πώς σκέφτομαι;',
+    readP: 'Κείμενα για τη δουλειά, τη φιλοδοξία, την ψυχολογία και εκεί που μπλέκονται.',
+    watchP: 'Μικρά βίντεο, μεγαλύτερες συζητήσεις και πού και πού κάποιο χρήσιμο rant.',
+    finalH: 'ΑΝ ΛΥΝΟΤΑΝ ΜΕ ΠΕΡΙΣΣΟΤΕΡΗ ΔΟΥΛΕΙΑ, ΜΑΛΛΟΝ ΘΑ ΕΙΧΕ ΛΥΘΕΙ ΗΔΗ.',
+    contAlt: 'Άγγελος Μουζακίτης'
   }
 };
 
@@ -187,6 +142,137 @@ const WHY_V2 = {
 // scoped under .amx-page so legacy routes never inherit them). Reviews keeps its
 // own rev-* rules below.
 const PAGE_V2_CSS = `
+/* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
+.home-hero{background:${V2.paper};color:${V2.heroInk}}
+.home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(410px,0.86fr);align-items:center;gap:48px;padding-block:52px 64px}
+.home-hero__copy{position:relative;z-index:2;min-width:0;max-width:720px;color:${V2.heroInk}}
+.home-hero__eyebrow{max-width:520px;color:${V2.green};font-family:${V2.display};font-size:13px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
+.home-hero__title{max-width:720px;margin:14px 0 22px;font-family:${V2.archivo};font-synthesis:none;font-weight:400;line-height:0.9;letter-spacing:-0.055em;color:${V2.heroInk}}
+html[lang="en"] .home-hero__title{font-size:clamp(62px,5.4vw,80px)}
+html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:${V2.display};font-weight:800;line-height:0.98;letter-spacing:-0.045em}
+.home-hero__title .human{position:relative;z-index:0;white-space:nowrap}
+.home-hero__title .human::after{content:"";position:absolute;z-index:-1;left:-0.03em;right:-0.03em;bottom:0.04em;height:0.14em;background:${V2.green}}
+.home-hero__support{max-width:640px;margin:0 0 26px;color:${V2.heroInk};font-family:${V2.display};font-size:20px;font-weight:400;line-height:1.42}
+.home-hero__photo{position:relative;z-index:1;width:clamp(420px,34vw,500px);max-width:100%;aspect-ratio:1;justify-self:end}
+.home-hero__photo::before{content:"";position:absolute;inset:8% -3% -2% 9%;border-radius:50%;background:${V2.green}}
+.home-hero__frame{position:absolute;inset:0;overflow:hidden;border-radius:50%}
+.home-hero__frame img{width:100%;height:100%;object-fit:cover;object-position:56% 44%;transform:scale(1.58);filter:grayscale(1) contrast(1.08)}
+@media (max-width:959px) and (min-width:521px){
+  .home-hero__grid{grid-template-columns:minmax(0,1.08fr) minmax(280px,0.92fr);gap:24px;padding-inline:24px}
+  html[lang="en"] .home-hero__title{font-size:clamp(46px,7vw,62px)}
+  html[lang="el"] .home-hero__title{font-size:clamp(40px,6vw,54px)}
+  .home-hero__photo{width:min(100%,390px)}
+}
+@media (max-width:520px){
+  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:38px 20px 48px;min-height:0}
+  html[lang="en"] .home-hero__title{font-size:clamp(46px,14vw,62px)}
+  html[lang="el"] .home-hero__title{font-size:clamp(38px,11vw,52px)}
+  .home-hero__photo{width:min(82%,310px);justify-self:center}
+}
+
+/* ── Manifesto — "The whole point" (full-width dark) ── */
+.home-manifesto{width:100%;background:${V2.ink}}
+.home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(48px,5vw,68px) clamp(24px,5vw,72px)}
+.home-manifesto__label{margin-bottom:17px;color:${V2.green};font-family:${V2.display};font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
+.home-manifesto__copy{font-family:${V2.archivo};font-synthesis:none;font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
+html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;letter-spacing:-0.045em}
+.home-manifesto__muted,.home-manifesto__green{display:block}
+.home-manifesto__muted{color:${V2.greyOnDark}}
+.home-manifesto__green{color:${V2.green}}
+.home-manifesto__copy mark{padding:0 0.08em 0.02em;background:${V2.paper};color:${V2.ink};box-decoration-break:clone;-webkit-box-decoration-break:clone}
+@media (max-width:680px){.home-manifesto__inner{padding:40px 20px 46px}.home-manifesto__copy{font-size:clamp(34px,10vw,48px)}}
+
+/* ── Section 01 — dual-field component (dark business / green psychology, portrait on the seam) ── */
+.am-duality-section{overflow:hidden;padding:clamp(72px,7.5vw,108px) 24px clamp(84px,8.5vw,122px);background:#f3f0e8}
+.am-duality-section__inner{width:min(100%,1140px);margin-inline:auto}
+.am-duality-section__heading{display:grid;grid-template-columns:54px minmax(0,880px);gap:22px;align-items:start;margin-bottom:clamp(62px,7vw,92px)}
+.am-duality-section__number{padding-top:8px;color:#059669;font-family:${V2.display};font-size:15px;line-height:1;font-weight:800}
+.am-duality-section__title{max-width:880px;margin:0;font-family:${V2.display};font-synthesis:none;font-size:clamp(43px,4.25vw,61px);line-height:0.98;letter-spacing:-0.052em;font-weight:800;color:#181a1c}
+.am-duality{--am-photo-width:clamp(224px,21.5vw,250px);--am-photo-height:clamp(382px,36.7vw,426px);position:relative;isolation:isolate;width:min(100%,1000px);min-height:360px;margin-inline:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.am-duality__side{min-width:0;min-height:360px;display:flex;align-items:center}
+.am-duality__side--business{padding:52px 160px 52px 50px;background:#181a1c;color:#ffffff}
+.am-duality__side--psychology{padding:52px 50px 52px 180px;background:#059669;color:#181a1c;text-align:right}
+.am-duality__side--psychology .am-duality__copy{margin-left:auto}
+.am-duality__copy{width:100%;max-width:270px}
+.am-duality__label{margin:0 0 20px;font-family:${V2.body};font-size:13px;line-height:1;font-weight:800;letter-spacing:0.075em;text-transform:uppercase}
+.am-duality__statement{margin:0;font-family:${V2.display};font-size:clamp(20px,1.8vw,24px);line-height:1.27;letter-spacing:-0.028em;font-weight:700}
+.am-duality__portrait{position:absolute;z-index:3;left:50%;top:50%;width:var(--am-photo-width);height:var(--am-photo-height);margin:0;transform:translate(-50%,-50%);overflow:hidden;background:#181a1c}
+.am-duality__portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(100%)}
+@media (max-width:900px) and (min-width:701px){
+  .am-duality-section__heading{grid-template-columns:42px minmax(0,1fr);gap:16px}
+  .am-duality{--am-photo-width:210px;--am-photo-height:360px}
+  .am-duality__side--business{padding:48px 130px 48px 38px}
+  .am-duality__side--psychology{padding:48px 38px 48px 145px}
+  .am-duality__statement{font-size:19px}
+}
+@media (max-width:700px){
+  .am-duality-section{padding-inline:20px}
+  .am-duality-section__heading{display:block;margin-bottom:58px}
+  .am-duality-section__number{display:block;margin-bottom:22px;padding:0}
+  .am-duality-section__title{font-size:clamp(39px,10.5vw,49px)}
+  .am-duality{--am-mobile-top:270px;--am-mobile-bottom:300px;--am-photo-width:clamp(144px,39vw,160px);--am-photo-height:clamp(224px,60vw,242px);min-height:calc(var(--am-mobile-top) + var(--am-mobile-bottom));grid-template-columns:1fr;grid-template-rows:var(--am-mobile-top) var(--am-mobile-bottom)}
+  .am-duality__side{min-height:0;justify-content:center;text-align:center}
+  .am-duality__side--psychology{text-align:center}
+  .am-duality__side--psychology .am-duality__copy{margin-left:0;margin-right:0}
+  .am-duality__side--business{padding:38px 18px 112px}
+  .am-duality__side--psychology{padding:178px 18px 34px}
+  .am-duality__copy{max-width:330px}
+  .am-duality__label{margin-bottom:17px;font-size:11px}
+  .am-duality__statement{font-size:clamp(17px,4.7vw,20px);line-height:1.3}
+  .am-duality__portrait{top:calc(var(--am-mobile-top) + 25px)}
+}
+@media (max-width:370px){
+  .am-duality-section{padding-inline:16px}
+  .am-duality__statement{font-size:16px}
+}
+
+/* ── Home dark canvas sections 02–04 ── */
+.home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(64px,8vw,96px)}
+.sec__n{font-family:${V2.display};font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:${V2.green}}
+.sec__h{margin:22px 0 48px;max-width:19ch;font-family:${V2.display};font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.sec__h2l{margin:22px 0 48px;font-family:${V2.display};font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
+.sec__h2l span{display:block}
+.cont-marker{display:flex;align-items:baseline;gap:10px}
+.cont-marker .n{font-family:${V2.display};font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:${V2.green}}
+.cont-marker .lbl{font-family:${V2.display};font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:${V2.green}}
+.opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:${V2.paper};border-radius:12px;overflow:hidden}
+.opinion img{display:block;width:100%;height:100%;min-height:520px;object-fit:cover;object-position:42% 50%}
+.opinion__body{padding:clamp(32px,4.5vw,56px);min-width:0;display:grid;align-content:start;gap:24px}
+.opinion__body p{margin:0;font-size:18px;line-height:1.55;color:${V2.ink2};max-width:52ch;text-wrap:pretty}
+.opinion__q{margin:8px 0 0;border-top:2px solid ${V2.green};padding-top:24px;font-family:${V2.display};font-weight:750;font-size:clamp(28px,2.5vw,38px);line-height:1.2;letter-spacing:-0.035em;color:${V2.ink};max-width:32ch;text-wrap:pretty}
+.cont{min-height:440px;background:${V2.paper};border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
+.cont__in{max-width:760px}
+.cont__h{margin:16px 0 0;max-width:20ch;font-family:${V2.display};font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:${V2.ink};text-wrap:pretty}
+.cont p{margin:24px 0 0;font-size:18px;line-height:1.55;color:${V2.ink2};max-width:52ch;text-wrap:pretty}
+.rule-arrow{display:flex;align-items:center;gap:10px;width:min(320px,60%);margin:0 0 48px}
+.rule-arrow div{flex:1;height:2px;background:${V2.green}}
+.rule-arrow span{color:${V2.green};line-height:1;font-size:18px}
+.media{display:grid;grid-template-columns:7fr 5fr;grid-template-rows:repeat(2,minmax(0,1fr));min-height:520px;border-radius:12px;overflow:hidden}
+.media__cell{padding:clamp(32px,3.5vw,56px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;min-width:0;transition:background .18s,filter .18s}
+.media__cell h3{margin:0;font-family:${V2.display};font-weight:800;line-height:0.9;letter-spacing:-0.045em}
+.media__top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.media__arw{font-size:38px;line-height:1;transition:transform .18s}
+.media__cell:hover .media__arw{transform:translate(5px,-5px)}
+.media__kicker{font-size:14px;font-weight:700;letter-spacing:0.12em;margin-bottom:16px}
+.media__cell p{margin:0;font-size:18px;line-height:1.55;max-width:36ch;text-wrap:pretty}
+.media__read{grid-row:1 / span 2;background:${V2.green};color:#fff}
+.media__read:hover{filter:brightness(0.9)}
+.media__read h3{font-size:clamp(64px,6vw,92px)}
+.media__watch{background:${V2.black};color:#fff}
+.media__watch:hover{background:#0e0e0e}
+.media__watch h3{font-size:clamp(44px,4vw,64px)}
+.media__watch p{font-size:17px;line-height:1.5;max-width:34ch}
+.media__follow{background:${V2.paper};color:${V2.ink}}
+.media__follow h3{font-size:clamp(44px,4vw,64px)}
+.icon-row{display:flex;align-items:center;gap:16px}
+.icon-btn{width:48px;height:48px;border-radius:50%;background:${V2.ink};color:#fff;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .18s}
+.icon-btn:hover{background:${V2.green};transform:translateY(-3px)}
+@media (max-width:960px){
+  .media{grid-template-columns:1fr;grid-template-rows:auto;min-height:0}
+  .media__read{grid-row:auto}.media__cell{min-height:320px}
+  .opinion{grid-template-columns:1fr}.opinion img{min-height:320px}
+}
+
 :root{
   --am-paper:#f3f0e8;
   --am-ink:#171919;
@@ -219,58 +305,6 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .amx-section-head{display:grid;grid-template-columns:44px minmax(0, 1fr);gap:20px;align-items:start;margin-bottom:36px}
 .amx-number{padding-top:4px;color:var(--am-green);font:800 16px/1 var(--font-heading);letter-spacing:-0.03em}
 
-/* HOME HERO */
-.amx-hero{display:grid;grid-template-columns:minmax(0, 1.25fr) minmax(240px, 0.75fr);gap:clamp(38px, 6vw, 72px);align-items:center;padding-block:clamp(58px, 8vw, 88px)}
-.amx-hero-copy{min-width:0}
-.amx-hero .amx-display{max-width:650px;margin-top:16px}
-.amx-hero .amx-body{max-width:610px;margin:22px 0 26px}
-.amx-hero-photo{position:relative;width:min(100%, 310px);aspect-ratio:1;justify-self:end}
-.amx-hero-photo::before{content:"";position:absolute;inset:8% -4% -2% 10%;border-radius:50%;background:var(--am-green)}
-.amx-hero-photo img{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;border-radius:50%;object-fit:cover;object-position:50% 50%;filter:grayscale(1)}
-
-/* THE WHOLE POINT */
-.amx-manifesto .amx-container{padding-block:clamp(54px, 7vw, 74px)}
-.amx-manifesto .amx-heading{max-width:880px;margin-top:16px}
-.amx-manifesto-muted{color:var(--am-grey)}
-.amx-manifesto-green{color:var(--am-green)}
-
-/* HOME 01 */
-.amx-lede{max-width:730px;margin:-14px 0 38px 64px}
-.amx-duality{position:relative;width:min(100%, 860px);min-height:485px;margin-inline:auto}
-.amx-circle{position:absolute;top:0;width:58%;aspect-ratio:1;display:flex;flex-direction:column;justify-content:center;border-radius:50%}
-.amx-circle-left{left:0;padding:52px 150px 52px 60px;color:#ffffff;background:var(--am-dark)}
-.amx-circle-right{right:0;align-items:flex-end;padding:52px 60px 52px 150px;color:var(--am-ink);background:var(--am-green);text-align:right}
-.amx-circle .amx-subheading{max-width:240px}
-.amx-circle-list{max-width:230px;margin:18px 0 0;padding:0;list-style:none;color:inherit;font:400 14px/1.65 var(--font-body)}
-.amx-overlap-photo{position:absolute;z-index:3;top:50%;left:50%;width:138px;aspect-ratio:1;transform:translate(-50%, -50%);overflow:hidden;border:8px solid var(--am-paper);border-radius:50%;background:var(--am-dark)}
-.amx-overlap-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:50% 18%}
-.amx-overlap-label{position:absolute;z-index:4;top:calc(50% + 84px);left:50%;min-width:126px;padding:8px 12px;transform:translateX(-50%);color:#ffffff;background:var(--am-dark);font:600 11px/1 var(--font-body);text-align:center;text-transform:uppercase}
-
-/* HOME 02 */
-.amx-opinion{display:grid;grid-template-columns:minmax(230px, 0.75fr) minmax(0, 1.25fr);margin-left:64px}
-.amx-opinion-photo{min-height:390px;overflow:hidden;background:var(--am-dark)}
-.amx-opinion-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
-.amx-opinion-copy{padding:clamp(30px, 5vw, 48px);color:var(--am-ink);background:var(--am-paper)}
-.amx-opinion-copy .amx-body + .amx-body{margin-top:18px}
-.amx-quote{margin-top:28px;padding-top:24px;border-top:2px solid var(--am-green);color:var(--am-ink);font-family:var(--font-heading);font-size:26px;font-weight:800;line-height:1.1;letter-spacing:-0.025em}
-.amx-proof{display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));margin-top:34px;border-top:1px solid rgb(243 240 232 / 18%);border-bottom:1px solid rgb(243 240 232 / 18%)}
-.amx-proof-item{min-height:104px;display:flex;flex-direction:column;justify-content:center;padding:20px;border-right:1px solid rgb(243 240 232 / 18%)}
-.amx-proof-item:last-child{border-right:0}
-.amx-proof-value{color:var(--am-green);font:800 22px/1 var(--font-heading)}
-.amx-proof-label{margin-top:8px;color:var(--am-paper);font:400 12px/1.35 var(--font-body)}
-
-/* HOME 03 */
-.amx-engagement-grid{display:grid;grid-template-columns:44px minmax(0, 720px);gap:20px}
-.amx-engagement-copy .amx-body{max-width:680px;margin-top:24px}
-
-/* HOME 04 */
-.amx-content-links{display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));margin-left:64px;border-top:1px solid rgb(243 240 232 / 20%)}
-.amx-content-link{min-height:190px;display:flex;flex-direction:column;justify-content:space-between;padding:26px 24px;color:var(--am-paper);border-right:1px solid rgb(243 240 232 / 20%);text-decoration:none}
-.amx-content-link:last-child{border-right:0}
-.amx-content-link .amx-body{color:var(--am-grey);font-size:15px}
-.amx-content-link .amx-body a{color:var(--am-green);text-decoration:underline;text-underline-offset:3px}
-.amx-content-arrow{color:var(--am-green);font-size:22px}
-
 /* FINAL CTA */
 .amx-final{text-align:center}
 .amx-final .amx-heading{max-width:770px;margin-inline:auto}
@@ -291,37 +325,15 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .amx-case{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding-block:26px;border-bottom:1px solid rgb(243 240 232 / 20%)}
 .amx-case .amx-body:last-child{color:var(--am-green)}
 
-@media (min-width: 721px) and (max-width: 840px){
-  .amx-duality{min-height:410px}
-  .amx-circle-left{padding:42px 110px 42px 42px}
-  .amx-circle-right{padding:42px 42px 42px 110px}
-  .amx-circle .amx-subheading{font-size:21px}
-  .amx-circle-list{font-size:13px}
-}
 @media (max-width: 720px){
-  .amx-hero{grid-template-columns:1fr}
-  .amx-hero-photo{width:min(72%, 280px);justify-self:center}
-  .amx-section-head,.amx-engagement-grid{grid-template-columns:1fr;gap:14px}
-  .amx-lede,.amx-opinion,.amx-content-links,.amx-reading-copy,.amx-case-list{margin-left:0}
-  .amx-opinion,.amx-proof,.amx-content-links,.amx-case{grid-template-columns:1fr}
-  .amx-proof-item,.amx-content-link{border-right:0;border-bottom:1px solid rgb(243 240 232 / 18%)}
-  .amx-proof-item:last-child,.amx-content-link:last-child{border-bottom:0}
-  .amx-opinion-photo{min-height:320px}
+  .amx-section-head{grid-template-columns:1fr;gap:14px}
+  .amx-reading-copy,.amx-case-list{margin-left:0}
+  .amx-case{grid-template-columns:1fr}
   .amx-story-grid{grid-template-columns:1fr;gap:18px}
-  .amx-duality{min-height:clamp(510px, 95vw, 650px)}
-  .amx-circle{width:min(90%, 430px);left:50%;right:auto;transform:translateX(-50%)}
-  .amx-circle-left{top:0;padding:46px 115px 110px 46px}
-  .amx-circle-right{top:clamp(170px, 32vw, 235px);padding:115px 46px 46px 115px}
-  .amx-overlap-photo{top:clamp(225px, 46vw, 331px)}
-  .amx-overlap-label{top:clamp(307px, calc(46vw + 82px), 413px)}
 }
 @media (max-width: 470px){
   .amx-display{font-size:clamp(38px, 12vw, 48px)}
   .amx-heading{font-size:clamp(32px, 10vw, 42px)}
-  .amx-circle .amx-subheading{font-size:20px}
-  .amx-circle-list{font-size:12px}
-  .amx-circle-left{padding-left:34px;padding-right:100px}
-  .amx-circle-right{padding-right:34px;padding-left:100px}
 }
 
 /* ── Reviews (no giant opening testimonial) ── */
@@ -358,220 +370,208 @@ function HomePageV2({
   lang = 'en'
 }) {
   const c = HOME_V2[lang] || HOME_V2.en;
-  const P = window.cPath;
-  const diag = P('diagnostic', lang);
-  const conf = P('confidentiality', lang);
-  const E = window.EXTERNAL;
+  const t = window.cT(lang);
   return React.createElement(React.Fragment, null, React.createElement(window.ChromeStyles), React.createElement(PageV2Styles), React.createElement(window.SiteHeader, {
     page: 'home',
     lang
-  }), React.createElement('main', {
-    className: 'amx-page'
-  },
-  // Hero — off-white
+  }), React.createElement('main', null,
+  // Hero — professional eyebrow, positioning H1, supporting line, CTA + stage photo
   React.createElement('section', {
-    className: 'amx-paper'
+    className: 'home-hero'
   }, React.createElement('div', {
-    className: 'amx-container amx-hero'
+    className: 'home-hero__grid'
   }, React.createElement('div', {
-    className: 'amx-hero-copy'
-  }, React.createElement('p', {
-    className: 'amx-label'
-  }, c.heroEyebrow), React.createElement('h1', {
-    className: 'amx-display'
-  }, c.heroH1), React.createElement('p', {
-    className: 'amx-body'
-  }, c.heroBody), React.createElement('a', {
-    className: 'amx-button',
-    href: diag
-  }, c.heroCta + ' →')), React.createElement('div', {
-    className: 'amx-hero-photo'
+    className: 'home-hero__copy'
+  }, React.createElement('div', {
+    className: 'home-hero__eyebrow'
+  }, c.eyebrow), React.createElement('h1', {
+    className: 'home-hero__title'
+  }, c.h1pre, React.createElement('span', {
+    className: 'human'
+  }, c.h1human), c.h1post), React.createElement('p', {
+    className: 'home-hero__support'
+  }, c.support), React.createElement('a', {
+    className: 'hero-cta',
+    href: window.cPath('diagnostic', lang)
+  }, React.createElement('span', null, t.ctaBtn), React.createElement('span', null, '→'))), React.createElement('figure', {
+    className: 'home-hero__photo'
+  }, React.createElement('div', {
+    className: 'home-hero__frame'
   }, React.createElement('img', {
     src: '/img/aggelos-homepage.webp',
-    alt: c.heroAlt,
-    width: 620,
-    height: 620,
+    alt: 'Aggelos Mouzakitis',
+    width: 1560,
+    height: 1040,
     loading: 'eager',
     fetchpriority: 'high',
     decoding: 'async'
-  })))),
-  // The Whole Point — dark
+  }))))),
+  // Manifesto — "The whole point"
   React.createElement('section', {
-    className: 'amx-dark amx-manifesto'
+    className: 'home-manifesto'
   }, React.createElement('div', {
-    className: 'amx-container'
-  }, React.createElement('p', {
-    className: 'amx-label'
-  }, c.mLabel), React.createElement('h2', {
-    className: 'amx-heading'
+    className: 'home-manifesto__inner'
+  }, React.createElement('div', {
+    className: 'home-manifesto__label'
+  }, c.mLabel), React.createElement('div', {
+    className: 'home-manifesto__copy'
   }, React.createElement('span', {
-    className: 'amx-manifesto-muted'
-  }, c.mMuted + ' '), React.createElement('span', {
-    className: 'amx-manifesto-green'
-  }, c.mGreen)))),
-  // Section 01 — off-white, overlapping circles
+    className: 'home-manifesto__muted'
+  }, c.mMuted), React.createElement('span', {
+    className: 'home-manifesto__green'
+  }, c.mGreenPre, React.createElement('mark', null, c.mMark))))),
+  // Section 01 — dual-field component (dark business / green psychology, portrait on the seam)
   React.createElement('section', {
-    className: 'amx-paper amx-section'
+    className: 'am-duality-section',
+    'aria-labelledby': 'am-duality-title'
   }, React.createElement('div', {
-    className: 'amx-container'
-  }, React.createElement('div', {
-    className: 'amx-section-head'
-  }, React.createElement('div', {
-    className: 'amx-number'
+    className: 'am-duality-section__inner'
+  }, React.createElement('header', {
+    className: 'am-duality-section__heading'
+  }, React.createElement('span', {
+    className: 'am-duality-section__number',
+    'aria-hidden': 'true'
   }, '01'), React.createElement('h2', {
-    className: 'amx-heading'
-  }, c.s1h)), React.createElement('p', {
-    className: 'amx-body amx-lede'
-  }, c.s1deck), React.createElement('div', {
-    className: 'amx-duality'
+    className: 'am-duality-section__title',
+    id: 'am-duality-title'
+  }, c.splitIntro)), React.createElement('div', {
+    className: 'am-duality'
+  }, React.createElement('article', {
+    className: 'am-duality__side am-duality__side--business'
   }, React.createElement('div', {
-    className: 'amx-circle amx-circle-left'
-  }, React.createElement('h3', {
-    className: 'amx-subheading'
-  }, c.s1leftH), React.createElement('ul', {
-    className: 'amx-circle-list'
-  }, c.s1left.map((x, i) => React.createElement('li', {
-    key: i
-  }, x)))), React.createElement('div', {
-    className: 'amx-circle amx-circle-right'
-  }, React.createElement('h3', {
-    className: 'amx-subheading'
-  }, c.s1rightH), React.createElement('ul', {
-    className: 'amx-circle-list'
-  }, c.s1right.map((x, i) => React.createElement('li', {
-    key: i
-  }, x)))),
-  // Overlap portrait: the supplied cutout, self-hosted; adjacent label
-  // already names Aggelos, so alt is empty to avoid repetition.
-  React.createElement('div', {
-    className: 'amx-overlap-photo'
+    className: 'am-duality__copy'
+  }, React.createElement('p', {
+    className: 'am-duality__label'
+  }, c.leftH), React.createElement('p', {
+    className: 'am-duality__statement'
+  }, c.leftP))), React.createElement('article', {
+    className: 'am-duality__side am-duality__side--psychology'
+  }, React.createElement('div', {
+    className: 'am-duality__copy'
+  }, React.createElement('p', {
+    className: 'am-duality__label'
+  }, c.rightH), React.createElement('p', {
+    className: 'am-duality__statement'
+  }, c.rightP))), React.createElement('figure', {
+    className: 'am-duality__portrait'
   }, React.createElement('img', {
     src: '/img/aggelos-overlap.webp',
-    alt: '',
-    width: 138,
-    height: 138,
+    alt: 'Aggelos Mouzakitis',
+    width: 250,
+    height: 426,
     loading: 'lazy',
     decoding: 'async'
-  })), React.createElement('div', {
-    className: 'amx-overlap-label'
-  }, c.s1centre)))),
-  // Section 02 — dark, opinion + proof strip
-  React.createElement('section', {
-    className: 'amx-dark amx-section'
+  }))))), React.createElement('div', {
+    className: 'home-flow'
+  },
+  // 02 — you will get an opinion
+  React.createElement('section', null, React.createElement('div', {
+    className: 'site-container'
   }, React.createElement('div', {
-    className: 'amx-container'
-  }, React.createElement('div', {
-    className: 'amx-section-head'
-  }, React.createElement('div', {
-    className: 'amx-number'
+    className: 'sec__n'
   }, '02'), React.createElement('h2', {
-    className: 'amx-heading'
-  }, c.s2h)), React.createElement('div', {
-    className: 'amx-opinion'
-  }, React.createElement('div', {
-    className: 'amx-opinion-photo'
+    className: 'sec__h2l'
+  }, React.createElement('span', null, c.opinionL1), React.createElement('span', null, c.opinionL2)), React.createElement('div', {
+    className: 'opinion'
   }, React.createElement('img', {
     src: '/img/aggelos-continuation.jpeg',
-    alt: '',
-    width: 520,
-    height: 650,
+    alt: c.contAlt,
+    width: 900,
+    height: 1125,
     loading: 'lazy',
     decoding: 'async'
-  })), React.createElement('div', {
-    className: 'amx-opinion-copy'
-  }, React.createElement('p', {
-    className: 'amx-body'
-  }, c.s2p1), React.createElement('p', {
-    className: 'amx-body'
-  }, c.s2p2), React.createElement('blockquote', {
-    className: 'amx-quote'
-  }, c.s2quote))), React.createElement('div', {
-    className: 'amx-proof'
-  }, c.proof.map((p, i) => React.createElement('div', {
-    className: 'amx-proof-item',
+  }), React.createElement('div', {
+    className: 'opinion__body'
+  }, c.opinionParas.map((p, i) => React.createElement('p', {
     key: i
+  }, p)), React.createElement('blockquote', {
+    className: 'opinion__q'
+  }, c.opinionQuote))))),
+  // 03 — if we continue
+  React.createElement('section', null, React.createElement('div', {
+    className: 'site-container'
   }, React.createElement('div', {
-    className: 'amx-proof-value'
-  }, p.v), React.createElement('div', {
-    className: 'amx-proof-label'
-  }, p.l)))))),
-  // Section 03 — off-white, engagement
-  React.createElement('section', {
-    className: 'amx-paper amx-section'
+    className: 'cont'
   }, React.createElement('div', {
-    className: 'amx-container amx-engagement-grid'
+    className: 'cont__in'
   }, React.createElement('div', {
-    className: 'amx-number'
-  }, '03'), React.createElement('div', {
-    className: 'amx-engagement-copy'
-  }, React.createElement('h2', {
-    className: 'amx-heading'
-  }, c.s3h), React.createElement('p', {
-    className: 'amx-body'
-  }, c.s3body)))),
-  // Section 04 — dark, Read / Watch / Follow (three equal columns)
-  React.createElement('section', {
-    className: 'amx-dark amx-section'
+    className: 'cont-marker'
+  }, React.createElement('span', {
+    className: 'n'
+  }, c.contNum), React.createElement('span', {
+    className: 'lbl'
+  }, c.contLabel)), React.createElement('h2', {
+    className: 'cont__h'
+  }, c.contH), React.createElement('p', null, c.contP))))),
+  // 04 — media
+  React.createElement('section', null, React.createElement('div', {
+    className: 'site-container'
   }, React.createElement('div', {
-    className: 'amx-container'
-  }, React.createElement('div', {
-    className: 'amx-section-head'
-  }, React.createElement('div', {
-    className: 'amx-number'
+    className: 'sec__n'
   }, '04'), React.createElement('h2', {
-    className: 'amx-heading'
-  }, c.s4h)), React.createElement('div', {
-    className: 'amx-content-links'
+    className: 'sec__h',
+    style: {
+      marginBottom: 24
+    }
+  }, c.mediaIntro), React.createElement('div', {
+    className: 'rule-arrow'
+  }, React.createElement('div'), React.createElement('span', null, '→')), React.createElement('div', {
+    className: 'media'
   }, React.createElement('a', {
-    className: 'amx-content-link',
-    href: E.undisguised,
+    className: 'media__cell media__read',
+    href: window.EXTERNAL.undisguised,
     ...v2Ext
-  }, React.createElement('div', null, React.createElement('h3', {
-    className: 'amx-subheading'
-  }, c.s4read.t), React.createElement('p', {
-    className: 'amx-body'
-  }, c.s4read.b)), React.createElement('span', {
-    className: 'amx-content-arrow'
-  }, '↗')), React.createElement('a', {
-    className: 'amx-content-link',
-    href: E.youtube,
-    ...v2Ext
-  }, React.createElement('div', null, React.createElement('h3', {
-    className: 'amx-subheading'
-  }, c.s4watch.t), React.createElement('p', {
-    className: 'amx-body'
-  }, c.s4watch.b)), React.createElement('span', {
-    className: 'amx-content-arrow'
-  }, '↗')), React.createElement('div', {
-    className: 'amx-content-link'
-  }, React.createElement('div', null, React.createElement('h3', {
-    className: 'amx-subheading'
-  }, c.s4follow.t), React.createElement('p', {
-    className: 'amx-body'
-  }, React.createElement('a', {
-    href: E.linkedin,
-    ...v2Ext
-  }, 'LinkedIn'), ', ', React.createElement('a', {
-    href: E.instagram,
-    ...v2Ext
-  }, 'Instagram'), c.s4and, React.createElement('a', {
-    href: E.tiktok,
-    ...v2Ext
-  }, 'TikTok'), '.')))))),
-  // Final CTA — off-white
-  React.createElement('section', {
-    className: 'amx-paper amx-section amx-final'
   }, React.createElement('div', {
-    className: 'amx-container'
-  }, React.createElement('h2', {
-    className: 'amx-heading'
-  }, c.finalH), React.createElement('a', {
-    className: 'amx-button',
-    href: diag
-  }, c.finalCta + ' →'), React.createElement('a', {
-    className: 'amx-final-link',
-    href: conf
-  }, c.confidentiality + ' →')))), React.createElement(window.SiteFooterX, {
+    className: 'media__top'
+  }, React.createElement('h3', null, 'READ'), React.createElement('span', {
+    className: 'media__arw'
+  }, '↗')), React.createElement('div', null, React.createElement('div', {
+    className: 'media__kicker'
+  }, 'UNDISGUISED'), React.createElement('p', null, c.readP))), React.createElement('a', {
+    className: 'media__cell media__watch',
+    href: window.EXTERNAL.youtube,
+    ...v2Ext
+  }, React.createElement('div', {
+    className: 'media__top'
+  }, React.createElement('h3', null, 'WATCH'), React.createElement('span', {
+    className: 'media__arw',
+    style: {
+      fontSize: 32
+    }
+  }, '↗')), React.createElement('div', null, React.createElement('div', {
+    className: 'media__kicker'
+  }, 'YOUTUBE'), React.createElement('p', null, c.watchP))), React.createElement('div', {
+    className: 'media__cell media__follow'
+  }, React.createElement('h3', null, 'FOLLOW'), React.createElement('div', {
+    className: 'icon-row'
+  }, React.createElement('a', {
+    className: 'icon-btn',
+    href: window.EXTERNAL.linkedin,
+    'aria-label': 'LinkedIn',
+    ...v2Ext
+  }, React.createElement(window.BrandIcon, {
+    name: 'LinkedIn',
+    size: 21
+  })), React.createElement('a', {
+    className: 'icon-btn',
+    href: window.EXTERNAL.instagram,
+    'aria-label': 'Instagram',
+    ...v2Ext
+  }, React.createElement(window.BrandIcon, {
+    name: 'Instagram',
+    size: 21
+  })), React.createElement('a', {
+    className: 'icon-btn',
+    href: window.EXTERNAL.tiktok,
+    'aria-label': 'TikTok',
+    ...v2Ext
+  }, React.createElement(window.BrandIcon, {
+    name: 'TikTok',
+    size: 20
+  })))))))), React.createElement(window.BlackCtaStrip, {
+    lang,
+    heading: c.finalH
+  })), React.createElement(window.SiteFooterX, {
     lang
   }));
 }

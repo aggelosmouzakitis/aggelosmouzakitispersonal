@@ -106,18 +106,18 @@ img{max-width:100%}
 
 .site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
 
-.site-hdr{width:100%;min-height:70px;background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16)}
-.site-hdr__in{min-height:70px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
-.site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:#F3F0E8;font-family:var(--font-heading);font-size:17px;font-weight:500;line-height:1;letter-spacing:-0.02em;white-space:nowrap}
+.site-hdr{width:100%;min-height:76px;background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16)}
+.site-hdr__in{width:min(100% - 64px,1280px);min-height:76px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
+.site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:#F3F0E8;font-family:var(--font-heading);font-size:26px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
 .site-hdr__brand span{color:#059669}
-.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:22px}
-.site-hdr__nav a{color:#F3F0E8;font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
+.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:30px}
+.site-hdr__nav a{color:#F3F0E8;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
 .site-hdr__nav a:hover{opacity:1}
 .site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:#059669}
 .site-hdr__end{display:flex;align-items:center;gap:14px}
-.site-hdr__lang{color:#F3F0E8;font-size:12px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;transition:opacity .18s}
+.site-hdr__lang{color:#F3F0E8;font-size:13px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:0.045em;opacity:.82;transition:opacity .18s}
 .site-hdr__lang:hover{opacity:1}
-.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 17px;background:#059669;color:#fff;font-size:12px;font-weight:600;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:#059669;color:#fff;font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hdr-cta:hover{filter:brightness(0.9);gap:11px}
 .site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
 .site-hdr__burger span{display:block;width:24px;height:2px;background:#F3F0E8}
@@ -204,7 +204,9 @@ img{max-width:100%}
 
 @media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:680px){
-  .site-hdr__nav,.site-hdr__lang{display:none}
+  .site-hdr,.site-hdr__in{min-height:68px}
+  .site-hdr__brand{font-size:23px}
+  .site-hdr__nav,.site-hdr__lang,.site-hdr__end{display:none}
   .site-hdr__burger{display:flex}
 }
 @media (max-width:900px){
@@ -228,7 +230,7 @@ img{max-width:100%}
 }
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
-</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/blog/" hreflang="el">Ελληνικά</a><a class="hdr-cta" href="/startingdiagnostic/"><span>APPLY</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header></div>
+</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/blog/" hreflang="el">ΕΛΛΗΝΙΚΑ</a><a class="hdr-cta" href="/startingdiagnostic/"><span>APPLY</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header></div>
   <div id="content-area">
     <div class="article-wrap">
       <a href="/blog/" class="top-back">← Writing</a>
@@ -282,7 +284,7 @@ img{max-width:100%}
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 
-<script src="../../site-chrome.js?v=2"></script>
+<script src="../../site-chrome.js?v=3"></script>
 <script>
 const URL_MAP = {
   'home': '/',
