@@ -8,8 +8,8 @@ const tpl = (label, title) => `<!DOCTYPE html><html><head><meta charset="utf-8">
 html,body { width:1200px; height:630px; }
 body { background:#1A1918; font-family:'DejaVu Sans Mono',monospace; color:#F4F2F0;
   padding:80px; display:flex; flex-direction:column; justify-content:space-between;
-  border-top:8px solid #1a7f37; }
-.label { font-size:22px; letter-spacing:.18em; text-transform:uppercase; color:#1a7f37; }
+  border-top:8px solid #059669; }
+.label { font-size:22px; letter-spacing:.18em; text-transform:uppercase; color:#059669; }
 .title { font-size:62px; line-height:1.25; letter-spacing:-.01em; max-width:1040px;
   color:#F4F2F0; font-weight:normal; }
 .title.small { font-size:48px; }

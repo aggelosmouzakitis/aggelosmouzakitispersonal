@@ -6,7 +6,7 @@ const SB = {
   muted: '#6e6e6e',
   text: 'rgba(40,39,38,0.65)',
   active: '#282726',
-  accent: '#1a7f37',
+  accent: '#059669',
   W: 300,
   WC: 68,
 };
@@ -152,7 +152,7 @@ function MobileNav({ page, lang }) {
     flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', alignItems: 'center',
     justifyContent: 'center', gap: 3, padding: '8px 1px',
     background: 'none', border: 'none', cursor: 'pointer',
-    color: active ? '#1a7f37' : 'rgba(40,39,38,0.55)',
+    color: active ? '#059669' : 'rgba(40,39,38,0.55)',
     fontFamily: 'inherit', fontSize: '9px', letterSpacing: '.02em',
     textTransform: 'uppercase', transition: 'color .15s', textDecoration: 'none',
   });
@@ -173,7 +173,7 @@ function MobileNav({ page, lang }) {
         <a style={tabStyle(act === 'one-to-one')} href={sbPath('one-to-one', lang)}><ICONS.OneToOne /><span>{t.oneToOne}</span></a>
         <a style={tabStyle(act === 'about')} href={sbPath('about', lang)}><ICONS.User /><span>{t.about}</span></a>
         <a style={tabStyle(act === 'reviews')} href={sbPath('reviews', lang)}><ICONS.Quote /><span>{t.reviews}</span></a>
-        <a style={{ ...tabStyle(act === 'diagnostic'), color: '#1a7f37', fontWeight: 700 }} href={diagPath(lang)}><ICONS.Pulse /><span>{t.diagShort}</span></a>
+        <a style={{ ...tabStyle(act === 'diagnostic'), color: '#059669', fontWeight: 700 }} href={diagPath(lang)}><ICONS.Pulse /><span>{t.diagShort}</span></a>
       </nav>
     </React.Fragment>
   );
@@ -346,13 +346,13 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
 
         {/* Primary CTA — Starting Diagnostic */}
         <div style={{ padding: '0 16px 22px', flexShrink: 0 }}>
-          <div style={{ border: `1.5px solid rgba(26,127,55,0.45)`, padding: '19px', background: 'rgba(26,127,55,0.08)' }}>
+          <div style={{ border: `1.5px solid rgba(5,150,105,0.45)`, padding: '19px', background: 'rgba(5,150,105,0.08)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '13px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: SB.accent, marginBottom: 9 }}>
               <span style={{ display: 'flex' }}><ICONS.Pulse /></span><span>{t.diagHead}</span>
             </div>
             <div style={{ fontSize: '14px', fontWeight: 500, color: SB.active, lineHeight: 1.6, marginBottom: 16 }}>{t.diagSub}</div>
             <a href={diagPath(lang)}
-              onMouseEnter={e => { e.currentTarget.style.background = '#146b2e'; e.currentTarget.style.borderColor = '#146b2e'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#059669'; e.currentTarget.style.borderColor = '#059669'; }}
               onMouseLeave={e => { e.currentTarget.style.background = SB.accent; e.currentTarget.style.borderColor = SB.accent; }}
               style={{ display: 'block', textAlign: 'center', width: '100%', padding: '13px 0', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: SB.accent, border: `1.5px solid ${SB.accent}`, color: '#fff', cursor: 'pointer', textDecoration: 'none', transition: 'background .15s, border-color .15s' }}>
               {t.diagBtn}

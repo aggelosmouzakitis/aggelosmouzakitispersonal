@@ -230,7 +230,7 @@ function DChoice({ label, options, C, selected, onPick, multi }) {
     React.createElement('p', { style: C.qLabel }, label),
     options.map((o, i) => {
       const on = multi ? (selected || []).includes(i) : selected === i;
-      const box = multi ? React.createElement('span', { 'aria-hidden': 'true', style: { width: 18, height: 18, flexShrink: 0, borderRadius: 4, border: '1.5px solid ' + (on ? '#1a7f37' : 'rgba(40,39,38,.4)'), background: on ? '#1a7f37' : 'transparent', color: '#fff', fontSize: 12, lineHeight: '16px', textAlign: 'center', marginRight: '.7rem', display: 'inline-block' } }, on ? '✓' : '') : null;
+      const box = multi ? React.createElement('span', { 'aria-hidden': 'true', style: { width: 18, height: 18, flexShrink: 0, borderRadius: 4, border: '1.5px solid ' + (on ? '#059669' : 'rgba(40,39,38,.4)'), background: on ? '#059669' : 'transparent', color: '#fff', fontSize: 12, lineHeight: '16px', textAlign: 'center', marginRight: '.7rem', display: 'inline-block' } }, on ? '✓' : '') : null;
       return React.createElement('button', { key: i, className: 'opt-btn', style: { ...C.choice(on), display: 'flex', alignItems: 'center' }, onClick: () => onPick(i) }, box, React.createElement('span', null, o));
     })
   );
@@ -378,18 +378,18 @@ function DiagnosticPage({ lang = 'en' }) {
     } else { done1(); }
   }
 
-  const ACC = '#1a7f37';
+  const ACC = '#059669';
   const C = {
     page: { maxWidth: 820, margin: '0 auto', padding: mob ? '2rem 1.25rem 6rem' : '4rem 2.5rem 7rem', color: '#282726', fontFamily: 'inherit' },
     eyebrow: { fontSize: '12px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#666', lineHeight: 1.6 },
-    h1: { fontSize: mob ? '27px' : '34px', fontWeight: 500, lineHeight: 1.2, letterSpacing: '-.02em', color: '#282726', margin: '0 0 1.25rem' },
+    h1: { fontFamily: 'var(--font-heading)', fontSynthesis: 'none', fontSize: mob ? '30px' : '44px', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-.035em', color: '#282726', margin: '0 0 1.25rem' },
     p: { margin: '0 0 1.2rem', lineHeight: 1.7, fontSize: mob ? '17px' : '18px', color: '#282726' },
     sectionH: { fontSize: mob ? '22px' : '27px', fontWeight: 500, letterSpacing: '-.02em', lineHeight: 1.25, color: '#282726', margin: '0 0 1.5rem' },
     qLabel: { fontSize: mob ? '16px' : '17px', fontWeight: 600, color: '#282726', margin: '0 0 .9rem', lineHeight: 1.5 },
     note: { fontSize: '14px', color: '#777', lineHeight: 1.7 },
     cta: { fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', color: '#fff', background: ACC, border: '1.5px solid ' + ACC, borderRadius: '2px', padding: '.9rem 1.7rem', display: 'inline-block', cursor: 'pointer', textDecoration: 'none' },
     ctaSec: { background: 'transparent', color: '#282726', border: '1.5px solid rgba(40,39,38,.35)' },
-    choice: (sel) => ({ width: '100%', textAlign: 'left', border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)', padding: mob ? '.8rem .9rem' : '.85rem 1rem', borderRadius: '10px', background: sel ? 'rgba(26,127,55,.08)' : '#fff', color: '#282726', fontFamily: 'inherit', fontSize: mob ? '15px' : '16px', lineHeight: 1.5, cursor: 'pointer', marginBottom: '.6rem', transition: 'border-color .12s, background .12s' }),
+    choice: (sel) => ({ width: '100%', textAlign: 'left', border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)', padding: mob ? '.8rem .9rem' : '.85rem 1rem', borderRadius: '10px', background: sel ? 'rgba(5,150,105,.08)' : '#fff', color: '#282726', fontFamily: 'inherit', fontSize: mob ? '15px' : '16px', lineHeight: 1.5, cursor: 'pointer', marginBottom: '.6rem', transition: 'border-color .12s, background .12s' }),
     field: { width: '100%', border: '1px solid rgba(40,39,38,.2)', padding: '.85rem 1rem', borderRadius: '10px', background: '#fff', color: '#282726', fontFamily: 'inherit', fontSize: '16px', lineHeight: 1.6, outline: 'none' },
     scaleBtn: (sel) => ({ flex: 1, minWidth: 0, padding: mob ? '.7rem 0' : '.75rem 0', border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)', background: sel ? ACC : '#fff', color: sel ? '#fff' : '#282726', fontFamily: 'inherit', fontSize: '15px', fontWeight: 600, borderRadius: '8px', cursor: 'pointer', transition: 'border-color .12s, background .12s' }),
     progLine: { height: '2px', background: 'rgba(40,39,38,.12)', borderRadius: '2px', marginTop: '.7rem' },

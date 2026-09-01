@@ -13,9 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
 <meta name="robots" content="max-image-preview:large">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -48,30 +46,29 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
-body { background: #FFFFFF; color: #282726; font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+body { background: #FFFFFF; color: #282726; font-family: var(--font-body,"Inter",system-ui,sans-serif); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 ::selection { background: #282726; color: #FFFFFF; }
-.wrap { max-width: 940px; margin: 0 auto; padding: 4rem 2rem 7rem; }
-h1 { font-size: 32px; font-weight: 400; line-height: 1.4; letter-spacing: -.02em; margin-bottom: 1.2rem; }
 .lead { font-size: 23px; font-weight: 500; line-height: 1.5; letter-spacing: -.01em; color: #282726; margin-bottom: 2.5rem; }
 p { font-size: 18px; line-height: 1.75; color: #282726; margin-bottom: 1.4rem; max-width: 680px; }
-a { color: #1a7f37; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-a:hover { color: #146b2e; }
+a { color: #059669; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: #059669; }
 strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,38,.3); padding-bottom: 1px; }
-.reach { max-width: 680px; margin: 2.5rem 0 0; padding: 1.35rem 1.5rem; border: 1px solid rgba(40,39,38,0.12); border-left: 3px solid #1a7f37; border-radius: 10px; background: rgba(26,127,55,0.04); font-size: 18px; line-height: 1.7; color: #282726; }
-.site-ft { margin-top: 5rem; padding-top: 3.25rem; border-top: 1px solid rgba(40,39,38,0.2); }
-.site-ft-cols { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; }
-.site-ft-h { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #1a7f37; margin-bottom: 1.1rem; }
-.site-ft-row { margin-bottom: .75rem; }
-.site-ft a { display: inline-flex; align-items: baseline; gap: .35rem; font-size: 15px; color: #282726; text-decoration: none; line-height: 1.4; transition: color .12s; }
-.site-ft a:hover { color: #1a7f37; }
-.site-ft .ext { font-size: 11px; opacity: .5; }
-.site-ft-copy { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(40,39,38,0.12); font-size: 13px; color: #666; }
-@media (max-width: 767px) { .site-ft-cols { display: block; } .site-ft-col { margin-bottom: 2rem; } }
-@media (max-width: 767px) { .wrap { padding: 2rem 1.2rem 4rem; } h1 { font-size: 24px; } .lead { font-size: 20px; } }
+.reach { max-width: 680px; margin: 2.5rem 0 0; padding: 1.35rem 1.5rem; border: 1px solid rgba(40,39,38,0.12); border-left: 3px solid #059669; border-radius: 10px; background: rgba(5,150,105,0.04); font-size: 18px; line-height: 1.7; color: #282726; }
+
+
+
+
+
+
+
+
+@media (max-width: 767px) { .lead { font-size: 20px; } }
 </style>
+
 </head>
 <body>
-<div class="wrap">
+<div id="gi-hdr"></div>
+<main class="u-main" style="padding-block:64px 96px"><div class="u-shell"><div class="u-shell__rail"></div><div class="u-shell__body">
   <h1>Get interviewed</h1>
   <p class="lead">I'm interviewing founders and solopreneurs in tech about what it actually took to get where they are.</p>
 
@@ -83,30 +80,14 @@ strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,3
 
   <div class="reach">Reach me at <a href="mailto:aggelos.mouzakitis@gmail.com?subject=Get%20interviewed">aggelos.mouzakitis@gmail.com</a>.</div>
 
-  <footer class="site-ft">
-    <div class="site-ft-cols">
-      <div class="site-ft-col">
-        <div class="site-ft-h">Work with me</div>
-        <div class="site-ft-row"><a href="/1-to-1/">1:1</a></div>
-        <div class="site-ft-row"><a href="/reviews/">Reviews</a></div>
-        <div class="site-ft-row"><a href="/book/">Book a fit call</a></div>
-      </div>
-      <div class="site-ft-col">
-        <div class="site-ft-h">Site</div>
-        <div class="site-ft-row"><a href="/">Home</a></div>
-        <div class="site-ft-row"><a href="/about/">About</a></div>
-        <div class="site-ft-row"><a href="/blog/">Writing</a></div>
-        <div class="site-ft-row"><a href="/confidentiality/">Confidentiality</a></div>
-        <div class="site-ft-row"><a href="/ask-me-anything/">Ask me anything</a></div>
-      </div>
-      <div class="site-ft-col">
-        <div class="site-ft-h">Elsewhere</div>
-        <div class="site-ft-row"><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener">LinkedIn <span class="ext">↗</span></a></div>
-        <div class="site-ft-row"><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener">YouTube <span class="ext">↗</span></a></div>
-      </div>
-    </div>
-    <div class="site-ft-copy">© Aggelos Mouzakitis · Business Growth Advisor + Therapist</div>
-  </footer>
-</div>
+</div></div></main>
+<div id="gi-ftr"></div>
+<script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
+<script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
+<script src="/site-chrome.js?v=3"></script>
+<script>
+ReactDOM.createRoot(document.getElementById('gi-hdr')).render(React.createElement(React.Fragment,null,React.createElement(window.ChromeStyles),React.createElement(window.SiteHeader,{page:'getinterviewed',lang:'en'})));
+ReactDOM.createRoot(document.getElementById('gi-ftr')).render(React.createElement(window.SiteFooterX,{lang:'en'}));
+</script>
 </body>
 </html>

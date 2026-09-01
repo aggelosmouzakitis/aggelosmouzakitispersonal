@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel sidebar.jsx -o sidebar.js && babel content-pages.jsx -o content-pages.js && babel diagnostic.jsx -o diagnostic.js",
+    "build": "babel site-chrome.jsx -o site-chrome.js && babel core-pages-v2.jsx -o core-pages-v2.js && babel sidebar.jsx -o sidebar.js && babel content-pages.jsx -o content-pages.js && babel diagnostic.jsx -o diagnostic.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

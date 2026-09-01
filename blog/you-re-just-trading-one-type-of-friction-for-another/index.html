@@ -13,9 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
 <meta name="robots" content="max-image-preview:large">
 <title>You're just trading one type of friction for another | Aggelos Mouzakitis</title>
 <meta name="description" content="Startup people crave corporate stability; corporate people crave startup freedom. Why switching sides just trades one kind of friction for another, not less.">
@@ -40,7 +38,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"You're just trading one type of friction for another","description":"Why the grass is not greener on the other side of the corporate/startup fence.","datePublished":"2025-12-02","dateModified":"2025-12-02","author":{"@type":"Person","name":"Aggelos Mouzakitis","url":"https://aggelosmouzakitis.com","@id":"https://aggelosmouzakitis.com/#person"},"publisher":{"@type":"Organization","name":"Aggelos Mouzakitis","url":"https://aggelosmouzakitis.com","logo":{"@type":"ImageObject","url":"https://aggelosmouzakitis.com/img/og/home.png"},"@id":"https://aggelosmouzakitis.com/#person"},"mainEntityOfPage":"https://aggelosmouzakitis.com/blog/you-re-just-trading-one-type-of-friction-for-another/","image":{"@type":"ImageObject","url":"https://aggelosmouzakitis.com/img/og/you-re-just-trading-one-type-of-friction-for-another.png","width":1200,"height":630},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".article-title",".article-desc"]}}</script>
 <style>*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
-body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+body { background: #F5F5F5; font-family: var(--font-body,"Inter",system-ui,sans-serif); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 ::selection { background: #282726; color: #FFFFFF; }
 #page-wrap { display: flex; height: 100vh; overflow: hidden; }
 #sidebar-mount { position: relative; flex-shrink: 0; }
@@ -51,7 +49,7 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
 .top-back { display: inline-flex; align-items: center; gap: .4rem; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #767676; text-decoration: none; margin-bottom: 2rem; transition: color .15s; }
 .top-back:hover { color: #282726; }
 .article-eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #767676; margin-bottom: 1.2rem; }
-.article-title { font-size: 30px; font-weight: 700; line-height: 1.3; color: #1a7f37; letter-spacing: -.02em; margin-bottom: 1rem; }
+.article-title {font-family:var(--font-heading);font-synthesis:none; font-size: 30px; font-weight: 700; line-height: 1.3; color: #059669; letter-spacing: -.02em; margin-bottom: 1rem; }
 .article-desc { font-size: 18px; color: #666; line-height: 1.7; margin-bottom: 1.2rem; }
 .article-meta { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #767676; display: flex; align-items: center; gap: .6rem; }
 .article-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(40,39,38,0.12); }
@@ -62,9 +60,9 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
 .article-body h3 { font-size: 21px; font-weight: 600; color: #282726; margin: 2.5rem 0 .8rem; letter-spacing: -.01em; }
 .article-body strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,38,0.3); padding-bottom: 1px; }
 .article-body em { font-style: normal; color: #555; }
-.article-body a { color: #1a7f37; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-.article-body a:hover { color: #146b2e; }
-.article-body blockquote { border-left: 2px solid #1a7f37; padding-left: 1.2rem; color: #555; margin: 1.8rem 0; }
+.article-body a { color: #059669; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.article-body a:hover { color: #059669; }
+.article-body blockquote { border-left: 2px solid #059669; padding-left: 1.2rem; color: #555; margin: 1.8rem 0; }
 .article-body hr { border: none; border-top: 1px solid rgba(40,39,38,0.15); margin: 2.5rem 0; }
 .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.5rem; }
 .article-body li { margin-bottom: .4rem; }
@@ -72,10 +70,11 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
 .article-footer-label { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: #767676; margin-bottom: 1rem; }
 .article-footer p { font-size: 15px; color: #666; margin-bottom: 1rem; line-height: 1.7; }
 .cta-btn { display: inline-block; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; background: #282726; color: #FFFFFF; padding: .65rem 1.3rem; text-decoration: none; transition: background .15s; }
-.cta-btn:hover { background: #1a7f37; color: #fff; }
+.cta-btn:hover { background: #059669; color: #fff; }
 .back-link { display: inline-block; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #767676; text-decoration: none; margin-top: 1.4rem; transition: color .15s; }
 .back-link:hover { color: #282726; }
-@media (max-width: 767px) { #page-wrap { display: block; height: auto; overflow: visible; } #sidebar-mount { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; } #content-area { min-height: 100vh; padding-bottom: 80px; } .article-wrap { padding: 2rem 1.2rem 4rem; } .article-title { font-size: 22px; } }</style>
+@media (max-width: 767px) { #page-wrap { display: block; height: auto; overflow: visible; } #sidebar-mount { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; } #content-area { min-height: 100vh; padding-bottom: 80px; } .article-wrap { padding: 2rem 1.2rem 4rem; } .article-title {font-family:var(--font-heading);font-synthesis:none; font-size: 22px; } }#page-wrap{display:block;height:auto;overflow:visible}#sidebar-mount{position:static}#content-area{overflow:visible;height:auto}@media(max-width:767px){#sidebar-mount{position:static;left:auto;right:auto;bottom:auto}#content-area{padding-bottom:0}}
+</style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aggelosmouzakitis.com/"}, {"@type": "ListItem", "position": 2, "name": "Writing", "item": "https://aggelosmouzakitis.com/blog/"}, {"@type": "ListItem", "position": 3, "name": "You're just trading one type of friction for another", "item": "https://aggelosmouzakitis.com/blog/you-re-just-trading-one-type-of-friction-for-another/"}]}</script>
 <!-- seo-enhancements -->
 <link rel="preconnect" href="https://www.googletagmanager.com">
@@ -86,7 +85,152 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
 </head>
 <body>
 <div id="page-wrap">
-  <div id="sidebar-mount"><div style="width: 300px; min-width: 300px; background: rgb(245, 245, 245); border-right: 1px solid rgba(40, 39, 38, 0.1); height: 100vh; position: relative; flex-shrink: 0; display: flex; flex-direction: column; overflow: visible;"><button title="Collapse" style="position: absolute; left: 287px; top: 32px; width: 26px; height: 26px; border-radius: 50%; background: rgb(255, 255, 255); border: 1px solid rgba(200, 200, 200, 0.3); color: rgb(26, 25, 24); cursor: pointer; z-index: 20; display: flex; align-items: center; justify-content: center; box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 8px; padding: 0px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button><div style="flex: 1 1 0%; overflow: hidden auto; display: flex; flex-direction: column;"><div style="display: flex; align-items: center; gap: 12px; padding: 22px 18px 20px; border-bottom: 1px solid rgba(40, 39, 38, 0.1); flex-shrink: 0;"><a href="/" style="display: flex; flex-shrink: 0;"><img src="https://aggelosmouzakitis.com/img/aggelos-96.webp?v=3" alt="Aggelos Mouzakitis" width="38" height="38" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block;"></a><div style="overflow: hidden; flex: 1 1 0%;"><div style="font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: rgb(40, 39, 38); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Aggelos Mouzakitis</div><div style="font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: rgb(110, 110, 110); margin-top: 3px; line-height: 1.35;">Business Growth Advisor + Licensed Psychotherapist</div></div></div><div style="padding: 12px 18px; border-bottom: 1px solid rgba(40, 39, 38, 0.1); display: flex; justify-content: center; flex-shrink: 0;"><div style="display: inline-flex; align-items: center; gap: 2px; border: 1px solid rgba(40, 39, 38, 0.1); border-radius: 5px; padding: 2px; background: rgb(255, 255, 255);"><a aria-current="true" hreflang="en" title="English" style="padding: 4px 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; text-transform: none; text-decoration: none; border-radius: 3px; color: rgb(255, 255, 255); background: rgb(26, 127, 55); cursor: default; pointer-events: none;">English</a><a href="/blog/?lang=el" hreflang="el" title="Ελληνικά" style="padding: 4px 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; text-transform: none; text-decoration: none; border-radius: 3px; color: rgba(40, 39, 38, 0.65); background: transparent; cursor: pointer; pointer-events: auto;">Ελληνικά</a></div></div><div style="padding: 10px 0px 0px;"><a href="/" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 11px 18px; background: transparent; border-left: 2px solid transparent; cursor: pointer; font-family: inherit; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; color: rgba(40, 39, 38, 0.65); transition: background 0.12s, color 0.12s;"><div style="display: flex; align-items: center; gap: 12px;"><span style="display: flex; flex-shrink: 0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"></path><polyline points="9 21 9 12 15 12 15 21"></polyline></svg></span><span>Home</span></div></a><a href="/1-to-1/" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 11px 18px; background: transparent; border-left: 2px solid transparent; cursor: pointer; font-family: inherit; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; color: rgba(40, 39, 38, 0.65); transition: background 0.12s, color 0.12s;"><div style="display: flex; align-items: center; gap: 12px;"><span style="display: flex; flex-shrink: 0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span><span>Work with me</span></div></a><a href="/about/" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 11px 18px; background: transparent; border-left: 2px solid transparent; cursor: pointer; font-family: inherit; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; color: rgba(40, 39, 38, 0.65); transition: background 0.12s, color 0.12s;"><div style="display: flex; align-items: center; gap: 12px;"><span style="display: flex; flex-shrink: 0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span><span>About</span></div></a><a href="/blog/" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 11px 18px; background: rgba(40, 39, 38, 0.08); border-left: 2px solid rgb(26, 127, 55); cursor: pointer; font-family: inherit; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; color: rgb(40, 39, 38); transition: background 0.12s, color 0.12s;"><div style="display: flex; align-items: center; gap: 12px;"><span style="display: flex; flex-shrink: 0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span><span>Writing</span></div></a><a href="/reviews/" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 11px 18px; background: transparent; border-left: 2px solid transparent; cursor: pointer; font-family: inherit; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; color: rgba(40, 39, 38, 0.65); transition: background 0.12s, color 0.12s;"><div style="display: flex; align-items: center; gap: 12px;"><span style="display: flex; flex-shrink: 0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M14 21c3 0 7-1 7-8V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path></svg></span><span>Reviews</span></div></a></div><div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(110, 110, 110); padding: 18px 18px 6px;">Find me</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 18px; text-decoration: none; background: transparent; color: rgba(40, 39, 38, 0.65); font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase; transition: color 0.12s, background 0.12s;"><div style="display: flex; align-items: center; gap: 12px;"><span style="display: flex; flex-shrink: 0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></span><span>LinkedIn</span></div><span style="opacity: 0.4;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span></a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 18px; text-decoration: none; background: transparent; color: rgba(40, 39, 38, 0.65); font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase; transition: color 0.12s, background 0.12s;"><div style="display: flex; align-items: center; gap: 12px;"><span style="display: flex; flex-shrink: 0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"></polygon></svg></span><span>YouTube</span></div><span style="opacity: 0.4;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 18px; text-decoration: none; background: transparent; color: rgba(40, 39, 38, 0.65); font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase; transition: color 0.12s, background 0.12s;"><div style="display: flex; align-items: center; gap: 12px;"><span style="display: flex; flex-shrink: 0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></span><span>Instagram</span></div><span style="opacity: 0.4;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span></a><div style="flex: 1 1 0%;"></div><div style="padding: 0px 16px 22px; flex-shrink: 0;"><div style="border: 1.5px solid rgba(26, 127, 55, 0.45); padding: 19px; background: rgba(26, 127, 55, 0.08);"><div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(26, 127, 55); margin-bottom: 9px;"><span style="display: flex;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></span><span>Starting Diagnostic</span></div><div style="font-size: 14px; font-weight: 500; color: rgb(40, 39, 38); line-height: 1.6; margin-bottom: 16px;">10 minutes on the business, what's getting in the way, and where the two meet.</div><a href="/startingdiagnostic/" style="display: block; text-align: center; width: 100%; padding: 13px 0px; font-family: inherit; font-weight: 700; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; background: rgb(26, 127, 55); border: 1.5px solid rgb(26, 127, 55); color: rgb(255, 255, 255); cursor: pointer; text-decoration: none; transition: background 0.15s, border-color 0.15s;">START →</a></div></div></div></div></div>
+  <div id="sidebar-mount"><style>
+:root{
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-heading:"Inter Tight","Inter",system-ui,sans-serif;
+  --font-display:"Archivo Black","Inter Tight","Inter",system-ui,sans-serif;
+  --brand-green:#059669;
+}
+html,body,#root{height:auto}
+#root{display:block;overflow:visible}
+#sidebar{display:none!important}
+#main-scroll{overflow:visible;background:#1A1C1D;color:#FFFFFF}
+#main-scroll::-webkit-scrollbar{width:0}
+body{background:#1A1C1D;color:#FFFFFF;font-family:var(--font-body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+::selection{background:#059669;color:#fff}
+#main-scroll a,a{color:inherit;text-decoration:none}
+#main-scroll strong{border:0;padding:0;color:inherit;font-weight:600}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #059669;outline-offset:2px;border-radius:2px}
+img{max-width:100%}
+
+.site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
+
+.site-hdr{width:100%;min-height:76px;background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16)}
+.site-hdr__in{width:min(100% - 64px,1280px);min-height:76px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
+.site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:#F3F0E8;font-family:var(--font-heading);font-size:26px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
+.site-hdr__brand span{color:#059669}
+.site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:30px}
+.site-hdr__nav a{color:#F3F0E8;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
+.site-hdr__nav a:hover{opacity:1}
+.site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:#059669}
+.site-hdr__end{display:flex;align-items:center;gap:14px}
+.site-hdr__lang{color:#F3F0E8;font-size:13px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:0.045em;opacity:.82;transition:opacity .18s}
+.site-hdr__lang:hover{opacity:1}
+.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:#059669;color:#fff;font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hdr-cta:hover{filter:brightness(0.9);gap:11px}
+.site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
+.site-hdr__burger span{display:block;width:24px;height:2px;background:#F3F0E8}
+.site-menu{background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16);padding-block:20px 28px}
+.site-menu .site-container{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.site-menu a{color:#F3F0E8;font-size:16px;text-transform:uppercase;letter-spacing:0.03em}
+.site-menu .hdr-cta{align-self:stretch;justify-content:center;min-height:48px;font-size:13px}
+
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
+.pill--green{height:60px;padding-inline:36px;background:#059669;color:#fff;font-size:16px}
+.pill--green:hover{gap:12px;filter:brightness(0.9)}
+.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:0 20px;background:#059669;color:#fff;font-size:14px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hero-cta:hover{filter:brightness(0.9);gap:13px}
+
+.cta-strip{padding-block:clamp(72px,9vw,110px);text-align:center;background:#1A1C1D}
+.cta-strip__h{margin:0 auto;max-width:20ch;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(36px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.cta-strip .pill--green{margin-top:44px}
+.cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:#C2C6CA;transition:gap .18s,color .18s}
+.cta-strip__sub:hover{gap:12px;color:#fff}
+
+.site-ftr{border-top:2px solid #059669;padding-block:64px 32px;background:#1A1C1D}
+.site-ftr__cols{display:grid;grid-template-columns:minmax(280px,1.4fr) repeat(3,minmax(130px,0.55fr));gap:48px;align-items:start}
+.site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#059669;margin-bottom:20px}
+.site-ftr nav a{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.4;margin-bottom:12px;transition:color .18s}
+.site-ftr nav a:hover{color:#C2C6CA}
+.site-ftr__roles{margin-top:20px;font-size:15px;line-height:1.4;color:#C2C6CA}
+.site-ftr__rule{height:1px;background:rgba(255,255,255,0.16);margin-block:48px 24px}
+.site-ftr__legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;font-size:13px;color:#C2C6CA}
+.site-ftr__legal nav{display:flex;flex-wrap:wrap;gap:12px 24px}
+.site-ftr__legal nav a{display:inline;margin:0}
+
+.u-hero{background:#F3F0E8;padding-block:88px 72px}
+.u-hero h1{margin:0;max-width:15ch;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(52px,5.8vw,82px);font-weight:800;line-height:0.96;letter-spacing:-0.05em;color:#1A1C1D}
+.u-hero p{max-width:65ch;margin:32px 0 0;font-size:21px;line-height:1.55;color:#282726}
+.u-main{background:#F3F0E8;padding-block:0 96px;color:#1A1C1D}
+
+/* ── Shared inner-page shell: asymmetrical editorial grid (rail | reading column | gutter) ── */
+.u-shell{max-width:1180px;margin-inline:auto;padding-inline:clamp(24px,5vw,72px);display:grid;grid-template-columns:minmax(120px,170px) minmax(0,760px) minmax(0,1fr);column-gap:clamp(28px,4vw,64px)}
+.u-shell--wide{grid-template-columns:minmax(120px,170px) minmax(0,860px) minmax(0,1fr)}
+.u-shell__rail{grid-column:1;min-width:0}
+.u-shell__rail::before{content:"";display:block;width:100%;height:3px;background:var(--brand-green,#059669)}
+.u-shell__rail .u-eyebrow{display:block;margin-top:16px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.4;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
+.u-shell__body{grid-column:2;min-width:0}
+.u-shell__gutter{grid-column:3}
+
+.u-read,.u-shell__body{font-size:19px;line-height:1.72;color:#1A1C1D}
+.u-read{width:min(740px,calc(100% - 40px));margin-inline:auto}
+.u-read h1,.u-shell__body h1{font-family:var(--font-heading);font-synthesis:none;font-size:clamp(48px,5vw,64px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;margin:0 0 32px}
+.u-read h2,.u-shell__body h2{margin:80px 0 24px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(32px,3.6vw,46px);font-weight:800;line-height:1.04;letter-spacing:-0.04em}
+.u-read h3,.u-shell__body h3{margin:48px 0 16px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(24px,2.8vw,32px);font-weight:750;line-height:1.1;letter-spacing:-0.03em}
+.u-read p + p,.u-shell__body p + p{margin-top:24px}
+.u-read ul,.u-read ol,.u-shell__body ul,.u-shell__body ol{margin:24px 0;padding-left:24px}
+.u-read li + li,.u-shell__body li + li{margin-top:12px}
+#main-scroll .u-read a,.u-read a,.u-shell__body a{color:#059669;text-decoration:underline;text-underline-offset:3px}
+.u-read blockquote,.u-shell__body blockquote{margin:48px 0;padding-left:28px;border-left:4px solid #059669;font-family:var(--font-heading);font-size:28px;line-height:1.3}
+.u-read hr,.u-shell__body hr{border:0;border-top:1px solid #059669;opacity:.45;margin:64px 0}
+.u-read img,.u-shell__body img{display:block;height:auto;margin:48px 0}
+.u-form{width:min(760px,calc(100% - 40px));margin-inline:auto}
+
+/* One shared branded callout for deeper pages (dark band, warm text, green rule) */
+.u-callout{margin:40px 0;padding:26px 30px;background:#1A1C1D;color:#F3F0E8;border-left:3px solid #059669;border-radius:2px}
+.u-callout :is(p,li){color:#F3F0E8}
+.u-callout > *:first-child{margin-top:0}
+.u-callout > *:last-child{margin-bottom:0}
+
+.u-faq details{border-top:1px solid rgba(24,26,28,0.20);padding:20px 0}
+.u-faq details:last-of-type{border-bottom:1px solid rgba(24,26,28,0.20)}
+.u-faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:24px;cursor:pointer;list-style:none;font-weight:600;font-size:20px;line-height:1.4}
+.u-faq summary::-webkit-details-marker{display:none}
+.u-faq summary::after{content:"+";color:#059669;font-size:26px;line-height:1;flex-shrink:0}
+.u-faq details[open] summary::after{content:"\2212"}
+.u-faq details > *:not(summary){margin-top:16px}
+.u-faq--dark details{border-color:rgba(255,255,255,0.16)}
+.u-faq--dark summary{color:#fff}
+.u-faq--dark details > *:not(summary){color:#C2C6CA}
+
+.u-related a{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid rgba(24,26,28,0.20);color:#1A1C1D}
+.u-related a:last-child{border-bottom:1px solid rgba(24,26,28,0.20)}
+.u-related a:hover{color:#059669}
+
+.u-notice{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding:24px 0;border-top:1px solid rgba(24,26,28,0.20);border-bottom:1px solid rgba(24,26,28,0.20);margin-bottom:56px}
+.u-notice p{margin:0;font-size:19px;line-height:1.5;max-width:52ch}
+.u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:#059669}
+
+@media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){
+  .site-hdr,.site-hdr__in{min-height:68px}
+  .site-hdr__brand{font-size:23px}
+  .site-hdr__nav,.site-hdr__lang,.site-hdr__end{display:none}
+  .site-hdr__burger{display:flex}
+}
+@media (max-width:900px){
+  .u-shell,.u-shell--wide{grid-template-columns:1fr;column-gap:0}
+  .u-shell__rail{grid-column:1;margin-bottom:20px}
+  .u-shell__rail::before{width:56px}
+  .u-shell__rail .u-eyebrow{margin-top:12px}
+  .u-shell__body{grid-column:1}
+  .u-shell__gutter{display:none}
+}
+@media (max-width:640px){
+  .site-ftr__cols{grid-template-columns:1fr;gap:40px}
+  .site-ftr__legal{flex-direction:column;align-items:flex-start;gap:20px}
+  .u-hero{padding-block:56px 48px}
+  .u-read,.u-shell__body{font-size:18px}
+  .u-read h2,.u-shell__body h2{margin-top:56px}
+}
+@media (max-width:420px){
+  .pill--green{padding-inline:22px;font-size:15px;max-width:100%}
+  .cta-strip__h{font-size:clamp(28px,7.6vw,36px)}
+}
+@media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
+@media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
+</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/blog/" hreflang="el">ΕΛΛΗΝΙΚΑ</a><a class="hdr-cta" href="/startingdiagnostic/"><span>APPLY</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header></div>
   <div id="content-area">
     <div class="article-wrap">
       <a href="/blog/" class="top-back">← Writing</a>
@@ -171,23 +315,23 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
         <p>You’re just trading one type of friction for another. The question is whether you’re ready for the trade.</p>
         <p>_ **</p>
       </article>
-      <footer class="article-footer">
-        <div class="author-bio" style="display:flex;gap:1rem;align-items:flex-start;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(40,39,38,0.12);"><img src="https://aggelosmouzakitis.com/img/aggelos.webp" alt="Aggelos Mouzakitis" width="48" height="48" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;display:block;"><p style="font-size:13px;color:#666;line-height:1.7;margin:0;"><strong style="color:#282726;font-weight:400;border-bottom:1px solid rgba(40,39,38,.3);">Aggelos Mouzakitis</strong> is a licensed psychotherapist (BACP) and advisor for tech founders and solopreneurs, with 18+ years in product and growth. He works the business problem in front of you and the pattern underneath it at the same time. <a href="/" style="color:#1a7f37;">More on how I work →</a></p></div>
+      <div class="article-footer">
+        <div class="author-bio" style="display:flex;gap:1rem;align-items:flex-start;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(40,39,38,0.12);"><img src="https://aggelosmouzakitis.com/img/aggelos.webp" alt="Aggelos Mouzakitis" width="48" height="48" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;display:block;"><p style="font-size:13px;color:#666;line-height:1.7;margin:0;"><strong style="color:#282726;font-weight:400;border-bottom:1px solid rgba(40,39,38,.3);">Aggelos Mouzakitis</strong> is a licensed psychotherapist (BACP) and advisor for tech founders and solopreneurs, with 18+ years in product and growth. He works the business problem in front of you and the pattern underneath it at the same time. <a href="/" style="color:#059669;">More on how I work →</a></p></div>
         
-        <p class="related-service" style="font-size:15px;color:#666;margin-bottom:1rem;line-height:1.7;">Recognise this pattern? <a href="/founders/" style="color:#1a7f37;">Advisory for founders →</a></p>
+        <p class="related-service" style="font-size:15px;color:#666;margin-bottom:1rem;line-height:1.7;">Recognise this pattern? <a href="/founders/" style="color:#059669;">Advisory for founders →</a></p>
         <p class="article-footer-label">Next step</p>
         <p>A 15-minute fit call to see if we're a fit. Free, no obligations.</p>
         <a href="mailto:aggelos.mouzakitis@gmail.com?subject=15-minute%20fit%20call" class="cta-btn">Book a fit call</a>
         <br>
         <a href="/blog/" class="back-link">← Back to writing</a>
-      </footer>
+      </div>
     </div>
   </div>
 </div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 
-<script src="../../sidebar.js?v=38"></script>
+<script src="../../site-chrome.js?v=3"></script>
 <script>
 const URL_MAP = {
   'home': '/',
@@ -200,18 +344,12 @@ const URL_MAP = {
   'career-transition-therapy': '/career-transition-therapy/',
   'ask-me-anything': '/ask-me-anything/'
 };
-function SidebarApp() {
-  const [open, setOpen] = React.useState(true);
-  return /*#__PURE__*/React.createElement(Sidebar, {
-    page: "blog",
-    setPage: id => {
-      window.location.href = URL_MAP[id] || '/';
-    },
-    open: open,
-    setOpen: setOpen
-  });
+function ChromeMount() {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(window.ChromeStyles), /*#__PURE__*/React.createElement(window.SiteHeader, { page: "blog", lang: "en" }));
 }
-ReactDOM.createRoot(document.getElementById('sidebar-mount')).render(/*#__PURE__*/React.createElement(SidebarApp, null));
+ReactDOM.createRoot(document.getElementById('sidebar-mount')).render(/*#__PURE__*/React.createElement(ChromeMount, null));
+var _blogFtr = document.createElement('div'); document.body.appendChild(_blogFtr);
+ReactDOM.createRoot(_blogFtr).render(/*#__PURE__*/React.createElement(window.SiteFooterX, { lang: "en" }));
 </script>
 </body>
 </html>

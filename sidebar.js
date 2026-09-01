@@ -6,7 +6,7 @@ const SB = {
   muted: '#6e6e6e',
   text: 'rgba(40,39,38,0.65)',
   active: '#282726',
-  accent: '#1a7f37',
+  accent: '#059669',
   W: 300,
   WC: 68
 };
@@ -397,7 +397,7 @@ function MobileNav({
     background: 'none',
     border: 'none',
     cursor: 'pointer',
-    color: active ? '#1a7f37' : 'rgba(40,39,38,0.55)',
+    color: active ? '#059669' : 'rgba(40,39,38,0.55)',
     fontFamily: 'inherit',
     fontSize: '9px',
     letterSpacing: '.02em',
@@ -446,7 +446,7 @@ function MobileNav({
   }, /*#__PURE__*/React.createElement(ICONS.Quote, null), /*#__PURE__*/React.createElement("span", null, t.reviews)), /*#__PURE__*/React.createElement("a", {
     style: {
       ...tabStyle(act === 'diagnostic'),
-      color: '#1a7f37',
+      color: '#059669',
       fontWeight: 700
     },
     href: diagPath(lang)
@@ -832,9 +832,9 @@ function Sidebar({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      border: `1.5px solid rgba(26,127,55,0.45)`,
+      border: `1.5px solid rgba(5,150,105,0.45)`,
       padding: '19px',
-      background: 'rgba(26,127,55,0.08)'
+      background: 'rgba(5,150,105,0.08)'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -863,8 +863,8 @@ function Sidebar({
   }, t.diagSub), /*#__PURE__*/React.createElement("a", {
     href: diagPath(lang),
     onMouseEnter: e => {
-      e.currentTarget.style.background = '#146b2e';
-      e.currentTarget.style.borderColor = '#146b2e';
+      e.currentTarget.style.background = '#059669';
+      e.currentTarget.style.borderColor = '#059669';
     },
     onMouseLeave: e => {
       e.currentTarget.style.background = SB.accent;

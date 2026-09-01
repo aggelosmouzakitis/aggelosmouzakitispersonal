@@ -211,8 +211,8 @@ function DChoice({
         height: 18,
         flexShrink: 0,
         borderRadius: 4,
-        border: '1.5px solid ' + (on ? '#1a7f37' : 'rgba(40,39,38,.4)'),
-        background: on ? '#1a7f37' : 'transparent',
+        border: '1.5px solid ' + (on ? '#059669' : 'rgba(40,39,38,.4)'),
+        background: on ? '#059669' : 'transparent',
         color: '#fff',
         fontSize: 12,
         lineHeight: '16px',
@@ -511,7 +511,7 @@ function DiagnosticPage({
       done1();
     }
   }
-  const ACC = '#1a7f37';
+  const ACC = '#059669';
   const C = {
     page: {
       maxWidth: 820,
@@ -529,10 +529,12 @@ function DiagnosticPage({
       lineHeight: 1.6
     },
     h1: {
-      fontSize: mob ? '27px' : '34px',
-      fontWeight: 500,
-      lineHeight: 1.2,
-      letterSpacing: '-.02em',
+      fontFamily: 'var(--font-heading)',
+      fontSynthesis: 'none',
+      fontSize: mob ? '30px' : '44px',
+      fontWeight: 800,
+      lineHeight: 1.05,
+      letterSpacing: '-.035em',
       color: '#282726',
       margin: '0 0 1.25rem'
     },
@@ -588,7 +590,7 @@ function DiagnosticPage({
       border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)',
       padding: mob ? '.8rem .9rem' : '.85rem 1rem',
       borderRadius: '10px',
-      background: sel ? 'rgba(26,127,55,.08)' : '#fff',
+      background: sel ? 'rgba(5,150,105,.08)' : '#fff',
       color: '#282726',
       fontFamily: 'inherit',
       fontSize: mob ? '15px' : '16px',

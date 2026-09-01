@@ -4,10 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap"></noscript>
 <title>POST_TITLE | Aggelos Mouzakitis</title>
 <meta name="description" content="POST_DESCRIPTION">
 <link rel="canonical" href="https://aggelosmouzakitis.com/blog/POST_SLUG/">
@@ -27,7 +25,7 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
-body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+body { background: #F5F5F5; font-family: var(--font-body,"Inter",system-ui,sans-serif); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 ::selection { background: #282726; color: #FFFFFF; }
 /* Layout */
 #page-wrap { display: flex; height: 100vh; overflow: hidden; }
@@ -38,7 +36,7 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
 /* Article */
 .article-wrap { max-width: 940px; margin: 0 auto; padding: 4rem 2rem 7rem; } .top-back { display: inline-flex; align-items: center; gap: .4rem; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #767676; text-decoration: none; margin-bottom: 2rem; transition: color .15s; } .top-back:hover { color: #282726; }
 .article-eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #767676; margin-bottom: 1.2rem; }
-.article-title { font-size: 30px; font-weight: 700; line-height: 1.3; color: #1a7f37; letter-spacing: -.02em; margin-bottom: 1rem; }
+.article-title {font-family:var(--font-heading);font-synthesis:none; font-size: 30px; font-weight: 700; line-height: 1.3; color: #059669; letter-spacing: -.02em; margin-bottom: 1rem; }
 .article-desc { font-size: 18px; color: #666; line-height: 1.7; margin-bottom: 1.2rem; }
 .article-meta { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #767676; display: flex; align-items: center; gap: .6rem; }
 .article-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(40,39,38,0.12); }
@@ -48,9 +46,9 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
 .article-body h2 { font-size: 17px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #444; margin: 2.5rem 0 1rem; border-bottom: 1px solid rgba(40,39,38,0.15); padding-bottom: .5rem; }
 .article-body h3 { font-size: 21px; font-weight: 600; color: #282726; margin: 2.5rem 0 .8rem; letter-spacing: -.01em; }
 .article-body strong { font-weight: 400; color: #282726; border-bottom: 1px solid rgba(40,39,38,0.3); padding-bottom: 1px; }
-.article-body a { color: #1a7f37; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-.article-body a:hover { color: #146b2e; }
-.article-body blockquote { border-left: 2px solid #1a7f37; padding-left: 1.2rem; color: #555; margin: 1.8rem 0; }
+.article-body a { color: #059669; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.article-body a:hover { color: #059669; }
+.article-body blockquote { border-left: 2px solid #059669; padding-left: 1.2rem; color: #555; margin: 1.8rem 0; }
 .article-body hr { border: none; border-top: 1px solid rgba(40,39,38,0.15); margin: 2.5rem 0; }
 .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.5rem; }
 .article-body li { margin-bottom: .4rem; }
@@ -58,7 +56,7 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
 .article-footer-label { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: #767676; margin-bottom: 1rem; }
 .article-footer p { font-size: 15px; color: #666; margin-bottom: 1rem; line-height: 1.7; }
 .cta-btn { display: inline-block; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; background: #282726; color: #FFFFFF; padding: .65rem 1.3rem; text-decoration: none; transition: background .15s; }
-.cta-btn:hover { background: #1a7f37; color: #fff; }
+.cta-btn:hover { background: #059669; color: #fff; }
 .back-link { display: inline-block; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #767676; text-decoration: none; margin-top: 1.4rem; transition: color .15s; }
 .back-link:hover { color: #282726; }
 @media (max-width: 767px) {
@@ -66,7 +64,7 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
   #sidebar-mount { position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; height: auto; }
   #content-area { min-height: 100vh; padding-bottom: 80px; }
   .article-wrap { padding: 2rem 1.2rem 4rem; }
-  .article-title { font-size: 22px; }
+  .article-title {font-family:var(--font-heading);font-synthesis:none; font-size: 22px; }
 }
 </style>
 <!-- seo-enhancements -->
@@ -106,13 +104,13 @@ body { background: #F5F5F5; font-family: 'Libre Franklin', -apple-system, BlinkM
           <a href="URL">Link text</a>
         -->
       </article>
-      <footer class="article-footer">
+      <div class="article-footer">
         <p class="article-footer-label">Next step</p>
         <p>A 15-minute fit call to see if we're a fit. Free, no obligations.</p>
         <a href="mailto:aggelos.mouzakitis@gmail.com?subject=15-minute%20fit%20call" class="cta-btn">Book a fit call</a>
         <br>
         <a href="/blog/" class="back-link">← Back to writing</a>
-      </footer>
+      </div>
     </div>
   </div>
 </div>
