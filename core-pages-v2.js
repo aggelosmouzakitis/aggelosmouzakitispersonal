@@ -12,6 +12,16 @@ const v2Ext = {
 };
 const arr = x => Array.isArray(x) ? x : [];
 
+// One reusable numbered-section-label: renders "NN / DESCRIPTION" on one line,
+// number + slash kept together, aligned to the heading grid (no gutter column).
+const SecLabel = (num, desc) => React.createElement('div', {
+  className: 'sec-label'
+}, React.createElement('span', {
+  className: 'sec-label__num'
+}, num + ' /'), React.createElement('span', {
+  className: 'sec-label__desc'
+}, desc));
+
 // ─── Homepage copy — restored approved values (Homepage.dc.html mockup object).
 // The personal first-person intro is intentionally removed (offer-first hero).
 const HOME_V2 = {
@@ -26,6 +36,10 @@ const HOME_V2 = {
     mGreenPre: 'Now let’s make your career or business ',
     mMark: 'work for you.',
     splitIntro: 'You won’t have to choose between practical advice and psychological depth.',
+    s01d: 'BUSINESS & PSYCHOLOGY',
+    s02d: 'HONEST FEEDBACK',
+    s03d: 'IF WE CONTINUE',
+    s04d: 'MORE FROM ME',
     leftH: 'WHAT WE CHANGE',
     leftP: 'We can work on the offer, marketing, career move, client mix or the way the business runs.',
     rightH: 'WHAT GETS IN THE WAY',
@@ -34,8 +48,6 @@ const HOME_V2 = {
     opinionL2: 'AN OPINION.',
     opinionParas: ['I ask enough questions to understand the situation, then tell you what I think.', 'If I see a practical move, I suggest it. If your story does not add up, I say so.', 'You can tell me the part you normally edit out. I will not think less of you. I will not let you bullshit yourself either.'],
     opinionQuote: '“I left with more than advice. I left understanding what the problem actually was.”',
-    contNum: '03',
-    contLabel: '/ IF WE CONTINUE',
     contH: 'We agree on one concrete outcome and how long we will work towards it.',
     contP: 'We meet weekly or every other week, and you have WhatsApp access between sessions.',
     mediaIntro: 'Want to see how I think?',
@@ -55,6 +67,10 @@ const HOME_V2 = {
     mGreenPre: 'Πάμε να κάνουμε την καριέρα ή την επιχείρησή σου ',
     mMark: 'να δουλεύει για σένα.',
     splitIntro: 'Δεν χρειάζεται να διαλέξεις αν το θέμα είναι επαγγελματικό ή προσωπικό.',
+    s01d: 'ΕΠΙΧΕΙΡΗΣΗ & ΨΥΧΟΛΟΓΙΑ',
+    s02d: 'ΕΙΛΙΚΡΙΝΗΣ ΓΝΩΜΗ',
+    s03d: 'ΑΝ ΣΥΝΕΧΙΣΟΥΜΕ',
+    s04d: 'ΠΕΡΙΣΣΟΤΕΡΑ ΑΠΟ ΜΕΝΑ',
     leftH: 'ΤΙ ΑΛΛΑΖΟΥΜΕ',
     leftP: 'Μπορούμε να δουλέψουμε το offer, το marketing, την επόμενη κίνηση στην καριέρα σου, τους πελάτες ή τον τρόπο που λειτουργεί η επιχείρησή σου.',
     rightH: 'ΤΙ ΜΠΑΙΝΕΙ ΣΤΗ ΜΕΣΗ',
@@ -63,8 +79,6 @@ const HOME_V2 = {
     opinionL2: 'ΤΗ ΓΝΩΜΗ ΜΟΥ.',
     opinionParas: ['Θα κάνω όσες ερωτήσεις χρειαστούν για να καταλάβω τι συμβαίνει. Μετά θα σου πω πώς το βλέπω.', 'Αν βλέπω κάτι συγκεκριμένο που μπορείς να κάνεις, θα στο προτείνω. Αν αυτά που μου λες δεν στέκουν, θα σου το πω.', 'Μπορείς να μου πεις και αυτό που συνήθως αφήνεις απ’ έξω. Δεν θα σε δω διαφορετικά. Δεν θα σε αφήσω όμως να λες μαλακίες στον εαυτό σου.'],
     opinionQuote: '«Έφυγα με κάτι περισσότερο από συμβουλές. Έφυγα έχοντας καταλάβει ποιο ήταν πραγματικά το πρόβλημα.»',
-    contNum: '03',
-    contLabel: '/ ΑΝ ΣΥΝΕΧΙΣΟΥΜΕ',
     contH: 'Συμφωνούμε τι ακριβώς θέλεις να πετύχεις και για πόσο θα δουλέψουμε πάνω σε αυτό.',
     contP: 'Μιλάμε κάθε εβδομάδα και μπορείς να μου γράφεις στο WhatsApp ανάμεσα στις συναντήσεις.',
     mediaIntro: 'Θέλεις να δεις πώς σκέφτομαι;',
@@ -82,12 +96,15 @@ const WHY_V2 = {
     h1: 'I spent most of my adult life in consulting, growth and startups before I trained as a psychotherapist.',
     deck: 'Before the psychotherapy, there were seven years running a growth consultancy, work with more than 100 technology companies, corporate roles and two startups that failed.',
     fact: 'A founder or experienced professional does not have to explain how this world works to me.',
-    originLabel: '01 / WHERE I STARTED',
+    originNum: '01',
+    originDesc: 'WHERE I STARTED',
     origin: ['My parents were public employees. Their advice was simple: find a stable job, keep your head down and hold onto it. There was no family money, business network or useful introduction waiting for me.', 'I was anxious, had very few friends and communication was not a natural talent. I worked at it. From a studio in Piraeus, I built a consultancy, worked with some of the largest companies in the world and was paid to teach the work to rooms full of people.', 'I also failed badly. Both startups failed. I do not talk to founders, freelancers or senior professionals as an observer. I know what the work feels like when your money, identity and relationships are involved.'],
     hwNum: '02',
+    hwDesc: 'WHAT DROVE ME',
     hwH: 'Hard work took me far. It also kept me in the wrong places for too long.',
     hw: ['For years I used anxiety, shame and ambition as fuel. It produced results, so I kept doing it. I also chased goals I did not actually want, stayed with the wrong people and missed patterns that were damaging my work and my life.', 'Business knowledge helped me make better commercial moves. It did not tell me why I kept forcing myself to succeed on terms I did not even want. I had to live that part, work through it and then train for it properly.'],
     exNum: '03',
+    exDesc: 'WHERE I HELP',
     exH: 'I know when you need a better business move — and when a good move is running into fear, shame or avoidance.',
     ex: [{
       l: 'If the offer is weak, I can help you fix the offer.',
@@ -100,6 +117,7 @@ const WHY_V2 = {
       r: 'We also notice when fear, shame or obligation is choosing for you.'
     }],
     orNum: '04',
+    orDesc: 'ONE CONVERSATION',
     orH: 'You do not have to translate one world into the other for me.',
     or: ['I ask questions, tell you what I see and challenge what does not add up. You do not have to explain the business to a therapist or hide the personal part from an adviser.', 'You can tell me what you are embarrassed to say out loud. I will not think less of you. I will also tell you when you are avoiding the obvious or being unfair to yourself.'],
     finalLabel: 'THIS IS THE WORK I NEEDED AND COULD NOT FIND.',
@@ -111,12 +129,15 @@ const WHY_V2 = {
     h1: 'Πριν εκπαιδευτώ ως ψυχοθεραπευτής, είχα περάσει το μεγαλύτερο μέρος της ενήλικης ζωής μου στο consulting, το growth και τα startups.',
     deck: 'Επτά χρόνια με δική μου growth consultancy, δουλειά με πάνω από 100 tech εταιρείες, εταιρικοί ρόλοι και δύο startups που απέτυχαν.',
     fact: 'Ένας founder ή ένας έμπειρος επαγγελματίας δεν χρειάζεται να μου εξηγήσει πώς λειτουργεί αυτός ο κόσμος.',
-    originLabel: '01 / ΑΠΟ ΠΟΥ ΞΕΚΙΝΗΣΑ',
+    originNum: '01',
+    originDesc: 'ΑΠΟ ΠΟΥ ΞΕΚΙΝΗΣΑ',
     origin: ['Οι γονείς μου ήταν δημόσιοι υπάλληλοι. Η συμβουλή τους ήταν απλή: βρες μια σταθερή δουλειά, κράτα το κεφάλι κάτω και πρόσεχε να μην τη χάσεις. Δεν υπήρχαν οικογενειακά λεφτά, επιχειρηματικές γνωριμίες ή άνθρωποι να μου ανοίξουν πόρτες.', 'Ήμουν αγχώδης, είχα ελάχιστους φίλους και η επικοινωνία δεν ήταν φυσικό μου ταλέντο. Το δούλεψα. Από μια γκαρσονιέρα στον Πειραιά έφτιαξα τη δική μου consultancy, συνεργάστηκα με μερικές από τις μεγαλύτερες εταιρείες στον κόσμο και έφτασα να πληρώνομαι για να εκπαιδεύω κόσμο σε γεμάτες αίθουσες.', 'Απέτυχα και άσχημα. Και τα δύο startups μου απέτυχαν. Δεν μιλάω σε founders, freelancers ή έμπειρα στελέχη ως παρατηρητής. Ξέρω πώς είναι όταν παίζονται τα λεφτά, η ταυτότητα και οι σχέσεις σου.'],
     hwNum: '02',
+    hwDesc: 'ΤΙ ΜΕ ΟΔΗΓΟΥΣΕ',
     hwH: 'Η σκληρή δουλειά με πήγε μακριά. Με κράτησε όμως και για χρόνια στα λάθος μέρη.',
     hw: ['Για χρόνια χρησιμοποιούσα το άγχος, τη ντροπή και τη φιλοδοξία σαν καύσιμο. Έφερνε αποτελέσματα, οπότε συνέχιζα. Παράλληλα κυνηγούσα στόχους που δεν ήθελα πραγματικά, έμενα με τους λάθος ανθρώπους και δεν έβλεπα patterns που χαλούσαν και τη δουλειά και τη ζωή μου.', 'Η γνώση του business με βοηθούσε να παίρνω καλύτερες επαγγελματικές αποφάσεις. Δεν μου εξηγούσε γιατί πίεζα τον εαυτό μου να πετύχει με όρους που δεν ήθελα καν. Αυτό χρειάστηκε να το ζήσω, να το δουλέψω και να εκπαιδευτώ σοβαρά πάνω του.'],
     exNum: '03',
+    exDesc: 'ΠΟΥ ΒΟΗΘΩ',
     exH: 'Ξέρω πότε χρειάζεται καλύτερη business κίνηση και πότε μια καλή κίνηση κολλάει πάνω σε φόβο, ντροπή ή αποφυγή.',
     ex: [{
       l: 'Αν το offer δεν στέκει, μπορώ να σε βοηθήσω να το φτιάξεις.',
@@ -129,6 +150,7 @@ const WHY_V2 = {
       r: 'Προσέχουμε επίσης πότε διαλέγει για εσένα ο φόβος, η ντροπή ή το «πρέπει».'
     }],
     orNum: '04',
+    orDesc: 'ΜΙΑ ΣΥΖΗΤΗΣΗ',
     orH: 'Δεν χρειάζεται να μου μεταφράζεις τον έναν κόσμο στον άλλον.',
     or: ['Κάνω ερωτήσεις, σου λέω τι βλέπω και αμφισβητώ όσα δεν βγάζουν νόημα. Δεν χρειάζεται να εξηγείς το business σε έναν ψυχοθεραπευτή ή να κρύβεις το προσωπικό κομμάτι από έναν σύμβουλο.', 'Μπορείς να μου πεις αυτό που ντρέπεσαι να πεις δυνατά. Δεν θα σε δω διαφορετικά. Θα σου πω όμως όταν αποφεύγεις το προφανές ή όταν αδικείς τον εαυτό σου.'],
     finalLabel: 'ΑΥΤΗ ΕΙΝΑΙ Η ΔΟΥΛΕΙΑ ΠΟΥ ΧΡΕΙΑΖΟΜΟΥΝ ΚΑΙ ΔΕΝ ΜΠΟΡΟΥΣΑ ΝΑ ΒΡΩ.',
@@ -142,9 +164,14 @@ const WHY_V2 = {
 // scoped under .amx-page so legacy routes never inherit them). Reviews keeps its
 // own rev-* rules below.
 const PAGE_V2_CSS = `
+/* ── One reusable numbered-section label: "NN / DESCRIPTION", one line, aligned to the heading ── */
+.sec-label{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.sec-label__num{font-family:${V2.display};font-size:clamp(20px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:${V2.green};white-space:nowrap}
+.sec-label__desc{font-family:${V2.display};font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:${V2.green}}
+
 /* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
-.home-hero{background:${V2.paper};color:${V2.heroInk}}
-.home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(410px,0.86fr);align-items:center;gap:48px;padding-block:52px 64px}
+.home-hero{background:${V2.white};color:${V2.heroInk}}
+.home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(410px,0.86fr);align-items:center;gap:48px;padding-block:64px 80px}
 .home-hero__copy{position:relative;z-index:2;min-width:0;max-width:720px;color:${V2.heroInk}}
 .home-hero__eyebrow{max-width:520px;color:${V2.green};font-family:${V2.display};font-size:13px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
 .home-hero__title{max-width:720px;margin:14px 0 22px;font-family:${V2.archivo};font-synthesis:none;font-weight:400;line-height:0.9;letter-spacing:-0.055em;color:${V2.heroInk}}
@@ -164,7 +191,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:$
   .home-hero__photo{width:min(100%,390px)}
 }
 @media (max-width:520px){
-  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:38px 20px 48px;min-height:0}
+  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:46px 20px 60px;min-height:0}
   html[lang="en"] .home-hero__title{font-size:clamp(46px,14vw,62px)}
   html[lang="el"] .home-hero__title{font-size:clamp(38px,11vw,52px)}
   .home-hero__photo{width:min(82%,310px);justify-self:center}
@@ -172,21 +199,20 @@ html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:$
 
 /* ── Manifesto — "The whole point" (full-width dark) ── */
 .home-manifesto{width:100%;background:${V2.ink}}
-.home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(48px,5vw,68px) clamp(24px,5vw,72px)}
+.home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(58px,6vw,82px) clamp(24px,5vw,72px)}
 .home-manifesto__label{margin-bottom:17px;color:${V2.green};font-family:${V2.display};font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
 .home-manifesto__copy{font-family:${V2.archivo};font-synthesis:none;font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
 html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;letter-spacing:-0.045em}
 .home-manifesto__muted,.home-manifesto__green{display:block}
 .home-manifesto__muted{color:${V2.greyOnDark}}
 .home-manifesto__green{color:${V2.green}}
-.home-manifesto__copy mark{padding:0 0.08em 0.02em;background:${V2.paper};color:${V2.ink};box-decoration-break:clone;-webkit-box-decoration-break:clone}
-@media (max-width:680px){.home-manifesto__inner{padding:40px 20px 46px}.home-manifesto__copy{font-size:clamp(34px,10vw,48px)}}
+.home-manifesto__copy mark{padding:0 0.08em 0.02em;background:${V2.white};color:${V2.ink};box-decoration-break:clone;-webkit-box-decoration-break:clone}
+@media (max-width:680px){.home-manifesto__inner{padding:48px 20px 55px}.home-manifesto__copy{font-size:clamp(34px,10vw,48px)}}
 
 /* ── Section 01 — dual-field component (dark business / green psychology, portrait on the seam) ── */
-.am-duality-section{overflow:hidden;padding:clamp(72px,7.5vw,108px) 24px clamp(84px,8.5vw,122px);background:#f3f0e8}
+.am-duality-section{overflow:hidden;padding:clamp(86px,9vw,130px) 24px clamp(101px,10.2vw,146px);background:${V2.white}}
 .am-duality-section__inner{width:min(100%,1140px);margin-inline:auto}
-.am-duality-section__heading{display:grid;grid-template-columns:54px minmax(0,880px);gap:22px;align-items:start;margin-bottom:clamp(62px,7vw,92px)}
-.am-duality-section__number{padding-top:8px;color:#059669;font-family:${V2.display};font-size:15px;line-height:1;font-weight:800}
+.am-duality-section__heading{display:block;margin-bottom:clamp(62px,7vw,92px)}
 .am-duality-section__title{max-width:880px;margin:0;font-family:${V2.display};font-synthesis:none;font-size:clamp(43px,4.25vw,61px);line-height:0.98;letter-spacing:-0.052em;font-weight:800;color:#181a1c}
 .am-duality{--am-photo-width:clamp(224px,21.5vw,250px);--am-photo-height:clamp(382px,36.7vw,426px);position:relative;isolation:isolate;width:min(100%,1000px);min-height:360px;margin-inline:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 .am-duality__side{min-width:0;min-height:360px;display:flex;align-items:center}
@@ -199,7 +225,6 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 .am-duality__portrait{position:absolute;z-index:3;left:50%;top:50%;width:var(--am-photo-width);height:var(--am-photo-height);margin:0;transform:translate(-50%,-50%);overflow:hidden;background:#181a1c}
 .am-duality__portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(100%)}
 @media (max-width:900px) and (min-width:701px){
-  .am-duality-section__heading{grid-template-columns:42px minmax(0,1fr);gap:16px}
   .am-duality{--am-photo-width:210px;--am-photo-height:360px}
   .am-duality__side--business{padding:48px 130px 48px 38px}
   .am-duality__side--psychology{padding:48px 38px 48px 145px}
@@ -207,8 +232,7 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 }
 @media (max-width:700px){
   .am-duality-section{padding-inline:20px}
-  .am-duality-section__heading{display:block;margin-bottom:58px}
-  .am-duality-section__number{display:block;margin-bottom:22px;padding:0}
+  .am-duality-section__heading{margin-bottom:58px}
   .am-duality-section__title{font-size:clamp(39px,10.5vw,49px)}
   .am-duality{--am-mobile-top:270px;--am-mobile-bottom:300px;--am-photo-width:clamp(144px,39vw,160px);--am-photo-height:clamp(224px,60vw,242px);min-height:calc(var(--am-mobile-top) + var(--am-mobile-bottom));grid-template-columns:1fr;grid-template-rows:var(--am-mobile-top) var(--am-mobile-bottom)}
   .am-duality__side{min-height:0;justify-content:center;text-align:center}
@@ -227,22 +251,18 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 }
 
 /* ── Home dark canvas sections 02–04 ── */
-.home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(64px,8vw,96px)}
-.sec__n{font-family:${V2.display};font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:${V2.green}}
-.sec__h{margin:22px 0 48px;max-width:19ch;font-family:${V2.display};font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
-.sec__h2l{margin:22px 0 48px;font-family:${V2.display};font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
+.home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(77px,9.6vw,115px)}
+.sec__h{margin:0 0 48px;max-width:19ch;font-family:${V2.display};font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.sec__h2l{margin:0 0 48px;font-family:${V2.display};font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
 .sec__h2l span{display:block}
-.cont-marker{display:flex;align-items:baseline;gap:10px}
-.cont-marker .n{font-family:${V2.display};font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:${V2.green}}
-.cont-marker .lbl{font-family:${V2.display};font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:${V2.green}}
-.opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:${V2.paper};border-radius:12px;overflow:hidden}
+.opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:${V2.white};border-radius:12px;overflow:hidden}
 .opinion img{display:block;width:100%;height:100%;min-height:520px;object-fit:cover;object-position:42% 50%}
 .opinion__body{padding:clamp(32px,4.5vw,56px);min-width:0;display:grid;align-content:start;gap:24px}
 .opinion__body p{margin:0;font-size:18px;line-height:1.55;color:${V2.ink2};max-width:52ch;text-wrap:pretty}
 .opinion__q{margin:8px 0 0;border-top:2px solid ${V2.green};padding-top:24px;font-family:${V2.display};font-weight:750;font-size:clamp(28px,2.5vw,38px);line-height:1.2;letter-spacing:-0.035em;color:${V2.ink};max-width:32ch;text-wrap:pretty}
-.cont{min-height:440px;background:${V2.paper};border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
+.cont{min-height:440px;background:${V2.white};border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
 .cont__in{max-width:760px}
-.cont__h{margin:16px 0 0;max-width:20ch;font-family:${V2.display};font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:${V2.ink};text-wrap:pretty}
+.cont__h{margin:0;max-width:20ch;font-family:${V2.display};font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:${V2.ink};text-wrap:pretty}
 .cont p{margin:24px 0 0;font-size:18px;line-height:1.55;color:${V2.ink2};max-width:52ch;text-wrap:pretty}
 .rule-arrow{display:flex;align-items:center;gap:10px;width:min(320px,60%);margin:0 0 48px}
 .rule-arrow div{flex:1;height:2px;background:${V2.green}}
@@ -262,7 +282,7 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 .media__watch:hover{background:#0e0e0e}
 .media__watch h3{font-size:clamp(44px,4vw,64px)}
 .media__watch p{font-size:17px;line-height:1.5;max-width:34ch}
-.media__follow{background:${V2.paper};color:${V2.ink}}
+.media__follow{background:${V2.white};color:${V2.ink}}
 .media__follow h3{font-size:clamp(44px,4vw,64px)}
 .icon-row{display:flex;align-items:center;gap:16px}
 .icon-btn{width:48px;height:48px;border-radius:50%;background:${V2.ink};color:#fff;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .18s}
@@ -275,26 +295,27 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 
 :root{
   --am-paper:#f3f0e8;
+  --am-surface:#ffffff;
   --am-ink:#171919;
   --am-dark:#1b1d1d;
   --am-green:#059669;
   --am-grey:#a5aaa6;
   --am-container:1080px;
   --am-gutter:clamp(24px, 5vw, 56px);
-  --am-section-space:clamp(58px, 8vw, 84px);
+  --am-section-space:clamp(70px, 9.6vw, 101px);
 }
-.amx-page{width:100%;overflow:clip;color:var(--am-ink);background:var(--am-paper);font-family:var(--font-body)}
+.amx-page{width:100%;overflow:clip;color:var(--am-ink);background:var(--am-surface);font-family:var(--font-body)}
 .amx-page,.amx-page *{box-sizing:border-box}
 .amx-container{width:min(100%, var(--am-container));margin-inline:auto;padding-inline:var(--am-gutter)}
-.amx-paper{color:var(--am-ink);background:var(--am-paper)}
+.amx-paper{color:var(--am-ink);background:var(--am-surface)}
 .amx-dark{color:var(--am-paper);background:var(--am-dark)}
 .amx-green{color:var(--am-ink);background:var(--am-green)}
 .amx-section{padding-block:var(--am-section-space)}
 .amx-label{margin:0;color:var(--am-green);font:700 12px/1.3 var(--font-body);letter-spacing:0.07em;text-transform:uppercase}
 .amx-display,.amx-heading,.amx-subheading{margin:0;color:inherit;font-synthesis:none}
 .amx-display{font-family:var(--font-display);font-size:clamp(42px, 6.4vw, 64px);font-weight:400;line-height:0.98;letter-spacing:-0.045em}
-html[lang^="el"] .amx-display{font-family:var(--font-heading);font-weight:800;line-height:1.04;letter-spacing:-0.035em}
-.amx-heading{font-family:var(--font-heading);font-size:clamp(34px, 5vw, 52px);font-weight:800;line-height:1;letter-spacing:-0.045em}
+html[lang^="el"] .amx-display{font-family:var(--font-heading);font-weight:800;line-height:1.04;letter-spacing:-0.035em;overflow-wrap:break-word}
+.amx-heading{margin:0;font-family:var(--font-heading);font-size:clamp(34px, 5vw, 52px);font-weight:800;line-height:1;letter-spacing:-0.045em;overflow-wrap:break-word}
 html[lang^="el"] .amx-heading{line-height:1.04;letter-spacing:-0.035em}
 .amx-subheading{font-family:var(--font-heading);font-size:24px;font-weight:800;line-height:1.08;letter-spacing:-0.025em}
 html[lang^="el"] .amx-subheading{line-height:1.13;letter-spacing:-0.018em}
@@ -302,8 +323,7 @@ html[lang^="el"] .amx-subheading{line-height:1.13;letter-spacing:-0.018em}
 html[lang^="el"] .amx-body{line-height:1.62}
 .amx-button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding-inline:21px;border:0;border-radius:0;color:#ffffff;background:var(--am-green);font:600 14px/1 var(--font-body);text-decoration:none}
 .amx-button:focus-visible,.amx-content-link:focus-visible{outline:3px solid currentColor;outline-offset:4px}
-.amx-section-head{display:grid;grid-template-columns:44px minmax(0, 1fr);gap:20px;align-items:start;margin-bottom:36px}
-.amx-number{padding-top:4px;color:var(--am-green);font:800 16px/1 var(--font-heading);letter-spacing:-0.03em}
+.amx-section-head{margin-bottom:36px}
 
 /* FINAL CTA */
 .amx-final{text-align:center}
@@ -312,24 +332,21 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .amx-final-link{display:block;margin-top:18px;color:#626764;font:400 13px/1.4 var(--font-body)}
 
 /* WHY ME */
-.amx-why-hero{padding-block:clamp(62px, 8vw, 88px)}
+.amx-why-hero{padding-block:clamp(74px, 9.6vw, 106px)}
 .amx-why-hero .amx-display{max-width:920px;margin-top:16px}
 .amx-why-hero .amx-body{max-width:800px;margin-top:24px}
-.amx-fact-bar{padding-block:24px}
+.amx-fact-bar{padding-block:29px}
 .amx-fact-bar .amx-body{font-weight:600}
-.amx-story-grid{display:grid;grid-template-columns:150px minmax(0, 700px);gap:36px;justify-content:center}
+.amx-story-copy{max-width:750px}
 .amx-story-copy .amx-body + .amx-body{margin-top:22px}
-.amx-reading-copy{max-width:750px;margin:28px 0 0 64px}
+.amx-reading-copy{max-width:750px;margin:28px 0 0}
 .amx-reading-copy .amx-body + .amx-body{margin-top:20px}
-.amx-case-list{margin-left:64px;border-top:1px solid rgb(243 240 232 / 20%)}
+.amx-case-list{border-top:1px solid rgb(243 240 232 / 20%)}
 .amx-case{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding-block:26px;border-bottom:1px solid rgb(243 240 232 / 20%)}
 .amx-case .amx-body:last-child{color:var(--am-green)}
 
 @media (max-width: 720px){
-  .amx-section-head{grid-template-columns:1fr;gap:14px}
-  .amx-reading-copy,.amx-case-list{margin-left:0}
   .amx-case{grid-template-columns:1fr}
-  .amx-story-grid{grid-template-columns:1fr;gap:18px}
 }
 @media (max-width: 470px){
   .amx-display{font-size:clamp(38px, 12vw, 48px)}
@@ -337,7 +354,7 @@ html[lang^="el"] .amx-body{line-height:1.62}
 }
 
 /* ── Reviews (no giant opening testimonial) ── */
-.rev-hero{background:${V2.paper};padding-block:80px 56px}
+.rev-hero{background:${V2.white};padding-block:96px 67px}
 .rev-hero__grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
 .rev-hero h1{margin:0;font-family:${V2.display};font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:${V2.ink}}
 .rev-hero__lead{margin:0 0 14px;font-size:20px;line-height:1.6;color:${V2.ink2};max-width:60ch}
@@ -354,7 +371,7 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .rev-cred .who{margin:0;font-size:14px;color:${V2.meta}}
 .rev-avatar{position:relative;flex:0 0 auto;width:60px;height:60px;border-radius:50%;overflow:hidden;background:${V2.ink};color:${V2.paper};display:flex;align-items:center;justify-content:center;font-family:${V2.display};font-size:17px;font-weight:700;line-height:1}
 .rev-avatar__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)}
-@media (max-width:900px){.rev-hero{padding-block:56px 48px}.rev-hero__grid{grid-template-columns:1fr;gap:28px}}
+@media (max-width:900px){.rev-hero{padding-block:67px 58px}.rev-hero__grid{grid-template-columns:1fr;gap:28px}}
 @media (max-width:800px){.rev-grid{grid-template-columns:1fr}.rev-lead p{font-size:22px}}
 `;
 function PageV2Styles() {
@@ -428,10 +445,7 @@ function HomePageV2({
     className: 'am-duality-section__inner'
   }, React.createElement('header', {
     className: 'am-duality-section__heading'
-  }, React.createElement('span', {
-    className: 'am-duality-section__number',
-    'aria-hidden': 'true'
-  }, '01'), React.createElement('h2', {
+  }, SecLabel('01', c.s01d), React.createElement('h2', {
     className: 'am-duality-section__title',
     id: 'am-duality-title'
   }, c.splitIntro)), React.createElement('div', {
@@ -467,9 +481,7 @@ function HomePageV2({
   // 02 — you will get an opinion
   React.createElement('section', null, React.createElement('div', {
     className: 'site-container'
-  }, React.createElement('div', {
-    className: 'sec__n'
-  }, '02'), React.createElement('h2', {
+  }, SecLabel('02', c.s02d), React.createElement('h2', {
     className: 'sec__h2l'
   }, React.createElement('span', null, c.opinionL1), React.createElement('span', null, c.opinionL2)), React.createElement('div', {
     className: 'opinion'
@@ -494,21 +506,13 @@ function HomePageV2({
     className: 'cont'
   }, React.createElement('div', {
     className: 'cont__in'
-  }, React.createElement('div', {
-    className: 'cont-marker'
-  }, React.createElement('span', {
-    className: 'n'
-  }, c.contNum), React.createElement('span', {
-    className: 'lbl'
-  }, c.contLabel)), React.createElement('h2', {
+  }, SecLabel('03', c.s03d), React.createElement('h2', {
     className: 'cont__h'
   }, c.contH), React.createElement('p', null, c.contP))))),
   // 04 — media
   React.createElement('section', null, React.createElement('div', {
     className: 'site-container'
-  }, React.createElement('div', {
-    className: 'sec__n'
-  }, '04'), React.createElement('h2', {
+  }, SecLabel('04', c.s04d), React.createElement('h2', {
     className: 'sec__h',
     style: {
       marginBottom: 24
@@ -613,9 +617,7 @@ function AboutPageV2({
     className: 'amx-dark amx-section'
   }, React.createElement('div', {
     className: 'amx-container amx-story-grid'
-  }, React.createElement('p', {
-    className: 'amx-label'
-  }, c.originLabel), React.createElement('div', {
+  }, SecLabel(c.originNum, c.originDesc), React.createElement('div', {
     className: 'amx-story-copy'
   }, c.origin.map((p, i) => React.createElement('p', {
     className: 'amx-body',
@@ -628,9 +630,7 @@ function AboutPageV2({
     className: 'amx-container'
   }, React.createElement('div', {
     className: 'amx-section-head'
-  }, React.createElement('div', {
-    className: 'amx-number'
-  }, c.hwNum), React.createElement('h2', {
+  }, SecLabel(c.hwNum, c.hwDesc), React.createElement('h2', {
     className: 'amx-heading'
   }, c.hwH)), React.createElement('div', {
     className: 'amx-reading-copy'
@@ -645,9 +645,7 @@ function AboutPageV2({
     className: 'amx-container'
   }, React.createElement('div', {
     className: 'amx-section-head'
-  }, React.createElement('div', {
-    className: 'amx-number'
-  }, c.exNum), React.createElement('h2', {
+  }, SecLabel(c.exNum, c.exDesc), React.createElement('h2', {
     className: 'amx-heading'
   }, c.exH)), React.createElement('div', {
     className: 'amx-case-list'
@@ -666,9 +664,7 @@ function AboutPageV2({
     className: 'amx-container'
   }, React.createElement('div', {
     className: 'amx-section-head'
-  }, React.createElement('div', {
-    className: 'amx-number'
-  }, c.orNum), React.createElement('h2', {
+  }, SecLabel(c.orNum, c.orDesc), React.createElement('h2', {
     className: 'amx-heading'
   }, c.orH)), React.createElement('div', {
     className: 'amx-reading-copy'

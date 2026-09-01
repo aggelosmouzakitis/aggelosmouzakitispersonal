@@ -112,7 +112,7 @@ img{max-width:100%}
 .hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:0 20px;background:#059669;color:#fff;font-size:14px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hero-cta:hover{filter:brightness(0.9);gap:13px}
 
-.cta-strip{padding-block:clamp(72px,9vw,110px);text-align:center;background:#1A1C1D}
+.cta-strip{padding-block:clamp(86px,10.8vw,132px);text-align:center;background:#1A1C1D}
 .cta-strip__h{margin:0 auto;max-width:20ch;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(36px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
 .cta-strip .pill--green{margin-top:44px}
 .cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:#C2C6CA;transition:gap .18s,color .18s}
@@ -129,10 +129,10 @@ img{max-width:100%}
 .site-ftr__legal nav{display:flex;flex-wrap:wrap;gap:12px 24px}
 .site-ftr__legal nav a{display:inline;margin:0}
 
-.u-hero{background:#F3F0E8;padding-block:88px 72px}
+.u-hero{background:#FFFFFF;padding-block:106px 86px}
 .u-hero h1{margin:0;max-width:15ch;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(52px,5.8vw,82px);font-weight:800;line-height:0.96;letter-spacing:-0.05em;color:#1A1C1D}
 .u-hero p{max-width:65ch;margin:32px 0 0;font-size:21px;line-height:1.55;color:#282726}
-.u-main{background:#F3F0E8;padding-block:0 96px;color:#1A1C1D}
+.u-main{background:#FFFFFF;padding-block:0 115px;color:#1A1C1D}
 
 /* ── Shared inner-page shell: asymmetrical editorial grid (rail | reading column | gutter) ── */
 .u-shell{max-width:1180px;margin-inline:auto;padding-inline:clamp(24px,5vw,72px);display:grid;grid-template-columns:minmax(120px,170px) minmax(0,760px) minmax(0,1fr);column-gap:clamp(28px,4vw,64px)}
@@ -200,7 +200,7 @@ img{max-width:100%}
 @media (max-width:640px){
   .site-ftr__cols{grid-template-columns:1fr;gap:40px}
   .site-ftr__legal{flex-direction:column;align-items:flex-start;gap:20px}
-  .u-hero{padding-block:56px 48px}
+  .u-hero{padding-block:67px 58px}
   .u-read,.u-shell__body{font-size:18px}
   .u-read h2,.u-shell__body h2{margin-top:56px}
 }
@@ -211,9 +211,14 @@ img{max-width:100%}
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
 </style><style>
+/* ── One reusable numbered-section label: "NN / DESCRIPTION", one line, aligned to the heading ── */
+.sec-label{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.sec-label__num{font-family:var(--font-heading);font-size:clamp(20px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669;white-space:nowrap}
+.sec-label__desc{font-family:var(--font-heading);font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
+
 /* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
-.home-hero{background:#F3F0E8;color:#111315}
-.home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(410px,0.86fr);align-items:center;gap:48px;padding-block:52px 64px}
+.home-hero{background:#FFFFFF;color:#111315}
+.home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(410px,0.86fr);align-items:center;gap:48px;padding-block:64px 80px}
 .home-hero__copy{position:relative;z-index:2;min-width:0;max-width:720px;color:#111315}
 .home-hero__eyebrow{max-width:520px;color:#059669;font-family:var(--font-heading);font-size:13px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
 .home-hero__title{max-width:720px;margin:14px 0 22px;font-family:var(--font-display);font-synthesis:none;font-weight:400;line-height:0.9;letter-spacing:-0.055em;color:#111315}
@@ -233,7 +238,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:v
   .home-hero__photo{width:min(100%,390px)}
 }
 @media (max-width:520px){
-  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:38px 20px 48px;min-height:0}
+  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:46px 20px 60px;min-height:0}
   html[lang="en"] .home-hero__title{font-size:clamp(46px,14vw,62px)}
   html[lang="el"] .home-hero__title{font-size:clamp(38px,11vw,52px)}
   .home-hero__photo{width:min(82%,310px);justify-self:center}
@@ -241,21 +246,20 @@ html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:v
 
 /* ── Manifesto — "The whole point" (full-width dark) ── */
 .home-manifesto{width:100%;background:#1A1C1D}
-.home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(48px,5vw,68px) clamp(24px,5vw,72px)}
+.home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(58px,6vw,82px) clamp(24px,5vw,72px)}
 .home-manifesto__label{margin-bottom:17px;color:#059669;font-family:var(--font-heading);font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
 .home-manifesto__copy{font-family:var(--font-display);font-synthesis:none;font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
 html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weight:800;letter-spacing:-0.045em}
 .home-manifesto__muted,.home-manifesto__green{display:block}
 .home-manifesto__muted{color:#9DA19E}
 .home-manifesto__green{color:#059669}
-.home-manifesto__copy mark{padding:0 0.08em 0.02em;background:#F3F0E8;color:#1A1C1D;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-@media (max-width:680px){.home-manifesto__inner{padding:40px 20px 46px}.home-manifesto__copy{font-size:clamp(34px,10vw,48px)}}
+.home-manifesto__copy mark{padding:0 0.08em 0.02em;background:#FFFFFF;color:#1A1C1D;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+@media (max-width:680px){.home-manifesto__inner{padding:48px 20px 55px}.home-manifesto__copy{font-size:clamp(34px,10vw,48px)}}
 
 /* ── Section 01 — dual-field component (dark business / green psychology, portrait on the seam) ── */
-.am-duality-section{overflow:hidden;padding:clamp(72px,7.5vw,108px) 24px clamp(84px,8.5vw,122px);background:#f3f0e8}
+.am-duality-section{overflow:hidden;padding:clamp(86px,9vw,130px) 24px clamp(101px,10.2vw,146px);background:#FFFFFF}
 .am-duality-section__inner{width:min(100%,1140px);margin-inline:auto}
-.am-duality-section__heading{display:grid;grid-template-columns:54px minmax(0,880px);gap:22px;align-items:start;margin-bottom:clamp(62px,7vw,92px)}
-.am-duality-section__number{padding-top:8px;color:#059669;font-family:var(--font-heading);font-size:15px;line-height:1;font-weight:800}
+.am-duality-section__heading{display:block;margin-bottom:clamp(62px,7vw,92px)}
 .am-duality-section__title{max-width:880px;margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(43px,4.25vw,61px);line-height:0.98;letter-spacing:-0.052em;font-weight:800;color:#181a1c}
 .am-duality{--am-photo-width:clamp(224px,21.5vw,250px);--am-photo-height:clamp(382px,36.7vw,426px);position:relative;isolation:isolate;width:min(100%,1000px);min-height:360px;margin-inline:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 .am-duality__side{min-width:0;min-height:360px;display:flex;align-items:center}
@@ -268,7 +272,6 @@ html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weigh
 .am-duality__portrait{position:absolute;z-index:3;left:50%;top:50%;width:var(--am-photo-width);height:var(--am-photo-height);margin:0;transform:translate(-50%,-50%);overflow:hidden;background:#181a1c}
 .am-duality__portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(100%)}
 @media (max-width:900px) and (min-width:701px){
-  .am-duality-section__heading{grid-template-columns:42px minmax(0,1fr);gap:16px}
   .am-duality{--am-photo-width:210px;--am-photo-height:360px}
   .am-duality__side--business{padding:48px 130px 48px 38px}
   .am-duality__side--psychology{padding:48px 38px 48px 145px}
@@ -276,8 +279,7 @@ html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weigh
 }
 @media (max-width:700px){
   .am-duality-section{padding-inline:20px}
-  .am-duality-section__heading{display:block;margin-bottom:58px}
-  .am-duality-section__number{display:block;margin-bottom:22px;padding:0}
+  .am-duality-section__heading{margin-bottom:58px}
   .am-duality-section__title{font-size:clamp(39px,10.5vw,49px)}
   .am-duality{--am-mobile-top:270px;--am-mobile-bottom:300px;--am-photo-width:clamp(144px,39vw,160px);--am-photo-height:clamp(224px,60vw,242px);min-height:calc(var(--am-mobile-top) + var(--am-mobile-bottom));grid-template-columns:1fr;grid-template-rows:var(--am-mobile-top) var(--am-mobile-bottom)}
   .am-duality__side{min-height:0;justify-content:center;text-align:center}
@@ -296,22 +298,18 @@ html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weigh
 }
 
 /* ── Home dark canvas sections 02–04 ── */
-.home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(64px,8vw,96px)}
-.sec__n{font-family:var(--font-heading);font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669}
-.sec__h{margin:22px 0 48px;max-width:19ch;font-family:var(--font-heading);font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
-.sec__h2l{margin:22px 0 48px;font-family:var(--font-heading);font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
+.home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(77px,9.6vw,115px)}
+.sec__h{margin:0 0 48px;max-width:19ch;font-family:var(--font-heading);font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.sec__h2l{margin:0 0 48px;font-family:var(--font-heading);font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
 .sec__h2l span{display:block}
-.cont-marker{display:flex;align-items:baseline;gap:10px}
-.cont-marker .n{font-family:var(--font-heading);font-size:clamp(21px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669}
-.cont-marker .lbl{font-family:var(--font-heading);font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
-.opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:#F3F0E8;border-radius:12px;overflow:hidden}
+.opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:#FFFFFF;border-radius:12px;overflow:hidden}
 .opinion img{display:block;width:100%;height:100%;min-height:520px;object-fit:cover;object-position:42% 50%}
 .opinion__body{padding:clamp(32px,4.5vw,56px);min-width:0;display:grid;align-content:start;gap:24px}
 .opinion__body p{margin:0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
 .opinion__q{margin:8px 0 0;border-top:2px solid #059669;padding-top:24px;font-family:var(--font-heading);font-weight:750;font-size:clamp(28px,2.5vw,38px);line-height:1.2;letter-spacing:-0.035em;color:#1A1C1D;max-width:32ch;text-wrap:pretty}
-.cont{min-height:440px;background:#F3F0E8;border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
+.cont{min-height:440px;background:#FFFFFF;border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
 .cont__in{max-width:760px}
-.cont__h{margin:16px 0 0;max-width:20ch;font-family:var(--font-heading);font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:#1A1C1D;text-wrap:pretty}
+.cont__h{margin:0;max-width:20ch;font-family:var(--font-heading);font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:#1A1C1D;text-wrap:pretty}
 .cont p{margin:24px 0 0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
 .rule-arrow{display:flex;align-items:center;gap:10px;width:min(320px,60%);margin:0 0 48px}
 .rule-arrow div{flex:1;height:2px;background:#059669}
@@ -331,7 +329,7 @@ html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weigh
 .media__watch:hover{background:#0e0e0e}
 .media__watch h3{font-size:clamp(44px,4vw,64px)}
 .media__watch p{font-size:17px;line-height:1.5;max-width:34ch}
-.media__follow{background:#F3F0E8;color:#1A1C1D}
+.media__follow{background:#FFFFFF;color:#1A1C1D}
 .media__follow h3{font-size:clamp(44px,4vw,64px)}
 .icon-row{display:flex;align-items:center;gap:16px}
 .icon-btn{width:48px;height:48px;border-radius:50%;background:#1A1C1D;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .18s}
@@ -344,26 +342,27 @@ html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weigh
 
 :root{
   --am-paper:#f3f0e8;
+  --am-surface:#ffffff;
   --am-ink:#171919;
   --am-dark:#1b1d1d;
   --am-green:#059669;
   --am-grey:#a5aaa6;
   --am-container:1080px;
   --am-gutter:clamp(24px, 5vw, 56px);
-  --am-section-space:clamp(58px, 8vw, 84px);
+  --am-section-space:clamp(70px, 9.6vw, 101px);
 }
-.amx-page{width:100%;overflow:clip;color:var(--am-ink);background:var(--am-paper);font-family:var(--font-body)}
+.amx-page{width:100%;overflow:clip;color:var(--am-ink);background:var(--am-surface);font-family:var(--font-body)}
 .amx-page,.amx-page *{box-sizing:border-box}
 .amx-container{width:min(100%, var(--am-container));margin-inline:auto;padding-inline:var(--am-gutter)}
-.amx-paper{color:var(--am-ink);background:var(--am-paper)}
+.amx-paper{color:var(--am-ink);background:var(--am-surface)}
 .amx-dark{color:var(--am-paper);background:var(--am-dark)}
 .amx-green{color:var(--am-ink);background:var(--am-green)}
 .amx-section{padding-block:var(--am-section-space)}
 .amx-label{margin:0;color:var(--am-green);font:700 12px/1.3 var(--font-body);letter-spacing:0.07em;text-transform:uppercase}
 .amx-display,.amx-heading,.amx-subheading{margin:0;color:inherit;font-synthesis:none}
 .amx-display{font-family:var(--font-display);font-size:clamp(42px, 6.4vw, 64px);font-weight:400;line-height:0.98;letter-spacing:-0.045em}
-html[lang^="el"] .amx-display{font-family:var(--font-heading);font-weight:800;line-height:1.04;letter-spacing:-0.035em}
-.amx-heading{font-family:var(--font-heading);font-size:clamp(34px, 5vw, 52px);font-weight:800;line-height:1;letter-spacing:-0.045em}
+html[lang^="el"] .amx-display{font-family:var(--font-heading);font-weight:800;line-height:1.04;letter-spacing:-0.035em;overflow-wrap:break-word}
+.amx-heading{margin:0;font-family:var(--font-heading);font-size:clamp(34px, 5vw, 52px);font-weight:800;line-height:1;letter-spacing:-0.045em;overflow-wrap:break-word}
 html[lang^="el"] .amx-heading{line-height:1.04;letter-spacing:-0.035em}
 .amx-subheading{font-family:var(--font-heading);font-size:24px;font-weight:800;line-height:1.08;letter-spacing:-0.025em}
 html[lang^="el"] .amx-subheading{line-height:1.13;letter-spacing:-0.018em}
@@ -371,8 +370,7 @@ html[lang^="el"] .amx-subheading{line-height:1.13;letter-spacing:-0.018em}
 html[lang^="el"] .amx-body{line-height:1.62}
 .amx-button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding-inline:21px;border:0;border-radius:0;color:#ffffff;background:var(--am-green);font:600 14px/1 var(--font-body);text-decoration:none}
 .amx-button:focus-visible,.amx-content-link:focus-visible{outline:3px solid currentColor;outline-offset:4px}
-.amx-section-head{display:grid;grid-template-columns:44px minmax(0, 1fr);gap:20px;align-items:start;margin-bottom:36px}
-.amx-number{padding-top:4px;color:var(--am-green);font:800 16px/1 var(--font-heading);letter-spacing:-0.03em}
+.amx-section-head{margin-bottom:36px}
 
 /* FINAL CTA */
 .amx-final{text-align:center}
@@ -381,24 +379,21 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .amx-final-link{display:block;margin-top:18px;color:#626764;font:400 13px/1.4 var(--font-body)}
 
 /* WHY ME */
-.amx-why-hero{padding-block:clamp(62px, 8vw, 88px)}
+.amx-why-hero{padding-block:clamp(74px, 9.6vw, 106px)}
 .amx-why-hero .amx-display{max-width:920px;margin-top:16px}
 .amx-why-hero .amx-body{max-width:800px;margin-top:24px}
-.amx-fact-bar{padding-block:24px}
+.amx-fact-bar{padding-block:29px}
 .amx-fact-bar .amx-body{font-weight:600}
-.amx-story-grid{display:grid;grid-template-columns:150px minmax(0, 700px);gap:36px;justify-content:center}
+.amx-story-copy{max-width:750px}
 .amx-story-copy .amx-body + .amx-body{margin-top:22px}
-.amx-reading-copy{max-width:750px;margin:28px 0 0 64px}
+.amx-reading-copy{max-width:750px;margin:28px 0 0}
 .amx-reading-copy .amx-body + .amx-body{margin-top:20px}
-.amx-case-list{margin-left:64px;border-top:1px solid rgb(243 240 232 / 20%)}
+.amx-case-list{border-top:1px solid rgb(243 240 232 / 20%)}
 .amx-case{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding-block:26px;border-bottom:1px solid rgb(243 240 232 / 20%)}
 .amx-case .amx-body:last-child{color:var(--am-green)}
 
 @media (max-width: 720px){
-  .amx-section-head{grid-template-columns:1fr;gap:14px}
-  .amx-reading-copy,.amx-case-list{margin-left:0}
   .amx-case{grid-template-columns:1fr}
-  .amx-story-grid{grid-template-columns:1fr;gap:18px}
 }
 @media (max-width: 470px){
   .amx-display{font-size:clamp(38px, 12vw, 48px)}
@@ -406,7 +401,7 @@ html[lang^="el"] .amx-body{line-height:1.62}
 }
 
 /* ── Reviews (no giant opening testimonial) ── */
-.rev-hero{background:#F3F0E8;padding-block:80px 56px}
+.rev-hero{background:#FFFFFF;padding-block:96px 67px}
 .rev-hero__grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
 .rev-hero h1{margin:0;font-family:var(--font-heading);font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:#1A1C1D}
 .rev-hero__lead{margin:0 0 14px;font-size:20px;line-height:1.6;color:#282726;max-width:60ch}
@@ -423,13 +418,13 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .rev-cred .who{margin:0;font-size:14px;color:#5E6264}
 .rev-avatar{position:relative;flex:0 0 auto;width:60px;height:60px;border-radius:50%;overflow:hidden;background:#1A1C1D;color:#F3F0E8;display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-size:17px;font-weight:700;line-height:1}
 .rev-avatar__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)}
-@media (max-width:900px){.rev-hero{padding-block:56px 48px}.rev-hero__grid{grid-template-columns:1fr;gap:28px}}
+@media (max-width:900px){.rev-hero{padding-block:67px 58px}.rev-hero__grid{grid-template-columns:1fr;gap:28px}}
 @media (max-width:800px){.rev-grid{grid-template-columns:1fr}.rev-lead p{font-size:22px}}
-</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/el/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/el/" aria-current="page">Αρχική</a><a href="/el/about/">Γιατί εμένα</a><a href="/el/reviews/">Κριτικές</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/" hreflang="en">English</a><a class="hdr-cta" href="/el/startingdiagnostic/"><span>ΣΥΝΑΝΤΗΣΗ</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Μενού" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main><section class="home-hero"><div class="home-hero__grid"><div class="home-hero__copy"><div class="home-hero__eyebrow">ΣΥΜΒΟΥΛΟΣ ΕΠΙΧΕΙΡΗΣΕΩΝ &amp; ΚΑΡΙΕΡΑΣ · ΣΥΜΒΟΥΛΟΣ ΨΥΧΙΚΗΣ ΥΓΕΙΑΣ</div><h1 class="home-hero__title">Πρακτική βοήθεια για την επιχείρηση, την καριέρα και <span class="human">τον άνθρωπο</span> πίσω από όλα αυτά.</h1><p class="home-hero__support">Για ανθρώπους που είναι καλοί σε αυτό που κάνουν και έχουν φτάσει σε κάτι που δεν λύνεται μόνο με περισσότερη δουλειά.</p><a class="hero-cta" href="/el/startingdiagnostic/"><span>Ζήτησε μια πρώτη συνάντηση</span><span>→</span></a></div><figure class="home-hero__photo"><div class="home-hero__frame"><img src="/img/aggelos-homepage.webp" alt="Aggelos Mouzakitis" width="1560" height="1040" loading="eager" fetchpriority="high" decoding="async"></div></figure></div></section><section class="home-manifesto"><div class="home-manifesto__inner"><div class="home-manifesto__label">ΤΟ ΖΗΤΟΥΜΕΝΟ</div><div class="home-manifesto__copy"><span class="home-manifesto__muted">Ξέρεις καλά τη δουλειά σου.</span><span class="home-manifesto__green">Πάμε να κάνουμε την καριέρα ή την επιχείρησή σου <mark>να δουλεύει για σένα.</mark></span></div></div></section><section class="am-duality-section" aria-labelledby="am-duality-title"><div class="am-duality-section__inner"><header class="am-duality-section__heading"><span class="am-duality-section__number" aria-hidden="true">01</span><h2 class="am-duality-section__title" id="am-duality-title">Δεν χρειάζεται να διαλέξεις αν το θέμα είναι επαγγελματικό ή προσωπικό.</h2></header><div class="am-duality"><article class="am-duality__side am-duality__side--business"><div class="am-duality__copy"><p class="am-duality__label">ΤΙ ΑΛΛΑΖΟΥΜΕ</p><p class="am-duality__statement">Μπορούμε να δουλέψουμε το offer, το marketing, την επόμενη κίνηση στην καριέρα σου, τους πελάτες ή τον τρόπο που λειτουργεί η επιχείρησή σου.</p></div></article><article class="am-duality__side am-duality__side--psychology"><div class="am-duality__copy"><p class="am-duality__label">ΤΙ ΜΠΑΙΝΕΙ ΣΤΗ ΜΕΣΗ</p><p class="am-duality__statement">Αν ο φόβος, η ντροπή, η αποφυγή ή η πίεση στο σπίτι επηρεάζουν τη δουλειά και τις αποφάσεις σου, πιάνουμε και αυτό το κομμάτι.</p></div></article><figure class="am-duality__portrait"><img src="/img/aggelos-overlap.webp" alt="Aggelos Mouzakitis" width="250" height="426" loading="lazy" decoding="async"></figure></div></div></section><div class="home-flow"><section><div class="site-container"><div class="sec__n">02</div><h2 class="sec__h2l"><span>ΘΑ ΣΟΥ ΠΩ</span><span>ΤΗ ΓΝΩΜΗ ΜΟΥ.</span></h2><div class="opinion"><img src="/img/aggelos-continuation.jpeg" alt="Άγγελος Μουζακίτης" width="900" height="1125" loading="lazy" decoding="async"><div class="opinion__body"><p>Θα κάνω όσες ερωτήσεις χρειαστούν για να καταλάβω τι συμβαίνει. Μετά θα σου πω πώς το βλέπω.</p><p>Αν βλέπω κάτι συγκεκριμένο που μπορείς να κάνεις, θα στο προτείνω. Αν αυτά που μου λες δεν στέκουν, θα σου το πω.</p><p>Μπορείς να μου πεις και αυτό που συνήθως αφήνεις απ’ έξω. Δεν θα σε δω διαφορετικά. Δεν θα σε αφήσω όμως να λες μαλακίες στον εαυτό σου.</p><blockquote class="opinion__q">«Έφυγα με κάτι περισσότερο από συμβουλές. Έφυγα έχοντας καταλάβει ποιο ήταν πραγματικά το πρόβλημα.»</blockquote></div></div></div></section><section><div class="site-container"><div class="cont"><div class="cont__in"><div class="cont-marker"><span class="n">03</span><span class="lbl">/ ΑΝ ΣΥΝΕΧΙΣΟΥΜΕ</span></div><h2 class="cont__h">Συμφωνούμε τι ακριβώς θέλεις να πετύχεις και για πόσο θα δουλέψουμε πάνω σε αυτό.</h2><p>Μιλάμε κάθε εβδομάδα και μπορείς να μου γράφεις στο WhatsApp ανάμεσα στις συναντήσεις.</p></div></div></div></section><section><div class="site-container"><div class="sec__n">04</div><h2 class="sec__h" style="margin-bottom: 24px;">Θέλεις να δεις πώς σκέφτομαι;</h2><div class="rule-arrow"><div></div><span>→</span></div><div class="media"><a class="media__cell media__read" href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer"><div class="media__top"><h3>READ</h3><span class="media__arw">↗</span></div><div><div class="media__kicker">UNDISGUISED</div><p>Κείμενα για τη δουλειά, τη φιλοδοξία, την ψυχολογία και εκεί που μπλέκονται.</p></div></a><a class="media__cell media__watch" href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer"><div class="media__top"><h3>WATCH</h3><span class="media__arw" style="font-size: 32px;">↗</span></div><div><div class="media__kicker">YOUTUBE</div><p>Μικρά βίντεο, μεγαλύτερες συζητήσεις και πού και πού κάποιο χρήσιμο rant.</p></div></a><div class="media__cell media__follow"><h3>FOLLOW</h3><div class="icon-row"><a class="icon-btn" href="https://linkedin.com/in/growth-product-manager/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a><a class="icon-btn" href="https://www.instagram.com/_aggelosmouzakitis_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg></a><a class="icon-btn" href="https://www.tiktok.com/@aggelosmouz" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg></a></div></div></div></div></section></div><section class="cta-strip"><div class="site-container"><h2 class="cta-strip__h">ΑΝ ΛΥΝΟΤΑΝ ΜΕ ΠΕΡΙΣΣΟΤΕΡΗ ΔΟΥΛΕΙΑ, ΜΑΛΛΟΝ ΘΑ ΕΙΧΕ ΛΥΘΕΙ ΗΔΗ.</h2><div><a class="pill pill--green" href="/el/startingdiagnostic/"><span>Ζήτησε μια πρώτη συνάντηση</span><span>→</span></a></div><a class="cta-strip__sub" href="/el/confidentiality/"><span>Εμπιστευτικότητα</span><span>→</span></a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__brand" style="font-size: 20px;">Aggelos<span>.</span></div><div class="site-ftr__roles"><div>Σύμβουλος επιχειρήσεων &amp; καριέρας</div><div style="margin-top: 8px;">Σύμβουλος ψυχικής υγείας</div></div></div><nav><div class="site-ftr__head">ΠΛΟΗΓΗΣΗ</div><a href="/el/">Αρχική</a><a href="/el/about/">Γιατί εμένα</a><a href="/el/reviews/">Κριτικές</a><a href="/el/startingdiagnostic/">Ζήτησε γνωριμία</a></nav><nav><div class="site-ftr__head">ΠΕΡΙΕΧΟΜΕΝΟ</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Κείμενα ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a></nav><nav><div class="site-ftr__head">ΑΚΟΛΟΥΘΗΣΕ</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. Με επιφύλαξη παντός δικαιώματος.</div><nav><a href="/el/confidentiality/">Εμπιστευτικότητα</a><a href="/el/confidentiality/#terms">Όροι χρήσης</a><a href="/el/confidentiality/#privacy">Πολιτική απορρήτου</a></nav></div></div></footer></div>
+</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/el/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/el/" aria-current="page">Αρχική</a><a href="/el/about/">Γιατί εμένα</a><a href="/el/reviews/">Κριτικές</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/" hreflang="en">English</a><a class="hdr-cta" href="/el/startingdiagnostic/"><span>ΣΥΝΑΝΤΗΣΗ</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Μενού" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main><section class="home-hero"><div class="home-hero__grid"><div class="home-hero__copy"><div class="home-hero__eyebrow">ΣΥΜΒΟΥΛΟΣ ΕΠΙΧΕΙΡΗΣΕΩΝ &amp; ΚΑΡΙΕΡΑΣ · ΣΥΜΒΟΥΛΟΣ ΨΥΧΙΚΗΣ ΥΓΕΙΑΣ</div><h1 class="home-hero__title">Πρακτική βοήθεια για την επιχείρηση, την καριέρα και <span class="human">τον άνθρωπο</span> πίσω από όλα αυτά.</h1><p class="home-hero__support">Για ανθρώπους που είναι καλοί σε αυτό που κάνουν και έχουν φτάσει σε κάτι που δεν λύνεται μόνο με περισσότερη δουλειά.</p><a class="hero-cta" href="/el/startingdiagnostic/"><span>Ζήτησε μια πρώτη συνάντηση</span><span>→</span></a></div><figure class="home-hero__photo"><div class="home-hero__frame"><img src="/img/aggelos-homepage.webp" alt="Aggelos Mouzakitis" width="1560" height="1040" loading="eager" fetchpriority="high" decoding="async"></div></figure></div></section><section class="home-manifesto"><div class="home-manifesto__inner"><div class="home-manifesto__label">ΤΟ ΖΗΤΟΥΜΕΝΟ</div><div class="home-manifesto__copy"><span class="home-manifesto__muted">Ξέρεις καλά τη δουλειά σου.</span><span class="home-manifesto__green">Πάμε να κάνουμε την καριέρα ή την επιχείρησή σου <mark>να δουλεύει για σένα.</mark></span></div></div></section><section class="am-duality-section" aria-labelledby="am-duality-title"><div class="am-duality-section__inner"><header class="am-duality-section__heading"><div class="sec-label"><span class="sec-label__num">01 /</span><span class="sec-label__desc">ΕΠΙΧΕΙΡΗΣΗ &amp; ΨΥΧΟΛΟΓΙΑ</span></div><h2 class="am-duality-section__title" id="am-duality-title">Δεν χρειάζεται να διαλέξεις αν το θέμα είναι επαγγελματικό ή προσωπικό.</h2></header><div class="am-duality"><article class="am-duality__side am-duality__side--business"><div class="am-duality__copy"><p class="am-duality__label">ΤΙ ΑΛΛΑΖΟΥΜΕ</p><p class="am-duality__statement">Μπορούμε να δουλέψουμε το offer, το marketing, την επόμενη κίνηση στην καριέρα σου, τους πελάτες ή τον τρόπο που λειτουργεί η επιχείρησή σου.</p></div></article><article class="am-duality__side am-duality__side--psychology"><div class="am-duality__copy"><p class="am-duality__label">ΤΙ ΜΠΑΙΝΕΙ ΣΤΗ ΜΕΣΗ</p><p class="am-duality__statement">Αν ο φόβος, η ντροπή, η αποφυγή ή η πίεση στο σπίτι επηρεάζουν τη δουλειά και τις αποφάσεις σου, πιάνουμε και αυτό το κομμάτι.</p></div></article><figure class="am-duality__portrait"><img src="/img/aggelos-overlap.webp" alt="Aggelos Mouzakitis" width="250" height="426" loading="lazy" decoding="async"></figure></div></div></section><div class="home-flow"><section><div class="site-container"><div class="sec-label"><span class="sec-label__num">02 /</span><span class="sec-label__desc">ΕΙΛΙΚΡΙΝΗΣ ΓΝΩΜΗ</span></div><h2 class="sec__h2l"><span>ΘΑ ΣΟΥ ΠΩ</span><span>ΤΗ ΓΝΩΜΗ ΜΟΥ.</span></h2><div class="opinion"><img src="/img/aggelos-continuation.jpeg" alt="Άγγελος Μουζακίτης" width="900" height="1125" loading="lazy" decoding="async"><div class="opinion__body"><p>Θα κάνω όσες ερωτήσεις χρειαστούν για να καταλάβω τι συμβαίνει. Μετά θα σου πω πώς το βλέπω.</p><p>Αν βλέπω κάτι συγκεκριμένο που μπορείς να κάνεις, θα στο προτείνω. Αν αυτά που μου λες δεν στέκουν, θα σου το πω.</p><p>Μπορείς να μου πεις και αυτό που συνήθως αφήνεις απ’ έξω. Δεν θα σε δω διαφορετικά. Δεν θα σε αφήσω όμως να λες μαλακίες στον εαυτό σου.</p><blockquote class="opinion__q">«Έφυγα με κάτι περισσότερο από συμβουλές. Έφυγα έχοντας καταλάβει ποιο ήταν πραγματικά το πρόβλημα.»</blockquote></div></div></div></section><section><div class="site-container"><div class="cont"><div class="cont__in"><div class="sec-label"><span class="sec-label__num">03 /</span><span class="sec-label__desc">ΑΝ ΣΥΝΕΧΙΣΟΥΜΕ</span></div><h2 class="cont__h">Συμφωνούμε τι ακριβώς θέλεις να πετύχεις και για πόσο θα δουλέψουμε πάνω σε αυτό.</h2><p>Μιλάμε κάθε εβδομάδα και μπορείς να μου γράφεις στο WhatsApp ανάμεσα στις συναντήσεις.</p></div></div></div></section><section><div class="site-container"><div class="sec-label"><span class="sec-label__num">04 /</span><span class="sec-label__desc">ΠΕΡΙΣΣΟΤΕΡΑ ΑΠΟ ΜΕΝΑ</span></div><h2 class="sec__h" style="margin-bottom: 24px;">Θέλεις να δεις πώς σκέφτομαι;</h2><div class="rule-arrow"><div></div><span>→</span></div><div class="media"><a class="media__cell media__read" href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer"><div class="media__top"><h3>READ</h3><span class="media__arw">↗</span></div><div><div class="media__kicker">UNDISGUISED</div><p>Κείμενα για τη δουλειά, τη φιλοδοξία, την ψυχολογία και εκεί που μπλέκονται.</p></div></a><a class="media__cell media__watch" href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer"><div class="media__top"><h3>WATCH</h3><span class="media__arw" style="font-size: 32px;">↗</span></div><div><div class="media__kicker">YOUTUBE</div><p>Μικρά βίντεο, μεγαλύτερες συζητήσεις και πού και πού κάποιο χρήσιμο rant.</p></div></a><div class="media__cell media__follow"><h3>FOLLOW</h3><div class="icon-row"><a class="icon-btn" href="https://linkedin.com/in/growth-product-manager/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a><a class="icon-btn" href="https://www.instagram.com/_aggelosmouzakitis_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg></a><a class="icon-btn" href="https://www.tiktok.com/@aggelosmouz" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg></a></div></div></div></div></section></div><section class="cta-strip"><div class="site-container"><h2 class="cta-strip__h">ΑΝ ΛΥΝΟΤΑΝ ΜΕ ΠΕΡΙΣΣΟΤΕΡΗ ΔΟΥΛΕΙΑ, ΜΑΛΛΟΝ ΘΑ ΕΙΧΕ ΛΥΘΕΙ ΗΔΗ.</h2><div><a class="pill pill--green" href="/el/startingdiagnostic/"><span>Ζήτησε μια πρώτη συνάντηση</span><span>→</span></a></div><a class="cta-strip__sub" href="/el/confidentiality/"><span>Εμπιστευτικότητα</span><span>→</span></a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__brand" style="font-size: 20px;">Aggelos<span>.</span></div><div class="site-ftr__roles"><div>Σύμβουλος επιχειρήσεων &amp; καριέρας</div><div style="margin-top: 8px;">Σύμβουλος ψυχικής υγείας</div></div></div><nav><div class="site-ftr__head">ΠΛΟΗΓΗΣΗ</div><a href="/el/">Αρχική</a><a href="/el/about/">Γιατί εμένα</a><a href="/el/reviews/">Κριτικές</a><a href="/el/startingdiagnostic/">Ζήτησε γνωριμία</a></nav><nav><div class="site-ftr__head">ΠΕΡΙΕΧΟΜΕΝΟ</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Κείμενα ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a></nav><nav><div class="site-ftr__head">ΑΚΟΛΟΥΘΗΣΕ</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. Με επιφύλαξη παντός δικαιώματος.</div><nav><a href="/el/confidentiality/">Εμπιστευτικότητα</a><a href="/el/confidentiality/#terms">Όροι χρήσης</a><a href="/el/confidentiality/#privacy">Πολιτική απορρήτου</a></nav></div></div></footer></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
-<script src="/site-chrome.js?v=3"></script>
-<script src="/core-pages-v2.js?v=4"></script>
+<script src="/site-chrome.js?v=4"></script>
+<script src="/core-pages-v2.js?v=5"></script>
 <script src="/content-pages.js?v=35"></script>
 <script>renderApp("home", "el");</script>
 </body>
