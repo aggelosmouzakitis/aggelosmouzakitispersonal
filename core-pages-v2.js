@@ -269,7 +269,6 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 .media__watch h3{font-size:clamp(44px,4vw,64px)}
 .media__watch p{font-size:18px;line-height:1.55;max-width:34ch}
 .media__ask{background:${V2.white};color:${V2.ink}}
-.media__ask:hover{background:rgba(5,150,105,0.05)}
 .media__ask h3{font-size:clamp(44px,4vw,64px)}
 .media__ask .media__arw{color:${V2.green}}
 .media__ask-sub{display:block;margin-top:6px;font-family:${V2.display};font-size:clamp(20px,1.9vw,26px);font-weight:800;line-height:1;letter-spacing:-0.02em;color:${V2.green}}
