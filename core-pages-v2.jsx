@@ -25,22 +25,22 @@ const HOME_V2 = {
     h1pre: 'Practical help for the business, the career and ',
     h1human: 'the person',
     h1post: ' behind them.',
-    support: 'For people who are good at what they do and have reached something that more work alone won’t fix.',
+    support: 'For founders, freelancers and experienced professionals whose business or career problem also has a personal side.',
     mLabel: 'THE WHOLE POINT',
-    mMuted: 'You know your work.',
-    mGreenPre: 'Now let’s make your career or business ',
-    mMark: 'work for you.',
+    mMuted: 'You know the work.',
+    mGreenPre: 'Now let’s build a career or business that ',
+    mMark: 'works for you too.',
     splitIntro: 'You won’t have to choose between practical advice and psychological depth.',
     s01d: 'BUSINESS & PSYCHOLOGY', s02d: 'HONEST FEEDBACK', s03d: 'IF WE CONTINUE', s04d: 'MORE FROM ME',
     leftH: 'WHAT WE CHANGE',
     leftP: 'We can work on the offer, marketing, career move, client mix or the way the business runs.',
     rightH: 'WHAT GETS IN THE WAY',
-    rightP: 'If fear, shame, avoidance or pressure at home is shaping what you do, we work there too.',
+    rightP: 'If fear, shame or other people’s approval is shaping your decisions, we work there too.',
     opinionL1: 'YOU WILL GET', opinionL2: 'AN OPINION.',
     opinionParas: [
       'I ask enough questions to understand the situation, then tell you what I think.',
       'If I see a practical move, I suggest it. If your story does not add up, I say so.',
-      'You can tell me the part you normally edit out. I will not think less of you. I will not let you bullshit yourself either.',
+      'Tell me the part you usually edit out. I will not think less of you or let you bullshit yourself.',
     ],
     opinionQuote: '“I left with more than advice. I left understanding what the problem actually was.”',
     contH: 'We agree on one concrete outcome and how long we will work towards it.',
@@ -48,6 +48,7 @@ const HOME_V2 = {
     mediaIntro: 'Want to see how I think?',
     readP: 'Essays about work, ambition, psychology and where they overlap.',
     watchP: 'Short videos, longer conversations and the occasional useful rant.',
+    askSub: 'ANONYMOUSLY', askP: 'Send me a question without giving me your name, and I may answer it in an article or video.',
     finalH: 'IF WORKING HARDER WAS GOING TO FIX THIS, IT PROBABLY WOULD HAVE BY NOW.',
     contAlt: 'Aggelos Mouzakitis',
   },
@@ -56,22 +57,22 @@ const HOME_V2 = {
     h1pre: 'Πρακτική βοήθεια για την επιχείρηση, την καριέρα και ',
     h1human: 'τον άνθρωπο',
     h1post: ' πίσω από όλα αυτά.',
-    support: 'Για ανθρώπους που είναι καλοί σε αυτό που κάνουν και έχουν φτάσει σε κάτι που δεν λύνεται μόνο με περισσότερη δουλειά.',
+    support: 'Για founders, freelancers και έμπειρους επαγγελματίες που αντιμετωπίζουν ένα πραγματικό πρόβλημα με προσωπικές προεκτάσεις.',
     mLabel: 'ΤΟ ΖΗΤΟΥΜΕΝΟ',
     mMuted: 'Ξέρεις καλά τη δουλειά σου.',
-    mGreenPre: 'Πάμε να κάνουμε την καριέρα ή την επιχείρησή σου ',
-    mMark: 'να δουλεύει για σένα.',
+    mGreenPre: 'Πάμε τώρα να κάνουμε την καριέρα ή την επιχείρησή σου ',
+    mMark: 'να δουλεύει και για σένα.',
     splitIntro: 'Δεν χρειάζεται να διαλέξεις αν το θέμα είναι επαγγελματικό ή προσωπικό.',
     s01d: 'ΕΠΙΧΕΙΡΗΣΗ & ΨΥΧΟΛΟΓΙΑ', s02d: 'ΕΙΛΙΚΡΙΝΗΣ ΓΝΩΜΗ', s03d: 'ΑΝ ΣΥΝΕΧΙΣΟΥΜΕ', s04d: 'ΠΕΡΙΣΣΟΤΕΡΑ ΑΠΟ ΜΕΝΑ',
     leftH: 'ΤΙ ΑΛΛΑΖΟΥΜΕ',
     leftP: 'Μπορούμε να δουλέψουμε το offer, το marketing, την επόμενη κίνηση στην καριέρα σου, τους πελάτες ή τον τρόπο που λειτουργεί η επιχείρησή σου.',
     rightH: 'ΤΙ ΜΠΑΙΝΕΙ ΣΤΗ ΜΕΣΗ',
-    rightP: 'Αν ο φόβος, η ντροπή, η αποφυγή ή η πίεση στο σπίτι επηρεάζουν τη δουλειά και τις αποφάσεις σου, πιάνουμε και αυτό το κομμάτι.',
+    rightP: 'Αν ο φόβος, η ντροπή ή η ανάγκη να μη δυσαρεστήσεις κανέναν επηρεάζουν τις αποφάσεις σου, δουλεύουμε και εκεί.',
     opinionL1: 'ΘΑ ΣΟΥ ΠΩ', opinionL2: 'ΤΗ ΓΝΩΜΗ ΜΟΥ.',
     opinionParas: [
       'Θα κάνω όσες ερωτήσεις χρειαστούν για να καταλάβω τι συμβαίνει. Μετά θα σου πω πώς το βλέπω.',
       'Αν βλέπω κάτι συγκεκριμένο που μπορείς να κάνεις, θα στο προτείνω. Αν αυτά που μου λες δεν στέκουν, θα σου το πω.',
-      'Μπορείς να μου πεις και αυτό που συνήθως αφήνεις απ’ έξω. Δεν θα σε δω διαφορετικά. Δεν θα σε αφήσω όμως να λες μαλακίες στον εαυτό σου.',
+      'Πες μου και αυτό που συνήθως αφήνεις απ’ έξω. Δεν θα σε δω διαφορετικά, αλλά ούτε θα σε αφήσω να λες μαλακίες στον εαυτό σου.',
     ],
     opinionQuote: '«Έφυγα με κάτι περισσότερο από συμβουλές. Έφυγα έχοντας καταλάβει ποιο ήταν πραγματικά το πρόβλημα.»',
     contH: 'Συμφωνούμε τι ακριβώς θέλεις να πετύχεις και για πόσο θα δουλέψουμε πάνω σε αυτό.',
@@ -79,6 +80,7 @@ const HOME_V2 = {
     mediaIntro: 'Θέλεις να δεις πώς σκέφτομαι;',
     readP: 'Κείμενα για τη δουλειά, τη φιλοδοξία, την ψυχολογία και εκεί που μπλέκονται.',
     watchP: 'Μικρά βίντεο, μεγαλύτερες συζητήσεις και πού και πού κάποιο χρήσιμο rant.',
+    askSub: 'ΑΝΩΝΥΜΑ', askP: 'Στείλε μου μια ερώτηση χωρίς να δώσεις το όνομά σου και ίσως την απαντήσω σε κάποιο κείμενο ή βίντεο.',
     finalH: 'ΑΝ ΛΥΝΟΤΑΝ ΜΕ ΠΕΡΙΣΣΟΤΕΡΗ ΔΟΥΛΕΙΑ, ΜΑΛΛΟΝ ΘΑ ΕΙΧΕ ΛΥΘΕΙ ΗΔΗ.',
     contAlt: 'Άγγελος Μουζακίτης',
   },
@@ -89,69 +91,65 @@ const WHY_V2 = {
   en: {
     label: 'WHY ME',
     h1: 'I spent most of my adult life in consulting, growth and startups before I trained as a psychotherapist.',
-    deck: 'Before the psychotherapy, there were seven years running a growth consultancy, work with more than 100 technology companies, corporate roles and two startups that failed.',
+    deck: 'I spent seven years running a growth consultancy, worked with more than 100 technology companies, held corporate roles and built two startups that failed, so you will not have to explain how this world works to me.',
     fact: 'A founder or experienced professional does not have to explain how this world works to me.',
     originNum: '01', originDesc: 'WHERE I STARTED',
     origin: [
-      'My parents were public employees. Their advice was simple: find a stable job, keep your head down and hold onto it. There was no family money, business network or useful introduction waiting for me.',
-      'I was anxious, had very few friends and communication was not a natural talent. I worked at it. From a studio in Piraeus, I built a consultancy, worked with some of the largest companies in the world and was paid to teach the work to rooms full of people.',
-      'I also failed badly. Both startups failed. I do not talk to founders, freelancers or senior professionals as an observer. I know what the work feels like when your money, identity and relationships are involved.',
+      'I did not grow up around business or inherit money, a network or useful introductions. From a studio in Piraeus, I built a consultancy, worked with some of the world’s largest companies and was later paid to teach the work.',
+      'I also built two startups that failed, so I do not advise founders, freelancers or senior professionals as an observer. I know what the work feels like when money, identity and relationships are involved.',
     ],
     hwNum: '02', hwDesc: 'WHAT DROVE ME',
     hwH: 'Hard work took me far. It also kept me in the wrong places for too long.',
     hw: [
-      'For years I used anxiety, shame and ambition as fuel. It produced results, so I kept doing it. I also chased goals I did not actually want, stayed with the wrong people and missed patterns that were damaging my work and my life.',
-      'Business knowledge helped me make better commercial moves. It did not tell me why I kept forcing myself to succeed on terms I did not even want. I had to live that part, work through it and then train for it properly.',
+      'For years, being useful, reasonable and easy to work with brought results, but it also made it easier to accept work I did not want, avoid conflict and stay too long in the wrong places.',
+      'Business knowledge could not explain why the need for approval and fear of disappointing people had so much influence over my decisions, which is part of why I trained as a psychotherapist.',
     ],
     exNum: '03', exDesc: 'WHERE I HELP',
-    exH: 'I know when you need a better business move — and when a good move is running into fear, shame or avoidance.',
+    exH: 'I know when the problem is the business move and when something personal is getting in the way.',
     ex: [
-      { l: 'If the offer is weak, I can help you fix the offer.', r: 'If the offer is good and you cannot bring yourself to sell it, I can work on that too.' },
-      { l: 'If a client relationship needs better pricing or clearer boundaries, we handle both.', r: 'If the same nice-guy pattern appears with your partner, we do not pretend it is unrelated.' },
-      { l: 'If you want a promotion, a side business or a different consultancy model, I can help you make the move.', r: 'We also notice when fear, shame or obligation is choosing for you.' },
+      'A weak offer needs fixing, while a good offer that you cannot bring yourself to sell points to a different problem.',
+      'The same applies when you know you should raise your prices, challenge a client or make a career move but keep avoiding the discomfort involved. If the same need to keep people happy appears at home, we do not pretend it is unrelated.',
     ],
     orNum: '04', orDesc: 'ONE CONVERSATION',
-    orH: 'You do not have to translate one world into the other for me.',
+    orH: 'You do not have to explain the business or hide the personal part.',
     or: [
-      'I ask questions, tell you what I see and challenge what does not add up. You do not have to explain the business to a therapist or hide the personal part from an adviser.',
-      'You can tell me what you are embarrassed to say out loud. I will not think less of you. I will also tell you when you are avoiding the obvious or being unfair to yourself.',
+      'I ask questions, tell you what I see and challenge what does not add up. You can say what you actually want, including the version that may disappoint someone.',
+      'I will not think less of you, but I will question the reasonable explanation if it is only there to keep everyone happy.',
     ],
     finalLabel: 'THIS IS THE WORK I NEEDED AND COULD NOT FIND.',
-    finalH: 'Actionable help from someone who can work on the commercial problem and the personal one in the same conversation.',
+    finalH: 'We can work on the commercial problem and the personal one in the same conversation.',
     finalCta: 'Apply for a working session',
   },
   el: {
     label: 'ΓΙΑΤΙ ΕΜΕΝΑ',
     h1: 'Πριν εκπαιδευτώ ως ψυχοθεραπευτής, είχα περάσει το μεγαλύτερο μέρος της ενήλικης ζωής μου στο consulting, το growth και τα startups.',
-    deck: 'Επτά χρόνια με δική μου growth consultancy, δουλειά με πάνω από 100 tech εταιρείες, εταιρικοί ρόλοι και δύο startups που απέτυχαν.',
+    deck: 'Για επτά χρόνια είχα τη δική μου growth consultancy, συνεργάστηκα με περισσότερες από 100 εταιρείες τεχνολογίας, πέρασα από εταιρικούς ρόλους και έστησα δύο startups που απέτυχαν. Οπότε δεν θα χρειαστεί να μου εξηγήσεις πώς λειτουργεί αυτός ο κόσμος.',
     fact: 'Ένας founder ή ένας έμπειρος επαγγελματίας δεν χρειάζεται να μου εξηγήσει πώς λειτουργεί αυτός ο κόσμος.',
     originNum: '01', originDesc: 'ΑΠΟ ΠΟΥ ΞΕΚΙΝΗΣΑ',
     origin: [
-      'Οι γονείς μου ήταν δημόσιοι υπάλληλοι. Η συμβουλή τους ήταν απλή: βρες μια σταθερή δουλειά, κράτα το κεφάλι κάτω και πρόσεχε να μην τη χάσεις. Δεν υπήρχαν οικογενειακά λεφτά, επιχειρηματικές γνωριμίες ή άνθρωποι να μου ανοίξουν πόρτες.',
-      'Ήμουν αγχώδης, είχα ελάχιστους φίλους και η επικοινωνία δεν ήταν φυσικό μου ταλέντο. Το δούλεψα. Από μια γκαρσονιέρα στον Πειραιά έφτιαξα τη δική μου consultancy, συνεργάστηκα με μερικές από τις μεγαλύτερες εταιρείες στον κόσμο και έφτασα να πληρώνομαι για να εκπαιδεύω κόσμο σε γεμάτες αίθουσες.',
-      'Απέτυχα και άσχημα. Και τα δύο startups μου απέτυχαν. Δεν μιλάω σε founders, freelancers ή έμπειρα στελέχη ως παρατηρητής. Ξέρω πώς είναι όταν παίζονται τα λεφτά, η ταυτότητα και οι σχέσεις σου.',
+      'Δεν μεγάλωσα σε επιχειρηματικό περιβάλλον και δεν υπήρχαν οικογενειακά χρήματα, επιχειρηματικές γνωριμίες ή άνθρωποι να μου ανοίξουν πόρτες. Από μια γκαρσονιέρα στον Πειραιά έφτιαξα τη δική μου growth consultancy, συνεργάστηκα με μερικές από τις μεγαλύτερες εταιρείες στον κόσμο και αργότερα πληρωνόμουν για να εκπαιδεύω κόσμο πάνω σε αυτή τη δουλειά.',
+      'Έστησα επίσης δύο startups που απέτυχαν, οπότε δεν μιλάω σε founders, freelancers ή έμπειρα στελέχη ως παρατηρητής. Ξέρω πώς είναι όταν στη δουλειά μπλέκονται τα χρήματα, η «ταυτότητα» και οι σχέσεις σου.',
     ],
     hwNum: '02', hwDesc: 'ΤΙ ΜΕ ΟΔΗΓΟΥΣΕ',
     hwH: 'Η σκληρή δουλειά με πήγε μακριά. Με κράτησε όμως και για χρόνια στα λάθος μέρη.',
     hw: [
-      'Για χρόνια χρησιμοποιούσα το άγχος, τη ντροπή και τη φιλοδοξία σαν καύσιμο. Έφερνε αποτελέσματα, οπότε συνέχιζα. Παράλληλα κυνηγούσα στόχους που δεν ήθελα πραγματικά, έμενα με τους λάθος ανθρώπους και δεν έβλεπα patterns που χαλούσαν και τη δουλειά και τη ζωή μου.',
-      'Η γνώση του business με βοηθούσε να παίρνω καλύτερες επαγγελματικές αποφάσεις. Δεν μου εξηγούσε γιατί πίεζα τον εαυτό μου να πετύχει με όρους που δεν ήθελα καν. Αυτό χρειάστηκε να το ζήσω, να το δουλέψω και να εκπαιδευτώ σοβαρά πάνω του.',
+      'Για χρόνια, το να είμαι χρήσιμος, λογικός και εύκολος στη συνεργασία έφερνε αποτελέσματα, αλλά με έκανε και να δέχομαι δουλειές που δεν ήθελα, να αποφεύγω τις απαραίτητες συγκρούσεις και να μένω περισσότερο απ’ όσο έπρεπε στα λάθος μέρη.',
+      'Η γνώση του business δεν μπορούσε να μου εξηγήσει γιατί η ανάγκη για αποδοχή και ο φόβος μήπως απογοητεύσω τους άλλους επηρέαζαν τόσο πολύ τις αποφάσεις μου, και αυτός είναι ένας από τους λόγους που εκπαιδεύτηκα ως ψυχοθεραπευτής.',
     ],
-    exNum: '03', exDesc: 'ΠΟΥ ΒΟΗΘΩ',
-    exH: 'Ξέρω πότε χρειάζεται καλύτερη business κίνηση και πότε μια καλή κίνηση κολλάει πάνω σε φόβο, ντροπή ή αποφυγή.',
+    exNum: '03', exDesc: 'ΠΩΣ ΒΟΗΘΑΩ',
+    exH: 'Ξέρω πότε το πρόβλημα είναι η ίδια η business κίνηση και πότε κάτι προσωπικό μπαίνει στη μέση.',
     ex: [
-      { l: 'Αν το offer δεν στέκει, μπορώ να σε βοηθήσω να το φτιάξεις.', r: 'Αν είναι καλό και δεν μπορείς να βγεις να το πουλήσεις, μπορώ να δουλέψω και αυτό.' },
-      { l: 'Αν μια σχέση με πελάτη χρειάζεται καλύτερη τιμολόγηση ή πιο καθαρά όρια, πιάνουμε και τα δύο.', r: 'Αν το ίδιο nice-guy pattern εμφανίζεται και με τον σύντροφό σου, δεν κάνουμε πως είναι άσχετο.' },
-      { l: 'Αν θέλεις προαγωγή, side business ή διαφορετικό μοντέλο για την consultancy σου, δουλεύουμε την κίνηση.', r: 'Προσέχουμε επίσης πότε διαλέγει για εσένα ο φόβος, η ντροπή ή το «πρέπει».' },
+      'Ένα αδύναμο offer χρειάζεται να φτιαχτεί, ενώ ένα καλό offer που δεν μπορείς να βγεις να το πουλήσεις δείχνει ότι το πρόβλημα βρίσκεται αλλού.',
+      'Το ίδιο ισχύει όταν ξέρεις ότι πρέπει να ανεβάσεις τις τιμές σου, να βάλεις όρια απέναντι σε έναν πελάτη ή να κάνεις μια επαγγελματική κίνηση, αλλά συνεχίζεις να αποφεύγεις ό,τι δύσκολο συνεπάγεται. Αν η ίδια ανάγκη να μη δυσαρεστήσεις κανέναν εμφανίζεται και στο σπίτι, δεν κάνουμε πως είναι άσχετη.',
     ],
-    orNum: '04', orDesc: 'ΜΙΑ ΣΥΖΗΤΗΣΗ',
-    orH: 'Δεν χρειάζεται να μου μεταφράζεις τον έναν κόσμο στον άλλον.',
+    orNum: '04', orDesc: 'ΣΤΗΝ ΙΔΙΑ ΣΥΖΗΤΗΣΗ',
+    orH: 'Δεν χρειάζεται να μου εξηγείς το business ή να κρύβεις το προσωπικό κομμάτι.',
     or: [
-      'Κάνω ερωτήσεις, σου λέω τι βλέπω και αμφισβητώ όσα δεν βγάζουν νόημα. Δεν χρειάζεται να εξηγείς το business σε έναν ψυχοθεραπευτή ή να κρύβεις το προσωπικό κομμάτι από έναν σύμβουλο.',
-      'Μπορείς να μου πεις αυτό που ντρέπεσαι να πεις δυνατά. Δεν θα σε δω διαφορετικά. Θα σου πω όμως όταν αποφεύγεις το προφανές ή όταν αδικείς τον εαυτό σου.',
+      'Κάνω ερωτήσεις, σου λέω τι βλέπω και αμφισβητώ όσα δεν στέκουν. Μπορείς να πεις τι θέλεις πραγματικά, ακόμη κι αν αυτό μπορεί να απογοητεύσει κάποιον.',
+      'Δεν θα σε δω διαφορετικά, αλλά θα σου πω αν η πολύ λογική εξήγηση που δίνεις υπάρχει μόνο για να μη δυσαρεστήσεις κανέναν.',
     ],
     finalLabel: 'ΑΥΤΗ ΕΙΝΑΙ Η ΔΟΥΛΕΙΑ ΠΟΥ ΧΡΕΙΑΖΟΜΟΥΝ ΚΑΙ ΔΕΝ ΜΠΟΡΟΥΣΑ ΝΑ ΒΡΩ.',
-    finalH: 'Actionable βοήθεια από κάποιον που μπορεί να δουλέψει το business και το προσωπικό πρόβλημα στην ίδια συζήτηση.',
+    finalH: 'Μπορούμε να δουλέψουμε το επαγγελματικό και το προσωπικό κομμάτι στην ίδια συζήτηση.',
     finalCta: 'Κάνε αίτηση για μία πρώτη συνάντηση',
   },
 };
@@ -168,7 +166,7 @@ const PAGE_V2_CSS = `
 
 /* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
 .home-hero{background:${V2.white};color:${V2.heroInk}}
-.home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(410px,0.86fr);align-items:center;gap:48px;padding-block:64px 80px}
+.home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(410px,0.86fr);align-items:center;gap:48px;padding-block:88px 112px}
 .home-hero__copy{position:relative;z-index:2;min-width:0;max-width:720px;color:${V2.heroInk}}
 .home-hero__eyebrow{max-width:520px;color:${V2.green};font-family:${V2.display};font-size:13px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
 .home-hero__title{max-width:720px;margin:14px 0 22px;font-family:${V2.archivo};font-synthesis:none;font-weight:400;line-height:0.9;letter-spacing:-0.055em;color:${V2.heroInk}}
@@ -188,7 +186,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:$
   .home-hero__photo{width:min(100%,390px)}
 }
 @media (max-width:520px){
-  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:46px 20px 60px;min-height:0}
+  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:66px 20px 80px;min-height:0}
   html[lang="en"] .home-hero__title{font-size:clamp(46px,14vw,62px)}
   html[lang="el"] .home-hero__title{font-size:clamp(38px,11vw,52px)}
   .home-hero__photo{width:min(82%,310px);justify-self:center}
@@ -279,11 +277,11 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 .media__watch:hover{background:#0e0e0e}
 .media__watch h3{font-size:clamp(44px,4vw,64px)}
 .media__watch p{font-size:17px;line-height:1.5;max-width:34ch}
-.media__follow{background:${V2.white};color:${V2.ink}}
-.media__follow h3{font-size:clamp(44px,4vw,64px)}
-.icon-row{display:flex;align-items:center;gap:16px}
-.icon-btn{width:48px;height:48px;border-radius:50%;background:${V2.ink};color:#fff;display:flex;align-items:center;justify-content:center;transition:background .18s,transform .18s}
-.icon-btn:hover{background:${V2.green};transform:translateY(-3px)}
+.media__ask{background:${V2.white};color:${V2.ink}}
+.media__ask:hover{background:rgba(5,150,105,0.05)}
+.media__ask h3{font-size:clamp(44px,4vw,64px)}
+.media__ask .media__arw{color:${V2.green}}
+.media__ask-sub{display:block;margin-top:6px;font-family:${V2.display};font-size:clamp(20px,1.9vw,26px);font-weight:800;line-height:1;letter-spacing:-0.02em;color:${V2.green}}
 @media (max-width:960px){
   .media{grid-template-columns:1fr;grid-template-rows:auto;min-height:0}
   .media__read{grid-row:auto}.media__cell{min-height:320px}
@@ -338,13 +336,6 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .amx-story-copy .amx-body + .amx-body{margin-top:22px}
 .amx-reading-copy{max-width:750px;margin:28px 0 0}
 .amx-reading-copy .amx-body + .amx-body{margin-top:20px}
-.amx-case-list{border-top:1px solid rgb(243 240 232 / 20%)}
-.amx-case{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding-block:26px;border-bottom:1px solid rgb(243 240 232 / 20%)}
-.amx-case .amx-body:last-child{color:var(--am-green)}
-
-@media (max-width: 720px){
-  .amx-case{grid-template-columns:1fr}
-}
 @media (max-width: 470px){
   .amx-display{font-size:clamp(38px, 12vw, 48px)}
   .amx-heading{font-size:clamp(32px, 10vw, 42px)}
@@ -505,16 +496,12 @@ function HomePageV2({ lang = 'en' }) {
                   React.createElement('div', { className: 'media__kicker' }, 'YOUTUBE'),
                   React.createElement('p', null, c.watchP))
               ),
-              React.createElement('div', { className: 'media__cell media__follow' },
-                React.createElement('h3', null, 'FOLLOW'),
-                React.createElement('div', { className: 'icon-row' },
-                  React.createElement('a', { className: 'icon-btn', href: window.EXTERNAL.linkedin, 'aria-label': 'LinkedIn', ...v2Ext },
-                    React.createElement(window.BrandIcon, { name: 'LinkedIn', size: 21 })),
-                  React.createElement('a', { className: 'icon-btn', href: window.EXTERNAL.instagram, 'aria-label': 'Instagram', ...v2Ext },
-                    React.createElement(window.BrandIcon, { name: 'Instagram', size: 21 })),
-                  React.createElement('a', { className: 'icon-btn', href: window.EXTERNAL.tiktok, 'aria-label': 'TikTok', ...v2Ext },
-                    React.createElement(window.BrandIcon, { name: 'TikTok', size: 20 }))
-                )
+              React.createElement('a', { className: 'media__cell media__ask', href: window.cPath('ask-me-anything', lang) },
+                React.createElement('div', { className: 'media__top' },
+                  React.createElement('h3', null, 'ASK', React.createElement('span', { className: 'media__ask-sub' }, c.askSub)),
+                  React.createElement('span', { className: 'media__arw', style: { fontSize: 32 } }, '↗')),
+                React.createElement('div', null,
+                  React.createElement('p', null, c.askP))
               )
             )
           )
@@ -582,11 +569,8 @@ function AboutPageV2({ lang = 'en' }) {
             SecLabel(c.exNum, c.exDesc),
             React.createElement('h2', { className: 'amx-heading' }, c.exH)
           ),
-          React.createElement('div', { className: 'amx-case-list' },
-            c.ex.map((row, i) => React.createElement('div', { className: 'amx-case', key: i },
-              React.createElement('p', { className: 'amx-body' }, row.l),
-              React.createElement('p', { className: 'amx-body' }, row.r)
-            ))
+          React.createElement('div', { className: 'amx-reading-copy' },
+            c.ex.map((p, i) => React.createElement('p', { className: 'amx-body', key: i }, p))
           )
         )
       ),

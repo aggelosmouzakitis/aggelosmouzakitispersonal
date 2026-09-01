@@ -104,7 +104,7 @@ const DIAG = {
         "I read these myself. I'll come back to you by email once I've had a proper look.",
         'If you already know you want to talk, you can also book a fit call below.',
       ],
-      book: 'BOOK A FIT CALL →',
+      book: 'Book a working session →',
     },
   },
   el: {
@@ -199,7 +199,7 @@ const DIAG = {
         'Τις διαβάζω ο ίδιος και θα σου απαντήσω με email αφού τις δω κανονικά.',
         'Αν ξέρεις ήδη ότι θέλεις να μιλήσουμε, μπορείς να κλείσεις και μια σύντομη γνωριμία.',
       ],
-      book: 'ΚΛΕΙΣΕ ΜΙΑ ΓΝΩΡΙΜΙΑ →',
+      book: 'ΚΛΕΙΣΕ ΤΗΝ ΣΥΝΑΝΤΗΣΗ →',
     },
   },
 };
