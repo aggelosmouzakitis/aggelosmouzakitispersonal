@@ -60,6 +60,10 @@ const CHROME_PATHS = {
   'blog': {
     en: '/blog/',
     el: '/blog/'
+  },
+  'ask-me-anything': {
+    en: '/ask-me-anything/',
+    el: '/ask-me-anything/el'
   }
 };
 function cPath(id, lang) {
@@ -84,7 +88,7 @@ const CHROME_T = {
     why: 'Why me',
     reviews: 'Reviews',
     apply: 'Apply',
-    start: 'APPLY',
+    start: 'START HERE',
     other: 'ΕΛΛΗΝΙΚΑ',
     role1: 'Private business & career advisor',
     role2: 'BACP-registered psychotherapist',
@@ -92,6 +96,7 @@ const CHROME_T = {
     content: 'CONTENT',
     follow: 'FOLLOW',
     articles: 'Articles',
+    askAnon: 'Ask anonymously',
     confidentiality: 'Confidentiality',
     terms: 'Terms',
     privacy: 'Privacy',
@@ -105,7 +110,7 @@ const CHROME_T = {
     why: 'Γιατί εμένα',
     reviews: 'Κριτικές',
     apply: 'Ζήτησε γνωριμία',
-    start: 'ΣΥΝΑΝΤΗΣΗ',
+    start: 'ΞΕΚΙΝΑ ΕΔΩ',
     other: 'English',
     role1: 'Σύμβουλος επιχειρήσεων & καριέρας',
     role2: 'Σύμβουλος ψυχικής υγείας',
@@ -113,6 +118,7 @@ const CHROME_T = {
     content: 'ΠΕΡΙΕΧΟΜΕΝΟ',
     follow: 'ΑΚΟΛΟΥΘΗΣΕ',
     articles: 'Κείμενα',
+    askAnon: 'Ρώτησε ανώνυμα',
     confidentiality: 'Εμπιστευτικότητα',
     terms: 'Όροι χρήσης',
     privacy: 'Πολιτική απορρήτου',
@@ -171,9 +177,9 @@ img{max-width:100%}
 .site-menu .hdr-cta{align-self:stretch;justify-content:center;min-height:48px;font-size:13px}
 
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
-.pill--green{height:60px;padding-inline:36px;background:${SITE.green};color:#fff;font-size:16px}
+.pill--green{height:72px;padding-inline:44px;background:${SITE.green};color:#fff;font-size:16px}
 .pill--green:hover{gap:12px;filter:brightness(0.9)}
-.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:0 20px;background:${SITE.green};color:#fff;font-size:14px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:${SITE.green};color:#fff;font-size:14px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hero-cta:hover{filter:brightness(0.9);gap:13px}
 
 .cta-strip{padding-block:clamp(86px,10.8vw,132px);text-align:center;background:${SITE.ink}}
@@ -342,6 +348,8 @@ function SiteHeader({
     'aria-current': page === it.id ? 'page' : undefined
   }, it.label);
   const langHref = CHROME_PATHS[page] ? cPath(page, other) : other === 'el' ? '/el/' : '/';
+  // The header CTA points at the diagnostic page, so hide it on that page itself.
+  const showCta = page !== 'diagnostic';
   return React.createElement(React.Fragment, null, React.createElement('header', {
     className: 'site-hdr'
   }, React.createElement('div', {
@@ -362,7 +370,7 @@ function SiteHeader({
     className: 'site-hdr__lang',
     href: langHref,
     hrefLang: other
-  }, t.other), React.createElement('a', {
+  }, t.other), showCta && React.createElement('a', {
     className: 'hdr-cta',
     href: cPath('diagnostic', lang)
   }, React.createElement('span', null, t.start), React.createElement('span', null, '→'))), React.createElement('button', {
@@ -381,7 +389,7 @@ function SiteHeader({
     style: {
       color: SITE.onDark
     }
-  }, t.other), React.createElement('a', {
+  }, t.other), showCta && React.createElement('a', {
     className: 'hdr-cta',
     href: cPath('diagnostic', lang)
   }, React.createElement('span', null, t.start), React.createElement('span', null, '→')))));
@@ -457,7 +465,9 @@ function SiteFooterX({
   }, t.articles + ' ↗'), React.createElement('a', {
     href: EXTERNAL.youtube,
     ...ext
-  }, 'YouTube ↗')), React.createElement('nav', null, React.createElement('div', {
+  }, 'YouTube ↗'), React.createElement('a', {
+    href: cPath('ask-me-anything', lang)
+  }, t.askAnon + ' ↗')), React.createElement('nav', null, React.createElement('div', {
     className: 'site-ftr__head'
   }, t.follow), social('LinkedIn', EXTERNAL.linkedin), social('Instagram', EXTERNAL.instagram), social('TikTok', EXTERNAL.tiktok))), React.createElement('div', {
     className: 'site-ftr__rule'

@@ -37,6 +37,7 @@ const CHROME_PATHS = {
   'diagnostic':      { en: '/startingdiagnostic/', el: '/el/startingdiagnostic/' },
   'confidentiality': { en: '/confidentiality/',    el: '/el/confidentiality/' },
   'blog':            { en: '/blog/',               el: '/blog/' },
+  'ask-me-anything': { en: '/ask-me-anything/',    el: '/ask-me-anything/el' },
 };
 function cPath(id, lang) {
   const p = CHROME_PATHS[id];
@@ -56,18 +57,18 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' };
 const CHROME_T = {
   en: {
     home: 'Home', why: 'Why me', reviews: 'Reviews', apply: 'Apply',
-    start: 'APPLY', other: 'ΕΛΛΗΝΙΚΑ',
+    start: 'START HERE', other: 'ΕΛΛΗΝΙΚΑ',
     role1: 'Private business & career advisor', role2: 'BACP-registered psychotherapist',
-    navigate: 'NAVIGATE', content: 'CONTENT', follow: 'FOLLOW', articles: 'Articles',
+    navigate: 'NAVIGATE', content: 'CONTENT', follow: 'FOLLOW', articles: 'Articles', askAnon: 'Ask anonymously',
     confidentiality: 'Confidentiality', terms: 'Terms', privacy: 'Privacy',
     ctaHeading: 'If working harder was going to fix this, it probably would have by now.',
     ctaBtn: 'Apply for a working session', menu: 'Menu', rights: 'All rights reserved.',
   },
   el: {
     home: 'Αρχική', why: 'Γιατί εμένα', reviews: 'Κριτικές', apply: 'Ζήτησε γνωριμία',
-    start: 'ΣΥΝΑΝΤΗΣΗ', other: 'English',
+    start: 'ΞΕΚΙΝΑ ΕΔΩ', other: 'English',
     role1: 'Σύμβουλος επιχειρήσεων & καριέρας', role2: 'Σύμβουλος ψυχικής υγείας',
-    navigate: 'ΠΛΟΗΓΗΣΗ', content: 'ΠΕΡΙΕΧΟΜΕΝΟ', follow: 'ΑΚΟΛΟΥΘΗΣΕ', articles: 'Κείμενα',
+    navigate: 'ΠΛΟΗΓΗΣΗ', content: 'ΠΕΡΙΕΧΟΜΕΝΟ', follow: 'ΑΚΟΛΟΥΘΗΣΕ', articles: 'Κείμενα', askAnon: 'Ρώτησε ανώνυμα',
     confidentiality: 'Εμπιστευτικότητα', terms: 'Όροι χρήσης', privacy: 'Πολιτική απορρήτου',
     ctaHeading: 'Αν λυνόταν με περισσότερη δουλειά, μάλλον θα είχε λυθεί ήδη.',
     ctaBtn: 'Ζήτησε μια πρώτη συνάντηση', menu: 'Μενού', rights: 'Με επιφύλαξη παντός δικαιώματος.',
@@ -122,9 +123,9 @@ img{max-width:100%}
 .site-menu .hdr-cta{align-self:stretch;justify-content:center;min-height:48px;font-size:13px}
 
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
-.pill--green{height:60px;padding-inline:36px;background:${SITE.green};color:#fff;font-size:16px}
+.pill--green{height:72px;padding-inline:44px;background:${SITE.green};color:#fff;font-size:16px}
 .pill--green:hover{gap:12px;filter:brightness(0.9)}
-.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:0 20px;background:${SITE.green};color:#fff;font-size:14px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:${SITE.green};color:#fff;font-size:14px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hero-cta:hover{filter:brightness(0.9);gap:13px}
 
 .cta-strip{padding-block:clamp(86px,10.8vw,132px);text-align:center;background:${SITE.ink}}
@@ -267,6 +268,8 @@ function SiteHeader({ page, lang = 'en' }) {
     'aria-current': page === it.id ? 'page' : undefined,
   }, it.label);
   const langHref = CHROME_PATHS[page] ? cPath(page, other) : (other === 'el' ? '/el/' : '/');
+  // The header CTA points at the diagnostic page, so hide it on that page itself.
+  const showCta = page !== 'diagnostic';
 
   return React.createElement(React.Fragment, null,
     React.createElement('header', { className: 'site-hdr' },
@@ -276,7 +279,7 @@ function SiteHeader({ page, lang = 'en' }) {
         React.createElement('div', { style: { display: 'flex', alignItems: 'center', justifySelf: 'end' } },
           React.createElement('div', { className: 'site-hdr__end' },
             React.createElement('a', { className: 'site-hdr__lang', href: langHref, hrefLang: other }, t.other),
-            React.createElement('a', { className: 'hdr-cta', href: cPath('diagnostic', lang) },
+            showCta && React.createElement('a', { className: 'hdr-cta', href: cPath('diagnostic', lang) },
               React.createElement('span', null, t.start), React.createElement('span', null, '→'))
           ),
           React.createElement('button', {
@@ -290,7 +293,7 @@ function SiteHeader({ page, lang = 'en' }) {
       React.createElement('div', { className: 'site-container' },
         items.map(link),
         React.createElement('a', { href: langHref, hrefLang: other, style: { color: SITE.onDark } }, t.other),
-        React.createElement('a', {
+        showCta && React.createElement('a', {
           className: 'hdr-cta', href: cPath('diagnostic', lang),
         }, React.createElement('span', null, t.start), React.createElement('span', null, '→'))
       )
@@ -342,7 +345,8 @@ function SiteFooterX({ lang = 'en' }) {
         React.createElement('nav', null,
           React.createElement('div', { className: 'site-ftr__head' }, t.content),
           React.createElement('a', { href: EXTERNAL.undisguised, ...ext }, t.articles + ' ↗'),
-          React.createElement('a', { href: EXTERNAL.youtube, ...ext }, 'YouTube ↗')
+          React.createElement('a', { href: EXTERNAL.youtube, ...ext }, 'YouTube ↗'),
+          React.createElement('a', { href: cPath('ask-me-anything', lang) }, t.askAnon + ' ↗')
         ),
         React.createElement('nav', null,
           React.createElement('div', { className: 'site-ftr__head' }, t.follow),
