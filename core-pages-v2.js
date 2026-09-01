@@ -153,7 +153,7 @@ const PAGE_V2_CSS = `
 /* ── One reusable numbered-section label: "NN / DESCRIPTION", one line, aligned to the heading ── */
 .sec-label{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0 0 24px}
 .sec-label__num{font-family:${V2.display};font-size:clamp(20px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:${V2.green};white-space:nowrap}
-.sec-label__desc{font-family:${V2.display};font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:${V2.green}}
+.sec-label__desc{font-family:${V2.display};font-size:13px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:${V2.green}}
 
 /* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
 .home-hero{background:${V2.white};color:${V2.heroInk}}
@@ -186,7 +186,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:$
 /* ── Manifesto — "The whole point" (full-width dark) ── */
 .home-manifesto{width:100%;background:${V2.ink}}
 .home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(58px,6vw,82px) clamp(24px,5vw,72px)}
-.home-manifesto__label{margin-bottom:17px;color:${V2.green};font-family:${V2.display};font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
+.home-manifesto__label{margin-bottom:17px;color:${V2.green};font-family:${V2.display};font-size:13px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
 .home-manifesto__copy{font-family:${V2.archivo};font-synthesis:none;font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
 html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;letter-spacing:-0.045em}
 .home-manifesto__muted,.home-manifesto__green{display:block}
@@ -238,8 +238,8 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 
 /* ── Home dark canvas sections 02–04 ── */
 .home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(77px,9.6vw,115px)}
-.sec__h{margin:0 0 48px;max-width:19ch;font-family:${V2.display};font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
-.sec__h2l{margin:0 0 48px;font-family:${V2.display};font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
+.sec__h{margin:0 0 48px;max-width:19ch;font-family:${V2.display};font-size:clamp(40px,4.25vw,58px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.sec__h2l{margin:0 0 48px;font-family:${V2.display};font-size:clamp(52px,5.5vw,76px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
 .sec__h2l span{display:block}
 .opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:${V2.white};border-radius:12px;overflow:hidden}
 .opinion img{display:block;width:100%;height:100%;min-height:520px;object-fit:cover;object-position:42% 50%}
@@ -267,7 +267,7 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 .media__watch{background:${V2.black};color:#fff}
 .media__watch:hover{background:#0e0e0e}
 .media__watch h3{font-size:clamp(44px,4vw,64px)}
-.media__watch p{font-size:17px;line-height:1.5;max-width:34ch}
+.media__watch p{font-size:18px;line-height:1.55;max-width:34ch}
 .media__ask{background:${V2.white};color:${V2.ink}}
 .media__ask:hover{background:rgba(5,150,105,0.05)}
 .media__ask h3{font-size:clamp(44px,4vw,64px)}
@@ -297,7 +297,7 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 .amx-dark{color:var(--am-paper);background:var(--am-dark)}
 .amx-green{color:var(--am-ink);background:var(--am-green)}
 .amx-section{padding-block:var(--am-section-space)}
-.amx-label{margin:0;color:var(--am-green);font:700 12px/1.3 var(--font-body);letter-spacing:0.07em;text-transform:uppercase}
+.amx-label{margin:0;color:var(--am-green);font:700 13px/1.3 var(--font-body);letter-spacing:0.07em;text-transform:uppercase}
 .amx-display,.amx-heading,.amx-subheading{margin:0;color:inherit;font-synthesis:none}
 .amx-display{font-family:var(--font-display);font-size:clamp(42px, 6.4vw, 64px);font-weight:400;line-height:0.98;letter-spacing:-0.045em}
 html[lang^="el"] .amx-display{font-family:var(--font-heading);font-weight:800;line-height:1.04;letter-spacing:-0.035em;overflow-wrap:break-word}
@@ -305,9 +305,9 @@ html[lang^="el"] .amx-display{font-family:var(--font-heading);font-weight:800;li
 html[lang^="el"] .amx-heading{line-height:1.04;letter-spacing:-0.035em}
 .amx-subheading{font-family:var(--font-heading);font-size:24px;font-weight:800;line-height:1.08;letter-spacing:-0.025em}
 html[lang^="el"] .amx-subheading{line-height:1.13;letter-spacing:-0.018em}
-.amx-body{margin:0;color:inherit;font:400 17px/1.55 var(--font-body)}
+.amx-body{margin:0;color:inherit;font:400 18px/1.55 var(--font-body)}
 html[lang^="el"] .amx-body{line-height:1.62}
-.amx-button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding-inline:21px;border:0;border-radius:0;color:#ffffff;background:var(--am-green);font:600 14px/1 var(--font-body);text-decoration:none}
+.amx-button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding-inline:21px;border:0;border-radius:0;color:#ffffff;background:var(--am-green);font:600 16px/1 var(--font-body);text-decoration:none}
 .amx-button:focus-visible,.amx-content-link:focus-visible{outline:3px solid currentColor;outline-offset:4px}
 .amx-section-head{margin-bottom:36px}
 
