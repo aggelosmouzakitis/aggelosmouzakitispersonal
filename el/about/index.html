@@ -107,7 +107,7 @@ img{max-width:100%}
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
 .pill--green{height:72px;padding-inline:44px;background:#059669;color:#fff;font-size:16px}
 .pill--green:hover{gap:12px;filter:brightness(0.9)}
-.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:#059669;color:#fff;font-size:14px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:#059669;color:#fff;font-size:16px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hero-cta:hover{filter:brightness(0.9);gap:13px}
 
 .cta-strip{padding-block:clamp(86px,10.8vw,132px);text-align:center;background:#1A1C1D}
@@ -205,6 +205,7 @@ img{max-width:100%}
 @media (max-width:420px){
   .pill--green{padding-inline:22px;font-size:15px;max-width:100%}
   .cta-strip__h{font-size:clamp(28px,7.6vw,36px)}
+  .hero-cta{padding-inline:16px}
 }
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
@@ -212,7 +213,7 @@ img{max-width:100%}
 /* ── One reusable numbered-section label: "NN / DESCRIPTION", one line, aligned to the heading ── */
 .sec-label{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0 0 24px}
 .sec-label__num{font-family:var(--font-heading);font-size:clamp(20px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669;white-space:nowrap}
-.sec-label__desc{font-family:var(--font-heading);font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
+.sec-label__desc{font-family:var(--font-heading);font-size:13px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
 
 /* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
 .home-hero{background:#FFFFFF;color:#111315}
@@ -245,7 +246,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:v
 /* ── Manifesto — "The whole point" (full-width dark) ── */
 .home-manifesto{width:100%;background:#1A1C1D}
 .home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(58px,6vw,82px) clamp(24px,5vw,72px)}
-.home-manifesto__label{margin-bottom:17px;color:#059669;font-family:var(--font-heading);font-size:12px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
+.home-manifesto__label{margin-bottom:17px;color:#059669;font-family:var(--font-heading);font-size:13px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
 .home-manifesto__copy{font-family:var(--font-display);font-synthesis:none;font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
 html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weight:800;letter-spacing:-0.045em}
 .home-manifesto__muted,.home-manifesto__green{display:block}
@@ -297,8 +298,8 @@ html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weigh
 
 /* ── Home dark canvas sections 02–04 ── */
 .home-flow{display:flex;flex-direction:column;gap:clamp(64px,8vw,96px);padding-block:clamp(77px,9.6vw,115px)}
-.sec__h{margin:0 0 48px;max-width:19ch;font-family:var(--font-heading);font-size:clamp(44px,4.8vw,68px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
-.sec__h2l{margin:0 0 48px;font-family:var(--font-heading);font-size:clamp(58px,6.4vw,92px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
+.sec__h{margin:0 0 48px;max-width:19ch;font-family:var(--font-heading);font-size:clamp(40px,4.25vw,58px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.sec__h2l{margin:0 0 48px;font-family:var(--font-heading);font-size:clamp(52px,5.5vw,76px);font-weight:800;line-height:0.94;letter-spacing:-0.045em;color:#fff}
 .sec__h2l span{display:block}
 .opinion{display:grid;grid-template-columns:0.85fr 1.15fr;background:#FFFFFF;border-radius:12px;overflow:hidden}
 .opinion img{display:block;width:100%;height:100%;min-height:520px;object-fit:cover;object-position:42% 50%}
@@ -326,7 +327,7 @@ html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weigh
 .media__watch{background:#050505;color:#fff}
 .media__watch:hover{background:#0e0e0e}
 .media__watch h3{font-size:clamp(44px,4vw,64px)}
-.media__watch p{font-size:17px;line-height:1.5;max-width:34ch}
+.media__watch p{font-size:18px;line-height:1.55;max-width:34ch}
 .media__ask{background:#FFFFFF;color:#1A1C1D}
 .media__ask:hover{background:rgba(5,150,105,0.05)}
 .media__ask h3{font-size:clamp(44px,4vw,64px)}
@@ -356,7 +357,7 @@ html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weigh
 .amx-dark{color:var(--am-paper);background:var(--am-dark)}
 .amx-green{color:var(--am-ink);background:var(--am-green)}
 .amx-section{padding-block:var(--am-section-space)}
-.amx-label{margin:0;color:var(--am-green);font:700 12px/1.3 var(--font-body);letter-spacing:0.07em;text-transform:uppercase}
+.amx-label{margin:0;color:var(--am-green);font:700 13px/1.3 var(--font-body);letter-spacing:0.07em;text-transform:uppercase}
 .amx-display,.amx-heading,.amx-subheading{margin:0;color:inherit;font-synthesis:none}
 .amx-display{font-family:var(--font-display);font-size:clamp(42px, 6.4vw, 64px);font-weight:400;line-height:0.98;letter-spacing:-0.045em}
 html[lang^="el"] .amx-display{font-family:var(--font-heading);font-weight:800;line-height:1.04;letter-spacing:-0.035em;overflow-wrap:break-word}
@@ -364,9 +365,9 @@ html[lang^="el"] .amx-display{font-family:var(--font-heading);font-weight:800;li
 html[lang^="el"] .amx-heading{line-height:1.04;letter-spacing:-0.035em}
 .amx-subheading{font-family:var(--font-heading);font-size:24px;font-weight:800;line-height:1.08;letter-spacing:-0.025em}
 html[lang^="el"] .amx-subheading{line-height:1.13;letter-spacing:-0.018em}
-.amx-body{margin:0;color:inherit;font:400 17px/1.55 var(--font-body)}
+.amx-body{margin:0;color:inherit;font:400 18px/1.55 var(--font-body)}
 html[lang^="el"] .amx-body{line-height:1.62}
-.amx-button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding-inline:21px;border:0;border-radius:0;color:#ffffff;background:var(--am-green);font:600 14px/1 var(--font-body);text-decoration:none}
+.amx-button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding-inline:21px;border:0;border-radius:0;color:#ffffff;background:var(--am-green);font:600 16px/1 var(--font-body);text-decoration:none}
 .amx-button:focus-visible,.amx-content-link:focus-visible{outline:3px solid currentColor;outline-offset:4px}
 .amx-section-head{margin-bottom:36px}
 
@@ -414,8 +415,8 @@ html[lang^="el"] .amx-body{line-height:1.62}
 </style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/el/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/el/">Αρχική</a><a href="/el/about/" aria-current="page">Γιατί εμένα</a><a href="/el/reviews/">Κριτικές</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/about/" hreflang="en">English</a><a class="hdr-cta" href="/el/startingdiagnostic/"><span>ΞΕΚΙΝΑ ΕΔΩ</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Μενού" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main class="amx-page"><section class="amx-paper"><div class="amx-container amx-why-hero"><p class="amx-label">ΓΙΑΤΙ ΕΜΕΝΑ</p><h1 class="amx-display">Πριν εκπαιδευτώ ως ψυχοθεραπευτής, είχα περάσει το μεγαλύτερο μέρος της ενήλικης ζωής μου στο consulting, το growth και τα startups.</h1><p class="amx-body">Για επτά χρόνια είχα τη δική μου growth consultancy, συνεργάστηκα με περισσότερες από 100 εταιρείες τεχνολογίας, πέρασα από εταιρικούς ρόλους και έστησα δύο startups που απέτυχαν. Οπότε δεν θα χρειαστεί να μου εξηγήσεις πώς λειτουργεί αυτός ο κόσμος.</p></div></section><section class="amx-green amx-fact-bar"><div class="amx-container"><p class="amx-body">Ένας founder ή ένας έμπειρος επαγγελματίας δεν χρειάζεται να μου εξηγήσει πώς λειτουργεί αυτός ο κόσμος.</p></div></section><section class="amx-dark amx-section"><div class="amx-container amx-story-grid"><div class="sec-label"><span class="sec-label__num">01 /</span><span class="sec-label__desc">ΑΠΟ ΠΟΥ ΞΕΚΙΝΗΣΑ</span></div><div class="amx-story-copy"><p class="amx-body">Δεν μεγάλωσα σε επιχειρηματικό περιβάλλον και δεν υπήρχαν οικογενειακά χρήματα, επιχειρηματικές γνωριμίες ή άνθρωποι να μου ανοίξουν πόρτες. Από μια γκαρσονιέρα στον Πειραιά έφτιαξα τη δική μου growth consultancy, συνεργάστηκα με μερικές από τις μεγαλύτερες εταιρείες στον κόσμο και αργότερα πληρωνόμουν για να εκπαιδεύω κόσμο πάνω σε αυτή τη δουλειά.</p><p class="amx-body">Έστησα επίσης δύο startups που απέτυχαν, οπότε δεν μιλάω σε founders, freelancers ή έμπειρα στελέχη ως παρατηρητής. Ξέρω πώς είναι όταν στη δουλειά μπλέκονται τα χρήματα, η «ταυτότητα» και οι σχέσεις σου.</p></div></div></section><section class="amx-paper amx-section"><div class="amx-container"><div class="amx-section-head"><div class="sec-label"><span class="sec-label__num">02 /</span><span class="sec-label__desc">ΤΙ ΜΕ ΟΔΗΓΟΥΣΕ</span></div><h2 class="amx-heading">Η σκληρή δουλειά με πήγε μακριά. Με κράτησε όμως και για χρόνια στα λάθος μέρη.</h2></div><div class="amx-reading-copy"><p class="amx-body">Για χρόνια, το να είμαι χρήσιμος, λογικός και εύκολος στη συνεργασία έφερνε αποτελέσματα, αλλά με έκανε και να δέχομαι δουλειές που δεν ήθελα, να αποφεύγω τις απαραίτητες συγκρούσεις και να μένω περισσότερο απ’ όσο έπρεπε στα λάθος μέρη.</p><p class="amx-body">Η γνώση του business δεν μπορούσε να μου εξηγήσει γιατί η ανάγκη για αποδοχή και ο φόβος μήπως απογοητεύσω τους άλλους επηρέαζαν τόσο πολύ τις αποφάσεις μου, και αυτός είναι ένας από τους λόγους που εκπαιδεύτηκα ως ψυχοθεραπευτής.</p></div></div></section><section class="amx-dark amx-section"><div class="amx-container"><div class="amx-section-head"><div class="sec-label"><span class="sec-label__num">03 /</span><span class="sec-label__desc">ΠΩΣ ΒΟΗΘΑΩ</span></div><h2 class="amx-heading">Ξέρω πότε το πρόβλημα είναι η ίδια η business κίνηση και πότε κάτι προσωπικό μπαίνει στη μέση.</h2></div><div class="amx-reading-copy"><p class="amx-body">Ένα αδύναμο offer χρειάζεται να φτιαχτεί, ενώ ένα καλό offer που δεν μπορείς να βγεις να το πουλήσεις δείχνει ότι το πρόβλημα βρίσκεται αλλού.</p><p class="amx-body">Το ίδιο ισχύει όταν ξέρεις ότι πρέπει να ανεβάσεις τις τιμές σου, να βάλεις όρια απέναντι σε έναν πελάτη ή να κάνεις μια επαγγελματική κίνηση, αλλά συνεχίζεις να αποφεύγεις ό,τι δύσκολο συνεπάγεται. Αν η ίδια ανάγκη να μη δυσαρεστήσεις κανέναν εμφανίζεται και στο σπίτι, δεν κάνουμε πως είναι άσχετη.</p></div></div></section><section class="amx-paper amx-section"><div class="amx-container"><div class="amx-section-head"><div class="sec-label"><span class="sec-label__num">04 /</span><span class="sec-label__desc">ΣΤΗΝ ΙΔΙΑ ΣΥΖΗΤΗΣΗ</span></div><h2 class="amx-heading">Δεν χρειάζεται να μου εξηγείς το business ή να κρύβεις το προσωπικό κομμάτι.</h2></div><div class="amx-reading-copy"><p class="amx-body">Κάνω ερωτήσεις, σου λέω τι βλέπω και αμφισβητώ όσα δεν στέκουν. Μπορείς να πεις τι θέλεις πραγματικά, ακόμη κι αν αυτό μπορεί να απογοητεύσει κάποιον.</p><p class="amx-body">Δεν θα σε δω διαφορετικά, αλλά θα σου πω αν η πολύ λογική εξήγηση που δίνεις υπάρχει μόνο για να μη δυσαρεστήσεις κανέναν.</p></div></div></section><section class="amx-dark amx-section amx-final"><div class="amx-container"><p class="amx-label">ΑΥΤΗ ΕΙΝΑΙ Η ΔΟΥΛΕΙΑ ΠΟΥ ΧΡΕΙΑΖΟΜΟΥΝ ΚΑΙ ΔΕΝ ΜΠΟΡΟΥΣΑ ΝΑ ΒΡΩ.</p><h2 class="amx-heading" style="margin-top: 16px;">Μπορούμε να δουλέψουμε το επαγγελματικό και το προσωπικό κομμάτι στην ίδια συζήτηση.</h2><a class="amx-button" href="/el/startingdiagnostic/">Κάνε αίτηση για μία πρώτη συνάντηση →</a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__brand" style="font-size: 20px;">Aggelos<span>.</span></div><div class="site-ftr__roles"><div>Σύμβουλος επιχειρήσεων &amp; καριέρας</div><div style="margin-top: 8px;">Σύμβουλος ψυχικής υγείας</div></div></div><nav><div class="site-ftr__head">ΠΛΟΗΓΗΣΗ</div><a href="/el/">Αρχική</a><a href="/el/about/">Γιατί εμένα</a><a href="/el/reviews/">Κριτικές</a><a href="/el/startingdiagnostic/">Ζήτησε γνωριμία</a></nav><nav><div class="site-ftr__head">ΠΕΡΙΕΧΟΜΕΝΟ</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Κείμενα ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a><a href="/ask-me-anything/el">Ρώτησε ανώνυμα ↗</a></nav><nav><div class="site-ftr__head">ΑΚΟΛΟΥΘΗΣΕ</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. Με επιφύλαξη παντός δικαιώματος.</div><nav><a href="/el/confidentiality/">Εμπιστευτικότητα</a><a href="/el/confidentiality/#terms">Όροι χρήσης</a><a href="/el/confidentiality/#privacy">Πολιτική απορρήτου</a></nav></div></div></footer></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
-<script src="/site-chrome.js?v=5"></script>
-<script src="/core-pages-v2.js?v=6"></script>
+<script src="/site-chrome.js?v=6"></script>
+<script src="/core-pages-v2.js?v=7"></script>
 <script src="/content-pages.js?v=35"></script>
 <script>renderApp("about", "el");</script>
 </body>
