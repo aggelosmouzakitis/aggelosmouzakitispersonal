@@ -209,48 +209,36 @@ function FaqItem({
   q,
   children
 }) {
+  // Restyled to the shared service-page FAQ look (24px question). Service pages only.
   return React.createElement('div', {
-    style: {
-      marginBottom: '2rem'
-    }
+    className: 'svc-faq__item'
   }, React.createElement('h3', {
-    style: h3Style
-  }, q), children);
+    className: 'svc-faq__q'
+  }, q), React.createElement('div', {
+    className: 'svc-faq__a'
+  }, children));
 }
 function Testimonial({
   quote,
   who
 }) {
+  // Restyled to the shared service-page quote look (17px). Service pages only.
   return React.createElement('blockquote', {
-    style: {
-      margin: '0 0 1.6rem',
-      padding: '0 0 0 1rem',
-      borderLeft: '2px solid rgba(5,150,105,0.35)'
-    }
-  }, React.createElement('p', {
-    style: {
-      fontSize: '15px',
-      lineHeight: 1.8,
-      color: '#282726',
-      marginBottom: '.5rem'
-    }
-  }, '\u201C' + quote + '\u201D'), React.createElement('div', {
-    style: {
-      fontSize: '10px',
-      letterSpacing: '.1em',
-      textTransform: 'uppercase',
-      color: '#767676'
-    }
-  }, who));
+    className: 'svc-quote'
+  }, React.createElement('p', null, '“' + quote + '”'), React.createElement('cite', null, who));
 }
 function Testimonials({
   items,
   mob,
   label
 }) {
-  return React.createElement(Section, {
-    label: label || 'What clients say',
-    mob
+  // Renders as a visible-H2 service section with the shared quote styling.
+  return React.createElement('section', {
+    className: 'svc-section'
+  }, React.createElement('h2', {
+    className: 'svc-h2'
+  }, label || 'What clients say'), React.createElement('div', {
+    className: 'svc-quotes'
   }, items.map(function (t, i) {
     return React.createElement(Testimonial, {
       key: i,
@@ -258,17 +246,17 @@ function Testimonials({
       who: t.w
     });
   }), React.createElement('p', {
+    className: 'svc-p',
     style: {
-      marginBottom: 0,
-      marginTop: '.4rem'
+      marginTop: '4px'
     }
   }, React.createElement('a', {
     href: '/reviews/',
-    style: greenLink
-  }, 'Read more client reflections \u2192')));
+    className: 'svc-morelink'
+  }, 'Read more client reflections →'))));
 }
 
-// \u2500\u2500\u2500 SITE FOOTER (shared across all pages) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// ─── SITE FOOTER (shared across all pages) ───────────────────────────────────
 // ─── BILINGUAL PATH MODEL (mirrors sidebar.jsx) ───────────────────────────────
 // One offer, two languages. English core at root, Greek core under /el/.
 const CORE_PATHS = {
@@ -469,7 +457,7 @@ function SiteFooter({
         fontSize: '11px',
         opacity: .5
       }
-    }, '\u2197') : null));
+    }, '↗') : null));
   }
   return React.createElement('footer', {
     style: wrap
@@ -670,69 +658,16 @@ function CtaRow({
   secondaryTo = 'book',
   secondaryLabel
 }) {
+  // Restyled to the shared green pill CTA row (primary solid, secondary ghost).
   const u = tUI(lang);
-  const primary = {
-    display: 'inline-block',
-    textAlign: 'center',
-    padding: '.85rem 1.6rem',
-    fontFamily: 'inherit',
-    fontWeight: 700,
-    fontSize: '13px',
-    letterSpacing: '.06em',
-    textTransform: 'uppercase',
-    background: C.accent,
-    border: `1.5px solid ${C.accent}`,
-    color: '#fff',
-    textDecoration: 'none',
-    borderRadius: '2px',
-    transition: 'background .15s, border-color .15s'
-  };
-  const secondary = {
-    display: 'inline-block',
-    textAlign: 'center',
-    padding: '.85rem 1.6rem',
-    fontFamily: 'inherit',
-    fontWeight: 700,
-    fontSize: '13px',
-    letterSpacing: '.06em',
-    textTransform: 'uppercase',
-    background: 'transparent',
-    border: `1.5px solid rgba(40,39,38,.35)`,
-    color: C.text,
-    textDecoration: 'none',
-    borderRadius: '2px',
-    transition: 'border-color .15s, color .15s'
-  };
   return React.createElement('div', {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '.8rem',
-      marginTop: '1.6rem'
-    }
+    className: 'svc-ctarow'
   }, React.createElement('a', {
     href: pathFor(primaryTo, lang),
-    className: 'cta-btn',
-    style: primary,
-    onMouseEnter: e => {
-      e.currentTarget.style.background = '#059669';
-      e.currentTarget.style.borderColor = '#059669';
-    },
-    onMouseLeave: e => {
-      e.currentTarget.style.background = C.accent;
-      e.currentTarget.style.borderColor = C.accent;
-    }
+    className: 'cta-btn svc-cta'
   }, (primaryLabel || u.seeOneToOne) + ' →'), React.createElement('a', {
     href: pathFor(secondaryTo, lang),
-    style: secondary,
-    onMouseEnter: e => {
-      e.currentTarget.style.borderColor = C.accent;
-      e.currentTarget.style.color = C.accent;
-    },
-    onMouseLeave: e => {
-      e.currentTarget.style.borderColor = 'rgba(40,39,38,.35)';
-      e.currentTarget.style.color = C.text;
-    }
+    className: 'cta-btn svc-cta svc-cta--ghost'
   }, secondaryLabel || u.book));
 }
 
@@ -741,31 +676,12 @@ function Bullets({
   items,
   mob
 }) {
+  // Restyled to the shared service-page bullet list (green tick marker, no em dash).
   return React.createElement('ul', {
-    style: {
-      listStyle: 'none',
-      margin: '.2rem 0 0',
-      padding: 0
-    }
+    className: 'svc-bullets'
   }, items.map((it, i) => React.createElement('li', {
-    key: i,
-    style: {
-      display: 'flex',
-      gap: '.7rem',
-      alignItems: 'baseline',
-      padding: mob ? '.5rem 0' : '.45rem 0',
-      fontSize: mob ? '16px' : '17px',
-      lineHeight: 1.6,
-      color: C.text,
-      borderTop: i ? `1px solid ${C.border}` : 'none'
-    }
-  }, React.createElement('span', {
-    style: {
-      color: C.accent,
-      fontWeight: 700,
-      flexShrink: 0
-    }
-  }, '—'), React.createElement('span', null, it))));
+    key: i
+  }, it)));
 }
 
 // Emphatic final CTA block.
@@ -994,6 +910,187 @@ function QCard({
       lineHeight: 1.5
     }
   }, q));
+}
+
+// ─── MODERN SERVICE-PAGE SYSTEM (one shared component + typography for all 15 ──
+// legacy service routes). Collapses the editorial rail shell into a clean
+// centered reading column and drives every heading/body size from CSS media
+// queries, so no route carries its own inline typography overrides. ───────────
+const SVC_CSS = `
+.u-shell:has(.svc-page){display:block;max-width:880px;margin-inline:auto;padding-inline:clamp(20px,5vw,40px)}
+.u-shell:has(.svc-page) .u-shell__rail,.u-shell:has(.svc-page) .u-shell__gutter{display:none}
+.u-shell:has(.svc-page) .u-shell__body{grid-column:auto;width:100%;min-width:0}
+
+.svc-page{--svc-read:720px;color:#181A1C;font-family:var(--font-body)}
+.svc-page *{box-sizing:border-box}
+.svc-page .svc-h1{max-width:980px;margin:0 0 22px;font-family:var(--font-display);font-synthesis:none;font-size:clamp(48px,4.7vw,64px);font-weight:400;line-height:0.98;letter-spacing:-0.045em;color:#1A1C1D;text-wrap:balance}
+html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:800}
+.svc-page .svc-lead{max-width:var(--svc-read);margin:0;font-family:var(--font-body);font-size:clamp(20px,1.65vw,23px);line-height:1.5;color:#282726}
+.svc-section{margin-top:72px}
+.svc-page .svc-h2{max-width:var(--svc-read);margin:0 0 20px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(36px,3.2vw,44px);line-height:1.05;letter-spacing:-0.035em;font-weight:800;color:#1A1C1D;text-wrap:balance}
+.svc-page .svc-p{max-width:var(--svc-read);margin:0 0 20px;font-size:18px;line-height:1.65;color:#282726}
+.svc-p:last-child{margin-bottom:0}
+.svc-p a,.svc-lead a,.svc-faq__a a,.svc-note a{color:#059669;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.svc-p strong,.svc-faq__a strong{font-weight:700;color:#1A1C1D}
+.svc-eyebrow{margin:0 0 12px;font-family:var(--font-body);font-size:13px;line-height:1.3;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#059669}
+.svc-faq{max-width:var(--svc-read);border-top:1px solid rgba(24,26,28,0.14)}
+.svc-faq__item{border-bottom:1px solid rgba(24,26,28,0.14);padding:22px 0}
+.svc-page .svc-faq__q{margin:0 0 10px;font-family:var(--font-heading);font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#1A1C1D}
+.svc-page .svc-faq__a{margin:0;font-size:18px;line-height:1.65;color:#282726}
+.svc-faq__a p{margin:0 0 12px}.svc-faq__a p:last-child{margin:0}
+.svc-quotes{max-width:var(--svc-read)}
+.svc-quote{margin:0 0 22px;padding:0 0 0 20px;border-left:3px solid rgba(5,150,105,0.4)}
+.svc-quote p{margin:0 0 8px;font-size:17px;line-height:1.6;color:#282726}
+.svc-quote cite{font-style:normal;font-size:13px;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:#767676}
+.svc-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 30px;background:#059669;color:#fff;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
+.svc-cta:hover{filter:brightness(0.92);gap:12px}
+.svc-cta--ghost{background:transparent;color:#1A1C1D;border:1.5px solid rgba(24,26,28,0.28)}
+.svc-cta--ghost:hover{border-color:#059669;color:#059669;filter:none}
+.svc-ctarow{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+.svc-note{max-width:var(--svc-read);margin:16px 0 0;font-size:15px;line-height:1.6;color:#666}
+.svc-bullets{max-width:var(--svc-read);list-style:none;margin:4px 0 0;padding:0}
+.svc-bullets li{position:relative;padding:8px 0 8px 22px;font-size:18px;line-height:1.6;color:#282726;border-top:1px solid rgba(24,26,28,0.1)}
+.svc-bullets li:first-child{border-top:0}
+.svc-bullets li::before{content:"";position:absolute;left:0;top:16px;width:10px;height:2px;background:#059669}
+.svc-bullets li a{color:#059669;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:767px){.svc-bullets li{font-size:17px}}
+.svc-cards{margin:4px 0 0}
+.svc-rule{border:0;border-top:1px solid rgba(24,26,28,0.14);margin:0}
+.svc-page .svc-related__h{margin:0 0 8px;font-family:var(--font-heading);font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#1A1C1D}
+.svc-related{list-style:none;max-width:var(--svc-read);margin:0;padding:0;border-top:1px solid rgba(24,26,28,0.14)}
+.svc-related li{border-bottom:1px solid rgba(24,26,28,0.14)}
+.svc-related a{display:flex;justify-content:space-between;gap:20px;padding:15px 0;font-family:var(--font-heading);font-size:17px;line-height:1.4;font-weight:600;color:#1A1C1D;text-decoration:none}
+.svc-related a:hover{color:#059669}
+@media (max-width:767px){
+  .u-shell:has(.svc-page){padding-inline:20px}
+  .svc-page .svc-h1{font-size:clamp(36px,10.5vw,44px)}
+  .svc-page .svc-lead{font-size:19px}
+  .svc-section{margin-top:52px}
+  .svc-page .svc-h2{font-size:clamp(29px,8vw,34px);line-height:1.08}
+  .svc-page .svc-p,.svc-page .svc-faq__a{font-size:17px;line-height:1.6}
+  .svc-page .svc-faq__q,.svc-page .svc-h3{font-size:21px;line-height:1.25}
+  .svc-cta{min-height:54px}
+}
+@media (max-width:420px){
+  .svc-ctarow{flex-direction:column;align-items:stretch}
+  .svc-cta{white-space:normal;text-align:center;padding-inline:18px;line-height:1.25}
+}
+`;
+function SvcStyles() {
+  return React.createElement('style', {
+    dangerouslySetInnerHTML: {
+      __html: SVC_CSS
+    }
+  });
+}
+function SvcPage({
+  children
+}) {
+  return React.createElement('main', {
+    className: 'svc-page'
+  }, React.createElement(SvcStyles), children);
+}
+function SvcH1({
+  children
+}) {
+  return React.createElement('h1', {
+    className: 'svc-h1'
+  }, children);
+}
+function SvcLead({
+  children
+}) {
+  return React.createElement('p', {
+    className: 'svc-lead'
+  }, children);
+}
+function SvcSection({
+  title,
+  id,
+  children
+}) {
+  return React.createElement('section', {
+    className: 'svc-section'
+  }, React.createElement('h2', {
+    className: 'svc-h2',
+    id: id || undefined
+  }, title), children);
+}
+function SvcP({
+  children
+}) {
+  return React.createElement('p', {
+    className: 'svc-p'
+  }, children);
+}
+function SvcCta({
+  href,
+  children,
+  ghost
+}) {
+  return React.createElement('a', {
+    href,
+    className: 'cta-btn svc-cta' + (ghost ? ' svc-cta--ghost' : '')
+  }, children);
+}
+function SvcNote({
+  children
+}) {
+  return React.createElement('p', {
+    className: 'svc-note'
+  }, children);
+}
+function SvcFaq({
+  items
+}) {
+  return React.createElement('div', {
+    className: 'svc-faq'
+  }, items.map((it, i) => React.createElement('div', {
+    key: i,
+    className: 'svc-faq__item'
+  }, React.createElement('h3', {
+    className: 'svc-faq__q'
+  }, it.q), React.createElement('div', {
+    className: 'svc-faq__a'
+  }, (Array.isArray(it.a) ? it.a : [it.a]).map((para, j) => React.createElement('p', {
+    key: j
+  }, ...(Array.isArray(para) ? para : [para])))))));
+}
+function SvcQuotes({
+  items,
+  more
+}) {
+  return React.createElement('div', {
+    className: 'svc-quotes'
+  }, items.map((t, i) => React.createElement('blockquote', {
+    key: i,
+    className: 'svc-quote'
+  }, React.createElement('p', null, '“' + t.q + '”'), React.createElement('cite', null, t.w))), more ? React.createElement('p', {
+    className: 'svc-p',
+    style: {
+      marginTop: '4px'
+    }
+  }, React.createElement(IA, {
+    href: '/reviews/'
+  }, more)) : null);
+}
+function SvcRelated({
+  items,
+  heading
+}) {
+  return React.createElement('section', {
+    className: 'svc-section'
+  }, React.createElement('h2', {
+    className: 'svc-related__h'
+  }, heading || 'Related'), React.createElement('ul', {
+    className: 'svc-related'
+  }, items.map((it, i) => React.createElement('li', {
+    key: i
+  }, React.createElement('a', {
+    href: it.href
+  }, React.createElement('span', null, it.label.replace(/\s*→\s*$/, '')), React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '→'))))));
 }
 
 // ─── HOME PAGE (bilingual) ───────────────────────────────────────────────────
@@ -2133,80 +2230,62 @@ function SpecialtyPage({
 }
 
 // ─── PERSONA PAGE SHARED BLOCKS (identical across /founders/, /solopreneurs/, ...) ──
-function PersonaWorkSection({
-  mob
-}) {
-  return React.createElement(Section, {
-    label: 'So what we actually do',
-    mob
-  }, React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Freud, but because I've sat in your seat more than once and I know the terrain."), React.createElement(P, null, "The work runs on two tracks at the same time:"), React.createElement('div', {
+function PersonaWorkSection() {
+  const mob = useIsMobile();
+  return React.createElement(SvcSection, {
+    title: 'So what we actually do'
+  }, React.createElement(SvcP, null, "We talk it through openly. I usually get what's going on fairly quickly, not because I'm Freud, but because I've sat in your seat more than once and I know the terrain."), React.createElement(SvcP, null, "The work runs on two tracks at once:"), React.createElement('div', {
+    className: 'svc-cards',
     style: {
-      margin: '0 0 1.2rem'
+      margin: '4px 0 20px'
     }
   }, React.createElement(TrackCards, {
     mob,
     tracks: [{
       title: 'The inner track',
-      body: "See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation. Sometimes deeper trauma techniques, sometimes behavioural exercises that get you doing the thing you avoid."
+      body: "See the pattern, find where it comes from, then rewire it. Awareness is the start, not the finish, because you don't talk yourself out of something your history spent years building. Sometimes that's deeper trauma work, sometimes behavioural exercises that get you doing the thing you avoid."
     }, {
       title: 'The business track',
-      body: "The decision in front of you, the move you need to make, the plan for where you're going. Real, practical and strategic."
+      body: "The decision in front of you, the move you need to make, the plan for where you're going. Real, practical, strategic."
     }]
-  })), React.createElement(P, {
-    last: true
-  }, "One without the other doesn't hold. Fixing the inside while the company drifts is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it."));
+  })), React.createElement(SvcP, null, "One track without the other doesn't hold. Fixing the inside while the company drifts is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it."));
 }
-function PersonaTherapyOrCoachingSection({
-  mob
-}) {
-  return React.createElement(Section, {
-    label: 'Is this therapy or coaching?',
-    mob
-  }, React.createElement(P, null, "Neither, cleanly."), React.createElement(P, null, "Therapy? Not by the protocol. I'm more direct and action-oriented, I make suggestions early, and I break a lot of the etiquette a therapist is supposed to keep. But it's therapy-informed — I'm a licensed psychotherapist — and that training is why I can see what's underneath."), React.createElement(P, null, "Coaching? Not that either. No framework I'll hand you to follow. There are coaching elements in how we work on decisions, but the framework was never the point."), React.createElement(P, {
-    last: true
-  }, "The honest description: a trusted advisor who's sat in your seat and has the expertise to help you sort yourself out and hit your goals. Someone who cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face. For a lot of founders it's the one place they can be themselves, not the version they perform for the team, the investors, the cofounder or the partner."));
+function PersonaTherapyOrCoachingSection() {
+  return React.createElement(SvcSection, {
+    title: 'Is this therapy or coaching?'
+  }, React.createElement(SvcP, null, "Neither, cleanly. By the book it isn't therapy: I'm more direct and action-oriented, I make suggestions early, and I break a lot of the etiquette a therapist is meant to keep. It stays therapy-informed, though. I'm a licensed psychotherapist, and that training is why I can see what's underneath."), React.createElement(SvcP, null, "It isn't coaching either. There's no framework I'll hand you, though we borrow coaching tools when we work on decisions."), React.createElement(SvcP, null, "The honest description is a trusted advisor who's sat in your seat and can help you sort yourself out and hit your goals. Someone who cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face. For a lot of founders it's the one place they can be themselves, not the version they perform for the team, the investors, the cofounder or the partner."));
 }
-function PersonaHowWeStartSection({
-  mob
-}) {
-  return React.createElement(Section, {
-    label: 'How we start',
-    mob
+function PersonaHowWeStartSection() {
+  const mob = useIsMobile();
+  return React.createElement(SvcSection, {
+    title: 'How we start'
+  }, React.createElement('div', {
+    className: 'svc-cards'
   }, React.createElement(StepCards, {
     mob,
     steps: [{
       n: '1',
       title: 'Fit call',
       tag: '~15 min · free',
-      body: "Not a session, just to see if we click or if you can't stand me. Both fine."
+      body: "Not a session. We see whether we click, or whether you can't stand me. Both fine."
     }, {
       n: '2',
       title: 'Paid session',
       tag: 'one session',
-      body: "You bring the problem as you see it. We find the one underneath. You leave with a clear read and one real move. Worth it even if we stop there."
+      body: "You bring the problem as you see it. We find the one underneath. You leave with a clear read and one real move, worth it even if we stop there."
     }, {
       n: '3',
       title: 'Ongoing',
       tag: "if it's worth it",
       body: "Private, one to one, for as long as it's genuinely useful. Not a session longer."
     }]
-  }), React.createElement('div', {
-    style: {
-      marginTop: '1.4rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →')), React.createElement('p', {
-    style: {
-      marginTop: '1.1rem',
-      fontSize: '15px',
-      color: C.muted
-    }
-  }, "It's the same ongoing 1:1 work — ", React.createElement(IA, {
+  })), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →')), React.createElement(SvcNote, null, "It's the same ongoing 1:1 work. ", React.createElement(IA, {
     href: '/1-to-1/'
-  }, 'see how 1:1 works'), '.'));
+  }, 'See how 1:1 works'), '.'));
 }
 function PatternList({
   items
@@ -2280,28 +2359,15 @@ function PatternList({
 
 // ─── FOR FOUNDERS ────────────────────────────────────────────────────────────
 function ForFoundersPage() {
-  const mob = useIsMobile();
-  const mobPage = mob ? {
-    ...pageStyle
-  } : widePageStyle;
-  return React.createElement('main', {
-    style: mobPage
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem'
-    }
-  }, 'Founder advisory for business problems that trace back to you'), React.createElement(Section, {
-    label: 'What you came here for',
-    mob
-  }, React.createElement(P, null, "You came here about something either business-related that gives you stress, activates inner criticism or prevents you from reaching your goals."), React.createElement(P, {
-    last: true
-  }, "If you're reading this instead of booking another consultant, part of you already suspects it isn't necessarily a strategy problem. You'd give someone else in your position the right advice without blinking, and you still don't do it yourself. That gap is the tell, and there's usually a reason you're ready to ask for some help now, this month, and not before.")), React.createElement(Section, {
-    label: 'What it usually turns out to be',
-    mob
-  }, React.createElement(P, null, "Most of the time it traces back to a pattern in you. Usually not the one you assume and definitely not the one ChatGPT suggested."), React.createElement(P, null, "Some founders name the wrong cause entirely, such as calling the procrastination laziness or the burnout overwork. Others have a sharp, honest read on it but still don't know how to get rid of it. Knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
+  return React.createElement(SvcPage, null, React.createElement(SvcH1, null, 'Founder advisory for business problems that trace back to you'), React.createElement(SvcLead, null, "For tech founders whose stress, self-criticism or stalled goals trace back to a pattern in them, not a strategy problem. An advisor who's sat in your seat."), React.createElement(SvcSection, {
+    title: 'What you came here for'
+  }, React.createElement(SvcP, null, "You came here about something in the business that gives you stress, feeds the self-criticism, or keeps a goal out of reach."), React.createElement(SvcP, null, "If you're reading this instead of booking another consultant, part of you already suspects it isn't only a strategy problem. You'd give someone else in your position the right advice without blinking, and still not take it yourself. That gap is the tell, and there's usually a reason you're ready to ask for help this month and not before.")), React.createElement(SvcSection, {
+    title: 'What it usually turns out to be'
+  }, React.createElement(SvcP, null, "Most of the time it traces back to a pattern in you, and usually not the one you assume or the one ChatGPT suggested."), React.createElement(SvcP, null, "Some founders name the wrong cause, calling the procrastination laziness or the burnout overwork. Others read it accurately and still can't shift it, because knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
     href: '/blog/self-analysis-as-a-meta-way-to-maintain-control/'
-  }, "The same brain that built it can't reason its way out of it"), ", however smart you are."), React.createElement(P, null, "And it doesn't stay only with you, of course, but gets spilled one way or another into your business:"), React.createElement(PatternList, {
+  }, "The same brain that built it can't reason its way out"), ", however smart you are."), React.createElement(SvcP, null, "It doesn't stay with you, either. One way or another it spills into the business:"), React.createElement('div', {
+    className: 'svc-cards'
+  }, React.createElement(PatternList, {
     items: [{
       cause: 'You avoid discomfort',
       effect: 'sales, hiring, firing, pricing and fundraising all keep sliding'
@@ -2326,32 +2392,18 @@ function ForFoundersPage() {
         href: '/blog/the-loneliness-and-emotional-pressure-that-founders-experience/'
       }, "you lose your read on what's real")
     }]
-  }), React.createElement('div', {
-    style: {
-      marginTop: '1.2rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(PersonaWorkSection, {
-    mob
-  }), React.createElement(PersonaTherapyOrCoachingSection, {
-    mob
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'A real example',
-    mob
-  }, React.createElement(P, null, "A founder came in having lost his motivation. He'd built the company, stopped caring about it, and wanted the drive back. He felt like a failure, was quietly planning his escape, and his marriage was strained because the obsessiveness and the hours had been bleeding into home."), React.createElement(P, {
-    last: true
-  }, "We didn't chase the motivation. We worked through the low period so he could think again, then got underneath it, to where the failure feeling came from and why the drive had drained out. Once that was clear, the business decisions stopped feeling impossible. We built a plan for the next chapter, including a clean exit, and he did the work at home. He didn't need more motivation. He needed to understand ", React.createElement(A, {
+  })), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →'))), React.createElement(PersonaWorkSection), React.createElement(PersonaTherapyOrCoachingSection), React.createElement(SvcSection, {
+    title: 'A real example'
+  }, React.createElement(SvcP, null, "A founder came to me having lost his motivation. He'd built the company, stopped caring about it, and wanted the drive back. He felt like a failure, was quietly planning his escape, and his marriage was strained because the hours and the obsessiveness had bled into home."), React.createElement(SvcP, null, "We didn't chase the motivation. We worked through the low period so he could think again, then got underneath it, to where the failure feeling came from and why the drive had drained out. After that the business decisions stopped feeling impossible. We built a plan for the next chapter, including a clean exit, and he did the work at home too. He needed to understand ", React.createElement(A, {
     href: '/blog/what-lost-purpose-actually-means-for-many-high-performers/'
-  }, 'what had happened to it'), ".")), React.createElement(Testimonials, {
-    mob,
-    label: 'What founders say',
+  }, 'what had happened to the drive'), ", not manufacture more of it.")), React.createElement(SvcSection, {
+    title: 'What founders say'
+  }, React.createElement(SvcQuotes, {
+    more: 'Read more client reflections →',
     items: [{
       q: "I had worked with coaches before, and I'd been in therapy before, but this felt different. He understands the emotional side without losing sight of the actual situation at work. We can talk about pressure or shame, and five minutes later a decision involving my team. I don't have to translate one world into the other.",
       w: 'Anonymous, founder'
@@ -2362,44 +2414,23 @@ function ForFoundersPage() {
       q: "I didn't want someone telling me to work less or be less ambitious. The work has been about keeping the part of me that wants to build, while becoming less dependent on winning and approval to feel okay.",
       w: 'Anonymous, founder'
     }]
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Who this is for',
-    mob
-  }, React.createElement(P, null, "Startup and tech founders, ideally in Europe, the US or Canada, mostly for timezones."), React.createElement(P, {
-    last: true
-  }, "I work with a few people at a time and care more about fit than volume. Not here to manage egos or hand you a silver-bullet plan, because nobody has one. I'm here to be your advisor, closer to a friend with real expertise, who helps you become the version of yourself the company actually needs. It runs both ways, with rights and obligations on both sides.")), React.createElement(PersonaHowWeStartSection, {
-    mob
-  }), React.createElement(SiteFooter, {
-    mob
-  }));
+  })), React.createElement(SvcSection, {
+    title: 'Who this is for'
+  }, React.createElement(SvcP, null, "Startup and tech founders, ideally in Europe, the US or Canada, mostly for time zones."), React.createElement(SvcP, null, "I work with a few people at a time and care more about fit than volume. I'm not here to manage egos or hand you a silver-bullet plan, because nobody has one. I'm here to be your advisor, closer to a friend with real expertise, who helps you become the version of yourself the company actually needs. It runs both ways, with rights and obligations on each side.")), React.createElement(PersonaHowWeStartSection));
 }
 
 // ─── FOR SOLOPRENEURS ────────────────────────────────────────────────────────
 function SolopreneursPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? {
-    ...pageStyle
-  } : widePageStyle;
-  return React.createElement('main', {
-    style: mobPage
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem'
-    }
-  }, 'Solopreneur advisory for business problems that trace back to you'), React.createElement(Section, {
-    label: 'What you came here for',
-    mob
-  }, React.createElement(P, null, "You came here about your one-person business. Typical things I've heard so far include things you avoid, things you are overthinking, things you are afraid of, lack of focus, procrastination and more. The common thread is that they start inside you but get spilled into your business."), React.createElement(P, {
-    last: true
-  }, "If you're reading this instead of buying another course or joining another community, part of you already suspects you ", React.createElement(Strong, null, "might not need tactical advice only"), ". You'd tell someone else in your position exactly what to do without blinking, and you still don't do it. That tells it all. And there's usually a reason it came up now, this month, and not before.")), React.createElement(Section, {
-    label: 'What it usually turns out to be',
-    mob
-  }, React.createElement(P, null, "In lots of cases it traces back to a pattern in you, and usually not the one you assume nor the one ChatGPT eloquently tells you."), React.createElement(P, null, "Some people name the wrong cause completely. Others have a sharp, honest read on it and still can't shift it. Knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
+  return React.createElement(SvcPage, null, React.createElement(SvcH1, null, 'Solopreneur advisory for business problems that trace back to you'), React.createElement(SvcLead, null, "For solopreneurs, consultants and freelancers whose stuck offer, pricing or focus traces back to a pattern in them, not a missing tactic."), React.createElement(SvcSection, {
+    title: 'What you came here for'
+  }, React.createElement(SvcP, null, "You came here about your one-person business. The specifics vary: things you avoid, things you overthink, things that scare you, lack of focus, procrastination. The common thread is they start inside you and end up in the business."), React.createElement(SvcP, null, "If you're reading this instead of buying another course or joining another community, part of you already suspects you ", React.createElement(Strong, null, "might not need tactical advice only"), ". You'd tell someone else in your position exactly what to do without blinking, and still not do it yourself. That's the tell, and there's usually a reason it surfaced now, this month, and not before.")), React.createElement(SvcSection, {
+    title: 'What it usually turns out to be'
+  }, React.createElement(SvcP, null, "In a lot of cases it traces back to a pattern in you, and usually not the one you assume or the one ChatGPT eloquently describes."), React.createElement(SvcP, null, "Some people name the wrong cause. Others read it accurately and still can't shift it, because knowing the pattern and being free of it are different jobs. ", React.createElement(A, {
     href: '/blog/self-analysis-as-a-meta-way-to-maintain-control/'
-  }, "The same brain that built it can't reason its way out"), ", however smart you are."), React.createElement(P, null, "Unfortunately, when you work alone, such patterns run straight into the business:"), React.createElement(PatternList, {
+  }, "The same brain that built it can't reason its way out"), ", however smart you are."), React.createElement(SvcP, null, "When you work alone, those patterns run straight into the business:"), React.createElement('div', {
+    className: 'svc-cards'
+  }, React.createElement(PatternList, {
     items: [{
       cause: 'You avoid being seen',
       effect: 'no content, no outbound, no clear opinion, weak demand'
@@ -2424,51 +2455,36 @@ function SolopreneursPage() {
         href: '/blog/the-high-cost-of-endless-pondering/'
       }, 'lots of refining, almost no selling')
     }]
-  }), React.createElement('div', {
+  })), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →'))), React.createElement(SvcSection, {
+    title: 'So what we actually do'
+  }, React.createElement(SvcP, null, "We talk it through openly. I usually get what's going on fairly quickly, not because I'm Carl Jung, but because I've done the job-to-solo-and-back trip myself more than once, including building this practice right now. In 2026 it's brutal, practically and emotionally, and I know the terrain."), React.createElement(SvcP, null, "The work runs on two tracks at once:"), React.createElement('div', {
+    className: 'svc-cards',
     style: {
-      marginTop: '1.2rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'So what we actually do',
-    mob
-  }, React.createElement(P, null, "We talk it through openly. Most of the time I get what's going on fairly quickly, not because I'm Carl Jung, but because I've done the job-to-solo-and-back journey myself more than once, including building this practice right now, and I know the terrain. And in 2026, I am telling you, it's brutal, both practically and emotionally."), React.createElement(P, null, "The work runs on two tracks at the same time:"), React.createElement('div', {
-    style: {
-      margin: '0 0 1.2rem'
+      margin: '4px 0 20px'
     }
   }, React.createElement(TrackCards, {
     mob,
     tracks: [{
       title: 'The inner track',
-      body: "See the pattern and where it comes from, then rewire it. Awareness is the first step but not enough on its own, because you don't talk yourself out of something your history spent years building. That takes more than conversation: sometimes deeper techniques, sometimes behavioural exercises that get you doing the thing you avoid, like actually sending the outreach or holding the price."
+      body: "See the pattern, find where it comes from, then rewire it. Awareness is the start, not the finish, because you don't talk yourself out of something your history spent years building. Sometimes that's deeper work, sometimes behavioural exercises that get you doing the thing you avoid, like sending the outreach or holding the price."
     }, {
       title: 'The business track',
-      body: "The decision in front of you, the offer, the pricing, the move you need to make, the plan for where you're going. Real, practical, strategic."
+      body: "The offer, the pricing, the decision in front of you, the plan for where you're going. Real, practical, strategic."
     }]
-  })), React.createElement(P, {
-    last: true
-  }, "One without the other doesn't hold. Fixing the inside while the pipeline dries up is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")), React.createElement(Section, {
-    label: 'Is this therapy or coaching?',
-    mob
-  }, React.createElement(P, null, "Neither, cleanly."), React.createElement(P, null, "Therapy? Not by the protocol. I'm more direct and action-oriented, I make suggestions early, and I break a lot of the etiquette a therapist is supposed to keep. But it's therapy-informed — I'm a licensed psychotherapist — and that training is why I can see what's underneath."), React.createElement(P, null, "Coaching? Not that either. No framework I'll hand you to follow. There are coaching elements in how we work on decisions and pricing and positioning, but the framework was never the point."), React.createElement(P, {
-    last: true
-  }, "The honest description: a trusted advisor who's built his own thing and has the expertise to help you sort yourself out and hit your goals. Someone who cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face. When you work alone, this is often the one place you get an honest mirror, and the one place you can be yourself, not the version you perform for clients, your audience or your partner.")), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'A real example',
-    mob
-  }, React.createElement(P, null, "Someone came to me running his own consultancy. He was doing well, but it didn't feel that way to him. He asked how to grow the business, and underneath that he was worried he wasn't successful enough, stuck doing all the execution himself, running on fight or flight with clients and taking every bit of criticism badly."), React.createElement(P, null, "All that stress had piled into one conclusion: that he wasn't cut out to run a business at all. That was false, but it's a normal place to land when you spend long enough powering through your own resentment. Most of it traced back to ", React.createElement(A, {
+  })), React.createElement(SvcP, null, "One track without the other doesn't hold. Fixing the inside while the pipeline dries up is useless. Pushing the business while the same pattern sabotages you is exhausting, and you already know that, because you've tried it.")), React.createElement(SvcSection, {
+    title: 'Is this therapy or coaching?'
+  }, React.createElement(SvcP, null, "Neither, cleanly. By the book it isn't therapy: I'm more direct and action-oriented, I make suggestions early, and I break a lot of the etiquette a therapist is meant to keep. It stays therapy-informed, though. I'm a licensed psychotherapist, and that training is why I can see what's underneath."), React.createElement(SvcP, null, "It isn't coaching either. There's no framework I'll hand you, though we borrow coaching tools when we work on decisions, pricing and positioning."), React.createElement(SvcP, null, "The honest description is a trusted advisor who's built his own thing and can help you sort yourself out and hit your goals. Someone who cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face. When you work alone, this is often the one honest mirror you get, and the one place you can be yourself, not the version you perform for clients, your audience or your partner.")), React.createElement(SvcSection, {
+    title: 'A real example'
+  }, React.createElement(SvcP, null, "Someone came to me running his own consultancy. He was doing well, but it didn't feel that way to him. He asked how to grow, and underneath that he was worried he wasn't successful enough, stuck doing all the execution himself, running on fight or flight with clients and taking every bit of criticism badly."), React.createElement(SvcP, null, "All that stress had piled into one conclusion: that he wasn't cut out to run a business. That was false, but it's a normal place to land after long enough powering through your own resentment. Most of it traced back to ", React.createElement(A, {
     href: '/blog/the-parent-archetypes-creating-high-performers-with-chronic-self-doubt/'
-  }, 'older family patterns that were still running'), ", the same ones showing up in his marriage. The business problems were almost a copy of what he was dealing with in himself."), React.createElement(P, {
-    last: true
-  }, "Over about six months that turned around. He got his confidence back, started doing things he'd written off as not for him, and grew the business by focusing on the parts he liked and outsourcing the rest. He worked on those patterns everywhere they showed up, not just at work. He didn't need a growth tactic. He needed to stop treating an old story about himself as fact.")), React.createElement(Testimonials, {
-    mob,
-    label: 'What clients say',
+  }, 'older family patterns still running'), ", the same ones showing up in his marriage. The business problems were almost a copy of what he was dealing with in himself."), React.createElement(SvcP, null, "Over about six months it turned around. He got his confidence back, took on work he'd written off as not for him, and grew by focusing on the parts he liked and outsourcing the rest. He worked on those patterns everywhere they showed up, not just at work. He didn't need a growth tactic. He needed to stop treating an old story about himself as fact.")), React.createElement(SvcSection, {
+    title: 'What clients say'
+  }, React.createElement(SvcQuotes, {
+    more: 'Read more client reflections →',
     items: [{
       q: "I had worked with coaches before, and I'd been in therapy before, but this felt different. He understands the emotional side without losing sight of the actual situation at work. We can talk about pressure or shame, and five minutes later a decision involving my business. I don't have to translate one world into the other.",
       w: 'Anonymous, solopreneur'
@@ -2479,18 +2495,9 @@ function SolopreneursPage() {
       q: "I didn't want someone telling me to lower my standards or want less. The work has been about keeping the part of me that wants to build, while becoming less dependent on winning and approval to feel okay.",
       w: 'Anonymous, solopreneur'
     }]
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Who this is for',
-    mob
-  }, React.createElement(P, null, "Solopreneurs, independent consultants and freelancers in tech, ideally in Europe, the US or Canada, mostly for timezones."), React.createElement(P, {
-    last: true
-  }, "I work with a few people at a time and care more about fit than volume. I'm not here to manage egos or hand you a silver-bullet plan, because nobody has one. I'm here to be your advisor, closer to a friend with real expertise, who helps you become the version of yourself the business actually needs. It runs both ways, with rights and obligations on both sides.")), React.createElement(PersonaHowWeStartSection, {
-    mob
-  }), React.createElement(SiteFooter, {
-    mob
-  }));
+  })), React.createElement(SvcSection, {
+    title: 'Who this is for'
+  }, React.createElement(SvcP, null, "Solopreneurs, independent consultants and freelancers in tech, ideally in Europe, the US or Canada, mostly for time zones."), React.createElement(SvcP, null, "I work with a few people at a time and care more about fit than volume. I'm not here to manage egos or hand you a silver-bullet plan, because nobody has one. I'm here to be your advisor, closer to a friend with real expertise, who helps you become the version of yourself the business actually needs. It runs both ways, with rights and obligations on each side.")), React.createElement(PersonaHowWeStartSection));
 }
 
 // ─── HOW I WORK ──────────────────────────────────────────────────────────────
@@ -2902,140 +2909,73 @@ function RelatedLinks({
   items,
   heading
 }) {
-  return React.createElement('div', {
-    style: {
-      marginTop: mob ? '2.5rem' : '3.25rem'
-    }
-  }, React.createElement('h2', {
-    style: {
-      ...sectionTitleStyle,
-      fontSize: mob ? '19px' : '22px'
-    }
-  }, heading || 'Related'), React.createElement('ul', {
-    style: {
-      listStyle: 'none',
-      margin: '.4rem 0 0',
-      padding: 0
-    }
-  }, items.map((it, i) => React.createElement('li', {
-    key: i,
-    style: {
-      padding: mob ? '.55rem 0' : '.5rem 0',
-      borderTop: `1px solid ${C.border}`,
-      fontSize: mob ? '16px' : '17px',
-      lineHeight: 1.5
-    }
-  }, React.createElement(IA, {
-    href: it.href
-  }, it.label)))));
+  // Restyled to the shared service-page related-links block. Service pages only.
+  return React.createElement(SvcRelated, {
+    items,
+    heading
+  });
 }
 
 // ─── THERAPY FOR EXECUTIVES ──────────────────────────────────────────────────
 function ExecTherapyPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? {
-    ...pageStyle
-  } : widePageStyle;
-  const mobSection = mob ? {
-    display: 'block',
-    marginBottom: '2rem'
-  } : sectionStyle;
-  const mobH2 = mob ? {
-    ...h2Style,
-    paddingBottom: '.4rem',
-    display: 'block'
-  } : h2Style;
-  const mobH1 = mob ? {
-    ...h1Style,
-    fontSize: '20px'
-  } : h1Style;
-  return React.createElement('main', {
-    style: mobPage
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem'
-    }
-  }, 'Therapy for executives who have done everything right and still feel like something is off'), React.createElement(Section, {
-    label: 'The problem',
-    mob
-  }, React.createElement(P, null, "You're good at your job. You know that. But somewhere along the way the cost of doing it well started to change, and ", React.createElement(Strong, null, "no amount of delegation, time off, or strategy adjustment seems to touch it"), ". The work gets done, the results are there, but something underneath has shifted."), React.createElement(P, null, "For some people it's the ", React.createElement(A, {
+  return React.createElement(SvcPage, null, React.createElement(SvcH1, null, 'Therapy for executives who have done everything right and still feel like something is off'), React.createElement(SvcLead, null, "You're good at your job, and you know it. Somewhere along the way the cost of doing it well changed, and no amount of delegation, time off or strategy seems to touch it."), React.createElement(SvcSection, {
+    title: 'The problem'
+  }, React.createElement(SvcP, null, "The work still gets done and the results are there, but something underneath has shifted. For some people it's the ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/the-loneliness-and-emotional-pressure'
-  }, 'isolation that comes with seniority'), ". For others it's an identity that has slowly become inseparable from output, to the point where slowing down feels dangerous. Or it's the persistent feeling of being one mistake away from losing everything you've built, even though the evidence says otherwise."), React.createElement(P, {
-    last: true
-  }, "These aren't problems that another offsite or another framework will solve. They tend to need a different kind of attention.")), React.createElement(Section, {
-    label: 'What executive therapy is',
-    mob
-  }, React.createElement(P, null, "Executive therapy is psychotherapy for people in senior professional roles. ", React.createElement(Strong, null, "Not coaching with a different label, and not a softer version of clinical work."), " It takes the professional context seriously rather than treating it as background noise, and it goes deeper than performance optimization into the patterns that actually drive behaviour."), React.createElement(P, null, "It looks at things like ", React.createElement(A, {
+  }, 'isolation that comes with seniority'), ". For others, an identity that's become inseparable from output, so slowing down feels dangerous. Or the constant sense of being one mistake from losing everything you've built, even though the evidence says otherwise."), React.createElement(SvcP, null, "Another offsite or framework won't touch these. They need a different kind of attention.")), React.createElement(SvcSection, {
+    title: 'What executive therapy is'
+  }, React.createElement(SvcP, null, "Psychotherapy for people in senior roles. It isn't coaching with a therapy label or a softer version of clinical work. It takes the professional context seriously instead of treating it as background noise, and goes past performance optimisation into the patterns that actually drive behaviour."), React.createElement(SvcP, null, "It looks at ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/who-are-you-if-you-are-not-crushing'
-  }, 'why identity becomes inseparable from output'), ", why success doesn't settle the internal question it was supposed to answer, and why certain interpersonal dynamics at work keep repeating."), React.createElement(P, {
-    last: true
-  }, "The difference between an executive therapist and a general therapist is mostly context. If your therapist needs half the session just to understand what happened in your week, that's time spent on orientation rather than the actual work.")), React.createElement(Section, {
-    label: 'How I work',
-    mob
-  }, React.createElement(P, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS. I've led growth strategy at startups and inside ", React.createElement(A, {
+  }, 'why identity becomes inseparable from output'), ", why success doesn't settle the question it was supposed to answer, and why certain dynamics at work keep repeating. The difference from a general therapist is mostly context. If your therapist needs half the session to understand your week, that's time spent orienting rather than working.")), React.createElement(SvcSection, {
+    title: 'How I work'
+  }, React.createElement(SvcP, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS. I've led growth strategy at startups and inside ", React.createElement(A, {
     href: 'https://www.ibm.com'
-  }, 'IBM'), "'s enterprise portfolio, and I've ", React.createElement(A, {
+  }, 'IBM'), "'s enterprise portfolio, and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advised 500+ companies'), " on the kind of work my clients carry into sessions every week."), React.createElement(P, null, React.createElement(Strong, null, "That means I already understand the environment you're operating in."), " We don't have to spend time on context-setting, which lets us get to the real work faster."), React.createElement(P, null, "So the work runs on two tracks at once. Sometimes the problem is genuinely business — a decision, a team, a strategy call — and we work it as advisory. Sometimes it's the pattern underneath: why identity fused with output, why slowing down feels dangerous. Often it's both, and part of the job is telling which one you're actually dealing with."), React.createElement(P, null, "A lot of it is what I call strategic detachment: learning to play the professional roles, handle pressure, and navigate business dynamics without turning every interaction into a referendum on your worth. The goal isn't less ambition. It's ambition that finally feels fulfilling."), React.createElement(P, {
-    last: true
-  }, "I write about the psychology of ambition and performance at ", React.createElement(A, {
+  }, 'advised 500+ companies'), " on the kind of work my clients carry into sessions. ", React.createElement(Strong, null, "So I already understand the environment you're operating in"), ", and we skip the context-setting."), React.createElement(SvcP, null, "The work runs on two tracks. Sometimes the problem is genuinely business, a decision or a team or a strategy call, and we work it as advisory. Sometimes it's the pattern underneath: why identity fused with output, why slowing down feels dangerous. Often it's both, and part of the job is telling which one you're dealing with."), React.createElement(SvcP, null, "A lot of it is strategic detachment: playing the professional roles and handling pressure without turning every interaction into a referendum on your worth. You keep the ambition. What changes is that it stops running on the fear of being found out."), React.createElement(SvcP, null, "I write about the psychology of ambition and performance at ", React.createElement(A, {
     href: 'https://undisguised.io'
-  }, 'Undisguised'), " (5,000+ subscribers). The writing explores the patterns. The private work is where we actually address them.")), React.createElement(Section, {
-    label: 'Who this is for',
-    mob
-  }, React.createElement(P, null, "Founders, VPs, directors, and senior ICs in tech. People who are doing well by any external measure and still feel like something isn't working. Some common threads:"), React.createElement(P, null, React.createElement(Strong, null, "Chronic self-doubt alongside strong performance."), " ", React.createElement(A, {
+  }, 'Undisguised'), " (5,000+ subscribers). The writing explores the patterns; the private work is where we address them.")), React.createElement(SvcSection, {
+    title: 'Who this is for'
+  }, React.createElement(SvcP, null, "Founders, VPs, directors and senior ICs in tech who are doing well by any external measure and still feel like something isn't working. Some common threads:"), React.createElement(SvcP, null, React.createElement(Strong, null, "Chronic self-doubt alongside strong performance."), " ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/the-parent-archetypes-creating-high'
   }, 'Achievement patterns tied to early approval-seeking'), " that were never examined. Decision paralysis that isn't really about the decision. Burnout that rest doesn't fix. ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/the-high-cost-of-endless-pondering'
-  }, 'Overthinking that has become a default setting'), " rather than a useful tool."), React.createElement(P, {
-    last: true
-  }, "If you're used to solving problems through effort and analysis, and this particular one isn't responding to either, it might be worth a conversation.")), React.createElement(Section, {
-    label: 'How it works',
-    mob
-  }, React.createElement(P, null, "All sessions are ", React.createElement(Strong, null, "remote, one-on-one, and confidential"), ". Most clients are across Europe and the US. Sessions run weekly or biweekly."), React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We use it to figure out what's actually going on and whether working together makes sense. If it doesn't, I'll say so."), React.createElement('div', {
-    style: {
-      marginTop: '.5rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Common questions',
-    mob
-  }, React.createElement('div', null, React.createElement(FaqItem, {
-    q: 'What is executive therapy, exactly?'
-  }, React.createElement(P, {
-    last: true
-  }, "Psychotherapy for people in leadership and senior roles. It goes beyond performance optimization into the patterns and internal dynamics that shape how you lead, make decisions, and relate to others. It works best when the therapist understands the professional context, not just the clinical side.")), React.createElement(FaqItem, {
-    q: 'How is this different from executive coaching?'
-  }, React.createElement(P, {
-    last: true
-  }, "Coaching tends to focus on skills and strategy. Therapy works with what's underneath: why you're stuck, why certain patterns keep repeating, why approaches that used to work have stopped working. ", React.createElement(A, {
-    href: 'https://www.undisguised.io/p/the-coaching-industrys-credibility'
-  }, 'A lot of what gets called coaching'), " actually needs therapeutic depth to address properly.")), React.createElement(FaqItem, {
-    q: "I'm not sure if I need therapy or coaching. How do I decide?"
-  }, React.createElement(P, {
-    last: true
-  }, "If the challenge is situational and skill-based, coaching is usually enough. If the same patterns keep appearing across different roles, relationships, and decisions, and ", React.createElement(A, {
-    href: 'https://www.undisguised.io/p/what-doubt-is-actually-protecting'
-  }, 'you suspect the real obstacle is internal'), ", that's more likely therapy territory. Starting with therapy often makes later coaching more useful.")), React.createElement(FaqItem, {
-    q: 'Can analytical people benefit from therapy?'
-  }, React.createElement(P, {
-    last: true
-  }, React.createElement(A, {
-    href: 'https://www.undisguised.io/p/self-analysis-as-a-meta-way-to-maintain'
-  }, 'Self-analysis can become a way to maintain control'), " rather than a path to change. Good therapy works with that pattern rather than being fooled by it.")), React.createElement(FaqItem, {
-    q: 'Is this available remotely?'
-  }, React.createElement(P, {
-    last: true
-  }, "Yes. All sessions are online. Most clients prefer it for flexibility and privacy.")))), React.createElement(Testimonials, {
+  }, 'Overthinking that has become a default setting'), " rather than a tool."), React.createElement(SvcP, null, "If you solve problems through effort and analysis, and this one isn't responding to either, it might be worth a conversation.")), React.createElement(SvcSection, {
+    title: 'How it works'
+  }, React.createElement(SvcP, null, "All sessions are ", React.createElement(Strong, null, "remote, one-on-one and confidential"), ". Most clients are across Europe and the US, weekly or biweekly. It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's going on and whether working together makes sense. If it doesn't, I'll say so."), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →'))), React.createElement(SvcSection, {
+    title: 'Common questions'
+  }, React.createElement(SvcFaq, {
+    items: [{
+      q: 'What is executive therapy, exactly?',
+      a: "Psychotherapy for people in leadership and senior roles. It goes past performance optimisation into the patterns and internal dynamics that shape how you lead, decide and relate to others. It works best when the therapist understands the professional context, not just the clinical side."
+    }, {
+      q: 'How is this different from executive coaching?',
+      a: [["Coaching tends to focus on skills and strategy. Therapy works with what's underneath: why you're stuck, why patterns keep repeating, why approaches that used to work have stopped. ", React.createElement(A, {
+        href: 'https://www.undisguised.io/p/the-coaching-industrys-credibility'
+      }, 'A lot of what gets called coaching'), " actually needs therapeutic depth to address properly."]]
+    }, {
+      q: "I'm not sure if I need therapy or coaching. How do I decide?",
+      a: [["If the challenge is situational and skill-based, coaching is usually enough. If the same patterns keep appearing across roles, relationships and decisions, and ", React.createElement(A, {
+        href: 'https://www.undisguised.io/p/what-doubt-is-actually-protecting'
+      }, 'you suspect the real obstacle is internal'), ", that's more likely therapy territory. Starting with therapy often makes later coaching more useful."]]
+    }, {
+      q: 'Can analytical people benefit from therapy?',
+      a: [[React.createElement(A, {
+        href: 'https://www.undisguised.io/p/self-analysis-as-a-meta-way-to-maintain'
+      }, 'Self-analysis can become a way to maintain control'), " rather than a path to change. Good therapy works with that pattern rather than being fooled by it."]]
+    }, {
+      q: 'Is this available remotely?',
+      a: "Yes. All sessions are online, and most clients prefer it for flexibility and privacy."
+    }]
+  })), React.createElement(Testimonials, {
     mob,
     items: [{
-      q: "One of the most useful things is that Aggelos actually understands the environment I work in. I don\u2019t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than \u201cfollow your values.\u201d He understands the game, but he also notices what the game is doing to me.",
+      q: "One of the most useful things is that Aggelos actually understands the environment I work in. I don’t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than “follow your values.” He understands the game, but he also notices what the game is doing to me.",
       w: "Anonymous client, Senior operator"
     }, {
       q: "Aggelos is direct. He will tell me when I am avoiding something or constructing a very intelligent explanation for why I cannot act. But I have never experienced his directness as judgement. There is enough trust between us that he can challenge me properly, which is exactly what I needed.",
@@ -3044,20 +2984,7 @@ function ExecTherapyPage() {
       q: "I came in expecting a fairly standard coaching conversation. Within the first session, Aggelos understood both the professional problem and the emotional mechanism underneath it. He was warm, but very straightforward, and gave me a way of looking at the situation that I had not considered before. I left with more than advice. I left with a more accurate problem.",
       w: "Anonymous client, Senior professional"
     }]
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Next step',
-    mob
-  }, React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We use it to figure out what's going on and whether working together makes sense."), React.createElement('div', {
-    style: {
-      marginTop: '.5rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement(RelatedLinks, {
+  }), React.createElement(RelatedLinks, {
     mob,
     items: [{
       href: '/1-to-1/',
@@ -3069,96 +2996,54 @@ function ExecTherapyPage() {
       href: '/imposter-syndrome-therapy/',
       label: 'Imposter syndrome →'
     }]
-  }), React.createElement(SiteFooter, {
-    mob
   }));
 }
 
 // ─── THERAPY FOR FOUNDERS ────────────────────────────────────────────────────
 function FoundersTherapyPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? {
-    ...pageStyle
-  } : widePageStyle;
-  const mobSection = mob ? {
-    display: 'block',
-    marginBottom: '2rem'
-  } : sectionStyle;
-  const mobH2 = mob ? {
-    ...h2Style,
-    paddingBottom: '.4rem',
-    display: 'block'
-  } : h2Style;
-  const mobH1 = mob ? {
-    ...h1Style,
-    fontSize: '20px'
-  } : h1Style;
-  return React.createElement('main', {
-    style: mobPage
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem'
-    }
-  }, 'Therapy for founders who have no one to be honest with about what this actually costs'), React.createElement(Section, {
-    label: 'The founder problem',
-    mob
-  }, React.createElement(P, null, "There's a ", React.createElement(A, {
+  return React.createElement(SvcPage, null, React.createElement(SvcH1, null, 'Therapy for founders who have no one to be honest with about what this actually costs'), React.createElement(SvcLead, null, "A private, confidential therapeutic relationship for founders carrying the weight of the role, from someone who has sat on both sides of the table."), React.createElement(SvcSection, {
+    title: 'The founder problem'
+  }, React.createElement(SvcP, null, "There's a ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/the-loneliness-and-emotional-pressure'
-  }, 'particular kind of isolation that founders experience'), " that's different from ordinary loneliness. You're surrounded by people who depend on you, and ", React.createElement(Strong, null, "precisely because they depend on you, none of them can be the person you're fully honest with"), " about what it costs to hold everything together."), React.createElement(P, null, "So you perform. Certainty in board meetings, calm in all-hands, optimism for your co-founder. Over time the gap between what you project and what you actually feel becomes its own source of exhaustion, sometimes the biggest one."), React.createElement(P, {
-    last: true
-  }, "This isn\u2019t something coaching or \u201cmental fitness\u201d apps are designed to address. It\u2019s a structural psychological burden that comes with the role, and it usually needs proper therapeutic work.")), React.createElement(Section, {
-    label: 'What I see in founders',
-    mob
-  }, React.createElement(P, null, "Having worked with founders both as a ", React.createElement(A, {
+  }, 'particular kind of isolation founders live with'), ", different from ordinary loneliness. You're surrounded by people who depend on you, and ", React.createElement(Strong, null, "precisely because they depend on you, none of them can be the person you're fully honest with"), " about what it costs to hold everything together."), React.createElement(SvcP, null, "So you perform. Certainty in board meetings, calm in all-hands, optimism for your co-founder. Over time the gap between what you project and what you feel becomes its own exhaustion, sometimes the biggest one."), React.createElement(SvcP, null, "Coaching and mental-fitness apps aren't built for this. It's a structural burden that comes with the role, and it usually needs proper therapeutic work.")), React.createElement(SvcSection, {
+    title: 'What I see in founders'
+  }, React.createElement(SvcP, null, "Having worked with founders as a ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'growth advisor'), " and as a therapist, the patterns are fairly consistent. ", React.createElement(Strong, null, "Identity tends to fuse completely with the company"), " — when it's up you're up, when it's down you disappear into it. There's often no stable sense of self that exists independently of the last metric you checked."), React.createElement(P, {
-    last: true
-  }, "Decision fatigue becomes chronic, and it stops being about the decisions themselves. It's about the weight of being the person who has to make them. ", React.createElement(A, {
+  }, 'growth advisor'), " and as a therapist, the patterns are consistent. ", React.createElement(Strong, null, "Identity fuses with the company."), " When it's up you're up; when it's down you disappear into it. There's often no stable sense of self independent of the last metric you checked."), React.createElement(SvcP, null, "Decision fatigue turns chronic and stops being about the decisions themselves; it's the weight of being the one who has to make them. ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/the-high-cost-of-endless-pondering'
-  }, 'Overthinking becomes a default mode'), " that feels productive but mostly produces exhaustion. Relationships suffer, not because you don't care, but because ", React.createElement(Strong, null, "there's nothing left after the company takes its share"), ".")), React.createElement(Section, {
-    label: 'Why I understand this',
-    mob
-  }, React.createElement(P, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS, including advising 500+ companies on growth. I've been on the other side of the table where you set targets, defend strategy, and absorb pressure from every direction."), React.createElement(P, null, "When a client comes in carrying the weight of a down round or a co-founder conflict, ", React.createElement(Strong, null, "I don't need them to explain the context"), ". I know what that room feels like. We skip the background and go straight to the work."), React.createElement(P, {
-    last: true
-  }, "So the work runs on two tracks at once. Sometimes what you bring is the business itself — the decision, the co-founder conflict, the strategy — and we work it directly. Sometimes it's the weight underneath: the identity fusion, the isolation, the pattern that keeps repeating. Usually it's both, tangled together, and part of the work is telling them apart.")), React.createElement(Section, {
-    label: 'How it works',
-    mob
-  }, React.createElement(P, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one, and confidential"), ". Nothing goes to your board, your investors, or your team. This isn't coaching attached to your company. It's a private therapeutic relationship."), React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We use it to figure out what's going on and whether I'm the right person for it."), React.createElement('div', {
-    style: {
-      marginTop: '.5rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Common questions',
-    mob
+  }, 'Overthinking becomes a default mode'), " that feels productive but mostly produces exhaustion. Relationships suffer, not because you don't care, but because ", React.createElement(Strong, null, "there's nothing left after the company takes its share"), ".")), React.createElement(SvcSection, {
+    title: 'Why I understand this'
+  }, React.createElement(SvcP, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS, including advising 500+ companies on growth. I've been on the other side of the table, setting targets, defending strategy and absorbing pressure from every direction."), React.createElement(SvcP, null, "When a client comes in carrying a down round or a co-founder conflict, ", React.createElement(Strong, null, "I don't need them to explain the context"), ". I know what that room feels like, so we skip the background and go straight to the work."), React.createElement(SvcP, null, "The work runs on two tracks. Sometimes what you bring is the business itself, a decision or a co-founder conflict or the strategy, and we work it directly. Sometimes it's the weight underneath: the identity fusion, the isolation, the pattern that keeps repeating. Usually it's both, tangled together, and part of the work is telling them apart.")), React.createElement(SvcSection, {
+    title: 'How it works'
+  }, React.createElement(SvcP, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one and confidential"), ". Nothing goes to your board, your investors or your team. This is a private therapeutic relationship, not coaching attached to your company. It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's going on and whether I'm the right person for it."), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →'))), React.createElement(SvcSection, {
+    title: 'Common questions'
   }, React.createElement('div', null, React.createElement(FaqItem, {
     q: 'Why do founders need a specific kind of therapy?'
   }, React.createElement(P, {
     last: true
-  }, "Because the psychological environment of founding is quite specific. The isolation is structural, the identity fusion is usually total, and the pressure comes from multiple directions at once. A therapist who hasn't operated inside that environment will likely either treat it as generic stress or miss what's actually going on underneath the performance.")), React.createElement(FaqItem, {
+  }, "The psychological environment of founding is specific. The isolation is structural, the identity fusion is usually total, and pressure comes from several directions at once. A therapist who hasn't operated inside that environment tends to treat it as generic stress or miss what's going on underneath the performance.")), React.createElement(FaqItem, {
     q: 'What do founders typically bring to therapy?'
   }, React.createElement(P, {
     last: true
-  }, "Isolation that gets worse as the company grows. Identity that's become indistinguishable from the company's performance. Chronic decision fatigue. Relationship strain. ", React.createElement(A, {
+  }, "Isolation that gets worse as the company grows. Identity indistinguishable from the company's performance. Chronic decision fatigue. Relationship strain. ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/youre-creating-the-exact-problem'
-  }, 'Self-defeating patterns'), " that keep producing the outcomes they're trying to avoid. Burnout that doesn't respond to rest because the source is emotional weight rather than hours worked.")), React.createElement(FaqItem, {
+  }, 'Self-defeating patterns'), " that keep producing the outcomes they're trying to avoid. Burnout that rest doesn't fix, because the source is emotional weight rather than hours worked.")), React.createElement(FaqItem, {
     q: 'Can I do this while running a company?'
   }, React.createElement(P, {
     last: true
-  }, "Yes. Most founder clients do weekly or biweekly sessions remotely. The more relevant question is usually whether the cost of not doing it — the reactive decisions, the strained relationships, the mounting internal pressure — is something your company can keep absorbing.")), React.createElement(FaqItem, {
+  }, "Yes. Most founder clients do weekly or biweekly sessions remotely. The more useful question is whether the cost of not doing it, the reactive decisions and strained relationships and mounting pressure, is something your company can keep absorbing.")), React.createElement(FaqItem, {
     q: 'Is this completely confidential?'
   }, React.createElement(P, {
     last: true
   }, "Yes. It's a private therapeutic relationship governed by professional ethics. Nothing is shared with anyone.")))), React.createElement(Testimonials, {
     mob,
     items: [{
-      q: "I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don\u2019t have to translate one world into the other for him.",
+      q: "I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don’t have to translate one world into the other for him.",
       w: "Anonymous client, Founder"
     }, {
       q: "There are no motivational speeches or generic frameworks pasted onto every situation. Aggelos pays attention to how I specifically operate. He remembers the contradictions, notices when I change the story and asks the question I was hoping we could avoid. Annoying at times, but usually accurate.",
@@ -3167,20 +3052,7 @@ function FoundersTherapyPage() {
       q: "I did not want somebody to tell me to work less, lower my standards or become less ambitious. Aggelos understood that immediately. Our work has been about keeping the part of me that wants to build and achieve, while becoming less dependent on winning, comparison and external approval to feel okay. That distinction has been very important to me.",
       w: "Anonymous client, Founder and executive"
     }]
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Next step',
-    mob
-  }, React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We figure out what's going on and whether working together makes sense."), React.createElement('div', {
-    style: {
-      marginTop: '.5rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement(RelatedLinks, {
+  }), React.createElement(RelatedLinks, {
     mob,
     items: [{
       href: '/1-to-1/',
@@ -3192,110 +3064,65 @@ function FoundersTherapyPage() {
       href: '/therapy-for-executives/',
       label: 'Therapy for executives →'
     }]
-  }), React.createElement(SiteFooter, {
-    mob
   }));
 }
 
 // ─── IMPOSTER SYNDROME ───────────────────────────────────────────────────────
 function ImposterPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? {
-    ...pageStyle
-  } : widePageStyle;
-  const mobSection = mob ? {
-    display: 'block',
-    marginBottom: '2rem'
-  } : sectionStyle;
-  const mobH2 = mob ? {
-    ...h2Style,
-    paddingBottom: '.4rem',
-    display: 'block'
-  } : h2Style;
-  const mobH1 = mob ? {
-    ...h1Style,
-    fontSize: '20px'
-  } : h1Style;
-  return React.createElement('main', {
-    style: mobPage
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem'
-    }
-  }, 'You can see the evidence that you\u2019re good at this. You just can\u2019t feel it.'), React.createElement(Section, {
-    label: 'The pattern',
-    mob
-  }, React.createElement(P, null, "The promotions confirm it. The salary confirms it. You're not unaware of the evidence. But ", React.createElement(Strong, null, "there's a gap between knowing you're competent and actually feeling it"), ", and that gap tends to fill with constant proof-seeking: another win, another round of validation that settles things for a day or two before the doubt comes back."), React.createElement(P, {
-    last: true
-  }, React.createElement(A, {
+  return React.createElement(SvcPage, null, React.createElement(SvcH1, null, 'You can see the evidence that you’re good at this. You just can’t feel it.'), React.createElement(SvcLead, null, "Imposter syndrome therapy for senior professionals who have every proof of competence and still feel like a fraud."), React.createElement(SvcSection, {
+    title: 'The pattern'
+  }, React.createElement(SvcP, null, "The promotions confirm it. The salary confirms it. You're not unaware of the evidence, but ", React.createElement(Strong, null, "there's a gap between knowing you're competent and feeling it"), ", and that gap fills with constant proof-seeking: another win, another round of validation that settles things for a day or two before the doubt comes back."), React.createElement(SvcP, null, React.createElement(A, {
     href: 'https://www.undisguised.io/p/the-parent-archetypes-creating-high'
-  }, 'For a lot of high performers, this pattern was wired early.'), " Achievement became the way to earn approval or safety, and a conditional sense of self-worth got established long before the career started. Because the next result always comes and always proves insufficient, the doubt doesn't resolve. It just gets more expensive to manage over time.")), React.createElement(Section, {
-    label: 'Why it gets worse with seniority',
-    mob
-  }, React.createElement(P, null, "Imposter syndrome doesn't tend to improve as you advance. ", React.createElement(Strong, null, "The stakes get higher, the visibility increases, and the margin for error feels thinner."), " At junior levels you can hide behind a team or a manager. At VP level and above, your decisions are visible and your failures have your name on them."), React.createElement(P, {
-    last: true
-  }, React.createElement(A, {
+  }, 'For a lot of high performers, this was wired early.'), " Achievement became the way to earn approval or safety, and a conditional sense of worth got established long before the career started. Because the next result always comes and always proves insufficient, the doubt doesn't resolve; it just gets more expensive to manage.")), React.createElement(SvcSection, {
+    title: 'Why it gets worse with seniority'
+  }, React.createElement(SvcP, null, "Imposter syndrome rarely improves as you advance. ", React.createElement(Strong, null, "The stakes get higher, visibility increases, and the margin for error feels thinner."), " At junior levels you can hide behind a team or a manager. At VP level and above, your decisions are visible and your failures have your name on them."), React.createElement(SvcP, null, React.createElement(A, {
     href: 'https://www.undisguised.io/p/who-are-you-if-you-are-not-crushing'
-  }, 'When identity is enmeshed with constant success'), ", even normal professional setbacks start to feel existential. A missed quarter isn't just a missed quarter. It feels like evidence that the fraud has finally been caught. The rational part of you knows this is distorted, but the emotional system doesn't care about evidence.")), React.createElement(Section, {
-    label: 'What doesn\u2019t work',
-    mob
-  }, React.createElement(P, null, "Affirmations. Achievement logs. \"Just remember how far you've come.\" These approaches treat imposter syndrome as a thinking problem, but ", React.createElement(Strong, null, "it's a feeling problem with roots that usually predate the career by decades"), ". ", React.createElement(A, {
+  }, 'When identity is enmeshed with constant success'), ", even normal setbacks feel existential. A missed quarter stops being a missed quarter and starts feeling like evidence the fraud has finally been caught. The rational part of you knows this is distorted, but the emotional system doesn't care about evidence.")), React.createElement(SvcSection, {
+    title: 'What doesn’t work'
+  }, React.createElement(SvcP, null, "Affirmations, achievement logs and \"just remember how far you've come\" all treat imposter syndrome as a thinking problem. ", React.createElement(Strong, null, "It's a feeling problem, with roots that usually predate the career by decades."), " ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/self-analysis-as-a-meta-way-to-maintain'
-  }, 'For analytical people, self-analysis often becomes another way to maintain control'), " rather than a genuine path to change."), React.createElement(P, {
-    last: true
-  }, "The doubt is real. The story it tells you about what it means is not. Therapy works with that distinction at a level that self-help and coaching don't typically reach.")), React.createElement(Section, {
-    label: 'How I work with this',
-    mob
-  }, React.createElement(P, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, {
+  }, 'For analytical people, self-analysis often becomes another way to maintain control'), " rather than a path to change."), React.createElement(SvcP, null, "The doubt is real; the story it tells you about what it means is not. Therapy works with that distinction at a level self-help and coaching rarely reach.")), React.createElement(SvcSection, {
+    title: 'How I work with this'
+  }, React.createElement(SvcP, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advising 500+ companies on growth'), ". I know the environment that amplifies imposter syndrome in tech: the pace, the ambiguity, the constant comparison."), React.createElement(P, null, React.createElement(Strong, null, "We work with the root pattern rather than the symptoms."), " That means going beyond the current role to understand where the conditional sense of worth was established, why it persists, and what it would take to build a sense of self that doesn't depend entirely on the next result."), React.createElement(P, null, "Insight alone rarely shifts this — most high performers have already understood it intellectually. So we work at two levels at once: the real professional situation in front of you, and the older pattern that keeps the doubt alive no matter what the evidence says. Sometimes the answer is a concrete business move, sometimes it's the deeper work, and often it's both."), React.createElement(P, {
-    last: true
-  }, "I write about this at ", React.createElement(A, {
+  }, 'advising 500+ companies on growth'), ". I know the environment that amplifies imposter syndrome in tech: the pace, the ambiguity, the constant comparison."), React.createElement(SvcP, null, React.createElement(Strong, null, "We work with the root pattern, not the symptoms."), " That means going past the current role to understand where the conditional worth was established, why it persists, and what it would take to build a sense of self that doesn't depend on the next result."), React.createElement(SvcP, null, "Insight alone rarely shifts this, because most high performers have already understood it intellectually. So we work at two levels: the professional situation in front of you, and the older pattern that keeps the doubt alive whatever the evidence says. Sometimes the answer is a concrete business move, sometimes the deeper work, often both."), React.createElement(SvcP, null, "I write about this at ", React.createElement(A, {
     href: 'https://undisguised.io'
-  }, 'Undisguised'), ". The writing explores the patterns. The private work is where they actually move.")), React.createElement(Section, {
-    label: 'Start here',
-    mob
-  }, React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We figure out what's driving the pattern and whether I'm the right person to work on it with you."), React.createElement('div', {
-    style: {
-      marginTop: '.5rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Common questions',
-    mob
+  }, 'Undisguised'), "; the private work is where the patterns actually move.")), React.createElement(SvcSection, {
+    title: 'Start here'
+  }, React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's driving the pattern and whether I'm the right person to work on it with you."), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →'))), React.createElement(SvcSection, {
+    title: 'Common questions'
   }, React.createElement('div', null, React.createElement(FaqItem, {
     q: 'Is imposter syndrome a real diagnosis?'
   }, React.createElement(P, {
     last: true
-  }, "It's not a clinical diagnosis in the DSM. It's a persistent pattern of doubting your accomplishments despite clear evidence of competence. In senior professionals, it tends to show up as overwork, avoidance of visibility, difficulty delegating, and a low-grade anxiety that erodes both performance and wellbeing over time.")), React.createElement(FaqItem, {
+  }, "Not a DSM diagnosis, but a persistent pattern of doubting your accomplishments despite clear evidence of competence. In senior professionals it shows up as overwork, avoidance of visibility, difficulty delegating and a low-grade anxiety that erodes performance and wellbeing over time.")), React.createElement(FaqItem, {
     q: 'Why is imposter syndrome so common in high achievers?'
   }, React.createElement(P, {
     last: true
   }, "Often because achievement started as a strategy to earn approval or safety rather than an expression of genuine interest. ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/high-performance-as-a-way-to-get'
-  }, 'High performance becomes a way to get accepted'), " rather than a reflection of who you actually are.")), React.createElement(FaqItem, {
+  }, 'High performance becomes a way to get accepted'), " rather than a reflection of who you are.")), React.createElement(FaqItem, {
     q: 'Can coaching with a therapist actually resolve this?'
   }, React.createElement(P, {
     last: true
-  }, "Yes, though not through reframing or positive self-talk. Effective therapy works with the relational pattern that established the conditional worth in the first place. ", React.createElement(A, {
+  }, "Yes, though not through reframing or positive self-talk. Effective therapy works with the relational pattern that set up the conditional worth in the first place. ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/what-doubt-is-actually-protecting'
-  }, 'Doubt tends to protect you from something'), " even when you can see the evidence clearly, and that protective function needs to be understood before it can change.")), React.createElement(FaqItem, {
+  }, 'Doubt tends to protect you from something'), " even when you can see the evidence clearly, and that function needs to be understood before it can change.")), React.createElement(FaqItem, {
     q: "I know I'm good at my job. Why do I still feel like a fraud?"
   }, React.createElement(P, {
     last: true
-  }, "Because the feeling isn't really about your job. It's about an older emotional system that learned your value is conditional. Your rational mind can process the evidence just fine, but the part of you that drives the doubt operates on different logic.")), React.createElement(FaqItem, {
+  }, "Because the feeling isn't really about your job. It's an older emotional system that learned your value is conditional. Your rational mind processes the evidence fine, but the part that drives the doubt runs on different logic.")), React.createElement(FaqItem, {
     q: 'How is therapeutically-informed coaching different from regular coaching?'
   }, React.createElement(P, {
     last: true
-  }, "Regular coaching usually focuses on managing symptoms: reframing, confidence exercises, tracking achievements. ", React.createElement(A, {
+  }, "Regular coaching usually manages symptoms: reframing, confidence exercises, tracking achievements. ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/the-coaching-industrys-credibility'
-  }, 'A lot of what gets labeled coaching'), " in this space actually requires therapeutic depth. Therapy goes to the source of the pattern rather than helping you cope with it.")))), React.createElement(Testimonials, {
+  }, 'A lot of what gets labeled coaching'), " in this space actually needs therapeutic depth. Therapy goes to the source of the pattern rather than helping you cope with it.")))), React.createElement(Testimonials, {
     mob,
     items: [{
       q: "From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.",
@@ -3307,20 +3134,7 @@ function ImposterPage() {
       q: "I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.",
       w: "Anonymous client, Technology executive"
     }]
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Next step',
-    mob
-  }, React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes and no obligations. We use it to understand what's driving the doubt and whether this is the right approach for you."), React.createElement('div', {
-    style: {
-      marginTop: '.5rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement(RelatedLinks, {
+  }), React.createElement(RelatedLinks, {
     mob,
     items: [{
       href: '/1-to-1/',
@@ -3332,95 +3146,54 @@ function ImposterPage() {
       href: '/executive-burnout-therapy/',
       label: 'Executive burnout →'
     }]
-  }), React.createElement(SiteFooter, {
-    mob
   }));
 }
 
 // ─── BURNOUT PAGE ────────────────────────────────────────────────────────────
 function BurnoutPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? {
-    ...pageStyle
-  } : widePageStyle;
-  const mobSection = mob ? {
-    display: 'block',
-    marginBottom: '2rem'
-  } : sectionStyle;
-  const mobH2 = mob ? {
-    ...h2Style,
-    paddingBottom: '.4rem',
-    display: 'block'
-  } : h2Style;
-  const mobH1 = mob ? {
-    ...h1Style,
-    fontSize: '20px'
-  } : h1Style;
-  return React.createElement('main', {
-    style: mobPage
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem'
-    }
-  }, 'You took the vacation. You came back feeling the same way. The problem probably isn\u2019t the workload.'), React.createElement(Section, {
-    label: 'Executive burnout',
-    mob
-  }, React.createElement(P, null, "The usual advice is to rest more, delegate more, set better boundaries. You've probably tried most of it. Maybe you even took real time off. And within a couple of weeks of returning, ", React.createElement(Strong, null, "the same weight came back"), ", as if it had been waiting for you."), React.createElement(P, null, "That's because burnout in executives often isn't about working too many hours. It's about the emotional cost of the work: carrying chronic responsibility without adequate support, maintaining a version of yourself that takes constant effort, and having an identity so tied to output that stopping feels like disappearing."), React.createElement(P, {
-    last: true
-  }, "Rest doesn't fix that. ", React.createElement(A, {
+  return React.createElement(SvcPage, null, React.createElement(SvcH1, null, 'You took the vacation. You came back feeling the same way. The problem probably isn’t the workload.'), React.createElement(SvcLead, null, "Executive burnout therapy for leaders who rested, came back the same, and suspect the hours were never the real problem."), React.createElement(SvcSection, {
+    title: 'Executive burnout'
+  }, React.createElement(SvcP, null, "The usual advice is to rest more, delegate more, set better boundaries. You've probably tried most of it, maybe even taken real time off. Within a couple of weeks of returning, ", React.createElement(Strong, null, "the same weight came back"), ", as if it had been waiting for you."), React.createElement(SvcP, null, "Executive burnout often has little to do with hours. Its real cost is emotional: carrying chronic responsibility without enough support, maintaining a version of yourself that takes constant effort, and an identity so tied to output that stopping feels like disappearing."), React.createElement(SvcP, null, "Rest doesn't fix that. ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/is-it-post-holiday-anxiety-or-just'
-  }, 'Sometimes what feels like post-holiday anxiety is actually a moment of clarity'), " about how unsustainable the current arrangement has become.")), React.createElement(Section, {
-    label: "What's actually happening"
-  }, React.createElement(P, null, "Executive burnout usually sits on top of older patterns. An inability to stop because ", React.createElement(A, {
+  }, 'Sometimes what feels like post-holiday anxiety is a moment of clarity'), " about how unsustainable the arrangement has become.")), React.createElement(SvcSection, {
+    title: "What's actually happening"
+  }, React.createElement(SvcP, null, "Executive burnout usually sits on top of older patterns: an inability to stop because ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/who-are-you-if-you-are-not-crushing'
-  }, 'identity has become enmeshed with constant output'), ". A relationship with work where ", React.createElement(Strong, null, "your sense of value as a person depends on the next deliverable"), ". Chronic overfunction that started well before this particular role."), React.createElement(P, null, "The cynicism, the emotional flatness, the inability to care about things you used to care about: these aren't character flaws. They're signals that the internal cost of how things are currently set up has exceeded what you can sustain."), React.createElement(P, {
-    last: true
-  }, React.createElement(A, {
+  }, 'identity is enmeshed with constant output'), ", a relationship with work where ", React.createElement(Strong, null, "your value as a person depends on the next deliverable"), ", and chronic overfunction that started well before this role."), React.createElement(SvcP, null, "The cynicism, the emotional flatness, the loss of interest in things you used to care about are signals that the internal cost of the current setup has passed what you can sustain, not character flaws."), React.createElement(SvcP, null, React.createElement(A, {
     href: 'https://www.undisguised.io/p/the-elaborate-performance-of-trying'
-  }, 'A lot of people build elaborate systems of "trying to change"'), " that look productive but function as avoidance. If that sounds familiar, the issue probably isn't willpower. It's that the pattern is serving a function that hasn't been identified.")), React.createElement(Section, {
-    label: 'How I work with this',
-    mob
-  }, React.createElement(P, null, React.createElement(Strong, null, "This work goes to the level of the pattern, not the symptoms."), " We look at what's driving the overwork: what it would mean to stop, what you're avoiding by staying in motion, why the idea of doing less feels threatening rather than freeing."), React.createElement(P, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, {
+  }, 'A lot of people build elaborate systems of "trying to change"'), " that look productive but function as avoidance. If that sounds familiar, the block is rarely willpower; the pattern is serving a function nobody has named yet.")), React.createElement(SvcSection, {
+    title: 'How I work with this'
+  }, React.createElement(SvcP, null, React.createElement(Strong, null, "This work goes to the level of the pattern, not the symptoms."), " We look at what drives the overwork: what it would mean to stop, what you're avoiding by staying in motion, why doing less feels threatening rather than freeing."), React.createElement(SvcP, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advising 500+ companies on growth'), ". I understand the environment well: the always-on culture, the ambiguity, the pressure to appear certain when you're not."), React.createElement(P, {
-    last: true
-  }, "The goal isn't necessarily to make you work less (though that might happen). ", React.createElement(Strong, null, "The goal is a more fulfilling relationship with the work, so it costs less and means more."), " We work on two tracks at once: the practical situation — the role, the load, the decisions you keep postponing — and the pattern underneath that keeps you overfunctioning. Sometimes the fix is a business change, sometimes it's the deeper work, and usually it's both.")), React.createElement(Section, {
-    label: 'Start here',
-    mob
-  }, React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We figure out what's underneath the exhaustion and whether therapy is the right approach."), React.createElement('div', {
-    style: {
-      marginTop: '.5rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Common questions',
-    mob
+  }, 'advising 500+ companies on growth'), ". I understand the environment: the always-on culture, the ambiguity, the pressure to appear certain when you're not."), React.createElement(SvcP, null, "Working less may follow, though the real aim is ", React.createElement(Strong, null, "a relationship with the work that costs less and means more"), ". We run two tracks at once: the practical situation (the role, the load, the decisions you keep postponing) and the pattern underneath that keeps you overfunctioning. Sometimes the fix is a business change, sometimes the deeper work, usually both.")), React.createElement(SvcSection, {
+    title: 'Start here'
+  }, React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's underneath the exhaustion and whether therapy is the right approach."), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →'))), React.createElement(SvcSection, {
+    title: 'Common questions'
   }, React.createElement('div', null, React.createElement(FaqItem, {
     q: "Why doesn't rest fix my burnout?"
   }, React.createElement(P, {
     last: true
-  }, "Usually because the exhaustion isn't caused by hours worked. It's caused by the emotional weight of the work: chronic responsibility, identity tied to performance, and the difficulty of stopping without feeling like you're failing. Rest addresses the symptom. Therapy addresses the structure underneath.")), React.createElement(FaqItem, {
+  }, "Usually because the exhaustion comes from the emotional weight of the work rather than the hours: chronic responsibility, identity tied to performance, and the difficulty of stopping without feeling like you're failing. Rest eases the symptom; therapy addresses the structure underneath.")), React.createElement(FaqItem, {
     q: 'Is burnout a mental health condition?'
   }, React.createElement(P, {
     last: true
-  }, "The WHO classifies it as an occupational phenomenon rather than a medical diagnosis. In practice, it often coexists with anxiety and depression. At senior levels, it tends to reveal longer-running patterns around identity, control, and self-worth that therapy is well suited to address.")), React.createElement(FaqItem, {
+  }, "The WHO classifies it as an occupational phenomenon rather than a medical diagnosis. In practice it often coexists with anxiety and depression, and at senior levels it tends to reveal longer-running patterns around identity, control and self-worth that therapy is well suited to address.")), React.createElement(FaqItem, {
     q: "How do I know if I'm burned out or just tired?"
   }, React.createElement(P, {
     last: true
-  }, "Tiredness resolves with rest. Burnout doesn't. If you've taken time off and come back feeling the same way, the exhaustion is probably structural. Other signals: cynicism about work you used to care about, emotional flatness, difficulty engaging with decisions that aren't urgent.")), React.createElement(FaqItem, {
+  }, "Tiredness resolves with rest; burnout doesn't. If you've taken time off and come back feeling the same, the exhaustion is probably structural. Other signals: cynicism about work you used to care about, emotional flatness, difficulty engaging with anything that isn't urgent.")), React.createElement(FaqItem, {
     q: 'Can I do this while still in the job?'
   }, React.createElement(P, {
     last: true
-  }, "Yes, and that's usually what happens. The point isn't to quit. It's to understand ", React.createElement(A, {
+  }, "Yes, and that's usually what happens. The point isn't to quit but to understand ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/youre-creating-the-exact-problem'
   }, "what's creating the problem"), " and change your relationship to the work so the cost comes down.")), React.createElement(FaqItem, {
-    q: "I've tried regular coaching, meditation, and boundary-setting. Why didn't they work?"
+    q: "I've tried coaching, meditation and boundary-setting. Why didn't they work?"
   }, React.createElement(P, {
     last: true
   }, "Because they operate at the surface. If the burnout is driven by a deeper pattern, like identity fusion with output or ", React.createElement(A, {
@@ -3437,20 +3210,7 @@ function BurnoutPage() {
       q: "The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.",
       w: "Anonymous client, Senior tech professional"
     }]
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Next step',
-    mob
-  }, React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We figure out what's going on and whether this is the right approach."), React.createElement('div', {
-    style: {
-      marginTop: '.5rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement(RelatedLinks, {
+  }), React.createElement(RelatedLinks, {
     mob,
     items: [{
       href: '/1-to-1/',
@@ -3462,131 +3222,73 @@ function BurnoutPage() {
       href: '/career-transition-therapy/',
       label: 'Career transition →'
     }]
-  }), React.createElement(SiteFooter, {
-    mob
   }));
 }
 
 // ─── CAREER TRANSITION ───────────────────────────────────────────────────────
 function CareerTransitionPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? {
-    ...pageStyle
-  } : widePageStyle;
-  const mobSection = mob ? {
-    display: 'block',
-    marginBottom: '2rem'
-  } : sectionStyle;
-  const mobH2 = mob ? {
-    ...h2Style,
-    paddingBottom: '.4rem',
-    display: 'block'
-  } : h2Style;
-  const mobH1 = mob ? {
-    ...h1Style,
-    fontSize: '20px'
-  } : h1Style;
-  return React.createElement('main', {
-    style: mobPage
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '3rem'
-    }
-  }, 'The next role isn\u2019t the hard part. Figuring out who you are without this one is.'), React.createElement(Section, {
-    label: 'The real transition',
-    mob
-  }, React.createElement(P, null, "You've spent years building a career that defines how people see you and, more importantly, how you see yourself. Now something is shifting. Maybe you're thinking about leaving. Maybe you were pushed out. Maybe you already made the move and ", React.createElement(Strong, null, "expected relief but got disorientation instead"), "."), React.createElement(P, null, "The strategic questions — what industry, what role, what compensation — are usually the easier part. The harder question is the one most people around you aren't equipped to help with: ", React.createElement(Strong, null, "who are you when the title, the team, and the daily structure that organised your sense of self are gone?")), React.createElement(P, {
-    last: true
-  }, React.createElement(A, {
+  return React.createElement(SvcPage, null, React.createElement(SvcH1, null, 'The next role isn’t the hard part. Figuring out who you are without this one is.'), React.createElement(SvcLead, null, "Career transition therapy for senior professionals, where the strategy is the easy part and identity is the real work."), React.createElement(SvcSection, {
+    title: 'The real transition'
+  }, React.createElement(SvcP, null, "You've spent years building a career that defines how people see you and, more to the point, how you see yourself. Now something is shifting. Maybe you're thinking about leaving, maybe you were pushed out, maybe you already made the move and ", React.createElement(Strong, null, "expected relief but got disorientation instead"), "."), React.createElement(SvcP, null, "The strategic questions (industry, role, compensation) are usually the easier part. The harder one is the one most people around you can't help with: ", React.createElement(Strong, null, "who are you when the title, the team and the daily structure that organised your sense of self are gone?")), React.createElement(SvcP, null, React.createElement(A, {
     href: 'https://www.undisguised.io/p/youre-just-trading-one-type-of-friction'
-  }, 'A lot of people assume the grass is greener on the other side of the corporate/startup divide.'), " They trade one set of difficulties for another and wonder why the relief didn't last. Usually the problem wasn't the specific job. It was the relationship to work itself, and that comes with you.")), React.createElement(Section, {
-    label: 'What makes this hard',
-    mob
-  }, React.createElement(P, null, "At senior levels, your career isn't just what you do. ", React.createElement(Strong, null, "It's the structure that holds a lot of your identity together."), " Your social world, your daily rhythm, your sense of competence — these are all built around the role. When that structure changes, everything it was quietly holding in place starts to shift too."), React.createElement(P, null, "If you were laid off, the experience often produces a grief response you didn't expect, because it's not just about the job. It's about the version of yourself that existed inside it. If you're choosing to leave, the paralysis usually isn't about the options. ", React.createElement(A, {
+  }, 'A lot of people assume the grass is greener across the corporate/startup divide.'), " They trade one set of difficulties for another and wonder why the relief didn't last. Usually the problem was the relationship to work itself, and that comes with you.")), React.createElement(SvcSection, {
+    title: 'What makes this hard'
+  }, React.createElement(SvcP, null, "At senior levels your career is ", React.createElement(Strong, null, "the structure that holds a lot of your identity together"), ". Your social world, your daily rhythm, your sense of competence are all built around the role. When that structure changes, everything it was quietly holding in place starts to shift."), React.createElement(SvcP, null, "If you were laid off, the grief often surprises you, because it's about the version of yourself that lived inside the role, not only the job. If you're choosing to leave, the paralysis rarely comes from the options. ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/what-doubt-is-actually-protecting'
-  }, 'The doubt is protecting you from something'), ", usually the fear of what you'll find on the other side."), React.createElement(P, {
-    last: true
-  }, "And if you already made the move and feel lost rather than free, that's not a failure. It's the predictable result of removing a structure without understanding what it was compensating for.")), React.createElement(Section, {
-    label: 'Why a therapist, not a career coach',
-    mob
-  }, React.createElement(P, null, "Career coaching helps you figure out what to do next. ", React.createElement(Strong, null, "Therapeutically-informed coaching helps you understand why you're stuck"), ", what the transition is actually about at a deeper level, and what needs to shift internally for any external change to hold."), React.createElement(P, null, "Without that internal work, people tend to recreate the same patterns in new settings. ", React.createElement(A, {
+  }, 'The doubt is protecting you from something'), ", usually the fear of what you'll find on the other side."), React.createElement(SvcP, null, "And feeling lost rather than free after the move is the predictable result of removing a structure without understanding what it was compensating for, not a failure.")), React.createElement(SvcSection, {
+    title: 'Why a therapist, not a career coach'
+  }, React.createElement(SvcP, null, "Career coaching helps you figure out what to do next. ", React.createElement(Strong, null, "Therapeutically-informed coaching helps you understand why you're stuck"), ", what the transition is really about, and what needs to shift internally for any external change to hold. Without that, people recreate the same patterns in new settings and ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/youre-creating-the-exact-problem'
-  }, 'They end up building the same problem in a different context.'), ""), React.createElement(P, null, "I'm a business growth advisor and licensed psychotherapist who made this kind of transition myself — from 18+ years in B2B SaaS and ", React.createElement(A, {
+  }, 'build the same problem in a different context'), "."), React.createElement(SvcP, null, "I'm a business growth advisor and licensed psychotherapist who made this kind of transition myself, from 18+ years in B2B SaaS and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'growth advisory'), " to clinical practice. I know what it's like to leave an identity that works, and I know the difference between doing that reactively and doing it with some clarity about what's actually driving the change."), React.createElement(P, {
-    last: true
-  }, "So the work runs on two tracks at once: the practical side of the move — options, risk, the actual plan — and what makes it hard underneath, the identity and worth questions the strategy can't touch. Sometimes you mostly need the plan, sometimes the deeper work, often both. The aim isn't just the next role. It's a working life that feels genuinely fulfilling, not just impressive.")), React.createElement(Section, {
-    label: 'Who this is for',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, React.createElement(Strong, null, "Senior professionals considering a major career change"), " but paralysed by the decision. Executives who were laid off and are dealing with more than just the job search. Leaders who made the move and feel more lost than free. People who ", React.createElement(Strong, null, "keep almost leaving but pull back every time"), ". Anyone at a senior level who suspects the career question is really a question about identity, worth, and what they want from the next phase of their working life.")), React.createElement(Section, {
-    label: 'Start here',
-    mob
-  }, React.createElement(P, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes. We figure out what's actually driving the transition (or the resistance to it) and whether therapy is the right kind of support for this moment."), React.createElement('div', {
-    style: {
-      marginTop: '.5rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Common questions',
-    mob
+  }, 'growth advisory'), " to clinical practice. I know what it's like to leave an identity that works, and the difference between doing it reactively and doing it with some clarity about what's driving the change."), React.createElement(SvcP, null, "The work runs on two tracks: the practical side of the move (options, risk, the actual plan) and what makes it hard underneath, the identity and worth questions the strategy can't touch. Sometimes you mostly need the plan, sometimes the deeper work, often both. The aim is a working life that feels genuinely fulfilling, not just impressive.")), React.createElement(SvcSection, {
+    title: 'Who this is for'
+  }, React.createElement(SvcP, null, React.createElement(Strong, null, "Senior professionals weighing a major career change"), " but paralysed by it. Executives who were laid off and are dealing with more than the job search. Leaders who made the move and feel more lost than free. People who ", React.createElement(Strong, null, "keep almost leaving but pull back every time"), ". Anyone senior who suspects the career question is really about identity, worth and what they want from the next phase of working life.")), React.createElement(SvcSection, {
+    title: 'Start here'
+  }, React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's driving the transition, or the resistance to it, and whether therapy is the right support for this moment."), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →'))), React.createElement(SvcSection, {
+    title: 'Common questions'
   }, React.createElement('div', null, React.createElement(FaqItem, {
     q: 'Why would I need a therapist for career transition coaching?'
   }, React.createElement(P, {
     last: true
-  }, "Because at senior levels, a career change disrupts your identity, your social world, and your sense of competence — not just your job. The strategic part is rarely the real difficulty. The harder part is figuring out who you are when the structure that organised your life is gone.")), React.createElement(FaqItem, {
+  }, "Because at senior levels a career change disrupts your identity, your social world and your sense of competence, not just your job. The strategic part is rarely the real difficulty. The harder part is figuring out who you are when the structure that organised your life is gone.")), React.createElement(FaqItem, {
     q: "I can't decide whether to leave. Can therapy help with that?"
   }, React.createElement(P, {
     last: true
-  }, "Usually, yes. The indecision almost never comes from lack of information. The block tends to come from what the decision represents: loss of identity, fear of regret, the distance between what you actually want and what you think you should want. ", React.createElement(A, {
+  }, "Usually, yes. The indecision almost never comes from lack of information. It comes from what the decision represents: loss of identity, fear of regret, the distance between what you want and what you think you should want. ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/the-high-cost-of-endless-pondering'
-  }, 'Endless deliberation has its own cost'), ", and therapy works with the internal conflict that's making the decision feel impossible.")), React.createElement(FaqItem, {
+  }, 'Endless deliberation has its own cost'), ", and therapy works with the internal conflict that makes the decision feel impossible.")), React.createElement(FaqItem, {
     q: 'How is this different from career coaching?'
   }, React.createElement(P, {
     last: true
-  }, "Regular career coaching works on what to do next. Therapeutically-informed coaching works on why you're stuck and what needs to shift internally for any external change to actually hold. ", React.createElement(A, {
+  }, "Regular career coaching works on what to do next. Therapeutically-informed coaching works on why you're stuck and what needs to shift internally for any external change to hold. ", React.createElement(A, {
     href: 'https://www.undisguised.io/p/the-coaching-industrys-credibility'
   }, 'A lot of what gets called career coaching'), " actually needs therapeutic depth to address properly.")), React.createElement(FaqItem, {
     q: 'I was laid off and I feel lost. Is that normal?'
   }, React.createElement(P, {
     last: true
-  }, "Very. Involuntary exits at senior levels produce genuine grief, not just about the job but about the identity and daily structure it provided. Most people around you won\u2019t fully understand that because they see it as \u201cjust a job.\u201d Therapy gives you a space to process the loss before rushing into whatever comes next.")), React.createElement(FaqItem, {
+  }, "Very. Involuntary exits at senior levels produce genuine grief, not just about the job but about the identity and daily structure it provided. Most people around you won’t fully understand, because they see it as “just a job.” Therapy gives you space to process the loss before rushing into whatever comes next.")), React.createElement(FaqItem, {
     q: 'I already made the move and feel worse. What happened?'
   }, React.createElement(P, {
     last: true
-  }, "You probably removed the structure without fully understanding what it was compensating for. The old role was quietly holding things in place: your sense of purpose, your daily identity, your social connections. Without it, those gaps become visible. That's not a sign you made the wrong choice. It's a sign there's deeper work to do — and now you have the space for it.")))), React.createElement(Testimonials, {
+  }, "You probably removed the structure without fully understanding what it was compensating for. The old role quietly held things in place: your sense of purpose, your daily identity, your social connections. Without it, those gaps become visible. That points to deeper work to do, not to a wrong choice, and now you have the space for it.")))), React.createElement(Testimonials, {
     mob,
     items: [{
-      q: "We have been working together for a while now, and the sessions have gradually changed the way I make decisions. Aggelos doesn\u2019t tell me what to do or try to make me dependent on his opinion. He helps me separate the real problem from the fear, ego and old patterns wrapped around it. I usually leave with less noise and a much clearer sense of what is mine to do.",
+      q: "We have been working together for a while now, and the sessions have gradually changed the way I make decisions. Aggelos doesn’t tell me what to do or try to make me dependent on his opinion. He helps me separate the real problem from the fear, ego and old patterns wrapped around it. I usually leave with less noise and a much clearer sense of what is mine to do.",
       w: "Anonymous client, Founder"
     }, {
       q: "I had been forcing a business situation to continue because stopping it felt like failure. After one of our exercises, I realised I was trying to manufacture reasons to keep going when I already knew the answer. I had the difficult conversation shortly afterwards. It was not that Aggelos gave me the decision. He helped me stop fighting what I already knew.",
       w: "Anonymous client, Business owner"
     }, {
-      q: "I was initially sceptical about somatic and trauma-informed work because I assumed it would be vague or a bit spiritual. It wasn\u2019t. Aggelos explained what we were doing, paid attention to my limits and connected the experience back to patterns I could recognise in my work and relationships. It felt grounded, careful and surprisingly practical.",
+      q: "I was initially sceptical about somatic and trauma-informed work because I assumed it would be vague or a bit spiritual. It wasn’t. Aggelos explained what we were doing, paid attention to my limits and connected the experience back to patterns I could recognise in my work and relationships. It felt grounded, careful and surprisingly practical.",
       w: "Anonymous client"
     }]
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Next step',
-    mob
-  }, React.createElement(P, null, "It starts with a short, free fit call, about 15 minutes, no obligations. We use it to understand where you actually are and what kind of support makes sense right now."), React.createElement('div', {
-    style: {
-      marginTop: '.5rem'
-    }
-  }, React.createElement('a', {
-    href: '/book/',
-    className: 'cta-btn',
-    style: ctaBtn
-  }, 'Book a fit call →'))), React.createElement(RelatedLinks, {
+  }), React.createElement(RelatedLinks, {
     mob,
     items: [{
       href: '/1-to-1/',
@@ -3598,8 +3300,6 @@ function CareerTransitionPage() {
       href: '/executive-burnout-therapy/',
       label: 'Executive burnout →'
     }]
-  }), React.createElement(SiteFooter, {
-    mob
   }));
 }
 
@@ -3626,67 +3326,35 @@ function BookCta({
 
 // ─── GREEK-SPEAKING THERAPIST · LONDON ───────────────────────────────────────
 function LondonPage() {
-  const mob = useIsMobile();
-  return React.createElement('main', {
-    style: locMobPage(mob)
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '2.5rem'
-    }
-  }, 'Greek-speaking therapist for tech professionals in London'), React.createElement('p', {
-    style: {
-      ...leadStyle,
-      marginBottom: mob ? '2.5rem' : '3rem'
-    }
-  }, "If you work in London tech and you’d rather do this in Greek, with someone who also understands your industry, that’s the whole idea here. The work itself is the same one I do with every client. Speaking Greek just takes the translation out of it."), React.createElement(Section, {
-    label: 'Who this is for',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Greek-speaking founders, engineers, product managers, designers, consultants and executives working in London tech — fintech, scale-ups, big tech, agencies, the consulting firms. Wherever in the city you ended up.")), React.createElement(Section, {
-    label: 'Why it helps that I speak Greek',
-    mob
-  }, React.createElement(P, null, "Therapy works better in the language you actually think and feel in. The family expectations, the humour, the guilt, the particular context of building a life away from Greece — you don’t have to translate any of it or explain it from scratch."), React.createElement(P, {
-    last: true
-  }, "We start from a shared understanding instead of spending sessions building one. That’s the real reason to choose a Greek-speaking therapist over a perfectly good local one.")), React.createElement(Section, {
-    label: 'And I understand the industry',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "You also don’t have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, {
+  return React.createElement(SvcPage, null, React.createElement(SvcH1, null, 'Greek-speaking therapist for tech professionals in London'), React.createElement(SvcLead, null, "If you work in London tech and you’d rather do this in Greek, with someone who also understands your industry, that’s the idea. The work is the same one I do with every client; speaking Greek just takes the translation out of it."), React.createElement(SvcSection, {
+    title: 'Who this is for'
+  }, React.createElement(SvcP, null, "Greek-speaking founders, engineers, product managers, designers, consultants and executives working in London tech: fintech, scale-ups, big tech, agencies, the consulting firms. Wherever in the city you ended up.")), React.createElement(SvcSection, {
+    title: 'Why it helps that I speak Greek'
+  }, React.createElement(SvcP, null, "Therapy works better in the language you actually think and feel in. The family expectations, the humour, the guilt, the particular context of building a life away from Greece, none of it needs translating or explaining from scratch."), React.createElement(SvcP, null, "We start from a shared understanding instead of spending sessions building one. That's the real reason to choose a Greek-speaking therapist over a perfectly good local one.")), React.createElement(SvcSection, {
+    title: 'And I understand the industry'
+  }, React.createElement(SvcP, null, "You also don't have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advised more than 500 companies'), ", so runway, reorgs, shipping, the pressure of a senior role — I already follow all of it. It’s the same reason my ", React.createElement(IA, {
+  }, 'advised more than 500 companies'), ", so runway, reorgs, shipping and the pressure of a senior role are things I already follow. It's the same reason my ", React.createElement(IA, {
     href: '/1-to-1/'
   }, 'founder'), " and ", React.createElement(IA, {
     href: '/1-to-1/'
-  }, 'solopreneur'), " clients come to me.")), React.createElement(Section, {
-    label: 'The work itself is the same',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Nothing about the work changes because you’re in London or because we speak Greek. It’s the same private, one-to-one work I do with everyone — the personal pattern and the real decision in front of you, worked at the same time. How it runs, step by step, is on ", React.createElement(IA, {
+  }, 'solopreneur'), " clients come to me.")), React.createElement(SvcSection, {
+    title: 'The work itself is the same'
+  }, React.createElement(SvcP, null, "Nothing about the work changes because you're in London or because we speak Greek. It's the same private, one-to-one work I do with everyone, the personal pattern and the real decision in front of you, worked at the same time. How it runs, step by step, is on ", React.createElement(IA, {
     href: '/1-to-1/'
-  }, 'how I work'), ".")), React.createElement(Section, {
-    label: 'Online sessions',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Everything is online, one to one. I’m based in Ireland — same time zone as London — so an early slot before work or an evening one is easy to arrange. There’s no in-person room.")), React.createElement(Section, {
-    label: 'Confidentiality',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Private and one to one. I don’t report to anyone and I don’t use identifiable client stories anywhere. Here’s ", React.createElement(IA, {
+  }, 'how I work'), ".")), React.createElement(SvcSection, {
+    title: 'Online sessions'
+  }, React.createElement(SvcP, null, "Everything is online, one to one. I'm based in Ireland, the same time zone as London, so an early slot before work or an evening one is easy to arrange. There's no in-person room.")), React.createElement(SvcSection, {
+    title: 'Confidentiality'
+  }, React.createElement(SvcP, null, "Private and one to one. I don't report to anyone and I don't use identifiable client stories anywhere. Here's ", React.createElement(IA, {
     href: '/confidentiality/'
-  }, 'how confidentiality works'), " in detail.")), React.createElement(BookCta, {
-    label: 'Book a fit call \u2192'
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Common questions',
-    mob
-  }, React.createElement(FaqItem, {
+  }, 'how confidentiality works'), " in detail.")), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →')), React.createElement(SvcSection, {
+    title: 'Common questions'
+  }, React.createElement('div', null, React.createElement(FaqItem, {
     q: 'Greek or English?'
   }, React.createElement(P, {
     last: true
@@ -3698,78 +3366,44 @@ function LondonPage() {
     q: 'Are you based in London?'
   }, React.createElement(P, {
     last: true
-  }, "No — I’m based in Ireland and work online. London is the same time zone, so scheduling is simple. There’s no in-person option.")), React.createElement(FaqItem, {
+  }, "No, I'm based in Ireland and work online. London is the same time zone, so scheduling is simple. There's no in-person option.")), React.createElement(FaqItem, {
     q: 'What do people usually bring?'
   }, React.createElement(P, {
     last: true
-  }, "The same things anyone brings — pressure that won’t switch off, a decision they keep circling, burnout, self-doubt, work that has quietly taken over. Nothing London-specific. You just get to talk about it in Greek, with someone who understands the context."))), React.createElement(SiteFooter, {
-    mob
-  }));
+  }, "The same things anyone brings: pressure that won't switch off, a decision they keep circling, burnout, self-doubt, work that has quietly taken over. Nothing London-specific. You just get to talk about it in Greek, with someone who understands the context.")))));
 }
 
 // ─── GREEK-SPEAKING THERAPIST · MANCHESTER ───────────────────────────────────
 function ManchesterPage() {
-  const mob = useIsMobile();
-  return React.createElement('main', {
-    style: locMobPage(mob)
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '2.5rem'
-    }
-  }, 'Greek-speaking therapist for tech professionals in Manchester'), React.createElement('p', {
-    style: {
-      ...leadStyle,
-      marginBottom: mob ? '2.5rem' : '3rem'
-    }
-  }, "If you’re in tech in Manchester and you’d rather talk in Greek, with someone who also knows the industry, that’s what this is. The work is the same one I do with every client — working in your own language just takes the translation out of it."), React.createElement(Section, {
-    label: 'Who this is for',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Greek-speaking engineers, developers, product and design people, consultants, agency owners and remote workers in and around Manchester and the wider North of England.")), React.createElement(Section, {
-    label: 'Why it helps that I speak Greek',
-    mob
-  }, React.createElement(P, null, "It’s easier to do this in the language you grew up in. The family side, the humour, the expectations, the context of building a life away from Greece — none of it needs translating or explaining first."), React.createElement(P, {
-    last: true
-  }, "You get to be blunt, funny and unsure in your own idiom, and be understood the first time. That, more than anything, is why people look for a Greek-speaking therapist rather than a local one.")), React.createElement(Section, {
-    label: 'And I understand the industry',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "You also don’t have to explain the work — the pipeline that’s gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, {
+  return React.createElement(SvcPage, null, React.createElement(SvcH1, null, 'Greek-speaking therapist for tech professionals in Manchester'), React.createElement(SvcLead, null, "If you're in tech in Manchester and you'd rather talk in Greek, with someone who also knows the industry, that's what this is. The work is the same one I do with every client; your own language just takes the translation out of it."), React.createElement(SvcSection, {
+    title: 'Who this is for'
+  }, React.createElement(SvcP, null, "Greek-speaking engineers, developers, product and design people, consultants, agency owners and remote workers in and around Manchester and the wider North of England.")), React.createElement(SvcSection, {
+    title: 'Why it helps that I speak Greek'
+  }, React.createElement(SvcP, null, "It's easier to do this in the language you grew up in. The family side, the humour, the expectations, the context of building a life away from Greece, none of it needs translating or explaining first."), React.createElement(SvcP, null, "You get to be blunt, funny and unsure in your own idiom, and be understood the first time. That, more than anything, is why people look for a Greek-speaking therapist rather than a local one.")), React.createElement(SvcSection, {
+    title: 'And I understand the industry'
+  }, React.createElement(SvcP, null, "You also don't have to explain the work: the pipeline that's gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advised more than 500 companies'), " before training as a psychotherapist, and I’ve done the job-to-independent route myself. It’s the same reason my ", React.createElement(IA, {
+  }, 'advised more than 500 companies'), " before training as a psychotherapist, and I've done the job-to-independent route myself. It's the same reason my ", React.createElement(IA, {
     href: '/1-to-1/'
   }, 'solopreneur'), " and ", React.createElement(IA, {
     href: '/1-to-1/'
-  }, 'founder'), " clients come to me.")), React.createElement(Section, {
-    label: 'The work itself is the same',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "It’s the same private, one-to-one work I do with everyone, working the personal pattern and the practical decision together. If you work for yourself, that includes the business side — pricing, positioning, the outreach you keep putting off — alongside the pattern underneath it. The full shape of it is on ", React.createElement(IA, {
+  }, 'founder'), " clients come to me.")), React.createElement(SvcSection, {
+    title: 'The work itself is the same'
+  }, React.createElement(SvcP, null, "It's the same private, one-to-one work I do with everyone, working the personal pattern and the practical decision together. If you work for yourself, that includes the business side (pricing, positioning, the outreach you keep putting off) alongside the pattern underneath it. The full shape of it is on ", React.createElement(IA, {
     href: '/1-to-1/'
-  }, 'how I work'), ".")), React.createElement(Section, {
-    label: 'Online sessions',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Everything is online, one to one. I’m based in Ireland, the same time zone as Manchester, so slots fit easily around work. If you’re remote-first anyway, a video session is just a Tuesday. There’s no in-person room.")), React.createElement(Section, {
-    label: 'Confidentiality',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Private, one to one, and it stays that way. Nothing gets reported to anyone and I don’t use identifiable stories. Here’s ", React.createElement(IA, {
+  }, 'how I work'), ".")), React.createElement(SvcSection, {
+    title: 'Online sessions'
+  }, React.createElement(SvcP, null, "Everything is online, one to one. I'm based in Ireland, the same time zone as Manchester, so slots fit easily around work. If you're remote-first anyway, a video session is just a Tuesday. There's no in-person room.")), React.createElement(SvcSection, {
+    title: 'Confidentiality'
+  }, React.createElement(SvcP, null, "Private, one to one, and it stays that way. Nothing gets reported to anyone and I don't use identifiable stories. Here's ", React.createElement(IA, {
     href: '/confidentiality/'
-  }, 'how confidentiality works'), ".")), React.createElement(BookCta, {
-    label: 'Book a fit call \u2192'
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Common questions',
-    mob
-  }, React.createElement(FaqItem, {
+  }, 'how confidentiality works'), ".")), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →')), React.createElement(SvcSection, {
+    title: 'Common questions'
+  }, React.createElement('div', null, React.createElement(FaqItem, {
     q: 'Do I need to be in Manchester itself?'
   }, React.createElement(P, {
     last: true
@@ -3785,82 +3419,48 @@ function ManchesterPage() {
     q: 'Is this a different service from the London or Dublin pages?'
   }, React.createElement(P, {
     last: true
-  }, "No — same person, same offer. The only real differences are who tends to be where and the practical logistics. The therapy itself doesn’t change."))), React.createElement(SiteFooter, {
-    mob
-  }));
+  }, "No, same person, same offer. The only real differences are who tends to be where and the practical logistics. The therapy itself doesn't change.")))));
 }
 
 // ─── GREEK-SPEAKING THERAPIST · NEW YORK ─────────────────────────────────────
 function NewYorkPage() {
-  const mob = useIsMobile();
-  return React.createElement('main', {
-    style: locMobPage(mob)
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '2.5rem'
-    }
-  }, 'Greek-speaking therapist for tech professionals in New York'), React.createElement('p', {
-    style: {
-      ...leadStyle,
-      marginBottom: mob ? '2.5rem' : '3rem'
-    }
-  }, "If you’re Greek and working in New York tech, and you’d rather do this in Greek with someone who also understands the industry, that’s the idea. The work is the same one I do with every client — speaking Greek just takes the translation out of it."), React.createElement(Section, {
-    label: 'Who this is for',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Greek-speaking engineers, founders, product leaders, designers and operators in New York tech — startups, larger platforms, and the finance-adjacent world the city runs on.")), React.createElement(Section, {
-    label: 'Why it helps that I speak Greek',
-    mob
-  }, React.createElement(P, null, "The things that actually run you — family, expectation, the particular pride and guilt of the one who went to the States — tend to live in Greek. In English they stay at a slight, unhelpful distance."), React.createElement(P, {
-    last: true
-  }, "Working in your first language means none of that needs translating, and the cultural context is already understood. That’s the reason to choose this over a local option, not anything different about the therapy.")), React.createElement(Section, {
-    label: 'And I understand the industry',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "You also don’t have to explain equity, runway, a reorg, or why “just be confident” is useless advice. 18+ years in product and growth and ", React.createElement(A, {
+  return React.createElement(SvcPage, null, React.createElement(SvcH1, null, 'Greek-speaking therapist for tech professionals in New York'), React.createElement(SvcLead, null, "If you're Greek and working in New York tech, and you'd rather do this in Greek with someone who also understands the industry, that's the idea. The work is the same one I do with every client; speaking Greek just takes the translation out of it."), React.createElement(SvcSection, {
+    title: 'Who this is for'
+  }, React.createElement(SvcP, null, "Greek-speaking engineers, founders, product leaders, designers and operators in New York tech: startups, larger platforms and the finance-adjacent world the city runs on.")), React.createElement(SvcSection, {
+    title: 'Why it helps that I speak Greek'
+  }, React.createElement(SvcP, null, "The things that actually run you (family, expectation, the particular pride and guilt of the one who went to the States) tend to live in Greek. In English they stay at a slight, unhelpful distance."), React.createElement(SvcP, null, "Working in your first language means none of that needs translating, and the cultural context is already understood. That's the reason to choose this over a local option, not anything different about the therapy.")), React.createElement(SvcSection, {
+    title: 'And I understand the industry'
+  }, React.createElement(SvcP, null, "You also don't have to explain equity, runway, a reorg, or why “just be confident” is useless advice. 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, '500+ companies advised'), " before I trained as a psychotherapist. It’s the same reason my ", React.createElement(IA, {
+  }, '500+ companies advised'), " before I trained as a psychotherapist. It's the same reason my ", React.createElement(IA, {
     href: '/1-to-1/'
   }, 'founder'), " and senior ", React.createElement(IA, {
     href: '/1-to-1/'
-  }, 'executive'), " clients come to me.")), React.createElement(Section, {
-    label: 'The work itself is the same',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Nothing about the work changes because you’re in New York. It’s the same one-to-one work I do with everyone, holding the personal pattern and the real situation at work in the same room. The steps are laid out on ", React.createElement(IA, {
+  }, 'executive'), " clients come to me.")), React.createElement(SvcSection, {
+    title: 'The work itself is the same'
+  }, React.createElement(SvcP, null, "Nothing about the work changes because you're in New York. It's the same one-to-one work I do with everyone, holding the personal pattern and the real situation at work in the same room. The steps are laid out on ", React.createElement(IA, {
     href: '/1-to-1/'
-  }, 'how I work'), ".")), React.createElement(Section, {
-    label: 'Online, across the time difference',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Sessions are online, one to one. I’m based in Ireland, which is about five hours ahead of New York, so in practice they land in your morning. We agree a recurring slot that works for both of us; if the time difference doesn’t fit your schedule, I’ll tell you on the fit call rather than force it.")), React.createElement(Section, {
-    label: 'Confidentiality',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Private and one to one. I don’t report to your employer, investors or anyone else, and I don’t use identifiable stories publicly. The detail, including the honest limits, is on the ", React.createElement(IA, {
+  }, 'how I work'), ".")), React.createElement(SvcSection, {
+    title: 'Online, across the time difference'
+  }, React.createElement(SvcP, null, "Sessions are online, one to one. I'm based in Ireland, about five hours ahead of New York, so in practice they land in your morning. We agree a recurring slot that works for both of us; if the time difference doesn't fit your schedule, I'll tell you on the fit call rather than force it.")), React.createElement(SvcSection, {
+    title: 'Confidentiality'
+  }, React.createElement(SvcP, null, "Private and one to one. I don't report to your employer, investors or anyone else, and I don't use identifiable stories publicly. The detail, including the honest limits, is on the ", React.createElement(IA, {
     href: '/confidentiality/'
-  }, 'confidentiality page'), ".")), React.createElement(BookCta, {
-    label: 'Book a fit call \u2192'
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Common questions',
-    mob
-  }, React.createElement(FaqItem, {
-    q: 'You’re in Ireland — how does the time difference work?'
+  }, 'confidentiality page'), ".")), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →')), React.createElement(SvcSection, {
+    title: 'Common questions'
+  }, React.createElement('div', null, React.createElement(FaqItem, {
+    q: "You're in Ireland, so how does the time difference work?"
   }, React.createElement(P, {
     last: true
-  }, "Ireland is about five hours ahead of New York, so sessions usually sit in your morning. We set a fixed recurring slot. If your schedule can’t make the difference work, I’ll say so on the fit call instead of pretending it’s fine.")), React.createElement(FaqItem, {
+  }, "Ireland is about five hours ahead of New York, so sessions usually sit in your morning. We set a fixed recurring slot. If your schedule can't make the difference work, I'll say so on the fit call instead of pretending it's fine.")), React.createElement(FaqItem, {
     q: 'Are you a licensed therapist in New York State?'
   }, React.createElement(P, {
     last: true
-  }, "I’m a licensed psychotherapist and a registered member of the BACP (British Association for Counselling and Psychotherapy). I’m not registered with a New York State board, and this is online work rather than a local clinical service. If you specifically need a New-York-licensed provider — for insurance, say — I’m happy to point you elsewhere on the fit call.")), React.createElement(FaqItem, {
+  }, "I'm a licensed psychotherapist and a registered member of the BACP (British Association for Counselling and Psychotherapy). I'm not registered with a New York State board, and this is online work rather than a local clinical service. If you specifically need a New-York-licensed provider (for insurance, say) I'm happy to point you elsewhere on the fit call.")), React.createElement(FaqItem, {
     q: 'Greek or English?'
   }, React.createElement(P, {
     last: true
@@ -3868,78 +3468,44 @@ function NewYorkPage() {
     q: 'Is it a different kind of therapy because it’s for Greek people abroad?'
   }, React.createElement(P, {
     last: true
-  }, "No. It’s the offer everyone gets. Being able to do it in Greek, with the context already understood, is the only part that’s specific to you."))), React.createElement(SiteFooter, {
-    mob
-  }));
+  }, "No. It's the offer everyone gets. Being able to do it in Greek, with the context already understood, is the only part that's specific to you.")))));
 }
 
 // ─── GREEK-SPEAKING THERAPIST · DUBLIN ───────────────────────────────────────
 function DublinPage() {
-  const mob = useIsMobile();
-  return React.createElement('main', {
-    style: locMobPage(mob)
-  }, React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '2.5rem'
-    }
-  }, 'Greek-speaking therapist for tech professionals in Dublin'), React.createElement('p', {
-    style: {
-      ...leadStyle,
-      marginBottom: mob ? '2.5rem' : '3rem'
-    }
-  }, "If you’re Greek and working in Dublin tech, and you’d rather do this in Greek with someone who also knows the industry, that’s what this is. The work is the same one I do with every client — speaking Greek just removes the translation."), React.createElement(Section, {
-    label: 'Who this is for',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Greek-speaking engineers, product managers, operations and consulting people working in Dublin’s multinationals, tech companies and startups.")), React.createElement(Section, {
-    label: 'Why it helps that I speak Greek',
-    mob
-  }, React.createElement(P, null, "For people who’ve relocated, a lot of what matters is still tied to Greece — family, expectations, the pull home. It’s the part that’s hardest to explain to someone outside the culture, and the part that lands flat when you have to translate it."), React.createElement(P, {
-    last: true
-  }, "In Greek, with someone who already gets it, you can go straight to it. That’s the reason to choose a Greek-speaking therapist — not anything different about the work.")), React.createElement(Section, {
-    label: 'And I understand the industry',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "You also don’t have to explain corporate life — the big-org politics, the way a role can quietly take over. 18+ years in product and growth and ", React.createElement(A, {
+  return React.createElement(SvcPage, null, React.createElement(SvcH1, null, 'Greek-speaking therapist for tech professionals in Dublin'), React.createElement(SvcLead, null, "If you're Greek and working in Dublin tech, and you'd rather do this in Greek with someone who also knows the industry, that's what this is. The work is the same one I do with every client; speaking Greek just removes the translation."), React.createElement(SvcSection, {
+    title: 'Who this is for'
+  }, React.createElement(SvcP, null, "Greek-speaking engineers, product managers, operations and consulting people working in Dublin's multinationals, tech companies and startups.")), React.createElement(SvcSection, {
+    title: 'Why it helps that I speak Greek'
+  }, React.createElement(SvcP, null, "For people who've relocated, a lot of what matters is still tied to Greece: family, expectations, the pull home. It's the part hardest to explain to someone outside the culture, and the part that lands flat when you have to translate it."), React.createElement(SvcP, null, "In Greek, with someone who already gets it, you can go straight to it. That's the reason to choose a Greek-speaking therapist, not anything different about the work.")), React.createElement(SvcSection, {
+    title: 'And I understand the industry'
+  }, React.createElement(SvcP, null, "You also don't have to explain corporate life: the big-org politics, the way a role can quietly take over. 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, '500+ companies advised'), " before I trained as a psychotherapist, including inside a large enterprise. I happen to be based in Ireland myself, which helps with the practicalities, but the real reason to come is that I hold both the work and the Greek context at once.")), React.createElement(Section, {
-    label: 'The work itself is the same',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "It’s the same private, one-to-one work I do with everyone — the personal pattern and the real decision together, whether that’s the job, the move, or whether to stay at all. How the work runs is on ", React.createElement(IA, {
+  }, '500+ companies advised'), " before I trained as a psychotherapist, including inside a large enterprise. I happen to be based in Ireland myself, which helps with the practicalities, but the real reason to come is that I hold both the work and the Greek context at once.")), React.createElement(SvcSection, {
+    title: 'The work itself is the same'
+  }, React.createElement(SvcP, null, "It's the same private, one-to-one work I do with everyone, the personal pattern and the real decision together, whether that's the job, the move, or whether to stay at all. How the work runs is on ", React.createElement(IA, {
     href: '/1-to-1/'
-  }, 'how I work'), ".")), React.createElement(Section, {
-    label: 'Online sessions',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Everything is online, one to one. I’m based in Ireland, so we share a time zone and there’s nothing to solve on scheduling — but sessions are by video, not in person. Same country, same working hours; that’s where the convenience begins and ends.")), React.createElement(Section, {
-    label: 'Confidentiality',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, "Private and one to one. Nothing goes back to your employer or manager, and I don’t use identifiable stories publicly. The full detail is on the ", React.createElement(IA, {
+  }, 'how I work'), ".")), React.createElement(SvcSection, {
+    title: 'Online sessions'
+  }, React.createElement(SvcP, null, "Everything is online, one to one. I'm based in Ireland, so we share a time zone and there's nothing to solve on scheduling, though sessions are by video, not in person. Same country, same working hours; that's where the convenience begins and ends.")), React.createElement(SvcSection, {
+    title: 'Confidentiality'
+  }, React.createElement(SvcP, null, "Private and one to one. Nothing goes back to your employer or manager, and I don't use identifiable stories publicly. The full detail is on the ", React.createElement(IA, {
     href: '/confidentiality/'
-  }, 'confidentiality page'), ".")), React.createElement(BookCta, {
-    label: 'Book a fit call \u2192'
-  }), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Common questions',
-    mob
-  }, React.createElement(FaqItem, {
-    q: 'You’re in Ireland too — can we meet in person?'
+  }, 'confidentiality page'), ".")), React.createElement('div', {
+    className: 'svc-ctarow'
+  }, React.createElement(SvcCta, {
+    href: '/book/'
+  }, 'Book a fit call →')), React.createElement(SvcSection, {
+    title: 'Common questions'
+  }, React.createElement('div', null, React.createElement(FaqItem, {
+    q: "You're in Ireland too, so can we meet in person?"
   }, React.createElement(P, {
     last: true
-  }, "No, the work is online, one to one, by video — same as for all my clients. Being in the same country and time zone makes scheduling effortless, but there isn’t an in-person room.")), React.createElement(FaqItem, {
+  }, "No, the work is online, one to one, by video, the same as for all my clients. Being in the same country and time zone makes scheduling effortless, but there isn't an in-person room.")), React.createElement(FaqItem, {
     q: 'A lot of what’s on my mind is family back in Greece. Is that the right thing to bring?'
   }, React.createElement(P, {
     last: true
-  }, "Yes. For people who’ve relocated, the tie home is usually central, not a side issue — and it’s the part hardest to explain to someone outside the culture. Working in Greek is exactly what makes it workable.")), React.createElement(FaqItem, {
+  }, "Yes. For people who've relocated, the tie home is usually central rather than a side issue, and it's the part hardest to explain to someone outside the culture. Working in Greek is exactly what makes it workable.")), React.createElement(FaqItem, {
     q: 'Greek or English?'
   }, React.createElement(P, {
     last: true
@@ -3947,9 +3513,7 @@ function DublinPage() {
     q: 'Is this a different service because I’m Greek and abroad?'
   }, React.createElement(P, {
     last: true
-  }, "No. What you’re paying for isn’t a “Greek service” — it’s the ordinary work, minus the part where you’d have to explain your background before we could start."))), React.createElement(SiteFooter, {
-    mob
-  }));
+  }, "No. It's the ordinary work, with the difference that you don't have to explain your background before we can start.")))));
 }
 
 // ─── CONFIDENTIALITY (bilingual, plain-language trust page) ───────────────────
@@ -4087,14 +3651,7 @@ function ConfidentialityPage({
 const EL_ROLE = 'Business Growth Advisor + Ψυχοθεραπευτής';
 function ElRoleEyebrow() {
   return React.createElement('div', {
-    style: {
-      fontSize: '12px',
-      fontWeight: 700,
-      letterSpacing: '.14em',
-      textTransform: 'uppercase',
-      color: C.accent,
-      marginBottom: '1rem'
-    }
+    className: 'svc-eyebrow'
   }, EL_ROLE);
 }
 function ElH1({
@@ -4102,69 +3659,44 @@ function ElH1({
   children
 }) {
   return React.createElement('h1', {
-    style: {
-      ...h1Style,
-      marginBottom: mob ? '1.5rem' : '2.5rem'
-    }
+    className: 'svc-h1'
   }, children);
 }
 
 // ─── /el/executive-coaching/ ─────────────────────────────────────────────────
 function ElExecutiveCoachingPage() {
   const mob = useIsMobile();
-  const mobPage = mob ? {
-    ...pageStyle
-  } : widePageStyle;
-  return React.createElement('main', {
-    style: mobPage
-  }, React.createElement(ElRoleEyebrow, null), React.createElement(ElH1, {
+  return React.createElement(SvcPage, null, React.createElement(ElRoleEyebrow, null), React.createElement(ElH1, {
     mob
-  }, 'Executive Coaching για στελέχη που συνεχίζουν να αποδίδουν με όλο και μεγαλύτερο προσωπικό κόστος'), React.createElement(Section, {
-    label: 'Το ζήτημα',
-    mob
-  }, React.createElement(P, null, 'Είσαι καλός στη δουλειά σου, οι άλλοι το βλέπουν και τα αποτελέσματα το επιβεβαιώνουν. Κάπου στην πορεία, όμως, το κόστος του να συνεχίζεις έτσι μεγάλωσε — και δεν διορθώνεται με καλύτερο delegation, λίγες μέρες άδεια ή άλλο ένα productivity hack.'), React.createElement(P, null, 'Για κάποιους είναι η απομόνωση που συνοδεύει έναν senior ρόλο. Για άλλους, η ταυτότητα έχει δεθεί τόσο με την απόδοση ώστε η επιβράδυνση ή η αμφιβολία να μοιάζουν απειλητικές. Ή υπάρχει η αίσθηση ότι μία λάθος απόφαση αρκεί για να θέσει σε κίνδυνο όσα έχτισες.'), React.createElement(P, {
-    last: true
-  }, 'Αυτά συνήθως δεν λύνονται με άλλο ένα leadership framework, αλλά με έναν διαφορετικό χώρο και ένα διαφορετικό είδος συζήτησης.')), React.createElement(Section, {
-    label: 'Τι δουλεύουμε',
-    mob
-  }, React.createElement(P, null, 'Μπορεί να έρχεσαι με μια συγκεκριμένη απόφαση που δεν μπορείς να συζητήσεις ανοιχτά με την ομάδα, το board ή τους επενδυτές. Ή να βλέπεις ότι τα ίδια προβλήματα επιστρέφουν:'), React.createElement(Bullets, {
+  }, 'Executive Coaching για στελέχη που συνεχίζουν να αποδίδουν με όλο και μεγαλύτερο προσωπικό κόστος'), React.createElement(SvcSection, {
+    title: 'Το ζήτημα'
+  }, React.createElement(SvcP, null, 'Είσαι καλός στη δουλειά σου, οι άλλοι το βλέπουν και τα αποτελέσματα το επιβεβαιώνουν. Κάπου στην πορεία, όμως, το κόστος του να συνεχίζεις έτσι μεγάλωσε, και δεν διορθώνεται με καλύτερο delegation, λίγες μέρες άδεια ή άλλο ένα productivity hack.'), React.createElement(SvcP, null, 'Για κάποιους είναι η απομόνωση που συνοδεύει έναν senior ρόλο. Για άλλους, η ταυτότητα έχει δεθεί τόσο με την απόδοση ώστε η επιβράδυνση ή η αμφιβολία να μοιάζουν απειλητικές. Ή υπάρχει η αίσθηση ότι μία λάθος απόφαση αρκεί για να θέσει σε κίνδυνο όσα έχτισες.'), React.createElement(SvcP, null, 'Αυτά συνήθως δεν λύνονται με άλλο ένα leadership framework, αλλά με έναν διαφορετικό χώρο και ένα διαφορετικό είδος συζήτησης.')), React.createElement(SvcSection, {
+    title: 'Τι δουλεύουμε'
+  }, React.createElement(SvcP, null, 'Μπορεί να έρχεσαι με μια συγκεκριμένη απόφαση που δεν μπορείς να συζητήσεις ανοιχτά με την ομάδα, το board ή τους επενδυτές. Ή να βλέπεις ότι τα ίδια προβλήματα επιστρέφουν:'), React.createElement(Bullets, {
     mob,
     items: ['δυσκολεύεσαι να εμπιστευτείς ή να αναθέσεις', 'αναλαμβάνεις περισσότερα από όσα σου αναλογούν', 'αποφεύγεις μια απόφαση παρότι ξέρεις ότι δεν περιμένει', 'αντιδράς με τον ίδιο τρόπο σε διαφορετικές ομάδες και συνεργασίες', 'συνεχίζεις να αποδίδεις, αλλά νιώθεις ότι πλησιάζεις τα όριά σου']
-  }), React.createElement(P, {
-    last: true
-  }, 'Σε υψηλά επίπεδα ευθύνης η απομόνωση είναι συχνά δομική: πολλοί εξαρτώνται από εσένα, αλλά ελάχιστοι είναι εκείνοι μπροστά στους οποίους μπορείς να μιλήσεις χωρίς να διαχειρίζεσαι ταυτόχρονα την εικόνα σου.')), React.createElement(Section, {
-    label: 'Γιατί μπορώ να καταλάβω το περιβάλλον σου',
-    mob
-  }, React.createElement(P, null, 'Πριν εκπαιδευτώ στην ψυχοθεραπεία, πέρασα 18+ χρόνια στην τεχνολογία, το product και το growth. Έχω υπάρξει founder, έχω δουλέψει σε startups και μεγάλους οργανισμούς και έχω συμβουλέψει πάνω από 500 επιχειρήσεις. Δεν χρειάζεται να μου μεταφράσεις τον επαγγελματικό σου κόσμο.'), React.createElement(P, {
-    last: true
-  }, React.createElement(Strong, null, 'Δεν ψυχολογικοποιούμε κάθε επαγγελματική δυσκολία.'), ' Προσπαθούμε να ξεχωρίσουμε πότε το πρόβλημα είναι πρακτικό business, πότε είναι ψυχολογικό και πότε, όπως συμβαίνει συχνά, είναι και τα δύο.')), React.createElement(Section, {
-    label: 'Με ποιους δουλεύω',
-    mob
-  }, React.createElement(P, null, 'Founders, C-level, VPs, directors και senior professionals — κυρίως στην τεχνολογία, αλλά όχι μόνο. Το σημείο εκκίνησης μπορεί να είναι:'), React.createElement(Bullets, {
+  }), React.createElement(SvcP, null, 'Σε υψηλά επίπεδα ευθύνης η απομόνωση είναι συχνά δομική: πολλοί εξαρτώνται από εσένα, αλλά ελάχιστοι είναι εκείνοι μπροστά στους οποίους μπορείς να μιλήσεις χωρίς να διαχειρίζεσαι ταυτόχρονα την εικόνα σου.')), React.createElement(SvcSection, {
+    title: 'Γιατί μπορώ να καταλάβω το περιβάλλον σου'
+  }, React.createElement(SvcP, null, 'Πριν εκπαιδευτώ στην ψυχοθεραπεία, πέρασα 18+ χρόνια στην τεχνολογία, το product και το growth. Έχω υπάρξει founder, έχω δουλέψει σε startups και μεγάλους οργανισμούς και έχω συμβουλέψει πάνω από 500 επιχειρήσεις. Δεν χρειάζεται να μου μεταφράσεις τον επαγγελματικό σου κόσμο.'), React.createElement(SvcP, null, React.createElement(Strong, null, 'Δεν ψυχολογικοποιούμε κάθε επαγγελματική δυσκολία.'), ' Προσπαθούμε να ξεχωρίσουμε πότε το πρόβλημα είναι πρακτικό business, πότε είναι ψυχολογικό και πότε, όπως συμβαίνει συχνά, είναι και τα δύο.')), React.createElement(SvcSection, {
+    title: 'Με ποιους δουλεύω'
+  }, React.createElement(SvcP, null, 'Founders, C-level, VPs, directors και senior professionals, κυρίως στην τεχνολογία αλλά όχι μόνο. Το σημείο εκκίνησης μπορεί να είναι:'), React.createElement(Bullets, {
     mob,
     items: [React.createElement(IA, {
       href: '/el/burnout/'
     }, 'burnout'), React.createElement(IA, {
       href: '/el/imposter-syndrome/'
     }, 'imposter syndrome'), 'μια δύσκολη απόφαση που αναβάλλεται', 'απομόνωση στον ρόλο', 'σύγκρουση με συνεργάτες ή επενδυτές', 'η αίσθηση ότι δεν θέλεις πια τη ζωή που συνοδεύει την επιτυχία σου']
-  })), React.createElement(Section, {
-    label: 'Πώς ξεκινάμε',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, 'Οι συνεδρίες γίνονται online, ατομικά και με πλήρη εμπιστευτικότητα. Ξεκινάμε με μια σύντομη, δωρεάν γνωριμία ~15 λεπτών, για να δούμε τι πραγματικά συμβαίνει και αν ταιριάζουμε.'), React.createElement(CtaRow, {
+  })), React.createElement(SvcSection, {
+    title: 'Πώς ξεκινάμε'
+  }, React.createElement(SvcP, null, 'Οι συνεδρίες γίνονται online, ατομικά και με πλήρη εμπιστευτικότητα. Ξεκινάμε με μια σύντομη, δωρεάν γνωριμία ~15 λεπτών, για να δούμε τι πραγματικά συμβαίνει και αν ταιριάζουμε.'), React.createElement(CtaRow, {
     lang: 'el',
     mob
-  })), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Συχνές ερωτήσεις',
-    mob
-  }, React.createElement(FaqAccordion, {
-    mob,
+  })), React.createElement(SvcSection, {
+    title: 'Συχνές ερωτήσεις'
+  }, React.createElement(SvcFaq, {
     items: [{
       q: 'Σε τι διαφέρει από το κλασικό coaching στελεχών;',
-      a: 'Το κλασικό coaching συνήθως εστιάζει σε leadership skills, στόχους, στρατηγική και performance. Αυτά μπορεί να είναι μέρος της δουλειάς, αλλά εξετάζουμε και γιατί, παρά τις γνώσεις και την εμπειρία σου, το ίδιο πρόβλημα επιστρέφει — ή γιατί ξέρεις τι πρέπει να κάνεις αλλά δεν το κάνεις.'
+      a: 'Το κλασικό coaching συνήθως εστιάζει σε leadership skills, στόχους, στρατηγική και performance. Αυτά μπορεί να είναι μέρος της δουλειάς, αλλά εξετάζουμε και γιατί, παρά τις γνώσεις και την εμπειρία σου, το ίδιο πρόβλημα επιστρέφει, ή γιατί ξέρεις τι πρέπει να κάνεις αλλά δεν το κάνεις.'
     }, {
       q: 'Χρειάζομαι coaching ή κάτι πιο ψυχολογικό;',
       a: 'Δεν χρειάζεται να το αποφασίσεις εσύ από πριν. Αν το θέμα είναι κυρίως μια απόφαση ή ένας στόχος, δουλεύεται σε επίπεδο coaching. Αν τα ίδια μοτίβα επιστρέφουν σε διαφορετικούς ρόλους και σχέσεις, πάμε βαθύτερα. Συχνά δουλεύουμε και στα δύο.'
@@ -4187,9 +3719,6 @@ function ElExecutiveCoachingPage() {
       href: '/el/imposter-syndrome/',
       label: 'Imposter Syndrome →'
     }]
-  }), React.createElement(SiteFooter, {
-    mob,
-    lang: 'el'
   }));
 }
 
@@ -4199,39 +3728,20 @@ function ElBurnoutPage() {
   const mobPage = mob ? {
     ...pageStyle
   } : widePageStyle;
-  return React.createElement('main', {
-    style: mobPage
-  }, React.createElement(ElRoleEyebrow, null), React.createElement(ElH1, {
+  return React.createElement(SvcPage, null, React.createElement(ElRoleEyebrow, null), React.createElement(ElH1, {
     mob
-  }, 'Πήρες άδεια, ξεκουράστηκες και γύρισες νιώθοντας ακριβώς το ίδιο'), React.createElement('p', {
-    style: {
-      ...leadStyle,
-      marginBottom: mob ? '2rem' : '2.5rem'
-    }
-  }, 'Ίσως το πρόβλημα δεν είναι απλώς ότι δουλεύεις πολύ.'), React.createElement(Section, {
-    label: 'Τι είναι το burnout',
-    mob
-  }, React.createElement(P, null, 'Η συνηθισμένη συμβουλή είναι να ξεκουραστείς περισσότερο, να βάλεις όρια και να διαχειριστείς το άγχος σου. Μερικές φορές αρκεί. Άλλες, παίρνεις άδεια, κοιμάσαι περισσότερο, απομακρύνεσαι για λίγο και επιστρέφεις στο ίδιο βάρος.'), React.createElement(P, null, 'Το burnout — η επαγγελματική εξουθένωση — συνδέεται με παρατεταμένη εργασιακή πίεση που δεν έχει αντιμετωπιστεί ουσιαστικά. Εμφανίζεται ως μόνιμη εξάντληση, αποστασιοποίηση από τη δουλειά, ευερεθιστότητα, δυσκολία συγκέντρωσης ή η αίσθηση ότι δεν έχεις πια τίποτα να δώσεις.'), React.createElement(P, {
-    last: true
-  }, 'Δεν είναι μια δύσκολη εβδομάδα, αλλά μια κατάσταση όπου η πίεση έχει γίνει ο κανονικοποιημένος τρόπος λειτουργίας σου.')), React.createElement(Section, {
-    label: 'Τι το συντηρεί',
-    mob
-  }, React.createElement(P, null, 'Το burnout σπάνια οφείλεται σε έναν μόνο παράγοντα. Μπορεί να υπάρχει υπερβολικός φόρτος, αβεβαιότητα, έλλειψη ελέγχου ή μια δουλειά που απαιτεί περισσότερα από όσα μπορείς πλέον να δώσεις. Συχνά, όμως, υπάρχει και κάτι βαθύτερο:'), React.createElement(Bullets, {
+  }, 'Πήρες άδεια, ξεκουράστηκες και γύρισες νιώθοντας ακριβώς το ίδιο'), React.createElement(SvcLead, null, 'Ίσως το πρόβλημα να μην είναι ο φόρτος.'), React.createElement(SvcSection, {
+    title: 'Τι είναι το burnout'
+  }, React.createElement(SvcP, null, 'Η συνηθισμένη συμβουλή είναι να ξεκουραστείς περισσότερο, να βάλεις όρια και να διαχειριστείς το άγχος σου. Μερικές φορές αρκεί. Άλλες, παίρνεις άδεια, κοιμάσαι περισσότερο, απομακρύνεσαι για λίγο και επιστρέφεις στο ίδιο βάρος.'), React.createElement(SvcP, null, 'Το burnout, η επαγγελματική εξουθένωση, συνδέεται με παρατεταμένη εργασιακή πίεση που δεν έχει αντιμετωπιστεί ουσιαστικά. Εμφανίζεται ως μόνιμη εξάντληση, αποστασιοποίηση από τη δουλειά, ευερεθιστότητα, δυσκολία συγκέντρωσης ή η αίσθηση ότι δεν έχεις πια τίποτα να δώσεις.'), React.createElement(SvcP, null, 'Είναι μια κατάσταση όπου η πίεση έχει γίνει ο κανονικοποιημένος τρόπος λειτουργίας σου, πέρα από μια απλή δύσκολη περίοδο.')), React.createElement(SvcSection, {
+    title: 'Τι το συντηρεί'
+  }, React.createElement(SvcP, null, 'Το burnout σπάνια οφείλεται σε έναν μόνο παράγοντα. Μπορεί να υπάρχει υπερβολικός φόρτος, αβεβαιότητα, έλλειψη ελέγχου ή μια δουλειά που απαιτεί περισσότερα από όσα μπορείς πλέον να δώσεις. Συχνά, όμως, υπάρχει και κάτι βαθύτερο:'), React.createElement(Bullets, {
     mob,
     items: ['η ανάγκη να αποδεικνύεις συνεχώς την αξία σου', 'η δυσκολία να απογοητεύσεις τους άλλους', 'η αίσθηση ότι όλα εξαρτώνται από εσένα', 'η αδυναμία να σταματήσεις χωρίς ενοχές', 'η ταύτιση της αξίας σου με την απόδοση']
-  }), React.createElement(P, {
-    last: true
-  }, 'Όταν αυτά συνδυάζονται με πραγματική επαγγελματική πίεση, η ξεκούραση ανακουφίζει προσωρινά αλλά δεν αλλάζει αυτό που σε επιστρέφει στην ίδια κατάσταση.')), React.createElement(Section, {
-    label: 'Πώς δουλεύουμε',
-    mob
-  }, React.createElement(P, null, 'Ξεκινάμε από την πραγματική συνθήκη της δουλειάς σου: τι άλλαξε, πότε άρχισε να γίνεται επίπονο, τι απαιτεί αντικειμενικά ο ρόλος, ποια κομμάτια της πίεσης προέρχονται από το περιβάλλον και ποια συνδέονται με τον τρόπο που έχεις μάθει να λειτουργείς.'), React.createElement(P, {
-    last: true
-  }, React.createElement(Strong, null, 'Κάποιες φορές το ζητούμενο είναι μια business αλλαγή· άλλες, μια πιο βαθιά δουλειά· συχνά, και τα δύο.'), ' Στόχος δεν είναι να γίνεις απλώς πιο ανθεκτικός σε μια κατάσταση που σου κάνει κακό, αλλά να λειτουργείς με λιγότερο προσωπικό κόστος και να δεις καθαρά τι χρειάζεται πραγματικά να αλλάξει.')), React.createElement(Section, {
-    label: 'Δες πού βρίσκεσαι',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, React.createElement(React.Fragment, null, 'Δεν είναι πάντα εύκολο να ξεχωρίσεις αν αυτό που περνάς είναι burnout, προσωρινή εξάντληση ή ένδειξη ότι η δουλειά σου δεν σου ταιριάζει πια. Το ', React.createElement(IA, {
+  }), React.createElement(SvcP, null, 'Όταν αυτά συνδυάζονται με πραγματική επαγγελματική πίεση, η ξεκούραση ανακουφίζει προσωρινά αλλά δεν αλλάζει αυτό που σε επιστρέφει στην ίδια κατάσταση.')), React.createElement(SvcSection, {
+    title: 'Πώς δουλεύουμε'
+  }, React.createElement(SvcP, null, 'Ξεκινάμε από την πραγματική συνθήκη της δουλειάς σου: τι άλλαξε, πότε άρχισε να γίνεται επίπονο, τι απαιτεί αντικειμενικά ο ρόλος, ποια κομμάτια της πίεσης προέρχονται από το περιβάλλον και ποια συνδέονται με τον τρόπο που έχεις μάθει να λειτουργείς.'), React.createElement(SvcP, null, React.createElement(Strong, null, 'Κάποιες φορές το ζητούμενο είναι μια business αλλαγή· άλλες, μια πιο βαθιά δουλειά· συχνά, και τα δύο.'), ' Στόχος είναι να λειτουργείς με λιγότερο προσωπικό κόστος και να δεις καθαρά τι χρειάζεται πραγματικά να αλλάξει, αντί να προσπαθείς να αντέξεις περισσότερο μια κατάσταση που σου κάνει κακό.')), React.createElement(SvcSection, {
+    title: 'Δες πού βρίσκεσαι'
+  }, React.createElement(SvcP, null, React.createElement(React.Fragment, null, 'Δεν είναι πάντα εύκολο να ξεχωρίσεις αν αυτό που περνάς είναι burnout, προσωρινή εξάντληση ή ένδειξη ότι η δουλειά σου δεν σου ταιριάζει πια. Το ', React.createElement(IA, {
     href: '/el/startingdiagnostic/'
   }, 'Starting Diagnostic'), ' είναι ένα σύντομο, δωρεάν εργαλείο αυτοαξιολόγησης που θα σε βοηθήσει να δεις πιο καθαρά τι συμβαίνει.')), React.createElement(CtaRow, {
     lang: 'el',
@@ -4239,16 +3749,12 @@ function ElBurnoutPage() {
     primaryTo: 'diagnostic',
     primaryLabel: 'Ξεκίνα το Starting Diagnostic',
     secondaryTo: 'book'
-  })), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Συχνές ερωτήσεις',
-    mob
-  }, React.createElement(FaqAccordion, {
-    mob,
+  })), React.createElement(SvcSection, {
+    title: 'Συχνές ερωτήσεις'
+  }, React.createElement(SvcFaq, {
     items: [{
       q: 'Πώς ξεχωρίζει το burnout από την απλή κούραση;',
-      a: 'Η κούραση υποχωρεί όταν ξεκουραστείς πραγματικά. Στο burnout, η ξεκούραση βοηθά προσωρινά αλλά το βάρος επιστρέφει σχεδόν αμέσως — μαζί με αποστασιοποίηση και απώλεια νοήματος.'
+      a: 'Η κούραση υποχωρεί όταν ξεκουραστείς πραγματικά. Στο burnout, η ξεκούραση βοηθά προσωρινά αλλά το βάρος επιστρέφει σχεδόν αμέσως, μαζί με αποστασιοποίηση και απώλεια νοήματος.'
     }, {
       q: 'Γιατί η άδεια ή οι διακοπές δεν αρκούν;',
       a: 'Επειδή η ξεκούραση αντιμετωπίζει την εξάντληση, όχι ό,τι τη δημιουργεί. Αν επιστρέψεις στον ίδιο φόρτο, στην ίδια αίσθηση ευθύνης και στον ίδιο τρόπο λειτουργίας, είναι πιθανό να επιστρέψει και το burnout.'
@@ -4269,9 +3775,6 @@ function ElBurnoutPage() {
       href: '/el/career-coaching/',
       label: 'Career Coaching →'
     }]
-  }), React.createElement(SiteFooter, {
-    mob,
-    lang: 'el'
   }));
 }
 
@@ -4281,47 +3784,26 @@ function ElCareerCoachingPage() {
   const mobPage = mob ? {
     ...pageStyle
   } : widePageStyle;
-  return React.createElement('main', {
-    style: mobPage
-  }, React.createElement(ElRoleEyebrow, null), React.createElement(ElH1, {
+  return React.createElement(SvcPage, null, React.createElement(ElRoleEyebrow, null), React.createElement(ElH1, {
     mob
-  }, 'Το επόμενο επαγγελματικό βήμα μπορεί να είναι το εύκολο. Το δύσκολο είναι να προσπεράσεις τους φόβους της αλλαγής'), React.createElement(Section, {
-    label: 'Η πραγματική μετάβαση',
-    mob
-  }, React.createElement(P, null, 'Μπορεί να έχεις περάσει χρόνια χτίζοντας μια καριέρα που σήμερα δεν σε εκφράζει πια. Ίσως σκέφτεσαι να φύγεις, να αλλάξεις κλάδο, να επιστρέψεις στην Ελλάδα, να μετακομίσεις στο εξωτερικό ή να αρχίσεις να δουλεύεις για τον εαυτό σου.'), React.createElement(P, null, 'Συχνά το πρακτικό μέρος είναι το πιο απλό: ποιες επιλογές υπάρχουν, πόσα χρήματα χρειάζεσαι, τι δεξιότητες έχεις, ποιο είναι το ρίσκο, ποια βήματα πρέπει να γίνουν.'), React.createElement(P, {
-    last: true
-  }, 'Το δύσκολο είναι να καταλάβεις τι πραγματικά θέλεις και γιατί, παρότι σκέφτεσαι την αλλαγή εδώ και καιρό, παραμένεις στο ίδιο σημείο.')), React.createElement(Section, {
-    label: 'Γιατί είναι τόσο δύσκολη',
-    mob
-  }, React.createElement(P, null, 'Η καριέρα σου δεν είναι μόνο αυτό που κάνεις· είναι συχνά μέρος του τρόπου με τον οποίο βλέπεις τον εαυτό σου και σε βλέπουν οι άλλοι. Μπορεί να αντιπροσωπεύει ασφάλεια, κύρος, οικονομική ανεξαρτησία, αναγνώριση ή χρόνια προσπάθειας που δεν θέλεις να θεωρήσεις χαμένα.'), React.createElement(P, {
-    last: true
-  }, 'Γι’ αυτό μια αλλαγή δεν είναι μόνο απόφαση για την επόμενη δουλειά. Ακόμη και όταν είναι σωστή, μπορεί να συνοδεύεται από φόβο, αμφιβολία και πραγματικό πένθος για ό,τι τελειώνει.')), React.createElement(Section, {
-    label: 'Πώς δουλεύουμε',
-    mob
-  }, React.createElement(P, null, 'Δεν ξεκινάμε με την υπόθεση ότι πρέπει οπωσδήποτε να αλλάξεις καριέρα. Ξεκινάμε εξετάζοντας τι δεν λειτουργεί σήμερα, τι έχεις ήδη δοκιμάσει, τι φοβάσαι ότι θα χάσεις, τι θέλεις πραγματικά να αλλάξει και ποιο κόστος είσαι διατεθειμένος να αναλάβεις.'), React.createElement(P, {
-    last: true
-  }, React.createElement(Strong, null, 'Δουλεύουμε και το πρακτικό μέρος της απόφασης και ό,τι την κάνει δύσκολη ψυχολογικά.'), ' Στόχος δεν είναι να σε πείσω να φύγεις ή να μείνεις, αλλά να πάρεις μια απόφαση που καταλαβαίνεις, αντέχεις και μπορείς να υποστηρίξεις στην πράξη.')), React.createElement(Section, {
-    label: 'Γιατί μπορώ να καταλάβω αυτή τη μετάβαση',
-    mob
-  }, React.createElement(P, null, 'Έχω περάσει 18+ χρόνια στην τεχνολογία, το product και το growth. Έχτισα δικές μου εταιρείες, δούλεψα σε startups και μεγάλους οργανισμούς και βρέθηκα ο ίδιος μπροστά σε αποφάσεις που δεν ήταν μόνο επαγγελματικές.'), React.createElement(P, {
-    last: true
-  }, 'Παράλληλα είμαι ψυχοθεραπευτής, με MSc Integrative Counselling & Psychotherapy και εγγραφή στο BACP. Δεν χρειάζεται να διαλέξουμε ανάμεσα σε στρατηγική και αυτογνωσία — μια σοβαρή αλλαγή καριέρας χρειάζεται συνήθως και τα δύο.')), React.createElement(Section, {
-    label: 'Δεν ξέρεις αν φταίει η καριέρα ή το burnout;',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, React.createElement(React.Fragment, null, 'Μερικές φορές η επιθυμία να φύγεις σημαίνει ότι η καριέρα σου δεν σου ταιριάζει πια. Άλλες, ότι έχεις εξαντληθεί τόσο ώστε τίποτα να μη φαίνεται βιώσιμο. Το ', React.createElement(IA, {
+  }, 'Το επόμενο επαγγελματικό βήμα μπορεί να είναι το εύκολο. Το δύσκολο είναι να προσπεράσεις τους φόβους της αλλαγής'), React.createElement(SvcSection, {
+    title: 'Η πραγματική μετάβαση'
+  }, React.createElement(SvcP, null, 'Μπορεί να έχεις περάσει χρόνια χτίζοντας μια καριέρα που σήμερα δεν σε εκφράζει πια. Ίσως σκέφτεσαι να φύγεις, να αλλάξεις κλάδο, να επιστρέψεις στην Ελλάδα, να μετακομίσεις στο εξωτερικό ή να αρχίσεις να δουλεύεις για τον εαυτό σου.'), React.createElement(SvcP, null, 'Συχνά το πρακτικό μέρος είναι το πιο απλό: ποιες επιλογές υπάρχουν, πόσα χρήματα χρειάζεσαι, τι δεξιότητες έχεις, ποιο είναι το ρίσκο, ποια βήματα πρέπει να γίνουν.'), React.createElement(SvcP, null, 'Το δύσκολο είναι να καταλάβεις τι πραγματικά θέλεις και γιατί, παρότι σκέφτεσαι την αλλαγή εδώ και καιρό, παραμένεις στο ίδιο σημείο.')), React.createElement(SvcSection, {
+    title: 'Γιατί είναι τόσο δύσκολη'
+  }, React.createElement(SvcP, null, 'Η καριέρα σου συχνά συνδέεται με τον τρόπο που βλέπεις τον εαυτό σου και σε βλέπουν οι άλλοι. Μπορεί να αντιπροσωπεύει ασφάλεια, κύρος, οικονομική ανεξαρτησία, αναγνώριση ή χρόνια προσπάθειας που δεν θέλεις να θεωρήσεις χαμένα.'), React.createElement(SvcP, null, 'Γι’ αυτό μια αλλαγή αγγίζει πολύ περισσότερα από την επόμενη δουλειά. Ακόμη και όταν είναι σωστή, μπορεί να συνοδεύεται από φόβο, αμφιβολία και πραγματικό πένθος για ό,τι τελειώνει.')), React.createElement(SvcSection, {
+    title: 'Πώς δουλεύουμε'
+  }, React.createElement(SvcP, null, 'Δεν ξεκινάμε με την υπόθεση ότι πρέπει οπωσδήποτε να αλλάξεις καριέρα. Ξεκινάμε εξετάζοντας τι δεν λειτουργεί σήμερα, τι έχεις ήδη δοκιμάσει, τι φοβάσαι ότι θα χάσεις, τι θέλεις πραγματικά να αλλάξει και ποιο κόστος είσαι διατεθειμένος να αναλάβεις.'), React.createElement(SvcP, null, React.createElement(Strong, null, 'Δουλεύουμε και το πρακτικό μέρος της απόφασης και ό,τι την κάνει δύσκολη ψυχολογικά.'), ' Στόχος είναι να πάρεις μια απόφαση που καταλαβαίνεις, αντέχεις και μπορείς να υποστηρίξεις στην πράξη, όχι να σε πείσω να φύγεις ή να μείνεις.')), React.createElement(SvcSection, {
+    title: 'Γιατί μπορώ να καταλάβω αυτή τη μετάβαση'
+  }, React.createElement(SvcP, null, 'Έχω περάσει 18+ χρόνια στην τεχνολογία, το product και το growth. Έχτισα δικές μου εταιρείες, δούλεψα σε startups και μεγάλους οργανισμούς και βρέθηκα ο ίδιος μπροστά σε αποφάσεις που ξεπερνούσαν το καθαρά επαγγελματικό.'), React.createElement(SvcP, null, 'Παράλληλα είμαι ψυχοθεραπευτής, με MSc Integrative Counselling & Psychotherapy και εγγραφή στο BACP. Δεν χρειάζεται να διαλέξουμε ανάμεσα σε στρατηγική και αυτογνωσία: μια σοβαρή αλλαγή καριέρας χρειάζεται συνήθως και τα δύο.')), React.createElement(SvcSection, {
+    title: 'Δεν ξέρεις αν φταίει η καριέρα ή το burnout;'
+  }, React.createElement(SvcP, null, React.createElement(React.Fragment, null, 'Μερικές φορές η επιθυμία να φύγεις σημαίνει ότι η καριέρα σου δεν σου ταιριάζει πια. Άλλες, ότι έχεις εξαντληθεί τόσο ώστε τίποτα να μη φαίνεται βιώσιμο. Το ', React.createElement(IA, {
     href: '/el/startingdiagnostic/'
   }, 'Starting Diagnostic'), ' μπορεί να σε βοηθήσει να ξεχωρίσεις τι από τα δύο συμβαίνει.')), React.createElement(CtaRow, {
     lang: 'el',
     mob
-  })), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Συχνές ερωτήσεις',
-    mob
-  }, React.createElement(FaqAccordion, {
-    mob,
+  })), React.createElement(SvcSection, {
+    title: 'Συχνές ερωτήσεις'
+  }, React.createElement(SvcFaq, {
     items: [{
       q: 'Σκέφτομαι να αλλάξω καριέρα αλλά δεν μπορώ να αποφασίσω. Μπορείς να βοηθήσεις;',
       a: 'Ναι. Δεν χρειάζεται να έχεις ήδη αποφασίσει ότι θα φύγεις. Δουλεύουμε να καταλάβουμε τι ακριβώς δεν λειτουργεί, τι περιμένεις από μια αλλαγή και ποιο μέρος της αμφιβολίας σου είναι χρήσιμη προσοχή και ποιο φόβος που σε κρατά ακίνητο.'
@@ -4330,7 +3812,7 @@ function ElCareerCoachingPage() {
       a: 'Ένας κλασικός σύμβουλος καριέρας εστιάζει στις δεξιότητες, το βιογραφικό και την αγορά εργασίας. Δουλεύουμε κι αυτά όταν χρειάζεται, αλλά το κέντρο είναι η ίδια η απόφαση: γιατί δεν μπορείς να δεσμευτείς, τι φοβάσαι ότι θα χάσεις και τι θα χρειαστεί για να στηρίξεις μια αλλαγή στην πράξη.'
     }, {
       q: 'Απολύθηκα και νιώθω χαμένος. Είναι φυσιολογικό;',
-      a: 'Ναι. Μια απόλυση, ειδικά ύστερα από χρόνια σε έναν ρόλο, δεν είναι μόνο απώλεια εισοδήματος — επηρεάζει την αυτοπεποίθηση, την ταυτότητα και την καθημερινή δομή. Πριν πιεστείς να βρεις αμέσως «το επόμενο», μπορεί να χρειάζεται να καταλάβεις τι ακριβώς τελείωσε και τι δεν θέλεις να επαναλάβεις.'
+      a: 'Ναι. Μια απόλυση, ειδικά ύστερα από χρόνια σε έναν ρόλο, επηρεάζει την αυτοπεποίθηση, την ταυτότητα και την καθημερινή δομή, πέρα από το εισόδημα. Πριν πιεστείς να βρεις αμέσως «το επόμενο», μπορεί να χρειάζεται να καταλάβεις τι ακριβώς τελείωσε και τι δεν θέλεις να επαναλάβεις.'
     }]
   })), React.createElement(RelatedLinks, {
     mob,
@@ -4345,9 +3827,6 @@ function ElCareerCoachingPage() {
       href: '/el/executive-coaching/',
       label: 'Executive Coaching →'
     }]
-  }), React.createElement(SiteFooter, {
-    mob,
-    lang: 'el'
   }));
 }
 
@@ -4357,41 +3836,20 @@ function ElImposterPage() {
   const mobPage = mob ? {
     ...pageStyle
   } : widePageStyle;
-  return React.createElement('main', {
-    style: mobPage
-  }, React.createElement(ElRoleEyebrow, null), React.createElement(ElH1, {
+  return React.createElement(SvcPage, null, React.createElement(ElRoleEyebrow, null), React.createElement(ElH1, {
     mob
-  }, 'Imposter Syndrome: βλέπεις ότι τα καταφέρνεις. Απλώς δεν το πιστεύεις πραγματικά'), React.createElement('p', {
-    style: {
-      ...leadStyle,
-      marginBottom: mob ? '1.5rem' : '1.75rem'
-    }
-  }, 'Η εμπειρία, οι ικανότητες και οι επιτυχίες σου είναι πραγματικές.'), React.createElement(P, {
-    last: true
-  }, 'Το ίδιο πραγματική είναι και η επίμονη αίσθηση ότι δεν αξίζεις τη θέση σου ή ότι κάποια στιγμή οι άλλοι θα καταλάβουν πως δεν είσαι τόσο καλός όσο νομίζουν.'), React.createElement(Section, {
-    label: 'Το μοτίβο',
-    mob
-  }, React.createElement(P, null, 'Οι αποδείξεις υπάρχουν: αποτελέσματα, εμπειρία, θετικό feedback, άνθρωποι που σε εμπιστεύονται. Παρ’ όλα αυτά, η αμφιβολία δεν υποχωρεί. Κάθε επιτυχία προσφέρει προσωρινή ανακούφιση και πολύ γρήγορα ο πήχης ανεβαίνει ξανά.'), React.createElement(P, {
-    last: true
-  }, 'Αντί η επιτυχία να χτίζει σταδιακά την αυτοπεποίθησή σου, μετατρέπεται σε άλλη μία απόδειξη που πρέπει να επαναλάβεις. Το πρόβλημα δεν είναι ότι δεν έχεις αποδείξεις· είναι ότι τίποτα δεν μένει απόδειξη για πολύ.')), React.createElement(Section, {
-    label: 'Συνηθισμένα σημάδια',
-    mob
+  }, 'Imposter Syndrome: βλέπεις ότι τα καταφέρνεις. Απλώς δεν το πιστεύεις πραγματικά'), React.createElement(SvcLead, null, 'Η εμπειρία, οι ικανότητες και οι επιτυχίες σου είναι πραγματικές. Το ίδιο πραγματική είναι και η επίμονη αίσθηση ότι δεν αξίζεις τη θέση σου.'), React.createElement(SvcSection, {
+    title: 'Το μοτίβο'
+  }, React.createElement(SvcP, null, 'Οι αποδείξεις υπάρχουν: αποτελέσματα, εμπειρία, θετικό feedback, άνθρωποι που σε εμπιστεύονται. Παρ’ όλα αυτά, η αμφιβολία δεν υποχωρεί. Κάθε επιτυχία προσφέρει προσωρινή ανακούφιση και πολύ γρήγορα ο πήχης ανεβαίνει ξανά.'), React.createElement(SvcP, null, 'Αντί να χτίζει σταδιακά την αυτοπεποίθησή σου, η επιτυχία μετατρέπεται σε άλλη μία απόδειξη που πρέπει να επαναλάβεις. Οι αποδείξεις υπάρχουν· απλώς καμία δεν μένει απόδειξη για πολύ.')), React.createElement(SvcSection, {
+    title: 'Συνηθισμένα σημάδια'
   }, React.createElement(Bullets, {
     mob,
     items: ['φόβος ότι κάποια στιγμή θα «αποκαλυφθείς»', 'δυσκολία να αναγνωρίσεις πραγματικά την επιτυχία σου', 'απόδοση των επιτυχιών στην τύχη ή στη βοήθεια άλλων', 'υπερπροετοιμασία για να μην αφήσεις περιθώριο λάθους', 'τελειομανία και σύγκριση με ανθρώπους που θεωρείς πιο ικανούς', 'έντονη αμφιβολία μετά από μια προαγωγή ή μεγαλύτερη ευθύνη']
-  }), React.createElement(P, {
-    last: true
-  }, 'Η αμφιβολία μπορεί να είναι αληθινή ως συναίσθημα. Δεν σημαίνει ότι είναι ακριβής ως αξιολόγηση της ικανότητάς σου.')), React.createElement(Section, {
-    label: 'Πώς το δουλεύουμε',
-    mob
-  }, React.createElement(P, null, 'Δεν προσπαθώ απλώς να σε πείσω ότι είσαι αρκετά καλός — πιθανότατα το έχεις ακούσει πολλές φορές. Η διαβεβαίωση ανακουφίζει προσωρινά, χωρίς να αλλάζει τον μηχανισμό που παράγει ξανά την αμφιβολία.'), React.createElement(P, {
-    last: true
-  }, React.createElement(Strong, null, 'Το δουλεύουμε μέσα στο πραγματικό επαγγελματικό πλαίσιο, όχι αποκομμένο από τη δουλειά και την καριέρα σου.'), ' Εξετάζουμε πότε εμφανίζεται πιο έντονα, τι σημαίνει για εσένα ένα λάθος, γιατί η αξία σου εξαρτάται τόσο από την απόδοση και τι σε αναγκάζει να αποδεικνύεις ξανά κάτι που έχει ήδη αποδειχθεί. Στόχος δεν είναι να εξαφανιστεί κάθε αμφιβολία, αλλά να μη χρειάζεται να κερδίζεις διαρκώς το δικαίωμα να βρίσκεσαι εκεί που ήδη είσαι.')), React.createElement(Section, {
-    label: 'Πού συνδέεται',
-    mob
-  }, React.createElement(P, {
-    last: true
-  }, React.createElement(React.Fragment, null, 'Το Imposter Syndrome σπάνια λειτουργεί μόνο του. Συχνά συνδέεται με το ', React.createElement(IA, {
+  }), React.createElement(SvcP, null, 'Η αμφιβολία μπορεί να είναι αληθινή ως συναίσθημα. Δεν σημαίνει ότι είναι ακριβής ως αξιολόγηση της ικανότητάς σου.')), React.createElement(SvcSection, {
+    title: 'Πώς το δουλεύουμε'
+  }, React.createElement(SvcP, null, 'Δεν προσπαθώ να σε πείσω ότι είσαι αρκετά καλός, και πιθανότατα το έχεις ακούσει πολλές φορές. Η διαβεβαίωση ανακουφίζει προσωρινά, χωρίς να αλλάζει τον μηχανισμό που παράγει ξανά την αμφιβολία.'), React.createElement(SvcP, null, React.createElement(Strong, null, 'Το δουλεύουμε μέσα στο πραγματικό επαγγελματικό πλαίσιο, όχι αποκομμένο από τη δουλειά και την καριέρα σου.'), ' Εξετάζουμε πότε εμφανίζεται πιο έντονα, τι σημαίνει για εσένα ένα λάθος, γιατί η αξία σου εξαρτάται τόσο από την απόδοση και τι σε αναγκάζει να αποδεικνύεις ξανά κάτι που έχει ήδη αποδειχθεί. Στόχος είναι να μη χρειάζεται να κερδίζεις διαρκώς το δικαίωμα να βρίσκεσαι εκεί που ήδη είσαι, όχι να εξαφανιστεί κάθε αμφιβολία.')), React.createElement(SvcSection, {
+    title: 'Πού συνδέεται'
+  }, React.createElement(SvcP, null, React.createElement(React.Fragment, null, 'Το Imposter Syndrome σπάνια λειτουργεί μόνο του. Συχνά συνδέεται με το ', React.createElement(IA, {
     href: '/el/executive-coaching/'
   }, 'Executive Coaching'), ', όταν εντείνεται ύστερα από προαγωγή· με το ', React.createElement(IA, {
     href: '/el/burnout/'
@@ -4400,19 +3858,15 @@ function ElImposterPage() {
   }, 'Career Coaching'), ', όταν η αμφιβολία σε εμποδίζει να διεκδικήσεις ή να αλλάξεις κατεύθυνση.')), React.createElement(CtaRow, {
     lang: 'el',
     mob
-  })), React.createElement('hr', {
-    style: sepStyle
-  }), React.createElement(Section, {
-    label: 'Συχνές ερωτήσεις',
-    mob
-  }, React.createElement(FaqAccordion, {
-    mob,
+  })), React.createElement(SvcSection, {
+    title: 'Συχνές ερωτήσεις'
+  }, React.createElement(SvcFaq, {
     items: [{
       q: 'Είναι το Imposter Syndrome πραγματική διάγνωση;',
-      a: 'Όχι. Δεν είναι κλινική διάγνωση, αλλά ένας όρος που περιγράφει ένα επαναλαμβανόμενο μοτίβο αμφιβολίας: έχεις αντικειμενικές αποδείξεις ικανότητας, αλλά δυσκολεύεσαι να τις εσωτερικεύσεις. Παρότι δεν είναι διάγνωση, επηρεάζει ουσιαστικά τον τρόπο που εργάζεσαι και αποφασίζεις.'
+      a: 'Όχι. Ο όρος περιγράφει ένα επαναλαμβανόμενο μοτίβο αμφιβολίας, όχι μια κλινική διάγνωση: έχεις αντικειμενικές αποδείξεις ικανότητας, αλλά δυσκολεύεσαι να τις εσωτερικεύσεις. Παρότι δεν είναι διάγνωση, επηρεάζει ουσιαστικά τον τρόπο που εργάζεσαι και αποφασίζεις.'
     }, {
       q: 'Γιατί εμφανίζεται συχνά σε ανθρώπους με υψηλές επιδόσεις;',
-      a: 'Επειδή για πολλούς η επίδοση δεν είναι μόνο αποτέλεσμα ικανότητας· είναι ο τρόπος με τον οποίο κερδίζουν ασφάλεια και αποδοχή. Όταν η αξία σου έχει δεθεί με το να τα καταφέρνεις, κάθε επιτυχία δημιουργεί και την υποχρέωση να το αποδείξεις ξανά.'
+      a: 'Επειδή για πολλούς η επίδοση έχει γίνει ο τρόπος με τον οποίο κερδίζουν ασφάλεια και αποδοχή. Όταν η αξία σου έχει δεθεί με το να τα καταφέρνεις, κάθε επιτυχία δημιουργεί και την υποχρέωση να το αποδείξεις ξανά.'
     }, {
       q: 'Ξέρω λογικά ότι είμαι καλός. Γιατί νιώθω ακόμα απατεώνας;',
       a: 'Επειδή η λογική αναγνώριση και η συναισθηματική πεποίθηση δεν είναι το ίδιο. Τα κομπλιμέντα και οι αποδείξεις απαντούν στη λογική αμφιβολία, όχι στον μηχανισμό που τη δημιουργεί.'
@@ -4430,9 +3884,6 @@ function ElImposterPage() {
       href: '/el/burnout/',
       label: 'Burnout →'
     }]
-  }), React.createElement(SiteFooter, {
-    mob,
-    lang: 'el'
   }));
 }
 
