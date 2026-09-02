@@ -22,9 +22,9 @@ const SecLabel = (num, desc) =>
 const HOME_V2 = {
   en: {
     eyebrow: 'BUSINESS & CAREER ADVISOR · BACP-REGISTERED PSYCHOTHERAPIST',
-    h1pre: 'Practical help for the business, the career and ',
+    h1pre: 'Practical help for your business, your career, and ',
     h1human: 'the person',
-    h1post: ' behind them.',
+    h1post: ' behind both.',
     support: 'For founders, freelancers and experienced professionals whose business or career problem also has a personal side.',
     mLabel: 'THE WHOLE POINT',
     mMuted: 'You know the work.',
