@@ -204,10 +204,18 @@ img{max-width:100%}
   .u-read,.u-shell__body{font-size:18px}
   .u-read h2,.u-shell__body h2{margin-top:56px}
 }
+@media (max-width:680px){
+  .pill--green{max-width:100%;padding-inline:clamp(22px,6.5vw,44px);font-size:clamp(15px,2.35vw,16px)}
+}
+@media (max-width:520px){
+  .cta-strip__h{font-size:clamp(28px,6.9vw,36px)}
+}
 @media (max-width:420px){
-  .pill--green{padding-inline:22px;font-size:15px;max-width:100%}
-  .cta-strip__h{font-size:clamp(28px,7.6vw,36px)}
   .hero-cta{padding-inline:16px}
+}
+@media (max-width:360px){
+  .hero-cta{max-width:100%;padding-inline:16px;gap:8px}
+  html[lang="el"] .hero-cta{font-size:14px}
 }
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
@@ -239,9 +247,10 @@ html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:v
   .home-hero__photo{width:min(100%,390px)}
 }
 @media (max-width:520px){
-  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:66px 20px 80px;min-height:0}
-  html[lang="en"] .home-hero__title{font-size:clamp(46px,14vw,62px)}
-  html[lang="el"] .home-hero__title{font-size:clamp(38px,11vw,52px)}
+  .home-hero__grid{grid-template-columns:1fr;gap:34px;width:100%;max-width:none;padding:66px 20px 80px;min-height:0}
+  html[lang="en"] .home-hero__title{font-size:clamp(40px,9vw,46px);text-wrap:balance}
+  html[lang="el"] .home-hero__title{font-size:clamp(36px,7.7vw,40px);text-wrap:balance}
+  .home-hero__support{font-size:18px;line-height:1.5}
   .home-hero__photo{width:min(82%,310px);justify-self:center}
 }
 
@@ -255,7 +264,7 @@ html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weigh
 .home-manifesto__muted{color:#9DA19E}
 .home-manifesto__green{color:#059669}
 .home-manifesto__copy mark{padding:0 0.08em 0.02em;background:#FFFFFF;color:#1A1C1D;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-@media (max-width:680px){.home-manifesto__inner{padding:48px 20px 55px}.home-manifesto__copy{font-size:clamp(34px,10vw,48px)}}
+@media (max-width:680px){.home-manifesto__inner{padding:48px 20px 55px}.home-manifesto__copy{font-size:clamp(34px,5.3vw,36px);text-wrap:balance}html[lang="el"] .home-manifesto__copy{font-size:clamp(30px,5.3vw,36px)}}
 
 /* ── Section 01 — dual-field component (dark business / green psychology, portrait on the seam) ── */
 .am-duality-section{overflow:hidden;padding:clamp(86px,9vw,130px) 24px clamp(101px,10.2vw,146px);background:#FFFFFF}
@@ -281,7 +290,7 @@ html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weigh
 @media (max-width:700px){
   .am-duality-section{padding-inline:20px}
   .am-duality-section__heading{margin-bottom:58px}
-  .am-duality-section__title{font-size:clamp(39px,10.5vw,49px)}
+  .am-duality-section__title{font-size:clamp(36px,6.15vw,43px);text-wrap:balance}
   .am-duality{--am-mobile-top:270px;--am-mobile-bottom:300px;--am-photo-width:clamp(144px,39vw,160px);--am-photo-height:clamp(224px,60vw,242px);min-height:calc(var(--am-mobile-top) + var(--am-mobile-bottom));grid-template-columns:1fr;grid-template-rows:var(--am-mobile-top) var(--am-mobile-bottom)}
   .am-duality__side{min-height:0;justify-content:center;text-align:center}
   .am-duality__side--psychology{text-align:center}
@@ -339,6 +348,12 @@ html[lang="el"] .home-manifesto__copy{font-family:var(--font-heading);font-weigh
   .media__read{grid-row:auto}.media__cell{min-height:320px}
   .opinion{grid-template-columns:1fr}.opinion img{min-height:320px}
 }
+@media (max-width:700px){
+  .cont__h{font-size:clamp(32px,5.7vw,40px);text-wrap:balance}
+}
+@media (max-width:640px){
+  .cont,.opinion__body,.media__cell{padding-inline:clamp(24px,5vw,32px)}
+}
 
 :root{
   --am-paper:#f3f0e8;
@@ -388,9 +403,15 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .amx-story-copy .amx-body + .amx-body{margin-top:22px}
 .amx-reading-copy{max-width:750px;margin:28px 0 0}
 .amx-reading-copy .amx-body + .amx-body{margin-top:20px}
-@media (max-width: 470px){
-  .amx-display{font-size:clamp(38px, 12vw, 48px)}
-  .amx-heading{font-size:clamp(32px, 10vw, 42px)}
+@media (max-width: 600px){
+  .amx-page--about .amx-display{font-size:clamp(34px, 7vw, 42px);text-wrap:balance}
+  html[lang="el"] .amx-page--about .amx-display{font-size:clamp(32px, 7vw, 42px)}
+  .amx-page--about .amx-heading{font-size:clamp(30px, 5.67vw, 34px);text-wrap:balance}
+}
+@media (max-width: 480px){
+  .amx-page--about .amx-container{padding-inline:clamp(20px, 5vw, 24px)}
+  .amx-page--about .amx-button{max-width:100%;padding-inline:18px;line-height:1.25;text-align:center}
+  html[lang="el"] .amx-page--about .amx-button{font-size:14px}
 }
 
 /* ── Reviews (no giant opening testimonial) ── */
@@ -416,8 +437,8 @@ html[lang^="el"] .amx-body{line-height:1.62}
 </style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/" aria-current="page">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/el/" hreflang="el">ΕΛΛΗΝΙΚΑ</a><a class="hdr-cta" href="/startingdiagnostic/"><span>START HERE</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main><section class="home-hero"><div class="home-hero__grid"><div class="home-hero__copy"><div class="home-hero__eyebrow">BUSINESS &amp; CAREER ADVISOR · BACP-REGISTERED PSYCHOTHERAPIST</div><h1 class="home-hero__title">Practical help for the business, the career and <span class="human">the person</span> behind them.</h1><p class="home-hero__support">For founders, freelancers and experienced professionals whose business or career problem also has a personal side.</p><a class="hero-cta" href="/startingdiagnostic/"><span>Apply for a working session</span><span>→</span></a></div><figure class="home-hero__photo"><div class="home-hero__frame"><img src="/img/aggelos-homepage.webp" alt="Aggelos Mouzakitis" width="1560" height="1040" loading="eager" fetchpriority="high" decoding="async"></div></figure></div></section><section class="home-manifesto"><div class="home-manifesto__inner"><div class="home-manifesto__label">THE WHOLE POINT</div><div class="home-manifesto__copy"><span class="home-manifesto__muted">You know the work.</span><span class="home-manifesto__green">Now let’s build a career or business that <mark>works for you too.</mark></span></div></div></section><section class="am-duality-section" aria-labelledby="am-duality-title"><div class="am-duality-section__inner"><header class="am-duality-section__heading"><div class="sec-label"><span class="sec-label__num">01 /</span><span class="sec-label__desc">BUSINESS &amp; PSYCHOLOGY</span></div><h2 class="am-duality-section__title" id="am-duality-title">You won’t have to choose between practical advice and psychological depth.</h2></header><div class="am-duality"><article class="am-duality__side am-duality__side--business"><div class="am-duality__copy"><p class="am-duality__label">WHAT WE CHANGE</p><p class="am-duality__statement">We can work on the offer, marketing, career move, client mix or the way the business runs.</p></div></article><article class="am-duality__side am-duality__side--psychology"><div class="am-duality__copy"><p class="am-duality__label">WHAT GETS IN THE WAY</p><p class="am-duality__statement">If fear, shame or other people’s approval is shaping your decisions, we work there too.</p></div></article><figure class="am-duality__portrait"><img src="/img/aggelos-overlap.webp" alt="Aggelos Mouzakitis" width="250" height="426" loading="lazy" decoding="async"></figure></div></div></section><div class="home-flow"><section><div class="site-container"><div class="sec-label"><span class="sec-label__num">02 /</span><span class="sec-label__desc">HONEST FEEDBACK</span></div><h2 class="sec__h2l"><span>YOU WILL GET</span><span>AN OPINION.</span></h2><div class="opinion"><img src="/img/aggelos-continuation.jpeg" alt="Aggelos Mouzakitis" width="900" height="1125" loading="lazy" decoding="async"><div class="opinion__body"><p>I ask enough questions to understand the situation, then tell you what I think.</p><p>If I see a practical move, I suggest it. If your story does not add up, I say so.</p><p>Tell me the part you usually edit out. I will not think less of you or let you bullshit yourself.</p><blockquote class="opinion__q">“I left with more than advice. I left understanding what the problem actually was.”</blockquote></div></div></div></section><section><div class="site-container"><div class="cont"><div class="cont__in"><div class="sec-label"><span class="sec-label__num">03 /</span><span class="sec-label__desc">IF WE CONTINUE</span></div><h2 class="cont__h">We agree on one concrete outcome and how long we will work towards it.</h2><p>We meet weekly or every other week, and you have WhatsApp access between sessions.</p></div></div></div></section><section><div class="site-container"><div class="sec-label"><span class="sec-label__num">04 /</span><span class="sec-label__desc">MORE FROM ME</span></div><h2 class="sec__h" style="margin-bottom: 24px;">Want to see how I think?</h2><div class="rule-arrow"><div></div><span>→</span></div><div class="media"><a class="media__cell media__read" href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer"><div class="media__top"><h3>READ</h3><span class="media__arw">↗</span></div><div><div class="media__kicker">UNDISGUISED</div><p>Essays about work, ambition, psychology and where they overlap.</p></div></a><a class="media__cell media__watch" href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer"><div class="media__top"><h3>WATCH</h3><span class="media__arw" style="font-size: 32px;">↗</span></div><div><div class="media__kicker">YOUTUBE</div><p>Short videos, longer conversations and the occasional useful rant.</p></div></a><a class="media__cell media__ask" href="/ask-me-anything/"><div class="media__top"><h3>ASK<span class="media__ask-sub">ANONYMOUSLY</span></h3><span class="media__arw" style="font-size: 32px;">↗</span></div><div><p>Send me a question without giving me your name, and I may answer it in an article or video.</p></div></a></div></div></section></div><section class="cta-strip"><div class="site-container"><h2 class="cta-strip__h">IF WORKING HARDER WAS GOING TO FIX THIS, IT PROBABLY WOULD HAVE BY NOW.</h2><div><a class="pill pill--green" href="/startingdiagnostic/"><span>Apply for a working session</span><span>→</span></a></div><a class="cta-strip__sub" href="/confidentiality/"><span>Confidentiality</span><span>→</span></a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__brand" style="font-size: 20px;">Aggelos<span>.</span></div><div class="site-ftr__roles"><div>Private business &amp; career advisor</div><div style="margin-top: 8px;">BACP-registered psychotherapist</div></div></div><nav><div class="site-ftr__head">NAVIGATE</div><a href="/">Home</a><a href="/about/">Why me</a><a href="/reviews/">Reviews</a><a href="/startingdiagnostic/">Apply</a></nav><nav><div class="site-ftr__head">CONTENT</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Articles ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a><a href="/ask-me-anything/">Ask anonymously ↗</a></nav><nav><div class="site-ftr__head">FOLLOW</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. All rights reserved.</div><nav><a href="/confidentiality/">Confidentiality</a><a href="/confidentiality/#terms">Terms</a><a href="/confidentiality/#privacy">Privacy</a></nav></div></div></footer></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
-<script src="/site-chrome.js?v=6"></script>
-<script src="/core-pages-v2.js?v=8"></script>
+<script src="/site-chrome.js?v=7"></script>
+<script src="/core-pages-v2.js?v=9"></script>
 <script src="/content-pages.js?v=35"></script>
 <script>renderApp("home", "en");</script>
 </body>
