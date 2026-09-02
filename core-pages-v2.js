@@ -177,9 +177,10 @@ html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:$
   .home-hero__photo{width:min(100%,390px)}
 }
 @media (max-width:520px){
-  .home-hero__grid{grid-template-columns:1fr;gap:34px;padding:66px 20px 80px;min-height:0}
-  html[lang="en"] .home-hero__title{font-size:clamp(46px,14vw,62px)}
-  html[lang="el"] .home-hero__title{font-size:clamp(38px,11vw,52px)}
+  .home-hero__grid{grid-template-columns:1fr;gap:34px;width:100%;max-width:none;padding:66px 20px 80px;min-height:0}
+  html[lang="en"] .home-hero__title{font-size:clamp(40px,9vw,46px);text-wrap:balance}
+  html[lang="el"] .home-hero__title{font-size:clamp(36px,7.7vw,40px);text-wrap:balance}
+  .home-hero__support{font-size:18px;line-height:1.5}
   .home-hero__photo{width:min(82%,310px);justify-self:center}
 }
 
@@ -193,7 +194,7 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 .home-manifesto__muted{color:${V2.greyOnDark}}
 .home-manifesto__green{color:${V2.green}}
 .home-manifesto__copy mark{padding:0 0.08em 0.02em;background:${V2.white};color:${V2.ink};box-decoration-break:clone;-webkit-box-decoration-break:clone}
-@media (max-width:680px){.home-manifesto__inner{padding:48px 20px 55px}.home-manifesto__copy{font-size:clamp(34px,10vw,48px)}}
+@media (max-width:680px){.home-manifesto__inner{padding:48px 20px 55px}.home-manifesto__copy{font-size:clamp(34px,5.3vw,36px);text-wrap:balance}html[lang="el"] .home-manifesto__copy{font-size:clamp(30px,5.3vw,36px)}}
 
 /* ── Section 01 — dual-field component (dark business / green psychology, portrait on the seam) ── */
 .am-duality-section{overflow:hidden;padding:clamp(86px,9vw,130px) 24px clamp(101px,10.2vw,146px);background:${V2.white}}
@@ -219,7 +220,7 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
 @media (max-width:700px){
   .am-duality-section{padding-inline:20px}
   .am-duality-section__heading{margin-bottom:58px}
-  .am-duality-section__title{font-size:clamp(39px,10.5vw,49px)}
+  .am-duality-section__title{font-size:clamp(36px,6.15vw,43px);text-wrap:balance}
   .am-duality{--am-mobile-top:270px;--am-mobile-bottom:300px;--am-photo-width:clamp(144px,39vw,160px);--am-photo-height:clamp(224px,60vw,242px);min-height:calc(var(--am-mobile-top) + var(--am-mobile-bottom));grid-template-columns:1fr;grid-template-rows:var(--am-mobile-top) var(--am-mobile-bottom)}
   .am-duality__side{min-height:0;justify-content:center;text-align:center}
   .am-duality__side--psychology{text-align:center}
@@ -277,6 +278,12 @@ html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;
   .media__read{grid-row:auto}.media__cell{min-height:320px}
   .opinion{grid-template-columns:1fr}.opinion img{min-height:320px}
 }
+@media (max-width:700px){
+  .cont__h{font-size:clamp(32px,5.7vw,40px);text-wrap:balance}
+}
+@media (max-width:640px){
+  .cont,.opinion__body,.media__cell{padding-inline:clamp(24px,5vw,32px)}
+}
 
 :root{
   --am-paper:#f3f0e8;
@@ -326,9 +333,15 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .amx-story-copy .amx-body + .amx-body{margin-top:22px}
 .amx-reading-copy{max-width:750px;margin:28px 0 0}
 .amx-reading-copy .amx-body + .amx-body{margin-top:20px}
-@media (max-width: 470px){
-  .amx-display{font-size:clamp(38px, 12vw, 48px)}
-  .amx-heading{font-size:clamp(32px, 10vw, 42px)}
+@media (max-width: 600px){
+  .amx-page--about .amx-display{font-size:clamp(34px, 7vw, 42px);text-wrap:balance}
+  html[lang="el"] .amx-page--about .amx-display{font-size:clamp(32px, 7vw, 42px)}
+  .amx-page--about .amx-heading{font-size:clamp(30px, 5.67vw, 34px);text-wrap:balance}
+}
+@media (max-width: 480px){
+  .amx-page--about .amx-container{padding-inline:clamp(20px, 5vw, 24px)}
+  .amx-page--about .amx-button{max-width:100%;padding-inline:18px;line-height:1.25;text-align:center}
+  html[lang="el"] .amx-page--about .amx-button{font-size:14px}
 }
 
 /* ── Reviews (no giant opening testimonial) ── */
@@ -552,7 +565,7 @@ function AboutPageV2({
     page: 'about',
     lang
   }), React.createElement('main', {
-    className: 'amx-page'
+    className: 'amx-page amx-page--about'
   },
   // Hero — off-white
   React.createElement('section', {
