@@ -277,6 +277,9 @@ function SiteHeader({ page, lang = 'en' }) {
     'aria-current': page === it.id ? 'page' : undefined,
   }, it.label);
   const langHref = CHROME_PATHS[page] ? cPath(page, other) : (other === 'el' ? '/el/' : '/');
+  // Header CTA: English routes to the anonymous-questions page; Greek keeps the diagnostic entry.
+  const ctaHref = lang === 'el' ? cPath('diagnostic', lang) : 'https://aggelosmouzakitis.com/ask-me-anything/';
+  const ctaLabel = lang === 'el' ? t.start : 'Ask anonymously';
   // The header CTA points at the diagnostic page, so hide it on that page itself.
   const showCta = page !== 'diagnostic';
 
@@ -288,8 +291,8 @@ function SiteHeader({ page, lang = 'en' }) {
         React.createElement('div', { style: { display: 'flex', alignItems: 'center', justifySelf: 'end' } },
           React.createElement('div', { className: 'site-hdr__end' },
             React.createElement('a', { className: 'site-hdr__lang', href: langHref, hrefLang: other }, t.other),
-            showCta && React.createElement('a', { className: 'hdr-cta', href: cPath('diagnostic', lang) },
-              React.createElement('span', null, t.start), React.createElement('span', null, '→'))
+            showCta && React.createElement('a', { className: 'hdr-cta', href: ctaHref },
+              React.createElement('span', null, ctaLabel), React.createElement('span', null, '→'))
           ),
           React.createElement('button', {
             className: 'site-hdr__burger', type: 'button', 'aria-label': t.menu,
@@ -303,8 +306,8 @@ function SiteHeader({ page, lang = 'en' }) {
         items.map(link),
         React.createElement('a', { href: langHref, hrefLang: other, style: { color: SITE.onDark } }, t.other),
         showCta && React.createElement('a', {
-          className: 'hdr-cta', href: cPath('diagnostic', lang),
-        }, React.createElement('span', null, t.start), React.createElement('span', null, '→'))
+          className: 'hdr-cta', href: ctaHref,
+        }, React.createElement('span', null, ctaLabel), React.createElement('span', null, '→'))
       )
     )
   );
@@ -355,7 +358,9 @@ function SiteFooterX({ lang = 'en' }) {
           React.createElement('div', { className: 'site-ftr__head' }, t.content),
           React.createElement('a', { href: EXTERNAL.undisguised, ...ext }, t.articles + ' ↗'),
           React.createElement('a', { href: EXTERNAL.youtube, ...ext }, 'YouTube ↗'),
-          React.createElement('a', { href: cPath('ask-me-anything', lang) }, t.askAnon + ' ↗')
+          React.createElement('a', lang === 'el'
+            ? { href: 'https://www.videoask.com/fuv51iuq1', ...ext }
+            : { href: cPath('ask-me-anything', lang) }, t.askAnon + ' ↗')
         ),
         React.createElement('nav', null,
           React.createElement('div', { className: 'site-ftr__head' }, t.follow),

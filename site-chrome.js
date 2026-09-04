@@ -357,6 +357,9 @@ function SiteHeader({
     'aria-current': page === it.id ? 'page' : undefined
   }, it.label);
   const langHref = CHROME_PATHS[page] ? cPath(page, other) : other === 'el' ? '/el/' : '/';
+  // Header CTA: English routes to the anonymous-questions page; Greek keeps the diagnostic entry.
+  const ctaHref = lang === 'el' ? cPath('diagnostic', lang) : 'https://aggelosmouzakitis.com/ask-me-anything/';
+  const ctaLabel = lang === 'el' ? t.start : 'Ask anonymously';
   // The header CTA points at the diagnostic page, so hide it on that page itself.
   const showCta = page !== 'diagnostic';
   return React.createElement(React.Fragment, null, React.createElement('header', {
@@ -381,8 +384,8 @@ function SiteHeader({
     hrefLang: other
   }, t.other), showCta && React.createElement('a', {
     className: 'hdr-cta',
-    href: cPath('diagnostic', lang)
-  }, React.createElement('span', null, t.start), React.createElement('span', null, '→'))), React.createElement('button', {
+    href: ctaHref
+  }, React.createElement('span', null, ctaLabel), React.createElement('span', null, '→'))), React.createElement('button', {
     className: 'site-hdr__burger',
     type: 'button',
     'aria-label': t.menu,
@@ -400,8 +403,8 @@ function SiteHeader({
     }
   }, t.other), showCta && React.createElement('a', {
     className: 'hdr-cta',
-    href: cPath('diagnostic', lang)
-  }, React.createElement('span', null, t.start), React.createElement('span', null, '→')))));
+    href: ctaHref
+  }, React.createElement('span', null, ctaLabel), React.createElement('span', null, '→')))));
 }
 
 // ─── BLACK CTA STRIP ─────────────────────────────────────────────────────────
@@ -474,7 +477,10 @@ function SiteFooterX({
   }, t.articles + ' ↗'), React.createElement('a', {
     href: EXTERNAL.youtube,
     ...ext
-  }, 'YouTube ↗'), React.createElement('a', {
+  }, 'YouTube ↗'), React.createElement('a', lang === 'el' ? {
+    href: 'https://www.videoask.com/fuv51iuq1',
+    ...ext
+  } : {
     href: cPath('ask-me-anything', lang)
   }, t.askAnon + ' ↗')), React.createElement('nav', null, React.createElement('div', {
     className: 'site-ftr__head'

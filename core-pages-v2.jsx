@@ -577,7 +577,9 @@ function HomePageV2({ lang = 'en' }) {
                   React.createElement('div', { className: 'media__kicker' }, 'YOUTUBE'),
                   React.createElement('p', null, c.watchP))
               ),
-              React.createElement('a', { className: 'media__cell media__ask', href: window.cPath('ask-me-anything', lang) },
+              React.createElement('a', lang === 'el'
+                ? { className: 'media__cell media__ask', href: 'https://www.videoask.com/fuv51iuq1', ...v2Ext }
+                : { className: 'media__cell media__ask', href: window.cPath('ask-me-anything', lang) },
                 React.createElement('div', { className: 'media__top' },
                   React.createElement('h3', null, 'ASK', React.createElement('span', { className: 'media__ask-sub' }, c.askSub)),
                   React.createElement('span', { className: 'media__arw', style: { fontSize: 32 } }, '↗')),
