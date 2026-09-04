@@ -277,10 +277,12 @@ function SiteHeader({ page, lang = 'en' }) {
     'aria-current': page === it.id ? 'page' : undefined,
   }, it.label);
   const langHref = CHROME_PATHS[page] ? cPath(page, other) : (other === 'el' ? '/el/' : '/');
-  // Header CTA: English routes to the anonymous-questions page; Greek keeps the diagnostic entry.
-  const ctaHref = lang === 'el' ? cPath('diagnostic', lang) : 'https://aggelosmouzakitis.com/ask-me-anything/';
-  const ctaLabel = lang === 'el' ? t.start : 'Ask anonymously';
-  // The header CTA points at the diagnostic page, so hide it on that page itself.
+  // Header CTA routes to "ask anonymously": the AMA page (EN) / the VideoAsk form (EL).
+  const ctaHref = lang === 'el' ? 'https://www.videoask.com/fuv51iuq1' : 'https://aggelosmouzakitis.com/ask-me-anything/';
+  // Greek label is intentionally plain uppercase (no accents on capitals).
+  const ctaLabel = lang === 'el' ? 'ΡΩΤΑ ΑΝΩΝΥΜΑ' : 'Ask anonymously';
+  const ctaExt = lang === 'el' ? ext : null;
+  // Keep the header CTA hidden on the diagnostic page.
   const showCta = page !== 'diagnostic';
 
   return React.createElement(React.Fragment, null,
@@ -291,7 +293,7 @@ function SiteHeader({ page, lang = 'en' }) {
         React.createElement('div', { style: { display: 'flex', alignItems: 'center', justifySelf: 'end' } },
           React.createElement('div', { className: 'site-hdr__end' },
             React.createElement('a', { className: 'site-hdr__lang', href: langHref, hrefLang: other }, t.other),
-            showCta && React.createElement('a', { className: 'hdr-cta', href: ctaHref },
+            showCta && React.createElement('a', { className: 'hdr-cta', href: ctaHref, ...ctaExt },
               React.createElement('span', null, ctaLabel), React.createElement('span', null, '→'))
           ),
           React.createElement('button', {
@@ -306,7 +308,7 @@ function SiteHeader({ page, lang = 'en' }) {
         items.map(link),
         React.createElement('a', { href: langHref, hrefLang: other, style: { color: SITE.onDark } }, t.other),
         showCta && React.createElement('a', {
-          className: 'hdr-cta', href: ctaHref,
+          className: 'hdr-cta', href: ctaHref, ...ctaExt,
         }, React.createElement('span', null, ctaLabel), React.createElement('span', null, '→'))
       )
     )

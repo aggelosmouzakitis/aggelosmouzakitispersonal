@@ -9,7 +9,7 @@ const ROOT = path.resolve(__dirname, '..');
 const ORIGIN = 'https://aggelosmouzakitis.com';
 const GA = 'G-KV83RRF6ZM';
 const SIDEBAR_V = 32, CONTENT_V = 36;
-const CHROME_V = 9, V2_V = 12;
+const CHROME_V = 10, V2_V = 12;
 
 // VideoAsk widget — injected into the <body> of Greek (/el/) pages only.
 const VIDEOASK_EMBED = `<script>
