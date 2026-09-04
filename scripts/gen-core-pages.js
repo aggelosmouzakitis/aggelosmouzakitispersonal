@@ -9,7 +9,7 @@ const ROOT = path.resolve(__dirname, '..');
 const ORIGIN = 'https://aggelosmouzakitis.com';
 const GA = 'G-KV83RRF6ZM';
 const SIDEBAR_V = 32, CONTENT_V = 36;
-const CHROME_V = 7, V2_V = 10;
+const CHROME_V = 8, V2_V = 11;
 
 // Shared CSS (from the original index.html — design system preserved 1:1)
 const CSS = `

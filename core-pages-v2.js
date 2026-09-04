@@ -31,10 +31,38 @@ const HOME_V2 = {
     h1human: 'the person',
     h1post: ' behind both.',
     support: 'For founders, freelancers and experienced professionals whose business or career problem also has a personal side.',
-    mLabel: 'THE WHOLE POINT',
-    mMuted: 'You know the work.',
-    mGreenPre: 'Now let’s build a career or business that ',
-    mMark: 'works for you too.',
+    pointEyebrow: 'BEFORE YOU SCROLL',
+    pointH: 'Anyone can put “advisor” in their bio.',
+    points: [{
+      label: '01 / BUSINESS',
+      lead: 'I did the work before I started selling advice.',
+      body: ['Eighteen years in product and growth. Seven of them running my own consultancy and working with 100+ tech companies. I also built two startups. Neither went well.'],
+      close: 'I know business because I made the decisions and lived with the consequences.'
+    }, {
+      label: '02 / CAREER',
+      lead: 'I built my own career before advising anyone on theirs.',
+      body: ['I built it abroad, through roles in product and growth, and I still work at IBM.'],
+      close: 'I did not leave a job, rebrand as a coach and start talking about a career I never had.'
+    }, {
+      label: '03 / TRAINING',
+      lead: 'I am not just a guy with too much confidence.',
+      body: ['My training includes an MSc in Integrative Counselling & Psychotherapy from the University of Derby, a Graduate Certificate in Psychology, supervised practice and five years of experience doing this work.'],
+      close: 'I do not improvise the psychological part.'
+    }, {
+      label: '04 / REACH',
+      lead: 'I am not a social media personality or an influencer.',
+      body: ['A large audience proves you have found a way to earn attention.', 'Being good at the work and being good at attracting attention are two completely different skills.'],
+      close: 'If you want a performer, there are better choices.'
+    }, {
+      label: '05 / BUSINESS → PSYCHOLOGY',
+      lead: 'You do not have to leave the psychological part out.',
+      body: ['If you come for business advisory, you also get the psychological work that often matters more than the strategy.']
+    }, {
+      label: '06 / PSYCHOLOGY → BUSINESS',
+      lead: 'You do not have to leave the business context out.',
+      body: ['If you come for psychotherapeutic work, we will not spend months getting me to understand how your business or career works.']
+    }],
+    logoLabel: 'WORK WITH 100+ TECHNOLOGY COMPANIES',
     splitIntro: 'You won’t have to choose between practical advice and psychological depth.',
     s01d: 'BUSINESS & PSYCHOLOGY',
     s02d: 'HONEST FEEDBACK',
@@ -59,15 +87,43 @@ const HOME_V2 = {
     contAlt: 'Aggelos Mouzakitis'
   },
   el: {
-    eyebrow: 'ΣΥΜΒΟΥΛΟΣ ΕΠΙΧΕΙΡΗΣΕΩΝ & ΚΑΡΙΕΡΑΣ · ΣΥΜΒΟΥΛΟΣ ΨΥΧΙΚΗΣ ΥΓΕΙΑΣ',
+    eyebrow: 'ΣΥΜΒΟΥΛΟΣ ΕΠΙΧΕΙΡΗΣΕΩΝ & ΚΑΡΙΕΡΑΣ · ΨΥΧΟΘΕΡΑΠΕΥΤΗΣ',
     h1pre: 'Πρακτική βοήθεια για την επιχείρηση, την καριέρα και ',
     h1human: 'τον άνθρωπο',
     h1post: ' πίσω από όλα αυτά.',
     support: 'Για founders, freelancers και έμπειρους επαγγελματίες που αντιμετωπίζουν ένα πραγματικό πρόβλημα με προσωπικές προεκτάσεις.',
-    mLabel: 'ΤΟ ΖΗΤΟΥΜΕΝΟ',
-    mMuted: 'Ξέρεις καλά τη δουλειά σου.',
-    mGreenPre: 'Πάμε τώρα να κάνουμε την καριέρα ή την επιχείρησή σου ',
-    mMark: 'να δουλεύει και για σένα.',
+    pointEyebrow: 'ΠΡΙΝ ΠΡΟΧΩΡΗΣΕΙΣ',
+    pointH: 'Ο καθένας μπορεί να γράψει «advisor» στο bio του.',
+    points: [{
+      label: '01 / BUSINESS',
+      lead: 'Έκανα τη δουλειά πριν αρχίσω να πουλάω συμβουλές.',
+      body: ['18 χρόνια σε product και growth. Επτά από αυτά με δική μου consultancy και συνεργασίες με 100+ εταιρείες τεχνολογίας. Έστησα επίσης δύο startups, που όμως δεν πήγαν καλά.'],
+      close: 'Ξέρω το business επειδή πήρα αποφάσεις και έφαγα τις συνέπειές τους.'
+    }, {
+      label: '02 / ΚΑΡΙΕΡΑ',
+      lead: 'Έχτισα τη δική μου καριέρα πριν αρχίσω να συμβουλεύω άλλους για τη δική τους.',
+      body: ['Την έχτισα στο εξωτερικό, μέσα από ρόλους σε product και growth, και συνεχίζω να δουλεύω στην IBM.'],
+      close: 'Δεν άφησα μια δουλειά, έκανα rebrand σε coach και άρχισα να μιλάω για μια καριέρα που δεν είχα ποτέ.'
+    }, {
+      label: '03 / ΕΚΠΑΙΔΕΥΣΗ',
+      lead: 'Δεν είμαι απλά ένας τύπος με υπερβολική αυτοπεποίθηση.',
+      body: ['Η εκπαίδευσή μου περιλαμβάνει MSc Integrative Counselling & Psychotherapy από το University of Derby, Graduate Certificate in Psychology, εποπτευόμενη πρακτική και ήδη πέντε χρόνια εμπειρίας σε αυτή τη δουλειά.'],
+      close: 'Στο ψυχολογικό μέρος δεν αυτοσχεδιάζω.'
+    }, {
+      label: '04 / REACH',
+      lead: 'Δεν είμαι social media personality ή influencer.',
+      body: ['Το μεγάλο κοινό αποδεικνύει ότι έχεις βρει τρόπο να κερδίζεις την προσοχή.', 'Το να είσαι καλός στη δουλειά και το να ξέρεις να κερδίζεις την προσοχή είναι δύο τελείως διαφορετικά skills.'],
+      close: 'Αν ψάχνεις performer, υπάρχουν καλύτερες επιλογές.'
+    }, {
+      label: '05 / BUSINESS → ΨΥΧΟΛΟΓΙΑ',
+      lead: 'Δεν χρειάζεται να αφήσεις το ψυχολογικό κομμάτι απ’ έξω.',
+      body: ['Αν έρχεσαι για business advisory, παίρνεις και το ψυχολογικό κομμάτι, που συχνά αποδεικνύεται πιο σημαντικό από τη στρατηγική.']
+    }, {
+      label: '06 / ΨΥΧΟΛΟΓΙΑ → BUSINESS',
+      lead: 'Δεν χρειάζεται να αφήσεις το business κομμάτι απ’ έξω.',
+      body: ['Αν έρχεσαι για ψυχοθεραπευτική δουλειά, δεν θα χρειαστούν αιώνες για να μου εξηγήσεις πώς λειτουργεί το business ή η καριέρα σου.']
+    }],
+    logoLabel: 'ΣΥΝΕΡΓΑΣΙΕΣ ΜΕ 100+ ΕΤΑΙΡΕΙΕΣ ΤΕΧΝΟΛΟΓΙΑΣ',
     splitIntro: 'Δεν χρειάζεται να διαλέξεις αν το θέμα είναι επαγγελματικό ή προσωπικό.',
     s01d: 'ΕΠΙΧΕΙΡΗΣΗ & ΨΥΧΟΛΟΓΙΑ',
     s02d: 'ΕΙΛΙΚΡΙΝΗΣ ΓΝΩΜΗ',
@@ -96,7 +152,7 @@ const HOME_V2 = {
 // ─── Why Me copy — verbatim from the approved implementation brief ─────────────
 const WHY_V2 = {
   en: {
-    label: 'WHY ME',
+    label: 'ABOUT ME',
     h1: 'I spent most of my adult life in consulting, growth and startups before I trained as a psychotherapist.',
     deck: 'I spent seven years running a growth consultancy, worked with more than 100 technology companies, held corporate roles and built two startups that failed, so you will not have to explain how this world works to me.',
     fact: 'A founder or experienced professional does not have to explain how this world works to me.',
@@ -120,7 +176,7 @@ const WHY_V2 = {
     finalCta: 'Apply for a working session'
   },
   el: {
-    label: 'ΓΙΑΤΙ ΕΜΕΝΑ',
+    label: 'ΠΟΙΟΣ ΕΙΜΑΙ',
     h1: 'Πριν εκπαιδευτώ ως ψυχοθεραπευτής, είχα περάσει το μεγαλύτερο μέρος της ενήλικης ζωής μου στο consulting, το growth και τα startups.',
     deck: 'Για επτά χρόνια είχα τη δική μου growth consultancy, συνεργάστηκα με περισσότερες από 100 εταιρείες τεχνολογίας, πέρασα από εταιρικούς ρόλους και έστησα δύο startups που απέτυχαν. Οπότε δεν θα χρειαστεί να μου εξηγήσεις πώς λειτουργεί αυτός ο κόσμος.',
     fact: 'Ένας founder ή ένας έμπειρος επαγγελματίας δεν χρειάζεται να μου εξηγήσει πώς λειτουργεί αυτός ο κόσμος.',
@@ -184,17 +240,35 @@ html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:$
   .home-hero__photo{width:min(82%,310px);justify-self:center}
 }
 
-/* ── Manifesto — "The whole point" (full-width dark) ── */
-.home-manifesto{width:100%;background:${V2.ink}}
-.home-manifesto__inner{max-width:1280px;margin-inline:auto;padding:clamp(58px,6vw,82px) clamp(24px,5vw,72px)}
-.home-manifesto__label{margin-bottom:17px;color:${V2.green};font-family:${V2.display};font-size:13px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
-.home-manifesto__copy{font-family:${V2.archivo};font-synthesis:none;font-size:clamp(36px,4.8vw,68px);font-weight:400;line-height:1.04;letter-spacing:-0.055em}
-html[lang="el"] .home-manifesto__copy{font-family:${V2.display};font-weight:800;letter-spacing:-0.045em}
-.home-manifesto__muted,.home-manifesto__green{display:block}
-.home-manifesto__muted{color:${V2.greyOnDark}}
-.home-manifesto__green{color:${V2.green}}
-.home-manifesto__copy mark{padding:0 0.08em 0.02em;background:${V2.white};color:${V2.ink};box-decoration-break:clone;-webkit-box-decoration-break:clone}
-@media (max-width:680px){.home-manifesto__inner{padding:48px 20px 55px}.home-manifesto__copy{font-size:clamp(34px,5.3vw,36px);text-wrap:balance}html[lang="el"] .home-manifesto__copy{font-size:clamp(30px,5.3vw,36px)}}
+/* ── Manifesto — "Anyone can put advisor in their bio" (full-width dark, card grid) ── */
+.home-point{width:100%;background:${V2.ink}}
+.home-point__inner{padding-block:clamp(64px,8vw,96px)}
+.home-point__eyebrow{font-family:${V2.body};font-size:13px;font-weight:700;line-height:1;letter-spacing:0.12em;color:${V2.green}}
+.home-point__h{margin:20px 0 clamp(44px,5vw,72px);max-width:24ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(40px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.04em;color:${V2.white};text-wrap:balance}
+.home-point__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;gap:22px;align-items:stretch}
+.home-point__card{height:100%;padding:clamp(28px,2.6vw,36px);border-radius:10px;display:flex;flex-direction:column;color:#181a1c}
+.home-point__label{font-family:${V2.body};font-size:13px;font-weight:700;line-height:1;letter-spacing:0.1em;text-transform:uppercase}
+.home-point__rule{height:1px;margin:14px 0 22px;background:rgba(24,26,28,0.24)}
+.home-point__lead{margin:0;font-family:${V2.display};font-synthesis:none;font-size:clamp(24px,1.8vw,27px);font-weight:750;line-height:1.14;letter-spacing:-0.03em;min-height:93px;text-wrap:pretty}
+.home-point__text{margin-top:26px;display:flex;flex-direction:column;gap:14px}
+.home-point__body{margin:0;font-size:17px;line-height:1.55;color:#282726;text-wrap:pretty}
+.home-point__close{margin:0;font-size:17px;line-height:1.55;font-weight:600;color:#181a1c;text-wrap:pretty}
+.home-point__card--1{background:#a7e9c9}
+.home-point__card--2{background:#d8f3e5}
+.home-point__card--3{background:#e9e7e2}
+.home-point__card--4{background:#043d2b;color:${V2.white}}
+.home-point__card--4 .home-point__rule{background:rgba(255,255,255,0.3)}
+.home-point__card--4 .home-point__lead{color:${V2.white}}
+.home-point__card--4 .home-point__body{color:#e6e8ea}
+.home-point__card--4 .home-point__close{color:${V2.white}}
+.home-point__card--5{background:#f1f9f4}
+.home-point__card--6{background:#bfefda}
+.home-point__logos{margin-top:clamp(56px,7vw,92px)}
+.home-point__logos-label{font-family:${V2.body};font-size:13px;font-weight:700;line-height:1;letter-spacing:0.12em;color:#8b9298;text-transform:uppercase}
+.home-point__logos-row{margin-top:34px;display:flex;flex-wrap:wrap;align-items:center;gap:24px 48px}
+.home-point__logo{font-family:${V2.display};font-synthesis:none;font-size:20px;font-weight:700;line-height:1.1;letter-spacing:-0.01em;color:#9aa1a7;white-space:nowrap}
+@media (max-width:1080px){.home-point__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.home-point__grid{grid-template-columns:1fr}.home-point__card{min-height:0}.home-point__lead{min-height:0}.home-point__logos-row{gap:20px 36px}.home-point__logo{font-size:18px}}
 
 /* ── Section 01 — dual-field component (dark business / green psychology, portrait on the seam) ── */
 .am-duality-section{overflow:hidden;padding:clamp(86px,9vw,130px) 24px clamp(101px,10.2vw,146px);background:${V2.white}}
@@ -414,20 +488,45 @@ function HomePageV2({
     fetchpriority: 'high',
     decoding: 'async'
   }))))),
-  // Manifesto — "The whole point"
+  // Manifesto — "Anyone can put advisor in their bio" (card grid + logo wall)
   React.createElement('section', {
-    className: 'home-manifesto'
+    className: 'home-point'
   }, React.createElement('div', {
-    className: 'home-manifesto__inner'
+    className: 'site-container'
   }, React.createElement('div', {
-    className: 'home-manifesto__label'
-  }, c.mLabel), React.createElement('div', {
-    className: 'home-manifesto__copy'
-  }, React.createElement('span', {
-    className: 'home-manifesto__muted'
-  }, c.mMuted), React.createElement('span', {
-    className: 'home-manifesto__green'
-  }, c.mGreenPre, React.createElement('mark', null, c.mMark))))),
+    className: 'home-point__inner'
+  }, React.createElement('div', {
+    className: 'home-point__eyebrow'
+  }, c.pointEyebrow), React.createElement('h2', {
+    className: 'home-point__h'
+  }, c.pointH), React.createElement('div', {
+    className: 'home-point__grid'
+  }, arr(c.points).map((pt, i) => React.createElement('article', {
+    className: 'home-point__card home-point__card--' + (i + 1),
+    key: i
+  }, React.createElement('div', {
+    className: 'home-point__label'
+  }, pt.label), React.createElement('div', {
+    className: 'home-point__rule'
+  }), React.createElement('p', {
+    className: 'home-point__lead'
+  }, pt.lead), React.createElement('div', {
+    className: 'home-point__text'
+  }, arr(pt.body).map((b, j) => React.createElement('p', {
+    className: 'home-point__body',
+    key: j
+  }, b)), pt.close ? React.createElement('p', {
+    className: 'home-point__close'
+  }, pt.close) : null)))), React.createElement('div', {
+    className: 'home-point__logos'
+  }, React.createElement('div', {
+    className: 'home-point__logos-label'
+  }, c.logoLabel), React.createElement('div', {
+    className: 'home-point__logos-row'
+  }, ['IBM', 'Farfetch', 'GrowthMentor', 'Discover Greece', 'University of London', 'University of Oxford', 'Glofox', 'Whereby', 'Octopus Investments', 'Startupbootcamp', 'Advantage Austria', 'How to Web', 'Moosend'].map((name, i) => React.createElement('span', {
+    className: 'home-point__logo',
+    key: i
+  }, name))))))),
   // Section 01 — dual-field component (dark business / green psychology, portrait on the seam)
   React.createElement('section', {
     className: 'am-duality-section',

@@ -85,7 +85,7 @@ const ext = {
 const CHROME_T = {
   en: {
     home: 'Home',
-    why: 'Why me',
+    why: 'About me',
     reviews: 'Reviews',
     apply: 'Apply',
     start: 'START HERE',
@@ -107,13 +107,13 @@ const CHROME_T = {
   },
   el: {
     home: 'Αρχική',
-    why: 'Γιατί εμένα',
+    why: 'Ποιος είμαι',
     reviews: 'Κριτικές',
     apply: 'Ζήτησε γνωριμία',
     start: 'ΞΕΚΙΝΑ ΕΔΩ',
     other: 'English',
     role1: 'Σύμβουλος επιχειρήσεων & καριέρας',
-    role2: 'Σύμβουλος ψυχικής υγείας',
+    role2: 'Ψυχοθεραπευτής',
     navigate: 'ΠΛΟΗΓΗΣΗ',
     content: 'ΠΕΡΙΕΧΟΜΕΝΟ',
     follow: 'ΑΚΟΛΟΥΘΗΣΕ',

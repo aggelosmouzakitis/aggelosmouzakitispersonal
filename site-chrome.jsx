@@ -56,7 +56,7 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' };
 
 const CHROME_T = {
   en: {
-    home: 'Home', why: 'Why me', reviews: 'Reviews', apply: 'Apply',
+    home: 'Home', why: 'About me', reviews: 'Reviews', apply: 'Apply',
     start: 'START HERE', other: 'ΕΛΛΗΝΙΚΑ',
     role1: 'Private business & career advisor', role2: 'BACP-registered psychotherapist',
     navigate: 'NAVIGATE', content: 'CONTENT', follow: 'FOLLOW', articles: 'Articles', askAnon: 'Ask anonymously',
@@ -65,9 +65,9 @@ const CHROME_T = {
     ctaBtn: 'Apply for a working session', menu: 'Menu', rights: 'All rights reserved.',
   },
   el: {
-    home: 'Αρχική', why: 'Γιατί εμένα', reviews: 'Κριτικές', apply: 'Ζήτησε γνωριμία',
+    home: 'Αρχική', why: 'Ποιος είμαι', reviews: 'Κριτικές', apply: 'Ζήτησε γνωριμία',
     start: 'ΞΕΚΙΝΑ ΕΔΩ', other: 'English',
-    role1: 'Σύμβουλος επιχειρήσεων & καριέρας', role2: 'Σύμβουλος ψυχικής υγείας',
+    role1: 'Σύμβουλος επιχειρήσεων & καριέρας', role2: 'Ψυχοθεραπευτής',
     navigate: 'ΠΛΟΗΓΗΣΗ', content: 'ΠΕΡΙΕΧΟΜΕΝΟ', follow: 'ΑΚΟΛΟΥΘΗΣΕ', articles: 'Κείμενα', askAnon: 'Ρώτησε ανώνυμα',
     confidentiality: 'Εμπιστευτικότητα', terms: 'Όροι χρήσης', privacy: 'Πολιτική απορρήτου',
     ctaHeading: 'Αν λυνόταν με περισσότερη δουλειά, μάλλον θα είχε λυθεί ήδη.',
