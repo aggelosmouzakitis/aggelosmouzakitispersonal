@@ -122,6 +122,23 @@
   status = 200
   force = true
 
+# ─── Hot Seat coworking PDF — clean link that opens the PDF ───────────────────
+# Serve the PDF bytes directly at /hot-seat-coworking-spaces (200 rewrite = keep
+# the URL; force = win over the directory's index.html) so the link opens the PDF
+# in the browser's native viewer. Both bare and trailing-slash forms resolve in
+# one hop; the directory's index.html stays as a fallback for other environments.
+# The page is kept out of search via X-Robots-Tag below (not in sitemap/prerender).
+[[redirects]]
+  from = "/hot-seat-coworking-spaces"
+  to = "/hot-seat-coworking-spaces/hot-seat-coworking.pdf"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/hot-seat-coworking-spaces/"
+  to = "/hot-seat-coworking-spaces/hot-seat-coworking.pdf"
+  status = 200
+  force = true
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Headers
 # ─────────────────────────────────────────────────────────────────────────────
@@ -199,3 +216,15 @@
   for = "/blog/post-template.html"
   [headers.values]
     X-Robots-Tag = "noindex"
+
+# Hot Seat coworking PDF — keep the page and the PDF out of search indexes.
+# Covers the clean URL, its trailing-slash form, and the underlying file so the
+# noindex applies whether the header is matched against the request or the rewrite target.
+[[headers]]
+  for = "/hot-seat-coworking-spaces"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+[[headers]]
+  for = "/hot-seat-coworking-spaces/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
