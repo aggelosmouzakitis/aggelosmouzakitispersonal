@@ -22,10 +22,11 @@ const SecLabel = (num, desc) =>
 const HOME_V2 = {
   en: {
     eyebrow: 'BUSINESS & CAREER ADVISOR · BACP-REGISTERED PSYCHOTHERAPIST',
-    h1pre: 'Practical help for your business, your career, and ',
-    h1human: 'the person',
-    h1post: ' behind both.',
-    support: 'For founders, freelancers and experienced professionals whose business or career problem also has a personal side.',
+    titleL1: 'Scale the business.',
+    titleL2pre: 'Master ',
+    titleHuman: 'the mind',
+    titleL2post: '.',
+    support: 'Combining commercial strategy with psychological depth to help founders, solopreneurs, and experts build high-growth businesses without self-sabotage.',
     pointEyebrow: 'BEFORE YOU SCROLL',
     pointH: 'Anyone can put “advisor” in their bio.',
     points: [
@@ -71,10 +72,11 @@ const HOME_V2 = {
   },
   el: {
     eyebrow: 'ΣΥΜΒΟΥΛΟΣ ΕΠΙΧΕΙΡΗΣΕΩΝ & ΚΑΡΙΕΡΑΣ · ΨΥΧΟΘΕΡΑΠΕΥΤΗΣ',
-    h1pre: 'Πρακτική βοήθεια για την επιχείρηση, την καριέρα και ',
-    h1human: 'τον άνθρωπο',
-    h1post: ' πίσω από όλα αυτά.',
-    support: 'Για founders, freelancers και έμπειρους επαγγελματίες που αντιμετωπίζουν ένα πραγματικό πρόβλημα με προσωπικές προεκτάσεις.',
+    titleL1: 'Κάνε scale το business.',
+    titleL2pre: 'Δούλεψε ό,τι σε ',
+    titleHuman: 'κρατάει πίσω',
+    titleL2post: '.',
+    support: 'Business strategy και ψυχολογική δουλειά για founders, solopreneurs και experts που θέλουν να χτίσουν κάτι μεγαλύτερο, χωρίς να τους φρενάρουν οι φόβοι, οι συνήθειες και τα ίδια επαναλαμβανόμενα μοτίβα.',
     pointEyebrow: 'ΠΡΙΝ ΠΡΟΧΩΡΗΣΕΙΣ',
     pointH: 'Ο καθένας μπορεί να γράψει «advisor» στο bio του.',
     points: [
@@ -204,8 +206,9 @@ const PAGE_V2_CSS = `
 .home-hero__copy{position:relative;z-index:2;min-width:0;max-width:720px;color:${V2.heroInk}}
 .home-hero__eyebrow{max-width:520px;color:${V2.green};font-family:${V2.display};font-size:13px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
 .home-hero__title{max-width:720px;margin:14px 0 22px;font-family:${V2.archivo};font-synthesis:none;font-weight:400;line-height:0.9;letter-spacing:-0.055em;color:${V2.heroInk}}
-html[lang="en"] .home-hero__title{font-size:clamp(62px,5.4vw,80px)}
-html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:${V2.display};font-weight:800;line-height:0.98;letter-spacing:-0.045em}
+.home-hero__title .home-hero__line{display:block}
+html[lang="en"] .home-hero__title{font-size:clamp(48px,5.1vw,72px)}
+html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:${V2.display};font-weight:800;line-height:0.98;letter-spacing:-0.045em}
 .home-hero__title .human{position:relative;z-index:0;white-space:nowrap}
 .home-hero__title .human::after{content:"";position:absolute;z-index:-1;left:-0.03em;right:-0.03em;bottom:0.04em;height:0.14em;background:${V2.green}}
 .home-hero__support{max-width:640px;margin:0 0 26px;color:${V2.heroInk};font-family:${V2.display};font-size:20px;font-weight:400;line-height:1.42}
@@ -215,14 +218,14 @@ html[lang="el"] .home-hero__title{font-size:clamp(46px,4.4vw,64px);font-family:$
 .home-hero__frame img{width:100%;height:100%;object-fit:cover;object-position:56% 44%;transform:scale(1.58);filter:grayscale(1) contrast(1.08)}
 @media (max-width:959px) and (min-width:521px){
   .home-hero__grid{grid-template-columns:minmax(0,1.08fr) minmax(280px,0.92fr);gap:24px;padding-inline:24px}
-  html[lang="en"] .home-hero__title{font-size:clamp(46px,7vw,62px)}
-  html[lang="el"] .home-hero__title{font-size:clamp(40px,6vw,54px)}
+  html[lang="en"] .home-hero__title{font-size:clamp(38px,5.0vw,48px)}
+  html[lang="el"] .home-hero__title{font-size:clamp(32px,4.2vw,40px)}
   .home-hero__photo{width:min(100%,390px)}
 }
 @media (max-width:520px){
   .home-hero__grid{grid-template-columns:1fr;gap:34px;width:100%;max-width:none;padding:66px 20px 80px;min-height:0}
-  html[lang="en"] .home-hero__title{font-size:clamp(40px,9vw,46px);text-wrap:balance}
-  html[lang="el"] .home-hero__title{font-size:clamp(36px,7.7vw,40px);text-wrap:balance}
+  html[lang="en"] .home-hero__title{font-size:clamp(34px,8.6vw,44px);text-wrap:balance}
+  html[lang="el"] .home-hero__title{font-size:clamp(28px,6.6vw,34px);text-wrap:balance}
   .home-hero__support{font-size:18px;line-height:1.5}
   .home-hero__photo{width:min(82%,310px);justify-self:center}
 }
@@ -445,9 +448,12 @@ function HomePageV2({ lang = 'en' }) {
           React.createElement('div', { className: 'home-hero__copy' },
             React.createElement('div', { className: 'home-hero__eyebrow' }, c.eyebrow),
             React.createElement('h1', { className: 'home-hero__title' },
-              c.h1pre,
-              React.createElement('span', { className: 'human' }, c.h1human),
-              c.h1post
+              React.createElement('span', { className: 'home-hero__line' }, c.titleL1),
+              React.createElement('span', { className: 'home-hero__line' },
+                c.titleL2pre,
+                React.createElement('span', { className: 'human' }, c.titleHuman),
+                c.titleL2post
+              )
             ),
             React.createElement('p', { className: 'home-hero__support' }, c.support),
             React.createElement('a', { className: 'hero-cta', href: window.cPath('diagnostic', lang) },
