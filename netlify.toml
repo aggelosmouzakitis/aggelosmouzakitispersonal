@@ -207,6 +207,13 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
+# Development-only draft landing pages — kept out of search indexes at the header
+# level as well as via each page's noindex meta. Not in nav, sitemap or prerender.
+[[headers]]
+  for = "/draft/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
 [[headers]]
   for = "/blog/posts.json"
   [headers.values]
