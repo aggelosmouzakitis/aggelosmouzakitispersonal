@@ -55,10 +55,17 @@
           name="host-request"
           data-host-form
           data-netlify="true"
+          data-netlify-honeypot="company-website"
           action="/host/thanks/"
           method="post"
         >
           <input type="hidden" name="form-name" value="host-request" />
+          <p hidden>
+            <label>
+              Leave this field empty:
+              <input name="company-website" autocomplete="off" tabindex="-1" />
+            </label>
+          </p>
           <div class="form-field">
             <label for="full-name">Your name</label>
             <input
