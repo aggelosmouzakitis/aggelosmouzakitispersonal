@@ -281,7 +281,15 @@ function Hero(props) {
     width: 1000,
     height: 1250,
     loading: 'eager',
-    decoding: 'async'
+    decoding: 'async',
+    // Graceful fallback until the per-page hero art is uploaded to /img/.
+    onError: function (ev) {
+      var t = ev.target;
+      if (!t.dataset.fb) {
+        t.dataset.fb = '1';
+        t.src = '/img/aggelos-overlap.webp';
+      }
+    }
   })), e('div', {
     className: 'dl-hero__border',
     'aria-hidden': 'true'

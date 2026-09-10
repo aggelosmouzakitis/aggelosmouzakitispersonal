@@ -241,7 +241,11 @@ function Hero(props) {
       ),
       e('figure', { className: 'dl-hero__figure' },
         e('div', { className: 'dl-hero__frame' },
-          e('img', { src: c.heroPhoto, alt: 'Aggelos Mouzakitis', width: 1000, height: 1250, loading: 'eager', decoding: 'async' })),
+          e('img', {
+            src: c.heroPhoto, alt: 'Aggelos Mouzakitis', width: 1000, height: 1250, loading: 'eager', decoding: 'async',
+            // Graceful fallback until the per-page hero art is uploaded to /img/.
+            onError: function (ev) { var t = ev.target; if (!t.dataset.fb) { t.dataset.fb = '1'; t.src = '/img/aggelos-overlap.webp'; } },
+          })),
         e('div', { className: 'dl-hero__border', 'aria-hidden': 'true' })
       )
     )
