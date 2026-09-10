@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Tell us why you want to bring Terrible Advice Club to your city, community or venue."
+    />
+    <meta name="theme-color" content="#5b43e6" />
+    <title>Host Terrible Advice Club</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../script.js" defer></script>
+  </head>
+  <body class="host-page">
+    <a class="skip-link" href="#host-form">Skip to form</a>
+
+    <header class="host-header">
+      <a class="wordmark" href="../" aria-label="Terrible Advice Club home">
+        <span class="wordmark-text">Terrible Advice Club</span><i aria-hidden="true"></i>
+      </a>
+      <a class="back-link" href="../">← Back to the club</a>
+    </header>
+
+    <main class="host-main">
+      <section class="host-intro" aria-labelledby="host-title">
+        <p class="eyebrow">Host Terrible Advice Club</p>
+        <h1 id="host-title">
+          <span>Bring bad</span>
+          <span>advice to</span>
+          <span>your city.</span>
+        </h1>
+        <p>
+          For community organisers, coworking spaces, teams and people who know
+          a room that would love this game.
+        </p>
+        <div class="host-mini-deck" aria-hidden="true">
+          <img src="../assets/cards/chaos.png" alt="" />
+          <img src="../assets/cards/both-sides.png" alt="" />
+          <img src="../assets/cards/red-flag-detective.png" alt="" />
+        </div>
+      </section>
+
+      <section class="host-form-panel" aria-labelledby="form-title">
+        <p class="kicker">Make your case</p>
+        <h2 id="form-title">Why does your city need worse advice?</h2>
+        <p>
+          Tell us who you are, where you are and why you want to bring
+          Terrible Advice Club there.
+        </p>
+
+        <form
+          class="host-form"
+          id="host-form"
+          name="host-request"
+          data-host-form
+          data-netlify="true"
+          action="/host/thanks/"
+          method="post"
+        >
+          <input type="hidden" name="form-name" value="host-request" />
+          <div class="form-field">
+            <label for="full-name">Your name</label>
+            <input
+              id="full-name"
+              name="full_name"
+              type="text"
+              autocomplete="name"
+              placeholder="Full name"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="city">City and country</label>
+            <input
+              id="city"
+              name="city"
+              type="text"
+              placeholder="Lisbon, Portugal"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="reason">Why do you want to host it?</label>
+            <textarea
+              id="reason"
+              name="reason"
+              placeholder="Tell us about the people you want to bring together and why this game belongs in the room."
+              required
+            ></textarea>
+          </div>
+
+          <button class="button host-submit" type="submit">Send hosting request</button>
+          <p class="form-smallprint">This is an expression of interest, not a commitment.</p>
+          <p class="form-status" data-form-status tabindex="-1" aria-live="polite" hidden>
+            Sending your request…
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="host-footer">
+      <p>Terrible Advice Club</p>
+      <p>© <span data-year></span></p>
+    </footer>
+  </body>
+</html>
