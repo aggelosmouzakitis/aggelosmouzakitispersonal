@@ -648,9 +648,12 @@ function DraftLandingPage(props) {
     cfg: c
   }), e(Faq, {
     cfg: c
-  })), e(FinalCta, {
+  }),
+  // FinalCta stays inside <main> so it inherits the --final-* custom
+  // properties set above; its colour band is page-specific.
+  e(FinalCta, {
     cfg: c
-  }), e(window.SiteFooterX, {
+  })), e(window.SiteFooterX, {
     lang: 'en'
   }), e(StickyCta, {
     cfg: c

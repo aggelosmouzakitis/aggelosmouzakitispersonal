@@ -491,9 +491,11 @@ function DraftLandingPage(props) {
       e(WhyMe, { cfg: c }),
       e(FitLists, { cfg: c }),
       e(HowItStarts, { cfg: c }),
-      e(Faq, { cfg: c })
+      e(Faq, { cfg: c }),
+      // FinalCta stays inside <main> so it inherits the --final-* custom
+      // properties set above; its colour band is page-specific.
+      e(FinalCta, { cfg: c })
     ),
-    e(FinalCta, { cfg: c }),
     e(window.SiteFooterX, { lang: 'en' }),
     e(StickyCta, { cfg: c })
   );
