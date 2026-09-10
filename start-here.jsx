@@ -62,8 +62,8 @@ var OUTCOMES = {
       'You do not need to prepare or decide whether you want ongoing help. There is no pressure to turn the conversation into paid work.',
       'The useful next step may be one of my services. It may also be a resource, another person, or simply giving it more time.',
     ],
-    primary: { label: 'SEE AVAILABLE TIMES →', href: '/book/', event: 'booking_page_opened' },
-    primaryMicro: 'Free · 30 minutes · Online · Available when my schedule allows',
+    primary: { label: 'REQUEST AN ORIENTATION CHAT →', href: '/contact?interest=orientation', event: 'contact_page_opened' },
+    primaryMicro: 'Free · 30 minutes · Online',
     secondary: [
       { label: 'I’D RATHER ASK ANYTHING →', href: ASK, event: 'ask_anything_opened', micro: 'You can include your name or ask anonymously.' },
     ],

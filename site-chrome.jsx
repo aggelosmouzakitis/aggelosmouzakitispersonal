@@ -138,7 +138,7 @@ img{max-width:100%}
 
 /* ── "Work with me" mega dropdown (desktop) ── */
 .site-hdr__work{position:static;display:flex;align-items:center}
-.site-hdr__work-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;cursor:pointer;color:${SITE.paper};font-family:inherit;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding:0;transition:opacity .18s}
+.site-hdr__work-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;color:${SITE.paper};font-family:inherit;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding:0 0 2px;transition:opacity .18s}
 .site-hdr__work-btn:hover,.site-hdr__work-btn[aria-expanded="true"]{opacity:1}
 .site-hdr__work-caret{width:10px;height:6px;transition:transform .2s ease;opacity:.85}
 .site-hdr__work-btn[aria-expanded="true"] .site-hdr__work-caret{transform:rotate(180deg)}

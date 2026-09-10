@@ -111,6 +111,31 @@
   status = 301
   force = true
 
+# ─── Book-a-call (Calendly) deactivated → route to the contact page ───────────
+# The Calendly booking pages are retired; every "book a call" intent now goes to
+# the contact form (orientation interest preselected). force=true wins over the
+# existing /book/ index.html, which is kept in the repo but no longer served.
+[[redirects]]
+  from = "/book"
+  to = "/contact?interest=orientation"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/book/*"
+  to = "/contact?interest=orientation"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/book"
+  to = "/el/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/book/*"
+  to = "/el/"
+  status = 301
+  force = true
+
 # ─── Greek "Ask Me Anything" — exact QR-code URL (no trailing slash) ──────────
 # The printed QR code points to /ask-me-anything/el exactly. Serve the Greek
 # page directly at that path with a 200 rewrite so the URL stays as-is (no
