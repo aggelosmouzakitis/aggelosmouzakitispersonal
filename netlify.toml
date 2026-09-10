@@ -5,36 +5,6 @@
 # both listed so /founders and /founders/ each resolve in a single hop.
 # ─────────────────────────────────────────────────────────────────────────────
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Logout Club microsite — logoutclub.gr + logoutclub.aggelosmouzakitis.com
-# -----------------------------------------------------------------------------
-# Both domains are aliases of THIS Netlify site (add them under Site settings →
-# Domain management). The microsite lives in /logoutclub/ and is served at the
-# ROOT of each Logout Club host via a domain-scoped rewrite (status 200 = keep
-# the URL; force = win even though / maps to the main site's index.html).
-#
-# aggelosmouzakitis.com is untouched: these three rules match ONLY the Logout
-# Club hosts, and they are listed first so they resolve before any path rule
-# below. The microsite uses relative asset paths, so /el/, the CSS/JS, fonts,
-# sitemap.xml, robots.txt and og-image.png all resolve under the rewrite.
-# (The site also previews directly at aggelosmouzakitis.com/logoutclub/.)
-# ─────────────────────────────────────────────────────────────────────────────
-[[redirects]]
-  from = "https://logoutclub.gr/*"
-  to = "/logoutclub/:splat"
-  status = 200
-  force = true
-[[redirects]]
-  from = "https://www.logoutclub.gr/*"
-  to = "/logoutclub/:splat"
-  status = 200
-  force = true
-[[redirects]]
-  from = "https://logoutclub.aggelosmouzakitis.com/*"
-  to = "/logoutclub/:splat"
-  status = 200
-  force = true
-
 # how-i-work → 1:1 (core page removed; method content merged into / and /1-to-1/)
 [[redirects]]
   from = "/how-i-work"
@@ -208,23 +178,6 @@
   for = "/manifest.json"
   [headers.values]
     Cache-Control = "public, max-age=86400"
-
-# Logout Club microsite — fingerprinted/stable assets stay immutable
-[[headers]]
-  for = "/logoutclub/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-# ...but config.js + logoutclub.js load without a version fingerprint and change
-# over time (config.js is meant to be edited to plug in real URLs), so they must
-# revalidate instead of inheriting the immutable 1-year cache from /*.js above.
-[[headers]]
-  for = "/logoutclub/config.js"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-[[headers]]
-  for = "/logoutclub/logoutclub.js"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
 
 # Keep non-content resources out of the index (crawlable so the noindex is seen)
 [[headers]]
