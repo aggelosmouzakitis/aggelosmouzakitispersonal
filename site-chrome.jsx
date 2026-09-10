@@ -76,6 +76,20 @@ const CHROME_T = {
 };
 const cT = (lang) => CHROME_T[lang] || CHROME_T.en;
 
+// ─── "Work with me" dropdown model (English site only) ───────────────────────
+// 1:1 pages are live and linked; group offers are placeholders (not linked).
+const WORK_GROUPS = [
+  { label: '1:1 private work', items: [
+    { name: 'Psychotherapy / Decision Coaching', href: '/psychotherapy-decision-coaching/', id: 'psychotherapy-decision-coaching', desc: 'Think through the decision or pattern that keeps circling' },
+    { name: 'Career Strategy Consulting', href: '/career-strategy-consulting/', id: 'career-strategy-consulting', desc: 'Build a paid offer while you keep your job' },
+    { name: 'Solopreneur Growth Consulting', href: '/solopreneur-growth-consulting/', id: 'solopreneur-growth-consulting', desc: 'Grow the business without grinding yourself down' },
+  ] },
+  { label: 'Group work', items: [
+    { name: 'Group Coaching', soon: true },
+    { name: 'Terrible Advice Club', soon: true },
+  ] },
+];
+
 // ─── Stylesheet ──────────────────────────────────────────────────────────────
 // The legacy page shell (scripts/gen-core-pages.js) still ships the sidebar-era
 // rules: html,body,#root{height:100%}, #root{display:flex}, #main-scroll{overflow-y:auto}
@@ -102,7 +116,7 @@ img{max-width:100%}
 
 .site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
 
-.site-hdr{width:100%;min-height:76px;background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16)}
+.site-hdr{position:relative;width:100%;min-height:76px;background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16)}
 .site-hdr__in{width:min(100% - 64px,1280px);min-height:76px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
 .site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:${SITE.paper};font-family:${SITE.display};font-size:26px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
 .site-hdr__brand span{color:${SITE.green}}
@@ -121,6 +135,32 @@ img{max-width:100%}
 .site-menu .site-container{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 .site-menu a{color:${SITE.paper};font-size:16px;text-transform:uppercase;letter-spacing:0.03em}
 .site-menu .hdr-cta{align-self:stretch;justify-content:center;min-height:48px;font-size:13px}
+
+/* ── "Work with me" mega dropdown (desktop) ── */
+.site-hdr__work{position:static;display:flex;align-items:center}
+.site-hdr__work-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;cursor:pointer;color:${SITE.paper};font-family:inherit;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding:0;transition:opacity .18s}
+.site-hdr__work-btn:hover,.site-hdr__work-btn[aria-expanded="true"]{opacity:1}
+.site-hdr__work-caret{width:10px;height:6px;transition:transform .2s ease;opacity:.85}
+.site-hdr__work-btn[aria-expanded="true"] .site-hdr__work-caret{transform:rotate(180deg)}
+.site-hdr__mega{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(640px,calc(100vw - 32px));background:#1F2223;border:1px solid rgba(243,240,232,0.14);border-top:2px solid ${SITE.green};border-radius:0 0 16px 16px;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:26px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;z-index:200}
+.site-hdr__mega-col{min-width:0}
+.site-hdr__mega-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${SITE.green};margin:2px 0 12px;padding-left:12px}
+.site-hdr__mega-item{display:block;padding:9px 12px;border-radius:10px;transition:background .16s}
+a.site-hdr__mega-item:hover{background:rgba(243,240,232,0.06)}
+.site-hdr__mega-name{display:block;font-family:${SITE.display};font-size:16.5px;font-weight:700;line-height:1.2;letter-spacing:-0.012em;color:${SITE.paper}}
+a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
+.site-hdr__mega-desc{display:block;margin-top:3px;font-size:13px;line-height:1.4;color:${SITE.greyOnDark}}
+.site-hdr__mega-item[aria-current] .site-hdr__mega-name{color:${SITE.green}}
+.site-hdr__mega-item--soon{cursor:default}
+.site-hdr__mega-item--soon .site-hdr__mega-name{color:${SITE.onDark};opacity:.7}
+.site-hdr__mega-soon{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${SITE.greyOnDark};border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 9px}
+
+/* ── "Work with me" section inside the mobile menu ── */
+.site-menu__label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${SITE.green};margin-top:8px}
+.site-menu a.site-menu__sub{text-transform:none;letter-spacing:0;font-size:15px;min-height:40px;display:flex;align-items:center}
+.site-menu a.site-menu__sub[aria-current]{color:${SITE.green}}
+.site-menu__soon{color:${SITE.greyOnDark};font-size:15px;min-height:40px;display:flex;align-items:center;gap:10px}
+.site-menu__soon small{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 8px;color:${SITE.greyOnDark}}
 
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
 .pill--green{height:72px;padding-inline:44px;background:${SITE.green};color:#fff;font-size:16px}
@@ -264,11 +304,18 @@ function Wordmark({ lang }) {
 
 // ─── HEADER ──────────────────────────────────────────────────────────────────
 function SiteHeader({ page, lang = 'en' }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);     // mobile burger menu
+  const [work, setWork] = React.useState(false);     // desktop "Work with me" mega
+  const workTimer = React.useRef(null);
+  const openWork = () => { if (workTimer.current) { clearTimeout(workTimer.current); workTimer.current = null; } setWork(true); };
+  const closeWorkSoon = () => { if (workTimer.current) clearTimeout(workTimer.current); workTimer.current = setTimeout(() => setWork(false), 130); };
+  React.useEffect(() => () => { if (workTimer.current) clearTimeout(workTimer.current); }, []);
+
   const t = cT(lang);
   const other = lang === 'el' ? 'en' : 'el';
-  const items = [
-    { id: 'home', label: t.home },
+  const showWork = lang === 'en'; // offer pages + group work are English-only
+  const homeItem = { id: 'home', label: t.home };
+  const restItems = [
     { id: 'about', label: t.why },
     { id: 'reviews', label: t.reviews },
   ];
@@ -277,19 +324,80 @@ function SiteHeader({ page, lang = 'en' }) {
     'aria-current': page === it.id ? 'page' : undefined,
   }, it.label);
   const langHref = CHROME_PATHS[page] ? cPath(page, other) : (other === 'el' ? '/el/' : '/');
-  // Header CTA routes to "ask anonymously": the AMA page (EN) / the VideoAsk form (EL).
-  const ctaHref = lang === 'el' ? 'https://www.videoask.com/fuv51iuq1' : 'https://aggelosmouzakitis.com/ask-me-anything/';
+  // English header CTA is the "Start Here" orientation flow; Greek keeps the
+  // "ask anonymously" VideoAsk form (no Greek Start Here page).
+  const ctaHref = lang === 'el' ? 'https://www.videoask.com/fuv51iuq1' : '/start-here/';
   // Greek label is intentionally plain uppercase (no accents on capitals).
-  const ctaLabel = lang === 'el' ? 'ΡΩΤΑ ΑΝΩΝΥΜΑ' : 'Ask anonymously';
+  const ctaLabel = lang === 'el' ? 'ΡΩΤΑ ΑΝΩΝΥΜΑ' : 'START HERE';
   const ctaExt = lang === 'el' ? ext : null;
-  // Keep the header CTA hidden on the diagnostic page.
-  const showCta = page !== 'diagnostic';
+  // Hide the header CTA where it would point at the current page.
+  const showCta = page !== 'diagnostic' && page !== 'start-here';
+
+  // Desktop mega-dropdown ("Work with me")
+  const megaCol = (group) => React.createElement('div', { className: 'site-hdr__mega-col', key: group.label },
+    React.createElement('div', { className: 'site-hdr__mega-label' }, group.label),
+    group.items.map((it) => it.soon
+      ? React.createElement('div', { className: 'site-hdr__mega-item site-hdr__mega-item--soon', key: it.name },
+          React.createElement('span', { className: 'site-hdr__mega-name' }, it.name),
+          React.createElement('span', { className: 'site-hdr__mega-soon' }, 'Coming soon'))
+      : React.createElement('a', {
+          className: 'site-hdr__mega-item', key: it.name, href: it.href, role: 'menuitem',
+          'aria-current': page === it.id ? 'page' : undefined, onClick: () => setWork(false),
+        },
+          React.createElement('span', { className: 'site-hdr__mega-name' }, it.name),
+          React.createElement('span', { className: 'site-hdr__mega-desc' }, it.desc))
+    )
+  );
+  const workDropdown = React.createElement('div', {
+    key: 'work', className: 'site-hdr__work',
+    onMouseEnter: openWork, onMouseLeave: closeWorkSoon,
+    onKeyDown: (ev) => { if (ev.key === 'Escape') setWork(false); },
+  },
+    React.createElement('button', {
+      className: 'site-hdr__work-btn', type: 'button',
+      'aria-haspopup': 'true', 'aria-expanded': work ? 'true' : 'false',
+      onClick: () => setWork((v) => !v),
+    },
+      React.createElement('span', null, 'Work with me'),
+      React.createElement('svg', { className: 'site-hdr__work-caret', viewBox: '0 0 10 6', 'aria-hidden': 'true' },
+        React.createElement('path', { d: 'M1 1l4 4 4-4', stroke: 'currentColor', strokeWidth: '1.6', fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round' }))
+    ),
+    work && React.createElement('div', {
+      className: 'site-hdr__mega', role: 'menu',
+      onMouseEnter: openWork, onMouseLeave: closeWorkSoon,
+    }, WORK_GROUPS.map(megaCol))
+  );
+
+  const navChildren = [link(homeItem)];
+  if (showWork) navChildren.push(workDropdown);
+  restItems.forEach((it) => navChildren.push(link(it)));
+
+  // Mobile "Work with me" section (rendered expanded inside the burger menu)
+  const workMobile = showWork ? React.createElement(React.Fragment, { key: 'work-m' },
+    WORK_GROUPS.map((group) => React.createElement(React.Fragment, { key: group.label },
+      React.createElement('div', { className: 'site-menu__label' }, group.label),
+      group.items.map((it) => it.soon
+        ? React.createElement('div', { className: 'site-menu__soon', key: it.name },
+            React.createElement('span', null, it.name), React.createElement('small', null, 'Coming soon'))
+        : React.createElement('a', {
+            className: 'site-menu__sub', key: it.name, href: it.href,
+            'aria-current': page === it.id ? 'page' : undefined,
+          }, it.name))
+    ))
+  ) : null;
+
+  const menuChildren = [link(homeItem)];
+  if (workMobile) menuChildren.push(workMobile);
+  restItems.forEach((it) => menuChildren.push(link(it)));
+  menuChildren.push(React.createElement('a', { key: 'lang', href: langHref, hrefLang: other, style: { color: SITE.onDark } }, t.other));
+  if (showCta) menuChildren.push(React.createElement('a', { key: 'cta', className: 'hdr-cta', href: ctaHref, ...ctaExt },
+    React.createElement('span', null, ctaLabel), React.createElement('span', null, '→')));
 
   return React.createElement(React.Fragment, null,
     React.createElement('header', { className: 'site-hdr' },
       React.createElement('div', { className: 'site-container site-hdr__in' },
         React.createElement(Wordmark, { lang }),
-        React.createElement('nav', { className: 'site-hdr__nav' }, items.map(link)),
+        React.createElement('nav', { className: 'site-hdr__nav' }, navChildren),
         React.createElement('div', { style: { display: 'flex', alignItems: 'center', justifySelf: 'end' } },
           React.createElement('div', { className: 'site-hdr__end' },
             React.createElement('a', { className: 'site-hdr__lang', href: langHref, hrefLang: other }, t.other),
@@ -304,13 +412,7 @@ function SiteHeader({ page, lang = 'en' }) {
       )
     ),
     open && React.createElement('div', { className: 'site-menu' },
-      React.createElement('div', { className: 'site-container' },
-        items.map(link),
-        React.createElement('a', { href: langHref, hrefLang: other, style: { color: SITE.onDark } }, t.other),
-        showCta && React.createElement('a', {
-          className: 'hdr-cta', href: ctaHref, ...ctaExt,
-        }, React.createElement('span', null, ctaLabel), React.createElement('span', null, '→'))
-      )
+      React.createElement('div', { className: 'site-container' }, menuChildren)
     )
   );
 }

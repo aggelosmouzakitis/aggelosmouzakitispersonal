@@ -10,17 +10,19 @@ const reactDomJs = fs.readFileSync(ROOT + '/node_modules/react-dom/umd/react-dom
 const PAGES = [
   // Core — English
   { f: 'index.html', faq: false },
-  { f: '1-to-1/index.html', faq: false },
   { f: 'about/index.html', faq: false },
   { f: 'reviews/index.html', faq: false },
-  { f: 'book/index.html', faq: false },
   { f: 'confidentiality/index.html', faq: false },
+  // New 1:1 offer landing pages + orientation flow + contact
+  { f: 'career-strategy-consulting/index.html', faq: true },
+  { f: 'solopreneur-growth-consulting/index.html', faq: true },
+  { f: 'psychotherapy-decision-coaching/index.html', faq: true },
+  { f: 'start-here/index.html', faq: false },
+  { f: 'contact/index.html', faq: false },
   // Core — Greek (/el/) — same indexable prerender path as English (brief §57)
   { f: 'el/index.html', faq: false },
-  { f: 'el/1-to-1/index.html', faq: false },
   { f: 'el/about/index.html', faq: false },
   { f: 'el/reviews/index.html', faq: false },
-  { f: 'el/book/index.html', faq: false },
   { f: 'el/confidentiality/index.html', faq: false },
   // Retained (out of nav, still indexable via their own inline SpecialtyPage mount)
   { f: 'blog/index.html', faq: false },
@@ -33,17 +35,13 @@ const PAGES = [
   { f: 'greek-speaking-therapist-new-york/index.html', faq: true },
   { f: 'greek-speaking-therapist-dublin/index.html', faq: true },
   // Restored English SEO landing pages (persona mounts + specialty SpecialtyPage mounts)
-  { f: 'founders/index.html', faq: false },
-  { f: 'solopreneurs/index.html', faq: false },
   { f: 'therapy-for-founders/index.html', faq: true },
   { f: 'therapy-for-executives/index.html', faq: true },
   { f: 'imposter-syndrome-therapy/index.html', faq: true },
   { f: 'executive-burnout-therapy/index.html', faq: true },
-  { f: 'career-transition-therapy/index.html', faq: true },
   // Greek SEO landing pages (/el/*) — renderApp('el-…','el'), same indexable path
   { f: 'el/executive-coaching/index.html', faq: false },
   { f: 'el/burnout/index.html', faq: false },
-  { f: 'el/career-coaching/index.html', faq: false },
   { f: 'el/imposter-syndrome/index.html', faq: false },
 ];
 

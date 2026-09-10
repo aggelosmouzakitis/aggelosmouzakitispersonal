@@ -7,8 +7,16 @@ const ROOT = path.resolve(__dirname, '..');
 const O = 'https://aggelosmouzakitis.com';
 const TODAY = '2026-08-15';
 
-// Paired core pages (English + Greek) — get hreflang alternates
-const CORE = ['/', '/1-to-1/', '/about/', '/reviews/', '/book/', '/startingdiagnostic/', '/confidentiality/'];
+// Paired core pages (English + Greek) — get hreflang alternates.
+// /1-to-1/ and /book/ (and their /el/ pairs) were unpublished — removed here.
+const CORE = ['/', '/about/', '/reviews/', '/startingdiagnostic/', '/confidentiality/'];
+// New 1:1 offer landing pages (English only, linked from the "Work with me"
+// dropdown). Single search intent each; no genuine EL equivalent → no hreflang.
+const OFFERS = [
+  '/psychotherapy-decision-coaching/',
+  '/career-strategy-consulting/',
+  '/solopreneur-growth-consulting/',
+];
 // Single blog (English chrome canonical) — one entry, no fake /el alternate
 const BLOG_INDEX = '/blog/';
 // Retained single-language SEO pages (English) — no cross-language hreflang
@@ -17,26 +25,23 @@ const RETAINED = [
   '/greek-speaking-therapist-manchester/',
   '/greek-speaking-therapist-new-york/',
   '/greek-speaking-therapist-dublin/',
-  '/getinterviewed/',
   '/ask-me-anything/',
 ];
 // Restored English SEO landing pages (persona + specialty). Single search intent
 // each; no genuine EL equivalent, so no cross-language hreflang.
+// /founders/, /solopreneurs/ and /career-transition-therapy/ were unpublished.
 const EN_SEO = [
-  '/founders/',
-  '/solopreneurs/',
   '/therapy-for-founders/',
   '/therapy-for-executives/',
   '/imposter-syndrome-therapy/',
   '/executive-burnout-therapy/',
-  '/career-transition-therapy/',
 ];
 // Greek SEO landing pages under /el/ (mined from the retired .gr site). Single
 // search intent each; no genuine EN equivalent, so no cross-language hreflang.
+// /el/career-coaching/ was unpublished.
 const EL_SEO = [
   '/el/executive-coaching/',
   '/el/burnout/',
-  '/el/career-coaching/',
   '/el/imposter-syndrome/',
 ];
 
@@ -59,7 +64,12 @@ function plainUrl(loc, priority, freq) {
 const parts = [];
 // Home first (priority 1.0), then the rest of the core
 parts.push(pairedUrl('/', '1.0'));
-for (const p of CORE.slice(1)) parts.push(pairedUrl(p, p === '/1-to-1/' ? '0.9' : '0.7'));
+for (const p of CORE.slice(1)) parts.push(pairedUrl(p, '0.7'));
+// New 1:1 offer landing pages (primary commercial pages)
+for (const p of OFFERS) parts.push(plainUrl(O + p, '0.8'));
+// Orientation + contact entry points
+parts.push(plainUrl(O + '/start-here/', '0.8'));
+parts.push(plainUrl(O + '/contact/', '0.7'));
 // Blog index (single canonical, weekly)
 parts.push(plainUrl(O + BLOG_INDEX, '0.9', 'weekly'));
 // Retained SEO pages

@@ -1,4 +1,4 @@
-// draft-landing.jsx — DEV-ONLY draft landing pages (noindex, nofollow).
+// offer-pages.jsx — 1:1 offer landing pages (live, indexed).
 // Plain React, compiled by babel like site-chrome.jsx / content-pages.jsx.
 // Loaded AFTER site-chrome.js (uses window.ChromeStyles / SiteHeader / SiteFooterX).
 //
@@ -6,21 +6,24 @@
 // data-only config (copy + colour variation). Rebuilt natively from the design
 // references. Real header/footer/fonts come from the production chrome.
 //
-// Draft routes (not in nav, sitemap or metadata):
-//   /draft/experience-to-offer/   renderDraft('experience-to-offer')
-//   /draft/solo-business-growth/  renderDraft('solo-business-growth')
-//   /draft/private-sparring/      renderDraft('private-sparring')
+// Routes (linked from the header "Work with me" dropdown):
+//   /psychotherapy-decision-coaching/  renderOfferPage('psychotherapy-decision-coaching')
+//   /career-strategy-consulting/       renderOfferPage('career-strategy-consulting')
+//   /solopreneur-growth-consulting/    renderOfferPage('solopreneur-growth-consulting')
 
 var e = React.createElement;
 
-// ─── CENTRAL PLACEHOLDER CTA DESTINATIONS (one per page) ─────────────────────
-// Swap these single values for the real application URLs when the pages ship.
-var experienceAuditUrl = '#';
-var soloGrowthAuditUrl  = '#';
-var privateSparringUrl  = '#';
+// ─── CENTRAL CTA DESTINATION (one per page) ──────────────────────────────────
+// Every main CTA (hero, audit panel, how-it-starts, final band, sticky) on each
+// page routes to the contact page, pre-selecting the matching enquiry interest.
+var psychotherapyDecisionCoachingUrl = '/contact?interest=private-sparring';
+var careerStrategyConsultingUrl = '/contact?interest=experience-to-offer';
+var solopreneurGrowthConsultingUrl = '/contact?interest=solo-business-growth';
 
-// ─── Shared content, identical across all three pages ────────────────────────
-var PHOTO = '/img/aggelos-overlap.webp'; // same grayscale 4:5 portrait as the design reference
+// ─── Shared content ──────────────────────────────────────────────────────────
+// Each page's 4:5 hero portrait (full colour, intrinsic 1000×1250) is set per
+// config as heroPhoto. START_HERE is the "not sure?" fallback under every hero CTA.
+var START_HERE_URL = '/start-here/';
 var STATS = [
   { num: '18 years',       label: 'Product and growth' },
   { num: '7 years',        label: 'Running my own consultancy' },
@@ -34,10 +37,10 @@ var WORKING_CALL_NOTE = 'This is a working call, not a generic fit call. It shou
 // Section styles transcribed from the design references. The three JS
 // breakpoints in the reference (mob<=680, stack<=900, sm<=560) become CSS media
 // queries. Per-page colour variation rides on custom properties set on .dl.
-var DRAFT_CSS = `
+var OFFER_CSS = `
 /* The shared production header can push ~4px past the viewport in the 681–768px
-   band (its desktop CTA before the burger kicks in). Clip it at the root on the
-   draft pages so the body never scrolls horizontally, without touching chrome. */
+   band (its desktop CTA before the burger kicks in). Clip it at the root on these
+   offer pages so the body never scrolls horizontally, without touching chrome. */
 html{overflow-x:clip}
 .dl{background:#FFFFFF;color:#282726;font-family:var(--font-body)}
 .dl-container{width:min(1240px,calc(100% - 2 * clamp(20px,4vw,64px)));margin-inline:auto}
@@ -68,9 +71,12 @@ html{overflow-x:clip}
 .dl-hero__lead{margin:0;max-width:660px;font-size:19px;line-height:1.6;color:#282726;text-wrap:pretty}
 .dl-hero__cta-row{margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;gap:16px}
 .dl-hero__note{margin:20px 0 0;font-size:15px;line-height:1.5;color:#5E6264}
+.dl-hero__fallback{margin:10px 0 0;font-size:15px;line-height:1.5;color:#5E6264}
+.dl-hero__fallback a{color:#059669;font-weight:600;white-space:nowrap;transition:opacity .18s}
+.dl-hero__fallback a:hover{opacity:.75}
 .dl-hero__figure{position:relative;margin:0;justify-self:end;width:100%;max-width:460px}
 .dl-hero__frame{position:relative;aspect-ratio:4 / 5;overflow:hidden;background:#181A1C}
-.dl-hero__frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 18%;filter:grayscale(100%)}
+.dl-hero__frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:none}
 .dl-hero__border{position:absolute;inset:-14px;border:1px solid #059669;pointer-events:none}
 
 /* stats bar */
@@ -204,8 +210,8 @@ html{overflow-x:clip}
 }
 `;
 
-function DraftStyles() {
-  return e('style', { dangerouslySetInnerHTML: { __html: DRAFT_CSS } });
+function OfferStyles() {
+  return e('style', { dangerouslySetInnerHTML: { __html: OFFER_CSS } });
 }
 
 // ─── Atoms ───────────────────────────────────────────────────────────────────
@@ -228,11 +234,14 @@ function Hero(props) {
         e('h1', { className: 'dl-hero__h1' }, h.lines.map(function (l, i) { return e('span', { key: i }, l + ' '); })),
         e('p', { className: 'dl-hero__lead' }, h.lead),
         e('div', { className: 'dl-hero__cta-row' }, e(CtaBtn, { href: c.ctaUrl, label: h.cta })),
-        e('p', { className: 'dl-hero__note' }, h.note)
+        e('p', { className: 'dl-hero__note' }, h.note),
+        e('p', { className: 'dl-hero__fallback' },
+          'Not sure this is the right fit? ',
+          e('a', { href: START_HERE_URL }, 'Start here →'))
       ),
       e('figure', { className: 'dl-hero__figure' },
         e('div', { className: 'dl-hero__frame' },
-          e('img', { src: PHOTO, alt: 'Aggelos Mouzakitis', width: 250, height: 426, loading: 'eager', decoding: 'async' })),
+          e('img', { src: c.heroPhoto, alt: 'Aggelos Mouzakitis', width: 1000, height: 1250, loading: 'eager', decoding: 'async' })),
         e('div', { className: 'dl-hero__border', 'aria-hidden': 'true' })
       )
     )
@@ -468,11 +477,11 @@ function StickyCta(props) {
 }
 
 // ─── Page shell ──────────────────────────────────────────────────────────────
-function DraftLandingPage(props) {
+function OfferPage(props) {
   var c = props.cfg, col = c.colors;
   return e(React.Fragment, null,
     e(window.ChromeStyles),
-    e(DraftStyles),
+    e(OfferStyles),
     e(window.SiteHeader, { page: c.key, lang: 'en' }),
     e('main', {
       className: 'dl',
@@ -503,10 +512,11 @@ function DraftLandingPage(props) {
 
 // ─── Page configs (content + colour variation) ───────────────────────────────
 var CONFIGS = {
-  'experience-to-offer': {
-    key: 'experience-to-offer',
-    title: 'DRAFT — Experience to Offer Audit',
-    ctaUrl: experienceAuditUrl,
+  'career-strategy-consulting': {
+    key: 'career-strategy-consulting',
+    serviceName: 'Career Strategy Consulting',
+    ctaUrl: careerStrategyConsultingUrl,
+    heroPhoto: '/img/experience-to-offer-hero.webp',
     sticky: 'Apply for the audit',
     colors: { tint: '#F4F1EA', finalBg: '#181A1C', finalEyebrow: '#059669', finalText: '#C2C6CA' },
     hero: {
@@ -616,10 +626,11 @@ var CONFIGS = {
     },
   },
 
-  'solo-business-growth': {
-    key: 'solo-business-growth',
-    title: 'DRAFT — Solo Business Growth',
-    ctaUrl: soloGrowthAuditUrl,
+  'solopreneur-growth-consulting': {
+    key: 'solopreneur-growth-consulting',
+    serviceName: 'Solopreneur Growth Consulting',
+    ctaUrl: solopreneurGrowthConsultingUrl,
+    heroPhoto: '/img/solo-business-growth-hero.webp',
     sticky: 'Apply for the audit',
     colors: { tint: '#E7F2EC', finalBg: '#123A31', finalEyebrow: '#5FD1A3', finalText: '#D7E7E0' },
     hero: {
@@ -731,10 +742,11 @@ var CONFIGS = {
     },
   },
 
-  'private-sparring': {
-    key: 'private-sparring',
-    title: 'DRAFT — Private Sparring',
-    ctaUrl: privateSparringUrl,
+  'psychotherapy-decision-coaching': {
+    key: 'psychotherapy-decision-coaching',
+    serviceName: 'Psychotherapy / Decision Coaching',
+    ctaUrl: psychotherapyDecisionCoachingUrl,
+    heroPhoto: '/img/private-sparring-hero.webp',
     sticky: 'Apply for the Sparring Session',
     colors: { tint: '#E8EEF0', finalBg: '#20363A', finalEyebrow: '#76D5B2', finalText: '#D9E4E5' },
     hero: {
@@ -852,13 +864,14 @@ var CONFIGS = {
 };
 
 // ─── Mount ───────────────────────────────────────────────────────────────────
-function renderDraft(pageId) {
+// The static <title> in each page's <head> is authoritative for SEO, so this
+// does not touch document.title.
+function renderOfferPage(pageId) {
   var cfg = CONFIGS[pageId];
   if (!cfg) { return; }
-  if (typeof document !== 'undefined') { document.title = cfg.title; }
   ReactDOM.createRoot(document.getElementById('root')).render(
-    e(DraftLandingPage, { cfg: cfg })
+    e(OfferPage, { cfg: cfg })
   );
 }
 
-Object.assign(window, { renderDraft: renderDraft, DRAFT_CONFIGS: CONFIGS });
+Object.assign(window, { renderOfferPage: renderOfferPage, OFFER_CONFIGS: CONFIGS });
