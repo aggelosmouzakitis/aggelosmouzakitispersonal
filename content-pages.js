@@ -488,7 +488,7 @@ const START_HERE_ITEMS = [{
   label: 'For founders →',
   href: '/founders/'
 }, {
-  label: 'For solopreneurs →',
+  label: 'For freelancers →',
   href: '/solopreneurs/'
 }];
 function StartHere({
@@ -3338,7 +3338,7 @@ function LondonPage() {
     href: '/1-to-1/'
   }, 'founder'), " and ", React.createElement(IA, {
     href: '/1-to-1/'
-  }, 'solopreneur'), " clients come to me.")), React.createElement(SvcSection, {
+  }, 'freelancer'), " clients come to me.")), React.createElement(SvcSection, {
     title: 'The work itself is the same'
   }, React.createElement(SvcP, null, "Nothing about the work changes because you're in London or because we speak Greek. It's the same private, one-to-one work I do with everyone, the personal pattern and the real decision in front of you, worked at the same time. How it runs, step by step, is on ", React.createElement(IA, {
     href: '/1-to-1/'
@@ -3385,7 +3385,7 @@ function ManchesterPage() {
     href: 'https://headofgrowth.io'
   }, 'advised more than 500 companies'), " before training as a psychotherapist, and I've done the job-to-independent route myself. It's the same reason my ", React.createElement(IA, {
     href: '/1-to-1/'
-  }, 'solopreneur'), " and ", React.createElement(IA, {
+  }, 'freelancer'), " and ", React.createElement(IA, {
     href: '/1-to-1/'
   }, 'founder'), " clients come to me.")), React.createElement(SvcSection, {
     title: 'The work itself is the same'
@@ -3411,7 +3411,7 @@ function ManchesterPage() {
     q: 'I work for myself. Can we cover the business too?'
   }, React.createElement(P, {
     last: true
-  }, "Yes. Pricing, positioning and the outreach you avoid sit alongside the pattern underneath them, because for solo and independent people the two are rarely separate. Same work I do with any solopreneur.")), React.createElement(FaqItem, {
+  }, "Yes. Pricing, positioning and the outreach you avoid sit alongside the pattern underneath them, because for solo and independent people the two are rarely separate. Same work I do with any freelancer.")), React.createElement(FaqItem, {
     q: 'Greek or English?'
   }, React.createElement(P, {
     last: true

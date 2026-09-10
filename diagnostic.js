@@ -36,7 +36,7 @@ const DIAG = {
     s1: {
       label: 'What are you building?',
       stageQ: 'Which of these describe where you are right now? (pick any that apply)',
-      stage: ['Employed and thinking seriously about building something', 'Building something alongside a job', 'Freelancer / independent professional', 'Consultant / advisor', 'Solopreneur', 'Founder / business owner', 'Something else'],
+      stage: ['Employed and thinking seriously about building something', 'Building something alongside a job', 'Freelancer / independent professional', 'Consultant / advisor', 'Solo business owner', 'Founder / business owner', 'Something else'],
       timeQ: 'How long have you been actively working on it?',
       time: ['Not started yet', 'Less than 6 months', '6–12 months', '1–3 years', '3+ years'],
       revQ: 'Roughly where is the business today?',
@@ -95,7 +95,7 @@ const DIAG = {
     s1: {
       label: 'Τι χτίζεις;',
       stageQ: 'Πού βρίσκεσαι αυτή τη στιγμή; (διάλεξε όσα ισχύουν)',
-      stage: ['Είμαι μισθωτός και σκέφτομαι σοβαρά να ξεκινήσω κάτι δικό μου', 'Τρέχω κάτι δικό μου παράλληλα με τη δουλειά μου', 'Freelancer / ελεύθερος επαγγελματίας', 'Consultant / σύμβουλος', 'Solopreneur', 'Founder / ιδρυτής', 'Κάτι άλλο'],
+      stage: ['Είμαι μισθωτός και σκέφτομαι σοβαρά να ξεκινήσω κάτι δικό μου', 'Τρέχω κάτι δικό μου παράλληλα με τη δουλειά μου', 'Freelancer / ελεύθερος επαγγελματίας', 'Consultant / σύμβουλος', 'Ιδιοκτήτης solo business', 'Founder / ιδρυτής', 'Κάτι άλλο'],
       timeQ: 'Πόσο καιρό ασχολείσαι ενεργά με αυτό;',
       time: ['Δεν έχω ξεκινήσει ακόμα', 'Λιγότερο από 6 μήνες', '6–12 μήνες', '1–3 χρόνια', 'Πάνω από 3 χρόνια'],
       revQ: 'Σε ποιο στάδιο βρίσκεται σήμερα το business σου;',

@@ -36,7 +36,7 @@ function personLd(lang) {
   const en = {
     jobTitle: ['Business Advisor', 'Licensed Psychotherapist'],
     description: "Business advisor and licensed psychotherapist (BACP-registered) for people building something of their own. 18+ years in product and growth, having built companies and advised more than 500 of them. The work runs on two tracks at once: the business you're building and whatever in you affects how you build it.",
-    knowsAbout: ['Business Advisory', 'Offer & Positioning', 'Pricing', 'Customer Acquisition', 'Sales', 'Founder Psychology', 'Solopreneur Advisory', 'Decision-Making', 'Product & Growth Strategy'],
+    knowsAbout: ['Business Advisory', 'Offer & Positioning', 'Pricing', 'Customer Acquisition', 'Sales', 'Founder Psychology', 'Solo Business Advisory', 'Decision-Making', 'Product & Growth Strategy'],
   };
   const el = {
     jobTitle: ['Business Advisor', 'Ψυχοθεραπευτής'],

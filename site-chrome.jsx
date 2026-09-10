@@ -86,7 +86,7 @@ const WORK_GROUPS = [
   { label: '1:1 private work', items: [
     { name: 'Psychotherapy / Decision Coaching', href: '/psychotherapy-decision-coaching/', id: 'psychotherapy-decision-coaching', desc: 'Think through the decision or pattern that keeps circling' },
     { name: 'Career Strategy Consulting', href: '/career-strategy-consulting/', id: 'career-strategy-consulting', desc: 'Build a paid offer while you keep your job' },
-    { name: 'Solopreneur Growth Consulting', href: '/solopreneur-growth-consulting/', id: 'solopreneur-growth-consulting', desc: 'Grow the business without grinding yourself down' },
+    { name: 'Solo Business Growth Consulting', href: '/solopreneur-growth-consulting/', id: 'solopreneur-growth-consulting', desc: 'Grow the business without grinding yourself down' },
   ] },
   { label: 'Group work', items: [
     { name: 'Group Coaching', soon: true },

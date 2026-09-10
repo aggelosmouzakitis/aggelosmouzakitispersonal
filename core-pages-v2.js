@@ -31,7 +31,7 @@ const HOME_V2 = {
     titleL2pre: 'Master ',
     titleHuman: 'the mind',
     titleL2post: '.',
-    support: 'Combining commercial strategy with psychological depth to help founders, solopreneurs, and experts build high-growth businesses without self-sabotage.',
+    support: 'Combining commercial strategy with psychological depth to help founders, freelancers and independent consultants build high-growth businesses without self-sabotage.',
     pointEyebrow: 'BEFORE YOU SCROLL',
     pointH: 'Anyone can put “advisor” in their bio.',
     points: [{
@@ -93,7 +93,7 @@ const HOME_V2 = {
     titleL2pre: 'Δούλεψε ό,τι σε ',
     titleHuman: 'κρατάει πίσω',
     titleL2post: '.',
-    support: 'Business strategy και ψυχολογική δουλειά για founders, solopreneurs και experts που θέλουν να χτίσουν κάτι μεγαλύτερο, χωρίς να τους φρενάρουν οι φόβοι, οι συνήθειες και τα ίδια επαναλαμβανόμενα μοτίβα.',
+    support: 'Business strategy και ψυχολογική δουλειά για founders, freelancers και ανεξάρτητους επαγγελματίες που θέλουν να χτίσουν κάτι μεγαλύτερο, χωρίς να τους φρενάρουν οι φόβοι, οι συνήθειες και τα ίδια επαναλαμβανόμενα μοτίβα.',
     pointEyebrow: 'ΠΡΙΝ ΠΡΟΧΩΡΗΣΕΙΣ',
     pointH: 'Ο καθένας μπορεί να γράψει «advisor» στο bio του.',
     points: [{

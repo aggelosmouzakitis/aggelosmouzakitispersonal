@@ -632,13 +632,13 @@ var CONFIGS = {
 
   'solopreneur-growth-consulting': {
     key: 'solopreneur-growth-consulting',
-    serviceName: 'Solopreneur Growth Consulting',
+    serviceName: 'Solo Business Growth Consulting',
     ctaUrl: solopreneurGrowthConsultingUrl,
     heroPhoto: '/img/solo-business-growth-hero.webp',
     sticky: 'Apply for the audit',
     colors: { tint: '#E7F2EC', finalBg: '#123A31', finalEyebrow: '#5FD1A3', finalText: '#D7E7E0' },
     hero: {
-      eyebrow: 'For consultants, solopreneurs and freelancers',
+      eyebrow: 'For freelancers and independent consultants',
       lines: ['Grow your', 'solo-business', 'without grinding', 'yourself down.'],
       lead: 'Private 1:1 work on the offer, pricing, clients and decisions that move the business forward, plus the patterns in you that keep getting in the way.',
       cta: 'Find out what to do next',
@@ -754,7 +754,7 @@ var CONFIGS = {
     sticky: 'Apply for the Sparring Session',
     colors: { tint: '#E8EEF0', finalBg: '#20363A', finalEyebrow: '#76D5B2', finalText: '#D9E4E5' },
     hero: {
-      eyebrow: 'For founders, solopreneurs and experienced professionals',
+      eyebrow: 'For founders, freelancers and experienced professionals',
       lines: ['Bring the problem', 'you cannot', 'think through', 'cleanly alone.'],
       lead: 'A private, direct place to work through the decision, pressure or pattern that keeps circling. Practical when the problem is practical. Deeper when it is not.',
       cta: 'Bring me the real problem',
@@ -849,7 +849,7 @@ var CONFIGS = {
     faq: [
       { q: 'What can I bring to the session?', a: 'A career decision, business dilemma, cofounder or client conflict, difficult conversation, loss of motivation, anxiety, imposter feelings or a general sense that something is no longer right. Bring the issue that is taking up the most space now.' },
       { q: 'What if I cannot explain what the problem is?', a: 'You do not need a diagnosis or a perfectly framed question. “Something feels wrong and I cannot work out what” is enough to begin.' },
-      { q: 'Is this only for founders?', a: 'No. It is for founders, solopreneurs and experienced professionals dealing with problems where work, ambition and personal psychology overlap.' },
+      { q: 'Is this only for founders?', a: 'No. It is for founders, freelancers and experienced professionals dealing with problems where work, ambition and personal psychology overlap.' },
       { q: 'Is this therapy or coaching?', a: 'Neither cleanly. I am more direct and action-oriented than a conventional therapist, and I do not use a coaching framework for every problem. We work at the level the situation actually requires.' },
       { q: 'Will you tell me what to do?', a: 'I will tell you what I think and challenge the parts of your reasoning that do not hold up. I will not make the decision for you.' },
       { q: 'Can we work on anxiety, imposter syndrome or lost motivation?', a: 'Yes. We do not stop at managing the symptom or trying to think more positively. We look at what keeps producing it and what needs to change.' },

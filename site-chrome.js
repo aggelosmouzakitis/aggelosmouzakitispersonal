@@ -150,7 +150,7 @@ const WORK_GROUPS = [{
     id: 'career-strategy-consulting',
     desc: 'Build a paid offer while you keep your job'
   }, {
-    name: 'Solopreneur Growth Consulting',
+    name: 'Solo Business Growth Consulting',
     href: '/solopreneur-growth-consulting/',
     id: 'solopreneur-growth-consulting',
     desc: 'Grow the business without grinding yourself down'

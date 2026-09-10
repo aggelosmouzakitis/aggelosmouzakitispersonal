@@ -195,7 +195,7 @@ function SiteFooter({ mob, lang = 'en' }) {
 // ─── START HERE ──────────────────────────────────────────────────────────────
 const START_HERE_ITEMS = [
   { label: 'For founders →', href: '/founders/' },
-  { label: 'For solopreneurs →', href: '/solopreneurs/' },
+  { label: 'For freelancers →', href: '/solopreneurs/' },
 ];
 function StartHere({ mob }) {
   const rowStyle = (first) => ({
@@ -1847,7 +1847,7 @@ function LondonPage() {
     ),
 
     React.createElement(SvcSection, { title: 'And I understand the industry' },
-      React.createElement(SvcP, null, "You also don't have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), ", so runway, reorgs, shipping and the pressure of a senior role are things I already follow. It's the same reason my ", React.createElement(IA, { href: '/1-to-1/' }, 'founder'), " and ", React.createElement(IA, { href: '/1-to-1/' }, 'solopreneur'), " clients come to me.")
+      React.createElement(SvcP, null, "You also don't have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), ", so runway, reorgs, shipping and the pressure of a senior role are things I already follow. It's the same reason my ", React.createElement(IA, { href: '/1-to-1/' }, 'founder'), " and ", React.createElement(IA, { href: '/1-to-1/' }, 'freelancer'), " clients come to me.")
     ),
 
     React.createElement(SvcSection, { title: 'The work itself is the same' },
@@ -1899,7 +1899,7 @@ function ManchesterPage() {
     ),
 
     React.createElement(SvcSection, { title: 'And I understand the industry' },
-      React.createElement(SvcP, null, "You also don't have to explain the work: the pipeline that's gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), " before training as a psychotherapist, and I've done the job-to-independent route myself. It's the same reason my ", React.createElement(IA, { href: '/1-to-1/' }, 'solopreneur'), " and ", React.createElement(IA, { href: '/1-to-1/' }, 'founder'), " clients come to me.")
+      React.createElement(SvcP, null, "You also don't have to explain the work: the pipeline that's gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), " before training as a psychotherapist, and I've done the job-to-independent route myself. It's the same reason my ", React.createElement(IA, { href: '/1-to-1/' }, 'freelancer'), " and ", React.createElement(IA, { href: '/1-to-1/' }, 'founder'), " clients come to me.")
     ),
 
     React.createElement(SvcSection, { title: 'The work itself is the same' },
@@ -1922,7 +1922,7 @@ function ManchesterPage() {
           React.createElement(P, { last: true }, "No. Sessions are online, so anywhere in the UK works the same. Manchester and the North just happen to be where a lot of my Greek-speaking, remote and independent clients are.")
         ),
         React.createElement(FaqItem, { q: 'I work for myself. Can we cover the business too?' },
-          React.createElement(P, { last: true }, "Yes. Pricing, positioning and the outreach you avoid sit alongside the pattern underneath them, because for solo and independent people the two are rarely separate. Same work I do with any solopreneur.")
+          React.createElement(P, { last: true }, "Yes. Pricing, positioning and the outreach you avoid sit alongside the pattern underneath them, because for solo and independent people the two are rarely separate. Same work I do with any freelancer.")
         ),
         React.createElement(FaqItem, { q: 'Greek or English?' },
           React.createElement(P, { last: true }, "Either, or both in the same session. Working in your own language is the point.")

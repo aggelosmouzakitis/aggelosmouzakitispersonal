@@ -850,7 +850,7 @@ var CONFIGS = {
   },
   'solopreneur-growth-consulting': {
     key: 'solopreneur-growth-consulting',
-    serviceName: 'Solopreneur Growth Consulting',
+    serviceName: 'Solo Business Growth Consulting',
     ctaUrl: solopreneurGrowthConsultingUrl,
     heroPhoto: '/img/solo-business-growth-hero.webp',
     sticky: 'Apply for the audit',
@@ -861,7 +861,7 @@ var CONFIGS = {
       finalText: '#D7E7E0'
     },
     hero: {
-      eyebrow: 'For consultants, solopreneurs and freelancers',
+      eyebrow: 'For freelancers and independent consultants',
       lines: ['Grow your', 'solo-business', 'without grinding', 'yourself down.'],
       lead: 'Private 1:1 work on the offer, pricing, clients and decisions that move the business forward, plus the patterns in you that keep getting in the way.',
       cta: 'Find out what to do next',
@@ -1026,7 +1026,7 @@ var CONFIGS = {
       finalText: '#D9E4E5'
     },
     hero: {
-      eyebrow: 'For founders, solopreneurs and experienced professionals',
+      eyebrow: 'For founders, freelancers and experienced professionals',
       lines: ['Bring the problem', 'you cannot', 'think through', 'cleanly alone.'],
       lead: 'A private, direct place to work through the decision, pressure or pattern that keeps circling. Practical when the problem is practical. Deeper when it is not.',
       cta: 'Bring me the real problem',
@@ -1151,7 +1151,7 @@ var CONFIGS = {
       a: 'You do not need a diagnosis or a perfectly framed question. “Something feels wrong and I cannot work out what” is enough to begin.'
     }, {
       q: 'Is this only for founders?',
-      a: 'No. It is for founders, solopreneurs and experienced professionals dealing with problems where work, ambition and personal psychology overlap.'
+      a: 'No. It is for founders, freelancers and experienced professionals dealing with problems where work, ambition and personal psychology overlap.'
     }, {
       q: 'Is this therapy or coaching?',
       a: 'Neither cleanly. I am more direct and action-oriented than a conventional therapist, and I do not use a coaching framework for every problem. We work at the level the situation actually requires.'
