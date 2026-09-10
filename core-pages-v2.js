@@ -487,10 +487,10 @@ function HomePageV2({
   }, React.createElement('div', {
     className: 'home-hero__frame'
   }, React.createElement('img', {
-    src: '/img/aggelos-homepage.webp',
+    src: '/img/aggelos-homepage.webp?v=2',
     alt: 'Aggelos Mouzakitis',
-    width: 1560,
-    height: 1040,
+    width: 2048,
+    height: 1365,
     loading: 'eager',
     fetchpriority: 'high',
     decoding: 'async'

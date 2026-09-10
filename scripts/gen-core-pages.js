@@ -132,7 +132,7 @@ function render(page, lang) {
   }
   ld.push({ '@context': 'https://schema.org', '@type': page.schemaType, '@id': self + '#webpage', url: self, name: c.title, inLanguage: htmlLang, isPartOf: { '@id': ORIGIN + '/#website' }, about: { '@id': ORIGIN + '/#person' } });
 
-  const preload = page.preloadHero ? `\n<link rel="preload" as="image" href="/img/aggelos-homepage.webp" fetchpriority="high">` : '';
+  const preload = page.preloadHero ? `\n<link rel="preload" as="image" href="/img/aggelos-homepage.webp?v=2" fetchpriority="high">` : '';
   const ldTags = ld.map(o => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n');
 
   return `<!DOCTYPE html>

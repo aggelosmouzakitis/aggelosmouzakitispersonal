@@ -462,8 +462,8 @@ function HomePageV2({ lang = 'en' }) {
           React.createElement('figure', { className: 'home-hero__photo' },
             React.createElement('div', { className: 'home-hero__frame' },
               React.createElement('img', {
-                src: '/img/aggelos-homepage.webp', alt: 'Aggelos Mouzakitis',
-                width: 1560, height: 1040, loading: 'eager', fetchpriority: 'high', decoding: 'async',
+                src: '/img/aggelos-homepage.webp?v=2', alt: 'Aggelos Mouzakitis',
+                width: 2048, height: 1365, loading: 'eager', fetchpriority: 'high', decoding: 'async',
               })
             )
           )
