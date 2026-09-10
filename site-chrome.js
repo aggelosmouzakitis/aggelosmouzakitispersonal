@@ -100,7 +100,8 @@ const CHROME_T = {
     content: 'CONTENT',
     follow: 'FOLLOW',
     articles: 'Articles',
-    askAnon: 'Ask anonymously',
+    askAnon: 'Ask me something',
+    startHere: 'Start Here',
     confidentiality: 'Confidentiality',
     terms: 'Terms',
     privacy: 'Privacy',
@@ -635,7 +636,12 @@ function SiteFooterX({
     href: cPath('about', lang)
   }, t.why), React.createElement('a', {
     href: cPath('reviews', lang)
-  }, t.reviews), React.createElement('a', {
+  }, t.reviews),
+  // English: Start Here orientation flow. Greek has no Start Here page,
+  // so it keeps the Greek diagnostic ("get to know each other") link.
+  lang === 'en' ? React.createElement('a', {
+    href: '/start-here/'
+  }, t.startHere) : React.createElement('a', {
     href: cPath('diagnostic', lang)
   }, t.apply)), React.createElement('nav', null, React.createElement('div', {
     className: 'site-ftr__head'

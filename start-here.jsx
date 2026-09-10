@@ -1,256 +1,353 @@
 // start-here.jsx — "Start Here" orientation flow (English).
-// Reuses the Starting Diagnostic's layout, answer cards, selection + Continue,
-// Back control, transition timing and selected-state behaviour. All copy and
-// destinations live in one FLOW/OUTCOMES config so they stay easy to edit.
 //
-// Mounted via window.LegacyShell (same page shell as the diagnostic).
+// A two-question decision flow that ends on a recommendation ("outcome")
+// screen. Editorial card system (numbered 2×2 cards, arrow affordance, green
+// selected state), auto-advance on selection, full browser-history state, and
+// accessible screen changes. All copy, routing and destinations live in the
+// Q1 / Q2 / OUTCOMES config below so they stay easy to edit.
+//
+// Mounted with the site's shared chrome (SiteHeader / SiteFooterX) on a beige
+// canvas. Layout is driven by CSS media queries (no width probing in JS), so
+// resize and rotation reflow without another interaction.
 
 var e = React.createElement;
 
-// External + internal destinations (reuse the site's existing URLs).
-var LINKEDIN = (window.EXTERNAL && window.EXTERNAL.linkedin) || 'https://linkedin.com/in/growth-product-manager/';
-var ASK = 'https://aggelosmouzakitis.com/ask-me-anything/';
+// ── Destinations (reuse the site's existing URLs) ────────────────────────────
+var LINKEDIN = (window.EXTERNAL && window.EXTERNAL.linkedin) || 'https://www.linkedin.com/in/growth-product-manager/';
+var ABOUT = '/about/';
+var REVIEWS = '/reviews/';
+var ASK = '/ask-me-anything/';
+var ORIENTATION = '/contact?interest=orientation'; // orientation call → contact page
 
-// ── One configuration object drives the whole flow ───────────────────────────
+// ── Flow configuration ───────────────────────────────────────────────────────
 var Q1 = {
-  eyebrow: 'START HERE',
-  heading: 'What brought you here today?',
-  support: 'There is no right answer. Choose whatever feels closest today.',
+  step: 'START HERE · STEP 1',
+  heading: 'What brings you here?',
+  instruction: 'Choose the closest option.',
   options: [
-    { text: 'I’m just looking around. I want to understand who you are and how you think.', to: 'looking' },
-    { text: 'Something is on my mind, but I’m not ready to speak to someone or explain it properly.', to: 'mind' },
-    { text: 'I might want help, but I don’t know what kind.', to: 'help' },
-    { text: 'I have a fairly clear idea of what I want help with.', to: 'q2' },
+    { text: 'I’m just looking around. I want to understand who you are and how you think.', go: { outcome: 'looking' } },
+    { text: 'Something is on my mind, but I’m not ready to talk it through yet.', go: { outcome: 'ask' } },
+    { text: 'I want help, but I’m not sure where to start.', go: { outcome: 'orientation' } },
+    { text: 'I know what I want to work on.', go: { screen: 'q2' } },
   ],
 };
 
 var Q2 = {
+  step: 'ONE MORE QUESTION · STEP 2',
   heading: 'What would you like to work on?',
-  support: 'Choose the option that feels closest.',
+  instruction: 'Choose the closest option.',
   options: [
-    { text: 'I want to turn my experience into a clear offer that people can understand and buy.', caption: 'Experience-to-Offer Audit', nav: '/career-strategy-consulting/', service: 'experience-to-offer' },
-    { text: 'I already run a solo business and want to understand what is really limiting its growth.', caption: 'Solo Business Growth Audit', nav: '/solopreneur-growth-consulting/', service: 'solo-business-growth' },
-    { text: 'I have a live problem or decision and would benefit from a strong thinking partner.', caption: 'Private Sparring', nav: '/psychotherapy-decision-coaching/', service: 'private-sparring' },
-    { text: 'I know I want help, but none of these feels quite right.', caption: 'Start with a free orientation chat', to: 'help', service: 'orientation' },
+    { text: 'I want to turn my experience into a clear offer that people can understand and buy.', kicker: 'Experience-to-Offer Audit', nav: '/career-strategy-consulting/', service: 'experience-to-offer' },
+    { text: 'I already run a solo business and want to understand what is really limiting its growth.', kicker: 'Solo Business Growth Audit', nav: '/solopreneur-growth-consulting/', service: 'solo-business-growth' },
+    { text: 'I have a difficult problem or decision and want a sharp outside perspective.', kicker: 'Private Sparring', nav: '/psychotherapy-decision-coaching/', service: 'private-sparring' },
+    { text: 'I want help, but none of these feels quite right.', kicker: 'Start with an orientation call', go: { outcome: 'orientation' }, service: 'orientation' },
   ],
 };
 
 var OUTCOMES = {
   looking: {
-    path: 'looking-around',
+    key: 'looking-around',
     heading: 'Take your time.',
-    body: ['You’re welcome to look around without doing anything else. Read about me, see what clients say, or connect with me and get a feel for how I think over time.'],
+    body: 'Look around, read about me and see what clients say. If you want, connect with me on LinkedIn and get a feel for how I think over time.',
     primary: { label: 'JUST SAY HI ON LINKEDIN →', href: LINKEDIN, external: true, event: 'linkedin_opened' },
     secondary: [
-      { label: 'ABOUT ME →', href: '/about/' },
-      { label: 'CLIENT STORIES →', href: '/reviews/' },
+      { label: 'ABOUT ME →', href: ABOUT },
+      { label: 'REVIEWS →', href: REVIEWS },
     ],
-    closing: 'Or simply enjoy your visit. Nothing else is expected of you.',
   },
-  mind: {
-    path: 'something-on-my-mind',
-    heading: 'You can start with the unfinished version.',
-    body: ['You do not have to turn it into a neat question. A sentence, a thought that keeps returning, or a few rough words are enough.'],
+  ask: {
+    key: 'something-on-my-mind',
+    heading: 'Start with the unfinished version.',
+    body: 'You do not need a neat question. A few rough words are enough.',
     primary: { label: 'ASK ANYTHING →', href: ASK, event: 'ask_anything_opened' },
-    primaryMicro: 'You can include your name or ask anonymously.',
+    micro: 'Your name is optional.',
   },
-  help: {
-    path: 'might-want-help',
+  orientation: {
+    key: 'orientation',
     heading: 'We can find the starting point together.',
-    body: [
-      'If talking would help, we can have a friendly 30-minute conversation. I’ll listen, ask a few useful questions, and help you understand what may be worth doing next.',
-      'You do not need to prepare or decide whether you want ongoing help. There is no pressure to turn the conversation into paid work.',
-      'The useful next step may be one of my services. It may also be a resource, another person, or simply giving it more time.',
-    ],
-    primary: { label: 'REQUEST AN ORIENTATION CHAT →', href: '/contact?interest=orientation', event: 'contact_page_opened' },
-    primaryMicro: 'Free · 30 minutes · Online',
+    body: 'We can have a 30-minute conversation to clarify what is happening and identify the most useful next step. You do not need to prepare or decide whether you want ongoing help.',
+    primary: { label: 'REQUEST AN ORIENTATION CALL →', href: ORIENTATION, event: 'contact_page_opened' },
+    details: 'Free · 30 minutes · Online',
     secondary: [
-      { label: 'I’D RATHER ASK ANYTHING →', href: ASK, event: 'ask_anything_opened', micro: 'You can include your name or ask anonymously.' },
+      { label: 'I’D RATHER ASK SOMETHING →', href: ASK, event: 'ask_anything_opened', micro: 'Your name is optional.' },
     ],
   },
 };
 
-// ── Analytics (existing gtag). Every event carries the selected path. ─────────
+var INITIAL = { screen: 'q1', firstAnswer: null, secondAnswer: null, outcome: null };
+var SELECT_DELAY = 180; // ms of visible selected-state feedback before advancing
+
+// ── Analytics (existing gtag; no-op if absent) ───────────────────────────────
 function track(name, params) {
   try { if (typeof window !== 'undefined' && typeof window.gtag === 'function') window.gtag('event', name, params || {}); } catch (err) { /* noop */ }
 }
 
+// ── Scoped styles (baked into #root by the prerenderer) ──────────────────────
+function StartHereStyles() {
+  var css = [
+    '.sh-root{display:flex;flex-direction:column;min-height:100vh;background:#F4F1EA}',
+    '.sh-main{flex:1 0 auto;background:#F4F1EA;color:#282726}',
+    '.sh-wrap{width:min(100% - 40px,1000px);margin-inline:auto;padding-block:clamp(40px,6vw,72px) clamp(48px,7vw,88px)}',
+    '.sh-stage{min-height:clamp(440px,56vh,560px)}',
+    '.sh-intro{max-width:760px}',
+    '.sh-step{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#059669;margin:0 0 14px}',
+    '.sh-h1{font-family:var(--font-heading);font-synthesis:none;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.04;letter-spacing:-.03em;color:#181A1C;margin:0 0 12px;outline:none}',
+    '.sh-instr{font-size:16px;line-height:1.55;color:#282726;margin:0 0 30px}',
+    // card grid
+    '.sh-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}',
+    '.sh-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:26px;min-height:196px;text-align:left;background:#FFFFFF;border:1.5px solid rgba(24,26,28,.20);border-radius:6px;padding:22px 24px;cursor:pointer;font-family:inherit;color:#181A1C;transition:border-color .15s,box-shadow .15s,transform .15s}',
+    '.sh-card:hover{border-color:rgba(24,26,28,.5)}',
+    '.sh-card:focus-visible{outline:2px solid #059669;outline-offset:3px}',
+    '.sh-card.is-sel{border-color:#059669;box-shadow:6px 6px 0 rgba(5,150,105,.20);transform:translate(-1px,-1px)}',
+    '.sh-card__top{display:flex;align-items:center;justify-content:space-between}',
+    '.sh-card__num{font-family:var(--font-heading);font-size:15px;font-weight:800;letter-spacing:.02em;color:#181A1C;font-variant-numeric:tabular-nums}',
+    '.sh-card.is-sel .sh-card__num{color:#059669}',
+    '.sh-card__arrow{font-size:20px;line-height:1;color:#181A1C;transition:transform .15s,color .15s}',
+    '.sh-card:hover .sh-card__arrow{transform:translateX(3px)}',
+    '.sh-card.is-sel .sh-card__arrow{color:#059669}',
+    '.sh-card__body{display:block}',
+    '.sh-card__copy{font-size:18px;line-height:1.34;font-weight:500;color:#181A1C}',
+    '.sh-card__kicker{display:block;margin-top:10px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#059669}',
+    // outcome
+    '.sh-outcome{display:grid;grid-template-columns:7fr 5fr;gap:44px;align-items:start}',
+    '.sh-outcome__lead{min-width:0}',
+    '.sh-outcome__h{font-family:var(--font-heading);font-synthesis:none;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#181A1C;margin:0 0 18px;outline:none}',
+    '.sh-outcome__body{font-size:18px;line-height:1.6;color:#282726;margin:0;max-width:60ch}',
+    '.sh-panel{background:#FFFFFF;border:1.5px solid rgba(24,26,28,.20);border-radius:8px;padding:26px 24px}',
+    '.sh-btn{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:54px;padding:0 20px;background:#059669;color:#fff;font-family:inherit;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;line-height:1.25;text-align:center;border:1.5px solid #059669;border-radius:0;text-decoration:none;cursor:pointer;transition:filter .16s}',
+    '.sh-btn:hover{filter:brightness(.93)}',
+    '.sh-btn--ghost{background:transparent;color:#181A1C;border-color:rgba(24,26,28,.30)}',
+    '.sh-btn--ghost:hover{filter:none;border-color:#181A1C}',
+    '.sh-btn + .sh-btn{margin-top:12px}',
+    '.sh-note{font-size:13px;line-height:1.5;color:#5E6264;margin:10px 0 0}',
+    '.sh-panel__group + .sh-panel__group{margin-top:16px;padding-top:16px;border-top:1px solid rgba(24,26,28,.12)}',
+    // quiet controls
+    '.sh-controls{display:flex;flex-wrap:wrap;gap:24px;align-items:center;margin-top:36px}',
+    '.sh-quiet{background:none;border:0;padding:6px 0;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8A8A8A;cursor:pointer;transition:color .15s}',
+    '.sh-quiet:hover{color:#181A1C}',
+    '.sh-quiet:focus-visible{outline:2px solid #059669;outline-offset:3px}',
+    // responsive
+    '@media (max-width:820px){.sh-outcome{grid-template-columns:1fr;gap:28px}}',
+    '@media (max-width:680px){.sh-grid{grid-template-columns:1fr}.sh-card{min-height:0;gap:20px}.sh-stage{min-height:0}}',
+    '@media (prefers-reduced-motion:reduce){.sh-card,.sh-card__arrow,.sh-btn,.sh-quiet{transition:none}.sh-card.is-sel{transform:none}}',
+  ].join('');
+  return e('style', { dangerouslySetInnerHTML: { __html: css } });
+}
+
+// ── Flow component ───────────────────────────────────────────────────────────
 function StartHerePage() {
   var R = React;
-  var mob = typeof window !== 'undefined' && window.innerWidth < 768;
-  var ACC = '#059669';
-
-  // Screen stack (current = last). Kept in a ref too so popstate/handlers read
-  // the latest without stale closures.
-  var stackState = R.useState(['q1']);
-  var stack = stackState[0], setStack = stackState[1];
-  var stackRef = R.useRef(['q1']);
-  var screen = stack[stack.length - 1];
-
-  var q1Sel = R.useState(null); // preserved across Back
-  var q2Sel = R.useState(null);
+  var stState = R.useState(INITIAL);
+  var st = stState[0], setSt = stState[1];
+  var stRef = R.useRef(INITIAL);
+  var pendingState = R.useState(null); // index shown selected during the advance delay
+  var pending = pendingState[0], setPending = pendingState[1];
+  var lockRef = R.useRef(false);       // guards against double-advance
+  var timerRef = R.useRef(null);
   var headingRef = R.useRef(null);
   var liveRef = R.useRef(null);
 
-  function sync(next) { stackRef.current = next; setStack(next); }
-  function goTo(s) {
-    var next = stackRef.current.concat([s]);
-    sync(next);
-    try { window.history.pushState({ sh: s, depth: next.length }, ''); } catch (err) {}
-  }
-  function back() { try { window.history.back(); } catch (err) { popOne(); } }
-  function popOne() { var cur = stackRef.current; if (cur.length > 1) sync(cur.slice(0, -1)); }
-  function startAgain() {
-    q1Sel[1](null); q2Sel[1](null);
-    sync(['q1']);
-    try { window.history.pushState({ sh: 'q1', depth: 1 }, ''); } catch (err) {}
+  function commit(next, push) {
+    try { window.history[push ? 'pushState' : 'replaceState'](next, ''); } catch (err) {}
+    stRef.current = next;
+    setSt(next);
   }
 
-  // Browser Back / Forward → keep the in-app stack in sync.
+  // Record the selection onto the CURRENT history entry (so browser Back
+  // restores this screen with the chosen card still highlighted).
+  function markSelection(i) {
+    var cur = stRef.current;
+    var upd = cur.screen === 'q1' ? { screen: cur.screen, firstAnswer: i, secondAnswer: cur.secondAnswer, outcome: cur.outcome }
+                                  : { screen: cur.screen, firstAnswer: cur.firstAnswer, secondAnswer: i, outcome: cur.outcome };
+    try { window.history.replaceState(upd, ''); } catch (err) {}
+    stRef.current = upd;
+  }
+
+  function selectQ1(i) {
+    if (lockRef.current) return;
+    lockRef.current = true;
+    setPending(i);
+    markSelection(i);
+    var o = Q1.options[i];
+    track('first_answer_selected', { path: o.go.outcome ? OUTCOMES[o.go.outcome].key : 'clear-idea' });
+    timerRef.current = setTimeout(function () {
+      lockRef.current = false;
+      setPending(null);
+      if (o.go.screen === 'q2') {
+        commit({ screen: 'q2', firstAnswer: i, secondAnswer: null, outcome: null }, true);
+      } else {
+        commit({ screen: 'outcome', firstAnswer: i, secondAnswer: null, outcome: o.go.outcome }, true);
+      }
+    }, SELECT_DELAY);
+  }
+
+  function selectQ2(i) {
+    if (lockRef.current) return;
+    lockRef.current = true;
+    setPending(i);
+    markSelection(i);
+    var o = Q2.options[i];
+    track('service_category_selected', { path: 'clear-idea', category: o.service });
+    timerRef.current = setTimeout(function () {
+      if (o.nav) {
+        track('service_page_opened', { path: 'clear-idea', service: o.service });
+        window.location.href = o.nav; // leave the flow
+        return;
+      }
+      lockRef.current = false;
+      setPending(null);
+      commit({ screen: 'outcome', firstAnswer: stRef.current.firstAnswer, secondAnswer: i, outcome: o.go.outcome }, true);
+    }, SELECT_DELAY);
+  }
+
+  function goBack() { try { window.history.back(); } catch (err) {} }
+
+  function startOver() {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    lockRef.current = false;
+    setPending(null);
+    commit(INITIAL, false); // replaceState → no duplicate flow step
+  }
+
+  // Init history + browser Back/Forward restoration.
   R.useEffect(function () {
-    function onPop() { popOne(); }
-    window.addEventListener('popstate', onPop);
-    try { window.history.replaceState({ sh: 'q1', depth: 1 }, ''); } catch (err) {}
+    try { window.history.replaceState(INITIAL, ''); } catch (err) {}
+    stRef.current = INITIAL;
     track('start_here_viewed', { path: 'start' });
-    return function () { window.removeEventListener('popstate', onPop); };
+    function onPop(ev) {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      lockRef.current = false;
+      setPending(null);
+      var s = ev.state && ev.state.screen ? ev.state : INITIAL;
+      stRef.current = s;
+      setSt(s);
+    }
+    window.addEventListener('popstate', onPop);
+    return function () {
+      window.removeEventListener('popstate', onPop);
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, []);
 
-  // After each screen change: scroll to top, move focus to the heading, announce.
+  // On every screen change: scroll to top, focus the heading, announce.
+  var screenKey = st.screen + ':' + (st.outcome || '');
   R.useEffect(function () {
-    var s = typeof document !== 'undefined' && document.getElementById('main-scroll');
-    if (s) s.scrollTop = 0;
-    if (typeof window !== 'undefined' && window.scrollTo) window.scrollTo(0, 0);
+    if (typeof window !== 'undefined' && window.scrollTo) { try { window.scrollTo(0, 0); } catch (err) {} }
     if (headingRef.current) { try { headingRef.current.focus(); } catch (err) {} }
-    if (liveRef.current) liveRef.current.textContent = headingRef.current ? headingRef.current.textContent : '';
-  }, [screen]);
+    if (liveRef.current) {
+      var label = st.screen === 'outcome' ? ('Your next step: ' + (headingRef.current ? headingRef.current.textContent : ''))
+                : st.screen === 'q2' ? ('Step 2 of 2. ' + Q2.heading)
+                : ('Step 1. ' + Q1.heading);
+      liveRef.current.textContent = label;
+    }
+  }, [screenKey]);
 
-  // ── styles (mirror the Starting Diagnostic; headings use brand #181A1C) ──
-  var C = {
-    page: { maxWidth: 840, margin: '0 auto', padding: mob ? '1.5rem 0 3rem' : '2.5rem 0 4rem', color: '#282726', fontFamily: 'inherit' },
-    eyebrow: { fontSize: '12px', fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: ACC, lineHeight: 1.6, margin: '0 0 1rem' },
-    h1: { fontFamily: 'var(--font-heading)', fontSynthesis: 'none', fontSize: mob ? '30px' : '44px', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-.035em', color: '#181A1C', margin: '0 0 1rem', outline: 'none' },
-    support: { margin: '0 0 2rem', lineHeight: 1.6, fontSize: mob ? '17px' : '18px', color: '#282726' },
-    body: { margin: '0 0 1.2rem', lineHeight: 1.7, fontSize: mob ? '17px' : '18px', color: '#282726', maxWidth: '64ch' },
-    choice: function (sel) { return { width: '100%', textAlign: 'left', border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)', padding: mob ? '1rem 1.05rem' : '1.15rem 1.25rem', borderRadius: '10px', background: sel ? 'rgba(5,150,105,.08)' : '#fff', color: '#282726', fontFamily: 'inherit', fontSize: mob ? '16px' : '17px', lineHeight: 1.5, cursor: 'pointer', marginBottom: '.75rem', minHeight: 44, transition: 'border-color .12s, background .12s', display: 'block' }; },
-    caption: { display: 'block', marginTop: '.4rem', fontSize: '13px', fontWeight: 700, letterSpacing: '.04em', color: ACC },
-    ctaPrimary: { fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', color: '#fff', background: ACC, border: '1.5px solid ' + ACC, borderRadius: '2px', padding: '1rem 1.7rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minHeight: 44, cursor: 'pointer', textDecoration: 'none' },
-    ctaOutline: { fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', color: '#282726', background: 'transparent', border: '1.5px solid rgba(40,39,38,.35)', borderRadius: '2px', padding: '1rem 1.7rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minHeight: 44, cursor: 'pointer', textDecoration: 'none' },
-    micro: { fontSize: '14px', color: '#666', lineHeight: 1.6, margin: '.7rem 0 0' },
-    back: { fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', color: '#282726', background: 'transparent', border: '1.5px solid rgba(40,39,38,.35)', borderRadius: '2px', padding: '.9rem 1.5rem', minHeight: 44, cursor: 'pointer' },
-    continue: function (on) { return { fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', color: '#fff', background: ACC, border: '1.5px solid ' + ACC, borderRadius: '2px', padding: '.9rem 1.7rem', minHeight: 44, cursor: on ? 'pointer' : 'not-allowed', opacity: on ? 1 : 0.45 }; },
-    startAgain: { display: 'inline-block', marginTop: '2.5rem', fontFamily: 'inherit', fontSize: '12px', fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#8a8a8a', background: 'none', border: 0, padding: '.5rem 0', cursor: 'pointer' },
-  };
+  var live = e('div', { ref: liveRef, 'aria-live': 'polite', role: 'status', style: { position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap' } });
 
-  var liveRegion = e('div', { ref: liveRef, 'aria-live': 'polite', role: 'status', style: { position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap' } });
-
-  // Full-width CTAs and stacked buttons on mobile.
-  var rowStyle = { display: 'flex', flexWrap: 'wrap', gap: mob ? '.75rem' : '1rem', flexDirection: mob ? 'column' : 'row', alignItems: mob ? 'stretch' : 'center' };
-
-  function heading(text) {
-    return e('h1', { style: C.h1, tabIndex: -1, ref: headingRef }, text);
+  function selectedIndex() {
+    if (pending !== null && pending !== undefined) return pending;
+    return st.screen === 'q1' ? st.firstAnswer : st.secondAnswer;
   }
 
-  // ── Question screen (q1 / q2) ──
-  function renderQuestion(cfg, selPair, isFirst) {
-    var sel = selPair[0], setSel = selPair[1];
-    var canContinue = sel !== null && sel !== undefined;
-    return e('div', { style: C.page },
-      liveRegion,
-      cfg.eyebrow ? e('div', { style: C.eyebrow }, cfg.eyebrow) : null,
-      heading(cfg.heading),
-      e('p', { style: C.support }, cfg.support),
-      e('div', { role: 'group', 'aria-label': cfg.heading },
+  function questionScreen(cfg, onSelect, isFirst) {
+    var sel = selectedIndex();
+    return e('div', { className: 'sh-stage' },
+      live,
+      e('div', { className: 'sh-intro' },
+        e('p', { className: 'sh-step' }, cfg.step),
+        e('h1', { className: 'sh-h1', tabIndex: -1, ref: headingRef }, cfg.heading),
+        e('p', { className: 'sh-instr' }, cfg.instruction)
+      ),
+      e('div', { className: 'sh-grid', role: 'group', 'aria-label': cfg.heading },
         cfg.options.map(function (o, i) {
           var on = sel === i;
+          var num = ('0' + (i + 1)).slice(-2);
           return e('button', {
-            key: i, type: 'button', className: 'opt-btn', style: C.choice(on),
+            key: i, type: 'button',
+            className: 'sh-card' + (on ? ' is-sel' : ''),
             'aria-pressed': on ? 'true' : 'false',
-            onClick: function () { setSel(i); },
+            onClick: function () { onSelect(i); },
           },
-            e('span', null, o.text),
-            o.caption ? e('span', { style: C.caption }, o.caption) : null
+            e('div', { className: 'sh-card__top' },
+              e('span', { className: 'sh-card__num' }, num),
+              e('span', { className: 'sh-card__arrow', 'aria-hidden': 'true' }, '→')
+            ),
+            e('div', { className: 'sh-card__body' },
+              e('span', { className: 'sh-card__copy' }, o.text),
+              o.kicker ? e('span', { className: 'sh-card__kicker' }, o.kicker) : null
+            )
           );
         })
       ),
-      e('div', { style: { display: 'flex', justifyContent: 'space-between', gap: '1rem', marginTop: '2rem', flexDirection: mob ? 'column-reverse' : 'row' } },
-        isFirst ? e('span', null) : e('button', { type: 'button', className: 'cta-btn', style: C.back, onClick: back }, 'Back'),
-        e('button', {
-          type: 'button', className: 'cta-btn', style: C.continue(canContinue), disabled: !canContinue,
-          onClick: function () { if (canContinue) onContinue(cfg, sel); },
-        }, 'Continue')
-      )
+      controls(isFirst)
     );
   }
 
-  function onContinue(cfg, sel) {
-    var o = cfg.options[sel];
-    if (cfg === Q1) {
-      track('first_answer_selected', { path: o.to === 'q2' ? 'clear-idea' : (OUTCOMES[o.to] ? OUTCOMES[o.to].path : o.to) });
-      goTo(o.to);
-    } else { // Q2
-      track('service_category_selected', { path: 'clear-idea', category: o.service });
-      if (o.nav) {
-        track('service_page_opened', { path: 'clear-idea', service: o.service });
-        window.location.href = o.nav;
-      } else {
-        goTo(o.to);
-      }
-    }
+  function controls(isFirst) {
+    if (isFirst) return null;
+    return e('div', { className: 'sh-controls' },
+      e('button', { type: 'button', className: 'sh-quiet', onClick: goBack }, '← Back'),
+      e('button', { type: 'button', className: 'sh-quiet', onClick: startOver }, 'Start over')
+    );
   }
 
-  // ── Outcome screen ──
-  function renderOutcome(key) {
-    var o = OUTCOMES[key];
-    function onCta(cta) {
-      return function () { if (cta.event) track(cta.event, { path: o.path }); };
-    }
-    return e('div', { style: C.page },
-      liveRegion,
-      e('div', { style: C.eyebrow }, 'START HERE'),
-      heading(o.heading),
-      o.body.map(function (b, i) { return e('p', { key: i, style: C.body }, b); }),
-      // Primary CTA (one green button) + its microcopy
-      e('div', { style: { marginTop: '1.6rem' } },
-        e('a', {
-          href: o.primary.href, className: 'cta-btn', style: Object.assign({}, C.ctaPrimary, mob ? { width: '100%' } : null),
-          target: o.primary.external ? '_blank' : undefined, rel: o.primary.external ? 'noopener noreferrer' : undefined,
-          onClick: onCta(o.primary),
-        }, o.primary.label),
-        o.primaryMicro ? e('p', { style: C.micro }, o.primaryMicro) : null
-      ),
-      // Secondary CTAs (outline buttons / text links)
-      o.secondary ? e('div', { style: { marginTop: '1.4rem' } },
-        e('div', { style: rowStyle },
-          o.secondary.map(function (s, i) {
-            return e('a', {
-              key: i, href: s.href, className: 'cta-btn', style: Object.assign({}, C.ctaOutline, mob ? { width: '100%' } : null),
-              target: s.external ? '_blank' : undefined, rel: s.external ? 'noopener noreferrer' : undefined,
-              onClick: onCta(s),
-            }, s.label);
-          })
+  function actionLink(a, ghost) {
+    return e('a', {
+      key: a.label, href: a.href, className: 'sh-btn' + (ghost ? ' sh-btn--ghost' : ''),
+      target: a.external ? '_blank' : undefined, rel: a.external ? 'noopener noreferrer' : undefined,
+      onClick: function () { if (a.event) track(a.event, { path: 'start-here' }); },
+    }, a.label);
+  }
+
+  function outcomeScreen() {
+    var o = OUTCOMES[st.outcome] || OUTCOMES.orientation;
+    var primaryMicro = o.micro; // shown under the primary action (ask outcome)
+    return e('div', { className: 'sh-stage' },
+      live,
+      e('div', { className: 'sh-outcome' },
+        e('div', { className: 'sh-outcome__lead' },
+          e('p', { className: 'sh-step' }, 'YOUR NEXT STEP'),
+          e('h1', { className: 'sh-outcome__h', tabIndex: -1, ref: headingRef }, o.heading),
+          e('p', { className: 'sh-outcome__body' }, o.body)
         ),
-        // per-secondary microcopy (e.g. Ask Anything note under the secondary CTA)
-        o.secondary.filter(function (s) { return s.micro; }).map(function (s, i) { return e('p', { key: i, style: C.micro }, s.micro); })
-      ) : null,
-      o.closing ? e('p', { style: Object.assign({}, C.body, { marginTop: '1.6rem', color: '#666' }) }, o.closing) : null,
-      // Nav: Back + Start again
-      e('div', { style: { marginTop: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '.25rem' } },
-        e('button', { type: 'button', className: 'cta-btn', style: C.back, onClick: back }, 'Back'),
-        e('button', { type: 'button', style: C.startAgain, onClick: startAgain }, 'Start again')
-      )
+        e('div', { className: 'sh-panel' },
+          e('div', { className: 'sh-panel__group' },
+            actionLink(o.primary, false),
+            o.details ? e('p', { className: 'sh-note' }, o.details) : null,
+            primaryMicro ? e('p', { className: 'sh-note' }, primaryMicro) : null
+          ),
+          o.secondary ? e('div', { className: 'sh-panel__group' },
+            o.secondary.map(function (s) { return actionLink(s, true); }),
+            o.secondary.filter(function (s) { return s.micro; }).map(function (s, i) {
+              return e('p', { key: 'm' + i, className: 'sh-note' }, s.micro);
+            })
+          ) : null
+        )
+      ),
+      controls(false)
     );
   }
 
-  if (screen === 'q1') return renderQuestion(Q1, q1Sel, true);
-  if (screen === 'q2') return renderQuestion(Q2, q2Sel, false);
-  return renderOutcome(screen);
+  var body;
+  if (st.screen === 'q1') body = questionScreen(Q1, selectQ1, true); // first screen: no Back / Start over
+  else if (st.screen === 'q2') body = questionScreen(Q2, selectQ2, false);
+  else body = outcomeScreen();
+
+  return e(React.Fragment, null,
+    e(StartHereStyles),
+    e(window.ChromeStyles),
+    e('div', { className: 'sh-root' },
+      e(window.SiteHeader, { page: 'start-here', lang: 'en' }),
+      e('main', { className: 'sh-main' },
+        e('div', { className: 'sh-wrap' }, body)
+      ),
+      e(window.SiteFooterX, { lang: 'en' })
+    )
+  );
 }
 
 function renderStartHere() {
-  ReactDOM.createRoot(document.getElementById('root')).render(
-    e(window.LegacyShell, { page: 'start-here', lang: 'en', bare: true, cta: false },
-      e(StartHerePage, null))
-  );
+  ReactDOM.createRoot(document.getElementById('root')).render(e(StartHerePage, null));
 }
 
 Object.assign(window, { StartHerePage: StartHerePage, renderStartHere: renderStartHere });

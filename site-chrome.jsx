@@ -63,7 +63,7 @@ const CHROME_T = {
     home: 'Home', why: 'About me', reviews: 'Reviews', apply: 'Apply',
     start: 'START HERE', other: 'ΕΛΛΗΝΙΚΑ',
     role1: 'Private business & career advisor', role2: 'BACP-registered psychotherapist',
-    navigate: 'NAVIGATE', content: 'CONTENT', follow: 'FOLLOW', articles: 'Articles', askAnon: 'Ask anonymously',
+    navigate: 'NAVIGATE', content: 'CONTENT', follow: 'FOLLOW', articles: 'Articles', askAnon: 'Ask me something', startHere: 'Start Here',
     confidentiality: 'Confidentiality', terms: 'Terms', privacy: 'Privacy',
     ctaHeading: 'If working harder was going to fix this, it probably would have by now.',
     ctaBtn: 'Apply for a working session', menu: 'Menu', rights: 'All rights reserved.',
@@ -460,7 +460,11 @@ function SiteFooterX({ lang = 'en' }) {
           React.createElement('a', { href: cPath('home', lang) }, t.home),
           React.createElement('a', { href: cPath('about', lang) }, t.why),
           React.createElement('a', { href: cPath('reviews', lang) }, t.reviews),
-          React.createElement('a', { href: cPath('diagnostic', lang) }, t.apply)
+          // English: Start Here orientation flow. Greek has no Start Here page,
+          // so it keeps the Greek diagnostic ("get to know each other") link.
+          lang === 'en'
+            ? React.createElement('a', { href: '/start-here/' }, t.startHere)
+            : React.createElement('a', { href: cPath('diagnostic', lang) }, t.apply)
         ),
         React.createElement('nav', null,
           React.createElement('div', { className: 'site-ftr__head' }, t.content),
