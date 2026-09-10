@@ -11,24 +11,6 @@ const GA = 'G-KV83RRF6ZM';
 const SIDEBAR_V = 32, CONTENT_V = 36;
 const CHROME_V = 10, V2_V = 12;
 
-// VideoAsk widget — injected into the <body> of Greek (/el/) pages only.
-const VIDEOASK_EMBED = `<script>
-window.VIDEOASK_EMBED_CONFIG = {
-  "kind": "widget",
-  "url": "https://www.videoask.com/fuv51iuq1",
-  "options": {
-    "widgetType": "VideoThumbnailWindowTall",
-    "text": "",
-    "backgroundColor": "#36CF71",
-    "position": "bottom-right",
-    "dismissible": true,
-    "videoPosition": "center center"
-  }
-}
-</script>
-<script src="https://www.videoask.com/embed/embed.js"></script>
-`;
-
 // Shared CSS (from the original index.html — design system preserved 1:1)
 const CSS = `
 :root{
@@ -206,7 +188,7 @@ ${ldTags}
 <script src="/core-pages-v2.js?v=${V2_V}"></script>
 <script src="/content-pages.js?v=${CONTENT_V}"></script>
 <script>renderApp(${JSON.stringify(page.id)}, ${JSON.stringify(lang)});</script>
-${lang === 'el' ? VIDEOASK_EMBED : ''}</body>
+</body>
 </html>
 `;
 }
