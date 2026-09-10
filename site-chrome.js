@@ -27,6 +27,10 @@ const SITE = {
   archivo: 'var(--font-display)'
 };
 
+// Language switcher (EN⇄EL) — temporarily hidden site-wide. Flip to `true`
+// to bring the EN/EL toggle back in both the desktop header and mobile menu.
+const SHOW_LANG_SWITCHER = false;
+
 // Bilingual route map — mirrors CORE_PATHS in content-pages.jsx.
 const CHROME_PATHS = {
   'home': {
@@ -520,7 +524,7 @@ function SiteHeader({
   const menuChildren = [link(homeItem)];
   if (workMobile) menuChildren.push(workMobile);
   restItems.forEach(it => menuChildren.push(link(it)));
-  menuChildren.push(React.createElement('a', {
+  if (SHOW_LANG_SWITCHER) menuChildren.push(React.createElement('a', {
     key: 'lang',
     href: langHref,
     hrefLang: other,
@@ -550,7 +554,7 @@ function SiteHeader({
     }
   }, React.createElement('div', {
     className: 'site-hdr__end'
-  }, React.createElement('a', {
+  }, SHOW_LANG_SWITCHER && React.createElement('a', {
     className: 'site-hdr__lang',
     href: langHref,
     hrefLang: other

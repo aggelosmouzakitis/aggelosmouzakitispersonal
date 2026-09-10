@@ -133,7 +133,7 @@ img{max-width:100%}
 
 /* ── "Work with me" mega dropdown (desktop) ── */
 .site-hdr__work{position:static;display:flex;align-items:center}
-.site-hdr__work-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;cursor:pointer;color:#F3F0E8;font-family:inherit;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding:0;transition:opacity .18s}
+.site-hdr__work-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;color:#F3F0E8;font-family:inherit;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding:0 0 2px;transition:opacity .18s}
 .site-hdr__work-btn:hover,.site-hdr__work-btn[aria-expanded="true"]{opacity:1}
 .site-hdr__work-caret{width:10px;height:6px;transition:transform .2s ease;opacity:.85}
 .site-hdr__work-btn[aria-expanded="true"] .site-hdr__work-caret{transform:rotate(180deg)}
@@ -270,7 +270,7 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 }
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
-</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/">Home</a><div class="site-hdr__work"><button class="site-hdr__work-btn" type="button" aria-haspopup="true" aria-expanded="false"><span>Work with me</span><svg class="site-hdr__work-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div><a href="/about/">About me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="site-hdr__lang" href="/blog/" hreflang="el">ΕΛΛΗΝΙΚΑ</a><a class="hdr-cta" href="/start-here/"><span>START HERE</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header></div>
+</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/">Home</a><div class="site-hdr__work"><button class="site-hdr__work-btn" type="button" aria-haspopup="true" aria-expanded="false"><span>Work with me</span><svg class="site-hdr__work-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div><a href="/about/">About me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="hdr-cta" href="/start-here/"><span>START HERE</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header></div>
   <div id="content-area">
     <div class="article-wrap">
       <a href="/blog/" class="top-back">← Writing</a>
@@ -485,7 +485,7 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 
-<script src="../../site-chrome.js?v=11"></script>
+<script src="../../site-chrome.js?v=12"></script>
 <script>
 const URL_MAP = {
   'home': '/',
