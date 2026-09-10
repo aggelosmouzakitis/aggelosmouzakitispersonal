@@ -105,7 +105,7 @@ const CORE_PATHS = {
   'one-to-one':      { en: '/1-to-1/',          el: '/el/1-to-1/' },
   'about':           { en: '/about/',           el: '/el/about/' },
   'reviews':         { en: '/reviews/',         el: '/el/reviews/' },
-  'book':            { en: '/book/',            el: '/el/book/' },
+  'book':            { en: '/contact?interest=orientation',            el: '/el/book/' },
   'diagnostic':      { en: '/startingdiagnostic/', el: '/el/startingdiagnostic/' },
   'confidentiality': { en: '/confidentiality/', el: '/el/confidentiality/' },
   // One blog for both languages (Greek enters it filtered — no second blog).
@@ -118,7 +118,7 @@ const FOOTER_COLS_BY_LANG = {
   en: [
     { label: 'Work with me', links: [
       { href: '/1-to-1/', label: '1:1' },
-      { href: '/book/', label: 'Book a fit call' },
+      { href: '/contact?interest=orientation', label: 'Book a fit call' },
     ] },
     { label: 'Site', links: [
       { href: '/', label: 'Home' },
@@ -1135,7 +1135,7 @@ function PersonaHowWeStartSection() {
       ] })
     ),
     React.createElement('div', { className: 'svc-ctarow' },
-      React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')
+      React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
     ),
     React.createElement(SvcNote, null, "It's the same ongoing 1:1 work. ", React.createElement(IA, { href: '/1-to-1/' }, 'See how 1:1 works'), '.')
   );
@@ -1198,7 +1198,7 @@ function ForFoundersPage() {
         ] })
       ),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')
+        React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
       )
     ),
 
@@ -1266,7 +1266,7 @@ function SolopreneursPage() {
         ] })
       ),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')
+        React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
       )
     ),
 
@@ -1430,7 +1430,7 @@ function HowIWorkPage() {
         "It's a trusted advisory relationship with someone who's sat where you're sitting, cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face."
       ),
       React.createElement('div', { style: { marginTop: '1.6rem' } },
-        React.createElement('a', { href: '/book/', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
+        React.createElement('a', { href: '/contact?interest=orientation', className: 'cta-btn', style: ctaBtn }, 'Book a fit call →')
       )
     ),
 
@@ -1550,7 +1550,7 @@ function ExecTherapyPage() {
     React.createElement(SvcSection, { title: 'How it works' },
       React.createElement(SvcP, null, "All sessions are ", React.createElement(Strong, null, "remote, one-on-one and confidential"), ". Most clients are across Europe and the US, weekly or biweekly. It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's going on and whether working together makes sense. If it doesn't, I'll say so."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')
+        React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
       )
     ),
 
@@ -1600,7 +1600,7 @@ function FoundersTherapyPage() {
     React.createElement(SvcSection, { title: 'How it works' },
       React.createElement(SvcP, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one and confidential"), ". Nothing goes to your board, your investors or your team. This is a private therapeutic relationship, not coaching attached to your company. It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's going on and whether I'm the right person for it."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')
+        React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
       )
     ),
 
@@ -1662,7 +1662,7 @@ function ImposterPage() {
     React.createElement(SvcSection, { title: 'Start here' },
       React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's driving the pattern and whether I'm the right person to work on it with you."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')
+        React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
       )
     ),
 
@@ -1723,7 +1723,7 @@ function BurnoutPage() {
     React.createElement(SvcSection, { title: 'Start here' },
       React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's underneath the exhaustion and whether therapy is the right approach."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')
+        React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
       )
     ),
 
@@ -1788,7 +1788,7 @@ function CareerTransitionPage() {
     React.createElement(SvcSection, { title: 'Start here' },
       React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's driving the transition, or the resistance to it, and whether therapy is the right support for this moment."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')
+        React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
       )
     ),
 
@@ -1862,7 +1862,7 @@ function LondonPage() {
       React.createElement(SvcP, null, "Private and one to one. I don't report to anyone and I don't use identifiable client stories anywhere. Here's ", React.createElement(IA, { href: '/confidentiality/' }, 'how confidentiality works'), " in detail.")
     ),
 
-    React.createElement('div', { className: 'svc-ctarow' }, React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')),
+    React.createElement('div', { className: 'svc-ctarow' }, React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')),
 
     React.createElement(SvcSection, { title: 'Common questions' },
       React.createElement('div', null,
@@ -1914,7 +1914,7 @@ function ManchesterPage() {
       React.createElement(SvcP, null, "Private, one to one, and it stays that way. Nothing gets reported to anyone and I don't use identifiable stories. Here's ", React.createElement(IA, { href: '/confidentiality/' }, 'how confidentiality works'), ".")
     ),
 
-    React.createElement('div', { className: 'svc-ctarow' }, React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')),
+    React.createElement('div', { className: 'svc-ctarow' }, React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')),
 
     React.createElement(SvcSection, { title: 'Common questions' },
       React.createElement('div', null,
@@ -1966,7 +1966,7 @@ function NewYorkPage() {
       React.createElement(SvcP, null, "Private and one to one. I don't report to your employer, investors or anyone else, and I don't use identifiable stories publicly. The detail, including the honest limits, is on the ", React.createElement(IA, { href: '/confidentiality/' }, 'confidentiality page'), ".")
     ),
 
-    React.createElement('div', { className: 'svc-ctarow' }, React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')),
+    React.createElement('div', { className: 'svc-ctarow' }, React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')),
 
     React.createElement(SvcSection, { title: 'Common questions' },
       React.createElement('div', null,
@@ -2018,7 +2018,7 @@ function DublinPage() {
       React.createElement(SvcP, null, "Private and one to one. Nothing goes back to your employer or manager, and I don't use identifiable stories publicly. The full detail is on the ", React.createElement(IA, { href: '/confidentiality/' }, 'confidentiality page'), ".")
     ),
 
-    React.createElement('div', { className: 'svc-ctarow' }, React.createElement(SvcCta, { href: '/book/' }, 'Book a fit call →')),
+    React.createElement('div', { className: 'svc-ctarow' }, React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')),
 
     React.createElement(SvcSection, { title: 'Common questions' },
       React.createElement('div', null,

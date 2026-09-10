@@ -566,7 +566,7 @@ function HomePageV2({
   }, c.rightP))), React.createElement('figure', {
     className: 'am-duality__portrait'
   }, React.createElement('img', {
-    src: '/img/aggelos-overlap.webp',
+    src: '/img/aggelos-overlap.webp?v=2',
     alt: 'Aggelos Mouzakitis',
     width: 250,
     height: 426,
@@ -583,7 +583,7 @@ function HomePageV2({
   }, React.createElement('span', null, c.opinionL1), React.createElement('span', null, c.opinionL2)), React.createElement('div', {
     className: 'opinion'
   }, React.createElement('img', {
-    src: '/img/aggelos-continuation.jpeg',
+    src: '/img/aggelos-continuation.webp',
     alt: c.contAlt,
     width: 900,
     height: 1125,

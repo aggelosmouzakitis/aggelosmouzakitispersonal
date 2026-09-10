@@ -522,7 +522,7 @@ function HomePageV2({ lang = 'en' }) {
               )
             ),
             React.createElement('figure', { className: 'am-duality__portrait' },
-              React.createElement('img', { src: '/img/aggelos-overlap.webp', alt: 'Aggelos Mouzakitis', width: 250, height: 426, loading: 'lazy', decoding: 'async' })
+              React.createElement('img', { src: '/img/aggelos-overlap.webp?v=2', alt: 'Aggelos Mouzakitis', width: 250, height: 426, loading: 'lazy', decoding: 'async' })
             )
           )
         )
@@ -539,7 +539,7 @@ function HomePageV2({ lang = 'en' }) {
               React.createElement('span', null, c.opinionL2)
             ),
             React.createElement('div', { className: 'opinion' },
-              React.createElement('img', { src: '/img/aggelos-continuation.jpeg', alt: c.contAlt, width: 900, height: 1125, loading: 'lazy', decoding: 'async' }),
+              React.createElement('img', { src: '/img/aggelos-continuation.webp', alt: c.contAlt, width: 900, height: 1125, loading: 'lazy', decoding: 'async' }),
               React.createElement('div', { className: 'opinion__body' },
                 c.opinionParas.map((p, i) => React.createElement('p', { key: i }, p)),
                 React.createElement('blockquote', { className: 'opinion__q' }, c.opinionQuote)
