@@ -111,7 +111,12 @@ img{max-width:100%}
    menu no longer shifts sideways between pages. */
 .site-hdr__in{width:min(100% - 64px,1280px);min-height:76px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:22px}
 .site-hdr__in>*{min-width:0}
-.site-hdr__brand{justify-self:start}
+/* Pin each slot to its column so the actions/burger stays hard-right even when
+   the nav is display:none on mobile — otherwise grid auto-placement pulls the
+   last child into the empty middle column. */
+.site-hdr__brand{grid-column:1;justify-self:start}
+.site-hdr__nav{grid-column:2}
+.site-hdr__in>*:last-child{grid-column:3;justify-self:end}
 .site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:#F3F0E8;font-family:var(--font-heading);font-size:26px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
 .site-hdr__brand span{color:#047857}
 .site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:30px}
@@ -404,7 +409,7 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 
-<script src="../../site-chrome.js?v=17"></script>
+<script src="../../site-chrome.js?v=18"></script>
 <script>
 const URL_MAP = {
   'home': '/',
