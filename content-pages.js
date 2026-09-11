@@ -4,7 +4,7 @@
 const C = {
   text: '#282726',
   muted: '#666',
-  accent: '#059669',
+  accent: '#047857',
   border: 'rgba(40,39,38,0.12)',
   sepBorder: 'rgba(40,39,38,0.2)'
 };
@@ -265,7 +265,7 @@ const CORE_PATHS = {
     el: '/el/'
   },
   'one-to-one': {
-    en: '/1-to-1/',
+    en: '/',
     el: '/el/1-to-1/'
   },
   'about': {
@@ -300,7 +300,7 @@ const FOOTER_COLS_BY_LANG = {
   en: [{
     label: 'Work with me',
     links: [{
-      href: '/1-to-1/',
+      href: '/',
       label: '1:1'
     }, {
       href: '/contact?interest=orientation',
@@ -486,7 +486,7 @@ function SiteFooter({
 // ─── START HERE ──────────────────────────────────────────────────────────────
 const START_HERE_ITEMS = [{
   label: 'For founders →',
-  href: '/founders/'
+  href: '/psychotherapy-decision-coaching/'
 }, {
   label: 'For freelancers →',
   href: '/solopreneurs/'
@@ -696,8 +696,8 @@ function FinalCta({
     style: {
       marginTop: mob ? '3rem' : '4rem',
       padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem',
-      border: `1.5px solid rgba(5,150,105,.4)`,
-      background: 'rgba(5,150,105,.06)',
+      border: `1.5px solid rgba(4, 120, 87,.4)`,
+      background: 'rgba(4, 120, 87,.06)',
       borderRadius: '14px'
     }
   }, React.createElement('p', {
@@ -735,8 +735,8 @@ function FinalCta({
       borderRadius: '2px'
     },
     onMouseEnter: e => {
-      e.currentTarget.style.background = '#059669';
-      e.currentTarget.style.borderColor = '#059669';
+      e.currentTarget.style.background = '#047857';
+      e.currentTarget.style.borderColor = '#047857';
     },
     onMouseLeave: e => {
       e.currentTarget.style.background = C.accent;
@@ -930,29 +930,29 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 .svc-page .svc-h2{max-width:var(--svc-read);margin:0 0 20px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(36px,3.2vw,44px);line-height:1.05;letter-spacing:-0.035em;font-weight:800;color:#1A1C1D;text-wrap:balance}
 .svc-page .svc-p{max-width:var(--svc-read);margin:0 0 20px;font-size:18px;line-height:1.65;color:#282726}
 .svc-p:last-child{margin-bottom:0}
-.svc-p a,.svc-lead a,.svc-faq__a a,.svc-note a{color:#059669;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.svc-p a,.svc-lead a,.svc-faq__a a,.svc-note a{color:#047857;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 .svc-p strong,.svc-faq__a strong{font-weight:700;color:#1A1C1D}
-.svc-eyebrow{margin:0 0 12px;font-family:var(--font-body);font-size:13px;line-height:1.3;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#059669}
+.svc-eyebrow{margin:0 0 12px;font-family:var(--font-body);font-size:13px;line-height:1.3;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#047857}
 .svc-faq{max-width:var(--svc-read);border-top:1px solid rgba(24,26,28,0.14)}
 .svc-faq__item{border-bottom:1px solid rgba(24,26,28,0.14);padding:22px 0}
 .svc-page .svc-faq__q{margin:0 0 10px;font-family:var(--font-heading);font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#1A1C1D}
 .svc-page .svc-faq__a{margin:0;font-size:18px;line-height:1.65;color:#282726}
 .svc-faq__a p{margin:0 0 12px}.svc-faq__a p:last-child{margin:0}
 .svc-quotes{max-width:var(--svc-read)}
-.svc-quote{margin:0 0 22px;padding:0 0 0 20px;border-left:3px solid rgba(5,150,105,0.4)}
+.svc-quote{margin:0 0 22px;padding:0 0 0 20px;border-left:3px solid rgba(4, 120, 87,0.4)}
 .svc-quote p{margin:0 0 8px;font-size:17px;line-height:1.6;color:#282726}
 .svc-quote cite{font-style:normal;font-size:13px;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:#767676}
-.svc-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 30px;background:#059669;color:#fff;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
+.svc-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 30px;background:#047857;color:#fff;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
 .svc-cta:hover{filter:brightness(0.92);gap:12px}
 .svc-cta--ghost{background:transparent;color:#1A1C1D;border:1.5px solid rgba(24,26,28,0.28)}
-.svc-cta--ghost:hover{border-color:#059669;color:#059669;filter:none}
+.svc-cta--ghost:hover{border-color:#047857;color:#047857;filter:none}
 .svc-ctarow{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
 .svc-note{max-width:var(--svc-read);margin:16px 0 0;font-size:15px;line-height:1.6;color:#666}
 .svc-bullets{max-width:var(--svc-read);list-style:none;margin:4px 0 0;padding:0}
 .svc-bullets li{position:relative;padding:8px 0 8px 22px;font-size:18px;line-height:1.6;color:#282726;border-top:1px solid rgba(24,26,28,0.1)}
 .svc-bullets li:first-child{border-top:0}
-.svc-bullets li::before{content:"";position:absolute;left:0;top:16px;width:10px;height:2px;background:#059669}
-.svc-bullets li a{color:#059669;text-decoration:underline;text-underline-offset:3px}
+.svc-bullets li::before{content:"";position:absolute;left:0;top:16px;width:10px;height:2px;background:#047857}
+.svc-bullets li a{color:#047857;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:767px){.svc-bullets li{font-size:17px}}
 .svc-cards{margin:4px 0 0}
 .svc-rule{border:0;border-top:1px solid rgba(24,26,28,0.14);margin:0}
@@ -960,7 +960,7 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 .svc-related{list-style:none;max-width:var(--svc-read);margin:0;padding:0;border-top:1px solid rgba(24,26,28,0.14)}
 .svc-related li{border-bottom:1px solid rgba(24,26,28,0.14)}
 .svc-related a{display:flex;justify-content:space-between;gap:20px;padding:15px 0;font-family:var(--font-heading);font-size:17px;line-height:1.4;font-weight:600;color:#1A1C1D;text-decoration:none}
-.svc-related a:hover{color:#059669}
+.svc-related a:hover{color:#047857}
 @media (max-width:767px){
   .u-shell:has(.svc-page){padding-inline:20px}
   .svc-page .svc-h1{font-size:clamp(36px,10.5vw,44px)}
@@ -1619,8 +1619,8 @@ function OneToOnePage({
     className: 'cta-btn',
     style: primaryBtn,
     onMouseEnter: e => {
-      e.currentTarget.style.background = '#059669';
-      e.currentTarget.style.borderColor = '#059669';
+      e.currentTarget.style.background = '#047857';
+      e.currentTarget.style.borderColor = '#047857';
     },
     onMouseLeave: e => {
       e.currentTarget.style.background = C.accent;
@@ -1845,8 +1845,8 @@ function AboutPage({
     style: {
       marginTop: mob ? '3rem' : '4rem',
       padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem',
-      border: `1.5px solid rgba(5,150,105,.4)`,
-      background: 'rgba(5,150,105,.06)',
+      border: `1.5px solid rgba(4, 120, 87,.4)`,
+      background: 'rgba(4, 120, 87,.06)',
       borderRadius: '14px'
     }
   }, React.createElement('p', {
@@ -1877,8 +1877,8 @@ function AboutPage({
       borderRadius: '2px'
     },
     onMouseEnter: e => {
-      e.currentTarget.style.background = '#059669';
-      e.currentTarget.style.borderColor = '#059669';
+      e.currentTarget.style.background = '#047857';
+      e.currentTarget.style.borderColor = '#047857';
     },
     onMouseLeave: e => {
       e.currentTarget.style.background = C.accent;
@@ -2115,7 +2115,7 @@ function ReviewCard({
       breakInside: 'avoid',
       margin: '0 0 1.9rem',
       padding: '0 0 0 1rem',
-      borderLeft: '2px solid rgba(5,150,105,0.35)'
+      borderLeft: '2px solid rgba(4, 120, 87,0.35)'
     }
   }, React.createElement('p', {
     style: {
@@ -2284,7 +2284,7 @@ function PersonaHowWeStartSection() {
   }, React.createElement(SvcCta, {
     href: '/contact?interest=orientation'
   }, 'Book a fit call →')), React.createElement(SvcNote, null, "It's the same ongoing 1:1 work. ", React.createElement(IA, {
-    href: '/1-to-1/'
+    href: '/'
   }, 'See how 1:1 works'), '.'));
 }
 function PatternList({
@@ -2579,8 +2579,8 @@ function StepCards({
         letterSpacing: '.05em',
         textTransform: 'uppercase',
         color: C.accent,
-        background: 'rgba(5,150,105,0.08)',
-        border: '1px solid rgba(5,150,105,0.25)',
+        background: 'rgba(4, 120, 87,0.08)',
+        border: '1px solid rgba(4, 120, 87,0.25)',
         borderRadius: '999px',
         padding: '.2rem .65rem'
       }
@@ -2763,7 +2763,7 @@ function HowIWorkPage() {
       border: `1px solid ${C.border}`,
       borderLeft: `3px solid ${C.accent}`,
       borderRadius: '10px',
-      background: 'rgba(5,150,105,0.04)',
+      background: 'rgba(4, 120, 87,0.04)',
       padding: mob ? '1.15rem' : '1.35rem 1.5rem',
       fontSize: '16px',
       lineHeight: 1.7,
@@ -2787,7 +2787,7 @@ function HowIWorkPage() {
       border: `1px solid ${C.border}`,
       borderLeft: `3px solid ${C.accent}`,
       borderRadius: '10px',
-      background: 'rgba(5,150,105,0.04)',
+      background: 'rgba(4, 120, 87,0.04)',
       padding: mob ? '1.15rem' : '1.35rem 1.5rem',
       fontSize: '16px',
       lineHeight: 1.7,
@@ -2987,7 +2987,7 @@ function ExecTherapyPage() {
   }), React.createElement(RelatedLinks, {
     mob,
     items: [{
-      href: '/1-to-1/',
+      href: '/',
       label: 'Work with me, 1:1 →'
     }, {
       href: '/executive-burnout-therapy/',
@@ -3055,10 +3055,10 @@ function FoundersTherapyPage() {
   }), React.createElement(RelatedLinks, {
     mob,
     items: [{
-      href: '/1-to-1/',
+      href: '/',
       label: 'Work with me, 1:1 →'
     }, {
-      href: '/founders/',
+      href: '/psychotherapy-decision-coaching/',
       label: 'Founder advisory →'
     }, {
       href: '/therapy-for-executives/',
@@ -3137,7 +3137,7 @@ function ImposterPage() {
   }), React.createElement(RelatedLinks, {
     mob,
     items: [{
-      href: '/1-to-1/',
+      href: '/',
       label: 'Work with me, 1:1 →'
     }, {
       href: '/therapy-for-executives/',
@@ -3213,7 +3213,7 @@ function BurnoutPage() {
   }), React.createElement(RelatedLinks, {
     mob,
     items: [{
-      href: '/1-to-1/',
+      href: '/',
       label: 'Work with me, 1:1 →'
     }, {
       href: '/therapy-for-executives/',
@@ -3291,7 +3291,7 @@ function CareerTransitionPage() {
   }), React.createElement(RelatedLinks, {
     mob,
     items: [{
-      href: '/1-to-1/',
+      href: '/',
       label: 'Work with me, 1:1 →'
     }, {
       href: '/therapy-for-executives/',
@@ -3335,13 +3335,13 @@ function LondonPage() {
   }, React.createElement(SvcP, null, "You also don't have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
   }, 'advised more than 500 companies'), ", so runway, reorgs, shipping and the pressure of a senior role are things I already follow. It's the same reason my ", React.createElement(IA, {
-    href: '/1-to-1/'
+    href: '/'
   }, 'founder'), " and ", React.createElement(IA, {
-    href: '/1-to-1/'
+    href: '/'
   }, 'freelancer'), " clients come to me.")), React.createElement(SvcSection, {
     title: 'The work itself is the same'
   }, React.createElement(SvcP, null, "Nothing about the work changes because you're in London or because we speak Greek. It's the same private, one-to-one work I do with everyone, the personal pattern and the real decision in front of you, worked at the same time. How it runs, step by step, is on ", React.createElement(IA, {
-    href: '/1-to-1/'
+    href: '/'
   }, 'how I work'), ".")), React.createElement(SvcSection, {
     title: 'Online sessions'
   }, React.createElement(SvcP, null, "Everything is online, one to one. I'm based in Ireland, the same time zone as London, so an early slot before work or an evening one is easy to arrange. There's no in-person room.")), React.createElement(SvcSection, {
@@ -3384,13 +3384,13 @@ function ManchesterPage() {
   }, React.createElement(SvcP, null, "You also don't have to explain the work: the pipeline that's gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
   }, 'advised more than 500 companies'), " before training as a psychotherapist, and I've done the job-to-independent route myself. It's the same reason my ", React.createElement(IA, {
-    href: '/1-to-1/'
+    href: '/'
   }, 'freelancer'), " and ", React.createElement(IA, {
-    href: '/1-to-1/'
+    href: '/'
   }, 'founder'), " clients come to me.")), React.createElement(SvcSection, {
     title: 'The work itself is the same'
   }, React.createElement(SvcP, null, "It's the same private, one-to-one work I do with everyone, working the personal pattern and the practical decision together. If you work for yourself, that includes the business side (pricing, positioning, the outreach you keep putting off) alongside the pattern underneath it. The full shape of it is on ", React.createElement(IA, {
-    href: '/1-to-1/'
+    href: '/'
   }, 'how I work'), ".")), React.createElement(SvcSection, {
     title: 'Online sessions'
   }, React.createElement(SvcP, null, "Everything is online, one to one. I'm based in Ireland, the same time zone as Manchester, so slots fit easily around work. If you're remote-first anyway, a video session is just a Tuesday. There's no in-person room.")), React.createElement(SvcSection, {
@@ -3433,13 +3433,13 @@ function NewYorkPage() {
   }, React.createElement(SvcP, null, "You also don't have to explain equity, runway, a reorg, or why “just be confident” is useless advice. 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
   }, '500+ companies advised'), " before I trained as a psychotherapist. It's the same reason my ", React.createElement(IA, {
-    href: '/1-to-1/'
+    href: '/'
   }, 'founder'), " and senior ", React.createElement(IA, {
-    href: '/1-to-1/'
+    href: '/'
   }, 'executive'), " clients come to me.")), React.createElement(SvcSection, {
     title: 'The work itself is the same'
   }, React.createElement(SvcP, null, "Nothing about the work changes because you're in New York. It's the same one-to-one work I do with everyone, holding the personal pattern and the real situation at work in the same room. The steps are laid out on ", React.createElement(IA, {
-    href: '/1-to-1/'
+    href: '/'
   }, 'how I work'), ".")), React.createElement(SvcSection, {
     title: 'Online, across the time difference'
   }, React.createElement(SvcP, null, "Sessions are online, one to one. I'm based in Ireland, about five hours ahead of New York, so in practice they land in your morning. We agree a recurring slot that works for both of us; if the time difference doesn't fit your schedule, I'll tell you on the fit call rather than force it.")), React.createElement(SvcSection, {
@@ -3484,7 +3484,7 @@ function DublinPage() {
   }, '500+ companies advised'), " before I trained as a psychotherapist, including inside a large enterprise. I happen to be based in Ireland myself, which helps with the practicalities, but the real reason to come is that I hold both the work and the Greek context at once.")), React.createElement(SvcSection, {
     title: 'The work itself is the same'
   }, React.createElement(SvcP, null, "It's the same private, one-to-one work I do with everyone, the personal pattern and the real decision together, whether that's the job, the move, or whether to stay at all. How the work runs is on ", React.createElement(IA, {
-    href: '/1-to-1/'
+    href: '/'
   }, 'how I work'), ".")), React.createElement(SvcSection, {
     title: 'Online sessions'
   }, React.createElement(SvcP, null, "Everything is online, one to one. I'm based in Ireland, so we share a time zone and there's nothing to solve on scheduling, though sessions are by video, not in person. Same country, same working hours; that's where the convenience begins and ends.")), React.createElement(SvcSection, {

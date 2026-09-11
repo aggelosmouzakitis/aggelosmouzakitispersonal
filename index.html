@@ -50,16 +50,16 @@
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-heading: "Inter Tight", "Inter", system-ui, sans-serif;
   --font-display: "Archivo Black", "Inter Tight", "Inter", system-ui, sans-serif;
-  --brand-green: #059669;
+  --brand-green: #047857;
 }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { background: #1A1C1D; color: #FFFFFF; font-family: var(--font-body); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 #root { display: block; }
 a { color: inherit; text-decoration: none; }
-::selection { background: #059669; color: #FFFFFF; }
+::selection { background: #047857; color: #FFFFFF; }
 img { max-width: 100%; }
-a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #059669; outline-offset: 2px; border-radius: 2px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #047857; outline-offset: 2px; border-radius: 2px; }
 @media (prefers-reduced-motion: reduce){ *{transition-duration:.001ms!important;animation-duration:.001ms!important} }
 @media print { .site-hdr, .site-ftr, .cta-strip { display: none !important; } }
 </style>
@@ -70,7 +70,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --font-heading:"Inter Tight","Inter",system-ui,sans-serif;
   --font-display:"Archivo Black","Inter Tight","Inter",system-ui,sans-serif;
-  --brand-green:#059669;
+  --brand-green:#047857;
 }
 html,body,#root{height:auto}
 #root{display:block;overflow:visible}
@@ -78,10 +78,10 @@ html,body,#root{height:auto}
 #main-scroll{overflow:visible;background:#1A1C1D;color:#FFFFFF}
 #main-scroll::-webkit-scrollbar{width:0}
 body{background:#1A1C1D;color:#FFFFFF;font-family:var(--font-body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
-::selection{background:#059669;color:#fff}
+::selection{background:#047857;color:#fff}
 #main-scroll a,a{color:inherit;text-decoration:none}
 #main-scroll strong{border:0;padding:0;color:inherit;font-weight:600}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #059669;outline-offset:2px;border-radius:2px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #047857;outline-offset:2px;border-radius:2px}
 img{max-width:100%}
 
 .site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
@@ -89,15 +89,15 @@ img{max-width:100%}
 .site-hdr{position:relative;width:100%;min-height:76px;background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16)}
 .site-hdr__in{width:min(100% - 64px,1280px);min-height:76px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
 .site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:#F3F0E8;font-family:var(--font-heading);font-size:26px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
-.site-hdr__brand span{color:#059669}
+.site-hdr__brand span{color:#047857}
 .site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:30px}
 .site-hdr__nav a{color:#F3F0E8;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
 .site-hdr__nav a:hover{opacity:1}
-.site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:#059669}
+.site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:#047857}
 .site-hdr__end{display:flex;align-items:center;gap:14px}
 .site-hdr__lang{color:#F3F0E8;font-size:13px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:0.045em;opacity:.82;transition:opacity .18s}
 .site-hdr__lang:hover{opacity:1}
-.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:#059669;color:#fff;font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:#047857;color:#fff;font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hdr-cta:hover{filter:brightness(0.9);gap:11px}
 .site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
 .site-hdr__burger span{display:block;width:24px;height:2px;background:#F3F0E8}
@@ -112,30 +112,30 @@ img{max-width:100%}
 .site-hdr__work-btn:hover,.site-hdr__work-btn[aria-expanded="true"]{opacity:1}
 .site-hdr__work-caret{width:10px;height:6px;transition:transform .2s ease;opacity:.85}
 .site-hdr__work-btn[aria-expanded="true"] .site-hdr__work-caret{transform:rotate(180deg)}
-.site-hdr__mega{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(640px,calc(100vw - 32px));background:#1F2223;border:1px solid rgba(243,240,232,0.14);border-top:2px solid #059669;border-radius:0 0 16px 16px;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:26px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;z-index:200}
+.site-hdr__mega{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(640px,calc(100vw - 32px));background:#1F2223;border:1px solid rgba(243,240,232,0.14);border-top:2px solid #047857;border-radius:0 0 16px 16px;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:26px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;z-index:200}
 .site-hdr__mega-col{min-width:0}
-.site-hdr__mega-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#059669;margin:2px 0 12px;padding-left:12px}
+.site-hdr__mega-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#047857;margin:2px 0 12px;padding-left:12px}
 .site-hdr__mega-item{display:block;padding:9px 12px;border-radius:10px;transition:background .16s}
 a.site-hdr__mega-item:hover{background:rgba(243,240,232,0.06)}
 .site-hdr__mega-name{display:block;font-family:var(--font-heading);font-size:16.5px;font-weight:700;line-height:1.2;letter-spacing:-0.012em;color:#F3F0E8}
 a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .site-hdr__mega-desc{display:block;margin-top:3px;font-size:13px;line-height:1.4;color:#9DA19E}
-.site-hdr__mega-item[aria-current] .site-hdr__mega-name{color:#059669}
+.site-hdr__mega-item[aria-current] .site-hdr__mega-name{color:#047857}
 .site-hdr__mega-item--soon{cursor:default}
 .site-hdr__mega-item--soon .site-hdr__mega-name{color:#C2C6CA;opacity:.7}
 .site-hdr__mega-soon{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9DA19E;border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 9px}
 
 /* ── "Work with me" section inside the mobile menu ── */
-.site-menu__label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#059669;margin-top:8px}
+.site-menu__label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#047857;margin-top:8px}
 .site-menu a.site-menu__sub{text-transform:none;letter-spacing:0;font-size:15px;min-height:40px;display:flex;align-items:center}
-.site-menu a.site-menu__sub[aria-current]{color:#059669}
+.site-menu a.site-menu__sub[aria-current]{color:#047857}
 .site-menu__soon{color:#9DA19E;font-size:15px;min-height:40px;display:flex;align-items:center;gap:10px}
 .site-menu__soon small{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 8px;color:#9DA19E}
 
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
-.pill--green{height:72px;padding-inline:44px;background:#059669;color:#fff;font-size:16px}
+.pill--green{height:72px;padding-inline:44px;background:#047857;color:#fff;font-size:16px}
 .pill--green:hover{gap:12px;filter:brightness(0.9)}
-.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:#059669;color:#fff;font-size:16px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:#047857;color:#fff;font-size:16px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hero-cta:hover{filter:brightness(0.9);gap:13px}
 
 .cta-strip{padding-block:clamp(86px,10.8vw,132px);text-align:center;background:#1A1C1D}
@@ -144,9 +144,9 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:#C2C6CA;transition:gap .18s,color .18s}
 .cta-strip__sub:hover{gap:12px;color:#fff}
 
-.site-ftr{border-top:2px solid #059669;padding-block:64px 32px;background:#1A1C1D}
+.site-ftr{border-top:2px solid #047857;padding-block:64px 32px;background:#1A1C1D}
 .site-ftr__cols{display:grid;grid-template-columns:minmax(280px,1.4fr) repeat(3,minmax(130px,0.55fr));gap:48px;align-items:start}
-.site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#059669;margin-bottom:20px}
+.site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#10B981;margin-bottom:20px}
 .site-ftr nav a{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.4;margin-bottom:12px;transition:color .18s}
 .site-ftr nav a:hover{color:#C2C6CA}
 .site-ftr__roles{margin-top:20px;font-size:15px;line-height:1.4;color:#C2C6CA}
@@ -164,8 +164,8 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .u-shell{max-width:1180px;margin-inline:auto;padding-inline:clamp(24px,5vw,72px);display:grid;grid-template-columns:minmax(120px,170px) minmax(0,760px) minmax(0,1fr);column-gap:clamp(28px,4vw,64px)}
 .u-shell--wide{grid-template-columns:minmax(120px,170px) minmax(0,860px) minmax(0,1fr)}
 .u-shell__rail{grid-column:1;min-width:0}
-.u-shell__rail::before{content:"";display:block;width:100%;height:3px;background:var(--brand-green,#059669)}
-.u-shell__rail .u-eyebrow{display:block;margin-top:16px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.4;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
+.u-shell__rail::before{content:"";display:block;width:100%;height:3px;background:var(--brand-green,#047857)}
+.u-shell__rail .u-eyebrow{display:block;margin-top:16px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.4;letter-spacing:0.10em;text-transform:uppercase;color:#047857}
 .u-shell__body{grid-column:2;min-width:0}
 .u-shell__gutter{grid-column:3}
 
@@ -177,14 +177,14 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .u-read p + p,.u-shell__body p + p{margin-top:24px}
 .u-read ul,.u-read ol,.u-shell__body ul,.u-shell__body ol{margin:24px 0;padding-left:24px}
 .u-read li + li,.u-shell__body li + li{margin-top:12px}
-#main-scroll .u-read a,.u-read a,.u-shell__body a{color:#059669;text-decoration:underline;text-underline-offset:3px}
-.u-read blockquote,.u-shell__body blockquote{margin:48px 0;padding-left:28px;border-left:4px solid #059669;font-family:var(--font-heading);font-size:28px;line-height:1.3}
-.u-read hr,.u-shell__body hr{border:0;border-top:1px solid #059669;opacity:.45;margin:64px 0}
+#main-scroll .u-read a,.u-read a,.u-shell__body a{color:#047857;text-decoration:underline;text-underline-offset:3px}
+.u-read blockquote,.u-shell__body blockquote{margin:48px 0;padding-left:28px;border-left:4px solid #047857;font-family:var(--font-heading);font-size:28px;line-height:1.3}
+.u-read hr,.u-shell__body hr{border:0;border-top:1px solid #047857;opacity:.45;margin:64px 0}
 .u-read img,.u-shell__body img{display:block;height:auto;margin:48px 0}
 .u-form{width:min(760px,calc(100% - 40px));margin-inline:auto}
 
 /* One shared branded callout for deeper pages (dark band, warm text, green rule) */
-.u-callout{margin:40px 0;padding:26px 30px;background:#1A1C1D;color:#F3F0E8;border-left:3px solid #059669;border-radius:2px}
+.u-callout{margin:40px 0;padding:26px 30px;background:#1A1C1D;color:#F3F0E8;border-left:3px solid #047857;border-radius:2px}
 .u-callout :is(p,li){color:#F3F0E8}
 .u-callout > *:first-child{margin-top:0}
 .u-callout > *:last-child{margin-bottom:0}
@@ -193,7 +193,7 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .u-faq details:last-of-type{border-bottom:1px solid rgba(24,26,28,0.20)}
 .u-faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:24px;cursor:pointer;list-style:none;font-weight:600;font-size:20px;line-height:1.4}
 .u-faq summary::-webkit-details-marker{display:none}
-.u-faq summary::after{content:"+";color:#059669;font-size:26px;line-height:1;flex-shrink:0}
+.u-faq summary::after{content:"+";color:#047857;font-size:26px;line-height:1;flex-shrink:0}
 .u-faq details[open] summary::after{content:"\2212"}
 .u-faq details > *:not(summary){margin-top:16px}
 .u-faq--dark details{border-color:rgba(255,255,255,0.16)}
@@ -202,11 +202,11 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 
 .u-related a{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid rgba(24,26,28,0.20);color:#1A1C1D}
 .u-related a:last-child{border-bottom:1px solid rgba(24,26,28,0.20)}
-.u-related a:hover{color:#059669}
+.u-related a:hover{color:#047857}
 
 .u-notice{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding:24px 0;border-top:1px solid rgba(24,26,28,0.20);border-bottom:1px solid rgba(24,26,28,0.20);margin-bottom:56px}
 .u-notice p{margin:0;font-size:19px;line-height:1.5;max-width:52ch}
-.u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:#059669}
+.u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:#047857}
 
 @media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:680px){
@@ -248,23 +248,29 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 </style><style>
 /* ── One reusable numbered-section label: "NN / DESCRIPTION", one line, aligned to the heading ── */
 .sec-label{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0 0 24px}
-.sec-label__num{font-family:var(--font-heading);font-size:clamp(20px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669;white-space:nowrap}
-.sec-label__desc{font-family:var(--font-heading);font-size:13px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
+.sec-label__num{font-family:var(--font-heading);font-size:clamp(20px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#047857;white-space:nowrap}
+.sec-label__desc{font-family:var(--font-heading);font-size:13px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#047857}
+/* On the dark (body-coloured) home-flow band, the small green label needs the
+   lighter on-dark green to meet AA contrast (deep #047857 only passes on light). */
+.home-flow .sec-label__desc{color:#10B981}
+/* …except the "If we continue" block, whose label sits inside a white card —
+   there the deep green is the one that passes. */
+.home-flow .cont .sec-label__desc{color:#047857}
 
 /* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
 .home-hero{background:#FFFFFF;color:#111315}
 .home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(410px,0.86fr);align-items:center;gap:48px;padding-block:88px 112px}
 .home-hero__copy{position:relative;z-index:2;min-width:0;max-width:720px;color:#111315}
-.home-hero__eyebrow{max-width:520px;color:#059669;font-family:var(--font-heading);font-size:13px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
+.home-hero__eyebrow{max-width:520px;color:#047857;font-family:var(--font-heading);font-size:13px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
 .home-hero__title{max-width:720px;margin:14px 0 22px;font-family:var(--font-display);font-synthesis:none;font-weight:400;line-height:0.9;letter-spacing:-0.055em;color:#111315}
 .home-hero__title .home-hero__line{display:block}
 html[lang="en"] .home-hero__title{font-size:clamp(48px,5.1vw,72px)}
 html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:var(--font-heading);font-weight:800;line-height:0.98;letter-spacing:-0.045em}
 .home-hero__title .human{position:relative;z-index:0;white-space:nowrap}
-.home-hero__title .human::after{content:"";position:absolute;z-index:-1;left:-0.03em;right:-0.03em;bottom:0.04em;height:0.14em;background:#059669}
+.home-hero__title .human::after{content:"";position:absolute;z-index:-1;left:-0.03em;right:-0.03em;bottom:0.04em;height:0.14em;background:#047857}
 .home-hero__support{max-width:640px;margin:0 0 26px;color:#111315;font-family:var(--font-heading);font-size:20px;font-weight:400;line-height:1.42}
 .home-hero__photo{position:relative;z-index:1;width:clamp(420px,34vw,500px);max-width:100%;aspect-ratio:1;justify-self:end}
-.home-hero__photo::before{content:"";position:absolute;inset:8% -3% -2% 9%;border-radius:50%;background:#059669}
+.home-hero__photo::before{content:"";position:absolute;inset:8% -3% -2% 9%;border-radius:50%;background:#047857}
 .home-hero__frame{position:absolute;inset:0;overflow:hidden;border-radius:50%}
 .home-hero__frame img{width:100%;height:100%;object-fit:cover;object-position:56% 44%;transform:scale(1.58);filter:none}
 @media (max-width:959px) and (min-width:521px){
@@ -284,7 +290,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:v
 /* ── Manifesto — "Anyone can put advisor in their bio" (full-width dark, card grid) ── */
 .home-point{width:100%;background:#1A1C1D}
 .home-point__inner{padding-block:clamp(64px,8vw,96px)}
-.home-point__eyebrow{font-family:var(--font-body);font-size:13px;font-weight:700;line-height:1;letter-spacing:0.12em;color:#059669}
+.home-point__eyebrow{font-family:var(--font-body);font-size:13px;font-weight:700;line-height:1;letter-spacing:0.12em;color:#10B981}
 .home-point__h{margin:20px 0 clamp(44px,5vw,72px);max-width:24ch;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(40px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.04em;color:#FFFFFF;text-wrap:balance}
 .home-point__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;gap:22px;align-items:stretch}
 .home-point__card{height:100%;padding:clamp(28px,2.6vw,36px);border-radius:10px;display:flex;flex-direction:column;color:#181a1c}
@@ -319,7 +325,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:v
 .am-duality{--am-photo-width:clamp(224px,21.5vw,250px);--am-photo-height:clamp(382px,36.7vw,426px);position:relative;isolation:isolate;width:min(100%,1000px);min-height:360px;margin-inline:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 .am-duality__side{min-width:0;min-height:360px;display:flex;align-items:center}
 .am-duality__side--business{padding:52px 160px 52px 50px;background:#181a1c;color:#ffffff}
-.am-duality__side--psychology{padding:52px 50px 52px 180px;background:#059669;color:#181a1c;text-align:right}
+.am-duality__side--psychology{padding:52px 50px 52px 180px;background:#047857;color:#ffffff;text-align:right}
 .am-duality__side--psychology .am-duality__copy{margin-left:auto}
 .am-duality__copy{width:100%;max-width:270px}
 .am-duality__label{margin:0 0 20px;font-family:var(--font-body);font-size:13px;line-height:1;font-weight:800;letter-spacing:0.075em;text-transform:uppercase}
@@ -361,14 +367,14 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:v
 .opinion img{display:block;width:100%;height:100%;min-height:520px;object-fit:cover;object-position:42% 50%}
 .opinion__body{padding:clamp(32px,4.5vw,56px);min-width:0;display:grid;align-content:start;gap:24px}
 .opinion__body p{margin:0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
-.opinion__q{margin:8px 0 0;border-top:2px solid #059669;padding-top:24px;font-family:var(--font-heading);font-weight:750;font-size:clamp(28px,2.5vw,38px);line-height:1.2;letter-spacing:-0.035em;color:#1A1C1D;max-width:32ch;text-wrap:pretty}
+.opinion__q{margin:8px 0 0;border-top:2px solid #047857;padding-top:24px;font-family:var(--font-heading);font-weight:750;font-size:clamp(28px,2.5vw,38px);line-height:1.2;letter-spacing:-0.035em;color:#1A1C1D;max-width:32ch;text-wrap:pretty}
 .cont{min-height:440px;background:#FFFFFF;border-radius:12px;padding:clamp(32px,5vw,72px);display:flex;align-items:center}
 .cont__in{max-width:760px}
 .cont__h{margin:0;max-width:20ch;font-family:var(--font-heading);font-size:clamp(40px,4.2vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:#1A1C1D;text-wrap:pretty}
 .cont p{margin:24px 0 0;font-size:18px;line-height:1.55;color:#282726;max-width:52ch;text-wrap:pretty}
 .rule-arrow{display:flex;align-items:center;gap:10px;width:min(320px,60%);margin:0 0 48px}
-.rule-arrow div{flex:1;height:2px;background:#059669}
-.rule-arrow span{color:#059669;line-height:1;font-size:18px}
+.rule-arrow div{flex:1;height:2px;background:#047857}
+.rule-arrow span{color:#047857;line-height:1;font-size:18px}
 .media{display:grid;grid-template-columns:7fr 5fr;grid-template-rows:repeat(2,minmax(0,1fr));min-height:520px;border-radius:12px;overflow:hidden}
 .media__cell{padding:clamp(32px,3.5vw,56px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;min-width:0;transition:background .18s,filter .18s}
 .media__cell h3{margin:0;font-family:var(--font-heading);font-weight:800;line-height:0.9;letter-spacing:-0.045em}
@@ -377,7 +383,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:v
 .media__cell:hover .media__arw{transform:translate(5px,-5px)}
 .media__kicker{font-size:14px;font-weight:700;letter-spacing:0.12em;margin-bottom:16px}
 .media__cell p{margin:0;font-size:18px;line-height:1.55;max-width:36ch;text-wrap:pretty}
-.media__read{grid-row:1 / span 2;background:#059669;color:#fff}
+.media__read{grid-row:1 / span 2;background:#047857;color:#fff}
 .media__read:hover{filter:brightness(0.9)}
 .media__read h3{font-size:clamp(64px,6vw,92px)}
 .media__watch{background:#050505;color:#fff}
@@ -386,8 +392,8 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:v
 .media__watch p{font-size:18px;line-height:1.55;max-width:34ch}
 .media__ask{background:#FFFFFF;color:#1A1C1D}
 .media__ask h3{font-size:clamp(44px,4vw,64px)}
-.media__ask .media__arw{color:#059669}
-.media__ask-sub{display:block;margin-top:6px;font-family:var(--font-heading);font-size:clamp(20px,1.9vw,26px);font-weight:800;line-height:1;letter-spacing:-0.02em;color:#059669}
+.media__ask .media__arw{color:#047857}
+.media__ask-sub{display:block;margin-top:6px;font-family:var(--font-heading);font-size:clamp(20px,1.9vw,26px);font-weight:800;line-height:1;letter-spacing:-0.02em;color:#047857}
 @media (max-width:960px){
   .media{grid-template-columns:1fr;grid-template-rows:auto;min-height:0}
   .media__read{grid-row:auto}.media__cell{min-height:320px}
@@ -405,7 +411,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:v
   --am-surface:#ffffff;
   --am-ink:#171919;
   --am-dark:#1b1d1d;
-  --am-green:#059669;
+  --am-green:#047857;
   --am-grey:#a5aaa6;
   --am-container:1080px;
   --am-gutter:clamp(24px, 5vw, 56px);
@@ -465,9 +471,9 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .rev-hero h1{margin:0;font-family:var(--font-heading);font-size:clamp(44px,4.6vw,64px);font-weight:780;line-height:0.98;letter-spacing:-0.045em;color:#1A1C1D}
 .rev-hero__lead{margin:0 0 14px;font-size:20px;line-height:1.6;color:#282726;max-width:60ch}
 .rev-hero__note{font-size:15px;line-height:1.6;color:#5E6264}
-.rev-lead{max-width:900px;margin:56px 0 0;padding-top:28px;border-top:4px solid #059669}
+.rev-lead{max-width:900px;margin:56px 0 0;padding-top:28px;border-top:4px solid #047857}
 .rev-lead p{margin:0;font-family:var(--font-heading);font-size:clamp(21px,2.1vw,25px);font-weight:600;line-height:1.5;letter-spacing:-0.01em;color:#1A1C1D;text-wrap:pretty}
-.rev-lead button,.rev-item button{margin-top:16px;background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:#059669}
+.rev-lead button,.rev-item button{margin-top:16px;background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:#047857}
 .rev-lead .orig,.rev-item .orig{margin-top:16px;padding-top:16px;border-top:1px solid rgba(24,26,28,0.20);font-size:16px;line-height:1.7;color:#5E6264;font-style:italic}
 .rev-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px;align-items:start}
 .rev-item{border-top:1px solid rgba(24,26,28,0.20);padding:36px 0 44px;min-width:0}
@@ -482,9 +488,9 @@ html[lang^="el"] .amx-body{line-height:1.62}
 </style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/" aria-current="page">Home</a><div class="site-hdr__work"><button class="site-hdr__work-btn" type="button" aria-haspopup="true" aria-expanded="false"><span>Work with me</span><svg class="site-hdr__work-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div><a href="/about/">About me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="hdr-cta" href="/start-here/"><span>START HERE</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main><section class="home-hero"><div class="home-hero__grid"><div class="home-hero__copy"><div class="home-hero__eyebrow">BUSINESS &amp; CAREER ADVISOR · BACP-REGISTERED PSYCHOTHERAPIST</div><h1 class="home-hero__title"><span class="home-hero__line">Scale the business.</span><span class="home-hero__line">Master <span class="human">the mind</span>.</span></h1><p class="home-hero__support">Combining commercial strategy with psychological depth to help founders, freelancers and independent consultants build high-growth businesses without self-sabotage.</p><a class="hero-cta" href="/startingdiagnostic/"><span>Apply for a working session</span><span>→</span></a></div><figure class="home-hero__photo"><div class="home-hero__frame"><img src="/img/aggelos-homepage.webp?v=2" alt="Aggelos Mouzakitis" width="2048" height="1365" loading="eager" fetchpriority="high" decoding="async"></div></figure></div></section><section class="home-point"><div class="site-container"><div class="home-point__inner"><div class="home-point__eyebrow">BEFORE YOU SCROLL</div><h2 class="home-point__h">Anyone can put “advisor” in their bio.</h2><div class="home-point__grid"><article class="home-point__card home-point__card--1"><div class="home-point__label">01 / BUSINESS</div><div class="home-point__rule"></div><p class="home-point__lead">I did the work before I started selling advice.</p><div class="home-point__text"><p class="home-point__body">Eighteen years in product and growth. Seven of them running my own consultancy and working with 100+ tech companies. I also built two startups. Neither went well.</p><p class="home-point__close">I know business because I made the decisions and lived with the consequences.</p></div></article><article class="home-point__card home-point__card--2"><div class="home-point__label">02 / CAREER</div><div class="home-point__rule"></div><p class="home-point__lead">I built my own career before advising anyone on theirs.</p><div class="home-point__text"><p class="home-point__body">I built it abroad, through roles in product and growth, and I still work at IBM.</p><p class="home-point__close">I did not leave a job, rebrand as a coach and start talking about a career I never had.</p></div></article><article class="home-point__card home-point__card--3"><div class="home-point__label">03 / TRAINING</div><div class="home-point__rule"></div><p class="home-point__lead">I am not just a guy with too much confidence.</p><div class="home-point__text"><p class="home-point__body">My training includes an MSc in Integrative Counselling &amp; Psychotherapy from the University of Derby, a Graduate Certificate in Psychology, supervised practice and five years of experience doing this work.</p><p class="home-point__close">I do not improvise the psychological part.</p></div></article><article class="home-point__card home-point__card--4"><div class="home-point__label">04 / REACH</div><div class="home-point__rule"></div><p class="home-point__lead">I am not a social media personality or an influencer.</p><div class="home-point__text"><p class="home-point__body">A large audience proves you have found a way to earn attention.</p><p class="home-point__body">Being good at the work and being good at attracting attention are two completely different skills.</p><p class="home-point__close">If you want a performer, there are better choices.</p></div></article><article class="home-point__card home-point__card--5"><div class="home-point__label">05 / BUSINESS → PSYCHOLOGY</div><div class="home-point__rule"></div><p class="home-point__lead">You do not have to leave the psychological part out.</p><div class="home-point__text"><p class="home-point__body">If you come for business advisory, you also get the psychological work that often matters more than the strategy.</p></div></article><article class="home-point__card home-point__card--6"><div class="home-point__label">06 / PSYCHOLOGY → BUSINESS</div><div class="home-point__rule"></div><p class="home-point__lead">You do not have to leave the business context out.</p><div class="home-point__text"><p class="home-point__body">If you come for psychotherapeutic work, we will not spend months getting me to understand how your business or career works.</p></div></article></div><div class="home-point__logos"><div class="home-point__logos-label">WORK WITH 100+ TECHNOLOGY COMPANIES</div><div class="home-point__logos-row"><span class="home-point__logo">IBM</span><span class="home-point__logo">Farfetch</span><span class="home-point__logo">GrowthMentor</span><span class="home-point__logo">Discover Greece</span><span class="home-point__logo">University of London</span><span class="home-point__logo">University of Oxford</span><span class="home-point__logo">Glofox</span><span class="home-point__logo">Whereby</span><span class="home-point__logo">Octopus Investments</span><span class="home-point__logo">Startupbootcamp</span><span class="home-point__logo">Advantage Austria</span><span class="home-point__logo">How to Web</span><span class="home-point__logo">Moosend</span></div></div></div></div></section><section class="am-duality-section" aria-labelledby="am-duality-title"><div class="am-duality-section__inner"><header class="am-duality-section__heading"><div class="sec-label"><span class="sec-label__num">01 /</span><span class="sec-label__desc">BUSINESS &amp; PSYCHOLOGY</span></div><h2 class="am-duality-section__title" id="am-duality-title">You won’t have to choose between practical advice and psychological depth.</h2></header><div class="am-duality"><article class="am-duality__side am-duality__side--business"><div class="am-duality__copy"><p class="am-duality__label">WHAT WE CHANGE</p><p class="am-duality__statement">We can work on the offer, marketing, career move, client mix or the way the business runs.</p></div></article><article class="am-duality__side am-duality__side--psychology"><div class="am-duality__copy"><p class="am-duality__label">WHAT GETS IN THE WAY</p><p class="am-duality__statement">If fear, shame or other people’s approval is shaping your decisions, we work there too.</p></div></article><figure class="am-duality__portrait"><img src="/img/aggelos-overlap.webp?v=2" alt="Aggelos Mouzakitis" width="250" height="426" loading="lazy" decoding="async"></figure></div></div></section><div class="home-flow"><section><div class="site-container"><div class="sec-label"><span class="sec-label__num">02 /</span><span class="sec-label__desc">HONEST FEEDBACK</span></div><h2 class="sec__h2l"><span>YOU WILL GET</span><span>AN OPINION.</span></h2><div class="opinion"><img src="/img/aggelos-continuation.webp" alt="Aggelos Mouzakitis" width="900" height="1125" loading="lazy" decoding="async"><div class="opinion__body"><p>I ask enough questions to understand the situation, then tell you what I think.</p><p>If I see a practical move, I suggest it. If your story does not add up, I say so.</p><p>Tell me the part you usually edit out. I will not think less of you or let you bullshit yourself.</p><blockquote class="opinion__q">“I left with more than advice. I left understanding what the problem actually was.”</blockquote></div></div></div></section><section><div class="site-container"><div class="cont"><div class="cont__in"><div class="sec-label"><span class="sec-label__num">03 /</span><span class="sec-label__desc">IF WE CONTINUE</span></div><h2 class="cont__h">We agree on one concrete outcome and how long we will work towards it.</h2><p>We meet weekly or every other week, and you have WhatsApp access between sessions.</p></div></div></div></section><section><div class="site-container"><div class="sec-label"><span class="sec-label__num">04 /</span><span class="sec-label__desc">MORE FROM ME</span></div><h2 class="sec__h" style="margin-bottom: 24px;">Want to see how I think?</h2><div class="rule-arrow"><div></div><span>→</span></div><div class="media"><a class="media__cell media__read" href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer"><div class="media__top"><h3>READ</h3><span class="media__arw">↗</span></div><div><div class="media__kicker">UNDISGUISED</div><p>Essays about work, ambition, psychology and where they overlap.</p></div></a><a class="media__cell media__watch" href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer"><div class="media__top"><h3>WATCH</h3><span class="media__arw" style="font-size: 32px;">↗</span></div><div><div class="media__kicker">YOUTUBE</div><p>Short videos, longer conversations and the occasional useful rant.</p></div></a><a class="media__cell media__ask" href="/ask-me-anything/"><div class="media__top"><h3>ASK<span class="media__ask-sub">ANONYMOUSLY</span></h3><span class="media__arw" style="font-size: 32px;">↗</span></div><div><p>Send me a question without giving me your name, and I may answer it in an article or video.</p></div></a></div></div></section></div><section class="cta-strip"><div class="site-container"><h2 class="cta-strip__h">IF WORKING HARDER WAS GOING TO FIX THIS, IT PROBABLY WOULD HAVE BY NOW.</h2><div><a class="pill pill--green" href="/startingdiagnostic/"><span>Apply for a working session</span><span>→</span></a></div><a class="cta-strip__sub" href="/confidentiality/"><span>Confidentiality</span><span>→</span></a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__brand" style="font-size: 20px;">Aggelos<span>.</span></div><div class="site-ftr__roles"><div>Private business &amp; career advisor</div><div style="margin-top: 8px;">BACP-registered psychotherapist</div></div></div><nav><div class="site-ftr__head">NAVIGATE</div><a href="/">Home</a><a href="/about/">About me</a><a href="/reviews/">Reviews</a><a href="/start-here/">Start Here</a></nav><nav><div class="site-ftr__head">CONTENT</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Articles ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a><a href="/ask-me-anything/">Ask me something ↗</a></nav><nav><div class="site-ftr__head">FOLLOW</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. All rights reserved.</div><nav><a href="/confidentiality/">Confidentiality</a><a href="/confidentiality/#terms">Terms</a><a href="/confidentiality/#privacy">Privacy</a></nav></div></div></footer></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
-<script src="/site-chrome.js?v=14"></script>
-<script src="/core-pages-v2.js?v=16"></script>
-<script src="/content-pages.js?v=38"></script>
+<script src="/site-chrome.js?v=16"></script>
+<script src="/core-pages-v2.js?v=19"></script>
+<script src="/content-pages.js?v=39"></script>
 <script>renderApp("home", "en");</script>
 </body>
 </html>

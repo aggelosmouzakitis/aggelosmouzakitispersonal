@@ -212,6 +212,12 @@ const PAGE_V2_CSS = `
 .sec-label{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0 0 24px}
 .sec-label__num{font-family:${V2.display};font-size:clamp(20px,2.2vw,26px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:${V2.green};white-space:nowrap}
 .sec-label__desc{font-family:${V2.display};font-size:13px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:${V2.green}}
+/* On the dark (body-coloured) home-flow band, the small green label needs the
+   lighter on-dark green to meet AA contrast (deep #047857 only passes on light). */
+.home-flow .sec-label__desc{color:#10B981}
+/* …except the "If we continue" block, whose label sits inside a white card —
+   there the deep green is the one that passes. */
+.home-flow .cont .sec-label__desc{color:#047857}
 
 /* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
 .home-hero{background:${V2.white};color:${V2.heroInk}}
@@ -246,7 +252,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 /* ── Manifesto — "Anyone can put advisor in their bio" (full-width dark, card grid) ── */
 .home-point{width:100%;background:${V2.ink}}
 .home-point__inner{padding-block:clamp(64px,8vw,96px)}
-.home-point__eyebrow{font-family:${V2.body};font-size:13px;font-weight:700;line-height:1;letter-spacing:0.12em;color:${V2.green}}
+.home-point__eyebrow{font-family:${V2.body};font-size:13px;font-weight:700;line-height:1;letter-spacing:0.12em;color:#10B981}
 .home-point__h{margin:20px 0 clamp(44px,5vw,72px);max-width:24ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(40px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.04em;color:${V2.white};text-wrap:balance}
 .home-point__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;gap:22px;align-items:stretch}
 .home-point__card{height:100%;padding:clamp(28px,2.6vw,36px);border-radius:10px;display:flex;flex-direction:column;color:#181a1c}
@@ -281,7 +287,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .am-duality{--am-photo-width:clamp(224px,21.5vw,250px);--am-photo-height:clamp(382px,36.7vw,426px);position:relative;isolation:isolate;width:min(100%,1000px);min-height:360px;margin-inline:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 .am-duality__side{min-width:0;min-height:360px;display:flex;align-items:center}
 .am-duality__side--business{padding:52px 160px 52px 50px;background:#181a1c;color:#ffffff}
-.am-duality__side--psychology{padding:52px 50px 52px 180px;background:#059669;color:#181a1c;text-align:right}
+.am-duality__side--psychology{padding:52px 50px 52px 180px;background:#047857;color:#ffffff;text-align:right}
 .am-duality__side--psychology .am-duality__copy{margin-left:auto}
 .am-duality__copy{width:100%;max-width:270px}
 .am-duality__label{margin:0 0 20px;font-family:${V2.body};font-size:13px;line-height:1;font-weight:800;letter-spacing:0.075em;text-transform:uppercase}
@@ -367,7 +373,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
   --am-surface:#ffffff;
   --am-ink:#171919;
   --am-dark:#1b1d1d;
-  --am-green:#059669;
+  --am-green:#047857;
   --am-grey:#a5aaa6;
   --am-container:1080px;
   --am-gutter:clamp(24px, 5vw, 56px);

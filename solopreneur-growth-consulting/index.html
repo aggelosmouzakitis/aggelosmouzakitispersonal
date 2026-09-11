@@ -59,7 +59,7 @@
   --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --font-heading:"Inter Tight","Inter",system-ui,sans-serif;
   --font-display:"Archivo Black","Inter Tight","Inter",system-ui,sans-serif;
-  --brand-green:#059669;
+  --brand-green:#047857;
 }
 html,body,#root{height:auto}
 #root{display:block;overflow:visible}
@@ -67,10 +67,10 @@ html,body,#root{height:auto}
 #main-scroll{overflow:visible;background:#1A1C1D;color:#FFFFFF}
 #main-scroll::-webkit-scrollbar{width:0}
 body{background:#1A1C1D;color:#FFFFFF;font-family:var(--font-body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
-::selection{background:#059669;color:#fff}
+::selection{background:#047857;color:#fff}
 #main-scroll a,a{color:inherit;text-decoration:none}
 #main-scroll strong{border:0;padding:0;color:inherit;font-weight:600}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #059669;outline-offset:2px;border-radius:2px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #047857;outline-offset:2px;border-radius:2px}
 img{max-width:100%}
 
 .site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
@@ -78,15 +78,15 @@ img{max-width:100%}
 .site-hdr{position:relative;width:100%;min-height:76px;background:#1A1C1D;border-bottom:1px solid rgba(243,240,232,0.16)}
 .site-hdr__in{width:min(100% - 64px,1280px);min-height:76px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px}
 .site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:#F3F0E8;font-family:var(--font-heading);font-size:26px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
-.site-hdr__brand span{color:#059669}
+.site-hdr__brand span{color:#047857}
 .site-hdr__nav{display:flex;align-items:center;justify-content:center;gap:30px}
 .site-hdr__nav a{color:#F3F0E8;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
 .site-hdr__nav a:hover{opacity:1}
-.site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:#059669}
+.site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:#047857}
 .site-hdr__end{display:flex;align-items:center;gap:14px}
 .site-hdr__lang{color:#F3F0E8;font-size:13px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:0.045em;opacity:.82;transition:opacity .18s}
 .site-hdr__lang:hover{opacity:1}
-.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:#059669;color:#fff;font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:#047857;color:#fff;font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hdr-cta:hover{filter:brightness(0.9);gap:11px}
 .site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
 .site-hdr__burger span{display:block;width:24px;height:2px;background:#F3F0E8}
@@ -101,30 +101,30 @@ img{max-width:100%}
 .site-hdr__work-btn:hover,.site-hdr__work-btn[aria-expanded="true"]{opacity:1}
 .site-hdr__work-caret{width:10px;height:6px;transition:transform .2s ease;opacity:.85}
 .site-hdr__work-btn[aria-expanded="true"] .site-hdr__work-caret{transform:rotate(180deg)}
-.site-hdr__mega{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(640px,calc(100vw - 32px));background:#1F2223;border:1px solid rgba(243,240,232,0.14);border-top:2px solid #059669;border-radius:0 0 16px 16px;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:26px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;z-index:200}
+.site-hdr__mega{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(640px,calc(100vw - 32px));background:#1F2223;border:1px solid rgba(243,240,232,0.14);border-top:2px solid #047857;border-radius:0 0 16px 16px;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:26px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;z-index:200}
 .site-hdr__mega-col{min-width:0}
-.site-hdr__mega-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#059669;margin:2px 0 12px;padding-left:12px}
+.site-hdr__mega-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#047857;margin:2px 0 12px;padding-left:12px}
 .site-hdr__mega-item{display:block;padding:9px 12px;border-radius:10px;transition:background .16s}
 a.site-hdr__mega-item:hover{background:rgba(243,240,232,0.06)}
 .site-hdr__mega-name{display:block;font-family:var(--font-heading);font-size:16.5px;font-weight:700;line-height:1.2;letter-spacing:-0.012em;color:#F3F0E8}
 a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .site-hdr__mega-desc{display:block;margin-top:3px;font-size:13px;line-height:1.4;color:#9DA19E}
-.site-hdr__mega-item[aria-current] .site-hdr__mega-name{color:#059669}
+.site-hdr__mega-item[aria-current] .site-hdr__mega-name{color:#047857}
 .site-hdr__mega-item--soon{cursor:default}
 .site-hdr__mega-item--soon .site-hdr__mega-name{color:#C2C6CA;opacity:.7}
 .site-hdr__mega-soon{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9DA19E;border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 9px}
 
 /* ── "Work with me" section inside the mobile menu ── */
-.site-menu__label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#059669;margin-top:8px}
+.site-menu__label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#047857;margin-top:8px}
 .site-menu a.site-menu__sub{text-transform:none;letter-spacing:0;font-size:15px;min-height:40px;display:flex;align-items:center}
-.site-menu a.site-menu__sub[aria-current]{color:#059669}
+.site-menu a.site-menu__sub[aria-current]{color:#047857}
 .site-menu__soon{color:#9DA19E;font-size:15px;min-height:40px;display:flex;align-items:center;gap:10px}
 .site-menu__soon small{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 8px;color:#9DA19E}
 
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
-.pill--green{height:72px;padding-inline:44px;background:#059669;color:#fff;font-size:16px}
+.pill--green{height:72px;padding-inline:44px;background:#047857;color:#fff;font-size:16px}
 .pill--green:hover{gap:12px;filter:brightness(0.9)}
-.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:#059669;color:#fff;font-size:16px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:#047857;color:#fff;font-size:16px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hero-cta:hover{filter:brightness(0.9);gap:13px}
 
 .cta-strip{padding-block:clamp(86px,10.8vw,132px);text-align:center;background:#1A1C1D}
@@ -133,9 +133,9 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:#C2C6CA;transition:gap .18s,color .18s}
 .cta-strip__sub:hover{gap:12px;color:#fff}
 
-.site-ftr{border-top:2px solid #059669;padding-block:64px 32px;background:#1A1C1D}
+.site-ftr{border-top:2px solid #047857;padding-block:64px 32px;background:#1A1C1D}
 .site-ftr__cols{display:grid;grid-template-columns:minmax(280px,1.4fr) repeat(3,minmax(130px,0.55fr));gap:48px;align-items:start}
-.site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#059669;margin-bottom:20px}
+.site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#10B981;margin-bottom:20px}
 .site-ftr nav a{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.4;margin-bottom:12px;transition:color .18s}
 .site-ftr nav a:hover{color:#C2C6CA}
 .site-ftr__roles{margin-top:20px;font-size:15px;line-height:1.4;color:#C2C6CA}
@@ -153,8 +153,8 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .u-shell{max-width:1180px;margin-inline:auto;padding-inline:clamp(24px,5vw,72px);display:grid;grid-template-columns:minmax(120px,170px) minmax(0,760px) minmax(0,1fr);column-gap:clamp(28px,4vw,64px)}
 .u-shell--wide{grid-template-columns:minmax(120px,170px) minmax(0,860px) minmax(0,1fr)}
 .u-shell__rail{grid-column:1;min-width:0}
-.u-shell__rail::before{content:"";display:block;width:100%;height:3px;background:var(--brand-green,#059669)}
-.u-shell__rail .u-eyebrow{display:block;margin-top:16px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.4;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
+.u-shell__rail::before{content:"";display:block;width:100%;height:3px;background:var(--brand-green,#047857)}
+.u-shell__rail .u-eyebrow{display:block;margin-top:16px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.4;letter-spacing:0.10em;text-transform:uppercase;color:#047857}
 .u-shell__body{grid-column:2;min-width:0}
 .u-shell__gutter{grid-column:3}
 
@@ -166,14 +166,14 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .u-read p + p,.u-shell__body p + p{margin-top:24px}
 .u-read ul,.u-read ol,.u-shell__body ul,.u-shell__body ol{margin:24px 0;padding-left:24px}
 .u-read li + li,.u-shell__body li + li{margin-top:12px}
-#main-scroll .u-read a,.u-read a,.u-shell__body a{color:#059669;text-decoration:underline;text-underline-offset:3px}
-.u-read blockquote,.u-shell__body blockquote{margin:48px 0;padding-left:28px;border-left:4px solid #059669;font-family:var(--font-heading);font-size:28px;line-height:1.3}
-.u-read hr,.u-shell__body hr{border:0;border-top:1px solid #059669;opacity:.45;margin:64px 0}
+#main-scroll .u-read a,.u-read a,.u-shell__body a{color:#047857;text-decoration:underline;text-underline-offset:3px}
+.u-read blockquote,.u-shell__body blockquote{margin:48px 0;padding-left:28px;border-left:4px solid #047857;font-family:var(--font-heading);font-size:28px;line-height:1.3}
+.u-read hr,.u-shell__body hr{border:0;border-top:1px solid #047857;opacity:.45;margin:64px 0}
 .u-read img,.u-shell__body img{display:block;height:auto;margin:48px 0}
 .u-form{width:min(760px,calc(100% - 40px));margin-inline:auto}
 
 /* One shared branded callout for deeper pages (dark band, warm text, green rule) */
-.u-callout{margin:40px 0;padding:26px 30px;background:#1A1C1D;color:#F3F0E8;border-left:3px solid #059669;border-radius:2px}
+.u-callout{margin:40px 0;padding:26px 30px;background:#1A1C1D;color:#F3F0E8;border-left:3px solid #047857;border-radius:2px}
 .u-callout :is(p,li){color:#F3F0E8}
 .u-callout > *:first-child{margin-top:0}
 .u-callout > *:last-child{margin-bottom:0}
@@ -182,7 +182,7 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .u-faq details:last-of-type{border-bottom:1px solid rgba(24,26,28,0.20)}
 .u-faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:24px;cursor:pointer;list-style:none;font-weight:600;font-size:20px;line-height:1.4}
 .u-faq summary::-webkit-details-marker{display:none}
-.u-faq summary::after{content:"+";color:#059669;font-size:26px;line-height:1;flex-shrink:0}
+.u-faq summary::after{content:"+";color:#047857;font-size:26px;line-height:1;flex-shrink:0}
 .u-faq details[open] summary::after{content:"\2212"}
 .u-faq details > *:not(summary){margin-top:16px}
 .u-faq--dark details{border-color:rgba(255,255,255,0.16)}
@@ -191,11 +191,11 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 
 .u-related a{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid rgba(24,26,28,0.20);color:#1A1C1D}
 .u-related a:last-child{border-bottom:1px solid rgba(24,26,28,0.20)}
-.u-related a:hover{color:#059669}
+.u-related a:hover{color:#047857}
 
 .u-notice{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding:24px 0;border-top:1px solid rgba(24,26,28,0.20);border-bottom:1px solid rgba(24,26,28,0.20);margin-bottom:56px}
 .u-notice p{margin:0;font-size:19px;line-height:1.5;max-width:52ch}
-.u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:#059669}
+.u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:#047857}
 
 @media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:680px){
@@ -243,16 +243,16 @@ html{overflow-x:clip}
 .dl-container{width:min(1240px,calc(100% - 2 * clamp(20px,4vw,64px)));margin-inline:auto}
 
 /* shared type/atoms */
-.dl-eyebrow{font-size:13px;font-weight:700;line-height:1.4;letter-spacing:0.11em;text-transform:uppercase;color:#059669;max-width:34ch}
-.dl-kicker{font-size:12px;font-weight:700;line-height:1.4;letter-spacing:0.12em;text-transform:uppercase;color:#059669}
+.dl-eyebrow{font-size:13px;font-weight:700;line-height:1.4;letter-spacing:0.11em;text-transform:uppercase;color:#047857;max-width:34ch}
+.dl-kicker{font-size:12px;font-weight:700;line-height:1.4;letter-spacing:0.12em;text-transform:uppercase;color:#047857}
 .dl-h2{margin:16px 0 0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(32px,3.5vw,52px);font-weight:800;line-height:1;letter-spacing:-0.04em;color:#181A1C;text-wrap:balance}
 .dl-lead{margin:0;max-width:660px;font-size:19px;line-height:1.6;color:#282726;text-wrap:pretty}
 .dl-leadwrap p + p{margin-top:16px}
 .dl-col{min-width:0}
-.dl-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 26px;background:#059669;color:#FFFFFF;font-size:16px;font-weight:600;letter-spacing:0.01em;transition:filter .18s,gap .18s}
+.dl-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 26px;background:#047857;color:#FFFFFF;font-size:16px;font-weight:600;letter-spacing:0.01em;transition:filter .18s,gap .18s}
 .dl-btn:hover{filter:brightness(0.9);gap:13px}
-.dl-textlink{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:15px;font-weight:700;letter-spacing:0.04em;color:#059669;transition:gap .18s}
-.dl-textlink:hover{gap:12px;color:#059669}
+.dl-textlink{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:15px;font-weight:700;letter-spacing:0.04em;color:#047857;transition:gap .18s}
+.dl-textlink:hover{gap:12px;color:#047857}
 
 /* section shells */
 .dl-section{background:#FFFFFF;padding-block:clamp(56px,8vw,112px)}
@@ -269,12 +269,12 @@ html{overflow-x:clip}
 .dl-hero__cta-row{margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;gap:16px}
 .dl-hero__note{margin:20px 0 0;font-size:15px;line-height:1.5;color:#5E6264}
 .dl-hero__fallback{margin:10px 0 0;font-size:15px;line-height:1.5;color:#5E6264}
-.dl-hero__fallback a{color:#059669;font-weight:600;white-space:nowrap;transition:opacity .18s}
+.dl-hero__fallback a{color:#047857;font-weight:600;white-space:nowrap;transition:opacity .18s}
 .dl-hero__fallback a:hover{opacity:.75}
 .dl-hero__figure{position:relative;margin:0;justify-self:end;width:100%;max-width:460px}
 .dl-hero__frame{position:relative;aspect-ratio:4 / 5;overflow:hidden;background:#181A1C}
 .dl-hero__frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:none}
-.dl-hero__border{position:absolute;inset:-14px;border:1px solid #059669;pointer-events:none}
+.dl-hero__border{position:absolute;inset:-14px;border:1px solid #047857;pointer-events:none}
 
 /* stats bar */
 .dl-stats{background:var(--tint);padding-block:clamp(40px,4.5vw,56px)}
@@ -292,18 +292,18 @@ html{overflow-x:clip}
 .dl-problem__lead{margin:0 0 clamp(28px,3vw,40px)}
 .dl-cards4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:1px;background:rgba(24,26,28,0.16);border:1px solid rgba(24,26,28,0.16)}
 .dl-card{background:#FFFFFF;padding:clamp(24px,2.4vw,32px);display:flex;flex-direction:column;gap:12px}
-.dl-card__num{font-family:var(--font-heading);font-size:14px;font-weight:800;line-height:1;letter-spacing:0.02em;color:#059669}
+.dl-card__num{font-family:var(--font-heading);font-size:14px;font-weight:800;line-height:1;letter-spacing:0.02em;color:#047857}
 .dl-card__h{margin:0;font-family:var(--font-heading);font-size:22px;font-weight:750;line-height:1.2;letter-spacing:-0.02em;color:#181A1C}
 .dl-card__p{margin:0;font-size:17px;line-height:1.55;color:#282726;text-wrap:pretty}
 
 /* path timeline */
 .dl-path{margin-top:clamp(48px,6vw,80px);display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
 .dl-path__step{position:relative;border-top:1px solid rgba(24,26,28,0.30);padding:22px clamp(12px,1.6vw,20px) 0 0}
-.dl-path__step--last{border-top-color:#059669}
+.dl-path__step--last{border-top-color:#047857}
 .dl-path__dot{position:absolute;left:0;top:0;width:9px;height:9px;border-radius:50%;background:#181A1C;transform:translate(-50%,-50%)}
-.dl-path__step--last .dl-path__dot{width:13px;height:13px;background:#059669}
+.dl-path__step--last .dl-path__dot{width:13px;height:13px;background:#047857}
 .dl-path__label{font-family:var(--font-heading);font-size:17px;font-weight:700;line-height:1.25;letter-spacing:-0.01em;color:#181A1C}
-.dl-path__step--last .dl-path__label{font-weight:800;color:#059669}
+.dl-path__step--last .dl-path__label{font-weight:800;color:#047857}
 
 /* problem closing statement */
 .dl-statement{margin:clamp(40px,4.5vw,56px) 0 0;max-width:26ch;font-family:var(--font-heading);font-size:clamp(22px,2.2vw,28px);font-weight:750;line-height:1.25;letter-spacing:-0.025em;color:#181A1C;text-wrap:pretty}
@@ -317,8 +317,8 @@ html{overflow-x:clip}
 .dl-audit__p{margin:16px 0 0;max-width:52ch;font-size:18px;line-height:1.6;color:#282726;text-wrap:pretty}
 .dl-audit__note{margin:20px 0 0;max-width:44ch;font-size:15px;line-height:1.5;color:#5E6264;text-wrap:pretty}
 .dl-audit__cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:clamp(16px,1.6vw,20px)}
-.dl-audit__card{background:#FFFFFF;padding:clamp(24px,2.2vw,28px);display:flex;flex-direction:column;gap:14px;border-top:3px solid #059669}
-.dl-audit__card-label{font-size:12px;font-weight:700;line-height:1.3;letter-spacing:0.12em;text-transform:uppercase;color:#059669}
+.dl-audit__card{background:#FFFFFF;padding:clamp(24px,2.2vw,28px);display:flex;flex-direction:column;gap:14px;border-top:3px solid #047857}
+.dl-audit__card-label{font-size:12px;font-weight:700;line-height:1.3;letter-spacing:0.12em;text-transform:uppercase;color:#047857}
 .dl-audit__card-p{margin:0;font-family:var(--font-heading);font-size:20px;font-weight:750;line-height:1.25;letter-spacing:-0.02em;color:#181A1C;text-wrap:pretty}
 .dl-audit__closing{margin:clamp(24px,2.4vw,32px) 0 0;padding-top:clamp(20px,2vw,24px);border-top:1px solid rgba(24,26,28,0.20);font-family:var(--font-heading);font-size:19px;font-weight:700;line-height:1.4;letter-spacing:-0.015em;color:#181A1C;text-wrap:pretty}
 
@@ -330,7 +330,7 @@ html{overflow-x:clip}
 .dl-step__p{margin:0;font-size:17px;line-height:1.55;color:#282726;text-wrap:pretty}
 .dl-panels{margin-top:clamp(32px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:1px;background:rgba(24,26,28,0.20);border:1px solid rgba(24,26,28,0.20)}
 .dl-panel{background:#FFFFFF;padding:clamp(24px,2.8vw,36px)}
-.dl-panel__label{font-size:12px;font-weight:700;line-height:1.3;letter-spacing:0.12em;text-transform:uppercase;color:#059669}
+.dl-panel__label{font-size:12px;font-weight:700;line-height:1.3;letter-spacing:0.12em;text-transform:uppercase;color:#047857}
 .dl-panel__p{margin:16px 0 0;font-family:var(--font-heading);font-size:20px;font-weight:700;line-height:1.35;letter-spacing:-0.02em;color:#181A1C;text-wrap:pretty}
 .dl-process__close{margin-top:clamp(24px,2.4vw,32px)}
 .dl-process__close p{margin:0;max-width:660px;font-size:18px;line-height:1.6;color:#282726;text-wrap:pretty}
@@ -340,8 +340,8 @@ html{overflow-x:clip}
 .dl-why__cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:clamp(16px,1.8vw,24px)}
 .dl-why__card{background:#FFFFFF;padding:clamp(24px,2.4vw,32px);display:flex;flex-direction:column;gap:14px}
 .dl-why__head{display:flex;align-items:baseline;gap:8px}
-.dl-why__num{font-family:var(--font-heading);font-size:22px;font-weight:800;line-height:1;letter-spacing:-0.03em;color:#059669}
-.dl-why__tag{font-family:var(--font-heading);font-size:13px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#059669}
+.dl-why__num{font-family:var(--font-heading);font-size:22px;font-weight:800;line-height:1;letter-spacing:-0.03em;color:#047857}
+.dl-why__tag{font-family:var(--font-heading);font-size:13px;font-weight:700;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#047857}
 .dl-why__rule{height:1px;background:rgba(24,26,28,0.24)}
 .dl-why__p{margin:0;font-size:17px;line-height:1.55;color:#282726;text-wrap:pretty}
 .dl-why__close{margin:clamp(24px,2.4vw,32px) 0 0;max-width:660px;font-size:18px;line-height:1.6;color:#282726;text-wrap:pretty}
@@ -353,7 +353,7 @@ html{overflow-x:clip}
 .dl-fit__list{list-style:none;display:flex;flex-direction:column;gap:16px}
 .dl-fit__item{display:flex;gap:14px;font-size:17px;line-height:1.55;color:#282726;text-wrap:pretty}
 .dl-fit__mark{flex:0 0 auto;font-size:17px;font-weight:700;line-height:1.55}
-.dl-fit__mark--yes{color:#059669}
+.dl-fit__mark--yes{color:#047857}
 .dl-fit__mark--no{color:#181A1C}
 
 /* how it starts */
@@ -370,7 +370,7 @@ html{overflow-x:clip}
 .dl-faq details:last-of-type{border-bottom:1px solid rgba(24,26,28,0.20)}
 .dl-faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:24px;cursor:pointer;list-style:none;padding:22px 0;font-family:var(--font-heading);font-weight:700;font-size:20px;line-height:1.4;letter-spacing:-0.015em;color:#181A1C}
 .dl-faq summary::-webkit-details-marker{display:none}
-.dl-faq summary::after{content:"+";flex-shrink:0;color:#059669;font-size:26px;line-height:1;font-weight:400}
+.dl-faq summary::after{content:"+";flex-shrink:0;color:#047857;font-size:26px;line-height:1;font-weight:400}
 .dl-faq details[open] summary::after{content:"\2212"}
 .dl-faq__a{padding:0 0 26px}
 .dl-faq__a p{margin:0;max-width:680px;font-size:17px;line-height:1.6;color:#282726;text-wrap:pretty}
@@ -386,7 +386,7 @@ html{overflow-x:clip}
 
 /* sticky mobile cta */
 .dl-sticky{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:12px 20px calc(12px + env(safe-area-inset-bottom));background:rgba(26,28,29,0.96);border-top:1px solid rgba(243,240,232,0.16)}
-.dl-sticky a{display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;background:#059669;color:#FFFFFF;font-size:15px;font-weight:600}
+.dl-sticky a{display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;background:#047857;color:#FFFFFF;font-size:15px;font-weight:600}
 
 /* ── responsive (mirrors the reference JS breakpoints) ── */
 @media (max-width:900px){
@@ -399,7 +399,7 @@ html{overflow-x:clip}
   .dl-hero__h1 span{display:inline}
   .dl-path{grid-template-columns:1fr}
   .dl-path__step{border-top:0;border-left:1px solid rgba(24,26,28,0.30);padding:0 0 24px 22px}
-  .dl-path__step--last{border-left-color:#059669}
+  .dl-path__step--last{border-left-color:#047857}
   .dl-path__dot{top:10px}
 }
 @media (max-width:680px){
@@ -408,8 +408,8 @@ html{overflow-x:clip}
 </style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/">Home</a><div class="site-hdr__work"><button class="site-hdr__work-btn" type="button" aria-haspopup="true" aria-expanded="false"><span>Work with me</span><svg class="site-hdr__work-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div><a href="/about/">About me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="hdr-cta" href="/start-here/"><span>START HERE</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main class="dl" style="--tint: #E7F2EC; --final-bg: #123A31; --final-eyebrow: #5FD1A3; --final-text: #D7E7E0;"><section class="dl-hero"><div class="dl-container dl-hero__grid"><div class="dl-col"><div class="dl-eyebrow">For freelancers and independent consultants</div><h1 class="dl-hero__h1"><span>Grow your </span><span>solo-business </span><span>without grinding </span><span>yourself down. </span></h1><p class="dl-hero__lead">Private 1:1 work on the offer, pricing, clients and decisions that move the business forward, plus the patterns in you that keep getting in the way.</p><div class="dl-hero__cta-row"><a class="dl-btn" href="/contact?interest=solo-business-growth"><span>Find out what to do next</span><span>→</span></a></div><p class="dl-hero__note">Apply for the Solo-Business Growth Audit.</p><p class="dl-hero__fallback">Not sure this is the right fit? <a href="/start-here/">Start here →</a></p></div><figure class="dl-hero__figure"><div class="dl-hero__frame"><img src="/img/solo-business-growth-hero.webp" alt="Aggelos Mouzakitis" width="1000" height="1250" loading="eager" decoding="async"></div><div class="dl-hero__border" aria-hidden="true"></div></figure></div></section><section class="dl-stats"><div class="dl-container"><div class="dl-stats__grid"><div class="dl-stat"><div class="dl-stat__num-wrap"><div class="dl-stat__num">18 years</div></div><div class="dl-stat__label">Product and growth</div></div><div class="dl-stat"><div class="dl-stat__num-wrap"><div class="dl-stat__num">7 years</div></div><div class="dl-stat__label">Running my own consultancy</div></div><div class="dl-stat"><div class="dl-stat__num-wrap"><div class="dl-stat__num">100+</div></div><div class="dl-stat__label">Technology companies</div></div><div class="dl-stat"><div class="dl-stat__num-wrap"><div class="dl-stat__num dl-stat__num--sm">BACP-registered</div></div><div class="dl-stat__label">Psychotherapist</div></div></div><div class="dl-logos"><span class="dl-logo">IBM</span><span class="dl-logo">Farfetch</span><span class="dl-logo">GrowthMentor</span><span class="dl-logo">University of Oxford</span><span class="dl-logo">University of London</span><span class="dl-logo">Glofox</span><span class="dl-logo">Whereby</span><span class="dl-logo">Moosend</span></div></div></section><section class="dl-section"><div class="dl-container"><div class="dl-split"><div class="dl-col"><div class="dl-kicker">The problem</div><h2 class="dl-h2">You do good work. The business around it is harder to run.</h2></div><div class="dl-col"><p class="dl-lead dl-problem__lead">When you work alone, commercial problems and personal patterns collide quickly. What looks like a marketing or growth problem may be weak positioning, avoidance, or both.</p><div class="dl-cards4"><article class="dl-card"><div class="dl-card__num">01</div><h3 class="dl-card__h">Scattered effort</h3><p class="dl-card__p">Too many services, ideas and priorities compete for your attention. You stay busy without knowing what is actually moving the business.</p></article><article class="dl-card"><div class="dl-card__num">02</div><h3 class="dl-card__h">Weak economics</h3><p class="dl-card__p">You undercharge, accept the wrong clients or sell work that leaves too little margin and too much delivery.</p></article><article class="dl-card"><div class="dl-card__num">03</div><h3 class="dl-card__h">Everything depends on you</h3><p class="dl-card__p">Sales, delivery and every important decision come back to you. More growth currently means more pressure.</p></article><article class="dl-card"><div class="dl-card__num">04</div><h3 class="dl-card__h">Thinking replaces action</h3><p class="dl-card__p">You keep refining the plan. The difficult conversation, price increase or sales ask moves to next week.</p></article></div></div></div><div class="dl-path"><div class="dl-path__step"><span class="dl-path__dot" aria-hidden="true"></span><div class="dl-path__label">The real problem</div></div><div class="dl-path__step"><span class="dl-path__dot" aria-hidden="true"></span><div class="dl-path__label">The right priority</div></div><div class="dl-path__step"><span class="dl-path__dot" aria-hidden="true"></span><div class="dl-path__label">Decisive action</div></div><div class="dl-path__step"><span class="dl-path__dot" aria-hidden="true"></span><div class="dl-path__label">Better economics</div></div><div class="dl-path__step dl-path__step--last"><span class="dl-path__dot" aria-hidden="true"></span><div class="dl-path__label">Sustainable growth</div></div></div><p class="dl-statement">You do not need more activity.</p><p class="dl-statement__sub">You need to find what is actually limiting the business and deal with it.</p></div></section><section class="dl-audit" id="audit"><div class="dl-container"><div class="dl-audit__panel"><div class="dl-audit__grid"><div class="dl-col"><div class="dl-kicker">START HERE</div><h2 class="dl-h2">What is working, what is costing you, and what should you do next?</h2><h3 class="dl-audit__h3">The Solo-Business Growth Audit</h3><p class="dl-audit__p">Apply with enough context for me to understand how the business works, where you want it to go, what you have tried and what keeps getting stuck.</p><p class="dl-audit__p">If it looks like I can help, I review your situation before we meet. During the audit, we separate the real constraint from the noise and identify the next move that matters.</p><a class="dl-btn" href="/contact?interest=solo-business-growth" style="margin-top: 32px;"><span>Apply for the audit</span><span>→</span></a><p class="dl-audit__note">This is a working call, not a generic fit call. It should be useful even if we never work together.</p></div><div class="dl-col"><div class="dl-audit__cards"><article class="dl-audit__card"><div class="dl-audit__card-label">Keep</div><p class="dl-audit__card-p">What is already working and deserves more attention.</p></article><article class="dl-audit__card"><div class="dl-audit__card-label">Fix</div><p class="dl-audit__card-p">What is costing you growth, time or headroom.</p></article><article class="dl-audit__card"><div class="dl-audit__card-label">Do next</div><p class="dl-audit__card-p">The highest-leverage decision or action in front of you.</p></article></div><p class="dl-audit__closing">If the problem is not what you think it is, I will tell you that too.</p></div></div></div></div></section><section class="dl-section dl-section--flush"><div class="dl-container"><div class="dl-split"><div class="dl-col"><div class="dl-kicker">If there is more to work on</div><h2 class="dl-h2">We work on the business and the person running it.</h2></div><div class="dl-col dl-leadwrap"><p class="dl-lead">If the audit surfaces a meaningful outcome and we are a good fit, we can continue privately. We agree on what needs to change and work on the commercial and personal parts together.</p></div></div><div class="dl-steps"><div class="dl-step"><div class="dl-step__num">01</div><h3 class="dl-step__h">Diagnose it</h3><p class="dl-step__p">Find the actual constraint: offer, demand, pricing, client mix, delivery or decision-making.</p></div><div class="dl-step"><div class="dl-step__num">02</div><h3 class="dl-step__h">Prioritise it</h3><p class="dl-step__p">Choose the few moves that matter and cut the work that adds noise rather than growth.</p></div><div class="dl-step"><div class="dl-step__num">03</div><h3 class="dl-step__h">Execute it</h3><p class="dl-step__p">Make the decisions, have the conversations and run the experiments the business needs.</p></div><div class="dl-step"><div class="dl-step__num">04</div><h3 class="dl-step__h">Make it hold</h3><p class="dl-step__p">Build a business that can grow without every problem landing back on you.</p></div></div><div class="dl-panels"><div class="dl-panel"><div class="dl-panel__label">The business</div><p class="dl-panel__p">Offer, positioning, pricing, acquisition, sales, client mix, priorities and delivery.</p></div><div class="dl-panel"><div class="dl-panel__label">You</div><p class="dl-panel__p">Avoidance, rejection, control, approval, boundaries, money, uncertainty and overwork.</p></div></div><div class="dl-process__close"><p>Fixing the inside while the pipeline dries up is useless. Pushing the business while the same pattern keeps undermining it is exhausting.</p><p>We work out which side the problem actually needs.</p></div></div></section><section class="dl-section dl-section--tint"><div class="dl-container"><div class="dl-split"><div class="dl-col"><div class="dl-kicker">WHY ME</div><h2 class="dl-h2">I did the work before I started selling advice.</h2></div><div class="dl-col"><div class="dl-why__cards"><article class="dl-why__card"><div class="dl-why__head"><span class="dl-why__num">01 /</span><span class="dl-why__tag">Business</span></div><div class="dl-why__rule"></div><p class="dl-why__p">Seven years running my own growth consultancy. Work with more than 100 technology companies. Two startups built. Neither went well.</p></article><article class="dl-why__card"><div class="dl-why__head"><span class="dl-why__num">02 /</span><span class="dl-why__tag">Operator</span></div><div class="dl-why__rule"></div><p class="dl-why__p">Eighteen years in product and growth. A career built abroad. I still work at IBM while building my own practice.</p></article><article class="dl-why__card"><div class="dl-why__head"><span class="dl-why__num">03 /</span><span class="dl-why__tag">Psychology</span></div><div class="dl-why__rule"></div><p class="dl-why__p">MSc Integrative Counselling &amp; Psychotherapy, Graduate Certificate in Psychology, supervised practice and BACP registration.</p></article></div><p class="dl-why__close">A growth problem needs commercial judgement. A pattern in the person running the business needs different depth. You get both.</p><a class="dl-textlink" href="/about/"><span>More about me</span><span>→</span></a></div></div></div></section><section class="dl-section"><div class="dl-container"><div class="dl-fit"><div class="dl-fit__col"><h3 class="dl-fit__h">This is probably for you if:</h3><ul class="dl-fit__list"><li class="dl-fit__item"><span class="dl-fit__mark dl-fit__mark--yes" aria-hidden="true">✓</span><span>You already sell your expertise through consulting, freelancing or another solo service.</span></li><li class="dl-fit__item"><span class="dl-fit__mark dl-fit__mark--yes" aria-hidden="true">✓</span><span>You want better growth, margins, clients or control of your time.</span></li><li class="dl-fit__item"><span class="dl-fit__mark dl-fit__mark--yes" aria-hidden="true">✓</span><span>You are willing to look honestly at both the business and your own behaviour.</span></li><li class="dl-fit__item"><span class="dl-fit__mark dl-fit__mark--yes" aria-hidden="true">✓</span><span>You want direct feedback and concrete action, not a generic framework.</span></li><li class="dl-fit__item"><span class="dl-fit__mark dl-fit__mark--yes" aria-hidden="true">✓</span><span>You are ambitious and do not want to be told to lower your standards.</span></li></ul></div><div class="dl-fit__col"><h3 class="dl-fit__h">This is not for you if:</h3><ul class="dl-fit__list"><li class="dl-fit__item"><span class="dl-fit__mark dl-fit__mark--no" aria-hidden="true">✕</span><span>You want one tactic to solve the whole business.</span></li><li class="dl-fit__item"><span class="dl-fit__mark dl-fit__mark--no" aria-hidden="true">✕</span><span>You want a formula applied without examining your actual situation.</span></li><li class="dl-fit__item"><span class="dl-fit__mark dl-fit__mark--no" aria-hidden="true">✕</span><span>You want growth without changing your offer, pricing, clients or boundaries.</span></li><li class="dl-fit__item"><span class="dl-fit__mark dl-fit__mark--no" aria-hidden="true">✕</span><span>You mainly want reassurance that your current plan is right.</span></li><li class="dl-fit__item"><span class="dl-fit__mark dl-fit__mark--no" aria-hidden="true">✕</span><span>You are unwilling to make decisions and execute between calls.</span></li></ul></div></div></div></section><section class="dl-section dl-section--flush" id="how-it-starts"><div class="dl-container"><div class="dl-kicker">HOW IT STARTS</div><div class="dl-hows"><div class="dl-how"><div class="dl-how__num">1</div><h3 class="dl-how__h">Apply for the audit</h3><p class="dl-how__p">Tell me how the business works, where you want it to go, what you have tried and what keeps getting stuck. Polished answers are less useful than honest ones.</p></div><div class="dl-how"><div class="dl-how__num">2</div><h3 class="dl-how__h">Get the audit</h3><p class="dl-how__p">I come prepared. We identify what is working, the real constraint and the next move that deserves your attention.</p></div><div class="dl-how"><div class="dl-how__num">3</div><h3 class="dl-how__h">Continue only if it makes sense</h3><p class="dl-how__p">If there is a meaningful outcome to work on and I am the right person to help, I will explain what ongoing 1:1 work could look like. There is no obligation to continue.</p></div></div><a class="dl-btn" href="/contact?interest=solo-business-growth" style="margin-top: clamp(28px, 3vw, 40px);"><span>Apply for the Solo-Business Growth Audit</span><span>→</span></a></div></section><section class="dl-section dl-section--flush"><div class="dl-container"><div class="dl-faq"><h2 class="dl-faq__h">Common questions</h2><div><details><summary><span>Do I need an established business?</span></summary><div class="dl-faq__a"><p>You should already be trading, with clients and enough real evidence to examine. The business does not need to be large or mature, but this is for improving something that already exists.</p></div></details><details><summary><span>What can we work on?</span></summary><div class="dl-faq__a"><p>Offer, positioning, pricing, acquisition, sales, client mix, priorities, delivery and the decisions behind them. We focus on the constraint that matters now instead of trying to overhaul everything at once.</p></div></details><details><summary><span>Is this growth consulting?</span></summary><div class="dl-faq__a"><p>Yes, but not only. The business outcome leads the work. When avoidance, approval, control or fear is interfering with execution, we work there too.</p></div></details><details><summary><span>Is this business coaching or therapy?</span></summary><div class="dl-faq__a"><p>Neither cleanly. I will have an opinion on the offer, pricing, acquisition and priorities. If the same personal pattern keeps undoing good decisions, we can work at that depth without losing sight of the business.</p></div></details><details><summary><span>What if I already know what to do but I am not doing it?</span></summary><div class="dl-faq__a"><p>Then more information is probably not the answer. We work out whether the blockage is fear of exposure, a need for approval, overthinking, exhaustion, or evidence that the plan itself is wrong. Those require different moves.</p></div></details><details><summary><span>Will you give me direct advice?</span></summary><div class="dl-faq__a"><p>Yes. When the problem needs a tactical answer, I will give you one. When I think you are avoiding a decision, protecting a story or solving the wrong problem, I will say that too.</p></div></details><details><summary><span>What if the business is doing well but I am exhausted?</span></summary><div class="dl-faq__a"><p>That is still a business problem. We look at what depends on you, which clients and work are worth keeping, and where control, boundaries or approval are making the model harder to sustain.</p></div></details><details><summary><span>Is the audit just a sales call?</span></summary><div class="dl-faq__a"><p>No. It has a standalone outcome. You leave knowing what to keep, what to fix and what to do next, even if we never work together. If continuing makes sense, we discuss it after the work is done.</p></div></details><details><summary><span>What happens after the audit?</span></summary><div class="dl-faq__a"><p>You can take the diagnosis and next move away. If the audit surfaces a meaningful outcome and we are a strong fit, I can also explain what ongoing 1:1 work could look like. Continuing is optional.</p></div></details></div></div></div></section><section class="dl-final"><div class="dl-container"><div class="dl-final__inner"><div class="dl-final__eyebrow">The business does not need more of everything</div><h2 class="dl-final__h">Find the move that matters now.</h2><p class="dl-final__p">Apply for the audit. I will review your situation before we meet. Then we will decide what to keep, what to fix and what to do next.</p><a class="dl-btn" href="/contact?interest=solo-business-growth" style="margin-top: 36px;"><span>Find out what to do next</span><span>→</span></a></div></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div><div class="site-hdr__brand" style="font-size: 20px;">Aggelos<span>.</span></div><div class="site-ftr__roles"><div>Private business &amp; career advisor</div><div style="margin-top: 8px;">BACP-registered psychotherapist</div></div></div><nav><div class="site-ftr__head">NAVIGATE</div><a href="/">Home</a><a href="/about/">About me</a><a href="/reviews/">Reviews</a><a href="/start-here/">Start Here</a></nav><nav><div class="site-ftr__head">CONTENT</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Articles ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a><a href="/ask-me-anything/">Ask me something ↗</a></nav><nav><div class="site-ftr__head">FOLLOW</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. All rights reserved.</div><nav><a href="/confidentiality/">Confidentiality</a><a href="/confidentiality/#terms">Terms</a><a href="/confidentiality/#privacy">Privacy</a></nav></div></div></footer><div class="dl-sticky"><a href="/contact?interest=solo-business-growth"><span>Apply for the audit</span><span>→</span></a></div></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
-<script src="/site-chrome.js?v=14"></script>
-<script src="/offer-pages.js?v=2"></script>
+<script src="/site-chrome.js?v=16"></script>
+<script src="/offer-pages.js?v=3"></script>
 <script>renderOfferPage("solopreneur-growth-consulting");</script>
 </body>
 </html>

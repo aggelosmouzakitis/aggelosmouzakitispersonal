@@ -4,7 +4,7 @@
 const C = {
   text: '#282726',
   muted: '#666',
-  accent: '#059669',
+  accent: '#047857',
   border: 'rgba(40,39,38,0.12)',
   sepBorder: 'rgba(40,39,38,0.2)',
 };
@@ -102,7 +102,7 @@ function Testimonials({ items, mob, label }) {
 // One offer, two languages. English core at root, Greek core under /el/.
 const CORE_PATHS = {
   'home':            { en: '/',                 el: '/el/' },
-  'one-to-one':      { en: '/1-to-1/',          el: '/el/1-to-1/' },
+  'one-to-one':      { en: '/',                el: '/el/1-to-1/' },
   'about':           { en: '/about/',           el: '/el/about/' },
   'reviews':         { en: '/reviews/',         el: '/el/reviews/' },
   'book':            { en: '/contact?interest=orientation',            el: '/el/book/' },
@@ -117,7 +117,7 @@ const isEl = (lang) => lang === 'el';
 const FOOTER_COLS_BY_LANG = {
   en: [
     { label: 'Work with me', links: [
-      { href: '/1-to-1/', label: '1:1' },
+      { href: '/', label: '1:1' },
       { href: '/contact?interest=orientation', label: 'Book a fit call' },
     ] },
     { label: 'Site', links: [
@@ -194,7 +194,7 @@ function SiteFooter({ mob, lang = 'en' }) {
 
 // ─── START HERE ──────────────────────────────────────────────────────────────
 const START_HERE_ITEMS = [
-  { label: 'For founders →', href: '/founders/' },
+  { label: 'For founders →', href: '/psychotherapy-decision-coaching/' },
   { label: 'For freelancers →', href: '/solopreneurs/' },
 ];
 function StartHere({ mob }) {
@@ -309,14 +309,14 @@ function Bullets({ items, mob }) {
 function FinalCta({ lang, mob, heading, sub }) {
   const u = tUI(lang);
   return React.createElement('div', {
-    style: { marginTop: mob ? '3rem' : '4rem', padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem', border: `1.5px solid rgba(5,150,105,.4)`, background: 'rgba(5,150,105,.06)', borderRadius: '14px' },
+    style: { marginTop: mob ? '3rem' : '4rem', padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem', border: `1.5px solid rgba(4, 120, 87,.4)`, background: 'rgba(4, 120, 87,.06)', borderRadius: '14px' },
   },
     React.createElement('p', { style: { fontSize: mob ? '19px' : '23px', fontWeight: 500, letterSpacing: '-.01em', lineHeight: 1.5, color: C.text, margin: 0 } }, heading),
     sub && React.createElement('p', { style: { fontSize: '16px', lineHeight: 1.7, color: C.muted, margin: '.9rem 0 0' } }, sub),
     React.createElement('a', {
       href: pathFor('book', lang), className: 'cta-btn',
       style: { display: 'inline-block', marginTop: '1.4rem', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#fff', textDecoration: 'none', borderRadius: '2px' },
-      onMouseEnter: e => { e.currentTarget.style.background = '#059669'; e.currentTarget.style.borderColor = '#059669'; },
+      onMouseEnter: e => { e.currentTarget.style.background = '#047857'; e.currentTarget.style.borderColor = '#047857'; },
       onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
     }, u.book + ' →')
   );
@@ -384,29 +384,29 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 .svc-page .svc-h2{max-width:var(--svc-read);margin:0 0 20px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(36px,3.2vw,44px);line-height:1.05;letter-spacing:-0.035em;font-weight:800;color:#1A1C1D;text-wrap:balance}
 .svc-page .svc-p{max-width:var(--svc-read);margin:0 0 20px;font-size:18px;line-height:1.65;color:#282726}
 .svc-p:last-child{margin-bottom:0}
-.svc-p a,.svc-lead a,.svc-faq__a a,.svc-note a{color:#059669;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.svc-p a,.svc-lead a,.svc-faq__a a,.svc-note a{color:#047857;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 .svc-p strong,.svc-faq__a strong{font-weight:700;color:#1A1C1D}
-.svc-eyebrow{margin:0 0 12px;font-family:var(--font-body);font-size:13px;line-height:1.3;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#059669}
+.svc-eyebrow{margin:0 0 12px;font-family:var(--font-body);font-size:13px;line-height:1.3;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#047857}
 .svc-faq{max-width:var(--svc-read);border-top:1px solid rgba(24,26,28,0.14)}
 .svc-faq__item{border-bottom:1px solid rgba(24,26,28,0.14);padding:22px 0}
 .svc-page .svc-faq__q{margin:0 0 10px;font-family:var(--font-heading);font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#1A1C1D}
 .svc-page .svc-faq__a{margin:0;font-size:18px;line-height:1.65;color:#282726}
 .svc-faq__a p{margin:0 0 12px}.svc-faq__a p:last-child{margin:0}
 .svc-quotes{max-width:var(--svc-read)}
-.svc-quote{margin:0 0 22px;padding:0 0 0 20px;border-left:3px solid rgba(5,150,105,0.4)}
+.svc-quote{margin:0 0 22px;padding:0 0 0 20px;border-left:3px solid rgba(4, 120, 87,0.4)}
 .svc-quote p{margin:0 0 8px;font-size:17px;line-height:1.6;color:#282726}
 .svc-quote cite{font-style:normal;font-size:13px;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:#767676}
-.svc-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 30px;background:#059669;color:#fff;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
+.svc-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 30px;background:#047857;color:#fff;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
 .svc-cta:hover{filter:brightness(0.92);gap:12px}
 .svc-cta--ghost{background:transparent;color:#1A1C1D;border:1.5px solid rgba(24,26,28,0.28)}
-.svc-cta--ghost:hover{border-color:#059669;color:#059669;filter:none}
+.svc-cta--ghost:hover{border-color:#047857;color:#047857;filter:none}
 .svc-ctarow{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
 .svc-note{max-width:var(--svc-read);margin:16px 0 0;font-size:15px;line-height:1.6;color:#666}
 .svc-bullets{max-width:var(--svc-read);list-style:none;margin:4px 0 0;padding:0}
 .svc-bullets li{position:relative;padding:8px 0 8px 22px;font-size:18px;line-height:1.6;color:#282726;border-top:1px solid rgba(24,26,28,0.1)}
 .svc-bullets li:first-child{border-top:0}
-.svc-bullets li::before{content:"";position:absolute;left:0;top:16px;width:10px;height:2px;background:#059669}
-.svc-bullets li a{color:#059669;text-decoration:underline;text-underline-offset:3px}
+.svc-bullets li::before{content:"";position:absolute;left:0;top:16px;width:10px;height:2px;background:#047857}
+.svc-bullets li a{color:#047857;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:767px){.svc-bullets li{font-size:17px}}
 .svc-cards{margin:4px 0 0}
 .svc-rule{border:0;border-top:1px solid rgba(24,26,28,0.14);margin:0}
@@ -414,7 +414,7 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 .svc-related{list-style:none;max-width:var(--svc-read);margin:0;padding:0;border-top:1px solid rgba(24,26,28,0.14)}
 .svc-related li{border-bottom:1px solid rgba(24,26,28,0.14)}
 .svc-related a{display:flex;justify-content:space-between;gap:20px;padding:15px 0;font-family:var(--font-heading);font-size:17px;line-height:1.4;font-weight:600;color:#1A1C1D;text-decoration:none}
-.svc-related a:hover{color:#059669}
+.svc-related a:hover{color:#047857}
 @media (max-width:767px){
   .u-shell:has(.svc-page){padding-inline:20px}
   .svc-page .svc-h1{font-size:clamp(36px,10.5vw,44px)}
@@ -781,7 +781,7 @@ function OneToOnePage({ lang = 'en' }) {
     React.createElement('div', { style: { marginTop: '1.6rem' } },
       React.createElement('a', {
         href: pathFor('book', lang), className: 'cta-btn', style: primaryBtn,
-        onMouseEnter: e => { e.currentTarget.style.background = '#059669'; e.currentTarget.style.borderColor = '#059669'; },
+        onMouseEnter: e => { e.currentTarget.style.background = '#047857'; e.currentTarget.style.borderColor = '#047857'; },
         onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
       }, u.book + ' →')
     ),
@@ -927,13 +927,13 @@ function AboutPage({ lang = 'en' }) {
       s.body.map((p, j) => React.createElement(P, { key: j, last: j === s.body.length - 1 }, p))
     )),
     React.createElement('div', {
-      style: { marginTop: mob ? '3rem' : '4rem', padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem', border: `1.5px solid rgba(5,150,105,.4)`, background: 'rgba(5,150,105,.06)', borderRadius: '14px' },
+      style: { marginTop: mob ? '3rem' : '4rem', padding: mob ? '1.6rem 1.4rem' : '2.4rem 2.6rem', border: `1.5px solid rgba(4, 120, 87,.4)`, background: 'rgba(4, 120, 87,.06)', borderRadius: '14px' },
     },
       React.createElement('p', { style: { fontSize: mob ? '19px' : '23px', fontWeight: 500, letterSpacing: '-.01em', lineHeight: 1.5, color: C.text, margin: 0 } }, c.ctaHeading),
       React.createElement('a', {
         href: pathFor('one-to-one', lang), className: 'cta-btn',
         style: { display: 'inline-block', marginTop: '1.4rem', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#fff', textDecoration: 'none', borderRadius: '2px' },
-        onMouseEnter: e => { e.currentTarget.style.background = '#059669'; e.currentTarget.style.borderColor = '#059669'; },
+        onMouseEnter: e => { e.currentTarget.style.background = '#047857'; e.currentTarget.style.borderColor = '#047857'; },
         onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
       }, c.ctaLabel + ' →')
     ),
@@ -1053,7 +1053,7 @@ function ReviewCard({ t, lang, toggleLabel }) {
   const el = lang === 'el';
   const quote = el ? t.qEl : t.q;
   const who = el ? t.wEl : t.w;
-  return React.createElement('blockquote', { style: { breakInside: 'avoid', margin: '0 0 1.9rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(5,150,105,0.35)' } },
+  return React.createElement('blockquote', { style: { breakInside: 'avoid', margin: '0 0 1.9rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(4, 120, 87,0.35)' } },
     React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.8, color: '#282726', margin: '0 0 .5rem' } }, '“' + quote + '”'),
     React.createElement('div', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, who),
     el && React.createElement('button', {
@@ -1137,7 +1137,7 @@ function PersonaHowWeStartSection() {
     React.createElement('div', { className: 'svc-ctarow' },
       React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
     ),
-    React.createElement(SvcNote, null, "It's the same ongoing 1:1 work. ", React.createElement(IA, { href: '/1-to-1/' }, 'See how 1:1 works'), '.')
+    React.createElement(SvcNote, null, "It's the same ongoing 1:1 work. ", React.createElement(IA, { href: '/' }, 'See how 1:1 works'), '.')
   );
 }
 function PatternList({ items }) {
@@ -1333,7 +1333,7 @@ function StepCards({ mob, steps }) {
           React.createElement('span', { style: { width: '30px', height: '30px', flexShrink: 0, borderRadius: '50%', background: C.accent, color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', fontWeight: 700, lineHeight: 1 } }, s.n),
           React.createElement('span', { style: { fontSize: '17px', fontWeight: 700, color: C.text } }, s.title)
         ),
-        s.tag && React.createElement('span', { style: { alignSelf: 'flex-start', fontSize: '11px', letterSpacing: '.05em', textTransform: 'uppercase', color: C.accent, background: 'rgba(5,150,105,0.08)', border: '1px solid rgba(5,150,105,0.25)', borderRadius: '999px', padding: '.2rem .65rem' } }, s.tag),
+        s.tag && React.createElement('span', { style: { alignSelf: 'flex-start', fontSize: '11px', letterSpacing: '.05em', textTransform: 'uppercase', color: C.accent, background: 'rgba(4, 120, 87,0.08)', border: '1px solid rgba(4, 120, 87,0.25)', borderRadius: '999px', padding: '.2rem .65rem' } }, s.tag),
         React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.65, color: C.text, margin: 0 } }, s.body)
       );
     })
@@ -1412,7 +1412,7 @@ function HowIWorkPage() {
 
     React.createElement('section', { style: block },
       kicker('What it costs'),
-      React.createElement('div', { className: 'hv-card', style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(5,150,105,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
+      React.createElement('div', { className: 'hv-card', style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(4, 120, 87,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
         "I keep the number of clients small, so I can go deep with each one. I'll give you the specifics on the fit call. What I'll say here is this is ",
         React.createElement('span', { style: { fontWeight: 700 } }, 'premium, ongoing, and priced as a monthly engagement'),
         ", not by the hour."
@@ -1426,7 +1426,7 @@ function HowIWorkPage() {
         notLine("Not coaching with a framework, though it has coaching in it."),
         notLine("Not a course, not a program, not a plan I hand you and disappear.")
       ),
-      React.createElement('div', { className: 'hv-card', style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(5,150,105,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
+      React.createElement('div', { className: 'hv-card', style: { border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: '10px', background: 'rgba(4, 120, 87,0.04)', padding: mob ? '1.15rem' : '1.35rem 1.5rem', fontSize: '16px', lineHeight: 1.7, color: C.text } },
         "It's a trusted advisory relationship with someone who's sat where you're sitting, cares how this goes, won't reject you for anything you say, and will still tell you the hard thing to your face."
       ),
       React.createElement('div', { style: { marginTop: '1.6rem' } },
@@ -1566,7 +1566,7 @@ function ExecTherapyPage() {
 
     React.createElement(Testimonials, { mob, items: [{q: "One of the most useful things is that Aggelos actually understands the environment I work in. I don’t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than “follow your values.” He understands the game, but he also notices what the game is doing to me.", w: "Anonymous client, Senior operator"}, {q: "Aggelos is direct. He will tell me when I am avoiding something or constructing a very intelligent explanation for why I cannot act. But I have never experienced his directness as judgement. There is enough trust between us that he can challenge me properly, which is exactly what I needed.", w: "Anonymous client, Senior tech professional"}, {q: "I came in expecting a fairly standard coaching conversation. Within the first session, Aggelos understood both the professional problem and the emotional mechanism underneath it. He was warm, but very straightforward, and gave me a way of looking at the situation that I had not considered before. I left with more than advice. I left with a more accurate problem.", w: "Anonymous client, Senior professional"}] }),
     React.createElement(RelatedLinks, { mob, items: [
-      { href: '/1-to-1/', label: 'Work with me, 1:1 →' },
+      { href: '/', label: 'Work with me, 1:1 →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
       { href: '/imposter-syndrome-therapy/', label: 'Imposter syndrome →' },
     ] })
@@ -1623,8 +1623,8 @@ function FoundersTherapyPage() {
 
     React.createElement(Testimonials, { mob, items: [{q: "I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don’t have to translate one world into the other for him.", w: "Anonymous client, Founder"}, {q: "There are no motivational speeches or generic frameworks pasted onto every situation. Aggelos pays attention to how I specifically operate. He remembers the contradictions, notices when I change the story and asks the question I was hoping we could avoid. Annoying at times, but usually accurate.", w: "Anonymous client, Founder"}, {q: "I did not want somebody to tell me to work less, lower my standards or become less ambitious. Aggelos understood that immediately. Our work has been about keeping the part of me that wants to build and achieve, while becoming less dependent on winning, comparison and external approval to feel okay. That distinction has been very important to me.", w: "Anonymous client, Founder and executive"}] }),
     React.createElement(RelatedLinks, { mob, items: [
-      { href: '/1-to-1/', label: 'Work with me, 1:1 →' },
-      { href: '/founders/', label: 'Founder advisory →' },
+      { href: '/', label: 'Work with me, 1:1 →' },
+      { href: '/psychotherapy-decision-coaching/', label: 'Founder advisory →' },
       { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
     ] })
   );
@@ -1688,7 +1688,7 @@ function ImposterPage() {
 
     React.createElement(Testimonials, { mob, items: [{q: "From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.", w: "Anonymous client, Tech executive"}, {q: "I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.", w: "Anonymous client, Product leader"}, {q: "I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.", w: "Anonymous client, Technology executive"}] }),
     React.createElement(RelatedLinks, { mob, items: [
-      { href: '/1-to-1/', label: 'Work with me, 1:1 →' },
+      { href: '/', label: 'Work with me, 1:1 →' },
       { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
     ] })
@@ -1749,7 +1749,7 @@ function BurnoutPage() {
 
     React.createElement(Testimonials, { mob, items: [{q: "Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.", w: "Anonymous client, Consultant and business owner"}, {q: "I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.", w: "Anonymous client, Technology leader"}, {q: "The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.", w: "Anonymous client, Senior tech professional"}] }),
     React.createElement(RelatedLinks, { mob, items: [
-      { href: '/1-to-1/', label: 'Work with me, 1:1 →' },
+      { href: '/', label: 'Work with me, 1:1 →' },
       { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
       { href: '/career-transition-therapy/', label: 'Career transition →' },
     ] })
@@ -1814,7 +1814,7 @@ function CareerTransitionPage() {
 
     React.createElement(Testimonials, { mob, items: [{q: "We have been working together for a while now, and the sessions have gradually changed the way I make decisions. Aggelos doesn’t tell me what to do or try to make me dependent on his opinion. He helps me separate the real problem from the fear, ego and old patterns wrapped around it. I usually leave with less noise and a much clearer sense of what is mine to do.", w: "Anonymous client, Founder"}, {q: "I had been forcing a business situation to continue because stopping it felt like failure. After one of our exercises, I realised I was trying to manufacture reasons to keep going when I already knew the answer. I had the difficult conversation shortly afterwards. It was not that Aggelos gave me the decision. He helped me stop fighting what I already knew.", w: "Anonymous client, Business owner"}, {q: "I was initially sceptical about somatic and trauma-informed work because I assumed it would be vague or a bit spiritual. It wasn’t. Aggelos explained what we were doing, paid attention to my limits and connected the experience back to patterns I could recognise in my work and relationships. It felt grounded, careful and surprisingly practical.", w: "Anonymous client"}] }),
     React.createElement(RelatedLinks, { mob, items: [
-      { href: '/1-to-1/', label: 'Work with me, 1:1 →' },
+      { href: '/', label: 'Work with me, 1:1 →' },
       { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
     ] })
@@ -1847,11 +1847,11 @@ function LondonPage() {
     ),
 
     React.createElement(SvcSection, { title: 'And I understand the industry' },
-      React.createElement(SvcP, null, "You also don't have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), ", so runway, reorgs, shipping and the pressure of a senior role are things I already follow. It's the same reason my ", React.createElement(IA, { href: '/1-to-1/' }, 'founder'), " and ", React.createElement(IA, { href: '/1-to-1/' }, 'freelancer'), " clients come to me.")
+      React.createElement(SvcP, null, "You also don't have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), ", so runway, reorgs, shipping and the pressure of a senior role are things I already follow. It's the same reason my ", React.createElement(IA, { href: '/' }, 'founder'), " and ", React.createElement(IA, { href: '/' }, 'freelancer'), " clients come to me.")
     ),
 
     React.createElement(SvcSection, { title: 'The work itself is the same' },
-      React.createElement(SvcP, null, "Nothing about the work changes because you're in London or because we speak Greek. It's the same private, one-to-one work I do with everyone, the personal pattern and the real decision in front of you, worked at the same time. How it runs, step by step, is on ", React.createElement(IA, { href: '/1-to-1/' }, 'how I work'), ".")
+      React.createElement(SvcP, null, "Nothing about the work changes because you're in London or because we speak Greek. It's the same private, one-to-one work I do with everyone, the personal pattern and the real decision in front of you, worked at the same time. How it runs, step by step, is on ", React.createElement(IA, { href: '/' }, 'how I work'), ".")
     ),
 
     React.createElement(SvcSection, { title: 'Online sessions' },
@@ -1899,11 +1899,11 @@ function ManchesterPage() {
     ),
 
     React.createElement(SvcSection, { title: 'And I understand the industry' },
-      React.createElement(SvcP, null, "You also don't have to explain the work: the pipeline that's gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), " before training as a psychotherapist, and I've done the job-to-independent route myself. It's the same reason my ", React.createElement(IA, { href: '/1-to-1/' }, 'freelancer'), " and ", React.createElement(IA, { href: '/1-to-1/' }, 'founder'), " clients come to me.")
+      React.createElement(SvcP, null, "You also don't have to explain the work: the pipeline that's gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, 'advised more than 500 companies'), " before training as a psychotherapist, and I've done the job-to-independent route myself. It's the same reason my ", React.createElement(IA, { href: '/' }, 'freelancer'), " and ", React.createElement(IA, { href: '/' }, 'founder'), " clients come to me.")
     ),
 
     React.createElement(SvcSection, { title: 'The work itself is the same' },
-      React.createElement(SvcP, null, "It's the same private, one-to-one work I do with everyone, working the personal pattern and the practical decision together. If you work for yourself, that includes the business side (pricing, positioning, the outreach you keep putting off) alongside the pattern underneath it. The full shape of it is on ", React.createElement(IA, { href: '/1-to-1/' }, 'how I work'), ".")
+      React.createElement(SvcP, null, "It's the same private, one-to-one work I do with everyone, working the personal pattern and the practical decision together. If you work for yourself, that includes the business side (pricing, positioning, the outreach you keep putting off) alongside the pattern underneath it. The full shape of it is on ", React.createElement(IA, { href: '/' }, 'how I work'), ".")
     ),
 
     React.createElement(SvcSection, { title: 'Online sessions' },
@@ -1951,11 +1951,11 @@ function NewYorkPage() {
     ),
 
     React.createElement(SvcSection, { title: 'And I understand the industry' },
-      React.createElement(SvcP, null, "You also don't have to explain equity, runway, a reorg, or why “just be confident” is useless advice. 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, '500+ companies advised'), " before I trained as a psychotherapist. It's the same reason my ", React.createElement(IA, { href: '/1-to-1/' }, 'founder'), " and senior ", React.createElement(IA, { href: '/1-to-1/' }, 'executive'), " clients come to me.")
+      React.createElement(SvcP, null, "You also don't have to explain equity, runway, a reorg, or why “just be confident” is useless advice. 18+ years in product and growth and ", React.createElement(A, { href: 'https://headofgrowth.io' }, '500+ companies advised'), " before I trained as a psychotherapist. It's the same reason my ", React.createElement(IA, { href: '/' }, 'founder'), " and senior ", React.createElement(IA, { href: '/' }, 'executive'), " clients come to me.")
     ),
 
     React.createElement(SvcSection, { title: 'The work itself is the same' },
-      React.createElement(SvcP, null, "Nothing about the work changes because you're in New York. It's the same one-to-one work I do with everyone, holding the personal pattern and the real situation at work in the same room. The steps are laid out on ", React.createElement(IA, { href: '/1-to-1/' }, 'how I work'), ".")
+      React.createElement(SvcP, null, "Nothing about the work changes because you're in New York. It's the same one-to-one work I do with everyone, holding the personal pattern and the real situation at work in the same room. The steps are laid out on ", React.createElement(IA, { href: '/' }, 'how I work'), ".")
     ),
 
     React.createElement(SvcSection, { title: 'Online, across the time difference' },
@@ -2007,7 +2007,7 @@ function DublinPage() {
     ),
 
     React.createElement(SvcSection, { title: 'The work itself is the same' },
-      React.createElement(SvcP, null, "It's the same private, one-to-one work I do with everyone, the personal pattern and the real decision together, whether that's the job, the move, or whether to stay at all. How the work runs is on ", React.createElement(IA, { href: '/1-to-1/' }, 'how I work'), ".")
+      React.createElement(SvcP, null, "It's the same private, one-to-one work I do with everyone, the personal pattern and the real decision together, whether that's the job, the move, or whether to stay at all. How the work runs is on ", React.createElement(IA, { href: '/' }, 'how I work'), ".")
     ),
 
     React.createElement(SvcSection, { title: 'Online sessions' },

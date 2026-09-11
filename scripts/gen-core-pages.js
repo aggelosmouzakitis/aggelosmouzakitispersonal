@@ -17,16 +17,16 @@ const CSS = `
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-heading: "Inter Tight", "Inter", system-ui, sans-serif;
   --font-display: "Archivo Black", "Inter Tight", "Inter", system-ui, sans-serif;
-  --brand-green: #059669;
+  --brand-green: #047857;
 }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { background: #1A1C1D; color: #FFFFFF; font-family: var(--font-body); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 #root { display: block; }
 a { color: inherit; text-decoration: none; }
-::selection { background: #059669; color: #FFFFFF; }
+::selection { background: #047857; color: #FFFFFF; }
 img { max-width: 100%; }
-a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #059669; outline-offset: 2px; border-radius: 2px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #047857; outline-offset: 2px; border-radius: 2px; }
 @media (prefers-reduced-motion: reduce){ *{transition-duration:.001ms!important;animation-duration:.001ms!important} }
 @media print { .site-hdr, .site-ftr, .cta-strip { display: none !important; } }
 `;

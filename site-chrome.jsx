@@ -4,10 +4,10 @@
 //   SITE, CHROME_PATHS, EXTERNAL, cPath, cT, BrandIcon, ChromeStyles,
 //   SiteHeader, SiteFooterX, BlackCtaStrip, UniversalContentLayout, LegacyShell
 //
-// One green across the whole site: #059669.
+// One green across the whole site: #047857.
 
 const SITE = {
-  green: '#059669',
+  green: '#047857',
   ink: '#1A1C1D',
   ink2: '#282726',
   heroInk: '#111315',
@@ -180,7 +180,7 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 
 .site-ftr{border-top:2px solid ${SITE.green};padding-block:64px 32px;background:${SITE.ink}}
 .site-ftr__cols{display:grid;grid-template-columns:minmax(280px,1.4fr) repeat(3,minmax(130px,0.55fr));gap:48px;align-items:start}
-.site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:${SITE.green};margin-bottom:20px}
+.site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#10B981;margin-bottom:20px}
 .site-ftr nav a{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.4;margin-bottom:12px;transition:color .18s}
 .site-ftr nav a:hover{color:${SITE.onDark}}
 .site-ftr__roles{margin-top:20px;font-size:15px;line-height:1.4;color:${SITE.onDark}}
