@@ -95,11 +95,16 @@ function StartHereStyles() {
     '.sh-instr{font-size:16px;line-height:1.55;color:#282726;margin:0 0 30px}',
     // card grid
     '.sh-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}',
-    '.sh-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:158px;text-align:left;background:#FFFFFF;border:1.5px solid rgba(24,26,28,.22);border-radius:8px;padding:26px 30px 28px;cursor:pointer;font-family:inherit;color:#181A1C;transition:border-color .15s,box-shadow .15s,transform .15s}',
-    '.sh-card:hover{border-color:rgba(24,26,28,.5)}',
+    // Hard-shadow button: a green offset shadow sits under every card at rest (so
+    // they read as raised, not flat); hover lifts it further; selecting presses the
+    // card down into the shadow (translate by the shadow offset, shadow collapses).
+    '.sh-card{position:relative;display:flex;flex-direction:column;min-height:176px;text-align:left;background:#FFFFFF;border:1.5px solid rgba(24,26,28,.16);border-radius:8px;padding:24px 28px 26px;cursor:pointer;font-family:inherit;color:#181A1C;box-shadow:5px 5px 0 rgba(4,120,87,.18);transition:transform .13s ease,box-shadow .13s ease,border-color .13s ease}',
+    '.sh-card:hover{border-color:rgba(24,26,28,.30);transform:translate(-2px,-2px);box-shadow:7px 7px 0 rgba(4,120,87,.26)}',
     '.sh-card:focus-visible{outline:2px solid #047857;outline-offset:3px}',
-    '.sh-card.is-sel{border-color:#047857;box-shadow:6px 6px 0 rgba(4, 120, 87,.20);transform:translate(-1px,-1px)}',
-    '.sh-card__top{display:flex;align-items:center;justify-content:space-between}',
+    '.sh-card.is-sel{border-color:#047857;transform:translate(5px,5px);box-shadow:0 0 0 rgba(4,120,87,0)}',
+    // Fixed gap under the number/arrow row → every card’s answer copy starts at
+    // the same height (was bottom-anchored, so line-count made them uneven).
+    '.sh-card__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:clamp(26px,3.2vw,40px)}',
     '.sh-card__num{font-family:var(--font-heading);font-size:17px;font-weight:800;letter-spacing:.02em;color:#181A1C;font-variant-numeric:tabular-nums}',
     '.sh-card.is-sel .sh-card__num{color:#047857}',
     '.sh-card__arrow{font-size:20px;line-height:1;color:#181A1C;transition:transform .15s,color .15s}',
@@ -107,7 +112,7 @@ function StartHereStyles() {
     '.sh-card.is-sel .sh-card__arrow{color:#047857}',
     '.sh-card__body{display:block}',
     '.sh-card__copy{font-size:clamp(20px,1.55vw,24px);line-height:1.28;font-weight:500;letter-spacing:-.01em;color:#181A1C}',
-    '.sh-card__kicker{display:block;margin-top:16px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#047857}',
+    '.sh-card__kicker{display:block;margin-top:auto;padding-top:18px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#047857}',
     // outcome
     '.sh-outcome{display:grid;grid-template-columns:7fr 5fr;gap:44px;align-items:start}',
     '.sh-outcome__lead{min-width:0}',
@@ -128,8 +133,8 @@ function StartHereStyles() {
     '.sh-quiet:focus-visible{outline:2px solid #047857;outline-offset:3px}',
     // responsive
     '@media (max-width:820px){.sh-outcome{grid-template-columns:1fr;gap:28px}}',
-    '@media (max-width:680px){.sh-grid{grid-template-columns:1fr;gap:16px}.sh-card{min-height:0;gap:22px;padding:24px 24px 26px}.sh-stage{min-height:0}}',
-    '@media (prefers-reduced-motion:reduce){.sh-card,.sh-card__arrow,.sh-btn,.sh-quiet{transition:none}.sh-card.is-sel{transform:none}}',
+    '@media (max-width:680px){.sh-grid{grid-template-columns:1fr;gap:18px}.sh-card{min-height:0;padding:22px 24px 24px}.sh-card__top{margin-bottom:22px}.sh-stage{min-height:0}}',
+    '@media (prefers-reduced-motion:reduce){.sh-card,.sh-card__arrow,.sh-btn,.sh-quiet{transition:none}.sh-card:hover,.sh-card.is-sel{transform:none}}',
   ].join('');
   return e('style', { dangerouslySetInnerHTML: { __html: css } });
 }
@@ -273,9 +278,9 @@ function StartHerePage() {
               e('span', { className: 'sh-card__arrow', 'aria-hidden': 'true' }, '→')
             ),
             e('div', { className: 'sh-card__body' },
-              e('span', { className: 'sh-card__copy' }, o.text),
-              o.kicker ? e('span', { className: 'sh-card__kicker' }, o.kicker) : null
-            )
+              e('span', { className: 'sh-card__copy' }, o.text)
+            ),
+            o.kicker ? e('span', { className: 'sh-card__kicker' }, o.kicker) : null
           );
         })
       ),
