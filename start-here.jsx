@@ -101,15 +101,20 @@ function StartHereStyles() {
     '.sh-card{position:relative;display:flex;flex-direction:column;min-height:176px;text-align:left;background:#FFFFFF;border:1.5px solid rgba(24,26,28,.16);border-radius:8px;padding:24px 28px 26px;cursor:pointer;font-family:inherit;color:#181A1C;box-shadow:5px 5px 0 rgba(4,120,87,.18);transition:transform .13s ease,box-shadow .13s ease,border-color .13s ease}',
     '.sh-card:hover{border-color:rgba(24,26,28,.30);transform:translate(-2px,-2px);box-shadow:7px 7px 0 rgba(4,120,87,.26)}',
     '.sh-card:focus-visible{outline:2px solid #047857;outline-offset:3px}',
-    '.sh-card.is-sel{border-color:#047857;transform:translate(5px,5px);box-shadow:0 0 0 rgba(4,120,87,0)}',
+    // Persistent "you chose this" state (restored on Back): green border + a
+    // stronger green shadow, still raised — NOT the pressed/flat look.
+    '.sh-card.is-sel{border-color:#047857;box-shadow:5px 5px 0 rgba(4,120,87,.34)}',
+    // Transient press (only the card being clicked, during the ~180ms advance):
+    // it drops into its shadow.
+    '.sh-card.is-pressing{border-color:#047857;transform:translate(5px,5px);box-shadow:0 0 0 rgba(4,120,87,0)}',
     // Fixed gap under the number/arrow row → every card’s answer copy starts at
     // the same height (was bottom-anchored, so line-count made them uneven).
     '.sh-card__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:clamp(26px,3.2vw,40px)}',
     '.sh-card__num{font-family:var(--font-heading);font-size:17px;font-weight:800;letter-spacing:.02em;color:#181A1C;font-variant-numeric:tabular-nums}',
-    '.sh-card.is-sel .sh-card__num{color:#047857}',
+    '.sh-card.is-sel .sh-card__num,.sh-card.is-pressing .sh-card__num{color:#047857}',
     '.sh-card__arrow{font-size:20px;line-height:1;color:#181A1C;transition:transform .15s,color .15s}',
     '.sh-card:hover .sh-card__arrow{transform:translateX(3px)}',
-    '.sh-card.is-sel .sh-card__arrow{color:#047857}',
+    '.sh-card.is-sel .sh-card__arrow,.sh-card.is-pressing .sh-card__arrow{color:#047857}',
     '.sh-card__body{display:block}',
     '.sh-card__copy{font-size:clamp(20px,1.55vw,24px);line-height:1.28;font-weight:500;letter-spacing:-.01em;color:#181A1C}',
     '.sh-card__kicker{display:block;margin-top:auto;padding-top:18px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#047857}',
@@ -134,7 +139,7 @@ function StartHereStyles() {
     // responsive
     '@media (max-width:820px){.sh-outcome{grid-template-columns:1fr;gap:28px}}',
     '@media (max-width:680px){.sh-grid{grid-template-columns:1fr;gap:18px}.sh-card{min-height:0;padding:22px 24px 24px}.sh-card__top{margin-bottom:22px}.sh-stage{min-height:0}}',
-    '@media (prefers-reduced-motion:reduce){.sh-card,.sh-card__arrow,.sh-btn,.sh-quiet{transition:none}.sh-card:hover,.sh-card.is-sel{transform:none}}',
+    '@media (prefers-reduced-motion:reduce){.sh-card,.sh-card__arrow,.sh-btn,.sh-quiet{transition:none}.sh-card:hover,.sh-card.is-pressing{transform:none}}',
   ].join('');
   return e('style', { dangerouslySetInnerHTML: { __html: css } });
 }
@@ -249,13 +254,10 @@ function StartHerePage() {
 
   var live = e('div', { ref: liveRef, 'aria-live': 'polite', role: 'status', style: { position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap' } });
 
-  function selectedIndex() {
-    if (pending !== null && pending !== undefined) return pending;
-    return st.screen === 'q1' ? st.firstAnswer : st.secondAnswer;
-  }
-
   function questionScreen(cfg, onSelect, isFirst) {
-    var sel = selectedIndex();
+    // committed = the answer stored for this screen (restored when you go Back).
+    // pending = the card mid-press right now (the transient click→advance state).
+    var committed = (cfg === Q1) ? st.firstAnswer : st.secondAnswer;
     return e('div', { className: 'sh-stage' },
       live,
       e('div', { className: 'sh-intro' },
@@ -265,12 +267,13 @@ function StartHerePage() {
       ),
       e('div', { className: 'sh-grid', role: 'group', 'aria-label': cfg.heading },
         cfg.options.map(function (o, i) {
-          var on = sel === i;
+          var pressing = pending === i;
+          var selected = (pending === null || pending === undefined) && committed === i;
           var num = ('0' + (i + 1)).slice(-2);
           return e('button', {
             key: i, type: 'button',
-            className: 'sh-card' + (on ? ' is-sel' : ''),
-            'aria-pressed': on ? 'true' : 'false',
+            className: 'sh-card' + (pressing ? ' is-pressing' : (selected ? ' is-sel' : '')),
+            'aria-pressed': (pressing || selected) ? 'true' : 'false',
             onClick: function () { onSelect(i); },
           },
             e('div', { className: 'sh-card__top' },
