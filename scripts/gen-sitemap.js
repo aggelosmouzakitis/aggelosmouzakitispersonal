@@ -70,6 +70,8 @@ for (const p of OFFERS) parts.push(plainUrl(O + p, '0.8'));
 // Orientation + contact entry points
 parts.push(plainUrl(O + '/start-here/', '0.8'));
 parts.push(plainUrl(O + '/contact/', '0.7'));
+// WTF Friday — free weekly office hours (English only; recurring → weekly)
+parts.push(plainUrl(O + '/wtf-friday/', '0.7', 'weekly'));
 // Blog index (single canonical, weekly)
 parts.push(plainUrl(O + BLOG_INDEX, '0.9', 'weekly'));
 // Retained SEO pages

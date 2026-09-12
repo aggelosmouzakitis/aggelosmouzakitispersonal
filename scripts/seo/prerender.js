@@ -19,6 +19,7 @@ const PAGES = [
   { f: 'psychotherapy-decision-coaching/index.html', faq: true },
   { f: 'start-here/index.html', faq: false },
   { f: 'contact/index.html', faq: false },
+  { f: 'wtf-friday/index.html', faq: false },
   // Core — Greek (/el/) — same indexable prerender path as English (brief §57)
   { f: 'el/index.html', faq: false },
   { f: 'el/about/index.html', faq: false },
