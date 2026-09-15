@@ -81,7 +81,8 @@ const CHROME_T = {
 const cT = (lang) => CHROME_T[lang] || CHROME_T.en;
 
 // ─── "Work with me" dropdown model (English site only) ───────────────────────
-// 1:1 pages are live and linked; group offers are placeholders (not linked).
+// 1:1 pages are live and linked. Under group work, WTF Friday is live (links to
+// its page); the remaining group offers are placeholders (not linked).
 const WORK_GROUPS = [
   { label: '1:1 private work', items: [
     { name: 'Psychotherapy / Decision Coaching', href: '/psychotherapy-decision-coaching/', id: 'psychotherapy-decision-coaching', desc: 'Think through the decision or pattern that keeps circling' },
@@ -89,7 +90,7 @@ const WORK_GROUPS = [
     { name: 'Solo Business Growth Consulting', href: '/solopreneur-growth-consulting/', id: 'solopreneur-growth-consulting', desc: 'Grow the business without grinding yourself down' },
   ] },
   { label: 'Group work', items: [
-    { name: 'Group Coaching', soon: true },
+    { name: 'WTF Friday', href: '/wtf-friday/', id: 'wtf-friday', desc: 'Free weekly office hours — bring a real problem, get a real answer' },
     { name: 'Terrible Advice Club', soon: true },
   ] },
 ];

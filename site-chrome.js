@@ -136,7 +136,8 @@ const CHROME_T = {
 const cT = lang => CHROME_T[lang] || CHROME_T.en;
 
 // ─── "Work with me" dropdown model (English site only) ───────────────────────
-// 1:1 pages are live and linked; group offers are placeholders (not linked).
+// 1:1 pages are live and linked. Under group work, WTF Friday is live (links to
+// its page); the remaining group offers are placeholders (not linked).
 const WORK_GROUPS = [{
   label: '1:1 private work',
   items: [{
@@ -158,8 +159,10 @@ const WORK_GROUPS = [{
 }, {
   label: 'Group work',
   items: [{
-    name: 'Group Coaching',
-    soon: true
+    name: 'WTF Friday',
+    href: '/wtf-friday/',
+    id: 'wtf-friday',
+    desc: 'Free weekly office hours — bring a real problem, get a real answer'
   }, {
     name: 'Terrible Advice Club',
     soon: true
