@@ -28,6 +28,11 @@ const HOME_V2 = {
   en: {
     eyebrow: 'BUSINESS & CAREER ADVISOR · BACP-REGISTERED PSYCHOTHERAPIST',
     titleL1: 'Scale the business.',
+    // First heading line with only the final word animated. "Scale the " and
+    // the trailing "." stay static; the word rotates business ⇄ career.
+    titleRotatePre: 'Scale the ',
+    titleRotateWords: ['business', 'career'],
+    titleRotatePost: '.',
     titleL2pre: 'Master ',
     titleHuman: 'the mind',
     titleL2post: '.',
@@ -230,6 +235,36 @@ html[lang="en"] .home-hero__title{font-size:clamp(48px,5.1vw,72px)}
 html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:${V2.display};font-weight:800;line-height:0.98;letter-spacing:-0.045em}
 .home-hero__title .human{position:relative;z-index:0;white-space:nowrap}
 .home-hero__title .human::after{content:"";position:absolute;z-index:-1;left:-0.03em;right:-0.03em;bottom:0.04em;height:0.14em;background:${V2.green}}
+/* ── Rotating hero word — "business" ⇄ "career" ──────────────────────────────
+   Only the final word of line 1 animates; "Scale the" and the trailing "."
+   (and "Master the mind.") stay put. A hidden, in-flow sizer reserves the
+   widest word's box so the baseline, line-height and width never change — the
+   swap causes no layout shift. Two visible copies are absolutely stacked in
+   that box and cross-fade with a subtle upward slide, looping indefinitely. */
+.home-hero__rotate{position:relative;display:inline-block;vertical-align:baseline;text-align:left}
+.home-hero__rotate-sizer{visibility:hidden}
+.home-hero__rotate-word{position:absolute;left:0;top:0;white-space:nowrap;will-change:transform,opacity}
+.home-hero__rotate-word--a{opacity:1;transform:translateY(0);animation:heroWordA 6s cubic-bezier(0.76,0,0.24,1) infinite}
+.home-hero__rotate-word--b{opacity:0;transform:translateY(0.36em);animation:heroWordB 6s cubic-bezier(0.76,0,0.24,1) infinite}
+.home-hero__rotate-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+@keyframes heroWordA{
+  0%,40%{opacity:1;transform:translateY(0)}
+  50%{opacity:0;transform:translateY(-0.36em)}
+  50.01%{opacity:0;transform:translateY(0.36em)}
+  90%{opacity:0;transform:translateY(0.36em)}
+  100%{opacity:1;transform:translateY(0)}
+}
+@keyframes heroWordB{
+  0%,40%{opacity:0;transform:translateY(0.36em)}
+  50%{opacity:1;transform:translateY(0)}
+  90%{opacity:1;transform:translateY(0)}
+  100%{opacity:0;transform:translateY(-0.36em)}
+}
+@media (prefers-reduced-motion:reduce){
+  .home-hero__rotate-word{animation:none}
+  .home-hero__rotate-word--a{opacity:1;transform:none}
+  .home-hero__rotate-word--b{opacity:0}
+}
 .home-hero__support{max-width:640px;margin:0 0 26px;color:${V2.heroInk};font-family:${V2.display};font-size:20px;font-weight:400;line-height:1.42}
 .home-hero__photo{position:relative;z-index:1;width:clamp(420px,34vw,500px);max-width:100%;aspect-ratio:1;justify-self:end}
 .home-hero__photo::before{content:"";position:absolute;inset:8% -3% -2% 9%;border-radius:50%;background:${V2.green}}
@@ -462,6 +497,26 @@ function HomePageV2({
 }) {
   const c = HOME_V2[lang] || HOME_V2.en;
   const t = window.cT(lang);
+  // Rotating hero word (en only). The hidden sizer reserves the widest word so
+  // the box, baseline and width never change — the swap causes no layout shift.
+  const rotWords = c.titleRotateWords || null;
+  const rotWide = rotWords ? rotWords.reduce((a, b) => b.length >= a.length ? b : a) : '';
+  const titleLine1 = rotWords ? React.createElement('span', {
+    className: 'home-hero__line'
+  }, c.titleRotatePre, React.createElement('span', {
+    className: 'home-hero__rotate',
+    'aria-hidden': 'true'
+  }, React.createElement('span', {
+    className: 'home-hero__rotate-sizer'
+  }, rotWide + c.titleRotatePost), React.createElement('span', {
+    className: 'home-hero__rotate-word home-hero__rotate-word--a'
+  }, rotWords[0] + c.titleRotatePost), React.createElement('span', {
+    className: 'home-hero__rotate-word home-hero__rotate-word--b'
+  }, rotWords[1] + c.titleRotatePost)), React.createElement('span', {
+    className: 'home-hero__rotate-sr'
+  }, rotWords[0] + c.titleRotatePost)) : React.createElement('span', {
+    className: 'home-hero__line'
+  }, c.titleL1);
   return React.createElement(React.Fragment, null, React.createElement(window.ChromeStyles), React.createElement(PageV2Styles), React.createElement(window.SiteHeader, {
     page: 'home',
     lang
@@ -477,9 +532,7 @@ function HomePageV2({
     className: 'home-hero__eyebrow'
   }, c.eyebrow), React.createElement('h1', {
     className: 'home-hero__title'
-  }, React.createElement('span', {
-    className: 'home-hero__line'
-  }, c.titleL1), React.createElement('span', {
+  }, titleLine1, React.createElement('span', {
     className: 'home-hero__line'
   }, c.titleL2pre, React.createElement('span', {
     className: 'human'
