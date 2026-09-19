@@ -17,6 +17,22 @@ const SecLabel = (num, desc) =>
     React.createElement('span', { className: 'sec-label__desc' }, desc)
   );
 
+// One credentials column for the About "Background" block: a green subsection
+// label over an editorial list. Each item is a bold primary line with an
+// optional quieter secondary line (institution or short descriptor).
+const CredColumn = (col) =>
+  React.createElement('div', { className: 'amx-cred-col' },
+    React.createElement('h3', { className: 'amx-cred-col__label' }, col.label),
+    React.createElement('ul', { className: 'amx-cred-list' },
+      col.items.map((it, i) =>
+        React.createElement('li', { className: 'amx-cred', key: i },
+          React.createElement('span', { className: 'amx-cred__title' }, it.t),
+          it.m ? React.createElement('span', { className: 'amx-cred__meta' }, it.m) : null
+        )
+      )
+    )
+  );
+
 // ─── Homepage copy — restored approved values (Homepage.dc.html mockup object).
 // The personal first-person intro is intentionally removed (offer-first hero).
 const HOME_V2 = {
@@ -134,6 +150,37 @@ const WHY_V2 = {
     h1: 'I spent most of my adult life in consulting, growth and startups before I trained as a psychotherapist.',
     deck: 'I spent seven years running a growth consultancy, worked with more than 100 technology companies, held corporate roles and built two startups that failed, so you will not have to explain how this world works to me.',
     fact: 'A founder or experienced professional does not have to explain how this world works to me.',
+    // Background / credentials — compact two-column proof that sits between the
+    // hero and the 01–04 narrative. Bold primary line + quieter secondary line.
+    background: {
+      label: 'BACKGROUND',
+      h: 'Business, behaviour and psychotherapy.',
+      colA: {
+        label: 'BUSINESS, PRODUCT & BEHAVIOUR',
+        items: [
+          { t: 'Growth Product Manager · IBM', m: 'Growth, PLG, product-led sales and GTM in enterprise SaaS' },
+          { t: '7+ years in growth and consulting' },
+          { t: 'Worked with 100+ technology companies' },
+          { t: 'Business Administration', m: 'University of Piraeus' },
+          { t: 'Designing AI Products', m: 'MIT' },
+          { t: 'Product Design', m: 'Ministry of Product' },
+          { t: 'UX Design', m: 'Google' },
+          { t: 'Jobs-to-be-Done & consumer psychology', m: 'Applied to SaaS product behaviour, adoption, purchasing decisions and growth' },
+          { t: 'Founder experience', m: 'Built two startups' },
+        ],
+      },
+      colB: {
+        label: 'PSYCHOLOGY & THERAPY',
+        items: [
+          { t: 'MSc Integrative Counselling & Psychotherapy', m: 'University of Derby' },
+          { t: 'Graduate studies in Psychology', m: 'The American College of Greece' },
+          { t: 'EMDR Practitioner' },
+          { t: 'Somatic Shaking Practitioner', m: 'Body-based work with stress, emotional regulation and trauma' },
+          { t: 'Clinical placement · Psychiatric Clinic', m: 'Metaxa Cancer Hospital' },
+          { t: 'BACP Registered' },
+        ],
+      },
+    },
     originNum: '01', originDesc: 'WHERE I STARTED',
     origin: [
       'I did not grow up around business or inherit money, a network or useful introductions. From a studio in Piraeus, I built a consultancy, worked with some of the world’s largest companies and was later paid to teach the work.',
@@ -438,6 +485,24 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .amx-story-copy .amx-body + .amx-body{margin-top:22px}
 .amx-reading-copy{max-width:750px;margin:28px 0 0}
 .amx-reading-copy .amx-body + .amx-body{margin-top:20px}
+/* BACKGROUND — compact two-column credentials block (EN About). Reuses the amx
+   type scale, Reviews' 2-col grid + hairline rule and the meta text colour, and
+   is deliberately denser than the 01–04 narrative sections: it is proof, not a
+   chapter. It sits on the same off-white as the hero, so its top padding is
+   trimmed and the clean break is the dark 01 section that follows. */
+.amx-cred-section{padding-block:clamp(30px, 3.6vw, 46px) clamp(60px, 7.8vw, 88px)}
+.amx-cred-head{max-width:750px;margin-bottom:clamp(30px, 4vw, 42px)}
+.amx-cred-head .amx-label + .amx-cred-h{margin-top:12px}
+.amx-cred-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(40px, 5.2vw, 72px);align-items:start}
+.amx-cred-col__label{margin:0 0 4px;color:var(--am-green);font:700 13px/1.3 var(--font-body);letter-spacing:0.09em;text-transform:uppercase}
+.amx-cred-list{list-style:none;margin:0;padding:0}
+.amx-cred{padding:14px 0}
+.amx-cred + .amx-cred{border-top:1px solid ${V2.rule}}
+.amx-cred__title{display:block;font:600 17px/1.32 var(--font-body);letter-spacing:-0.01em;color:var(--am-ink)}
+.amx-cred__meta{display:block;margin-top:3px;font:400 15px/1.45 var(--font-body);color:${V2.meta}}
+@media (max-width:800px){
+  .amx-cred-grid{grid-template-columns:1fr;row-gap:clamp(30px, 6vw, 40px)}
+}
 @media (max-width: 600px){
   .amx-page--about .amx-display{font-size:clamp(34px, 7vw, 42px);text-wrap:balance}
   html[lang="el"] .amx-page--about .amx-display{font-size:clamp(32px, 7vw, 42px)}
@@ -677,12 +742,26 @@ function AboutPageV2({ lang = 'en' }) {
         )
       ),
 
-      // Fact bar — green
-      React.createElement('section', { className: 'amx-green amx-fact-bar' },
-        React.createElement('div', { className: 'amx-container' },
-          React.createElement('p', { className: 'amx-body' }, c.fact)
-        )
-      ),
+      // Proof — Background / credentials (EN). Replaces the green fact bar,
+      // which is kept for locales without a `background` block (EL).
+      c.background
+        ? React.createElement('section', { className: 'amx-paper amx-cred-section' },
+            React.createElement('div', { className: 'amx-container' },
+              React.createElement('div', { className: 'amx-cred-head' },
+                React.createElement('p', { className: 'amx-label' }, c.background.label),
+                React.createElement('h2', { className: 'amx-subheading amx-cred-h' }, c.background.h)
+              ),
+              React.createElement('div', { className: 'amx-cred-grid' },
+                CredColumn(c.background.colA),
+                CredColumn(c.background.colB)
+              )
+            )
+          )
+        : React.createElement('section', { className: 'amx-green amx-fact-bar' },
+            React.createElement('div', { className: 'amx-container' },
+              React.createElement('p', { className: 'amx-body' }, c.fact)
+            )
+          ),
 
       // Origin — dark
       React.createElement('section', { className: 'amx-dark amx-section' },
