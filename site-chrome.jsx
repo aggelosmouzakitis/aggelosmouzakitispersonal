@@ -95,6 +95,19 @@ const WORK_GROUPS = [
   ] },
 ];
 
+// ─── "Clarity tools" dropdown model (English only) ───────────────────────────
+// Five self-scoring diagnostics. No landing page: the dropdown is the hub and
+// each link goes straight to that tool's starting screen. Titles are sentence
+// case; the only intentional all-caps nav label is "CLARITY TOOLS" (uppercased
+// by the nav CSS). Ids match the tool slugs and drive aria-current.
+const CLARITY_LINKS = [
+  { name: "What's limiting your business?", href: '/clarity-tools/business-constraint/', id: 'business-constraint', desc: 'Find the part of the business most likely restricting growth' },
+  { name: 'Is it a strategy or execution problem?', href: '/clarity-tools/strategy-or-execution/', id: 'strategy-or-execution', desc: 'Separate a weak plan from weak execution' },
+  { name: "What's making you want to quit your job?", href: '/clarity-tools/quit-your-job/', id: 'quit-your-job', desc: 'Break down what is actually driving the urge to leave' },
+  { name: 'Do you want to become a solopreneur?', href: '/clarity-tools/become-a-solopreneur/', id: 'become-a-solopreneur', desc: 'Test the pull toward working for yourself' },
+  { name: 'Are you burned out?', href: '/clarity-tools/burned-out/', id: 'burned-out', desc: 'Tell work depletion apart from boredom and loss of fit' },
+];
+
 // ─── Stylesheet ──────────────────────────────────────────────────────────────
 // The legacy page shell (scripts/gen-core-pages.js) still ships the sidebar-era
 // rules: html,body,#root{height:100%}, #root{display:flex}, #main-scroll{overflow-y:auto}
@@ -169,6 +182,18 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .site-hdr__mega-item--soon{cursor:default}
 .site-hdr__mega-item--soon .site-hdr__mega-name{color:${SITE.onDark};opacity:.7}
 .site-hdr__mega-soon{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${SITE.greyOnDark};border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 9px}
+
+/* ── "Clarity tools" dropdown (desktop) — single-column, anchored to its button ── */
+.site-hdr__clarity{position:relative;display:flex;align-items:center}
+.site-hdr__ddown{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(360px,calc(100vw - 32px));background:#1F2223;border:1px solid rgba(243,240,232,0.14);border-top:2px solid ${SITE.green};border-radius:0 0 16px 16px;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:14px;display:flex;flex-direction:column;gap:2px;z-index:200}
+.site-hdr__ddown-item{display:block;padding:10px 12px;border-radius:10px;transition:background .16s}
+a.site-hdr__ddown-item:hover{background:rgba(243,240,232,0.06)}
+/* Tool titles stay sentence case (nav <a> forces uppercase; reset it here — the
+   only intentional all-caps nav label is "CLARITY TOOLS" itself). */
+.site-hdr__ddown-name{display:block;font-family:${SITE.display};font-size:15.5px;font-weight:700;line-height:1.25;letter-spacing:-0.012em;text-transform:none;color:${SITE.paper}}
+a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
+.site-hdr__ddown-desc{display:block;margin-top:2px;font-size:12.5px;line-height:1.4;letter-spacing:normal;text-transform:none;color:${SITE.greyOnDark}}
+.site-hdr__ddown-item[aria-current] .site-hdr__ddown-name{color:${SITE.green}}
 
 /* ── "Work with me" section inside the mobile menu ── */
 .site-menu__label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${SITE.green};margin-top:8px}
@@ -321,14 +346,19 @@ function Wordmark({ lang }) {
 function SiteHeader({ page, lang = 'en' }) {
   const [open, setOpen] = React.useState(false);     // mobile burger menu
   const [work, setWork] = React.useState(false);     // desktop "Work with me" mega
+  const [clarity, setClarity] = React.useState(false); // desktop "Clarity tools" dropdown
   const workTimer = React.useRef(null);
+  const clarityTimer = React.useRef(null);
   const openWork = () => { if (workTimer.current) { clearTimeout(workTimer.current); workTimer.current = null; } setWork(true); };
   const closeWorkSoon = () => { if (workTimer.current) clearTimeout(workTimer.current); workTimer.current = setTimeout(() => setWork(false), 130); };
-  React.useEffect(() => () => { if (workTimer.current) clearTimeout(workTimer.current); }, []);
+  const openClarity = () => { if (clarityTimer.current) { clearTimeout(clarityTimer.current); clarityTimer.current = null; } setClarity(true); };
+  const closeClaritySoon = () => { if (clarityTimer.current) clearTimeout(clarityTimer.current); clarityTimer.current = setTimeout(() => setClarity(false), 130); };
+  React.useEffect(() => () => { if (workTimer.current) clearTimeout(workTimer.current); if (clarityTimer.current) clearTimeout(clarityTimer.current); }, []);
 
   const t = cT(lang);
   const other = lang === 'el' ? 'en' : 'el';
   const showWork = lang === 'en'; // offer pages + group work are English-only
+  const showClarity = lang === 'en'; // clarity tools are English-only
   const homeItem = { id: 'home', label: t.home };
   const restItems = [
     { id: 'about', label: t.why },
@@ -383,8 +413,35 @@ function SiteHeader({ page, lang = 'en' }) {
     }, WORK_GROUPS.map(megaCol))
   );
 
+  // Desktop dropdown ("Clarity tools") — single column, straight-to-tool links.
+  const clarityDropdown = React.createElement('div', {
+    key: 'clarity', className: 'site-hdr__clarity',
+    onMouseEnter: openClarity, onMouseLeave: closeClaritySoon,
+    onKeyDown: (ev) => { if (ev.key === 'Escape') setClarity(false); },
+  },
+    React.createElement('button', {
+      className: 'site-hdr__work-btn', type: 'button',
+      'aria-haspopup': 'true', 'aria-expanded': clarity ? 'true' : 'false',
+      onClick: () => setClarity((v) => !v),
+    },
+      React.createElement('span', null, 'Clarity tools'),
+      React.createElement('svg', { className: 'site-hdr__work-caret', viewBox: '0 0 10 6', 'aria-hidden': 'true' },
+        React.createElement('path', { d: 'M1 1l4 4 4-4', stroke: 'currentColor', strokeWidth: '1.6', fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round' }))
+    ),
+    clarity && React.createElement('div', {
+      className: 'site-hdr__ddown', role: 'menu',
+      onMouseEnter: openClarity, onMouseLeave: closeClaritySoon,
+    }, CLARITY_LINKS.map((it) => React.createElement('a', {
+      className: 'site-hdr__ddown-item', key: it.id, href: it.href, role: 'menuitem',
+      'aria-current': page === it.id ? 'page' : undefined, onClick: () => setClarity(false),
+    },
+      React.createElement('span', { className: 'site-hdr__ddown-name' }, it.name),
+      React.createElement('span', { className: 'site-hdr__ddown-desc' }, it.desc))))
+  );
+
   const navChildren = [link(homeItem)];
   if (showWork) navChildren.push(workDropdown);
+  if (showClarity) navChildren.push(clarityDropdown);
   restItems.forEach((it) => navChildren.push(link(it)));
 
   // Mobile "Work with me" section (rendered expanded inside the burger menu)
@@ -401,8 +458,18 @@ function SiteHeader({ page, lang = 'en' }) {
     ))
   ) : null;
 
+  // Mobile "Clarity tools" section (expanded list inside the burger menu)
+  const clarityMobile = showClarity ? React.createElement(React.Fragment, { key: 'clarity-m' },
+    React.createElement('div', { className: 'site-menu__label' }, 'Clarity tools'),
+    CLARITY_LINKS.map((it) => React.createElement('a', {
+      className: 'site-menu__sub', key: it.id, href: it.href,
+      'aria-current': page === it.id ? 'page' : undefined,
+    }, it.name))
+  ) : null;
+
   const menuChildren = [link(homeItem)];
   if (workMobile) menuChildren.push(workMobile);
+  if (clarityMobile) menuChildren.push(clarityMobile);
   restItems.forEach((it) => menuChildren.push(link(it)));
   if (SHOW_LANG_SWITCHER) menuChildren.push(React.createElement('a', { key: 'lang', href: langHref, hrefLang: other, style: { color: SITE.onDark } }, t.other));
   if (showCta) menuChildren.push(React.createElement('a', { key: 'cta', className: 'hdr-cta', href: ctaHref, ...ctaExt },

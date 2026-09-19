@@ -59,15 +59,17 @@
   status = 301
   force = true
 
-# ─── Burnout Diagnostic → Starting Diagnostic (replaced) ─────────────────────
+# ─── Burnout Diagnostic → Clarity Tools "Are you burned out?" ────────────────
+# The legacy burnout diagnostic's public URL now points at the new burnout tool
+# so existing links land on the actual burnout assessment (not the general one).
 [[redirects]]
   from = "/burnout-diagnostic"
-  to = "/startingdiagnostic/"
+  to = "/clarity-tools/burned-out/"
   status = 301
   force = true
 [[redirects]]
   from = "/burnout-diagnostic/*"
-  to = "/startingdiagnostic/"
+  to = "/clarity-tools/burned-out/"
   status = 301
   force = true
 [[redirects]]

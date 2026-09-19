@@ -154,6 +154,18 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 .site-hdr__mega-item--soon .site-hdr__mega-name{color:#C2C6CA;opacity:.7}
 .site-hdr__mega-soon{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9DA19E;border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 9px}
 
+/* ── "Clarity tools" dropdown (desktop) — single-column, anchored to its button ── */
+.site-hdr__clarity{position:relative;display:flex;align-items:center}
+.site-hdr__ddown{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(360px,calc(100vw - 32px));background:#1F2223;border:1px solid rgba(243,240,232,0.14);border-top:2px solid #047857;border-radius:0 0 16px 16px;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:14px;display:flex;flex-direction:column;gap:2px;z-index:200}
+.site-hdr__ddown-item{display:block;padding:10px 12px;border-radius:10px;transition:background .16s}
+a.site-hdr__ddown-item:hover{background:rgba(243,240,232,0.06)}
+/* Tool titles stay sentence case (nav <a> forces uppercase; reset it here — the
+   only intentional all-caps nav label is "CLARITY TOOLS" itself). */
+.site-hdr__ddown-name{display:block;font-family:var(--font-heading);font-size:15.5px;font-weight:700;line-height:1.25;letter-spacing:-0.012em;text-transform:none;color:#F3F0E8}
+a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
+.site-hdr__ddown-desc{display:block;margin-top:2px;font-size:12.5px;line-height:1.4;letter-spacing:normal;text-transform:none;color:#9DA19E}
+.site-hdr__ddown-item[aria-current] .site-hdr__ddown-name{color:#047857}
+
 /* ── "Work with me" section inside the mobile menu ── */
 .site-menu__label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#047857;margin-top:8px}
 .site-menu a.site-menu__sub{text-transform:none;letter-spacing:0;font-size:15px;min-height:40px;display:flex;align-items:center}
@@ -274,7 +286,7 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 }
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
-</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/">Home</a><div class="site-hdr__work"><button class="site-hdr__work-btn" type="button" aria-haspopup="true" aria-expanded="false"><span>Work with me</span><svg class="site-hdr__work-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div><a href="/about/">About me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="hdr-cta" href="/start-here/"><span>START HERE</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header></div>
+</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/">Home</a><div class="site-hdr__work"><button class="site-hdr__work-btn" type="button" aria-haspopup="true" aria-expanded="false"><span>Work with me</span><svg class="site-hdr__work-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div><div class="site-hdr__clarity"><button class="site-hdr__work-btn" type="button" aria-haspopup="true" aria-expanded="false"><span>Clarity tools</span><svg class="site-hdr__work-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div><a href="/about/">About me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="hdr-cta" href="/start-here/"><span>START HERE</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header></div>
   <div id="content-area">
     <div class="article-wrap">
       <a href="/blog/" class="top-back">← Writing</a>
@@ -403,7 +415,7 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 
-<script src="../../site-chrome.js?v=19"></script>
+<script src="../../site-chrome.js?v=20"></script>
 <script>
 const URL_MAP = {
   'home': '/',

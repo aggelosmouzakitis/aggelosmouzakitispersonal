@@ -31,6 +31,12 @@ const PAGES = [
   { f: 'ask-me-anything/el/index.html', faq: false },
   { f: 'startingdiagnostic/index.html', faq: false },
   { f: 'el/startingdiagnostic/index.html', faq: false },
+  // Clarity Tools — five self-scoring diagnostics (renderApp-free; mount ClarityTool)
+  { f: 'clarity-tools/business-constraint/index.html', faq: false },
+  { f: 'clarity-tools/strategy-or-execution/index.html', faq: false },
+  { f: 'clarity-tools/quit-your-job/index.html', faq: false },
+  { f: 'clarity-tools/become-a-solopreneur/index.html', faq: false },
+  { f: 'clarity-tools/burned-out/index.html', faq: false },
   { f: 'greek-speaking-therapist-london/index.html', faq: true },
   { f: 'greek-speaking-therapist-manchester/index.html', faq: true },
   { f: 'greek-speaking-therapist-new-york/index.html', faq: true },
