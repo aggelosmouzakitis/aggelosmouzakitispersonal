@@ -38,16 +38,11 @@ const CredColumn = (col) =>
 const HOME_V2 = {
   en: {
     eyebrow: 'BUSINESS & CAREER ADVISOR · BACP-REGISTERED PSYCHOTHERAPIST',
-    titleL1: 'Scale the business.',
-    // First heading line with only the final word animated. "Scale the " and
-    // the trailing "." stay static; the word rotates business ⇄ career.
-    titleRotatePre: 'Scale the ',
-    titleRotateWords: ['business', 'career'],
-    titleRotatePost: '.',
-    titleL2pre: 'Master ',
-    titleHuman: 'the mind',
-    titleL2post: '.',
-    support: 'Combining commercial strategy with psychological depth to help founders, freelancers and independent consultants build high-growth businesses without self-sabotage.',
+    titleL1: 'Practical help for your business, your career,',
+    titleL2pre: 'and ',
+    titleHuman: 'the person',
+    titleL2post: ' behind both.',
+    support: 'Business and career advice with the psychological depth to deal with what gets in the way.',
     pointEyebrow: 'BEFORE YOU SCROLL',
     pointH: 'Anyone can put “advisor” in their bio.',
     points: [
