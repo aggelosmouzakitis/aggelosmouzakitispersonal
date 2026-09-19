@@ -45,16 +45,11 @@ const CredColumn = col => React.createElement('div', {
 const HOME_V2 = {
   en: {
     eyebrow: 'BUSINESS & CAREER ADVISOR · BACP-REGISTERED PSYCHOTHERAPIST',
-    titleL1: 'Scale the business.',
-    // First heading line with only the final word animated. "Scale the " and
-    // the trailing "." stay static; the word rotates business ⇄ career.
-    titleRotatePre: 'Scale the ',
-    titleRotateWords: ['business', 'career'],
-    titleRotatePost: '.',
-    titleL2pre: 'Master ',
-    titleHuman: 'the mind',
-    titleL2post: '.',
-    support: 'Combining commercial strategy with psychological depth to help founders, freelancers and independent consultants build high-growth businesses without self-sabotage.',
+    titleL1: 'Practical help for your business, your career, and',
+    titleHuman: 'the person',
+    titleL2post: ' behind both.',
+    titleOneLine: true,
+    support: 'Business and career advice with the psychological depth to deal with what gets in the way.',
     pointEyebrow: 'BEFORE YOU SCROLL',
     pointH: 'Anyone can put “advisor” in their bio.',
     points: [{
@@ -299,12 +294,12 @@ const PAGE_V2_CSS = `
 
 /* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
 .home-hero{background:${V2.white};color:${V2.heroInk}}
-.home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(410px,0.86fr);align-items:center;gap:48px;padding-block:88px 112px}
-.home-hero__copy{position:relative;z-index:2;min-width:0;max-width:720px;color:${V2.heroInk}}
+.home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(380px,0.78fr);align-items:center;gap:48px;padding-block:88px 112px}
+.home-hero__copy{position:relative;z-index:2;min-width:0;max-width:820px;color:${V2.heroInk}}
 .home-hero__eyebrow{max-width:520px;color:${V2.green};font-family:${V2.display};font-size:13px;font-weight:700;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
-.home-hero__title{max-width:720px;margin:14px 0 22px;font-family:${V2.archivo};font-synthesis:none;font-weight:400;line-height:0.9;letter-spacing:-0.055em;color:${V2.heroInk}}
+.home-hero__title{max-width:none;margin:14px 0 22px;font-family:${V2.archivo};font-synthesis:none;font-weight:400;line-height:0.9;letter-spacing:-0.055em;color:${V2.heroInk}}
 .home-hero__title .home-hero__line{display:block}
-html[lang="en"] .home-hero__title{font-size:clamp(48px,5.1vw,72px)}
+html[lang="en"] .home-hero__title{font-size:clamp(46px,4.5vw,58px);text-wrap:balance}
 html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:${V2.display};font-weight:800;line-height:0.98;letter-spacing:-0.045em}
 .home-hero__title .human{position:relative;z-index:0;white-space:nowrap}
 .home-hero__title .human::after{content:"";position:absolute;z-index:-1;left:-0.03em;right:-0.03em;bottom:0.04em;height:0.14em;background:${V2.green}}
@@ -343,11 +338,12 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .home-hero__photo::before{content:"";position:absolute;inset:8% -3% -2% 9%;border-radius:50%;background:${V2.green}}
 .home-hero__frame{position:absolute;inset:0;overflow:hidden;border-radius:50%}
 .home-hero__frame img{width:100%;height:100%;object-fit:cover;object-position:56% 44%;transform:scale(1.58);filter:none}
-@media (max-width:959px) and (min-width:521px){
-  .home-hero__grid{grid-template-columns:minmax(0,1.08fr) minmax(280px,0.92fr);gap:24px;padding-inline:24px}
-  html[lang="en"] .home-hero__title{font-size:clamp(38px,5.0vw,48px)}
-  html[lang="el"] .home-hero__title{font-size:clamp(32px,4.2vw,40px)}
-  .home-hero__photo{width:min(100%,390px)}
+@media (max-width:1151px) and (min-width:521px){
+  .home-hero__grid{grid-template-columns:1fr;gap:30px;width:100%;max-width:none;padding:64px 40px 84px;min-height:0}
+  html[lang="en"] .home-hero__title{font-size:clamp(40px,6.0vw,54px);text-wrap:balance}
+  html[lang="el"] .home-hero__title{font-size:clamp(34px,4.6vw,44px);text-wrap:balance}
+  .home-hero__support{max-width:620px}
+  .home-hero__photo{width:min(58%,380px);justify-self:center}
 }
 @media (max-width:520px){
   .home-hero__grid{grid-template-columns:1fr;gap:34px;width:100%;max-width:none;padding:66px 20px 80px;min-height:0}
@@ -608,6 +604,19 @@ function HomePageV2({
   }, rotWords[0] + c.titleRotatePost)) : React.createElement('span', {
     className: 'home-hero__line'
   }, c.titleL1);
+  // EN positioning line flows as a single block (natural wrapping); other
+  // locales keep the static line 1 + emphasised line 2 structure.
+  const heroTitleChildren = c.titleOneLine ? [React.createElement('span', {
+    className: 'home-hero__line',
+    key: 'one'
+  }, c.titleL1 + ' ', React.createElement('span', {
+    className: 'human'
+  }, c.titleHuman), c.titleL2post)] : [titleLine1, React.createElement('span', {
+    className: 'home-hero__line',
+    key: 'two'
+  }, c.titleL2pre, React.createElement('span', {
+    className: 'human'
+  }, c.titleHuman), c.titleL2post)];
   return React.createElement(React.Fragment, null, React.createElement(window.ChromeStyles), React.createElement(PageV2Styles), React.createElement(window.SiteHeader, {
     page: 'home',
     lang
@@ -623,11 +632,7 @@ function HomePageV2({
     className: 'home-hero__eyebrow'
   }, c.eyebrow), React.createElement('h1', {
     className: 'home-hero__title'
-  }, titleLine1, React.createElement('span', {
-    className: 'home-hero__line'
-  }, c.titleL2pre, React.createElement('span', {
-    className: 'human'
-  }, c.titleHuman), c.titleL2post)), React.createElement('p', {
+  }, heroTitleChildren), React.createElement('p', {
     className: 'home-hero__support'
   }, c.support), React.createElement('a', {
     className: 'hero-cta',
