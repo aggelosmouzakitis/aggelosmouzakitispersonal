@@ -374,8 +374,10 @@ const SVC_CSS = `
 .u-shell:has(.svc-page) .u-shell__rail,.u-shell:has(.svc-page) .u-shell__gutter{display:none}
 .u-shell:has(.svc-page) .u-shell__body{grid-column:auto;width:100%;min-width:0}
 
-.svc-page{--svc-read:720px;color:#181A1C;font-family:var(--font-body)}
+.svc-page{--svc-read:720px;color:#181A1C;font-family:var(--font-body);counter-reset:svcsec}
 .svc-page *{box-sizing:border-box}
+.svc-section:has(.svc-h2){counter-increment:svcsec}
+.svc-page .svc-section>.svc-h2::before{content:counter(svcsec,decimal-leading-zero) " /";display:block;margin:0 0 14px;font-family:var(--font-display);font-size:clamp(19px,2.1vw,24px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#047857}
 .svc-page .svc-h1{max-width:980px;margin:0 0 22px;font-family:var(--font-display);font-synthesis:none;font-size:clamp(48px,4.7vw,64px);font-weight:400;line-height:0.98;letter-spacing:-0.045em;color:#1A1C1D;text-wrap:balance}
 html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:800}
 .svc-page .svc-lead{max-width:var(--svc-read);margin:0;font-family:var(--font-body);font-size:clamp(20px,1.65vw,23px);line-height:1.5;color:#282726}
@@ -395,11 +397,17 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 .svc-quote{margin:0 0 22px;padding:0 0 0 20px;border-left:3px solid rgba(4, 120, 87,0.4)}
 .svc-quote p{margin:0 0 8px;font-size:17px;line-height:1.6;color:#282726}
 .svc-quote cite{font-style:normal;font-size:13px;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:#767676}
-.svc-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 30px;background:#047857;color:#fff;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
-.svc-cta:hover{filter:brightness(0.92);gap:12px}
-.svc-cta--ghost{background:transparent;color:#1A1C1D;border:1.5px solid rgba(24,26,28,0.28)}
-.svc-cta--ghost:hover{border-color:#047857;color:#047857;filter:none}
+.svc-page a.svc-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 30px;background:#047857;color:#fff !important;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
+.svc-page a.svc-cta:hover{filter:brightness(0.92);gap:12px;color:#fff !important}
+.svc-page a.svc-cta--ghost{background:transparent;color:#1A1C1D !important;border:1.5px solid rgba(24,26,28,0.28)}
+.svc-page a.svc-cta--ghost:hover{border-color:#047857;color:#047857 !important;filter:none;background:transparent}
 .svc-ctarow{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+.svc-ctarow--hero{margin-top:30px}
+.svc-close{max-width:var(--svc-read);margin:76px 0 0;background:#1A1C1D;border-radius:22px;padding:clamp(30px,4vw,46px)}
+.svc-page .svc-close__h{margin:0;max-width:20ch;font-family:var(--font-display);font-synthesis:none;font-size:clamp(28px,3.1vw,38px);line-height:1.04;letter-spacing:-0.03em;font-weight:800;color:#FFFFFF}
+.svc-close__p{margin:16px 0 0;max-width:54ch;font-size:18px;line-height:1.6;color:#C2C6CA}
+.svc-page a.svc-close__cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:28px;min-height:56px;padding:0 30px;background:#047857;color:#fff !important;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
+.svc-page a.svc-close__cta:hover{filter:brightness(1.12);gap:12px;color:#fff !important}
 .svc-note{max-width:var(--svc-read);margin:16px 0 0;font-size:15px;line-height:1.6;color:#666}
 .svc-bullets{max-width:var(--svc-read);list-style:none;margin:4px 0 0;padding:0}
 .svc-bullets li{position:relative;padding:8px 0 8px 22px;font-size:18px;line-height:1.6;color:#282726;border-top:1px solid rgba(24,26,28,0.1)}
@@ -426,7 +434,8 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 }
 @media (max-width:420px){
   .svc-ctarow{flex-direction:column;align-items:stretch}
-  .svc-cta{white-space:normal;text-align:center;padding-inline:18px;line-height:1.25}
+  .svc-page a.svc-cta,.svc-page a.svc-close__cta{white-space:normal;text-align:center;padding-inline:18px;line-height:1.25}
+  .svc-close__cta{width:100%}
 }
 `;
 function SvcStyles() { return React.createElement('style', { dangerouslySetInnerHTML: { __html: SVC_CSS } }); }
@@ -445,6 +454,17 @@ function SvcCta({ href, children, ghost }) {
   return React.createElement('a', { href, className: 'cta-btn svc-cta' + (ghost ? ' svc-cta--ghost' : '') }, children);
 }
 function SvcNote({ children }) { return React.createElement('p', { className: 'svc-note' }, children); }
+function SvcEyebrow({ children }) { return React.createElement('p', { className: 'svc-eyebrow' }, children); }
+function SvcHeroCta() {
+  return React.createElement('div', { className: 'svc-ctarow svc-ctarow--hero' },
+    React.createElement(SvcCta, { href: '/start-here/' }, 'START HERE →'));
+}
+function SvcClosingCta({ title, body }) {
+  return React.createElement('section', { className: 'svc-close' },
+    React.createElement('h2', { className: 'svc-close__h' }, title),
+    body ? React.createElement('p', { className: 'svc-close__p' }, body) : null,
+    React.createElement('a', { href: '/start-here/', className: 'cta-btn svc-close__cta' }, 'START HERE →'));
+}
 function SvcFaq({ items }) {
   return React.createElement('div', { className: 'svc-faq' },
     items.map((it, i) => React.createElement('div', { key: i, className: 'svc-faq__item' },
@@ -1520,8 +1540,10 @@ function RelatedLinks({ mob, items, heading }) {
 function ExecTherapyPage() {
   const mob = useIsMobile();
   return React.createElement(SvcPage, null,
+    React.createElement(SvcEyebrow, null, 'Private 1:1 · Therapy for executives'),
     React.createElement(SvcH1, null, 'Therapy for executives who have done everything right and still feel like something is off'),
     React.createElement(SvcLead, null, "You're good at your job, and you know it. Somewhere along the way the cost of doing it well changed, and no amount of delegation, time off or strategy seems to touch it."),
+    React.createElement(SvcHeroCta),
 
     React.createElement(SvcSection, { title: 'The problem' },
       React.createElement(SvcP, null, "The work still gets done and the results are there, but something underneath has shifted. For some people it's the ", React.createElement(A, { href: 'https://www.undisguised.io/p/the-loneliness-and-emotional-pressure' }, 'isolation that comes with seniority'), ". For others, an identity that's become inseparable from output, so slowing down feels dangerous. Or the constant sense of being one mistake from losing everything you've built, even though the evidence says otherwise."),
@@ -1564,8 +1586,9 @@ function ExecTherapyPage() {
     ),
 
     React.createElement(Testimonials, { mob, items: [{q: "One of the most useful things is that Aggelos actually understands the environment I work in. I don’t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than “follow your values.” He understands the game, but he also notices what the game is doing to me.", w: "Anonymous client, Senior operator"}, {q: "Aggelos is direct. He will tell me when I am avoiding something or constructing a very intelligent explanation for why I cannot act. But I have never experienced his directness as judgement. There is enough trust between us that he can challenge me properly, which is exactly what I needed.", w: "Anonymous client, Senior tech professional"}, {q: "I came in expecting a fairly standard coaching conversation. Within the first session, Aggelos understood both the professional problem and the emotional mechanism underneath it. He was warm, but very straightforward, and gave me a way of looking at the situation that I had not considered before. I left with more than advice. I left with a more accurate problem.", w: "Anonymous client, Senior professional"}] }),
-    React.createElement(RelatedLinks, { mob, items: [
-      { href: '/', label: 'Work with me, 1:1 →' },
+    React.createElement(SvcClosingCta, { title: "Still feel like something's off?", body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call." }),
+    React.createElement(RelatedLinks, { mob, heading: 'Keep reading', items: [
+      { href: '/psychotherapy-decision-coaching/', label: '1:1 work with me →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
       { href: '/imposter-syndrome-therapy/', label: 'Imposter syndrome →' },
     ] })
@@ -1576,8 +1599,10 @@ function ExecTherapyPage() {
 function FoundersTherapyPage() {
   const mob = useIsMobile();
   return React.createElement(SvcPage, null,
+    React.createElement(SvcEyebrow, null, 'Private 1:1 · Therapy for founders'),
     React.createElement(SvcH1, null, 'Therapy for founders who have no one to be honest with about what this actually costs'),
     React.createElement(SvcLead, null, "A private, confidential therapeutic relationship for founders carrying the weight of the role, from someone who has sat on both sides of the table."),
+    React.createElement(SvcHeroCta),
 
     React.createElement(SvcSection, { title: 'The founder problem' },
       React.createElement(SvcP, null, "There's a ", React.createElement(A, { href: 'https://www.undisguised.io/p/the-loneliness-and-emotional-pressure' }, 'particular kind of isolation founders live with'), ", different from ordinary loneliness. You're surrounded by people who depend on you, and ", React.createElement(Strong, null, "precisely because they depend on you, none of them can be the person you're fully honest with"), " about what it costs to hold everything together."),
@@ -1621,9 +1646,11 @@ function FoundersTherapyPage() {
     ),
 
     React.createElement(Testimonials, { mob, items: [{q: "I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don’t have to translate one world into the other for him.", w: "Anonymous client, Founder"}, {q: "There are no motivational speeches or generic frameworks pasted onto every situation. Aggelos pays attention to how I specifically operate. He remembers the contradictions, notices when I change the story and asks the question I was hoping we could avoid. Annoying at times, but usually accurate.", w: "Anonymous client, Founder"}, {q: "I did not want somebody to tell me to work less, lower my standards or become less ambitious. Aggelos understood that immediately. Our work has been about keeping the part of me that wants to build and achieve, while becoming less dependent on winning, comparison and external approval to feel okay. That distinction has been very important to me.", w: "Anonymous client, Founder and executive"}] }),
-    React.createElement(RelatedLinks, { mob, items: [
-      { href: '/', label: 'Work with me, 1:1 →' },
-      { href: '/psychotherapy-decision-coaching/', label: 'Founder advisory →' },
+    React.createElement(SvcClosingCta, { title: "Carrying more than you can say out loud?", body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call." }),
+    React.createElement(RelatedLinks, { mob, heading: 'Keep reading', items: [
+      { href: '/psychotherapy-decision-coaching/', label: '1:1 work with me →' },
+      { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
+      { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
     ] })
   );
 }
@@ -1632,8 +1659,10 @@ function FoundersTherapyPage() {
 function ImposterPage() {
   const mob = useIsMobile();
   return React.createElement(SvcPage, null,
+    React.createElement(SvcEyebrow, null, 'Private 1:1 · Imposter syndrome therapy'),
     React.createElement(SvcH1, null, 'You can see the evidence that you’re good at this. You just can’t feel it.'),
     React.createElement(SvcLead, null, "Imposter syndrome therapy for senior professionals who have every proof of competence and still feel like a fraud."),
+    React.createElement(SvcHeroCta),
 
     React.createElement(SvcSection, { title: 'The pattern' },
       React.createElement(SvcP, null, "The promotions confirm it. The salary confirms it. You're not unaware of the evidence, but ", React.createElement(Strong, null, "there's a gap between knowing you're competent and feeling it"), ", and that gap fills with constant proof-seeking: another win, another round of validation that settles things for a day or two before the doubt comes back."),
@@ -1685,9 +1714,11 @@ function ImposterPage() {
     ),
 
     React.createElement(Testimonials, { mob, items: [{q: "From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.", w: "Anonymous client, Tech executive"}, {q: "I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.", w: "Anonymous client, Product leader"}, {q: "I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.", w: "Anonymous client, Technology executive"}] }),
-    React.createElement(RelatedLinks, { mob, items: [
-      { href: '/', label: 'Work with me, 1:1 →' },
+    React.createElement(SvcClosingCta, { title: "Know you're good and still can't feel it?", body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call." }),
+    React.createElement(RelatedLinks, { mob, heading: 'Keep reading', items: [
+      { href: '/psychotherapy-decision-coaching/', label: '1:1 work with me →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
+      { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
     ] })
   );
 }
@@ -1696,8 +1727,10 @@ function ImposterPage() {
 function BurnoutPage() {
   const mob = useIsMobile();
   return React.createElement(SvcPage, null,
+    React.createElement(SvcEyebrow, null, 'Private 1:1 · Executive burnout therapy'),
     React.createElement(SvcH1, null, 'You took the vacation. You came back feeling the same way. The problem probably isn’t the workload.'),
     React.createElement(SvcLead, null, "Executive burnout therapy for leaders who rested, came back the same, and suspect the hours were never the real problem."),
+    React.createElement(SvcHeroCta),
 
     React.createElement(SvcSection, { title: 'Executive burnout' },
       React.createElement(SvcP, null, "The usual advice is to rest more, delegate more, set better boundaries. You've probably tried most of it, maybe even taken real time off. Within a couple of weeks of returning, ", React.createElement(Strong, null, "the same weight came back"), ", as if it had been waiting for you."),
@@ -1745,8 +1778,9 @@ function BurnoutPage() {
     ),
 
     React.createElement(Testimonials, { mob, items: [{q: "Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.", w: "Anonymous client, Consultant and business owner"}, {q: "I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.", w: "Anonymous client, Technology leader"}, {q: "The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.", w: "Anonymous client, Senior tech professional"}] }),
-    React.createElement(RelatedLinks, { mob, items: [
-      { href: '/', label: 'Work with me, 1:1 →' },
+    React.createElement(SvcClosingCta, { title: "Rested, and came back the same?", body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call." }),
+    React.createElement(RelatedLinks, { mob, heading: 'Keep reading', items: [
+      { href: '/psychotherapy-decision-coaching/', label: '1:1 work with me →' },
       { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
       { href: '/imposter-syndrome-therapy/', label: 'Imposter syndrome →' },
     ] })
