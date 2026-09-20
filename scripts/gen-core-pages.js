@@ -8,8 +8,8 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const ORIGIN = 'https://aggelosmouzakitis.com';
 const GA = 'G-KV83RRF6ZM';
-const SIDEBAR_V = 32, CONTENT_V = 36;
-const CHROME_V = 10, V2_V = 12;
+const SIDEBAR_V = 60, CONTENT_V = 60;
+const CHROME_V = 60, V2_V = 60;
 
 // Shared CSS (from the original index.html — design system preserved 1:1)
 const CSS = `
