@@ -49,7 +49,7 @@ const HOME_V2 = {
     titleHuman: 'the person',
     titleL2post: ' behind both.',
     titleOneLine: true,
-    support: 'Business and career advice with the psychological depth to deal with what gets in the way.',
+    support: "Strategy is the easy half. I work on the decisions you keep not making, and the reasons you don't.",
     pointEyebrow: 'BEFORE YOU SCROLL',
     pointH: 'Anyone can put “advisor” in their bio.',
     points: [{
@@ -175,15 +175,18 @@ const HOME_V2 = {
 // clarity-tool routes are the canonical ones already implemented in the site.
 const HOME_OFFERS = [{
   name: 'Psychotherapy / decision coaching',
-  desc: 'Think through the decision or pattern that keeps circling.',
+  kicker: '1:1 private work',
+  desc: "For the decision you've already made three times and still haven't acted on.",
   href: '/psychotherapy-decision-coaching/'
 }, {
   name: 'Career strategy consulting',
-  desc: 'Build a paid offer while you keep your job.',
+  kicker: '1:1 private work',
+  desc: 'Build the thing people pay for before you hand in your notice.',
   href: '/career-strategy-consulting/'
 }, {
   name: 'Solo business growth consulting',
-  desc: 'Grow the business without grinding yourself down.',
+  kicker: '1:1 private work',
+  desc: 'For when the business only grows as far as your own stamina goes.',
   href: '/solopreneur-growth-consulting/'
 }];
 const HOME_TOOLS = [{
@@ -506,63 +509,59 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
   .cont,.opinion__body,.media__cell{padding-inline:clamp(24px,5vw,32px)}
 }
 
-/* ── 02 / Work with me — white inset card on the dark home band ── */
-.home-work{background:${V2.white};border-radius:12px;padding:clamp(40px,5vw,72px) clamp(28px,5vw,72px) clamp(44px,5.4vw,78px)}
-.home-flow .home-work .sec-label__desc{color:#047857}
-.home-work__h{margin:24px 0 clamp(38px,5vw,56px);max-width:20ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(34px,4.6vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:${V2.ink};text-wrap:pretty}
-.home-work__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(30px,3.4vw,48px)}
+/* ── Hero CTA row — green button + quiet "Who I am" link ── */
+.home-hero__ctarow{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
+.home-hero__who{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:${V2.ink2};border-bottom:2px solid rgba(24,26,28,0.22);padding-bottom:3px;transition:color .18s,border-color .18s}
+.home-hero__who:hover{color:${V2.green};border-bottom-color:${V2.green}}
+
+/* ── Proof strip — beige band of credentials under the hero ── */
+.home-proof{background:${V2.paper};border-block:1px solid rgba(24,26,28,0.14)}
+.home-proof__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px 40px;padding-block:24px}
+.home-proof__item{margin:0;font-size:15px;line-height:1.4;color:${V2.ink2}}
+.home-proof__item strong{font-weight:600;color:#171919}
+
+/* ── 01 / Work with me — white section, three offers on hairlines ── */
+.home-work{background:${V2.white};padding-block:clamp(64px,8vw,104px)}
+.home-work__h{max-width:18ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(34px,4.3vw,56px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:#181a1c;text-wrap:balance}
+.home-work__grid{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:clamp(28px,3.4vw,48px)}
 .home-work__item{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding-top:24px;border-top:2px solid rgba(24,26,28,0.18);color:${V2.ink};transition:color .18s,border-color .18s}
 .home-work__item:hover{color:${V2.green};border-top-color:${V2.green}}
+.home-work__kicker{font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:${V2.green}}
 .home-work__name{font-family:${V2.display};font-synthesis:none;font-size:clamp(24px,2.2vw,29px);font-weight:750;line-height:1.1;letter-spacing:-0.032em;color:inherit;text-wrap:pretty}
 .home-work__desc{max-width:30ch;font-size:17px;line-height:1.55;color:${V2.ink2};text-wrap:pretty}
-.home-work__go{margin-top:12px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:0.06em;color:${V2.green}}
-@media (max-width:760px){.home-work__grid{grid-template-columns:1fr;gap:28px}}
+.home-work__go{margin-top:6px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:0.06em;color:${V2.green}}
 
-/* ── 05 / Start here for free — stays on the dark band, no card ── */
-.home-start__h{margin:0 0 clamp(36px,4.6vw,52px);max-width:26ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,3.6vw,44px);font-weight:800;line-height:1.04;letter-spacing:-0.042em;color:${V2.white};text-wrap:balance}
-.home-start__grid{display:grid;grid-template-columns:1.32fr 1fr 1fr;gap:clamp(30px,3.2vw,48px)}
-.home-start__col{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding-top:24px;border-top:2px solid rgba(255,255,255,0.18)}
-a.home-start__col{color:${V2.white};transition:color .18s,border-color .18s}
-a.home-start__col:hover{color:#10B981;border-top-color:#10B981}
-.home-start__col--clarity{border-top-color:#10B981}
-.home-start__titlerow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.home-start__name{font-family:${V2.display};font-synthesis:none;font-size:clamp(24px,2.2vw,29px);font-weight:750;line-height:1.1;letter-spacing:-0.032em;color:inherit}
-.home-start__badge{font-size:11.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#10B981}
-.home-start__desc{max-width:36ch;font-size:17px;line-height:1.55;color:${V2.onDark};text-wrap:pretty}
-.home-start__go{margin-top:12px;display:inline-flex;align-items:center;gap:8px;min-height:24px;font-size:14px;font-weight:700;letter-spacing:0.06em;color:#10B981}
-.home-clarity__btn{margin-top:10px;display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0;background:none;border:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0.06em;color:#10B981}
+/* ── 02 / Start here for free — dark section, in-page Clarity disclosure ── */
+.home-free{background:${V2.ink};color:${V2.white};padding-block:clamp(64px,8vw,104px)}
+.home-free .sec-label__num,.home-free .sec-label__desc{color:#10B981}
+.home-free__h{max-width:22ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,3.7vw,46px);font-weight:800;line-height:1.04;letter-spacing:-0.042em;color:${V2.white};text-wrap:balance}
+.home-free__grid{margin-top:clamp(40px,5vw,60px);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(28px,3.2vw,48px)}
+.home-free__col{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding-top:24px;border-top:2px solid rgba(255,255,255,0.18)}
+a.home-free__col{color:${V2.white};transition:color .18s,border-color .18s}
+a.home-free__col:hover{color:#10B981;border-top-color:#10B981}
+.home-free__col--clarity{border-top-color:#10B981}
+.home-free__titlerow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.home-free__name{font-family:${V2.display};font-synthesis:none;font-size:clamp(24px,2.2vw,29px);font-weight:750;line-height:1.1;letter-spacing:-0.032em;color:inherit}
+.home-free__badge{font-size:11.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#10B981}
+.home-free__desc{max-width:36ch;font-size:17px;line-height:1.55;color:${V2.onDark};text-wrap:pretty}
+.home-free__go{margin-top:6px;display:inline-flex;align-items:center;gap:8px;min-height:24px;font-size:14px;font-weight:700;letter-spacing:0.06em;color:#10B981}
+.home-clarity__btn{margin-top:6px;display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0;background:none;border:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0.06em;color:#10B981}
 .home-clarity__caret{transition:transform .28s ease}
 .home-clarity__btn[aria-expanded="true"] .home-clarity__caret{transform:rotate(180deg)}
-.home-clarity-panel{grid-column:1 / -1;display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.2,.7,.2,1)}
+.home-clarity-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.2,.7,.2,1)}
 .home-clarity-panel.is-open{grid-template-rows:1fr}
 .home-clarity-panel__inner{overflow:hidden;min-height:0}
-.home-clarity-panel__list{padding-top:40px;opacity:0;transition:opacity .3s ease .04s;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(30px,3.4vw,48px)}
+.home-clarity-panel__list{padding-top:clamp(32px,4vw,44px);opacity:0;transition:opacity .3s ease .04s;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));column-gap:clamp(28px,3.2vw,48px)}
 .home-clarity-panel.is-open .home-clarity-panel__list{opacity:1}
-.home-clarity__tool{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:19px 0;border-top:1px solid rgba(255,255,255,0.16);color:#F3F0E8;font-size:18px;line-height:1.35;transition:color .18s,border-color .18s}
+.home-clarity__tool{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:19px 0;border-top:1px solid rgba(255,255,255,0.16);color:#F3F0E8;font-size:17px;line-height:1.35;transition:color .18s,border-color .18s}
 .home-clarity__tool:hover{color:#FFFFFF;border-top-color:#10B981}
 .home-clarity__tool-arw{color:#10B981;transition:transform .18s}
 .home-clarity__tool:hover .home-clarity__tool-arw{transform:translateX(4px)}
-@media (max-width:900px){
-  .home-start__grid{grid-template-columns:1fr;gap:30px}
-  .home-start__col--clarity{order:1}
-  .home-clarity-panel{order:2}
-  .home-start__col--wtf{order:3}
-  .home-start__col--ask{order:4}
+@media (max-width:640px){
   .home-clarity__btn{width:100%;justify-content:space-between;min-height:52px;padding:0 16px;border:1px solid rgba(255,255,255,0.30)}
-  .home-clarity-panel__list{grid-template-columns:1fr;padding-top:8px}
+  .home-clarity-panel__list{padding-top:8px}
   .home-clarity__tool{min-height:56px;padding:14px 0}
 }
-
-/* ── More from me — compact strip (no section number) ── */
-.home-more__label{font-family:${V2.body};font-size:13px;font-weight:700;line-height:1;letter-spacing:0.12em;text-transform:uppercase;color:#8b9298}
-.home-more__links{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(30px,3.4vw,48px)}
-.home-more__link{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.16);color:${V2.white};transition:color .18s,border-color .18s}
-.home-more__link:hover{color:#10B981;border-top-color:#10B981}
-.home-more__link-main{min-width:0}
-.home-more__link-kicker{display:block;font-family:${V2.display};font-synthesis:none;font-size:19px;font-weight:750;letter-spacing:-0.02em;line-height:1.1;color:inherit}
-.home-more__link-desc{display:block;margin-top:6px;font-size:15px;line-height:1.5;color:${V2.onDark};text-wrap:pretty}
-.home-more__link-arw{color:#10B981}
-@media (max-width:700px){.home-more__links{grid-template-columns:1fr}}
 
 :root{
   --am-paper:#f3f0e8;
@@ -661,6 +660,54 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .rev-avatar__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)}
 @media (max-width:900px){.rev-hero{padding-block:67px 58px}.rev-hero__grid{grid-template-columns:1fr;gap:28px}}
 @media (max-width:800px){.rev-grid{grid-template-columns:1fr}.rev-lead p{font-size:22px}}
+
+/* ── About (design refresh) — beige top, white duality, dark close ── */
+.ax-page{width:100%;overflow:clip;background:${V2.white};color:#171919;font-family:${V2.body}}
+.ax-container{width:min(100%,1080px);margin-inline:auto;padding-inline:clamp(24px,5vw,56px)}
+.ax-label{margin:0;color:${V2.green};font:700 13px/1.3 ${V2.body};letter-spacing:0.09em;text-transform:uppercase}
+.ax-top{background:${V2.paper}}
+.ax-hero{padding-block:clamp(64px,8vw,96px) 0}
+.ax-hero__h{max-width:18ch;margin-top:20px;font-family:${V2.archivo};font-synthesis:none;font-size:clamp(36px,5.2vw,58px);font-weight:400;line-height:1.02;letter-spacing:-0.032em;color:#171919;text-wrap:balance}
+.ax-hero__deck{max-width:68ch;margin-top:28px;font-size:19px;line-height:1.62;color:${V2.ink2};text-wrap:pretty}
+.ax-cred{padding-block:clamp(40px,5vw,56px) clamp(64px,8vw,96px)}
+.ax-cred__head{max-width:750px;padding-top:clamp(40px,5vw,56px);border-top:1px solid rgba(24,26,28,0.20)}
+.ax-cred__h{margin-top:14px;font-family:${V2.display};font-synthesis:none;font-size:clamp(30px,3.8vw,42px);font-weight:750;line-height:1.04;letter-spacing:-0.032em;color:#171919}
+.ax-cred__grid{margin-top:clamp(36px,4.4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));column-gap:clamp(40px,5.2vw,72px);row-gap:40px;align-items:start}
+.ax-cred__list{list-style:none;margin-top:12px}
+.ax-cred__item{padding:16px 0}
+.ax-cred__item + .ax-cred__item{border-top:1px solid rgba(24,26,28,0.20)}
+.ax-cred__t{display:block;font-size:17px;font-weight:600;line-height:1.32;letter-spacing:-0.01em;color:#171919}
+.ax-cred__m{display:block;margin-top:4px;font-size:15px;line-height:1.45;color:${V2.meta}}
+.ax-duality{background:${V2.white};padding-block:clamp(64px,8vw,96px)}
+.ax-duality__h{max-width:16ch;margin-top:14px;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,4.4vw,52px);font-weight:800;line-height:1;letter-spacing:-0.04em;color:#171919;text-wrap:balance}
+.ax-duality__band{margin-top:clamp(40px,5vw,56px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.ax-duality__side{padding:clamp(32px,3.6vw,48px);display:flex;flex-direction:column;justify-content:center;min-height:300px}
+.ax-duality__side--business{background:#181a1c;color:#fff}
+.ax-duality__side--psychology{background:${V2.green};color:#fff}
+.ax-duality__k{margin:0;font-size:13px;font-weight:800;line-height:1;letter-spacing:0.075em;text-transform:uppercase}
+.ax-duality__side--business .ax-duality__k{color:#10B981}
+.ax-duality__s{margin:18px 0 0;font-family:${V2.display};font-size:clamp(20px,1.8vw,24px);font-weight:700;line-height:1.27;letter-spacing:-0.028em}
+.ax-duality__img{display:block;width:100%;height:100%;min-height:300px;object-fit:cover;object-position:50% 20%;filter:grayscale(100%);background:#181a1c}
+.ax-explain{margin-top:clamp(40px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));column-gap:clamp(40px,5.2vw,72px);row-gap:24px;align-items:start}
+.ax-explain__lead{margin:0;font-family:${V2.display};font-size:24px;font-weight:800;line-height:1.08;letter-spacing:-0.025em;color:#171919;text-wrap:pretty}
+.ax-explain__body{display:flex;flex-direction:column;gap:20px;max-width:56ch}
+.ax-explain__body p{margin:0;font-size:18px;line-height:1.62;color:${V2.ink2};text-wrap:pretty}
+.ax-explain__body p.is-strong{font-weight:600;color:#171919}
+.ax-why{background:${V2.ink};color:#F3F0E8;padding-block:clamp(64px,8vw,96px)}
+.ax-why__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));column-gap:clamp(40px,5.2vw,72px);row-gap:32px;align-items:start}
+.ax-why__rule{width:min(240px,60%);height:3px;background:#10B981}
+.ax-why__h{max-width:14ch;margin-top:24px;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,4vw,46px);font-weight:800;line-height:1.02;letter-spacing:-0.04em;color:#fff;text-wrap:balance}
+.ax-why__body{display:flex;flex-direction:column;gap:22px;max-width:60ch}
+.ax-why__body p{margin:0;font-size:18px;line-height:1.66;color:#D7DAD8;text-wrap:pretty}
+.ax-why__quote{margin:6px 0 0;padding-left:24px;border-left:3px solid #10B981;font-family:${V2.display};font-size:22px;font-weight:700;line-height:1.28;letter-spacing:-0.025em;color:#fff;text-wrap:pretty}
+.ax-cta{background:${V2.ink};padding-block:clamp(56px,7vw,88px);text-align:center;border-top:1px solid rgba(243,240,232,0.16)}
+.ax-cta__h{max-width:20ch;margin-inline:auto;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,4.2vw,52px);font-weight:800;line-height:1.02;letter-spacing:-0.04em;color:#fff;text-wrap:balance}
+.ax-cta__btn{margin-top:36px;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:64px;padding-inline:44px;background:${V2.green};color:#fff;font-size:16px;font-weight:700;border-radius:999px;transition:filter .18s,gap .18s}
+.ax-cta__btn:hover{filter:brightness(0.9);gap:13px;color:#fff}
+@media (max-width:720px){
+  .ax-duality__band{grid-template-columns:1fr}
+  .ax-duality__img{min-height:260px}
+}
 `;
 function PageV2Styles() {
   return React.createElement('style', {
@@ -746,12 +793,24 @@ function HomePageV2({
       window.removeEventListener('keydown', onKey);
     };
   }, [clarityOpen]);
-  const workSection = isEn ? React.createElement('section', {
-    key: 'work'
+  const proofSection = isEn ? React.createElement('section', {
+    className: 'home-proof',
+    key: 'proof'
   }, React.createElement('div', {
     className: 'site-container'
   }, React.createElement('div', {
-    className: 'home-work'
+    className: 'home-proof__grid'
+  }, [['18+ years', ' in product and growth'], ['100+', ' technology companies advised'], ['MSc', ' Integrative Counselling & Psychotherapy'], ['BACP', ' registered psychotherapist']].map(function (p, i) {
+    return React.createElement('p', {
+      className: 'home-proof__item',
+      key: i
+    }, React.createElement('strong', null, p[0]), p[1]);
+  })))) : null;
+  const workSection = isEn ? React.createElement('section', {
+    className: 'home-work',
+    key: 'work'
+  }, React.createElement('div', {
+    className: 'site-container'
   }, SecLabel('01', 'Work with me'), React.createElement('h2', {
     className: 'home-work__h'
   }, 'Three ways to work with me.'), React.createElement('div', {
@@ -762,7 +821,9 @@ function HomePageV2({
       className: 'home-work__item',
       href: o.href,
       'aria-label': 'Explore ' + o.name
-    }, React.createElement('span', {
+    }, o.kicker ? React.createElement('span', {
+      className: 'home-work__kicker'
+    }, o.kicker) : null, React.createElement('span', {
       className: 'home-work__name'
     }, o.name), React.createElement('span', {
       className: 'home-work__desc'
@@ -771,26 +832,27 @@ function HomePageV2({
     }, 'Explore ', React.createElement('span', {
       'aria-hidden': 'true'
     }, '→')));
-  }))))) : null;
+  })))) : null;
   const startSection = isEn ? React.createElement('section', {
+    className: 'home-free',
     key: 'start'
   }, React.createElement('div', {
     className: 'site-container'
   }, SecLabel('02', 'Start here for free'), React.createElement('h2', {
-    className: 'home-start__h'
+    className: 'home-free__h'
   }, "You don't need to know what kind of help you need before you start."), React.createElement('div', {
-    className: 'home-start__grid'
+    className: 'home-free__grid'
   }, React.createElement('div', {
-    className: 'home-start__col home-start__col--clarity'
+    className: 'home-free__col home-free__col--clarity'
   }, React.createElement('div', {
-    className: 'home-start__titlerow'
+    className: 'home-free__titlerow'
   }, React.createElement('span', {
-    className: 'home-start__name'
+    className: 'home-free__name'
   }, 'Clarity tools'), React.createElement('span', {
-    className: 'home-start__badge'
+    className: 'home-free__badge'
   }, '5 tools')), React.createElement('span', {
-    className: 'home-start__desc'
-  }, "Short assessments to work out what's actually going on with your business, career, execution or burnout."), React.createElement('button', {
+    className: 'home-free__desc'
+  }, 'Five short diagnostics that name the problem before you spend money solving the wrong one.'), React.createElement('button', {
     type: 'button',
     className: 'home-clarity__btn',
     ref: clarityBtnRef,
@@ -815,30 +877,30 @@ function HomePageV2({
     strokeLinecap: 'round',
     strokeLinejoin: 'round'
   })))), React.createElement('a', {
-    className: 'home-start__col home-start__col--wtf',
+    className: 'home-free__col home-free__col--wtf',
     href: '/wtf-friday/',
     'aria-label': 'Join WTF Friday'
   }, React.createElement('span', {
-    className: 'home-start__name'
+    className: 'home-free__name'
   }, 'WTF Friday'), React.createElement('span', {
-    className: 'home-start__desc'
-  }, 'Free weekly office hours. Bring a real problem, get a real answer.'), React.createElement('span', {
-    className: 'home-start__go'
+    className: 'home-free__desc'
+  }, 'Free weekly office hours. Bring one real problem, leave with a straight answer.'), React.createElement('span', {
+    className: 'home-free__go'
   }, 'Join WTF Friday ', React.createElement('span', {
     'aria-hidden': 'true'
   }, '→'))), React.createElement('a', {
-    className: 'home-start__col home-start__col--ask',
+    className: 'home-free__col home-free__col--ask',
     href: window.cPath('ask-me-anything', lang),
     'aria-label': 'Ask me something'
   }, React.createElement('span', {
-    className: 'home-start__name'
+    className: 'home-free__name'
   }, 'Ask me something'), React.createElement('span', {
-    className: 'home-start__desc'
-  }, 'Send a question anonymously. I answer selected questions publicly.'), React.createElement('span', {
-    className: 'home-start__go'
+    className: 'home-free__desc'
+  }, "Ask the thing you wouldn't put your name on. I answer selected ones publicly."), React.createElement('span', {
+    className: 'home-free__go'
   }, 'Ask something ', React.createElement('span', {
     'aria-hidden': 'true'
-  }, '→'))), React.createElement('div', {
+  }, '→')))), React.createElement('div', {
     id: 'home-clarity-panel',
     className: 'home-clarity-panel' + (clarityOpen ? ' is-open' : '')
   }, React.createElement('div', {
@@ -856,7 +918,7 @@ function HomePageV2({
       className: 'home-clarity__tool-arw',
       'aria-hidden': 'true'
     }, '→'));
-  }))))))) : null;
+  })))))) : null;
   const opinionSection = React.createElement('section', {
     key: 'opinion'
   }, React.createElement('div', {
@@ -992,10 +1054,20 @@ function HomePageV2({
     className: 'home-hero__title'
   }, heroTitleChildren), React.createElement('p', {
     className: 'home-hero__support'
-  }, c.support), React.createElement('a', {
+  }, c.support), isEn ? React.createElement('div', {
+    className: 'home-hero__ctarow'
+  }, React.createElement('a', {
     className: 'hero-cta',
-    href: isEn ? '/start-here/' : window.cPath('diagnostic', lang)
-  }, React.createElement('span', null, isEn ? 'START HERE' : t.ctaBtn), React.createElement('span', null, '→'))), React.createElement('figure', {
+    href: '/start-here/'
+  }, React.createElement('span', null, 'Start here'), React.createElement('span', null, '→')), React.createElement('a', {
+    className: 'home-hero__who',
+    href: '/about/'
+  }, React.createElement('span', null, 'Who I am'), React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '→'))) : React.createElement('a', {
+    className: 'hero-cta',
+    href: window.cPath('diagnostic', lang)
+  }, React.createElement('span', null, t.ctaBtn), React.createElement('span', null, '→'))), React.createElement('figure', {
     className: 'home-hero__photo'
   }, React.createElement('div', {
     className: 'home-hero__frame'
@@ -1100,12 +1172,9 @@ function HomePageV2({
     heading: c.finalH
   });
 
-  // English homepage: hero → 01 Work with me → 02 Start here for free → footer.
-  // Greek homepage keeps its full original flow until it is localised.
-  const mainChildren = isEn ? [heroSection, React.createElement('div', {
-    className: 'home-flow',
-    key: 'flow'
-  }, workSection, startSection)] : [heroSection, homePointSection, amDualitySection, React.createElement('div', {
+  // English homepage: hero → proof strip → 01 Work with me → 02 Start here for
+  // free → footer. Greek homepage keeps its full original flow until localised.
+  const mainChildren = isEn ? [heroSection, proofSection, workSection, startSection] : [heroSection, homePointSection, amDualitySection, React.createElement('div', {
     className: 'home-flow',
     key: 'flow'
   }, opinionSection, contSection, moreSection), finalCta];
@@ -1160,96 +1229,126 @@ function AboutPageV2({
     className: 'amx-body'
   }, c.fact)));
   let aboutMainChildren;
+  let aboutMainClass;
   if (isEn) {
-    // Business ← portrait → Psychology: the homepage duality visual now lives here,
-    // where it explains why one person legitimately sits between the two worlds.
-    const visualSection = React.createElement('section', {
-      className: 'am-duality-section',
-      'aria-labelledby': 'about-duality-title',
-      key: 'visual'
+    aboutMainClass = 'ax-page';
+    const b = c.background;
+    const credCol = function (col) {
+      return React.createElement('div', {
+        key: col.label
+      }, React.createElement('p', {
+        className: 'ax-label'
+      }, col.label), React.createElement('ul', {
+        className: 'ax-cred__list'
+      }, col.items.map(function (it, i) {
+        return React.createElement('li', {
+          className: 'ax-cred__item',
+          key: i
+        }, React.createElement('span', {
+          className: 'ax-cred__t'
+        }, it.t), it.m ? React.createElement('span', {
+          className: 'ax-cred__m'
+        }, it.m) : null);
+      })));
+    };
+    // Beige top: hero + short résumé / credentials.
+    const topSection = React.createElement('section', {
+      className: 'ax-top',
+      key: 'top'
     }, React.createElement('div', {
-      className: 'am-duality-section__inner'
-    }, React.createElement('header', {
-      className: 'am-duality-section__heading'
+      className: 'ax-container ax-hero'
     }, React.createElement('p', {
-      className: 'amx-label'
-    }, 'BUSINESS + PSYCHOLOGY'), React.createElement('h2', {
-      className: 'am-duality-section__title',
-      id: 'about-duality-title',
-      style: {
-        marginTop: 14
-      }
-    }, 'Why I sit between two professional worlds.')), React.createElement('div', {
-      className: 'am-duality'
-    }, React.createElement('article', {
-      className: 'am-duality__side am-duality__side--business'
+      className: 'ax-label'
+    }, c.label), React.createElement('h1', {
+      className: 'ax-hero__h'
+    }, c.h1), React.createElement('p', {
+      className: 'ax-hero__deck'
+    }, c.deck)), React.createElement('div', {
+      className: 'ax-container ax-cred'
     }, React.createElement('div', {
-      className: 'am-duality__copy'
+      className: 'ax-cred__head'
     }, React.createElement('p', {
-      className: 'am-duality__label'
+      className: 'ax-label'
+    }, b.label), React.createElement('h2', {
+      className: 'ax-cred__h'
+    }, b.h)), React.createElement('div', {
+      className: 'ax-cred__grid'
+    }, credCol(b.colA), credCol(b.colB))));
+    // White: Business ← portrait → Psychology + why the two interact.
+    const dualitySection = React.createElement('section', {
+      className: 'ax-duality',
+      'aria-labelledby': 'ax-duality-title',
+      key: 'duality'
+    }, React.createElement('div', {
+      className: 'ax-container'
+    }, React.createElement('p', {
+      className: 'ax-label'
+    }, 'Business + psychology'), React.createElement('h2', {
+      className: 'ax-duality__h',
+      id: 'ax-duality-title'
+    }, 'Why I sit between two professional worlds.'), React.createElement('div', {
+      className: 'ax-duality__band'
+    }, React.createElement('div', {
+      className: 'ax-duality__side ax-duality__side--business'
+    }, React.createElement('p', {
+      className: 'ax-duality__k'
     }, 'Business'), React.createElement('p', {
-      className: 'am-duality__statement'
-    }, 'I spent most of my career here.'))), React.createElement('article', {
-      className: 'am-duality__side am-duality__side--psychology'
-    }, React.createElement('div', {
-      className: 'am-duality__copy'
-    }, React.createElement('p', {
-      className: 'am-duality__label'
-    }, 'Psychology'), React.createElement('p', {
-      className: 'am-duality__statement'
-    }, 'I trained here because business knowledge was not enough.'))), React.createElement('figure', {
-      className: 'am-duality__portrait'
-    }, React.createElement('img', {
+      className: 'ax-duality__s'
+    }, 'I spent most of my career here.')), React.createElement('img', {
+      className: 'ax-duality__img',
       src: '/img/aggelos-overlap.webp?v=2',
       alt: 'Aggelos Mouzakitis',
       width: 250,
       height: 426,
       loading: 'lazy',
       decoding: 'async'
-    })))));
-    const explainSection = React.createElement('section', {
-      className: 'amx-paper amx-section',
-      key: 'explain'
-    }, React.createElement('div', {
-      className: 'amx-container'
-    }, React.createElement('div', {
-      className: 'amx-reading-copy'
+    }), React.createElement('div', {
+      className: 'ax-duality__side ax-duality__side--psychology'
     }, React.createElement('p', {
-      className: 'amx-body'
-    }, 'Most problems I work on do not stay neatly on one side.'), React.createElement('p', {
-      className: 'amx-body'
-    }, 'A pricing problem can involve fear of rejection. A career decision can be commercially rational and psychologically difficult. A business can have the right strategy and an owner who keeps avoiding it.'), React.createElement('p', {
-      className: 'amx-body'
-    }, 'That is why I work with both.'))));
+      className: 'ax-duality__k'
+    }, 'Psychology'), React.createElement('p', {
+      className: 'ax-duality__s'
+    }, 'I trained here because business knowledge was not enough.'))), React.createElement('div', {
+      className: 'ax-explain'
+    }, React.createElement('p', {
+      className: 'ax-explain__lead'
+    }, 'Most problems I work on do not stay neatly on one side.'), React.createElement('div', {
+      className: 'ax-explain__body'
+    }, React.createElement('p', null, 'A pricing problem can involve fear of rejection. A career decision can be commercially rational and psychologically difficult. A business can have the right strategy and an owner who keeps avoiding it.'), React.createElement('p', {
+      className: 'is-strong'
+    }, 'That is why I work with both.')))));
+    // Dark: why I ended up here.
     const whySection = React.createElement('section', {
-      className: 'amx-dark amx-section',
+      className: 'ax-why',
       key: 'why'
     }, React.createElement('div', {
-      className: 'amx-container'
+      className: 'ax-container'
     }, React.createElement('div', {
-      className: 'amx-section-head'
-    }, React.createElement('h2', {
-      className: 'amx-heading'
+      className: 'ax-why__grid'
+    }, React.createElement('div', null, React.createElement('div', {
+      className: 'ax-why__rule'
+    }), React.createElement('h2', {
+      className: 'ax-why__h'
     }, 'Why I ended up here')), React.createElement('div', {
-      className: 'amx-reading-copy'
-    }, React.createElement('p', {
-      className: 'amx-body'
-    }, 'I built a consultancy, worked with more than 100 technology companies and built two startups that failed. For years, being useful, reasonable and easy to work with helped me professionally. It also made it easier to avoid conflict, accept things I did not want and stay too long in the wrong places.'), React.createElement('p', {
-      className: 'amx-body'
-    }, 'Knowing more about business did not explain why approval, fear or other people’s reactions could still influence decisions that looked perfectly rational on paper. That gap is part of why I trained as a psychotherapist.'), React.createElement('p', {
-      className: 'amx-body'
-    }, 'Today I work with both sides of the problem when both sides matter.'))));
+      className: 'ax-why__body'
+    }, React.createElement('p', null, 'I built a consultancy, worked with more than 100 technology companies and built two startups that failed. For years, being useful, reasonable and easy to work with helped me professionally. It also made it easier to avoid conflict, accept things I did not want and stay too long in the wrong places.'), React.createElement('p', null, "Knowing more about business did not explain why approval, fear or other people's reactions could still influence decisions that looked perfectly rational on paper. That gap is part of why I trained as a psychotherapist."), React.createElement('p', {
+      className: 'ax-why__quote'
+    }, 'Today I work with both sides of the problem when both sides matter.')))));
+    // Dark closing CTA.
     const ctaSection = React.createElement('section', {
-      className: 'amx-dark amx-section amx-final',
+      className: 'ax-cta',
       key: 'cta'
     }, React.createElement('div', {
-      className: 'amx-container'
-    }, React.createElement('a', {
-      className: 'amx-button',
+      className: 'ax-container'
+    }, React.createElement('h2', {
+      className: 'ax-cta__h'
+    }, 'Not sure which conversation you need?'), React.createElement('a', {
+      className: 'ax-cta__btn',
       href: '/start-here/'
-    }, 'START HERE →')));
-    aboutMainChildren = [heroSection, credOrFact, visualSection, explainSection, whySection, ctaSection];
+    }, 'Start here →')));
+    aboutMainChildren = [topSection, dualitySection, whySection, ctaSection];
   } else {
+    aboutMainClass = 'amx-page amx-page--about';
     aboutMainChildren = [heroSection, credOrFact, React.createElement('section', {
       className: 'amx-dark amx-section',
       key: 'origin'
@@ -1331,7 +1430,7 @@ function AboutPageV2({
     page: 'about',
     lang
   }), React.createElement('main', {
-    className: 'amx-page amx-page--about'
+    className: aboutMainClass
   }, aboutMainChildren), React.createElement(window.SiteFooterX, {
     lang
   }));
