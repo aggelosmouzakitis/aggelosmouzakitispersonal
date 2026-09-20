@@ -221,9 +221,14 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:${SITE.bone}}
 .site-hdr__ddown-item[aria-current] .site-hdr__ddown-name{color:${SITE.green}}
 
 /* ── "Work with me" section inside the mobile menu ── */
-.site-menu__label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${SITE.green};margin-top:8px}
+.site-menu__group{width:100%}
+.site-menu__acc{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;padding:0;background:none;border:0;cursor:pointer;color:${SITE.paper};font-family:inherit;font-size:16px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.03em}
+.site-menu__acc-caret{flex:none;opacity:.8;transition:transform .2s ease}
+.site-menu__acc.is-open .site-menu__acc-caret{transform:rotate(180deg)}
+.site-menu__panel{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:6px 0 10px}
+.site-menu__label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${SITE.sage};margin-top:8px}
 .site-menu a.site-menu__sub{text-transform:none;letter-spacing:0;font-size:15px;min-height:40px;display:flex;align-items:center}
-.site-menu a.site-menu__sub[aria-current]{color:${SITE.green}}
+.site-menu a.site-menu__sub[aria-current]{color:${SITE.sage}}
 .site-menu__soon{color:${SITE.greyOnDark};font-size:15px;min-height:40px;display:flex;align-items:center;gap:10px}
 .site-menu__soon small{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 8px;color:${SITE.greyOnDark}}
 
@@ -373,6 +378,7 @@ function Wordmark({ lang }) {
 // ─── HEADER ──────────────────────────────────────────────────────────────────
 function SiteHeader({ page, lang = 'en' }) {
   const [open, setOpen] = React.useState(false);     // mobile burger menu
+  const [mWork, setMWork] = React.useState(false);   // mobile "Work with me" accordion
   const [work, setWork] = React.useState(false);     // desktop "Work with me" mega
   const [clarity, setClarity] = React.useState(false); // desktop "Clarity tools" dropdown
   const workTimer = React.useRef(null);
@@ -480,18 +486,30 @@ function SiteHeader({ page, lang = 'en' }) {
     restItems.forEach((it) => navChildren.push(link(it)));
   }
 
-  // Mobile "Work with me" section (rendered expanded inside the burger menu)
-  const workMobile = showWork ? React.createElement(React.Fragment, { key: 'work-m' },
-    WORK_GROUPS.map((group) => React.createElement(React.Fragment, { key: group.label },
-      React.createElement('div', { className: 'site-menu__label' }, group.label),
-      group.items.map((it) => it.soon
-        ? React.createElement('div', { className: 'site-menu__soon', key: it.name },
-            React.createElement('span', null, it.name), React.createElement('small', null, 'Coming soon'))
-        : React.createElement('a', {
-            className: 'site-menu__sub', key: it.name, href: it.href,
-            'aria-current': page === it.id ? 'page' : undefined,
-          }, it.name))
-    ))
+  // Mobile "Work with me" — collapsible accordion inside the burger menu, so the
+  // offers stay tucked away instead of spilling the whole tree into the menu.
+  const workMobile = showWork ? React.createElement('div', { className: 'site-menu__group', key: 'work-m' },
+    React.createElement('button', {
+      type: 'button', className: 'site-menu__acc' + (mWork ? ' is-open' : ''),
+      'aria-expanded': mWork ? 'true' : 'false', 'aria-controls': 'site-menu-work',
+      onClick: () => setMWork((v) => !v),
+    },
+      React.createElement('span', null, 'Work with me'),
+      React.createElement('svg', { className: 'site-menu__acc-caret', viewBox: '0 0 10 6', width: 12, height: 8, 'aria-hidden': 'true' },
+        React.createElement('path', { d: 'M1 1l4 4 4-4', stroke: 'currentColor', strokeWidth: '1.6', fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round' }))
+    ),
+    mWork && React.createElement('div', { className: 'site-menu__panel', id: 'site-menu-work' },
+      WORK_GROUPS.map((group) => React.createElement(React.Fragment, { key: group.label },
+        React.createElement('div', { className: 'site-menu__label' }, group.label),
+        group.items.map((it) => it.soon
+          ? React.createElement('div', { className: 'site-menu__soon', key: it.name },
+              React.createElement('span', null, it.name), React.createElement('small', null, 'Coming soon'))
+          : React.createElement('a', {
+              className: 'site-menu__sub', key: it.name, href: it.href,
+              'aria-current': page === it.id ? 'page' : undefined,
+            }, it.name))
+      ))
+    )
   ) : null;
 
   // Mobile "Clarity tools" section (expanded list inside the burger menu)

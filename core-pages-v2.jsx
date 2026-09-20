@@ -493,7 +493,13 @@ a.home-free__col:hover{color:${V2.green};border-top-color:${V2.green}}
 .home-clarity__btn{margin-top:6px;display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0;background:none;border:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0.06em;color:${V2.green}}
 .home-clarity__caret{transition:transform .28s ease}
 .home-clarity__btn[aria-expanded="true"] .home-clarity__caret{transform:rotate(180deg)}
-.home-clarity-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.2,.7,.2,1)}
+.home-clarity-panel{grid-column:1 / -1;order:5;display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.2,.7,.2,1)}
+@media (max-width:767px){
+  .home-free__col--clarity{order:1}
+  .home-clarity-panel{order:2}
+  .home-free__col--wtf{order:3}
+  .home-free__col--ask{order:4}
+}
 .home-clarity-panel.is-open{grid-template-rows:1fr}
 .home-clarity-panel__inner{overflow:hidden;min-height:0}
 .home-clarity-panel__list{padding-top:clamp(32px,4vw,44px);opacity:0;transition:opacity .3s ease .04s;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));column-gap:clamp(28px,3.2vw,48px)}
@@ -768,6 +774,18 @@ function HomePageV2({ lang = 'en' }) {
               React.createElement('path', { d: 'M1 1l4 4 4-4', stroke: 'currentColor', strokeWidth: '1.6', fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round' }))
           )
         ),
+        React.createElement('div', { id: 'home-clarity-panel', className: 'home-clarity-panel' + (clarityOpen ? ' is-open' : '') },
+          React.createElement('div', { className: 'home-clarity-panel__inner' },
+            React.createElement('div', { className: 'home-clarity-panel__list', ref: clarityListRef },
+              HOME_TOOLS.map(function (tool, i) {
+                return React.createElement('a', { key: tool.href, className: 'home-clarity__tool', href: tool.href, ref: i === 0 ? clarityFirstRef : null },
+                  React.createElement('span', null, tool.name),
+                  React.createElement('span', { className: 'home-clarity__tool-arw', 'aria-hidden': 'true' }, '→')
+                );
+              })
+            )
+          )
+        ),
         React.createElement('a', { className: 'home-free__col home-free__col--wtf', href: '/wtf-friday/', 'aria-label': 'Join WTF Friday' },
           React.createElement('span', { className: 'home-free__name' }, 'WTF Friday'),
           React.createElement('span', { className: 'home-free__desc' }, 'Free weekly office hours. Bring one real problem, leave with a straight answer.'),
@@ -777,18 +795,6 @@ function HomePageV2({ lang = 'en' }) {
           React.createElement('span', { className: 'home-free__name' }, 'Ask me something'),
           React.createElement('span', { className: 'home-free__desc' }, "Ask the thing you wouldn't put your name on. I answer selected ones publicly."),
           React.createElement('span', { className: 'home-free__go' }, 'Ask something ', React.createElement('span', { 'aria-hidden': 'true' }, '→'))
-        )
-      ),
-      React.createElement('div', { id: 'home-clarity-panel', className: 'home-clarity-panel' + (clarityOpen ? ' is-open' : '') },
-        React.createElement('div', { className: 'home-clarity-panel__inner' },
-          React.createElement('div', { className: 'home-clarity-panel__list', ref: clarityListRef },
-            HOME_TOOLS.map(function (tool, i) {
-              return React.createElement('a', { key: tool.href, className: 'home-clarity__tool', href: tool.href, ref: i === 0 ? clarityFirstRef : null },
-                React.createElement('span', null, tool.name),
-                React.createElement('span', { className: 'home-clarity__tool-arw', 'aria-hidden': 'true' }, '→')
-              );
-            })
-          )
         )
       )
     )
