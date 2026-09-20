@@ -30,7 +30,9 @@ body { background: #F3F0E8; color: #171919; font-family: var(--font-body); font-
 #root { display: block; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: #047857; color: #F3F0E8; }
-img { max-width: 100%; }
+img { max-width: 100%; filter: grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14); }
+.site-grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: 0.40; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E"); background-size: 160px 160px; }
+@media print { .site-grain { display: none; } }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #047857; outline-offset: 2px; border-radius: 2px; }
 @media (prefers-reduced-motion: reduce){ *{transition-duration:.001ms!important;animation-duration:.001ms!important} }
 @media print { .site-hdr, .site-ftr, .cta-strip { display: none !important; } }
@@ -182,6 +184,7 @@ ${ldTags}
 <style>${CSS}</style>
 </head>
 <body>
+<div class="site-grain" aria-hidden="true"></div>
 <div id="root"></div>
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>

@@ -153,7 +153,11 @@ body{background:${SITE.bone};color:${SITE.inkText};font-family:${SITE.body};font
 #main-scroll a,a{color:inherit;text-decoration:none}
 #main-scroll strong{border:0;padding:0;color:inherit;font-weight:600}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid ${SITE.green};outline-offset:2px;border-radius:2px}
-img{max-width:100%}
+/* Global photographic duotone — no full-colour photography anywhere (avatars, OG, portraits) */
+img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14)}
+/* Single page-level film grain: one overlay per page, above content, below modals */
+.site-grain{position:fixed;inset:0;pointer-events:none;z-index:90;opacity:0.40;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E");background-size:160px 160px}
+@media print{.site-grain{display:none}}
 
 .site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
 
@@ -181,7 +185,7 @@ img{max-width:100%}
 .hdr-cta:hover{background:${SITE.greenPressed};gap:11px}
 .site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
 .site-hdr__burger span{display:block;width:24px;height:2px;background:${SITE.paper}}
-.site-menu{background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16);padding-block:20px 28px}
+.site-menu{position:relative;z-index:210;background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16);padding-block:20px 28px}
 .site-menu .site-container{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 .site-menu a{color:${SITE.paper};font-size:16px;text-transform:uppercase;letter-spacing:0.03em}
 .site-menu .hdr-cta{align-self:stretch;justify-content:center;min-height:48px;font-size:13px}
