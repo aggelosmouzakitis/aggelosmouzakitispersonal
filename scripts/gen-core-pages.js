@@ -157,9 +157,6 @@ function render(page, lang) {
 <title>${esc(c.title)}</title>
 <meta name="description" content="${esc(c.desc)}">${preload}
 <link rel="canonical" href="${self}">
-<link rel="alternate" hreflang="en" href="${canEn}">
-<link rel="alternate" hreflang="el" href="${canEl}">
-<link rel="alternate" hreflang="x-default" href="${canEn}">
 <meta property="og:type" content="${page.id === 'about' ? 'profile' : 'website'}">
 <meta property="og:title" content="${esc(c.title)}">
 <meta property="og:description" content="${esc(c.desc)}">
@@ -169,7 +166,6 @@ function render(page, lang) {
 <meta property="og:image:height" content="630">
 <meta property="og:site_name" content="Aggelos Mouzakitis">
 <meta property="og:locale" content="${ogLocale}">
-<meta property="og:locale:alternate" content="${ogAltLocale}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(c.title)}">
 <meta name="twitter:description" content="${esc(c.desc)}">
