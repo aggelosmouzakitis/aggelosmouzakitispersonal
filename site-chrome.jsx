@@ -375,8 +375,9 @@ function SiteHeader({ page, lang = 'en' }) {
   // Greek label is intentionally plain uppercase (no accents on capitals).
   const ctaLabel = lang === 'el' ? 'ΡΩΤΑ ΑΝΩΝΥΜΑ' : 'START HERE';
   const ctaExt = lang === 'el' ? ext : null;
-  // Hide the header CTA where it would point at the current page.
-  const showCta = page !== 'diagnostic' && page !== 'start-here';
+  // Keep the START HERE CTA present in the header on every page (including the
+  // Start Here flow itself, where it acts as a "start over"); it never disappears.
+  const showCta = true;
 
   // Desktop mega-dropdown ("Work with me")
   const megaCol = (group) => React.createElement('div', { className: 'site-hdr__mega-col', key: group.label },
