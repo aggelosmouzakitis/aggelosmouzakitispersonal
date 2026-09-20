@@ -6,19 +6,59 @@
 //
 // One green across the whole site: #047857.
 
+// ── Editorial Japandi palette — the entire colour system (ten tokens) ──
+// bone/bone-deep = light grounds; forest/forest-deep = dark grounds; green =
+// accent on light; sage = accent on forest; ink/ink-2 = text on light;
+// on-forest = body on dark; meta = muted on light. Any colour outside this set
+// maps to the nearest token — no new values are introduced.
 const SITE = {
+  bone: '#F3F0E8',
+  // primary page ground (replaces every #FFFFFF bg)
+  boneDeep: '#EDE8DB',
+  // second light band when two light sections adjoin
+  forest: '#16231E',
+  // dark sections / header / footer / dark cards
+  forestDeep: '#101A16',
+  // code blocks, inset panels, dropdown grounds
   green: '#047857',
-  ink: '#1A1C1D',
-  ink2: '#282726',
-  heroInk: '#111315',
+  // buttons, eyebrows on light, 2px key rules (unchanged)
+  greenPressed: '#03654A',
+  // explicit hover for every green surface
+  sage: '#8FBFA7',
+  // every accent that sits on forest
+  inkText: '#171919',
+  // text on light
+  headingInk: '#14201C',
+  // headings on light
+  ink2: '#3A403A',
+  // body copy on light (replaces #282726)
+  onForest: '#C0C9BF',
+  // body copy on dark (replaces #C2C6CA)
+  metaLight: '#6A6F67',
+  // meta on light (replaces #626764)
+
+  // ── Back-compat aliases: existing key names → nearest Japandi token, so every
+  //    file that already reads window.SITE keeps working after the recolour. ──
+  ink: '#16231E',
+  // "dark ground" role → forest
+  heroInk: '#14201C',
+  // heading ink on light
   paper: '#F3F0E8',
-  black: '#050505',
-  white: '#FFFFFF',
-  onDark: '#C2C6CA',
-  greyOnDark: '#9DA19E',
-  meta: '#5E6264',
-  rule: 'rgba(24,26,28,0.20)',
-  ruleOnDark: 'rgba(255,255,255,0.16)',
+  // = bone
+  black: '#101A16',
+  // → forest-deep (nearest)
+  white: '#F3F0E8',
+  // page-white retired → bone (also light text on dark)
+  onDark: '#C0C9BF',
+  // = on-forest
+  greyOnDark: '#C0C9BF',
+  // muted-on-dark → on-forest
+  meta: '#6A6F67',
+  // = meta on light
+  rule: 'rgba(23,25,25,0.18)',
+  // 1px hairline on light
+  ruleOnDark: 'rgba(243,240,232,0.16)',
+  // 1px hairline on forest
   // Type roles map onto global CSS custom properties (defined in :root below and
   // in the core-shell <head>). display = heading face (Inter Tight); archivo =
   // display face (Archivo Black EN / Inter Tight 800 EL); body = Inter.
@@ -207,14 +247,19 @@ const CHROME_CSS = `
   --font-heading:"Inter Tight","Inter",system-ui,sans-serif;
   --font-display:"Archivo Black","Inter Tight","Inter",system-ui,sans-serif;
   --brand-green:${SITE.green};
+  /* Editorial Japandi palette (ten tokens) */
+  --bone:${SITE.bone};--bone-deep:${SITE.boneDeep};--forest:${SITE.forest};--forest-deep:${SITE.forestDeep};
+  --green:${SITE.green};--green-pressed:${SITE.greenPressed};--sage:${SITE.sage};
+  --ink:${SITE.inkText};--heading-ink:${SITE.headingInk};--ink-2:${SITE.ink2};--on-forest:${SITE.onForest};--meta:${SITE.metaLight};
+  --rule:${SITE.rule};--rule-on-forest:${SITE.ruleOnDark};
 }
 html,body,#root{height:auto}
 #root{display:block;overflow:visible}
 #sidebar{display:none!important}
-#main-scroll{overflow:visible;background:${SITE.ink};color:${SITE.white}}
+#main-scroll{overflow:visible;background:${SITE.bone};color:${SITE.inkText}}
 #main-scroll::-webkit-scrollbar{width:0}
-body{background:${SITE.ink};color:${SITE.white};font-family:${SITE.body};font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
-::selection{background:${SITE.green};color:#fff}
+body{background:${SITE.bone};color:${SITE.inkText};font-family:${SITE.body};font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+::selection{background:${SITE.green};color:${SITE.bone}}
 #main-scroll a,a{color:inherit;text-decoration:none}
 #main-scroll strong{border:0;padding:0;color:inherit;font-weight:600}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid ${SITE.green};outline-offset:2px;border-radius:2px}
@@ -242,8 +287,8 @@ img{max-width:100%}
 .site-hdr__end{display:flex;align-items:center;gap:14px}
 .site-hdr__lang{color:${SITE.paper};font-size:13px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:0.045em;opacity:.82;transition:opacity .18s}
 .site-hdr__lang:hover{opacity:1}
-.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:${SITE.green};color:#fff;font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
-.hdr-cta:hover{filter:brightness(0.9);gap:11px}
+.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:${SITE.green};color:${SITE.bone};font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hdr-cta:hover{background:${SITE.greenPressed};gap:11px}
 .site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
 .site-hdr__burger span{display:block;width:24px;height:2px;background:${SITE.paper}}
 .site-menu{background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16);padding-block:20px 28px}
@@ -257,13 +302,13 @@ img{max-width:100%}
 .site-hdr__work-btn:hover,.site-hdr__work-btn[aria-expanded="true"]{opacity:1}
 .site-hdr__work-caret{width:10px;height:6px;transition:transform .2s ease;opacity:.85}
 .site-hdr__work-btn[aria-expanded="true"] .site-hdr__work-caret{transform:rotate(180deg)}
-.site-hdr__mega{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(640px,calc(100vw - 32px));background:#1F2223;border:1px solid rgba(243,240,232,0.14);border-top:2px solid ${SITE.green};border-radius:0 0 16px 16px;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:26px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;z-index:200}
+.site-hdr__mega{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(640px,calc(100vw - 32px));background:${SITE.forestDeep};border:1px solid rgba(243,240,232,0.14);border-top:2px solid ${SITE.green};border-radius:0;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:26px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;z-index:200}
 .site-hdr__mega-col{min-width:0}
 .site-hdr__mega-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${SITE.green};margin:2px 0 12px;padding-left:12px}
-.site-hdr__mega-item{display:block;padding:9px 12px;border-radius:10px;transition:background .16s}
+.site-hdr__mega-item{display:block;padding:9px 12px;border-radius:0;transition:background .16s}
 a.site-hdr__mega-item:hover{background:rgba(243,240,232,0.06)}
 .site-hdr__mega-name{display:block;font-family:${SITE.display};font-size:16.5px;font-weight:700;line-height:1.2;letter-spacing:-0.012em;color:${SITE.paper}}
-a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
+a.site-hdr__mega-item:hover .site-hdr__mega-name{color:${SITE.bone}}
 .site-hdr__mega-desc{display:block;margin-top:3px;font-size:13px;line-height:1.4;color:${SITE.greyOnDark}}
 .site-hdr__mega-item[aria-current] .site-hdr__mega-name{color:${SITE.green}}
 .site-hdr__mega-item--soon{cursor:default}
@@ -272,13 +317,13 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#fff}
 
 /* ── "Clarity tools" dropdown (desktop) — single-column, anchored to its button ── */
 .site-hdr__clarity{position:relative;display:flex;align-items:center}
-.site-hdr__ddown{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(424px,calc(100vw - 32px));background:#1F2223;border:1px solid rgba(243,240,232,0.14);border-top:2px solid ${SITE.green};border-radius:0 0 16px 16px;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:14px 12px;display:flex;flex-direction:column;gap:4px;z-index:200}
-.site-hdr__ddown-item{display:block;padding:14px;border-radius:10px;transition:background .16s}
+.site-hdr__ddown{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(424px,calc(100vw - 32px));background:${SITE.forestDeep};border:1px solid rgba(243,240,232,0.14);border-top:2px solid ${SITE.green};border-radius:0;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:14px 12px;display:flex;flex-direction:column;gap:4px;z-index:200}
+.site-hdr__ddown-item{display:block;padding:14px;border-radius:0;transition:background .16s}
 a.site-hdr__ddown-item:hover{background:rgba(243,240,232,0.06)}
 /* Tool titles stay sentence case (nav <a> forces uppercase; reset it here — the
    only intentional all-caps nav label is "CLARITY TOOLS" itself). */
 .site-hdr__ddown-name{display:block;font-family:${SITE.display};font-size:16px;font-weight:700;line-height:1.3;letter-spacing:-0.012em;text-transform:none;color:${SITE.paper}}
-a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
+a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:${SITE.bone}}
 .site-hdr__ddown-item[aria-current] .site-hdr__ddown-name{color:${SITE.green}}
 
 /* ── "Work with me" section inside the mobile menu ── */
@@ -289,21 +334,21 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 .site-menu__soon small{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 8px;color:${SITE.greyOnDark}}
 
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
-.pill--green{height:72px;padding-inline:44px;background:${SITE.green};color:#fff;font-size:16px}
-.pill--green:hover{gap:12px;filter:brightness(0.9)}
-.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:${SITE.green};color:#fff;font-size:16px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
-.hero-cta:hover{filter:brightness(0.9);gap:13px}
+.pill--green{height:72px;padding-inline:44px;background:${SITE.green};color:${SITE.bone};font-size:16px}
+.pill--green:hover{gap:12px;background:${SITE.greenPressed}}
+.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:${SITE.green};color:${SITE.bone};font-size:16px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
+.hero-cta:hover{background:${SITE.greenPressed};gap:13px}
 
 .cta-strip{padding-block:clamp(86px,10.8vw,132px);text-align:center;background:${SITE.ink}}
-.cta-strip__h{margin:0 auto;max-width:20ch;font-family:${SITE.display};font-synthesis:none;font-size:clamp(36px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:#fff;text-wrap:balance}
+.cta-strip__h{margin:0 auto;max-width:20ch;font-family:${SITE.display};font-synthesis:none;font-size:clamp(36px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:${SITE.bone};text-wrap:balance}
 .cta-strip .pill--green{margin-top:44px}
 .cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:${SITE.onDark};transition:gap .18s,color .18s}
-.cta-strip__sub:hover{gap:12px;color:#fff}
+.cta-strip__sub:hover{gap:12px;color:${SITE.bone}}
 
 .site-ftr{border-top:2px solid ${SITE.green};padding-block:64px 32px;background:${SITE.ink}}
 .site-ftr__cols{display:grid;grid-template-columns:minmax(280px,1.4fr) repeat(3,minmax(130px,0.55fr));gap:48px;align-items:start}
 .site-ftr__cols--en{grid-template-columns:minmax(220px,1.2fr) repeat(4,minmax(120px,0.6fr));gap:40px}
-.site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#10B981;margin-bottom:20px}
+.site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:${SITE.sage};margin-bottom:20px}
 .site-ftr nav a{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.4;margin-bottom:12px;transition:color .18s}
 .site-ftr nav a:hover{color:${SITE.onDark}}
 .site-ftr__roles{margin-top:20px;font-size:15px;line-height:1.4;color:${SITE.onDark}}
@@ -312,10 +357,10 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 .site-ftr__legal nav{display:flex;flex-wrap:wrap;gap:12px 24px}
 .site-ftr__legal nav a{display:inline;margin:0}
 
-.u-hero{background:${SITE.white};padding-block:106px 86px}
-.u-hero h1{margin:0;max-width:15ch;font-family:${SITE.display};font-synthesis:none;font-size:clamp(52px,5.8vw,82px);font-weight:800;line-height:0.96;letter-spacing:-0.05em;color:${SITE.ink}}
+.u-hero{background:${SITE.bone};padding-block:106px 86px}
+.u-hero h1{margin:0;max-width:15ch;font-family:${SITE.display};font-synthesis:none;font-size:clamp(52px,5.8vw,82px);font-weight:800;line-height:0.96;letter-spacing:-0.05em;color:${SITE.headingInk}}
 .u-hero p{max-width:65ch;margin:32px 0 0;font-size:21px;line-height:1.55;color:${SITE.ink2}}
-.u-main{background:${SITE.white};padding-block:0 115px;color:${SITE.ink}}
+.u-main{background:${SITE.bone};padding-block:0 115px;color:${SITE.inkText}}
 
 /* ── Shared inner-page shell: asymmetrical editorial grid (rail | reading column | gutter) ── */
 .u-shell{max-width:1180px;margin-inline:auto;padding-inline:clamp(24px,5vw,72px);display:grid;grid-template-columns:minmax(120px,170px) minmax(0,760px) minmax(0,1fr);column-gap:clamp(28px,4vw,64px)}
@@ -326,7 +371,7 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 .u-shell__body{grid-column:2;min-width:0}
 .u-shell__gutter{grid-column:3}
 
-.u-read,.u-shell__body{font-size:19px;line-height:1.72;color:${SITE.ink}}
+.u-read,.u-shell__body{font-size:19px;line-height:1.72;color:${SITE.inkText}}
 .u-read{width:min(740px,calc(100% - 40px));margin-inline:auto}
 .u-read h1,.u-shell__body h1{font-family:${SITE.display};font-synthesis:none;font-size:clamp(48px,5vw,64px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;margin:0 0 32px}
 .u-read h2,.u-shell__body h2{margin:80px 0 24px;font-family:${SITE.display};font-synthesis:none;font-size:clamp(32px,3.6vw,46px);font-weight:800;line-height:1.04;letter-spacing:-0.04em}
@@ -336,13 +381,13 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 .u-read li + li,.u-shell__body li + li{margin-top:12px}
 #main-scroll .u-read a,.u-read a,.u-shell__body a{color:${SITE.green};text-decoration:underline;text-underline-offset:3px}
 .u-read blockquote,.u-shell__body blockquote{margin:48px 0;padding-left:28px;border-left:4px solid ${SITE.green};font-family:${SITE.display};font-size:28px;line-height:1.3}
-.u-read hr,.u-shell__body hr{border:0;border-top:1px solid ${SITE.green};opacity:.45;margin:64px 0}
+.u-read hr,.u-shell__body hr{border:0;border-top:1px solid ${SITE.rule};margin:64px 0}
 .u-read img,.u-shell__body img{display:block;height:auto;margin:48px 0}
 .u-form{width:min(760px,calc(100% - 40px));margin-inline:auto}
 
 /* One shared branded callout for deeper pages (dark band, warm text, green rule) */
-.u-callout{margin:40px 0;padding:26px 30px;background:${SITE.ink};color:${SITE.paper};border-left:3px solid ${SITE.green};border-radius:2px}
-.u-callout :is(p,li){color:${SITE.paper}}
+.u-callout{margin:40px 0;padding:26px 30px;background:${SITE.forest};color:${SITE.bone};border-left:3px solid ${SITE.sage};border-radius:0}
+.u-callout :is(p,li){color:${SITE.onForest}}
 .u-callout > *:first-child{margin-top:0}
 .u-callout > *:last-child{margin-bottom:0}
 
@@ -354,10 +399,11 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 .u-faq details[open] summary::after{content:"\\2212"}
 .u-faq details > *:not(summary){margin-top:16px}
 .u-faq--dark details{border-color:${SITE.ruleOnDark}}
-.u-faq--dark summary{color:#fff}
+.u-faq--dark summary{color:${SITE.bone}}
+.u-faq--dark summary::after{color:${SITE.sage}}
 .u-faq--dark details > *:not(summary){color:${SITE.onDark}}
 
-.u-related a{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid ${SITE.rule};color:${SITE.ink}}
+.u-related a{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid ${SITE.rule};color:${SITE.inkText}}
 .u-related a:last-child{border-bottom:1px solid ${SITE.rule}}
 .u-related a:hover{color:${SITE.green}}
 

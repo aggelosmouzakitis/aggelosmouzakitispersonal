@@ -18,13 +18,18 @@ const CSS = `
   --font-heading: "Inter Tight", "Inter", system-ui, sans-serif;
   --font-display: "Archivo Black", "Inter Tight", "Inter", system-ui, sans-serif;
   --brand-green: #047857;
+  /* Editorial Japandi palette (ten tokens) */
+  --bone: #F3F0E8; --bone-deep: #EDE8DB; --forest: #16231E; --forest-deep: #101A16;
+  --green: #047857; --green-pressed: #03654A; --sage: #8FBFA7;
+  --ink: #171919; --heading-ink: #14201C; --ink-2: #3A403A; --on-forest: #C0C9BF; --meta: #6A6F67;
+  --rule: rgba(23,25,25,0.18); --rule-on-forest: rgba(243,240,232,0.16);
 }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { background: #1A1C1D; color: #FFFFFF; font-family: var(--font-body); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body { background: #F3F0E8; color: #171919; font-family: var(--font-body); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 #root { display: block; }
 a { color: inherit; text-decoration: none; }
-::selection { background: #047857; color: #FFFFFF; }
+::selection { background: #047857; color: #F3F0E8; }
 img { max-width: 100%; }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #047857; outline-offset: 2px; border-radius: 2px; }
 @media (prefers-reduced-motion: reduce){ *{transition-duration:.001ms!important;animation-duration:.001ms!important} }
@@ -170,7 +175,7 @@ function render(page, lang) {
 <meta name="twitter:title" content="${esc(c.title)}">
 <meta name="twitter:description" content="${esc(c.desc)}">
 <meta name="twitter:image" content="${ogUrl}">
-<meta name="theme-color" content="#F5F5F5">
+<meta name="theme-color" content="#F3F0E8">
 <meta name="author" content="Aggelos Mouzakitis">
 <link rel="manifest" href="/manifest.json">
 ${ldTags}
