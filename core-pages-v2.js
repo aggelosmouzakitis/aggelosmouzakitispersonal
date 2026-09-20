@@ -169,6 +169,40 @@ const HOME_V2 = {
   }
 };
 
+// ─── Homepage "Work with me" + "Start here for free" (EN homepage only) ───────
+// Approved homepage sections (design: "Work with me + Start here for free").
+// Copy is sentence-case per the design; the three offer routes and the five
+// clarity-tool routes are the canonical ones already implemented in the site.
+const HOME_OFFERS = [{
+  name: 'Psychotherapy / decision coaching',
+  desc: 'Think through the decision or pattern that keeps circling.',
+  href: '/psychotherapy-decision-coaching/'
+}, {
+  name: 'Career strategy consulting',
+  desc: 'Build a paid offer while you keep your job.',
+  href: '/career-strategy-consulting/'
+}, {
+  name: 'Solo business growth consulting',
+  desc: 'Grow the business without grinding yourself down.',
+  href: '/solopreneur-growth-consulting/'
+}];
+const HOME_TOOLS = [{
+  name: "What's limiting your business?",
+  href: '/clarity-tools/business-constraint/'
+}, {
+  name: 'Is it a strategy or execution problem?',
+  href: '/clarity-tools/strategy-or-execution/'
+}, {
+  name: "What's making you want to quit your job?",
+  href: '/clarity-tools/quit-your-job/'
+}, {
+  name: 'Do you want to become a solopreneur?',
+  href: '/clarity-tools/become-a-solopreneur/'
+}, {
+  name: 'Are you burned out?',
+  href: '/clarity-tools/burned-out/'
+}];
+
 // ─── Why Me copy — verbatim from the approved implementation brief ─────────────
 const WHY_V2 = {
   en: {
@@ -472,6 +506,64 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
   .cont,.opinion__body,.media__cell{padding-inline:clamp(24px,5vw,32px)}
 }
 
+/* ── 02 / Work with me — white inset card on the dark home band ── */
+.home-work{background:${V2.white};border-radius:12px;padding:clamp(40px,5vw,72px) clamp(28px,5vw,72px) clamp(44px,5.4vw,78px)}
+.home-flow .home-work .sec-label__desc{color:#047857}
+.home-work__h{margin:24px 0 clamp(38px,5vw,56px);max-width:20ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(34px,4.6vw,58px);font-weight:760;line-height:1.02;letter-spacing:-0.04em;color:${V2.ink};text-wrap:pretty}
+.home-work__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(30px,3.4vw,48px)}
+.home-work__item{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding-top:24px;border-top:2px solid rgba(24,26,28,0.18);color:${V2.ink};transition:color .18s,border-color .18s}
+.home-work__item:hover{color:${V2.green};border-top-color:${V2.green}}
+.home-work__name{font-family:${V2.display};font-synthesis:none;font-size:clamp(24px,2.2vw,29px);font-weight:750;line-height:1.1;letter-spacing:-0.032em;color:inherit;text-wrap:pretty}
+.home-work__desc{max-width:30ch;font-size:17px;line-height:1.55;color:${V2.ink2};text-wrap:pretty}
+.home-work__go{margin-top:12px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:0.06em;color:${V2.green}}
+@media (max-width:760px){.home-work__grid{grid-template-columns:1fr;gap:28px}}
+
+/* ── 05 / Start here for free — stays on the dark band, no card ── */
+.home-start__h{margin:0 0 clamp(36px,4.6vw,52px);max-width:26ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,3.6vw,44px);font-weight:800;line-height:1.04;letter-spacing:-0.042em;color:${V2.white};text-wrap:balance}
+.home-start__grid{display:grid;grid-template-columns:1.32fr 1fr 1fr;gap:clamp(30px,3.2vw,48px)}
+.home-start__col{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding-top:24px;border-top:2px solid rgba(255,255,255,0.18)}
+a.home-start__col{color:${V2.white};transition:color .18s,border-color .18s}
+a.home-start__col:hover{color:#10B981;border-top-color:#10B981}
+.home-start__col--clarity{border-top-color:#10B981}
+.home-start__titlerow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.home-start__name{font-family:${V2.display};font-synthesis:none;font-size:clamp(24px,2.2vw,29px);font-weight:750;line-height:1.1;letter-spacing:-0.032em;color:inherit}
+.home-start__badge{font-size:11.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#10B981}
+.home-start__desc{max-width:36ch;font-size:17px;line-height:1.55;color:${V2.onDark};text-wrap:pretty}
+.home-start__go{margin-top:12px;display:inline-flex;align-items:center;gap:8px;min-height:24px;font-size:14px;font-weight:700;letter-spacing:0.06em;color:#10B981}
+.home-clarity__btn{margin-top:10px;display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0;background:none;border:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0.06em;color:#10B981}
+.home-clarity__caret{transition:transform .28s ease}
+.home-clarity__btn[aria-expanded="true"] .home-clarity__caret{transform:rotate(180deg)}
+.home-clarity-panel{grid-column:1 / -1;display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.2,.7,.2,1)}
+.home-clarity-panel.is-open{grid-template-rows:1fr}
+.home-clarity-panel__inner{overflow:hidden;min-height:0}
+.home-clarity-panel__list{padding-top:40px;opacity:0;transition:opacity .3s ease .04s;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(30px,3.4vw,48px)}
+.home-clarity-panel.is-open .home-clarity-panel__list{opacity:1}
+.home-clarity__tool{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:19px 0;border-top:1px solid rgba(255,255,255,0.16);color:#F3F0E8;font-size:18px;line-height:1.35;transition:color .18s,border-color .18s}
+.home-clarity__tool:hover{color:#FFFFFF;border-top-color:#10B981}
+.home-clarity__tool-arw{color:#10B981;transition:transform .18s}
+.home-clarity__tool:hover .home-clarity__tool-arw{transform:translateX(4px)}
+@media (max-width:900px){
+  .home-start__grid{grid-template-columns:1fr;gap:30px}
+  .home-start__col--clarity{order:1}
+  .home-clarity-panel{order:2}
+  .home-start__col--wtf{order:3}
+  .home-start__col--ask{order:4}
+  .home-clarity__btn{width:100%;justify-content:space-between;min-height:52px;padding:0 16px;border:1px solid rgba(255,255,255,0.30)}
+  .home-clarity-panel__list{grid-template-columns:1fr;padding-top:8px}
+  .home-clarity__tool{min-height:56px;padding:14px 0}
+}
+
+/* ── More from me — compact strip (no section number) ── */
+.home-more__label{font-family:${V2.body};font-size:13px;font-weight:700;line-height:1;letter-spacing:0.12em;text-transform:uppercase;color:#8b9298}
+.home-more__links{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(30px,3.4vw,48px)}
+.home-more__link{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.16);color:${V2.white};transition:color .18s,border-color .18s}
+.home-more__link:hover{color:#10B981;border-top-color:#10B981}
+.home-more__link-main{min-width:0}
+.home-more__link-kicker{display:block;font-family:${V2.display};font-synthesis:none;font-size:19px;font-weight:750;letter-spacing:-0.02em;line-height:1.1;color:inherit}
+.home-more__link-desc{display:block;margin-top:6px;font-size:15px;line-height:1.5;color:${V2.onDark};text-wrap:pretty}
+.home-more__link-arw{color:#10B981}
+@media (max-width:700px){.home-more__links{grid-template-columns:1fr}}
+
 :root{
   --am-paper:#f3f0e8;
   --am-surface:#ffffff;
@@ -617,123 +709,159 @@ function HomePageV2({
   }, c.titleL2pre, React.createElement('span', {
     className: 'human'
   }, c.titleHuman), c.titleL2post)];
-  return React.createElement(React.Fragment, null, React.createElement(window.ChromeStyles), React.createElement(PageV2Styles), React.createElement(window.SiteHeader, {
-    page: 'home',
-    lang
-  }), React.createElement('main', null,
-  // Hero — professional eyebrow, positioning H1, supporting line, CTA + stage photo
-  React.createElement('section', {
-    className: 'home-hero'
-  }, React.createElement('div', {
-    className: 'home-hero__grid'
-  }, React.createElement('div', {
-    className: 'home-hero__copy'
-  }, React.createElement('div', {
-    className: 'home-hero__eyebrow'
-  }, c.eyebrow), React.createElement('h1', {
-    className: 'home-hero__title'
-  }, heroTitleChildren), React.createElement('p', {
-    className: 'home-hero__support'
-  }, c.support), React.createElement('a', {
-    className: 'hero-cta',
-    href: window.cPath('diagnostic', lang)
-  }, React.createElement('span', null, t.ctaBtn), React.createElement('span', null, '→'))), React.createElement('figure', {
-    className: 'home-hero__photo'
-  }, React.createElement('div', {
-    className: 'home-hero__frame'
-  }, React.createElement('img', {
-    src: '/img/aggelos-homepage.webp?v=2',
-    alt: 'Aggelos Mouzakitis',
-    width: 2048,
-    height: 1365,
-    loading: 'eager',
-    fetchpriority: 'high',
-    decoding: 'async'
-  }))))),
-  // Manifesto — "Anyone can put advisor in their bio" (card grid + logo wall)
-  React.createElement('section', {
-    className: 'home-point'
+
+  // ── Approved homepage sections (EN only): 02 / Work with me and 05 / Start
+  // here for free drop into the existing .home-flow band; the two explanatory
+  // blocks renumber (02→03, 03→04) and "More from me" shrinks to a strip. ──
+  const isEn = lang === 'en';
+  const clarityState = React.useState(false);
+  const clarityOpen = clarityState[0],
+    setClarityOpen = clarityState[1];
+  const clarityBtnRef = React.useRef(null);
+  const clarityFirstRef = React.useRef(null);
+  const clarityListRef = React.useRef(null);
+  React.useEffect(function () {
+    // Keep the collapsed panel out of the tab order / a11y tree while its links
+    // stay in the DOM (so crawlers still find the five tools).
+    if (clarityListRef.current) clarityListRef.current.inert = !clarityOpen;
+    if (clarityOpen && clarityFirstRef.current) {
+      try {
+        clarityFirstRef.current.focus();
+      } catch (e) {}
+    }
+  }, [clarityOpen]);
+  React.useEffect(function () {
+    function onKey(ev) {
+      if (ev.key === 'Escape' && clarityOpen) {
+        setClarityOpen(false);
+        if (clarityBtnRef.current) {
+          try {
+            clarityBtnRef.current.focus();
+          } catch (e) {}
+        }
+      }
+    }
+    window.addEventListener('keydown', onKey);
+    return function () {
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [clarityOpen]);
+  const workSection = isEn ? React.createElement('section', {
+    key: 'work'
   }, React.createElement('div', {
     className: 'site-container'
   }, React.createElement('div', {
-    className: 'home-point__inner'
+    className: 'home-work'
+  }, SecLabel('01', 'Work with me'), React.createElement('h2', {
+    className: 'home-work__h'
+  }, 'Three ways to work with me.'), React.createElement('div', {
+    className: 'home-work__grid'
+  }, HOME_OFFERS.map(function (o) {
+    return React.createElement('a', {
+      key: o.href,
+      className: 'home-work__item',
+      href: o.href,
+      'aria-label': 'Explore ' + o.name
+    }, React.createElement('span', {
+      className: 'home-work__name'
+    }, o.name), React.createElement('span', {
+      className: 'home-work__desc'
+    }, o.desc), React.createElement('span', {
+      className: 'home-work__go'
+    }, 'Explore ', React.createElement('span', {
+      'aria-hidden': 'true'
+    }, '→')));
+  }))))) : null;
+  const startSection = isEn ? React.createElement('section', {
+    key: 'start'
   }, React.createElement('div', {
-    className: 'home-point__eyebrow'
-  }, c.pointEyebrow), React.createElement('h2', {
-    className: 'home-point__h'
-  }, c.pointH), React.createElement('div', {
-    className: 'home-point__grid'
-  }, arr(c.points).map((pt, i) => React.createElement('article', {
-    className: 'home-point__card home-point__card--' + (i + 1),
-    key: i
-  }, React.createElement('div', {
-    className: 'home-point__label'
-  }, pt.label), React.createElement('div', {
-    className: 'home-point__rule'
-  }), React.createElement('p', {
-    className: 'home-point__lead'
-  }, pt.lead), React.createElement('div', {
-    className: 'home-point__text'
-  }, arr(pt.body).map((b, j) => React.createElement('p', {
-    className: 'home-point__body',
-    key: j
-  }, b)), pt.close ? React.createElement('p', {
-    className: 'home-point__close'
-  }, pt.close) : null)))), React.createElement('div', {
-    className: 'home-point__logos'
-  }, React.createElement('div', {
-    className: 'home-point__logos-label'
-  }, c.logoLabel), React.createElement('div', {
-    className: 'home-point__logos-row'
-  }, ['IBM', 'Farfetch', 'GrowthMentor', 'Discover Greece', 'University of London', 'University of Oxford', 'Glofox', 'Whereby', 'Octopus Investments', 'Startupbootcamp', 'Advantage Austria', 'How to Web', 'Moosend'].map((name, i) => React.createElement('span', {
-    className: 'home-point__logo',
-    key: i
-  }, name))))))),
-  // Section 01 — dual-field component (dark business / green psychology, portrait on the seam)
-  React.createElement('section', {
-    className: 'am-duality-section',
-    'aria-labelledby': 'am-duality-title'
-  }, React.createElement('div', {
-    className: 'am-duality-section__inner'
-  }, React.createElement('header', {
-    className: 'am-duality-section__heading'
-  }, SecLabel('01', c.s01d), React.createElement('h2', {
-    className: 'am-duality-section__title',
-    id: 'am-duality-title'
-  }, c.splitIntro)), React.createElement('div', {
-    className: 'am-duality'
-  }, React.createElement('article', {
-    className: 'am-duality__side am-duality__side--business'
-  }, React.createElement('div', {
-    className: 'am-duality__copy'
-  }, React.createElement('p', {
-    className: 'am-duality__label'
-  }, c.leftH), React.createElement('p', {
-    className: 'am-duality__statement'
-  }, c.leftP))), React.createElement('article', {
-    className: 'am-duality__side am-duality__side--psychology'
-  }, React.createElement('div', {
-    className: 'am-duality__copy'
-  }, React.createElement('p', {
-    className: 'am-duality__label'
-  }, c.rightH), React.createElement('p', {
-    className: 'am-duality__statement'
-  }, c.rightP))), React.createElement('figure', {
-    className: 'am-duality__portrait'
-  }, React.createElement('img', {
-    src: '/img/aggelos-overlap.webp?v=2',
-    alt: 'Aggelos Mouzakitis',
-    width: 250,
-    height: 426,
-    loading: 'lazy',
-    decoding: 'async'
-  }))))), React.createElement('div', {
-    className: 'home-flow'
-  },
-  // 02 — you will get an opinion
-  React.createElement('section', null, React.createElement('div', {
     className: 'site-container'
-  }, SecLabel('02', c.s02d), React.createElement('h2', {
+  }, SecLabel('02', 'Start here for free'), React.createElement('h2', {
+    className: 'home-start__h'
+  }, "You don't need to know what kind of help you need before you start."), React.createElement('div', {
+    className: 'home-start__grid'
+  }, React.createElement('div', {
+    className: 'home-start__col home-start__col--clarity'
+  }, React.createElement('div', {
+    className: 'home-start__titlerow'
+  }, React.createElement('span', {
+    className: 'home-start__name'
+  }, 'Clarity tools'), React.createElement('span', {
+    className: 'home-start__badge'
+  }, '5 tools')), React.createElement('span', {
+    className: 'home-start__desc'
+  }, "Short assessments to work out what's actually going on with your business, career, execution or burnout."), React.createElement('button', {
+    type: 'button',
+    className: 'home-clarity__btn',
+    ref: clarityBtnRef,
+    'aria-expanded': clarityOpen ? 'true' : 'false',
+    'aria-controls': 'home-clarity-panel',
+    onClick: function () {
+      setClarityOpen(function (v) {
+        return !v;
+      });
+    }
+  }, React.createElement('span', null, clarityOpen ? 'Hide tools' : 'Choose a tool'), React.createElement('svg', {
+    className: 'home-clarity__caret',
+    viewBox: '0 0 10 6',
+    width: 11,
+    height: 7,
+    'aria-hidden': 'true'
+  }, React.createElement('path', {
+    d: 'M1 1l4 4 4-4',
+    stroke: 'currentColor',
+    strokeWidth: '1.6',
+    fill: 'none',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round'
+  })))), React.createElement('a', {
+    className: 'home-start__col home-start__col--wtf',
+    href: '/wtf-friday/',
+    'aria-label': 'Join WTF Friday'
+  }, React.createElement('span', {
+    className: 'home-start__name'
+  }, 'WTF Friday'), React.createElement('span', {
+    className: 'home-start__desc'
+  }, 'Free weekly office hours. Bring a real problem, get a real answer.'), React.createElement('span', {
+    className: 'home-start__go'
+  }, 'Join WTF Friday ', React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '→'))), React.createElement('a', {
+    className: 'home-start__col home-start__col--ask',
+    href: window.cPath('ask-me-anything', lang),
+    'aria-label': 'Ask me something'
+  }, React.createElement('span', {
+    className: 'home-start__name'
+  }, 'Ask me something'), React.createElement('span', {
+    className: 'home-start__desc'
+  }, 'Send a question anonymously. I answer selected questions publicly.'), React.createElement('span', {
+    className: 'home-start__go'
+  }, 'Ask something ', React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '→'))), React.createElement('div', {
+    id: 'home-clarity-panel',
+    className: 'home-clarity-panel' + (clarityOpen ? ' is-open' : '')
+  }, React.createElement('div', {
+    className: 'home-clarity-panel__inner'
+  }, React.createElement('div', {
+    className: 'home-clarity-panel__list',
+    ref: clarityListRef
+  }, HOME_TOOLS.map(function (tool, i) {
+    return React.createElement('a', {
+      key: tool.href,
+      className: 'home-clarity__tool',
+      href: tool.href,
+      ref: i === 0 ? clarityFirstRef : null
+    }, React.createElement('span', null, tool.name), React.createElement('span', {
+      className: 'home-clarity__tool-arw',
+      'aria-hidden': 'true'
+    }, '→'));
+  }))))))) : null;
+  const opinionSection = React.createElement('section', {
+    key: 'opinion'
+  }, React.createElement('div', {
+    className: 'site-container'
+  }, SecLabel(isEn ? '03' : '02', c.s02d), React.createElement('h2', {
     className: 'sec__h2l'
   }, React.createElement('span', null, c.opinionL1), React.createElement('span', null, c.opinionL2)), React.createElement('div', {
     className: 'opinion'
@@ -746,23 +874,61 @@ function HomePageV2({
     decoding: 'async'
   }), React.createElement('div', {
     className: 'opinion__body'
-  }, c.opinionParas.map((p, i) => React.createElement('p', {
-    key: i
-  }, p)), React.createElement('blockquote', {
+  }, c.opinionParas.map(function (p, i) {
+    return React.createElement('p', {
+      key: i
+    }, p);
+  }), React.createElement('blockquote', {
     className: 'opinion__q'
-  }, c.opinionQuote))))),
-  // 03 — if we continue
-  React.createElement('section', null, React.createElement('div', {
+  }, c.opinionQuote)))));
+  const contSection = React.createElement('section', {
+    key: 'cont'
+  }, React.createElement('div', {
     className: 'site-container'
   }, React.createElement('div', {
     className: 'cont'
   }, React.createElement('div', {
     className: 'cont__in'
-  }, SecLabel('03', c.s03d), React.createElement('h2', {
+  }, SecLabel(isEn ? '04' : '03', c.s03d), React.createElement('h2', {
     className: 'cont__h'
-  }, c.contH), React.createElement('p', null, c.contP))))),
-  // 04 — media
-  React.createElement('section', null, React.createElement('div', {
+  }, c.contH), React.createElement('p', null, c.contP)))));
+  const moreSection = isEn ? React.createElement('section', {
+    key: 'more'
+  }, React.createElement('div', {
+    className: 'site-container'
+  }, React.createElement('div', {
+    className: 'home-more__label'
+  }, 'More from me'), React.createElement('div', {
+    className: 'home-more__links'
+  }, React.createElement('a', {
+    className: 'home-more__link',
+    href: window.EXTERNAL.undisguised,
+    ...v2Ext
+  }, React.createElement('span', {
+    className: 'home-more__link-main'
+  }, React.createElement('span', {
+    className: 'home-more__link-kicker'
+  }, 'Undisguised'), React.createElement('span', {
+    className: 'home-more__link-desc'
+  }, c.readP)), React.createElement('span', {
+    className: 'home-more__link-arw',
+    'aria-hidden': 'true'
+  }, '↗')), React.createElement('a', {
+    className: 'home-more__link',
+    href: window.EXTERNAL.youtube,
+    ...v2Ext
+  }, React.createElement('span', {
+    className: 'home-more__link-main'
+  }, React.createElement('span', {
+    className: 'home-more__link-kicker'
+  }, 'YouTube'), React.createElement('span', {
+    className: 'home-more__link-desc'
+  }, c.watchP)), React.createElement('span', {
+    className: 'home-more__link-arw',
+    'aria-hidden': 'true'
+  }, '↗'))))) : React.createElement('section', {
+    key: 'more'
+  }, React.createElement('div', {
     className: 'site-container'
   }, SecLabel('04', c.s04d), React.createElement('h2', {
     className: 'sec__h',
@@ -812,10 +978,141 @@ function HomePageV2({
     style: {
       fontSize: 32
     }
-  }, '↗')), React.createElement('div', null, React.createElement('p', null, c.askP))))))), React.createElement(window.BlackCtaStrip, {
+  }, '↗')), React.createElement('div', null, React.createElement('p', null, c.askP))))));
+  const heroSection = React.createElement('section', {
+    className: 'home-hero',
+    key: 'hero'
+  }, React.createElement('div', {
+    className: 'home-hero__grid'
+  }, React.createElement('div', {
+    className: 'home-hero__copy'
+  }, React.createElement('div', {
+    className: 'home-hero__eyebrow'
+  }, c.eyebrow), React.createElement('h1', {
+    className: 'home-hero__title'
+  }, heroTitleChildren), React.createElement('p', {
+    className: 'home-hero__support'
+  }, c.support), React.createElement('a', {
+    className: 'hero-cta',
+    href: isEn ? '/start-here/' : window.cPath('diagnostic', lang)
+  }, React.createElement('span', null, isEn ? 'START HERE' : t.ctaBtn), React.createElement('span', null, '→'))), React.createElement('figure', {
+    className: 'home-hero__photo'
+  }, React.createElement('div', {
+    className: 'home-hero__frame'
+  }, React.createElement('img', {
+    src: '/img/aggelos-homepage.webp?v=2',
+    alt: 'Aggelos Mouzakitis',
+    width: 2048,
+    height: 1365,
+    loading: 'eager',
+    fetchpriority: 'high',
+    decoding: 'async'
+  })))));
+
+  // Sections that only remain on the Greek homepage (the English homepage is now
+  // deliberately lean: hero → 01 Work with me → 02 Start here for free → footer).
+  const homePointSection = React.createElement('section', {
+    className: 'home-point',
+    key: 'point'
+  }, React.createElement('div', {
+    className: 'site-container'
+  }, React.createElement('div', {
+    className: 'home-point__inner'
+  }, React.createElement('div', {
+    className: 'home-point__eyebrow'
+  }, c.pointEyebrow), React.createElement('h2', {
+    className: 'home-point__h'
+  }, c.pointH), React.createElement('div', {
+    className: 'home-point__grid'
+  }, arr(c.points).map(function (pt, i) {
+    return React.createElement('article', {
+      className: 'home-point__card home-point__card--' + (i + 1),
+      key: i
+    }, React.createElement('div', {
+      className: 'home-point__label'
+    }, pt.label), React.createElement('div', {
+      className: 'home-point__rule'
+    }), React.createElement('p', {
+      className: 'home-point__lead'
+    }, pt.lead), React.createElement('div', {
+      className: 'home-point__text'
+    }, arr(pt.body).map(function (b, j) {
+      return React.createElement('p', {
+        className: 'home-point__body',
+        key: j
+      }, b);
+    }), pt.close ? React.createElement('p', {
+      className: 'home-point__close'
+    }, pt.close) : null));
+  })), React.createElement('div', {
+    className: 'home-point__logos'
+  }, React.createElement('div', {
+    className: 'home-point__logos-label'
+  }, c.logoLabel), React.createElement('div', {
+    className: 'home-point__logos-row'
+  }, ['IBM', 'Farfetch', 'GrowthMentor', 'Discover Greece', 'University of London', 'University of Oxford', 'Glofox', 'Whereby', 'Octopus Investments', 'Startupbootcamp', 'Advantage Austria', 'How to Web', 'Moosend'].map(function (name, i) {
+    return React.createElement('span', {
+      className: 'home-point__logo',
+      key: i
+    }, name);
+  }))))));
+  const amDualitySection = React.createElement('section', {
+    className: 'am-duality-section',
+    'aria-labelledby': 'am-duality-title',
+    key: 'duality'
+  }, React.createElement('div', {
+    className: 'am-duality-section__inner'
+  }, React.createElement('header', {
+    className: 'am-duality-section__heading'
+  }, SecLabel('01', c.s01d), React.createElement('h2', {
+    className: 'am-duality-section__title',
+    id: 'am-duality-title'
+  }, c.splitIntro)), React.createElement('div', {
+    className: 'am-duality'
+  }, React.createElement('article', {
+    className: 'am-duality__side am-duality__side--business'
+  }, React.createElement('div', {
+    className: 'am-duality__copy'
+  }, React.createElement('p', {
+    className: 'am-duality__label'
+  }, c.leftH), React.createElement('p', {
+    className: 'am-duality__statement'
+  }, c.leftP))), React.createElement('article', {
+    className: 'am-duality__side am-duality__side--psychology'
+  }, React.createElement('div', {
+    className: 'am-duality__copy'
+  }, React.createElement('p', {
+    className: 'am-duality__label'
+  }, c.rightH), React.createElement('p', {
+    className: 'am-duality__statement'
+  }, c.rightP))), React.createElement('figure', {
+    className: 'am-duality__portrait'
+  }, React.createElement('img', {
+    src: '/img/aggelos-overlap.webp?v=2',
+    alt: 'Aggelos Mouzakitis',
+    width: 250,
+    height: 426,
+    loading: 'lazy',
+    decoding: 'async'
+  })))));
+  const finalCta = React.createElement(window.BlackCtaStrip, {
     lang,
     heading: c.finalH
-  })), React.createElement(window.SiteFooterX, {
+  });
+
+  // English homepage: hero → 01 Work with me → 02 Start here for free → footer.
+  // Greek homepage keeps its full original flow until it is localised.
+  const mainChildren = isEn ? [heroSection, React.createElement('div', {
+    className: 'home-flow',
+    key: 'flow'
+  }, workSection, startSection)] : [heroSection, homePointSection, amDualitySection, React.createElement('div', {
+    className: 'home-flow',
+    key: 'flow'
+  }, opinionSection, contSection, moreSection), finalCta];
+  return React.createElement(React.Fragment, null, React.createElement(window.ChromeStyles), React.createElement(PageV2Styles), React.createElement(window.SiteHeader, {
+    page: 'home',
+    lang
+  }), React.createElement('main', null, mainChildren), React.createElement(window.SiteFooterX, {
     lang
   }));
 }
@@ -826,15 +1123,10 @@ function AboutPageV2({
 }) {
   const c = WHY_V2[lang] || WHY_V2.en;
   const diag = window.cPath('diagnostic', lang);
-  return React.createElement(React.Fragment, null, React.createElement(window.ChromeStyles), React.createElement(PageV2Styles), React.createElement(window.SiteHeader, {
-    page: 'about',
-    lang
-  }), React.createElement('main', {
-    className: 'amx-page amx-page--about'
-  },
-  // Hero — off-white
-  React.createElement('section', {
-    className: 'amx-paper'
+  const isEn = lang === 'en';
+  const heroSection = React.createElement('section', {
+    className: 'amx-paper',
+    key: 'hero'
   }, React.createElement('div', {
     className: 'amx-container amx-why-hero'
   }, React.createElement('p', {
@@ -843,11 +1135,12 @@ function AboutPageV2({
     className: 'amx-display'
   }, c.h1), React.createElement('p', {
     className: 'amx-body'
-  }, c.deck))),
-  // Proof — Background / credentials (EN). Replaces the green fact bar,
-  // which is kept for locales without a `background` block (EL).
-  c.background ? React.createElement('section', {
-    className: 'amx-paper amx-cred-section'
+  }, c.deck)));
+
+  // Short résumé / credentials (EN keeps the two-column proof; EL keeps the fact bar).
+  const credOrFact = c.background ? React.createElement('section', {
+    className: 'amx-paper amx-cred-section',
+    key: 'cred'
   }, React.createElement('div', {
     className: 'amx-container'
   }, React.createElement('div', {
@@ -859,84 +1152,187 @@ function AboutPageV2({
   }, c.background.h)), React.createElement('div', {
     className: 'amx-cred-grid'
   }, CredColumn(c.background.colA), CredColumn(c.background.colB)))) : React.createElement('section', {
-    className: 'amx-green amx-fact-bar'
+    className: 'amx-green amx-fact-bar',
+    key: 'fact'
   }, React.createElement('div', {
     className: 'amx-container'
   }, React.createElement('p', {
     className: 'amx-body'
-  }, c.fact))),
-  // Origin — dark
-  React.createElement('section', {
-    className: 'amx-dark amx-section'
-  }, React.createElement('div', {
-    className: 'amx-container amx-story-grid'
-  }, SecLabel(c.originNum, c.originDesc), React.createElement('div', {
-    className: 'amx-story-copy'
-  }, c.origin.map((p, i) => React.createElement('p', {
-    className: 'amx-body',
-    key: i
-  }, p))))),
-  // Hard work — off-white
-  React.createElement('section', {
-    className: 'amx-paper amx-section'
-  }, React.createElement('div', {
-    className: 'amx-container'
-  }, React.createElement('div', {
-    className: 'amx-section-head'
-  }, SecLabel(c.hwNum, c.hwDesc), React.createElement('h2', {
-    className: 'amx-heading'
-  }, c.hwH)), React.createElement('div', {
-    className: 'amx-reading-copy'
-  }, c.hw.map((p, i) => React.createElement('p', {
-    className: 'amx-body',
-    key: i
-  }, p))))),
-  // Examples — dark
-  React.createElement('section', {
-    className: 'amx-dark amx-section'
-  }, React.createElement('div', {
-    className: 'amx-container'
-  }, React.createElement('div', {
-    className: 'amx-section-head'
-  }, SecLabel(c.exNum, c.exDesc), React.createElement('h2', {
-    className: 'amx-heading'
-  }, c.exH)), React.createElement('div', {
-    className: 'amx-reading-copy'
-  }, c.ex.map((p, i) => React.createElement('p', {
-    className: 'amx-body',
-    key: i
-  }, p))))),
-  // One room — off-white
-  React.createElement('section', {
-    className: 'amx-paper amx-section'
-  }, React.createElement('div', {
-    className: 'amx-container'
-  }, React.createElement('div', {
-    className: 'amx-section-head'
-  }, SecLabel(c.orNum, c.orDesc), React.createElement('h2', {
-    className: 'amx-heading'
-  }, c.orH)), React.createElement('div', {
-    className: 'amx-reading-copy'
-  }, c.or.map((p, i) => React.createElement('p', {
-    className: 'amx-body',
-    key: i
-  }, p))))),
-  // Final CTA — dark
-  React.createElement('section', {
-    className: 'amx-dark amx-section amx-final'
-  }, React.createElement('div', {
-    className: 'amx-container'
-  }, React.createElement('p', {
-    className: 'amx-label'
-  }, c.finalLabel), React.createElement('h2', {
-    className: 'amx-heading',
-    style: {
-      marginTop: 16
-    }
-  }, c.finalH), React.createElement('a', {
-    className: 'amx-button',
-    href: diag
-  }, c.finalCta + ' →')))), React.createElement(window.SiteFooterX, {
+  }, c.fact)));
+  let aboutMainChildren;
+  if (isEn) {
+    // Business ← portrait → Psychology: the homepage duality visual now lives here,
+    // where it explains why one person legitimately sits between the two worlds.
+    const visualSection = React.createElement('section', {
+      className: 'am-duality-section',
+      'aria-labelledby': 'about-duality-title',
+      key: 'visual'
+    }, React.createElement('div', {
+      className: 'am-duality-section__inner'
+    }, React.createElement('header', {
+      className: 'am-duality-section__heading'
+    }, React.createElement('p', {
+      className: 'amx-label'
+    }, 'BUSINESS + PSYCHOLOGY'), React.createElement('h2', {
+      className: 'am-duality-section__title',
+      id: 'about-duality-title',
+      style: {
+        marginTop: 14
+      }
+    }, 'Why I sit between two professional worlds.')), React.createElement('div', {
+      className: 'am-duality'
+    }, React.createElement('article', {
+      className: 'am-duality__side am-duality__side--business'
+    }, React.createElement('div', {
+      className: 'am-duality__copy'
+    }, React.createElement('p', {
+      className: 'am-duality__label'
+    }, 'Business'), React.createElement('p', {
+      className: 'am-duality__statement'
+    }, 'I spent most of my career here.'))), React.createElement('article', {
+      className: 'am-duality__side am-duality__side--psychology'
+    }, React.createElement('div', {
+      className: 'am-duality__copy'
+    }, React.createElement('p', {
+      className: 'am-duality__label'
+    }, 'Psychology'), React.createElement('p', {
+      className: 'am-duality__statement'
+    }, 'I trained here because business knowledge was not enough.'))), React.createElement('figure', {
+      className: 'am-duality__portrait'
+    }, React.createElement('img', {
+      src: '/img/aggelos-overlap.webp?v=2',
+      alt: 'Aggelos Mouzakitis',
+      width: 250,
+      height: 426,
+      loading: 'lazy',
+      decoding: 'async'
+    })))));
+    const explainSection = React.createElement('section', {
+      className: 'amx-paper amx-section',
+      key: 'explain'
+    }, React.createElement('div', {
+      className: 'amx-container'
+    }, React.createElement('div', {
+      className: 'amx-reading-copy'
+    }, React.createElement('p', {
+      className: 'amx-body'
+    }, 'Most problems I work on do not stay neatly on one side.'), React.createElement('p', {
+      className: 'amx-body'
+    }, 'A pricing problem can involve fear of rejection. A career decision can be commercially rational and psychologically difficult. A business can have the right strategy and an owner who keeps avoiding it.'), React.createElement('p', {
+      className: 'amx-body'
+    }, 'That is why I work with both.'))));
+    const whySection = React.createElement('section', {
+      className: 'amx-dark amx-section',
+      key: 'why'
+    }, React.createElement('div', {
+      className: 'amx-container'
+    }, React.createElement('div', {
+      className: 'amx-section-head'
+    }, React.createElement('h2', {
+      className: 'amx-heading'
+    }, 'Why I ended up here')), React.createElement('div', {
+      className: 'amx-reading-copy'
+    }, React.createElement('p', {
+      className: 'amx-body'
+    }, 'I built a consultancy, worked with more than 100 technology companies and built two startups that failed. For years, being useful, reasonable and easy to work with helped me professionally. It also made it easier to avoid conflict, accept things I did not want and stay too long in the wrong places.'), React.createElement('p', {
+      className: 'amx-body'
+    }, 'Knowing more about business did not explain why approval, fear or other people’s reactions could still influence decisions that looked perfectly rational on paper. That gap is part of why I trained as a psychotherapist.'), React.createElement('p', {
+      className: 'amx-body'
+    }, 'Today I work with both sides of the problem when both sides matter.'))));
+    const ctaSection = React.createElement('section', {
+      className: 'amx-dark amx-section amx-final',
+      key: 'cta'
+    }, React.createElement('div', {
+      className: 'amx-container'
+    }, React.createElement('a', {
+      className: 'amx-button',
+      href: '/start-here/'
+    }, 'START HERE →')));
+    aboutMainChildren = [heroSection, credOrFact, visualSection, explainSection, whySection, ctaSection];
+  } else {
+    aboutMainChildren = [heroSection, credOrFact, React.createElement('section', {
+      className: 'amx-dark amx-section',
+      key: 'origin'
+    }, React.createElement('div', {
+      className: 'amx-container amx-story-grid'
+    }, SecLabel(c.originNum, c.originDesc), React.createElement('div', {
+      className: 'amx-story-copy'
+    }, c.origin.map(function (p, i) {
+      return React.createElement('p', {
+        className: 'amx-body',
+        key: i
+      }, p);
+    })))), React.createElement('section', {
+      className: 'amx-paper amx-section',
+      key: 'hw'
+    }, React.createElement('div', {
+      className: 'amx-container'
+    }, React.createElement('div', {
+      className: 'amx-section-head'
+    }, SecLabel(c.hwNum, c.hwDesc), React.createElement('h2', {
+      className: 'amx-heading'
+    }, c.hwH)), React.createElement('div', {
+      className: 'amx-reading-copy'
+    }, c.hw.map(function (p, i) {
+      return React.createElement('p', {
+        className: 'amx-body',
+        key: i
+      }, p);
+    })))), React.createElement('section', {
+      className: 'amx-dark amx-section',
+      key: 'ex'
+    }, React.createElement('div', {
+      className: 'amx-container'
+    }, React.createElement('div', {
+      className: 'amx-section-head'
+    }, SecLabel(c.exNum, c.exDesc), React.createElement('h2', {
+      className: 'amx-heading'
+    }, c.exH)), React.createElement('div', {
+      className: 'amx-reading-copy'
+    }, c.ex.map(function (p, i) {
+      return React.createElement('p', {
+        className: 'amx-body',
+        key: i
+      }, p);
+    })))), React.createElement('section', {
+      className: 'amx-paper amx-section',
+      key: 'or'
+    }, React.createElement('div', {
+      className: 'amx-container'
+    }, React.createElement('div', {
+      className: 'amx-section-head'
+    }, SecLabel(c.orNum, c.orDesc), React.createElement('h2', {
+      className: 'amx-heading'
+    }, c.orH)), React.createElement('div', {
+      className: 'amx-reading-copy'
+    }, c.or.map(function (p, i) {
+      return React.createElement('p', {
+        className: 'amx-body',
+        key: i
+      }, p);
+    })))), React.createElement('section', {
+      className: 'amx-dark amx-section amx-final',
+      key: 'cta'
+    }, React.createElement('div', {
+      className: 'amx-container'
+    }, React.createElement('p', {
+      className: 'amx-label'
+    }, c.finalLabel), React.createElement('h2', {
+      className: 'amx-heading',
+      style: {
+        marginTop: 16
+      }
+    }, c.finalH), React.createElement('a', {
+      className: 'amx-button',
+      href: diag
+    }, c.finalCta + ' →')))];
+  }
+  return React.createElement(React.Fragment, null, React.createElement(window.ChromeStyles), React.createElement(PageV2Styles), React.createElement(window.SiteHeader, {
+    page: 'about',
+    lang
+  }), React.createElement('main', {
+    className: 'amx-page amx-page--about'
+  }, aboutMainChildren), React.createElement(window.SiteFooterX, {
     lang
   }));
 }

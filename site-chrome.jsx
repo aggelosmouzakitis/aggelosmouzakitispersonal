@@ -216,6 +216,7 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 
 .site-ftr{border-top:2px solid ${SITE.green};padding-block:64px 32px;background:${SITE.ink}}
 .site-ftr__cols{display:grid;grid-template-columns:minmax(280px,1.4fr) repeat(3,minmax(130px,0.55fr));gap:48px;align-items:start}
+.site-ftr__cols--en{grid-template-columns:minmax(220px,1.2fr) repeat(4,minmax(120px,0.6fr));gap:40px}
 .site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#10B981;margin-bottom:20px}
 .site-ftr nav a{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.4;margin-bottom:12px;transition:color .18s}
 .site-ftr nav a:hover{color:${SITE.onDark}}
@@ -278,7 +279,7 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 .u-notice p{margin:0;font-size:19px;line-height:1.5;max-width:52ch}
 .u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:${SITE.green}}
 
-@media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:960px){.site-ftr__cols,.site-ftr__cols--en{grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}}
 @media (max-width:680px){
   .site-hdr,.site-hdr__in{min-height:68px}
   .site-hdr__brand{font-size:23px}
@@ -439,10 +440,18 @@ function SiteHeader({ page, lang = 'en' }) {
       React.createElement('span', { className: 'site-hdr__ddown-desc' }, it.desc))))
   );
 
-  const navChildren = [link(homeItem)];
-  if (showWork) navChildren.push(workDropdown);
-  if (showClarity) navChildren.push(clarityDropdown);
-  restItems.forEach((it) => navChildren.push(link(it)));
+  // English header is deliberately lean: Work with me, About, START HERE →.
+  // Greek keeps its current Home / About / Reviews nav until it is localised.
+  const aboutItem = { id: 'about', label: t.why };
+  let navChildren;
+  if (lang === 'en') {
+    navChildren = [];
+    if (showWork) navChildren.push(workDropdown);
+    navChildren.push(link(aboutItem));
+  } else {
+    navChildren = [link(homeItem)];
+    restItems.forEach((it) => navChildren.push(link(it)));
+  }
 
   // Mobile "Work with me" section (rendered expanded inside the burger menu)
   const workMobile = showWork ? React.createElement(React.Fragment, { key: 'work-m' },
@@ -467,10 +476,15 @@ function SiteHeader({ page, lang = 'en' }) {
     }, it.name))
   ) : null;
 
-  const menuChildren = [link(homeItem)];
-  if (workMobile) menuChildren.push(workMobile);
-  if (clarityMobile) menuChildren.push(clarityMobile);
-  restItems.forEach((it) => menuChildren.push(link(it)));
+  let menuChildren;
+  if (lang === 'en') {
+    menuChildren = [];
+    if (workMobile) menuChildren.push(workMobile);
+    menuChildren.push(link(aboutItem));
+  } else {
+    menuChildren = [link(homeItem)];
+    restItems.forEach((it) => menuChildren.push(link(it)));
+  }
   if (SHOW_LANG_SWITCHER) menuChildren.push(React.createElement('a', { key: 'lang', href: langHref, hrefLang: other, style: { color: SITE.onDark } }, t.other));
   if (showCta) menuChildren.push(React.createElement('a', { key: 'cta', className: 'hdr-cta', href: ctaHref, ...ctaExt },
     React.createElement('span', null, ctaLabel), React.createElement('span', null, '→')));
@@ -523,7 +537,7 @@ function SiteFooterX({ lang = 'en' }) {
     React.createElement(BrandIcon, { name }), React.createElement('span', null, label || name));
   return React.createElement('footer', { className: 'site-ftr' },
     React.createElement('div', { className: 'site-container' },
-      React.createElement('div', { className: 'site-ftr__cols' },
+      React.createElement('div', { className: 'site-ftr__cols' + (lang === 'en' ? ' site-ftr__cols--en' : '') },
         React.createElement('div', null,
           React.createElement('div', { className: 'site-hdr__brand', style: { fontSize: 20 } },
             'Aggelos', React.createElement('span', null, '.')
@@ -533,6 +547,15 @@ function SiteFooterX({ lang = 'en' }) {
             React.createElement('div', { style: { marginTop: 8 } }, t.role2)
           )
         ),
+        // Work with me — the three paid offers + WTF Friday (English only, mirrors
+        // the header dropdown and the homepage "Work with me" section).
+        lang === 'en' ? React.createElement('nav', null,
+          React.createElement('div', { className: 'site-ftr__head' }, 'WORK WITH ME'),
+          React.createElement('a', { href: '/psychotherapy-decision-coaching/' }, 'Psychotherapy / decision coaching'),
+          React.createElement('a', { href: '/career-strategy-consulting/' }, 'Career strategy consulting'),
+          React.createElement('a', { href: '/solopreneur-growth-consulting/' }, 'Solo business growth consulting'),
+          React.createElement('a', { href: '/wtf-friday/' }, 'WTF Friday')
+        ) : null,
         React.createElement('nav', null,
           React.createElement('div', { className: 'site-ftr__head' }, t.navigate),
           React.createElement('a', { href: cPath('home', lang) }, t.home),

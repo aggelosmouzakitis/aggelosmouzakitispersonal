@@ -87,7 +87,7 @@ window.CLARITY_DATA['business-constraint'] = {
     count: '20 questions',
     start: 'Start assessment →',
   },
-  cta: { heading: 'Want another perspective?', sub: 'If you want a second read on which constraint to work on first, a working session goes through your specific numbers and situation in depth.', label: 'Apply for a working session →', href: '/start-here/' },
+  cta: { heading: 'Want another perspective?', sub: 'If you want a second read on which constraint to work on first, a working session goes through your specific numbers and situation in depth.', label: 'START HERE →', href: '/start-here/' },
   questions: [
     { id: 'q1', context: true, dim: null, text: 'Which best describes the business today?', options: [
       { t: 'A side project or idea I have not really sold yet', s: 0 },
@@ -379,7 +379,7 @@ window.CLARITY_DATA['strategy-or-execution'] = {
     count: '17 questions',
     start: 'Start assessment →',
   },
-  cta: { heading: 'Want another perspective?', sub: 'If the result points at more than one driver, a working session can help you decide what to change first without guessing.', label: 'Apply for a working session →', href: '/start-here/' },
+  cta: { heading: 'Want another perspective?', sub: 'If the result points at more than one driver, a working session can help you decide what to change first without guessing.', label: 'START HERE →', href: '/start-here/' },
   questions: [
     { id: 'q1', dim: 'strategy', text: 'How precisely can you state the result you are currently trying to achieve?', options: [
       { t: 'Very precisely, with a number and a date', s: 0 },
@@ -603,7 +603,7 @@ window.CLARITY_DATA['quit-your-job'] = {
     count: '20 questions',
     start: 'Start assessment →',
   },
-  cta: { heading: 'Want another perspective?', sub: 'A working session can help you separate what needs to change from whether you need to leave, without anyone telling you what to do.', label: 'Apply for a working session →', href: '/start-here/' },
+  cta: { heading: 'Want another perspective?', sub: 'A working session can help you separate what needs to change from whether you need to leave, without anyone telling you what to do.', label: 'START HERE →', href: '/start-here/' },
   breakdownGroups: [
     { title: 'What is pushing you', note: 'Higher means more pressure to change in that area.', keys: A3_PUSH },
     { title: 'Your alternative', note: 'Higher means the alternative is more developed and evidenced.', keys: A3_ALT },
@@ -915,7 +915,7 @@ window.CLARITY_DATA['become-a-solopreneur'] = {
     count: '20 questions',
     start: 'Start assessment →',
   },
-  cta: { heading: 'Want another perspective?', sub: 'If fit and readiness are pointing in different directions, a working session can help you decide what to test before committing to anything.', label: 'Apply for a working session →', href: '/start-here/' },
+  cta: { heading: 'Want another perspective?', sub: 'If fit and readiness are pointing in different directions, a working session can help you decide what to test before committing to anything.', label: 'START HERE →', href: '/start-here/' },
   breakdownGroups: [
     { title: 'Fit — do you want the reality?', note: 'Higher means a better fit with how independent work actually feels.', keys: A4_FIT },
     { title: 'Readiness — can it work yet?', note: 'Higher means more practical evidence and preparation.', keys: A4_READY },
@@ -1199,7 +1199,7 @@ window.CLARITY_DATA['burned-out'] = {
     count: '20 questions',
     start: 'Start assessment →',
   },
-  cta: { heading: 'Want another perspective?', sub: 'If the result points to depletion, boredom, or a loss of fit, a working session can help you decide what to change. For clinical concerns, speak to a professional.', label: 'Apply for a working session →', href: '/start-here/' },
+  cta: { heading: 'Want another perspective?', sub: 'If the result points to depletion, boredom, or a loss of fit, a working session can help you decide what to change. For clinical concerns, speak to a professional.', label: 'START HERE →', href: '/start-here/' },
   breakdownGroups: [
     { title: 'Work strain', note: 'Higher means stronger evidence of work-related depletion in that area.', keys: A5_STRAIN },
     { title: 'Other explanations', note: 'Separate from strain. Higher means a stronger alternative explanation for low motivation.', keys: ['boredom', 'unusedCapability', 'lossOfFit'] },

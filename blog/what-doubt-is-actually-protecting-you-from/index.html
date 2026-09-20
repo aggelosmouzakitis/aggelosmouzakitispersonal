@@ -188,6 +188,7 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 
 .site-ftr{border-top:2px solid #047857;padding-block:64px 32px;background:#1A1C1D}
 .site-ftr__cols{display:grid;grid-template-columns:minmax(280px,1.4fr) repeat(3,minmax(130px,0.55fr));gap:48px;align-items:start}
+.site-ftr__cols--en{grid-template-columns:minmax(220px,1.2fr) repeat(4,minmax(120px,0.6fr));gap:40px}
 .site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#10B981;margin-bottom:20px}
 .site-ftr nav a{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.4;margin-bottom:12px;transition:color .18s}
 .site-ftr nav a:hover{color:#C2C6CA}
@@ -250,7 +251,7 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 .u-notice p{margin:0;font-size:19px;line-height:1.5;max-width:52ch}
 .u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:#047857}
 
-@media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:960px){.site-ftr__cols,.site-ftr__cols--en{grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}}
 @media (max-width:680px){
   .site-hdr,.site-hdr__in{min-height:68px}
   .site-hdr__brand{font-size:23px}
@@ -287,7 +288,7 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 }
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
-</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/">Home</a><div class="site-hdr__work"><button class="site-hdr__work-btn" type="button" aria-haspopup="true" aria-expanded="false"><span>Work with me</span><svg class="site-hdr__work-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div><div class="site-hdr__clarity"><button class="site-hdr__work-btn" type="button" aria-haspopup="true" aria-expanded="false"><span>Clarity tools</span><svg class="site-hdr__work-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div><a href="/about/">About me</a><a href="/reviews/">Reviews</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="hdr-cta" href="/start-here/"><span>START HERE</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header></div>
+</style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><div class="site-hdr__work"><button class="site-hdr__work-btn" type="button" aria-haspopup="true" aria-expanded="false"><span>Work with me</span><svg class="site-hdr__work-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div><a href="/about/">About me</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="hdr-cta" href="/start-here/"><span>START HERE</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header></div>
   <div id="content-area">
     <div class="article-wrap">
       <a href="/blog/" class="top-back">← Writing</a>
@@ -362,7 +363,7 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 <script src="/react.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=18.3.1" crossorigin="anonymous"></script>
 
-<script src="../../site-chrome.js?v=20"></script>
+<script src="../../site-chrome.js?v=21"></script>
 <script>
 const URL_MAP = {
   'home': '/',

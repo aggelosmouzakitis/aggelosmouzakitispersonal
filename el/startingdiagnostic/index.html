@@ -173,6 +173,7 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 
 .site-ftr{border-top:2px solid #047857;padding-block:64px 32px;background:#1A1C1D}
 .site-ftr__cols{display:grid;grid-template-columns:minmax(280px,1.4fr) repeat(3,minmax(130px,0.55fr));gap:48px;align-items:start}
+.site-ftr__cols--en{grid-template-columns:minmax(220px,1.2fr) repeat(4,minmax(120px,0.6fr));gap:40px}
 .site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:#10B981;margin-bottom:20px}
 .site-ftr nav a{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.4;margin-bottom:12px;transition:color .18s}
 .site-ftr nav a:hover{color:#C2C6CA}
@@ -235,7 +236,7 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
 .u-notice p{margin:0;font-size:19px;line-height:1.5;max-width:52ch}
 .u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:#047857}
 
-@media (max-width:960px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:960px){.site-ftr__cols,.site-ftr__cols--en{grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}}
 @media (max-width:680px){
   .site-hdr,.site-hdr__in{min-height:68px}
   .site-hdr__brand{font-size:23px}
@@ -288,7 +289,7 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:#fff}
   })();
 </script>
 
-<script src="../../site-chrome.js?v=20"></script>
+<script src="../../site-chrome.js?v=21"></script>
 <script src="../../content-pages.js?v=39"></script>
 <script src="../../diagnostic.js?v=36"></script>
 
