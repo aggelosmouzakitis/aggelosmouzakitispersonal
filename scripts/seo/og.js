@@ -6,16 +6,16 @@ const pages = JSON.parse(fs.readFileSync('/tmp/og_pages.json','utf8'));
 const tpl = (label, title) => `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
 * { margin:0; padding:0; box-sizing:border-box; }
 html,body { width:1200px; height:630px; }
-body { background:#1A1918; font-family:'DejaVu Sans Mono',monospace; color:#F4F2F0;
+body { background:#16231E; font-family:'DejaVu Sans Mono',monospace; color:#F3F0E8;
   padding:80px; display:flex; flex-direction:column; justify-content:space-between;
-  border-top:8px solid #10B981; }
-.label { font-size:22px; letter-spacing:.18em; text-transform:uppercase; color:#10B981; }
+  border-top:8px solid #8FBFA7; }
+.label { font-size:22px; letter-spacing:.18em; text-transform:uppercase; color:#8FBFA7; }
 .title { font-size:62px; line-height:1.25; letter-spacing:-.01em; max-width:1040px;
-  color:#F4F2F0; font-weight:normal; }
+  color:#F3F0E8; font-weight:normal; }
 .title.small { font-size:48px; }
 .foot { display:flex; align-items:center; gap:20px; }
-.foot img { width:64px; height:64px; border-radius:50%; }
-.foot .dom { font-size:24px; letter-spacing:.1em; color:rgba(244,242,240,.55); }
+.foot img { width:64px; height:64px; border-radius:50%; filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14); }
+.foot .dom { font-size:24px; letter-spacing:.1em; color:rgba(243,240,232,.55); }
 </style></head><body>
 <div class="label">${label}</div>
 <div class="title ${title.length>60?'small':''}">${title}</div>
