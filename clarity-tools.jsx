@@ -225,7 +225,7 @@ function claritySubmit(data, answers, result, person, done) {
 var CL_ACC = '#047857';
 // Restrained severity colours for the breakdown bars. Problem scale runs
 // green→red; the positive-fit scale is reversed so green always reads "good".
-var CL_TONES = ['#047857', '#4B7A52', '#B7791F', '#C05621', '#9B2C2C'];
+var CL_TONES = ['#047857', '#047857', '#B7791F', '#C05621', '#9B2C2C'];
 function toneFor(type, bracketIdx) {
   var idx = type === 'fit' ? (4 - bracketIdx) : bracketIdx;
   return CL_TONES[idx];
@@ -233,17 +233,17 @@ function toneFor(type, bracketIdx) {
 
 function clarityStyles(mob) {
   return {
-    page: { maxWidth: 820, margin: '0 auto', padding: mob ? '1.75rem 1.25rem 5rem' : '3.5rem 2.5rem 6rem', color: '#282726', fontFamily: 'inherit' },
-    eyebrow: { fontSize: '12px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#666', lineHeight: 1.6 },
-    h1: { fontFamily: 'var(--font-heading)', fontSynthesis: 'none', fontSize: mob ? '30px' : '44px', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-.035em', color: '#282726', margin: '0 0 1.25rem' },
-    p: { margin: '0 0 1.2rem', lineHeight: 1.7, fontSize: mob ? '17px' : '18px', color: '#282726' },
-    note: { fontSize: '14px', color: '#777', lineHeight: 1.7 },
-    qText: { fontFamily: 'var(--font-heading)', fontSynthesis: 'none', fontSize: mob ? '23px' : '30px', fontWeight: 750, lineHeight: 1.2, letterSpacing: '-.02em', color: '#282726', margin: '0 0 1.6rem' },
-    cta: { fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', color: '#fff', background: CL_ACC, border: '1.5px solid ' + CL_ACC, borderRadius: '2px', padding: '.9rem 1.7rem', display: 'inline-block', cursor: 'pointer', textDecoration: 'none' },
-    ctaSec: { background: 'transparent', color: '#282726', border: '1.5px solid rgba(40,39,38,.35)' },
-    choice: function (sel) { return { width: '100%', textAlign: 'left', border: sel ? '1.5px solid ' + CL_ACC : '1px solid rgba(40,39,38,.2)', padding: mob ? '.95rem 1rem' : '1rem 1.15rem', borderRadius: '10px', background: sel ? 'rgba(4,120,87,.08)' : '#fff', color: '#282726', fontFamily: 'inherit', fontSize: mob ? '15.5px' : '16.5px', lineHeight: 1.5, cursor: 'pointer', marginBottom: '.6rem', transition: 'border-color .12s, background .12s', display: 'block' }; },
-    naChoice: function (sel) { return { width: '100%', textAlign: 'left', border: sel ? '1.5px solid ' + CL_ACC : '1px dashed rgba(40,39,38,.3)', padding: mob ? '.8rem 1rem' : '.85rem 1.15rem', borderRadius: '10px', background: sel ? 'rgba(4,120,87,.08)' : '#fafafa', color: '#555', fontFamily: 'inherit', fontSize: '15px', lineHeight: 1.5, cursor: 'pointer', marginTop: '.3rem', transition: 'border-color .12s, background .12s', display: 'block' }; },
-    field: { width: '100%', border: '1px solid rgba(40,39,38,.25)', padding: '.85rem 1rem', borderRadius: '10px', background: '#fff', color: '#282726', fontFamily: 'inherit', fontSize: '16px', lineHeight: 1.6, outline: 'none' },
+    page: { maxWidth: 820, margin: '0 auto', padding: mob ? '1.75rem 1.25rem 5rem' : '3.5rem 2.5rem 6rem', color: '#3A403A', fontFamily: 'inherit' },
+    eyebrow: { fontSize: '12px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#6A6F67', lineHeight: 1.6 },
+    h1: { fontFamily: 'var(--font-heading)', fontSynthesis: 'none', fontSize: mob ? '30px' : '44px', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-.035em', color: '#3A403A', margin: '0 0 1.25rem' },
+    p: { margin: '0 0 1.2rem', lineHeight: 1.7, fontSize: mob ? '17px' : '18px', color: '#3A403A' },
+    note: { fontSize: '14px', color: '#6A6F67', lineHeight: 1.7 },
+    qText: { fontFamily: 'var(--font-heading)', fontSynthesis: 'none', fontSize: mob ? '23px' : '30px', fontWeight: 750, lineHeight: 1.2, letterSpacing: '-.02em', color: '#3A403A', margin: '0 0 1.6rem' },
+    cta: { fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', color: '#F3F0E8', background: CL_ACC, border: '1.5px solid ' + CL_ACC, borderRadius: '2px', padding: '.9rem 1.7rem', display: 'inline-block', cursor: 'pointer', textDecoration: 'none' },
+    ctaSec: { background: 'transparent', color: '#3A403A', border: '1.5px solid rgba(40,39,38,.35)' },
+    choice: function (sel) { return { width: '100%', textAlign: 'left', border: sel ? '1.5px solid ' + CL_ACC : '1px solid rgba(40,39,38,.2)', padding: mob ? '.95rem 1rem' : '1rem 1.15rem', borderRadius: '10px', background: sel ? 'rgba(4,120,87,.08)' : '#F3F0E8', color: '#3A403A', fontFamily: 'inherit', fontSize: mob ? '15.5px' : '16.5px', lineHeight: 1.5, cursor: 'pointer', marginBottom: '.6rem', transition: 'border-color .12s, background .12s', display: 'block' }; },
+    naChoice: function (sel) { return { width: '100%', textAlign: 'left', border: sel ? '1.5px solid ' + CL_ACC : '1px dashed rgba(40,39,38,.3)', padding: mob ? '.8rem 1rem' : '.85rem 1.15rem', borderRadius: '10px', background: sel ? 'rgba(4,120,87,.08)' : '#EDE8DB', color: '#3A403A', fontFamily: 'inherit', fontSize: '15px', lineHeight: 1.5, cursor: 'pointer', marginTop: '.3rem', transition: 'border-color .12s, background .12s', display: 'block' }; },
+    field: { width: '100%', border: '1px solid rgba(40,39,38,.25)', padding: '.85rem 1rem', borderRadius: '10px', background: '#F3F0E8', color: '#3A403A', fontFamily: 'inherit', fontSize: '16px', lineHeight: 1.6, outline: 'none' },
     progLine: { height: '3px', background: 'rgba(40,39,38,.12)', borderRadius: '3px', marginTop: '.7rem' },
     progFill: function (pct) { return { height: '3px', background: CL_ACC, width: pct + '%', borderRadius: '3px', transition: 'width .25s ease' }; },
   };
@@ -264,33 +264,33 @@ function ClarityBar({ dim, C }) {
   if (dim.score == null) {
     return React.createElement('div', { style: { marginBottom: '1.4rem' } },
       React.createElement('div', { style: { display: 'flex', justifyContent: 'space-between', gap: '1rem', marginBottom: '.35rem' } },
-        React.createElement('span', { style: { fontSize: '15px', fontWeight: 600, color: '#282726' } }, dim.label),
-        React.createElement('span', { style: { fontSize: '13px', color: '#999' } }, 'Not enough answers')),
-      React.createElement('p', { style: { fontSize: '14px', color: '#777', lineHeight: 1.55, margin: '.15rem 0 0' } }, 'You marked this area as not applicable, so it is excluded from the result.'));
+        React.createElement('span', { style: { fontSize: '15px', fontWeight: 600, color: '#3A403A' } }, dim.label),
+        React.createElement('span', { style: { fontSize: '13px', color: '#6A6F67' } }, 'Not enough answers')),
+      React.createElement('p', { style: { fontSize: '14px', color: '#6A6F67', lineHeight: 1.55, margin: '.15rem 0 0' } }, 'You marked this area as not applicable, so it is excluded from the result.'));
   }
   var tone = toneFor(dim.type, dim.bracket);
   return React.createElement('div', { style: { marginBottom: '1.5rem' } },
     React.createElement('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', marginBottom: '.4rem' } },
-      React.createElement('span', { style: { fontSize: '15.5px', fontWeight: 600, color: '#282726' } }, dim.label),
+      React.createElement('span', { style: { fontSize: '15.5px', fontWeight: 600, color: '#3A403A' } }, dim.label),
       React.createElement('span', { style: { fontSize: '14px', fontWeight: 700, color: tone, whiteSpace: 'nowrap' } }, dim.score + '/100 · ' + dim.labelShort)),
     React.createElement('div', { style: { height: '8px', background: 'rgba(40,39,38,.09)', borderRadius: '999px', overflow: 'hidden' } },
       React.createElement('div', { style: { height: '8px', width: dim.score + '%', background: tone, borderRadius: '999px', transition: 'width .4s ease' } })),
-    dim.copy ? React.createElement('p', { style: { fontSize: '14.5px', color: '#555', lineHeight: 1.55, margin: '.5rem 0 0' } }, dim.copy) : null,
-    dim.lowConfidence ? React.createElement('p', { style: { fontSize: '13px', color: '#999', lineHeight: 1.5, margin: '.3rem 0 0', fontStyle: 'italic' } }, 'Based on few answers, so read this as a weaker signal.') : null);
+    dim.copy ? React.createElement('p', { style: { fontSize: '14.5px', color: '#3A403A', lineHeight: 1.55, margin: '.5rem 0 0' } }, dim.copy) : null,
+    dim.lowConfidence ? React.createElement('p', { style: { fontSize: '13px', color: '#6A6F67', lineHeight: 1.5, margin: '.3rem 0 0', fontStyle: 'italic' } }, 'Based on few answers, so read this as a weaker signal.') : null);
 }
 
 // A headline score block (overall, or a paired headline like fit / readiness).
 function ClarityHeadline({ head, C, compact }) {
   if (!head) return null;
   var tone = toneFor(head.type, head.bracket);
-  return React.createElement('div', { style: { border: '1px solid rgba(40,39,38,.14)', borderLeft: '3px solid ' + tone, borderRadius: '10px', padding: compact ? '1.1rem 1.2rem' : '1.4rem 1.5rem', background: '#fff', marginBottom: compact ? 0 : '1rem', flex: compact ? 1 : 'none', minWidth: 0 } },
-    React.createElement('div', { style: { fontSize: '12px', fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase', color: '#777', marginBottom: '.5rem' } }, head.name),
+  return React.createElement('div', { style: { border: '1px solid rgba(40,39,38,.14)', borderLeft: '3px solid ' + tone, borderRadius: '10px', padding: compact ? '1.1rem 1.2rem' : '1.4rem 1.5rem', background: '#F3F0E8', marginBottom: compact ? 0 : '1rem', flex: compact ? 1 : 'none', minWidth: 0 } },
+    React.createElement('div', { style: { fontSize: '12px', fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase', color: '#6A6F67', marginBottom: '.5rem' } }, head.name),
     React.createElement('div', { style: { display: 'flex', alignItems: 'baseline', gap: '.5rem', flexWrap: 'wrap' } },
-      React.createElement('span', { style: { fontFamily: 'var(--font-heading)', fontSize: compact ? '34px' : '44px', fontWeight: 800, letterSpacing: '-.03em', color: '#282726', lineHeight: 1 } }, head.score),
-      React.createElement('span', { style: { fontSize: '16px', color: '#999', fontWeight: 600 } }, head.unit)),
+      React.createElement('span', { style: { fontFamily: 'var(--font-heading)', fontSize: compact ? '34px' : '44px', fontWeight: 800, letterSpacing: '-.03em', color: '#3A403A', lineHeight: 1 } }, head.score),
+      React.createElement('span', { style: { fontSize: '16px', color: '#6A6F67', fontWeight: 600 } }, head.unit)),
     React.createElement('div', { style: { fontSize: '15px', fontWeight: 700, color: tone, margin: '.5rem 0 .15rem' } }, head.bracketLabel),
-    head.meaning ? React.createElement('p', { style: { fontSize: '13px', color: '#888', lineHeight: 1.5, margin: '.3rem 0 0' } }, head.meaning) : null,
-    (!compact && head.bracketDesc) ? React.createElement('p', { style: { fontSize: '15px', color: '#444', lineHeight: 1.6, margin: '.6rem 0 0' } }, head.bracketDesc) : null,
+    head.meaning ? React.createElement('p', { style: { fontSize: '13px', color: '#6A6F67', lineHeight: 1.5, margin: '.3rem 0 0' } }, head.meaning) : null,
+    (!compact && head.bracketDesc) ? React.createElement('p', { style: { fontSize: '15px', color: '#3A403A', lineHeight: 1.6, margin: '.6rem 0 0' } }, head.bracketDesc) : null,
     head.followNote ? React.createElement('p', { style: { fontSize: '13.5px', color: '#9B2C2C', lineHeight: 1.5, margin: '.6rem 0 0', fontWeight: 600 } }, head.followNote) : null);
 }
 
@@ -302,7 +302,7 @@ function ClaritySection({ title, children, C }) {
 
 function clarityList(items, C) {
   return React.createElement('ul', { style: { margin: 0, paddingLeft: '1.1rem' } },
-    items.map(function (it, i) { return React.createElement('li', { key: i, style: { fontSize: '16px', color: '#333', lineHeight: 1.65, marginBottom: '.5rem' } }, it); }));
+    items.map(function (it, i) { return React.createElement('li', { key: i, style: { fontSize: '16px', color: '#3A403A', lineHeight: 1.65, marginBottom: '.5rem' } }, it); }));
 }
 
 // ── Result page ───────────────────────────────────────────────────────────────
@@ -314,16 +314,16 @@ function ClarityResult({ data, result, C, mob }) {
     React.createElement('div', { style: { ...C.eyebrow, color: CL_ACC, marginBottom: '.8rem' } }, data.intro.eyebrow),
     // 1. Your result
     React.createElement('h1', { style: C.h1 }, 'Your result'),
-    React.createElement('p', { style: { ...C.p, fontSize: mob ? '19px' : '21px', fontWeight: 600, color: '#1A1C1D' } }, interp.primary),
-    interp.secondary ? React.createElement('p', { style: { ...C.p, color: '#333' } }, interp.secondary) : null,
+    React.createElement('p', { style: { ...C.p, fontSize: mob ? '19px' : '21px', fontWeight: 600, color: '#171919' } }, interp.primary),
+    interp.secondary ? React.createElement('p', { style: { ...C.p, color: '#3A403A' } }, interp.secondary) : null,
     // 2. Overall score(s)
     twoHead
       ? React.createElement('div', { style: { display: 'flex', gap: '1rem', flexDirection: mob ? 'column' : 'row', margin: '1.6rem 0 .4rem' } },
           React.createElement(ClarityHeadline, { head: result.overall, C: C, compact: true }),
           React.createElement(ClarityHeadline, { head: result.overall2, C: C, compact: true }))
       : React.createElement('div', { style: { margin: '1.6rem 0 .4rem' } }, React.createElement(ClarityHeadline, { head: result.overall, C: C })),
-    twoHead && result.overall.bracketDesc ? React.createElement('p', { style: { fontSize: '15px', color: '#555', lineHeight: 1.6, margin: '1rem 0 0' } }, result.overall.bracketDesc) : null,
-    twoHead && result.overall2 && result.overall2.bracketDesc ? React.createElement('p', { style: { fontSize: '15px', color: '#555', lineHeight: 1.6, margin: '.5rem 0 0' } }, result.overall2.bracketDesc) : null,
+    twoHead && result.overall.bracketDesc ? React.createElement('p', { style: { fontSize: '15px', color: '#3A403A', lineHeight: 1.6, margin: '1rem 0 0' } }, result.overall.bracketDesc) : null,
+    twoHead && result.overall2 && result.overall2.bracketDesc ? React.createElement('p', { style: { fontSize: '15px', color: '#3A403A', lineHeight: 1.6, margin: '.5rem 0 0' } }, result.overall2.bracketDesc) : null,
     // 3. What is driving the score
     (interp.driving && interp.driving.length) ? React.createElement(ClaritySection, { title: 'What is driving the score', C: C }, clarityList(interp.driving, C)) : null,
     // 4. Your breakdown — grouped when the assessment defines groups, else flat.
@@ -331,29 +331,29 @@ function ClarityResult({ data, result, C, mob }) {
       (data.breakdownGroups && data.breakdownGroups.length)
         ? data.breakdownGroups.map(function (g, gi) {
             return React.createElement('div', { key: gi, style: { marginBottom: '1.6rem' } },
-              React.createElement('h4', { style: { fontSize: '14px', fontWeight: 700, color: '#282726', margin: '0 0 .2rem' } }, g.title),
-              g.note ? React.createElement('p', { style: { fontSize: '13px', color: '#888', lineHeight: 1.5, margin: '0 0 .9rem' } }, g.note) : null,
+              React.createElement('h4', { style: { fontSize: '14px', fontWeight: 700, color: '#3A403A', margin: '0 0 .2rem' } }, g.title),
+              g.note ? React.createElement('p', { style: { fontSize: '13px', color: '#6A6F67', lineHeight: 1.5, margin: '0 0 .9rem' } }, g.note) : null,
               g.keys.map(function (k) { return result.dims[k] ? React.createElement(ClarityBar, { key: k, dim: result.dims[k], C: C }) : null; }));
           })
         : React.createElement('div', null,
-            React.createElement('p', { style: { fontSize: '13.5px', color: '#888', lineHeight: 1.5, margin: '-.3rem 0 1.1rem' } }, data.breakdownNote || (result.overall && result.overall.type === 'fit' ? 'Higher scores mean more supporting evidence.' : 'Higher scores mean stronger evidence of a problem in that area.')),
+            React.createElement('p', { style: { fontSize: '13.5px', color: '#6A6F67', lineHeight: 1.5, margin: '-.3rem 0 1.1rem' } }, data.breakdownNote || (result.overall && result.overall.type === 'fit' ? 'Higher scores mean more supporting evidence.' : 'Higher scores mean stronger evidence of a problem in that area.')),
             shown.map(function (dm) { return React.createElement(ClarityBar, { key: dm.key, dim: dm, C: C }); }))),
     // 5. What looks healthy
     (interp.healthy && interp.healthy.length) ? React.createElement(ClaritySection, { title: 'What looks healthy', C: C }, clarityList(interp.healthy, C)) : null,
     // 6. What else matters
     interp.elseMatters ? React.createElement(ClaritySection, { title: 'What else matters', C: C },
-      Array.isArray(interp.elseMatters) ? clarityList(interp.elseMatters, C) : React.createElement('p', { style: { fontSize: '16px', color: '#333', lineHeight: 1.65, margin: 0 } }, interp.elseMatters)) : null,
+      Array.isArray(interp.elseMatters) ? clarityList(interp.elseMatters, C) : React.createElement('p', { style: { fontSize: '16px', color: '#3A403A', lineHeight: 1.65, margin: 0 } }, interp.elseMatters)) : null,
     // 7. The part worth challenging
     interp.challenge ? React.createElement(ClaritySection, { title: 'The part worth challenging', C: C },
-      React.createElement('p', { style: { fontSize: '16px', color: '#333', lineHeight: 1.65, margin: 0, paddingLeft: '.9rem', borderLeft: '2px solid ' + CL_ACC } }, interp.challenge)) : null,
+      React.createElement('p', { style: { fontSize: '16px', color: '#3A403A', lineHeight: 1.65, margin: 0, paddingLeft: '.9rem', borderLeft: '2px solid ' + CL_ACC } }, interp.challenge)) : null,
     // 8. What to test next
     (interp.testNext && interp.testNext.length) ? React.createElement(ClaritySection, { title: 'What to test next', C: C }, clarityList(interp.testNext, C)) : null,
     // 9. Important context
     interp.context ? React.createElement(ClaritySection, { title: 'Important context', C: C },
-      React.createElement('p', { style: { fontSize: '15px', color: '#555', lineHeight: 1.65, margin: 0 } }, interp.context)) : null,
+      React.createElement('p', { style: { fontSize: '15px', color: '#3A403A', lineHeight: 1.65, margin: 0 } }, interp.context)) : null,
     // 10. Want another perspective?
     React.createElement('div', { style: { marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(40,39,38,.14)' } },
-      React.createElement('h3', { style: { fontFamily: 'var(--font-heading)', fontSize: mob ? '22px' : '26px', fontWeight: 800, letterSpacing: '-.02em', color: '#282726', margin: '0 0 .6rem' } }, data.cta.heading),
+      React.createElement('h3', { style: { fontFamily: 'var(--font-heading)', fontSize: mob ? '22px' : '26px', fontWeight: 800, letterSpacing: '-.02em', color: '#3A403A', margin: '0 0 .6rem' } }, data.cta.heading),
       React.createElement('p', { style: { ...C.p, marginBottom: '1.3rem' } }, data.cta.sub),
       React.createElement('a', { href: data.cta.href, className: 'cta-btn', style: C.cta }, data.cta.label)));
 }
@@ -431,7 +431,7 @@ function ClarityTool({ slug }) {
       React.createElement('div', { style: { ...C.eyebrow, color: CL_ACC, marginBottom: '1rem' } }, data.intro.eyebrow),
       React.createElement('h1', { style: C.h1 }, data.title),
       data.intro.paras.map(function (p, i) { return React.createElement('p', { key: i, style: C.p }, p); }),
-      data.intro.note ? React.createElement('p', { style: { fontSize: '15px', color: '#555', lineHeight: 1.6, margin: '0 0 1.4rem', paddingLeft: '.9rem', borderLeft: '2px solid ' + CL_ACC, fontWeight: 600 } }, data.intro.note) : null,
+      data.intro.note ? React.createElement('p', { style: { fontSize: '15px', color: '#3A403A', lineHeight: 1.6, margin: '0 0 1.4rem', paddingLeft: '.9rem', borderLeft: '2px solid ' + CL_ACC, fontWeight: 600 } }, data.intro.note) : null,
       React.createElement('p', { style: { ...C.note, marginBottom: '.4rem' } }, data.intro.count + (data.intro.time ? ' · ' + data.intro.time : '')),
       React.createElement('p', { style: { ...C.note, marginBottom: '2rem' } }, 'No email is needed to begin. You will be asked for one at the end to receive your result.'),
       React.createElement('button', { className: 'cta-btn', style: C.cta, onClick: start }, data.intro.start));
@@ -470,7 +470,7 @@ function ClarityTool({ slug }) {
       React.createElement('div', { style: { display: 'flex', justifyContent: 'space-between', gap: '1rem' } },
         React.createElement('button', { className: 'cta-btn', style: { ...C.cta, ...C.ctaSec }, onClick: function () { go(total - 1); } }, '← Back'),
         React.createElement('button', { className: 'cta-btn', style: { ...C.cta, opacity: sending ? 0.5 : 1 }, disabled: sending, onClick: submit }, sending ? 'Working…' : 'See my result →')),
-      React.createElement('p', { style: { fontSize: '13px', color: '#999', lineHeight: 1.6, marginTop: '1.4rem' } }, 'Your individual answers are not sent to analytics. They go only to the result you see and to the private notification Aggelos receives.'));
+      React.createElement('p', { style: { fontSize: '13px', color: '#6A6F67', lineHeight: 1.6, marginTop: '1.4rem' } }, 'Your individual answers are not sent to analytics. They go only to the result you see and to the private notification Aggelos receives.'));
   }
 
   // ---- Result ----

@@ -1,9 +1,9 @@
 // content-pages.jsx — Home + all specialty pages
 
-// Shared styles — light theme #FFFFFF bg, #282726 text
+// Shared styles — light theme #F3F0E8 bg, #3A403A text
 const C = {
-  text: '#282726',
-  muted: '#666',
+  text: '#3A403A',
+  muted: '#6A6F67',
   accent: '#047857',
   border: 'rgba(40,39,38,0.12)',
   sepBorder: 'rgba(40,39,38,0.2)',
@@ -25,7 +25,7 @@ const leadStyle = { marginBottom: '1.4rem', lineHeight: 1.6, fontSize: '23px', f
 const sepStyle = { border: 'none', borderTop: `1px solid ${C.sepBorder}`, margin: '2.5rem 0' };
 const ctaBtn = {
   fontFamily: 'inherit', fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase',
-  color: '#FFFFFF', background: '#282726', border: '1px solid #282726',
+  color: '#F3F0E8', background: '#3A403A', border: '1px solid #3A403A',
   textDecoration: 'none', padding: '.8rem 1.5rem', display: 'inline-block',
   cursor: 'pointer', transition: 'background .15s, color .15s',
 };
@@ -49,7 +49,7 @@ function useIsMobile() {
 }
 function Strong({ children }) {
   return React.createElement('span', {
-    style: { fontWeight: 400, color: '#282726', borderBottom: '1px solid rgba(40,39,38,.3)', paddingBottom: '1px' }
+    style: { fontWeight: 400, color: '#3A403A', borderBottom: '1px solid rgba(40,39,38,.3)', paddingBottom: '1px' }
   }, children);
 }
 function A({ href, children }) {
@@ -163,7 +163,7 @@ function SiteFooter({ mob, lang = 'en' }) {
   const cols = { display: mob ? 'block' : 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2.5rem' };
   const colLabel = { fontSize: '11px', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: C.accent, marginBottom: '1.1rem' };
   const linkStyle = { display: 'inline-flex', alignItems: 'baseline', gap: '.35rem', fontSize: '15px', color: C.text, textDecoration: 'none', lineHeight: 1.4, transition: 'color .12s' };
-  const mutedStyle = { fontSize: '15px', color: '#aaa', lineHeight: 1.4, cursor: 'default' };
+  const mutedStyle = { fontSize: '15px', color: '#6A6F67', lineHeight: 1.4, cursor: 'default' };
   const row = { marginBottom: '.75rem' };
   function fLink(l) {
     if (l.muted) return React.createElement('div', { style: row, key: l.label }, React.createElement('span', { style: mutedStyle }, l.label));
@@ -242,8 +242,8 @@ function LatestWriting({ mob, lang = 'en' }) {
   });
   return React.createElement('div', { style: { marginTop: mob ? '2.5rem' : '3.5rem' } },
     React.createElement('h2', { style: { ...sectionTitleStyle, fontSize: mob ? '19px' : '22px' } }, t.head),
-    posts === null && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, t.loading),
-    posts && posts.length === 0 && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, t.empty),
+    posts === null && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#6A6F67' } }, t.loading),
+    posts && posts.length === 0 && React.createElement('p', { style: { fontSize: '12px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#6A6F67' } }, t.empty),
     items.length > 0 && React.createElement(React.Fragment, null,
       items.map(function (p, i) {
         return React.createElement('a', {
@@ -255,7 +255,7 @@ function LatestWriting({ mob, lang = 'en' }) {
           onMouseLeave: e => e.currentTarget.style.color = C.text,
         },
           React.createElement('span', { style: { fontSize: mob ? '16px' : '18px', fontWeight: 600 } }, p.title),
-          React.createElement('span', { style: { fontSize: '14px', color: '#767676', whiteSpace: 'nowrap', flexShrink: 0 } }, p.date)
+          React.createElement('span', { style: { fontSize: '14px', color: '#6A6F67', whiteSpace: 'nowrap', flexShrink: 0 } }, p.date)
         );
       }),
       React.createElement('div', { style: { textAlign: 'right', marginTop: '1.2rem', fontSize: '14px' } },
@@ -314,7 +314,7 @@ function FinalCta({ lang, mob, heading, sub }) {
     sub && React.createElement('p', { style: { fontSize: '16px', lineHeight: 1.7, color: C.muted, margin: '.9rem 0 0' } }, sub),
     React.createElement('a', {
       href: pathFor('book', lang), className: 'cta-btn',
-      style: { display: 'inline-block', marginTop: '1.4rem', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#fff', textDecoration: 'none', borderRadius: '2px' },
+      style: { display: 'inline-block', marginTop: '1.4rem', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#F3F0E8', textDecoration: 'none', borderRadius: '2px' },
       onMouseEnter: e => { e.currentTarget.style.background = '#047857'; e.currentTarget.style.borderColor = '#047857'; },
       onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
     }, u.book + ' →')
@@ -351,7 +351,7 @@ function TwoColBoard({ mob, leftLabel, leftItems, rightLabel, rightItems }) {
       items.map((it, i) => React.createElement('li', { key: i, style: { display: 'flex', gap: '.7rem', alignItems: 'baseline', padding: '.55rem 0', fontSize: mob ? '15px' : '16px', lineHeight: 1.55, color: C.text, borderTop: i ? `1px solid ${C.border}` : 'none' } },
         React.createElement('span', { style: { color: C.accent, flexShrink: 0, fontWeight: 700 } }, '·'),
         React.createElement('span', null, it)))));
-  return React.createElement('div', { style: { ...cardBase, display: 'flex', flexDirection: mob ? 'column' : 'row', gap: mob ? '1.75rem' : '3.5rem', padding: mob ? '1.6rem' : '2.5rem 3rem', background: '#fff', boxShadow: '0 10px 40px rgba(40,39,38,.06)' } },
+  return React.createElement('div', { style: { ...cardBase, display: 'flex', flexDirection: mob ? 'column' : 'row', gap: mob ? '1.75rem' : '3.5rem', padding: mob ? '1.6rem' : '2.5rem 3rem', background: '#F3F0E8', boxShadow: '0 10px 40px rgba(40,39,38,.06)' } },
     col(leftLabel, leftItems),
     !mob && React.createElement('div', { style: { width: 1, background: C.border, alignSelf: 'stretch' } }),
     col(rightLabel, rightItems)
@@ -374,53 +374,53 @@ const SVC_CSS = `
 .u-shell:has(.svc-page) .u-shell__rail,.u-shell:has(.svc-page) .u-shell__gutter{display:none}
 .u-shell:has(.svc-page) .u-shell__body{grid-column:auto;width:100%;min-width:0}
 
-.svc-page{--svc-read:720px;color:#181A1C;font-family:var(--font-body);counter-reset:svcsec}
+.svc-page{--svc-read:720px;color:#171919;font-family:var(--font-body);counter-reset:svcsec}
 .svc-page *{box-sizing:border-box}
 .svc-section:has(.svc-h2){counter-increment:svcsec}
 .svc-page .svc-section>.svc-h2::before{content:counter(svcsec,decimal-leading-zero) " /";display:block;margin:0 0 14px;font-family:var(--font-display);font-size:clamp(19px,2.1vw,24px);font-weight:800;line-height:1;letter-spacing:-0.03em;color:#047857}
-.svc-page .svc-h1{max-width:980px;margin:0 0 22px;font-family:var(--font-display);font-synthesis:none;font-size:clamp(48px,4.7vw,64px);font-weight:400;line-height:0.98;letter-spacing:-0.045em;color:#1A1C1D;text-wrap:balance}
+.svc-page .svc-h1{max-width:980px;margin:0 0 22px;font-family:var(--font-display);font-synthesis:none;font-size:clamp(48px,4.7vw,64px);font-weight:400;line-height:0.98;letter-spacing:-0.045em;color:#171919;text-wrap:balance}
 html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:800}
-.svc-page .svc-lead{max-width:var(--svc-read);margin:0;font-family:var(--font-body);font-size:clamp(20px,1.65vw,23px);line-height:1.5;color:#282726}
+.svc-page .svc-lead{max-width:var(--svc-read);margin:0;font-family:var(--font-body);font-size:clamp(20px,1.65vw,23px);line-height:1.5;color:#3A403A}
 .svc-section{margin-top:72px}
-.svc-page .svc-h2{max-width:var(--svc-read);margin:0 0 20px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(36px,3.2vw,44px);line-height:1.05;letter-spacing:-0.035em;font-weight:800;color:#1A1C1D;text-wrap:balance}
-.svc-page .svc-p{max-width:var(--svc-read);margin:0 0 20px;font-size:18px;line-height:1.65;color:#282726}
+.svc-page .svc-h2{max-width:var(--svc-read);margin:0 0 20px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(36px,3.2vw,44px);line-height:1.05;letter-spacing:-0.035em;font-weight:800;color:#171919;text-wrap:balance}
+.svc-page .svc-p{max-width:var(--svc-read);margin:0 0 20px;font-size:18px;line-height:1.65;color:#3A403A}
 .svc-p:last-child{margin-bottom:0}
 .svc-p a,.svc-lead a,.svc-faq__a a,.svc-note a{color:#047857;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
-.svc-p strong,.svc-faq__a strong{font-weight:700;color:#1A1C1D}
+.svc-p strong,.svc-faq__a strong{font-weight:700;color:#171919}
 .svc-eyebrow{margin:0 0 12px;font-family:var(--font-body);font-size:13px;line-height:1.3;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#047857}
 .svc-faq{max-width:var(--svc-read);border-top:1px solid rgba(24,26,28,0.14)}
 .svc-faq__item{border-bottom:1px solid rgba(24,26,28,0.14);padding:22px 0}
-.svc-page .svc-faq__q{margin:0 0 10px;font-family:var(--font-heading);font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#1A1C1D}
-.svc-page .svc-faq__a{margin:0;font-size:18px;line-height:1.65;color:#282726}
+.svc-page .svc-faq__q{margin:0 0 10px;font-family:var(--font-heading);font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#171919}
+.svc-page .svc-faq__a{margin:0;font-size:18px;line-height:1.65;color:#3A403A}
 .svc-faq__a p{margin:0 0 12px}.svc-faq__a p:last-child{margin:0}
 .svc-quotes{max-width:var(--svc-read)}
 .svc-quote{margin:0 0 22px;padding:0 0 0 20px;border-left:3px solid rgba(4, 120, 87,0.4)}
-.svc-quote p{margin:0 0 8px;font-size:17px;line-height:1.6;color:#282726}
-.svc-quote cite{font-style:normal;font-size:13px;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:#767676}
-.svc-page a.svc-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 30px;background:#047857;color:#fff !important;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
-.svc-page a.svc-cta:hover{filter:brightness(0.92);gap:12px;color:#fff !important}
-.svc-page a.svc-cta--ghost{background:transparent;color:#1A1C1D !important;border:1.5px solid rgba(24,26,28,0.28)}
+.svc-quote p{margin:0 0 8px;font-size:17px;line-height:1.6;color:#3A403A}
+.svc-quote cite{font-style:normal;font-size:13px;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:#6A6F67}
+.svc-page a.svc-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 30px;background:#047857;color:#F3F0E8 !important;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
+.svc-page a.svc-cta:hover{background:#03654A;gap:12px;color:#F3F0E8 !important}
+.svc-page a.svc-cta--ghost{background:transparent;color:#171919 !important;border:1.5px solid rgba(24,26,28,0.28)}
 .svc-page a.svc-cta--ghost:hover{border-color:#047857;color:#047857 !important;filter:none;background:transparent}
 .svc-ctarow{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
 .svc-ctarow--hero{margin-top:30px}
-.svc-close{max-width:var(--svc-read);margin:76px 0 0;background:#1A1C1D;border-radius:22px;padding:clamp(30px,4vw,46px)}
-.svc-page .svc-close__h{margin:0;max-width:20ch;font-family:var(--font-display);font-synthesis:none;font-size:clamp(28px,3.1vw,38px);line-height:1.04;letter-spacing:-0.03em;font-weight:800;color:#FFFFFF}
-.svc-close__p{margin:16px 0 0;max-width:54ch;font-size:18px;line-height:1.6;color:#C2C6CA}
-.svc-page a.svc-close__cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:28px;min-height:56px;padding:0 30px;background:#047857;color:#fff !important;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
-.svc-page a.svc-close__cta:hover{filter:brightness(1.12);gap:12px;color:#fff !important}
-.svc-note{max-width:var(--svc-read);margin:16px 0 0;font-size:15px;line-height:1.6;color:#666}
+.svc-close{max-width:var(--svc-read);margin:76px 0 0;background:#16231E;border-radius:22px;padding:clamp(30px,4vw,46px)}
+.svc-page .svc-close__h{margin:0;max-width:20ch;font-family:var(--font-display);font-synthesis:none;font-size:clamp(28px,3.1vw,38px);line-height:1.04;letter-spacing:-0.03em;font-weight:800;color:#F3F0E8}
+.svc-close__p{margin:16px 0 0;max-width:54ch;font-size:18px;line-height:1.6;color:#C0C9BF}
+.svc-page a.svc-close__cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:28px;min-height:56px;padding:0 30px;background:#047857;color:#F3F0E8 !important;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
+.svc-page a.svc-close__cta:hover{filter:brightness(1.12);gap:12px;color:#F3F0E8 !important}
+.svc-note{max-width:var(--svc-read);margin:16px 0 0;font-size:15px;line-height:1.6;color:#6A6F67}
 .svc-bullets{max-width:var(--svc-read);list-style:none;margin:4px 0 0;padding:0}
-.svc-bullets li{position:relative;padding:8px 0 8px 22px;font-size:18px;line-height:1.6;color:#282726;border-top:1px solid rgba(24,26,28,0.1)}
+.svc-bullets li{position:relative;padding:8px 0 8px 22px;font-size:18px;line-height:1.6;color:#3A403A;border-top:1px solid rgba(24,26,28,0.1)}
 .svc-bullets li:first-child{border-top:0}
 .svc-bullets li::before{content:"";position:absolute;left:0;top:16px;width:10px;height:2px;background:#047857}
 .svc-bullets li a{color:#047857;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:767px){.svc-bullets li{font-size:17px}}
 .svc-cards{margin:4px 0 0}
 .svc-rule{border:0;border-top:1px solid rgba(24,26,28,0.14);margin:0}
-.svc-page .svc-related__h{margin:0 0 8px;font-family:var(--font-heading);font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#1A1C1D}
+.svc-page .svc-related__h{margin:0 0 8px;font-family:var(--font-heading);font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#171919}
 .svc-related{list-style:none;max-width:var(--svc-read);margin:0;padding:0;border-top:1px solid rgba(24,26,28,0.14)}
 .svc-related li{border-bottom:1px solid rgba(24,26,28,0.14)}
-.svc-related a{display:flex;justify-content:space-between;gap:20px;padding:15px 0;font-family:var(--font-heading);font-size:17px;line-height:1.4;font-weight:600;color:#1A1C1D;text-decoration:none}
+.svc-related a{display:flex;justify-content:space-between;gap:20px;padding:15px 0;font-family:var(--font-heading);font-size:17px;line-height:1.4;font-weight:600;color:#171919;text-decoration:none}
 .svc-related a:hover{color:#047857}
 @media (max-width:767px){
   .u-shell:has(.svc-page){padding-inline:20px}
@@ -783,7 +783,7 @@ function OneToOnePage({ lang = 'en' }) {
   const mobPage = mob ? { ...pageStyle } : widePageStyle;
   const headingStyle = { fontFamily: 'var(--font-heading)', fontSynthesis: 'none', fontSize: mob ? '22px' : '28px', fontWeight: 750, letterSpacing: '-.03em', lineHeight: 1.15, color: C.text, margin: '0 0 1.3rem' };
   const gap = React.createElement('div', { style: { marginTop: mob ? '3.25rem' : '5rem' } });
-  const primaryBtn = { display: 'inline-block', textAlign: 'center', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#fff', textDecoration: 'none', borderRadius: '2px' };
+  const primaryBtn = { display: 'inline-block', textAlign: 'center', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#F3F0E8', textDecoration: 'none', borderRadius: '2px' };
 
   const bizYouCard = (label, body, note) => React.createElement('div', { className: 'hv-card', style: { ...cardBase, padding: mob ? '1.3rem' : '1.7rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '.85rem' } },
     React.createElement('div', { style: { fontSize: '12px', fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: C.accent } }, label),
@@ -936,7 +936,7 @@ function AboutPage({ lang = 'en' }) {
       React.createElement('img', { src: 'https://aggelosmouzakitis.com/img/aggelos.webp', alt: 'Aggelos Mouzakitis', width: 64, height: 64, style: { width: 64, height: 64, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, display: 'block' } }),
       React.createElement('div', null,
         React.createElement('div', { style: { fontSize: '12px', letterSpacing: '.12em', textTransform: 'uppercase', color: C.accent, fontWeight: 700 } }, c.role),
-        React.createElement('div', { style: { fontSize: '12px', letterSpacing: '.04em', color: '#767676', marginTop: '5px', lineHeight: 1.5 } }, c.creds)
+        React.createElement('div', { style: { fontSize: '12px', letterSpacing: '.04em', color: '#6A6F67', marginTop: '5px', lineHeight: 1.5 } }, c.creds)
       )
     ),
     React.createElement('p', { style: { ...leadStyle, marginBottom: mob ? '1.5rem' : '1.75rem' } }, c.lead),
@@ -951,7 +951,7 @@ function AboutPage({ lang = 'en' }) {
       React.createElement('p', { style: { fontSize: mob ? '19px' : '23px', fontWeight: 500, letterSpacing: '-.01em', lineHeight: 1.5, color: C.text, margin: 0 } }, c.ctaHeading),
       React.createElement('a', {
         href: pathFor('one-to-one', lang), className: 'cta-btn',
-        style: { display: 'inline-block', marginTop: '1.4rem', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#fff', textDecoration: 'none', borderRadius: '2px' },
+        style: { display: 'inline-block', marginTop: '1.4rem', padding: '.9rem 1.8rem', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: C.accent, border: `1.5px solid ${C.accent}`, color: '#F3F0E8', textDecoration: 'none', borderRadius: '2px' },
         onMouseEnter: e => { e.currentTarget.style.background = '#047857'; e.currentTarget.style.borderColor = '#047857'; },
         onMouseLeave: e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.borderColor = C.accent; },
       }, c.ctaLabel + ' →')
@@ -1073,8 +1073,8 @@ function ReviewCard({ t, lang, toggleLabel }) {
   const quote = el ? t.qEl : t.q;
   const who = el ? t.wEl : t.w;
   return React.createElement('blockquote', { style: { breakInside: 'avoid', margin: '0 0 1.9rem', padding: '0 0 0 1rem', borderLeft: '2px solid rgba(4, 120, 87,0.35)' } },
-    React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.8, color: '#282726', margin: '0 0 .5rem' } }, '“' + quote + '”'),
-    React.createElement('div', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#767676' } }, who),
+    React.createElement('p', { style: { fontSize: '15px', lineHeight: 1.8, color: '#3A403A', margin: '0 0 .5rem' } }, '“' + quote + '”'),
+    React.createElement('div', { style: { fontSize: '10px', letterSpacing: '.1em', textTransform: 'uppercase', color: '#6A6F67' } }, who),
     el && React.createElement('button', {
       onClick: () => setOpen(!open),
       'aria-expanded': open ? 'true' : 'false',
@@ -1335,7 +1335,7 @@ function SolopreneursPage() {
 
 // ─── HOW I WORK ──────────────────────────────────────────────────────────────
 // ─── SHARED VISUAL BLOCKS (numbered step cards + two-track cards) ─────────────
-const cardBase = { border: `1px solid ${C.border}`, borderRadius: '12px', background: '#FFFFFF' };
+const cardBase = { border: `1px solid ${C.border}`, borderRadius: '12px', background: '#F3F0E8' };
 function Kicker({ children }) {
   return React.createElement('h2', {
     style: { fontSize: '17px', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: C.muted, margin: '0 0 1.2rem', lineHeight: 1.5, textWrap: 'balance' }
@@ -1349,7 +1349,7 @@ function StepCards({ mob, steps }) {
         style: { ...cardBase, padding: mob ? '1.15rem 1.15rem 1.25rem' : '1.35rem 1.3rem 1.45rem', display: 'flex', flexDirection: 'column', gap: '.7rem' }
       },
         React.createElement('div', { style: { display: 'flex', alignItems: 'center', gap: '.65rem' } },
-          React.createElement('span', { style: { width: '30px', height: '30px', flexShrink: 0, borderRadius: '50%', background: C.accent, color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', fontWeight: 700, lineHeight: 1 } }, s.n),
+          React.createElement('span', { style: { width: '30px', height: '30px', flexShrink: 0, borderRadius: '50%', background: C.accent, color: '#F3F0E8', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', fontWeight: 700, lineHeight: 1 } }, s.n),
           React.createElement('span', { style: { fontSize: '17px', fontWeight: 700, color: C.text } }, s.title)
         ),
         s.tag && React.createElement('span', { style: { alignSelf: 'flex-start', fontSize: '11px', letterSpacing: '.05em', textTransform: 'uppercase', color: C.accent, background: 'rgba(4, 120, 87,0.08)', border: '1px solid rgba(4, 120, 87,0.25)', borderRadius: '999px', padding: '.2rem .65rem' } }, s.tag),
@@ -1520,7 +1520,7 @@ function BookPage({ lang = 'en' }) {
       React.createElement(IA, { href: 'mailto:aggelos.mouzakitis@gmail.com' }, 'aggelos.mouzakitis@gmail.com'), "."
     ),
     React.createElement('div', {
-      style: { marginTop: mob ? '2.5rem' : '3rem', padding: mob ? '1.5rem 1.4rem' : '1.8rem 2rem', border: `1px solid ${C.border}`, background: '#fff', borderRadius: '14px' },
+      style: { marginTop: mob ? '2.5rem' : '3rem', padding: mob ? '1.5rem 1.4rem' : '1.8rem 2rem', border: `1px solid ${C.border}`, background: '#F3F0E8', borderRadius: '14px' },
     },
       React.createElement('p', { style: { fontSize: mob ? '17px' : '18px', fontWeight: 600, color: C.text, margin: '0 0 .5rem' } }, c.crossLead),
       React.createElement('p', { style: { fontSize: '16px', lineHeight: 1.65, color: C.muted, margin: '0 0 1.1rem' } }, c.crossBody),

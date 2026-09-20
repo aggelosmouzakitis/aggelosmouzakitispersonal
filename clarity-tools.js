@@ -339,7 +339,7 @@ function claritySubmit(data, answers, result, person, done) {
 var CL_ACC = '#047857';
 // Restrained severity colours for the breakdown bars. Problem scale runs
 // green→red; the positive-fit scale is reversed so green always reads "good".
-var CL_TONES = ['#047857', '#4B7A52', '#B7791F', '#C05621', '#9B2C2C'];
+var CL_TONES = ['#047857', '#047857', '#B7791F', '#C05621', '#9B2C2C'];
 function toneFor(type, bracketIdx) {
   var idx = type === 'fit' ? 4 - bracketIdx : bracketIdx;
   return CL_TONES[idx];
@@ -350,7 +350,7 @@ function clarityStyles(mob) {
       maxWidth: 820,
       margin: '0 auto',
       padding: mob ? '1.75rem 1.25rem 5rem' : '3.5rem 2.5rem 6rem',
-      color: '#282726',
+      color: '#3A403A',
       fontFamily: 'inherit'
     },
     eyebrow: {
@@ -358,7 +358,7 @@ function clarityStyles(mob) {
       fontWeight: 700,
       letterSpacing: '.06em',
       textTransform: 'uppercase',
-      color: '#666',
+      color: '#6A6F67',
       lineHeight: 1.6
     },
     h1: {
@@ -368,18 +368,18 @@ function clarityStyles(mob) {
       fontWeight: 800,
       lineHeight: 1.05,
       letterSpacing: '-.035em',
-      color: '#282726',
+      color: '#3A403A',
       margin: '0 0 1.25rem'
     },
     p: {
       margin: '0 0 1.2rem',
       lineHeight: 1.7,
       fontSize: mob ? '17px' : '18px',
-      color: '#282726'
+      color: '#3A403A'
     },
     note: {
       fontSize: '14px',
-      color: '#777',
+      color: '#6A6F67',
       lineHeight: 1.7
     },
     qText: {
@@ -389,7 +389,7 @@ function clarityStyles(mob) {
       fontWeight: 750,
       lineHeight: 1.2,
       letterSpacing: '-.02em',
-      color: '#282726',
+      color: '#3A403A',
       margin: '0 0 1.6rem'
     },
     cta: {
@@ -398,7 +398,7 @@ function clarityStyles(mob) {
       fontSize: '13px',
       letterSpacing: '.06em',
       textTransform: 'uppercase',
-      color: '#fff',
+      color: '#F3F0E8',
       background: CL_ACC,
       border: '1.5px solid ' + CL_ACC,
       borderRadius: '2px',
@@ -409,7 +409,7 @@ function clarityStyles(mob) {
     },
     ctaSec: {
       background: 'transparent',
-      color: '#282726',
+      color: '#3A403A',
       border: '1.5px solid rgba(40,39,38,.35)'
     },
     choice: function (sel) {
@@ -419,8 +419,8 @@ function clarityStyles(mob) {
         border: sel ? '1.5px solid ' + CL_ACC : '1px solid rgba(40,39,38,.2)',
         padding: mob ? '.95rem 1rem' : '1rem 1.15rem',
         borderRadius: '10px',
-        background: sel ? 'rgba(4,120,87,.08)' : '#fff',
-        color: '#282726',
+        background: sel ? 'rgba(4,120,87,.08)' : '#F3F0E8',
+        color: '#3A403A',
         fontFamily: 'inherit',
         fontSize: mob ? '15.5px' : '16.5px',
         lineHeight: 1.5,
@@ -437,8 +437,8 @@ function clarityStyles(mob) {
         border: sel ? '1.5px solid ' + CL_ACC : '1px dashed rgba(40,39,38,.3)',
         padding: mob ? '.8rem 1rem' : '.85rem 1.15rem',
         borderRadius: '10px',
-        background: sel ? 'rgba(4,120,87,.08)' : '#fafafa',
-        color: '#555',
+        background: sel ? 'rgba(4,120,87,.08)' : '#EDE8DB',
+        color: '#3A403A',
         fontFamily: 'inherit',
         fontSize: '15px',
         lineHeight: 1.5,
@@ -453,8 +453,8 @@ function clarityStyles(mob) {
       border: '1px solid rgba(40,39,38,.25)',
       padding: '.85rem 1rem',
       borderRadius: '10px',
-      background: '#fff',
-      color: '#282726',
+      background: '#F3F0E8',
+      color: '#3A403A',
       fontFamily: 'inherit',
       fontSize: '16px',
       lineHeight: 1.6,
@@ -527,17 +527,17 @@ function ClarityBar({
       style: {
         fontSize: '15px',
         fontWeight: 600,
-        color: '#282726'
+        color: '#3A403A'
       }
     }, dim.label), React.createElement('span', {
       style: {
         fontSize: '13px',
-        color: '#999'
+        color: '#6A6F67'
       }
     }, 'Not enough answers')), React.createElement('p', {
       style: {
         fontSize: '14px',
-        color: '#777',
+        color: '#6A6F67',
         lineHeight: 1.55,
         margin: '.15rem 0 0'
       }
@@ -560,7 +560,7 @@ function ClarityBar({
     style: {
       fontSize: '15.5px',
       fontWeight: 600,
-      color: '#282726'
+      color: '#3A403A'
     }
   }, dim.label), React.createElement('span', {
     style: {
@@ -587,14 +587,14 @@ function ClarityBar({
   })), dim.copy ? React.createElement('p', {
     style: {
       fontSize: '14.5px',
-      color: '#555',
+      color: '#3A403A',
       lineHeight: 1.55,
       margin: '.5rem 0 0'
     }
   }, dim.copy) : null, dim.lowConfidence ? React.createElement('p', {
     style: {
       fontSize: '13px',
-      color: '#999',
+      color: '#6A6F67',
       lineHeight: 1.5,
       margin: '.3rem 0 0',
       fontStyle: 'italic'
@@ -616,7 +616,7 @@ function ClarityHeadline({
       borderLeft: '3px solid ' + tone,
       borderRadius: '10px',
       padding: compact ? '1.1rem 1.2rem' : '1.4rem 1.5rem',
-      background: '#fff',
+      background: '#F3F0E8',
       marginBottom: compact ? 0 : '1rem',
       flex: compact ? 1 : 'none',
       minWidth: 0
@@ -627,7 +627,7 @@ function ClarityHeadline({
       fontWeight: 700,
       letterSpacing: '.05em',
       textTransform: 'uppercase',
-      color: '#777',
+      color: '#6A6F67',
       marginBottom: '.5rem'
     }
   }, head.name), React.createElement('div', {
@@ -643,13 +643,13 @@ function ClarityHeadline({
       fontSize: compact ? '34px' : '44px',
       fontWeight: 800,
       letterSpacing: '-.03em',
-      color: '#282726',
+      color: '#3A403A',
       lineHeight: 1
     }
   }, head.score), React.createElement('span', {
     style: {
       fontSize: '16px',
-      color: '#999',
+      color: '#6A6F67',
       fontWeight: 600
     }
   }, head.unit)), React.createElement('div', {
@@ -662,14 +662,14 @@ function ClarityHeadline({
   }, head.bracketLabel), head.meaning ? React.createElement('p', {
     style: {
       fontSize: '13px',
-      color: '#888',
+      color: '#6A6F67',
       lineHeight: 1.5,
       margin: '.3rem 0 0'
     }
   }, head.meaning) : null, !compact && head.bracketDesc ? React.createElement('p', {
     style: {
       fontSize: '15px',
-      color: '#444',
+      color: '#3A403A',
       lineHeight: 1.6,
       margin: '.6rem 0 0'
     }
@@ -715,7 +715,7 @@ function clarityList(items, C) {
       key: i,
       style: {
         fontSize: '16px',
-        color: '#333',
+        color: '#3A403A',
         lineHeight: 1.65,
         marginBottom: '.5rem'
       }
@@ -752,12 +752,12 @@ function ClarityResult({
       ...C.p,
       fontSize: mob ? '19px' : '21px',
       fontWeight: 600,
-      color: '#1A1C1D'
+      color: '#171919'
     }
   }, interp.primary), interp.secondary ? React.createElement('p', {
     style: {
       ...C.p,
-      color: '#333'
+      color: '#3A403A'
     }
   }, interp.secondary) : null,
   // 2. Overall score(s)
@@ -786,14 +786,14 @@ function ClarityResult({
   })), twoHead && result.overall.bracketDesc ? React.createElement('p', {
     style: {
       fontSize: '15px',
-      color: '#555',
+      color: '#3A403A',
       lineHeight: 1.6,
       margin: '1rem 0 0'
     }
   }, result.overall.bracketDesc) : null, twoHead && result.overall2 && result.overall2.bracketDesc ? React.createElement('p', {
     style: {
       fontSize: '15px',
-      color: '#555',
+      color: '#3A403A',
       lineHeight: 1.6,
       margin: '.5rem 0 0'
     }
@@ -817,13 +817,13 @@ function ClarityResult({
       style: {
         fontSize: '14px',
         fontWeight: 700,
-        color: '#282726',
+        color: '#3A403A',
         margin: '0 0 .2rem'
       }
     }, g.title), g.note ? React.createElement('p', {
       style: {
         fontSize: '13px',
-        color: '#888',
+        color: '#6A6F67',
         lineHeight: 1.5,
         margin: '0 0 .9rem'
       }
@@ -837,7 +837,7 @@ function ClarityResult({
   }) : React.createElement('div', null, React.createElement('p', {
     style: {
       fontSize: '13.5px',
-      color: '#888',
+      color: '#6A6F67',
       lineHeight: 1.5,
       margin: '-.3rem 0 1.1rem'
     }
@@ -860,7 +860,7 @@ function ClarityResult({
   }, Array.isArray(interp.elseMatters) ? clarityList(interp.elseMatters, C) : React.createElement('p', {
     style: {
       fontSize: '16px',
-      color: '#333',
+      color: '#3A403A',
       lineHeight: 1.65,
       margin: 0
     }
@@ -872,7 +872,7 @@ function ClarityResult({
   }, React.createElement('p', {
     style: {
       fontSize: '16px',
-      color: '#333',
+      color: '#3A403A',
       lineHeight: 1.65,
       margin: 0,
       paddingLeft: '.9rem',
@@ -891,7 +891,7 @@ function ClarityResult({
   }, React.createElement('p', {
     style: {
       fontSize: '15px',
-      color: '#555',
+      color: '#3A403A',
       lineHeight: 1.65,
       margin: 0
     }
@@ -909,7 +909,7 @@ function ClarityResult({
       fontSize: mob ? '22px' : '26px',
       fontWeight: 800,
       letterSpacing: '-.02em',
-      color: '#282726',
+      color: '#3A403A',
       margin: '0 0 .6rem'
     }
   }, data.cta.heading), React.createElement('p', {
@@ -1058,7 +1058,7 @@ function ClarityTool({
     }), data.intro.note ? React.createElement('p', {
       style: {
         fontSize: '15px',
-        color: '#555',
+        color: '#3A403A',
         lineHeight: 1.6,
         margin: '0 0 1.4rem',
         paddingLeft: '.9rem',
@@ -1212,7 +1212,7 @@ function ClarityTool({
     }, sending ? 'Working…' : 'See my result →')), React.createElement('p', {
       style: {
         fontSize: '13px',
-        color: '#999',
+        color: '#6A6F67',
         lineHeight: 1.6,
         marginTop: '1.4rem'
       }

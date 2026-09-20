@@ -213,7 +213,7 @@ function DChoice({
         borderRadius: 4,
         border: '1.5px solid ' + (on ? '#047857' : 'rgba(40,39,38,.4)'),
         background: on ? '#047857' : 'transparent',
-        color: '#fff',
+        color: '#F3F0E8',
         fontSize: 12,
         lineHeight: '16px',
         textAlign: 'center',
@@ -268,12 +268,12 @@ function DScale({
   }, React.createElement('span', {
     style: {
       fontSize: '12px',
-      color: '#8a8a8a'
+      color: '#6A6F67'
     }
   }, low), React.createElement('span', {
     style: {
       fontSize: '12px',
-      color: '#8a8a8a'
+      color: '#6A6F67'
     }
   }, high)));
 }
@@ -517,7 +517,7 @@ function DiagnosticPage({
       maxWidth: 820,
       margin: '0 auto',
       padding: mob ? '2rem 1.25rem 6rem' : '4rem 2.5rem 7rem',
-      color: '#282726',
+      color: '#3A403A',
       fontFamily: 'inherit'
     },
     eyebrow: {
@@ -525,7 +525,7 @@ function DiagnosticPage({
       fontWeight: 700,
       letterSpacing: '.06em',
       textTransform: 'uppercase',
-      color: '#666',
+      color: '#6A6F67',
       lineHeight: 1.6
     },
     h1: {
@@ -535,33 +535,33 @@ function DiagnosticPage({
       fontWeight: 800,
       lineHeight: 1.05,
       letterSpacing: '-.035em',
-      color: '#282726',
+      color: '#3A403A',
       margin: '0 0 1.25rem'
     },
     p: {
       margin: '0 0 1.2rem',
       lineHeight: 1.7,
       fontSize: mob ? '17px' : '18px',
-      color: '#282726'
+      color: '#3A403A'
     },
     sectionH: {
       fontSize: mob ? '22px' : '27px',
       fontWeight: 500,
       letterSpacing: '-.02em',
       lineHeight: 1.25,
-      color: '#282726',
+      color: '#3A403A',
       margin: '0 0 1.5rem'
     },
     qLabel: {
       fontSize: mob ? '16px' : '17px',
       fontWeight: 600,
-      color: '#282726',
+      color: '#3A403A',
       margin: '0 0 .9rem',
       lineHeight: 1.5
     },
     note: {
       fontSize: '14px',
-      color: '#777',
+      color: '#6A6F67',
       lineHeight: 1.7
     },
     cta: {
@@ -570,7 +570,7 @@ function DiagnosticPage({
       fontSize: '13px',
       letterSpacing: '.06em',
       textTransform: 'uppercase',
-      color: '#fff',
+      color: '#F3F0E8',
       background: ACC,
       border: '1.5px solid ' + ACC,
       borderRadius: '2px',
@@ -581,7 +581,7 @@ function DiagnosticPage({
     },
     ctaSec: {
       background: 'transparent',
-      color: '#282726',
+      color: '#3A403A',
       border: '1.5px solid rgba(40,39,38,.35)'
     },
     choice: sel => ({
@@ -590,8 +590,8 @@ function DiagnosticPage({
       border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)',
       padding: mob ? '.8rem .9rem' : '.85rem 1rem',
       borderRadius: '10px',
-      background: sel ? 'rgba(4, 120, 87,.08)' : '#fff',
-      color: '#282726',
+      background: sel ? 'rgba(4, 120, 87,.08)' : '#F3F0E8',
+      color: '#3A403A',
       fontFamily: 'inherit',
       fontSize: mob ? '15px' : '16px',
       lineHeight: 1.5,
@@ -604,8 +604,8 @@ function DiagnosticPage({
       border: '1px solid rgba(40,39,38,.2)',
       padding: '.85rem 1rem',
       borderRadius: '10px',
-      background: '#fff',
-      color: '#282726',
+      background: '#F3F0E8',
+      color: '#3A403A',
       fontFamily: 'inherit',
       fontSize: '16px',
       lineHeight: 1.6,
@@ -616,8 +616,8 @@ function DiagnosticPage({
       minWidth: 0,
       padding: mob ? '.7rem 0' : '.75rem 0',
       border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)',
-      background: sel ? ACC : '#fff',
-      color: sel ? '#fff' : '#282726',
+      background: sel ? ACC : '#F3F0E8',
+      color: sel ? '#F3F0E8' : '#3A403A',
       fontFamily: 'inherit',
       fontSize: '15px',
       fontWeight: 600,
@@ -643,7 +643,7 @@ function DiagnosticPage({
       borderRadius: '12px',
       padding: mob ? '1.1rem' : '1.25rem 1.35rem',
       marginBottom: '.9rem',
-      background: '#fff'
+      background: '#F3F0E8'
     }
   };
   const footer = () => typeof SiteFooter !== 'undefined' ? React.createElement(SiteFooter, {
@@ -760,7 +760,7 @@ function DiagnosticPage({
       style: {
         fontSize: mob ? '15px' : '16px',
         fontWeight: 500,
-        color: '#666',
+        color: '#6A6F67',
         lineHeight: 1.5,
         margin: mob ? '-0.85rem 0 1.5rem' : '-1rem 0 1.75rem'
       }
@@ -856,7 +856,7 @@ function DiagnosticPage({
     style: {
       fontSize: '14px',
       lineHeight: 1.65,
-      color: '#666',
+      color: '#6A6F67',
       margin: '0 0 1.5rem',
       paddingLeft: '.9rem',
       borderLeft: '2px solid ' + ACC
