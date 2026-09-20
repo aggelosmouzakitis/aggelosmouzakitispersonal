@@ -2943,8 +2943,8 @@ function ExecTherapyPage() {
   }, React.createElement(SvcP, null, "All sessions are ", React.createElement(Strong, null, "remote, one-on-one and confidential"), ". Most clients are across Europe and the US, weekly or biweekly. It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's going on and whether working together makes sense. If it doesn't, I'll say so."), React.createElement('div', {
     className: 'svc-ctarow'
   }, React.createElement(SvcCta, {
-    href: '/contact?interest=orientation'
-  }, 'Book a fit call →'))), React.createElement(SvcSection, {
+    href: '/start-here/'
+  }, 'START HERE →'))), React.createElement(SvcSection, {
     title: 'Common questions'
   }, React.createElement(SvcFaq, {
     items: [{
@@ -3016,8 +3016,8 @@ function FoundersTherapyPage() {
   }, React.createElement(SvcP, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one and confidential"), ". Nothing goes to your board, your investors or your team. This is a private therapeutic relationship, not coaching attached to your company. It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's going on and whether I'm the right person for it."), React.createElement('div', {
     className: 'svc-ctarow'
   }, React.createElement(SvcCta, {
-    href: '/contact?interest=orientation'
-  }, 'Book a fit call →'))), React.createElement(SvcSection, {
+    href: '/start-here/'
+  }, 'START HERE →'))), React.createElement(SvcSection, {
     title: 'Common questions'
   }, React.createElement('div', null, React.createElement(FaqItem, {
     q: 'Why do founders need a specific kind of therapy?'
@@ -3087,8 +3087,8 @@ function ImposterPage() {
   }, React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's driving the pattern and whether I'm the right person to work on it with you."), React.createElement('div', {
     className: 'svc-ctarow'
   }, React.createElement(SvcCta, {
-    href: '/contact?interest=orientation'
-  }, 'Book a fit call →'))), React.createElement(SvcSection, {
+    href: '/start-here/'
+  }, 'START HERE →'))), React.createElement(SvcSection, {
     title: 'Common questions'
   }, React.createElement('div', null, React.createElement(FaqItem, {
     q: 'Is imposter syndrome a real diagnosis?'
@@ -3162,8 +3162,8 @@ function BurnoutPage() {
   }, React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's underneath the exhaustion and whether therapy is the right approach."), React.createElement('div', {
     className: 'svc-ctarow'
   }, React.createElement(SvcCta, {
-    href: '/contact?interest=orientation'
-  }, 'Book a fit call →'))), React.createElement(SvcSection, {
+    href: '/start-here/'
+  }, 'START HERE →'))), React.createElement(SvcSection, {
     title: 'Common questions'
   }, React.createElement('div', null, React.createElement(FaqItem, {
     q: "Why doesn't rest fix my burnout?"
@@ -3207,8 +3207,11 @@ function BurnoutPage() {
       href: '/',
       label: 'Work with me, 1:1 →'
     }, {
-      href: '/career-transition-therapy/',
-      label: 'Career transition →'
+      href: '/therapy-for-executives/',
+      label: 'Therapy for executives →'
+    }, {
+      href: '/imposter-syndrome-therapy/',
+      label: 'Imposter syndrome →'
     }]
   }));
 }

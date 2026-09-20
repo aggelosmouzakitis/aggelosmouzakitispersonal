@@ -1549,7 +1549,7 @@ function ExecTherapyPage() {
     React.createElement(SvcSection, { title: 'How it works' },
       React.createElement(SvcP, null, "All sessions are ", React.createElement(Strong, null, "remote, one-on-one and confidential"), ". Most clients are across Europe and the US, weekly or biweekly. It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's going on and whether working together makes sense. If it doesn't, I'll say so."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
+        React.createElement(SvcCta, { href: '/start-here/' }, 'START HERE →')
       )
     ),
 
@@ -1599,7 +1599,7 @@ function FoundersTherapyPage() {
     React.createElement(SvcSection, { title: 'How it works' },
       React.createElement(SvcP, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one and confidential"), ". Nothing goes to your board, your investors or your team. This is a private therapeutic relationship, not coaching attached to your company. It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's going on and whether I'm the right person for it."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
+        React.createElement(SvcCta, { href: '/start-here/' }, 'START HERE →')
       )
     ),
 
@@ -1660,7 +1660,7 @@ function ImposterPage() {
     React.createElement(SvcSection, { title: 'Start here' },
       React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's driving the pattern and whether I'm the right person to work on it with you."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
+        React.createElement(SvcCta, { href: '/start-here/' }, 'START HERE →')
       )
     ),
 
@@ -1720,7 +1720,7 @@ function BurnoutPage() {
     React.createElement(SvcSection, { title: 'Start here' },
       React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's underneath the exhaustion and whether therapy is the right approach."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')
+        React.createElement(SvcCta, { href: '/start-here/' }, 'START HERE →')
       )
     ),
 
@@ -1747,7 +1747,8 @@ function BurnoutPage() {
     React.createElement(Testimonials, { mob, items: [{q: "Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.", w: "Anonymous client, Consultant and business owner"}, {q: "I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.", w: "Anonymous client, Technology leader"}, {q: "The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.", w: "Anonymous client, Senior tech professional"}] }),
     React.createElement(RelatedLinks, { mob, items: [
       { href: '/', label: 'Work with me, 1:1 →' },
-      { href: '/career-transition-therapy/', label: 'Career transition →' },
+      { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
+      { href: '/imposter-syndrome-therapy/', label: 'Imposter syndrome →' },
     ] })
   );
 }
