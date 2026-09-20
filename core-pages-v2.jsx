@@ -455,11 +455,11 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .home-hero__who{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:${V2.ink2};border-bottom:2px solid rgba(24,26,28,0.22);padding-bottom:3px;transition:color .18s,border-color .18s}
 .home-hero__who:hover{color:${V2.green};border-bottom-color:${V2.green}}
 
-/* ── Proof strip — beige band of credentials under the hero ── */
-.home-proof{background:${V2.paper};border-block:1px solid rgba(24,26,28,0.14)}
+/* ── Proof strip — dark band of credentials under the hero ── */
+.home-proof{background:${V2.ink};border-block:1px solid rgba(255,255,255,0.14)}
 .home-proof__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px 40px;padding-block:24px}
-.home-proof__item{margin:0;font-size:15px;line-height:1.4;color:${V2.ink2}}
-.home-proof__item strong{font-weight:600;color:#171919}
+.home-proof__item{margin:0;font-size:15px;line-height:1.4;color:${V2.onDark}}
+.home-proof__item strong{font-weight:600;color:#FFFFFF}
 
 /* ── 01 / Work with me — white section, three offers on hairlines ── */
 .home-work{background:${V2.white};padding-block:clamp(64px,8vw,104px)}
