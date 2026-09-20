@@ -476,7 +476,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .home-work__go{margin-top:6px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:0.06em;color:#8FBFA7}
 
 /* ── 02 / Start here for free — white section, in-page Clarity disclosure ── */
-.home-free{position:relative;overflow:clip;background:#EDE8DB;color:${V2.ink};padding-block:clamp(64px,8vw,104px)}
+.home-free{position:relative;overflow:clip;background:${V2.white};color:${V2.ink};padding-block:clamp(64px,8vw,104px)}
 .home-free::before{content:"";position:absolute;bottom:-180px;left:-120px;width:400px;height:400px;border-radius:50%;background:rgba(4,120,87,0.06);pointer-events:none}
 .home-free .sec-label__num,.home-free .sec-label__desc{color:${V2.green}}
 .home-free__h{position:relative;max-width:22ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,3.7vw,46px);font-weight:800;line-height:1.04;letter-spacing:-0.042em;color:#14201C;text-wrap:balance}
