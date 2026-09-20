@@ -211,7 +211,7 @@ function DChoice({
         height: 18,
         flexShrink: 0,
         borderRadius: 4,
-        border: '1.5px solid ' + (on ? '#047857' : 'rgba(40,39,38,.4)'),
+        border: '1.5px solid ' + (on ? '#047857' : 'rgba(23,25,25,.4)'),
         background: on ? '#047857' : 'transparent',
         color: '#F3F0E8',
         fontSize: 12,
@@ -582,30 +582,34 @@ function DiagnosticPage({
     ctaSec: {
       background: 'transparent',
       color: '#3A403A',
-      border: '1.5px solid rgba(40,39,38,.35)'
+      border: '1.5px solid rgba(23,25,25,.35)'
     },
     choice: sel => ({
       width: '100%',
       textAlign: 'left',
-      border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)',
-      padding: mob ? '.8rem .9rem' : '.85rem 1rem',
-      borderRadius: '10px',
-      background: sel ? 'rgba(4, 120, 87,.08)' : '#F3F0E8',
-      color: '#3A403A',
+      border: '0',
+      borderLeft: sel ? '2px solid ' + ACC : '2px solid transparent',
+      borderBottom: '1px solid rgba(23,25,25,.14)',
+      padding: mob ? '.85rem .6rem .85rem .95rem' : '.9rem .6rem .9rem 1rem',
+      borderRadius: '0',
+      background: 'transparent',
+      color: sel ? ACC : '#3A403A',
+      fontWeight: sel ? 700 : 400,
       fontFamily: 'inherit',
       fontSize: mob ? '15px' : '16px',
       lineHeight: 1.5,
       cursor: 'pointer',
-      marginBottom: '.6rem',
-      transition: 'border-color .12s, background .12s'
+      marginBottom: '0',
+      transition: 'border-color .12s, color .12s'
     }),
     field: {
       width: '100%',
-      border: '1px solid rgba(40,39,38,.2)',
-      padding: '.85rem 1rem',
-      borderRadius: '10px',
-      background: '#F3F0E8',
-      color: '#3A403A',
+      border: '0',
+      borderBottom: '1px solid rgba(23,25,25,.28)',
+      padding: '.85rem .2rem',
+      borderRadius: '0',
+      background: 'transparent',
+      color: '#171919',
       fontFamily: 'inherit',
       fontSize: '16px',
       lineHeight: 1.6,
@@ -615,35 +619,36 @@ function DiagnosticPage({
       flex: 1,
       minWidth: 0,
       padding: mob ? '.7rem 0' : '.75rem 0',
-      border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)',
-      background: sel ? ACC : '#F3F0E8',
-      color: sel ? '#F3F0E8' : '#3A403A',
+      border: sel ? '2px solid ' + ACC : '1px solid rgba(23,25,25,.18)',
+      background: 'transparent',
+      color: sel ? ACC : '#3A403A',
       fontFamily: 'inherit',
       fontSize: '15px',
-      fontWeight: 600,
-      borderRadius: '8px',
+      fontWeight: sel ? 700 : 600,
+      borderRadius: '0',
       cursor: 'pointer',
-      transition: 'border-color .12s, background .12s'
+      transition: 'border-color .12s, color .12s'
     }),
     progLine: {
-      height: '2px',
-      background: 'rgba(40,39,38,.12)',
-      borderRadius: '2px',
+      height: '1px',
+      background: 'rgba(23,25,25,.18)',
+      borderRadius: '0',
       marginTop: '.7rem'
     },
     progFill: pct => ({
-      height: '2px',
+      height: '1px',
       background: ACC,
       width: pct + '%',
-      borderRadius: '2px',
+      borderRadius: '0',
       transition: 'width .25s ease'
     }),
     row: {
-      border: '1px solid rgba(40,39,38,.14)',
-      borderRadius: '12px',
-      padding: mob ? '1.1rem' : '1.25rem 1.35rem',
-      marginBottom: '.9rem',
-      background: '#F3F0E8'
+      border: '0',
+      borderTop: '1px solid rgba(23,25,25,.14)',
+      borderRadius: '0',
+      padding: mob ? '1.1rem .2rem' : '1.25rem .2rem',
+      marginBottom: '0',
+      background: 'transparent'
     }
   };
   const footer = () => typeof SiteFooter !== 'undefined' ? React.createElement(SiteFooter, {
@@ -802,7 +807,7 @@ function DiagnosticPage({
     C
   })), React.createElement('div', {
     style: {
-      borderTop: '1px solid rgba(40,39,38,.14)',
+      borderTop: '1px solid rgba(23,25,25,.14)',
       paddingTop: '2rem',
       marginTop: '.5rem'
     }

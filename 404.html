@@ -12,34 +12,39 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..900&family=Inter:wght@400..700&display=swap"></noscript>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<meta name="theme-color" content="#F5F5F5">
+<meta name="theme-color" content="#16231E">
 <style>
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
 body {
-  background: #FFFFFF; color: #282726;
+  background: #16231E; color: #F3F0E8;
   font-family: var(--font-body,"Inter",system-ui,sans-serif);
   font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased;
   display: flex; align-items: center; justify-content: center; min-height: 100%;
+  position: relative; overflow: hidden;
 }
-main { max-width: 540px; padding: 2rem; }
-.eyebrow { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #767676; margin-bottom: 1.2rem; }
-h1 { font-family: var(--font-heading, "Inter Tight", "Inter", system-ui, sans-serif); font-synthesis: none; font-size: clamp(34px, 5vw, 48px); font-weight: 800; line-height: 1.05; letter-spacing: -.035em; margin-bottom: 1rem; }
-p { font-size: 16px; color: #555; margin-bottom: 1.6rem; line-height: 1.8; }
-nav a { display: inline-block; color: #047857; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; margin-right: 1.4rem; font-size: 14px; letter-spacing: .04em; }
-nav a:hover { color: #047857; }
+.enso { position: absolute; width: min(94vh, 780px); aspect-ratio: 1; right: -16%; bottom: -26%;
+  border: 2px solid #8FBFA7; border-radius: 50%; opacity: .55; pointer-events: none; z-index: 0; }
+.site-grain { position: fixed; inset: 0; pointer-events: none; z-index: 2; opacity: 0.40; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E"); background-size: 160px 160px; }
+main { position: relative; z-index: 1; max-width: 540px; padding: 2rem; }
+.eyebrow { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8FBFA7; margin-bottom: 1.2rem; }
+h1 { font-family: var(--font-heading, "Inter Tight", "Inter", system-ui, sans-serif); font-synthesis: none; font-size: clamp(34px, 5vw, 48px); font-weight: 800; line-height: 1.05; letter-spacing: -.035em; margin-bottom: 1rem; color: #F3F0E8; }
+p { font-size: 16px; color: #C0C9BF; margin-bottom: 1.6rem; line-height: 1.8; }
+nav a { display: inline-block; color: #8FBFA7; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; font-size: 14px; letter-spacing: .04em; }
+nav a:hover { color: #F3F0E8; }
 </style>
 </head>
 <body>
+<div class="enso" aria-hidden="true"></div>
+<div class="site-grain" aria-hidden="true"></div>
 <main>
   <p class="eyebrow">404 · Page not found</p>
   <h1>That page doesn't exist.</h1>
   <p>The link may be broken or the page may have moved. Let's get you back on track.</p>
   <nav>
-    <a href="/">Home</a>
-    <a href="/blog/">Writing</a>
-    <a href="/burnout-diagnostic/">Fulfilment Diagnostic</a>
+    <a href="/">Back to the homepage &rarr;</a>
   </nav>
 </main>
 </body>

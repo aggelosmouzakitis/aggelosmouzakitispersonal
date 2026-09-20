@@ -240,12 +240,12 @@ function clarityStyles(mob) {
     note: { fontSize: '14px', color: '#6A6F67', lineHeight: 1.7 },
     qText: { fontFamily: 'var(--font-heading)', fontSynthesis: 'none', fontSize: mob ? '23px' : '30px', fontWeight: 750, lineHeight: 1.2, letterSpacing: '-.02em', color: '#3A403A', margin: '0 0 1.6rem' },
     cta: { fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', color: '#F3F0E8', background: CL_ACC, border: '1.5px solid ' + CL_ACC, borderRadius: '2px', padding: '.9rem 1.7rem', display: 'inline-block', cursor: 'pointer', textDecoration: 'none' },
-    ctaSec: { background: 'transparent', color: '#3A403A', border: '1.5px solid rgba(40,39,38,.35)' },
-    choice: function (sel) { return { width: '100%', textAlign: 'left', border: sel ? '1.5px solid ' + CL_ACC : '1px solid rgba(40,39,38,.2)', padding: mob ? '.95rem 1rem' : '1rem 1.15rem', borderRadius: '10px', background: sel ? 'rgba(4,120,87,.08)' : '#F3F0E8', color: '#3A403A', fontFamily: 'inherit', fontSize: mob ? '15.5px' : '16.5px', lineHeight: 1.5, cursor: 'pointer', marginBottom: '.6rem', transition: 'border-color .12s, background .12s', display: 'block' }; },
-    naChoice: function (sel) { return { width: '100%', textAlign: 'left', border: sel ? '1.5px solid ' + CL_ACC : '1px dashed rgba(40,39,38,.3)', padding: mob ? '.8rem 1rem' : '.85rem 1.15rem', borderRadius: '10px', background: sel ? 'rgba(4,120,87,.08)' : '#EDE8DB', color: '#3A403A', fontFamily: 'inherit', fontSize: '15px', lineHeight: 1.5, cursor: 'pointer', marginTop: '.3rem', transition: 'border-color .12s, background .12s', display: 'block' }; },
-    field: { width: '100%', border: '1px solid rgba(40,39,38,.25)', padding: '.85rem 1rem', borderRadius: '10px', background: '#F3F0E8', color: '#3A403A', fontFamily: 'inherit', fontSize: '16px', lineHeight: 1.6, outline: 'none' },
-    progLine: { height: '3px', background: 'rgba(40,39,38,.12)', borderRadius: '3px', marginTop: '.7rem' },
-    progFill: function (pct) { return { height: '3px', background: CL_ACC, width: pct + '%', borderRadius: '3px', transition: 'width .25s ease' }; },
+    ctaSec: { background: 'transparent', color: '#3A403A', border: '1.5px solid rgba(23,25,25,.35)' },
+    choice: function (sel) { return { width: '100%', textAlign: 'left', border: '0', borderLeft: sel ? '2px solid ' + CL_ACC : '2px solid transparent', borderBottom: '1px solid rgba(23,25,25,.14)', padding: mob ? '.95rem .6rem .95rem 1rem' : '1rem .6rem 1rem 1.1rem', borderRadius: '0', background: 'transparent', color: sel ? CL_ACC : '#3A403A', fontWeight: sel ? 700 : 400, fontFamily: 'inherit', fontSize: mob ? '15.5px' : '16.5px', lineHeight: 1.5, cursor: 'pointer', marginBottom: '0', transition: 'border-color .12s, color .12s', display: 'block' }; },
+    naChoice: function (sel) { return { width: '100%', textAlign: 'left', border: '0', borderLeft: sel ? '2px solid ' + CL_ACC : '2px solid transparent', borderTop: '1px solid rgba(23,25,25,.14)', padding: mob ? '.8rem .6rem .8rem 1rem' : '.85rem .6rem .85rem 1.1rem', borderRadius: '0', background: 'transparent', color: sel ? CL_ACC : '#6A6F67', fontWeight: sel ? 700 : 400, fontFamily: 'inherit', fontSize: '15px', lineHeight: 1.5, cursor: 'pointer', marginTop: '.5rem', transition: 'border-color .12s, color .12s', display: 'block' }; },
+    field: { width: '100%', border: '0', borderBottom: '1px solid rgba(23,25,25,.28)', padding: '.85rem .2rem', borderRadius: '0', background: 'transparent', color: '#171919', fontFamily: 'inherit', fontSize: '16px', lineHeight: 1.6, outline: 'none' },
+    progLine: { height: '1px', background: 'rgba(23,25,25,.18)', borderRadius: '0', marginTop: '.7rem' },
+    progFill: function (pct) { return { height: '1px', background: CL_ACC, width: pct + '%', borderRadius: '0', transition: 'width .25s ease' }; },
   };
 }
 
@@ -273,7 +273,7 @@ function ClarityBar({ dim, C }) {
     React.createElement('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', marginBottom: '.4rem' } },
       React.createElement('span', { style: { fontSize: '15.5px', fontWeight: 600, color: '#3A403A' } }, dim.label),
       React.createElement('span', { style: { fontSize: '14px', fontWeight: 700, color: tone, whiteSpace: 'nowrap' } }, dim.score + '/100 · ' + dim.labelShort)),
-    React.createElement('div', { style: { height: '8px', background: 'rgba(40,39,38,.09)', borderRadius: '999px', overflow: 'hidden' } },
+    React.createElement('div', { style: { height: '8px', background: 'rgba(23,25,25,.09)', borderRadius: '999px', overflow: 'hidden' } },
       React.createElement('div', { style: { height: '8px', width: dim.score + '%', background: tone, borderRadius: '999px', transition: 'width .4s ease' } })),
     dim.copy ? React.createElement('p', { style: { fontSize: '14.5px', color: '#3A403A', lineHeight: 1.55, margin: '.5rem 0 0' } }, dim.copy) : null,
     dim.lowConfidence ? React.createElement('p', { style: { fontSize: '13px', color: '#6A6F67', lineHeight: 1.5, margin: '.3rem 0 0', fontStyle: 'italic' } }, 'Based on few answers, so read this as a weaker signal.') : null);
@@ -283,7 +283,7 @@ function ClarityBar({ dim, C }) {
 function ClarityHeadline({ head, C, compact }) {
   if (!head) return null;
   var tone = toneFor(head.type, head.bracket);
-  return React.createElement('div', { style: { border: '1px solid rgba(40,39,38,.14)', borderLeft: '3px solid ' + tone, borderRadius: '10px', padding: compact ? '1.1rem 1.2rem' : '1.4rem 1.5rem', background: '#F3F0E8', marginBottom: compact ? 0 : '1rem', flex: compact ? 1 : 'none', minWidth: 0 } },
+  return React.createElement('div', { style: { border: '1px solid rgba(23,25,25,.14)', borderLeft: '3px solid ' + tone, borderRadius: '10px', padding: compact ? '1.1rem 1.2rem' : '1.4rem 1.5rem', background: '#F3F0E8', marginBottom: compact ? 0 : '1rem', flex: compact ? 1 : 'none', minWidth: 0 } },
     React.createElement('div', { style: { fontSize: '12px', fontWeight: 700, letterSpacing: '.05em', textTransform: 'uppercase', color: '#6A6F67', marginBottom: '.5rem' } }, head.name),
     React.createElement('div', { style: { display: 'flex', alignItems: 'baseline', gap: '.5rem', flexWrap: 'wrap' } },
       React.createElement('span', { style: { fontFamily: 'var(--font-heading)', fontSize: compact ? '34px' : '44px', fontWeight: 800, letterSpacing: '-.03em', color: '#3A403A', lineHeight: 1 } }, head.score),
@@ -352,7 +352,7 @@ function ClarityResult({ data, result, C, mob }) {
     interp.context ? React.createElement(ClaritySection, { title: 'Important context', C: C },
       React.createElement('p', { style: { fontSize: '15px', color: '#3A403A', lineHeight: 1.65, margin: 0 } }, interp.context)) : null,
     // 10. Want another perspective?
-    React.createElement('div', { style: { marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(40,39,38,.14)' } },
+    React.createElement('div', { style: { marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(23,25,25,.14)' } },
       React.createElement('h3', { style: { fontFamily: 'var(--font-heading)', fontSize: mob ? '22px' : '26px', fontWeight: 800, letterSpacing: '-.02em', color: '#3A403A', margin: '0 0 .6rem' } }, data.cta.heading),
       React.createElement('p', { style: { ...C.p, marginBottom: '1.3rem' } }, data.cta.sub),
       React.createElement('a', { href: data.cta.href, className: 'cta-btn', style: C.cta }, data.cta.label)));

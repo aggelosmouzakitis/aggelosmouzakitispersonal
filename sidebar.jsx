@@ -1,11 +1,11 @@
 // sidebar.jsx — desktop sidebar + mobile bottom nav (bilingual, one offer)
 
 const SB = {
-  bg: '#F5F5F5',
+  bg: '#F3F0E8',
   border: 'rgba(40,39,38,0.1)',
-  muted: '#6e6e6e',
+  muted: '#6A6F67',
   text: 'rgba(40,39,38,0.65)',
-  active: '#282726',
+  active: '#3A403A',
   accent: '#047857',
   W: 300,
   WC: 68,
@@ -133,13 +133,13 @@ function LangSwitch({ page, lang, compact, full }) {
         style={{
           padding: full ? '4px 12px' : compact ? '3px 8px' : '4px 10px', fontSize: full ? '12px' : compact ? '11px' : '12px', fontWeight: full ? 600 : 700,
           letterSpacing: full ? '.02em' : '.04em', textTransform: full ? 'none' : 'uppercase', textDecoration: 'none', borderRadius: '3px',
-          color: active ? '#fff' : SB.text, background: active ? SB.accent : 'transparent',
+          color: active ? '#F3F0E8' : SB.text, background: active ? SB.accent : 'transparent',
           cursor: active ? 'default' : 'pointer', pointerEvents: active ? 'none' : 'auto',
         }}>{label}</a>
     );
   };
   return (
-    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 2, border: `1px solid ${SB.border}`, borderRadius: '5px', padding: 2, background: '#fff' }}>
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 2, border: `1px solid ${SB.border}`, borderRadius: '5px', padding: 2, background: '#F3F0E8' }}>
       {seg('en', full ? 'English' : 'EN')}{seg('el', full ? 'Ελληνικά' : 'ΕΛ')}
     </div>
   );
@@ -165,7 +165,7 @@ function MobileNav({ page, lang }) {
       </div>
       <nav style={{
         position: 'fixed', left: 0, right: 0, bottom: 0, height: 64,
-        background: '#F5F5F5', borderTop: '1px solid rgba(40,39,38,0.1)',
+        background: '#F3F0E8', borderTop: '1px solid rgba(40,39,38,0.1)',
         display: 'flex', alignItems: 'stretch', zIndex: 100,
         paddingBottom: 'env(safe-area-inset-bottom)',
       }}>
@@ -201,8 +201,8 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
       style={{
         position: 'absolute', left: open ? SB.W - 13 : SB.WC - 13, top: 32,
         width: 26, height: 26, borderRadius: '50%',
-        background: '#ffffff', border: '1px solid rgba(200,200,200,0.3)',
-        color: '#1A1918', cursor: 'pointer', zIndex: 20,
+        background: '#F3F0E8', border: '1px solid rgba(200,200,200,0.3)',
+        color: '#16231E', cursor: 'pointer', zIndex: 20,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         boxShadow: '0 2px 8px rgba(0,0,0,0.18)', padding: 0,
       }}>
@@ -214,7 +214,7 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
   // hover/focus (no native-title delay), positioned just right of the icon.
   const TIP = {
     position: 'absolute', left: '100%', top: '50%', transform: 'translateY(-50%)', marginLeft: 10,
-    background: '#282726', color: '#fff', padding: '5px 10px', borderRadius: 6,
+    background: '#3A403A', color: '#F3F0E8', padding: '5px 10px', borderRadius: 6,
     fontSize: '12px', fontWeight: 600, letterSpacing: '.02em', lineHeight: 1.2, whiteSpace: 'nowrap',
     textTransform: 'none', boxShadow: '0 4px 14px rgba(0,0,0,.28)', zIndex: 200, pointerEvents: 'none',
   };
@@ -354,7 +354,7 @@ function Sidebar({ page, lang = 'en', open, setOpen }) {
             <a href={diagPath(lang)}
               onMouseEnter={e => { e.currentTarget.style.background = '#047857'; e.currentTarget.style.borderColor = '#047857'; }}
               onMouseLeave={e => { e.currentTarget.style.background = SB.accent; e.currentTarget.style.borderColor = SB.accent; }}
-              style={{ display: 'block', textAlign: 'center', width: '100%', padding: '13px 0', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: SB.accent, border: `1.5px solid ${SB.accent}`, color: '#fff', cursor: 'pointer', textDecoration: 'none', transition: 'background .15s, border-color .15s' }}>
+              style={{ display: 'block', textAlign: 'center', width: '100%', padding: '13px 0', fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', background: SB.accent, border: `1.5px solid ${SB.accent}`, color: '#F3F0E8', cursor: 'pointer', textDecoration: 'none', transition: 'background .15s, border-color .15s' }}>
               {t.diagBtn}
             </a>
           </div>

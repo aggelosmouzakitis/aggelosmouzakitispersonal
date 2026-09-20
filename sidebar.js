@@ -1,11 +1,11 @@
 // sidebar.jsx — desktop sidebar + mobile bottom nav (bilingual, one offer)
 
 const SB = {
-  bg: '#F5F5F5',
+  bg: '#F3F0E8',
   border: 'rgba(40,39,38,0.1)',
-  muted: '#6e6e6e',
+  muted: '#6A6F67',
   text: 'rgba(40,39,38,0.65)',
-  active: '#282726',
+  active: '#3A403A',
   accent: '#047857',
   W: 300,
   WC: 68
@@ -359,7 +359,7 @@ function LangSwitch({
         textTransform: full ? 'none' : 'uppercase',
         textDecoration: 'none',
         borderRadius: '3px',
-        color: active ? '#fff' : SB.text,
+        color: active ? '#F3F0E8' : SB.text,
         background: active ? SB.accent : 'transparent',
         cursor: active ? 'default' : 'pointer',
         pointerEvents: active ? 'none' : 'auto'
@@ -374,7 +374,7 @@ function LangSwitch({
       border: `1px solid ${SB.border}`,
       borderRadius: '5px',
       padding: 2,
-      background: '#fff'
+      background: '#F3F0E8'
     }
   }, seg('en', full ? 'English' : 'EN'), seg('el', full ? 'Ελληνικά' : 'ΕΛ'));
 }
@@ -424,7 +424,7 @@ function MobileNav({
       right: 0,
       bottom: 0,
       height: 64,
-      background: '#F5F5F5',
+      background: '#F3F0E8',
       borderTop: '1px solid rgba(40,39,38,0.1)',
       display: 'flex',
       alignItems: 'stretch',
@@ -484,9 +484,9 @@ function Sidebar({
       width: 26,
       height: 26,
       borderRadius: '50%',
-      background: '#ffffff',
+      background: '#F3F0E8',
       border: '1px solid rgba(200,200,200,0.3)',
-      color: '#1A1918',
+      color: '#16231E',
       cursor: 'pointer',
       zIndex: 20,
       display: 'flex',
@@ -505,8 +505,8 @@ function Sidebar({
     top: '50%',
     transform: 'translateY(-50%)',
     marginLeft: 10,
-    background: '#282726',
-    color: '#fff',
+    background: '#3A403A',
+    color: '#F3F0E8',
     padding: '5px 10px',
     borderRadius: 6,
     fontSize: '12px',
@@ -882,7 +882,7 @@ function Sidebar({
       textTransform: 'uppercase',
       background: SB.accent,
       border: `1.5px solid ${SB.accent}`,
-      color: '#fff',
+      color: '#F3F0E8',
       cursor: 'pointer',
       textDecoration: 'none',
       transition: 'background .15s, border-color .15s'

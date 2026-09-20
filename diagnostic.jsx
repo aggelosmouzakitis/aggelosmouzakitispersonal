@@ -230,7 +230,7 @@ function DChoice({ label, options, C, selected, onPick, multi }) {
     React.createElement('p', { style: C.qLabel }, label),
     options.map((o, i) => {
       const on = multi ? (selected || []).includes(i) : selected === i;
-      const box = multi ? React.createElement('span', { 'aria-hidden': 'true', style: { width: 18, height: 18, flexShrink: 0, borderRadius: 4, border: '1.5px solid ' + (on ? '#047857' : 'rgba(40,39,38,.4)'), background: on ? '#047857' : 'transparent', color: '#F3F0E8', fontSize: 12, lineHeight: '16px', textAlign: 'center', marginRight: '.7rem', display: 'inline-block' } }, on ? '✓' : '') : null;
+      const box = multi ? React.createElement('span', { 'aria-hidden': 'true', style: { width: 18, height: 18, flexShrink: 0, borderRadius: 4, border: '1.5px solid ' + (on ? '#047857' : 'rgba(23,25,25,.4)'), background: on ? '#047857' : 'transparent', color: '#F3F0E8', fontSize: 12, lineHeight: '16px', textAlign: 'center', marginRight: '.7rem', display: 'inline-block' } }, on ? '✓' : '') : null;
       return React.createElement('button', { key: i, className: 'opt-btn', style: { ...C.choice(on), display: 'flex', alignItems: 'center' }, onClick: () => onPick(i) }, box, React.createElement('span', null, o));
     })
   );
@@ -388,13 +388,13 @@ function DiagnosticPage({ lang = 'en' }) {
     qLabel: { fontSize: mob ? '16px' : '17px', fontWeight: 600, color: '#3A403A', margin: '0 0 .9rem', lineHeight: 1.5 },
     note: { fontSize: '14px', color: '#6A6F67', lineHeight: 1.7 },
     cta: { fontFamily: 'inherit', fontWeight: 700, fontSize: '13px', letterSpacing: '.06em', textTransform: 'uppercase', color: '#F3F0E8', background: ACC, border: '1.5px solid ' + ACC, borderRadius: '2px', padding: '.9rem 1.7rem', display: 'inline-block', cursor: 'pointer', textDecoration: 'none' },
-    ctaSec: { background: 'transparent', color: '#3A403A', border: '1.5px solid rgba(40,39,38,.35)' },
-    choice: (sel) => ({ width: '100%', textAlign: 'left', border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)', padding: mob ? '.8rem .9rem' : '.85rem 1rem', borderRadius: '10px', background: sel ? 'rgba(4, 120, 87,.08)' : '#F3F0E8', color: '#3A403A', fontFamily: 'inherit', fontSize: mob ? '15px' : '16px', lineHeight: 1.5, cursor: 'pointer', marginBottom: '.6rem', transition: 'border-color .12s, background .12s' }),
-    field: { width: '100%', border: '1px solid rgba(40,39,38,.2)', padding: '.85rem 1rem', borderRadius: '10px', background: '#F3F0E8', color: '#3A403A', fontFamily: 'inherit', fontSize: '16px', lineHeight: 1.6, outline: 'none' },
-    scaleBtn: (sel) => ({ flex: 1, minWidth: 0, padding: mob ? '.7rem 0' : '.75rem 0', border: sel ? '1.5px solid ' + ACC : '1px solid rgba(40,39,38,.18)', background: sel ? ACC : '#F3F0E8', color: sel ? '#F3F0E8' : '#3A403A', fontFamily: 'inherit', fontSize: '15px', fontWeight: 600, borderRadius: '8px', cursor: 'pointer', transition: 'border-color .12s, background .12s' }),
-    progLine: { height: '2px', background: 'rgba(40,39,38,.12)', borderRadius: '2px', marginTop: '.7rem' },
-    progFill: (pct) => ({ height: '2px', background: ACC, width: pct + '%', borderRadius: '2px', transition: 'width .25s ease' }),
-    row: { border: '1px solid rgba(40,39,38,.14)', borderRadius: '12px', padding: mob ? '1.1rem' : '1.25rem 1.35rem', marginBottom: '.9rem', background: '#F3F0E8' },
+    ctaSec: { background: 'transparent', color: '#3A403A', border: '1.5px solid rgba(23,25,25,.35)' },
+    choice: (sel) => ({ width: '100%', textAlign: 'left', border: '0', borderLeft: sel ? '2px solid ' + ACC : '2px solid transparent', borderBottom: '1px solid rgba(23,25,25,.14)', padding: mob ? '.85rem .6rem .85rem .95rem' : '.9rem .6rem .9rem 1rem', borderRadius: '0', background: 'transparent', color: sel ? ACC : '#3A403A', fontWeight: sel ? 700 : 400, fontFamily: 'inherit', fontSize: mob ? '15px' : '16px', lineHeight: 1.5, cursor: 'pointer', marginBottom: '0', transition: 'border-color .12s, color .12s' }),
+    field: { width: '100%', border: '0', borderBottom: '1px solid rgba(23,25,25,.28)', padding: '.85rem .2rem', borderRadius: '0', background: 'transparent', color: '#171919', fontFamily: 'inherit', fontSize: '16px', lineHeight: 1.6, outline: 'none' },
+    scaleBtn: (sel) => ({ flex: 1, minWidth: 0, padding: mob ? '.7rem 0' : '.75rem 0', border: sel ? '2px solid ' + ACC : '1px solid rgba(23,25,25,.18)', background: 'transparent', color: sel ? ACC : '#3A403A', fontFamily: 'inherit', fontSize: '15px', fontWeight: sel ? 700 : 600, borderRadius: '0', cursor: 'pointer', transition: 'border-color .12s, color .12s' }),
+    progLine: { height: '1px', background: 'rgba(23,25,25,.18)', borderRadius: '0', marginTop: '.7rem' },
+    progFill: (pct) => ({ height: '1px', background: ACC, width: pct + '%', borderRadius: '0', transition: 'width .25s ease' }),
+    row: { border: '0', borderTop: '1px solid rgba(23,25,25,.14)', borderRadius: '0', padding: mob ? '1.1rem .2rem' : '1.25rem .2rem', marginBottom: '0', background: 'transparent' },
   };
   const footer = () => (typeof SiteFooter !== 'undefined' ? React.createElement(SiteFooter, { mob, lang }) : null);
   const toggleStage = (i) => setProf((p) => { const cur = p.stage || []; return { ...p, stage: cur.includes(i) ? cur.filter((x) => x !== i) : [...cur, i] }; });
@@ -435,7 +435,7 @@ function DiagnosticPage({ lang = 'en' }) {
     React.createElement(DProg, { n: 5, progress, C, t }),
     React.createElement('h2', { style: C.sectionH }, t.s5.label),
     t.s5.opens.map((q, i) => React.createElement(DField, { key: i, label: q, value: opens[i], onChange: (v) => setOpens((o) => ({ ...o, [i]: v })), C })),
-    React.createElement('div', { style: { borderTop: '1px solid rgba(40,39,38,.14)', paddingTop: '2rem', marginTop: '.5rem' } },
+    React.createElement('div', { style: { borderTop: '1px solid rgba(23,25,25,.14)', paddingTop: '2rem', marginTop: '.5rem' } },
       React.createElement('div', { style: { marginBottom: '1.2rem' } },
         React.createElement('label', { style: { ...C.eyebrow, display: 'block', marginBottom: '.5rem' } }, t.s5.name),
         React.createElement('input', { type: 'text', value: name, onChange: (e) => setName(e.target.value), style: C.field })

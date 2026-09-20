@@ -5,8 +5,8 @@ const C = {
   text: '#3A403A',
   muted: '#6A6F67',
   accent: '#047857',
-  border: 'rgba(40,39,38,0.12)',
-  sepBorder: 'rgba(40,39,38,0.2)'
+  border: 'rgba(23,25,25,0.12)',
+  sepBorder: 'rgba(23,25,25,0.2)'
 };
 // These content pages now render inside the shared inner-page shell (rail +
 // reading column, in site-chrome.jsx). The shell supplies horizontal insets and
@@ -148,7 +148,7 @@ function Strong({
     style: {
       fontWeight: 400,
       color: '#3A403A',
-      borderBottom: '1px solid rgba(40,39,38,.3)',
+      borderBottom: '1px solid rgba(23,25,25,.3)',
       paddingBottom: '1px'
     }
   }, children);
@@ -859,7 +859,7 @@ function TwoColBoard({
       gap: mob ? '1.75rem' : '3.5rem',
       padding: mob ? '1.6rem' : '2.5rem 3rem',
       background: '#F3F0E8',
-      boxShadow: '0 10px 40px rgba(40,39,38,.06)'
+      boxShadow: '0 10px 40px rgba(23,25,25,.06)'
     }
   }, col(leftLabel, leftItems), !mob && React.createElement('div', {
     style: {
@@ -932,8 +932,8 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 .svc-p a,.svc-lead a,.svc-faq__a a,.svc-note a{color:#047857;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 .svc-p strong,.svc-faq__a strong{font-weight:700;color:#171919}
 .svc-eyebrow{margin:0 0 12px;font-family:var(--font-body);font-size:13px;line-height:1.3;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#047857}
-.svc-faq{max-width:var(--svc-read);border-top:1px solid rgba(24,26,28,0.14)}
-.svc-faq__item{border-bottom:1px solid rgba(24,26,28,0.14);padding:22px 0}
+.svc-faq{max-width:var(--svc-read);border-top:1px solid rgba(23,25,25,0.14)}
+.svc-faq__item{border-bottom:1px solid rgba(23,25,25,0.14);padding:22px 0}
 .svc-page .svc-faq__q{margin:0 0 10px;font-family:var(--font-heading);font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#171919}
 .svc-page .svc-faq__a{margin:0;font-size:18px;line-height:1.65;color:#3A403A}
 .svc-faq__a p{margin:0 0 12px}.svc-faq__a p:last-child{margin:0}
@@ -943,7 +943,7 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 .svc-quote cite{font-style:normal;font-size:13px;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:#6A6F67}
 .svc-page a.svc-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 30px;background:#047857;color:#F3F0E8 !important;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
 .svc-page a.svc-cta:hover{background:#03654A;gap:12px;color:#F3F0E8 !important}
-.svc-page a.svc-cta--ghost{background:transparent;color:#171919 !important;border:1.5px solid rgba(24,26,28,0.28)}
+.svc-page a.svc-cta--ghost{background:transparent;color:#171919 !important;border:1.5px solid rgba(23,25,25,0.28)}
 .svc-page a.svc-cta--ghost:hover{border-color:#047857;color:#047857 !important;filter:none;background:transparent}
 .svc-ctarow{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
 .svc-ctarow--hero{margin-top:30px}
@@ -954,16 +954,16 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 .svc-page a.svc-close__cta:hover{filter:brightness(1.12);gap:12px;color:#F3F0E8 !important}
 .svc-note{max-width:var(--svc-read);margin:16px 0 0;font-size:15px;line-height:1.6;color:#6A6F67}
 .svc-bullets{max-width:var(--svc-read);list-style:none;margin:4px 0 0;padding:0}
-.svc-bullets li{position:relative;padding:8px 0 8px 22px;font-size:18px;line-height:1.6;color:#3A403A;border-top:1px solid rgba(24,26,28,0.1)}
+.svc-bullets li{position:relative;padding:8px 0 8px 22px;font-size:18px;line-height:1.6;color:#3A403A;border-top:1px solid rgba(23,25,25,0.1)}
 .svc-bullets li:first-child{border-top:0}
 .svc-bullets li::before{content:"";position:absolute;left:0;top:16px;width:10px;height:2px;background:#047857}
 .svc-bullets li a{color:#047857;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:767px){.svc-bullets li{font-size:17px}}
 .svc-cards{margin:4px 0 0}
-.svc-rule{border:0;border-top:1px solid rgba(24,26,28,0.14);margin:0}
+.svc-rule{border:0;border-top:1px solid rgba(23,25,25,0.14);margin:0}
 .svc-page .svc-related__h{margin:0 0 8px;font-family:var(--font-heading);font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-0.02em;color:#171919}
-.svc-related{list-style:none;max-width:var(--svc-read);margin:0;padding:0;border-top:1px solid rgba(24,26,28,0.14)}
-.svc-related li{border-bottom:1px solid rgba(24,26,28,0.14)}
+.svc-related{list-style:none;max-width:var(--svc-read);margin:0;padding:0;border-top:1px solid rgba(23,25,25,0.14)}
+.svc-related li{border-bottom:1px solid rgba(23,25,25,0.14)}
 .svc-related a{display:flex;justify-content:space-between;gap:20px;padding:15px 0;font-family:var(--font-heading);font-size:17px;line-height:1.4;font-weight:600;color:#171919;text-decoration:none}
 .svc-related a:hover{color:#047857}
 @media (max-width:767px){
