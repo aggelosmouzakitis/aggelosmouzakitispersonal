@@ -21,35 +21,21 @@ const PAGES = [
   { f: 'contact/index.html', faq: false },
   { f: 'wtf-friday/index.html', faq: false },
   // Core — Greek (/el/) — same indexable prerender path as English (brief §57)
-  { f: 'el/index.html', faq: false },
-  { f: 'el/about/index.html', faq: false },
-  { f: 'el/reviews/index.html', faq: false },
-  { f: 'el/confidentiality/index.html', faq: false },
   // Retained (out of nav, still indexable via their own inline SpecialtyPage mount)
-  { f: 'blog/index.html', faq: false },
   { f: 'ask-me-anything/index.html', faq: false },
   { f: 'ask-me-anything/el/index.html', faq: false },
-  { f: 'startingdiagnostic/index.html', faq: false },
-  { f: 'el/startingdiagnostic/index.html', faq: false },
   // Clarity Tools — five self-scoring diagnostics (renderApp-free; mount ClarityTool)
   { f: 'clarity-tools/business-constraint/index.html', faq: false },
   { f: 'clarity-tools/strategy-or-execution/index.html', faq: false },
   { f: 'clarity-tools/quit-your-job/index.html', faq: false },
   { f: 'clarity-tools/become-a-solopreneur/index.html', faq: false },
   { f: 'clarity-tools/burned-out/index.html', faq: false },
-  { f: 'greek-speaking-therapist-london/index.html', faq: true },
-  { f: 'greek-speaking-therapist-manchester/index.html', faq: true },
-  { f: 'greek-speaking-therapist-new-york/index.html', faq: true },
-  { f: 'greek-speaking-therapist-dublin/index.html', faq: true },
   // Restored English SEO landing pages (persona mounts + specialty SpecialtyPage mounts)
   { f: 'therapy-for-founders/index.html', faq: true },
   { f: 'therapy-for-executives/index.html', faq: true },
   { f: 'imposter-syndrome-therapy/index.html', faq: true },
   { f: 'executive-burnout-therapy/index.html', faq: true },
   // Greek SEO landing pages (/el/*) — renderApp('el-…','el'), same indexable path
-  { f: 'el/executive-coaching/index.html', faq: false },
-  { f: 'el/burnout/index.html', faq: false },
-  { f: 'el/imposter-syndrome/index.html', faq: false },
 ];
 
 // Individual blog posts don't use the #root App shell — they're static articles
@@ -57,10 +43,12 @@ const PAGES = [
 // the sidebar (including the "Work With Me" CTA) is invisible until the unpkg
 // React/ReactDOM CDN scripts load, which is why it could look "missing" or
 // inconsistent versus every other page (all of which have a baked-in fallback).
-const BLOG_POST_FILES = fs.readdirSync(ROOT + '/blog', { withFileTypes: true })
-  .filter(d => d.isDirectory())
-  .map(d => `blog/${d.name}/index.html`)
-  .filter(f => fs.existsSync(ROOT + '/' + f));
+const BLOG_POST_FILES = fs.existsSync(ROOT + '/blog')
+  ? fs.readdirSync(ROOT + '/blog', { withFileTypes: true })
+      .filter(d => d.isDirectory())
+      .map(d => `blog/${d.name}/index.html`)
+      .filter(f => fs.existsSync(ROOT + '/' + f))
+  : [];
 
 function injectPrerender(html, inner) {
   // Replace #root (empty or already-populated) with the captured innerHTML.

@@ -123,9 +123,8 @@ const FOOTER_COLS_BY_LANG = {
     { label: 'Site', links: [
       { href: '/', label: 'Home' },
       { href: '/about/', label: 'About' },
-      { href: '/blog/', label: 'Writing' },
       { href: '/reviews/', label: 'Reviews' },
-      { href: '/startingdiagnostic/', label: 'Starting Diagnostic' },
+      { href: '/start-here/', label: 'Start here' },
       { href: '/confidentiality/', label: 'Confidentiality' },
     ] },
     { label: 'Elsewhere', links: [
@@ -1625,7 +1624,6 @@ function FoundersTherapyPage() {
     React.createElement(RelatedLinks, { mob, items: [
       { href: '/', label: 'Work with me, 1:1 →' },
       { href: '/psychotherapy-decision-coaching/', label: 'Founder advisory →' },
-      { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
     ] })
   );
 }
@@ -1689,7 +1687,6 @@ function ImposterPage() {
     React.createElement(Testimonials, { mob, items: [{q: "From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.", w: "Anonymous client, Tech executive"}, {q: "I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.", w: "Anonymous client, Product leader"}, {q: "I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.", w: "Anonymous client, Technology executive"}] }),
     React.createElement(RelatedLinks, { mob, items: [
       { href: '/', label: 'Work with me, 1:1 →' },
-      { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
     ] })
   );
@@ -1750,7 +1747,6 @@ function BurnoutPage() {
     React.createElement(Testimonials, { mob, items: [{q: "Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.", w: "Anonymous client, Consultant and business owner"}, {q: "I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.", w: "Anonymous client, Technology leader"}, {q: "The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.", w: "Anonymous client, Senior tech professional"}] }),
     React.createElement(RelatedLinks, { mob, items: [
       { href: '/', label: 'Work with me, 1:1 →' },
-      { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
       { href: '/career-transition-therapy/', label: 'Career transition →' },
     ] })
   );
@@ -1815,7 +1811,6 @@ function CareerTransitionPage() {
     React.createElement(Testimonials, { mob, items: [{q: "We have been working together for a while now, and the sessions have gradually changed the way I make decisions. Aggelos doesn’t tell me what to do or try to make me dependent on his opinion. He helps me separate the real problem from the fear, ego and old patterns wrapped around it. I usually leave with less noise and a much clearer sense of what is mine to do.", w: "Anonymous client, Founder"}, {q: "I had been forcing a business situation to continue because stopping it felt like failure. After one of our exercises, I realised I was trying to manufacture reasons to keep going when I already knew the answer. I had the difficult conversation shortly afterwards. It was not that Aggelos gave me the decision. He helped me stop fighting what I already knew.", w: "Anonymous client, Business owner"}, {q: "I was initially sceptical about somatic and trauma-informed work because I assumed it would be vague or a bit spiritual. It wasn’t. Aggelos explained what we were doing, paid attention to my limits and connected the experience back to patterns I could recognise in my work and relationships. It felt grounded, careful and surprisingly practical.", w: "Anonymous client"}] }),
     React.createElement(RelatedLinks, { mob, items: [
       { href: '/', label: 'Work with me, 1:1 →' },
-      { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
     ] })
   );

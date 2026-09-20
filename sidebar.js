@@ -62,10 +62,10 @@ const SB_LABELS = {
     writing: 'Writing',
     reviews: 'Reviews',
     findMe: 'Find me',
-    diagHead: 'Starting Diagnostic',
-    diagSub: "10 minutes on the business, what's getting in the way, and where the two meet.",
+    diagHead: 'Start here',
+    diagSub: 'Answer a few questions and get the most useful next step, whether that is a tool, a call or a paid offer.',
     diagBtn: 'START →',
-    diagShort: 'Diagnostic',
+    diagShort: 'Start here',
     book: 'Book a fit call →',
     bookShort: 'Book'
   },
@@ -88,7 +88,7 @@ const SB_LABELS = {
 };
 const sbT = lang => SB_LABELS[lang] || SB_LABELS.en;
 // Starting Diagnostic route is language-aware.
-const diagPath = lang => lang === 'el' ? '/el/startingdiagnostic/' : '/startingdiagnostic/';
+const diagPath = lang => lang === 'el' ? '/el/startingdiagnostic/' : '/start-here/';
 const ICONS = {
   OneToOne: () => /*#__PURE__*/React.createElement("svg", {
     width: "19",

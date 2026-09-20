@@ -315,14 +315,11 @@ const FOOTER_COLS_BY_LANG = {
       href: '/about/',
       label: 'About'
     }, {
-      href: '/blog/',
-      label: 'Writing'
-    }, {
       href: '/reviews/',
       label: 'Reviews'
     }, {
-      href: '/startingdiagnostic/',
-      label: 'Starting Diagnostic'
+      href: '/start-here/',
+      label: 'Start here'
     }, {
       href: '/confidentiality/',
       label: 'Confidentiality'
@@ -3060,9 +3057,6 @@ function FoundersTherapyPage() {
     }, {
       href: '/psychotherapy-decision-coaching/',
       label: 'Founder advisory →'
-    }, {
-      href: '/therapy-for-executives/',
-      label: 'Therapy for executives →'
     }]
   }));
 }
@@ -3140,9 +3134,6 @@ function ImposterPage() {
       href: '/',
       label: 'Work with me, 1:1 →'
     }, {
-      href: '/therapy-for-executives/',
-      label: 'Therapy for executives →'
-    }, {
       href: '/executive-burnout-therapy/',
       label: 'Executive burnout →'
     }]
@@ -3215,9 +3206,6 @@ function BurnoutPage() {
     items: [{
       href: '/',
       label: 'Work with me, 1:1 →'
-    }, {
-      href: '/therapy-for-executives/',
-      label: 'Therapy for executives →'
     }, {
       href: '/career-transition-therapy/',
       label: 'Career transition →'
@@ -3293,9 +3281,6 @@ function CareerTransitionPage() {
     items: [{
       href: '/',
       label: 'Work with me, 1:1 →'
-    }, {
-      href: '/therapy-for-executives/',
-      label: 'Therapy for executives →'
     }, {
       href: '/executive-burnout-therapy/',
       label: 'Executive burnout →'

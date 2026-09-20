@@ -20,6 +20,70 @@
   status = 301
   force = true
 
+# ─── Retired diagnostic + thin SEO landing pages → most relevant live page ───
+[[redirects]]
+  from = "/startingdiagnostic"
+  to = "/start-here/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/startingdiagnostic/*"
+  to = "/start-here/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-london"
+  to = "/psychotherapy-decision-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-london/*"
+  to = "/psychotherapy-decision-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-manchester"
+  to = "/psychotherapy-decision-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-manchester/*"
+  to = "/psychotherapy-decision-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-dublin"
+  to = "/psychotherapy-decision-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-dublin/*"
+  to = "/psychotherapy-decision-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-new-york"
+  to = "/psychotherapy-decision-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-new-york/*"
+  to = "/psychotherapy-decision-coaching/"
+  status = 301
+  force = true
+
+# ─── Blog retired → homepage ───
+[[redirects]]
+  from = "/blog"
+  to = "/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/blog/*"
+  to = "/"
+  status = 301
+  force = true
+
 # how-i-work → 1:1 (core page removed; method content merged into / and /1-to-1/)
 [[redirects]]
   from = "/how-i-work"

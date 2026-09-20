@@ -732,8 +732,8 @@ function BlackCtaStrip({
     className: 'cta-strip__h'
   }, heading || t.ctaHeading), React.createElement('div', null, React.createElement('a', {
     className: 'pill pill--green',
-    href: cPath('diagnostic', lang)
-  }, React.createElement('span', null, label || t.ctaBtn), React.createElement('span', null, '→'))), React.createElement('a', {
+    href: '/start-here/'
+  }, React.createElement('span', null, label || 'START HERE'), React.createElement('span', null, '→'))), React.createElement('a', {
     className: 'cta-strip__sub',
     href: cPath('confidentiality', lang)
   }, React.createElement('span', null, t.confidentiality), React.createElement('span', null, '→'))));

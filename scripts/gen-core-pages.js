@@ -128,7 +128,7 @@ function render(page, lang) {
   const htmlLang = lang === 'el' ? 'el' : 'en';
   const ld = [personLd(lang), breadcrumbLd(page, lang)];
   if (page.id === 'home') {
-    ld.push({ '@context': 'https://schema.org', '@type': 'WebSite', '@id': ORIGIN + '/#website', name: 'Aggelos Mouzakitis', url: ORIGIN + '/', inLanguage: ['en', 'el'], publisher: { '@id': ORIGIN + '/#person' } });
+    ld.push({ '@context': 'https://schema.org', '@type': 'WebSite', '@id': ORIGIN + '/#website', name: 'Aggelos Mouzakitis', url: ORIGIN + '/', inLanguage: ['en'], publisher: { '@id': ORIGIN + '/#person' } });
   }
   ld.push({ '@context': 'https://schema.org', '@type': page.schemaType, '@id': self + '#webpage', url: self, name: c.title, inLanguage: htmlLang, isPartOf: { '@id': ORIGIN + '/#website' }, about: { '@id': ORIGIN + '/#person' } });
 
@@ -191,7 +191,7 @@ ${ldTags}
 
 let n = 0;
 for (const page of PAGES) {
-  for (const lang of ['en', 'el']) {
+  for (const lang of ['en']) {
     const rel = (lang === 'el' ? 'el/' : '') + page.dir + (page.dir ? '/' : '');
     const outDir = path.join(ROOT, rel);
     fs.mkdirSync(outDir, { recursive: true });
