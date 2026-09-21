@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const O = 'https://aggelosmouzakitis.com';
-const TODAY = '2026-09-20';
+const TODAY = '2026-09-21';
 
 // Core pages (English only).
 const CORE = ['/about/', '/reviews/', '/confidentiality/'];
@@ -16,13 +16,14 @@ const OFFERS = [
   '/career-strategy-consulting/',
   '/solopreneur-growth-consulting/',
 ];
-// Free clarity-tool diagnostics (five self-scoring assessments).
-const CLARITY = [
-  '/clarity-tools/business-constraint/',
-  '/clarity-tools/strategy-or-execution/',
-  '/clarity-tools/quit-your-job/',
-  '/clarity-tools/become-a-solopreneur/',
-  '/clarity-tools/burned-out/',
+// Free Tools — the collection page plus the five live clarity-tool diagnostics
+// that sit inside it. The old /clarity-tools/ URLs are 301s and stay out.
+const FREE_TOOLS = [
+  '/free-tools/business-constraint/',
+  '/free-tools/strategy-or-execution/',
+  '/free-tools/quit-your-job/',
+  '/free-tools/become-a-solopreneur/',
+  '/free-tools/burned-out/',
 ];
 // English SEO landing pages (single search intent each, no EL equivalent).
 const EN_SEO = [
@@ -40,9 +41,11 @@ const parts = [];
 parts.push(plainUrl(O + '/', '1.0'));
 for (const p of CORE) parts.push(plainUrl(O + p, '0.7'));
 for (const p of OFFERS) parts.push(plainUrl(O + p, '0.8'));
-// High-intent + free entry points
-parts.push(plainUrl(O + '/start-here/', '0.9'));
-for (const p of CLARITY) parts.push(plainUrl(O + p, '0.7'));
+// High-intent + free entry points. /free-tools/ is the site's primary discovery
+// destination, so it carries the highest priority after the homepage.
+parts.push(plainUrl(O + '/free-tools/', '0.9'));
+for (const p of FREE_TOOLS) parts.push(plainUrl(O + p, '0.7'));
+parts.push(plainUrl(O + '/start-here/', '0.8'));
 parts.push(plainUrl(O + '/wtf-friday/', '0.7', 'weekly'));
 parts.push(plainUrl(O + '/ask-me-anything/', '0.6'));
 parts.push(plainUrl(O + '/contact/', '0.7'));
@@ -56,4 +59,4 @@ ${parts.join('\n')}
 `;
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml);
 const count = (xml.match(/<loc>/g) || []).length;
-console.log(`sitemap.xml written — ${count} URLs (1 home, ${CORE.length} core, ${OFFERS.length} offers, ${CLARITY.length} clarity tools, ${EN_SEO.length} en-seo, + start-here/wtf/ama/contact)`);
+console.log(`sitemap.xml written — ${count} URLs (1 home, ${CORE.length} core, ${OFFERS.length} offers, 1 free-tools hub + ${FREE_TOOLS.length} tools, ${EN_SEO.length} en-seo, + start-here/wtf/ama/contact)`);

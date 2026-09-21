@@ -138,17 +138,17 @@
   status = 301
   force = true
 
-# ─── Burnout Diagnostic → Clarity Tools "Are you burned out?" ────────────────
+# ─── Burnout Diagnostic → Free Tools "Are you burned out?" ──────────────────
 # The legacy burnout diagnostic's public URL now points at the new burnout tool
 # so existing links land on the actual burnout assessment (not the general one).
 [[redirects]]
   from = "/burnout-diagnostic"
-  to = "/clarity-tools/burned-out/"
+  to = "/free-tools/burned-out/"
   status = 301
   force = true
 [[redirects]]
   from = "/burnout-diagnostic/*"
-  to = "/clarity-tools/burned-out/"
+  to = "/free-tools/burned-out/"
   status = 301
   force = true
 [[redirects]]
@@ -159,6 +159,80 @@
 [[redirects]]
   from = "/el/burnout-diagnostic/*"
   to = "/el/startingdiagnostic/"
+  status = 301
+  force = true
+
+
+# ─── Clarity Tools → Free Tools (section rename + IA change) ─────────────────
+# "Free Tools" is now the umbrella section for every free interactive resource;
+# "Clarity tool" survives only as the TYPE of these five diagnostics. Each old
+# URL resolves in ONE direct 301 to its exact new equivalent — the per-tool
+# rules are listed before the catch-all so the specific match always wins.
+# Bare + trailing-slash forms are both listed so either resolves in a single hop.
+[[redirects]]
+  from = "/clarity-tools/business-constraint"
+  to = "/free-tools/business-constraint/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/business-constraint/"
+  to = "/free-tools/business-constraint/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/strategy-or-execution"
+  to = "/free-tools/strategy-or-execution/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/strategy-or-execution/"
+  to = "/free-tools/strategy-or-execution/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/quit-your-job"
+  to = "/free-tools/quit-your-job/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/quit-your-job/"
+  to = "/free-tools/quit-your-job/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/burned-out"
+  to = "/free-tools/burned-out/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/burned-out/"
+  to = "/free-tools/burned-out/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/become-a-solopreneur"
+  to = "/free-tools/become-a-solopreneur/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/become-a-solopreneur/"
+  to = "/free-tools/become-a-solopreneur/"
+  status = 301
+  force = true
+# Section root + anything else left under the old prefix.
+[[redirects]]
+  from = "/clarity-tools"
+  to = "/free-tools/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/"
+  to = "/free-tools/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/*"
+  to = "/free-tools/"
   status = 301
   force = true
 

@@ -124,7 +124,8 @@ const FOOTER_COLS_BY_LANG = {
       { href: '/', label: 'Home' },
       { href: '/about/', label: 'About' },
       { href: '/reviews/', label: 'Reviews' },
-      { href: '/start-here/', label: 'Start here' },
+      { href: '/free-tools/', label: 'Free tools' },
+      { href: '/start-here/', label: 'Not sure where to start?' },
       { href: '/confidentiality/', label: 'Confidentiality' },
     ] },
     { label: 'Elsewhere', links: [
@@ -406,6 +407,8 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 .svc-close{max-width:var(--svc-read);margin:76px 0 0;background:#16231E;border-radius:22px;padding:clamp(30px,4vw,46px)}
 .svc-page .svc-close__h{margin:0;max-width:20ch;font-family:var(--font-display);font-synthesis:none;font-size:clamp(28px,3.1vw,38px);line-height:1.04;letter-spacing:-0.03em;font-weight:800;color:#F3F0E8}
 .svc-close__p{margin:16px 0 0;max-width:54ch;font-size:18px;line-height:1.6;color:#C0C9BF}
+.svc-page a.svc-close__soft{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-size:13px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#8FBFA7 !important;text-decoration:none;transition:gap .18s,color .18s}
+.svc-page a.svc-close__soft:hover{gap:13px;color:#F3F0E8 !important}
 .svc-page a.svc-close__cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:28px;min-height:56px;padding:0 30px;background:#047857;color:#F3F0E8 !important;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
 .svc-page a.svc-close__cta:hover{filter:brightness(1.12);gap:12px;color:#F3F0E8 !important}
 .svc-note{max-width:var(--svc-read);margin:16px 0 0;font-size:15px;line-height:1.6;color:#6A6F67}
@@ -455,15 +458,20 @@ function SvcCta({ href, children, ghost }) {
 }
 function SvcNote({ children }) { return React.createElement('p', { className: 'svc-note' }, children); }
 function SvcEyebrow({ children }) { return React.createElement('p', { className: 'svc-eyebrow' }, children); }
+// Site-wide discovery pair: Free Tools is the dominant action, "Not sure where
+// to start?" the softer orientation route for people who can't frame it yet.
 function SvcHeroCta() {
   return React.createElement('div', { className: 'svc-ctarow svc-ctarow--hero' },
-    React.createElement(SvcCta, { href: '/start-here/' }, 'START HERE →'));
+    React.createElement(SvcCta, { href: '/free-tools/' }, 'EXPLORE FREE TOOLS →'),
+    React.createElement(SvcCta, { href: '/start-here/', ghost: true }, 'NOT SURE WHERE TO START? →'));
 }
 function SvcClosingCta({ title, body }) {
   return React.createElement('section', { className: 'svc-close' },
     React.createElement('h2', { className: 'svc-close__h' }, title),
     body ? React.createElement('p', { className: 'svc-close__p' }, body) : null,
-    React.createElement('a', { href: '/start-here/', className: 'cta-btn svc-close__cta' }, 'START HERE →'));
+    React.createElement('a', { href: '/free-tools/', className: 'cta-btn svc-close__cta' }, 'EXPLORE FREE TOOLS →'),
+    React.createElement('a', { href: '/start-here/', className: 'svc-close__soft' },
+      React.createElement('span', null, 'Not sure where to start?'), React.createElement('span', { 'aria-hidden': 'true' }, '→')));
 }
 function SvcFaq({ items }) {
   return React.createElement('div', { className: 'svc-faq' },
@@ -1571,7 +1579,7 @@ function ExecTherapyPage() {
     React.createElement(SvcSection, { title: 'How it works' },
       React.createElement(SvcP, null, "All sessions are ", React.createElement(Strong, null, "remote, one-on-one and confidential"), ". Most clients are across Europe and the US, weekly or biweekly. It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's going on and whether working together makes sense. If it doesn't, I'll say so."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/start-here/' }, 'START HERE →')
+        React.createElement(SvcCta, { href: '/start-here/' }, 'NOT SURE WHERE TO START? →')
       )
     ),
 
@@ -1586,7 +1594,7 @@ function ExecTherapyPage() {
     ),
 
     React.createElement(Testimonials, { mob, items: [{q: "One of the most useful things is that Aggelos actually understands the environment I work in. I don’t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than “follow your values.” He understands the game, but he also notices what the game is doing to me.", w: "Anonymous client, Senior operator"}, {q: "Aggelos is direct. He will tell me when I am avoiding something or constructing a very intelligent explanation for why I cannot act. But I have never experienced his directness as judgement. There is enough trust between us that he can challenge me properly, which is exactly what I needed.", w: "Anonymous client, Senior tech professional"}, {q: "I came in expecting a fairly standard coaching conversation. Within the first session, Aggelos understood both the professional problem and the emotional mechanism underneath it. He was warm, but very straightforward, and gave me a way of looking at the situation that I had not considered before. I left with more than advice. I left with a more accurate problem.", w: "Anonymous client, Senior professional"}] }),
-    React.createElement(SvcClosingCta, { title: "Still feel like something's off?", body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call." }),
+    React.createElement(SvcClosingCta, { title: "Still feel like something's off?", body: "Start with a free tool and name the problem yourself, or tell me what is going on and I will point you to the most useful next step." }),
     React.createElement(RelatedLinks, { mob, heading: 'Keep reading', items: [
       { href: '/psychotherapy-decision-coaching/', label: '1:1 work with me →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
@@ -1624,7 +1632,7 @@ function FoundersTherapyPage() {
     React.createElement(SvcSection, { title: 'How it works' },
       React.createElement(SvcP, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one and confidential"), ". Nothing goes to your board, your investors or your team. This is a private therapeutic relationship, not coaching attached to your company. It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's going on and whether I'm the right person for it."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/start-here/' }, 'START HERE →')
+        React.createElement(SvcCta, { href: '/start-here/' }, 'NOT SURE WHERE TO START? →')
       )
     ),
 
@@ -1646,7 +1654,7 @@ function FoundersTherapyPage() {
     ),
 
     React.createElement(Testimonials, { mob, items: [{q: "I had worked with coaches before, and I had been in therapy before, but this felt different. Aggelos understands the emotional side without losing sight of the actual situation I am dealing with at work. We can talk about pressure, shame or something happening in my body, and five minutes later discuss a decision involving my team or business. I don’t have to translate one world into the other for him.", w: "Anonymous client, Founder"}, {q: "There are no motivational speeches or generic frameworks pasted onto every situation. Aggelos pays attention to how I specifically operate. He remembers the contradictions, notices when I change the story and asks the question I was hoping we could avoid. Annoying at times, but usually accurate.", w: "Anonymous client, Founder"}, {q: "I did not want somebody to tell me to work less, lower my standards or become less ambitious. Aggelos understood that immediately. Our work has been about keeping the part of me that wants to build and achieve, while becoming less dependent on winning, comparison and external approval to feel okay. That distinction has been very important to me.", w: "Anonymous client, Founder and executive"}] }),
-    React.createElement(SvcClosingCta, { title: "Carrying more than you can say out loud?", body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call." }),
+    React.createElement(SvcClosingCta, { title: "Carrying more than you can say out loud?", body: "Start with a free tool and name the problem yourself, or tell me what is going on and I will point you to the most useful next step." }),
     React.createElement(RelatedLinks, { mob, heading: 'Keep reading', items: [
       { href: '/psychotherapy-decision-coaching/', label: '1:1 work with me →' },
       { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
@@ -1686,10 +1694,10 @@ function ImposterPage() {
       React.createElement(SvcP, null, "I write about this at ", React.createElement(A, { href: 'https://undisguised.io' }, 'Undisguised'), "; the private work is where the patterns actually move.")
     ),
 
-    React.createElement(SvcSection, { title: 'Start here' },
+    React.createElement(SvcSection, { title: 'How it starts' },
       React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's driving the pattern and whether I'm the right person to work on it with you."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/start-here/' }, 'START HERE →')
+        React.createElement(SvcCta, { href: '/start-here/' }, 'NOT SURE WHERE TO START? →')
       )
     ),
 
@@ -1714,7 +1722,7 @@ function ImposterPage() {
     ),
 
     React.createElement(Testimonials, { mob, items: [{q: "From the outside, I was still functioning and performing at a high level, so it was difficult to explain why something felt wrong. Aggelos understood that the problem was not simply workload. We have worked on the way I connect achievement with safety, worth and relief. I am still ambitious, but success is beginning to feel less like narrowly escaping failure.", w: "Anonymous client, Tech executive"}, {q: "I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see. Somehow that honesty has made the work feel safer, not less safe.", w: "Anonymous client, Product leader"}, {q: "I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me understand which concerns were legitimate and which were being amplified by old fears around performance, failure and how other people saw me. I feel more grounded now, even though not everything has been resolved.", w: "Anonymous client, Technology executive"}] }),
-    React.createElement(SvcClosingCta, { title: "Know you're good and still can't feel it?", body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call." }),
+    React.createElement(SvcClosingCta, { title: "Know you're good and still can't feel it?", body: "Start with a free tool and name the problem yourself, or tell me what is going on and I will point you to the most useful next step." }),
     React.createElement(RelatedLinks, { mob, heading: 'Keep reading', items: [
       { href: '/psychotherapy-decision-coaching/', label: '1:1 work with me →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
@@ -1750,10 +1758,10 @@ function BurnoutPage() {
       React.createElement(SvcP, null, "Working less may follow, though the real aim is ", React.createElement(Strong, null, "a relationship with the work that costs less and means more"), ". We run two tracks at once: the practical situation (the role, the load, the decisions you keep postponing) and the pattern underneath that keeps you overfunctioning. Sometimes the fix is a business change, sometimes the deeper work, usually both.")
     ),
 
-    React.createElement(SvcSection, { title: 'Start here' },
+    React.createElement(SvcSection, { title: 'How it starts' },
       React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's underneath the exhaustion and whether therapy is the right approach."),
       React.createElement('div', { className: 'svc-ctarow' },
-        React.createElement(SvcCta, { href: '/start-here/' }, 'START HERE →')
+        React.createElement(SvcCta, { href: '/start-here/' }, 'NOT SURE WHERE TO START? →')
       )
     ),
 
@@ -1778,7 +1786,7 @@ function BurnoutPage() {
     ),
 
     React.createElement(Testimonials, { mob, items: [{q: "Before working together, a difficult email or a problem with a client could affect my entire day. I would immediately feel responsible for everything and start trying to control how I was perceived. We traced that response much further back than the immediate work situation. I still feel pressure, but I can recognise it earlier and I no longer believe every conclusion my nervous system produces.", w: "Anonymous client, Consultant and business owner"}, {q: "I already understood many of my patterns intellectually. That was partly the problem. I could explain myself very well and still repeat the same behaviour. Working with Aggelos helped me recognise what was happening physically, not just analyse it afterwards. That has made the work much more real and, slowly, changed how I respond under pressure.", w: "Anonymous client, Technology leader"}, {q: "The conversations go deeper than ordinary coaching, but I still leave with something usable. Sometimes that is a decision, sometimes a difficult conversation I need to have, and sometimes it is simply noticing the moment my body moves into threat before my mind creates a story around it. It is a rare combination of depth and practicality.", w: "Anonymous client, Senior tech professional"}] }),
-    React.createElement(SvcClosingCta, { title: "Rested, and came back the same?", body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call." }),
+    React.createElement(SvcClosingCta, { title: "Rested, and came back the same?", body: "Start with a free tool and name the problem yourself, or tell me what is going on and I will point you to the most useful next step." }),
     React.createElement(RelatedLinks, { mob, heading: 'Keep reading', items: [
       { href: '/psychotherapy-decision-coaching/', label: '1:1 work with me →' },
       { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
@@ -1816,7 +1824,7 @@ function CareerTransitionPage() {
       React.createElement(SvcP, null, React.createElement(Strong, null, "Senior professionals weighing a major career change"), " but paralysed by it. Executives who were laid off and are dealing with more than the job search. Leaders who made the move and feel more lost than free. People who ", React.createElement(Strong, null, "keep almost leaving but pull back every time"), ". Anyone senior who suspects the career question is really about identity, worth and what they want from the next phase of working life.")
     ),
 
-    React.createElement(SvcSection, { title: 'Start here' },
+    React.createElement(SvcSection, { title: 'How it starts' },
       React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's driving the transition, or the resistance to it, and whether therapy is the right support for this moment."),
       React.createElement('div', { className: 'svc-ctarow' },
         React.createElement(SvcCta, { href: '/contact?interest=orientation' }, 'Book a fit call →')

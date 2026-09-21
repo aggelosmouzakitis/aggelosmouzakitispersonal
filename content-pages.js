@@ -318,8 +318,11 @@ const FOOTER_COLS_BY_LANG = {
       href: '/reviews/',
       label: 'Reviews'
     }, {
+      href: '/free-tools/',
+      label: 'Free tools'
+    }, {
       href: '/start-here/',
-      label: 'Start here'
+      label: 'Not sure where to start?'
     }, {
       href: '/confidentiality/',
       label: 'Confidentiality'
@@ -950,6 +953,8 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 .svc-close{max-width:var(--svc-read);margin:76px 0 0;background:#16231E;border-radius:22px;padding:clamp(30px,4vw,46px)}
 .svc-page .svc-close__h{margin:0;max-width:20ch;font-family:var(--font-display);font-synthesis:none;font-size:clamp(28px,3.1vw,38px);line-height:1.04;letter-spacing:-0.03em;font-weight:800;color:#F3F0E8}
 .svc-close__p{margin:16px 0 0;max-width:54ch;font-size:18px;line-height:1.6;color:#C0C9BF}
+.svc-page a.svc-close__soft{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-size:13px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#8FBFA7 !important;text-decoration:none;transition:gap .18s,color .18s}
+.svc-page a.svc-close__soft:hover{gap:13px;color:#F3F0E8 !important}
 .svc-page a.svc-close__cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:28px;min-height:56px;padding:0 30px;background:#047857;color:#F3F0E8 !important;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
 .svc-page a.svc-close__cta:hover{filter:brightness(1.12);gap:12px;color:#F3F0E8 !important}
 .svc-note{max-width:var(--svc-read);margin:16px 0 0;font-size:15px;line-height:1.6;color:#6A6F67}
@@ -1053,12 +1058,17 @@ function SvcEyebrow({
     className: 'svc-eyebrow'
   }, children);
 }
+// Site-wide discovery pair: Free Tools is the dominant action, "Not sure where
+// to start?" the softer orientation route for people who can't frame it yet.
 function SvcHeroCta() {
   return React.createElement('div', {
     className: 'svc-ctarow svc-ctarow--hero'
   }, React.createElement(SvcCta, {
-    href: '/start-here/'
-  }, 'START HERE →'));
+    href: '/free-tools/'
+  }, 'EXPLORE FREE TOOLS →'), React.createElement(SvcCta, {
+    href: '/start-here/',
+    ghost: true
+  }, 'NOT SURE WHERE TO START? →'));
 }
 function SvcClosingCta({
   title,
@@ -1071,9 +1081,14 @@ function SvcClosingCta({
   }, title), body ? React.createElement('p', {
     className: 'svc-close__p'
   }, body) : null, React.createElement('a', {
-    href: '/start-here/',
+    href: '/free-tools/',
     className: 'cta-btn svc-close__cta'
-  }, 'START HERE →'));
+  }, 'EXPLORE FREE TOOLS →'), React.createElement('a', {
+    href: '/start-here/',
+    className: 'svc-close__soft'
+  }, React.createElement('span', null, 'Not sure where to start?'), React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '→')));
 }
 function SvcFaq({
   items
@@ -2982,7 +2997,7 @@ function ExecTherapyPage() {
     className: 'svc-ctarow'
   }, React.createElement(SvcCta, {
     href: '/start-here/'
-  }, 'START HERE →'))), React.createElement(SvcSection, {
+  }, 'NOT SURE WHERE TO START? →'))), React.createElement(SvcSection, {
     title: 'Common questions'
   }, React.createElement(SvcFaq, {
     items: [{
@@ -3021,7 +3036,7 @@ function ExecTherapyPage() {
     }]
   }), React.createElement(SvcClosingCta, {
     title: "Still feel like something's off?",
-    body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call."
+    body: "Start with a free tool and name the problem yourself, or tell me what is going on and I will point you to the most useful next step."
   }), React.createElement(RelatedLinks, {
     mob,
     heading: 'Keep reading',
@@ -3059,7 +3074,7 @@ function FoundersTherapyPage() {
     className: 'svc-ctarow'
   }, React.createElement(SvcCta, {
     href: '/start-here/'
-  }, 'START HERE →'))), React.createElement(SvcSection, {
+  }, 'NOT SURE WHERE TO START? →'))), React.createElement(SvcSection, {
     title: 'Common questions'
   }, React.createElement('div', null, React.createElement(FaqItem, {
     q: 'Why do founders need a specific kind of therapy?'
@@ -3093,7 +3108,7 @@ function FoundersTherapyPage() {
     }]
   }), React.createElement(SvcClosingCta, {
     title: "Carrying more than you can say out loud?",
-    body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call."
+    body: "Start with a free tool and name the problem yourself, or tell me what is going on and I will point you to the most useful next step."
   }), React.createElement(RelatedLinks, {
     mob,
     heading: 'Keep reading',
@@ -3132,12 +3147,12 @@ function ImposterPage() {
   }, 'advising 500+ companies on growth'), ". I know the environment that amplifies imposter syndrome in tech: the pace, the ambiguity, the constant comparison."), React.createElement(SvcP, null, React.createElement(Strong, null, "We work with the root pattern, not the symptoms."), " That means going past the current role to understand where the conditional worth was established, why it persists, and what it would take to build a sense of self that doesn't depend on the next result."), React.createElement(SvcP, null, "Insight alone rarely shifts this, because most high performers have already understood it intellectually. So we work at two levels: the professional situation in front of you, and the older pattern that keeps the doubt alive whatever the evidence says. Sometimes the answer is a concrete business move, sometimes the deeper work, often both."), React.createElement(SvcP, null, "I write about this at ", React.createElement(A, {
     href: 'https://undisguised.io'
   }, 'Undisguised'), "; the private work is where the patterns actually move.")), React.createElement(SvcSection, {
-    title: 'Start here'
+    title: 'How it starts'
   }, React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's driving the pattern and whether I'm the right person to work on it with you."), React.createElement('div', {
     className: 'svc-ctarow'
   }, React.createElement(SvcCta, {
     href: '/start-here/'
-  }, 'START HERE →'))), React.createElement(SvcSection, {
+  }, 'NOT SURE WHERE TO START? →'))), React.createElement(SvcSection, {
     title: 'Common questions'
   }, React.createElement('div', null, React.createElement(FaqItem, {
     q: 'Is imposter syndrome a real diagnosis?'
@@ -3179,7 +3194,7 @@ function ImposterPage() {
     }]
   }), React.createElement(SvcClosingCta, {
     title: "Know you're good and still can't feel it?",
-    body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call."
+    body: "Start with a free tool and name the problem yourself, or tell me what is going on and I will point you to the most useful next step."
   }), React.createElement(RelatedLinks, {
     mob,
     heading: 'Keep reading',
@@ -3214,12 +3229,12 @@ function BurnoutPage() {
   }, React.createElement(SvcP, null, React.createElement(Strong, null, "This work goes to the level of the pattern, not the symptoms."), " We look at what drives the overwork: what it would mean to stop, what you're avoiding by staying in motion, why doing less feels threatening rather than freeing."), React.createElement(SvcP, null, "I'm a business growth advisor and licensed psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, {
     href: 'https://headofgrowth.io'
   }, 'advising 500+ companies on growth'), ". I understand the environment: the always-on culture, the ambiguity, the pressure to appear certain when you're not."), React.createElement(SvcP, null, "Working less may follow, though the real aim is ", React.createElement(Strong, null, "a relationship with the work that costs less and means more"), ". We run two tracks at once: the practical situation (the role, the load, the decisions you keep postponing) and the pattern underneath that keeps you overfunctioning. Sometimes the fix is a business change, sometimes the deeper work, usually both.")), React.createElement(SvcSection, {
-    title: 'Start here'
+    title: 'How it starts'
   }, React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's underneath the exhaustion and whether therapy is the right approach."), React.createElement('div', {
     className: 'svc-ctarow'
   }, React.createElement(SvcCta, {
     href: '/start-here/'
-  }, 'START HERE →'))), React.createElement(SvcSection, {
+  }, 'NOT SURE WHERE TO START? →'))), React.createElement(SvcSection, {
     title: 'Common questions'
   }, React.createElement('div', null, React.createElement(FaqItem, {
     q: "Why doesn't rest fix my burnout?"
@@ -3259,7 +3274,7 @@ function BurnoutPage() {
     }]
   }), React.createElement(SvcClosingCta, {
     title: "Rested, and came back the same?",
-    body: "Start here and answer a few quick questions. I'll point you to the most useful next step — usually a short, free fit call."
+    body: "Start with a free tool and name the problem yourself, or tell me what is going on and I will point you to the most useful next step."
   }), React.createElement(RelatedLinks, {
     mob,
     heading: 'Keep reading',
@@ -3296,7 +3311,7 @@ function CareerTransitionPage() {
   }, 'growth advisory'), " to clinical practice. I know what it's like to leave an identity that works, and the difference between doing it reactively and doing it with some clarity about what's driving the change."), React.createElement(SvcP, null, "The work runs on two tracks: the practical side of the move (options, risk, the actual plan) and what makes it hard underneath, the identity and worth questions the strategy can't touch. Sometimes you mostly need the plan, sometimes the deeper work, often both. The aim is a working life that feels genuinely fulfilling, not just impressive.")), React.createElement(SvcSection, {
     title: 'Who this is for'
   }, React.createElement(SvcP, null, React.createElement(Strong, null, "Senior professionals weighing a major career change"), " but paralysed by it. Executives who were laid off and are dealing with more than the job search. Leaders who made the move and feel more lost than free. People who ", React.createElement(Strong, null, "keep almost leaving but pull back every time"), ". Anyone senior who suspects the career question is really about identity, worth and what they want from the next phase of working life.")), React.createElement(SvcSection, {
-    title: 'Start here'
+    title: 'How it starts'
   }, React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's driving the transition, or the resistance to it, and whether therapy is the right support for this moment."), React.createElement('div', {
     className: 'svc-ctarow'
   }, React.createElement(SvcCta, {

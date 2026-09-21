@@ -22,8 +22,9 @@ var solopreneurGrowthConsultingUrl = '/contact?interest=solo-business-growth';
 
 // ─── Shared content ──────────────────────────────────────────────────────────
 // Each page's 4:5 hero portrait (full colour, intrinsic 1000×1250) is set per
-// config as heroPhoto. START_HERE is the "not sure?" fallback under every hero CTA.
-var START_HERE_URL = '/start-here/';
+// config as heroPhoto. Under every hero CTA sit the two softer routes: a
+// contextually relevant free tool (per config) and the orientation flow.
+var START_HERE_URL = '/start-here/'; // "Not sure where to start?" orientation
 var STATS = [{
   num: '18 years',
   label: 'Product and growth'
@@ -79,9 +80,9 @@ html{overflow-x:clip}
 .dl-hero__lead{margin:0;max-width:660px;font-size:19px;line-height:1.6;color:#3A403A;text-wrap:pretty}
 .dl-hero__cta-row{margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;gap:16px}
 .dl-hero__note{margin:20px 0 0;font-size:15px;line-height:1.5;color:#6A6F67}
-.dl-hero__fallback{margin:10px 0 0;font-size:15px;line-height:1.5;color:#6A6F67}
-.dl-hero__fallback a{color:#047857;font-weight:600;white-space:nowrap;transition:opacity .18s}
-.dl-hero__fallback a:hover{opacity:.75}
+.dl-hero__fallback{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px 26px;font-size:15px;line-height:1.5;color:#6A6F67}
+.dl-hero__soft{display:inline-flex;align-items:center;min-height:30px;color:#047857;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;transition:opacity .18s}
+.dl-hero__soft:hover{opacity:.75}
 .dl-hero__figure{position:relative;margin:0;justify-self:end;width:100%;max-width:460px}
 .dl-hero__frame{position:relative;aspect-ratio:4 / 5;overflow:hidden;background:#16231E}
 .dl-hero__frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:none}
@@ -269,9 +270,13 @@ function Hero(props) {
     className: 'dl-hero__note'
   }, h.note), e('p', {
     className: 'dl-hero__fallback'
-  }, 'Not sure this is the right fit? ', e('a', {
-    href: START_HERE_URL
-  }, 'Start here →'))), e('figure', {
+  }, c.freeTool ? e('a', {
+    href: c.freeTool.href,
+    className: 'dl-hero__soft'
+  }, c.freeTool.label + ' →') : null, e('a', {
+    href: START_HERE_URL,
+    className: 'dl-hero__soft'
+  }, 'Not sure where to start? →'))), e('figure', {
     className: 'dl-hero__figure'
   }, e('div', {
     className: 'dl-hero__frame'
@@ -395,7 +400,7 @@ function Audit(props) {
     className: 'dl-col'
   }, e('div', {
     className: 'dl-kicker'
-  }, 'START HERE'), e('h2', {
+  }, 'THE FIRST STEP'), e('h2', {
     className: 'dl-h2'
   }, a.h2), e('h3', {
     className: 'dl-audit__h3'
@@ -683,6 +688,10 @@ var CONFIGS = {
   'career-strategy-consulting': {
     key: 'career-strategy-consulting',
     serviceName: 'Career Strategy Consulting',
+    freeTool: {
+      label: 'Do you want to become a solopreneur?',
+      href: '/free-tools/become-a-solopreneur/'
+    },
     ctaUrl: careerStrategyConsultingUrl,
     heroPhoto: '/img/experience-to-offer-hero.webp',
     sticky: 'Apply for the audit',
@@ -851,6 +860,10 @@ var CONFIGS = {
   'solopreneur-growth-consulting': {
     key: 'solopreneur-growth-consulting',
     serviceName: 'Solo Business Growth Consulting',
+    freeTool: {
+      label: "What's limiting your business?",
+      href: '/free-tools/business-constraint/'
+    },
     ctaUrl: solopreneurGrowthConsultingUrl,
     heroPhoto: '/img/solo-business-growth-hero.webp',
     sticky: 'Apply for the audit',
@@ -1016,6 +1029,10 @@ var CONFIGS = {
   'psychotherapy-decision-coaching': {
     key: 'psychotherapy-decision-coaching',
     serviceName: 'Psychotherapy / Decision Coaching',
+    freeTool: {
+      label: 'Are you burned out?',
+      href: '/free-tools/burned-out/'
+    },
     ctaUrl: psychotherapyDecisionCoachingUrl,
     heroPhoto: '/img/private-sparring-hero.webp',
     sticky: 'Apply for the Sparring Session',

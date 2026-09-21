@@ -169,10 +169,10 @@ const HOME_V2 = {
   }
 };
 
-// ─── Homepage "Work with me" + "Start here for free" (EN homepage only) ───────
-// Approved homepage sections (design: "Work with me + Start here for free").
-// Copy is sentence-case per the design; the three offer routes and the five
-// clarity-tool routes are the canonical ones already implemented in the site.
+// ─── Homepage "Work with me" + "Free tools" (EN homepage only) ───────────────
+// Approved homepage sections. Copy is sentence-case per the design; the three
+// offer routes and the free-tool routes are the canonical ones already
+// implemented in the site.
 const HOME_OFFERS = [{
   name: 'Psychotherapy / decision coaching',
   kicker: '1:1 private work',
@@ -189,21 +189,24 @@ const HOME_OFFERS = [{
   desc: 'For when the business only grows as far as your own stamina goes.',
   href: '/solopreneur-growth-consulting/'
 }];
+// Homepage preview of the Free Tools library: three representative live tools,
+// one per subject, covering business, career and the person behind both. The
+// full collection lives at /free-tools/ — the homepage is only the shop window.
 const HOME_TOOLS = [{
   name: "What's limiting your business?",
-  href: '/clarity-tools/business-constraint/'
-}, {
-  name: 'Is it a strategy or execution problem?',
-  href: '/clarity-tools/strategy-or-execution/'
+  href: '/free-tools/business-constraint/',
+  kind: 'Business · Clarity tool',
+  meta: '20 questions'
 }, {
   name: "What's making you want to quit your job?",
-  href: '/clarity-tools/quit-your-job/'
-}, {
-  name: 'Do you want to become a solopreneur?',
-  href: '/clarity-tools/become-a-solopreneur/'
+  href: '/free-tools/quit-your-job/',
+  kind: 'Career · Clarity tool',
+  meta: '20 questions'
 }, {
   name: 'Are you burned out?',
-  href: '/clarity-tools/burned-out/'
+  href: '/free-tools/burned-out/',
+  kind: 'Psychology · Clarity tool',
+  meta: '20 questions'
 }];
 
 // ─── Why Me copy — verbatim from the approved implementation brief ─────────────
@@ -510,10 +513,11 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
   .cont,.opinion__body,.media__cell{padding-inline:clamp(24px,5vw,32px)}
 }
 
-/* ── Hero CTA row — green button + quiet "Who I am" link ── */
+/* ── Hero CTA row — dominant Free Tools button + soft orientation route ── */
 .home-hero__ctarow{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
-.home-hero__who{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:#2C312C;border-bottom:1px solid rgba(23,25,25,0.3);padding-bottom:3px;transition:color .18s,border-color .18s}
-.home-hero__who:hover{color:${V2.green};border-bottom-color:${V2.green}}
+.hero-cta--caps{font-size:15px;font-weight:750;letter-spacing:0.045em;text-transform:uppercase}
+.home-hero__soft{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#2C312C;border-bottom:1px solid rgba(23,25,25,0.3);padding-bottom:4px;min-height:32px;transition:color .18s,border-color .18s,gap .18s}
+.home-hero__soft:hover{color:${V2.green};border-bottom-color:${V2.green};gap:12px}
 
 /* ── Proof strip — dark band of credentials under the hero ── */
 .home-proof{background:${V2.ink};border-block:1px solid rgba(243,240,232,0.14)}
@@ -534,43 +538,39 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .home-work__desc{max-width:30ch;font-size:17px;line-height:1.55;color:#B9C4BA;text-wrap:pretty}
 .home-work__go{margin-top:6px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:0.06em;color:#8FBFA7}
 
-/* ── 02 / Start here for free — white section, in-page Clarity disclosure ── */
+/* ── 02 / Free tools — light section, three-tool preview of the library ── */
 .home-free{position:relative;overflow:clip;background:${V2.white};color:${V2.ink};padding-block:clamp(64px,8vw,104px)}
 .home-free::before{content:"";position:absolute;bottom:-180px;left:-120px;width:400px;height:400px;border-radius:50%;background:rgba(4,120,87,0.06);pointer-events:none}
 .home-free .sec-label__num,.home-free .sec-label__desc{color:${V2.green}}
 .home-free__h{position:relative;max-width:22ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,3.7vw,46px);font-weight:800;line-height:1.04;letter-spacing:-0.042em;color:#14201C;text-wrap:balance}
-.home-free__grid{margin-top:clamp(40px,5vw,60px);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(28px,3.2vw,48px)}
+.home-free__lead{position:relative;max-width:58ch;margin-top:20px;font-size:19px;line-height:1.55;color:${V2.ink2};text-wrap:pretty}
+
+/* three representative live tools, on hairlines */
+.home-free__tools{position:relative;margin-top:clamp(40px,5vw,60px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:0 clamp(28px,3.2vw,48px)}
+.home-free__tool{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:22px 0 28px;border-top:1px solid rgba(23,25,25,0.18);color:${V2.ink};transition:color .18s,border-color .18s}
+.home-free__tool:hover{color:${V2.green};border-top-color:${V2.green}}
+.home-free__tool-kind{font-size:12.5px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:${V2.green}}
+.home-free__tool-name{font-family:${V2.display};font-synthesis:none;font-size:clamp(21px,1.8vw,25px);font-weight:750;line-height:1.14;letter-spacing:-0.028em;color:inherit;text-wrap:pretty}
+.home-free__tool-go{margin-top:auto;padding-top:8px;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${V2.green}}
+.home-free__tool-go span{transition:transform .18s}
+.home-free__tool:hover .home-free__tool-go span{transform:translateX(4px)}
+
+/* the destination */
+.home-free__all{position:relative;margin-top:clamp(32px,4vw,44px);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:55px;padding:0 26px;background:${V2.green};color:#F3F0E8;font-size:14px;font-weight:750;line-height:1;letter-spacing:0.05em;text-transform:uppercase;transition:background .18s,gap .18s}
+.home-free__all:hover{background:#03654A;color:#F3F0E8;gap:14px}
+
+/* the other two free routes, deliberately quieter than the tools */
+.home-free__alsolabel{position:relative;margin-top:clamp(52px,6.5vw,78px);font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${V2.meta}}
+.home-free__also{position:relative;margin-top:clamp(20px,2.4vw,28px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(28px,3.2vw,48px)}
 .home-free__col{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding-top:24px;border-top:2px solid rgba(23,25,25,0.18)}
 a.home-free__col{color:${V2.ink};transition:color .18s,border-color .18s}
 a.home-free__col:hover{color:${V2.green};border-top-color:${V2.green}}
-.home-free__col--clarity{border-top-color:${V2.green}}
-.home-free__titlerow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.home-free__name{font-family:${V2.display};font-synthesis:none;font-size:clamp(24px,2.2vw,29px);font-weight:750;line-height:1.1;letter-spacing:-0.032em;color:inherit}
-.home-free__badge{font-size:11.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:${V2.green}}
+.home-free__name{font-family:${V2.display};font-synthesis:none;font-size:clamp(22px,2vw,26px);font-weight:750;line-height:1.1;letter-spacing:-0.032em;color:inherit}
 .home-free__desc{max-width:36ch;font-size:17px;line-height:1.55;color:${V2.ink2};text-wrap:pretty}
 .home-free__go{margin-top:6px;display:inline-flex;align-items:center;gap:8px;min-height:24px;font-size:14px;font-weight:700;letter-spacing:0.06em;color:${V2.green}}
-.home-clarity__btn{margin-top:6px;display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0;background:none;border:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0.06em;color:${V2.green}}
-.home-clarity__caret{transition:transform .28s ease}
-.home-clarity__btn[aria-expanded="true"] .home-clarity__caret{transform:rotate(180deg)}
-.home-clarity-panel{grid-column:1 / -1;order:5;display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.2,.7,.2,1)}
-@media (max-width:767px){
-  .home-free__col--clarity{order:1}
-  .home-clarity-panel{order:2}
-  .home-free__col--wtf{order:3}
-  .home-free__col--ask{order:4}
-}
-.home-clarity-panel.is-open{grid-template-rows:1fr}
-.home-clarity-panel__inner{overflow:hidden;min-height:0}
-.home-clarity-panel__list{padding-top:clamp(32px,4vw,44px);opacity:0;transition:opacity .3s ease .04s;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));column-gap:clamp(28px,3.2vw,48px)}
-.home-clarity-panel.is-open .home-clarity-panel__list{opacity:1}
-.home-clarity__tool{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:19px 0;border-top:1px solid rgba(23,25,25,0.16);color:${V2.ink};font-size:17px;line-height:1.35;transition:color .18s,border-color .18s}
-.home-clarity__tool:hover{color:#171919;border-top-color:${V2.green}}
-.home-clarity__tool-arw{color:${V2.green};transition:transform .18s}
-.home-clarity__tool:hover .home-clarity__tool-arw{transform:translateX(4px)}
 @media (max-width:640px){
-  .home-clarity__btn{width:100%;justify-content:space-between;min-height:52px;padding:0 16px;border:1px solid rgba(23,25,25,0.30)}
-  .home-clarity-panel__list{padding-top:8px}
-  .home-clarity__tool{min-height:56px;padding:14px 0}
+  .home-free__all{width:100%}
+}
 }
 
 :root{
@@ -718,6 +718,8 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .ax-cta__h{max-width:20ch;margin-inline:auto;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,4.2vw,52px);font-weight:800;line-height:1.02;letter-spacing:-0.04em;color:#F3F0E8;text-wrap:balance}
 .ax-cta__btn{margin-top:36px;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:64px;padding-inline:44px;background:${V2.green};color:#F3F0E8;font-size:16px;font-weight:700;border-radius:999px;transition:filter .18s,gap .18s}
 .ax-cta__btn:hover{background:${V2.greenPressed};gap:13px;color:#F3F0E8}
+.ax-cta__soft{display:block;margin-top:24px;font-size:13px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:${V2.sage};transition:color .18s}
+.ax-cta__soft:hover{color:#F3F0E8}
 @media (max-width:720px){
   .ax-duality__band{grid-template-columns:1fr}
   .ax-duality__img{min-height:260px}
@@ -771,42 +773,10 @@ function HomePageV2({
     className: 'human'
   }, c.titleHuman), c.titleL2post)];
 
-  // ── Approved homepage sections (EN only): 02 / Work with me and 05 / Start
-  // here for free drop into the existing .home-flow band; the two explanatory
-  // blocks renumber (02→03, 03→04) and "More from me" shrinks to a strip. ──
+  // ── Approved homepage sections (EN only): 01 / Work with me and 02 / Free
+  // tools drop into the existing .home-flow band. Free Tools is the dominant
+  // discovery route; the homepage shows a preview, /free-tools/ is the hub. ──
   const isEn = lang === 'en';
-  const clarityState = React.useState(false);
-  const clarityOpen = clarityState[0],
-    setClarityOpen = clarityState[1];
-  const clarityBtnRef = React.useRef(null);
-  const clarityFirstRef = React.useRef(null);
-  const clarityListRef = React.useRef(null);
-  React.useEffect(function () {
-    // Keep the collapsed panel out of the tab order / a11y tree while its links
-    // stay in the DOM (so crawlers still find the five tools).
-    if (clarityListRef.current) clarityListRef.current.inert = !clarityOpen;
-    if (clarityOpen && clarityFirstRef.current) {
-      try {
-        clarityFirstRef.current.focus();
-      } catch (e) {}
-    }
-  }, [clarityOpen]);
-  React.useEffect(function () {
-    function onKey(ev) {
-      if (ev.key === 'Escape' && clarityOpen) {
-        setClarityOpen(false);
-        if (clarityBtnRef.current) {
-          try {
-            clarityBtnRef.current.focus();
-          } catch (e) {}
-        }
-      }
-    }
-    window.addEventListener('keydown', onKey);
-    return function () {
-      window.removeEventListener('keydown', onKey);
-    };
-  }, [clarityOpen]);
   const proofSection = isEn ? React.createElement('section', {
     className: 'home-proof',
     key: 'proof'
@@ -852,63 +822,36 @@ function HomePageV2({
     key: 'start'
   }, React.createElement('div', {
     className: 'site-container'
-  }, SecLabel('02', 'Start here for free'), React.createElement('h2', {
+  }, SecLabel('02', 'Free tools'), React.createElement('h2', {
     className: 'home-free__h'
-  }, "You don't need to know what kind of help you need before you start."), React.createElement('div', {
-    className: 'home-free__grid'
-  }, React.createElement('div', {
-    className: 'home-free__col home-free__col--clarity'
-  }, React.createElement('div', {
-    className: 'home-free__titlerow'
-  }, React.createElement('span', {
-    className: 'home-free__name'
-  }, 'Clarity tools'), React.createElement('span', {
-    className: 'home-free__badge'
-  }, '5 tools')), React.createElement('span', {
-    className: 'home-free__desc'
-  }, 'Five short diagnostics that name the problem before you spend money solving the wrong one.'), React.createElement('button', {
-    type: 'button',
-    className: 'home-clarity__btn',
-    ref: clarityBtnRef,
-    'aria-expanded': clarityOpen ? 'true' : 'false',
-    'aria-controls': 'home-clarity-panel',
-    onClick: function () {
-      setClarityOpen(function (v) {
-        return !v;
-      });
-    }
-  }, React.createElement('span', null, clarityOpen ? 'Hide tools' : 'Choose a tool'), React.createElement('svg', {
-    className: 'home-clarity__caret',
-    viewBox: '0 0 10 6',
-    width: 11,
-    height: 7,
-    'aria-hidden': 'true'
-  }, React.createElement('path', {
-    d: 'M1 1l4 4 4-4',
-    stroke: 'currentColor',
-    strokeWidth: '1.6',
-    fill: 'none',
-    strokeLinecap: 'round',
-    strokeLinejoin: 'round'
-  })))), React.createElement('div', {
-    id: 'home-clarity-panel',
-    className: 'home-clarity-panel' + (clarityOpen ? ' is-open' : '')
-  }, React.createElement('div', {
-    className: 'home-clarity-panel__inner'
-  }, React.createElement('div', {
-    className: 'home-clarity-panel__list',
-    ref: clarityListRef
-  }, HOME_TOOLS.map(function (tool, i) {
+  }, 'Start with the problem, not the service.'), React.createElement('p', {
+    className: 'home-free__lead'
+  }, 'Free tools for the business, the career and the person behind both. Start with whichever one is closest to what is actually going on — no email needed to begin.'), React.createElement('div', {
+    className: 'home-free__tools'
+  }, HOME_TOOLS.map(function (tool) {
     return React.createElement('a', {
       key: tool.href,
-      className: 'home-clarity__tool',
-      href: tool.href,
-      ref: i === 0 ? clarityFirstRef : null
-    }, React.createElement('span', null, tool.name), React.createElement('span', {
-      className: 'home-clarity__tool-arw',
+      className: 'home-free__tool',
+      href: tool.href
+    }, React.createElement('span', {
+      className: 'home-free__tool-kind'
+    }, tool.kind), React.createElement('span', {
+      className: 'home-free__tool-name'
+    }, tool.name), React.createElement('span', {
+      className: 'home-free__tool-go'
+    }, tool.meta, ' ', React.createElement('span', {
       'aria-hidden': 'true'
-    }, '→'));
-  })))), React.createElement('a', {
+    }, '→')));
+  })), React.createElement('a', {
+    className: 'home-free__all',
+    href: '/free-tools/'
+  }, React.createElement('span', null, 'Explore all free tools'), React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '→')), React.createElement('p', {
+    className: 'home-free__alsolabel'
+  }, 'Also free'), React.createElement('div', {
+    className: 'home-free__also'
+  }, React.createElement('a', {
     className: 'home-free__col home-free__col--wtf',
     href: '/wtf-friday/',
     'aria-label': 'Join WTF Friday'
@@ -933,128 +876,6 @@ function HomePageV2({
   }, 'Ask something ', React.createElement('span', {
     'aria-hidden': 'true'
   }, '→')))))) : null;
-  const opinionSection = React.createElement('section', {
-    key: 'opinion'
-  }, React.createElement('div', {
-    className: 'site-container'
-  }, SecLabel(isEn ? '03' : '02', c.s02d), React.createElement('h2', {
-    className: 'sec__h2l'
-  }, React.createElement('span', null, c.opinionL1), React.createElement('span', null, c.opinionL2)), React.createElement('div', {
-    className: 'opinion'
-  }, React.createElement('img', {
-    src: '/img/aggelos-continuation.webp',
-    alt: c.contAlt,
-    width: 900,
-    height: 1125,
-    loading: 'lazy',
-    decoding: 'async'
-  }), React.createElement('div', {
-    className: 'opinion__body'
-  }, c.opinionParas.map(function (p, i) {
-    return React.createElement('p', {
-      key: i
-    }, p);
-  }), React.createElement('blockquote', {
-    className: 'opinion__q'
-  }, c.opinionQuote)))));
-  const contSection = React.createElement('section', {
-    key: 'cont'
-  }, React.createElement('div', {
-    className: 'site-container'
-  }, React.createElement('div', {
-    className: 'cont'
-  }, React.createElement('div', {
-    className: 'cont__in'
-  }, SecLabel(isEn ? '04' : '03', c.s03d), React.createElement('h2', {
-    className: 'cont__h'
-  }, c.contH), React.createElement('p', null, c.contP)))));
-  const moreSection = isEn ? React.createElement('section', {
-    key: 'more'
-  }, React.createElement('div', {
-    className: 'site-container'
-  }, React.createElement('div', {
-    className: 'home-more__label'
-  }, 'More from me'), React.createElement('div', {
-    className: 'home-more__links'
-  }, React.createElement('a', {
-    className: 'home-more__link',
-    href: window.EXTERNAL.undisguised,
-    ...v2Ext
-  }, React.createElement('span', {
-    className: 'home-more__link-main'
-  }, React.createElement('span', {
-    className: 'home-more__link-kicker'
-  }, 'Undisguised'), React.createElement('span', {
-    className: 'home-more__link-desc'
-  }, c.readP)), React.createElement('span', {
-    className: 'home-more__link-arw',
-    'aria-hidden': 'true'
-  }, '↗')), React.createElement('a', {
-    className: 'home-more__link',
-    href: window.EXTERNAL.youtube,
-    ...v2Ext
-  }, React.createElement('span', {
-    className: 'home-more__link-main'
-  }, React.createElement('span', {
-    className: 'home-more__link-kicker'
-  }, 'YouTube'), React.createElement('span', {
-    className: 'home-more__link-desc'
-  }, c.watchP)), React.createElement('span', {
-    className: 'home-more__link-arw',
-    'aria-hidden': 'true'
-  }, '↗'))))) : React.createElement('section', {
-    key: 'more'
-  }, React.createElement('div', {
-    className: 'site-container'
-  }, SecLabel('04', c.s04d), React.createElement('h2', {
-    className: 'sec__h',
-    style: {
-      marginBottom: 24
-    }
-  }, c.mediaIntro), React.createElement('div', {
-    className: 'rule-arrow'
-  }, React.createElement('div'), React.createElement('span', null, '→')), React.createElement('div', {
-    className: 'media'
-  }, React.createElement('a', {
-    className: 'media__cell media__read',
-    href: window.EXTERNAL.undisguised,
-    ...v2Ext
-  }, React.createElement('div', {
-    className: 'media__top'
-  }, React.createElement('h3', null, 'READ'), React.createElement('span', {
-    className: 'media__arw'
-  }, '↗')), React.createElement('div', null, React.createElement('div', {
-    className: 'media__kicker'
-  }, 'UNDISGUISED'), React.createElement('p', null, c.readP))), React.createElement('a', {
-    className: 'media__cell media__watch',
-    href: window.EXTERNAL.youtube,
-    ...v2Ext
-  }, React.createElement('div', {
-    className: 'media__top'
-  }, React.createElement('h3', null, 'WATCH'), React.createElement('span', {
-    className: 'media__arw',
-    style: {
-      fontSize: 32
-    }
-  }, '↗')), React.createElement('div', null, React.createElement('div', {
-    className: 'media__kicker'
-  }, 'YOUTUBE'), React.createElement('p', null, c.watchP))), React.createElement('a', lang === 'el' ? {
-    className: 'media__cell media__ask',
-    href: 'https://www.videoask.com/fuv51iuq1',
-    ...v2Ext
-  } : {
-    className: 'media__cell media__ask',
-    href: window.cPath('ask-me-anything', lang)
-  }, React.createElement('div', {
-    className: 'media__top'
-  }, React.createElement('h3', null, 'ASK', React.createElement('span', {
-    className: 'media__ask-sub'
-  }, c.askSub)), React.createElement('span', {
-    className: 'media__arw',
-    style: {
-      fontSize: 32
-    }
-  }, '↗')), React.createElement('div', null, React.createElement('p', null, c.askP))))));
   const heroSection = React.createElement('section', {
     className: 'home-hero',
     key: 'hero'
@@ -1071,12 +892,14 @@ function HomePageV2({
   }, c.support), isEn ? React.createElement('div', {
     className: 'home-hero__ctarow'
   }, React.createElement('a', {
-    className: 'hero-cta',
+    className: 'hero-cta hero-cta--caps',
+    href: '/free-tools/'
+  }, React.createElement('span', null, 'Explore free tools'), React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '→')), React.createElement('a', {
+    className: 'home-hero__soft',
     href: '/start-here/'
-  }, React.createElement('span', null, 'Start here'), React.createElement('span', null, '→')), React.createElement('a', {
-    className: 'home-hero__who',
-    href: '/about/'
-  }, React.createElement('span', null, 'Who I am'), React.createElement('span', {
+  }, React.createElement('span', null, 'Not sure where to start?'), React.createElement('span', {
     'aria-hidden': 'true'
   }, '→'))) : React.createElement('a', {
     className: 'hero-cta',
@@ -1358,8 +1181,11 @@ function AboutPageV2({
       className: 'ax-cta__h'
     }, 'Not sure which conversation you need?'), React.createElement('a', {
       className: 'ax-cta__btn',
+      href: '/free-tools/'
+    }, 'Explore free tools →'), React.createElement('a', {
+      className: 'ax-cta__soft',
       href: '/start-here/'
-    }, 'Start here →')));
+    }, 'Not sure where to start? →')));
     aboutMainChildren = [topSection, dualitySection, whySection, ctaSection];
   } else {
     aboutMainClass = 'amx-page amx-page--about';

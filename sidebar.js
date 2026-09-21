@@ -62,10 +62,10 @@ const SB_LABELS = {
     writing: 'Writing',
     reviews: 'Reviews',
     findMe: 'Find me',
-    diagHead: 'Start here',
-    diagSub: 'Answer a few questions and get the most useful next step, whether that is a tool, a call or a paid offer.',
+    diagHead: 'Not sure where to start?',
+    diagSub: 'Pick the situation closest to what you are dealing with and get one clear starting direction.',
     diagBtn: 'START →',
-    diagShort: 'Start here',
+    diagShort: 'Where to start',
     book: 'Book a fit call →',
     bookShort: 'Book'
   },
@@ -87,7 +87,7 @@ const SB_LABELS = {
   }
 };
 const sbT = lang => SB_LABELS[lang] || SB_LABELS.en;
-// Starting Diagnostic route is language-aware.
+// Orientation route is language-aware (EL still has its own diagnostic).
 const diagPath = lang => lang === 'el' ? '/el/startingdiagnostic/' : '/start-here/';
 const ICONS = {
   OneToOne: () => /*#__PURE__*/React.createElement("svg", {

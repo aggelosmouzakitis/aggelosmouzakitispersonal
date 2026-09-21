@@ -95,7 +95,7 @@ window.CLARITY_DATA['business-constraint'] = {
     fit: CD_FIT_LABELS
   },
   intro: {
-    eyebrow: 'Clarity tools',
+    eyebrow: 'Business · Clarity tool',
     paras: ['Your business can be stuck for very different reasons.', 'This assessment looks at demand, positioning, acquisition, sales conversion, economics, retention and delivery capacity to identify which part of the business is most likely restricting growth right now.', "You'll get a breakdown of the strongest constraint, any secondary problems, and the parts of the business that currently look healthy."],
     count: '20 questions',
     start: 'Start assessment →'
@@ -103,7 +103,7 @@ window.CLARITY_DATA['business-constraint'] = {
   cta: {
     heading: 'Want another perspective?',
     sub: 'If you want a second read on which constraint to work on first, a working session goes through your specific numbers and situation in depth.',
-    label: 'START HERE →',
+    label: 'NOT SURE WHERE TO START? →',
     href: '/start-here/'
   },
   questions: [{
@@ -645,7 +645,7 @@ window.CLARITY_DATA['strategy-or-execution'] = {
     fit: CD_FIT_LABELS
   },
   intro: {
-    eyebrow: 'Clarity tools',
+    eyebrow: 'Business · Clarity tool',
     paras: ['Being stuck does not automatically mean you need a better plan.', 'This assessment looks at the quality of your strategy, how consistently you execute it, whether you avoid difficult actions, and whether your workload or environment is making execution unrealistic.', 'The result will show whether the main problem appears to be strategy, execution, avoidance, capacity, coordination, or a combination of them.'],
     count: '17 questions',
     start: 'Start assessment →'
@@ -653,7 +653,7 @@ window.CLARITY_DATA['strategy-or-execution'] = {
   cta: {
     heading: 'Want another perspective?',
     sub: 'If the result points at more than one driver, a working session can help you decide what to change first without guessing.',
-    label: 'START HERE →',
+    label: 'NOT SURE WHERE TO START? →',
     href: '/start-here/'
   },
   questions: [{
@@ -1116,7 +1116,7 @@ window.CLARITY_DATA['quit-your-job'] = {
     fit: CD_FIT_LABELS
   },
   intro: {
-    eyebrow: 'Clarity tools',
+    eyebrow: 'Career · Clarity tool',
     paras: ['Wanting to leave a job can mean very different things.', 'This assessment separates problems with your manager, company, role, workload, compensation, values and broader career direction.', 'It also looks at whether you are moving toward a realistic alternative or mainly trying to get away from your current situation.'],
     count: '20 questions',
     start: 'Start assessment →'
@@ -1124,7 +1124,7 @@ window.CLARITY_DATA['quit-your-job'] = {
   cta: {
     heading: 'Want another perspective?',
     sub: 'A working session can help you separate what needs to change from whether you need to leave, without anyone telling you what to do.',
-    label: 'START HERE →',
+    label: 'NOT SURE WHERE TO START? →',
     href: '/start-here/'
   },
   breakdownGroups: [{
@@ -1708,7 +1708,7 @@ window.CLARITY_DATA['become-a-solopreneur'] = {
     fit: CD_FIT_LABELS
   },
   intro: {
-    eyebrow: 'Clarity tools',
+    eyebrow: 'Career · Clarity tool',
     paras: ['Wanting more freedom is not the same as wanting to run your own business.', 'This assessment looks at what is pulling you toward self-employment, how much market evidence you already have, your willingness to sell, your ability to work without external structure, your financial position and whether you actually want the work that comes with running a business.', 'The result will distinguish between a strong fit for independent work, an untested idea, a desire for autonomy, an escape from employment, and other mixed patterns.'],
     count: '20 questions',
     start: 'Start assessment →'
@@ -1716,7 +1716,7 @@ window.CLARITY_DATA['become-a-solopreneur'] = {
   cta: {
     heading: 'Want another perspective?',
     sub: 'If fit and readiness are pointing in different directions, a working session can help you decide what to test before committing to anything.',
-    label: 'START HERE →',
+    label: 'NOT SURE WHERE TO START? →',
     href: '/start-here/'
   },
   breakdownGroups: [{
@@ -2275,7 +2275,7 @@ window.CLARITY_DATA['burned-out'] = {
     fit: CD_FIT_LABELS
   },
   intro: {
-    eyebrow: 'Clarity tools',
+    eyebrow: 'Psychology · Clarity tool',
     paras: ['Low motivation at work does not always come from burnout.', 'This assessment looks at exhaustion, cognitive strain, workload, control, boredom, lack of challenge, meaning and whether you still want the underlying work.', 'The result will show whether your answers point more toward work-related depletion, under-stimulation, loss of fit with the work itself, or a combination of these.', 'Answer for how things have been over the past six weeks.'],
     note: 'This assessment is directional. It is not a clinical diagnosis.',
     count: '20 questions',
@@ -2284,7 +2284,7 @@ window.CLARITY_DATA['burned-out'] = {
   cta: {
     heading: 'Want another perspective?',
     sub: 'If the result points to depletion, boredom, or a loss of fit, a working session can help you decide what to change. For clinical concerns, speak to a professional.',
-    label: 'START HERE →',
+    label: 'NOT SURE WHERE TO START? →',
     href: '/start-here/'
   },
   breakdownGroups: [{

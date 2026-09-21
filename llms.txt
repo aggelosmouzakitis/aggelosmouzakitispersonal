@@ -16,9 +16,22 @@ There is one core offer: private 1:1 work. English lives at the root; a Greek ve
 - [Book a fit call](https://aggelosmouzakitis.com/book/): A short, free call to see whether working together makes sense.
 - [Confidentiality](https://aggelosmouzakitis.com/confidentiality/): How discretion works in this private work, and where the honest limits are.
 
-## Tools
+## Free Tools
 
-- [Starting Diagnostic](https://aggelosmouzakitis.com/startingdiagnostic/): A short diagnostic (~8–10 minutes) — some questions about the business, some about you. There is no user-facing score and no automated result; Aggelos reads every submission himself and replies by email. Greek version at https://aggelosmouzakitis.com/el/startingdiagnostic/.
+Free Tools is the site's primary discovery destination: every free interactive
+resource lives under /free-tools/. "Clarity tool" is the type of the five live
+self-scoring diagnostics; Free Tools is the collection that contains them.
+
+- [Free Tools](https://aggelosmouzakitis.com/free-tools/): The collection — diagnostics, roasts, sales, pricing and decision tools and exercises, filterable by Business / Career / Psychology. Free to use, no email needed to begin.
+- [What's limiting your business?](https://aggelosmouzakitis.com/free-tools/business-constraint/): Business · Clarity tool. 20 questions identifying which part of the business — demand, offer, acquisition, conversion, retention, economics or delivery capacity — is most likely restricting growth.
+- [Is it a strategy or execution problem?](https://aggelosmouzakitis.com/free-tools/strategy-or-execution/): Business · Clarity tool. 17 questions separating strategy, execution, avoidance, capacity and coordination problems.
+- [What's making you want to quit your job?](https://aggelosmouzakitis.com/free-tools/quit-your-job/): Career · Clarity tool. 20 questions separating a problem with the current job from a broader problem with career direction.
+- [Do you want to become a solopreneur?](https://aggelosmouzakitis.com/free-tools/become-a-solopreneur/): Career · Clarity tool. 20 questions separating wanting your own business from wanting autonomy or wanting out of employment.
+- [Are you burned out?](https://aggelosmouzakitis.com/free-tools/burned-out/): Psychology · Clarity tool. 20 questions separating depletion, under-stimulation and no longer wanting the work. Directional, not a clinical diagnosis.
+- [Not sure where to start?](https://aggelosmouzakitis.com/start-here/): The orientation flow for people who are not sure how to frame the situation yet. Pick the closest of four situations — the business, the career, something more personal, or all of it tangled together — answer at most one follow-up, and get one recommended starting direction.
+
+The five tools formerly lived under /clarity-tools/; those URLs now 301 to their
+/free-tools/ equivalents.
 
 ## Core pages (Greek — /el/)
 

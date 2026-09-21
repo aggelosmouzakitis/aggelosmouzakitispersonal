@@ -28,12 +28,12 @@ const sbPath = (id, lang) => (SB_CORE_PATHS[id] && SB_CORE_PATHS[id][lang]) || (
 
 const SB_LABELS = {
   en: { role: 'Business Growth Advisor + Licensed Psychotherapist', home: 'Home', workWith: 'Work with me', oneToOne: '1:1', about: 'About', writing: 'Writing', reviews: 'Reviews',
-        findMe: 'Find me', diagHead: 'Start here', diagSub: 'Answer a few questions and get the most useful next step, whether that is a tool, a call or a paid offer.', diagBtn: 'START →', diagShort: 'Start here', book: 'Book a fit call →', bookShort: 'Book' },
+        findMe: 'Find me', diagHead: 'Not sure where to start?', diagSub: 'Pick the situation closest to what you are dealing with and get one clear starting direction.', diagBtn: 'START →', diagShort: 'Where to start', book: 'Book a fit call →', bookShort: 'Book' },
   el: { role: 'Business Growth Advisor + Ψυχοθεραπευτής', home: 'Αρχική', workWith: 'Συνεργασία', oneToOne: '1:1', about: 'Σχετικά', writing: 'Άρθρα', reviews: 'Κριτικές',
         findMe: 'Βρες με', diagHead: 'Starting Diagnostic', diagSub: '10 λεπτά για το business σου: τι το φρενάρει και πού μπαίνεις εσύ στην εξίσωση.', diagBtn: 'ΞΕΚΙΝΑ →', diagShort: 'Τεστ', book: 'Κλείσε γνωριμία →', bookShort: 'Γνωριμία' },
 };
 const sbT = (lang) => SB_LABELS[lang] || SB_LABELS.en;
-// Starting Diagnostic route is language-aware.
+// Orientation route is language-aware (EL still has its own diagnostic).
 const diagPath = (lang) => (lang === 'el' ? '/el/startingdiagnostic/' : '/start-here/');
 
 const ICONS = {

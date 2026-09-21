@@ -2,7 +2,8 @@
 // Plain React, compiled by babel like sidebar.jsx / content-pages.jsx.
 // Loaded BEFORE content-pages.js. Exposes on window:
 //   SITE, CHROME_PATHS, EXTERNAL, cPath, cT, BrandIcon, ChromeStyles,
-//   SiteHeader, SiteFooterX, BlackCtaStrip, UniversalContentLayout, LegacyShell
+//   SiteHeader, SiteFooterX, BlackCtaStrip, UniversalContentLayout, LegacyShell,
+//   FREE_TOOLS_URL, FREE_TOOL_LINKS
 //
 // One green across the whole site: #047857.
 
@@ -132,7 +133,7 @@ const CHROME_T = {
     why: 'About me',
     reviews: 'Reviews',
     apply: 'Apply',
-    start: 'START HERE',
+    start: 'FREE TOOLS',
     other: 'ΕΛΛΗΝΙΚΑ',
     role1: 'Private business & career advisor',
     role2: 'BACP-registered psychotherapist',
@@ -141,7 +142,8 @@ const CHROME_T = {
     follow: 'FOLLOW',
     articles: 'Articles',
     askAnon: 'Ask me something',
-    startHere: 'Start Here',
+    freeTools: 'Free tools',
+    startHere: 'Not sure where to start?',
     confidentiality: 'Confidentiality',
     terms: 'Terms',
     privacy: 'Privacy',
@@ -209,31 +211,37 @@ const WORK_GROUPS = [{
   }]
 }];
 
-// ─── "Clarity tools" dropdown model (English only) ───────────────────────────
-// Five self-scoring diagnostics. No landing page: the dropdown is the hub and
-// each link goes straight to that tool's starting screen. Titles are sentence
-// case; the only intentional all-caps nav label is "CLARITY TOOLS" (uppercased
-// by the nav CSS). Ids match the tool slugs and drive aria-current.
-const CLARITY_LINKS = [{
+// ─── Free Tools link model (English only) ────────────────────────────────────
+// The five live self-scoring diagnostics that sit inside the Free Tools
+// collection. "Free Tools" is the section; "Clarity tool" is the type of tool
+// these five are. /free-tools/ is the hub; each link goes straight to that
+// tool's starting screen. Ids match the tool slugs and drive aria-current.
+const FREE_TOOLS_URL = '/free-tools/';
+const FREE_TOOL_LINKS = [{
   name: "What's limiting your business?",
-  href: '/clarity-tools/business-constraint/',
-  id: 'business-constraint'
+  href: '/free-tools/business-constraint/',
+  id: 'business-constraint',
+  category: 'Business'
 }, {
   name: 'Is it a strategy or execution problem?',
-  href: '/clarity-tools/strategy-or-execution/',
-  id: 'strategy-or-execution'
+  href: '/free-tools/strategy-or-execution/',
+  id: 'strategy-or-execution',
+  category: 'Business'
 }, {
   name: "What's making you want to quit your job?",
-  href: '/clarity-tools/quit-your-job/',
-  id: 'quit-your-job'
+  href: '/free-tools/quit-your-job/',
+  id: 'quit-your-job',
+  category: 'Career'
 }, {
   name: 'Do you want to become a solopreneur?',
-  href: '/clarity-tools/become-a-solopreneur/',
-  id: 'become-a-solopreneur'
+  href: '/free-tools/become-a-solopreneur/',
+  id: 'become-a-solopreneur',
+  category: 'Career'
 }, {
   name: 'Are you burned out?',
-  href: '/clarity-tools/burned-out/',
-  id: 'burned-out'
+  href: '/free-tools/burned-out/',
+  id: 'burned-out',
+  category: 'Psychology'
 }];
 
 // ─── Stylesheet ──────────────────────────────────────────────────────────────
@@ -319,17 +327,6 @@ a.site-hdr__mega-item:hover .site-hdr__mega-name{color:${SITE.bone}}
 .site-hdr__mega-item--soon .site-hdr__mega-name{color:${SITE.onDark};opacity:.7}
 .site-hdr__mega-soon{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${SITE.greyOnDark};border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 9px}
 
-/* ── "Clarity tools" dropdown (desktop) — single-column, anchored to its button ── */
-.site-hdr__clarity{position:relative;display:flex;align-items:center}
-.site-hdr__ddown{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(424px,calc(100vw - 32px));background:${SITE.forestDeep};border:1px solid rgba(243,240,232,0.14);border-top:2px solid ${SITE.green};border-radius:0;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:14px 12px;display:flex;flex-direction:column;gap:4px;z-index:200}
-.site-hdr__ddown-item{display:block;padding:14px;border-radius:0;transition:background .16s}
-a.site-hdr__ddown-item:hover{background:rgba(243,240,232,0.06)}
-/* Tool titles stay sentence case (nav <a> forces uppercase; reset it here — the
-   only intentional all-caps nav label is "CLARITY TOOLS" itself). */
-.site-hdr__ddown-name{display:block;font-family:${SITE.display};font-size:16px;font-weight:700;line-height:1.3;letter-spacing:-0.012em;text-transform:none;color:${SITE.paper}}
-a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:${SITE.bone}}
-.site-hdr__ddown-item[aria-current] .site-hdr__ddown-name{color:${SITE.green}}
-
 /* ── "Work with me" section inside the mobile menu ── */
 .site-menu__group{width:100%}
 .site-menu__acc{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;padding:0;background:none;border:0;cursor:pointer;color:${SITE.paper};font-family:inherit;font-size:16px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.03em}
@@ -351,6 +348,8 @@ a.site-hdr__ddown-item:hover .site-hdr__ddown-name{color:${SITE.bone}}
 .cta-strip{padding-block:clamp(86px,10.8vw,132px);text-align:center;background:${SITE.ink}}
 .cta-strip__h{margin:0 auto;max-width:20ch;font-family:${SITE.display};font-synthesis:none;font-size:clamp(36px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:${SITE.bone};text-wrap:balance}
 .cta-strip .pill--green{margin-top:44px}
+.cta-strip__soft{display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-size:14px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:${SITE.sage};transition:gap .18s,color .18s}
+.cta-strip__soft:hover{gap:13px;color:${SITE.bone}}
 .cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:${SITE.onDark};transition:gap .18s,color .18s}
 .cta-strip__sub:hover{gap:12px;color:${SITE.bone}}
 
@@ -510,9 +509,7 @@ function SiteHeader({
   const [open, setOpen] = React.useState(false); // mobile burger menu
   const [mWork, setMWork] = React.useState(false); // mobile "Work with me" accordion
   const [work, setWork] = React.useState(false); // desktop "Work with me" mega
-  const [clarity, setClarity] = React.useState(false); // desktop "Clarity tools" dropdown
   const workTimer = React.useRef(null);
-  const clarityTimer = React.useRef(null);
   const openWork = () => {
     if (workTimer.current) {
       clearTimeout(workTimer.current);
@@ -524,25 +521,12 @@ function SiteHeader({
     if (workTimer.current) clearTimeout(workTimer.current);
     workTimer.current = setTimeout(() => setWork(false), 130);
   };
-  const openClarity = () => {
-    if (clarityTimer.current) {
-      clearTimeout(clarityTimer.current);
-      clarityTimer.current = null;
-    }
-    setClarity(true);
-  };
-  const closeClaritySoon = () => {
-    if (clarityTimer.current) clearTimeout(clarityTimer.current);
-    clarityTimer.current = setTimeout(() => setClarity(false), 130);
-  };
   React.useEffect(() => () => {
     if (workTimer.current) clearTimeout(workTimer.current);
-    if (clarityTimer.current) clearTimeout(clarityTimer.current);
   }, []);
   const t = cT(lang);
   const other = lang === 'el' ? 'en' : 'el';
   const showWork = lang === 'en'; // offer pages + group work are English-only
-  const showClarity = lang === 'en'; // clarity tools are English-only
   const homeItem = {
     id: 'home',
     label: t.home
@@ -560,14 +544,15 @@ function SiteHeader({
     'aria-current': page === it.id ? 'page' : undefined
   }, it.label);
   const langHref = CHROME_PATHS[page] ? cPath(page, other) : other === 'el' ? '/el/' : '/';
-  // English header CTA is the "Start Here" orientation flow; Greek keeps the
-  // "ask anonymously" VideoAsk form (no Greek Start Here page).
-  const ctaHref = lang === 'el' ? 'https://www.videoask.com/fuv51iuq1' : '/start-here/';
+  // English header CTA is the Free Tools collection — the site's single dominant
+  // discovery action; Greek keeps the "ask anonymously" VideoAsk form (no Greek
+  // Free Tools page). "Work with me" stays ordinary navigation beside it.
+  const ctaHref = lang === 'el' ? 'https://www.videoask.com/fuv51iuq1' : FREE_TOOLS_URL;
   // Greek label is intentionally plain uppercase (no accents on capitals).
-  const ctaLabel = lang === 'el' ? 'ΡΩΤΑ ΑΝΩΝΥΜΑ' : 'START HERE';
+  const ctaLabel = lang === 'el' ? 'ΡΩΤΑ ΑΝΩΝΥΜΑ' : 'FREE TOOLS';
   const ctaExt = lang === 'el' ? ext : null;
-  // Keep the START HERE CTA present in the header on every page (including the
-  // Start Here flow itself, where it acts as a "start over"); it never disappears.
+  // Keep the FREE TOOLS CTA present in the header on every page (including the
+  // Free Tools page itself, where it acts as a "back to all"); it never disappears.
   const showCta = true;
 
   // Desktop mega-dropdown ("Work with me")
@@ -627,49 +612,7 @@ function SiteHeader({
     onMouseLeave: closeWorkSoon
   }, WORK_GROUPS.map(megaCol)));
 
-  // Desktop dropdown ("Clarity tools") — single column, straight-to-tool links.
-  const clarityDropdown = React.createElement('div', {
-    key: 'clarity',
-    className: 'site-hdr__clarity',
-    onMouseEnter: openClarity,
-    onMouseLeave: closeClaritySoon,
-    onKeyDown: ev => {
-      if (ev.key === 'Escape') setClarity(false);
-    }
-  }, React.createElement('button', {
-    className: 'site-hdr__work-btn',
-    type: 'button',
-    'aria-haspopup': 'true',
-    'aria-expanded': clarity ? 'true' : 'false',
-    onClick: () => setClarity(v => !v)
-  }, React.createElement('span', null, 'Clarity tools'), React.createElement('svg', {
-    className: 'site-hdr__work-caret',
-    viewBox: '0 0 10 6',
-    'aria-hidden': 'true'
-  }, React.createElement('path', {
-    d: 'M1 1l4 4 4-4',
-    stroke: 'currentColor',
-    strokeWidth: '1.6',
-    fill: 'none',
-    strokeLinecap: 'round',
-    strokeLinejoin: 'round'
-  }))), clarity && React.createElement('div', {
-    className: 'site-hdr__ddown',
-    role: 'menu',
-    onMouseEnter: openClarity,
-    onMouseLeave: closeClaritySoon
-  }, CLARITY_LINKS.map(it => React.createElement('a', {
-    className: 'site-hdr__ddown-item',
-    key: it.id,
-    href: it.href,
-    role: 'menuitem',
-    'aria-current': page === it.id ? 'page' : undefined,
-    onClick: () => setClarity(false)
-  }, React.createElement('span', {
-    className: 'site-hdr__ddown-name'
-  }, it.name)))));
-
-  // English header is deliberately lean: Work with me, About, START HERE →.
+  // English header is deliberately lean: Work with me, About, FREE TOOLS →.
   // Greek keeps its current Home / About / Reviews nav until it is localised.
   const aboutItem = {
     id: 'about',
@@ -725,18 +668,6 @@ function SiteHeader({
     href: it.href,
     'aria-current': page === it.id ? 'page' : undefined
   }, it.name)))))) : null;
-
-  // Mobile "Clarity tools" section (expanded list inside the burger menu)
-  const clarityMobile = showClarity ? React.createElement(React.Fragment, {
-    key: 'clarity-m'
-  }, React.createElement('div', {
-    className: 'site-menu__label'
-  }, 'Clarity tools'), CLARITY_LINKS.map(it => React.createElement('a', {
-    className: 'site-menu__sub',
-    key: it.id,
-    href: it.href,
-    'aria-current': page === it.id ? 'page' : undefined
-  }, it.name))) : null;
   let menuChildren;
   if (lang === 'en') {
     menuChildren = [];
@@ -798,12 +729,16 @@ function SiteHeader({
 }
 
 // ─── BLACK CTA STRIP ─────────────────────────────────────────────────────────
+// Site-wide two-CTA choice on general pages: Free Tools is the dominant
+// discovery action, "Not sure where to start?" the softer orientation route.
+// Greek has neither page, so it keeps a single pill into its own flow.
 function BlackCtaStrip({
   lang = 'en',
   heading,
   label
 }) {
   const t = cT(lang);
+  const isEn = lang !== 'el';
   return React.createElement('section', {
     className: 'cta-strip'
   }, React.createElement('div', {
@@ -812,8 +747,13 @@ function BlackCtaStrip({
     className: 'cta-strip__h'
   }, heading || t.ctaHeading), React.createElement('div', null, React.createElement('a', {
     className: 'pill pill--green',
+    href: isEn ? FREE_TOOLS_URL : cPath('diagnostic', lang)
+  }, React.createElement('span', null, label || (isEn ? 'EXPLORE FREE TOOLS' : t.ctaBtn)), React.createElement('span', null, '→'))), isEn ? React.createElement('div', null, React.createElement('a', {
+    className: 'cta-strip__soft',
     href: '/start-here/'
-  }, React.createElement('span', null, label || 'START HERE'), React.createElement('span', null, '→'))), React.createElement('a', {
+  }, React.createElement('span', null, 'Not sure where to start?'), React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '→'))) : null, React.createElement('a', {
     className: 'cta-strip__sub',
     href: cPath('confidentiality', lang)
   }, React.createElement('span', null, t.confidentiality), React.createElement('span', null, '→'))));
@@ -871,11 +811,13 @@ function SiteFooterX({
   }, t.why), React.createElement('a', {
     href: cPath('reviews', lang)
   }, t.reviews),
-  // English: Start Here orientation flow. Greek has no Start Here page,
-  // so it keeps the Greek diagnostic ("get to know each other") link.
-  lang === 'en' ? React.createElement('a', {
+  // English: Free Tools (primary discovery) then the softer orientation
+  // flow. Greek has neither page, so it keeps the Greek diagnostic link.
+  lang === 'en' ? React.createElement(React.Fragment, null, React.createElement('a', {
+    href: FREE_TOOLS_URL
+  }, t.freeTools), React.createElement('a', {
     href: '/start-here/'
-  }, t.startHere) : React.createElement('a', {
+  }, t.startHere)) : React.createElement('a', {
     href: cPath('diagnostic', lang)
   }, t.apply)), React.createElement('nav', null, React.createElement('div', {
     className: 'site-ftr__head'
@@ -1007,5 +949,7 @@ Object.assign(window, {
   SiteFooterX,
   BlackCtaStrip,
   UniversalContentLayout,
-  LegacyShell
+  LegacyShell,
+  FREE_TOOLS_URL,
+  FREE_TOOL_LINKS
 });

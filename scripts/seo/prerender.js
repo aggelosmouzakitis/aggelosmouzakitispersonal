@@ -24,12 +24,14 @@ const PAGES = [
   // Retained (out of nav, still indexable via their own inline SpecialtyPage mount)
   { f: 'ask-me-anything/index.html', faq: false },
   { f: 'ask-me-anything/el/index.html', faq: false },
-  // Clarity Tools — five self-scoring diagnostics (renderApp-free; mount ClarityTool)
-  { f: 'clarity-tools/business-constraint/index.html', faq: false },
-  { f: 'clarity-tools/strategy-or-execution/index.html', faq: false },
-  { f: 'clarity-tools/quit-your-job/index.html', faq: false },
-  { f: 'clarity-tools/become-a-solopreneur/index.html', faq: false },
-  { f: 'clarity-tools/burned-out/index.html', faq: false },
+  // Free Tools — the collection page plus the five self-scoring clarity tools
+  // inside it (renderApp-free; they mount renderFreeTools / ClarityTool).
+  { f: 'free-tools/index.html', faq: false },
+  { f: 'free-tools/business-constraint/index.html', faq: false },
+  { f: 'free-tools/strategy-or-execution/index.html', faq: false },
+  { f: 'free-tools/quit-your-job/index.html', faq: false },
+  { f: 'free-tools/become-a-solopreneur/index.html', faq: false },
+  { f: 'free-tools/burned-out/index.html', faq: false },
   // Restored English SEO landing pages (persona mounts + specialty SpecialtyPage mounts)
   { f: 'therapy-for-founders/index.html', faq: true },
   { f: 'therapy-for-executives/index.html', faq: true },
