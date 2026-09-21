@@ -19,10 +19,10 @@
 
 var e = React.createElement;
 
-// ── Submission plumbing — the same owner-notification pair the Clarity Tools
-//    and the legacy diagnostic already use (EmailJS + Apps Script sheet). ────
-var FT_SHEET_URL = 'https://script.google.com/macros/s/AKfycby-gv3oCFT2q5KXvVnqRzS4PAzcMjPB8Gls5qodZJ3v4_9HKGqJHMdBCw7YYbEzIE2d/exec';
-var FT_EMAILJS_SERVICE = 'service_i4xq7vg';
+// ── Submission plumbing ──────────────────────────────────────────────────────
+// Waitlist sign-ups go through the shared path in lead-capture.js, same as the
+// contact form, WTF Friday and the clarity tools: one subject format, one
+// header block, one row in the sheet.
 var FT_EMAILJS_TEMPLATE = 'template_wdsrbdo';
 if (typeof window !== 'undefined' && window.emailjs) {
   try { emailjs.init({ publicKey: 'bfBcHLXj2nKaev_lT' }); } catch (err) {}
@@ -42,46 +42,27 @@ function ftValidEmail(v) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v || '').trim());
 }
 
-// Waitlist submission. Sends the tool identifier, the page it came from and a
-// timestamp alongside the address, through both notification channels.
+// Waitlist submission — the tool identifier is what makes the notification and
+// the sheet row say which tool this person is waiting for.
 function ftSubmitInterest(tool, email, done) {
-  var now = new Date();
-  var detail = [
-    'Tool: ' + tool.title,
-    'Tool id: ' + tool.id,
-    'Source: ' + (typeof window !== 'undefined' ? window.location.pathname : '/free-tools/'),
-    'Requested: ' + now.toISOString(),
-  ].join('\n');
-  // Key names mirror the shared EmailJS template so the notification renders;
-  // tool / source / timestamp ride along for the sheet.
-  var payload = {
-    user_email: email, user_name: '', user_website: '',
-    overall_grade: 'Free tool waitlist — ' + tool.title,
-    overall_score: tool.id,
-    section_breakdown: detail,
-    all_answers: detail,
-    page_url: typeof window !== 'undefined' ? window.location.href : 'https://aggelosmouzakitis.com/free-tools/',
-    tool: tool.id,
-    tool_name: tool.title,
-    source: 'free-tools',
-    timestamp: now.toISOString(),
-  };
-  var finished = false;
-  var finish = function (ok) { if (!finished) { finished = true; done(ok); } };
-  try {
-    fetch(FT_SHEET_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }).catch(function () {});
-  } catch (err) {}
-  if (typeof window !== 'undefined' && window.emailjs) {
-    try {
-      emailjs.send(FT_EMAILJS_SERVICE, FT_EMAILJS_TEMPLATE, payload)
-        .then(function () { finish(true); })
-        .catch(function (err) { console.error('Free tools interest error:', err); finish(true); });
-      // The sheet POST is fire-and-forget, so never leave the person waiting.
-      setTimeout(function () { finish(true); }, 6000);
-    } catch (err) { finish(true); }
-  } else {
-    finish(true);
-  }
+  if (typeof window === 'undefined' || typeof window.submitLead !== 'function') { done(false); return; }
+  window.submitLead({
+    source: 'tool-waitlist',
+    detail: tool.id,
+    detailLabel: tool.title,
+    name: '',
+    email: email,
+    notes: 'Wants to be told when "' + tool.title + '" is ready.',
+    body: 'Waiting on: ' + tool.title + ' (' + tool.id + ')',
+    template: FT_EMAILJS_TEMPLATE,
+    // Keep template_wdsrbdo's own fields populated so it renders as it always has.
+    params: {
+      overall_grade: 'Free tool waitlist — ' + tool.title,
+      overall_score: tool.id,
+      section_breakdown: 'Waitlist sign-up. No assessment taken.',
+      all_answers: 'Waiting on: ' + tool.title + ' (' + tool.id + ')',
+    },
+  }, function (ok) { done(ok); });
 }
 
 // ── Conceptual diagrams ──────────────────────────────────────────────────────
@@ -396,7 +377,12 @@ function ComingSoonSignup(props) {
     setError('');
     setStage('sending');
     ftTrack('free_tool_interest_submit', { tool: tool.id });
-    ftSubmitInterest(tool, email, function () { setStage('done'); });
+    ftSubmitInterest(tool, email, function (ok) {
+      if (ok) { setStage('done'); return; }
+      // Don't claim they're on the list when the send actually failed.
+      setStage('open');
+      setError("That didn't go through. Try again in a moment.");
+    });
   }
 
   if (stage === 'done') {

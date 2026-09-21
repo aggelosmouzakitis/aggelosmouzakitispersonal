@@ -23,9 +23,10 @@
 // own compute() so weighting and dependencies (documented in clarity-data.js)
 // are respected.
 
-// Reuse the existing diagnostic's owner-notification plumbing verbatim.
-const CLARITY_SHEET_URL = 'https://script.google.com/macros/s/AKfycby-gv3oCFT2q5KXvVnqRzS4PAzcMjPB8Gls5qodZJ3v4_9HKGqJHMdBCw7YYbEzIE2d/exec';
-const CLARITY_EMAILJS_SERVICE = 'service_i4xq7vg';
+// Notification + sheet go through the shared path in lead-capture.js. The
+// EmailJS template is unchanged — the tools still render through template_wdsrbdo
+// with every field it already received; lead-capture only adds the subject,
+// the standard header block and the flat keys the sheet reads.
 const CLARITY_EMAILJS_TEMPLATE = 'template_wdsrbdo';
 if (window.emailjs) { try { emailjs.init({ publicKey: 'bfBcHLXj2nKaev_lT' }); } catch (e) {} }
 
@@ -147,17 +148,11 @@ function clarityTrack(name, params) {
 }
 
 // ── Owner/admin notification — reuses the existing EmailJS + Sheet pipeline ────
-function clarityBuildReport(data, answers, result, person) {
+function clarityBuildReport(data, answers, result) {
   var L = [];
   var line = function (s) { L.push(s == null ? '' : s); };
-  line(data.emailName + ' — new submission');
-  line('Submitted: ' + new Date().toISOString());
-  line('Page: ' + (typeof window !== 'undefined' ? window.location.href : ''));
-  line('');
-  line('── PERSON ──');
-  line('Name: ' + (person.name || '—'));
-  line('Email: ' + (person.email || '—'));
-  line('');
+  // Tool name, person, page and timestamp are supplied by the shared header
+  // block in lead-capture.js, so the report starts at the result itself.
   line('── PRIMARY RESULT ──');
   line(result.interp.primary || '—');
   line('');
@@ -194,7 +189,7 @@ function clarityBuildReport(data, answers, result, person) {
 }
 
 function claritySubmit(data, answers, result, person, done) {
-  var report = clarityBuildReport(data, answers, result, person);
+  var report = clarityBuildReport(data, answers, result);
   var secondaryTxt = result.overall2 ? (result.overall2.name + ': ' + result.overall2.score + result.overall2.unit + ' — ' + result.overall2.bracketLabel) : (result.interp.secondary || '—');
   var gradeTxt = result.overall ? (result.overall.name + ': ' + result.overall.score + result.overall.unit + ' — ' + result.overall.bracketLabel) : (data.emailName + ' submission');
   var breakdown = data.dimensions.map(function (d) {
@@ -202,23 +197,25 @@ function claritySubmit(data, answers, result, person, done) {
     if (!dm) return null;
     return d.label + ': ' + (dm.score == null ? 'n/a' : dm.score + '/100 — ' + dm.labelShort);
   }).filter(Boolean).join('\n');
-  var payload = {
-    user_email: person.email, user_name: person.name || '', user_website: '',
-    overall_grade: gradeTxt,
-    overall_score: (result.interp.primary || ''),
-    section_breakdown: secondaryTxt + '\n\n' + breakdown,
-    all_answers: report,
-    page_url: typeof window !== 'undefined' ? window.location.href : '',
-  };
-  var finished = false;
-  var finish = function () { if (!finished) { finished = true; done(); } };
-  try { fetch(CLARITY_SHEET_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }).catch(function () {}); } catch (e) {}
-  if (window.emailjs) {
-    try {
-      emailjs.send(CLARITY_EMAILJS_SERVICE, CLARITY_EMAILJS_TEMPLATE, payload).then(finish).catch(function (e) { console.error('Clarity email error:', e); finish(); });
-      setTimeout(finish, 6000);
-    } catch (e) { finish(); }
-  } else { finish(); }
+  if (typeof window !== 'undefined' && typeof window.submitLead === 'function') {
+    window.submitLead({
+      source: 'clarity-tool',
+      detail: data.slug,
+      detailLabel: data.title,
+      name: person.name || '',
+      email: person.email,
+      notes: (result.interp.primary || gradeTxt),
+      body: report,
+      template: CLARITY_EMAILJS_TEMPLATE,
+      // Everything template_wdsrbdo already rendered, spelled exactly as before.
+      params: {
+        overall_grade: gradeTxt,
+        overall_score: (result.interp.primary || ''),
+        section_breakdown: secondaryTxt + '\n\n' + breakdown,
+        all_answers: report,
+      },
+    }, function () { done(); });
+  } else { done(); }
 }
 
 // ── Visual tokens (mirrors the existing diagnostic's palette) ─────────────────

@@ -171,31 +171,13 @@ function ContactForm() {
     announce('Sending your message.');
 
     var interestLabel = VALID_INTEREST[interest] || interest;
-    var when = new Date();
     var source = (typeof document !== 'undefined' && document.referrer) || 'direct';
     var body = [
-      'New website enquiry',
-      '',
-      'Full name: ' + sanitize(name),
-      'Email: ' + sanitize(email),
-      'Interested in: ' + interestLabel,
-      '',
       'Message:',
       sanitize(msg).slice(0, MAXLEN),
       '',
-      'Source page: ' + source,
-      'Submitted: ' + when.toISOString() + ' (' + when.toString() + ')',
+      'Referrer: ' + source,
     ].join('\n');
-
-    var payload = {
-      from_name: sanitize(name),
-      from_email: sanitize(email),
-      reply_to: sanitize(email),
-      subject: 'New website enquiry: ' + interestLabel + ' – ' + sanitize(name),
-      interest: interestLabel,
-      source_page: source,
-      message: body,
-    };
 
     function ok() {
       lastSubmitRef.current = Date.now(); safeSet('ct_last', String(lastSubmitRef.current));
@@ -208,12 +190,21 @@ function ContactForm() {
       statusS[1]('idle'); setFormErr(true); announce('Something went wrong and your message was not sent.');
     }
 
-    if (typeof window !== 'undefined' && window.emailjs) {
-      var settled = false;
-      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, payload, EMAILJS_PUBLIC_KEY)
-        .then(function () { if (!settled) { settled = true; ok(); } })
-        .catch(function (e2) { if (!settled) { settled = true; fail(e2); } });
-    } else { fail(new Error('EmailJS unavailable')); }
+    // One shared submission path (lead-capture.js): consistent subject, the
+    // same header block on every notification, and a row in the sheet.
+    if (typeof window !== 'undefined' && typeof window.submitLead === 'function') {
+      window.submitLead({
+        source: 'contact',
+        detail: interest,
+        detailLabel: interestLabel,
+        name: sanitize(name),
+        email: sanitize(email),
+        notes: sanitize(msg).slice(0, MAXLEN),
+        body: body,
+        sourcePage: source,
+        template: EMAILJS_TEMPLATE_ID,
+      }, function (sent) { if (sent) ok(); else fail(new Error('Lead send failed')); });
+    } else { fail(new Error('Lead capture unavailable')); }
   }
 
   function setFormErr(v) { formErrS[1](v); }
