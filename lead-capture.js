@@ -26,7 +26,7 @@
 // keys are additive, for the replacement script in scripts/leads-apps-script.gs.
 
 var leadE = typeof React !== 'undefined' ? React.createElement : null;
-var LEAD_SHEET_URL = 'https://script.google.com/macros/s/AKfycby-gv3oCFT2q5KXvVnqRzS4PAzcMjPB8Gls5qodZJ3v4_9HKGqJHMdBCw7YYbEzIE2d/exec';
+var LEAD_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyfbiW4nURPv6d2W9uErRFTt2vB27rs5kPyDW-C_Az5WiUMtWcxZMPjxt524ikuQN4m/exec';
 var LEAD_EMAILJS_SERVICE = 'service_i4xq7vg';
 var LEAD_EMAILJS_PUBLIC_KEY = 'bfBcHLXj2nKaev_lT';
 

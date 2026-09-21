@@ -4,7 +4,7 @@
 // Internal averages + strongest signals are scanning aids only, never a diagnosis,
 // and are never shown to the user.
 
-const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby-gv3oCFT2q5KXvVnqRzS4PAzcMjPB8Gls5qodZJ3v4_9HKGqJHMdBCw7YYbEzIE2d/exec';
+const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyfbiW4nURPv6d2W9uErRFTt2vB27rs5kPyDW-C_Az5WiUMtWcxZMPjxt524ikuQN4m/exec';
 
 if (window.emailjs) {
   emailjs.init({ publicKey: 'bfBcHLXj2nKaev_lT' });
