@@ -14,16 +14,26 @@
 // Each form keeps sending to the EmailJS template it already used, and every
 // field those templates already received is still sent, spelled the same way.
 // This module only ADDS: `subject`, `message`, and a set of flat, self-
-// describing keys for the sheet. So:
-//   • template_6mv5hou (contact, WTF Friday) already renders {{subject}} and
-//     {{message}}, so those two get clean subjects with no dashboard change.
-//   • template_wdsrbdo (clarity tools, waitlist) keeps rendering exactly what
-//     it renders today. Setting its Subject field to {{subject}} in the EmailJS
-//     dashboard is all it takes to get clean subjects there too — and until
-//     that happens, nothing changes.
-// The same applies to the sheet: the legacy keys the current Apps Script reads
-// are still in the payload, so it keeps writing rows as it does today. The new
-// keys are additive, for the replacement script in scripts/leads-apps-script.gs.
+// describing keys for the sheet.
+//
+// NEITHER template picks up `subject` on its own — both were verified against
+// real delivered mail:
+//   • template_6mv5hou (contact, WTF Friday) ships EmailJS's stock "Contact Us"
+//     layout. Its Subject is "Contact Us: {{title}}" — a variable nothing sends,
+//     which is why those arrive titled just "Contact Us:". Its body wraps
+//     {{message}} in boilerplate ("A message by … has been received").
+//   • template_wdsrbdo (clarity tools, waitlist) has Subject
+//     "New burnout diagnostic submission - {{overall_grade}} - {{user_email}}",
+//     a leftover from the retired burnout diagnostic, which is why every tool
+//     mail looked the same. Its body prints its own field list and ignores
+//     {{message}}.
+// To get one consistent format everywhere, set BOTH templates in the EmailJS
+// dashboard to Subject: {{subject}} and Content: {{message}}. Until then the
+// mails still arrive with all their data, just under the old headings.
+//
+// The same additive rule applies to the sheet: the legacy keys the old Apps
+// Script read are still in the payload, so nothing depended on the swap. The
+// new flat keys are what scripts/leads-apps-script.gs reads.
 
 var leadE = typeof React !== 'undefined' ? React.createElement : null;
 
