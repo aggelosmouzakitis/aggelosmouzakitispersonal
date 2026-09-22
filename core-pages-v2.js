@@ -52,34 +52,23 @@ const HOME_V2 = {
     support: "Strategy is the easy half. I work on the decisions you keep not making, and the reasons you don't.",
     pointEyebrow: 'BEFORE YOU SCROLL',
     pointH: 'Anyone can put “advisor” in their bio.',
+    // Three blocks, in one row on desktop: what I have done, what I trained in,
+    // and how I actually read a problem. Tints run light → mid → deep across the row.
     points: [{
-      label: '01 / BUSINESS',
+      label: '01 / EXPERIENCE',
       lead: 'I did the work before I started selling advice.',
       body: ['Eighteen years in product and growth. Seven of them running my own consultancy and working with 100+ tech companies. I also built two startups. Neither went well.'],
       close: 'I know business because I made the decisions and lived with the consequences.'
     }, {
-      label: '02 / CAREER',
-      lead: 'I built my own career before advising anyone on theirs.',
-      body: ['I built it abroad, through roles in product and growth, and I still work at IBM.'],
-      close: 'I did not leave a job, rebrand as a coach and start talking about a career I never had.'
-    }, {
-      label: '03 / TRAINING',
+      label: '02 / TRAINING',
       lead: 'I am not just a guy with too much confidence.',
       body: ['My training includes an MSc in Integrative Counselling & Psychotherapy from the University of Derby, a Graduate Certificate in Psychology, supervised practice and five years of experience doing this work.'],
       close: 'I do not improvise the psychological part.'
     }, {
-      label: '04 / REACH',
-      lead: 'I am not a social media personality or an influencer.',
-      body: ['A large audience proves you have found a way to earn attention.', 'Being good at the work and being good at attracting attention are two completely different skills.'],
-      close: 'If you want a performer, there are better choices.'
-    }, {
-      label: '05 / BUSINESS → PSYCHOLOGY',
-      lead: 'You do not have to leave the psychological part out.',
-      body: ['If you come for business advisory, you also get the psychological work that often matters more than the strategy.']
-    }, {
-      label: '06 / PSYCHOLOGY → BUSINESS',
-      lead: 'You do not have to leave the business context out.',
-      body: ['If you come for psychotherapeutic work, we will not spend months getting me to understand how your business or career works.']
+      label: '03 / HOW I WORK',
+      lead: 'Years in consumer psychology changed the way I read problems.',
+      body: ['Jobs to be Done trained me to look past the problem people first describe: what changed, what they are trying to achieve, and what keeps them where they are.'],
+      close: 'I use the same logic today across business, career and personal problems.'
     }],
     logoLabel: 'WORK WITH 100+ TECHNOLOGY COMPANIES',
     splitIntro: 'You won’t have to choose between practical advice and psychological depth.',
@@ -414,6 +403,8 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .home-point__card--1{background:rgba(143,191,167,0.09)}
 .home-point__card--2{background:rgba(4,120,87,0.16)}
 .home-point__card--3{background:#101A16}
+/* --4..--6 are only reached by the (unshipped) Greek homepage, which still
+   carries its original six blocks. */
 .home-point__card--4{background:#101A16}
 .home-point__card--5{background:rgba(143,191,167,0.09)}
 .home-point__card--6{background:rgba(4,120,87,0.16)}
@@ -421,8 +412,25 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .home-point__logos-label{font-family:${V2.archivo};font-synthesis:none;font-size:13px;font-weight:400;line-height:1;letter-spacing:0.10em;color:#8FBFA7;text-transform:uppercase}
 .home-point__logos-row{margin-top:34px;display:flex;flex-wrap:wrap;align-items:center;gap:24px 48px}
 .home-point__logo{font-family:${V2.display};font-synthesis:none;font-size:20px;font-weight:700;line-height:1.1;letter-spacing:-0.01em;color:#C0C9BF;white-space:nowrap}
-@media (max-width:1080px){.home-point__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:700px){.home-point__grid{grid-template-columns:1fr}.home-point__card{min-height:0}.home-point__lead{min-height:0}.home-point__logos-row{gap:20px 36px}.home-point__logo{font-size:18px}}
+/* Three blocks no longer divide into a two-up grid, so below the desktop
+   breakpoint each card becomes a full-width editorial row (label + lead on the
+   left, the argument on the right) instead of leaving an orphan in the grid. */
+@media (max-width:1080px){
+  .home-point__grid{grid-template-columns:1fr;grid-auto-rows:auto;gap:18px}
+  .home-point__card{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(28px,4vw,48px);align-content:start;grid-template-areas:"label label" "rule rule" "lead text"}
+  .home-point__label{grid-area:label}
+  .home-point__rule{grid-area:rule}
+  .home-point__lead{grid-area:lead;min-height:0}
+  .home-point__text{grid-area:text;margin-top:0;max-width:56ch}
+}
+@media (max-width:700px){
+  .home-point__grid{gap:16px}
+  .home-point__card{display:flex;flex-direction:column;min-height:0}
+  .home-point__lead{min-height:0}
+  .home-point__text{margin-top:26px;max-width:none}
+  .home-point__logos-row{gap:20px 36px}
+  .home-point__logo{font-size:18px}
+}
 
 /* ── Section 01 — dual-field component (dark business / green psychology, portrait on the seam) ── */
 .am-duality-section{overflow:hidden;padding:clamp(86px,9vw,130px) 24px clamp(101px,10.2vw,146px);background:${V2.white}}
@@ -540,7 +548,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 
 /* ── 02 / Free tools — light section, three-tool preview of the library ── */
 .home-free{position:relative;overflow:clip;background:${V2.white};color:${V2.ink};padding-block:clamp(64px,8vw,104px)}
-.home-free::before{content:"";position:absolute;bottom:-180px;left:-120px;width:400px;height:400px;border-radius:50%;background:rgba(4,120,87,0.06);pointer-events:none}
+.home-free::before{content:"";position:absolute;bottom:-300px;left:-130px;width:420px;height:420px;border-radius:50%;background:rgba(4,120,87,0.06);pointer-events:none}
 .home-free .sec-label__num,.home-free .sec-label__desc{color:${V2.green}}
 .home-free__h{position:relative;max-width:22ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,3.7vw,46px);font-weight:800;line-height:1.04;letter-spacing:-0.042em;color:#14201C;text-wrap:balance}
 .home-free__lead{position:relative;max-width:58ch;margin-top:20px;font-size:19px;line-height:1.55;color:${V2.ink2};text-wrap:pretty}
@@ -559,15 +567,6 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .home-free__all{position:relative;margin-top:clamp(32px,4vw,44px);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:55px;padding:0 26px;background:${V2.green};color:#F3F0E8;font-size:14px;font-weight:750;line-height:1;letter-spacing:0.05em;text-transform:uppercase;transition:background .18s,gap .18s}
 .home-free__all:hover{background:#03654A;color:#F3F0E8;gap:14px}
 
-/* the other two free routes, deliberately quieter than the tools */
-.home-free__alsolabel{position:relative;margin-top:clamp(52px,6.5vw,78px);font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${V2.meta}}
-.home-free__also{position:relative;margin-top:clamp(20px,2.4vw,28px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(28px,3.2vw,48px)}
-.home-free__col{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding-top:24px;border-top:2px solid rgba(23,25,25,0.18)}
-a.home-free__col{color:${V2.ink};transition:color .18s,border-color .18s}
-a.home-free__col:hover{color:${V2.green};border-top-color:${V2.green}}
-.home-free__name{font-family:${V2.display};font-synthesis:none;font-size:clamp(22px,2vw,26px);font-weight:750;line-height:1.1;letter-spacing:-0.032em;color:inherit}
-.home-free__desc{max-width:36ch;font-size:17px;line-height:1.55;color:${V2.ink2};text-wrap:pretty}
-.home-free__go{margin-top:6px;display:inline-flex;align-items:center;gap:8px;min-height:24px;font-size:14px;font-weight:700;letter-spacing:0.06em;color:${V2.green}}
 @media (max-width:640px){
   .home-free__all{width:100%}
 }
@@ -847,35 +846,7 @@ function HomePageV2({
     href: '/free-tools/'
   }, React.createElement('span', null, 'Explore all free tools'), React.createElement('span', {
     'aria-hidden': 'true'
-  }, '→')), React.createElement('p', {
-    className: 'home-free__alsolabel'
-  }, 'Also free'), React.createElement('div', {
-    className: 'home-free__also'
-  }, React.createElement('a', {
-    className: 'home-free__col home-free__col--wtf',
-    href: '/wtf-friday/',
-    'aria-label': 'Join WTF Friday'
-  }, React.createElement('span', {
-    className: 'home-free__name'
-  }, 'WTF Friday'), React.createElement('span', {
-    className: 'home-free__desc'
-  }, 'Free weekly office hours. Bring one real problem, leave with a straight answer.'), React.createElement('span', {
-    className: 'home-free__go'
-  }, 'Join WTF Friday ', React.createElement('span', {
-    'aria-hidden': 'true'
-  }, '→'))), React.createElement('a', {
-    className: 'home-free__col home-free__col--ask',
-    href: window.cPath('ask-me-anything', lang),
-    'aria-label': 'Ask me something'
-  }, React.createElement('span', {
-    className: 'home-free__name'
-  }, 'Ask me something'), React.createElement('span', {
-    className: 'home-free__desc'
-  }, "Ask the thing you wouldn't put your name on. I answer selected ones publicly."), React.createElement('span', {
-    className: 'home-free__go'
-  }, 'Ask something ', React.createElement('span', {
-    'aria-hidden': 'true'
-  }, '→')))))) : null;
+  }, '→')))) : null;
   const heroSection = React.createElement('section', {
     className: 'home-hero',
     key: 'hero'
