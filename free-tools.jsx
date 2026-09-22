@@ -263,10 +263,10 @@ var FREE_TOOLS_CSS = [
   '.ft-filter{margin-top:clamp(36px,4.4vw,52px);display:flex;flex-wrap:wrap;align-items:stretch;gap:0 clamp(18px,3vw,44px);border-top:1px solid var(--rule,rgba(23,25,25,0.18));border-bottom:1px solid var(--rule,rgba(23,25,25,0.18))}',
   // padding (not min-height) sets the strip's height, so the active tab's rule
   // sits just under its label instead of drifting to the bottom of a tall box
-  '.ft-filter__btn{display:inline-flex;align-items:baseline;gap:9px;min-height:44px;padding:20px 0 16px;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;line-height:1;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink-2,#3A403A);transition:color .16s,border-color .16s}',
+  '.ft-filter__btn{display:inline-flex;align-items:baseline;gap:10px;min-height:44px;padding:20px 0 16px;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;font-family:inherit;font-size:18px;font-weight:700;line-height:1;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink-2,#3A403A);transition:color .16s,border-color .16s}',
   '.ft-filter__btn:hover{color:var(--ft-green-sm,#03654A)}',
   '.ft-filter__btn[aria-pressed="true"]{color:var(--ft-green-sm,#03654A);border-bottom-color:var(--green,#047857)}',
-  '.ft-filter__count{font-size:11.5px;font-weight:700;letter-spacing:0.06em;color:var(--ft-meta,#60655D);font-variant-numeric:tabular-nums}',
+  '.ft-filter__count{font-size:14px;font-weight:700;letter-spacing:0.06em;color:var(--ft-meta,#60655D);font-variant-numeric:tabular-nums}',
   '.ft-filter__btn[aria-pressed="true"] .ft-filter__count{color:var(--ft-green-sm,#03654A)}',
 
   // grid + cards
@@ -329,7 +329,7 @@ var FREE_TOOLS_CSS = [
   // same way, instead of wrapping only on the cards with a longer type label
   '.ft-card__soon{margin-left:0;flex:0 0 100%}',
   '.ft-filter{gap:0 22px}',
-  '.ft-filter__btn{min-height:56px;font-size:13px;letter-spacing:0.08em}',
+  '.ft-filter__btn{min-height:56px;font-size:17px;letter-spacing:0.07em}',
   '.ft-hero__fig{flex:0 0 clamp(150px,44vw,220px);align-self:flex-start}',
   '.ft-hero__lead{font-size:19px}',
   '.ft-form__submit{flex:1 1 100%}',
