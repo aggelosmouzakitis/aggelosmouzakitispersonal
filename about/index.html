@@ -334,6 +334,17 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 /* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
 .home-hero{position:relative;overflow:clip;background:#F3F0E8;color:#14201C}
 .home-hero::before{content:"";position:absolute;top:0;bottom:0;left:66%;width:1px;background:rgba(4,120,87,0.55);pointer-events:none}
+/* Hero Field: 18 hairlines from ~36% of the page width, intensifying toward
+   the portrait, with one green square that travels the lowest line on the
+   first ~320px of scroll. Sits behind the copy and the portrait, both of which
+   stay exactly where they were. preserveAspectRatio none so the field stretches
+   to whatever the hero actually is rather than dictating its height. */
+.home-hero__field{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.home-hero__field-m{display:none}
+@media (max-width:900px){
+  .home-hero__field-d{display:none}
+  .home-hero__field-m{display:block}
+}
 @media (max-width:900px){.home-hero::before{display:none}}
 .home-hero__grid{width:var(--page-canvas);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(380px,0.78fr);align-items:center;gap:48px;padding-block:88px 112px}
 .home-hero__copy{position:relative;z-index:2;min-width:0;max-width:820px;color:#14201C}
@@ -533,7 +544,11 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:v
 .home-hero__soft:hover{color:#047857;border-bottom-color:#047857;gap:12px}
 
 /* ── Proof strip — dark band of credentials under the hero ── */
-.home-proof{background:#16231E;border-block:1px solid rgba(243,240,232,0.14)}
+.home-proof{position:relative;background:#16231E;border-block:1px solid rgba(243,240,232,0.14)}
+/* The hero's path crosses the seam and continues along this band's top edge in
+   sage on forest — a graphic handoff, not a decorative animation. */
+.home-proof__carry{position:absolute;left:66%;top:-1px;height:1.5px;width:0;background:#8FBFA7;pointer-events:none}
+@media (max-width:900px){.home-proof__carry{display:none}}
 .home-proof__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px 40px;padding-block:24px}
 .home-proof__item{margin:0;font-size:15px;line-height:1.4;color:#B9C4BA}
 .home-proof__item strong{font-weight:600;color:#F3F0E8}
@@ -548,32 +563,75 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:v
 .home-work__btn{display:inline-flex;align-items:center;gap:10px;min-height:56px;padding-inline:28px;background:#047857;color:#F3F0E8;font-size:15px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;transition:background .18s,gap .18s}
 .home-work__btn:hover{background:#03654A;color:#F3F0E8;gap:13px}
 
-.home-shift{border:1px solid rgba(23,25,25,0.22)}
-.home-shift__row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
-.home-shift__cell{display:flex;gap:14px;padding:clamp(20px,2.3vw,28px) clamp(20px,2.2vw,30px)}
-.home-shift__cell--now{background:#E4E0D4;border-top:1px solid rgba(23,25,25,0.2);border-right:1px solid rgba(23,25,25,0.22)}
-.home-shift__cell--next{background:#047857;border-top:1px solid rgba(243,240,232,0.26);gap:12px}
-.home-shift__row--head .home-shift__cell{padding-block:15px;align-items:center}
-.home-shift__cell--headnow{background:#D9D3C4;border-top:3px solid #6A6F67}
-.home-shift__cell--headnext{background:#043D2B;border-top:3px solid #8FBFA7}
-.home-shift__headlabel{font-family:var(--font-display);font-synthesis:none;font-size:13px;font-weight:400;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
-.home-shift__cell--headnow .home-shift__headlabel{color:#4A5148}
-.home-shift__cell--headnext .home-shift__headlabel{color:#8FBFA7}
-.home-shift__headarrow{flex:0 0 auto;font-family:var(--font-display);font-synthesis:none;font-size:19px;line-height:1;color:#8FBFA7}
-.home-shift__n{flex:0 0 auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.75;letter-spacing:0.08em;color:#8A8F86}
-.home-shift__a{font-size:17.5px;line-height:1.4;color:#4A5148;text-wrap:pretty}
-.home-shift__arrow{flex:0 0 auto;font-family:var(--font-display);font-synthesis:none;font-size:15px;line-height:1.55;color:#8FBFA7}
-.home-shift__b{font-size:18px;font-weight:600;line-height:1.4;color:#F3F0E8;text-wrap:pretty}
-/* Once the two halves stack, the vertical divider between them is meaningless
-   and the "now" cell needs its own bottom edge instead. */
+/* Progress Field — three columns at 36/28/36, hairlines only, marker travels
+   the dashed track and docks beside the desired statement as its bullet. Every
+   scrubbed value arrives as a custom property from ProgressField; with JS off
+   or motion reduced the fallbacks below are the completed state, so the field
+   reads as finished rather than empty. */
+.pfield{position:relative;--pf-wash:0.08;--pf-rule:1;--pf-cta-gap:13px}
+.pfield__wash{position:absolute;top:0;bottom:0;right:0;width:36%;background:rgba(4,120,87,var(--pf-wash));pointer-events:none}
+.pfield__toprule{position:absolute;top:-1px;right:0;width:36%;height:3px;background:#047857;transform-origin:left center;transform:scaleX(var(--pf-rule));pointer-events:none}
+.pfield__head,.pfield__row{position:relative;display:grid;grid-template-columns:minmax(0,0.36fr) minmax(0,0.28fr) minmax(0,0.36fr);align-items:center}
+.pfield__head{--pf-head:1;--pf-head-pct:100%;padding:20px 0}
+.pfield__head::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:rgba(23,25,25,0.24);transform-origin:left center;transform:scaleX(var(--pf-head))}
+.pfield__headlabel{font-family:var(--font-display);font-synthesis:none;font-size:13px;font-weight:400;line-height:1;letter-spacing:0.1em;text-transform:uppercase;color:#4A5148;opacity:var(--pf-head)}
+.pfield__headlabel--next{padding-left:28px;color:#047857}
+.pfield__headtrack{position:relative;height:12px;margin:0 28px}
+.pfield__headline{position:absolute;left:0;top:6px;height:1px;width:var(--pf-head-pct);background:rgba(23,25,25,0.3)}
+.pfield__headarrow{position:absolute;right:-4px;top:-1px;font-family:var(--font-display);font-synthesis:none;font-size:14px;line-height:1;color:#047857;opacity:var(--pf-head)}
+.pfield__row{--pf-o:1;--pf-y:0px;--pf-s:100%;--pf-track:1;--pf-track-pct:100%;--pf-dot-o:1;--pf-cur:#6A6F67;--pf-des:#14201C;
+  padding:30px 0;border-top:1px solid rgba(23,25,25,0.16)}
+.pfield__now,.pfield__next{opacity:var(--pf-o);transform:translate3d(0,var(--pf-y),0)}
+.pfield__now{display:flex;gap:14px}
+.pfield__n{flex:0 0 auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.9;letter-spacing:0.08em;color:#8A8F86}
+.pfield__a{max-width:30ch;font-size:19px;line-height:1.4;color:var(--pf-cur);text-wrap:pretty}
+.pfield__next{padding-left:28px}
+.pfield__b{display:block;max-width:30ch;font-size:19px;font-weight:600;line-height:1.4;color:var(--pf-des);text-wrap:pretty}
+.pfield__track{position:relative;height:12px;margin:0 28px;opacity:var(--pf-track)}
+.pfield__dash{position:absolute;left:0;top:5px;width:var(--pf-track-pct);border-top:1px dashed rgba(23,25,25,0.38);opacity:var(--pf-dot-o)}
+.pfield__trail{position:absolute;left:0;top:5px;height:1.5px;width:var(--pf-s);background:#047857}
+.pfield__tick{position:absolute;right:0;top:0;width:1px;height:12px;background:rgba(23,25,25,0.3)}
+.pfield__row.is-done .pfield__tick{background:#047857}
+.pfield__marker{position:absolute;top:1px;left:var(--pf-s);width:10px;height:10px;margin-left:-5px;box-sizing:border-box;background:#047857;border:1.25px solid #047857}
+.pfield__row.is-waiting .pfield__marker{background:transparent;border-color:#3A403A}
+.pfield__foot{display:block;height:1px;background:rgba(23,25,25,0.16)}
+.home-work__btn{gap:var(--pf-cta-gap,10px)}
+/* Mobile: the field turns vertical. Now above, a downward progress rail, then
+   Instead. No green wash — the marker, trail and desired text carry it.
+   align-items must go back to stretch here: the rail's children are all
+   absolutely positioned, so a centred track collapses to zero height and the
+   percentage-height trail and dashes resolve to nothing. */
 @media (max-width:620px){
-  .home-shift__cell--now{border-right:0}
-  .home-shift__row--head{display:none}
+  .pfield__wash,.pfield__toprule{display:none}
+  .pfield__head{display:block;padding:0;height:1px;background:rgba(23,25,25,0.24);transform-origin:left center;transform:scaleX(var(--pf-head))}
+  .pfield__head::before,.pfield__headlabel,.pfield__headtrack{display:none}
+  .pfield__row{align-items:stretch;grid-template-columns:14px minmax(0,1fr);grid-template-rows:auto 28px auto;column-gap:12px;
+    padding:24px 0 26px;border-top:0;border-bottom:1px solid rgba(23,25,25,0.16);
+    opacity:var(--pf-o);transform:translate3d(0,var(--pf-y),0)}
+  .pfield__now,.pfield__next{opacity:1;transform:none}
+  .pfield__track{grid-column:1;grid-row:1 / 3;position:relative;height:auto;margin:0}
+  .pfield__dash{left:4px;top:6px;width:0;height:var(--pf-track-pct);border-top:0;border-left:1px dashed rgba(23,25,25,0.38)}
+  .pfield__trail{left:3.25px;top:6px;width:1.5px;height:var(--pf-s)}
+  .pfield__tick{display:none}
+  .pfield__marker{left:-0.5px;top:var(--pf-s);margin-left:0;margin-top:1px;transform:translateY(-5px)}
+  .pfield__now{grid-column:2;grid-row:1;display:block}
+  .pfield__n{font-size:12px;line-height:1;letter-spacing:0.08em}
+  .pfield__n::after{content:"Now";margin-left:10px;font-family:var(--font-display);font-synthesis:none;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#4A5148}
+  .pfield__a{display:block;margin-top:8px;max-width:none;font-size:17px}
+  .pfield__next{grid-column:2;grid-row:3;padding-left:0}
+  .pfield__next::before{content:"Instead";display:block;font-family:var(--font-display);font-synthesis:none;font-size:11px;line-height:1;letter-spacing:0.1em;text-transform:uppercase;color:#047857}
+  .pfield__b{margin-top:8px;max-width:none;font-size:17px}
+  .pfield__foot{display:none}
+  .home-work__btn{display:flex;width:100%;justify-content:center}
 }
 
 /* ── 02 / Free tools — dark green ground, the site's dominant CTA ── */
 .home-free{position:relative;overflow:clip;background:#043D2B;color:#F3F0E8;padding-block:clamp(56px,7vw,96px)}
-.home-free::before{content:"";position:absolute;top:-160px;right:-140px;width:420px;height:420px;border-radius:50%;background:rgba(243,240,232,0.05);pointer-events:none}
+/* Handoff H2, dark to light: the section edge stays hard and one large disc
+   carries across it instead, parallaxed at 0.86 so the next section slides
+   over it rather than the two dissolving together. */
+.home-free{--free-disc:0px}
+.home-free::before{content:"";position:absolute;top:-160px;right:-140px;width:420px;height:420px;border-radius:50%;background:rgba(243,240,232,0.05);pointer-events:none;transform:translate3d(0,var(--free-disc),0)}
 .home-free .sec-label__num,.home-free .sec-label__desc{color:#8FBFA7}
 .home-free__head{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:clamp(24px,3vw,48px);align-items:end;margin-bottom:clamp(32px,4vw,48px)}
 .home-free__h{max-width:20ch;margin:0;font-family:var(--font-display);font-synthesis:none;font-size:clamp(28px,3.8vw,48px);font-weight:400;line-height:1;letter-spacing:-0.048em;color:#F3F0E8;text-wrap:balance}
@@ -765,8 +823,8 @@ html[lang^="el"] .amx-body{line-height:1.62}
 </style><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis">Aggelos<span>.</span></a><nav class="site-hdr__nav"><a href="/work-with-me/">Work with me</a><a href="/about/" aria-current="page">About me</a></nav><div style="display: flex; align-items: center; justify-self: end;"><div class="site-hdr__end"><a class="hdr-cta" href="/free-tools/"><span>FREE TOOLS</span><span>→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header><main class="ax-page"><section class="ax-top"><div class="ax-container ax-hero"><p class="ax-label">ABOUT ME</p><h1 class="ax-hero__h">I spent most of my adult life in consulting, growth and startups before I trained as a psychotherapist.</h1><p class="ax-hero__deck">Seven years running a growth consultancy, more than 100 technology companies, corporate roles and two startups that failed. You will not have to explain how this world works to me.</p></div><div class="ax-container ax-cred"><div class="ax-cred__head"><p class="ax-label">BACKGROUND</p><h2 class="ax-cred__h">Business, behaviour and psychotherapy.</h2></div><div class="ax-cred__grid"><div><p class="ax-label">BUSINESS, PRODUCT &amp; BEHAVIOUR</p><ul class="ax-cred__list"><li class="ax-cred__item"><span class="ax-cred__t">Growth Product Manager · IBM</span><span class="ax-cred__m">Growth, PLG, product-led sales and GTM in enterprise SaaS</span></li><li class="ax-cred__item"><span class="ax-cred__t">7+ years in growth and consulting</span></li><li class="ax-cred__item"><span class="ax-cred__t">Worked with 100+ technology companies</span></li><li class="ax-cred__item"><span class="ax-cred__t">Business Administration</span><span class="ax-cred__m">University of Piraeus</span></li><li class="ax-cred__item"><span class="ax-cred__t">Designing AI Products</span><span class="ax-cred__m">MIT</span></li><li class="ax-cred__item"><span class="ax-cred__t">Product Design</span><span class="ax-cred__m">Ministry of Product</span></li><li class="ax-cred__item"><span class="ax-cred__t">UX Design</span><span class="ax-cred__m">Google</span></li><li class="ax-cred__item"><span class="ax-cred__t">Jobs-to-be-Done &amp; consumer psychology</span><span class="ax-cred__m">Applied to SaaS product behaviour, adoption, purchasing decisions and growth</span></li><li class="ax-cred__item"><span class="ax-cred__t">Founder experience</span><span class="ax-cred__m">Built two startups</span></li></ul></div><div><p class="ax-label">PSYCHOLOGY &amp; THERAPY</p><ul class="ax-cred__list"><li class="ax-cred__item"><span class="ax-cred__t">MSc Integrative Counselling &amp; Psychotherapy</span><span class="ax-cred__m">University of Derby</span></li><li class="ax-cred__item"><span class="ax-cred__t">Graduate studies in Psychology</span><span class="ax-cred__m">The American College of Greece</span></li><li class="ax-cred__item"><span class="ax-cred__t">EMDR Practitioner</span></li><li class="ax-cred__item"><span class="ax-cred__t">Somatic Shaking Practitioner</span><span class="ax-cred__m">Body-based work with stress, emotional regulation and trauma</span></li><li class="ax-cred__item"><span class="ax-cred__t">Clinical placement · Psychiatric Clinic</span><span class="ax-cred__m">Metaxa Cancer Hospital</span></li><li class="ax-cred__item"><span class="ax-cred__t">BACP Registered</span></li></ul></div></div></div></section><section class="ax-bridge" aria-labelledby="ax-bridge-title"><div class="ax-container"><p class="ax-bridge__label">How I learned to read problems</p><h2 class="ax-bridge__h" id="ax-bridge-title">The way I learned to understand customers changed the way I understand people.</h2><div class="ax-bridge__grid"><div class="ax-bridge__copy"><p>For years, part of my job was understanding why people buy something, switch to something else, stay where they are or hesitate. I did that through customer research and Jobs to be Done.</p><p>You learn quickly that the first explanation is often incomplete. So you reconstruct what happened, what someone was trying to achieve and what made the change easier or harder.</p><p class="ax-bridge__close">I realised I was using the same investigative habit with clients.</p></div><ol class="ax-bridge__steps"><li class="ax-bridge__step"><span class="ax-bridge__n">01</span><span class="ax-bridge__t">What changed just before they started looking.</span></li><li class="ax-bridge__step"><span class="ax-bridge__n">02</span><span class="ax-bridge__t">What they were trying to achieve.</span></li><li class="ax-bridge__step"><span class="ax-bridge__n">03</span><span class="ax-bridge__t">What pulled them towards the new thing.</span></li><li class="ax-bridge__step"><span class="ax-bridge__n">04</span><span class="ax-bridge__t">What the old thing was still doing for them.</span></li></ol></div></div></section><section class="ax-duality" aria-labelledby="ax-duality-title"><div class="ax-container"><p class="ax-label">Business + psychology</p><h2 class="ax-duality__h" id="ax-duality-title">Why I sit between two professional worlds.</h2><div class="ax-duality__band"><div class="ax-duality__side ax-duality__side--business"><p class="ax-duality__k">Business</p><p class="ax-duality__s">I spent most of my career here.</p></div><img class="ax-duality__img" src="/img/aggelos-overlap.webp?v=2" alt="Aggelos Mouzakitis" width="250" height="426" loading="lazy" decoding="async"><div class="ax-duality__side ax-duality__side--psychology"><p class="ax-duality__k">Psychology</p><p class="ax-duality__s">I trained here because business knowledge was not enough.</p></div></div><div class="ax-explain"><p class="ax-explain__lead">Most problems I work on do not stay neatly on one side.</p><div class="ax-explain__body"><p>A pricing problem can involve fear of rejection. A career decision can be commercially rational and psychologically difficult. A business can have the right strategy and an owner who keeps avoiding it.</p><p class="is-strong">That is why I work with both.</p></div></div></div></section><section class="ax-why"><div class="ax-container"><div class="ax-why__grid"><div><div class="ax-why__rule"></div><h2 class="ax-why__h">Why I ended up here</h2></div><div class="ax-why__body"><p>I built a consultancy, worked with more than 100 technology companies and built two startups that failed. For years, being useful, reasonable and easy to work with helped me professionally. It also made it easier to avoid conflict, accept things I did not want and stay too long in the wrong places.</p><p>Knowing more about business did not explain why approval, fear or other people's reactions could still influence decisions that looked perfectly rational on paper. That gap is part of why I trained as a psychotherapist.</p><p class="ax-why__quote">Today I work with both sides of the problem when both sides matter.</p></div></div></div></section><section class="ax-cta"><div class="ax-container"><h2 class="ax-cta__h">If that sounds like the kind of thinking you want, here is how I work.</h2><a class="ax-cta__btn" href="/work-with-me/">Work with me →</a><a class="ax-cta__soft" href="/free-tools/">Explore free tools →</a></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols site-ftr__cols--en"><div><div class="site-hdr__brand" style="font-size: 20px;">Aggelos<span>.</span></div><div class="site-ftr__roles"><div>Private business &amp; career advisor</div><div style="margin-top: 8px;">BACP-registered psychotherapist</div></div></div><nav><div class="site-ftr__head">WORK WITH ME</div><a href="/work-with-me/">Work with me</a><a href="/wtf-friday/">WTF Friday</a></nav><nav><div class="site-ftr__head">NAVIGATE</div><a href="/">Home</a><a href="/about/">About me</a><a href="/reviews/">Reviews</a><a href="/free-tools/">Free tools</a></nav><nav><div class="site-ftr__head">CONTENT</div><a href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer">Articles ↗</a><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" target="_blank" rel="noopener noreferrer">YouTube ↗</a><a href="/ask-me-anything/">Ask me something ↗</a></nav><nav><div class="site-ftr__head">FOLLOW</div><a href="https://linkedin.com/in/growth-product-manager/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg><span>LinkedIn</span></a><a href="https://www.instagram.com/_aggelosmouzakitis_/" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg><span>Instagram</span></a><a href="https://www.tiktok.com/@aggelosmouz" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg><span>TikTok</span></a></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><div>© 2026 Aggelos Mouzakitis. All rights reserved.</div><nav><a href="/confidentiality/">Confidentiality</a><a href="/confidentiality/#terms">Terms</a><a href="/confidentiality/#privacy">Privacy</a></nav></div></div></footer></div>
 <script src="/react.production.min.js?v=d949f1c368" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=35f4f974f4" crossorigin="anonymous"></script>
-<script src="/site-chrome.js?v=0b75328824"></script>
-<script src="/core-pages-v2.js?v=169f20774a"></script>
+<script src="/site-chrome.js?v=83c3bf1dfe"></script>
+<script src="/core-pages-v2.js?v=a757996103"></script>
 <script src="/content-pages.js?v=b6f8ac6fa7"></script>
 <script>renderApp("about", "en");</script>
 </body>

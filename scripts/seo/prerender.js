@@ -97,6 +97,16 @@ function injectSidebarPrerender(html, inner) {
     }
     await page.waitForTimeout(350);
 
+    // Settle every motion primitive before capturing. The snapshot is what a
+    // crawler and a JS-disabled visitor get, so it has to be the finished page:
+    // no half-drawn SVG, nothing still waiting on an IntersectionObserver that
+    // will never fire because nothing ever scrolls here.
+    await page.evaluate(() => {
+      document.querySelectorAll('[stroke-dashoffset]').forEach((el) => el.setAttribute('stroke-dashoffset', '0'));
+      document.querySelectorAll('[data-mo]').forEach((el) => el.classList.add('is-in'));
+    });
+    await page.waitForTimeout(60);
+
     // Capture pre-render HTML
     const inner = await page.evaluate(() => document.getElementById('root').innerHTML);
 

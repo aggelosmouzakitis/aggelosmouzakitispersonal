@@ -18,6 +18,7 @@
 //     EmailJS + Google Apps Script plumbing, tagged with the tool identifier
 
 var e = React.createElement;
+var R = React;
 
 // ── Submission plumbing ──────────────────────────────────────────────────────
 // Waitlist sign-ups go through the shared path in lead-capture.js, same as the
@@ -65,6 +66,146 @@ function ftSubmitInterest(tool, email, done) {
   }, function (ok) { done(ok); });
 }
 
+// ─── Tool diagram motion ─────────────────────────────────────────────────────
+// From Tool Diagram.dc.html. Each live tool's drawing tells its story once, on
+// first entrance, in 600–700ms. The drawings themselves are unchanged — they
+// are the site's graphic language already; this only animates them.
+//
+// Coming-soon diagrams stay static: they have no story to tell yet, and five
+// narratives in one viewport would compete.
+var FT_DUR = { 'business-constraint': 620, 'strategy-or-execution': 600, 'quit-your-job': 640,
+               'become-a-solopreneur': 680, 'burned-out': 700 };
+// [x, y, targetHeight, targetOpacity] — bar 0 is the green "before" reference.
+var FT_BURN = [[4, 12, 80, 1], [36, 20, 72, 0.62], [68, 30, 62, 0.52], [100, 42, 50, 0.44],
+               [132, 54, 38, 0.36], [164, 64, 28, 0.28], [196, 74, 18, 0.22], [228, 82, 10, 0.16], [260, 88, 4, 0.12]];
+
+function ftDrive(root, id) {
+  var M = window.Motion;
+  if (!M || !FT_DUR[id]) return null;
+  var q = function (k) { return root.querySelector('[data-el="' + k + '"]'); };
+  var el = {};
+  ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'p', 'out', 'tint', 'r0', 'r1', 'r2', 'r3', 'r4', 'r5',
+   'b0', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8'].forEach(function (k) { el[k] = q(k); });
+  var set = function (n, k, v) { if (n) n.setAttribute(k, v); };
+  // One dash pair per length: stroke-dashoffset is the only thing that moves.
+  var draw = function (n, len, prog) {
+    if (!n) return;
+    set(n, 'stroke-dasharray', (len + 2).toFixed(1));
+    set(n, 'stroke-dashoffset', ((len + 2) * (1 - prog)).toFixed(2));
+  };
+  var seg = function (ms, a, d, ease) { return M.win(ms, a, d, ease); };
+
+  return function paint(t, h) {
+    var ms = t * FT_DUR[id];
+    if (id === 'business-constraint') {
+      // Inputs converge, the bottleneck appears, then one clean line out.
+      var i1 = seg(ms, 0, 300), i2 = seg(ms, 40, 300), i3 = seg(ms, 80, 300);
+      draw(el.a, 162.4, i1); draw(el.e, 162.4, i1);
+      draw(el.b, 153.4, i2); draw(el.d, 153.4, i2);
+      draw(el.c, 150, i3);
+      var fp = seg(ms, 300, 120);
+      set(el.f, 'y', (52 - 22 * fp).toFixed(2)); set(el.f, 'height', (44 * fp).toFixed(2));
+      var gx = 300 + 12 * h;
+      set(el.g, 'd', 'M170 52 H' + gx.toFixed(1));
+      draw(el.g, gx - 170, seg(ms, 380, 240));
+    } else if (id === 'strategy-or-execution') {
+      // The plan draws, the doing draws over it, then the gap resolves.
+      draw(el.a, 416, seg(ms, 0, 300));
+      draw(el.b, 150, seg(ms, 120, 180));
+      draw(el.c, 416, seg(ms, 220, 260));
+      draw(el.d, 150, seg(ms, 300, 200));
+      var mv = seg(ms, 220, 300);
+      set(el.g, 'transform', 'translate(' + (14 * (1 - mv)).toFixed(2) + ' 0)');
+      set(el.tint, 'fill-opacity', (0.07 * seg(ms, 440, 160)).toFixed(3));
+      set(el.c, 'stroke-width', (1.6 + 0.4 * h).toFixed(2));
+      var sq = 8 * seg(ms, 460, 140) + 2 * h;
+      set(el.e, 'x', (156 - sq / 2).toFixed(2)); set(el.e, 'y', (38 - sq / 2).toFixed(2));
+      set(el.e, 'width', sq.toFixed(2)); set(el.e, 'height', sq.toFixed(2));
+    } else if (id === 'quit-your-job') {
+      // The road in, the decision node, then the ways on, staggered.
+      draw(el.a, 130, seg(ms, 0, 300));
+      set(el.e, 'r', (5 * seg(ms, 260, 120) + 1.5 * h).toFixed(2));
+      draw(el.c, 132, seg(ms, 340, 240));
+      draw(el.b, 137.9, seg(ms, 380, 240));
+      draw(el.d, 137.9, seg(ms, 400, 240));
+      var fork = 'rgba(23,25,25,' + (0.34 + 0.16 * h).toFixed(3) + ')';
+      [el.b, el.c, el.d].forEach(function (n) { set(n, 'stroke', fork); });
+    } else if (id === 'become-a-solopreneur') {
+      // The repeated row resolves, then one element leaves the system.
+      [0, 1, 2, 3, 4, 5].forEach(function (i) { draw(el['r' + i], 88, seg(ms, i * 45, 180)); });
+      var s = 88 * seg(ms, 360, 320, M.travel);
+      var cx = s <= 34 ? 185 + s : 219, cy = s <= 34 ? 81 : 81 - (s - 34);
+      cx += 3 * h; cy -= 3 * h;
+      var sp = Math.min(71, s);
+      set(el.p, 'd', sp <= 0.01 ? 'M185 81' : sp <= 34 ? 'M185 81 H' + (185 + sp).toFixed(2)
+        : 'M185 81 H219 V' + (81 - (sp - 34)).toFixed(2));
+      set(el.out, 'x', (cx - 11).toFixed(2)); set(el.out, 'y', (cy - 11).toFixed(2));
+      set(el.out, 'opacity', seg(ms, 360, 80).toFixed(3));
+    } else if (id === 'burned-out') {
+      // Bars deplete high to low. The first stays green as the reference.
+      FT_BURN.forEach(function (b, i) {
+        var n = el['b' + i];
+        if (!n || i === 0) return;
+        var pr = seg(ms, 160 + (i - 1) * 40, 260, M.travel);
+        var hh = Math.max(1, 80 - (80 - b[2]) * pr - 3 * h * (i / 8));
+        set(n, 'y', (92 - hh).toFixed(2)); set(n, 'height', hh.toFixed(2));
+        set(n, 'fill', 'rgba(23,25,25,' + (0.62 + (b[3] - 0.62) * pr).toFixed(3) + ')');
+      });
+    }
+  };
+}
+
+// Attaches the entrance and the hover tween to one card. Cards in the same grid
+// row stagger by 80ms (--stagger-row) so a row reads left to right.
+function ftAttach(node, id, index) {
+  var M = window.Motion;
+  if (!node || !M) return function () {};
+  var paint = ftDrive(node, id);
+  if (!paint) return function () {};
+  var t = 1, h = 0, raf = 0, hraf = 0;
+  if (M.reduced) { paint(1, 0); return function () {}; }
+  // Arm well before the card is visible, and never while it is on screen. That
+  // keeps the undrawn state out of the prerendered snapshot — which is why a
+  // JS-disabled visitor sees finished drawings rather than frozen fragments —
+  // and means arming can never blank a diagram the visitor is looking at.
+  M.onView(node, function (_, info) {
+    if (!info.instant) paint(0, h);
+  }, { threshold: 0, margin: '400px 0px 400px 0px' });
+  M.onView(node, function (_, info) {
+    if (info.instant) { paint(1, h); return; }
+    var t0 = performance.now() + (index % 3) * 80;
+    var step = function (now) {
+      t = M.clamp01((now - t0) / (FT_DUR[id] || 600));
+      paint(t, h);
+      if (t < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  });
+  // 240ms hover tween on the diagram's meaningful green element.
+  var tween = function (to) {
+    cancelAnimationFrame(hraf);
+    var from = h, t0 = performance.now();
+    var step = function (now) {
+      var k = M.clamp01((now - t0) / 240);
+      h = from + (to - from) * M.settle(k);
+      paint(t, h);
+      if (k < 1) hraf = requestAnimationFrame(step);
+    };
+    hraf = requestAnimationFrame(step);
+  };
+  var over = function () { tween(1); }, out = function () { tween(0); };
+  node.addEventListener('mouseenter', over);
+  node.addEventListener('mouseleave', out);
+  node.addEventListener('focusin', over);
+  node.addEventListener('focusout', out);
+  return function () {
+    cancelAnimationFrame(raf); cancelAnimationFrame(hraf);
+    node.removeEventListener('mouseenter', over); node.removeEventListener('mouseleave', out);
+    node.removeEventListener('focusin', over); node.removeEventListener('focusout', out);
+    M.release(node);
+  };
+}
+
 // ── Conceptual diagrams ──────────────────────────────────────────────────────
 // One 320×104 line drawing per tool, transcribed from the design. Live tools
 // draw their key line in green; coming-soon tools stay in ink.
@@ -72,15 +213,15 @@ var FT_MUTED = 'rgba(23,25,25,0.34)';
 var FT_GREEN = '#047857';
 var FT_INK2 = '#3A403A';
 function ftPath(key, d, stroke, width, dash) {
-  return e('path', { key: key, d: d, fill: 'none', stroke: stroke || FT_MUTED, strokeWidth: width || 1.25, strokeDasharray: dash || undefined });
+  return e('path', { key: key, 'data-el': key, d: d, fill: 'none', stroke: stroke || FT_MUTED, strokeWidth: width || 1.25, strokeDasharray: dash || undefined });
 }
 function ftRect(key, x, y, w, h, o) {
   o = o || {};
-  return e('rect', { key: key, x: x, y: y, width: w, height: h, fill: o.fill || 'none', stroke: o.stroke, strokeWidth: o.sw, strokeDasharray: o.dash });
+  return e('rect', { key: key, 'data-el': key, x: x, y: y, width: w, height: h, fill: o.fill || 'none', fillOpacity: o.fo, stroke: o.stroke, strokeWidth: o.sw, strokeDasharray: o.dash });
 }
 function ftCircle(key, cx, cy, r, o) {
   o = o || {};
-  return e('circle', { key: key, cx: cx, cy: cy, r: r, fill: o.fill || 'none', stroke: o.stroke, strokeWidth: o.sw });
+  return e('circle', { key: key, 'data-el': key, cx: cx, cy: cy, r: r, fill: o.fill || 'none', stroke: o.stroke, strokeWidth: o.sw });
 }
 function ftArt(children) {
   return e('svg', { viewBox: '0 0 320 104', width: 320, height: 104, 'aria-hidden': 'true', className: 'ft-art' }, children);
@@ -99,7 +240,10 @@ function artConstraint() {
 function artStrategy() {
   return ftArt([
     ftRect('a', 6, 10, 150, 58, { stroke: FT_MUTED, sw: 1.25 }), ftPath('b', 'M6 39 H156'),
-    ftRect('c', 86, 38, 150, 58, { stroke: FT_GREEN, sw: 1.6 }), ftPath('d', 'M86 67 H236', FT_GREEN, 1.6),
+    e('g', { key: 'g', 'data-el': 'g' },
+      ftRect('tint', 86, 38, 70, 30, { fill: FT_GREEN, fo: 0.07 }),
+      ftRect('c', 86, 38, 150, 58, { stroke: FT_GREEN, sw: 1.6 }),
+      ftPath('d', 'M86 67 H236', FT_GREEN, 1.6)),
     ftRect('e', 152, 34, 8, 8, { fill: FT_GREEN }),
   ]);
 }
@@ -118,7 +262,7 @@ function artSolopreneur() {
   });
   return ftArt(rects.concat([
     ftRect('out', 208, 16, 22, 22, { fill: FT_GREEN }),
-    ftPath('p', 'M185 81 H219 V44', FT_GREEN, 1.25, '3 5'),
+    ftPath('p', 'M185 81 H219 V27', FT_GREEN, 1.25, '3 5'),
   ]));
 }
 // 05 — a depleting bar chart.
@@ -273,7 +417,9 @@ var FREE_TOOLS_CSS = [
   '.ft-grid{margin-top:clamp(28px,3.4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));column-gap:clamp(36px,4.6vw,80px)}',
   '.ft-cell{min-width:0}',
   '.ft-card{display:flex;flex-direction:column;align-items:flex-start;padding:26px 0 clamp(44px,5vw,68px);border-top:1px solid var(--rule,rgba(23,25,25,0.18));color:var(--ink,#171919);transition:border-color .18s}',
-  'a.ft-card:hover{border-top-color:var(--green,#047857);color:var(--ink,#171919)}',
+  'a.ft-card{position:relative;color:var(--ink,#171919)}',
+  'a.ft-card::before{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--green,#047857);transform:scaleX(0);transform-origin:left center;transition:transform var(--dur-rule,260ms) var(--ease-settle,cubic-bezier(.22,1,.36,1))}',
+  'a.ft-card:hover::before,a.ft-card:focus-visible::before{transform:scaleX(1)}',
   '.ft-card__top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;width:100%}',
   '.ft-card__num{font-family:var(--font-display);font-size:14px;line-height:1;letter-spacing:-0.01em;color:var(--ft-green-sm,#03654A);font-variant-numeric:tabular-nums}',
   '.ft-card--soon .ft-card__num{color:var(--ft-meta,#60655D)}',
@@ -281,15 +427,17 @@ var FREE_TOOLS_CSS = [
   '.ft-card--soon .ft-card__kind{color:var(--ink-2,#3A403A)}',
   '.ft-card__soon{margin-left:auto;font-size:11.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ft-meta,#60655D)}',
   '.ft-card__figure{margin:22px 0 0;width:100%;transition:transform .22s ease}',
-  'a.ft-card:hover .ft-card__figure{transform:translateX(3px)}',
+  '.ft-card__figure{transition:transform var(--dur-nudge,220ms) var(--ease-settle,cubic-bezier(.22,1,.36,1))}',
+  'a.ft-card:hover .ft-card__figure,a.ft-card:focus-visible .ft-card__figure{transform:translateX(4px)}',
   '.ft-art{display:block;width:100%;max-width:320px;height:auto}',
   '.ft-card__h{margin:26px 0 0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(25px,2.1vw,30px);font-weight:800;line-height:1.08;letter-spacing:-0.035em;color:var(--heading-ink,#14201C);transition:color .18s}',
-  'a.ft-card:hover .ft-card__h{color:var(--green,#047857)}',
+  '.ft-card__h{transition:color var(--dur-hover,180ms) var(--ease-settle,cubic-bezier(.22,1,.36,1))}',
+  'a.ft-card:hover .ft-card__h,a.ft-card:focus-visible .ft-card__h{color:var(--green,#047857)}',
   '.ft-card__desc{margin:14px 0 0;max-width:42ch;font-size:17px;line-height:1.55;color:var(--ink-2,#3A403A);text-wrap:pretty}',
   '.ft-card__note{margin:12px 0 0;font-size:13px;line-height:1.45;color:var(--ft-meta,#60655D)}',
   '.ft-card__go{margin-top:26px;display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--ft-green-sm,#03654A)}',
-  '.ft-card__go span{transition:transform .2s ease}',
-  'a.ft-card:hover .ft-card__go span{transform:translateX(4px)}',
+  '.ft-card__go span{transition:transform var(--dur-nudge,220ms) var(--ease-settle,cubic-bezier(.22,1,.36,1))}',
+  'a.ft-card:hover .ft-card__go span,a.ft-card:focus-visible .ft-card__go span{transform:translateX(6px)}',
 
   // coming-soon signup
   '.ft-notify{margin-top:26px;display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0;background:none;border:0;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--ft-green-sm,#03654A);transition:gap .18s,color .18s}',
@@ -334,7 +482,7 @@ var FREE_TOOLS_CSS = [
   '.ft-hero__lead{font-size:19px}',
   '.ft-form__submit{flex:1 1 100%}',
   '}',
-  '@media (prefers-reduced-motion:reduce){.ft-card,.ft-card__figure,.ft-card__go span,.ft-notify,.ft-form__submit{transition:none}a.ft-card:hover .ft-card__figure{transform:none}}',
+  '@media (prefers-reduced-motion:reduce){.ft-card,.ft-card__figure,.ft-card__go span,.ft-notify,.ft-form__submit,a.ft-card::before{transition:none}a.ft-card:hover .ft-card__figure{transform:none}a.ft-card::before{transform:scaleX(0)}}',
 ].join('');
 
 function FreeToolsStyles() {
@@ -421,6 +569,11 @@ function ComingSoonSignup(props) {
 function ToolCard(props) {
   var t = props.tool, num = props.num;
   var label = ftCatLabel(t.cat) + ' · ' + t.kind;
+  var cardRef = R.useRef(null);
+  R.useEffect(function () {
+    if (t.soon) return;            // coming-soon diagrams stay static
+    return ftAttach(cardRef.current, t.id, props.num ? Number(props.num) - 1 : 0);
+  }, [t.id]);
   var head = e('div', { className: 'ft-card__top' },
     e('span', { className: 'ft-card__num', 'aria-hidden': 'true' }, num),
     e('span', { className: 'ft-card__kind' }, label),
@@ -438,7 +591,7 @@ function ToolCard(props) {
       e(ComingSoonSignup, { tool: t }));
   }
   return e('a', {
-    className: 'ft-card', href: t.href,
+    className: 'ft-card', href: t.href, ref: cardRef,
     'aria-label': t.title + ' — ' + label + ', ' + t.meta,
     onClick: function () { ftTrack('free_tool_open', { tool: t.id }); },
   }, head, art, body,

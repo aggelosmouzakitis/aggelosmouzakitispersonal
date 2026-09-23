@@ -640,9 +640,42 @@ const Motion = (function () {
   const RM = typeof matchMedia === 'function' ? matchMedia('(prefers-reduced-motion: reduce)') : null;
   let reduced = !!(RM && RM.matches);
 
+  // Scrubbing needs the easing curves as functions, because a scroll-linked
+  // value is sampled rather than transitioned — CSS easing only applies to a
+  // transition the browser is running. Same two curves as the tokens.
+  function bezier(x1, y1, x2, y2) {
+    const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx;
+    const cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
+    const sx = (t) => ((ax * t + bx) * t + cx) * t;
+    const sy = (t) => ((ay * t + by) * t + cy) * t;
+    return (x) => {
+      if (x <= 0) return 0;
+      if (x >= 1) return 1;
+      let lo = 0, hi = 1, t = x;
+      for (let i = 0; i < 24; i++) {
+        const v = sx(t);
+        if (Math.abs(v - x) < 1e-5) break;
+        if (v < x) lo = t; else hi = t;
+        t = (lo + hi) / 2;
+      }
+      return sy(t);
+    };
+  }
+  const settle = bezier(0.22, 1, 0.36, 1);
+  const travel = bezier(0.65, 0, 0.35, 1);
+  const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+  // One sub-window of a 0–1 scrub: starts at `start`, runs for `len`, eased.
+  const win = (p, start, len, ease) => (ease || settle)(clamp01((p - start) / len));
+  // Interpolate two [r,g,b] triples to a css colour.
+  const mix = (a, b, k) => {
+    const t = clamp01(k);
+    return 'rgb(' + a.map((v, i) => Math.round(v + (b[i] - v) * t)).join(',') + ')';
+  };
+
   const api = {
     get reduced() { return reduced; },
     onView, reveal, draw, track, release,
+    settle, travel, clamp01, win, mix, bezier,
   };
   if (typeof document === 'undefined') return api;
 
@@ -662,7 +695,7 @@ const Motion = (function () {
   // of the viewport does not count, so nothing fires as it clips the fold.
   const DEF_THRESHOLD = 0.35;
   const DEF_MARGIN = '0px 0px -10% 0px';
-  const entries = new WeakMap(); // el -> {fn, io}
+  const entries = new WeakMap(); // el -> [{fn, io}, …]  (a node may arm and run on different thresholds)
   const observers = new Map();   // "threshold|margin" -> IntersectionObserver
 
   function observerFor(threshold, margin) {
@@ -672,10 +705,11 @@ const Motion = (function () {
       io = new IntersectionObserver((list) => {
         for (const e of list) {
           if (!e.isIntersecting) continue;
-          const rec = entries.get(e.target);
           io.unobserve(e.target);          // entrances run exactly once
-          entries.delete(e.target);
-          if (rec) rec.fn(e.target, { instant: false });
+          const recs = entries.get(e.target) || [];
+          const mine = recs.filter((r) => r.io === io);
+          entries.set(e.target, recs.filter((r) => r.io !== io));
+          for (const r of mine) r.fn(e.target, { instant: false });
         }
       }, { threshold, rootMargin: margin });
       observers.set(key, io);
@@ -700,7 +734,7 @@ const Motion = (function () {
       return;
     }
     const io = observerFor(o.threshold != null ? o.threshold : DEF_THRESHOLD, o.margin || DEF_MARGIN);
-    entries.set(el, { fn, io });
+    entries.set(el, (entries.get(el) || []).concat([{ fn, io }]));
     io.observe(el);
   }
 
@@ -759,6 +793,19 @@ const Motion = (function () {
 
   function stopLoop() { if (loop) { cancelAnimationFrame(loop); loop = 0; } }
 
+  // p = 0 when the element's top edge sits at `from` × viewport height, and
+  // p = 1 when its bottom edge reaches `to` × viewport height. Measuring the
+  // end against the bottom edge makes the scrub length scale with the section,
+  // so a tall field and a short one both finish as they are read rather than
+  // one racing ahead. `distance` switches to raw page scroll instead, for the
+  // handful of things anchored to the top of the document.
+  function progressOf(c, r, vh) {
+    if (c.distance) return Math.min(1, Math.max(0, (pageYOffset || 0) / c.distance));
+    const span = (c.from - c.to) * vh + r.height;
+    if (span <= 0) return 1;
+    return Math.min(1, Math.max(0, (c.from * vh - r.top) / span));
+  }
+
   function frame() {
     loop = 0;
     const vh = innerHeight || root.clientHeight;
@@ -767,11 +814,11 @@ const Motion = (function () {
     for (const [el, r] of reads) {                                          // write pass
       const c = cfg.get(el);
       if (!c) continue;
-      // from/to are fractions of the viewport height measured against the
-      // element's top edge: 1 = top edge at the bottom of the viewport.
-      const start = c.from * vh;
-      const end = c.to * vh;
-      const p = start === end ? 1 : Math.min(1, Math.max(0, (start - r.top) / (start - end)));
+      const p = progressOf(c, r, vh);
+      // Settled sections write nothing: most frames in a long scroll touch no
+      // style at all, which is what keeps four tracked fields affordable.
+      if (c.last !== null && Math.abs(p - c.last) < 0.0005) continue;
+      c.last = p;
       if (c.prop) el.style.setProperty(c.prop, p.toFixed(4));
       if (c.onProgress) c.onProgress(p, el);
     }
@@ -783,9 +830,11 @@ const Motion = (function () {
     const o = opts || {};
     const c = {
       prop: o.prop || '--mo-p',
-      from: o.from != null ? o.from : 1,
-      to: o.to != null ? o.to : 0,
+      from: o.from != null ? o.from : 0.85,
+      to: o.to != null ? o.to : 0.55,
+      distance: o.distance || 0,
       onProgress: o.onProgress || null,
+      last: null,
     };
     if (reduced || typeof IntersectionObserver !== 'function') {
       // No scrubbing: hand the element its completed state once.
@@ -799,8 +848,8 @@ const Motion = (function () {
 
   function release(el) {
     if (!el) return;
-    const rec = entries.get(el);
-    if (rec) { rec.io.unobserve(el); entries.delete(el); }
+    const recs = entries.get(el);
+    if (recs) { recs.forEach((r) => r.io.unobserve(el)); entries.delete(el); }
     if (cfg.has(el)) { cfg.delete(el); tracked.delete(el); if (vis) vis.unobserve(el); }
     if (!tracked.size) stopLoop();
   }

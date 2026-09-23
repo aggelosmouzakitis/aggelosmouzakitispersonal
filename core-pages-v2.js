@@ -181,6 +181,339 @@ const HOME_SHIFTS = [{
 }];
 const HOME_SHIFT_AREAS = 'Career \u00B7 Going independent \u00B7 Sales \u00B7 Business growth \u00B7 Communication \u00B7 Burnout';
 
+// ─── Hero Field ──────────────────────────────────────────────────────────────
+// From Hero Field.dc.html. A field of very fine hairlines behind the right of
+// the hero, and one green square that travels the lowest line as the page is
+// first scrolled — the site's opening statement of "green means forward".
+//
+// Nothing here animates on load: the square sits at its origin until the
+// visitor actually scrolls, and copy, portrait and CTAs never move. Scroll-
+// linked over the first ~320px of page scroll, which is the prototype's window.
+function HeroField() {
+  const svg = React.useRef(null);
+  const n = React.useRef({});
+  React.useEffect(function () {
+    const M = window.Motion;
+    const el = svg.current;
+    if (!el || !M) return;
+    const mq = window.matchMedia('(max-width: 900px)');
+    function apply(p) {
+      const mobile = mq.matches;
+      const set = function (k, a, v) {
+        if (n.current[k]) n.current[k].setAttribute(a, v);
+      };
+      // The field itself drifts up very slightly; the square does the travelling.
+      if (n.current.field) n.current.field.setAttribute('transform', 'translate(0 ' + (mobile ? -8 * p : -12 * p).toFixed(2) + ')');
+      if (mobile) {
+        const mx = 60 + 64 * M.travel(M.clamp01(p / 0.8));
+        set('trailM', 'x2', mx.toFixed(2));
+        set('sqM', 'x', (mx - 4).toFixed(2));
+        return;
+      }
+      const ox = 700 + 244 * M.travel(M.clamp01(p / 0.7));
+      set('trail', 'x2', ox.toFixed(2));
+      set('sq', 'x', (ox - 5).toFixed(2));
+      // At the 66% rule the path turns 90° down and crosses the section seam.
+      const dp = M.travel(M.clamp01((p - 0.62) / 0.38));
+      set('drop', 'y2', (604 + 60 * dp).toFixed(2));
+      // …and continues along the proof band's top edge in sage on forest.
+      const cont = document.querySelector('.home-proof__carry');
+      if (cont) cont.style.width = (438 * M.travel(M.clamp01((p - 0.86) / 0.14))).toFixed(1) + 'px';
+    }
+    M.track(el, {
+      distance: 320,
+      onProgress: apply
+    });
+    return function () {
+      M.release(el);
+    };
+  }, []);
+  const ref = function (k) {
+    return function (el) {
+      n.current[k] = el;
+    };
+  };
+  const lines = [];
+  for (let y = 128; y <= 576; y += 28) lines.push(y);
+  const linesM = [];
+  for (let y = 60; y <= 372; y += 24) linesM.push(y);
+  return React.createElement('svg', {
+    className: 'home-hero__field',
+    ref: svg,
+    viewBox: '0 0 1440 661',
+    preserveAspectRatio: 'none',
+    'aria-hidden': 'true',
+    focusable: 'false'
+  }, React.createElement('defs', null, React.createElement('linearGradient', {
+    id: 'hfFade',
+    gradientUnits: 'userSpaceOnUse',
+    x1: 520,
+    y1: 0,
+    x2: 980,
+    y2: 0
+  }, React.createElement('stop', {
+    offset: '0',
+    stopColor: '#171919',
+    stopOpacity: '0'
+  }), React.createElement('stop', {
+    offset: '1',
+    stopColor: '#171919',
+    stopOpacity: '0.11'
+  })), React.createElement('linearGradient', {
+    id: 'hfFadeM',
+    gradientUnits: 'userSpaceOnUse',
+    x1: 0,
+    y1: 0,
+    x2: 390,
+    y2: 0
+  }, React.createElement('stop', {
+    offset: '0',
+    stopColor: '#171919',
+    stopOpacity: '0'
+  }), React.createElement('stop', {
+    offset: '0.35',
+    stopColor: '#171919',
+    stopOpacity: '0.08'
+  }), React.createElement('stop', {
+    offset: '1',
+    stopColor: '#171919',
+    stopOpacity: '0.08'
+  }))), React.createElement('g', {
+    ref: ref('field')
+  }, React.createElement('g', {
+    className: 'home-hero__field-d'
+  }, lines.map(function (y) {
+    return React.createElement('line', {
+      key: 'l' + y,
+      x1: 520,
+      y1: y,
+      x2: 1440,
+      y2: y,
+      stroke: 'url(#hfFade)',
+      strokeWidth: 1
+    });
+  }), React.createElement('line', {
+    x1: 520,
+    y1: 604,
+    x2: 1440,
+    y2: 604,
+    stroke: 'url(#hfFade)',
+    strokeWidth: 1
+  }), React.createElement('line', {
+    ref: ref('trail'),
+    x1: 700,
+    y1: 604,
+    x2: 700,
+    y2: 604,
+    stroke: '#047857',
+    strokeWidth: 1.25,
+    opacity: 0.7
+  }), React.createElement('line', {
+    ref: ref('drop'),
+    x1: 950.4,
+    y1: 604,
+    x2: 950.4,
+    y2: 604,
+    stroke: '#047857',
+    strokeWidth: 1.5
+  }), React.createElement('rect', {
+    ref: ref('sq'),
+    x: 695,
+    y: 599,
+    width: 10,
+    height: 10,
+    fill: '#047857'
+  })), React.createElement('g', {
+    className: 'home-hero__field-m'
+  }, linesM.map(function (y) {
+    return React.createElement('line', {
+      key: 'm' + y,
+      x1: 0,
+      y1: y,
+      x2: 390,
+      y2: y,
+      stroke: 'url(#hfFadeM)',
+      strokeWidth: 1
+    });
+  }), React.createElement('line', {
+    ref: ref('trailM'),
+    x1: 60,
+    y1: 372,
+    x2: 60,
+    y2: 372,
+    stroke: '#047857',
+    strokeWidth: 1.25,
+    opacity: 0.7
+  }), React.createElement('rect', {
+    ref: ref('sqM'),
+    x: 56,
+    y: 368,
+    width: 8,
+    height: 8,
+    fill: '#047857'
+  }))));
+}
+
+// \u2500\u2500\u2500 Progress Field \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// The homepage's before/after ledger as an open editorial field: three columns
+// (36% / 28% / 36%), hairline rules instead of filled cells, and a marker that
+// travels each row's dashed track from the current statement to the desired
+// one, docking beside it as its bullet.
+//
+// Scroll-linked, one row at a time, from Progress Field.dc.html. The prototype
+// drives everything off a single 0\u20131 scalar `p`; Motion.track supplies that
+// from scroll position, and the windows below are the prototype's verbatim:
+// each row's marker starts at 0.30 + 0.16i and runs for 0.22, so rows overlap
+// only slightly and the eye follows one at a time. No pinning, no hijacking \u2014
+// the section scrolls normally and the field is simply read off where it is.
+const PF_META = [106, 111, 103]; // --meta      #6A6F67
+const PF_INK = [20, 32, 28]; // --heading-ink #14201C
+const PF_INK2 = [58, 64, 58]; // --ink-2     #3A403A
+
+// The disc on the Free Tools band, carried across the seam below it.
+function FreeDisc(props) {
+  const ref = React.useRef(null);
+  React.useEffect(function () {
+    const M = window.Motion,
+      el = ref.current;
+    if (!el || !M) return;
+    M.track(el, {
+      from: 1,
+      to: 0,
+      onProgress: function (p) {
+        el.style.setProperty('--free-disc', (0.86 * 120 * p).toFixed(1) + 'px');
+      }
+    });
+    return function () {
+      M.release(el);
+    };
+  }, []);
+  return React.createElement('section', {
+    className: 'home-free',
+    ref: ref
+  }, props.children);
+}
+function ProgressField() {
+  const root = React.useRef(null);
+  const rows = React.useRef([]);
+  const head = React.useRef(null);
+  React.useEffect(function () {
+    const el = root.current;
+    if (!el || !window.Motion) return;
+    const M = window.Motion;
+    const mobile = window.matchMedia('(max-width: 620px)').matches;
+    function apply(p) {
+      const h = M.win(p, 0.02, 0.18);
+      // Marker windows. Mobile gives each row its own viewport window; desktop
+      // uses the prototype's "one" mode rather than "all", so four markers
+      // never move at once.
+      const S = HOME_SHIFTS.map(function (_, i) {
+        return mobile ? M.win(p, 0.24 + i * 0.19, 0.2, M.travel) : M.win(p, 0.3 + i * 0.16, 0.22, M.travel);
+      });
+      const anyStarted = S.some(function (s) {
+        return s > 0;
+      });
+      const done = S.reduce(function (a, b) {
+        return a + b;
+      }, 0) / S.length;
+      if (head.current) {
+        head.current.style.setProperty('--pf-head', h.toFixed(3));
+        head.current.style.setProperty('--pf-head-pct', (h * 100).toFixed(2) + '%');
+      }
+      el.style.setProperty('--pf-wash', (0.02 + 0.06 * done).toFixed(3));
+      el.style.setProperty('--pf-rule', done.toFixed(3));
+      el.style.setProperty('--pf-cta-gap', (10 + 3 * M.clamp01((done - 0.9) / 0.1)).toFixed(1) + 'px');
+      rows.current.forEach(function (node, i) {
+        if (!node) return;
+        const s = S[i];
+        const rise = mobile ? M.win(p, 0.06 + i * 0.05, 0.16) : M.win(p, 0.12 + i * 0.03, 0.16);
+        const track = mobile ? M.win(p, 0.12 + i * 0.05, 0.14) : M.win(p, 0.18 + i * 0.02, 0.14);
+        const waiting = s <= 0;
+        // A row that has not started yet, once another has, steps back to meta
+        // so only the row in play reads at full strength.
+        const quiet = anyStarted && waiting;
+        const recede = M.clamp01((s - 0.85) / 0.15);
+        const st = node.style;
+        st.setProperty('--pf-o', rise.toFixed(3));
+        st.setProperty('--pf-y', ((1 - rise) * 12).toFixed(2) + 'px');
+        st.setProperty('--pf-cur', quiet ? M.mix(PF_INK2, PF_META, 1) : M.mix(PF_INK2, PF_META, recede));
+        st.setProperty('--pf-des', M.mix(PF_META, PF_INK, s));
+        st.setProperty('--pf-track', track.toFixed(3));
+        st.setProperty('--pf-track-pct', (track * 100).toFixed(2) + '%');
+        st.setProperty('--pf-dot-o', quiet ? '0.5' : '1');
+        st.setProperty('--pf-s', (s * 100).toFixed(2) + '%');
+        node.classList.toggle('is-waiting', waiting);
+        node.classList.toggle('is-done', s >= 1);
+      });
+    }
+    M.track(el, {
+      from: 0.88,
+      to: 0.45,
+      onProgress: apply
+    });
+    return function () {
+      M.release(el);
+    };
+  }, []);
+  const cell = function (sh, i) {
+    return React.createElement('div', {
+      className: 'pfield__row',
+      key: sh.n,
+      ref: function (n) {
+        rows.current[i] = n;
+      }
+    }, React.createElement('div', {
+      className: 'pfield__now'
+    }, React.createElement('span', {
+      className: 'pfield__n'
+    }, sh.n), React.createElement('span', {
+      className: 'pfield__a'
+    }, sh.a)), React.createElement('div', {
+      className: 'pfield__track',
+      'aria-hidden': 'true'
+    }, React.createElement('span', {
+      className: 'pfield__dash'
+    }), React.createElement('span', {
+      className: 'pfield__trail'
+    }), React.createElement('span', {
+      className: 'pfield__tick'
+    }), React.createElement('span', {
+      className: 'pfield__marker'
+    })), React.createElement('div', {
+      className: 'pfield__next'
+    }, React.createElement('span', {
+      className: 'pfield__b'
+    }, sh.b)));
+  };
+  return React.createElement('div', {
+    className: 'pfield',
+    ref: root
+  }, React.createElement('span', {
+    className: 'pfield__wash',
+    'aria-hidden': 'true'
+  }), React.createElement('span', {
+    className: 'pfield__toprule',
+    'aria-hidden': 'true'
+  }), React.createElement('div', {
+    className: 'pfield__head',
+    ref: head
+  }, React.createElement('span', {
+    className: 'pfield__headlabel'
+  }, 'What\u2019s happening now'), React.createElement('span', {
+    className: 'pfield__headtrack',
+    'aria-hidden': 'true'
+  }, React.createElement('span', {
+    className: 'pfield__headline'
+  }), React.createElement('span', {
+    className: 'pfield__headarrow'
+  }, '\u2192')), React.createElement('span', {
+    className: 'pfield__headlabel pfield__headlabel--next'
+  }, 'What you want instead')), HOME_SHIFTS.map(cell), React.createElement('span', {
+    className: 'pfield__foot',
+    'aria-hidden': 'true'
+  }));
+}
+
 // Homepage preview of the Free Tools library: all five live tools, so the
 // homepage shows the whole collection rather than a sample. The hub at
 // /free-tools/ stays the destination for the full page.
@@ -357,6 +690,17 @@ const PAGE_V2_CSS = `
 /* ── Home hero — approved copy left, stage photograph right (scaled up) ── */
 .home-hero{position:relative;overflow:clip;background:${V2.white};color:${V2.heroInk}}
 .home-hero::before{content:"";position:absolute;top:0;bottom:0;left:66%;width:1px;background:rgba(4,120,87,0.55);pointer-events:none}
+/* Hero Field: 18 hairlines from ~36% of the page width, intensifying toward
+   the portrait, with one green square that travels the lowest line on the
+   first ~320px of scroll. Sits behind the copy and the portrait, both of which
+   stay exactly where they were. preserveAspectRatio none so the field stretches
+   to whatever the hero actually is rather than dictating its height. */
+.home-hero__field{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.home-hero__field-m{display:none}
+@media (max-width:900px){
+  .home-hero__field-d{display:none}
+  .home-hero__field-m{display:block}
+}
 @media (max-width:900px){.home-hero::before{display:none}}
 .home-hero__grid{width:var(--page-canvas);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(380px,0.78fr);align-items:center;gap:48px;padding-block:88px 112px}
 .home-hero__copy{position:relative;z-index:2;min-width:0;max-width:820px;color:${V2.heroInk}}
@@ -556,7 +900,11 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .home-hero__soft:hover{color:${V2.green};border-bottom-color:${V2.green};gap:12px}
 
 /* ── Proof strip — dark band of credentials under the hero ── */
-.home-proof{background:${V2.ink};border-block:1px solid rgba(243,240,232,0.14)}
+.home-proof{position:relative;background:${V2.ink};border-block:1px solid rgba(243,240,232,0.14)}
+/* The hero's path crosses the seam and continues along this band's top edge in
+   sage on forest — a graphic handoff, not a decorative animation. */
+.home-proof__carry{position:absolute;left:66%;top:-1px;height:1.5px;width:0;background:${V2.sage};pointer-events:none}
+@media (max-width:900px){.home-proof__carry{display:none}}
 .home-proof__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px 40px;padding-block:24px}
 .home-proof__item{margin:0;font-size:15px;line-height:1.4;color:#B9C4BA}
 .home-proof__item strong{font-weight:600;color:#F3F0E8}
@@ -571,32 +919,75 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .home-work__btn{display:inline-flex;align-items:center;gap:10px;min-height:56px;padding-inline:28px;background:${V2.green};color:#F3F0E8;font-size:15px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;transition:background .18s,gap .18s}
 .home-work__btn:hover{background:#03654A;color:#F3F0E8;gap:13px}
 
-.home-shift{border:1px solid rgba(23,25,25,0.22)}
-.home-shift__row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
-.home-shift__cell{display:flex;gap:14px;padding:clamp(20px,2.3vw,28px) clamp(20px,2.2vw,30px)}
-.home-shift__cell--now{background:#E4E0D4;border-top:1px solid rgba(23,25,25,0.2);border-right:1px solid rgba(23,25,25,0.22)}
-.home-shift__cell--next{background:${V2.green};border-top:1px solid rgba(243,240,232,0.26);gap:12px}
-.home-shift__row--head .home-shift__cell{padding-block:15px;align-items:center}
-.home-shift__cell--headnow{background:#D9D3C4;border-top:3px solid ${V2.meta}}
-.home-shift__cell--headnext{background:#043D2B;border-top:3px solid ${V2.sage}}
-.home-shift__headlabel{font-family:${V2.archivo};font-synthesis:none;font-size:13px;font-weight:400;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
-.home-shift__cell--headnow .home-shift__headlabel{color:#4A5148}
-.home-shift__cell--headnext .home-shift__headlabel{color:${V2.sage}}
-.home-shift__headarrow{flex:0 0 auto;font-family:${V2.archivo};font-synthesis:none;font-size:19px;line-height:1;color:${V2.sage}}
-.home-shift__n{flex:0 0 auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.75;letter-spacing:0.08em;color:#8A8F86}
-.home-shift__a{font-size:17.5px;line-height:1.4;color:#4A5148;text-wrap:pretty}
-.home-shift__arrow{flex:0 0 auto;font-family:${V2.archivo};font-synthesis:none;font-size:15px;line-height:1.55;color:${V2.sage}}
-.home-shift__b{font-size:18px;font-weight:600;line-height:1.4;color:#F3F0E8;text-wrap:pretty}
-/* Once the two halves stack, the vertical divider between them is meaningless
-   and the "now" cell needs its own bottom edge instead. */
+/* Progress Field — three columns at 36/28/36, hairlines only, marker travels
+   the dashed track and docks beside the desired statement as its bullet. Every
+   scrubbed value arrives as a custom property from ProgressField; with JS off
+   or motion reduced the fallbacks below are the completed state, so the field
+   reads as finished rather than empty. */
+.pfield{position:relative;--pf-wash:0.08;--pf-rule:1;--pf-cta-gap:13px}
+.pfield__wash{position:absolute;top:0;bottom:0;right:0;width:36%;background:rgba(4,120,87,var(--pf-wash));pointer-events:none}
+.pfield__toprule{position:absolute;top:-1px;right:0;width:36%;height:3px;background:${V2.green};transform-origin:left center;transform:scaleX(var(--pf-rule));pointer-events:none}
+.pfield__head,.pfield__row{position:relative;display:grid;grid-template-columns:minmax(0,0.36fr) minmax(0,0.28fr) minmax(0,0.36fr);align-items:center}
+.pfield__head{--pf-head:1;--pf-head-pct:100%;padding:20px 0}
+.pfield__head::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:rgba(23,25,25,0.24);transform-origin:left center;transform:scaleX(var(--pf-head))}
+.pfield__headlabel{font-family:${V2.archivo};font-synthesis:none;font-size:13px;font-weight:400;line-height:1;letter-spacing:0.1em;text-transform:uppercase;color:#4A5148;opacity:var(--pf-head)}
+.pfield__headlabel--next{padding-left:28px;color:${V2.green}}
+.pfield__headtrack{position:relative;height:12px;margin:0 28px}
+.pfield__headline{position:absolute;left:0;top:6px;height:1px;width:var(--pf-head-pct);background:rgba(23,25,25,0.3)}
+.pfield__headarrow{position:absolute;right:-4px;top:-1px;font-family:${V2.archivo};font-synthesis:none;font-size:14px;line-height:1;color:${V2.green};opacity:var(--pf-head)}
+.pfield__row{--pf-o:1;--pf-y:0px;--pf-s:100%;--pf-track:1;--pf-track-pct:100%;--pf-dot-o:1;--pf-cur:#6A6F67;--pf-des:#14201C;
+  padding:30px 0;border-top:1px solid rgba(23,25,25,0.16)}
+.pfield__now,.pfield__next{opacity:var(--pf-o);transform:translate3d(0,var(--pf-y),0)}
+.pfield__now{display:flex;gap:14px}
+.pfield__n{flex:0 0 auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.9;letter-spacing:0.08em;color:#8A8F86}
+.pfield__a{max-width:30ch;font-size:19px;line-height:1.4;color:var(--pf-cur);text-wrap:pretty}
+.pfield__next{padding-left:28px}
+.pfield__b{display:block;max-width:30ch;font-size:19px;font-weight:600;line-height:1.4;color:var(--pf-des);text-wrap:pretty}
+.pfield__track{position:relative;height:12px;margin:0 28px;opacity:var(--pf-track)}
+.pfield__dash{position:absolute;left:0;top:5px;width:var(--pf-track-pct);border-top:1px dashed rgba(23,25,25,0.38);opacity:var(--pf-dot-o)}
+.pfield__trail{position:absolute;left:0;top:5px;height:1.5px;width:var(--pf-s);background:${V2.green}}
+.pfield__tick{position:absolute;right:0;top:0;width:1px;height:12px;background:rgba(23,25,25,0.3)}
+.pfield__row.is-done .pfield__tick{background:${V2.green}}
+.pfield__marker{position:absolute;top:1px;left:var(--pf-s);width:10px;height:10px;margin-left:-5px;box-sizing:border-box;background:${V2.green};border:1.25px solid ${V2.green}}
+.pfield__row.is-waiting .pfield__marker{background:transparent;border-color:#3A403A}
+.pfield__foot{display:block;height:1px;background:rgba(23,25,25,0.16)}
+.home-work__btn{gap:var(--pf-cta-gap,10px)}
+/* Mobile: the field turns vertical. Now above, a downward progress rail, then
+   Instead. No green wash — the marker, trail and desired text carry it.
+   align-items must go back to stretch here: the rail's children are all
+   absolutely positioned, so a centred track collapses to zero height and the
+   percentage-height trail and dashes resolve to nothing. */
 @media (max-width:620px){
-  .home-shift__cell--now{border-right:0}
-  .home-shift__row--head{display:none}
+  .pfield__wash,.pfield__toprule{display:none}
+  .pfield__head{display:block;padding:0;height:1px;background:rgba(23,25,25,0.24);transform-origin:left center;transform:scaleX(var(--pf-head))}
+  .pfield__head::before,.pfield__headlabel,.pfield__headtrack{display:none}
+  .pfield__row{align-items:stretch;grid-template-columns:14px minmax(0,1fr);grid-template-rows:auto 28px auto;column-gap:12px;
+    padding:24px 0 26px;border-top:0;border-bottom:1px solid rgba(23,25,25,0.16);
+    opacity:var(--pf-o);transform:translate3d(0,var(--pf-y),0)}
+  .pfield__now,.pfield__next{opacity:1;transform:none}
+  .pfield__track{grid-column:1;grid-row:1 / 3;position:relative;height:auto;margin:0}
+  .pfield__dash{left:4px;top:6px;width:0;height:var(--pf-track-pct);border-top:0;border-left:1px dashed rgba(23,25,25,0.38)}
+  .pfield__trail{left:3.25px;top:6px;width:1.5px;height:var(--pf-s)}
+  .pfield__tick{display:none}
+  .pfield__marker{left:-0.5px;top:var(--pf-s);margin-left:0;margin-top:1px;transform:translateY(-5px)}
+  .pfield__now{grid-column:2;grid-row:1;display:block}
+  .pfield__n{font-size:12px;line-height:1;letter-spacing:0.08em}
+  .pfield__n::after{content:"Now";margin-left:10px;font-family:${V2.archivo};font-synthesis:none;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#4A5148}
+  .pfield__a{display:block;margin-top:8px;max-width:none;font-size:17px}
+  .pfield__next{grid-column:2;grid-row:3;padding-left:0}
+  .pfield__next::before{content:"Instead";display:block;font-family:${V2.archivo};font-synthesis:none;font-size:11px;line-height:1;letter-spacing:0.1em;text-transform:uppercase;color:${V2.green}}
+  .pfield__b{margin-top:8px;max-width:none;font-size:17px}
+  .pfield__foot{display:none}
+  .home-work__btn{display:flex;width:100%;justify-content:center}
 }
 
 /* ── 02 / Free tools — dark green ground, the site's dominant CTA ── */
 .home-free{position:relative;overflow:clip;background:#043D2B;color:#F3F0E8;padding-block:clamp(56px,7vw,96px)}
-.home-free::before{content:"";position:absolute;top:-160px;right:-140px;width:420px;height:420px;border-radius:50%;background:rgba(243,240,232,0.05);pointer-events:none}
+/* Handoff H2, dark to light: the section edge stays hard and one large disc
+   carries across it instead, parallaxed at 0.86 so the next section slides
+   over it rather than the two dissolving together. */
+.home-free{--free-disc:0px}
+.home-free::before{content:"";position:absolute;top:-160px;right:-140px;width:420px;height:420px;border-radius:50%;background:rgba(243,240,232,0.05);pointer-events:none;transform:translate3d(0,var(--free-disc),0)}
 .home-free .sec-label__num,.home-free .sec-label__desc{color:${V2.sage}}
 .home-free__head{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:clamp(24px,3vw,48px);align-items:end;margin-bottom:clamp(32px,4vw,48px)}
 .home-free__h{max-width:20ch;margin:0;font-family:${V2.archivo};font-synthesis:none;font-size:clamp(28px,3.8vw,48px);font-weight:400;line-height:1;letter-spacing:-0.048em;color:#F3F0E8;text-wrap:balance}
@@ -841,7 +1232,10 @@ function HomePageV2({
   const proofSection = isEn ? React.createElement('section', {
     className: 'home-proof',
     key: 'proof'
-  }, React.createElement('div', {
+  }, React.createElement('span', {
+    className: 'home-proof__carry',
+    'aria-hidden': 'true'
+  }), React.createElement('div', {
     className: 'site-container'
   }, React.createElement('div', {
     className: 'home-proof__grid'
@@ -857,47 +1251,15 @@ function HomePageV2({
   // with; the pairing is the argument, so both halves are plain text.
   const workSection = isEn ? React.createElement('section', {
     className: 'home-work',
-    key: 'work'
+    key: 'work',
+    'data-handoff': 'light'
   }, React.createElement('div', {
     className: 'site-container'
   }, SecLabel('01', 'Work with me'), React.createElement('h2', {
     className: 'home-work__h'
   }, 'What do you want to be different?'), React.createElement('p', {
     className: 'home-work__lead'
-  }, 'Maybe you need more clients. Maybe you want to leave your job. Maybe you keep avoiding sales, content, or the same difficult conversation. We start with what is happening now and what you want instead.'), React.createElement('div', {
-    className: 'home-shift'
-  }, React.createElement('div', {
-    className: 'home-shift__row home-shift__row--head'
-  }, React.createElement('div', {
-    className: 'home-shift__cell home-shift__cell--now home-shift__cell--headnow'
-  }, React.createElement('span', {
-    className: 'home-shift__headlabel'
-  }, 'What\u2019s happening now')), React.createElement('div', {
-    className: 'home-shift__cell home-shift__cell--next home-shift__cell--headnext'
-  }, React.createElement('span', {
-    className: 'home-shift__headarrow',
-    'aria-hidden': 'true'
-  }, '\u2197'), React.createElement('span', {
-    className: 'home-shift__headlabel'
-  }, 'What you want instead'))), HOME_SHIFTS.map(function (sh) {
-    return React.createElement('div', {
-      className: 'home-shift__row',
-      key: sh.n
-    }, React.createElement('div', {
-      className: 'home-shift__cell home-shift__cell--now'
-    }, React.createElement('span', {
-      className: 'home-shift__n'
-    }, sh.n), React.createElement('span', {
-      className: 'home-shift__a'
-    }, sh.a)), React.createElement('div', {
-      className: 'home-shift__cell home-shift__cell--next'
-    }, React.createElement('span', {
-      className: 'home-shift__arrow',
-      'aria-hidden': 'true'
-    }, '\u2192'), React.createElement('span', {
-      className: 'home-shift__b'
-    }, sh.b)));
-  })), React.createElement('p', {
+  }, 'Maybe you need more clients. Maybe you want to leave your job. Maybe you keep avoiding sales, content, or the same difficult conversation. We start with what is happening now and what you want instead.'), React.createElement(ProgressField, null), React.createElement('p', {
     className: 'home-work__areas'
   }, HOME_SHIFT_AREAS), React.createElement('div', {
     className: 'home-work__cta'
@@ -910,8 +1272,7 @@ function HomePageV2({
 
   // 02 / Free tools — the site's dominant CTA, on its own dark-green ground so
   // it reads as the destination rather than a footnote to the section above.
-  const startSection = isEn ? React.createElement('section', {
-    className: 'home-free',
+  const startSection = isEn ? React.createElement(FreeDisc, {
     key: 'start'
   }, React.createElement('div', {
     className: 'site-container'
@@ -952,7 +1313,7 @@ function HomePageV2({
   const heroSection = React.createElement('section', {
     className: 'home-hero',
     key: 'hero'
-  }, React.createElement('div', {
+  }, isEn ? React.createElement(HeroField, null) : null, React.createElement('div', {
     className: 'home-hero__grid'
   }, React.createElement('div', {
     className: 'home-hero__copy'

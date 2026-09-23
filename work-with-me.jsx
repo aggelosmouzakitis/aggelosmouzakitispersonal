@@ -9,6 +9,7 @@
 // Route: /work-with-me/  →  renderWorkWithMe()
 
 var e = React.createElement;
+var R = React;
 
 // Every CTA on the page lands on the contact form with the orientation-call
 // interest preselected, which is the only 1:1 option the form now offers.
@@ -140,44 +141,83 @@ var WM_CSS = `
 .wm-how__h2{max-width:24ch;margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(28px,3.8vw,48px);font-weight:800;line-height:1.02;letter-spacing:-0.044em;color:#14201C;text-wrap:balance}
 .wm-how__intro{max-width:62ch;margin:20px 0 0;font-size:17px;line-height:1.6;color:#3A403A;text-wrap:pretty}
 
-.wm-map{margin-top:clamp(48px,6vw,84px)}
-.wm-map__axis{display:flex;align-items:center;gap:clamp(12px,1.6vw,20px)}
-.wm-map__axis-label{flex:0 0 auto;font-family:var(--font-display);font-synthesis:none;font-size:13px;font-weight:400;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#047857}
-.wm-map__axis-line{flex:1;min-width:16px;border-top:1px dashed rgba(4,120,87,0.6)}
-.wm-map__axis-arrow{flex:0 0 auto;font-family:var(--font-display);font-size:14px;line-height:1;color:#047857}
-.wm-map__axis--against .wm-map__axis-label,.wm-map__axis--against .wm-map__axis-arrow{color:var(--coral-ink)}
-.wm-map__axis--against .wm-map__axis-line{border-top-color:rgba(207,90,61,0.6)}
-
-.wm-forces{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:clamp(24px,3.4vw,56px);padding-block:clamp(30px,3.6vw,48px) clamp(34px,4vw,56px);margin:0;list-style:none}
-.wm-forces--against{padding-block:clamp(34px,4vw,56px) clamp(30px,3.6vw,48px)}
-.wm-force{min-width:0}
-.wm-force__label{font-family:var(--font-display);font-synthesis:none;font-size:clamp(36px,5.2vw,68px);line-height:0.92;letter-spacing:-0.055em;color:#047857;margin-bottom:16px}
-.wm-forces--against .wm-force__label{color:var(--coral);margin-bottom:0}
-.wm-force__sub{margin-top:4px;font-family:var(--font-display);font-synthesis:none;font-size:clamp(18px,2.2vw,29px);line-height:1;letter-spacing:-0.045em;color:var(--coral-ink)}
-.wm-forces--against .wm-force__q{margin-top:16px}
-.wm-force__q{margin:0;max-width:26ch;font-size:clamp(16.5px,1.5vw,18px);line-height:1.5;color:#14201C;text-wrap:pretty}
-
-.wm-journey{display:flex;align-items:center;gap:clamp(8px,1.4vw,18px);padding-block:clamp(24px,3vw,38px);border-block:1px solid rgba(23,25,25,0.2)}
-.wm-journey__end{flex:0 0 auto;max-width:25%;font-size:clamp(11px,1vw,12.5px);font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:#6A6F67;line-height:1.35}
-.wm-journey__end--to{text-align:right;color:#047857}
-.wm-journey__line{flex:1;min-width:12px;height:1px;background:rgba(23,25,25,0.45)}
-.wm-journey__line--to{height:2px;background:#047857}
-.wm-journey__you{flex:0 0 auto;width:clamp(76px,10vw,128px);aspect-ratio:1;border-radius:50%;background:#047857;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-synthesis:none;font-size:clamp(12.5px,1.3vw,15px);line-height:1;letter-spacing:0.06em;text-transform:uppercase;color:#F3F0E8}
-
+/* Forces Map. One spatial system: a journey axis with YOU on it, two green
+   forces pushing toward the desired state and two coral ones pulling back to
+   the current one. The SVG is aria-hidden; every force's label and question is
+   a real button, so the concept survives with no SVG, no JS and no pointer.
+   Sized in container-query units so the whole composition scales with the page
+   canvas instead of freezing at the prototype's 1336px. Browsers without cqw
+   keep the px fallback declared immediately above each one. */
+.fm{margin-top:clamp(48px,6vw,84px)}
+.fm__ends{display:flex;justify-content:space-between;gap:16px;--fm-from:#6A6F67}
+.fm__end{font-size:clamp(10.5px,1vw,12.5px);font-weight:700;letter-spacing:0.11em;text-transform:uppercase;line-height:1.35;color:var(--fm-from);transition:color var(--dur-state) var(--ease-settle)}
+.fm__end--to{text-align:right;color:#047857}
+.fm__stage{position:relative;container-type:inline-size;aspect-ratio:1336 / 640;margin-top:10px}
+.fm__svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fm__youlabel{font-family:var(--font-display);font-synthesis:none;font-size:15px;letter-spacing:0.9px}
+.fm-force{position:absolute;display:block;margin:0;padding:0;background:none;border:0;font:inherit;color:inherit;cursor:pointer;--fm-label-o:1;--fm-q:#14201C}
+.fm-force--tl{left:0;top:4.6875%;text-align:left}
+.fm-force--tr{right:0;top:4.6875%;text-align:right}
+.fm-force--bl{left:0;top:70.625%;text-align:left}
+.fm-force--br{right:0;top:70.625%;text-align:right}
+.fm-force__label{display:block;font-family:var(--font-display);font-synthesis:none;font-size:68px;font-size:5.09cqw;font-weight:400;line-height:0.92;letter-spacing:-0.055em;opacity:var(--fm-label-o);transition:opacity var(--dur-state) var(--ease-settle)}
+.fm-force--push .fm-force__label,.fm-force--pull .fm-force__label{color:#047857}
+.fm-force--habit .fm-force__label,.fm-force--anxiety .fm-force__label,.fm-force__sub{color:var(--coral)}
+.fm-force__sub{display:block;margin-top:4px;font-family:var(--font-display);font-synthesis:none;font-size:29px;font-size:2.17cqw;line-height:1;letter-spacing:-0.045em;opacity:var(--fm-label-o);transition:opacity var(--dur-state) var(--ease-settle)}
+.fm-force__q{display:block;margin-top:16px;max-width:26ch;font-size:18px;font-size:1.35cqw;line-height:1.5;color:var(--fm-q);transition:color var(--dur-state) var(--ease-settle)}
+.fm-force--tr .fm-force__q,.fm-force--br .fm-force__q{margin-left:auto}
+/* The list is the mobile control surface; on desktop the quadrant buttons are
+   the controls and the list would only repeat them. */
+.fm__list{display:none}
+.fm__row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:baseline;width:100%;margin:0;padding:14px 0 16px;
+  background:none;border:0;border-top:1px solid rgba(23,25,25,0.18);font:inherit;color:inherit;text-align:left;cursor:pointer;--fm-q:#14201C;
+  transition:border-color var(--dur-state) var(--ease-settle)}
+.fm__rowlabel{font-family:var(--font-display);font-synthesis:none;font-size:19px;line-height:1;letter-spacing:-0.04em}
+.fm__row--push .fm__rowlabel,.fm__row--pull .fm__rowlabel{color:#047857}
+.fm__row--habit .fm__rowlabel,.fm__row--anxiety .fm__rowlabel{color:var(--coral)}
+.fm__rowq{font-size:16px;line-height:1.45;color:var(--fm-q);transition:color var(--dur-state) var(--ease-settle)}
+/* Mobile: the diagram keeps its horizontal geometry at 350x330 and only the
+   force labels; the questions move into the list, which is where touch
+   interaction happens. */
+@media (max-width:900px){
+  .fm__stage{aspect-ratio:350 / 330}
+  .fm-force{pointer-events:none}
+  .fm-force--tl,.fm-force--tr{top:7.9%}
+  .fm-force--bl,.fm-force--br{top:79.4%}
+  .fm-force__label{font-size:30px;font-size:8.57cqw;letter-spacing:-0.05em}
+  .fm-force__sub{margin-top:3px;font-size:15px;font-size:4.28cqw;letter-spacing:-0.04em}
+  .fm-force__q{display:none}
+  .fm__list{display:block;margin-top:22px}
+}
+@media (max-width:900px){
+  .wm-where__chips{gap:8px}
+  .wm-chip{padding:12px 10px;font-size:14.5px}
+}
+@media (max-width:420px){
+  .wm-chip{padding:10px 8px;font-size:13px}
+  .fm__row{grid-template-columns:72px minmax(0,1fr);gap:10px}
+  .fm__rowlabel{font-size:17px}
+  .fm__rowq{font-size:15px}
+}
 .wm-where{margin-top:clamp(48px,6vw,80px);padding-top:clamp(32px,4vw,44px);border-top:2px solid #047857;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:clamp(24px,3vw,48px);align-items:start}
 .wm-where__h3{margin:0;max-width:14ch;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(24px,2.8vw,36px);font-weight:800;line-height:1.06;letter-spacing:-0.036em;color:#14201C;text-wrap:balance}
-.wm-where__chips{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(130px,100%),1fr));gap:10px}
-/* Keep the practical row and the psychological row intact: three across, two
-   rows. Without this a wide canvas reflows them to 5+1 and the colour
-   grouping stops meaning anything. */
-@media (min-width:900px){.wm-where__chips{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* Always three across. The first row is the practical interventions and the
+   second the psychological ones, so any other column count destroys the split
+   the colours encode. */
+.wm-where__chips{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .wm-chip{padding:14px 16px;font-family:var(--font-heading);font-size:16px;font-weight:750;letter-spacing:-0.01em}
 .wm-chip--practical{background:#D8F3E5;color:#043D2B}
 .wm-chip--psychological{background:var(--coral-tint);color:#7E2C20}
 .wm-where__note{margin:18px 0 0;max-width:46ch;font-size:16.5px;line-height:1.55;color:#3A403A}
 
 /* 03 — fit and questions */
-.wm-fit{background:#EDE8DB;padding-block:clamp(56px,7vw,100px)}
+/* Handoff H3, light to light: the ground interpolates bone -> bone-deep across
+   the seam rather than switching, then the two column rules grow outward from
+   their own side and the rows rise 12px on a 70ms stagger. Runs once. */
+.wm-fit{--fit-bg:#EDE8DB;--fit-col:1;background:var(--fit-bg);padding-block:clamp(56px,7vw,100px)}
+.wm-fit__rule{display:block;height:2px;margin:0 0 20px;background:#047857;transform:scaleX(var(--fit-col));transform-origin:left center}
+.wm-fit__rule--no{background:var(--coral);transform-origin:right center}
+.wm-fit__item{--fit-r:1;opacity:var(--fit-r);transform:translate3d(0,calc((1 - var(--fit-r)) * 12px),0)}
 .wm-fit__h2{margin:0 0 clamp(32px,4vw,44px)}
 .wm-fit__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:clamp(32px,4vw,64px);margin-bottom:clamp(44px,5.4vw,68px)}
 .wm-fit__h3{margin:0 0 20px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(21px,2.1vw,26px);font-weight:800;line-height:1.14;letter-spacing:-0.03em;color:#047857}
@@ -293,6 +333,392 @@ function WmScope() {
 // The forces map. Everything in it is real text: the two forces pushing towards
 // the change, the two holding it back, and the six places the work can land.
 // A crawler (or a screen reader) gets the whole model without the diagram.
+// ─── Forces Map ──────────────────────────────────────────────────────────────
+// The page's signature interaction, from Forces Map.dc.html. One spatial
+// system: a journey axis with YOU on it, two green forces pushing right toward
+// the desired state and two coral forces pulling left toward the current one.
+//
+// The SVG is aria-hidden throughout. Every force's label and question lives in
+// a real <button>, so the concept is fully readable — and operable — with no
+// SVG, no JS and no pointer.
+//
+// The prototype cycles through states to demonstrate itself. Production does
+// not: the entrance plays once, settles at DEFAULT, and only hover, focus or
+// tap changes state after that.
+var FM_GREEN = '#047857', FM_CORAL = '#CF5A3D';
+var FM_ENTRANCE = 2060;
+// Geometry, verbatim from the prototype. d = desktop viewBox 1336x640,
+// m = mobile 350x330. R 64 is the 128px disc; sF/sN are the bundle's far and
+// near line spacing; ext is how far an active vector extends.
+var FM_G = {
+  d: { w: 1336, h: 640, y0: 320, cx0: 668, R: 64, farL: 200, farR: 1136, gap: 28,
+       yFU: 244, yNU: 266, yFD: 396, yND: 374, sF: 20, sN: 9, ext: 48,
+       axL: 150, axR: 1186, blk: 220, head: [10, 6.5], arcPad: 10, dash: '5 6',
+       shift: { push: 36, pull: 56, anxiety: -28, habit: -44 }, trailN: 12, ghostN: 20 },
+  m: { w: 350, h: 330, y0: 165, cx0: 175, R: 30, farL: 14, farR: 336, gap: 12,
+       yFU: 112, yNU: 134, yFD: 218, yND: 196, sF: 11, sN: 5, ext: 12,
+       axL: 0, axR: 350, blk: 86, head: [7, 4.5], arcPad: 6, dash: '4 5',
+       shift: { push: 14, pull: 22, anxiety: -12, habit: -18 }, trailN: 5, ghostN: 8 },
+};
+var FM_KEYS = ['push', 'pull', 'anxiety', 'habit'];
+var FM_LIST_ORDER = ['push', 'pull', 'habit', 'anxiety'];
+var FM_TEXT = {
+  push: { label: 'Push', q: FORCES_FOR[0].q, c: FM_GREEN },
+  pull: { label: 'Pull', q: FORCES_FOR[1].q, c: FM_GREEN },
+  habit: { label: 'Habit', sub: '/ Protection', q: FORCES_AGAINST[0].q, c: FM_CORAL },
+  anxiety: { label: 'Anxiety', q: FORCES_AGAINST[1].q, c: FM_CORAL },
+};
+// Draw order: axis, then the two green forward forces, then the two coral
+// opposing ones, then YOU, then the intervention chips. 2060ms end to end.
+var FM_DRAW = { push: 350, pull: 420, anxiety: 800, habit: 870 };
+var FM_LABEL_IN = { push: 450, pull: 530, anxiety: 900, habit: 980 };
+
+function fmTarget(state, g) {
+  var v = { sx: 0, push: 0.5, pull: 0.5, anxiety: 0.5, habit: 0.5 };
+  if (FM_KEYS.indexOf(state) >= 0) {
+    FM_KEYS.forEach(function (k) { v[k] = k === state ? 1 : 0.2; });
+    v.sx = g.shift[state];
+  }
+  return v;
+}
+
+function WmForcesMap() {
+  var wrap = R.useRef(null);
+  var svg = R.useRef(null);
+  var nodes = R.useRef({});
+  var stateRef = R.useRef({ active: 'default', v: null, e: 1, sticky: false, raf: 0, vraf: 0 });
+  var listRow = R.useRef([]);
+  var btn = R.useRef({});
+  var mobileRef = R.useRef(false);
+  var pressed = R.useState('default');
+  var active = pressed[0], setActive = pressed[1];
+
+  R.useEffect(function () {
+    var M = window.Motion;
+    var el = wrap.current;
+    if (!el || !M) return;
+    var mq = window.matchMedia('(max-width: 900px)');
+    var S = stateRef.current;
+
+    function g() { return mobileRef.current ? FM_G.m : FM_G.d; }
+    var f = function (n) { return n.toFixed(2); };
+    var seg = function (ms, a, d, ease) { return M.win(ms, a, d, ease); };
+    var amt = function (v, k) { return M.clamp01((v[k] - 0.5) * 2); };
+
+    // One imperative pass over the diagram. Attributes only — no React render
+    // per frame, and nothing here reads layout.
+    function paint() {
+      var G = g(), v = S.v || fmTarget('default', G), ms = S.e * FM_ENTRANCE;
+      var n = nodes.current;
+      var cx = G.cx0 + v.sx;
+      var set = function (node, k, val) { if (node) node.setAttribute(k, val); };
+
+      FM_KEYS.forEach(function (key) {
+        var i = v[key], a = amt(v, key), c = FM_TEXT[key].c;
+        [-2, -1, 0, 1, 2].forEach(function (k) {
+          var core = Math.abs(k) <= 1, j = k + 1;
+          var dp = core ? seg(ms, FM_DRAW[key] + j * 60, 360) : 1;
+          var up = key === 'push' || key === 'pull';
+          var yF = (up ? G.yFU : G.yFD) + k * G.sF, yN = (up ? G.yNU : G.yND) + k * G.sN;
+          var nearL = cx - G.R - G.gap, nearR = cx + G.R + G.gap;
+          var farL = Math.max(0, G.farL - G.ext * a), farR = Math.min(G.axR, G.farR + G.ext * a);
+          var x1, y1, x2, y2;
+          if (key === 'push') { x1 = farL; y1 = yF; x2 = nearL; y2 = yN; }
+          if (key === 'pull') { x1 = nearR; y1 = yN; x2 = farR; y2 = yF; }
+          if (key === 'habit') { x1 = nearL; y1 = yN; x2 = farL; y2 = yF; }
+          if (key === 'anxiety') { x1 = farR; y1 = yF; x2 = nearR; y2 = yN; }
+          var len = Math.hypot(x2 - x1, y2 - y1);
+          // Default 0.59, active 1.0, stood-down 0.34. Outer pair exists only
+          // while the force is active, taking the bundle from three to five.
+          var op = core ? 0.18 + 0.82 * i : a * 0.7;
+          var sw = core ? 1 + 0.8 * i + (k === 0 ? 0.4 : 0) : 1;
+          var ln = n['l_' + key + '_' + k];
+          if (ln) {
+            set(ln, 'x1', f(x1)); set(ln, 'y1', f(y1)); set(ln, 'x2', f(x2)); set(ln, 'y2', f(y2));
+            set(ln, 'stroke', c); set(ln, 'stroke-width', f(sw)); set(ln, 'opacity', op.toFixed(3));
+            set(ln, 'stroke-dasharray', f(len + 2)); set(ln, 'stroke-dashoffset', f((len + 2) * (1 - dp)));
+          }
+          if (k === 0) {
+            var ux = (x2 - x1) / len, uy = (y2 - y1) / len, nx = -uy, ny = ux;
+            var hl = G.head[0], hw = G.head[1];
+            var pts = [[x2 - hl * ux + hw * nx, y2 - hl * uy + hw * ny], [x2, y2],
+                       [x2 - hl * ux - hw * nx, y2 - hl * uy - hw * ny]]
+              .map(function (p) { return f(p[0]) + ',' + f(p[1]); }).join(' ');
+            var hd = n['h_' + key];
+            if (hd) {
+              set(hd, 'points', pts); set(hd, 'stroke', c); set(hd, 'stroke-width', f(sw));
+              set(hd, 'opacity', (op * M.clamp01((dp - 0.85) / 0.15)).toFixed(3));
+            }
+          }
+        });
+      });
+
+      // Journey axis. Left of the disc is the path already walked; right of it
+      // is the path ahead, which PULL thickens and ANXIETY obstructs.
+      var eL = seg(ms, 0, 320), eR = seg(ms, 150, 320);
+      var l1 = G.axL, l2 = cx - G.R, r1 = cx + G.R, r2 = G.axR;
+      var b2 = Math.min(G.axR, r1 + G.blk);
+      var ldLen = Math.abs(l2 - l1) + 2, rdLen = Math.abs(r2 - r1) + 2;
+      // Every horizontal element sits on the journey axis, and y0 moves with
+      // the breakpoint, so y is written here rather than baked into the JSX.
+      ['ax_l', 'ax_lhab', 'ax_r', 'ax_mask', 'ax_block', 'you_trail'].forEach(function (id) {
+        set(n[id], 'y1', G.y0); set(n[id], 'y2', G.y0);
+      });
+      var tick = mobileRef.current ? 8 : 12;
+      set(n.ax_stop, 'y1', G.y0 - tick); set(n.ax_stop, 'y2', G.y0 + tick);
+      set(n.ax_block, 'stroke-dasharray', G.dash);
+      set(n.you_ghost, 'cx', G.cx0); set(n.you_ghost, 'cy', G.y0); set(n.you_ghost, 'r', G.R);
+      set(n.you_c, 'cy', G.y0); set(n.you_c, 'r', G.R);
+      set(n.you_t, 'y', G.y0 + (mobileRef.current ? 4 : 5.5));
+      ['arc_push', 'arc_habit', 'arc_pull', 'arc_anx'].forEach(function (id) {
+        set(n[id], 'stroke-width', mobileRef.current ? 2 : 2.5);
+      });
+      [['ax_l', l1, l2], ['ax_lhab', l1, l2]].forEach(function (p) {
+        set(n[p[0]], 'x1', f(p[1])); set(n[p[0]], 'x2', f(p[2]));
+      });
+      set(n.ax_l, 'stroke-dasharray', f(ldLen)); set(n.ax_l, 'stroke-dashoffset', f(ldLen * (1 - eL)));
+      set(n.ax_lhab, 'opacity', amt(v, 'habit').toFixed(3));
+      set(n.ax_r, 'x1', f(r1)); set(n.ax_r, 'x2', f(r2));
+      set(n.ax_r, 'stroke-width', f(2 + 1.5 * amt(v, 'pull')));
+      set(n.ax_r, 'stroke-dasharray', f(rdLen)); set(n.ax_r, 'stroke-dashoffset', f(rdLen * (1 - eR)));
+      [['ax_mask', r1, b2], ['ax_block', r1, b2]].forEach(function (p) {
+        set(n[p[0]], 'x1', f(p[1])); set(n[p[0]], 'x2', f(p[2]));
+        set(n[p[0]], 'opacity', amt(v, 'anxiety').toFixed(3));
+      });
+      set(n.ax_stop, 'x1', f(b2)); set(n.ax_stop, 'x2', f(b2));
+      set(n.ax_stop, 'opacity', amt(v, 'anxiety').toFixed(3));
+
+      // Pressure: a 60° arc just outside the disc, on the side acting on it.
+      var arcR = G.R + G.arcPad;
+      var arc = function (a1, a2) {
+        var r1a = (a1 * Math.PI) / 180, r2a = (a2 * Math.PI) / 180;
+        return 'M' + f(cx + arcR * Math.cos(r1a)) + ' ' + f(G.y0 + arcR * Math.sin(r1a)) +
+          ' A' + arcR + ' ' + arcR + ' 0 0 1 ' + f(cx + arcR * Math.cos(r2a)) + ' ' + f(G.y0 + arcR * Math.sin(r2a));
+      };
+      var left = arc(150, 210), right = arc(-30, 30);
+      set(n.arc_push, 'd', left); set(n.arc_push, 'opacity', amt(v, 'push').toFixed(3));
+      set(n.arc_habit, 'd', left); set(n.arc_habit, 'opacity', amt(v, 'habit').toFixed(3));
+      set(n.arc_pull, 'd', right); set(n.arc_pull, 'opacity', amt(v, 'pull').toFixed(3));
+      set(n.arc_anx, 'd', right); set(n.arc_anx, 'opacity', amt(v, 'anxiety').toFixed(3));
+
+      // YOU: the disc travels, a dashed ghost stays at the origin and the gap
+      // between them fills with the colour of whatever moved it.
+      var youIn = seg(ms, 1250, 350), sc = 0.6 + 0.4 * youIn;
+      set(n.you_trail, 'x1', f(Math.min(G.cx0, cx))); set(n.you_trail, 'x2', f(Math.max(G.cx0, cx)));
+      set(n.you_trail, 'stroke', v.sx >= 0 ? FM_GREEN : FM_CORAL);
+      set(n.you_trail, 'opacity', M.clamp01(Math.abs(v.sx) / G.trailN).toFixed(3));
+      set(n.you_ghost, 'opacity', M.clamp01(Math.abs(v.sx) / G.ghostN).toFixed(3));
+      set(n.you_g, 'opacity', youIn.toFixed(3));
+      set(n.you_g, 'transform', 'translate(' + f(cx) + ' ' + G.y0 + ') scale(' + sc.toFixed(3) +
+        ') translate(' + f(-cx) + ' ' + -G.y0 + ')');
+      set(n.you_c, 'cx', f(cx));
+      set(n.you_t, 'x', f(cx)); set(n.you_t, 'opacity', seg(ms, 1400, 200).toFixed(3));
+
+      // Labels, questions and the intervention chips.
+      FM_KEYS.forEach(function (key) {
+        var i = v[key], into = seg(ms, FM_LABEL_IN[key], 400);
+        var dim = M.clamp01((0.5 - i) / 0.3);
+        var b = btn.current[key];
+        if (!b) return;
+        b.style.opacity = into.toFixed(3);
+        b.style.transform = 'translate3d(0,' + ((1 - into) * 12).toFixed(2) + 'px,0)';
+        b.style.setProperty('--fm-label-o', (1 - 0.62 * dim).toFixed(3));
+        b.style.setProperty('--fm-q', dim > 0.5 ? '#6A6F67' : '#14201C');
+      });
+      if (n.ends) {
+        n.ends.style.opacity = seg(ms, 150, 300).toFixed(3);
+        n.ends.style.setProperty('--fm-from', amt(v, 'habit') > 0.5 ? '#AA432F' : '#6A6F67');
+      }
+      if (n.where) {
+        var whereIn = seg(ms, 1550, 300);
+        n.where.style.opacity = whereIn.toFixed(3);
+        (n.chips || []).forEach(function (ch, idx) {
+          if (!ch) return;
+          var ci = seg(ms, 1560 + idx * 50, 240);
+          ch.style.opacity = ci.toFixed(3);
+          ch.style.transform = 'translate3d(0,' + ((1 - ci) * 8).toFixed(2) + 'px,0)';
+        });
+      }
+      listRow.current.forEach(function (row, idx) {
+        if (!row) return;
+        var key = FM_LIST_ORDER[idx], on = S.active === key;
+        var dimmed = FM_KEYS.indexOf(S.active) >= 0 && !on;
+        row.style.borderTopColor = on ? FM_TEXT[key].c : 'rgba(23,25,25,0.18)';
+        row.style.borderTopWidth = on ? '2px' : '1px';
+        row.style.setProperty('--fm-q', dimmed ? '#6A6F67' : '#14201C');
+      });
+    }
+
+    // 520ms travel between states, the same curve as --ease-travel.
+    function goTo(next, instant) {
+      var G = g(), to = fmTarget(next, G);
+      cancelAnimationFrame(S.vraf);
+      S.active = next;
+      setActive(next);
+      if (instant || !S.v || M.reduced) { S.v = to; paint(); return; }
+      var from = Object.assign({}, S.v), t0 = performance.now();
+      var step = function (now) {
+        var k = M.clamp01((now - t0) / 520), ek = M.travel(k), v = {};
+        Object.keys(to).forEach(function (key) { v[key] = from[key] + (to[key] - from[key]) * ek; });
+        S.v = v; paint();
+        if (k < 1) S.vraf = requestAnimationFrame(step);
+      };
+      S.vraf = requestAnimationFrame(step);
+    }
+
+    function sizeCheck() {
+      var m = mq.matches;
+      if (m !== mobileRef.current) {
+        mobileRef.current = m;
+        if (svg.current) svg.current.setAttribute('viewBox', '0 0 ' + g().w + ' ' + g().h);
+        S.v = fmTarget(S.active, g());
+        paint();
+      }
+    }
+    mobileRef.current = mq.matches;
+    if (svg.current) svg.current.setAttribute('viewBox', '0 0 ' + g().w + ' ' + g().h);
+    S.v = fmTarget('default', g());
+
+    // Entrance: once, at ~35% visibility, then settle at DEFAULT and wait for
+    // the visitor. No cycling — that belongs to the prototype, not the page.
+    S.e = 1;
+    paint();
+    M.onView(el, function (_, info) {
+      if (info.instant) { S.e = 1; paint(); return; }
+      S.e = 0; paint();
+      var t0 = performance.now() + 250;
+      var step = function (now) {
+        S.e = M.clamp01((now - t0) / FM_ENTRANCE);
+        paint();
+        if (S.e < 1) S.raf = requestAnimationFrame(step);
+      };
+      S.raf = requestAnimationFrame(step);
+    });
+
+    // Hover is transient; focus and tap are sticky until dismissed.
+    el.__fmSet = function (key, sticky) { S.sticky = !!sticky; goTo(key); };
+    el.__fmLeave = function () { if (!S.sticky) goTo('default'); };
+    el.__fmBlur = function () { if (S.sticky) { S.sticky = false; goTo('default'); } };
+    el.__fmToggle = function (key) {
+      if (S.active === key && S.sticky) { S.sticky = false; goTo('default'); }
+      else { S.sticky = true; goTo(key); }
+    };
+    if (mq.addEventListener) mq.addEventListener('change', sizeCheck);
+    return function () {
+      cancelAnimationFrame(S.raf); cancelAnimationFrame(S.vraf);
+      if (mq.removeEventListener) mq.removeEventListener('change', sizeCheck);
+      M.release(el);
+    };
+  }, []);
+
+  var call = function (fn, arg) {
+    return function () { var el = wrap.current; if (el && el[fn]) el[fn](arg); };
+  };
+
+  function forceButton(key, cls) {
+    var t = FM_TEXT[key];
+    return e('button', {
+      type: 'button', className: 'fm-force fm-force--' + key + (cls ? ' ' + cls : ''),
+      'aria-pressed': active === key ? 'true' : 'false',
+      ref: function (n) { btn.current[key] = n; },
+      onMouseEnter: call('__fmSet', key), onFocus: call('__fmSet', key),
+      onClick: call('__fmToggle', key),
+    },
+      e('span', { className: 'fm-force__label' }, t.label),
+      t.sub ? e('span', { className: 'fm-force__sub' }, t.sub) : null,
+      e('span', { className: 'fm-force__q' }, t.q));
+  }
+
+  var line = function (id, extra) {
+    return e('line', Object.assign({ key: id, ref: function (n) { nodes.current[id] = n; } }, extra));
+  };
+
+  return e('div', {
+    className: 'fm', ref: wrap,
+    onMouseLeave: call('__fmLeave'), onBlur: call('__fmBlur'),
+  },
+    e('div', { className: 'fm__ends', ref: function (n) { nodes.current.ends = n; } },
+      e('span', { className: 'fm__end fm__end--from' }, 'Where', e('br'), 'you are'),
+      e('span', { className: 'fm__end fm__end--to' }, 'Where you', e('br'), 'want to get to')),
+    e('div', { className: 'fm__stage' },
+      e('svg', {
+        className: 'fm__svg', ref: svg, viewBox: '0 0 1336 640',
+        preserveAspectRatio: 'xMidYMid meet', 'aria-hidden': 'true', focusable: 'false',
+      },
+        line('ax_l', { stroke: 'rgba(23,25,25,0.45)', strokeWidth: 1 }),
+        line('ax_lhab', { stroke: FM_CORAL, strokeWidth: 2, opacity: 0 }),
+        line('ax_r', { stroke: FM_GREEN, strokeWidth: 2 }),
+        line('ax_mask', { stroke: '#F3F0E8', strokeWidth: 4, opacity: 0 }),
+        line('ax_block', { stroke: FM_CORAL, strokeWidth: 2, strokeDasharray: '5 6', opacity: 0 }),
+        line('ax_stop', { stroke: FM_CORAL, strokeWidth: 2, opacity: 0 }),
+        FM_KEYS.map(function (key) {
+          return [-2, -1, 0, 1, 2].map(function (k) {
+            return line('l_' + key + '_' + k, { stroke: FM_TEXT[key].c, strokeWidth: 1, opacity: 0 });
+          });
+        }),
+        FM_KEYS.map(function (key) {
+          return e('polyline', {
+            key: 'h_' + key, ref: function (n) { nodes.current['h_' + key] = n; },
+            fill: 'none', stroke: FM_TEXT[key].c, strokeWidth: 1.4, opacity: 0, strokeLinejoin: 'miter',
+          });
+        }),
+        line('you_trail', { stroke: FM_GREEN, strokeWidth: 3, opacity: 0 }),
+        e('circle', {
+          ref: function (n) { nodes.current.you_ghost = n; },
+          cx: 668, cy: 320, r: 64, fill: 'none', stroke: 'rgba(23,25,25,0.34)',
+          strokeWidth: 1, strokeDasharray: '3 5', opacity: 0,
+        }),
+        ['push', 'habit', 'pull', 'anx'].map(function (k) {
+          return e('path', {
+            key: 'arc_' + k, ref: function (n) { nodes.current['arc_' + k] = n; },
+            fill: 'none', stroke: (k === 'push' || k === 'pull') ? FM_GREEN : FM_CORAL,
+            strokeWidth: 2.5, opacity: 0,
+          });
+        }),
+        e('g', { ref: function (n) { nodes.current.you_g = n; } },
+          e('circle', { ref: function (n) { nodes.current.you_c = n; }, cx: 668, cy: 320, r: 64, fill: FM_GREEN }),
+          e('text', {
+            ref: function (n) { nodes.current.you_t = n; }, x: 668, y: 325.5,
+            textAnchor: 'middle', fill: '#F3F0E8', className: 'fm__youlabel',
+          }, 'YOU'))
+      ),
+      forceButton('push', 'fm-force--tl'),
+      forceButton('pull', 'fm-force--tr'),
+      forceButton('habit', 'fm-force--bl'),
+      forceButton('anxiety', 'fm-force--br')
+    ),
+    // Mobile: the diagram keeps only the labels, and the questions move into
+    // this list, which is where touch interaction happens.
+    e('div', { className: 'fm__list' },
+      FM_LIST_ORDER.map(function (key, idx) {
+        var t = FM_TEXT[key];
+        return e('button', {
+          type: 'button', className: 'fm__row fm__row--' + key, key: key,
+          'aria-pressed': active === key ? 'true' : 'false',
+          ref: function (n) { listRow.current[idx] = n; },
+          onClick: call('__fmToggle', key),
+        },
+          e('span', { className: 'fm__rowlabel' }, key === 'habit' ? 'Habit /' : t.label),
+          e('span', { className: 'fm__rowq' }, t.q));
+      })
+    ),
+    e('div', { className: 'wm-where', ref: function (n) { nodes.current.where = n; } },
+      e('h3', { className: 'wm-where__h3' }, 'Where do we need to work?'),
+      e('div', null,
+        e('ul', { className: 'wm-where__chips' },
+          INTERVENTIONS.map(function (iv, idx) {
+            return e('li', {
+              className: 'wm-chip wm-chip--' + iv.kind, key: iv.name,
+              ref: function (n) { (nodes.current.chips = nodes.current.chips || [])[idx] = n; },
+            }, iv.name);
+          })
+        ),
+        e('p', { className: 'wm-where__note' }, 'The map helps us decide what deserves attention first.')
+      )
+    )
+  );
+}
+
 function WmHow() {
   return e('section', { className: 'wm-how', 'aria-labelledby': 'wm-how-h' },
     e('div', { className: 'wm-container' },
@@ -303,60 +729,36 @@ function WmHow() {
       e('p', { className: 'wm-how__intro' },
         'Four forces decide whether a change actually happens. Two push you towards it: the situation becoming harder to tolerate, and something better you want instead. Two hold you in place: what the current situation still does for you, and what feels risky about changing. We map all four before deciding what to work on.'),
 
-      e('div', { className: 'wm-map' },
-        e('div', { className: 'wm-map__axis' },
-          e('span', { className: 'wm-map__axis-label' }, 'Pushing you to change'),
-          e('span', { className: 'wm-map__axis-line', 'aria-hidden': 'true' }),
-          e('span', { className: 'wm-map__axis-arrow', 'aria-hidden': 'true' }, '→')
-        ),
-        e('ul', { className: 'wm-forces' },
-          FORCES_FOR.map(function (f) {
-            return e('li', { className: 'wm-force', key: f.label },
-              e('div', { className: 'wm-force__label' }, f.label),
-              e('p', { className: 'wm-force__q' }, f.q));
-          })
-        ),
-        e('div', { className: 'wm-journey' },
-          e('div', { className: 'wm-journey__end' }, 'Where', e('br'), 'you are'),
-          e('div', { className: 'wm-journey__line', 'aria-hidden': 'true' }),
-          e('div', { className: 'wm-journey__you' }, 'You'),
-          e('div', { className: 'wm-journey__line wm-journey__line--to', 'aria-hidden': 'true' }),
-          e('div', { className: 'wm-journey__end wm-journey__end--to' }, 'Where you', e('br'), 'want to get to')
-        ),
-        e('ul', { className: 'wm-forces wm-forces--against' },
-          FORCES_AGAINST.map(function (f) {
-            return e('li', { className: 'wm-force', key: f.label },
-              e('div', { className: 'wm-force__label' }, f.label),
-              f.sub ? e('div', { className: 'wm-force__sub' }, f.sub) : null,
-              e('p', { className: 'wm-force__q' }, f.q));
-          })
-        ),
-        e('div', { className: 'wm-map__axis wm-map__axis--against' },
-          e('span', { className: 'wm-map__axis-arrow', 'aria-hidden': 'true' }, '←'),
-          e('span', { className: 'wm-map__axis-line', 'aria-hidden': 'true' }),
-          e('span', { className: 'wm-map__axis-label' }, 'Keeping you where you are')
-        )
-      ),
-
-      e('div', { className: 'wm-where' },
-        e('h3', { className: 'wm-where__h3' }, 'Where do we need to work?'),
-        e('div', null,
-          e('ul', { className: 'wm-where__chips' },
-            INTERVENTIONS.map(function (iv) {
-              return e('li', { className: 'wm-chip wm-chip--' + iv.kind, key: iv.name }, iv.name);
-            })
-          ),
-          e('p', { className: 'wm-where__note' }, 'The map helps us decide what deserves attention first.')
-        )
-      )
+      e(WmForcesMap, null)
     )
   );
 }
 
+
 function WmFit() {
+  var root = R.useRef(null);
+  R.useEffect(function () {
+    var M = window.Motion, el = root.current;
+    if (!el || !M) return;
+    var BONE = [243, 240, 232], BONE_DEEP = [237, 232, 219];
+    var rows = el.querySelectorAll('.wm-fit__item');
+    M.track(el, {
+      from: 0.95, to: 0.62,
+      onProgress: function (p) {
+        el.style.setProperty('--fit-bg', M.mix(BONE, BONE_DEEP, M.win(p, 0.2, 0.5)));
+        el.style.setProperty('--fit-col', M.win(p, 0.42, 0.3).toFixed(3));
+        rows.forEach(function (row, i) {
+          row.style.setProperty('--fit-r', M.win(p, 0.52 + (i % 3) * 0.07, 0.28).toFixed(3));
+        });
+      },
+    });
+    return function () { M.release(el); };
+  }, []);
+
   function column(heading, items, mark, no) {
     return e('div', null,
       e('h3', { className: 'wm-fit__h3' + (no ? ' wm-fit__h3--no' : '') }, heading),
+      e('span', { className: 'wm-fit__rule' + (no ? ' wm-fit__rule--no' : ''), 'aria-hidden': 'true' }),
       e('ul', { className: 'wm-fit__list' },
         items.map(function (t, i) {
           return e('li', { className: 'wm-fit__item', key: i },
@@ -366,7 +768,7 @@ function WmFit() {
       )
     );
   }
-  return e('section', { className: 'wm-fit', 'aria-labelledby': 'wm-fit-h' },
+  return e('section', { className: 'wm-fit', 'aria-labelledby': 'wm-fit-h', ref: root },
     e('div', { className: 'wm-container' },
       e(WmEyebrow, { as: 'h2', num: '03', text: 'Fit and questions', className: 'wm-fit__h2' }),
       e('div', { className: 'wm-fit__grid' },
