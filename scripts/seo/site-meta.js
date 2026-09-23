@@ -34,10 +34,12 @@ const PERSON_FULL = {
   jobTitle: ['Business & Career Advisor', 'BACP-registered Psychotherapist'],
   description:
     'Business and career advisor and BACP-registered psychotherapist. 18+ years in product and growth, seven of them running his own consultancy, with more than 100 technology companies advised.',
+  // Each of these is a heading or a labelled item a visitor can read on
+  // /work-with-me/ or /about/. Nothing here is inferred.
   knowsAbout: [
-    'Business Advisory', 'Offer & Positioning', 'Pricing', 'Customer Acquisition', 'Sales',
-    'Career Decisions', 'Going Independent', 'Founder Psychology', 'Burnout',
-    'Jobs to be Done', 'Consumer Psychology', 'Product & Growth Strategy',
+    'Career decisions', 'Going independent', 'Positioning', 'Pricing', 'Sales',
+    'Business growth', 'Boundaries', 'Burnout',
+    'Jobs to be Done', 'Consumer psychology', 'Psychotherapy',
   ],
   sameAs: [
     'https://www.linkedin.com/in/growth-product-manager/',
@@ -46,7 +48,6 @@ const PERSON_FULL = {
     'https://www.instagram.com/_aggelosmouzakitis_/',
     'https://www.tiktok.com/@aggelosmouz',
   ],
-  address: { '@type': 'PostalAddress', addressCountry: 'IE' },
   hasCredential: [
     { '@type': 'EducationalOccupationalCredential', credentialCategory: 'Professional Accreditation',
       name: 'Registered Member, BACP',
@@ -80,14 +81,12 @@ function pageNodes(path, name, crumb, type) {
 // WebApplication is the only type that matches what the visitor can actually do
 // on the page (answer questions in the browser and get a result), so that is
 // what each tool declares — nothing about medical or educational outcomes.
-function toolNodes(path, name, description, questions) {
+function toolNodes(path, name, description) {
   const url = abs(path);
   return pageNodes(path, name, 'Free tools').concat([{
     '@type': 'WebApplication', '@id': url + '#tool', name, url, description,
-    applicationCategory: 'BusinessApplication', browserRequirements: 'Requires JavaScript.',
-    operatingSystem: 'Any', isAccessibleForFree: true,
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
-    numberOfItems: questions, author: { '@id': PERSON_ID }, provider: { '@id': PERSON_ID },
+    browserRequirements: 'Requires JavaScript.', isAccessibleForFree: true,
+    author: { '@id': PERSON_ID },
     isPartOf: { '@id': abs('/free-tools/') + '#collection' },
   }]);
 }
@@ -121,14 +120,15 @@ const PAGES = [
     schema: pageNodes('/work-with-me/', 'Work With Me | Aggelos Mouzakitis', 'Work with me').concat([
       PERSON_REF,
       {
+        // Only what the page states: one 1:1 service, provided by Aggelos,
+        // on business, career or personal problems. No price, no location, no
+        // delivery channel and no languages, because the page names none.
         '@type': 'Service', '@id': abs('/work-with-me/') + '#service',
-        name: 'Private 1:1 advisory and psychotherapeutic work',
+        name: 'Work with me',
         serviceType: 'Business and career advisory with psychotherapeutic work',
         url: abs('/work-with-me/'),
-        description: 'Private 1:1 sessions on a specific business, career or personal problem, combining direct commercial advice with psychotherapeutic work where behaviour or a recurring pattern is part of the problem.',
+        description: '1:1 sessions on a specific business, career or personal problem. Direct advice where the problem is commercial, and psychotherapeutic work where behaviour or a recurring pattern is part of it.',
         provider: { '@id': PERSON_ID },
-        areaServed: ['IE', 'GB', 'US', 'DE', 'FR', 'NL', 'ES', 'IT', 'AT', 'CH', 'SE', 'DK', 'NO', 'FI', 'BE', 'PT', 'PL', 'CA', 'AU'],
-        availableChannel: { '@type': 'ServiceChannel', serviceType: 'Online (video sessions)', availableLanguage: ['English', 'Greek'] },
       },
     ]),
     // The six questions and answers are visible on the page and present in the
@@ -211,7 +211,7 @@ const PAGES = [
     ogImage: abs('/img/og/clarity-business-constraint.png'),
     ogImageAlt: "Free clarity tool: what's limiting your business?",
     schema: toolNodes('/free-tools/business-constraint/', "What's limiting your business?",
-      'A 20-question self-assessment that points to the constraint most likely holding the business back: the offer, demand, pricing, conversion or execution.', 20),
+      'A 20-question self-assessment that points to the constraint most likely holding the business back: the offer, demand, pricing, conversion or execution.'),
   },
   {
     file: 'free-tools/strategy-or-execution/index.html', url: '/free-tools/strategy-or-execution/', priority: '0.7', changefreq: 'yearly',
@@ -222,18 +222,18 @@ const PAGES = [
     ogImage: abs('/img/og/clarity-strategy-or-execution.png'),
     ogImageAlt: 'Free clarity tool: is it a strategy or execution problem?',
     schema: toolNodes('/free-tools/strategy-or-execution/', 'Is it a strategy or execution problem?',
-      'A 17-question self-assessment that distinguishes a strategy problem from an execution problem.', 17),
+      'A 17-question self-assessment that distinguishes a strategy problem from an execution problem.'),
   },
   {
     file: 'free-tools/quit-your-job/index.html', url: '/free-tools/quit-your-job/', priority: '0.7', changefreq: 'yearly',
     title: "What's Making You Want to Quit Your Job? | Free Career Clarity Tool",
-    description: 'Answer 20 questions to see whether it is the role, the manager, the company, the field or burnout driving the urge to leave. Directional, not a clinical assessment.',
+    description: 'Directional, not a clinical assessment: 20 questions on whether it is the role, the manager, the company, the field or burnout driving the urge to leave.',
     ogTitle: "What's Making You Want to Quit Your Job? | Free Career Clarity Tool",
     ogDescription: '20 questions that separate the role, the manager, the company, the field and burnout.',
     ogImage: abs('/img/og/clarity-quit-your-job.png'),
     ogImageAlt: "Free career clarity tool: what's making you want to quit your job?",
     schema: toolNodes('/free-tools/quit-your-job/', "What's making you want to quit your job?",
-      'A 20-question self-assessment that distinguishes the role, the manager, the company, the field and burnout as reasons for wanting to leave a job. Directional, not a clinical assessment.', 20),
+      'A 20-question self-assessment that distinguishes the role, the manager, the company, the field and burnout as reasons for wanting to leave a job. Directional, not a clinical assessment.'),
   },
   {
     file: 'free-tools/become-a-solopreneur/index.html', url: '/free-tools/become-a-solopreneur/', priority: '0.7', changefreq: 'yearly',
@@ -244,23 +244,23 @@ const PAGES = [
     ogImage: abs('/img/og/clarity-become-a-solopreneur.png'),
     ogImageAlt: 'Free clarity tool: do you want to become a solopreneur?',
     schema: toolNodes('/free-tools/become-a-solopreneur/', 'Do you want to become a solopreneur?',
-      'A 20-question self-assessment that separates readiness and fit for working independently from the wish to escape a current job.', 20),
+      'A 20-question self-assessment that separates readiness and fit for working independently from the wish to escape a current job.'),
   },
   {
     file: 'free-tools/burned-out/index.html', url: '/free-tools/burned-out/', priority: '0.7', changefreq: 'yearly',
     title: 'Are You Burned Out? | Free Burnout Clarity Tool',
-    description: 'Answer 20 questions to see whether your answers point more towards work-related depletion, under-stimulation or loss of fit with the work. Directional, not a clinical diagnosis.',
+    description: 'Directional, not a clinical diagnosis: 20 questions on whether this points to work-related depletion, under-stimulation or loss of fit with the work itself.',
     ogTitle: 'Are You Burned Out? | Free Burnout Clarity Tool',
     ogDescription: 'Directional, not a clinical diagnosis: 20 questions on exhaustion, control, meaning and fit.',
     ogImage: abs('/img/og/clarity-burned-out.png'),
     ogImageAlt: 'Free burnout clarity tool: are you burned out?',
     schema: toolNodes('/free-tools/burned-out/', 'Are you burned out?',
-      'A 20-question self-assessment covering exhaustion, cognitive strain, workload, control, boredom, meaning and fit with the work. Directional, not a clinical diagnosis.', 20),
+      'A 20-question self-assessment covering exhaustion, cognitive strain, workload, control, boredom, meaning and fit with the work. Directional, not a clinical diagnosis.'),
   },
   {
     file: 'wtf-friday/index.html', url: '/wtf-friday/', priority: '0.7', changefreq: 'weekly',
     title: 'WTF Friday | Free Weekly Group Office Hours',
-    description: 'Free weekly group office hours for people working for themselves, or trying to. Bring one real problem, get an opinion, a reality check from the room, and meet other people building their own thing.',
+    description: 'Free weekly group office hours for people working for themselves, or trying to. Bring one real problem, get a straight answer and a reality check from the room.',
     ogTitle: 'WTF Friday | Free Weekly Group Office Hours',
     ogDescription: 'Free weekly group office hours. Bring one real problem and get a straight answer.',
     ogImage: abs('/img/og/wtf-friday.png'),

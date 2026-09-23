@@ -58,7 +58,7 @@ const HOME_V2 = {
         body: ['Jobs to be Done trained me to look past the problem people first describe: what changed, what they are trying to achieve, and what keeps them where they are.'],
         close: 'I use the same logic today across business, career and personal problems.' },
     ],
-    logoLabel: 'WORK WITH 100+ TECHNOLOGY COMPANIES',
+    logoLabel: 'Worked with 100+ technology companies',
     splitIntro: 'You won’t have to choose between practical advice and psychological depth.',
     s01d: 'BUSINESS & PSYCHOLOGY', s02d: 'HONEST FEEDBACK', s03d: 'IF WE CONTINUE', s04d: 'MORE FROM ME',
     leftH: 'WHAT WE CHANGE',
@@ -161,7 +161,7 @@ const WHY_V2 = {
   en: {
     label: 'ABOUT ME',
     h1: 'I spent most of my adult life in consulting, growth and startups before I trained as a psychotherapist.',
-    deck: 'I spent seven years running a growth consultancy, worked with more than 100 technology companies, held corporate roles and built two startups that failed, so you will not have to explain how this world works to me.',
+    deck: 'Seven years running a growth consultancy, more than 100 technology companies, corporate roles and two startups that failed. You will not have to explain how this world works to me.',
     fact: 'A founder or experienced professional does not have to explain how this world works to me.',
     // Background / credentials — compact two-column proof that sits between the
     // hero and the 01–04 narrative. Bold primary line + quieter secondary line.

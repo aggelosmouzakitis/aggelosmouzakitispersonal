@@ -211,6 +211,25 @@ async function main() {
           if (!text.includes(q.name)) err(url, `FAQ schema question not in page text: "${q.name.slice(0, 50)}"`);
         }
       }
+      // Claims this site's visible copy never makes. Ratings, reviews, awards,
+      // prices, addresses, service areas and medical typing were all either
+      // present before or easy to reintroduce, and none of them are supported
+      // by anything a visitor can read. Fail rather than let them drift back.
+      const FABRICATED = ['aggregateRating', 'review', 'award', 'awards', 'address',
+        'areaServed', 'priceRange', 'telephone', 'openingHours', 'openingHoursSpecification'];
+      const MEDICAL = /^(MedicalBusiness|Physician|MedicalClinic|MedicalOrganization|MedicalTherapy|MedicalCondition|Dentist|Hospital)$/;
+      const scan = (n) => {
+        if (Array.isArray(n)) return n.forEach(scan);
+        if (!n || typeof n !== 'object') return;
+        for (const t of [].concat(n['@type'] || [])) {
+          if (MEDICAL.test(t)) err(url, `medical schema type "${t}" — the page describes no clinical service`);
+        }
+        for (const k of Object.keys(n)) {
+          if (FABRICATED.includes(k)) err(url, `schema asserts "${k}", which no visible copy supports`);
+          scan(n[k]);
+        }
+      };
+      scan(graph);
     }
 
     // retired wording

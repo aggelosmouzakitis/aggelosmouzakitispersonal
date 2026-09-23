@@ -45,6 +45,7 @@ npm run seo:check -- --warn     # include non-blocking warnings
 - Footer: `WORK WITH ME` → Work with me, WTF Friday. `NAVIGATE` → Home, About me, Reviews, Free tools. "Not sure where to start?" removed.
 - Homepage: "Three ways to work with me" and the three service cards replaced by the merged before/after ledger; Free Tools section rebuilt on dark green with all five tools. Hero CTAs are `FREE TOOLS →` → `/free-tools/` and `SEE HOW I WORK →` → `/work-with-me/`.
 - About: added the Jobs to be Done / consumer-psychology section; replaced the "Not sure which conversation you need?" routing block with a single `Work with me →` CTA.
+- **Copy diffed string-by-string against the ZIP.** 106 approved strings across the three views; two were genuinely wrong and are now fixed: the homepage logo row said `WORK WITH 100+ TECHNOLOGY COMPANIES` where the design says `Worked with…`, and the About hero still carried the pre-refinement, longer deck sentence. **106 / 106 approved strings now render** (the rest of the apparent diffs were CSS uppercasing and curly vs straight apostrophes).
 - Contact form: the three audit options are gone. Options are now **Free orientation call (1:1 work)**, **WTF Friday**, **Something else**. `?interest=orientation` preselects correctly — verified by driving a real submission in a browser (payload carried `interest: "Free orientation call (1:1 work)"`, confirmation rendered, no JS errors).
 
 **Metadata — written per page, not templated**
@@ -162,6 +163,20 @@ Deliberately excluded and `noindex`: `/founders/`, `/solopreneurs/`, `/getinterv
 - **Free tools use `WebApplication`**, which is what the visitor can actually do: answer questions in the browser and get a result. Not `Quiz`, not `MedicalTest`, not `Course` — none of those describe a directional self-assessment, and two of the tools explicitly say they are not a clinical diagnosis.
 - **`/free-tools/` is a `CollectionPage` + `ItemList`** of the five live tools, each of which points back at the collection via `isPartOf`.
 - `/about/` is a `ProfilePage` with the Person as `mainEntity`; `/contact/` is a `ContactPage`; everything else is a `WebPage`, all with `BreadcrumbList` and all `isPartOf` the single `WebSite` node.
+
+**Claims removed in a second pass**, because nothing a visitor can read supports them:
+
+| Removed | Why |
+|---|---|
+| `address: { addressCountry: "IE" }` on Person | "Ireland" appears nowhere in the site's visible copy. |
+| `areaServed` (19 countries) on the Service | `/work-with-me/` names no country or region. |
+| `availableChannel` → `"Online (video sessions)"`, `availableLanguage: ["English","Greek"]` | The page never says online, remote, or Greek. |
+| `offers: { price: "0", priceCurrency: "EUR" }` on each tool | `isAccessibleForFree: true` already says it, without inventing a currency. |
+| `numberOfItems` on `WebApplication` | Not a property of that type — it belongs to `ItemList`. |
+| `applicationCategory: "BusinessApplication"` | Does not describe a burnout or career self-assessment. |
+| `knowsAbout` — 12 loose topics | Replaced with 11 terms, each of which is a heading or labelled item on `/work-with-me/` or `/about/`. |
+
+`seo-check` now **fails** if any page's JSON-LD reintroduces `aggregateRating`, `review`, `award`, `address`, `areaServed`, `priceRange`, `telephone`, `openingHours`, or any medical type (`MedicalBusiness`, `Physician`, `MedicalClinic`, …). None of those are supported by this site, so the rule is encoded rather than remembered.
 
 ---
 
