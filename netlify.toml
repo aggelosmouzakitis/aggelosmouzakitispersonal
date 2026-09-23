@@ -20,55 +20,109 @@
   status = 301
   force = true
 
+# ─── Three services + Start Here consolidated into /work-with-me/ ───────────
+# Permanent. force=true so the redirect wins over any leftover index.html, and
+# bare + splat forms are both listed so each old URL resolves in a single hop.
+[[redirects]]
+  from = "/psychotherapy-decision-coaching"
+  to = "/work-with-me/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/psychotherapy-decision-coaching/*"
+  to = "/work-with-me/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/career-strategy-consulting"
+  to = "/work-with-me/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/career-strategy-consulting/*"
+  to = "/work-with-me/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/solopreneur-growth-consulting"
+  to = "/work-with-me/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/solopreneur-growth-consulting/*"
+  to = "/work-with-me/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/start-here"
+  to = "/work-with-me/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/start-here/*"
+  to = "/work-with-me/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/1-to-1"
+  to = "/work-with-me/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/1-to-1/*"
+  to = "/work-with-me/"
+  status = 301
+  force = true
+
 # ─── Retired diagnostic + thin SEO landing pages → most relevant live page ───
 [[redirects]]
   from = "/startingdiagnostic"
-  to = "/start-here/"
+  to = "/work-with-me/"
   status = 301
   force = true
 [[redirects]]
   from = "/startingdiagnostic/*"
-  to = "/start-here/"
+  to = "/work-with-me/"
   status = 301
   force = true
 [[redirects]]
   from = "/greek-speaking-therapist-london"
-  to = "/psychotherapy-decision-coaching/"
+  to = "/work-with-me/"
   status = 301
   force = true
 [[redirects]]
   from = "/greek-speaking-therapist-london/*"
-  to = "/psychotherapy-decision-coaching/"
+  to = "/work-with-me/"
   status = 301
   force = true
 [[redirects]]
   from = "/greek-speaking-therapist-manchester"
-  to = "/psychotherapy-decision-coaching/"
+  to = "/work-with-me/"
   status = 301
   force = true
 [[redirects]]
   from = "/greek-speaking-therapist-manchester/*"
-  to = "/psychotherapy-decision-coaching/"
+  to = "/work-with-me/"
   status = 301
   force = true
 [[redirects]]
   from = "/greek-speaking-therapist-dublin"
-  to = "/psychotherapy-decision-coaching/"
+  to = "/work-with-me/"
   status = 301
   force = true
 [[redirects]]
   from = "/greek-speaking-therapist-dublin/*"
-  to = "/psychotherapy-decision-coaching/"
+  to = "/work-with-me/"
   status = 301
   force = true
 [[redirects]]
   from = "/greek-speaking-therapist-new-york"
-  to = "/psychotherapy-decision-coaching/"
+  to = "/work-with-me/"
   status = 301
   force = true
 [[redirects]]
   from = "/greek-speaking-therapist-new-york/*"
-  to = "/psychotherapy-decision-coaching/"
+  to = "/work-with-me/"
   status = 301
   force = true
 
@@ -87,26 +141,16 @@
 # how-i-work → 1:1 (core page removed; method content merged into / and /1-to-1/)
 [[redirects]]
   from = "/how-i-work"
-  to = "/1-to-1/"
+  to = "/work-with-me/"
   status = 301
   force = true
 [[redirects]]
   from = "/how-i-work/*"
-  to = "/1-to-1/"
+  to = "/work-with-me/"
   status = 301
   force = true
 
 # el/how-i-work → el/1-to-1 (Greek method page merged into the Greek offer page)
-[[redirects]]
-  from = "/el/how-i-work"
-  to = "/el/1-to-1/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/el/how-i-work/*"
-  to = "/el/1-to-1/"
-  status = 301
-  force = true
 
 # NOTE: /founders/, /solopreneurs/, /therapy-for-founders/, /therapy-for-executives/,
 # /imposter-syndrome-therapy/, /executive-burnout-therapy/ and /career-transition-therapy/
@@ -151,17 +195,6 @@
   to = "/free-tools/burned-out/"
   status = 301
   force = true
-[[redirects]]
-  from = "/el/burnout-diagnostic"
-  to = "/el/startingdiagnostic/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/el/burnout-diagnostic/*"
-  to = "/el/startingdiagnostic/"
-  status = 301
-  force = true
-
 
 # ─── Clarity Tools → Free Tools (section rename + IA change) ─────────────────
 # "Free Tools" is now the umbrella section for every free interactive resource;
@@ -248,16 +281,6 @@
 [[redirects]]
   from = "/book/*"
   to = "/contact?interest=orientation"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/el/book"
-  to = "/el/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/el/book/*"
-  to = "/el/"
   status = 301
   force = true
 

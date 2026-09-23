@@ -82,6 +82,10 @@ const CHROME_PATHS = {
     en: '/1-to-1/',
     el: '/el/1-to-1/'
   },
+  'work-with-me': {
+    en: '/work-with-me/',
+    el: '/work-with-me/'
+  },
   'about': {
     en: '/about/',
     el: '/el/about/'
@@ -143,7 +147,6 @@ const CHROME_T = {
     articles: 'Articles',
     askAnon: 'Ask me something',
     freeTools: 'Free tools',
-    startHere: 'Not sure where to start?',
     confidentiality: 'Confidentiality',
     terms: 'Terms',
     privacy: 'Privacy',
@@ -177,39 +180,10 @@ const CHROME_T = {
 };
 const cT = lang => CHROME_T[lang] || CHROME_T.en;
 
-// ─── "Work with me" dropdown model (English site only) ───────────────────────
-// 1:1 pages are live and linked. Under group work, WTF Friday is live (links to
-// its page); the remaining group offers are placeholders (not linked).
-const WORK_GROUPS = [{
-  label: '1:1 private work',
-  items: [{
-    name: 'Psychotherapy / Decision Coaching',
-    href: '/psychotherapy-decision-coaching/',
-    id: 'psychotherapy-decision-coaching',
-    desc: 'Think through the decision or pattern that keeps circling'
-  }, {
-    name: 'Career Strategy Consulting',
-    href: '/career-strategy-consulting/',
-    id: 'career-strategy-consulting',
-    desc: 'Build a paid offer while you keep your job'
-  }, {
-    name: 'Solo Business Growth Consulting',
-    href: '/solopreneur-growth-consulting/',
-    id: 'solopreneur-growth-consulting',
-    desc: 'Grow the business without grinding yourself down'
-  }]
-}, {
-  label: 'Group work',
-  items: [{
-    name: 'WTF Friday',
-    href: '/wtf-friday/',
-    id: 'wtf-friday',
-    desc: 'Free weekly office hours — bring a real problem, get a real answer'
-  }, {
-    name: 'Terrible Advice Club',
-    soon: true
-  }]
-}];
+// ─── "Work with me" ──────────────────────────────────────────────────────────
+// One service page replaces the three 1:1 offers and the Start Here flow, so
+// the header entry is an ordinary link rather than a dropdown.
+const WORK_WITH_ME_URL = '/work-with-me/';
 
 // ─── Free Tools link model (English only) ────────────────────────────────────
 // The five live self-scoring diagnostics that sit inside the Free Tools
@@ -307,37 +281,6 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .site-menu .site-container{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 .site-menu a{color:${SITE.paper};font-size:16px;text-transform:uppercase;letter-spacing:0.03em}
 .site-menu .hdr-cta{align-self:stretch;justify-content:center;min-height:48px;font-size:13px}
-
-/* ── "Work with me" mega dropdown (desktop) ── */
-.site-hdr__work{position:static;display:flex;align-items:center}
-.site-hdr__work-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;color:${SITE.paper};font-family:inherit;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding:0 0 2px;transition:opacity .18s}
-.site-hdr__work-btn:hover,.site-hdr__work-btn[aria-expanded="true"]{opacity:1}
-.site-hdr__work-caret{width:10px;height:6px;transition:transform .2s ease;opacity:.85}
-.site-hdr__work-btn[aria-expanded="true"] .site-hdr__work-caret{transform:rotate(180deg)}
-.site-hdr__mega{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(640px,calc(100vw - 32px));background:${SITE.forestDeep};border:1px solid rgba(243,240,232,0.14);border-top:2px solid ${SITE.green};border-radius:0;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:26px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;z-index:200}
-.site-hdr__mega-col{min-width:0}
-.site-hdr__mega-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${SITE.green};margin:2px 0 12px;padding-left:12px}
-.site-hdr__mega-item{display:block;padding:9px 12px;border-radius:0;transition:background .16s}
-a.site-hdr__mega-item:hover{background:rgba(243,240,232,0.06)}
-.site-hdr__mega-name{display:block;font-family:${SITE.display};font-size:16.5px;font-weight:700;line-height:1.2;letter-spacing:-0.012em;color:${SITE.paper}}
-a.site-hdr__mega-item:hover .site-hdr__mega-name{color:${SITE.bone}}
-.site-hdr__mega-desc{display:block;margin-top:3px;font-size:13px;line-height:1.4;color:${SITE.greyOnDark}}
-.site-hdr__mega-item[aria-current] .site-hdr__mega-name{color:${SITE.green}}
-.site-hdr__mega-item--soon{cursor:default}
-.site-hdr__mega-item--soon .site-hdr__mega-name{color:${SITE.onDark};opacity:.7}
-.site-hdr__mega-soon{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${SITE.greyOnDark};border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 9px}
-
-/* ── "Work with me" section inside the mobile menu ── */
-.site-menu__group{width:100%}
-.site-menu__acc{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;padding:0;background:none;border:0;cursor:pointer;color:${SITE.paper};font-family:inherit;font-size:16px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.03em}
-.site-menu__acc-caret{flex:none;opacity:.8;transition:transform .2s ease}
-.site-menu__acc.is-open .site-menu__acc-caret{transform:rotate(180deg)}
-.site-menu__panel{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:6px 0 10px}
-.site-menu__label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${SITE.sage};margin-top:8px}
-.site-menu a.site-menu__sub{text-transform:none;letter-spacing:0;font-size:15px;min-height:40px;display:flex;align-items:center}
-.site-menu a.site-menu__sub[aria-current]{color:${SITE.sage}}
-.site-menu__soon{color:${SITE.greyOnDark};font-size:15px;min-height:40px;display:flex;align-items:center;gap:10px}
-.site-menu__soon small{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 8px;color:${SITE.greyOnDark}}
 
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
 .pill--green{height:72px;padding-inline:44px;background:${SITE.green};color:${SITE.bone};font-size:16px}
@@ -507,23 +450,7 @@ function SiteHeader({
   lang = 'en'
 }) {
   const [open, setOpen] = React.useState(false); // mobile burger menu
-  const [mWork, setMWork] = React.useState(false); // mobile "Work with me" accordion
-  const [work, setWork] = React.useState(false); // desktop "Work with me" mega
-  const workTimer = React.useRef(null);
-  const openWork = () => {
-    if (workTimer.current) {
-      clearTimeout(workTimer.current);
-      workTimer.current = null;
-    }
-    setWork(true);
-  };
-  const closeWorkSoon = () => {
-    if (workTimer.current) clearTimeout(workTimer.current);
-    workTimer.current = setTimeout(() => setWork(false), 130);
-  };
-  React.useEffect(() => () => {
-    if (workTimer.current) clearTimeout(workTimer.current);
-  }, []);
+
   const t = cT(lang);
   const other = lang === 'el' ? 'en' : 'el';
   const showWork = lang === 'en'; // offer pages + group work are English-only
@@ -555,123 +482,29 @@ function SiteHeader({
   // Free Tools page itself, where it acts as a "back to all"); it never disappears.
   const showCta = true;
 
-  // Desktop mega-dropdown ("Work with me")
-  const megaCol = group => React.createElement('div', {
-    className: 'site-hdr__mega-col',
-    key: group.label
-  }, React.createElement('div', {
-    className: 'site-hdr__mega-label'
-  }, group.label), group.items.map(it => it.soon ? React.createElement('div', {
-    className: 'site-hdr__mega-item site-hdr__mega-item--soon',
-    key: it.name
-  }, React.createElement('span', {
-    className: 'site-hdr__mega-name'
-  }, it.name), React.createElement('span', {
-    className: 'site-hdr__mega-soon'
-  }, 'Coming soon')) : React.createElement('a', {
-    className: 'site-hdr__mega-item',
-    key: it.name,
-    href: it.href,
-    role: 'menuitem',
-    'aria-current': page === it.id ? 'page' : undefined,
-    onClick: () => setWork(false)
-  }, React.createElement('span', {
-    className: 'site-hdr__mega-name'
-  }, it.name), React.createElement('span', {
-    className: 'site-hdr__mega-desc'
-  }, it.desc))));
-  const workDropdown = React.createElement('div', {
-    key: 'work',
-    className: 'site-hdr__work',
-    onMouseEnter: openWork,
-    onMouseLeave: closeWorkSoon,
-    onKeyDown: ev => {
-      if (ev.key === 'Escape') setWork(false);
-    }
-  }, React.createElement('button', {
-    className: 'site-hdr__work-btn',
-    type: 'button',
-    'aria-haspopup': 'true',
-    'aria-expanded': work ? 'true' : 'false',
-    onClick: () => setWork(v => !v)
-  }, React.createElement('span', null, 'Work with me'), React.createElement('svg', {
-    className: 'site-hdr__work-caret',
-    viewBox: '0 0 10 6',
-    'aria-hidden': 'true'
-  }, React.createElement('path', {
-    d: 'M1 1l4 4 4-4',
-    stroke: 'currentColor',
-    strokeWidth: '1.6',
-    fill: 'none',
-    strokeLinecap: 'round',
-    strokeLinejoin: 'round'
-  }))), work && React.createElement('div', {
-    className: 'site-hdr__mega',
-    role: 'menu',
-    onMouseEnter: openWork,
-    onMouseLeave: closeWorkSoon
-  }, WORK_GROUPS.map(megaCol)));
-
   // English header is deliberately lean: Work with me, About, FREE TOOLS →.
   // Greek keeps its current Home / About / Reviews nav until it is localised.
   const aboutItem = {
     id: 'about',
     label: t.why
   };
+  const workItem = {
+    id: 'work-with-me',
+    label: 'Work with me'
+  };
   let navChildren;
   if (lang === 'en') {
     navChildren = [];
-    if (showWork) navChildren.push(workDropdown);
+    if (showWork) navChildren.push(link(workItem));
     navChildren.push(link(aboutItem));
   } else {
     navChildren = [link(homeItem)];
     restItems.forEach(it => navChildren.push(link(it)));
   }
-
-  // Mobile "Work with me" — collapsible accordion inside the burger menu, so the
-  // offers stay tucked away instead of spilling the whole tree into the menu.
-  const workMobile = showWork ? React.createElement('div', {
-    className: 'site-menu__group',
-    key: 'work-m'
-  }, React.createElement('button', {
-    type: 'button',
-    className: 'site-menu__acc' + (mWork ? ' is-open' : ''),
-    'aria-expanded': mWork ? 'true' : 'false',
-    'aria-controls': 'site-menu-work',
-    onClick: () => setMWork(v => !v)
-  }, React.createElement('span', null, 'Work with me'), React.createElement('svg', {
-    className: 'site-menu__acc-caret',
-    viewBox: '0 0 10 6',
-    width: 12,
-    height: 8,
-    'aria-hidden': 'true'
-  }, React.createElement('path', {
-    d: 'M1 1l4 4 4-4',
-    stroke: 'currentColor',
-    strokeWidth: '1.6',
-    fill: 'none',
-    strokeLinecap: 'round',
-    strokeLinejoin: 'round'
-  }))), mWork && React.createElement('div', {
-    className: 'site-menu__panel',
-    id: 'site-menu-work'
-  }, WORK_GROUPS.map(group => React.createElement(React.Fragment, {
-    key: group.label
-  }, React.createElement('div', {
-    className: 'site-menu__label'
-  }, group.label), group.items.map(it => it.soon ? React.createElement('div', {
-    className: 'site-menu__soon',
-    key: it.name
-  }, React.createElement('span', null, it.name), React.createElement('small', null, 'Coming soon')) : React.createElement('a', {
-    className: 'site-menu__sub',
-    key: it.name,
-    href: it.href,
-    'aria-current': page === it.id ? 'page' : undefined
-  }, it.name)))))) : null;
   let menuChildren;
   if (lang === 'en') {
     menuChildren = [];
-    if (workMobile) menuChildren.push(workMobile);
+    if (showWork) menuChildren.push(link(workItem));
     menuChildren.push(link(aboutItem));
   } else {
     menuChildren = [link(homeItem)];
@@ -730,7 +563,7 @@ function SiteHeader({
 
 // ─── BLACK CTA STRIP ─────────────────────────────────────────────────────────
 // Site-wide two-CTA choice on general pages: Free Tools is the dominant
-// discovery action, "Not sure where to start?" the softer orientation route.
+// discovery action, the service page the softer second route.
 // Greek has neither page, so it keeps a single pill into its own flow.
 function BlackCtaStrip({
   lang = 'en',
@@ -750,8 +583,8 @@ function BlackCtaStrip({
     href: isEn ? FREE_TOOLS_URL : cPath('diagnostic', lang)
   }, React.createElement('span', null, label || (isEn ? 'EXPLORE FREE TOOLS' : t.ctaBtn)), React.createElement('span', null, '→'))), isEn ? React.createElement('div', null, React.createElement('a', {
     className: 'cta-strip__soft',
-    href: '/start-here/'
-  }, React.createElement('span', null, 'Not sure where to start?'), React.createElement('span', {
+    href: WORK_WITH_ME_URL
+  }, React.createElement('span', null, 'See how I work'), React.createElement('span', {
     'aria-hidden': 'true'
   }, '→'))) : null, React.createElement('a', {
     className: 'cta-strip__sub',
@@ -790,17 +623,12 @@ function SiteFooterX({
       marginTop: 8
     }
   }, t.role2))),
-  // Work with me — the three paid offers + WTF Friday (English only, mirrors
-  // the header dropdown and the homepage "Work with me" section).
+  // Work with me — the single 1:1 service page plus the free group format.
   lang === 'en' ? React.createElement('nav', null, React.createElement('div', {
     className: 'site-ftr__head'
   }, 'WORK WITH ME'), React.createElement('a', {
-    href: '/psychotherapy-decision-coaching/'
-  }, 'Psychotherapy / decision coaching'), React.createElement('a', {
-    href: '/career-strategy-consulting/'
-  }, 'Career strategy consulting'), React.createElement('a', {
-    href: '/solopreneur-growth-consulting/'
-  }, 'Solo business growth consulting'), React.createElement('a', {
+    href: WORK_WITH_ME_URL
+  }, 'Work with me'), React.createElement('a', {
     href: '/wtf-friday/'
   }, 'WTF Friday')) : null, React.createElement('nav', null, React.createElement('div', {
     className: 'site-ftr__head'
@@ -813,11 +641,9 @@ function SiteFooterX({
   }, t.reviews),
   // English: Free Tools (primary discovery) then the softer orientation
   // flow. Greek has neither page, so it keeps the Greek diagnostic link.
-  lang === 'en' ? React.createElement(React.Fragment, null, React.createElement('a', {
+  lang === 'en' ? React.createElement('a', {
     href: FREE_TOOLS_URL
-  }, t.freeTools), React.createElement('a', {
-    href: '/start-here/'
-  }, t.startHere)) : React.createElement('a', {
+  }, t.freeTools) : React.createElement('a', {
     href: cPath('diagnostic', lang)
   }, t.apply)), React.createElement('nav', null, React.createElement('div', {
     className: 'site-ftr__head'

@@ -103,8 +103,8 @@ window.CLARITY_DATA['business-constraint'] = {
   cta: {
     heading: 'Want another perspective?',
     sub: 'If you want a second read on which constraint to work on first, a working session goes through your specific numbers and situation in depth.',
-    label: 'NOT SURE WHERE TO START? →',
-    href: '/start-here/'
+    label: 'SEE HOW I WORK →',
+    href: '/work-with-me/'
   },
   questions: [{
     id: 'q1',
@@ -653,8 +653,8 @@ window.CLARITY_DATA['strategy-or-execution'] = {
   cta: {
     heading: 'Want another perspective?',
     sub: 'If the result points at more than one driver, a working session can help you decide what to change first without guessing.',
-    label: 'NOT SURE WHERE TO START? →',
-    href: '/start-here/'
+    label: 'SEE HOW I WORK →',
+    href: '/work-with-me/'
   },
   questions: [{
     id: 'q1',
@@ -1124,8 +1124,8 @@ window.CLARITY_DATA['quit-your-job'] = {
   cta: {
     heading: 'Want another perspective?',
     sub: 'A working session can help you separate what needs to change from whether you need to leave, without anyone telling you what to do.',
-    label: 'NOT SURE WHERE TO START? →',
-    href: '/start-here/'
+    label: 'SEE HOW I WORK →',
+    href: '/work-with-me/'
   },
   breakdownGroups: [{
     title: 'What is pushing you',
@@ -1716,8 +1716,8 @@ window.CLARITY_DATA['become-a-solopreneur'] = {
   cta: {
     heading: 'Want another perspective?',
     sub: 'If fit and readiness are pointing in different directions, a working session can help you decide what to test before committing to anything.',
-    label: 'NOT SURE WHERE TO START? →',
-    href: '/start-here/'
+    label: 'SEE HOW I WORK →',
+    href: '/work-with-me/'
   },
   breakdownGroups: [{
     title: 'Fit — do you want the reality?',
@@ -2284,8 +2284,8 @@ window.CLARITY_DATA['burned-out'] = {
   cta: {
     heading: 'Want another perspective?',
     sub: 'If the result points to depletion, boredom, or a loss of fit, a working session can help you decide what to change. For clinical concerns, speak to a professional.',
-    label: 'NOT SURE WHERE TO START? →',
-    href: '/start-here/'
+    label: 'SEE HOW I WORK →',
+    href: '/work-with-me/'
   },
   breakdownGroups: [{
     title: 'Work strain',

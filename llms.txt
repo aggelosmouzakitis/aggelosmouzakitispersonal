@@ -1,49 +1,75 @@
 # Aggelos Mouzakitis
 
-> Business Growth Advisor + Licensed Psychotherapist for people building something of their own — starting it, or taking what they've already built much further. The work runs on two tracks at once: the business you're building (offer, positioning, pricing, customer acquisition, sales, priorities, decisions, execution) and whatever in you is affecting how you build it (avoidance, fear of visibility, rejection, perfectionism, control, identity, self-worth, commitment). Based in Ireland, working globally, online and 1:1.
+> Business and career advisor and BACP-registered psychotherapist. Private 1:1
+> work on a specific business, career or personal problem: what is happening
+> now, what you want instead, and what is getting in the way. Based in Ireland,
+> working online and internationally.
 
-Aggelos Mouzakitis is a business advisor and a licensed, BACP-registered psychotherapist. Before this he spent 18+ years in product and growth — building his own companies, working inside startups and large organisations, and advising more than 500 businesses. He also holds an MSc in Integrative Counselling & Psychotherapy (University of Derby). The unusual combination is the point: you don't have to explain business to someone who only understands psychology, and you don't have to leave half of yourself outside the room with someone who only understands tactics. The core distinction runs through everything: sometimes the work is tactical, sometimes it's psychological, and quite often the two are tangled enough that it isn't obvious which problem is which.
+Aggelos Mouzakitis spent 18+ years in product and growth before training as a
+psychotherapist: seven years running his own growth consultancy, work with more
+than 100 technology companies, a Growth Product Manager role at IBM, and two
+startups he built that failed. He holds an MSc in Integrative Counselling &
+Psychotherapy (University of Derby), graduate studies in Psychology (The
+American College of Greece), and is a registered member of the BACP.
 
-There is one core offer: private 1:1 work. English lives at the root; a Greek version of the same brand and offer lives under /el/.
+The combination is the point. A pricing problem can involve fear of rejection. A
+career decision can be commercially rational and psychologically difficult. So
+the work covers both sides when both sides matter, rather than treating every
+problem as either a tactic or a feeling.
 
-## Core pages (English)
+The method is informed by Jobs to be Done, carried over from years of consumer
+research. Four forces decide whether a change happens: what is making the
+current situation harder to tolerate (push), what you want instead (pull), what
+the current situation still does for you (habit / protection), and what feels
+risky about changing (anxiety). Mapping all four decides whether the work is
+strategy, skill and decisions, or behaviour, fear and patterns.
 
-- [Home](https://aggelosmouzakitis.com/): The positioning, what people recognise in themselves, the tactical-vs-psychological distinction, and the single 1:1 relationship that holds both sides of the problem.
-- [Work with me — 1:1](https://aggelosmouzakitis.com/1-to-1/): What the work is — business advisory and psychological work in one private relationship. It starts with a free ~15-minute fit call, then a first session, then ongoing 1:1 if it makes sense. No invented pricing, frequency or guarantees.
-- [About](https://aggelosmouzakitis.com/about/): Two careers that kept running into the same problem — the product/growth career, the psychotherapy training, and why they converged. Ambition itself is not the pathology.
-- [Reviews](https://aggelosmouzakitis.com/reviews/): Anonymous reflections from founders, operators and independents. Shared with permission; identifying details removed.
-- [Writing](https://aggelosmouzakitis.com/blog/): One blog, mixed-language (filterable English / Ελληνικά). Notes on building something of your own: customers, pricing, decisions, avoidance, ambition, identity, and where business and psychology mix.
-- [Book a fit call](https://aggelosmouzakitis.com/book/): A short, free call to see whether working together makes sense.
-- [Confidentiality](https://aggelosmouzakitis.com/confidentiality/): How discretion works in this private work, and where the honest limits are.
+## Site structure
 
-## Free Tools
+There is one paid service — /work-with-me/ — plus a free weekly group format
+and a library of free self-assessment tools. Free Tools is the site's primary
+call to action. The site is English-only.
 
-Free Tools is the site's primary discovery destination: every free interactive
-resource lives under /free-tools/. "Clarity tool" is the type of the five live
-self-scoring diagnostics; Free Tools is the collection that contains them.
+- [Home](https://aggelosmouzakitis.com/): Positioning, the credentials behind the advice, the before/after changes people come to work on, and the free tools.
+- [Work with me](https://aggelosmouzakitis.com/work-with-me/): The single 1:1 service. What can be worked on (career and direction, going independent, sales and visibility, business growth, patterns and boundaries, burnout and identity), the Jobs to be Done forces map, fit and not-fit, six common questions, and the free orientation call.
+- [About](https://aggelosmouzakitis.com/about/): Background and credentials in two columns (business/product/behaviour and psychology/therapy), how consumer research became the way he reads problems, and why he works across both fields.
+- [Reviews](https://aggelosmouzakitis.com/reviews/): Anonymous client feedback, shared with permission, identifying details removed.
+- [Contact](https://aggelosmouzakitis.com/contact/): One form. Interests are the free orientation call, WTF Friday, or something else.
+- [Confidentiality](https://aggelosmouzakitis.com/confidentiality/): How notes and personal data are handled, the limits of confidentiality, plus terms and privacy.
 
-- [Free Tools](https://aggelosmouzakitis.com/free-tools/): The collection — diagnostics, roasts, sales, pricing and decision tools and exercises, filterable by Business / Career / Psychology. Free to use, no email needed to begin.
-- [What's limiting your business?](https://aggelosmouzakitis.com/free-tools/business-constraint/): Business · Clarity tool. 20 questions identifying which part of the business — demand, offer, acquisition, conversion, retention, economics or delivery capacity — is most likely restricting growth.
-- [Is it a strategy or execution problem?](https://aggelosmouzakitis.com/free-tools/strategy-or-execution/): Business · Clarity tool. 17 questions separating strategy, execution, avoidance, capacity and coordination problems.
-- [What's making you want to quit your job?](https://aggelosmouzakitis.com/free-tools/quit-your-job/): Career · Clarity tool. 20 questions separating a problem with the current job from a broader problem with career direction.
-- [Do you want to become a solopreneur?](https://aggelosmouzakitis.com/free-tools/become-a-solopreneur/): Career · Clarity tool. 20 questions separating wanting your own business from wanting autonomy or wanting out of employment.
-- [Are you burned out?](https://aggelosmouzakitis.com/free-tools/burned-out/): Psychology · Clarity tool. 20 questions separating depletion, under-stimulation and no longer wanting the work. Directional, not a clinical diagnosis.
-- [Not sure where to start?](https://aggelosmouzakitis.com/start-here/): The orientation flow for people who are not sure how to frame the situation yet. Pick the closest of four situations — the business, the career, something more personal, or all of it tangled together — answer at most one follow-up, and get one recommended starting direction.
+## Free tools
 
-The five tools formerly lived under /clarity-tools/; those URLs now 301 to their
-/free-tools/ equivalents.
+Free, self-scored questionnaires that run in the browser. They are directional
+and none of them is a clinical diagnosis.
 
-## Core pages (Greek — /el/)
+- [Free Tools](https://aggelosmouzakitis.com/free-tools/): The collection, filterable by Business / Career / Psychology.
+- [What's limiting your business?](https://aggelosmouzakitis.com/free-tools/business-constraint/): 20 questions separating an offer problem from a demand, pricing, conversion or execution problem.
+- [Is it a strategy or execution problem?](https://aggelosmouzakitis.com/free-tools/strategy-or-execution/): 17 questions separating a wrong plan from a plan that is not being carried out.
+- [What's making you want to quit your job?](https://aggelosmouzakitis.com/free-tools/quit-your-job/): 20 questions separating the role, the manager, the company, the field and burnout.
+- [Do you want to become a solopreneur?](https://aggelosmouzakitis.com/free-tools/become-a-solopreneur/): 20 questions separating genuine fit for working alone from wanting out of the current job.
+- [Are you burned out?](https://aggelosmouzakitis.com/free-tools/burned-out/): 20 questions on exhaustion, cognitive strain, control, boredom, meaning and fit. Directional, not a clinical diagnosis.
 
-- [Αρχική](https://aggelosmouzakitis.com/el/): Business Growth Advisor + Ψυχοθεραπευτής — για ανθρώπους που χτίζουν κάτι δικό τους.
-- [Συνεργασία — 1:1](https://aggelosmouzakitis.com/el/1-to-1/): Η δουλειά — συμβουλευτική επιχειρήσεων και ψυχολογική δουλειά μαζί.
-- [Σχετικά](https://aggelosmouzakitis.com/el/about/)
-- [Κριτικές](https://aggelosmouzakitis.com/el/reviews/)
-- [Κλείσε μια γνωριμία](https://aggelosmouzakitis.com/el/book/)
-- [Εμπιστευτικότητα](https://aggelosmouzakitis.com/el/confidentiality/)
+## Other pages
+
+- [WTF Friday](https://aggelosmouzakitis.com/wtf-friday/): Free weekly group office hours for people working for themselves, or trying to. A group format, not a 1:1 service.
+- [Ask me anything](https://aggelosmouzakitis.com/ask-me-anything/): Send a question, anonymously if you prefer; selected ones are answered publicly.
+- [Therapy for founders](https://aggelosmouzakitis.com/therapy-for-founders/): Psychotherapy for founders, with a therapist who has built and advised companies.
+- [Therapy for executives](https://aggelosmouzakitis.com/therapy-for-executives/): Psychotherapy for senior leaders.
+- [Imposter syndrome therapy](https://aggelosmouzakitis.com/imposter-syndrome-therapy/): For people who can see the evidence that they are good at their work but cannot feel it.
+- [Executive burnout therapy](https://aggelosmouzakitis.com/executive-burnout-therapy/): For people who took the break and came back feeling the same.
 
 ## Notes
 
-- Professional title: "Business Growth Advisor + Licensed Psychotherapist" (EN) / "Business Growth Advisor + Ψυχοθεραπευτής" (EL). In Greek, "Ψυχοθεραπευτής" is the approved term (psychotherapy is not a regulated title in Greece); "Ψυχολόγος" (psychologist) is a protected title and is deliberately not used.
-- Credentials to cite: 18+ years in product/growth; 500+ companies advised; MSc Integrative Counselling & Psychotherapy (University of Derby); registered member of the BACP. Do not strengthen or invent beyond these. Do not invent pricing, session frequency, duration, group offers or guarantees.
-- Contact: aggelos.mouzakitis@gmail.com · Booking: Calendly (linked from the Book page).
+- Professional description: "business and career advisor" and "BACP-registered
+  psychotherapist". "Licensed psychotherapist" is not accurate wording for this
+  practice and is not used anywhere on the site.
+- Verified numbers: 18+ years in product and growth, 7+ years running his own
+  consultancy, 100+ technology companies advised, 2 startups built.
+- Three former service pages (/psychotherapy-decision-coaching/,
+  /career-strategy-consulting/, /solopreneur-growth-consulting/) and the
+  /start-here/ orientation flow were consolidated into /work-with-me/ and now
+  301 there permanently. The Greek /el/ pages are retired and 301 to the
+  English homepage. The five free tools formerly lived under /clarity-tools/;
+  those URLs 301 to their /free-tools/ equivalents.
+- Canonical host is https://aggelosmouzakitis.com with a trailing slash on every
+  page URL.

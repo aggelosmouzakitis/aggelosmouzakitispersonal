@@ -86,13 +86,6 @@ const PAGES = [
       desc: 'Σύμβουλος επιχειρήσεων και ψυχοθεραπευτής για ανθρώπους που χτίζουν κάτι δικό τους. Δουλεύουμε την επιχείρηση και ό,τι μέσα σου επηρεάζει το χτίσιμό της.' },
   },
   {
-    id: 'one-to-one', path: '/1-to-1/', dir: '1-to-1', schemaType: 'WebPage', og: 'one-to-one.png',
-    en: { title: '1:1 — Business Advisory + Psychological Work | Aggelos Mouzakitis', crumb: '1:1',
-      desc: "Private 1:1 work on what you're building and whatever is affecting your ability to build it — business advisory and psychological work in one engagement." },
-    el: { title: '1:1 Συνεργασία — business & ψυχολογία | Άγγελος Μουζακίτης', crumb: '1:1',
-      desc: 'Ιδιωτική δουλειά 1:1 πάνω σε αυτό που χτίζεις και σε ό,τι επηρεάζει την ικανότητά σου να το χτίσεις — συμβουλευτική επιχειρήσεων και ψυχολογική δουλειά μαζί.' },
-  },
-  {
     id: 'about', path: '/about/', dir: 'about', schemaType: 'ProfilePage', og: 'about.png',
     en: { title: 'About — Aggelos Mouzakitis', crumb: 'About',
       desc: 'Business advisor and licensed psychotherapist (BACP). 18+ years in product and growth, 500+ companies advised, MSc Integrative Counselling & Psychotherapy.' },

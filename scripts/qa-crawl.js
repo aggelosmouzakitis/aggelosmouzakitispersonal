@@ -16,7 +16,7 @@ const bad = (m) => { fail++; problems.push(m); };
 
 // Pages that REMAIN redirected (obsolete replacement pages — kept as 301s).
 const REDIRECTED = ['/how-i-work/', '/el/how-i-work/', '/burnout-diagnostic/', '/el/burnout-diagnostic/'];
-const CORE = ['/', '/1-to-1/', '/about/', '/reviews/', '/book/', '/startingdiagnostic/', '/confidentiality/'];
+const CORE = ['/', '/work-with-me/', '/about/', '/reviews/', '/free-tools/', '/contact/', '/confidentiality/'];
 // Restored English SEO landing pages (200, self-canonical, in sitemap, prerendered).
 const RESTORED_EN = ['/founders/', '/solopreneurs/', '/therapy-for-founders/', '/therapy-for-executives/', '/imposter-syndrome-therapy/', '/executive-burnout-therapy/', '/career-transition-therapy/'];
 // New Greek SEO landing pages under /el/ (200, self-canonical, in sitemap, prerendered).

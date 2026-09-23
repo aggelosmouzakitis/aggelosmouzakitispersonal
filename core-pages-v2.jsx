@@ -134,21 +134,26 @@ const HOME_V2 = {
 };
 
 // ─── Homepage "Work with me" + "Free tools" (EN homepage only) ───────────────
-// Approved homepage sections. Copy is sentence-case per the design; the three
-// offer routes and the free-tool routes are the canonical ones already
-// implemented in the site.
-const HOME_OFFERS = [
-  { name: 'Psychotherapy / decision coaching', kicker: '1:1 private work', desc: "For the decision you've already made three times and still haven't acted on.", href: '/psychotherapy-decision-coaching/' },
-  { name: 'Career strategy consulting', kicker: '1:1 private work', desc: 'Build the thing people pay for before you hand in your notice.', href: '/career-strategy-consulting/' },
-  { name: 'Solo business growth consulting', kicker: '1:1 private work', desc: 'For when the business only grows as far as your own stamina goes.', href: '/solopreneur-growth-consulting/' },
+// The three separate offers are retired: one service page now covers them all,
+// so the homepage section leads with the change someone wants rather than with
+// a menu of products. Each row is a before/after a real client arrived with.
+const HOME_SHIFTS = [
+  { n: '01', a: 'I need more clients but keep avoiding sales.', b: 'I have a sales process I actually use.' },
+  { n: '02', a: 'I want to leave my job but don\u2019t know what comes next.', b: 'I have a direction I\u2019ve tested before I quit.' },
+  { n: '03', a: 'The business works, but it needs too much of me.', b: 'I know what needs to change so it relies less on me.' },
+  { n: '04', a: 'I keep saying yes and regretting it afterwards.', b: 'I can set a boundary and hold it.' },
 ];
-// Homepage preview of the Free Tools library: three representative live tools,
-// one per subject, covering business, career and the person behind both. The
-// full collection lives at /free-tools/ — the homepage is only the shop window.
+const HOME_SHIFT_AREAS = 'Career \u00B7 Going independent \u00B7 Sales \u00B7 Business growth \u00B7 Communication \u00B7 Burnout';
+
+// Homepage preview of the Free Tools library: all five live tools, so the
+// homepage shows the whole collection rather than a sample. The hub at
+// /free-tools/ stays the destination for the full page.
 const HOME_TOOLS = [
-  { name: "What's limiting your business?", href: '/free-tools/business-constraint/', kind: 'Business · Clarity tool', meta: '20 questions' },
-  { name: "What's making you want to quit your job?", href: '/free-tools/quit-your-job/', kind: 'Career · Clarity tool', meta: '20 questions' },
-  { name: 'Are you burned out?', href: '/free-tools/burned-out/', kind: 'Psychology · Clarity tool', meta: '20 questions' },
+  { name: "What's limiting your business?", href: '/free-tools/business-constraint/', kind: 'Business diagnostic', meta: '20 questions' },
+  { name: 'Is it a strategy or execution problem?', href: '/free-tools/strategy-or-execution/', kind: 'Business diagnostic', meta: '17 questions' },
+  { name: "What's making you want to quit your job?", href: '/free-tools/quit-your-job/', kind: 'Career diagnostic', meta: '20 questions' },
+  { name: 'Do you want to become a solopreneur?', href: '/free-tools/become-a-solopreneur/', kind: 'Career diagnostic', meta: '20 questions' },
+  { name: 'Are you burned out?', href: '/free-tools/burned-out/', kind: 'Psychology diagnostic', meta: '20 questions' },
 ];
 
 // ─── Why Me copy — verbatim from the approved implementation brief ─────────────
@@ -189,6 +194,22 @@ const WHY_V2 = {
         ],
       },
     },
+    // How I learned to read problems — the consumer-research habit that became
+    // the way the 1:1 work is done. Named explicitly so the connection between
+    // Jobs to be Done and the sessions is readable rather than implied.
+    bridgeLabel: 'How I learned to read problems',
+    bridgeH: 'The way I learned to understand customers changed the way I understand people.',
+    bridgeBody: [
+      'For years, part of my job was understanding why people buy something, switch to something else, stay where they are or hesitate. I did that through customer research and Jobs to be Done.',
+      'You learn quickly that the first explanation is often incomplete. So you reconstruct what happened, what someone was trying to achieve and what made the change easier or harder.',
+    ],
+    bridgeClose: 'I realised I was using the same investigative habit with clients.',
+    bridgeSteps: [
+      { n: '01', t: 'What changed just before they started looking.' },
+      { n: '02', t: 'What they were trying to achieve.' },
+      { n: '03', t: 'What pulled them towards the new thing.' },
+      { n: '04', t: 'What the old thing was still doing for them.' },
+    ],
     originNum: '01', originDesc: 'WHERE I STARTED',
     origin: [
       'I did not grow up around business or inherit money, a network or useful introductions. From a studio in Piraeus, I built a consultancy, worked with some of the world’s largest companies and was later paid to teach the work.',
@@ -473,40 +494,61 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .home-proof__item{margin:0;font-size:15px;line-height:1.4;color:#B9C4BA}
 .home-proof__item strong{font-weight:600;color:#F3F0E8}
 
-/* ── 01 / Work with me — dark section, three offers on hairlines ── */
-.home-work{position:relative;overflow:clip;background:${V2.ink};color:${V2.white};padding-block:clamp(64px,8vw,104px)}
-.home-work::before{content:"";position:absolute;top:-120px;right:-140px;width:420px;height:420px;border-radius:50%;background:rgba(143,191,167,0.07);pointer-events:none}
-.home-work .sec-label__num,.home-work .sec-label__desc{color:#8FBFA7}
-.home-work__h{max-width:18ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(34px,4.3vw,56px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:${V2.white};text-wrap:balance}
-.home-work__grid{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:clamp(28px,3.4vw,48px)}
-.home-work__item{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding-top:24px;border-top:1px solid rgba(243,240,232,0.28);color:${V2.white};transition:color .18s,border-color .18s}
-.home-work__item:hover{color:#8FBFA7;border-top-color:#8FBFA7}
-.home-work__kicker{font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8FBFA7}
-.home-work__name{font-family:${V2.display};font-synthesis:none;font-size:clamp(24px,2.2vw,29px);font-weight:750;line-height:1.1;letter-spacing:-0.032em;color:inherit;text-wrap:pretty}
-.home-work__desc{max-width:30ch;font-size:17px;line-height:1.55;color:#B9C4BA;text-wrap:pretty}
-.home-work__go{margin-top:6px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:0.06em;color:#8FBFA7}
+/* ── 01 / Work with me — the before/after ledger ── */
+.home-work{position:relative;overflow:clip;background:${V2.white};color:${V2.ink};padding-block:clamp(56px,7vw,96px)}
+.home-work .sec-label__num,.home-work .sec-label__desc{color:${V2.green}}
+.home-work__h{max-width:22ch;margin:0 0 18px;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,4.6vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:#14201C;text-wrap:balance}
+.home-work__lead{max-width:58ch;margin:0 0 clamp(34px,4.2vw,52px);font-size:clamp(17px,1.6vw,19px);line-height:1.55;color:${V2.ink2};text-wrap:pretty}
+.home-work__areas{margin:clamp(22px,2.8vw,30px) 0 0;font-size:15px;line-height:1.7;letter-spacing:0.02em;color:${V2.meta}}
+.home-work__cta{margin-top:clamp(28px,3.4vw,40px)}
+.home-work__btn{display:inline-flex;align-items:center;gap:10px;min-height:56px;padding-inline:28px;background:${V2.green};color:#F3F0E8;font-size:15px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;transition:background .18s,gap .18s}
+.home-work__btn:hover{background:#03654A;color:#F3F0E8;gap:13px}
 
-/* ── 02 / Free tools — light section, three-tool preview of the library ── */
-.home-free{position:relative;overflow:clip;background:${V2.white};color:${V2.ink};padding-block:clamp(64px,8vw,104px)}
-.home-free::before{content:"";position:absolute;bottom:-300px;left:-130px;width:420px;height:420px;border-radius:50%;background:rgba(4,120,87,0.06);pointer-events:none}
-.home-free .sec-label__num,.home-free .sec-label__desc{color:${V2.green}}
-.home-free__h{position:relative;max-width:22ch;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,3.7vw,46px);font-weight:800;line-height:1.04;letter-spacing:-0.042em;color:#14201C;text-wrap:balance}
-.home-free__lead{position:relative;max-width:58ch;margin-top:20px;font-size:19px;line-height:1.55;color:${V2.ink2};text-wrap:pretty}
+.home-shift{border:1px solid rgba(23,25,25,0.22)}
+.home-shift__row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
+.home-shift__cell{display:flex;gap:14px;padding:clamp(20px,2.3vw,28px) clamp(20px,2.2vw,30px)}
+.home-shift__cell--now{background:#E4E0D4;border-top:1px solid rgba(23,25,25,0.2);border-right:1px solid rgba(23,25,25,0.22)}
+.home-shift__cell--next{background:${V2.green};border-top:1px solid rgba(243,240,232,0.26);gap:12px}
+.home-shift__row--head .home-shift__cell{padding-block:15px;align-items:center}
+.home-shift__cell--headnow{background:#D9D3C4;border-top:3px solid ${V2.meta}}
+.home-shift__cell--headnext{background:#043D2B;border-top:3px solid ${V2.sage}}
+.home-shift__headlabel{font-family:${V2.archivo};font-synthesis:none;font-size:13px;font-weight:400;line-height:1;letter-spacing:0.10em;text-transform:uppercase}
+.home-shift__cell--headnow .home-shift__headlabel{color:#4A5148}
+.home-shift__cell--headnext .home-shift__headlabel{color:${V2.sage}}
+.home-shift__headarrow{flex:0 0 auto;font-family:${V2.archivo};font-synthesis:none;font-size:19px;line-height:1;color:${V2.sage}}
+.home-shift__n{flex:0 0 auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.75;letter-spacing:0.08em;color:#8A8F86}
+.home-shift__a{font-size:17.5px;line-height:1.4;color:#4A5148;text-wrap:pretty}
+.home-shift__arrow{flex:0 0 auto;font-family:${V2.archivo};font-synthesis:none;font-size:15px;line-height:1.55;color:${V2.sage}}
+.home-shift__b{font-size:18px;font-weight:600;line-height:1.4;color:#F3F0E8;text-wrap:pretty}
+/* Once the two halves stack, the vertical divider between them is meaningless
+   and the "now" cell needs its own bottom edge instead. */
+@media (max-width:620px){
+  .home-shift__cell--now{border-right:0}
+  .home-shift__row--head{display:none}
+}
 
-/* three representative live tools, on hairlines */
-.home-free__tools{position:relative;margin-top:clamp(40px,5vw,60px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:0 clamp(28px,3.2vw,48px)}
-.home-free__tool{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:22px 0 28px;border-top:1px solid rgba(23,25,25,0.18);color:${V2.ink};transition:color .18s,border-color .18s}
-.home-free__tool:hover{color:${V2.green};border-top-color:${V2.green}}
-.home-free__tool-kind{font-size:12.5px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:${V2.green}}
-.home-free__tool-name{font-family:${V2.display};font-synthesis:none;font-size:clamp(21px,1.8vw,25px);font-weight:750;line-height:1.14;letter-spacing:-0.028em;color:inherit;text-wrap:pretty}
-.home-free__tool-go{margin-top:auto;padding-top:8px;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${V2.green}}
-.home-free__tool-go span{transition:transform .18s}
-.home-free__tool:hover .home-free__tool-go span{transform:translateX(4px)}
-
-/* the destination */
-.home-free__all{position:relative;margin-top:clamp(32px,4vw,44px);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:55px;padding:0 26px;background:${V2.green};color:#F3F0E8;font-size:14px;font-weight:750;line-height:1;letter-spacing:0.05em;text-transform:uppercase;transition:background .18s,gap .18s}
-.home-free__all:hover{background:#03654A;color:#F3F0E8;gap:14px}
-
+/* ── 02 / Free tools — dark green ground, the site's dominant CTA ── */
+.home-free{position:relative;overflow:clip;background:#043D2B;color:#F3F0E8;padding-block:clamp(56px,7vw,96px)}
+.home-free::before{content:"";position:absolute;top:-160px;right:-140px;width:420px;height:420px;border-radius:50%;background:rgba(243,240,232,0.05);pointer-events:none}
+.home-free .sec-label__num,.home-free .sec-label__desc{color:${V2.sage}}
+.home-free__head{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:clamp(24px,3vw,48px);align-items:end;margin-bottom:clamp(32px,4vw,48px)}
+.home-free__h{max-width:20ch;margin:0;font-family:${V2.archivo};font-synthesis:none;font-size:clamp(28px,3.8vw,48px);font-weight:400;line-height:1;letter-spacing:-0.048em;color:#F3F0E8;text-wrap:balance}
+.home-free__lead{margin:0;max-width:40ch;font-size:17px;line-height:1.6;color:#C9DED3;text-wrap:pretty}
+/* Five tools: one row on desktop, then 3+2 rather than 4+1 so the wrap never
+   leaves a single card stranded on its own row. */
+.home-free__tools{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));gap:clamp(14px,1.6vw,20px)}
+@media (max-width:1100px) and (min-width:720px){.home-free__tools{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:719px){.home-free__tools{grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}}
+.home-free__tool{min-width:0;display:flex;flex-direction:column;gap:16px;padding:clamp(20px,2.2vw,26px);background:#F3F0E8;color:#14201C;transition:background .18s}
+.home-free__tool:hover{background:#D8F3E5;color:#14201C}
+.home-free__tool-tags{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.home-free__tool-free{padding:5px 10px;background:${V2.green};font-size:12.5px;font-weight:750;letter-spacing:0.1em;text-transform:uppercase;color:#F3F0E8}
+.home-free__tool-kind{font-size:12.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#046B4E}
+.home-free__tool-name{font-family:${V2.display};font-synthesis:none;font-size:19px;font-weight:750;line-height:1.22;letter-spacing:-0.026em;color:inherit;text-wrap:pretty}
+.home-free__tool-go{margin-top:auto;padding-top:14px;border-top:1px solid rgba(23,25,25,0.18);font-size:14px;font-weight:700;letter-spacing:0.04em;color:${V2.green}}
+.home-free__allwrap{position:relative;margin-top:clamp(32px,4vw,44px)}
+.home-free__all{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding-inline:26px;background:#F3F0E8;color:#043D2B;font-size:15px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;transition:background .18s,gap .18s}
+.home-free__all:hover{background:#D8F3E5;color:#043D2B;gap:13px}
 @media (max-width:640px){
   .home-free__all{width:100%}
 }
@@ -629,6 +671,19 @@ html[lang^="el"] .amx-body{line-height:1.62}
 .ax-cred__item + .ax-cred__item{border-top:1px solid rgba(23,25,25,0.20)}
 .ax-cred__t{display:block;font-size:17px;font-weight:600;line-height:1.32;letter-spacing:-0.01em;color:#171919}
 .ax-cred__m{display:block;margin-top:4px;font-size:15px;line-height:1.45;color:${V2.meta}}
+/* ── About: how I learned to read problems (Jobs to be Done) ── */
+.ax-bridge{background:${V2.ink};color:${V2.white};padding-block:clamp(56px,7vw,96px)}
+.ax-bridge__label{margin:0;color:${V2.sage};font-size:13px;font-weight:700;line-height:1.3;letter-spacing:0.09em;text-transform:uppercase}
+.ax-bridge__h{max-width:24ch;margin:16px 0 0;font-family:${V2.display};font-synthesis:none;font-size:clamp(28px,3.8vw,46px);font-weight:800;line-height:1.02;letter-spacing:-0.042em;color:#F3F0E8;text-wrap:balance}
+.ax-bridge__grid{margin-top:clamp(32px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));column-gap:clamp(40px,5.2vw,72px);row-gap:28px;align-items:start}
+.ax-bridge__copy{display:flex;flex-direction:column;gap:20px;max-width:58ch}
+.ax-bridge__copy p{margin:0;font-size:clamp(17px,1.5vw,18.5px);line-height:1.66;color:${V2.onDark};text-wrap:pretty}
+.ax-bridge__copy .ax-bridge__close{font-weight:600;color:#F3F0E8}
+.ax-bridge__steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.ax-bridge__step{display:flex;align-items:baseline;gap:14px;padding:14px 0;border-top:1px solid rgba(243,240,232,0.18)}
+.ax-bridge__n{flex:0 0 auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;letter-spacing:0.08em;color:${V2.sage}}
+.ax-bridge__t{font-size:16px;line-height:1.5;color:#F3F0E8}
+
 .ax-duality{background:#EDE8DB;padding-block:clamp(64px,8vw,96px)}
 .ax-duality__h{max-width:16ch;margin-top:14px;font-family:${V2.display};font-synthesis:none;font-size:clamp(32px,4.4vw,52px);font-weight:800;line-height:1;letter-spacing:-0.04em;color:#171919;text-wrap:balance}
 .ax-duality__band{margin-top:clamp(40px,5vw,56px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
@@ -714,40 +769,67 @@ function HomePageV2({ lang = 'en' }) {
     )
   ) : null;
 
+  // 01 / Work with me — a before/after ledger instead of a menu of services.
+  // Left column is what someone arrives with, right column is what they leave
+  // with; the pairing is the argument, so both halves are plain text.
   const workSection = isEn ? React.createElement('section', { className: 'home-work', key: 'work' },
     React.createElement('div', { className: 'site-container' },
       SecLabel('01', 'Work with me'),
-      React.createElement('h2', { className: 'home-work__h' }, 'Three ways to work with me.'),
-      React.createElement('div', { className: 'home-work__grid' },
-        HOME_OFFERS.map(function (o) {
-          return React.createElement('a', { key: o.href, className: 'home-work__item', href: o.href, 'aria-label': 'Explore ' + o.name },
-            o.kicker ? React.createElement('span', { className: 'home-work__kicker' }, o.kicker) : null,
-            React.createElement('span', { className: 'home-work__name' }, o.name),
-            React.createElement('span', { className: 'home-work__desc' }, o.desc),
-            React.createElement('span', { className: 'home-work__go' }, 'Explore ', React.createElement('span', { 'aria-hidden': 'true' }, '→'))
-          );
-        })
-      )
-    )
-  ) : null;
-
-  const startSection = isEn ? React.createElement('section', { className: 'home-free', key: 'start' },
-    React.createElement('div', { className: 'site-container' },
-      SecLabel('02', 'Free tools'),
-      React.createElement('h2', { className: 'home-free__h' }, 'Start with the problem, not the service.'),
-      React.createElement('p', { className: 'home-free__lead' },
-        'Free tools for the business, the career and the person behind both. Start with whichever one is closest to what is actually going on — no email needed to begin.'),
-      React.createElement('div', { className: 'home-free__tools' },
-        HOME_TOOLS.map(function (tool) {
-          return React.createElement('a', { key: tool.href, className: 'home-free__tool', href: tool.href },
-            React.createElement('span', { className: 'home-free__tool-kind' }, tool.kind),
-            React.createElement('span', { className: 'home-free__tool-name' }, tool.name),
-            React.createElement('span', { className: 'home-free__tool-go' }, tool.meta, ' ', React.createElement('span', { 'aria-hidden': 'true' }, '→'))
+      React.createElement('h2', { className: 'home-work__h' }, 'What do you want to be different?'),
+      React.createElement('p', { className: 'home-work__lead' },
+        'Maybe you need more clients. Maybe you want to leave your job. Maybe you keep avoiding sales, content, or the same difficult conversation. We start with what is happening now and what you want instead.'),
+      React.createElement('div', { className: 'home-shift' },
+        React.createElement('div', { className: 'home-shift__row home-shift__row--head' },
+          React.createElement('div', { className: 'home-shift__cell home-shift__cell--now home-shift__cell--headnow' },
+            React.createElement('span', { className: 'home-shift__headlabel' }, 'What\u2019s happening now')),
+          React.createElement('div', { className: 'home-shift__cell home-shift__cell--next home-shift__cell--headnext' },
+            React.createElement('span', { className: 'home-shift__headarrow', 'aria-hidden': 'true' }, '\u2197'),
+            React.createElement('span', { className: 'home-shift__headlabel' }, 'What you want instead'))
+        ),
+        HOME_SHIFTS.map(function (sh) {
+          return React.createElement('div', { className: 'home-shift__row', key: sh.n },
+            React.createElement('div', { className: 'home-shift__cell home-shift__cell--now' },
+              React.createElement('span', { className: 'home-shift__n' }, sh.n),
+              React.createElement('span', { className: 'home-shift__a' }, sh.a)),
+            React.createElement('div', { className: 'home-shift__cell home-shift__cell--next' },
+              React.createElement('span', { className: 'home-shift__arrow', 'aria-hidden': 'true' }, '\u2192'),
+              React.createElement('span', { className: 'home-shift__b' }, sh.b))
           );
         })
       ),
-      React.createElement('a', { className: 'home-free__all', href: '/free-tools/' },
-        React.createElement('span', null, 'Explore all free tools'), React.createElement('span', { 'aria-hidden': 'true' }, '→'))
+      React.createElement('p', { className: 'home-work__areas' }, HOME_SHIFT_AREAS),
+      React.createElement('div', { className: 'home-work__cta' },
+        React.createElement('a', { className: 'home-work__btn', href: '/work-with-me/' },
+          React.createElement('span', null, 'See how I work'), React.createElement('span', { 'aria-hidden': 'true' }, '\u2192')))
+    )
+  ) : null;
+
+  // 02 / Free tools — the site's dominant CTA, on its own dark-green ground so
+  // it reads as the destination rather than a footnote to the section above.
+  const startSection = isEn ? React.createElement('section', { className: 'home-free', key: 'start' },
+    React.createElement('div', { className: 'site-container' },
+      React.createElement('div', { className: 'home-free__head' },
+        React.createElement('div', null,
+          SecLabel('02', 'Free tools'),
+          React.createElement('h2', { className: 'home-free__h' }, 'Free tools for things you\u2019re trying to figure out.')
+        ),
+        React.createElement('p', { className: 'home-free__lead' },
+          'Diagnostics, feedback and practical tools for business, career and everything going on in your head.')
+      ),
+      React.createElement('div', { className: 'home-free__tools' },
+        HOME_TOOLS.map(function (tool) {
+          return React.createElement('a', { key: tool.href, className: 'home-free__tool', href: tool.href },
+            React.createElement('span', { className: 'home-free__tool-tags' },
+              React.createElement('span', { className: 'home-free__tool-free' }, 'Free'),
+              React.createElement('span', { className: 'home-free__tool-kind' }, tool.kind)),
+            React.createElement('span', { className: 'home-free__tool-name' }, tool.name),
+            React.createElement('span', { className: 'home-free__tool-go' }, tool.meta, ' ', React.createElement('span', { 'aria-hidden': 'true' }, '\u2192'))
+          );
+        })
+      ),
+      React.createElement('div', { className: 'home-free__allwrap' },
+        React.createElement('a', { className: 'home-free__all', href: '/free-tools/' },
+          React.createElement('span', null, 'See all free tools'), React.createElement('span', { 'aria-hidden': 'true' }, '\u2192')))
     )
   ) : null;
 
@@ -761,8 +843,8 @@ function HomePageV2({ lang = 'en' }) {
           ? React.createElement('div', { className: 'home-hero__ctarow' },
               React.createElement('a', { className: 'hero-cta hero-cta--caps', href: '/free-tools/' },
                 React.createElement('span', null, 'Explore free tools'), React.createElement('span', { 'aria-hidden': 'true' }, '→')),
-              React.createElement('a', { className: 'home-hero__soft', href: '/start-here/' },
-                React.createElement('span', null, 'Not sure where to start?'), React.createElement('span', { 'aria-hidden': 'true' }, '→'))
+              React.createElement('a', { className: 'home-hero__soft', href: '/work-with-me/' },
+                React.createElement('span', null, 'See how I work'), React.createElement('span', { 'aria-hidden': 'true' }, '→'))
             )
           : React.createElement('a', { className: 'hero-cta', href: window.cPath('diagnostic', lang) },
               React.createElement('span', null, t.ctaBtn), React.createElement('span', null, '→'))
@@ -925,6 +1007,26 @@ function AboutPageV2({ lang = 'en' }) {
       )
     );
     // White: Business ← portrait → Psychology + why the two interact.
+    const bridgeSection = React.createElement('section', { className: 'ax-bridge', 'aria-labelledby': 'ax-bridge-title', key: 'bridge' },
+      React.createElement('div', { className: 'ax-container' },
+        React.createElement('p', { className: 'ax-bridge__label' }, c.bridgeLabel),
+        React.createElement('h2', { className: 'ax-bridge__h', id: 'ax-bridge-title' }, c.bridgeH),
+        React.createElement('div', { className: 'ax-bridge__grid' },
+          React.createElement('div', { className: 'ax-bridge__copy' },
+            c.bridgeBody.map(function (t, i) { return React.createElement('p', { key: i }, t); }),
+            React.createElement('p', { className: 'ax-bridge__close' }, c.bridgeClose)
+          ),
+          React.createElement('ol', { className: 'ax-bridge__steps' },
+            c.bridgeSteps.map(function (b) {
+              return React.createElement('li', { className: 'ax-bridge__step', key: b.n },
+                React.createElement('span', { className: 'ax-bridge__n' }, b.n),
+                React.createElement('span', { className: 'ax-bridge__t' }, b.t));
+            })
+          )
+        )
+      )
+    );
+
     const dualitySection = React.createElement('section', { className: 'ax-duality', 'aria-labelledby': 'ax-duality-title', key: 'duality' },
       React.createElement('div', { className: 'ax-container' },
         React.createElement('p', { className: 'ax-label' }, 'Business + psychology'),
@@ -968,13 +1070,13 @@ function AboutPageV2({ lang = 'en' }) {
     // Dark closing CTA.
     const ctaSection = React.createElement('section', { className: 'ax-cta', key: 'cta' },
       React.createElement('div', { className: 'ax-container' },
-        React.createElement('h2', { className: 'ax-cta__h' }, 'Not sure which conversation you need?'),
-        React.createElement('a', { className: 'ax-cta__btn', href: '/free-tools/' }, 'Explore free tools →'),
-        React.createElement('a', { className: 'ax-cta__soft', href: '/start-here/' }, 'Not sure where to start? →')
+        React.createElement('h2', { className: 'ax-cta__h' }, 'If that sounds like the kind of thinking you want, here is how I work.'),
+        React.createElement('a', { className: 'ax-cta__btn', href: '/work-with-me/' }, 'Work with me →'),
+        React.createElement('a', { className: 'ax-cta__soft', href: '/free-tools/' }, 'Explore free tools →')
       )
     );
 
-    aboutMainChildren = [topSection, dualitySection, whySection, ctaSection];
+    aboutMainChildren = [topSection, bridgeSection, dualitySection, whySection, ctaSection];
   } else {
     aboutMainClass = 'amx-page amx-page--about';
     aboutMainChildren = [

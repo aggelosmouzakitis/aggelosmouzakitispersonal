@@ -13,11 +13,8 @@ const PAGES = [
   { f: 'about/index.html', faq: false },
   { f: 'reviews/index.html', faq: false },
   { f: 'confidentiality/index.html', faq: false },
-  // New 1:1 offer landing pages + orientation flow + contact
-  { f: 'career-strategy-consulting/index.html', faq: true },
-  { f: 'solopreneur-growth-consulting/index.html', faq: true },
-  { f: 'psychotherapy-decision-coaching/index.html', faq: true },
-  { f: 'start-here/index.html', faq: false },
+  // The single service page + contact
+  { f: 'work-with-me/index.html', faq: true },
   { f: 'contact/index.html', faq: false },
   { f: 'wtf-friday/index.html', faq: false },
   // Core — Greek (/el/) — same indexable prerender path as English (brief §57)
@@ -37,6 +34,7 @@ const PAGES = [
   { f: 'therapy-for-executives/index.html', faq: true },
   { f: 'imposter-syndrome-therapy/index.html', faq: true },
   { f: 'executive-burnout-therapy/index.html', faq: true },
+  { f: 'career-transition-therapy/index.html', faq: true },
   // Greek SEO landing pages (/el/*) — renderApp('el-…','el'), same indexable path
 ];
 

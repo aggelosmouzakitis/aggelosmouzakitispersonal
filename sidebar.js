@@ -18,9 +18,9 @@ const SB_CORE_PATHS = {
     en: '/',
     el: '/el/'
   },
-  'one-to-one': {
-    en: '/1-to-1/',
-    el: '/el/1-to-1/'
+  'work-with-me': {
+    en: '/work-with-me/',
+    el: '/work-with-me/'
   },
   'about': {
     en: '/about/',
@@ -54,7 +54,7 @@ const SB_CORE_PATHS = {
 const sbPath = (id, lang) => SB_CORE_PATHS[id] && SB_CORE_PATHS[id][lang] || SB_CORE_PATHS[id] && SB_CORE_PATHS[id].en || '/';
 const SB_LABELS = {
   en: {
-    role: 'Business Growth Advisor + Licensed Psychotherapist',
+    role: 'Business & Career Advisor + BACP-registered psychotherapist',
     home: 'Home',
     workWith: 'Work with me',
     oneToOne: '1:1',
@@ -62,7 +62,7 @@ const SB_LABELS = {
     writing: 'Writing',
     reviews: 'Reviews',
     findMe: 'Find me',
-    diagHead: 'Not sure where to start?',
+    diagHead: 'Work with me',
     diagSub: 'Pick the situation closest to what you are dealing with and get one clear starting direction.',
     diagBtn: 'START →',
     diagShort: 'Where to start',
@@ -88,7 +88,7 @@ const SB_LABELS = {
 };
 const sbT = lang => SB_LABELS[lang] || SB_LABELS.en;
 // Orientation route is language-aware (EL still has its own diagnostic).
-const diagPath = lang => lang === 'el' ? '/el/startingdiagnostic/' : '/start-here/';
+const diagPath = lang => lang === 'el' ? '/el/startingdiagnostic/' : '/work-with-me/';
 const ICONS = {
   OneToOne: () => /*#__PURE__*/React.createElement("svg", {
     width: "19",

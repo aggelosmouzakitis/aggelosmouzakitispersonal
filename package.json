@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel site-chrome.jsx -o site-chrome.js && babel core-pages-v2.jsx -o core-pages-v2.js && babel sidebar.jsx -o sidebar.js && babel content-pages.jsx -o content-pages.js && babel diagnostic.jsx -o diagnostic.js && babel offer-pages.jsx -o offer-pages.js && babel start-here.jsx -o start-here.js && babel contact.jsx -o contact.js && babel wtf-friday.jsx -o wtf-friday.js && babel clarity-data.jsx -o clarity-data.js && babel clarity-tools.jsx -o clarity-tools.js && babel free-tools.jsx -o free-tools.js && babel lead-capture.jsx -o lead-capture.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel site-chrome.jsx -o site-chrome.js && babel core-pages-v2.jsx -o core-pages-v2.js && babel sidebar.jsx -o sidebar.js && babel content-pages.jsx -o content-pages.js && babel diagnostic.jsx -o diagnostic.js && babel work-with-me.jsx -o work-with-me.js && babel contact.jsx -o contact.js && babel wtf-friday.jsx -o wtf-friday.js && babel clarity-data.jsx -o clarity-data.js && babel clarity-tools.jsx -o clarity-tools.js && babel free-tools.jsx -o free-tools.js && babel lead-capture.jsx -o lead-capture.js",
+    "test": "node scripts/seo/seo-check.js",
+    "seo:meta": "node scripts/seo/apply-metadata.js",
+    "seo:sitemap": "node scripts/gen-sitemap.js",
+    "seo:check": "node scripts/seo/seo-check.js",
+    "seo:indexnow": "node scripts/seo/indexnow.js"
   },
   "repository": {
     "type": "git",

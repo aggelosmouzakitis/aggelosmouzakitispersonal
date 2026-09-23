@@ -247,37 +247,6 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .site-menu a{color:#F3F0E8;font-size:16px;text-transform:uppercase;letter-spacing:0.03em}
 .site-menu .hdr-cta{align-self:stretch;justify-content:center;min-height:48px;font-size:13px}
 
-/* ── "Work with me" mega dropdown (desktop) ── */
-.site-hdr__work{position:static;display:flex;align-items:center}
-.site-hdr__work-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;color:#F3F0E8;font-family:inherit;font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding:0 0 2px;transition:opacity .18s}
-.site-hdr__work-btn:hover,.site-hdr__work-btn[aria-expanded="true"]{opacity:1}
-.site-hdr__work-caret{width:10px;height:6px;transition:transform .2s ease;opacity:.85}
-.site-hdr__work-btn[aria-expanded="true"] .site-hdr__work-caret{transform:rotate(180deg)}
-.site-hdr__mega{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:min(640px,calc(100vw - 32px));background:#101A16;border:1px solid rgba(243,240,232,0.14);border-top:2px solid #047857;border-radius:0;box-shadow:0 30px 70px -24px rgba(0,0,0,0.6);padding:26px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;z-index:200}
-.site-hdr__mega-col{min-width:0}
-.site-hdr__mega-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#047857;margin:2px 0 12px;padding-left:12px}
-.site-hdr__mega-item{display:block;padding:9px 12px;border-radius:0;transition:background .16s}
-a.site-hdr__mega-item:hover{background:rgba(243,240,232,0.06)}
-.site-hdr__mega-name{display:block;font-family:var(--font-heading);font-size:16.5px;font-weight:700;line-height:1.2;letter-spacing:-0.012em;color:#F3F0E8}
-a.site-hdr__mega-item:hover .site-hdr__mega-name{color:#F3F0E8}
-.site-hdr__mega-desc{display:block;margin-top:3px;font-size:13px;line-height:1.4;color:#C0C9BF}
-.site-hdr__mega-item[aria-current] .site-hdr__mega-name{color:#047857}
-.site-hdr__mega-item--soon{cursor:default}
-.site-hdr__mega-item--soon .site-hdr__mega-name{color:#C0C9BF;opacity:.7}
-.site-hdr__mega-soon{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#C0C9BF;border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 9px}
-
-/* ── "Work with me" section inside the mobile menu ── */
-.site-menu__group{width:100%}
-.site-menu__acc{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;padding:0;background:none;border:0;cursor:pointer;color:#F3F0E8;font-family:inherit;font-size:16px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.03em}
-.site-menu__acc-caret{flex:none;opacity:.8;transition:transform .2s ease}
-.site-menu__acc.is-open .site-menu__acc-caret{transform:rotate(180deg)}
-.site-menu__panel{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:6px 0 10px}
-.site-menu__label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#8FBFA7;margin-top:8px}
-.site-menu a.site-menu__sub{text-transform:none;letter-spacing:0;font-size:15px;min-height:40px;display:flex;align-items:center}
-.site-menu a.site-menu__sub[aria-current]{color:#8FBFA7}
-.site-menu__soon{color:#C0C9BF;font-size:15px;min-height:40px;display:flex;align-items:center;gap:10px}
-.site-menu__soon small{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:1px solid rgba(243,240,232,0.22);border-radius:999px;padding:2px 8px;color:#C0C9BF}
-
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
 .pill--green{height:72px;padding-inline:44px;background:#047857;color:#F3F0E8;font-size:16px}
 .pill--green:hover{gap:12px;background:#03654A}

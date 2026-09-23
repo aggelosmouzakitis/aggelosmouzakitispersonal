@@ -1,62 +1,68 @@
-// gen-sitemap.js — build sitemap.xml with only canonical, indexable 200 URLs.
-// The site is English-only now (Greek /el/ retired → 301), so there are no
-// hreflang alternates. Redirected / noindex / deactivated URLs are excluded.
+// gen-sitemap.js — build sitemap.xml from scripts/seo/site-meta.js.
+//
+// The page table is the single source of truth, so a URL can only appear in the
+// sitemap if it also has a canonical, a title and a description. Redirected,
+// noindex and retired URLs are absent by construction: they are not in the table.
+//
+// lastmod comes from the file's own git history (the last commit that touched
+// that page or the source that renders it), falling back to the file mtime, so
+// the dates reflect real content changes rather than the date of the build.
+//
 // Run: node scripts/gen-sitemap.js
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
+const { ORIGIN, PAGES } = require('./seo/site-meta.js');
 const ROOT = path.resolve(__dirname, '..');
-const O = 'https://aggelosmouzakitis.com';
-const TODAY = '2026-09-21';
 
-// Core pages (English only).
-const CORE = ['/about/', '/reviews/', '/confidentiality/'];
-// Primary commercial 1:1 offers (linked from the "Work with me" dropdown).
-const OFFERS = [
-  '/psychotherapy-decision-coaching/',
-  '/career-strategy-consulting/',
-  '/solopreneur-growth-consulting/',
-];
-// Free Tools — the collection page plus the five live clarity-tool diagnostics
-// that sit inside it. The old /clarity-tools/ URLs are 301s and stay out.
-const FREE_TOOLS = [
-  '/free-tools/business-constraint/',
-  '/free-tools/strategy-or-execution/',
-  '/free-tools/quit-your-job/',
-  '/free-tools/become-a-solopreneur/',
-  '/free-tools/burned-out/',
-];
-// English SEO landing pages (single search intent each, no EL equivalent).
-const EN_SEO = [
-  '/therapy-for-founders/',
-  '/therapy-for-executives/',
-  '/imposter-syndrome-therapy/',
-  '/executive-burnout-therapy/',
-];
+// Page → the sources that actually change its content. A page's lastmod is the
+// most recent commit date across its own file and those sources.
+const SOURCES = {
+  '/': ['core-pages-v2.jsx'],
+  '/work-with-me/': ['work-with-me.jsx'],
+  '/about/': ['core-pages-v2.jsx'],
+  '/reviews/': ['core-pages-v2.jsx', 'content-pages.jsx'],
+  '/free-tools/': ['free-tools.jsx'],
+  '/contact/': ['contact.jsx'],
+  '/wtf-friday/': ['wtf-friday.jsx'],
+  '/confidentiality/': ['content-pages.jsx'],
+};
+const TOOL_SOURCES = ['clarity-data.jsx', 'clarity-tools.jsx'];
+const SPECIALTY_SOURCES = ['content-pages.jsx'];
 
-function plainUrl(loc, priority, freq) {
-  return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${freq || 'monthly'}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+function lastCommitDate(file) {
+  try {
+    const out = execFileSync('git', ['log', '-1', '--format=%cs', '--', file],
+      { cwd: ROOT, encoding: 'utf8' }).trim();
+    return out || null;
+  } catch (e) { return null; }
 }
 
-const parts = [];
-parts.push(plainUrl(O + '/', '1.0'));
-for (const p of CORE) parts.push(plainUrl(O + p, '0.7'));
-for (const p of OFFERS) parts.push(plainUrl(O + p, '0.8'));
-// High-intent + free entry points. /free-tools/ is the site's primary discovery
-// destination, so it carries the highest priority after the homepage.
-parts.push(plainUrl(O + '/free-tools/', '0.9'));
-for (const p of FREE_TOOLS) parts.push(plainUrl(O + p, '0.7'));
-parts.push(plainUrl(O + '/start-here/', '0.8'));
-parts.push(plainUrl(O + '/wtf-friday/', '0.7', 'weekly'));
-parts.push(plainUrl(O + '/ask-me-anything/', '0.6'));
-parts.push(plainUrl(O + '/contact/', '0.7'));
-// English SEO landing pages
-for (const p of EN_SEO) parts.push(plainUrl(O + p, '0.6'));
+function lastmodFor(p) {
+  const files = [p.file];
+  if (SOURCES[p.url]) files.push(...SOURCES[p.url]);
+  else if (p.url.startsWith('/free-tools/')) files.push(...TOOL_SOURCES);
+  else files.push(...SPECIALTY_SOURCES);
 
-const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${parts.join('\n')}
-</urlset>
-`;
-fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml);
-const count = (xml.match(/<loc>/g) || []).length;
-console.log(`sitemap.xml written — ${count} URLs (1 home, ${CORE.length} core, ${OFFERS.length} offers, 1 free-tools hub + ${FREE_TOOLS.length} tools, ${EN_SEO.length} en-seo, + start-here/wtf/ama/contact)`);
+  const dates = files
+    .map((f) => (fs.existsSync(path.join(ROOT, f)) ? lastCommitDate(f) : null))
+    .filter(Boolean);
+  if (dates.length) return dates.sort().pop();
+  // Uncommitted or brand-new file: fall back to its mtime.
+  const st = fs.statSync(path.join(ROOT, p.file));
+  return st.mtime.toISOString().slice(0, 10);
+}
+
+const rows = PAGES.map((p) => {
+  const lastmod = lastmodFor(p);
+  return `  <url>\n    <loc>${ORIGIN}${p.url}</loc>\n    <lastmod>${lastmod}</lastmod>\n` +
+         `    <changefreq>${p.changefreq}</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`;
+});
+
+const out = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+  rows.join('\n') + '\n</urlset>\n';
+
+fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), out);
+console.log(`sitemap.xml: ${PAGES.length} URLs`);
+for (const p of PAGES) console.log(`  ${lastmodFor(p)}  ${ORIGIN}${p.url}`);

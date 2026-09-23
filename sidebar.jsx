@@ -15,7 +15,7 @@ const SB = {
 // Kept here too so the sidebar never depends on script load order.
 const SB_CORE_PATHS = {
   'home':            { en: '/',                 el: '/el/' },
-  'one-to-one':      { en: '/1-to-1/',          el: '/el/1-to-1/' },
+  'work-with-me':    { en: '/work-with-me/',    el: '/work-with-me/' },
   'about':           { en: '/about/',           el: '/el/about/' },
   'reviews':         { en: '/reviews/',         el: '/el/reviews/' },
   'book':            { en: '/book/',            el: '/el/book/' },
@@ -27,14 +27,14 @@ const SB_CORE_PATHS = {
 const sbPath = (id, lang) => (SB_CORE_PATHS[id] && SB_CORE_PATHS[id][lang]) || (SB_CORE_PATHS[id] && SB_CORE_PATHS[id].en) || '/';
 
 const SB_LABELS = {
-  en: { role: 'Business Growth Advisor + Licensed Psychotherapist', home: 'Home', workWith: 'Work with me', oneToOne: '1:1', about: 'About', writing: 'Writing', reviews: 'Reviews',
-        findMe: 'Find me', diagHead: 'Not sure where to start?', diagSub: 'Pick the situation closest to what you are dealing with and get one clear starting direction.', diagBtn: 'START →', diagShort: 'Where to start', book: 'Book a fit call →', bookShort: 'Book' },
+  en: { role: 'Business & Career Advisor + BACP-registered psychotherapist', home: 'Home', workWith: 'Work with me', oneToOne: '1:1', about: 'About', writing: 'Writing', reviews: 'Reviews',
+        findMe: 'Find me', diagHead: 'Work with me', diagSub: 'Pick the situation closest to what you are dealing with and get one clear starting direction.', diagBtn: 'START →', diagShort: 'Where to start', book: 'Book a fit call →', bookShort: 'Book' },
   el: { role: 'Business Growth Advisor + Ψυχοθεραπευτής', home: 'Αρχική', workWith: 'Συνεργασία', oneToOne: '1:1', about: 'Σχετικά', writing: 'Άρθρα', reviews: 'Κριτικές',
         findMe: 'Βρες με', diagHead: 'Starting Diagnostic', diagSub: '10 λεπτά για το business σου: τι το φρενάρει και πού μπαίνεις εσύ στην εξίσωση.', diagBtn: 'ΞΕΚΙΝΑ →', diagShort: 'Τεστ', book: 'Κλείσε γνωριμία →', bookShort: 'Γνωριμία' },
 };
 const sbT = (lang) => SB_LABELS[lang] || SB_LABELS.en;
 // Orientation route is language-aware (EL still has its own diagnostic).
-const diagPath = (lang) => (lang === 'el' ? '/el/startingdiagnostic/' : '/start-here/');
+const diagPath = (lang) => (lang === 'el' ? '/el/startingdiagnostic/' : '/work-with-me/');
 
 const ICONS = {
   OneToOne: () => (

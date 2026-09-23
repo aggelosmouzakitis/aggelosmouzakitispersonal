@@ -23,12 +23,14 @@ var PRIVACY_HREF = (typeof window !== 'undefined' && window.cPath) ? window.cPat
 var MAXLEN = 3000;
 var COUNTER_FROM = 2600; // only show the character count as the limit approaches
 
-// interest value → human label (also the dropdown option order)
+// interest value → human label (also the dropdown option order).
+// The three separate audits are retired along with their pages: 1:1 work is one
+// service now, so the orientation call is the single route into it. `wtf-friday`
+// and `other` stay because they are genuinely different reasons to write.
 var INTERESTS = [
-  { value: 'orientation', label: 'Free 30-minute orientation chat' },
-  { value: 'experience-to-offer', label: 'Experience-to-Offer Audit' },
-  { value: 'solo-business-growth', label: 'Solo Business Growth Audit' },
-  { value: 'private-sparring', label: 'Private Sparring' },
+  { value: 'orientation', label: 'Free orientation call (1:1 work)' },
+  { value: 'wtf-friday', label: 'WTF Friday (free group office hours)' },
+  { value: 'other', label: 'Something else' },
 ];
 var VALID_INTEREST = INTERESTS.reduce(function (m, o) { m[o.value] = o.label; return m; }, {});
 
@@ -286,7 +288,7 @@ function ContactForm() {
         INTERESTS.map(function (o) { return e('option', { key: o.value, value: o.value }, o.label); })
       ),
       errors.interest ? e('p', { id: 'interest-err', className: 'ct-err' }, errors.interest) : null,
-      e('p', { id: 'interest-help', className: 'ct-help' }, 'Choose the orientation chat if you are not sure where to begin.')
+      e('p', { id: 'interest-help', className: 'ct-help' }, 'Choose the orientation call if you want to work together on something specific.')
     ),
     // Message
     e('div', { className: 'ct-field' },
