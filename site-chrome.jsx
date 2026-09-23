@@ -691,10 +691,15 @@ const Motion = (function () {
   });
 
   // ── Entrances ──────────────────────────────────────────────────────────────
-  // Spec thresholds: the element is a third of the way in, and the bottom 10%
-  // of the viewport does not count, so nothing fires as it clips the fold.
-  const DEF_THRESHOLD = 0.35;
-  const DEF_MARGIN = '0px 0px -10% 0px';
+  // Trigger on where the element is, not on how much of itself is showing.
+  // A ratio threshold is size-dependent: a section taller than the phone has to
+  // fill most of the screen before 35% of *it* is visible, so its entrance only
+  // started once it was halfway up — and a 2s sequence then finished after the
+  // thing had scrolled past. A zero threshold against a root shortened by 15%
+  // fires the moment the top edge crosses 85% of the viewport, which is the
+  // same cue for a card and for a full-height map.
+  const DEF_THRESHOLD = 0;
+  const DEF_MARGIN = '0px 0px -15% 0px';
   const entries = new WeakMap(); // el -> [{fn, io}, …]  (a node may arm and run on different thresholds)
   const observers = new Map();   // "threshold|margin" -> IntersectionObserver
 
@@ -801,7 +806,13 @@ const Motion = (function () {
   // handful of things anchored to the top of the document.
   function progressOf(c, r, vh) {
     if (c.distance) return Math.min(1, Math.max(0, (pageYOffset || 0) / c.distance));
-    const span = (c.from - c.to) * vh + r.height;
+    // Scroll-linked motion is meant to scale with its section: that is what
+    // keeps the progress field's four markers tied to the four rows you are
+    // reading. An entrance is not — it should land in a bounded amount of
+    // scrolling however tall the section is, or on a phone the last rows only
+    // arrive after they have gone off the top. So `once` caps the height term.
+    const h = c.once ? Math.min(r.height, vh * 0.8) : r.height;
+    const span = (c.from - c.to) * vh + h;
     if (span <= 0) return 1;
     return Math.min(1, Math.max(0, (c.from * vh - r.top) / span));
   }

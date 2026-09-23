@@ -808,6 +808,10 @@ function WmForcesMap() {
     // the visitor. No cycling — that belongs to the prototype, not the page.
     S.e = 1;
     paint();
+    // This entrance is 2060ms — by far the longest on the site — so it starts a
+    // little before the map reaches the fold. Any later and the sequence is
+    // still resolving once the map is already high on screen, which reads as
+    // lag rather than as motion.
     M.onView(el, function (_, info) {
       if (info.instant) {
         S.e = 1;
@@ -823,6 +827,8 @@ function WmForcesMap() {
         if (S.e < 1) S.raf = requestAnimationFrame(step);
       };
       S.raf = requestAnimationFrame(step);
+    }, {
+      margin: '0px 0px 20% 0px'
     });
 
     // Hover is transient; focus and tap are sticky until dismissed.
