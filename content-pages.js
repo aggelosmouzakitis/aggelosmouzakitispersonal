@@ -3046,6 +3046,9 @@ function ExecTherapyPage() {
     }, {
       href: '/imposter-syndrome-therapy/',
       label: 'Imposter syndrome →'
+    }, {
+      href: '/career-transition-therapy/',
+      label: 'Career transition →'
     }]
   }));
 }
@@ -3118,6 +3121,9 @@ function FoundersTherapyPage() {
     }, {
       href: '/executive-burnout-therapy/',
       label: 'Executive burnout →'
+    }, {
+      href: '/career-transition-therapy/',
+      label: 'Career transition →'
     }]
   }));
 }
@@ -3204,6 +3210,9 @@ function ImposterPage() {
     }, {
       href: '/therapy-for-executives/',
       label: 'Therapy for executives →'
+    }, {
+      href: '/therapy-for-founders/',
+      label: 'Therapy for founders →'
     }]
   }));
 }
@@ -3282,8 +3291,11 @@ function BurnoutPage() {
       href: '/therapy-for-executives/',
       label: 'Therapy for executives →'
     }, {
-      href: '/imposter-syndrome-therapy/',
-      label: 'Imposter syndrome →'
+      href: '/career-transition-therapy/',
+      label: 'Career transition →'
+    }, {
+      href: '/therapy-for-founders/',
+      label: 'Therapy for founders →'
     }]
   }));
 }

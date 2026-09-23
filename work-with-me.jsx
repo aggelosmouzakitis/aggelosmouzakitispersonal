@@ -12,7 +12,7 @@ var e = React.createElement;
 
 // Every CTA on the page lands on the contact form with the orientation-call
 // interest preselected, which is the only 1:1 option the form now offers.
-var ORIENTATION_URL = '/contact?interest=orientation';
+var ORIENTATION_URL = '/contact/?interest=orientation';
 
 // ─── Content ─────────────────────────────────────────────────────────────────
 // Six problem areas. Each is a heading plus the concrete things people actually

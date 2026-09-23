@@ -1598,6 +1598,7 @@ function ExecTherapyPage() {
       { href: '/work-with-me/', label: '1:1 work with me →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
       { href: '/imposter-syndrome-therapy/', label: 'Imposter syndrome →' },
+      { href: '/career-transition-therapy/', label: 'Career transition →' },
     ] })
   );
 }
@@ -1658,6 +1659,7 @@ function FoundersTherapyPage() {
       { href: '/work-with-me/', label: '1:1 work with me →' },
       { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
+      { href: '/career-transition-therapy/', label: 'Career transition →' },
     ] })
   );
 }
@@ -1726,6 +1728,7 @@ function ImposterPage() {
       { href: '/work-with-me/', label: '1:1 work with me →' },
       { href: '/executive-burnout-therapy/', label: 'Executive burnout →' },
       { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
+      { href: '/therapy-for-founders/', label: 'Therapy for founders →' },
     ] })
   );
 }
@@ -1789,7 +1792,8 @@ function BurnoutPage() {
     React.createElement(RelatedLinks, { mob, heading: 'Keep reading', items: [
       { href: '/work-with-me/', label: '1:1 work with me →' },
       { href: '/therapy-for-executives/', label: 'Therapy for executives →' },
-      { href: '/imposter-syndrome-therapy/', label: 'Imposter syndrome →' },
+      { href: '/career-transition-therapy/', label: 'Career transition →' },
+      { href: '/therapy-for-founders/', label: 'Therapy for founders →' },
     ] })
   );
 }

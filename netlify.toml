@@ -275,12 +275,12 @@
 # existing /book/ index.html, which is kept in the repo but no longer served.
 [[redirects]]
   from = "/book"
-  to = "/contact?interest=orientation"
+  to = "/contact/?interest=orientation"
   status = 301
   force = true
 [[redirects]]
   from = "/book/*"
-  to = "/contact?interest=orientation"
+  to = "/contact/?interest=orientation"
   status = 301
   force = true
 

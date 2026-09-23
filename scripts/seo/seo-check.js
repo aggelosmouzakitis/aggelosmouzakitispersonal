@@ -13,7 +13,8 @@
 // self-referencing, single), robots (no accidental noindex), exactly one H1,
 // Open Graph completeness, og:url === canonical, OG image resolves, JSON-LD
 // parses and its FAQ entries exist in the HTML, internal links that 404 or go
-// through a redirect, retired URLs linked from anywhere, and sitemap integrity.
+// through a redirect, retired URLs linked from anywhere, orphan pages, and
+// sitemap integrity.
 
 const fs = require('fs');
 const path = require('path');
@@ -247,7 +248,8 @@ async function main() {
     }
 
     // collect internal links
-    for (const href of all(body, /href="(\/[^"#?]*)"/g)) {
+    for (const raw of all(body, /href="(\/[^"#]*)"/g)) {
+      const href = raw.split('?')[0];
       if (!linkTargets.has(href)) linkTargets.set(href, new Set());
       linkTargets.get(href).add(url);
     }
@@ -262,6 +264,17 @@ async function main() {
     else if (t.hops.length) err(from, `internal link goes through a ${t.hops[0].status} → ${target} → ${t.final}`);
     for (const r of RETIRED) {
       if (target === r || target.startsWith(r)) err(from, `links to retired URL ${target}`);
+    }
+  }
+
+  // ── Orphans: an indexable page nothing links to is reachable only through
+  //    the sitemap, which is not discovery. The homepage is the root, so it is
+  //    exempt; everything else needs at least one crawlable <a href> to it.
+  for (const p of PAGES) {
+    if (p.url === '/') continue;
+    const sources = linkTargets.get(p.url);
+    if (!sources || sources.size === 0) {
+      err(p.url, 'orphan — indexable and in the sitemap, but no page links to it');
     }
   }
 
