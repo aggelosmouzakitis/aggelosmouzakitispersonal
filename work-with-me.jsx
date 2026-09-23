@@ -83,12 +83,16 @@ var PROOF = [
 ];
 
 // ─── Stylesheet ──────────────────────────────────────────────────────────────
-// Same editorial Japandi tokens as the rest of the site, plus one new accent
-// (--wm-clay) for the forces that hold someone in place. Breakpoints mirror the
-// offer pages they replace: 900px stacks the two-column blocks, 560px reflows
-// the forces map from a horizontal axis to a vertical one.
+// Same editorial Japandi tokens as the rest of the site. The forces that hold
+// someone in place now use the shared coral system from site-chrome instead of
+// the page-scoped --wm-clay, which is gone: --coral for graphics and large
+// emphasis, --coral-ink wherever the text is small enough to need 4.5:1 on
+// bone (--coral reaches only 3.56:1 there, --coral-ink 5.19:1, which is what
+// clay used to give). Breakpoints mirror the offer pages they replace: 900px
+// stacks the two-column blocks, 560px reflows the forces map from a horizontal
+// axis to a vertical one.
 var WM_CSS = `
-.wm{background:#F3F0E8;color:#3A403A;font-family:var(--font-body);--wm-clay:#A34A38}
+.wm{background:#F3F0E8;color:#3A403A;font-family:var(--font-body)}
 .wm-container{width:var(--page-canvas);margin-inline:auto}
 
 /* shared atoms */
@@ -141,15 +145,15 @@ var WM_CSS = `
 .wm-map__axis-label{flex:0 0 auto;font-family:var(--font-display);font-synthesis:none;font-size:13px;font-weight:400;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#047857}
 .wm-map__axis-line{flex:1;min-width:16px;border-top:1px dashed rgba(4,120,87,0.6)}
 .wm-map__axis-arrow{flex:0 0 auto;font-family:var(--font-display);font-size:14px;line-height:1;color:#047857}
-.wm-map__axis--against .wm-map__axis-label,.wm-map__axis--against .wm-map__axis-arrow{color:var(--wm-clay)}
-.wm-map__axis--against .wm-map__axis-line{border-top-color:rgba(163,74,56,0.6)}
+.wm-map__axis--against .wm-map__axis-label,.wm-map__axis--against .wm-map__axis-arrow{color:var(--coral-ink)}
+.wm-map__axis--against .wm-map__axis-line{border-top-color:rgba(207,90,61,0.6)}
 
 .wm-forces{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:clamp(24px,3.4vw,56px);padding-block:clamp(30px,3.6vw,48px) clamp(34px,4vw,56px);margin:0;list-style:none}
 .wm-forces--against{padding-block:clamp(34px,4vw,56px) clamp(30px,3.6vw,48px)}
 .wm-force{min-width:0}
 .wm-force__label{font-family:var(--font-display);font-synthesis:none;font-size:clamp(36px,5.2vw,68px);line-height:0.92;letter-spacing:-0.055em;color:#047857;margin-bottom:16px}
-.wm-forces--against .wm-force__label{color:var(--wm-clay);margin-bottom:0}
-.wm-force__sub{margin-top:4px;font-family:var(--font-display);font-synthesis:none;font-size:clamp(18px,2.2vw,29px);line-height:1;letter-spacing:-0.045em;color:var(--wm-clay)}
+.wm-forces--against .wm-force__label{color:var(--coral);margin-bottom:0}
+.wm-force__sub{margin-top:4px;font-family:var(--font-display);font-synthesis:none;font-size:clamp(18px,2.2vw,29px);line-height:1;letter-spacing:-0.045em;color:var(--coral-ink)}
 .wm-forces--against .wm-force__q{margin-top:16px}
 .wm-force__q{margin:0;max-width:26ch;font-size:clamp(16.5px,1.5vw,18px);line-height:1.5;color:#14201C;text-wrap:pretty}
 
@@ -169,7 +173,7 @@ var WM_CSS = `
 @media (min-width:900px){.wm-where__chips{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .wm-chip{padding:14px 16px;font-family:var(--font-heading);font-size:16px;font-weight:750;letter-spacing:-0.01em}
 .wm-chip--practical{background:#D8F3E5;color:#043D2B}
-.wm-chip--psychological{background:#F6E2DE;color:#7E2C20}
+.wm-chip--psychological{background:var(--coral-tint);color:#7E2C20}
 .wm-where__note{margin:18px 0 0;max-width:46ch;font-size:16.5px;line-height:1.55;color:#3A403A}
 
 /* 03 — fit and questions */
@@ -177,14 +181,14 @@ var WM_CSS = `
 .wm-fit__h2{margin:0 0 clamp(32px,4vw,44px)}
 .wm-fit__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:clamp(32px,4vw,64px);margin-bottom:clamp(44px,5.4vw,68px)}
 .wm-fit__h3{margin:0 0 20px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(21px,2.1vw,26px);font-weight:800;line-height:1.14;letter-spacing:-0.03em;color:#047857}
-.wm-fit__h3--no{color:var(--wm-clay)}
+.wm-fit__h3--no{color:var(--coral)}
 .wm-fit__list{list-style:none;margin:0;padding:0}
 .wm-fit__item{display:flex;gap:12px;padding:15px 0;border-top:1px solid rgba(23,25,25,0.18);font-size:17px;line-height:1.5;color:#3A403A;text-wrap:pretty}
 /* The rules still span the full column on a wide canvas, but the sentence
    inside them stops at a readable measure instead of stretching to ~90ch. */
 .wm-fit__item>span:last-child{max-width:52ch}
 .wm-fit__mark{flex:0 0 auto;font-weight:700;color:#047857}
-.wm-fit__mark--no{color:var(--wm-clay)}
+.wm-fit__mark--no{color:var(--coral-ink)}
 
 .wm-faq__h3{margin:0 0 20px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(24px,2.8vw,34px);font-weight:800;line-height:1.08;letter-spacing:-0.036em;color:#14201C}
 .wm-faq{max-width:900px}

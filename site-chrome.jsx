@@ -136,6 +136,31 @@ const CHROME_CSS = `
   --green:${SITE.green};--green-pressed:${SITE.greenPressed};--sage:${SITE.sage};
   --ink:${SITE.inkText};--heading-ink:${SITE.headingInk};--ink-2:${SITE.ink2};--on-forest:${SITE.onForest};--meta:${SITE.metaLight};
   --rule:${SITE.rule};--rule-on-forest:${SITE.ruleOnDark};
+  /* Coral — resistance, anxiety, friction, blocked movement. Green stays
+     progress, forest depth, bone the editorial canvas. Four values because one
+     coral cannot carry small text on bone, large graphics and text on forest at
+     once: --coral is graphics and large emphasis, --coral-ink is small coral
+     text on light ground (5.2:1 on bone, where --coral manages only 3.6:1),
+     --coral-on-forest is coral on the dark ground, --coral-tint the chip wash.
+     Supersedes the page-scoped --wm-clay. */
+  --coral:#CF5A3D;
+  --coral-ink:#AA432F;
+  --coral-on-forest:#E4896C;
+  --coral-tint:#F6E2DE;
+  /* Motion. Two easings: settle for things arriving and coming to rest, travel
+     for things crossing distance. No bounce, no spring anywhere. */
+  --ease-settle:cubic-bezier(.22,1,.36,1);
+  --ease-travel:cubic-bezier(.65,0,.35,1);
+  --dur-hover:180ms;
+  --dur-nudge:220ms;
+  --dur-rule:260ms;
+  --dur-draw:360ms;
+  --dur-text:480ms;
+  --dur-state:520ms;
+  --stagger-line:40ms;
+  --stagger-item:60ms;
+  --stagger-row:80ms;
+  --rise:12px;
   /* The one page canvas: header, hero, every section container and the footer
      resolve against it, so the whole page shares a single grid instead of the
      three it used to have (1320 / 1280 / 1280, each with its own gutter).
@@ -323,6 +348,30 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
   .hero-cta{max-width:100%;padding-inline:16px;gap:8px}
   html[lang="el"] .hero-cta{font-size:14px}
 }
+/* ── Shared motion primitives ────────────────────────────────────────────────
+   Every rule here is gated on .mo, which window.Motion puts on <html> at
+   runtime and only when motion is allowed. Nothing is hidden by a stylesheet,
+   so the prerendered page is complete and readable with JS disabled, and a
+   reduced-motion visitor never gets .mo and therefore lands on the final state
+   with no transition to sit through. Motion also refuses to arm anything that
+   is already on screen when it initialises, so arming can never blank or move
+   content the visitor is looking at. */
+.mo [data-mo]{opacity:0}
+.mo [data-mo="rise"]{transform:translate3d(0,var(--rise),0)}
+.mo [data-mo="rise-sm"]{transform:translate3d(0,calc(var(--rise) / 2),0)}
+.mo [data-mo].is-in{opacity:1;transform:none;
+  transition:opacity var(--dur-text) var(--ease-settle) var(--mo-delay,0ms),transform var(--dur-text) var(--ease-settle) var(--mo-delay,0ms)}
+/* Rules that grow from an origin rather than fading in. */
+.mo [data-mo="rule-l"],.mo [data-mo="rule-r"]{opacity:1;transform:scaleX(0)}
+.mo [data-mo="rule-l"]{transform-origin:left center}
+.mo [data-mo="rule-r"]{transform-origin:right center}
+.mo [data-mo^="rule-"].is-in{transform:scaleX(1);
+  transition:transform var(--dur-rule) var(--ease-settle) var(--mo-delay,0ms)}
+/* SVG line drawing. Motion.draw() sets pathLength="1" so one dash length
+   covers any geometry and the offset is a plain 0–1 number. */
+.mo [data-mo-draw]{stroke-dasharray:1;stroke-dashoffset:1}
+.mo [data-mo-draw].is-in{stroke-dashoffset:0;
+  transition:stroke-dashoffset var(--dur-draw) var(--ease-travel) var(--mo-delay,0ms)}
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
 `;
@@ -572,7 +621,195 @@ function LegacyShell({ page, lang = 'en', children, form, wide, cta = true, eyeb
   );
 }
 
+// ─── Shared motion utility ───────────────────────────────────────────────────
+// One observer for entrances, one observer for scroll-linked visibility, one
+// rAF loop for all scroll progress on the page. Components declare what they
+// want and never touch IntersectionObserver, rAF or matchMedia themselves.
+//
+//   Motion.onView(el, fn, {threshold, margin, delay})  entrance, runs once
+//   Motion.reveal(root, {sel, stagger, delay})         staggered entrance group
+//   Motion.draw(root, {sel, stagger, delay})           SVG line drawing
+//   Motion.track(el, {prop, from, to, onProgress})     0–1 scroll progress
+//   Motion.release(el)                                 detach
+//
+// Reduced motion is not a variant of the animation, it is the absence of one:
+// .mo never lands on <html>, so every primitive above is inert and the page is
+// already in its final state. onView/reveal/draw still fire their callbacks so
+// components that need to set up state can, but with {instant:true}.
+const Motion = (function () {
+  const RM = typeof matchMedia === 'function' ? matchMedia('(prefers-reduced-motion: reduce)') : null;
+  let reduced = !!(RM && RM.matches);
+
+  const api = {
+    get reduced() { return reduced; },
+    onView, reveal, draw, track, release,
+  };
+  if (typeof document === 'undefined') return api;
+
+  const root = document.documentElement;
+  const arm = () => { if (!reduced) root.classList.add('mo'); else root.classList.remove('mo'); };
+  arm();
+  // A visitor can flip the OS setting mid-session. Turning motion off must take
+  // effect at once; turning it on again only affects what has not run yet.
+  if (RM && RM.addEventListener) RM.addEventListener('change', (e) => {
+    reduced = e.matches;
+    arm();
+    if (reduced) { for (const el of tracked) el.style.removeProperty('--mo-p'); tracked.clear(); stopLoop(); }
+  });
+
+  // ── Entrances ──────────────────────────────────────────────────────────────
+  // Spec thresholds: the element is a third of the way in, and the bottom 10%
+  // of the viewport does not count, so nothing fires as it clips the fold.
+  const DEF_THRESHOLD = 0.35;
+  const DEF_MARGIN = '0px 0px -10% 0px';
+  const entries = new WeakMap(); // el -> {fn, io}
+  const observers = new Map();   // "threshold|margin" -> IntersectionObserver
+
+  function observerFor(threshold, margin) {
+    const key = threshold + '|' + margin;
+    let io = observers.get(key);
+    if (!io) {
+      io = new IntersectionObserver((list) => {
+        for (const e of list) {
+          if (!e.isIntersecting) continue;
+          const rec = entries.get(e.target);
+          io.unobserve(e.target);          // entrances run exactly once
+          entries.delete(e.target);
+          if (rec) rec.fn(e.target, { instant: false });
+        }
+      }, { threshold, rootMargin: margin });
+      observers.set(key, io);
+    }
+    return io;
+  }
+
+  // Already on screen when we initialise? Then there is no entrance to play —
+  // running one would move content the visitor is already reading.
+  function onScreen(el) {
+    const r = el.getBoundingClientRect();
+    const vh = innerHeight || root.clientHeight;
+    return r.top < vh * 0.9 && r.bottom > 0;
+  }
+
+  function onView(el, fn, opts) {
+    if (!el || typeof fn !== 'function') return;
+    const o = opts || {};
+    if (o.delay) el.style.setProperty('--mo-delay', o.delay + 'ms');
+    if (reduced || typeof IntersectionObserver !== 'function' || onScreen(el)) {
+      fn(el, { instant: true });
+      return;
+    }
+    const io = observerFor(o.threshold != null ? o.threshold : DEF_THRESHOLD, o.margin || DEF_MARGIN);
+    entries.set(el, { fn, io });
+    io.observe(el);
+  }
+
+  // Mark a group in, one stagger step apart. The delay rides on a custom
+  // property so the transition itself stays in CSS.
+  function stagger(nodes, step, base) {
+    nodes.forEach((n, i) => {
+      n.style.setProperty('--mo-delay', (base + i * step) + 'ms');
+      n.classList.add('is-in');
+    });
+  }
+
+  function reveal(el, opts) {
+    const o = opts || {};
+    const pick = () => (o.sel ? Array.prototype.slice.call(el.querySelectorAll(o.sel)) : [el]);
+    onView(el, (_, s) => {
+      const nodes = pick();
+      if (s.instant) { nodes.forEach((n) => n.classList.add('is-in')); return; }
+      stagger(nodes, o.stagger != null ? o.stagger : 60, o.delay || 0);
+    }, o);
+  }
+
+  // pathLength="1" normalises every path to a single dash unit, so one CSS rule
+  // draws a 40px tick and a 900px axis at the same rate without per-path JS.
+  function draw(el, opts) {
+    const o = opts || {};
+    const paths = Array.prototype.slice.call(el.querySelectorAll(o.sel || '[data-mo-draw]'));
+    paths.forEach((p) => { if (!p.hasAttribute('pathLength')) p.setAttribute('pathLength', '1'); });
+    onView(el, (_, s) => {
+      if (s.instant) { paths.forEach((p) => p.classList.add('is-in')); return; }
+      stagger(paths, o.stagger != null ? o.stagger : 40, o.delay || 0);
+    }, o);
+  }
+
+  // ── Scroll progress ────────────────────────────────────────────────────────
+  // One rAF loop for the whole page, running only while a tracked element is
+  // actually on screen. Reads are batched ahead of writes so a frame never
+  // interleaves getBoundingClientRect with a style write.
+  const cfg = new WeakMap();   // el -> {prop, from, to, onProgress}
+  const tracked = new Set();   // currently on screen
+  let loop = 0;
+  let vis = null;
+
+  function visObserver() {
+    if (vis) return vis;
+    vis = new IntersectionObserver((list) => {
+      for (const e of list) {
+        if (e.isIntersecting) tracked.add(e.target);
+        else tracked.delete(e.target);
+      }
+      if (tracked.size && !loop && !reduced) loop = requestAnimationFrame(frame);
+      else if (!tracked.size) stopLoop();
+    }, { threshold: 0 });
+    return vis;
+  }
+
+  function stopLoop() { if (loop) { cancelAnimationFrame(loop); loop = 0; } }
+
+  function frame() {
+    loop = 0;
+    const vh = innerHeight || root.clientHeight;
+    const reads = [];
+    for (const el of tracked) reads.push([el, el.getBoundingClientRect()]); // read pass
+    for (const [el, r] of reads) {                                          // write pass
+      const c = cfg.get(el);
+      if (!c) continue;
+      // from/to are fractions of the viewport height measured against the
+      // element's top edge: 1 = top edge at the bottom of the viewport.
+      const start = c.from * vh;
+      const end = c.to * vh;
+      const p = start === end ? 1 : Math.min(1, Math.max(0, (start - r.top) / (start - end)));
+      if (c.prop) el.style.setProperty(c.prop, p.toFixed(4));
+      if (c.onProgress) c.onProgress(p, el);
+    }
+    if (tracked.size) loop = requestAnimationFrame(frame);
+  }
+
+  function track(el, opts) {
+    if (!el) return;
+    const o = opts || {};
+    const c = {
+      prop: o.prop || '--mo-p',
+      from: o.from != null ? o.from : 1,
+      to: o.to != null ? o.to : 0,
+      onProgress: o.onProgress || null,
+    };
+    if (reduced || typeof IntersectionObserver !== 'function') {
+      // No scrubbing: hand the element its completed state once.
+      if (c.prop) el.style.setProperty(c.prop, '1');
+      if (c.onProgress) c.onProgress(1, el);
+      return;
+    }
+    cfg.set(el, c);
+    visObserver().observe(el);
+  }
+
+  function release(el) {
+    if (!el) return;
+    const rec = entries.get(el);
+    if (rec) { rec.io.unobserve(el); entries.delete(el); }
+    if (cfg.has(el)) { cfg.delete(el); tracked.delete(el); if (vis) vis.unobserve(el); }
+    if (!tracked.size) stopLoop();
+  }
+
+  return api;
+})();
+
 Object.assign(window, {
+  Motion,
   SITE, CHROME_PATHS, EXTERNAL, cPath, cT, BrandIcon, Wordmark, ChromeStyles,
   SiteHeader, SiteFooterX, BlackCtaStrip, UniversalContentLayout, LegacyShell,
   FREE_TOOLS_URL, FREE_TOOL_LINKS,

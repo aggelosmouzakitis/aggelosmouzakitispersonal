@@ -67,6 +67,31 @@
   --green:#047857;--green-pressed:#03654A;--sage:#8FBFA7;
   --ink:#171919;--heading-ink:#14201C;--ink-2:#3A403A;--on-forest:#C0C9BF;--meta:#6A6F67;
   --rule:rgba(23,25,25,0.18);--rule-on-forest:rgba(243,240,232,0.16);
+  /* Coral — resistance, anxiety, friction, blocked movement. Green stays
+     progress, forest depth, bone the editorial canvas. Four values because one
+     coral cannot carry small text on bone, large graphics and text on forest at
+     once: --coral is graphics and large emphasis, --coral-ink is small coral
+     text on light ground (5.2:1 on bone, where --coral manages only 3.6:1),
+     --coral-on-forest is coral on the dark ground, --coral-tint the chip wash.
+     Supersedes the page-scoped --wm-clay. */
+  --coral:#CF5A3D;
+  --coral-ink:#AA432F;
+  --coral-on-forest:#E4896C;
+  --coral-tint:#F6E2DE;
+  /* Motion. Two easings: settle for things arriving and coming to rest, travel
+     for things crossing distance. No bounce, no spring anywhere. */
+  --ease-settle:cubic-bezier(.22,1,.36,1);
+  --ease-travel:cubic-bezier(.65,0,.35,1);
+  --dur-hover:180ms;
+  --dur-nudge:220ms;
+  --dur-rule:260ms;
+  --dur-draw:360ms;
+  --dur-text:480ms;
+  --dur-state:520ms;
+  --stagger-line:40ms;
+  --stagger-item:60ms;
+  --stagger-row:80ms;
+  --rise:12px;
   /* The one page canvas: header, hero, every section container and the footer
      resolve against it, so the whole page shares a single grid instead of the
      three it used to have (1320 / 1280 / 1280, each with its own gutter).
@@ -254,6 +279,30 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
   .hero-cta{max-width:100%;padding-inline:16px;gap:8px}
   html[lang="el"] .hero-cta{font-size:14px}
 }
+/* ── Shared motion primitives ────────────────────────────────────────────────
+   Every rule here is gated on .mo, which window.Motion puts on <html> at
+   runtime and only when motion is allowed. Nothing is hidden by a stylesheet,
+   so the prerendered page is complete and readable with JS disabled, and a
+   reduced-motion visitor never gets .mo and therefore lands on the final state
+   with no transition to sit through. Motion also refuses to arm anything that
+   is already on screen when it initialises, so arming can never blank or move
+   content the visitor is looking at. */
+.mo [data-mo]{opacity:0}
+.mo [data-mo="rise"]{transform:translate3d(0,var(--rise),0)}
+.mo [data-mo="rise-sm"]{transform:translate3d(0,calc(var(--rise) / 2),0)}
+.mo [data-mo].is-in{opacity:1;transform:none;
+  transition:opacity var(--dur-text) var(--ease-settle) var(--mo-delay,0ms),transform var(--dur-text) var(--ease-settle) var(--mo-delay,0ms)}
+/* Rules that grow from an origin rather than fading in. */
+.mo [data-mo="rule-l"],.mo [data-mo="rule-r"]{opacity:1;transform:scaleX(0)}
+.mo [data-mo="rule-l"]{transform-origin:left center}
+.mo [data-mo="rule-r"]{transform-origin:right center}
+.mo [data-mo^="rule-"].is-in{transform:scaleX(1);
+  transition:transform var(--dur-rule) var(--ease-settle) var(--mo-delay,0ms)}
+/* SVG line drawing. Motion.draw() sets pathLength="1" so one dash length
+   covers any geometry and the offset is a plain 0–1 number. */
+.mo [data-mo-draw]{stroke-dasharray:1;stroke-dashoffset:1}
+.mo [data-mo-draw].is-in{stroke-dashoffset:0;
+  transition:stroke-dashoffset var(--dur-draw) var(--ease-travel) var(--mo-delay,0ms)}
 @media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
 </style><style>
@@ -318,7 +367,7 @@ html{overflow-x:clip}
 <script src="/react.production.min.js?v=d949f1c368" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=35f4f974f4" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="/site-chrome.js?v=522a860d24"></script>
+<script src="/site-chrome.js?v=0b75328824"></script>
 <script src="/lead-capture.js?v=31177c02e0"></script>
 <script src="/contact.js?v=08885c209b"></script>
 <script>renderContact();</script>
