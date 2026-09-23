@@ -41,13 +41,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 // Person JSON-LD (verified facts only; per-language jobTitle per brief §48/§55)
 function personLd(lang) {
   const en = {
-    jobTitle: ['Business Advisor', 'Licensed Psychotherapist'],
-    description: "Business advisor and licensed psychotherapist (BACP-registered) for people building something of their own. 18+ years in product and growth, having built companies and advised more than 500 of them. The work runs on two tracks at once: the business you're building and whatever in you affects how you build it.",
+    jobTitle: ['Business & Career Advisor', 'BACP-registered Psychotherapist'],
+    description: "Business and career advisor and BACP-registered psychotherapist for people building something of their own. 18+ years in product and growth, having built companies and advised more than 100 technology companies. The work runs on two tracks at once: the business you're building and whatever in you affects how you build it.",
     knowsAbout: ['Business Advisory', 'Offer & Positioning', 'Pricing', 'Customer Acquisition', 'Sales', 'Founder Psychology', 'Solo Business Advisory', 'Decision-Making', 'Product & Growth Strategy'],
   };
   const el = {
     jobTitle: ['Business Advisor', 'Ψυχοθεραπευτής'],
-    description: 'Σύμβουλος επιχειρήσεων και ψυχοθεραπευτής για ανθρώπους που χτίζουν κάτι δικό τους. 18+ χρόνια σε product και growth, με εμπειρία ως founder και συμβουλευτική σε 500+ επιχειρήσεις.',
+    description: 'Σύμβουλος επιχειρήσεων και ψυχοθεραπευτής για ανθρώπους που χτίζουν κάτι δικό τους. 18+ χρόνια σε product και growth, με εμπειρία ως founder και συμβουλευτική σε 100+ εταιρείες τεχνολογίας.',
     knowsAbout: ['Συμβουλευτική Επιχειρήσεων', 'Positioning', 'Τιμολόγηση', 'Εύρεση Πελατών', 'Πωλήσεις', 'Ψυχολογία Founders', 'Λήψη Αποφάσεων'],
   };
   const c = lang === 'el' ? el : en;
@@ -80,17 +80,17 @@ function canonical(page, lang) {
 const PAGES = [
   {
     id: 'home', path: '/', dir: '', schemaType: 'WebPage', og: 'home.png', preloadHero: true,
-    en: { title: 'Aggelos Mouzakitis — Business Advisor + Licensed Psychotherapist', crumb: 'Home',
-      desc: "Business advisor and licensed psychotherapist for people building something of their own — the business, and whatever in you affects how you build it." },
+    en: { title: 'Business & Career Advisor | Aggelos Mouzakitis', crumb: 'Home',
+      desc: "Business and career advisor and BACP-registered psychotherapist for people building something of their own — the business, and whatever in you affects how you build it." },
     el: { title: 'Άγγελος Μουζακίτης — Business Advisor + Ψυχοθεραπευτής', crumb: 'Αρχική',
       desc: 'Σύμβουλος επιχειρήσεων και ψυχοθεραπευτής για ανθρώπους που χτίζουν κάτι δικό τους. Δουλεύουμε την επιχείρηση και ό,τι μέσα σου επηρεάζει το χτίσιμό της.' },
   },
   {
     id: 'about', path: '/about/', dir: 'about', schemaType: 'ProfilePage', og: 'about.png',
     en: { title: 'About — Aggelos Mouzakitis', crumb: 'About',
-      desc: 'Business advisor and licensed psychotherapist (BACP). 18+ years in product and growth, 500+ companies advised, MSc Integrative Counselling & Psychotherapy.' },
+      desc: 'Business and career advisor and BACP-registered psychotherapist. 18+ years in product and growth, 100+ technology companies advised, MSc Integrative Counselling & Psychotherapy.' },
     el: { title: 'Σχετικά — Άγγελος Μουζακίτης', crumb: 'Σχετικά',
-      desc: 'Σύμβουλος επιχειρήσεων και ψυχοθεραπευτής. 18+ χρόνια σε product & growth, 500+ επιχειρήσεις, MSc Integrative Counselling & Psychotherapy, εγγεγραμμένος στο BACP.' },
+      desc: 'Σύμβουλος επιχειρήσεων και ψυχοθεραπευτής. 18+ χρόνια σε product & growth, 100+ εταιρείες τεχνολογίας, MSc Integrative Counselling & Psychotherapy, εγγεγραμμένος στο BACP.' },
   },
   {
     id: 'reviews', path: '/reviews/', dir: 'reviews', schemaType: 'WebPage', og: 'reviews.png',

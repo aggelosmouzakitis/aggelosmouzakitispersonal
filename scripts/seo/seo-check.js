@@ -36,6 +36,10 @@ const RETIRED_LABELS = [
   'Solo business growth consulting', 'Not sure where to start?',
   'Licensed Psychotherapist', 'licensed psychotherapist',
 ];
+// Superseded numbers. The approved claim is "100+ technology companies"; the
+// older "500+ companies" survived only in a two-versions-ago migration note,
+// with nothing in the repo establishing it as a separate, accurate metric.
+const SUPERSEDED_CLAIMS = [/\b500\+?\s*(?:compan|business|\u03b5\u03c0\u03b9\u03c7\u03b5\u03b9\u03c1)/i, /more than 500\s*(?:compan|business|of them)/i];
 
 const errors = [];
 const warnings = [];
@@ -236,6 +240,10 @@ async function main() {
     for (const label of RETIRED_LABELS) {
       if (text.includes(label)) err(url, `retired wording in visible copy: "${label}"`);
       if (h.includes(label)) err(url, `retired wording in metadata: "${label}"`);
+    }
+    for (const re of SUPERSEDED_CLAIMS) {
+      if (re.test(text)) err(url, 'visible copy claims 500+ companies; the approved figure is 100+ technology companies');
+      if (re.test(h)) err(url, 'metadata claims 500+ companies; the approved figure is 100+ technology companies');
     }
 
     // collect internal links

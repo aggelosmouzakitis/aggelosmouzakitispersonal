@@ -1145,7 +1145,7 @@ const HOME = {
   en: {
     promise: "Build something of your own. Or take what you've already built much further.",
     tagline: 'Figure out what the business needs. Work through what gets in the way. Business and psychology, together.',
-    introA: 'I spent 18+ years in product and growth, building companies and advising more than 500 of them. I also trained as a psychotherapist.',
+    introA: 'I spent 18+ years in product and growth, building companies and advising more than 100 technology companies. I also trained as a psychotherapist.',
     introB: "Today I work 1:1 and with groups of people building something of their own. Sometimes the problem is clearly business. Sometimes it's more complicated and includes you.",
     introC: "Quite often, business and psychology collide to the point where it's hard to tell yourself where the problem actually is.",
     recogLabel: 'You may recognise some of this',
@@ -1181,7 +1181,7 @@ const HOME = {
   el: {
     promise: 'Χτίζεις κάτι δικό σου; Ας το πάμε παρακάτω.',
     tagline: 'Ξεκαθαρίζουμε τι χρειάζεται το business και τι σε κρατάει πίσω. Business και ψυχολογία, μαζί.',
-    introA: 'Πέρασα 18+ χρόνια στο product και το growth, χτίζοντας δικές μου εταιρείες και συμβουλεύοντας πάνω από 500 επιχειρήσεις. Παράλληλα εκπαιδεύτηκα ως ψυχοθεραπευτής.',
+    introA: 'Πέρασα 18+ χρόνια στο product και το growth, χτίζοντας δικές μου εταιρείες και συμβουλεύοντας πάνω από 100 εταιρείες τεχνολογίας. Παράλληλα εκπαιδεύτηκα ως ψυχοθεραπευτής.',
     introB: 'Σήμερα δουλεύω 1:1 και με ομάδες ανθρώπων που χτίζουν κάτι δικό τους.',
     introC: 'Μερικές φορές το πρόβλημα είναι καθαρά business. Μερικές φορές είναι πιο περίπλοκο και έχει να κάνει και με εσένα. Και αρκετά συχνά, τα δύο μπλέκονται τόσο που δεν είναι καθόλου ξεκάθαρο πού ακριβώς είναι το πρόβλημα.',
     recogLabel: 'Μήπως σου θυμίζει κάτι;',
@@ -1772,7 +1772,7 @@ const ABOUT = {
     role: 'Business & Career Advisor + BACP-registered psychotherapist',
     creds: 'MSc Integrative Counselling & Psychotherapy (University of Derby) · BACP-registered · Based in Ireland, working globally',
     lead: 'Two careers that kept running into the same problem.',
-    intro: ['I spent 18+ years in tech, mostly in product and growth. I built my own companies, worked inside startups and large organisations, and advised more than 500 businesses.', "So if we're talking about your offer, pricing, customer acquisition, a hire, a sale you're avoiding or a business decision you can't settle, you don't need to translate the commercial side for me.", 'I know that world.'],
+    intro: ['I spent 18+ years in tech, mostly in product and growth. I built my own companies, worked inside startups and large organisations, and advised more than 100 technology companies.', "So if we're talking about your offer, pricing, customer acquisition, a hire, a sale you're avoiding or a business decision you can't settle, you don't need to translate the commercial side for me.", 'I know that world.'],
     sections: [{
       label: "Then psychology started showing up in places it wasn't invited.",
       body: ["Again and again, I'd see a business problem that was only partly a business problem.", 'Someone knew they needed to sell but wouldn’t.', 'Someone kept changing a perfectly reasonable strategy.', 'Someone had hired good people but struggled to let go of control.', 'Someone had enough information to make a decision and kept looking for more.', "The strategy mattered. But it wasn't the whole story.", 'So I trained as a psychotherapist: MSc Integrative Counselling & Psychotherapy at the University of Derby, and registration with the BACP.']
@@ -1794,7 +1794,7 @@ const ABOUT = {
     role: 'Business Growth Advisor + Ψυχοθεραπευτής',
     creds: 'MSc Integrative Counselling & Psychotherapy (University of Derby) · Εγγεγραμμένος στο BACP · Έδρα στην Ιρλανδία, δουλεύω παγκόσμια',
     lead: 'Δύο καριέρες που όλο κατέληγαν στο ίδιο σημείο.',
-    intro: ['Πέρασα 18+ χρόνια στην τεχνολογία, κυρίως στο product και το growth. Έχτισα δικές μου εταιρείες, δούλεψα σε startups και μεγάλους οργανισμούς και συμβούλεψα περισσότερες από 500 επιχειρήσεις.', 'Οπότε αν μιλάμε για offer, pricing, πελάτες, μια πρόσληψη, μια συζήτηση πώλησης που αποφεύγεις ή μια απόφαση που δεν μπορείς να πάρεις, δεν χρειάζεται να μου εξηγήσεις όλο το context.', 'Αυτόν τον κόσμο τον ξέρω.'],
+    intro: ['Πέρασα 18+ χρόνια στην τεχνολογία, κυρίως στο product και το growth. Έχτισα δικές μου εταιρείες, δούλεψα σε startups και μεγάλους οργανισμούς και συμβούλεψα περισσότερες από 100 εταιρείες τεχνολογίας.', 'Οπότε αν μιλάμε για offer, pricing, πελάτες, μια πρόσληψη, μια συζήτηση πώλησης που αποφεύγεις ή μια απόφαση που δεν μπορείς να πάρεις, δεν χρειάζεται να μου εξηγήσεις όλο το context.', 'Αυτόν τον κόσμο τον ξέρω.'],
     sections: [{
       label: 'Κάπου εκεί άρχισε να εμφανίζεται η ψυχολογία χωρίς να την έχει καλέσει κανείς.',
       body: ['Ξανά και ξανά έβλεπα προβλήματα που έμοιαζαν business, αλλά μόνο μέχρι ένα σημείο.', 'Κάποιος ήξερε ότι έπρεπε να πουλήσει και δεν το έκανε.', 'Κάποιος άλλαζε συνέχεια στρατηγική, παρότι αυτή που είχε ήταν απολύτως λογική.', 'Κάποιος είχε προσλάβει καλούς συνεργάτες αλλά δυσκολευόταν να αφήσει τον έλεγχο.', 'Κάποιος είχε αρκετά δεδομένα για να πάρει μια απόφαση και συνέχιζε να ψάχνει κι άλλα.', 'Το business είχε σημασία. Απλώς δεν ήταν όλη η ιστορία.', 'Έτσι εκπαιδεύτηκα στην ψυχοθεραπεία. Έχω MSc Integrative Counselling & Psychotherapy από το University of Derby και είμαι εγγεγραμμένο μέλος του BACP.']
@@ -2980,7 +2980,7 @@ function ExecTherapyPage() {
     href: 'https://www.ibm.com'
   }, 'IBM'), "'s enterprise portfolio, and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advised 500+ companies'), " on the kind of work my clients carry into sessions. ", React.createElement(Strong, null, "So I already understand the environment you're operating in"), ", and we skip the context-setting."), React.createElement(SvcP, null, "The work runs on two tracks. Sometimes the problem is genuinely business, a decision or a team or a strategy call, and we work it as advisory. Sometimes it's the pattern underneath: why identity fused with output, why slowing down feels dangerous. Often it's both, and part of the job is telling which one you're dealing with."), React.createElement(SvcP, null, "A lot of it is strategic detachment: playing the professional roles and handling pressure without turning every interaction into a referendum on your worth. You keep the ambition. What changes is that it stops running on the fear of being found out."), React.createElement(SvcP, null, "I write about the psychology of ambition and performance at ", React.createElement(A, {
+  }, 'advised 100+ technology companies'), " on the kind of work my clients carry into sessions. ", React.createElement(Strong, null, "So I already understand the environment you're operating in"), ", and we skip the context-setting."), React.createElement(SvcP, null, "The work runs on two tracks. Sometimes the problem is genuinely business, a decision or a team or a strategy call, and we work it as advisory. Sometimes it's the pattern underneath: why identity fused with output, why slowing down feels dangerous. Often it's both, and part of the job is telling which one you're dealing with."), React.createElement(SvcP, null, "A lot of it is strategic detachment: playing the professional roles and handling pressure without turning every interaction into a referendum on your worth. You keep the ambition. What changes is that it stops running on the fear of being found out."), React.createElement(SvcP, null, "I write about the psychology of ambition and performance at ", React.createElement(A, {
     href: 'https://undisguised.io'
   }, 'Undisguised'), " (5,000+ subscribers). The writing explores the patterns; the private work is where we address them.")), React.createElement(SvcSection, {
     title: 'Who this is for'
@@ -3065,7 +3065,7 @@ function FoundersTherapyPage() {
     href: 'https://www.undisguised.io/p/the-high-cost-of-endless-pondering'
   }, 'Overthinking becomes a default mode'), " that feels productive but mostly produces exhaustion. Relationships suffer, not because you don't care, but because ", React.createElement(Strong, null, "there's nothing left after the company takes its share"), ".")), React.createElement(SvcSection, {
     title: 'Why I understand this'
-  }, React.createElement(SvcP, null, "I'm a business growth advisor and BACP-registered psychotherapist with 18+ years in B2B SaaS, including advising 500+ companies on growth. I've been on the other side of the table, setting targets, defending strategy and absorbing pressure from every direction."), React.createElement(SvcP, null, "When a client comes in carrying a down round or a co-founder conflict, ", React.createElement(Strong, null, "I don't need them to explain the context"), ". I know what that room feels like, so we skip the background and go straight to the work."), React.createElement(SvcP, null, "The work runs on two tracks. Sometimes what you bring is the business itself, a decision or a co-founder conflict or the strategy, and we work it directly. Sometimes it's the weight underneath: the identity fusion, the isolation, the pattern that keeps repeating. Usually it's both, tangled together, and part of the work is telling them apart.")), React.createElement(SvcSection, {
+  }, React.createElement(SvcP, null, "I'm a business growth advisor and BACP-registered psychotherapist with 18+ years in B2B SaaS, including advising 100+ technology companies on growth. I've been on the other side of the table, setting targets, defending strategy and absorbing pressure from every direction."), React.createElement(SvcP, null, "When a client comes in carrying a down round or a co-founder conflict, ", React.createElement(Strong, null, "I don't need them to explain the context"), ". I know what that room feels like, so we skip the background and go straight to the work."), React.createElement(SvcP, null, "The work runs on two tracks. Sometimes what you bring is the business itself, a decision or a co-founder conflict or the strategy, and we work it directly. Sometimes it's the weight underneath: the identity fusion, the isolation, the pattern that keeps repeating. Usually it's both, tangled together, and part of the work is telling them apart.")), React.createElement(SvcSection, {
     title: 'How it works'
   }, React.createElement(SvcP, null, "Sessions are ", React.createElement(Strong, null, "remote, one-on-one and confidential"), ". Nothing goes to your board, your investors or your team. This is a private therapeutic relationship, not coaching attached to your company. It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's going on and whether I'm the right person for it."), React.createElement('div', {
     className: 'svc-ctarow'
@@ -3141,7 +3141,7 @@ function ImposterPage() {
     title: 'How I work with this'
   }, React.createElement(SvcP, null, "I'm a business growth advisor and BACP-registered psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advising 500+ companies on growth'), ". I know the environment that amplifies imposter syndrome in tech: the pace, the ambiguity, the constant comparison."), React.createElement(SvcP, null, React.createElement(Strong, null, "We work with the root pattern, not the symptoms."), " That means going past the current role to understand where the conditional worth was established, why it persists, and what it would take to build a sense of self that doesn't depend on the next result."), React.createElement(SvcP, null, "Insight alone rarely shifts this, because most high performers have already understood it intellectually. So we work at two levels: the professional situation in front of you, and the older pattern that keeps the doubt alive whatever the evidence says. Sometimes the answer is a concrete business move, sometimes the deeper work, often both."), React.createElement(SvcP, null, "I write about this at ", React.createElement(A, {
+  }, 'advising 100+ technology companies on growth'), ". I know the environment that amplifies imposter syndrome in tech: the pace, the ambiguity, the constant comparison."), React.createElement(SvcP, null, React.createElement(Strong, null, "We work with the root pattern, not the symptoms."), " That means going past the current role to understand where the conditional worth was established, why it persists, and what it would take to build a sense of self that doesn't depend on the next result."), React.createElement(SvcP, null, "Insight alone rarely shifts this, because most high performers have already understood it intellectually. So we work at two levels: the professional situation in front of you, and the older pattern that keeps the doubt alive whatever the evidence says. Sometimes the answer is a concrete business move, sometimes the deeper work, often both."), React.createElement(SvcP, null, "I write about this at ", React.createElement(A, {
     href: 'https://undisguised.io'
   }, 'Undisguised'), "; the private work is where the patterns actually move.")), React.createElement(SvcSection, {
     title: 'How it starts'
@@ -3225,7 +3225,7 @@ function BurnoutPage() {
     title: 'How I work with this'
   }, React.createElement(SvcP, null, React.createElement(Strong, null, "This work goes to the level of the pattern, not the symptoms."), " We look at what drives the overwork: what it would mean to stop, what you're avoiding by staying in motion, why doing less feels threatening rather than freeing."), React.createElement(SvcP, null, "I'm a business growth advisor and BACP-registered psychotherapist with 18+ years in B2B SaaS, including ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advising 500+ companies on growth'), ". I understand the environment: the always-on culture, the ambiguity, the pressure to appear certain when you're not."), React.createElement(SvcP, null, "Working less may follow, though the real aim is ", React.createElement(Strong, null, "a relationship with the work that costs less and means more"), ". We run two tracks at once: the practical situation (the role, the load, the decisions you keep postponing) and the pattern underneath that keeps you overfunctioning. Sometimes the fix is a business change, sometimes the deeper work, usually both.")), React.createElement(SvcSection, {
+  }, 'advising 100+ technology companies on growth'), ". I understand the environment: the always-on culture, the ambiguity, the pressure to appear certain when you're not."), React.createElement(SvcP, null, "Working less may follow, though the real aim is ", React.createElement(Strong, null, "a relationship with the work that costs less and means more"), ". We run two tracks at once: the practical situation (the role, the load, the decisions you keep postponing) and the pattern underneath that keeps you overfunctioning. Sometimes the fix is a business change, sometimes the deeper work, usually both.")), React.createElement(SvcSection, {
     title: 'How it starts'
   }, React.createElement(SvcP, null, "It starts with ", React.createElement(Strong, null, "a short, free fit call"), ", about 15 minutes, to figure out what's underneath the exhaustion and whether therapy is the right approach."), React.createElement('div', {
     className: 'svc-ctarow'
@@ -3394,7 +3394,7 @@ function LondonPage() {
     title: 'And I understand the industry'
   }, React.createElement(SvcP, null, "You also don't have to explain your work. Before training as a psychotherapist I spent 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advised more than 500 companies'), ", so runway, reorgs, shipping and the pressure of a senior role are things I already follow. It's the same reason my ", React.createElement(IA, {
+  }, 'advised more than 100 technology companies'), ", so runway, reorgs, shipping and the pressure of a senior role are things I already follow. It's the same reason my ", React.createElement(IA, {
     href: '/'
   }, 'founder'), " and ", React.createElement(IA, {
     href: '/'
@@ -3443,7 +3443,7 @@ function ManchesterPage() {
     title: 'And I understand the industry'
   }, React.createElement(SvcP, null, "You also don't have to explain the work: the pipeline that's gone quiet, the pricing you avoid raising, the projects, the independence. I spent 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, 'advised more than 500 companies'), " before training as a psychotherapist, and I've done the job-to-independent route myself. It's the same reason my ", React.createElement(IA, {
+  }, 'advised more than 100 technology companies'), " before training as a psychotherapist, and I've done the job-to-independent route myself. It's the same reason my ", React.createElement(IA, {
     href: '/'
   }, 'freelancer'), " and ", React.createElement(IA, {
     href: '/'
@@ -3492,7 +3492,7 @@ function NewYorkPage() {
     title: 'And I understand the industry'
   }, React.createElement(SvcP, null, "You also don't have to explain equity, runway, a reorg, or why “just be confident” is useless advice. 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, '500+ companies advised'), " before I trained as a psychotherapist. It's the same reason my ", React.createElement(IA, {
+  }, '100+ technology companies advised'), " before I trained as a psychotherapist. It's the same reason my ", React.createElement(IA, {
     href: '/'
   }, 'founder'), " and senior ", React.createElement(IA, {
     href: '/'
@@ -3541,7 +3541,7 @@ function DublinPage() {
     title: 'And I understand the industry'
   }, React.createElement(SvcP, null, "You also don't have to explain corporate life: the big-org politics, the way a role can quietly take over. 18+ years in product and growth and ", React.createElement(A, {
     href: 'https://headofgrowth.io'
-  }, '500+ companies advised'), " before I trained as a psychotherapist, including inside a large enterprise. I happen to be based in Ireland myself, which helps with the practicalities, but the real reason to come is that I hold both the work and the Greek context at once.")), React.createElement(SvcSection, {
+  }, '100+ technology companies advised'), " before I trained as a psychotherapist, including inside a large enterprise. I happen to be based in Ireland myself, which helps with the practicalities, but the real reason to come is that I hold both the work and the Greek context at once.")), React.createElement(SvcSection, {
     title: 'The work itself is the same'
   }, React.createElement(SvcP, null, "It's the same private, one-to-one work I do with everyone, the personal pattern and the real decision together, whether that's the job, the move, or whether to stay at all. How the work runs is on ", React.createElement(IA, {
     href: '/'
@@ -3737,7 +3737,7 @@ function ElExecutiveCoachingPage() {
     items: ['δυσκολεύεσαι να εμπιστευτείς ή να αναθέσεις', 'αναλαμβάνεις περισσότερα από όσα σου αναλογούν', 'αποφεύγεις μια απόφαση παρότι ξέρεις ότι δεν περιμένει', 'αντιδράς με τον ίδιο τρόπο σε διαφορετικές ομάδες και συνεργασίες', 'συνεχίζεις να αποδίδεις, αλλά νιώθεις ότι πλησιάζεις τα όριά σου']
   }), React.createElement(SvcP, null, 'Σε υψηλά επίπεδα ευθύνης η απομόνωση είναι συχνά δομική: πολλοί εξαρτώνται από εσένα, αλλά ελάχιστοι είναι εκείνοι μπροστά στους οποίους μπορείς να μιλήσεις χωρίς να διαχειρίζεσαι ταυτόχρονα την εικόνα σου.')), React.createElement(SvcSection, {
     title: 'Γιατί μπορώ να καταλάβω το περιβάλλον σου'
-  }, React.createElement(SvcP, null, 'Πριν εκπαιδευτώ στην ψυχοθεραπεία, πέρασα 18+ χρόνια στην τεχνολογία, το product και το growth. Έχω υπάρξει founder, έχω δουλέψει σε startups και μεγάλους οργανισμούς και έχω συμβουλέψει πάνω από 500 επιχειρήσεις. Δεν χρειάζεται να μου μεταφράσεις τον επαγγελματικό σου κόσμο.'), React.createElement(SvcP, null, React.createElement(Strong, null, 'Δεν ψυχολογικοποιούμε κάθε επαγγελματική δυσκολία.'), ' Προσπαθούμε να ξεχωρίσουμε πότε το πρόβλημα είναι πρακτικό business, πότε είναι ψυχολογικό και πότε, όπως συμβαίνει συχνά, είναι και τα δύο.')), React.createElement(SvcSection, {
+  }, React.createElement(SvcP, null, 'Πριν εκπαιδευτώ στην ψυχοθεραπεία, πέρασα 18+ χρόνια στην τεχνολογία, το product και το growth. Έχω υπάρξει founder, έχω δουλέψει σε startups και μεγάλους οργανισμούς και έχω συμβουλέψει πάνω από 100 εταιρείες τεχνολογίας. Δεν χρειάζεται να μου μεταφράσεις τον επαγγελματικό σου κόσμο.'), React.createElement(SvcP, null, React.createElement(Strong, null, 'Δεν ψυχολογικοποιούμε κάθε επαγγελματική δυσκολία.'), ' Προσπαθούμε να ξεχωρίσουμε πότε το πρόβλημα είναι πρακτικό business, πότε είναι ψυχολογικό και πότε, όπως συμβαίνει συχνά, είναι και τα δύο.')), React.createElement(SvcSection, {
     title: 'Με ποιους δουλεύω'
   }, React.createElement(SvcP, null, 'Founders, C-level, VPs, directors και senior professionals, κυρίως στην τεχνολογία αλλά όχι μόνο. Το σημείο εκκίνησης μπορεί να είναι:'), React.createElement(Bullets, {
     mob,
