@@ -843,7 +843,7 @@ function LegacyShell({
 //   Motion.onView(el, fn, {threshold, margin, delay})  entrance, runs once
 //   Motion.reveal(root, {sel, stagger, delay})         staggered entrance group
 //   Motion.draw(root, {sel, stagger, delay})           SVG line drawing
-//   Motion.track(el, {prop, from, to, onProgress})     0–1 scroll progress
+//   Motion.track(el, {prop, from, to, onProgress, once}) 0–1 scroll progress
 //   Motion.release(el)                                 detach
 //
 // Reduced motion is not a variant of the animation, it is the absence of one:
@@ -1063,19 +1063,31 @@ const Motion = function () {
     loop = 0;
     const vh = innerHeight || root.clientHeight;
     const reads = [];
+    const done = [];
     for (const el of tracked) reads.push([el, el.getBoundingClientRect()]); // read pass
     for (const [el, r] of reads) {
       // write pass
       const c = cfg.get(el);
       if (!c) continue;
-      const p = progressOf(c, r, vh);
+      let p = progressOf(c, r, vh);
+      // An entrance only ever goes forwards. `once` ratchets progress so
+      // scrolling back up cannot rewind a reveal, and retires the element
+      // altogether at 1 so it stops costing a frame.
+      if (c.once) {
+        p = c.peak = Math.max(c.peak, p);
+      }
       // Settled sections write nothing: most frames in a long scroll touch no
       // style at all, which is what keeps four tracked fields affordable.
-      if (c.last !== null && Math.abs(p - c.last) < 0.0005) continue;
+      if (c.last !== null && Math.abs(p - c.last) < 0.0005) {
+        if (c.once && p >= 1) done.push(el);
+        continue;
+      }
       c.last = p;
       if (c.prop) el.style.setProperty(c.prop, p.toFixed(4));
       if (c.onProgress) c.onProgress(p, el);
+      if (c.once && p >= 1) done.push(el);
     }
+    for (const el of done) release(el);
     if (tracked.size) loop = requestAnimationFrame(frame);
   }
   function track(el, opts) {
@@ -1087,6 +1099,8 @@ const Motion = function () {
       to: o.to != null ? o.to : 0.55,
       distance: o.distance || 0,
       onProgress: o.onProgress || null,
+      once: !!o.once,
+      peak: 0,
       last: null
     };
     if (reduced || typeof IntersectionObserver !== 'function') {

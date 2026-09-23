@@ -742,7 +742,9 @@ function WmFit() {
     if (!el || !M) return;
     var BONE = [243, 240, 232], BONE_DEEP = [237, 232, 219];
     var rows = el.querySelectorAll('.wm-fit__item');
+    // Handoff H3 is an entrance, not a scrub: once it has run it stays run.
     M.track(el, {
+      once: true,
       from: 0.95, to: 0.62,
       onProgress: function (p) {
         el.style.setProperty('--fit-bg', M.mix(BONE, BONE_DEEP, M.win(p, 0.2, 0.5)));
