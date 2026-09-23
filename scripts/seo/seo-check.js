@@ -20,6 +20,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const { ORIGIN, PAGES } = require('./site-meta.js');
+const { hashOf, SRC_RE } = require('./stamp-assets.js');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const PORT = 8123;
@@ -287,6 +288,23 @@ async function main() {
     else if (t.hops[0].status !== 301) err(r, `redirect is ${t.hops[0].status}, expected 301`);
     else if (t.final !== '/work-with-me/') err(r, `redirects to ${t.final}, expected /work-with-me/`);
     if (t.status !== 200) err(r, `redirect destination returns ${t.status}`);
+  }
+
+  // ── Cache busting: every bundle URL must carry its current content hash ───
+  // netlify.toml serves /*.js as immutable for a year, so a page that points at
+  // a stale ?v= pins returning visitors to old JS — and the site's CSS lives
+  // inside those bundles, so a stale pin silently reverts the design.
+  for (const p of PAGES) {
+    const t = await trace(p.url);
+    if (t.status !== 200) continue;
+    for (const m of t.body.matchAll(SRC_RE)) {
+      const [, asset, query] = m;
+      const want = hashOf(asset);
+      if (!want) continue; // not a bundle we ship
+      if (query !== `?v=${want}`) {
+        err(p.url, `${asset} is stamped ${query || '(no ?v=)'}, current content hash is ?v=${want} — run scripts/seo/stamp-assets.js`);
+      }
+    }
   }
 
   // ── A URL that does not exist must 404, not 200 ───────────────────────────
