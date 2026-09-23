@@ -234,8 +234,31 @@ const CHROME_CSS = `
   --green:${SITE.green};--green-pressed:${SITE.greenPressed};--sage:${SITE.sage};
   --ink:${SITE.inkText};--heading-ink:${SITE.headingInk};--ink-2:${SITE.ink2};--on-forest:${SITE.onForest};--meta:${SITE.metaLight};
   --rule:${SITE.rule};--rule-on-forest:${SITE.ruleOnDark};
+  /* The one page canvas: header, hero, every section container and the footer
+     resolve against it, so the whole page shares a single grid instead of the
+     three it used to have (1320 / 1280 / 1280, each with its own gutter).
+     Fluid to the viewport minus a gutter, capped so the eye still has an edge
+     to work against on very large screens.
+       - up to ~1040px the 5vw ramp binds and matches the old container exactly,
+         so phones and tablets are pixel-identical;
+       - through the laptop band the 52px gutter holds proportions close to what
+         they were (header and hero sat on a flat 32px gutter, the sections on
+         5vw — this lands between the two and finally aligns them);
+       - past ~1664px the cap takes over at 1560 instead of 1280/1320.
+     Individual text blocks keep their own smaller measures on top of this. */
+  --page-max:1560px;
+  --page-gutter:clamp(20px,5vw,52px);
+  --page-canvas:min(var(--page-max),calc(100% - 2 * var(--page-gutter)));
 }
 html,body,#root{height:auto}
+/* Every page except /work-with-me/ carries a star-selector margin reset in its
+   own static preamble; that page was authored later and never got one, so the UA's
+   8px body margin survived and inset the whole page — full-bleed header and
+   section backgrounds included — by 8px, which also made the page canvas
+   resolve 16px narrower there than everywhere else. Zero it here so the chrome
+   guarantees it on every page instead of each page having to remember. */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}
 #root{display:block;overflow:visible}
 #sidebar{display:none!important}
 #main-scroll{overflow:visible;background:${SITE.bone};color:${SITE.inkText}}
@@ -251,12 +274,12 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .site-grain{position:fixed;inset:0;pointer-events:none;z-index:90;opacity:0.40;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E");background-size:160px 160px}
 @media print{.site-grain{display:none}}
 
-.site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
+.site-container{width:var(--page-canvas);margin-inline:auto}
 
 .site-hdr{position:relative;width:100%;min-height:76px;background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16)}
 /* Logo hard-left, then the nav + Start here CTA grouped hard-right (design):
    nav takes margin-left:auto so it and everything after it sit against the CTA. */
-.site-hdr__in{width:min(100% - 64px,1280px);min-height:76px;display:flex;align-items:center;gap:22px}
+.site-hdr__in{width:var(--page-canvas);min-height:76px;display:flex;align-items:center;gap:22px}
 .site-hdr__in>*{min-width:0}
 /* Pin each slot to its column so the actions/burger stays hard-right even when
    the nav is display:none on mobile — otherwise grid auto-placement pulls the

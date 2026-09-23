@@ -108,7 +108,7 @@ var PROOF = [['18+ years', ' in product and growth'], ['100+', ' technology comp
 // the forces map from a horizontal axis to a vertical one.
 var WM_CSS = `
 .wm{background:#F3F0E8;color:#3A403A;font-family:var(--font-body);--wm-clay:#A34A38}
-.wm-container{width:min(1280px,calc(100% - 2 * clamp(16px,3.5vw,32px)));margin-inline:auto}
+.wm-container{width:var(--page-canvas);margin-inline:auto}
 
 /* shared atoms */
 .wm-eyebrow{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0}
@@ -139,6 +139,11 @@ var WM_CSS = `
 .wm-scope{background:#EDE8DB;padding-block:clamp(48px,6vw,84px)}
 .wm-scope__h2{margin:0 0 clamp(28px,3.4vw,40px)}
 .wm-scope__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr));gap:clamp(22px,2.8vw,40px)}
+/* Hold the approved 3x2 arrangement on a wide canvas: auto-fit would pick up
+   a fourth column past ~1440px and leave an orphan row of two. 1160px is where
+   auto-fit used to reach three columns on the old narrower container, so the
+   breakpoint itself is unchanged. */
+@media (min-width:1160px){.wm-scope__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .wm-group{min-width:0;padding-top:18px;border-top:1px solid rgba(23,25,25,0.24);display:flex;flex-direction:column;gap:16px}
 .wm-group__h{margin:0;font-family:var(--font-display);font-synthesis:none;font-size:13px;font-weight:400;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#047857}
 .wm-group__list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 16px}
@@ -177,6 +182,10 @@ var WM_CSS = `
 .wm-where{margin-top:clamp(48px,6vw,80px);padding-top:clamp(32px,4vw,44px);border-top:2px solid #047857;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:clamp(24px,3vw,48px);align-items:start}
 .wm-where__h3{margin:0;max-width:14ch;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(24px,2.8vw,36px);font-weight:800;line-height:1.06;letter-spacing:-0.036em;color:#14201C;text-wrap:balance}
 .wm-where__chips{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(130px,100%),1fr));gap:10px}
+/* Keep the practical row and the psychological row intact: three across, two
+   rows. Without this a wide canvas reflows them to 5+1 and the colour
+   grouping stops meaning anything. */
+@media (min-width:900px){.wm-where__chips{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .wm-chip{padding:14px 16px;font-family:var(--font-heading);font-size:16px;font-weight:750;letter-spacing:-0.01em}
 .wm-chip--practical{background:#D8F3E5;color:#043D2B}
 .wm-chip--psychological{background:#F6E2DE;color:#7E2C20}
@@ -190,6 +199,9 @@ var WM_CSS = `
 .wm-fit__h3--no{color:var(--wm-clay)}
 .wm-fit__list{list-style:none;margin:0;padding:0}
 .wm-fit__item{display:flex;gap:12px;padding:15px 0;border-top:1px solid rgba(23,25,25,0.18);font-size:17px;line-height:1.5;color:#3A403A;text-wrap:pretty}
+/* The rules still span the full column on a wide canvas, but the sentence
+   inside them stops at a readable measure instead of stretching to ~90ch. */
+.wm-fit__item>span:last-child{max-width:52ch}
 .wm-fit__mark{flex:0 0 auto;font-weight:700;color:#047857}
 .wm-fit__mark--no{color:var(--wm-clay)}
 

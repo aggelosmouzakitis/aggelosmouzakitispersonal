@@ -58,8 +58,31 @@
   --green:#047857;--green-pressed:#03654A;--sage:#8FBFA7;
   --ink:#171919;--heading-ink:#14201C;--ink-2:#3A403A;--on-forest:#C0C9BF;--meta:#6A6F67;
   --rule:rgba(23,25,25,0.18);--rule-on-forest:rgba(243,240,232,0.16);
+  /* The one page canvas: header, hero, every section container and the footer
+     resolve against it, so the whole page shares a single grid instead of the
+     three it used to have (1320 / 1280 / 1280, each with its own gutter).
+     Fluid to the viewport minus a gutter, capped so the eye still has an edge
+     to work against on very large screens.
+       - up to ~1040px the 5vw ramp binds and matches the old container exactly,
+         so phones and tablets are pixel-identical;
+       - through the laptop band the 52px gutter holds proportions close to what
+         they were (header and hero sat on a flat 32px gutter, the sections on
+         5vw — this lands between the two and finally aligns them);
+       - past ~1664px the cap takes over at 1560 instead of 1280/1320.
+     Individual text blocks keep their own smaller measures on top of this. */
+  --page-max:1560px;
+  --page-gutter:clamp(20px,5vw,52px);
+  --page-canvas:min(var(--page-max),calc(100% - 2 * var(--page-gutter)));
 }
 html,body,#root{height:auto}
+/* Every page except /work-with-me/ carries a star-selector margin reset in its
+   own static preamble; that page was authored later and never got one, so the UA's
+   8px body margin survived and inset the whole page — full-bleed header and
+   section backgrounds included — by 8px, which also made the page canvas
+   resolve 16px narrower there than everywhere else. Zero it here so the chrome
+   guarantees it on every page instead of each page having to remember. */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}
 #root{display:block;overflow:visible}
 #sidebar{display:none!important}
 #main-scroll{overflow:visible;background:#F3F0E8;color:#171919}
@@ -75,12 +98,12 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .site-grain{position:fixed;inset:0;pointer-events:none;z-index:90;opacity:0.40;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E");background-size:160px 160px}
 @media print{.site-grain{display:none}}
 
-.site-container{width:min(1320px,calc(100% - 2 * clamp(20px,5vw,68px)));margin-inline:auto}
+.site-container{width:var(--page-canvas);margin-inline:auto}
 
 .site-hdr{position:relative;width:100%;min-height:76px;background:#16231E;border-bottom:1px solid rgba(243,240,232,0.16)}
 /* Logo hard-left, then the nav + Start here CTA grouped hard-right (design):
    nav takes margin-left:auto so it and everything after it sit against the CTA. */
-.site-hdr__in{width:min(100% - 64px,1280px);min-height:76px;display:flex;align-items:center;gap:22px}
+.site-hdr__in{width:var(--page-canvas);min-height:76px;display:flex;align-items:center;gap:22px}
 .site-hdr__in>*{min-width:0}
 /* Pin each slot to its column so the actions/burger stays hard-right even when
    the nav is display:none on mobile — otherwise grid auto-placement pulls the
@@ -226,7 +249,7 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 @media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
 </style><style>
 .wm{background:#F3F0E8;color:#3A403A;font-family:var(--font-body);--wm-clay:#A34A38}
-.wm-container{width:min(1280px,calc(100% - 2 * clamp(16px,3.5vw,32px)));margin-inline:auto}
+.wm-container{width:var(--page-canvas);margin-inline:auto}
 
 /* shared atoms */
 .wm-eyebrow{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0}
@@ -257,6 +280,11 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .wm-scope{background:#EDE8DB;padding-block:clamp(48px,6vw,84px)}
 .wm-scope__h2{margin:0 0 clamp(28px,3.4vw,40px)}
 .wm-scope__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr));gap:clamp(22px,2.8vw,40px)}
+/* Hold the approved 3x2 arrangement on a wide canvas: auto-fit would pick up
+   a fourth column past ~1440px and leave an orphan row of two. 1160px is where
+   auto-fit used to reach three columns on the old narrower container, so the
+   breakpoint itself is unchanged. */
+@media (min-width:1160px){.wm-scope__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .wm-group{min-width:0;padding-top:18px;border-top:1px solid rgba(23,25,25,0.24);display:flex;flex-direction:column;gap:16px}
 .wm-group__h{margin:0;font-family:var(--font-display);font-synthesis:none;font-size:13px;font-weight:400;line-height:1;letter-spacing:0.10em;text-transform:uppercase;color:#047857}
 .wm-group__list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 16px}
@@ -295,6 +323,10 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .wm-where{margin-top:clamp(48px,6vw,80px);padding-top:clamp(32px,4vw,44px);border-top:2px solid #047857;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:clamp(24px,3vw,48px);align-items:start}
 .wm-where__h3{margin:0;max-width:14ch;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(24px,2.8vw,36px);font-weight:800;line-height:1.06;letter-spacing:-0.036em;color:#14201C;text-wrap:balance}
 .wm-where__chips{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(130px,100%),1fr));gap:10px}
+/* Keep the practical row and the psychological row intact: three across, two
+   rows. Without this a wide canvas reflows them to 5+1 and the colour
+   grouping stops meaning anything. */
+@media (min-width:900px){.wm-where__chips{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .wm-chip{padding:14px 16px;font-family:var(--font-heading);font-size:16px;font-weight:750;letter-spacing:-0.01em}
 .wm-chip--practical{background:#D8F3E5;color:#043D2B}
 .wm-chip--psychological{background:#F6E2DE;color:#7E2C20}
@@ -308,6 +340,9 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .wm-fit__h3--no{color:var(--wm-clay)}
 .wm-fit__list{list-style:none;margin:0;padding:0}
 .wm-fit__item{display:flex;gap:12px;padding:15px 0;border-top:1px solid rgba(23,25,25,0.18);font-size:17px;line-height:1.5;color:#3A403A;text-wrap:pretty}
+/* The rules still span the full column on a wide canvas, but the sentence
+   inside them stops at a readable measure instead of stretching to ~90ch. */
+.wm-fit__item>span:last-child{max-width:52ch}
 .wm-fit__mark{flex:0 0 auto;font-weight:700;color:#047857}
 .wm-fit__mark--no{color:var(--wm-clay)}
 

@@ -291,7 +291,7 @@ const PAGE_V2_CSS = `
 .home-hero{position:relative;overflow:clip;background:${V2.white};color:${V2.heroInk}}
 .home-hero::before{content:"";position:absolute;top:0;bottom:0;left:66%;width:1px;background:rgba(4,120,87,0.55);pointer-events:none}
 @media (max-width:900px){.home-hero::before{display:none}}
-.home-hero__grid{width:min(100% - 64px,1280px);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(380px,0.78fr);align-items:center;gap:48px;padding-block:88px 112px}
+.home-hero__grid{width:var(--page-canvas);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(380px,0.78fr);align-items:center;gap:48px;padding-block:88px 112px}
 .home-hero__copy{position:relative;z-index:2;min-width:0;max-width:820px;color:${V2.heroInk}}
 .home-hero__eyebrow{max-width:520px;color:${V2.green};font-family:${V2.archivo};font-synthesis:none;font-size:13px;font-weight:400;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
 .home-hero__title{max-width:none;margin:16px 0 0;font-family:${V2.archivo};font-synthesis:none;font-weight:400;line-height:0.94;letter-spacing:-0.05em;color:${V2.heroInk}}
@@ -332,7 +332,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
   .home-hero__rotate-word--b{opacity:0}
 }
 .home-hero__support{max-width:640px;margin:0 0 30px;color:#2C312C;font-family:${V2.body};font-size:20px;font-weight:400;line-height:1.5}
-.home-hero__photo{position:relative;z-index:1;width:clamp(380px,32vw,480px);max-width:100%;aspect-ratio:1;justify-self:end}
+.home-hero__photo{position:relative;z-index:1;width:clamp(380px,32vw,560px);max-width:100%;aspect-ratio:1;justify-self:end}
 .home-hero__photo::before{content:"";position:absolute;z-index:0;inset:6% -4% -2% 8%;border-radius:50%;background:${V2.green}}
 .home-hero__photo::after{content:"";position:absolute;z-index:0;inset:6% -4% -2% 8%;border-radius:50%;background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,0.92) 58%);pointer-events:none}
 .home-hero__frame{position:absolute;z-index:1;inset:0;overflow:hidden;border-radius:50%}
@@ -537,7 +537,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 /* Five tools: one row on desktop, then 3+2 rather than 4+1 so the wrap never
    leaves a single card stranded on its own row. */
 .home-free__tools{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));gap:clamp(14px,1.6vw,20px)}
-@media (max-width:1100px) and (min-width:720px){.home-free__tools{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1240px) and (min-width:720px){.home-free__tools{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:719px){.home-free__tools{grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}}
 .home-free__tool{min-width:0;display:flex;flex-direction:column;gap:16px;padding:clamp(20px,2.2vw,26px);background:#F3F0E8;color:#14201C;transition:background .18s}
 .home-free__tool:hover{background:#D8F3E5;color:#14201C}
