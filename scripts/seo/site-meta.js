@@ -206,7 +206,7 @@ const PAGES = [
   {
     file: 'free-tools/roast-my-offer/index.html', url: '/free-tools/roast-my-offer/', priority: '0.7', changefreq: 'yearly',
     title: 'Roast My Offer | Free Offer Teardown',
-    description: 'Send your offer — a link or pasted copy — and get a written teardown of the positioning, the pricing and the reasons someone might not buy. Free, and written by a person.',
+    description: 'Send your offer — a link or pasted copy — and get a written teardown of the positioning, the pricing and why someone might not buy. Free, written by a person.',
     ogTitle: 'Roast My Offer | Free Offer Teardown',
     ogDescription: 'Send your offer and get a written teardown of what is weak in it.',
     ogImage: abs('/img/og/roast-my-offer.png'),
