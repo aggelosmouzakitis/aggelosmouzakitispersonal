@@ -20,6 +20,9 @@
  *   within a second. If it does, the database half is finished and working,
  *   independently of the website.
  *
+ *   Re-pasting a later version is safe: if columns were added since, the header
+ *   row is topped up on the next write and existing rows stay where they are.
+ *
  * STEP 3 — publish it as a Web app and send Claude the URL.
  *   Deploy → New deployment → gear icon → select type: **Web app**
  *   (NOT Library — a Library has no /exec address, so the site cannot post to it)
@@ -49,7 +52,9 @@ var COLUMNS = [
   'Email',
   'Notes',          // short human summary — message, question, or headline result
   'Page',           // the URL they submitted from
-  'Subject'         // the exact subject line of the notification email
+  'Subject',        // the exact subject line of the notification email
+  'Newsletter',     // yes / no, only on forms that actually ask; blank otherwise
+  'Detail extra'    // tool-specific data, e.g. the offer and audience for a roast
 ];
 
 // ── Run this once from the editor ────────────────────────────────────────────
@@ -83,7 +88,9 @@ function testSubmission() {
     email: 'test@example.com',
     notes: 'If you can see this row, the database half is working.',
     page_url: 'https://aggelosmouzakitis.com/free-tools/',
-    subject: '[TEST] Test row from the Apps Script editor — Test Person'
+    subject: '[TEST] Test row from the Apps Script editor — Test Person',
+    newsletter: 'no',
+    detail_extra: 'Any tool-specific fields land here.'
   };
   appendLead_(fake);
   Logger.log('Wrote a test row. Open the sheet and check the Leads tab.');
@@ -117,7 +124,9 @@ function appendLead_(data) {
     data.email || data.user_email || data.from_email || '',
     data.notes || data.overall_score || data.section_breakdown || '',
     data.page_url || data.source_page || '',
-    data.subject || data.overall_grade || ''
+    data.subject || data.overall_grade || '',
+    data.newsletter || '',
+    data.detail_extra || ''
   ]);
 }
 
@@ -167,12 +176,16 @@ function getSheet_() {
   if (!sheet) sheet = ss.insertSheet(SHEET_NAME);
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(COLUMNS);
-    sheet.getRange(1, 1, 1, COLUMNS.length).setFontWeight('bold');
     sheet.setFrozenRows(1);
     sheet.setColumnWidth(1, 180);
     sheet.setColumnWidth(3, 240);
     sheet.setColumnWidth(6, 320);
+  } else if (sheet.getLastColumn() < COLUMNS.length) {
+    // A later version added columns. Fill in the new headings rather than
+    // leaving data sitting under blank ones; existing rows are untouched.
+    sheet.getRange(1, 1, 1, COLUMNS.length).setValues([COLUMNS]);
   }
+  sheet.getRange(1, 1, 1, COLUMNS.length).setFontWeight('bold');
   return sheet;
 }
 

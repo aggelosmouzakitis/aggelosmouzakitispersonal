@@ -368,15 +368,15 @@ function artBurnout() {
 // 06 — two panels either side of a seam: the offer, and the offer after.
 function artRoast() {
   return ftArt([ftRect('a', 96, 26, 46, 52, {
-    stroke: FT_INK2,
-    sw: 1.6
+    stroke: FT_MUTED,
+    sw: 1.25
   }), ftRect('b', 158, 26, 46, 52, {
-    stroke: FT_INK2,
+    stroke: FT_GREEN,
     sw: 1.6
-  }), ftPath('c', 'M150 6 V30 M150 74 V98'), ftPath('d', 'M40 52 H84 M216 52 H260'), ftCircle('e', 30, 52, 4, {
-    fill: FT_INK2
+  }), ftPath('c', 'M150 6 V30 M150 74 V98', FT_GREEN, 1.6), ftPath('d', 'M40 52 H84 M216 52 H260'), ftCircle('e', 30, 52, 4, {
+    fill: FT_MUTED
   }), ftCircle('f', 270, 52, 4, {
-    fill: FT_INK2
+    fill: FT_GREEN
   })]);
 }
 // 07 — a path from interest to purchase, interrupted.
@@ -467,9 +467,10 @@ var FT_TOOLS = [{
   id: 'roast-my-offer',
   cat: 'business',
   kind: 'Roast',
-  soon: true,
+  href: '/free-tools/roast-my-offer/',
   title: 'Roast my offer',
   desc: 'Give me your offer and get direct feedback on positioning, credibility and why someone might not buy.',
+  meta: 'Send your offer',
   art: artRoast
 }, {
   id: 'why-arent-people-buying',

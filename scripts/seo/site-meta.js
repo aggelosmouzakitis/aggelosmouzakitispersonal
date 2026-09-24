@@ -193,6 +193,7 @@ const PAGES = [
         '@type': 'ItemList', '@id': abs('/free-tools/') + '#collection',
         name: 'Free tools', numberOfItems: 5, itemListOrder: 'https://schema.org/ItemListUnordered',
         itemListElement: [
+          ['/free-tools/roast-my-offer/', 'Roast my offer'],
           ['/free-tools/business-constraint/', "What's limiting your business?"],
           ['/free-tools/strategy-or-execution/', 'Is it a strategy or execution problem?'],
           ['/free-tools/quit-your-job/', "What's making you want to quit your job?"],
@@ -201,6 +202,17 @@ const PAGES = [
         ].map(([p, n], i) => ({ '@type': 'ListItem', position: i + 1, name: n, url: abs(p) })),
       },
     ]),
+  },
+  {
+    file: 'free-tools/roast-my-offer/index.html', url: '/free-tools/roast-my-offer/', priority: '0.7', changefreq: 'yearly',
+    title: 'Roast My Offer | Free Offer Teardown',
+    description: 'Send your offer — a link or pasted copy — and get a written teardown of the positioning, the pricing and the reasons someone might not buy. Free, and written by a person.',
+    ogTitle: 'Roast My Offer | Free Offer Teardown',
+    ogDescription: 'Send your offer and get a written teardown of what is weak in it.',
+    ogImage: abs('/img/og/roast-my-offer.png'),
+    ogImageAlt: 'Free offer teardown: roast my offer',
+    schema: toolNodes('/free-tools/roast-my-offer/', 'Roast my offer',
+      'Send an offer URL or pasted copy, say who it is for and roughly what it costs, and receive a written teardown of the positioning, pricing and likely objections.'),
   },
   {
     file: 'free-tools/business-constraint/index.html', url: '/free-tools/business-constraint/', priority: '0.7', changefreq: 'yearly',

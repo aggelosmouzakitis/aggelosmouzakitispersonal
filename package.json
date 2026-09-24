@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel site-chrome.jsx -o site-chrome.js && babel core-pages-v2.jsx -o core-pages-v2.js && babel sidebar.jsx -o sidebar.js && babel content-pages.jsx -o content-pages.js && babel diagnostic.jsx -o diagnostic.js && babel work-with-me.jsx -o work-with-me.js && babel contact.jsx -o contact.js && babel wtf-friday.jsx -o wtf-friday.js && babel clarity-data.jsx -o clarity-data.js && babel clarity-tools.jsx -o clarity-tools.js && babel free-tools.jsx -o free-tools.js && babel lead-capture.jsx -o lead-capture.js",
+    "build": "babel site-chrome.jsx -o site-chrome.js && babel core-pages-v2.jsx -o core-pages-v2.js && babel sidebar.jsx -o sidebar.js && babel content-pages.jsx -o content-pages.js && babel diagnostic.jsx -o diagnostic.js && babel work-with-me.jsx -o work-with-me.js && babel contact.jsx -o contact.js && babel wtf-friday.jsx -o wtf-friday.js && babel clarity-data.jsx -o clarity-data.js && babel clarity-tools.jsx -o clarity-tools.js && babel free-tools.jsx -o free-tools.js && babel lead-capture.jsx -o lead-capture.js && babel roast-my-offer.jsx -o roast-my-offer.js",
     "test": "node scripts/seo/seo-check.js",
     "seo:meta": "node scripts/seo/apply-metadata.js",
     "seo:stamp": "node scripts/seo/stamp-assets.js",

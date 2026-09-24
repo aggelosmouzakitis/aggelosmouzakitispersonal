@@ -43,6 +43,7 @@ Free, self-scored questionnaires that run in the browser. They are directional
 and none of them is a clinical diagnosis.
 
 - [Free Tools](https://aggelosmouzakitis.com/free-tools/): The collection, filterable by Business / Career / Psychology.
+- [Roast my offer](https://aggelosmouzakitis.com/free-tools/roast-my-offer/): Send an offer URL or pasted copy, say who it is for and roughly what it costs, and Aggelos writes back a teardown of the positioning, pricing and likely objections. Not automated — he runs each one through his offer-analysis framework himself.
 - [What's limiting your business?](https://aggelosmouzakitis.com/free-tools/business-constraint/): 20 questions separating an offer problem from a demand, pricing, conversion or execution problem.
 - [Is it a strategy or execution problem?](https://aggelosmouzakitis.com/free-tools/strategy-or-execution/): 17 questions separating a wrong plan from a plan that is not being carried out.
 - [What's making you want to quit your job?](https://aggelosmouzakitis.com/free-tools/quit-your-job/): 20 questions separating the role, the manager, the company, the field and burnout.

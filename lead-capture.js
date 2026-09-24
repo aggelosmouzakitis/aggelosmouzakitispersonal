@@ -63,6 +63,11 @@ var LEAD_SOURCES = {
     tag: 'WAITLIST',
     label: 'Free tool waitlist',
     template: 'template_wdsrbdo'
+  },
+  'roast-my-offer': {
+    tag: 'ROAST',
+    label: 'Roast My Offer',
+    template: 'template_wdsrbdo'
   }
 };
 function leadSource(id) {
@@ -115,6 +120,8 @@ function leadPostToSheet(payload) {
 //   name, email  as captured (one full-name field; no splitting)
 //   notes        short summary for the sheet's Notes column
 //   body         the form's own detailed body; the header block is prepended
+//   newsletter   true/false only where the form asks; left out otherwise
+//   detailExtra  tool-specific fields, flattened, for the sheet's last column
 //   params       extra EmailJS params this form's template already expects
 // }
 // done(ok) always fires — on success, on failure, or after 6s, so a person is
@@ -142,7 +149,13 @@ function submitLead(rec, done) {
     notes: leadStr(rec.notes),
     subject: subject,
     message: message,
-    page_url: pageUrl
+    page_url: pageUrl,
+    // Only forms that actually ask get a yes/no; everything else stays blank so
+    // an unasked question never reads as a refusal.
+    newsletter: rec.newsletter === true ? 'yes' : rec.newsletter === false ? 'no' : '',
+    // Whatever a given tool collects beyond the shared fields, flattened into
+    // one cell so the sheet keeps a fixed shape as more tools are added.
+    detail_extra: leadStr(rec.detailExtra)
   };
   // Legacy EmailJS/sheet field names — unchanged spellings, still populated.
   var legacy = {

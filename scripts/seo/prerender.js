@@ -21,9 +21,10 @@ const PAGES = [
   // Retained (out of nav, still indexable via their own inline SpecialtyPage mount)
   { f: 'ask-me-anything/index.html', faq: false },
   { f: 'ask-me-anything/el/index.html', faq: false },
-  // Free Tools — the collection page plus the five self-scoring clarity tools
-  // inside it (renderApp-free; they mount renderFreeTools / ClarityTool).
+  // Free Tools — the collection page plus every tool inside it (renderApp-free;
+  // they mount renderFreeTools / renderRoastMyOffer / ClarityTool).
   { f: 'free-tools/index.html', faq: false },
+  { f: 'free-tools/roast-my-offer/index.html', faq: false },
   { f: 'free-tools/business-constraint/index.html', faq: false },
   { f: 'free-tools/strategy-or-execution/index.html', faq: false },
   { f: 'free-tools/quit-your-job/index.html', faq: false },
