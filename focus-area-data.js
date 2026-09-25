@@ -1019,7 +1019,7 @@ window.FOCUS_AREA_DATA = function () {
   }, {
     id: 'u02',
     group: 'Direction',
-    text: 'I can tell the difference between what I want and what I think I should want.'
+    text: 'I know whether I truly want something or just feel I should want it.'
   }, {
     id: 'u03',
     group: 'Self-trust',

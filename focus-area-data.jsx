@@ -791,7 +791,7 @@ window.FOCUS_AREA_DATA = (function () {
   var UNIVERSAL_PROMPT = 'How true is this for you?';
   var UNIVERSAL = [
     { id: 'u01', group: 'Direction', text: "I know what I want, even if I don't yet know how to get there." },
-    { id: 'u02', group: 'Direction', text: 'I can tell the difference between what I want and what I think I should want.' },
+    { id: 'u02', group: 'Direction', text: 'I know whether I truly want something or just feel I should want it.' },
     { id: 'u03', group: 'Self-trust', text: 'I trust my own judgment when the stakes are high.' },
     { id: 'u04', group: 'Self-trust', text: "Other people's opinions can easily make me question what I already know." },
     { id: 'u05', group: 'Action', text: 'When I know what needs to be done, I usually do it.' },
