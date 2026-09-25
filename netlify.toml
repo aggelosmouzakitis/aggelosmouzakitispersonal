@@ -269,6 +269,21 @@
   status = 301
   force = true
 
+# ─── Find Your Focus Area lives at the root ──────────────────────────────────
+# The flagship assessment is /find-your-focus-area/. It is also the first item in
+# Free Tools, so the path a visitor might guess from the other tools' URLs
+# resolves to it in one hop.
+[[redirects]]
+  from = "/free-tools/find-your-focus-area"
+  to = "/find-your-focus-area/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/free-tools/find-your-focus-area/*"
+  to = "/find-your-focus-area/"
+  status = 301
+  force = true
+
 # ─── Book-a-call (Calendly) deactivated → route to the contact page ───────────
 # The Calendly booking pages are retired; every "book a call" intent now goes to
 # the contact form (orientation interest preselected). force=true wins over the

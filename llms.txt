@@ -27,10 +27,11 @@ strategy, skill and decisions, or behaviour, fear and patterns.
 ## Site structure
 
 There is one paid service — /work-with-me/ — plus a free weekly group format
-and a library of free self-assessment tools. Free Tools is the site's primary
-call to action. The site is English-only.
+and a library of free self-assessment tools. The free Find Your Focus Area
+assessment is the site's primary call to action; the Free Tools collection holds
+it and every other tool. The site is English-only.
 
-- [Home](https://aggelosmouzakitis.com/): Positioning, the credentials behind the advice, the before/after changes people come to work on, and the free tools.
+- [Home](https://aggelosmouzakitis.com/): Positioning, the credentials behind the advice, the before/after changes people come to work on, the free assessment and the free tools.
 - [Work with me](https://aggelosmouzakitis.com/work-with-me/): The single 1:1 service. What can be worked on (career and direction, going independent, sales and visibility, business growth, patterns and boundaries, burnout and identity), the Jobs to be Done forces map, fit and not-fit, six common questions, and the free orientation call.
 - [About](https://aggelosmouzakitis.com/about/): Background and credentials in two columns (business/product/behaviour and psychology/therapy), how consumer research became the way he reads problems, and why he works across both fields.
 - [Reviews](https://aggelosmouzakitis.com/reviews/): Anonymous client feedback, shared with permission, identifying details removed.
@@ -42,7 +43,8 @@ call to action. The site is English-only.
 Free, self-scored questionnaires that run in the browser. They are directional
 and none of them is a clinical diagnosis.
 
-- [Free Tools](https://aggelosmouzakitis.com/free-tools/): The collection, filterable by Business / Career / Psychology.
+- [Find Your Focus Area](https://aggelosmouzakitis.com/find-your-focus-area/): The flagship free assessment, about 4 minutes. Three stages (your situation, how the problem is working, how you tend to respond) point to one of seven Focus Areas where attention is likely to be most useful right now: Direction, Strategy, Action, Self-trust, Capacity, Relationships & Boundaries or Environment. Deterministic scoring in the browser; the Focus Areas are not personality types.
+- [Free Tools](https://aggelosmouzakitis.com/free-tools/): The collection, led by Find Your Focus Area, filterable by Business / Career / Psychology.
 - [Roast my offer](https://aggelosmouzakitis.com/free-tools/roast-my-offer/): Send an offer URL or pasted copy, say who it is for and roughly what it costs, and Aggelos writes back a teardown of the positioning, pricing and likely objections. Not automated — he runs each one through his offer-analysis framework himself.
 - [What's limiting your business?](https://aggelosmouzakitis.com/free-tools/business-constraint/): 20 questions separating an offer problem from a demand, pricing, conversion or execution problem.
 - [Is it a strategy or execution problem?](https://aggelosmouzakitis.com/free-tools/strategy-or-execution/): 17 questions separating a wrong plan from a plan that is not being carried out.

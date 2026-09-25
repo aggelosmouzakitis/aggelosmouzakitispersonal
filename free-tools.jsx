@@ -10,6 +10,10 @@
 // site-chrome.js; only the page-specific rules live in FREE_TOOLS_CSS, and the
 // conceptual diagrams are inline SVG so the page ships no extra assets.
 //
+// The flagship "Find Your Focus Area" assessment is featured first, in its own
+// section under the hero, above the filterable collection. It spans business,
+// career and the person behind both, so it sits outside the category filter.
+//
 // Interactive parts:
 //   • category filter (All / Business / Career / Psychology) — native buttons,
 //     aria-pressed, live region announcing the result count
@@ -30,6 +34,7 @@ if (typeof window !== 'undefined' && window.emailjs) {
 }
 
 var ASK_URL = '/ask-me-anything/';
+var FOCUS_URL = (typeof window !== 'undefined' && window.FOCUS_AREA_URL) || '/find-your-focus-area/';
 
 // ── Analytics (existing gtag; no-op if absent) ───────────────────────────────
 function ftTrack(name, params) {
@@ -470,19 +475,49 @@ var FREE_TOOLS_CSS = [
   '.ft-ask__p + .ft-ask__p{margin-top:16px}',
   '.ft-ask .pill--green{margin-top:48px}',
 
+  // featured assessment: a forest card under the hero, the page's strongest
+  // element after the h1. Sage carries the accents on the dark ground, as it
+  // does in the closing band.
+  '.ft-feature{background:var(--bone,#F3F0E8);padding-block:0 clamp(64px,8vw,104px)}',
+  '.ft-feature__card{position:relative;overflow:clip;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:center;gap:clamp(32px,5vw,72px);padding:clamp(28px,4.6vw,64px);background:var(--forest,#16231E);color:var(--bone,#F3F0E8);border-top:3px solid var(--sage,#8FBFA7)}',
+  '.ft-feature__glow{position:absolute;top:-200px;right:-160px;width:520px;height:520px;border-radius:50%;background:rgba(143,191,167,0.07);pointer-events:none}',
+  '.ft-feature__copy{position:relative;min-width:0}',
+  '.ft-feature__eyebrow{margin:0;color:var(--sage,#8FBFA7);font-size:13px;font-weight:700;line-height:1.3;letter-spacing:0.11em;text-transform:uppercase}',
+  '.ft-feature__eyebrow span{color:var(--bone,#F3F0E8)}',
+  '.ft-feature__h{margin:18px 0 0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(36px,5vw,64px);font-weight:800;line-height:.98;letter-spacing:-0.048em;color:var(--bone,#F3F0E8);text-wrap:balance}',
+  '.ft-feature__lead{margin:22px 0 0;max-width:34ch;font-size:clamp(19px,1.8vw,22px);font-weight:600;line-height:1.4;color:var(--bone,#F3F0E8);text-wrap:pretty}',
+  '.ft-feature__p{margin:14px 0 0;max-width:58ch;font-size:17px;line-height:1.6;color:var(--on-forest,#C0C9BF);text-wrap:pretty}',
+  '.ft-feature__stages{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px 28px}',
+  '.ft-feature__stages li{display:inline-flex;align-items:baseline;gap:10px;font-size:15px;font-weight:600;line-height:1.35;color:var(--bone,#F3F0E8)}',
+  '.ft-feature__stages b{font-family:var(--font-display);font-size:13px;font-weight:400;color:var(--sage,#8FBFA7);font-variant-numeric:tabular-nums}',
+  '.ft-feature__row{margin-top:34px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}',
+  '.ft-feature__cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 26px;background:var(--green,#047857);color:var(--bone,#F3F0E8);font-size:15px;font-weight:750;line-height:1;letter-spacing:0.045em;text-transform:uppercase;white-space:nowrap;transition:background var(--dur-hover,180ms),gap var(--dur-hover,180ms)}',
+  '.ft-feature__cta:hover{background:var(--green-pressed,#03654A);gap:13px}',
+  '.ft-feature__meta{font-size:14px;line-height:1.4;color:var(--on-forest,#C0C9BF)}',
+  '.ft-feature__fig{position:relative;margin:0;justify-self:end;width:100%;max-width:400px}',
+  '.ft-feature__fig svg{display:block;width:100%;height:auto}',
+  '.ft-feature__bar{transform-box:fill-box;transform-origin:50% 100%;animation:ft-feature-grow 720ms var(--ease-settle,cubic-bezier(.22,1,.36,1)) both}',
+  '@keyframes ft-feature-grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}',
+  '.ft-feature__ring{animation:ft-feature-fade 480ms var(--ease-settle,cubic-bezier(.22,1,.36,1)) 700ms both}',
+  '@keyframes ft-feature-fade{from{opacity:0}to{opacity:1}}',
+
   // responsive
-  '@media (max-width:900px){.ft-hero__rule{display:none}}',
+  '@media (max-width:900px){.ft-hero__rule{display:none}.ft-feature__card{grid-template-columns:minmax(0,1fr)}.ft-feature__fig{justify-self:start;max-width:300px;order:-1}}',
   '@media (max-width:640px){',
   // the "Coming soon" chip gets its own line so every card's top row reads the
   // same way, instead of wrapping only on the cards with a longer type label
   '.ft-card__soon{margin-left:0;flex:0 0 100%}',
   '.ft-filter{gap:0 22px}',
   '.ft-filter__btn{min-height:56px;font-size:17px;letter-spacing:0.07em}',
-  '.ft-hero__fig{flex:0 0 clamp(150px,44vw,220px);align-self:flex-start}',
+  // the decorative disc gives way on phones so the featured assessment is on
+  // screen without scrolling; the feature card carries its own drawing
+  '.ft-hero__fig{display:none}',
   '.ft-hero__lead{font-size:19px}',
   '.ft-form__submit{flex:1 1 100%}',
+  '.ft-feature__cta{width:100%;white-space:normal;text-align:center}',
+  '.ft-feature__fig{max-width:200px}',
   '}',
-  '@media (prefers-reduced-motion:reduce){.ft-card,.ft-card__figure,.ft-card__go span,.ft-notify,.ft-form__submit,a.ft-card::before{transition:none}a.ft-card:hover .ft-card__figure{transform:none}a.ft-card::before{transform:scaleX(0)}}',
+  '@media (prefers-reduced-motion:reduce){.ft-card,.ft-card__figure,.ft-card__go span,.ft-notify,.ft-form__submit,a.ft-card::before{transition:none}a.ft-card:hover .ft-card__figure{transform:none}a.ft-card::before{transform:scaleX(0)}.ft-feature__bar,.ft-feature__ring{animation:none}}',
 ].join('');
 
 function FreeToolsStyles() {
@@ -599,6 +634,48 @@ function ToolCard(props) {
   );
 }
 
+// ── Featured: Find Your Focus Area ───────────────────────────────────────────
+// Seven Focus Areas as seven bars on one baseline; one stands out and is
+// marked. The same line language as the tool diagrams, drawn for the dark card.
+var FT_FEATURE_BARS = [[12, 46], [64, 70], [116, 34], [168, 98], [220, 56], [272, 28], [324, 62]];
+function artFocusArea() {
+  var base = 132;
+  return e('svg', { viewBox: '0 0 340 144', width: 340, height: 144, 'aria-hidden': 'true', focusable: 'false' },
+    e('path', { d: 'M0 ' + base + ' H340', stroke: 'rgba(243,240,232,0.22)', strokeWidth: 1.25, fill: 'none' }),
+    FT_FEATURE_BARS.map(function (b, i) {
+      var focus = i === 3;
+      return e('rect', {
+        key: i, className: 'ft-feature__bar', x: b[0], y: base - b[1], width: focus ? 8 : 5, height: b[1],
+        fill: focus ? '#8FBFA7' : 'rgba(243,240,232,0.34)', style: { animationDelay: (i * 60) + 'ms' },
+      });
+    }),
+    e('circle', { className: 'ft-feature__ring', cx: 172, cy: base - 98 - 18, r: 8, fill: 'none', stroke: '#8FBFA7', strokeWidth: 1.6 }),
+    e('path', { className: 'ft-feature__ring', d: 'M172 ' + (base - 98 - 30) + ' V' + (base - 98 - 26) + ' M172 ' + (base - 98 - 10) + ' V' + (base - 98 - 6), stroke: '#8FBFA7', strokeWidth: 1.6, fill: 'none' }));
+}
+
+function FeaturedAssessment() {
+  return e('section', { className: 'ft-feature', 'aria-labelledby': 'ft-feature-h' },
+    e('div', { className: 'site-container' },
+      e('div', { className: 'ft-feature__card' },
+        e('div', { className: 'ft-feature__glow', 'aria-hidden': 'true' }),
+        e('div', { className: 'ft-feature__copy' },
+          e('p', { className: 'ft-feature__eyebrow' }, e('span', null, 'Start here'), ' · Free assessment'),
+          e('h2', { className: 'ft-feature__h', id: 'ft-feature-h' }, 'Find Your Focus Area'),
+          e('p', { className: 'ft-feature__lead' }, 'A 4-minute assessment to find what deserves your attention first.'),
+          e('p', { className: 'ft-feature__p' }, "Most problems have more than one layer. This assessment looks at what you're dealing with, how the problem is working, and how you tend to respond to it. The goal is to identify where your attention is most useful right now."),
+          e('ol', { className: 'ft-feature__stages', 'aria-label': 'Three stages' },
+            e('li', null, e('b', { 'aria-hidden': 'true' }, '01'), 'Your situation'),
+            e('li', null, e('b', { 'aria-hidden': 'true' }, '02'), 'How the problem is working'),
+            e('li', null, e('b', { 'aria-hidden': 'true' }, '03'), 'How you tend to respond')),
+          e('div', { className: 'ft-feature__row' },
+            e('a', {
+              className: 'ft-feature__cta', href: FOCUS_URL,
+              onClick: function () { ftTrack('free_tool_open', { tool: 'find-your-focus-area' }); },
+            }, e('span', null, 'Start the assessment'), e('span', { 'aria-hidden': 'true' }, '→')),
+            e('span', { className: 'ft-feature__meta' }, 'About 4 minutes · Business, career and the person behind both'))),
+        e('figure', { className: 'ft-feature__fig', 'aria-hidden': 'true' }, artFocusArea()))));
+}
+
 // ── Page ─────────────────────────────────────────────────────────────────────
 function FreeToolsPage() {
   var R = React;
@@ -668,6 +745,8 @@ function FreeToolsPage() {
           )
         )
       ),
+      // ── The flagship assessment, first ──
+      e(FeaturedAssessment),
       // ── The collection ──
       e('section', { className: 'ft-collection' },
         e('div', { className: 'site-container' },

@@ -24,6 +24,8 @@ const PAGES = [
   // Free Tools — the collection page plus every tool inside it (renderApp-free;
   // they mount renderFreeTools / renderRoastMyOffer / ClarityTool).
   { f: 'free-tools/index.html', faq: false },
+  // The flagship assessment (renderFocusArea): the snapshot is its intro screen.
+  { f: 'find-your-focus-area/index.html', faq: false },
   { f: 'free-tools/roast-my-offer/index.html', faq: false },
   { f: 'free-tools/business-constraint/index.html', faq: false },
   { f: 'free-tools/strategy-or-execution/index.html', faq: false },

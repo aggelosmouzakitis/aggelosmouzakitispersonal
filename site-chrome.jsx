@@ -3,7 +3,7 @@
 // Loaded BEFORE content-pages.js. Exposes on window:
 //   SITE, CHROME_PATHS, EXTERNAL, cPath, cT, BrandIcon, ChromeStyles,
 //   SiteHeader, SiteFooterX, BlackCtaStrip, UniversalContentLayout, LegacyShell,
-//   FREE_TOOLS_URL, FREE_TOOL_LINKS
+//   FREE_TOOLS_URL, FREE_TOOL_LINKS, FOCUS_AREA_URL
 //
 // One green across the whole site: #047857.
 
@@ -62,6 +62,7 @@ const CHROME_PATHS = {
   'confidentiality': { en: '/confidentiality/',    el: '/el/confidentiality/' },
   'blog':            { en: '/blog/',               el: '/blog/' },
   'ask-me-anything': { en: '/ask-me-anything/',    el: '/ask-me-anything/el' },
+  'free-tools':      { en: '/free-tools/',         el: '/free-tools/' },
 };
 function cPath(id, lang) {
   const p = CHROME_PATHS[id];
@@ -81,7 +82,7 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' };
 const CHROME_T = {
   en: {
     home: 'Home', why: 'About me', reviews: 'Reviews', apply: 'Apply',
-    start: 'FREE TOOLS', other: 'ΕΛΛΗΝΙΚΑ',
+    start: 'FREE ASSESSMENT', other: 'ΕΛΛΗΝΙΚΑ',
     role1: 'Private business & career advisor', role2: 'BACP-registered psychotherapist',
     navigate: 'NAVIGATE', content: 'CONTENT', follow: 'FOLLOW', articles: 'Articles', askAnon: 'Ask me something',
     freeTools: 'Free tools',
@@ -112,6 +113,11 @@ const WORK_WITH_ME_URL = '/work-with-me/';
 // these five are. /free-tools/ is the hub; each link goes straight to that
 // tool's starting screen. Ids match the tool slugs and drive aria-current.
 const FREE_TOOLS_URL = '/free-tools/';
+// The flagship assessment. It is the site's primary call to action: wherever
+// the dominant CTA used to point generically at Free Tools, it now reads
+// FREE ASSESSMENT → and lands here, with EXPLORE ALL FREE TOOLS → as the
+// secondary route where there is room for one.
+const FOCUS_AREA_URL = '/find-your-focus-area/';
 const FREE_TOOL_LINKS = [
   { name: "What's limiting your business?", href: '/free-tools/business-constraint/', id: 'business-constraint', category: 'Business' },
   { name: 'Is it a strategy or execution problem?', href: '/free-tools/strategy-or-execution/', id: 'strategy-or-execution', category: 'Business' },
@@ -243,6 +249,7 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .cta-strip .pill--green{margin-top:44px}
 .cta-strip__soft{display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-size:14px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:${SITE.sage};transition:gap .18s,color .18s}
 .cta-strip__soft:hover{gap:13px;color:${SITE.bone}}
+.cta-strip__softrow{display:flex;flex-wrap:wrap;justify-content:center;column-gap:36px}
 .cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:${SITE.onDark};transition:gap .18s,color .18s}
 .cta-strip__sub:hover{gap:12px;color:${SITE.bone}}
 
@@ -313,6 +320,14 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:${SITE.green}}
 
 @media (max-width:960px){.site-ftr__cols,.site-ftr__cols--en{grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}}
+/* Tablet band: three nav links plus FREE ASSESSMENT no longer fit on one row,
+   so the links move into the burger menu while the CTA stays in the bar. */
+@media (min-width:681px) and (max-width:900px){
+  .site-hdr__nav{display:none}
+  .site-hdr__in>*:last-child{margin-left:auto}
+  .site-hdr__burger{display:flex;margin-left:6px}
+  .site-menu .hdr-cta{display:none}
+}
 @media (max-width:680px){
   .site-hdr,.site-hdr__in{min-height:68px}
   .site-hdr__brand{font-size:23px}
@@ -418,25 +433,29 @@ function SiteHeader({ page, lang = 'en' }) {
     'aria-current': page === it.id ? 'page' : undefined,
   }, it.label);
   const langHref = CHROME_PATHS[page] ? cPath(page, other) : (other === 'el' ? '/el/' : '/');
-  // English header CTA is the Free Tools collection — the site's single dominant
-  // discovery action; Greek keeps the "ask anonymously" VideoAsk form (no Greek
-  // Free Tools page). "Work with me" stays ordinary navigation beside it.
-  const ctaHref = lang === 'el' ? 'https://www.videoask.com/fuv51iuq1' : FREE_TOOLS_URL;
+  // English header CTA is the flagship Find Your Focus Area assessment — the
+  // site's single dominant action; Greek keeps the "ask anonymously" VideoAsk
+  // form (no Greek assessment). Free Tools, the section that holds every tool,
+  // stays one click away as ordinary navigation.
+  const ctaHref = lang === 'el' ? 'https://www.videoask.com/fuv51iuq1' : FOCUS_AREA_URL;
   // Greek label is intentionally plain uppercase (no accents on capitals).
-  const ctaLabel = lang === 'el' ? 'ΡΩΤΑ ΑΝΩΝΥΜΑ' : 'FREE TOOLS';
+  const ctaLabel = lang === 'el' ? 'ΡΩΤΑ ΑΝΩΝΥΜΑ' : t.start;
   const ctaExt = lang === 'el' ? ext : null;
-  // Keep the FREE TOOLS CTA present in the header on every page (including the
-  // Free Tools page itself, where it acts as a "back to all"); it never disappears.
+  const ctaCurrent = page === 'find-your-focus-area' ? 'page' : undefined;
+  // Keep the CTA present in the header on every page (including the assessment
+  // itself); it never disappears.
   const showCta = true;
 
-  // English header is deliberately lean: Work with me, About, FREE TOOLS →.
-  // Greek keeps its current Home / About / Reviews nav until it is localised.
+  // English header is deliberately lean: Work with me, Free tools, About,
+  // FREE ASSESSMENT →. Greek keeps its current Home / About / Reviews nav.
   const aboutItem = { id: 'about', label: t.why };
   const workItem = { id: 'work-with-me', label: 'Work with me' };
+  const toolsItem = { id: 'free-tools', label: t.freeTools };
   let navChildren;
   if (lang === 'en') {
     navChildren = [];
     if (showWork) navChildren.push(link(workItem));
+    navChildren.push(link(toolsItem));
     navChildren.push(link(aboutItem));
   } else {
     navChildren = [link(homeItem)];
@@ -447,13 +466,14 @@ function SiteHeader({ page, lang = 'en' }) {
   if (lang === 'en') {
     menuChildren = [];
     if (showWork) menuChildren.push(link(workItem));
+    menuChildren.push(link(toolsItem));
     menuChildren.push(link(aboutItem));
   } else {
     menuChildren = [link(homeItem)];
     restItems.forEach((it) => menuChildren.push(link(it)));
   }
   if (SHOW_LANG_SWITCHER) menuChildren.push(React.createElement('a', { key: 'lang', href: langHref, hrefLang: other, style: { color: SITE.onDark } }, t.other));
-  if (showCta) menuChildren.push(React.createElement('a', { key: 'cta', className: 'hdr-cta', href: ctaHref, ...ctaExt },
+  if (showCta) menuChildren.push(React.createElement('a', { key: 'cta', className: 'hdr-cta', href: ctaHref, 'aria-current': ctaCurrent, ...ctaExt },
     React.createElement('span', null, ctaLabel), React.createElement('span', null, '→')));
 
   return React.createElement(React.Fragment, null,
@@ -464,7 +484,7 @@ function SiteHeader({ page, lang = 'en' }) {
         React.createElement('div', { style: { display: 'flex', alignItems: 'center', justifySelf: 'end' } },
           React.createElement('div', { className: 'site-hdr__end' },
             SHOW_LANG_SWITCHER && React.createElement('a', { className: 'site-hdr__lang', href: langHref, hrefLang: other }, t.other),
-            showCta && React.createElement('a', { className: 'hdr-cta', href: ctaHref, ...ctaExt },
+            showCta && React.createElement('a', { className: 'hdr-cta', href: ctaHref, 'aria-current': ctaCurrent, ...ctaExt },
               React.createElement('span', null, ctaLabel), React.createElement('span', null, '→'))
           ),
           React.createElement('button', {
@@ -481,22 +501,25 @@ function SiteHeader({ page, lang = 'en' }) {
 }
 
 // ─── BLACK CTA STRIP ─────────────────────────────────────────────────────────
-// Site-wide two-CTA choice on general pages: Free Tools is the dominant
-// discovery action, the service page the softer second route.
-// Greek has neither page, so it keeps a single pill into its own flow.
+// Site-wide CTA choice on general pages: the free assessment is the dominant
+// action; the full Free Tools collection and the service page are the softer
+// second routes. Greek has none of these pages, so it keeps a single pill into
+// its own flow.
 function BlackCtaStrip({ lang = 'en', heading, label }) {
   const t = cT(lang);
   const isEn = lang !== 'el';
+  const soft = (href, text) => React.createElement('a', { className: 'cta-strip__soft', href },
+    React.createElement('span', null, text), React.createElement('span', { 'aria-hidden': 'true' }, '→'));
   return React.createElement('section', { className: 'cta-strip' },
     React.createElement('div', { className: 'site-container' },
       React.createElement('h2', { className: 'cta-strip__h' }, heading || t.ctaHeading),
       React.createElement('div', null,
-        React.createElement('a', { className: 'pill pill--green', href: isEn ? FREE_TOOLS_URL : cPath('diagnostic', lang) },
-          React.createElement('span', null, label || (isEn ? 'EXPLORE FREE TOOLS' : t.ctaBtn)), React.createElement('span', null, '→'))
+        React.createElement('a', { className: 'pill pill--green', href: isEn ? FOCUS_AREA_URL : cPath('diagnostic', lang) },
+          React.createElement('span', null, label || (isEn ? 'FREE ASSESSMENT' : t.ctaBtn)), React.createElement('span', null, '→'))
       ),
-      isEn ? React.createElement('div', null,
-        React.createElement('a', { className: 'cta-strip__soft', href: WORK_WITH_ME_URL },
-          React.createElement('span', null, 'See how I work'), React.createElement('span', { 'aria-hidden': 'true' }, '→'))
+      isEn ? React.createElement('div', { className: 'cta-strip__softrow' },
+        soft(FREE_TOOLS_URL, 'Explore all free tools'),
+        soft(WORK_WITH_ME_URL, 'See how I work')
       ) : null,
       React.createElement('a', { className: 'cta-strip__sub', href: cPath('confidentiality', lang) },
         React.createElement('span', null, t.confidentiality), React.createElement('span', null, '→'))
@@ -884,5 +907,5 @@ Object.assign(window, {
   Motion,
   SITE, CHROME_PATHS, EXTERNAL, cPath, cT, BrandIcon, Wordmark, ChromeStyles,
   SiteHeader, SiteFooterX, BlackCtaStrip, UniversalContentLayout, LegacyShell,
-  FREE_TOOLS_URL, FREE_TOOL_LINKS,
+  FREE_TOOLS_URL, FREE_TOOL_LINKS, FOCUS_AREA_URL,
 });

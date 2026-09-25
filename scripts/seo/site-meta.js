@@ -191,8 +191,9 @@ const PAGES = [
       PERSON_REF,
       {
         '@type': 'ItemList', '@id': abs('/free-tools/') + '#collection',
-        name: 'Free tools', numberOfItems: 5, itemListOrder: 'https://schema.org/ItemListUnordered',
+        name: 'Free tools', numberOfItems: 7, itemListOrder: 'https://schema.org/ItemListUnordered',
         itemListElement: [
+          ['/find-your-focus-area/', 'Find Your Focus Area'],
           ['/free-tools/roast-my-offer/', 'Roast my offer'],
           ['/free-tools/business-constraint/', "What's limiting your business?"],
           ['/free-tools/strategy-or-execution/', 'Is it a strategy or execution problem?'],
@@ -200,6 +201,29 @@ const PAGES = [
           ['/free-tools/become-a-solopreneur/', 'Do you want to become a solopreneur?'],
           ['/free-tools/burned-out/', 'Are you burned out?'],
         ].map(([p, n], i) => ({ '@type': 'ListItem', position: i + 1, name: n, url: abs(p) })),
+      },
+    ]),
+  },
+  {
+    // The flagship assessment. Root-level URL because it is the site's primary
+    // call to action, not one tool among many; it is also first in the Free
+    // Tools collection.
+    file: 'find-your-focus-area/index.html', url: '/find-your-focus-area/', priority: '0.9', changefreq: 'monthly',
+    title: 'Find Your Focus Area | Aggelos Mouzakitis',
+    description: 'A free 4-minute assessment to find what deserves your attention first across your business, career and the person behind both.',
+    ogTitle: 'Find Your Focus Area | Aggelos Mouzakitis',
+    ogDescription: 'A free 4-minute assessment to find what deserves your attention first.',
+    ogImage: abs('/img/og/find-your-focus-area.png'),
+    ogImageAlt: 'Find Your Focus Area, a free 4-minute assessment by Aggelos Mouzakitis',
+    schema: pageNodes('/find-your-focus-area/', 'Find Your Focus Area', 'Find Your Focus Area').concat([
+      PERSON_REF,
+      {
+        '@type': 'WebApplication', '@id': abs('/find-your-focus-area/') + '#tool',
+        name: 'Find Your Focus Area', url: abs('/find-your-focus-area/'),
+        description: 'A free self-scored assessment in three short stages: your situation, how the problem is working and how you tend to respond. It points to the Focus Area where attention is likely to be most useful right now.',
+        browserRequirements: 'Requires JavaScript.', isAccessibleForFree: true,
+        author: { '@id': PERSON_ID },
+        isPartOf: { '@id': abs('/free-tools/') + '#collection' },
       },
     ]),
   },

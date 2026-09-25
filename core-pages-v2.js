@@ -893,7 +893,7 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
   .cont,.opinion__body,.media__cell{padding-inline:clamp(24px,5vw,32px)}
 }
 
-/* ── Hero CTA row — dominant Free Tools button + soft orientation route ── */
+/* ── Hero CTA row — dominant free assessment button + soft orientation route ── */
 .home-hero__ctarow{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
 .hero-cta--caps{font-size:15px;font-weight:750;letter-spacing:0.045em;text-transform:uppercase}
 .home-hero__soft{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#2C312C;border-bottom:1px solid rgba(23,25,25,0.3);padding-bottom:4px;min-height:32px;transition:color .18s,border-color .18s,gap .18s}
@@ -1005,6 +1005,18 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .home-free__tool-name{font-family:${V2.display};font-synthesis:none;font-size:19px;font-weight:750;line-height:1.22;letter-spacing:-0.026em;color:inherit;text-wrap:pretty}
 .home-free__tool-go{margin-top:auto;padding-top:14px;border-top:1px solid rgba(23,25,25,0.18);font-size:14px;font-weight:700;letter-spacing:0.04em;color:${V2.green}}
 .home-free__allwrap{position:relative;margin-top:clamp(32px,4vw,44px)}
+/* The flagship assessment leads the band: the same bone card as the tools,
+   full width, with a 4px green top rule and its own green button. */
+.home-free__feature{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:22px 48px;margin-bottom:clamp(14px,1.6vw,20px);padding:clamp(24px,3vw,40px);background:#F3F0E8;color:#14201C;border-top:4px solid ${V2.green};transition:background .18s}
+.home-free__feature:hover{background:#D8F3E5;color:#14201C}
+.home-free__feature-name{display:block;margin-top:16px;font-family:${V2.display};font-synthesis:none;font-size:clamp(28px,3.4vw,42px);font-weight:800;line-height:1.02;letter-spacing:-0.04em;color:inherit;text-wrap:balance}
+.home-free__feature-sub{display:block;margin-top:12px;max-width:46ch;font-size:17px;line-height:1.55;color:${V2.ink2};text-wrap:pretty}
+.home-free__feature-go{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding-inline:26px;background:${V2.green};color:#F3F0E8;font-size:15px;font-weight:750;line-height:1;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap;transition:background .18s,gap .18s}
+.home-free__feature:hover .home-free__feature-go{background:${V2.greenPressed};gap:13px}
+@media (max-width:719px){
+  .home-free__feature{grid-template-columns:minmax(0,1fr)}
+  .home-free__feature-go{width:100%;white-space:normal;text-align:center}
+}
 .home-free__all{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding-inline:26px;background:#F3F0E8;color:#043D2B;font-size:15px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;transition:background .18s,gap .18s}
 .home-free__all:hover{background:#D8F3E5;color:#043D2B;gap:13px}
 @media (max-width:640px){
@@ -1270,8 +1282,9 @@ function HomePageV2({
     'aria-hidden': 'true'
   }, '\u2192'))))) : null;
 
-  // 02 / Free tools — the site's dominant CTA, on its own dark-green ground so
-  // it reads as the destination rather than a footnote to the section above.
+  // 02 / Free tools — on its own dark-green ground so it reads as the
+  // destination rather than a footnote to the section above. The flagship
+  // assessment leads it; the five tools and the full collection follow.
   const startSection = isEn ? React.createElement(FreeDisc, {
     key: 'start'
   }, React.createElement('div', {
@@ -1282,7 +1295,24 @@ function HomePageV2({
     className: 'home-free__h'
   }, 'Free tools for things you\u2019re trying to figure out.')), React.createElement('p', {
     className: 'home-free__lead'
-  }, 'Diagnostics, feedback and practical tools for business, career and everything going on in your head.')), React.createElement('div', {
+  }, 'Diagnostics, feedback and practical tools for business, career and everything going on in your head.')), React.createElement('a', {
+    className: 'home-free__feature',
+    href: window.FOCUS_AREA_URL || '/find-your-focus-area/'
+  }, React.createElement('span', null, React.createElement('span', {
+    className: 'home-free__tool-tags'
+  }, React.createElement('span', {
+    className: 'home-free__tool-free'
+  }, 'Free'), React.createElement('span', {
+    className: 'home-free__tool-kind'
+  }, 'Assessment · 4 minutes')), React.createElement('span', {
+    className: 'home-free__feature-name'
+  }, 'Find Your Focus Area'), React.createElement('span', {
+    className: 'home-free__feature-sub'
+  }, 'A 4-minute assessment to find what deserves your attention first.')), React.createElement('span', {
+    className: 'home-free__feature-go'
+  }, React.createElement('span', null, 'Start the assessment'), React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '\u2192'))), React.createElement('div', {
     className: 'home-free__tools'
   }, HOME_TOOLS.map(function (tool) {
     return React.createElement('a', {
@@ -1307,7 +1337,7 @@ function HomePageV2({
   }, React.createElement('a', {
     className: 'home-free__all',
     href: '/free-tools/'
-  }, React.createElement('span', null, 'See all free tools'), React.createElement('span', {
+  }, React.createElement('span', null, 'Explore all free tools'), React.createElement('span', {
     'aria-hidden': 'true'
   }, '\u2192'))))) : null;
   const heroSection = React.createElement('section', {
@@ -1327,8 +1357,8 @@ function HomePageV2({
     className: 'home-hero__ctarow'
   }, React.createElement('a', {
     className: 'hero-cta hero-cta--caps',
-    href: '/free-tools/'
-  }, React.createElement('span', null, 'Explore free tools'), React.createElement('span', {
+    href: window.FOCUS_AREA_URL || '/find-your-focus-area/'
+  }, React.createElement('span', null, 'Free assessment'), React.createElement('span', {
     'aria-hidden': 'true'
   }, '→')), React.createElement('a', {
     className: 'home-hero__soft',
@@ -1652,7 +1682,7 @@ function AboutPageV2({
     }, 'Work with me →'), React.createElement('a', {
       className: 'ax-cta__soft',
       href: '/free-tools/'
-    }, 'Explore free tools →')));
+    }, 'Explore all free tools →')));
     aboutMainChildren = [topSection, bridgeSection, dualitySection, whySection, ctaSection];
   } else {
     aboutMainClass = 'amx-page amx-page--about';

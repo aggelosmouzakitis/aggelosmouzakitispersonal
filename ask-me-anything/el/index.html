@@ -306,6 +306,7 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .cta-strip .pill--green{margin-top:44px}
 .cta-strip__soft{display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-size:14px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#8FBFA7;transition:gap .18s,color .18s}
 .cta-strip__soft:hover{gap:13px;color:#F3F0E8}
+.cta-strip__softrow{display:flex;flex-wrap:wrap;justify-content:center;column-gap:36px}
 .cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:#C0C9BF;transition:gap .18s,color .18s}
 .cta-strip__sub:hover{gap:12px;color:#F3F0E8}
 
@@ -376,6 +377,14 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:#047857}
 
 @media (max-width:960px){.site-ftr__cols,.site-ftr__cols--en{grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}}
+/* Tablet band: three nav links plus FREE ASSESSMENT no longer fit on one row,
+   so the links move into the burger menu while the CTA stays in the bar. */
+@media (min-width:681px) and (max-width:900px){
+  .site-hdr__nav{display:none}
+  .site-hdr__in>*:last-child{margin-left:auto}
+  .site-hdr__burger{display:flex;margin-left:6px}
+  .site-menu .hdr-cta{display:none}
+}
 @media (max-width:680px){
   .site-hdr,.site-hdr__in{min-height:68px}
   .site-hdr__brand{font-size:23px}
@@ -441,8 +450,8 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 <script src="/react.production.min.js?v=d949f1c368" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=35f4f974f4" crossorigin="anonymous"></script>
 
-<script src="/site-chrome.js?v=92af4446a8"></script>
-<script src="/content-pages.js?v=b6f8ac6fa7"></script>
+<script src="/site-chrome.js?v=d30ea6bce3"></script>
+<script src="/content-pages.js?v=5e58b167d4"></script>
 <script>
 const {
   useState

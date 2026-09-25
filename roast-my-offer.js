@@ -87,7 +87,7 @@ var ROAST_CSS = ['.ro-page{max-width:820px;margin:0 auto;padding:3.5rem 2.5rem 6
 // transcribed here: same green, radius, padding and type as "Start assessment".
 '.ro-submit{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:6px;padding:.9rem 1.7rem;min-height:52px;background:var(--green,#047857);color:#F3F0E8;border:1.5px solid var(--green,#047857);border-radius:2px;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1;cursor:pointer;transition:background .18s,border-color .18s,box-shadow .18s}', '.ro-submit:hover{background:var(--green-pressed,#03654A);border-color:var(--green-pressed,#03654A);color:#F3F0E8;box-shadow:0 6px 18px rgba(4,120,87,.28)}', '.ro-submit[disabled]{opacity:.55;cursor:default;box-shadow:none}', '.ro-submit[disabled]:hover{background:var(--green,#047857);border-color:var(--green,#047857)}', '.ro-micro{margin:16px 0 0;font-size:14px;line-height:1.6;color:var(--ink-2,#3A403A)}', '.ro-privacy{margin:8px 0 0;font-size:13px;line-height:1.6;color:var(--meta,#6A6F67)}', '.ro-privacy a{color:var(--green,#047857);text-decoration:underline;text-underline-offset:2px}',
 // success — same shape as the contact form's confirmation
-'.ro-success{display:flex;flex-direction:column;align-items:flex-start}', '.ro-success h2{margin:0 0 14px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(28px,3.4vw,40px);font-weight:800;line-height:1.08;letter-spacing:-0.03em;color:var(--ink,#171919);outline:none}', '.ro-success p{margin:0 0 24px;font-size:18px;line-height:1.65;color:var(--ink-2,#3A403A);max-width:54ch}', '.ro-success strong{font-weight:700;color:var(--ink,#171919)}', '.ro-success__row{display:flex;flex-wrap:wrap;gap:12px}', '.ro-btn2{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 22px;border-radius:2px;font-family:inherit;font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;cursor:pointer}', '.ro-btn2--green{background:var(--green,#047857);color:#F3F0E8;border:1.5px solid var(--green,#047857)}', '.ro-btn2--green:hover{background:var(--green-pressed,#03654A);color:#F3F0E8}', '.ro-btn2--outline{background:transparent;color:var(--ink-2,#3A403A);border:1.5px solid rgba(23,25,25,.35)}', '.ro-btn2--outline:hover{border-color:var(--green,#047857);color:var(--green,#047857)}', '@media (max-width:767px){', '.ro-page{padding:1.75rem 1.25rem 5rem}', '.ro-h1{font-size:30px}', '.ro-lead{font-size:17px}', '.ro-success__row{width:100%}', '.ro-btn2{width:100%}', '.ro-submit{width:100%}', '}'].join('');
+'.ro-success{display:flex;flex-direction:column;align-items:flex-start}', '.ro-success h2{margin:0 0 14px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(28px,3.4vw,40px);font-weight:800;line-height:1.08;letter-spacing:-0.03em;color:var(--ink,#171919);outline:none}', '.ro-success p{margin:0 0 24px;font-size:18px;line-height:1.65;color:var(--ink-2,#3A403A);max-width:54ch}', '.ro-success strong{font-weight:700;color:var(--ink,#171919)}', '.ro-success__row{display:flex;flex-wrap:wrap;gap:12px}', '.ro-btn2{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 22px;border-radius:2px;font-family:inherit;font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;cursor:pointer}', '.ro-btn2--green{background:var(--green,#047857);color:#F3F0E8;border:1.5px solid var(--green,#047857)}', '.ro-btn2--green:hover{background:var(--green-pressed,#03654A);color:#F3F0E8}', '.ro-btn2--outline{background:transparent;color:var(--ink-2,#3A403A);border:1.5px solid rgba(23,25,25,.35)}', '.ro-btn2--outline:hover{border-color:var(--green,#047857);color:var(--green,#047857)}', '.ro-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:14px;font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--green-pressed,#03654A);text-decoration:none;transition:gap .18s,color .18s}', '.ro-link:hover{gap:12px;color:var(--green,#047857)}', '@media (max-width:767px){', '.ro-page{padding:1.75rem 1.25rem 5rem}', '.ro-h1{font-size:30px}', '.ro-lead{font-size:17px}', '.ro-success__row{width:100%}', '.ro-btn2{width:100%}', '.ro-submit{width:100%}', '}'].join('');
 function RoastStyles() {
   return e('style', {
     dangerouslySetInnerHTML: {
@@ -297,11 +297,16 @@ function RoastMyOfferForm() {
       className: 'ro-success__row'
     }, e('a', {
       className: 'ro-btn2 ro-btn2--green',
-      href: '/free-tools/'
-    }, 'Explore free tools →'), e('a', {
+      href: window.FOCUS_AREA_URL || '/find-your-focus-area/'
+    }, 'Free assessment →'), e('a', {
       className: 'ro-btn2 ro-btn2--outline',
+      href: '/free-tools/'
+    }, 'Explore all free tools →')), e('a', {
+      className: 'ro-link',
       href: '/ask-me-anything/'
-    }, 'Ask me something →'))));
+    }, 'Ask me something ', e('span', {
+      'aria-hidden': 'true'
+    }, '→'))));
   }
 
   // `key` is the ref/error key, which is not always the input's own id.

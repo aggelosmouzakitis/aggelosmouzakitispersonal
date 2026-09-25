@@ -406,7 +406,7 @@ html[lang^="el"] .svc-page .svc-h1{font-family:var(--font-heading);font-weight:8
 .svc-close{max-width:var(--svc-read);margin:76px 0 0;background:#16231E;border-radius:22px;padding:clamp(30px,4vw,46px)}
 .svc-page .svc-close__h{margin:0;max-width:20ch;font-family:var(--font-display);font-synthesis:none;font-size:clamp(28px,3.1vw,38px);line-height:1.04;letter-spacing:-0.03em;font-weight:800;color:#F3F0E8}
 .svc-close__p{margin:16px 0 0;max-width:54ch;font-size:18px;line-height:1.6;color:#C0C9BF}
-.svc-page a.svc-close__soft{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-size:13px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#8FBFA7 !important;text-decoration:none;transition:gap .18s,color .18s}
+.svc-page a.svc-close__soft{display:flex;width:fit-content;align-items:center;gap:9px;margin-top:22px;font-size:13px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#8FBFA7 !important;text-decoration:none;transition:gap .18s,color .18s}
 .svc-page a.svc-close__soft:hover{gap:13px;color:#F3F0E8 !important}
 .svc-page a.svc-close__cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:28px;min-height:56px;padding:0 30px;background:#047857;color:#F3F0E8 !important;font-family:var(--font-body);font-size:16px;font-weight:700;line-height:1;letter-spacing:0.01em;border-radius:999px;text-decoration:none;transition:filter .18s,gap .18s;white-space:nowrap}
 .svc-page a.svc-close__cta:hover{filter:brightness(1.12);gap:12px;color:#F3F0E8 !important}
@@ -457,18 +457,20 @@ function SvcCta({ href, children, ghost }) {
 }
 function SvcNote({ children }) { return React.createElement('p', { className: 'svc-note' }, children); }
 function SvcEyebrow({ children }) { return React.createElement('p', { className: 'svc-eyebrow' }, children); }
-// Site-wide discovery pair: Free Tools is the dominant action, "Not sure where
-// the service page the softer second route for people who can't frame it yet.
+// Site-wide discovery pair: the free assessment is the dominant action, the
+// service page the softer second route. The full Free Tools collection stays
+// one click away in the header and in the closing strip below.
+const SVC_ASSESSMENT_URL = (typeof window !== 'undefined' && window.FOCUS_AREA_URL) || '/find-your-focus-area/';
 function SvcHeroCta() {
   return React.createElement('div', { className: 'svc-ctarow svc-ctarow--hero' },
-    React.createElement(SvcCta, { href: '/free-tools/' }, 'EXPLORE FREE TOOLS →'),
+    React.createElement(SvcCta, { href: SVC_ASSESSMENT_URL }, 'FREE ASSESSMENT →'),
     React.createElement(SvcCta, { href: '/work-with-me/', ghost: true }, 'SEE HOW I WORK →'));
 }
 function SvcClosingCta({ title, body }) {
   return React.createElement('section', { className: 'svc-close' },
     React.createElement('h2', { className: 'svc-close__h' }, title),
     body ? React.createElement('p', { className: 'svc-close__p' }, body) : null,
-    React.createElement('a', { href: '/free-tools/', className: 'cta-btn svc-close__cta' }, 'EXPLORE FREE TOOLS →'),
+    React.createElement('a', { href: SVC_ASSESSMENT_URL, className: 'cta-btn svc-close__cta' }, 'FREE ASSESSMENT →'),
     React.createElement('a', { href: '/work-with-me/', className: 'svc-close__soft' },
       React.createElement('span', null, 'See how I work'), React.createElement('span', { 'aria-hidden': 'true' }, '→')));
 }

@@ -113,6 +113,8 @@ var ROAST_CSS = [
   '.ro-btn2--green:hover{background:var(--green-pressed,#03654A);color:#F3F0E8}',
   '.ro-btn2--outline{background:transparent;color:var(--ink-2,#3A403A);border:1.5px solid rgba(23,25,25,.35)}',
   '.ro-btn2--outline:hover{border-color:var(--green,#047857);color:var(--green,#047857)}',
+  '.ro-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:14px;font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--green-pressed,#03654A);text-decoration:none;transition:gap .18s,color .18s}',
+  '.ro-link:hover{gap:12px;color:var(--green,#047857)}',
 
   '@media (max-width:767px){',
   '.ro-page{padding:1.75rem 1.25rem 5rem}',
@@ -315,9 +317,10 @@ function RoastMyOfferForm() {
           e('strong', null, sentToS[0]),
           ' as soon as possible.'),
         e('div', { className: 'ro-success__row' },
-          e('a', { className: 'ro-btn2 ro-btn2--green', href: '/free-tools/' }, 'Explore free tools →'),
-          e('a', { className: 'ro-btn2 ro-btn2--outline', href: '/ask-me-anything/' }, 'Ask me something →')
-        )
+          e('a', { className: 'ro-btn2 ro-btn2--green', href: (window.FOCUS_AREA_URL || '/find-your-focus-area/') }, 'Free assessment →'),
+          e('a', { className: 'ro-btn2 ro-btn2--outline', href: '/free-tools/' }, 'Explore all free tools →')
+        ),
+        e('a', { className: 'ro-link', href: '/ask-me-anything/' }, 'Ask me something ', e('span', { 'aria-hidden': 'true' }, '→'))
       )
     );
   }
