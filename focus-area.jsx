@@ -11,6 +11,9 @@
 //   • answer rows keep the clarity tools' look: hairline rows, a 2px green rule
 //     on the selected answer, the same hover wash and the same ← Back button
 //   • analytics go through gtag with the slug on every event and no answer text
+//   • the completion notification goes through window.submitLead
+//     (lead-capture.js), the one EmailJS + sheet path every form on the site
+//     uses, with its error handling and 6s safety timeout
 //
 // Result page: six separate slots, in order, assembled from the stored result
 // state and the copy in focus-area-content.js (window.FOCUS_AREA_CONTENT):
@@ -35,6 +38,108 @@
   function safeSet(v) { try { window.sessionStorage.setItem(STORE_KEY, JSON.stringify(v)); } catch (err) { /* noop */ } }
   function safeClear() { try { window.sessionStorage.removeItem(STORE_KEY); } catch (err) { /* noop */ } }
 
+  // ── Completion notification ──────────────────────────────────────────────
+  // One email to Aggelos per completed set of answers, sent only once the
+  // result exists. It is fire-and-forget: the result is already on screen, so
+  // a slow or failed send can never hold it back.
+  var FA_LEAD_SOURCE = 'find-your-focus-area';
+  var FA_EMAILJS_TEMPLATE = 'template_wdsrbdo';   // the tools' template, as the clarity tools use
+
+  function faAreaLabel(id) { var a = D.focusArea(id); return a ? a.label : id; }
+  function faOption(q, id) {
+    for (var i = 0; i < q.options.length; i++) if (q.options[i].id === id) return q.options[i];
+    return null;
+  }
+
+  // Plain-text report, laid out to scan: PERSON / RESULT / CONTEXTUAL ANSWERS /
+  // UNIVERSAL ANSWERS. `meta` prepends the source and timestamp, for templates
+  // that print this report without lead-capture's header block.
+  function faBuildReport(r, meta) {
+    var L = [];
+    var persona = D.persona(r.persona), problem = D.problem(r.persona, r.primaryProblem);
+    var others = (r.selectedProblems || []).filter(function (id) { return id !== r.primaryProblem; })
+      .map(function (id) { var p = D.problem(r.persona, id); return p ? p.label : id; });
+    if (meta) {
+      L.push('Source: ' + D.title);
+      L.push('Timestamp: ' + (r.completedAt || new Date().toISOString()));
+      L.push('');
+    }
+    L.push('PERSON');
+    L.push('Persona: ' + (persona ? persona.label : r.persona));
+    L.push('Primary problem: ' + (problem ? problem.label : r.primaryProblem));
+    L.push('Other selected problems: ' + (others.length ? others.join('; ') : 'None'));
+    L.push('');
+    L.push('RESULT');
+    L.push('Primary Focus Area: ' + faAreaLabel(r.primaryFocusArea));
+    L.push('Secondary Focus Area: ' + faAreaLabel(r.secondaryFocusArea));
+    L.push('Close result: ' + (r.isCloseResult ? 'Yes' : 'No'));
+    D.FOCUS_AREAS.forEach(function (a) { L.push(a.label + ': ' + r.focusAreaScores[a.id] + '/100'); });
+    L.push('');
+    L.push('CONTEXTUAL ANSWERS');
+    D.contextualQuestions(r.persona, r.primaryProblem).forEach(function (q) {
+      var o = faOption(q, (r.contextualAnswers || {})[q.id]);
+      L.push(q.text + ' \u2192 ' + (o ? o.label : '(no answer)'));
+    });
+    L.push('');
+    L.push('UNIVERSAL ANSWERS');
+    D.UNIVERSAL.forEach(function (u) {
+      var v = (r.universalAnswers || {})[u.id];
+      L.push(u.text + ' \u2192 ' + (v != null ? v + ' - ' + D.scaleLabel(v) : '(no answer)'));
+    });
+    L.push('');
+    L.push('Completed: ' + (r.completedAt || '(unknown)') + ' \u00b7 scoring version ' + r.version);
+    return L.join('\n');
+  }
+
+  // Short, stable fingerprint of a completed answer set, so the same answers
+  // are never reported twice (a refresh on the result page, say).
+  function faAnswerKey(r) {
+    var str = JSON.stringify([r.persona, r.selectedProblems, r.primaryProblem, r.contextualAnswers, r.universalAnswers]);
+    var h = 5381;
+    for (var i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0;
+    return (h >>> 0).toString(36);
+  }
+
+  function faNotify(r, done) {
+    var finish = function (ok) { if (typeof done === 'function') done(ok); };
+    if (typeof window.submitLead !== 'function') { finish(false); return; }
+    var p = faAreaLabel(r.primaryFocusArea), sec = faAreaLabel(r.secondaryFocusArea);
+    var persona = D.persona(r.persona), problem = D.problem(r.persona, r.primaryProblem);
+    var headline = r.isCloseResult ? p + ' + ' + sec + ' (close result)' : p;
+    var resultBlock = ['Primary Focus Area: ' + p, 'Secondary Focus Area: ' + sec, 'Close result: ' + (r.isCloseResult ? 'Yes' : 'No')]
+      .concat(D.FOCUS_AREAS.map(function (a) { return a.label + ': ' + r.focusAreaScores[a.id] + '/100'; })).join('\n');
+    try {
+      window.submitLead({
+        source: FA_LEAD_SOURCE,
+        detail: r.primaryFocusArea,
+        detailLabel: D.title + ' \u00b7 ' + headline,
+        name: '',
+        email: '',
+        notes: 'Primary: ' + p + ' \u00b7 Secondary: ' + sec + (r.isCloseResult ? ' (close)' : '') +
+          ' \u00b7 ' + (persona ? persona.label : r.persona) + ' \u00b7 ' + (problem ? problem.label : r.primaryProblem),
+        body: faBuildReport(r, false),
+        // One cell for the sheet's last column.
+        detailExtra: D.FOCUS_AREAS.map(function (a) { return a.label + ' ' + r.focusAreaScores[a.id]; }).join(' \u00b7 ') +
+          ' \u00b7 Problems: ' + (r.selectedProblems || []).join(', '),
+        template: FA_EMAILJS_TEMPLATE,
+        // Everything template_wdsrbdo renders, so the full report arrives
+        // whichever way that template is set up in the EmailJS dashboard.
+        params: {
+          overall_grade: D.title + ' \u2014 ' + headline,
+          overall_score: p,
+          section_breakdown: resultBlock,
+          all_answers: faBuildReport(r, true),
+        },
+      }, function (ok) {
+        faTrack('assessment_notification', { status: ok ? 'sent' : 'failed' });
+        finish(ok);
+      });
+    } catch (err) {
+      try { console.error('Focus Area notification error:', err); } catch (e2) { /* noop */ }
+      finish(false);
+    }
+  }
+
   // ── Flow ─────────────────────────────────────────────────────────────────
   // The step list is derived from the answers, so it is always accurate: the
   // "which one matters most" screen exists only when two or more problems are
@@ -55,7 +160,7 @@
       screen: 'intro', step: 0, dir: 1,
       persona: null, selectedProblems: [], primaryProblem: null,
       contextualAnswers: {}, universalAnswers: {},
-      result: null, completedAt: null,
+      result: null, completedAt: null, notifiedKey: null,
     };
   }
 
@@ -78,6 +183,8 @@
         return s.result ? Object.assign({}, s, { screen: 'result', dir: 1 }) : s;
       case 'INTRO':
         return Object.assign({}, s, { screen: 'intro' });
+      case 'NOTIFIED':
+        return Object.assign({}, s, { notifiedKey: a.key });
       case 'SET_PERSONA':
         if (a.value === s.persona) return s;
         // Problems are persona-specific, so a different persona starts that
@@ -135,6 +242,7 @@
     s.contextualAnswers = saved.contextualAnswers || {};
     s.universalAnswers = saved.universalAnswers || {};
     s.step = saved.step || 0;
+    s.notifiedKey = saved.notifiedKey || null;
     if (saved.completedAt && window.faIsComplete(answersOf(s))) {
       s.completedAt = saved.completedAt;
       s.result = window.faScore(Object.assign(answersOf(s), { completedAt: saved.completedAt }));
@@ -159,6 +267,7 @@
     '.fa-stages__m{font-size:13.5px;line-height:1.35;color:var(--meta,#6A6F67);white-space:nowrap}',
     '.fa-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}',
     '.fa-note{margin:16px 0 0;font-size:14px;line-height:1.6;color:var(--meta,#6A6F67)}',
+    '.fa-note--privacy{margin-top:6px;max-width:62ch;font-size:13px}',
 
     // buttons (the clarity tools\' green, radius, padding and type)
     '.fa-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 26px;background:var(--green,#047857);color:#F3F0E8;border:1.5px solid var(--green,#047857);border-radius:2px;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1;cursor:pointer;text-decoration:none;transition:background var(--dur-hover,180ms),border-color var(--dur-hover,180ms),box-shadow var(--dur-hover,180ms),gap var(--dur-hover,180ms)}',
@@ -354,7 +463,8 @@
       e('div', { className: 'fa-row' },
         primaryBtn,
         (resumable || s.result) ? e('button', { type: 'button', className: 'fa-link', onClick: props.onStart }, 'Start again') : null),
-      e('p', { className: 'fa-note' }, 'Free · About 4 minutes · Your result appears as soon as you finish'));
+      e('p', { className: 'fa-note' }, 'Free · About 4 minutes · Your result appears as soon as you finish'),
+      e('p', { className: 'fa-note fa-note--privacy' }, 'Your individual answers are not sent to analytics. They go only to the result you see and to the private notification Aggelos receives.'));
   }
 
   // ── Question screens ─────────────────────────────────────────────────────
@@ -580,9 +690,20 @@
       safeSet({
         v: 1, persona: s.persona, selectedProblems: s.selectedProblems, primaryProblem: s.primaryProblem,
         contextualAnswers: s.contextualAnswers, universalAnswers: s.universalAnswers,
-        step: s.step, completedAt: s.completedAt,
+        step: s.step, completedAt: s.completedAt, notifiedKey: s.notifiedKey,
       });
-    }, [s.persona, s.selectedProblems, s.primaryProblem, s.contextualAnswers, s.universalAnswers, s.step, s.completedAt]);
+    }, [s.persona, s.selectedProblems, s.primaryProblem, s.contextualAnswers, s.universalAnswers, s.step, s.completedAt, s.notifiedKey]);
+
+    // Notify once the result is on screen, once per distinct answer set. The
+    // key is recorded before sending so a re-render cannot send twice; an
+    // explicit failure clears it so a later view of this result can try again.
+    R.useEffect(function () {
+      if (s.screen !== 'result' || !s.result) return;
+      var key = faAnswerKey(s.result);
+      if (key === s.notifiedKey) return;
+      dispatch({ type: 'NOTIFIED', key: key });
+      faNotify(s.result, function (ok) { if (ok === false) dispatch({ type: 'NOTIFIED', key: null }); });
+    }, [s.screen, s.result]);
 
     // New screen: keep the question in view and move focus to it, so keyboard
     // and screen-reader users land on the question rather than the last button.
@@ -676,6 +797,8 @@
   Object.assign(window, {
     FocusAreaAssessment: FocusAreaAssessment,
     FocusAreaResult: Result,
+    faBuildReport: faBuildReport,
+    faNotify: faNotify,
     FocusAreaStyles: FocusAreaStyles,
     renderFocusArea: renderFocusArea,
     faBuildSteps: buildSteps,

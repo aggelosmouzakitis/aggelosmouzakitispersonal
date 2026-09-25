@@ -40,9 +40,10 @@ var LEAD_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyfbiW4nURPv6d2W9u
 var LEAD_EMAILJS_SERVICE = 'service_i4xq7vg';
 var LEAD_EMAILJS_PUBLIC_KEY = 'bfBcHLXj2nKaev_lT';
 
-// The four things that can produce a lead. `tag` is the bracketed prefix that
+// The things that can produce a lead. `tag` is the bracketed prefix that
 // makes the inbox sortable; `template` is the EmailJS template that form has
-// always used — unchanged on purpose.
+// always used — unchanged on purpose. The Focus Area assessment is a tool, so
+// it renders through the tools' template like the clarity tools do.
 var LEAD_SOURCES = {
   'contact': {
     tag: 'CONTACT',
@@ -67,6 +68,11 @@ var LEAD_SOURCES = {
   'roast-my-offer': {
     tag: 'ROAST',
     label: 'Roast My Offer',
+    template: 'template_wdsrbdo'
+  },
+  'find-your-focus-area': {
+    tag: 'FOCUS',
+    label: 'Find Your Focus Area',
     template: 'template_wdsrbdo'
   }
 };
@@ -114,7 +120,8 @@ function leadPostToSheet(payload) {
 
 // ── The one entry point ──────────────────────────────────────────────────────
 // rec: {
-//   source       'contact' | 'wtf-friday' | 'clarity-tool' | 'tool-waitlist'
+//   source       'contact' | 'wtf-friday' | 'clarity-tool' | 'tool-waitlist' |
+//                'roast-my-offer' | 'find-your-focus-area'
 //   detail       machine identifier — interest value, tool slug, waitlist id
 //   detailLabel  human version of the above, used in the subject
 //   name, email  as captured (one full-name field; no splitting)
