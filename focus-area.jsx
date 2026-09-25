@@ -54,12 +54,13 @@
   //     variables. The user-facing template (template_gcj2lrd, To: {{user_email}})
   //     is linked in EmailJS as that template's Auto-Reply, so EmailJS sends
   //     the person their result. The frontend never calls it directly.
-  // FA_EMAILJS_TEMPLATE must be the admin template that has template_gcj2lrd
-  // linked as its Auto-Reply, and no other form may send through it, or the
-  // result email would go to people who never took the assessment. (Keep the
+  // FA_EMAILJS_TEMPLATE is this assessment's own admin template, a copy of the
+  // tools' template_wdsrbdo, and the only one with template_gcj2lrd linked as
+  // its Auto-Reply. No other form may send through it, or the result email
+  // would go to people who never took the assessment. (Keep the
   // 'find-your-focus-area' entry in lead-capture.jsx's LEAD_SOURCES in step.)
   var FA_LEAD_SOURCE = 'find-your-focus-area';
-  var FA_EMAILJS_TEMPLATE = 'template_wdsrbdo';
+  var FA_EMAILJS_TEMPLATE = 'template_fdba9kr';
 
   function faAreaLabel(id) { var a = D.focusArea(id); return a ? a.label : id; }
   function faOption(q, id) {

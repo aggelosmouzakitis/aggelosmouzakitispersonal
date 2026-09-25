@@ -42,11 +42,11 @@ var LEAD_EMAILJS_PUBLIC_KEY = 'bfBcHLXj2nKaev_lT';
 
 // The things that can produce a lead. `tag` is the bracketed prefix that
 // makes the inbox sortable; `template` is the EmailJS template that form has
-// always used — unchanged on purpose. The Focus Area assessment passes its own
-// template (FA_EMAILJS_TEMPLATE in focus-area.jsx): the admin template whose
-// EmailJS Auto-Reply (template_gcj2lrd) emails the person their result. That
-// Auto-Reply fires on every send through its template, so it belongs on a
-// template no other source here uses.
+// always used — unchanged on purpose. The Focus Area assessment has its own
+// admin template, template_fdba9kr (a copy of template_wdsrbdo), whose EmailJS
+// Auto-Reply (template_gcj2lrd) emails the person their result. That
+// Auto-Reply fires on every send through its template, so no other source
+// here may use template_fdba9kr, and template_wdsrbdo must not carry it.
 var LEAD_SOURCES = {
   'contact': {
     tag: 'CONTACT',
@@ -76,7 +76,7 @@ var LEAD_SOURCES = {
   'find-your-focus-area': {
     tag: 'FOCUS',
     label: 'Find Your Focus Area',
-    template: 'template_wdsrbdo'
+    template: 'template_fdba9kr'
   }
 };
 function leadSource(id) {
