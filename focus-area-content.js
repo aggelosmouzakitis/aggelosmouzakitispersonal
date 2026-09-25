@@ -7,6 +7,10 @@
 //   resultContent[primaryFocusArea] core sections            → core interpretation
 //   resultContent[secondaryFocusArea].secondaryCopy          → "Also showing up"
 //
+// The result email reads the same fields (focus-area.jsx, faResultVars), so
+// the copy a person receives is always the copy they were shown. `gate` and
+// `callCta` hold the email gate and the orientation-call invitation.
+//
 // Keys are the stable Focus Area ids from focus-area-data.jsx and the stable
 // persona ids (founder, freelancer, professional). Paragraph fields are arrays
 // of paragraphs; howThisMayShowUp is an array of list items.
@@ -28,6 +32,26 @@ window.FOCUS_AREA_CONTENT = function () {
     alsoShowingUp: 'Also showing up',
     scores: 'Your Focus Areas',
     scoresClose: 'All Focus Area scores'
+  };
+
+  // The email gate in front of the finished result. The result is already
+  // calculated and rendered behind it; the email only unlocks it.
+  var gate = {
+    title: 'YOUR RESULT IS READY',
+    text: 'Enter your email to unlock your full result and receive a copy in your inbox.',
+    placeholder: 'Email address',
+    button: 'UNLOCK MY RESULTS',
+    sending: 'Unlocking…',
+    helper: "We'll only use this email to send your result unless you choose to hear from me elsewhere.",
+    invalid: 'Please enter a valid email address.',
+    failed: "That didn't go through. Try again in a moment."
+  };
+
+  // The invitation at the foot of the unlocked result.
+  var callCta = {
+    title: 'Want a second pair of eyes on this?',
+    text: ["You've already spent time thinking seriously about your situation. If the result has surfaced something important, I'm happy to spend some time looking at it with you.", "I keep a limited number of free orientation calls available. Bring the situation as it is, and we'll work out what actually deserves attention."],
+    button: 'BOOK A FREE ORIENTATION CALL'
   };
   var resultContent = {
     direction: {
@@ -125,6 +149,8 @@ window.FOCUS_AREA_CONTENT = function () {
   return {
     version: 1,
     labels: labels,
+    gate: gate,
+    callCta: callCta,
     resultContent: resultContent
   };
 }();

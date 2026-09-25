@@ -11,16 +11,21 @@
 //   • answer rows keep the clarity tools' look: hairline rows, a 2px green rule
 //     on the selected answer, the same hover wash and the same ← Back button
 //   • analytics go through gtag with the slug on every event and no answer text
-//   • the completion notification goes through window.submitLead
-//     (lead-capture.js), the one EmailJS + sheet path every form on the site
-//     uses, with its error handling and 6s safety timeout
+//   • the result email goes through window.submitLead (lead-capture.js), the
+//     one EmailJS + sheet path every form on the site uses, with its error
+//     handling and 6s safety timeout
 //
 // Result page: six separate slots, in order, assembled from the stored result
 // state and the copy in focus-area-content.js (window.FOCUS_AREA_CONTENT):
 //   1 heading · 2 contextual interpretation · 3 core interpretation ·
 //   4 secondary Focus Area · 5 score visualisation · 6 recommended resources
-// A close result names both areas in the heading and gives each its full core
-// interpretation, the second visually subordinate.
+// then the orientation-call invitation. A close result names both areas in
+// the heading and gives each its full core interpretation, the second
+// visually subordinate.
+//
+// Email gate: the result is calculated and rendered as soon as the last
+// answer is in, then shown blurred and inert behind an unlock panel. Entering
+// an email makes the one EmailJS send; only a successful send unlocks it.
 
 (function () {
   var e = React.createElement;
@@ -30,6 +35,9 @@
   var STORE_KEY = 'focus-area:v1';
   var ADVANCE_MS = 180; // long enough to see the choice register
   var FREE_TOOLS_URL = window.FREE_TOOLS_URL || '/free-tools/';
+  // The site's orientation-call booking link (work-with-me.jsx ORIENTATION_URL;
+  // /book redirects here too). contact.jsx preselects the call from ?interest=.
+  var FA_CALL_URL = '/contact/?interest=orientation';
   function faTrack(name, params) {
     try {
       if (typeof window.gtag === 'function') window.gtag('event', name, Object.assign({
@@ -56,13 +64,20 @@
     } catch (err) {/* noop */}
   }
 
-  // ── Completion notification ──────────────────────────────────────────────
-  // One email to Aggelos per completed set of answers, sent only once the
-  // result exists. It is fire-and-forget: the result is already on screen, so
-  // a slow or failed send can never hold it back.
+  // ── Result email ─────────────────────────────────────────────────────────
+  // Sent once per unlocked result, from the email gate. ONE EmailJS send does
+  // both jobs:
+  //   • Aggelos gets the complete report through the admin template, as before
+  //   • the same send carries user_email and the result copy as flat
+  //     variables. The user-facing template (template_gcj2lrd, To: {{user_email}})
+  //     is linked in EmailJS as that template's Auto-Reply, so EmailJS sends
+  //     the person their result. The frontend never calls it directly.
+  // FA_EMAILJS_TEMPLATE must be the admin template that has template_gcj2lrd
+  // linked as its Auto-Reply, and no other form may send through it, or the
+  // result email would go to people who never took the assessment. (Keep the
+  // 'find-your-focus-area' entry in lead-capture.jsx's LEAD_SOURCES in step.)
   var FA_LEAD_SOURCE = 'find-your-focus-area';
-  var FA_EMAILJS_TEMPLATE = 'template_wdsrbdo'; // the tools' template, as the clarity tools use
-
+  var FA_EMAILJS_TEMPLATE = 'template_wdsrbdo';
   function faAreaLabel(id) {
     var a = D.focusArea(id);
     return a ? a.label : id;
@@ -75,7 +90,7 @@
   // Plain-text report, laid out to scan: PERSON / RESULT / CONTEXTUAL ANSWERS /
   // UNIVERSAL ANSWERS. `meta` prepends the source and timestamp, for templates
   // that print this report without lead-capture's header block.
-  function faBuildReport(r, meta) {
+  function faBuildReport(r, meta, email) {
     var L = [];
     var persona = D.persona(r.persona),
       problem = D.problem(r.persona, r.primaryProblem);
@@ -91,6 +106,7 @@
       L.push('');
     }
     L.push('PERSON');
+    if (email) L.push('Email: ' + email);
     L.push('Persona: ' + (persona ? persona.label : r.persona));
     L.push('Primary problem: ' + (problem ? problem.label : r.primaryProblem));
     L.push('Other selected problems: ' + (others.length ? others.join('; ') : 'None'));
@@ -119,19 +135,89 @@
     return L.join('\n');
   }
 
-  // Short, stable fingerprint of a completed answer set, so the same answers
-  // are never reported twice (a refresh on the result page, say).
+  // Short, stable fingerprint of a completed answer set. An unlock is recorded
+  // against it, so a refresh keeps the same result unlocked without another
+  // send, while changed answers produce a new result that has to be unlocked.
   function faAnswerKey(r) {
     var str = JSON.stringify([r.persona, r.selectedProblems, r.primaryProblem, r.contextualAnswers, r.universalAnswers]);
     var h = 5381;
     for (var i = 0; i < str.length; i++) h = (h << 5) + h + str.charCodeAt(i) | 0;
     return (h >>> 0).toString(36);
   }
-  function faNotify(r, done) {
-    var finish = function (ok) {
-      if (typeof done === 'function') done(ok);
+
+  // One plain address, nothing else: no spaces, commas, semicolons or angle
+  // brackets, so the value can only ever name a single recipient. (The HTML
+  // spec's email pattern, with a dot required in the domain.)
+  var FA_EMAIL_RE = /^[A-Za-z0-9.!#$%&'*+\/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
+  function faValidEmail(v) {
+    return typeof v === 'string' && v.length <= 254 && FA_EMAIL_RE.test(v);
+  }
+  function faEsc(t) {
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // The person's result as flat, email-safe variables for the Auto-Reply,
+  // read from the same content config the page renders. Plain values use
+  // line breaks only: paragraphs are separated by a blank line and each list
+  // item carries its own bullet, so the text still reads cleanly if a mail
+  // client runs the lines together. The *_html twins carry the same copy as
+  // escaped markup, for a template that prefers {{{triple braces}}}.
+  function faResultVars(r, email) {
+    var c = COPY.resultContent[r.primaryFocusArea] || {};
+    var sc = COPY.resultContent[r.secondaryFocusArea] || {};
+    var persona = D.persona(r.persona),
+      problem = D.problem(r.persona, r.primaryProblem);
+    var score = function (id) {
+      return String(r.focusAreaScores[id]);
     };
-    if (typeof window.submitLead !== 'function') {
+    var paras = function (list) {
+      return (list || []).join('\n\n');
+    };
+    var parasHtml = function (list) {
+      return (list || []).map(function (t) {
+        return '<p>' + faEsc(t) + '</p>';
+      }).join('');
+    };
+    var shows = c.howThisMayShowUp || [];
+    return {
+      user_email: email,
+      primary_focus: areaLabel(r.primaryFocusArea),
+      secondary_focus: areaLabel(r.secondaryFocusArea),
+      persona_context: (c.personaContext || {})[r.persona] || '',
+      what_this_means: paras(c.whatThisMeans),
+      showing_up_items: shows.map(function (t) {
+        return '\u2022 ' + t;
+      }).join('\n'),
+      what_deserves_attention: paras(c.whatDeservesAttentionFirst),
+      what_to_keep_in_mind: paras(c.whatToKeepInMind),
+      secondary_copy: sc.secondaryCopy || '',
+      direction_score: score('direction'),
+      strategy_score: score('strategy'),
+      action_score: score('action'),
+      self_trust_score: score('self_trust'),
+      capacity_score: score('capacity'),
+      relationships_score: score('relationships_boundaries'),
+      environment_score: score('environment'),
+      // Context the template can use.
+      persona: persona ? persona.label : r.persona,
+      primary_problem: problem ? problem.label : r.primaryProblem,
+      is_close_result: r.isCloseResult ? 'Yes' : 'No',
+      what_this_means_html: parasHtml(c.whatThisMeans),
+      showing_up_items_html: '<ul>' + shows.map(function (t) {
+        return '<li>' + faEsc(t) + '</li>';
+      }).join('') + '</ul>',
+      what_deserves_attention_html: parasHtml(c.whatDeservesAttentionFirst),
+      what_to_keep_in_mind_html: parasHtml(c.whatToKeepInMind)
+    };
+  }
+
+  // The single send behind an unlock. done(ok) always fires (lead-capture's
+  // guarantee); only ok === true may unlock the result.
+  function faNotify(r, email, done) {
+    var finish = function (ok) {
+      if (typeof done === 'function') done(ok === true);
+    };
+    if (!faValidEmail(email) || typeof window.submitLead !== 'function') {
       finish(false);
       return;
     }
@@ -143,28 +229,28 @@
     var resultBlock = ['Primary Focus Area: ' + p, 'Secondary Focus Area: ' + sec, 'Close result: ' + (r.isCloseResult ? 'Yes' : 'No')].concat(D.FOCUS_AREAS.map(function (a) {
       return a.label + ': ' + r.focusAreaScores[a.id] + '/100';
     })).join('\n');
+    // The admin report exactly as before (the admin template renders these),
+    // with the person's result variables alongside for the Auto-Reply.
+    var params = faResultVars(r, email);
+    params.overall_grade = D.title + ' \u2014 ' + headline;
+    params.overall_score = p;
+    params.section_breakdown = resultBlock;
+    params.all_answers = faBuildReport(r, true, email);
     try {
       window.submitLead({
         source: FA_LEAD_SOURCE,
         detail: r.primaryFocusArea,
         detailLabel: D.title + ' \u00b7 ' + headline,
         name: '',
-        email: '',
+        email: email,
         notes: 'Primary: ' + p + ' \u00b7 Secondary: ' + sec + (r.isCloseResult ? ' (close)' : '') + ' \u00b7 ' + (persona ? persona.label : r.persona) + ' \u00b7 ' + (problem ? problem.label : r.primaryProblem),
-        body: faBuildReport(r, false),
+        body: faBuildReport(r, false, email),
         // One cell for the sheet's last column.
         detailExtra: D.FOCUS_AREAS.map(function (a) {
           return a.label + ' ' + r.focusAreaScores[a.id];
         }).join(' \u00b7 ') + ' \u00b7 Problems: ' + (r.selectedProblems || []).join(', '),
         template: FA_EMAILJS_TEMPLATE,
-        // Everything template_wdsrbdo renders, so the full report arrives
-        // whichever way that template is set up in the EmailJS dashboard.
-        params: {
-          overall_grade: D.title + ' \u2014 ' + headline,
-          overall_score: p,
-          section_breakdown: resultBlock,
-          all_answers: faBuildReport(r, true)
-        }
+        params: params
       }, function (ok) {
         faTrack('assessment_notification', {
           status: ok ? 'sent' : 'failed'
@@ -227,7 +313,9 @@
       universalAnswers: {},
       result: null,
       completedAt: null,
-      notifiedKey: null
+      unlockedKey: null,
+      // faAnswerKey of the result this person unlocked
+      userEmail: '' // the address that unlocked it
     };
   }
   function answersOf(s) {
@@ -243,10 +331,13 @@
     var steps, n;
     switch (a.type) {
       case 'START':
+        // A retake is a new result, so it is locked again; the address stays
+        // to prefill the gate.
         return Object.assign(freshState(), {
           screen: 'flow',
           step: 0,
-          dir: 1
+          dir: 1,
+          userEmail: s.userEmail
         });
       case 'RESUME':
         steps = buildSteps(s);
@@ -264,9 +355,12 @@
         return Object.assign({}, s, {
           screen: 'intro'
         });
-      case 'NOTIFIED':
+      case 'UNLOCK':
+        // Records the unlock only. The result object is left exactly as it
+        // was calculated: nothing is rescored.
         return Object.assign({}, s, {
-          notifiedKey: a.key
+          unlockedKey: a.key,
+          userEmail: a.email
         });
       case 'SET_PERSONA':
         if (a.value === s.persona) return s;
@@ -362,7 +456,8 @@
     s.contextualAnswers = saved.contextualAnswers || {};
     s.universalAnswers = saved.universalAnswers || {};
     s.step = saved.step || 0;
-    s.notifiedKey = saved.notifiedKey || null;
+    s.unlockedKey = typeof saved.unlockedKey === 'string' ? saved.unlockedKey : null;
+    s.userEmail = faValidEmail(saved.userEmail) ? saved.userEmail : '';
     if (saved.completedAt && window.faIsComplete(answersOf(s))) {
       s.completedAt = saved.completedAt;
       s.result = window.faScore(Object.assign(answersOf(s), {
@@ -386,7 +481,7 @@
   // question
   '.fa-step{animation-duration:340ms;animation-timing-function:var(--ease-settle,cubic-bezier(.22,1,.36,1));animation-fill-mode:both}', '.fa-step--fwd{animation-name:fa-in-fwd}', '.fa-step--back{animation-name:fa-in-back}', '@keyframes fa-in-fwd{from{opacity:0;transform:translate3d(16px,0,0)}to{opacity:1;transform:none}}', '@keyframes fa-in-back{from{opacity:0;transform:translate3d(-16px,0,0)}to{opacity:1;transform:none}}', '.fa-q__kicker{margin:0 0 12px;font-size:14.5px;font-weight:600;line-height:1.5;color:var(--meta,#6A6F67)}', '.fa-q__text{margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(24px,3.1vw,31px);font-weight:750;line-height:1.2;letter-spacing:-.02em;color:var(--heading-ink,#14201C);text-wrap:balance;outline:none}', '.fa-q__helper{margin:12px 0 0;max-width:56ch;font-size:16px;line-height:1.55;color:var(--ink-2,#3A403A)}', '.fa-q__limit{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:18px 0 0;font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}', '.fa-q__limit-rule{color:var(--green-pressed,#03654A)}', '.fa-q__limit-count{color:var(--meta,#6A6F67);font-variant-numeric:tabular-nums}', '.fa-q__limit-count.is-full{color:var(--green-pressed,#03654A)}', '.fa-options{margin:22px 0 0;border-top:1px solid rgba(23,25,25,.14)}', '.fa-opt{display:flex;align-items:flex-start;gap:14px;width:100%;margin:0;padding:15px 12px 15px 14px;text-align:left;background:transparent;border:0;border-bottom:1px solid rgba(23,25,25,.14);border-left:2px solid transparent;border-radius:0;font-family:inherit;font-size:17px;font-weight:400;line-height:1.45;color:var(--ink-2,#3A403A);cursor:pointer;transition:background-color var(--dur-hover,180ms),border-color var(--dur-hover,180ms),color var(--dur-hover,180ms)}', '.fa-opt:hover{background:rgba(4,120,87,.05)}', '.fa-opt[aria-pressed="true"]{border-left-color:var(--green,#047857);background:rgba(4,120,87,.07);color:var(--green-pressed,#03654A);font-weight:650}', '.fa-opt[aria-disabled="true"]{color:rgba(58,64,58,.5);cursor:not-allowed}', '.fa-opt[aria-disabled="true"]:hover{background:transparent}', '.fa-opt__mark{flex:none;position:relative;width:20px;height:20px;margin-top:2px;border:1.5px solid rgba(23,25,25,.42);border-radius:50%;background:transparent;transition:background-color var(--dur-hover,180ms),border-color var(--dur-hover,180ms)}', '.fa-opt__mark--check{border-radius:3px}', '.fa-opt[aria-pressed="true"] .fa-opt__mark{border-color:var(--green,#047857);background:var(--green,#047857)}', '.fa-opt[aria-pressed="true"] .fa-opt__mark::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#F3F0E8}', '.fa-opt[aria-pressed="true"] .fa-opt__mark--check::after{width:5px;height:10px;margin:-6.5px 0 0 -2.5px;border-radius:0;background:none;border:solid #F3F0E8;border-width:0 2px 2px 0;transform:rotate(45deg)}', '.fa-opt[aria-disabled="true"] .fa-opt__mark{border-color:rgba(23,25,25,.2)}', '.fa-opt__num{flex:none;min-width:14px;font-weight:700;color:var(--meta,#6A6F67);font-variant-numeric:tabular-nums}', '.fa-opt[aria-pressed="true"] .fa-opt__num{color:inherit}', '.fa-opt__label{min-width:0}', '.fa-nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:28px}', '.fa-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}',
   // result
-  '.fa-result{animation:fa-in-fwd 420ms var(--ease-settle,cubic-bezier(.22,1,.36,1)) both}', '.fa-slot + .fa-slot{margin-top:40px}', '.fa-slot[hidden]{display:none}', '.fa-result__area{margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(46px,8vw,88px);font-weight:800;line-height:.95;letter-spacing:-.05em;color:var(--green,#047857);text-wrap:balance;outline:none}', '.fa-result__area--pair{font-size:clamp(38px,6vw,68px);line-height:1}', '.fa-result__plus{color:var(--meta,#6A6F67);font-weight:700}', '.fa-result__lead{margin:0 0 12px;font-size:clamp(18px,1.9vw,21px);font-weight:600;line-height:1.4;color:var(--ink,#171919)}', '.fa-result__rule{width:96px;height:2px;margin:26px 0 0;background:var(--green,#047857)}', '.fa-result__situation{margin:22px 0 0}', '.fa-label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:var(--meta,#6A6F67)}', '.fa-result__situation p{margin:0;font-size:18px;font-weight:600;line-height:1.5;color:var(--ink,#171919)}',
+  '.fa-result{animation:fa-in-fwd 420ms var(--ease-settle,cubic-bezier(.22,1,.36,1)) both;transition:filter 520ms var(--ease-settle,cubic-bezier(.22,1,.36,1))}', '.fa-slot + .fa-slot{margin-top:40px}', '.fa-slot[hidden]{display:none}', '.fa-result__area{margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(46px,8vw,88px);font-weight:800;line-height:.95;letter-spacing:-.05em;color:var(--green,#047857);text-wrap:balance;outline:none}', '.fa-result__area--pair{font-size:clamp(38px,6vw,68px);line-height:1}', '.fa-result__plus{color:var(--meta,#6A6F67);font-weight:700}', '.fa-result__lead{margin:0 0 12px;font-size:clamp(18px,1.9vw,21px);font-weight:600;line-height:1.4;color:var(--ink,#171919)}', '.fa-result__rule{width:96px;height:2px;margin:26px 0 0;background:var(--green,#047857)}', '.fa-result__situation{margin:22px 0 0}', '.fa-label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:var(--meta,#6A6F67)}', '.fa-result__situation p{margin:0;font-size:18px;font-weight:600;line-height:1.5;color:var(--ink,#171919)}',
   // 2 · contextual paragraph: the lead, read straight after the situation
   '.fa-context{margin:0;max-width:62ch;font-size:clamp(19px,1.9vw,21px);line-height:1.6;color:var(--ink,#171919);text-wrap:pretty}',
   // 3 · core interpretation: section labels in the tools\' small green caps
@@ -396,7 +491,18 @@
   // 4 · also showing up
   '.fa-also{padding-top:26px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}', '.fa-also__area{margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(26px,3vw,32px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--green-pressed,#03654A)}', '.fa-also__copy{margin:12px 0 0;max-width:62ch;font-size:18px;line-height:1.7;color:var(--ink-2,#3A403A);text-wrap:pretty}',
   // score visualisation — deliberately quieter than the result above it
-  '.fa-scores{padding-top:22px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}', '.fa-scores__h{margin:0;font-size:13px;font-weight:700;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:var(--green-pressed,#03654A)}', '.fa-scores__note{margin:6px 0 0;font-size:14px;line-height:1.55;color:var(--meta,#6A6F67)}', '.fa-scores__list{list-style:none;margin:20px 0 0;padding:0}', '.fa-bar{padding:10px 0}', '.fa-bar__top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:7px}', '.fa-bar__name{min-width:0;font-size:15px;font-weight:600;line-height:1.35;color:var(--ink-2,#3A403A)}', '.fa-bar__tag{margin-left:8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-pressed,#03654A);white-space:nowrap}', '.fa-bar__val{flex:none;font-size:14px;font-weight:700;color:var(--meta,#6A6F67);font-variant-numeric:tabular-nums}', '.fa-bar__track{height:6px;background:rgba(23,25,25,.08)}', '.fa-bar__fill{height:100%;background:rgba(23,25,25,.3);transform-origin:left center;animation:fa-grow 640ms var(--ease-settle,cubic-bezier(.22,1,.36,1)) both}', '.fa-bar--primary .fa-bar__fill{background:var(--green,#047857)}', '.fa-bar--secondary .fa-bar__fill{background:#6FAE8F}', '.fa-bar--primary .fa-bar__name,.fa-bar--secondary .fa-bar__name{color:var(--ink,#171919)}', '@keyframes fa-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}', '.fa-scores__foot{margin:16px 0 0;font-size:13.5px;line-height:1.55;color:var(--meta,#6A6F67)}', '.fa-result__actions{margin-top:44px;padding-top:26px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}', '@media (max-width:767px){', '.fa-page{padding:8px 0 8px}', '.fa-sec p,.fa-also__copy{font-size:17px}', '.fa-list li{font-size:16px}', '.fa-lead{font-size:17px}', '.fa-opt{font-size:16px;padding:14px 10px 14px 12px}', '.fa-stages li{grid-template-columns:34px minmax(0,1fr)}', '.fa-stages__m{grid-column:2;white-space:normal}', '.fa-row .fa-btn{width:100%}', '.fa-result__actions .fa-row{flex-direction:column;align-items:stretch}', '.fa-result__actions .fa-link{justify-content:center}', '}', '@media (prefers-reduced-motion:reduce){.fa-step,.fa-result,.fa-bar__fill{animation:none}.fa-progress__fill{transition:none}}'].join('');
+  '.fa-scores{padding-top:22px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}', '.fa-scores__h{margin:0;font-size:13px;font-weight:700;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:var(--green-pressed,#03654A)}', '.fa-scores__note{margin:6px 0 0;font-size:14px;line-height:1.55;color:var(--meta,#6A6F67)}', '.fa-scores__list{list-style:none;margin:20px 0 0;padding:0}', '.fa-bar{padding:10px 0}', '.fa-bar__top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:7px}', '.fa-bar__name{min-width:0;font-size:15px;font-weight:600;line-height:1.35;color:var(--ink-2,#3A403A)}', '.fa-bar__tag{margin-left:8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-pressed,#03654A);white-space:nowrap}', '.fa-bar__val{flex:none;font-size:14px;font-weight:700;color:var(--meta,#6A6F67);font-variant-numeric:tabular-nums}', '.fa-bar__track{height:6px;background:rgba(23,25,25,.08)}', '.fa-bar__fill{height:100%;background:rgba(23,25,25,.3);transform-origin:left center;animation:fa-grow 640ms var(--ease-settle,cubic-bezier(.22,1,.36,1)) both}', '.fa-bar--primary .fa-bar__fill{background:var(--green,#047857)}', '.fa-bar--secondary .fa-bar__fill{background:#6FAE8F}', '.fa-bar--primary .fa-bar__name,.fa-bar--secondary .fa-bar__name{color:var(--ink,#171919)}', '@keyframes fa-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}', '.fa-scores__foot{margin:16px 0 0;font-size:13.5px;line-height:1.55;color:var(--meta,#6A6F67)}', '.fa-result__actions{margin-top:44px;padding-top:26px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}',
+  // orientation-call invitation: after the result, a quieter band than it
+  '.fa-call{padding:30px 30px 28px;background:var(--bone-deep,#EDE8DB)}', '.fa-call__h{margin:0 0 12px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(24px,2.6vw,28px);font-weight:800;line-height:1.15;letter-spacing:-.025em;color:var(--heading-ink,#14201C);text-wrap:balance}', '.fa-call p{margin:0;max-width:60ch;font-size:17px;line-height:1.65;color:var(--ink-2,#3A403A);text-wrap:pretty}', '.fa-call p + p{margin-top:12px}', '.fa-call__btn{margin-top:22px}', '.fa-btn--outline{background:transparent;color:var(--green-pressed,#03654A);border-color:var(--green,#047857)}', '.fa-btn--outline:hover{background:var(--green,#047857);color:#F3F0E8;border-color:var(--green,#047857)}',
+  // email gate: the finished result sits blurred and inert behind the panel
+  '.fa-gatewrap{position:relative}', '.fa-gatewrap.is-locked .fa-result{filter:blur(9px);pointer-events:none;-webkit-user-select:none;user-select:none}',
+  // the large area names get extra blur on top, or they stay legible
+  '.fa-gatewrap.is-locked .fa-result__area{filter:blur(14px)}', '.fa-gatewrap.is-locked .fa-core__area,.fa-gatewrap.is-locked .fa-also__area{filter:blur(9px)}', '.fa-gate{position:absolute;top:0;right:0;bottom:0;left:0;z-index:5;background:linear-gradient(180deg,rgba(243,240,232,.1) 0,rgba(243,240,232,.45) 360px,rgba(243,240,232,.62) 100%)}',
+  // viewport-tall and sticky, so the panel stays on screen while the blurred
+  // result scrolls past underneath. It sits a little above centre (as if it
+  // were 480px tall), which also keeps it whole at the very top of the page,
+  // where the header pushes the result down.
+  '.fa-gate__stick{position:sticky;top:0;display:flex;align-items:flex-start;justify-content:center;box-sizing:border-box;height:100vh;height:100dvh;padding:max(16px,calc(50vh - 240px)) 0 16px;padding-top:max(16px,calc(50dvh - 240px))}', '.fa-gate__panel{box-sizing:border-box;width:100%;max-width:440px;max-height:100%;overflow-y:auto;padding:30px 30px 26px;background:var(--bone,#F3F0E8);border:1px solid rgba(23,25,25,.14);border-top:3px solid var(--green,#047857);border-radius:2px;box-shadow:0 28px 64px -24px rgba(22,35,30,.42),0 2px 10px rgba(22,35,30,.08)}', '.fa-gate__title{margin:0 0 10px;font-family:var(--font-heading);font-synthesis:none;font-size:22px;font-weight:800;line-height:1.15;letter-spacing:.02em;color:var(--heading-ink,#14201C);outline:none}', '.fa-gate__text{margin:0 0 20px;font-size:16.5px;line-height:1.55;color:var(--ink-2,#3A403A);text-wrap:pretty}', '.fa-gate__input{display:block;box-sizing:border-box;width:100%;min-height:52px;margin:0;padding:14px 15px;border:1px solid rgba(23,25,25,.22);border-radius:10px;background:var(--bone,#F3F0E8);color:var(--ink-2,#3A403A);font-family:inherit;font-size:16px;line-height:1.5;outline:none;transition:border-color .16s,box-shadow .16s}', '.fa-gate__input::placeholder{color:var(--meta,#6A6F67);opacity:1}', '.fa-gate__input:focus{border-color:var(--green,#047857);box-shadow:0 0 0 3px rgba(4,120,87,.22)}', '.fa-gate__input[aria-invalid="true"]{border-color:#c0392b}', '.fa-gate__input[readonly]{color:var(--meta,#6A6F67)}', '.fa-gate__err{margin:8px 0 0;font-size:13.5px;font-weight:600;line-height:1.5;color:#c0392b}', '.fa-gate__btn{width:100%;margin-top:12px}', '.fa-gate__btn[disabled]{opacity:.72;cursor:progress}', '.fa-gate__help{margin:14px 0 0;font-size:13px;line-height:1.55;color:var(--meta,#6A6F67);text-wrap:pretty}', '@media (max-width:767px){', '.fa-page{padding:8px 0 8px}', '.fa-sec p,.fa-also__copy{font-size:17px}', '.fa-list li{font-size:16px}', '.fa-lead{font-size:17px}', '.fa-opt{font-size:16px;padding:14px 10px 14px 12px}', '.fa-stages li{grid-template-columns:34px minmax(0,1fr)}', '.fa-stages__m{grid-column:2;white-space:normal}', '.fa-row .fa-btn{width:100%}', '.fa-result__actions .fa-row{flex-direction:column;align-items:stretch}', '.fa-result__actions .fa-link{justify-content:center}', '.fa-call{padding:24px 20px 22px}', '.fa-call p{font-size:16.5px}', '.fa-call__btn{width:100%;padding:12px 16px;line-height:1.3;text-align:center}', '.fa-gate__panel{padding:24px 20px 20px}', '.fa-gate__title{font-size:20px}', '.fa-gate__text{margin-bottom:16px;font-size:16px}', '}', '@media (prefers-reduced-motion:reduce){.fa-step,.fa-result,.fa-bar__fill{animation:none}.fa-progress__fill,.fa-result{transition:none}}'].join('');
   function FocusAreaStyles() {
     return e('style', {
       dangerouslySetInnerHTML: {
@@ -533,9 +639,9 @@
       onClick: props.onStart
     }, 'Start again') : null), e('p', {
       className: 'fa-note'
-    }, 'Free · About 4 minutes · Your result appears as soon as you finish'), e('p', {
+    }, 'Free · About 4 minutes · Enter your email at the end to unlock your result'), e('p', {
       className: 'fa-note fa-note--privacy'
-    }, 'Your individual answers are not sent to analytics. They go only to the result you see and to the private notification Aggelos receives.'));
+    }, 'Your individual answers are not sent to analytics. They go only to your result, the copy emailed to you and the private notification Aggelos receives.'));
   }
 
   // ── Question screens ─────────────────────────────────────────────────────
@@ -909,6 +1015,26 @@
       empty: true
     });
   }
+
+  // The orientation-call invitation, after everything the result has to say.
+  function CallSlot() {
+    var C = COPY.callCta;
+    return e(Slot, {
+      name: 'call'
+    }, e('div', {
+      className: 'fa-call'
+    }, e('h2', {
+      className: 'fa-call__h'
+    }, C.title), paras(C.text), e('a', {
+      className: 'fa-btn fa-btn--outline fa-call__btn',
+      href: FA_CALL_URL,
+      onClick: function () {
+        faTrack('assessment_call_cta');
+      }
+    }, C.button + ' ', e('span', {
+      'aria-hidden': 'true'
+    }, '→'))));
+  }
   function Result(props) {
     var r = props.result;
     return e('div', {
@@ -926,7 +1052,7 @@
       result: r
     }), e(ResourcesSlot, {
       result: r
-    }), e('div', {
+    }), e(CallSlot, null), e('div', {
       className: 'fa-result__actions'
     }, e('div', {
       className: 'fa-row'
@@ -948,6 +1074,145 @@
     }, '→')))));
   }
 
+  // ── Email gate ───────────────────────────────────────────────────────────
+  // Sits over the finished, blurred result. It asks for an email and nothing
+  // else, and hands the address to onSubmit, which makes the one send and
+  // calls back with the outcome. Everything it knows lives in its own state,
+  // so a failed send leaves the address in the field and the result as it was.
+  function EmailGate(props) {
+    var R = React,
+      G = COPY.gate;
+    var emailS = R.useState(props.initialEmail || ''),
+      email = emailS[0],
+      setEmail = emailS[1];
+    var statusS = R.useState('idle'),
+      status = statusS[0],
+      setStatus = statusS[1]; // idle | invalid | sending | failed
+    var inputRef = R.useRef(null),
+      titleRef = R.useRef(null),
+      panelRef = R.useRef(null);
+    var busyRef = R.useRef(false),
+      aliveRef = R.useRef(true);
+    var sending = status === 'sending';
+
+    // Scroll just enough to show the whole panel (short screens only).
+    function fitPanel() {
+      var p = panelRef.current;
+      if (!p) return;
+      var b = p.getBoundingClientRect();
+      var over = b.bottom - (window.innerHeight - 12);
+      if (over > 0) window.scrollBy(0, Math.min(over, Math.max(0, b.top - 12)));
+    }
+    R.useEffect(function () {
+      aliveRef.current = true;
+      // Once laid out: bring the whole panel on screen, then move focus into
+      // it. The field on a desktop; the title on touch screens, where
+      // focusing the field would throw the keyboard over the panel.
+      var raf = window.requestAnimationFrame(function () {
+        fitPanel();
+        var fine = !window.matchMedia || window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        var t = fine ? inputRef.current : titleRef.current;
+        if (t) {
+          try {
+            t.focus({
+              preventScroll: true
+            });
+          } catch (err) {
+            t.focus();
+          }
+        }
+      });
+      return function () {
+        aliveRef.current = false;
+        window.cancelAnimationFrame(raf);
+      };
+    }, []);
+
+    // A message line makes the panel taller: keep it whole.
+    R.useEffect(function () {
+      if (status === 'invalid' || status === 'failed') fitPanel();
+    }, [status]);
+    function submit(ev) {
+      if (ev) ev.preventDefault();
+      if (busyRef.current) return; // one send at a time, however many clicks
+      var em = email.trim();
+      if (!faValidEmail(em)) {
+        setStatus('invalid');
+        if (inputRef.current) inputRef.current.focus();
+        return;
+      }
+      busyRef.current = true;
+      setEmail(em);
+      setStatus('sending');
+      props.onSubmit(em, function (ok) {
+        busyRef.current = false;
+        // Success unmounts the gate; only a failure has anything to show.
+        if (!ok && aliveRef.current) setStatus('failed');
+      });
+    }
+    var errText = status === 'invalid' ? G.invalid : status === 'failed' ? G.failed : '';
+    return e('div', {
+      className: 'fa-gate'
+    }, e('div', {
+      className: 'fa-gate__stick'
+    }, e('div', {
+      className: 'fa-gate__panel',
+      ref: panelRef,
+      role: 'dialog',
+      'aria-labelledby': 'fa-gate-title',
+      'aria-describedby': 'fa-gate-text'
+    }, e('h2', {
+      className: 'fa-gate__title',
+      id: 'fa-gate-title',
+      tabIndex: -1,
+      ref: titleRef
+    }, G.title), e('p', {
+      className: 'fa-gate__text',
+      id: 'fa-gate-text'
+    }, G.text), e('form', {
+      noValidate: true,
+      onSubmit: submit
+    }, e('label', {
+      className: 'fa-sr',
+      htmlFor: 'fa-gate-email'
+    }, G.placeholder), e('input', {
+      id: 'fa-gate-email',
+      ref: inputRef,
+      className: 'fa-gate__input',
+      type: 'email',
+      name: 'email',
+      inputMode: 'email',
+      autoComplete: 'email',
+      autoCapitalize: 'off',
+      autoCorrect: 'off',
+      spellCheck: false,
+      maxLength: 254,
+      placeholder: G.placeholder,
+      value: email,
+      readOnly: sending,
+      'aria-invalid': status === 'invalid' ? 'true' : 'false',
+      'aria-describedby': errText ? 'fa-gate-err fa-gate-help' : 'fa-gate-help',
+      onChange: function (ev) {
+        setEmail(ev.target.value);
+        if (status === 'invalid' || status === 'failed') setStatus('idle');
+      }
+    }), errText ? e('p', {
+      className: 'fa-gate__err',
+      id: 'fa-gate-err',
+      role: 'alert'
+    }, errText) : null, e('button', {
+      type: 'submit',
+      className: 'fa-btn fa-gate__btn',
+      disabled: sending,
+      'aria-disabled': sending ? 'true' : undefined
+    }, sending ? G.sending : G.button + ' ', sending ? null : e('span', {
+      'aria-hidden': 'true'
+    }, '→'))), e('p', {
+      className: 'fa-gate__help',
+      id: 'fa-gate-help'
+    }, G.helper))));
+  }
+
   // ── Root ─────────────────────────────────────────────────────────────────
   function FocusAreaAssessment() {
     var R = React;
@@ -962,6 +1227,12 @@
     var firstRef = R.useRef(true);
     var steps = buildSteps(s);
     var step = steps[Math.min(s.step, steps.length - 1)];
+    // The result is locked until this exact answer set has been unlocked.
+    var resultKey = R.useMemo(function () {
+      return s.result ? faAnswerKey(s.result) : null;
+    }, [s.result]);
+    var locked = s.screen === 'result' && !!s.result && s.unlockedKey !== resultKey;
+    var wasLockedRef = R.useRef(locked);
 
     // Persist progress for this tab.
     R.useEffect(function () {
@@ -974,43 +1245,17 @@
         universalAnswers: s.universalAnswers,
         step: s.step,
         completedAt: s.completedAt,
-        notifiedKey: s.notifiedKey
+        unlockedKey: s.unlockedKey,
+        userEmail: s.userEmail
       });
-    }, [s.persona, s.selectedProblems, s.primaryProblem, s.contextualAnswers, s.universalAnswers, s.step, s.completedAt, s.notifiedKey]);
-
-    // Notify once the result is on screen, once per distinct answer set. The
-    // key is recorded before sending so a re-render cannot send twice; an
-    // explicit failure clears it so a later view of this result can try again.
-    R.useEffect(function () {
-      if (s.screen !== 'result' || !s.result) return;
-      var key = faAnswerKey(s.result);
-      if (key === s.notifiedKey) return;
-      dispatch({
-        type: 'NOTIFIED',
-        key: key
-      });
-      faNotify(s.result, function (ok) {
-        if (ok === false) dispatch({
-          type: 'NOTIFIED',
-          key: null
-        });
-      });
-    }, [s.screen, s.result]);
-
-    // New screen: keep the question in view and move focus to it, so keyboard
-    // and screen-reader users land on the question rather than the last button.
-    var viewKey = s.screen + ':' + (s.screen === 'flow' ? step.key : '');
-    R.useEffect(function () {
-      lockRef.current = false;
-      if (firstRef.current) {
-        firstRef.current = false;
-        return;
-      }
+    }, [s.persona, s.selectedProblems, s.primaryProblem, s.contextualAnswers, s.universalAnswers, s.step, s.completedAt, s.unlockedKey, s.userEmail]);
+    function scrollRootIntoView() {
       var root = rootRef.current;
-      if (root) {
-        var top = root.getBoundingClientRect().top;
-        if (top < 0 || top > window.innerHeight * 0.6) window.scrollTo(0, Math.max(0, window.pageYOffset + top - 24));
-      }
+      if (!root) return;
+      var top = root.getBoundingClientRect().top;
+      if (top < 0 || top > window.innerHeight * 0.6) window.scrollTo(0, Math.max(0, window.pageYOffset + top - 24));
+    }
+    function focusHead() {
       if (headRef.current) {
         try {
           headRef.current.focus({
@@ -1020,7 +1265,30 @@
           headRef.current.focus();
         }
       }
+    }
+
+    // New screen: keep the question in view and move focus to it, so keyboard
+    // and screen-reader users land on the question rather than the last button.
+    // A locked result is the exception: the gate takes focus itself.
+    var viewKey = s.screen + ':' + (s.screen === 'flow' ? step.key : '');
+    R.useEffect(function () {
+      lockRef.current = false;
+      if (firstRef.current) {
+        firstRef.current = false;
+        return;
+      }
+      scrollRootIntoView();
+      if (!locked) focusHead();
     }, [viewKey]);
+
+    // Just unlocked: land on the result heading, as a fresh result would.
+    R.useEffect(function () {
+      if (wasLockedRef.current && !locked && s.screen === 'result') {
+        scrollRootIntoView();
+        focusHead();
+      }
+      wasLockedRef.current = locked;
+    }, [locked]);
     R.useEffect(function () {
       return function () {
         clearTimeout(timerRef.current);
@@ -1082,9 +1350,39 @@
         }, ADVANCE_MS);
       }
     };
+
+    // The gate's submit: the one send, then unlock on success only. The result
+    // is the one already calculated and on screen; nothing is rescored.
+    function unlock(email, done) {
+      var r = s.result,
+        key = resultKey;
+      faTrack('assessment_unlock_submitted');
+      faNotify(r, email, function (ok) {
+        done(ok);
+        if (ok) {
+          faTrack('assessment_unlocked');
+          dispatch({
+            type: 'UNLOCK',
+            key: key,
+            email: email
+          });
+          announce('Your result is unlocked.');
+        } else {
+          faTrack('assessment_unlock_failed');
+        }
+      });
+    }
     var body;
     if (s.screen === 'result' && s.result) {
-      body = e(Result, {
+      body = e('div', {
+        className: 'fa-gatewrap' + (locked ? ' is-locked' : '')
+      },
+      // Rendered in full either way; while locked it is blurred, and inert
+      // and hidden from assistive tech so nothing in it can be reached.
+      e('div', {
+        inert: locked ? '' : undefined,
+        'aria-hidden': locked ? 'true' : undefined
+      }, e(Result, {
         result: s.result,
         headRef: headRef,
         onBack: act.back,
@@ -1095,7 +1393,11 @@
             type: 'START'
           });
         }
-      });
+      })), locked ? e(EmailGate, {
+        key: resultKey,
+        initialEmail: s.userEmail,
+        onSubmit: unlock
+      }) : null);
     } else if (s.screen === 'flow') {
       body = e('div', {
         className: 'fa-page'
@@ -1162,6 +1464,8 @@
     FocusAreaResult: Result,
     faBuildReport: faBuildReport,
     faNotify: faNotify,
+    faResultVars: faResultVars,
+    faValidEmail: faValidEmail,
     FocusAreaStyles: FocusAreaStyles,
     renderFocusArea: renderFocusArea,
     faBuildSteps: buildSteps
