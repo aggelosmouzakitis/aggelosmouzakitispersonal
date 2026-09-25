@@ -23,7 +23,7 @@ const SOURCES = {
   '/about/': ['core-pages-v2.jsx'],
   '/reviews/': ['core-pages-v2.jsx', 'content-pages.jsx'],
   '/free-tools/': ['free-tools.jsx'],
-  '/find-your-focus-area/': ['focus-area-data.jsx', 'focus-area-scoring.jsx', 'focus-area.jsx'],
+  '/find-your-focus-area/': ['focus-area-data.jsx', 'focus-area-scoring.jsx', 'focus-area-content.jsx', 'focus-area.jsx'],
   '/contact/': ['contact.jsx'],
   '/wtf-friday/': ['wtf-friday.jsx'],
   '/confidentiality/': ['content-pages.jsx'],

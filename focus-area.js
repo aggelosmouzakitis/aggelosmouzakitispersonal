@@ -12,14 +12,17 @@
 //     on the selected answer, the same hover wash and the same ← Back button
 //   • analytics go through gtag with the slug on every event and no answer text
 //
-// Result page: six separate slots, in order, so later stages can fill them
-// without restructuring anything:
+// Result page: six separate slots, in order, assembled from the stored result
+// state and the copy in focus-area-content.js (window.FOCUS_AREA_CONTENT):
 //   1 heading · 2 contextual interpretation · 3 core interpretation ·
 //   4 secondary Focus Area · 5 score visualisation · 6 recommended resources
+// A close result names both areas in the heading and gives each its full core
+// interpretation, the second visually subordinate.
 
 (function () {
   var e = React.createElement;
   var D = window.FOCUS_AREA_DATA;
+  var COPY = window.FOCUS_AREA_CONTENT;
   var SLUG = D.slug;
   var STORE_KEY = 'focus-area:v1';
   var ADVANCE_MS = 180; // long enough to see the choice register
@@ -251,9 +254,17 @@
   // question
   '.fa-step{animation-duration:340ms;animation-timing-function:var(--ease-settle,cubic-bezier(.22,1,.36,1));animation-fill-mode:both}', '.fa-step--fwd{animation-name:fa-in-fwd}', '.fa-step--back{animation-name:fa-in-back}', '@keyframes fa-in-fwd{from{opacity:0;transform:translate3d(16px,0,0)}to{opacity:1;transform:none}}', '@keyframes fa-in-back{from{opacity:0;transform:translate3d(-16px,0,0)}to{opacity:1;transform:none}}', '.fa-q__kicker{margin:0 0 12px;font-size:14.5px;font-weight:600;line-height:1.5;color:var(--meta,#6A6F67)}', '.fa-q__text{margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(24px,3.1vw,31px);font-weight:750;line-height:1.2;letter-spacing:-.02em;color:var(--heading-ink,#14201C);text-wrap:balance;outline:none}', '.fa-q__helper{margin:12px 0 0;max-width:56ch;font-size:16px;line-height:1.55;color:var(--ink-2,#3A403A)}', '.fa-q__limit{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:18px 0 0;font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}', '.fa-q__limit-rule{color:var(--green-pressed,#03654A)}', '.fa-q__limit-count{color:var(--meta,#6A6F67);font-variant-numeric:tabular-nums}', '.fa-q__limit-count.is-full{color:var(--green-pressed,#03654A)}', '.fa-options{margin:22px 0 0;border-top:1px solid rgba(23,25,25,.14)}', '.fa-opt{display:flex;align-items:flex-start;gap:14px;width:100%;margin:0;padding:15px 12px 15px 14px;text-align:left;background:transparent;border:0;border-bottom:1px solid rgba(23,25,25,.14);border-left:2px solid transparent;border-radius:0;font-family:inherit;font-size:17px;font-weight:400;line-height:1.45;color:var(--ink-2,#3A403A);cursor:pointer;transition:background-color var(--dur-hover,180ms),border-color var(--dur-hover,180ms),color var(--dur-hover,180ms)}', '.fa-opt:hover{background:rgba(4,120,87,.05)}', '.fa-opt[aria-pressed="true"]{border-left-color:var(--green,#047857);background:rgba(4,120,87,.07);color:var(--green-pressed,#03654A);font-weight:650}', '.fa-opt[aria-disabled="true"]{color:rgba(58,64,58,.5);cursor:not-allowed}', '.fa-opt[aria-disabled="true"]:hover{background:transparent}', '.fa-opt__mark{flex:none;position:relative;width:20px;height:20px;margin-top:2px;border:1.5px solid rgba(23,25,25,.42);border-radius:50%;background:transparent;transition:background-color var(--dur-hover,180ms),border-color var(--dur-hover,180ms)}', '.fa-opt__mark--check{border-radius:3px}', '.fa-opt[aria-pressed="true"] .fa-opt__mark{border-color:var(--green,#047857);background:var(--green,#047857)}', '.fa-opt[aria-pressed="true"] .fa-opt__mark::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#F3F0E8}', '.fa-opt[aria-pressed="true"] .fa-opt__mark--check::after{width:5px;height:10px;margin:-6.5px 0 0 -2.5px;border-radius:0;background:none;border:solid #F3F0E8;border-width:0 2px 2px 0;transform:rotate(45deg)}', '.fa-opt[aria-disabled="true"] .fa-opt__mark{border-color:rgba(23,25,25,.2)}', '.fa-opt__num{flex:none;min-width:14px;font-weight:700;color:var(--meta,#6A6F67);font-variant-numeric:tabular-nums}', '.fa-opt[aria-pressed="true"] .fa-opt__num{color:inherit}', '.fa-opt__label{min-width:0}', '.fa-nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:28px}', '.fa-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}',
   // result
-  '.fa-result{animation:fa-in-fwd 420ms var(--ease-settle,cubic-bezier(.22,1,.36,1)) both}', '.fa-slot + .fa-slot{margin-top:40px}', '.fa-slot[hidden]{display:none}', '.fa-result__area{margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(46px,8vw,88px);font-weight:800;line-height:.95;letter-spacing:-.05em;color:var(--green,#047857);text-wrap:balance;outline:none}', '.fa-result__rule{width:96px;height:2px;margin:26px 0 0;background:var(--green,#047857)}', '.fa-result__situation{margin:22px 0 0}', '.fa-label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:var(--meta,#6A6F67)}', '.fa-result__situation p{margin:0;font-size:18px;font-weight:600;line-height:1.5;color:var(--ink,#171919)}', '.fa-placeholder{margin:0;padding:18px 20px;border-left:2px solid var(--rule,rgba(23,25,25,.18));background:rgba(23,25,25,.03);font-size:16px;line-height:1.6;color:var(--meta,#6A6F67)}', '.fa-secondary{padding-top:22px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}', '.fa-secondary__line{margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(22px,2.6vw,28px);font-weight:750;line-height:1.25;letter-spacing:-.02em;color:var(--heading-ink,#14201C);text-wrap:balance}', '.fa-secondary__line span{color:var(--green-pressed,#03654A)}',
+  '.fa-result{animation:fa-in-fwd 420ms var(--ease-settle,cubic-bezier(.22,1,.36,1)) both}', '.fa-slot + .fa-slot{margin-top:40px}', '.fa-slot[hidden]{display:none}', '.fa-result__area{margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(46px,8vw,88px);font-weight:800;line-height:.95;letter-spacing:-.05em;color:var(--green,#047857);text-wrap:balance;outline:none}', '.fa-result__area--pair{font-size:clamp(38px,6vw,68px);line-height:1}', '.fa-result__plus{color:var(--meta,#6A6F67);font-weight:700}', '.fa-result__lead{margin:0 0 12px;font-size:clamp(18px,1.9vw,21px);font-weight:600;line-height:1.4;color:var(--ink,#171919)}', '.fa-result__rule{width:96px;height:2px;margin:26px 0 0;background:var(--green,#047857)}', '.fa-result__situation{margin:22px 0 0}', '.fa-label{display:block;margin:0 0 6px;font-size:12px;font-weight:700;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:var(--meta,#6A6F67)}', '.fa-result__situation p{margin:0;font-size:18px;font-weight:600;line-height:1.5;color:var(--ink,#171919)}',
+  // 2 · contextual paragraph: the lead, read straight after the situation
+  '.fa-context{margin:0;max-width:62ch;font-size:clamp(19px,1.9vw,21px);line-height:1.6;color:var(--ink,#171919);text-wrap:pretty}',
+  // 3 · core interpretation: section labels in the tools\' small green caps
+  '.fa-core{max-width:64ch}', '.fa-core__area{margin:0 0 6px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(30px,3.6vw,40px);font-weight:800;line-height:1.05;letter-spacing:-.035em;color:var(--green,#047857)}', '.fa-sec{margin-top:34px}', '.fa-core__area + .fa-sec{margin-top:22px}', '.fa-sec__h{margin:0 0 12px;font-family:var(--font-body);font-size:13px;font-weight:700;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:var(--green-pressed,#03654A)}', '.fa-sec p{margin:0;font-size:18px;line-height:1.7;color:var(--ink-2,#3A403A);text-wrap:pretty}', '.fa-sec p + p{margin-top:14px}', '.fa-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(23,25,25,.12)}', '.fa-list li{position:relative;padding:12px 0 12px 26px;border-bottom:1px solid rgba(23,25,25,.12);font-size:17px;line-height:1.55;color:var(--ink-2,#3A403A)}', '.fa-list li::before{content:"";position:absolute;left:2px;top:23px;width:12px;height:2px;background:var(--green,#047857)}',
+  // the second interpretation of a close result: same structure, quieter
+  '.fa-core--sub{padding-top:32px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}', '.fa-core--sub .fa-core__area{font-size:clamp(26px,3vw,32px);color:var(--green-pressed,#03654A)}', '.fa-core--sub .fa-sec{margin-top:28px}', '.fa-core--sub .fa-sec p{font-size:17px;line-height:1.68}', '.fa-core--sub .fa-list li{font-size:16px}',
+  // 4 · also showing up
+  '.fa-also{padding-top:26px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}', '.fa-also__area{margin:0;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(26px,3vw,32px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--green-pressed,#03654A)}', '.fa-also__copy{margin:12px 0 0;max-width:62ch;font-size:18px;line-height:1.7;color:var(--ink-2,#3A403A);text-wrap:pretty}',
   // score visualisation — deliberately quieter than the result above it
-  '.fa-scores{padding-top:22px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}', '.fa-scores__h{margin:0;font-size:13px;font-weight:700;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:var(--green-pressed,#03654A)}', '.fa-scores__note{margin:6px 0 0;font-size:14px;line-height:1.55;color:var(--meta,#6A6F67)}', '.fa-scores__list{list-style:none;margin:20px 0 0;padding:0}', '.fa-bar{padding:10px 0}', '.fa-bar__top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:7px}', '.fa-bar__name{min-width:0;font-size:15px;font-weight:600;line-height:1.35;color:var(--ink-2,#3A403A)}', '.fa-bar__tag{margin-left:8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-pressed,#03654A);white-space:nowrap}', '.fa-bar__val{flex:none;font-size:14px;font-weight:700;color:var(--meta,#6A6F67);font-variant-numeric:tabular-nums}', '.fa-bar__track{height:6px;background:rgba(23,25,25,.08)}', '.fa-bar__fill{height:100%;background:rgba(23,25,25,.3);transform-origin:left center;animation:fa-grow 640ms var(--ease-settle,cubic-bezier(.22,1,.36,1)) both}', '.fa-bar--primary .fa-bar__fill{background:var(--green,#047857)}', '.fa-bar--secondary .fa-bar__fill{background:#6FAE8F}', '.fa-bar--primary .fa-bar__name,.fa-bar--secondary .fa-bar__name{color:var(--ink,#171919)}', '@keyframes fa-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}', '.fa-scores__foot{margin:16px 0 0;font-size:13.5px;line-height:1.55;color:var(--meta,#6A6F67)}', '.fa-result__actions{margin-top:44px;padding-top:26px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}', '@media (max-width:767px){', '.fa-page{padding:8px 0 8px}', '.fa-lead{font-size:17px}', '.fa-opt{font-size:16px;padding:14px 10px 14px 12px}', '.fa-stages li{grid-template-columns:34px minmax(0,1fr)}', '.fa-stages__m{grid-column:2;white-space:normal}', '.fa-row .fa-btn{width:100%}', '.fa-result__actions .fa-row{flex-direction:column;align-items:stretch}', '.fa-result__actions .fa-link{justify-content:center}', '}', '@media (prefers-reduced-motion:reduce){.fa-step,.fa-result,.fa-bar__fill{animation:none}.fa-progress__fill{transition:none}}'].join('');
+  '.fa-scores{padding-top:22px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}', '.fa-scores__h{margin:0;font-size:13px;font-weight:700;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:var(--green-pressed,#03654A)}', '.fa-scores__note{margin:6px 0 0;font-size:14px;line-height:1.55;color:var(--meta,#6A6F67)}', '.fa-scores__list{list-style:none;margin:20px 0 0;padding:0}', '.fa-bar{padding:10px 0}', '.fa-bar__top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:7px}', '.fa-bar__name{min-width:0;font-size:15px;font-weight:600;line-height:1.35;color:var(--ink-2,#3A403A)}', '.fa-bar__tag{margin-left:8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-pressed,#03654A);white-space:nowrap}', '.fa-bar__val{flex:none;font-size:14px;font-weight:700;color:var(--meta,#6A6F67);font-variant-numeric:tabular-nums}', '.fa-bar__track{height:6px;background:rgba(23,25,25,.08)}', '.fa-bar__fill{height:100%;background:rgba(23,25,25,.3);transform-origin:left center;animation:fa-grow 640ms var(--ease-settle,cubic-bezier(.22,1,.36,1)) both}', '.fa-bar--primary .fa-bar__fill{background:var(--green,#047857)}', '.fa-bar--secondary .fa-bar__fill{background:#6FAE8F}', '.fa-bar--primary .fa-bar__name,.fa-bar--secondary .fa-bar__name{color:var(--ink,#171919)}', '@keyframes fa-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}', '.fa-scores__foot{margin:16px 0 0;font-size:13.5px;line-height:1.55;color:var(--meta,#6A6F67)}', '.fa-result__actions{margin-top:44px;padding-top:26px;border-top:1px solid var(--rule,rgba(23,25,25,.18))}', '@media (max-width:767px){', '.fa-page{padding:8px 0 8px}', '.fa-sec p,.fa-also__copy{font-size:17px}', '.fa-list li{font-size:16px}', '.fa-lead{font-size:17px}', '.fa-opt{font-size:16px;padding:14px 10px 14px 12px}', '.fa-stages li{grid-template-columns:34px minmax(0,1fr)}', '.fa-stages__m{grid-column:2;white-space:normal}', '.fa-row .fa-btn{width:100%}', '.fa-result__actions .fa-row{flex-direction:column;align-items:stretch}', '.fa-result__actions .fa-link{justify-content:center}', '}', '@media (prefers-reduced-motion:reduce){.fa-step,.fa-result,.fa-bar__fill{animation:none}.fa-progress__fill{transition:none}}'].join('');
   function FocusAreaStyles() {
     return e('style', {
       dangerouslySetInnerHTML: {
@@ -580,74 +591,146 @@
       'aria-label': props.label || undefined
     }, props.children || null);
   }
+  function areaLabel(id) {
+    return COPY.resultContent[id] && COPY.resultContent[id].title || D.focusArea(id).label;
+  }
+  function paras(list) {
+    return list.map(function (t, i) {
+      return e('p', {
+        key: i
+      }, t);
+    });
+  }
 
-  // 1. Focus Area heading
+  // 1. Focus Area heading. A close result names both areas with equal weight.
   function HeadingSlot(props) {
-    var r = props.result;
+    var r = props.result,
+      L = COPY.labels;
     var persona = D.persona(r.persona),
       problem = D.problem(r.persona, r.primaryProblem);
+    var title = r.isCloseResult ? e('h1', {
+      className: 'fa-result__area fa-result__area--pair',
+      tabIndex: -1,
+      ref: props.headRef
+    }, areaLabel(r.primaryFocusArea), e('span', {
+      className: 'fa-result__plus'
+    }, ' + '), areaLabel(r.secondaryFocusArea)) : e('h1', {
+      className: 'fa-result__area',
+      tabIndex: -1,
+      ref: props.headRef
+    }, areaLabel(r.primaryFocusArea));
     return e(Slot, {
       name: 'heading'
     }, e('p', {
       className: 'fa-eyebrow'
-    }, 'Your Focus Area'), e('h1', {
-      className: 'fa-result__area',
-      tabIndex: -1,
-      ref: props.headRef
-    }, D.focusArea(r.primaryFocusArea).label), e('div', {
+    }, r.isCloseResult ? L.focusAreas : L.focusArea), r.isCloseResult ? e('p', {
+      className: 'fa-result__lead'
+    }, L.closeLead) : null, title, e('div', {
       className: 'fa-result__rule',
       'aria-hidden': 'true'
     }), e('div', {
       className: 'fa-result__situation'
     }, e('span', {
       className: 'fa-label'
-    }, 'Your situation'), e('p', null, (persona ? persona.label : r.persona) + ' · ' + (problem ? problem.label : r.primaryProblem))));
+    }, L.situation), e('p', null, (persona ? persona.label : r.persona) + ' · ' + (problem ? problem.label : r.primaryProblem))));
   }
 
-  // 2. Contextual interpretation (persona + problem). Stage 1 placeholder.
-  function ContextSlot() {
-    return e(Slot, {
+  // 2. Contextual interpretation: persona + primary Focus Area. In a close
+  // result this is the highest-scoring area's paragraph.
+  function ContextSlot(props) {
+    var r = props.result;
+    var c = COPY.resultContent[r.primaryFocusArea];
+    var text = c && c.personaContext[r.persona];
+    if (!text) return e(Slot, {
       name: 'context',
-      label: 'Your interpretation'
-    }, e('p', {
-      className: 'fa-placeholder'
-    }, 'Your detailed interpretation will be added in the next stage.'));
-  }
-
-  // 3. Core Focus Area interpretation. Empty in Stage 1.
-  function CoreSlot() {
-    return e(Slot, {
-      name: 'core',
       empty: true
     });
+    return e(Slot, {
+      name: 'context',
+      label: 'Your situation, interpreted'
+    }, e('p', {
+      className: 'fa-context'
+    }, text));
   }
 
-  // 4. Secondary Focus Area
-  function SecondarySlot(props) {
+  // The four core sections for one Focus Area. `titled` adds the area name
+  // above them, which a close result needs because it shows two.
+  function CoreInterpretation(props) {
+    var c = COPY.resultContent[props.area],
+      L = COPY.labels;
+    if (!c) return null;
+    var H = props.titled ? 'h3' : 'h2';
+    var sec = function (key, label, body) {
+      return e('section', {
+        className: 'fa-sec',
+        key: key
+      }, e(H, {
+        className: 'fa-sec__h'
+      }, label), body);
+    };
+    return e('div', {
+      className: 'fa-core' + (props.subordinate ? ' fa-core--sub' : '')
+    }, props.titled ? e('h2', {
+      className: 'fa-core__area'
+    }, c.title) : null, sec('means', L.whatThisMeans, paras(c.whatThisMeans)), sec('shows', L.howThisMayShowUp, e('ul', {
+      className: 'fa-list'
+    }, c.howThisMayShowUp.map(function (t, i) {
+      return e('li', {
+        key: i
+      }, t);
+    }))), sec('first', L.whatDeservesAttentionFirst, paras(c.whatDeservesAttentionFirst)), sec('mind', L.whatToKeepInMind, paras(c.whatToKeepInMind)));
+  }
+
+  // 3. Core Focus Area interpretation.
+  function CoreSlot(props) {
     var r = props.result;
-    var p = D.focusArea(r.primaryFocusArea).label,
-      sLabel = D.focusArea(r.secondaryFocusArea).label;
+    return e(Slot, {
+      name: 'core'
+    }, e(CoreInterpretation, {
+      area: r.primaryFocusArea,
+      titled: r.isCloseResult
+    }));
+  }
+
+  // 4. Secondary Focus Area: a short "also showing up" block, or, in a close
+  // result, the second full interpretation, visually subordinate.
+  function SecondarySlot(props) {
+    var r = props.result,
+      L = COPY.labels;
+    var c = COPY.resultContent[r.secondaryFocusArea];
+    if (r.isCloseResult) {
+      return e(Slot, {
+        name: 'secondary'
+      }, e(CoreInterpretation, {
+        area: r.secondaryFocusArea,
+        titled: true,
+        subordinate: true
+      }));
+    }
     return e(Slot, {
       name: 'secondary'
     }, e('div', {
-      className: 'fa-secondary'
-    }, r.isCloseResult ? e('p', {
-      className: 'fa-secondary__line'
-    }, 'Two areas are showing up strongly: ', e('span', null, p + ' + ' + sLabel)) : e('p', {
-      className: 'fa-secondary__line'
-    }, 'Also showing up: ', e('span', null, sLabel))));
+      className: 'fa-also'
+    }, e('p', {
+      className: 'fa-eyebrow'
+    }, L.alsoShowingUp), e('h2', {
+      className: 'fa-also__area'
+    }, c ? c.title : D.focusArea(r.secondaryFocusArea).label), c ? e('p', {
+      className: 'fa-also__copy'
+    }, c.secondaryCopy) : null));
   }
 
   // 5. All seven scores, highest first. Supporting information only.
   function ScoresSlot(props) {
-    var r = props.result;
+    var r = props.result,
+      L = COPY.labels;
     return e(Slot, {
       name: 'scores'
     }, e('div', {
       className: 'fa-scores'
     }, e('h2', {
       className: 'fa-scores__h'
-    }, 'Your Focus Areas'), e('p', {
+    }, r.isCloseResult ? L.scoresClose : L.scores), e('p', {
       className: 'fa-scores__note'
     }, 'Higher scores mean a stronger indication that the area deserves attention right now.'), e('ul', {
       className: 'fa-scores__list'
@@ -662,7 +745,7 @@
         className: 'fa-bar__top'
       }, e('span', {
         className: 'fa-bar__name'
-      }, D.focusArea(id).label, tag ? e('span', {
+      }, areaLabel(id), tag ? e('span', {
         className: 'fa-bar__tag'
       }, tag) : null), e('span', {
         className: 'fa-bar__val'
@@ -695,7 +778,7 @@
   function Result(props) {
     var r = props.result;
     return e('div', {
-      className: 'fa-page fa-result'
+      className: 'fa-page fa-result' + (r.isCloseResult ? ' fa-result--close' : '')
     }, e(HeadingSlot, {
       result: r,
       headRef: props.headRef
@@ -922,6 +1005,8 @@
   }
   Object.assign(window, {
     FocusAreaAssessment: FocusAreaAssessment,
+    FocusAreaResult: Result,
+    FocusAreaStyles: FocusAreaStyles,
     renderFocusArea: renderFocusArea,
     faBuildSteps: buildSteps
   });
