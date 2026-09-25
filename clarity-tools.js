@@ -970,18 +970,39 @@ function ClarityTool({
     });
     go(0);
   };
+
+  // Choosing records the answer and nothing more; Continue moves on. If the
+  // Continue button sits below the fold on a short screen, bring it into view.
   var choose = function (q, i, optIndex) {
     setAnswers(function (a) {
       var n = Object.assign({}, a);
       n[q.id] = optIndex;
       return n;
     });
+    window.requestAnimationFrame(function () {
+      var btn = document.getElementById('clarity-continue');
+      var over = btn ? btn.getBoundingClientRect().bottom - (window.innerHeight - 16) : 0;
+      if (over <= 0) return;
+      var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      try {
+        window.scrollBy({
+          top: over,
+          behavior: still ? 'auto' : 'smooth'
+        });
+      } catch (e) {
+        window.scrollBy(0, over);
+      }
+    });
+  };
+
+  // Continue: the next question, or the email gate after the last one.
+  var next = function (q, i) {
+    if (answers[q.id] == null) return;
     clarityTrack('assessment_question_progress', {
       assessment: slug,
       question: i + 1,
       total: total
     });
-    // Advance: next question, or the email gate after the last one.
     if (i + 1 < total) {
       go(i + 1);
     } else {
@@ -1099,9 +1120,17 @@ function ClarityTool({
       onClick: function () {
         choose(q, i, 'na');
       }
-    }, q.naText || 'Not applicable to me') : null, React.createElement('div', {
+    }, q.naText || 'Not applicable to me') : null,
+    // Back on the left, Continue on the right, on every question; Continue
+    // stays disabled until an answer is chosen.
+    React.createElement('div', {
       style: {
-        marginTop: '1.8rem'
+        marginTop: '1.8rem',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '1rem'
       }
     }, React.createElement('button', {
       className: 'cta-btn',
@@ -1112,7 +1141,20 @@ function ClarityTool({
       onClick: function () {
         back(i);
       }
-    }, '← Back')));
+    }, '← Back'), React.createElement('button', {
+      id: 'clarity-continue',
+      className: 'cta-btn',
+      disabled: sel == null,
+      style: {
+        ...C.cta,
+        flex: mob ? '1 1 auto' : '0 0 auto',
+        opacity: sel == null ? 0.45 : 1,
+        cursor: sel == null ? 'default' : 'pointer'
+      },
+      onClick: function () {
+        next(q, i);
+      }
+    }, 'Continue →')));
   }
 
   // ---- Email capture ----

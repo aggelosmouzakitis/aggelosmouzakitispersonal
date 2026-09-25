@@ -9,7 +9,8 @@
 //   • the page frame is window.LegacyShell (form: true, cta: false), the shell
 //     every free tool mounts into
 //   • answer rows keep the clarity tools' look: hairline rows, a 2px green rule
-//     on the selected answer, the same hover wash and the same ← Back button
+//     on the selected answer, the same hover wash, and the same ← Back and
+//     green Continue → pair on every question (nothing advances on its own)
 //   • analytics go through gtag with the slug on every event and no answer text
 //   • the result email goes through window.submitLead (lead-capture.js), the
 //     one EmailJS + sheet path every form on the site uses, with its error
@@ -33,7 +34,6 @@
   var COPY = window.FOCUS_AREA_CONTENT;
   var SLUG = D.slug;
   var STORE_KEY = 'focus-area:v1';
-  var ADVANCE_MS = 180; // long enough to see the choice register
   var FREE_TOOLS_URL = window.FREE_TOOLS_URL || '/free-tools/';
   // The site's orientation-call booking link (work-with-me.jsx ORIENTATION_URL;
   // /book redirects here too). contact.jsx preselects the call from ?interest=.
@@ -302,6 +302,28 @@
     });
     return steps;
   }
+
+  // Has this screen been answered? Continue stays disabled until it has.
+  function stepAnswered(s, step) {
+    if (!step) return false;
+    switch (step.kind) {
+      case 'persona':
+        return !!s.persona;
+      case 'problems':
+        return s.selectedProblems.length > 0;
+      case 'primary':
+        return s.selectedProblems.indexOf(s.primaryProblem) >= 0;
+      case 'contextual':
+        {
+          var q = D.contextualQuestions(s.persona, s.primaryProblem)[step.index];
+          return !!(q && s.contextualAnswers[q.id]);
+        }
+      case 'universal':
+        return s.universalAnswers[step.item.id] != null;
+      default:
+        return false;
+    }
+  }
   function freshState() {
     return {
       screen: 'intro',
@@ -378,7 +400,11 @@
           var at = sel.indexOf(a.value);
           if (at >= 0) sel.splice(at, 1);else if (sel.length < D.PROBLEMS_QUESTION.max) sel.push(a.value);else return s;
           var primary = s.primaryProblem;
-          if (sel.length === 1) primary = sel[0];else if (sel.indexOf(primary) < 0) primary = null;
+          if (sel.length === 1) primary = sel[0];
+          // Going from one problem to several: the lone problem was the primary
+          // by default, not by choice, so "which matters most" starts unanswered
+          // and its Continue waits for a real answer.
+          else if (s.selectedProblems.length <= 1 || sel.indexOf(primary) < 0) primary = null;
           return Object.assign({}, s, {
             selectedProblems: sel,
             primaryProblem: primary
@@ -406,6 +432,7 @@
         }
       case 'NEXT':
         steps = buildSteps(s);
+        if (!stepAnswered(s, steps[Math.min(s.step, steps.length - 1)])) return s;
         n = s.step + 1;
         if (n < steps.length) return Object.assign({}, s, {
           step: n,
@@ -503,7 +530,7 @@
   // result scrolls past underneath. It sits a little above centre (as if it
   // were 480px tall), which also keeps it whole at the very top of the page,
   // where the header pushes the result down.
-  '.fa-gate__stick{position:sticky;top:0;display:flex;align-items:flex-start;justify-content:center;box-sizing:border-box;height:100vh;height:100dvh;padding:max(16px,calc(50vh - 240px)) 0 16px;padding-top:max(16px,calc(50dvh - 240px))}', '.fa-gate__panel{box-sizing:border-box;width:100%;max-width:440px;max-height:100%;overflow-y:auto;padding:30px 30px 26px;background:var(--bone,#F3F0E8);border:1px solid rgba(23,25,25,.14);border-top:3px solid var(--green,#047857);border-radius:2px;box-shadow:0 28px 64px -24px rgba(22,35,30,.42),0 2px 10px rgba(22,35,30,.08)}', '.fa-gate__title{margin:0 0 10px;font-family:var(--font-heading);font-synthesis:none;font-size:22px;font-weight:800;line-height:1.15;letter-spacing:.02em;color:var(--heading-ink,#14201C);outline:none}', '.fa-gate__text{margin:0 0 20px;font-size:16.5px;line-height:1.55;color:var(--ink-2,#3A403A);text-wrap:pretty}', '.fa-gate__input{display:block;box-sizing:border-box;width:100%;min-height:52px;margin:0;padding:14px 15px;border:1px solid rgba(23,25,25,.22);border-radius:10px;background:var(--bone,#F3F0E8);color:var(--ink-2,#3A403A);font-family:inherit;font-size:16px;line-height:1.5;outline:none;transition:border-color .16s,box-shadow .16s}', '.fa-gate__input::placeholder{color:var(--meta,#6A6F67);opacity:1}', '.fa-gate__input:focus{border-color:var(--green,#047857);box-shadow:0 0 0 3px rgba(4,120,87,.22)}', '.fa-gate__input[aria-invalid="true"]{border-color:#c0392b}', '.fa-gate__input[readonly]{color:var(--meta,#6A6F67)}', '.fa-gate__err{margin:8px 0 0;font-size:13.5px;font-weight:600;line-height:1.5;color:#c0392b}', '.fa-gate__btn{width:100%;margin-top:12px}', '.fa-gate__btn[disabled]{opacity:.72;cursor:progress}', '.fa-gate__help{margin:14px 0 0;font-size:13px;line-height:1.55;color:var(--meta,#6A6F67);text-wrap:pretty}', '@media (max-width:767px){', '.fa-page{padding:8px 0 8px}', '.fa-sec p,.fa-also__copy{font-size:17px}', '.fa-list li{font-size:16px}', '.fa-lead{font-size:17px}', '.fa-opt{font-size:16px;padding:14px 10px 14px 12px}', '.fa-stages li{grid-template-columns:34px minmax(0,1fr)}', '.fa-stages__m{grid-column:2;white-space:normal}', '.fa-row .fa-btn{width:100%}', '.fa-result__actions .fa-row{flex-direction:column;align-items:stretch}', '.fa-result__actions .fa-link{justify-content:center}', '.fa-call{padding:24px 20px 22px}', '.fa-call p{font-size:16.5px}', '.fa-call__btn{width:100%;padding:12px 16px;line-height:1.3;text-align:center}', '.fa-gate__panel{padding:24px 20px 20px}', '.fa-gate__title{font-size:20px}', '.fa-gate__text{margin-bottom:16px;font-size:16px}', '}', '@media (prefers-reduced-motion:reduce){.fa-step,.fa-result,.fa-bar__fill{animation:none}.fa-progress__fill,.fa-result{transition:none}}'].join('');
+  '.fa-gate__stick{position:sticky;top:0;display:flex;align-items:flex-start;justify-content:center;box-sizing:border-box;height:100vh;height:100dvh;padding:max(16px,calc(50vh - 240px)) 0 16px;padding-top:max(16px,calc(50dvh - 240px))}', '.fa-gate__panel{box-sizing:border-box;width:100%;max-width:440px;max-height:100%;overflow-y:auto;padding:30px 30px 26px;background:var(--bone,#F3F0E8);border:1px solid rgba(23,25,25,.14);border-top:3px solid var(--green,#047857);border-radius:2px;box-shadow:0 28px 64px -24px rgba(22,35,30,.42),0 2px 10px rgba(22,35,30,.08)}', '.fa-gate__title{margin:0 0 10px;font-family:var(--font-heading);font-synthesis:none;font-size:22px;font-weight:800;line-height:1.15;letter-spacing:.02em;color:var(--heading-ink,#14201C);outline:none}', '.fa-gate__text{margin:0 0 20px;font-size:16.5px;line-height:1.55;color:var(--ink-2,#3A403A);text-wrap:pretty}', '.fa-gate__input{display:block;box-sizing:border-box;width:100%;min-height:52px;margin:0;padding:14px 15px;border:1px solid rgba(23,25,25,.22);border-radius:10px;background:var(--bone,#F3F0E8);color:var(--ink-2,#3A403A);font-family:inherit;font-size:16px;line-height:1.5;outline:none;transition:border-color .16s,box-shadow .16s}', '.fa-gate__input::placeholder{color:var(--meta,#6A6F67);opacity:1}', '.fa-gate__input:focus{border-color:var(--green,#047857);box-shadow:0 0 0 3px rgba(4,120,87,.22)}', '.fa-gate__input[aria-invalid="true"]{border-color:#c0392b}', '.fa-gate__input[readonly]{color:var(--meta,#6A6F67)}', '.fa-gate__err{margin:8px 0 0;font-size:13.5px;font-weight:600;line-height:1.5;color:#c0392b}', '.fa-gate__btn{width:100%;margin-top:12px}', '.fa-gate__btn[disabled]{opacity:.72;cursor:progress}', '.fa-gate__help{margin:14px 0 0;font-size:13px;line-height:1.55;color:var(--meta,#6A6F67);text-wrap:pretty}', '@media (max-width:767px){', '.fa-page{padding:8px 0 8px}', '.fa-sec p,.fa-also__copy{font-size:17px}', '.fa-list li{font-size:16px}', '.fa-lead{font-size:17px}', '.fa-opt{font-size:16px;padding:14px 10px 14px 12px}', '.fa-stages li{grid-template-columns:34px minmax(0,1fr)}', '.fa-stages__m{grid-column:2;white-space:normal}', '.fa-row .fa-btn{width:100%}', '.fa-nav__next{flex:1 1 auto}', '.fa-result__actions .fa-row{flex-direction:column;align-items:stretch}', '.fa-result__actions .fa-link{justify-content:center}', '.fa-call{padding:24px 20px 22px}', '.fa-call p{font-size:16.5px}', '.fa-call__btn{width:100%;padding:12px 16px;line-height:1.3;text-align:center}', '.fa-gate__panel{padding:24px 20px 20px}', '.fa-gate__title{font-size:20px}', '.fa-gate__text{margin-bottom:16px;font-size:16px}', '}', '@media (prefers-reduced-motion:reduce){.fa-step,.fa-result,.fa-bar__fill{animation:none}.fa-progress__fill,.fa-result{transition:none}}'].join('');
   function FocusAreaStyles() {
     return e('style', {
       dangerouslySetInnerHTML: {
@@ -710,7 +737,7 @@
               act.announce('You can choose up to ' + max + '. Deselect one to choose a different problem.');
               return;
             }
-            act.dispatch({
+            act.choose({
               type: 'TOGGLE_PROBLEM',
               value: p.id
             });
@@ -718,16 +745,7 @@
             act.announce(count + ' of ' + max + ' chosen.');
           }
         });
-      })), e(Nav, {
-        onBack: act.back
-      }, e('button', {
-        type: 'button',
-        className: 'fa-btn',
-        disabled: !sel.length,
-        onClick: act.next
-      }, 'Continue ', e('span', {
-        'aria-hidden': 'true'
-      }, '→'))));
+      })));
     }
     if (step.kind === 'primary') {
       return e('div', null, e(QuestionHead, {
@@ -809,6 +827,9 @@
     }
     return null;
   }
+
+  // Back on the left, Continue on the right, on every question. Nothing moves
+  // on by itself: Continue stays disabled until the screen is answered.
   function Nav(props) {
     return e('div', {
       className: 'fa-nav'
@@ -818,7 +839,14 @@
       onClick: props.onBack
     }, e('span', {
       'aria-hidden': 'true'
-    }, '←'), ' Back'), props.children || null);
+    }, '←'), ' Back'), e('button', {
+      type: 'button',
+      className: 'fa-btn fa-nav__next',
+      disabled: !props.canNext,
+      onClick: props.onNext
+    }, 'Continue ', e('span', {
+      'aria-hidden': 'true'
+    }, '→')));
   }
 
   // ── Result page ──────────────────────────────────────────────────────────
@@ -1223,8 +1251,6 @@
     var headRef = R.useRef(null);
     var rootRef = R.useRef(null);
     var liveRef = R.useRef(null);
-    var lockRef = R.useRef(false);
-    var timerRef = R.useRef(0);
     var firstRef = R.useRef(true);
     var steps = buildSteps(s);
     var step = steps[Math.min(s.step, steps.length - 1)];
@@ -1273,7 +1299,6 @@
     // A locked result is the exception: the gate takes focus itself.
     var viewKey = s.screen + ':' + (s.screen === 'flow' ? step.key : '');
     R.useEffect(function () {
-      lockRef.current = false;
       if (firstRef.current) {
         firstRef.current = false;
         return;
@@ -1290,11 +1315,6 @@
       }
       wasLockedRef.current = locked;
     }, [locked]);
-    R.useEffect(function () {
-      return function () {
-        clearTimeout(timerRef.current);
-      };
-    }, []);
 
     // Analytics on arrival at each question and at the result.
     R.useEffect(function () {
@@ -1320,6 +1340,23 @@
         el.textContent = text;
       }, 30);
     }
+
+    // After an answer on a short screen, bring Continue into view if it sits
+    // below the fold, so the next step is always visible.
+    function revealNext() {
+      var btn = rootRef.current && rootRef.current.querySelector('.fa-nav__next');
+      var over = btn ? btn.getBoundingClientRect().bottom - (window.innerHeight - 16) : 0;
+      if (over <= 0) return;
+      var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      try {
+        window.scrollBy({
+          top: over,
+          behavior: still ? 'auto' : 'smooth'
+        });
+      } catch (err) {
+        window.scrollBy(0, over);
+      }
+    }
     var act = {
       dispatch: dispatch,
       announce: announce,
@@ -1330,25 +1367,14 @@
         });
       },
       back: function () {
-        clearTimeout(timerRef.current);
-        lockRef.current = false;
         dispatch({
           type: 'BACK'
         });
       },
-      // Single-choice screens advance on their own, after a beat.
+      // Choosing records the answer and nothing more; Continue moves on.
       choose: function (action) {
-        if (lockRef.current) return;
-        lockRef.current = true;
         dispatch(action);
-        clearTimeout(timerRef.current);
-        timerRef.current = setTimeout(function () {
-          dispatch({
-            type: 'NEXT',
-            now: new Date().toISOString()
-          });
-          lockRef.current = false;
-        }, ADVANCE_MS);
+        window.requestAnimationFrame(revealNext);
       }
     };
 
@@ -1413,9 +1439,11 @@
         step: step,
         act: act,
         headRef: headRef
-      }), step.kind !== 'problems' ? e(Nav, {
-        onBack: act.back
-      }) : null));
+      }), e(Nav, {
+        onBack: act.back,
+        onNext: act.next,
+        canNext: stepAnswered(s, step)
+      })));
     } else {
       body = e(Intro, {
         state: s,
