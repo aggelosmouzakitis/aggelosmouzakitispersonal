@@ -225,6 +225,37 @@ function HeroField() {
   );
 }
 
+// ─── Verified seal ───────────────────────────────────────────────────────────
+// Psychology Today's verification seal, under the hero CTA. Their embed is an
+// empty <a class="sx-verified-seal"> plus a script that fills it. The script is
+// added only once React has committed the anchor: as a tag in the static HTML it
+// would fill the prerendered copy, which createRoot then clears. It is appended
+// last in <body> with the embed's data attributes, so it finds its settings
+// whether it reads currentScript, queries for itself or takes the last script.
+const PT_SEAL = {
+  profile: 'https://www.psychologytoday.com/profile/1662603',
+  src: 'https://member.psychologytoday.com/verified-seal.js',
+  badge: '13',
+  id: '1662603',
+  code: 'aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy8xMy9wcm9maWxlLzE2NjI2MDM/Y2FsbGJhY2s9c3hjYWxsYmFjaw==',
+};
+
+function VerifiedSeal() {
+  React.useEffect(function () {
+    const s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.src = PT_SEAL.src;
+    s.setAttribute('data-badge', PT_SEAL.badge);
+    s.setAttribute('data-id', PT_SEAL.id);
+    s.setAttribute('data-code', PT_SEAL.code);
+    document.body.appendChild(s);
+    return function () { s.remove(); };
+  }, []);
+
+  return React.createElement('div', { className: 'home-hero__seal' },
+    React.createElement('a', { href: PT_SEAL.profile, className: 'sx-verified-seal', 'aria-label': 'Verified by Psychology Today' }));
+}
+
 
 // \u2500\u2500\u2500 Progress Field \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 // The homepage's before/after ledger as an open editorial field: three columns
@@ -702,6 +733,13 @@ html[lang="el"] .home-hero__title{font-size:clamp(40px,4.0vw,54px);font-family:$
 .hero-cta--caps{font-size:15px;font-weight:750;letter-spacing:0.045em;text-transform:uppercase}
 .home-hero__soft{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#2C312C;border-bottom:1px solid rgba(23,25,25,0.3);padding-bottom:4px;min-height:32px;transition:color .18s,border-color .18s,gap .18s}
 .home-hero__soft:hover{color:${V2.green};border-bottom-color:${V2.green};gap:12px}
+/* Psychology Today seal — a quiet trust mark under the CTA row. Its box is
+   reserved at the capped height so the seal fills in without moving the copy,
+   and the cap keeps whatever their script injects smaller than the button.
+   filter:none: the site's grayscale photo treatment is not for a third-party mark. */
+.home-hero__seal{display:flex;align-items:center;min-height:48px;margin-top:20px}
+.home-hero__seal .sx-verified-seal{display:inline-flex;align-items:center;line-height:0}
+.home-hero__seal img,.home-hero__seal svg{max-width:160px;max-height:48px;width:auto;height:auto;object-fit:contain;filter:none}
 
 /* ── Proof strip — dark band of credentials under the hero ── */
 .home-proof{position:relative;background:${V2.ink};border-block:1px solid rgba(243,240,232,0.14)}
@@ -1115,7 +1153,8 @@ function HomePageV2({ lang = 'en' }) {
                 React.createElement('span', null, 'See how I work'), React.createElement('span', { 'aria-hidden': 'true' }, '→'))
             )
           : React.createElement('a', { className: 'hero-cta', href: window.cPath('diagnostic', lang) },
-              React.createElement('span', null, t.ctaBtn), React.createElement('span', null, '→'))
+              React.createElement('span', null, t.ctaBtn), React.createElement('span', null, '→')),
+        isEn ? React.createElement(VerifiedSeal, null) : null
       ),
       React.createElement('figure', { className: 'home-hero__photo' },
         React.createElement('div', { className: 'home-hero__frame' },
