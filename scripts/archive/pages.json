@@ -1,0 +1,140 @@
+{
+  "groups": [
+    {
+      "id": "offers",
+      "title": "Offer and service pages",
+      "blurb": "The three-service architecture, Start Here and the one-offer 1:1 page. Consolidated into /work-with-me/ on 23 Sep 2026.",
+      "pages": [
+        {"url": "/start-here/", "commit": "b4a136489356d3620d4adb3efd2b2eba993af963", "since": "2026-09-10", "retired": {"date": "2026-09-23", "commit": "1ecf94337de76056e010911441862154efcbc04a"}},
+        {"url": "/psychotherapy-decision-coaching/", "commit": "b4a136489356d3620d4adb3efd2b2eba993af963", "since": "2026-09-10", "retired": {"date": "2026-09-23", "commit": "1ecf94337de76056e010911441862154efcbc04a"}},
+        {"url": "/career-strategy-consulting/", "commit": "b4a136489356d3620d4adb3efd2b2eba993af963", "since": "2026-09-10", "retired": {"date": "2026-09-23", "commit": "1ecf94337de76056e010911441862154efcbc04a"}},
+        {"url": "/solopreneur-growth-consulting/", "commit": "b4a136489356d3620d4adb3efd2b2eba993af963", "since": "2026-09-10", "retired": {"date": "2026-09-23", "commit": "1ecf94337de76056e010911441862154efcbc04a"}},
+        {"url": "/1-to-1/", "commit": "b4a136489356d3620d4adb3efd2b2eba993af963", "since": "2026-08-15", "retired": {"date": "2026-09-23", "commit": "1ecf94337de76056e010911441862154efcbc04a"}}
+      ]
+    },
+    {
+      "id": "greek",
+      "title": "Greek site (/el/)",
+      "blurb": "Every Greek-language page. Unpublished on 20 Sep 2026; /el/* now redirects to the English homepage.",
+      "pages": [
+        {"url": "/el/", "commit": "3adb64eb439b3e6c59e3dbccfd46591e4ed8ffdd", "since": "2026-08-15", "retired": {"date": "2026-09-20", "commit": "6d469af7df5e79da47ccbbca4ffb3396549abb35"}},
+        {"url": "/el/about/", "commit": "3adb64eb439b3e6c59e3dbccfd46591e4ed8ffdd", "since": "2026-08-15", "retired": {"date": "2026-09-20", "commit": "6d469af7df5e79da47ccbbca4ffb3396549abb35"}},
+        {"url": "/el/1-to-1/", "commit": "3adb64eb439b3e6c59e3dbccfd46591e4ed8ffdd", "since": "2026-08-15", "retired": {"date": "2026-09-20", "commit": "6d469af7df5e79da47ccbbca4ffb3396549abb35"}},
+        {"url": "/el/reviews/", "commit": "3adb64eb439b3e6c59e3dbccfd46591e4ed8ffdd", "since": "2026-08-15", "retired": {"date": "2026-09-20", "commit": "6d469af7df5e79da47ccbbca4ffb3396549abb35"}},
+        {"url": "/el/executive-coaching/", "commit": "3adb64eb439b3e6c59e3dbccfd46591e4ed8ffdd", "since": "2026-08-15", "retired": {"date": "2026-09-20", "commit": "6d469af7df5e79da47ccbbca4ffb3396549abb35"}},
+        {"url": "/el/career-coaching/", "commit": "3adb64eb439b3e6c59e3dbccfd46591e4ed8ffdd", "since": "2026-08-15", "retired": {"date": "2026-09-20", "commit": "6d469af7df5e79da47ccbbca4ffb3396549abb35"}},
+        {"url": "/el/burnout/", "commit": "3adb64eb439b3e6c59e3dbccfd46591e4ed8ffdd", "since": "2026-08-15", "retired": {"date": "2026-09-20", "commit": "6d469af7df5e79da47ccbbca4ffb3396549abb35"}},
+        {"url": "/el/imposter-syndrome/", "commit": "3adb64eb439b3e6c59e3dbccfd46591e4ed8ffdd", "since": "2026-08-15", "retired": {"date": "2026-09-20", "commit": "6d469af7df5e79da47ccbbca4ffb3396549abb35"}},
+        {"url": "/el/startingdiagnostic/", "commit": "3adb64eb439b3e6c59e3dbccfd46591e4ed8ffdd", "since": "2026-08-15", "retired": {"date": "2026-09-20", "commit": "6d469af7df5e79da47ccbbca4ffb3396549abb35"}},
+        {"url": "/el/confidentiality/", "commit": "3adb64eb439b3e6c59e3dbccfd46591e4ed8ffdd", "since": "2026-08-15", "retired": {"date": "2026-09-20", "commit": "6d469af7df5e79da47ccbbca4ffb3396549abb35"}},
+        {"url": "/el/book/", "commit": "981baaf91f96d41a76337537c067aadef3d2590c", "since": "2026-08-15", "retired": {"date": "2026-09-10", "commit": "c54dd24618582a9078ccc0b90a471bb69b5982a6"}, "note": "Retired earlier, with the Calendly booking, on 10 Sep 2026."}
+      ]
+    },
+    {
+      "id": "blog",
+      "title": "Writing (the blog)",
+      "blurb": "The blog index and all 27 posts. Retired on 20 Sep 2026 when new writing moved to Undisguised; /blog/* now redirects to the homepage.",
+      "pages": [
+        {"url": "/blog/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-28", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/what-went-wrong-ep04-avoidance/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-07-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/what-went-wrong-ep03-body-and-therapy/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-06-28", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/what-went-wrong-ep02-happiness/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-06-21", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/what-went-wrong-ep01-productivity/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-06-12", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/when-the-drive-to-succeed-is-really-just-the-fear-of-falling-behind/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-06-03", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/when-founder-builds-a-company-around-his-life/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-05-25", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/the-turtle-and-the-shell/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-05-25", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/vacation-same-feeling/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-29", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/high-functioning-burnout-pandemic/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/what-lost-purpose-actually-means-for-many-high-performers/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/therapy-has-a-branding-problem/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/why-do-high-performers-keep-winning-and-still-feel-stuck/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/the-parent-archetypes-creating-high-performers-with-chronic-self-doubt/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/what-doubt-is-actually-protecting-you-from/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/high-performance-as-a-way-to-get-accepted-by-your-family/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/the-loneliness-and-emotional-pressure-that-founders-experience/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/why-hard-work-alone-doesnt-advance-you/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/who-are-you-if-you-are-not-crushing-it/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/self-analysis-as-a-meta-way-to-maintain-control/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/is-it-post-holiday-anxiety-or-just-clarity/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/the-elaborate-performance-of-trying-to-change/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/we-ve-turned-adhd-diagnosis-into-a-trend/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/the-high-cost-of-endless-pondering/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/the-coaching-industrys-credibility-problem/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/you-re-creating-the-exact-problem-you-re-trying-to-avoid/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/you-re-just-trading-one-type-of-friction-for-another/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/shared-accountability-leading-without-authority/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-04-30", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/blog/sample-post/", "commit": "f0874cd6c11aa0ba0d564da965239be0a3a13d40", "since": "2026-04-29", "retired": {"date": "2026-04-30", "commit": "897f52a9776dcac3f655500176f0875794ce2e08"}, "note": "The first post on the blog, live for two days in April 2026. It was never republished."}
+      ]
+    },
+    {
+      "id": "tools",
+      "title": "Clarity tools",
+      "blurb": "The five tools as they were before the section was renamed Free Tools on 21 Sep 2026. The live versions at /free-tools/ have changed since.",
+      "pages": [
+        {"url": "/clarity-tools/business-constraint/", "commit": "ab7996aecb7f3309a435e9d8ab56a455109d4ea9", "since": "2026-09-19", "retired": {"date": "2026-09-21", "commit": "57529c22375479076fc073fca51827196782c14c"}},
+        {"url": "/clarity-tools/strategy-or-execution/", "commit": "ab7996aecb7f3309a435e9d8ab56a455109d4ea9", "since": "2026-09-19", "retired": {"date": "2026-09-21", "commit": "57529c22375479076fc073fca51827196782c14c"}},
+        {"url": "/clarity-tools/quit-your-job/", "commit": "ab7996aecb7f3309a435e9d8ab56a455109d4ea9", "since": "2026-09-19", "retired": {"date": "2026-09-21", "commit": "57529c22375479076fc073fca51827196782c14c"}},
+        {"url": "/clarity-tools/burned-out/", "commit": "ab7996aecb7f3309a435e9d8ab56a455109d4ea9", "since": "2026-09-19", "retired": {"date": "2026-09-21", "commit": "57529c22375479076fc073fca51827196782c14c"}},
+        {"url": "/clarity-tools/become-a-solopreneur/", "commit": "ab7996aecb7f3309a435e9d8ab56a455109d4ea9", "since": "2026-09-19", "retired": {"date": "2026-09-21", "commit": "57529c22375479076fc073fca51827196782c14c"}}
+      ]
+    },
+    {
+      "id": "diagnostics",
+      "title": "Diagnostics",
+      "blurb": "The application diagnostic and the original burnout diagnostic.",
+      "pages": [
+        {"url": "/startingdiagnostic/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-08-15", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/burnout-diagnostic/", "commit": "2a96d885436e743e1470be5173b798f85cadc292", "since": "2026-04-06", "retired": {"date": "2026-08-15", "commit": "18564a69d5b3c349ac28af89c240a19b65ec66f2"}}
+      ]
+    },
+    {
+      "id": "landing",
+      "title": "Greek-speaking therapist city pages",
+      "blurb": "Location landing pages for SEO. Deactivated as thin pages on 20 Sep 2026.",
+      "pages": [
+        {"url": "/greek-speaking-therapist-london/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-07-15", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/greek-speaking-therapist-manchester/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-07-15", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/greek-speaking-therapist-dublin/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-07-15", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}},
+        {"url": "/greek-speaking-therapist-new-york/", "commit": "a99908f1d4067d070002b805121a5b1795c6b07f", "since": "2026-07-15", "retired": {"date": "2026-09-20", "commit": "d13cca29962c52dd2e8d3de755d5e1615eee68b7"}}
+      ]
+    },
+    {
+      "id": "booking",
+      "title": "Booking and method",
+      "blurb": "The Calendly booking page (deactivated 10 Sep 2026) and the How I Work page (merged into the offer on 15 Aug 2026).",
+      "pages": [
+        {"url": "/book/", "commit": "981baaf91f96d41a76337537c067aadef3d2590c", "since": "2026-07-07", "retired": {"date": "2026-09-10", "commit": "c54dd24618582a9078ccc0b90a471bb69b5982a6"}},
+        {"url": "/how-i-work/", "commit": "2a96d885436e743e1470be5173b798f85cadc292", "since": "2026-07-07", "retired": {"date": "2026-08-15", "commit": "18564a69d5b3c349ac28af89c240a19b65ec66f2"}}
+      ]
+    },
+    {
+      "id": "drafts",
+      "title": "Draft landing pages",
+      "blurb": "Drafts from 9 Sep 2026 that became the three live offer pages the next day.",
+      "pages": [
+        {"url": "/draft/experience-to-offer/", "commit": "5e76b27f9c232bb872c2e42a02313288ff891611", "since": "2026-09-09", "retired": {"date": "2026-09-10", "commit": "ab411c212db9e3620b1487a38b0521e43228507b"}},
+        {"url": "/draft/private-sparring/", "commit": "5e76b27f9c232bb872c2e42a02313288ff891611", "since": "2026-09-09", "retired": {"date": "2026-09-10", "commit": "ab411c212db9e3620b1487a38b0521e43228507b"}},
+        {"url": "/draft/solo-business-growth/", "commit": "5e76b27f9c232bb872c2e42a02313288ff891611", "since": "2026-09-09", "retired": {"date": "2026-09-10", "commit": "ab411c212db9e3620b1487a38b0521e43228507b"}}
+      ]
+    },
+    {
+      "id": "logoutclub",
+      "title": "Logout Club microsite",
+      "blurb": "The bilingual Logout Club microsite, deleted on 10 Sep 2026.",
+      "pages": [
+        {"url": "/logoutclub/", "commit": "735d132843ed8ca8add43d2880af700e4dbfa3b2", "since": "2026-08-25", "retired": {"date": "2026-09-10", "commit": "15dc60cdc70c6b8432dc6a6d7f03feb7cb4fd455"}},
+        {"url": "/logoutclub/el/", "commit": "735d132843ed8ca8add43d2880af700e4dbfa3b2", "since": "2026-08-25", "retired": {"date": "2026-09-10", "commit": "15dc60cdc70c6b8432dc6a6d7f03feb7cb4fd455"}}
+      ]
+    },
+    {
+      "id": "hidden",
+      "title": "Still live, hidden from Google",
+      "blurb": "Noindexed on 10 Sep 2026 but still served. Frozen here so a future change cannot take them with it.",
+      "pages": [
+        {"url": "/founders/", "commit": "079c8d09d5bcac20fa5f41a7f55335286ce3a1e3", "since": "2026-07-06", "retired": {"date": "2026-09-10", "commit": "ab411c212db9e3620b1487a38b0521e43228507b"}, "stillServed": true, "note": "Still served at its original URL, noindexed. This copy is frozen as of 26 Sep 2026."},
+        {"url": "/solopreneurs/", "commit": "079c8d09d5bcac20fa5f41a7f55335286ce3a1e3", "since": "2026-07-06", "retired": {"date": "2026-09-10", "commit": "ab411c212db9e3620b1487a38b0521e43228507b"}, "stillServed": true, "note": "Still served at its original URL, noindexed. This copy is frozen as of 26 Sep 2026."},
+        {"url": "/getinterviewed/", "commit": "079c8d09d5bcac20fa5f41a7f55335286ce3a1e3", "since": "2026-07-09", "retired": {"date": "2026-09-10", "commit": "ab411c212db9e3620b1487a38b0521e43228507b"}, "stillServed": true, "note": "Still served at its original URL, noindexed. This copy is frozen as of 26 Sep 2026."}
+      ]
+    }
+  ]
+}

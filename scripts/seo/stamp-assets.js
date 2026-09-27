@@ -21,7 +21,9 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 // Directories that hold no deployed HTML, or hold copies we do not stamp.
-const SKIP_DIRS = new Set(['node_modules', '.git', 'scripts', 'admin']);
+// archive/ pages load frozen, content-hashed copies of the bundles they used
+// when they were retired; stamping would re-point them at today's.
+const SKIP_DIRS = new Set(['node_modules', '.git', 'scripts', 'admin', 'archive']);
 
 function htmlFiles(dir, out = []) {
   for (const d of fs.readdirSync(dir, { withFileTypes: true })) {

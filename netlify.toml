@@ -388,6 +388,26 @@
   [headers.values]
     X-Robots-Tag = "noindex"
 
+# Archive of retired pages — private copies, never indexed.
+# /archive/ holds frozen copies of every retired page (scripts/archive/build.js).
+# Each page there also carries a robots meta; this header covers the frozen JS,
+# CSS and images as well. Crawlable on purpose so the noindex is seen, absent
+# from sitemap.xml, and not linked from the live site. The retired URLs
+# themselves keep their redirects above, so nothing Google knows changes.
+[[headers]]
+  for = "/archive"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+[[headers]]
+  for = "/archive/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+# Frozen assets are content-hashed, so their URL changes whenever their bytes do.
+[[headers]]
+  for = "/archive/_assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 # Hot Seat coworking PDF — keep the page and the PDF out of search indexes.
 # Covers the clean URL, its trailing-slash form, and the underlying file so the
 # noindex applies whether the header is matched against the request or the rewrite target.

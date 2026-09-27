@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>Archive of retired pages | Aggelos Mouzakitis</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600..800&family=Inter:wght@400..600&display=swap">
+<meta name="theme-color" content="#16231E">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bone: #F3F0E8; --bone-deep: #EDE8DB; --forest: #16231E; --green: #047857; --sage: #8FBFA7;
+  --ink: #171919; --heading: #14201C; --ink-2: #3A403A; --meta: #6A6F67; --on-forest: #C0C9BF;
+  --rule: rgba(23,25,25,.18); --rule-dark: rgba(243,240,232,.16); --coral-ink: #AA432F;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --heading-font: "Inter Tight", "Inter", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bone); color: var(--ink); font: 400 15px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+.wrap { width: min(1080px, calc(100% - 32px)); margin: 0 auto; }
+header { background: var(--forest); color: var(--bone); padding: 56px 0 28px; }
+.eyebrow { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--sage); margin-bottom: 14px; }
+h1 { font: 800 clamp(34px, 5vw, 52px)/1.04 var(--heading-font); letter-spacing: -.035em; margin-bottom: 16px; }
+.lead { color: var(--on-forest); max-width: 64ch; font-size: 16px; line-height: 1.7; }
+.lead strong { color: var(--bone); font-weight: 600; }
+.tools { display: flex; gap: 12px; align-items: center; margin-top: 28px; flex-wrap: wrap; }
+.search { flex: 1 1 280px; max-width: 420px; background: rgba(243,240,232,.06); border: 1px solid var(--rule-dark);
+  border-radius: 999px; color: var(--bone); font: inherit; padding: 10px 18px; outline: none; }
+.search::placeholder { color: rgba(243,240,232,.5); }
+.search:focus { border-color: var(--sage); }
+.total { color: var(--on-forest); font-size: 13px; }
+nav.groups { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+nav.groups a { font-size: 12.5px; text-decoration: none; color: var(--on-forest); border: 1px solid var(--rule-dark);
+  border-radius: 999px; padding: 5px 12px; white-space: nowrap; }
+nav.groups a:hover { color: var(--bone); border-color: var(--sage); }
+nav.groups a span { color: var(--sage); margin-left: 4px; }
+main { padding: 12px 0 72px; }
+.group { padding-top: 44px; scroll-margin-top: 12px; }
+.group-head { border-bottom: 2px solid var(--green); padding-bottom: 12px; margin-bottom: 4px; }
+h2 { font: 700 22px/1.2 var(--heading-font); letter-spacing: -.02em; color: var(--heading); }
+.count { font: 500 13px var(--body); color: var(--meta); margin-left: 6px; letter-spacing: 0; }
+.group-head p { color: var(--ink-2); margin-top: 6px; max-width: 72ch; }
+.rows { list-style: none; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 28px; align-items: start;
+  padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.title { font-weight: 600; color: var(--heading); text-decoration: none; }
+.title:hover { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+.url { display: block; font: 12.5px/1.5 var(--mono); color: var(--meta); margin-top: 2px; overflow-wrap: anywhere; }
+.note { font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+.meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; text-align: right; font-size: 13px; white-space: nowrap; }
+.live { color: var(--ink-2); }
+.now { font: 12px/1.4 var(--mono); color: var(--meta); }
+.now.gone { color: var(--coral-ink); }
+.now.live { color: var(--green); }
+.empty { display: none; padding: 48px 0; color: var(--meta); }
+footer { border-top: 1px solid var(--rule); padding: 24px 0 48px; color: var(--meta); font-size: 13px; }
+footer code { font-family: var(--mono); font-size: 12px; }
+@media (max-width: 640px) {
+  header { padding-top: 40px; }
+  .row { grid-template-columns: 1fr; }
+  .meta { flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: flex-start; gap: 4px 14px; text-align: left; white-space: normal; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Archive · Private</p>
+    <h1>Retired pages</h1>
+    <p class="lead">Every page the site has retired or hidden, frozen as it last looked, with the code and images it used at the time. <strong>Kept out of Google</strong>: noindex on every page, not in the sitemap, not linked from the site. Links between archived pages stay inside the archive. Analytics and form submissions are switched off.</p>
+    <div class="tools">
+      <input class="search" type="search" placeholder="Filter by title or URL" aria-label="Filter pages" autocomplete="off">
+      <span class="total" aria-live="polite">66 pages</span>
+    </div>
+    <nav class="groups" aria-label="Sections"><a href="#offers">Offer and service pages <span>5</span></a><a href="#greek">Greek site (/el/) <span>11</span></a><a href="#blog">Writing (the blog) <span>29</span></a><a href="#tools">Clarity tools <span>5</span></a><a href="#diagnostics">Diagnostics <span>2</span></a><a href="#landing">Greek-speaking therapist city pages <span>4</span></a><a href="#booking">Booking and method <span>2</span></a><a href="#drafts">Draft landing pages <span>3</span></a><a href="#logoutclub">Logout Club microsite <span>2</span></a><a href="#hidden">Still live, hidden from Google <span>3</span></a></nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <section class="group" id="offers">
+      <div class="group-head">
+        <h2>Offer and service pages <span class="count">5</span></h2>
+        <p>The three-service architecture, Start Here and the one-offer 1:1 page. Consolidated into /work-with-me/ on 23 Sep 2026.</p>
+      </div>
+      <ul class="rows">
+        <li class="row" data-q="not sure where to start? /start-here/">
+          <div class="main">
+            <a class="title" href="/archive/start-here/">Not Sure Where to Start?</a>
+            <code class="url">/start-here/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">10 Sep – 23 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /work-with-me/">→ /work-with-me/</span>
+          </div>
+        </li>
+        <li class="row" data-q="psychotherapy &amp; decision coaching /psychotherapy-decision-coaching/">
+          <div class="main">
+            <a class="title" href="/archive/psychotherapy-decision-coaching/">Psychotherapy &amp; Decision Coaching</a>
+            <code class="url">/psychotherapy-decision-coaching/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">10 Sep – 23 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /work-with-me/">→ /work-with-me/</span>
+          </div>
+        </li>
+        <li class="row" data-q="career strategy consulting /career-strategy-consulting/">
+          <div class="main">
+            <a class="title" href="/archive/career-strategy-consulting/">Career Strategy Consulting</a>
+            <code class="url">/career-strategy-consulting/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">10 Sep – 23 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /work-with-me/">→ /work-with-me/</span>
+          </div>
+        </li>
+        <li class="row" data-q="business growth for freelancers and consultants /solopreneur-growth-consulting/">
+          <div class="main">
+            <a class="title" href="/archive/solopreneur-growth-consulting/">Business Growth for Freelancers and Consultants</a>
+            <code class="url">/solopreneur-growth-consulting/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">10 Sep – 23 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /work-with-me/">→ /work-with-me/</span>
+          </div>
+        </li>
+        <li class="row" data-q="1:1 — business advisory + psychological work /1-to-1/">
+          <div class="main">
+            <a class="title" href="/archive/1-to-1/">1:1 — Business Advisory + Psychological Work</a>
+            <code class="url">/1-to-1/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 23 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /work-with-me/">→ /work-with-me/</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="greek">
+      <div class="group-head">
+        <h2>Greek site (/el/) <span class="count">11</span></h2>
+        <p>Every Greek-language page. Unpublished on 20 Sep 2026; /el/* now redirects to the English homepage.</p>
+      </div>
+      <ul class="rows">
+        <li class="row" data-q="άγγελος μουζακίτης — business advisor + ψυχοθεραπευτής /el/">
+          <div class="main">
+            <a class="title" href="/archive/el/">Άγγελος Μουζακίτης — Business Advisor + Ψυχοθεραπευτής</a>
+            <code class="url">/el/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="σχετικά /el/about/">
+          <div class="main">
+            <a class="title" href="/archive/el/about/">Σχετικά</a>
+            <code class="url">/el/about/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="1:1 συνεργασία — business &amp; ψυχολογία /el/1-to-1/">
+          <div class="main">
+            <a class="title" href="/archive/el/1-to-1/">1:1 Συνεργασία — business &amp; ψυχολογία</a>
+            <code class="url">/el/1-to-1/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="κριτικές — με τα λόγια τους /el/reviews/">
+          <div class="main">
+            <a class="title" href="/archive/el/reviews/">Κριτικές — με τα λόγια τους</a>
+            <code class="url">/el/reviews/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="executive coaching για στελέχη /el/executive-coaching/">
+          <div class="main">
+            <a class="title" href="/archive/el/executive-coaching/">Executive Coaching για Στελέχη</a>
+            <code class="url">/el/executive-coaching/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="career coaching &amp; αλλαγή καριέρας /el/career-coaching/">
+          <div class="main">
+            <a class="title" href="/archive/el/career-coaching/">Career Coaching &amp; Αλλαγή Καριέρας</a>
+            <code class="url">/el/career-coaching/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="burnout: συμπτώματα, αιτίες &amp; αντιμετώπιση /el/burnout/">
+          <div class="main">
+            <a class="title" href="/archive/el/burnout/">Burnout: Συμπτώματα, Αιτίες &amp; Αντιμετώπιση</a>
+            <code class="url">/el/burnout/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="imposter syndrome | σύνδρομο του απατεώνα /el/imposter-syndrome/">
+          <div class="main">
+            <a class="title" href="/archive/el/imposter-syndrome/">Imposter Syndrome | Σύνδρομο του Απατεώνα</a>
+            <code class="url">/el/imposter-syndrome/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="starting diagnostic /el/startingdiagnostic/">
+          <div class="main">
+            <a class="title" href="/archive/el/startingdiagnostic/">Starting Diagnostic</a>
+            <code class="url">/el/startingdiagnostic/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="εμπιστευτικότητα /el/confidentiality/">
+          <div class="main">
+            <a class="title" href="/archive/el/confidentiality/">Εμπιστευτικότητα</a>
+            <code class="url">/el/confidentiality/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="κλείσε μια γνωριμία /el/book/">
+          <div class="main">
+            <a class="title" href="/archive/el/book/">Κλείσε μια γνωριμία</a>
+            <code class="url">/el/book/</code><p class="note">Retired earlier, with the Calendly booking, on 10 Sep 2026.</p>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 10 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="blog">
+      <div class="group-head">
+        <h2>Writing (the blog) <span class="count">29</span></h2>
+        <p>The blog index and all 27 posts. Retired on 20 Sep 2026 when new writing moved to Undisguised; /blog/* now redirects to the homepage.</p>
+      </div>
+      <ul class="rows">
+        <li class="row" data-q="writing /blog/">
+          <div class="main">
+            <a class="title" href="/archive/blog/">Writing</a>
+            <code class="url">/blog/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">28 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="what went wrong — ep. 04: avoidance /blog/what-went-wrong-ep04-avoidance/">
+          <div class="main">
+            <a class="title" href="/archive/blog/what-went-wrong-ep04-avoidance/">What Went Wrong — Ep. 04: Avoidance</a>
+            <code class="url">/blog/what-went-wrong-ep04-avoidance/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Jul – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="what went wrong — ep. 03: body &amp; therapy /blog/what-went-wrong-ep03-body-and-therapy/">
+          <div class="main">
+            <a class="title" href="/archive/blog/what-went-wrong-ep03-body-and-therapy/">What Went Wrong — Ep. 03: Body &amp; Therapy</a>
+            <code class="url">/blog/what-went-wrong-ep03-body-and-therapy/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">28 Jun – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="what went wrong — ep. 02: happiness /blog/what-went-wrong-ep02-happiness/">
+          <div class="main">
+            <a class="title" href="/archive/blog/what-went-wrong-ep02-happiness/">What Went Wrong — Ep. 02: Happiness</a>
+            <code class="url">/blog/what-went-wrong-ep02-happiness/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">21 Jun – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="what went wrong — ep. 01: productivity /blog/what-went-wrong-ep01-productivity/">
+          <div class="main">
+            <a class="title" href="/archive/blog/what-went-wrong-ep01-productivity/">What Went Wrong — Ep. 01: Productivity</a>
+            <code class="url">/blog/what-went-wrong-ep01-productivity/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">12 Jun – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="when the drive to succeed is really just the fear of falling behind /blog/when-the-drive-to-succeed-is-really-just-the-fear-of-falling-behind/">
+          <div class="main">
+            <a class="title" href="/archive/blog/when-the-drive-to-succeed-is-really-just-the-fear-of-falling-behind/">When the drive to succeed is really just the fear of falling behind</a>
+            <code class="url">/blog/when-the-drive-to-succeed-is-really-just-the-fear-of-falling-behind/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">3 Jun – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="when founder builds a company around his life - not the other way around /blog/when-founder-builds-a-company-around-his-life/">
+          <div class="main">
+            <a class="title" href="/archive/blog/when-founder-builds-a-company-around-his-life/">When founder builds a company around his life - not the other way around</a>
+            <code class="url">/blog/when-founder-builds-a-company-around-his-life/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">25 May – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="the turtle and the shell /blog/the-turtle-and-the-shell/">
+          <div class="main">
+            <a class="title" href="/archive/blog/the-turtle-and-the-shell/">The turtle and the shell</a>
+            <code class="url">/blog/the-turtle-and-the-shell/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">25 May – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="you took the vacation. you came back feeling the same way. /blog/vacation-same-feeling/">
+          <div class="main">
+            <a class="title" href="/archive/blog/vacation-same-feeling/">You took the vacation. You came back feeling the same way.</a>
+            <code class="url">/blog/vacation-same-feeling/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">29 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="high-functioning burnout pandemic /blog/high-functioning-burnout-pandemic/">
+          <div class="main">
+            <a class="title" href="/archive/blog/high-functioning-burnout-pandemic/">High-functioning burnout pandemic</a>
+            <code class="url">/blog/high-functioning-burnout-pandemic/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="what 'lost purpose' actually means for many high performers /blog/what-lost-purpose-actually-means-for-many-high-performers/">
+          <div class="main">
+            <a class="title" href="/archive/blog/what-lost-purpose-actually-means-for-many-high-performers/">What 'lost purpose' actually means for many high performers</a>
+            <code class="url">/blog/what-lost-purpose-actually-means-for-many-high-performers/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="therapy has a branding problem /blog/therapy-has-a-branding-problem/">
+          <div class="main">
+            <a class="title" href="/archive/blog/therapy-has-a-branding-problem/">Therapy has a branding problem</a>
+            <code class="url">/blog/therapy-has-a-branding-problem/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="why do high performers keep winning and still feel stuck? /blog/why-do-high-performers-keep-winning-and-still-feel-stuck/">
+          <div class="main">
+            <a class="title" href="/archive/blog/why-do-high-performers-keep-winning-and-still-feel-stuck/">Why do high performers keep winning and still feel stuck?</a>
+            <code class="url">/blog/why-do-high-performers-keep-winning-and-still-feel-stuck/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="the parent archetypes creating high performers with chronic self-doubt /blog/the-parent-archetypes-creating-high-performers-with-chronic-self-doubt/">
+          <div class="main">
+            <a class="title" href="/archive/blog/the-parent-archetypes-creating-high-performers-with-chronic-self-doubt/">The parent archetypes creating high performers with chronic self-doubt</a>
+            <code class="url">/blog/the-parent-archetypes-creating-high-performers-with-chronic-self-doubt/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="what doubt is actually protecting you from /blog/what-doubt-is-actually-protecting-you-from/">
+          <div class="main">
+            <a class="title" href="/archive/blog/what-doubt-is-actually-protecting-you-from/">What doubt is actually protecting you from</a>
+            <code class="url">/blog/what-doubt-is-actually-protecting-you-from/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="high performance as a way to get accepted by your family /blog/high-performance-as-a-way-to-get-accepted-by-your-family/">
+          <div class="main">
+            <a class="title" href="/archive/blog/high-performance-as-a-way-to-get-accepted-by-your-family/">High performance as a way to get accepted by your family</a>
+            <code class="url">/blog/high-performance-as-a-way-to-get-accepted-by-your-family/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="the loneliness and emotional pressure that founders experience /blog/the-loneliness-and-emotional-pressure-that-founders-experience/">
+          <div class="main">
+            <a class="title" href="/archive/blog/the-loneliness-and-emotional-pressure-that-founders-experience/">The loneliness and emotional pressure that founders experience</a>
+            <code class="url">/blog/the-loneliness-and-emotional-pressure-that-founders-experience/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="why hard work alone doesn't advance you /blog/why-hard-work-alone-doesnt-advance-you/">
+          <div class="main">
+            <a class="title" href="/archive/blog/why-hard-work-alone-doesnt-advance-you/">Why hard work alone doesn't advance you</a>
+            <code class="url">/blog/why-hard-work-alone-doesnt-advance-you/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="who are you if you are not &quot;crushing&quot; it? /blog/who-are-you-if-you-are-not-crushing-it/">
+          <div class="main">
+            <a class="title" href="/archive/blog/who-are-you-if-you-are-not-crushing-it/">Who are you if you are not &quot;crushing&quot; it?</a>
+            <code class="url">/blog/who-are-you-if-you-are-not-crushing-it/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="self-analysis as a meta way to maintain control /blog/self-analysis-as-a-meta-way-to-maintain-control/">
+          <div class="main">
+            <a class="title" href="/archive/blog/self-analysis-as-a-meta-way-to-maintain-control/">Self-analysis as a meta way to maintain control</a>
+            <code class="url">/blog/self-analysis-as-a-meta-way-to-maintain-control/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="is it &quot;post-holiday anxiety&quot; or just clarity? /blog/is-it-post-holiday-anxiety-or-just-clarity/">
+          <div class="main">
+            <a class="title" href="/archive/blog/is-it-post-holiday-anxiety-or-just-clarity/">Is it &quot;post-holiday anxiety&quot; or just clarity?</a>
+            <code class="url">/blog/is-it-post-holiday-anxiety-or-just-clarity/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="the elaborate performance of &quot;trying to change&quot; /blog/the-elaborate-performance-of-trying-to-change/">
+          <div class="main">
+            <a class="title" href="/archive/blog/the-elaborate-performance-of-trying-to-change/">The elaborate performance of &quot;trying to change&quot;</a>
+            <code class="url">/blog/the-elaborate-performance-of-trying-to-change/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="we've turned adhd diagnosis into a trend /blog/we-ve-turned-adhd-diagnosis-into-a-trend/">
+          <div class="main">
+            <a class="title" href="/archive/blog/we-ve-turned-adhd-diagnosis-into-a-trend/">We've turned ADHD diagnosis into a trend</a>
+            <code class="url">/blog/we-ve-turned-adhd-diagnosis-into-a-trend/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="the high cost of endless pondering /blog/the-high-cost-of-endless-pondering/">
+          <div class="main">
+            <a class="title" href="/archive/blog/the-high-cost-of-endless-pondering/">The high cost of endless pondering</a>
+            <code class="url">/blog/the-high-cost-of-endless-pondering/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="the coaching industry's credibility problem (and why it should matter to you) /blog/the-coaching-industrys-credibility-problem/">
+          <div class="main">
+            <a class="title" href="/archive/blog/the-coaching-industrys-credibility-problem/">The coaching industry's credibility problem (and why it should matter to you)</a>
+            <code class="url">/blog/the-coaching-industrys-credibility-problem/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="you're creating the exact problem you're trying to avoid /blog/you-re-creating-the-exact-problem-you-re-trying-to-avoid/">
+          <div class="main">
+            <a class="title" href="/archive/blog/you-re-creating-the-exact-problem-you-re-trying-to-avoid/">You're creating the exact problem you're trying to avoid</a>
+            <code class="url">/blog/you-re-creating-the-exact-problem-you-re-trying-to-avoid/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="you're just trading one type of friction for another /blog/you-re-just-trading-one-type-of-friction-for-another/">
+          <div class="main">
+            <a class="title" href="/archive/blog/you-re-just-trading-one-type-of-friction-for-another/">You're just trading one type of friction for another</a>
+            <code class="url">/blog/you-re-just-trading-one-type-of-friction-for-another/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="shared accountability, leading without authority, and other funny corporate myths /blog/shared-accountability-leading-without-authority/">
+          <div class="main">
+            <a class="title" href="/archive/blog/shared-accountability-leading-without-authority/">Shared accountability, leading without authority, and other funny corporate myths</a>
+            <code class="url">/blog/shared-accountability-leading-without-authority/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">30 Apr – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+        <li class="row" data-q="the thing high performers carry without naming it /blog/sample-post/">
+          <div class="main">
+            <a class="title" href="/archive/blog/sample-post/">The thing high performers carry without naming it</a>
+            <code class="url">/blog/sample-post/</code><p class="note">The first post on the blog, live for two days in April 2026. It was never republished.</p>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">29 Apr – 30 Apr 2026</span>
+            <span class="now redirect" title="301 redirect to /">→ /</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="tools">
+      <div class="group-head">
+        <h2>Clarity tools <span class="count">5</span></h2>
+        <p>The five tools as they were before the section was renamed Free Tools on 21 Sep 2026. The live versions at /free-tools/ have changed since.</p>
+      </div>
+      <ul class="rows">
+        <li class="row" data-q="what's limiting your business? /clarity-tools/business-constraint/">
+          <div class="main">
+            <a class="title" href="/archive/clarity-tools/business-constraint/">What's limiting your business?</a>
+            <code class="url">/clarity-tools/business-constraint/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">19 Sep – 21 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /free-tools/business-constraint/">→ /free-tools/business-constraint/</span>
+          </div>
+        </li>
+        <li class="row" data-q="is it a strategy or execution problem? /clarity-tools/strategy-or-execution/">
+          <div class="main">
+            <a class="title" href="/archive/clarity-tools/strategy-or-execution/">Is it a strategy or execution problem?</a>
+            <code class="url">/clarity-tools/strategy-or-execution/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">19 Sep – 21 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /free-tools/strategy-or-execution/">→ /free-tools/strategy-or-execution/</span>
+          </div>
+        </li>
+        <li class="row" data-q="what's making you want to quit your job? /clarity-tools/quit-your-job/">
+          <div class="main">
+            <a class="title" href="/archive/clarity-tools/quit-your-job/">What's making you want to quit your job?</a>
+            <code class="url">/clarity-tools/quit-your-job/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">19 Sep – 21 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /free-tools/quit-your-job/">→ /free-tools/quit-your-job/</span>
+          </div>
+        </li>
+        <li class="row" data-q="are you burned out? /clarity-tools/burned-out/">
+          <div class="main">
+            <a class="title" href="/archive/clarity-tools/burned-out/">Are you burned out?</a>
+            <code class="url">/clarity-tools/burned-out/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">19 Sep – 21 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /free-tools/burned-out/">→ /free-tools/burned-out/</span>
+          </div>
+        </li>
+        <li class="row" data-q="do you want to become a solopreneur? /clarity-tools/become-a-solopreneur/">
+          <div class="main">
+            <a class="title" href="/archive/clarity-tools/become-a-solopreneur/">Do you want to become a solopreneur?</a>
+            <code class="url">/clarity-tools/become-a-solopreneur/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">19 Sep – 21 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /free-tools/become-a-solopreneur/">→ /free-tools/become-a-solopreneur/</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="diagnostics">
+      <div class="group-head">
+        <h2>Diagnostics <span class="count">2</span></h2>
+        <p>The application diagnostic and the original burnout diagnostic.</p>
+      </div>
+      <ul class="rows">
+        <li class="row" data-q="starting diagnostic /startingdiagnostic/">
+          <div class="main">
+            <a class="title" href="/archive/startingdiagnostic/">Starting Diagnostic</a>
+            <code class="url">/startingdiagnostic/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Aug – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /work-with-me/">→ /work-with-me/</span>
+          </div>
+        </li>
+        <li class="row" data-q="the high-performance fulfilment diagnostic /burnout-diagnostic/">
+          <div class="main">
+            <a class="title" href="/archive/burnout-diagnostic/">The High-Performance Fulfilment Diagnostic</a>
+            <code class="url">/burnout-diagnostic/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">6 Apr – 15 Aug 2026</span>
+            <span class="now redirect" title="301 redirect to /free-tools/burned-out/">→ /free-tools/burned-out/</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="landing">
+      <div class="group-head">
+        <h2>Greek-speaking therapist city pages <span class="count">4</span></h2>
+        <p>Location landing pages for SEO. Deactivated as thin pages on 20 Sep 2026.</p>
+      </div>
+      <ul class="rows">
+        <li class="row" data-q="greek-speaking therapist in london /greek-speaking-therapist-london/">
+          <div class="main">
+            <a class="title" href="/archive/greek-speaking-therapist-london/">Greek-Speaking Therapist in London</a>
+            <code class="url">/greek-speaking-therapist-london/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Jul – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /work-with-me/">→ /work-with-me/</span>
+          </div>
+        </li>
+        <li class="row" data-q="greek-speaking therapist in manchester /greek-speaking-therapist-manchester/">
+          <div class="main">
+            <a class="title" href="/archive/greek-speaking-therapist-manchester/">Greek-Speaking Therapist in Manchester</a>
+            <code class="url">/greek-speaking-therapist-manchester/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Jul – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /work-with-me/">→ /work-with-me/</span>
+          </div>
+        </li>
+        <li class="row" data-q="greek-speaking therapist in dublin /greek-speaking-therapist-dublin/">
+          <div class="main">
+            <a class="title" href="/archive/greek-speaking-therapist-dublin/">Greek-Speaking Therapist in Dublin</a>
+            <code class="url">/greek-speaking-therapist-dublin/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Jul – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /work-with-me/">→ /work-with-me/</span>
+          </div>
+        </li>
+        <li class="row" data-q="greek-speaking therapist in new york /greek-speaking-therapist-new-york/">
+          <div class="main">
+            <a class="title" href="/archive/greek-speaking-therapist-new-york/">Greek-Speaking Therapist in New York</a>
+            <code class="url">/greek-speaking-therapist-new-york/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">15 Jul – 20 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /work-with-me/">→ /work-with-me/</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="booking">
+      <div class="group-head">
+        <h2>Booking and method <span class="count">2</span></h2>
+        <p>The Calendly booking page (deactivated 10 Sep 2026) and the How I Work page (merged into the offer on 15 Aug 2026).</p>
+      </div>
+      <ul class="rows">
+        <li class="row" data-q="book a fit call /book/">
+          <div class="main">
+            <a class="title" href="/archive/book/">Book a fit call</a>
+            <code class="url">/book/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">7 Jul – 10 Sep 2026</span>
+            <span class="now redirect" title="301 redirect to /contact/?interest=orientation">→ /contact/?interest=orientation</span>
+          </div>
+        </li>
+        <li class="row" data-q="how i work /how-i-work/">
+          <div class="main">
+            <a class="title" href="/archive/how-i-work/">How I Work</a>
+            <code class="url">/how-i-work/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">7 Jul – 15 Aug 2026</span>
+            <span class="now redirect" title="301 redirect to /work-with-me/">→ /work-with-me/</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="drafts">
+      <div class="group-head">
+        <h2>Draft landing pages <span class="count">3</span></h2>
+        <p>Drafts from 9 Sep 2026 that became the three live offer pages the next day.</p>
+      </div>
+      <ul class="rows">
+        <li class="row" data-q="draft — experience to offer audit /draft/experience-to-offer/">
+          <div class="main">
+            <a class="title" href="/archive/draft/experience-to-offer/">DRAFT — Experience to Offer Audit</a>
+            <code class="url">/draft/experience-to-offer/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">9 Sep – 10 Sep 2026</span>
+            <span class="now gone" title="This URL returns 404 on the live site">Gone (404)</span>
+          </div>
+        </li>
+        <li class="row" data-q="draft — private sparring /draft/private-sparring/">
+          <div class="main">
+            <a class="title" href="/archive/draft/private-sparring/">DRAFT — Private Sparring</a>
+            <code class="url">/draft/private-sparring/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">9 Sep – 10 Sep 2026</span>
+            <span class="now gone" title="This URL returns 404 on the live site">Gone (404)</span>
+          </div>
+        </li>
+        <li class="row" data-q="draft — solo business growth /draft/solo-business-growth/">
+          <div class="main">
+            <a class="title" href="/archive/draft/solo-business-growth/">DRAFT — Solo Business Growth</a>
+            <code class="url">/draft/solo-business-growth/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">9 Sep – 10 Sep 2026</span>
+            <span class="now gone" title="This URL returns 404 on the live site">Gone (404)</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="logoutclub">
+      <div class="group-head">
+        <h2>Logout Club microsite <span class="count">2</span></h2>
+        <p>The bilingual Logout Club microsite, deleted on 10 Sep 2026.</p>
+      </div>
+      <ul class="rows">
+        <li class="row" data-q="logout club athens | real moments. no screens. /logoutclub/">
+          <div class="main">
+            <a class="title" href="/archive/logoutclub/">Logout Club Athens | Real moments. No screens.</a>
+            <code class="url">/logoutclub/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">25 Aug – 10 Sep 2026</span>
+            <span class="now gone" title="This URL returns 404 on the live site">Gone (404)</span>
+          </div>
+        </li>
+        <li class="row" data-q="logout club αθήνα | πραγματικές στιγμές. χωρίς οθόνες. /logoutclub/el/">
+          <div class="main">
+            <a class="title" href="/archive/logoutclub/el/">Logout Club Αθήνα | Πραγματικές στιγμές. Χωρίς οθόνες.</a>
+            <code class="url">/logoutclub/el/</code>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">25 Aug – 10 Sep 2026</span>
+            <span class="now gone" title="This URL returns 404 on the live site">Gone (404)</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="group" id="hidden">
+      <div class="group-head">
+        <h2>Still live, hidden from Google <span class="count">3</span></h2>
+        <p>Noindexed on 10 Sep 2026 but still served. Frozen here so a future change cannot take them with it.</p>
+      </div>
+      <ul class="rows">
+        <li class="row" data-q="founder advisory for business problems that trace back to you /founders/">
+          <div class="main">
+            <a class="title" href="/archive/founders/">Founder Advisory for Business Problems That Trace Back to You</a>
+            <code class="url">/founders/</code><p class="note">Still served at its original URL, noindexed. This copy is frozen as of 26 Sep 2026.</p>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">Since 6 Jul 2026</span>
+            <span class="now live" title="Still served at this URL, kept out of search">Live, noindex</span>
+          </div>
+        </li>
+        <li class="row" data-q="solopreneur advisory for business problems that trace back to you /solopreneurs/">
+          <div class="main">
+            <a class="title" href="/archive/solopreneurs/">Solopreneur Advisory for Business Problems That Trace Back to You</a>
+            <code class="url">/solopreneurs/</code><p class="note">Still served at its original URL, noindexed. This copy is frozen as of 26 Sep 2026.</p>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">Since 6 Jul 2026</span>
+            <span class="now live" title="Still served at this URL, kept out of search">Live, noindex</span>
+          </div>
+        </li>
+        <li class="row" data-q="get interviewed /getinterviewed/">
+          <div class="main">
+            <a class="title" href="/archive/getinterviewed/">Get Interviewed</a>
+            <code class="url">/getinterviewed/</code><p class="note">Still served at its original URL, noindexed. This copy is frozen as of 26 Sep 2026.</p>
+          </div>
+          <div class="meta">
+            <span class="live" title="Dates this URL was served">Since 9 Jul 2026</span>
+            <span class="now live" title="Still served at this URL, kept out of search">Live, noindex</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <p class="empty">No archived page matches that.</p>
+  </div>
+</main>
+<footer>
+  <div class="wrap">Built from git history by <code>scripts/archive/build.js</code>. To archive more pages, add them to <code>scripts/archive/pages.json</code> and run <code>npm run archive</code>.</div>
+</footer>
+<script>
+(function () {
+  var input = document.querySelector('.search');
+  var total = document.querySelector('.total');
+  var rows = [].slice.call(document.querySelectorAll('.row'));
+  var groups = [].slice.call(document.querySelectorAll('.group'));
+  var empty = document.querySelector('.empty');
+  input.addEventListener('input', function () {
+    var q = input.value.trim().toLowerCase();
+    var shown = 0;
+    rows.forEach(function (r) {
+      var hit = !q || r.getAttribute('data-q').indexOf(q) !== -1;
+      r.hidden = !hit;
+      if (hit) shown++;
+    });
+    groups.forEach(function (g) { g.hidden = !g.querySelector('.row:not([hidden])'); });
+    empty.style.display = shown ? 'none' : 'block';
+    total.textContent = q ? shown + ' of 66 pages' : '66 pages';
+  });
+})();
+</script>
+</body>
+</html>

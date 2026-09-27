@@ -266,6 +266,7 @@ async function main() {
     for (const r of RETIRED) {
       if (target === r || target.startsWith(r)) err(from, `links to retired URL ${target}`);
     }
+    if (target === '/archive' || target.startsWith('/archive/')) err(from, `links to the private archive ${target}`);
   }
 
   // ── Orphans: an indexable page nothing links to is reachable only through
@@ -320,6 +321,7 @@ async function main() {
     for (const l of locs) {
       if (l.includes('?')) err('/sitemap.xml', `query-string URL: ${l}`);
       for (const r of RETIRED) if (l.includes(r)) err('/sitemap.xml', `retired URL listed: ${l}`);
+      if (l.includes('/archive/')) err('/sitemap.xml', `private archive URL listed: ${l}`);
       const t = await trace(l.replace(ORIGIN, ''));
       if (t.status !== 200) err('/sitemap.xml', `${l} returns ${t.status}`);
       if (t.hops.length) err('/sitemap.xml', `${l} redirects`);
@@ -336,6 +338,30 @@ async function main() {
   else {
     if (!rb.body.includes(`Sitemap: ${ORIGIN}/sitemap.xml`)) err('/robots.txt', 'no sitemap line');
     if (/^\s*Disallow:\s*\/\s*$/m.test(rb.body)) err('/robots.txt', 'Disallow: / blocks the whole site');
+  }
+
+  // ── Archive: private copies of retired pages must never be indexable ──────
+  // scripts/archive/build.js writes /archive/. Every page there carries a
+  // noindex meta and netlify.toml sends the same as X-Robots-Tag; the link and
+  // sitemap checks above keep it undiscoverable from the live site.
+  const archiveDir = path.join(ROOT, 'archive');
+  if (fs.existsSync(archiveDir)) {
+    const archived = [];
+    const walk = (d) => {
+      for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+        if (e.isDirectory()) walk(path.join(d, e.name));
+        else if (e.name.endsWith('.html')) archived.push(path.join(d, e.name));
+      }
+    };
+    walk(archiveDir);
+    for (const f of archived) {
+      const robots = one(fs.readFileSync(f, 'utf8'), /<meta name="robots" content="([^"]*)"/);
+      if (!robots || !/noindex/i.test(robots)) err('/' + path.relative(ROOT, f), 'archived page is not noindex');
+    }
+    const toml = fs.readFileSync(path.join(ROOT, 'netlify.toml'), 'utf8');
+    if (!/for = "\/archive\/\*"\s*\[headers\.values\]\s*X-Robots-Tag = "noindex/.test(toml)) {
+      err('/archive/', 'netlify.toml does not send X-Robots-Tag: noindex for /archive/*');
+    }
   }
 
   server.close();

@@ -1,0 +1,19 @@
+{
+  "name": "Aggelos Mouzakitis",
+  "short_name": "Aggelos",
+  "description": "Business advisor and therapist for people building something of their own — the business you're building, and whatever in you affects how you build it.",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "background_color": "#FFFFFF",
+  "theme_color": "#F5F5F5",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "lifestyle", "education"]
+}
