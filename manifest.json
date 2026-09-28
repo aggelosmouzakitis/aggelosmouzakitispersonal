@@ -1,7 +1,7 @@
 {
   "name": "Aggelos Mouzakitis",
   "short_name": "Aggelos",
-  "description": "Business advisor and therapist for people building something of their own — the business you're building, and whatever in you affects how you build it.",
+  "description": "Online psychotherapy for men in tech, startups and demanding careers dealing with relationships, burnout, anxiety, difficult decisions and work taking over life.",
   "start_url": "/",
   "display": "minimal-ui",
   "background_color": "#FFFFFF",
@@ -15,5 +15,9 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["health", "lifestyle", "education"]
+  "categories": [
+    "health",
+    "lifestyle",
+    "education"
+  ]
 }

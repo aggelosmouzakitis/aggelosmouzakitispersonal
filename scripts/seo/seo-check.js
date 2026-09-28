@@ -10,90 +10,67 @@
 //
 // Checks: HTTP status, redirect hops, real 404s, title (present + unique),
 // meta description (present + unique on priority pages), canonical (present,
-// self-referencing, single), robots (no accidental noindex), exactly one H1,
-// Open Graph completeness, og:url === canonical, OG image resolves, JSON-LD
-// parses and its FAQ entries exist in the HTML, internal links that 404 or go
-// through a redirect, retired URLs linked from anywhere, orphan pages, and
-// sitemap integrity.
+// self-referencing, single), robots (no accidental noindex), <html lang="en">,
+// no /el/ alternates, exactly one H1, Open Graph completeness, og:url ===
+// canonical, OG image resolves, JSON-LD parses and asserts nothing the page
+// does not (no price, offers, reviews, ratings, address, areaServed, FAQPage,
+// LocalBusiness or medical types), retired positioning wording, internal links
+// that 404 or go through a redirect, retired URLs linked from anywhere, orphan
+// pages, every legacy URL in routes.js (one 301 hop or a real 410), bundle
+// cache-busting, sitemap integrity and the private archive's noindex.
 
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const { ORIGIN, PAGES } = require('./site-meta.js');
 const { hashOf, SRC_RE } = require('./stamp-assets.js');
+const { serve: netlifyServe } = require('./netlify-emulator.js');
+const { LEGACY } = require('./routes.js');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const PORT = 8123;
 const SHOW_WARN = process.argv.includes('--warn');
 
-// URLs that must never appear as an internal link or in the sitemap again.
+// URL prefixes that are retired (301 or 410 in netlify.toml): none may appear
+// as an internal link or in the sitemap. /blog/ is live again as Writing.
 const RETIRED = [
   '/psychotherapy-decision-coaching/', '/career-strategy-consulting/',
-  '/solopreneur-growth-consulting/', '/start-here/', '/1-to-1/',
-  '/startingdiagnostic/', '/clarity-tools/', '/blog/', '/el/',
+  '/solopreneur-growth-consulting/', '/start-here/', '/1-to-1/', '/how-i-work/',
+  '/book/', '/schedule/', '/faqs/', '/startingdiagnostic/', '/burnout-diagnostic/',
+  '/clarity-tools/', '/el/', '/founders/', '/solopreneurs/', '/getinterviewed/',
+  '/wtf-friday/', '/ask-me-anything/', '/find-your-focus-area/',
+  '/free-tools/business-constraint/', '/free-tools/strategy-or-execution/',
+  '/free-tools/become-a-solopreneur/', '/free-tools/roast-my-offer/',
+  '/free-tools/find-your-focus-area/', '/greek-speaking-therapist-', '/draft/', '/logoutclub/',
 ];
-// Visible labels from the retired three-service architecture.
+// Positioning and wording retired with the business-advisor site (brief,
+// Phase 13), plus claims the practice does not make. Case-insensitive.
 const RETIRED_LABELS = [
-  'Psychotherapy / decision coaching', 'Career strategy consulting',
-  'Solo business growth consulting', 'Not sure where to start?',
-  'Licensed Psychotherapist', 'licensed psychotherapist',
+  /business\s*&\s*career advisor/i, /\bbusiness advisor\b/i, /private business & career advisor/i,
+  /\bfree assessment\b/i, /find your focus area/i, /starting diagnostic/i,
+  /strategy or execution/i, /\bbusiness constraint\b/i, /become a solopreneur/i,
+  /wtf friday/i, /ask me something/i, /ask me anything/i, /licensed psychotherapist/i,
+  /working globally/i, /\bworldwide\b/i,
+  /psychotherapy \/ decision coaching/i, /career strategy consulting/i,
+  /solo business growth consulting/i, /not sure where to start\?/i,
 ];
 // Superseded numbers. The approved claim is "100+ technology companies"; the
 // older "500+ companies" survived only in a two-versions-ago migration note,
 // with nothing in the repo establishing it as a separate, accurate metric.
 const SUPERSEDED_CLAIMS = [/\b500\+?\s*(?:compan|business|\u03b5\u03c0\u03b9\u03c7\u03b5\u03b9\u03c1)/i, /more than 500\s*(?:compan|business|of them)/i];
 
+// The final editorial copy gives these pages the same meta description, and
+// metadata is used exactly as written. Listed so the check still catches any
+// new, accidental duplicate. (Pairs are sorted, space-separated.)
+const DUPLICATE_OK = new Set(['/ /therapy-for-men-in-tech/']);
+
 const errors = [];
 const warnings = [];
 const err = (url, msg) => errors.push(`${url} — ${msg}`);
 const warn = (url, msg) => warnings.push(`${url} — ${msg}`);
 
-// ─── Netlify redirect emulation ──────────────────────────────────────────────
-function loadRedirects() {
-  const toml = fs.readFileSync(path.join(ROOT, 'netlify.toml'), 'utf8');
-  return toml.split('[[redirects]]').slice(1).map((b) => {
-    const g = (k) => (b.match(new RegExp(k + '\\s*=\\s*"([^"]+)"')) || [])[1];
-    const n = (b.match(/status\s*=\s*(\d+)/) || [])[1];
-    return { from: g('from'), to: g('to'), status: n ? +n : 301 };
-  }).filter((r) => r.from && r.to);
-}
-const REDIRECTS = loadRedirects();
-
-function matchRedirect(pathname) {
-  for (const r of REDIRECTS) {
-    if (r.from.endsWith('/*')) {
-      const base = r.from.slice(0, -2);
-      if (pathname === base || pathname.startsWith(base + '/')) return r;
-    } else if (pathname === r.from || pathname === r.from + '/') return r;
-  }
-  return null;
-}
-
-// ─── Static server ───────────────────────────────────────────────────────────
-const TYPES = { '.html': 'text/html', '.js': 'application/javascript', '.css': 'text/css',
-  '.json': 'application/json', '.xml': 'application/xml', '.txt': 'text/plain',
-  '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml',
-  '.ico': 'image/x-icon', '.pdf': 'application/pdf' };
-
-function serve() {
-  return http.createServer((req, res) => {
-    const pathname = decodeURIComponent(req.url.split('?')[0]);
-    const r = matchRedirect(pathname);
-    if (r && r.status >= 300 && r.status < 400) {
-      res.writeHead(r.status, { Location: r.to }); return res.end();
-    }
-    let file = path.join(ROOT, pathname);
-    if (r && r.status === 200) file = path.join(ROOT, r.to.split('?')[0]);
-    if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
-    if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) {
-      const nf = path.join(ROOT, '404.html');
-      res.writeHead(404, { 'Content-Type': 'text/html' });
-      return res.end(fs.existsSync(nf) ? fs.readFileSync(nf) : 'Not found');
-    }
-    res.writeHead(200, { 'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream' });
-    res.end(fs.readFileSync(file));
-  });
-}
+// ─── Netlify emulation (scripts/seo/netlify-emulator.js) ─────────────────────
+const serve = () => netlifyServe(ROOT);
 
 function get(url) {
   return new Promise((resolve) => {
@@ -148,6 +125,11 @@ async function main() {
 
     const html = t.body;
     const h = head(html);
+    const lang = one(html, /<html[^>]*\slang="([^"]*)"/);
+    if (lang !== 'en') err(url, `<html lang="${lang}">, expected "en"`);
+    for (const alt of all(h, /<link rel="alternate"[^>]*href="([^"]*)"/g)) {
+      if (/\/el(\/|$)/.test(alt.replace(ORIGIN, ''))) err(url, `alternate/hreflang points at the retired Greek site: ${alt}`);
+    }
     const body = html.includes('<div id="root">') ? html.split('<div id="root">')[1] : html;
 
     // title
@@ -163,7 +145,11 @@ async function main() {
     const desc = decode(one(h, /<meta name="description" content="([\s\S]*?)">/) || '');
     if (!desc) err(url, 'missing meta description');
     else {
-      if (seenDescs.has(desc)) err(url, `duplicate description, also on ${seenDescs.get(desc)}`);
+      if (seenDescs.has(desc)) {
+        const pair = [seenDescs.get(desc), url].sort().join(' ');
+        if (DUPLICATE_OK.has(pair)) warn(url, `same description as ${seenDescs.get(desc)} (as written in the final editorial copy)`);
+        else err(url, `duplicate description, also on ${seenDescs.get(desc)}`);
+      }
       seenDescs.set(desc, url);
     }
 
@@ -221,14 +207,15 @@ async function main() {
       // prices, addresses, service areas and medical typing were all either
       // present before or easy to reintroduce, and none of them are supported
       // by anything a visitor can read. Fail rather than let them drift back.
-      const FABRICATED = ['aggregateRating', 'review', 'award', 'awards', 'address',
-        'areaServed', 'priceRange', 'telephone', 'openingHours', 'openingHoursSpecification'];
+      const FABRICATED = ['aggregateRating', 'review', 'reviewRating', 'award', 'awards', 'address',
+        'areaServed', 'priceRange', 'price', 'offers', 'telephone', 'openingHours', 'openingHoursSpecification'];
       const MEDICAL = /^(MedicalBusiness|Physician|MedicalClinic|MedicalOrganization|MedicalTherapy|MedicalCondition|Dentist|Hospital)$/;
       const scan = (n) => {
         if (Array.isArray(n)) return n.forEach(scan);
         if (!n || typeof n !== 'object') return;
         for (const t of [].concat(n['@type'] || [])) {
           if (MEDICAL.test(t)) err(url, `medical schema type "${t}" — the page describes no clinical service`);
+          if (/^(Review|AggregateRating|LocalBusiness|FAQPage)$/.test(t)) err(url, `schema type "${t}" — not published on this site`);
         }
         for (const k of Object.keys(n)) {
           if (FABRICATED.includes(k)) err(url, `schema asserts "${k}", which no visible copy supports`);
@@ -239,9 +226,11 @@ async function main() {
     }
 
     // retired wording
-    for (const label of RETIRED_LABELS) {
-      if (text.includes(label)) err(url, `retired wording in visible copy: "${label}"`);
-      if (h.includes(label)) err(url, `retired wording in metadata: "${label}"`);
+    for (const re of RETIRED_LABELS) {
+      const mt = text.match(re);
+      if (mt) err(url, `retired wording in visible copy: "${mt[0]}"`);
+      const mh = decode(h).match(re);
+      if (mh) err(url, `retired wording in metadata: "${mh[0]}"`);
     }
     for (const re of SUPERSEDED_CLAIMS) {
       if (re.test(text)) err(url, 'visible copy claims 500+ companies; the approved figure is 100+ technology companies');
@@ -276,19 +265,23 @@ async function main() {
     if (p.url === '/') continue;
     const sources = linkTargets.get(p.url);
     if (!sources || sources.size === 0) {
-      err(p.url, 'orphan — indexable and in the sitemap, but no page links to it');
+      // A held page keeps its status quo until its review; say so, don't fail.
+      if (p.hold) warn(p.url, 'HOLD page has no inbound internal links');
+      else err(p.url, 'orphan — indexable and in the sitemap, but no page links to it');
     }
   }
 
-  // ── Redirects: each retired URL, one hop, to a 200 ────────────────────────
-  for (const r of ['/psychotherapy-decision-coaching/', '/career-strategy-consulting/',
-    '/solopreneur-growth-consulting/', '/start-here/']) {
+  // ── Redirects: every legacy URL in the migration table (routes.js) — one
+  //    301 hop straight to its final page, or a real 410 ────────────────────
+  for (const [r, status, target] of LEGACY) {
     const t = await trace(r);
-    if (!t.hops.length) err(r, 'retired URL does not redirect');
-    else if (t.hops.length > 1) err(r, `redirect chain: ${t.hops.map((h) => h.to).join(' → ')}`);
-    else if (t.hops[0].status !== 301) err(r, `redirect is ${t.hops[0].status}, expected 301`);
-    else if (t.final !== '/work-with-me/') err(r, `redirects to ${t.final}, expected /work-with-me/`);
-    if (t.status !== 200) err(r, `redirect destination returns ${t.status}`);
+    const first = t.hops.length ? t.hops[0].status : t.status;
+    if (first !== status) { err(r, `responds ${first}, expected ${status}`); continue; }
+    if (status === 301) {
+      if (t.hops.length > 1) err(r, `redirect chain: ${t.hops.map((h) => h.to).join(' → ')}`);
+      if (t.final !== target) err(r, `redirects to ${t.final}, expected ${target}`);
+      if (t.status !== 200) err(r, `redirect destination returns ${t.status}`);
+    }
   }
 
   // ── Cache busting: every bundle URL must carry its current content hash ───

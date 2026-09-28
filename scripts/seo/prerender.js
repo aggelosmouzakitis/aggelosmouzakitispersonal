@@ -4,42 +4,11 @@ const ROOT = '/home/user/aggelosmouzakitispersonal';
 const reactJs = fs.readFileSync(ROOT + '/node_modules/react/umd/react.production.min.js', 'utf8');
 const reactDomJs = fs.readFileSync(ROOT + '/node_modules/react-dom/umd/react-dom.production.min.js', 'utf8');
 
-// page key -> { file, url, faq: bool }
-// Core pages (renderApp-based) — English at root, Greek under /el/.
-// Legacy persona/service pages are 301-redirected and no longer prerendered.
-const PAGES = [
-  // Core — English
-  { f: 'index.html', faq: false },
-  { f: 'about/index.html', faq: false },
-  { f: 'reviews/index.html', faq: false },
-  { f: 'confidentiality/index.html', faq: false },
-  // The single service page + contact
-  { f: 'work-with-me/index.html', faq: true },
-  { f: 'contact/index.html', faq: false },
-  { f: 'wtf-friday/index.html', faq: false },
-  // Core — Greek (/el/) — same indexable prerender path as English (brief §57)
-  // Retained (out of nav, still indexable via their own inline SpecialtyPage mount)
-  { f: 'ask-me-anything/index.html', faq: false },
-  { f: 'ask-me-anything/el/index.html', faq: false },
-  // Free Tools — the collection page plus every tool inside it (renderApp-free;
-  // they mount renderFreeTools / renderRoastMyOffer / ClarityTool).
-  { f: 'free-tools/index.html', faq: false },
-  // The flagship assessment (renderFocusArea): the snapshot is its intro screen.
-  { f: 'find-your-focus-area/index.html', faq: false },
-  { f: 'free-tools/roast-my-offer/index.html', faq: false },
-  { f: 'free-tools/business-constraint/index.html', faq: false },
-  { f: 'free-tools/strategy-or-execution/index.html', faq: false },
-  { f: 'free-tools/quit-your-job/index.html', faq: false },
-  { f: 'free-tools/become-a-solopreneur/index.html', faq: false },
-  { f: 'free-tools/burned-out/index.html', faq: false },
-  // Restored English SEO landing pages (persona mounts + specialty SpecialtyPage mounts)
-  { f: 'therapy-for-founders/index.html', faq: true },
-  { f: 'therapy-for-executives/index.html', faq: true },
-  { f: 'imposter-syndrome-therapy/index.html', faq: true },
-  { f: 'executive-burnout-therapy/index.html', faq: true },
-  { f: 'career-transition-therapy/index.html', faq: true },
-  // Greek SEO landing pages (/el/*) — renderApp('el-…','el'), same indexable path
-];
+// Every page that is served and indexable: the 24 canonical pages
+// (site-pages.js, from scripts/seo/site-meta.js), the two free tools and the
+// held /imposter-syndrome-therapy/ page. FAQ extraction is off everywhere:
+// the site publishes no FAQPage schema.
+const PAGES = require('./site-meta.js').PAGES.map((p) => ({ f: p.file, faq: false }));
 
 // Individual blog posts don't use the #root App shell — they're static articles
 // that mount only the Sidebar into #sidebar-mount. Without a prerendered snapshot,

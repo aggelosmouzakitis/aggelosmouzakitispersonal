@@ -16,20 +16,12 @@ const { ORIGIN, PAGES } = require('./seo/site-meta.js');
 const ROOT = path.resolve(__dirname, '..');
 
 // Page → the sources that actually change its content. A page's lastmod is the
-// most recent commit date across its own file and those sources.
-const SOURCES = {
-  '/': ['core-pages-v2.jsx'],
-  '/work-with-me/': ['work-with-me.jsx'],
-  '/about/': ['core-pages-v2.jsx'],
-  '/reviews/': ['core-pages-v2.jsx', 'content-pages.jsx'],
-  '/free-tools/': ['free-tools.jsx'],
-  '/find-your-focus-area/': ['focus-area-data.jsx', 'focus-area-scoring.jsx', 'focus-area-content.jsx', 'focus-area.jsx'],
-  '/contact/': ['contact.jsx'],
-  '/wtf-friday/': ['wtf-friday.jsx'],
-  '/confidentiality/': ['content-pages.jsx'],
-};
-const TOOL_SOURCES = ['clarity-data.jsx', 'clarity-tools.jsx'];
-const SPECIALTY_SOURCES = ['content-pages.jsx'];
+// most recent commit date across its own file and those sources. The canonical
+// pages are rendered by site-pages.jsx from site-copy.jsx; the two tools by
+// the clarity engine; the held imposter-syndrome page by content-pages.jsx.
+const CANONICAL_SOURCES = ['site-copy.jsx', 'site-pages.jsx', 'site-chrome.jsx'];
+const TOOL_SOURCES = ['clarity-data.jsx', 'clarity-tools.jsx', 'site-chrome.jsx'];
+const HOLD_SOURCES = ['content-pages.jsx', 'site-chrome.jsx'];
 
 function lastCommitDate(file) {
   try {
@@ -41,9 +33,9 @@ function lastCommitDate(file) {
 
 function lastmodFor(p) {
   const files = [p.file];
-  if (SOURCES[p.url]) files.push(...SOURCES[p.url]);
-  else if (p.url.startsWith('/free-tools/')) files.push(...TOOL_SOURCES);
-  else files.push(...SPECIALTY_SOURCES);
+  if (p.hold) files.push(...HOLD_SOURCES);
+  else if (p.og) files.push(...CANONICAL_SOURCES);
+  else files.push(...TOOL_SOURCES);
 
   const dates = files
     .map((f) => (fs.existsSync(path.join(ROOT, f)) ? lastCommitDate(f) : null))

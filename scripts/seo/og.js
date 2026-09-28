@@ -1,7 +1,13 @@
 const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const fs = require('fs');
 const ROOT = '/home/user/aggelosmouzakitispersonal';
-const pages = JSON.parse(fs.readFileSync('/tmp/og_pages.json','utf8'));
+// Pages to draw: /tmp/og_pages.json if present ([{key,label,title}]), else
+// every page in site-meta.js that declares `og` (the canonical pages), drawn
+// into img/og/v2/ — a new path, because /img/* is served immutable for a year.
+const pages = fs.existsSync('/tmp/og_pages.json')
+  ? JSON.parse(fs.readFileSync('/tmp/og_pages.json','utf8'))
+  : require('./site-meta.js').PAGES.filter((p) => p.og).map((p) => ({ key: 'v2/' + p.og.key, label: p.og.label, title: p.og.title }));
+fs.mkdirSync(ROOT + '/img/og/v2', { recursive: true });
 
 const tpl = (label, title) => `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
 * { margin:0; padding:0; box-sizing:border-box; }
