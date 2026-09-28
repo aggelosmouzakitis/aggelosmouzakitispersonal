@@ -1,3 +1,11 @@
+// SUPERSEDED by scripts/gen-site-pages.js — kept for history only. This wrote
+// the business-advisor era shells; running it now would overwrite the current
+// pages with retired copy and metadata, so it refuses to run.
+if (require.main === module) {
+  console.error('gen-core-pages.js is superseded: run `node scripts/gen-site-pages.js` instead.');
+  process.exit(1);
+}
+
 // gen-core-pages.js — generate the 12 core page shells (6 EN + 6 EL).
 // Each shell: bilingual <head> (canonical, reciprocal hreflang, OG, JSON-LD),
 // an empty #root (filled later by scripts/seo/prerender.js), and a renderApp() mount.
