@@ -1,9 +1,9 @@
 // site-chrome.jsx — shared production chrome + universal content layout.
-// Plain React, compiled by babel like sidebar.jsx / content-pages.jsx.
-// Loaded BEFORE content-pages.js. Exposes on window:
-//   SITE, CHROME_PATHS, EXTERNAL, cPath, cT, BrandIcon, ChromeStyles,
+// Plain React, compiled by babel like the other .jsx bundles. Loaded on every
+// page, before the page's own bundle. Exposes on window:
+//   SITE, CHROME_PATHS, EXTERNAL, cPath, cT, BrandIcon, ChromeStyles, Motion,
 //   SiteHeader, SiteFooterX, BlackCtaStrip, UniversalContentLayout, LegacyShell,
-//   FREE_TOOLS_URL, FREE_TOOL_LINKS, FOCUS_AREA_URL
+//   NAV, FOOTER_NAV, CONTACT_URL, FREE_TOOLS_URL, FREE_TOOL_LINKS, currentPath
 //
 // One green across the whole site: #047857.
 
@@ -68,61 +68,45 @@ const SITE = {
   archivo: 'var(--font-display)'
 };
 
-// Language switcher (EN⇄EL) — temporarily hidden site-wide. Flip to `true`
-// to bring the EN/EL toggle back in both the desktop header and mobile menu.
-const SHOW_LANG_SWITCHER = false;
-
-// Bilingual route map — mirrors CORE_PATHS in content-pages.jsx.
+// ─── Routes ──────────────────────────────────────────────────────────────────
+// The site is English-only: the Greek (/el/) pages are retired and there is no
+// language switch. cPath() keeps its (id, lang) signature so older callers keep
+// working; lang is ignored.
 const CHROME_PATHS = {
   'home': {
-    en: '/',
-    el: '/el/'
-  },
-  'one-to-one': {
-    en: '/1-to-1/',
-    el: '/el/1-to-1/'
-  },
-  'work-with-me': {
-    en: '/work-with-me/',
-    el: '/work-with-me/'
+    en: '/'
   },
   'about': {
-    en: '/about/',
-    el: '/el/about/'
+    en: '/about/'
+  },
+  'work-with-me': {
+    en: '/work-with-me/'
   },
   'reviews': {
-    en: '/reviews/',
-    el: '/el/reviews/'
+    en: '/reviews/'
   },
-  'book': {
-    en: '/book/',
-    el: '/el/book/'
-  },
-  'diagnostic': {
-    en: '/startingdiagnostic/',
-    el: '/el/startingdiagnostic/'
+  'contact': {
+    en: '/contact/'
   },
   'confidentiality': {
-    en: '/confidentiality/',
-    el: '/el/confidentiality/'
+    en: '/confidentiality/'
   },
   'blog': {
-    en: '/blog/',
-    el: '/blog/'
-  },
-  'ask-me-anything': {
-    en: '/ask-me-anything/',
-    el: '/ask-me-anything/el'
+    en: '/blog/'
   },
   'free-tools': {
-    en: '/free-tools/',
-    el: '/free-tools/'
+    en: '/free-tools/'
+  },
+  'faq': {
+    en: '/faq/'
+  },
+  'considering-therapy': {
+    en: '/considering-therapy/'
   }
 };
-function cPath(id, lang) {
+function cPath(id) {
   const p = CHROME_PATHS[id];
-  if (!p) return lang === 'el' ? '/el/' : '/';
-  return p[lang] || p.en;
+  return p ? p.en : '/';
 }
 const EXTERNAL = {
   undisguised: 'https://www.undisguised.io/',
@@ -135,97 +119,223 @@ const ext = {
   target: '_blank',
   rel: 'noopener noreferrer'
 };
+
+// Chrome strings. Labels come from the final editorial copy (its "Final
+// navigation" and primary CTA); the rest are structural UI words.
 const CHROME_T = {
   en: {
     home: 'Home',
-    why: 'About me',
-    reviews: 'Reviews',
-    apply: 'Apply',
-    start: 'FREE ASSESSMENT',
-    other: 'ΕΛΛΗΝΙΚΑ',
-    role1: 'Private business & career advisor',
-    role2: 'BACP-registered psychotherapist',
-    navigate: 'NAVIGATE',
-    content: 'CONTENT',
-    follow: 'FOLLOW',
-    articles: 'Articles',
-    askAnon: 'Ask me something',
-    freeTools: 'Free tools',
+    cta: 'Book a consultation',
+    role: 'BACP-registered psychotherapist',
+    follow: 'Follow',
     confidentiality: 'Confidentiality',
-    terms: 'Terms',
-    privacy: 'Privacy',
-    ctaHeading: 'If working harder was going to fix this, it probably would have by now.',
-    ctaBtn: 'Apply for a working session',
     menu: 'Menu',
+    closeMenu: 'Close menu',
     rights: 'All rights reserved.'
-  },
-  el: {
-    home: 'Αρχική',
-    why: 'Ποιος είμαι',
-    reviews: 'Κριτικές',
-    apply: 'Ζήτησε γνωριμία',
-    start: 'ΞΕΚΙΝΑ ΕΔΩ',
-    other: 'English',
-    role1: 'Σύμβουλος επιχειρήσεων & καριέρας',
-    role2: 'Ψυχοθεραπευτής',
-    navigate: 'ΠΛΟΗΓΗΣΗ',
-    content: 'ΠΕΡΙΕΧΟΜΕΝΟ',
-    follow: 'ΑΚΟΛΟΥΘΗΣΕ',
-    articles: 'Κείμενα',
-    askAnon: 'Ρώτησε ανώνυμα',
-    confidentiality: 'Εμπιστευτικότητα',
-    terms: 'Όροι χρήσης',
-    privacy: 'Πολιτική απορρήτου',
-    ctaHeading: 'Αν λυνόταν με περισσότερη δουλειά, μάλλον θα είχε λυθεί ήδη.',
-    ctaBtn: 'Ζήτησε μια πρώτη συνάντηση',
-    menu: 'Μενού',
-    rights: 'Με επιφύλαξη παντός δικαιώματος.'
   }
 };
-const cT = lang => CHROME_T[lang] || CHROME_T.en;
+const cT = () => CHROME_T.en;
 
-// ─── "Work with me" ──────────────────────────────────────────────────────────
-// One service page replaces the three 1:1 offers and the Start Here flow, so
-// the header entry is an ordinary link rather than a dropdown.
+// The primary call to action everywhere on the site.
+const CONTACT_URL = '/contact/';
 const WORK_WITH_ME_URL = '/work-with-me/';
-
-// ─── Free Tools link model (English only) ────────────────────────────────────
-// The five live self-scoring diagnostics that sit inside the Free Tools
-// collection. "Free Tools" is the section; "Clarity tool" is the type of tool
-// these five are. /free-tools/ is the hub; each link goes straight to that
-// tool's starting screen. Ids match the tool slugs and drive aria-current.
 const FREE_TOOLS_URL = '/free-tools/';
-// The flagship assessment. It is the site's primary call to action: wherever
-// the dominant CTA used to point generically at Free Tools, it now reads
-// FREE ASSESSMENT → and lands here, with EXPLORE ALL FREE TOOLS → as the
-// secondary route where there is room for one.
-const FOCUS_AREA_URL = '/find-your-focus-area/';
+// The two tools that stay public. The business tools, Find Your Focus Area and
+// Roast My Offer are retired (redirected in netlify.toml).
 const FREE_TOOL_LINKS = [{
-  name: "What's limiting your business?",
-  href: '/free-tools/business-constraint/',
-  id: 'business-constraint',
-  category: 'Business'
-}, {
-  name: 'Is it a strategy or execution problem?',
-  href: '/free-tools/strategy-or-execution/',
-  id: 'strategy-or-execution',
-  category: 'Business'
+  name: 'Are you burned out?',
+  href: '/free-tools/burned-out/',
+  id: 'burned-out'
 }, {
   name: "What's making you want to quit your job?",
   href: '/free-tools/quit-your-job/',
-  id: 'quit-your-job',
-  category: 'Career'
-}, {
-  name: 'Do you want to become a solopreneur?',
-  href: '/free-tools/become-a-solopreneur/',
-  id: 'become-a-solopreneur',
-  category: 'Career'
-}, {
-  name: 'Are you burned out?',
-  href: '/free-tools/burned-out/',
-  id: 'burned-out',
-  category: 'Psychology'
+  id: 'quit-your-job'
 }];
+
+// ─── Navigation model ────────────────────────────────────────────────────────
+// Group and item labels are the editorial "Final navigation". Two deliberate
+// readings of it: the editorial's single "Relationships & Separation" entry
+// becomes its two pages, and Reviews stays out of the header — the editorial
+// places Reviews, Contact and Confidentiality in the footer and in context.
+// `overview` is the group's own hub page, shown as the panel's first link.
+const NAV = [{
+  id: 'work',
+  label: 'Work with me',
+  overview: {
+    label: 'Work with me',
+    href: '/work-with-me/'
+  },
+  items: [{
+    label: 'Individual Psychotherapy',
+    href: '/individual-psychotherapy/'
+  }, {
+    label: 'Couples Therapy',
+    href: '/couples-therapy/'
+  }, {
+    label: 'Professional Coaching',
+    href: '/professional-coaching/'
+  }]
+}, {
+  id: 'who',
+  label: 'Who I work with',
+  items: [{
+    label: 'Men in Tech & Demanding Careers',
+    href: '/therapy-for-men-in-tech/'
+  }, {
+    label: 'Founders & Business Owners',
+    href: '/therapy-for-founders/'
+  }, {
+    label: 'Executives & Leaders',
+    href: '/therapy-for-executives/'
+  }, {
+    label: 'Greek-speaking Psychotherapy',
+    href: '/greek-speaking-psychotherapist/'
+  }]
+},
+// One grouped panel rather than seven top-level items: the relationship pages
+// in one column, everything else in the other.
+{
+  id: 'problems',
+  label: 'Common problems',
+  columns: [[{
+    label: 'Relationship Problems',
+    href: '/relationship-problems-men/'
+  }, {
+    label: 'Separation & Divorce',
+    href: '/separation-divorce-men/'
+  }, {
+    label: 'Work & Relationships',
+    href: '/work-affecting-relationship/'
+  }], [{
+    label: 'Burnout & Can’t Switch Off',
+    href: '/executive-burnout-therapy/'
+  }, {
+    label: 'Career Change & Decisions',
+    href: '/career-transition-therapy/'
+  }, {
+    label: 'Anxiety & Overthinking',
+    href: '/anxiety-overthinking/'
+  }, {
+    label: 'Achievement & Self-Worth',
+    href: '/achievement-self-worth/'
+  }]]
+}, {
+  id: 'about',
+  label: 'About',
+  href: '/about/'
+}, {
+  id: 'resources',
+  label: 'Resources',
+  items: [{
+    label: 'Considering Therapy',
+    href: '/considering-therapy/'
+  }, {
+    label: 'Writing',
+    href: '/blog/'
+  }, {
+    label: 'Free Tools',
+    href: '/free-tools/'
+  }, {
+    label: 'FAQ',
+    href: '/faq/'
+  }]
+}];
+const navLinks = g => g.columns ? [].concat.apply([], g.columns) : g.items || [];
+
+// Footer groups (implementation brief, Phase 4). Shorter labels than the header.
+const FOOTER_NAV = [{
+  label: 'Work with me',
+  items: [{
+    label: 'Individual Psychotherapy',
+    href: '/individual-psychotherapy/'
+  }, {
+    label: 'Couples Therapy',
+    href: '/couples-therapy/'
+  }, {
+    label: 'Professional Coaching',
+    href: '/professional-coaching/'
+  }]
+}, {
+  label: 'Who I work with',
+  items: [{
+    label: 'Men in Tech',
+    href: '/therapy-for-men-in-tech/'
+  }, {
+    label: 'Founders',
+    href: '/therapy-for-founders/'
+  }, {
+    label: 'Executives',
+    href: '/therapy-for-executives/'
+  }, {
+    label: 'Greek-speaking Psychotherapy',
+    href: '/greek-speaking-psychotherapist/'
+  }]
+}, {
+  label: 'Problems',
+  items: [{
+    label: 'Relationships',
+    href: '/relationship-problems-men/'
+  }, {
+    label: 'Separation & Divorce',
+    href: '/separation-divorce-men/'
+  }, {
+    label: 'Work & Relationships',
+    href: '/work-affecting-relationship/'
+  }, {
+    label: 'Burnout',
+    href: '/executive-burnout-therapy/'
+  }, {
+    label: 'Career Change',
+    href: '/career-transition-therapy/'
+  }, {
+    label: 'Anxiety & Overthinking',
+    href: '/anxiety-overthinking/'
+  }, {
+    label: 'Achievement & Self-Worth',
+    href: '/achievement-self-worth/'
+  }]
+}, {
+  label: 'Resources',
+  items: [{
+    label: 'Considering Therapy',
+    href: '/considering-therapy/'
+  }, {
+    label: 'Writing',
+    href: '/blog/'
+  }, {
+    label: 'Free Tools',
+    href: '/free-tools/'
+  }, {
+    label: 'FAQ',
+    href: '/faq/'
+  }, {
+    label: 'Reviews',
+    href: '/reviews/'
+  }]
+},
+// Terms and Privacy links return here once that text exists; the anchors
+// they used to point at (#terms, #privacy) were never on the page.
+{
+  label: 'About',
+  items: [{
+    label: 'About',
+    href: '/about/'
+  }, {
+    label: 'Contact',
+    href: '/contact/'
+  }, {
+    label: 'Confidentiality',
+    href: '/confidentiality/'
+  }]
+}];
+
+// Which page is current: the pathname, normalised to a trailing slash
+// ("/about/index.html" and "/about" both read as "/about/").
+function currentPath() {
+  if (typeof window === 'undefined' || !window.location) return '';
+  const p = (window.location.pathname || '/').replace(/index\.html$/, '');
+  return p.endsWith('/') ? p : p + '/';
+}
 
 // ─── Stylesheet ──────────────────────────────────────────────────────────────
 // The legacy page shell (scripts/gen-core-pages.js) still ships the sidebar-era
@@ -310,34 +420,60 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 
 .site-container{width:var(--page-canvas);margin-inline:auto}
 
-.site-hdr{position:relative;width:100%;min-height:76px;background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16)}
-/* Logo hard-left, then the nav + Start here CTA grouped hard-right (design):
-   nav takes margin-left:auto so it and everything after it sit against the CTA. */
+/* Skip link: first focusable element on every page, visible only on focus. */
+.skip-link{position:absolute;left:12px;top:-80px;z-index:300;padding:12px 18px;background:${SITE.bone};color:${SITE.inkText};font-size:15px;font-weight:700;box-shadow:0 0 0 3px ${SITE.green};transition:top .15s}
+.skip-link:focus{top:12px}
+.site-hdr{position:relative;z-index:200;width:100%;min-height:76px;background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16)}
+/* Logo hard-left; nav and the Book a consultation CTA grouped hard-right. */
 .site-hdr__in{width:var(--page-canvas);min-height:76px;display:flex;align-items:center;gap:22px}
 .site-hdr__in>*{min-width:0}
-/* Pin each slot to its column so the actions/burger stays hard-right even when
-   the nav is display:none on mobile — otherwise grid auto-placement pulls the
-   last child into the empty middle column. */
-.site-hdr__brand{grid-column:1;justify-self:start}
-.site-hdr__nav{grid-column:2}
-.site-hdr__in>*:last-child{grid-column:3;justify-self:end}
 .site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:${SITE.paper};font-family:${SITE.display};font-size:26px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
 .site-hdr__brand span{color:${SITE.green}}
-.site-hdr__nav{margin-left:auto;display:flex;align-items:center;gap:28px}
-.site-hdr__nav a{color:${SITE.paper};font-size:15px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.82;padding-bottom:2px;border-bottom:2px solid transparent;transition:opacity .18s}
-.site-hdr__nav a:hover{opacity:1}
-.site-hdr__nav a[aria-current]{opacity:1;border-bottom-color:${SITE.green}}
+.site-hdr__nav{margin-left:auto}
+.site-hdr__list{display:flex;align-items:center;gap:6px;margin:0;padding:0;list-style:none}
+.site-hdr__item{position:relative}
+/* Top-level entries: links and panel toggles share one look. */
+.site-hdr__top{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 10px;background:none;border:0;border-radius:0;cursor:pointer;font:inherit;color:${SITE.paper};font-size:14px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.84;transition:opacity .18s;white-space:nowrap}
+.site-hdr__top:hover,.site-hdr__top[aria-expanded="true"]{opacity:1}
+.site-hdr__top>span:first-child{padding-block:4px 2px;border-bottom:2px solid transparent}
+.site-hdr__top[aria-current] >span:first-child,.site-hdr__top.is-current>span:first-child{border-bottom-color:${SITE.green}}
+.site-hdr__top[aria-current],.site-hdr__top.is-current{opacity:1}
+.site-hdr__chev{width:9px;height:9px;flex-shrink:0;transition:transform var(--dur-hover) var(--ease-settle)}
+.site-hdr__top[aria-expanded="true"] .site-hdr__chev{transform:rotate(180deg)}
+/* Dropdown panels: forest-deep, a 2px green top rule like the footer. */
+.site-hdr__panel{position:absolute;top:calc(100% + 16px);left:0;min-width:300px;padding:18px 0 14px;background:${SITE.forestDeep};border:1px solid ${SITE.ruleOnDark};border-top:2px solid ${SITE.green};box-shadow:0 18px 40px rgba(16,26,22,0.28)}
+.site-hdr__panel[hidden]{display:none}
+.site-hdr__item--end .site-hdr__panel{left:auto;right:0}
+.site-hdr__panel--wide{display:grid;grid-template-columns:repeat(2,minmax(250px,1fr));min-width:560px}
+.site-hdr__panel ul{margin:0;padding:0;list-style:none}
+.site-hdr__panel a{display:block;padding:10px 22px;color:${SITE.onForest};font-size:15px;line-height:1.35;text-transform:none;letter-spacing:0;transition:color .18s,background .18s}
+.site-hdr__panel a:hover{color:${SITE.bone};background:rgba(143,191,167,0.08)}
+.site-hdr__panel a[aria-current]{color:${SITE.bone};box-shadow:inset 3px 0 0 ${SITE.green}}
+.site-hdr__panel .site-hdr__over{display:flex;align-items:center;gap:8px;margin-bottom:6px;padding-bottom:12px;border-bottom:1px solid ${SITE.ruleOnDark};color:${SITE.sage};font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
+.site-hdr__panel .site-hdr__over:hover{color:${SITE.bone}}
 .site-hdr__end{display:flex;align-items:center;gap:14px}
-.site-hdr__lang{color:${SITE.paper};font-size:13px;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:0.045em;opacity:.82;transition:opacity .18s}
-.site-hdr__lang:hover{opacity:1}
 .hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:${SITE.green};color:${SITE.bone};font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
 .hdr-cta:hover{background:${SITE.greenPressed};gap:11px}
 .site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
-.site-hdr__burger span{display:block;width:24px;height:2px;background:${SITE.paper}}
-.site-menu{position:relative;z-index:210;background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16);padding-block:20px 28px}
-.site-menu .site-container{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
-.site-menu a{color:${SITE.paper};font-size:16px;text-transform:uppercase;letter-spacing:0.03em}
-.site-menu .hdr-cta{align-self:stretch;justify-content:center;min-height:48px;font-size:13px}
+.site-hdr__burger span{display:block;width:24px;height:2px;background:${SITE.paper};transition:transform var(--dur-hover) var(--ease-settle),opacity var(--dur-hover)}
+.site-hdr__burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.site-hdr__burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.site-hdr__burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* Mobile / tablet menu: the same hierarchy as the desktop panels, as
+   accordions, so twenty-odd links never arrive as one flat list. */
+.site-menu{position:relative;z-index:210;background:${SITE.ink};border-bottom:1px solid rgba(243,240,232,0.16);padding-block:8px 28px}
+.site-menu[hidden]{display:none}
+.site-menu__list{margin:0;padding:0;list-style:none}
+.site-menu__group{border-bottom:1px solid ${SITE.ruleOnDark}}
+.site-menu__top{display:flex;width:100%;align-items:center;justify-content:space-between;gap:16px;min-height:56px;padding:0;background:none;border:0;cursor:pointer;font:inherit;color:${SITE.paper};font-size:16px;font-weight:650;letter-spacing:0.03em;text-transform:uppercase;text-align:left}
+.site-menu__top[aria-current]{color:${SITE.sage}}
+.site-menu__top .site-hdr__chev{width:11px;height:11px}
+.site-menu__top[aria-expanded="true"] .site-hdr__chev{transform:rotate(180deg)}
+.site-menu__sub{margin:0;padding:0 0 14px;list-style:none}
+.site-menu__sub[hidden]{display:none}
+.site-menu__sub a{display:block;padding:9px 0 9px 16px;border-left:1px solid ${SITE.ruleOnDark};color:${SITE.onForest};font-size:16px;line-height:1.35}
+.site-menu__sub a[aria-current]{color:${SITE.bone};border-left:2px solid ${SITE.green};padding-left:15px}
+.site-menu .hdr-cta{display:flex;width:100%;margin-top:24px;min-height:52px;font-size:13px}
 
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
 .pill--green{height:72px;padding-inline:44px;background:${SITE.green};color:${SITE.bone};font-size:16px}
@@ -355,16 +491,19 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .cta-strip__sub:hover{gap:12px;color:${SITE.bone}}
 
 .site-ftr{border-top:2px solid ${SITE.green};padding-block:64px 32px;background:${SITE.ink};color:${SITE.onForest}}
-.site-ftr__cols{display:grid;grid-template-columns:minmax(280px,1.4fr) repeat(3,minmax(130px,0.55fr));gap:48px;align-items:start}
-.site-ftr__cols--en{grid-template-columns:minmax(220px,1.2fr) repeat(4,minmax(120px,0.6fr));gap:40px}
-.site-ftr__head{font-size:12px;font-weight:700;letter-spacing:0.12em;color:${SITE.sage};margin-bottom:20px}
-.site-ftr nav a{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.4;margin-bottom:12px;color:${SITE.onForest};transition:color .18s}
-.site-ftr nav a:hover{color:${SITE.bone}}
-.site-ftr__roles{margin-top:20px;font-size:15px;line-height:1.4;color:${SITE.onDark}}
+.site-ftr__cols{display:grid;grid-template-columns:minmax(200px,1.15fr) repeat(5,minmax(0,1fr));gap:36px;align-items:start}
+.site-ftr__head{margin:0 0 18px;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:${SITE.sage}}
+.site-ftr__col ul{margin:0;padding:0;list-style:none}
+.site-ftr__col li{margin-bottom:11px}
+.site-ftr a{color:${SITE.onForest};transition:color .18s}
+.site-ftr a:hover{color:${SITE.bone}}
+.site-ftr__col a{font-size:15px;line-height:1.4}
+.site-ftr__role{margin:18px 0 0;font-size:15px;line-height:1.4;color:${SITE.onDark}}
+.site-ftr__social{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.site-ftr__social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid ${SITE.ruleOnDark}}
+.site-ftr__social a:hover{border-color:${SITE.sage}}
 .site-ftr__rule{height:1px;background:${SITE.ruleOnDark};margin-block:48px 24px}
 .site-ftr__legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;font-size:13px;color:${SITE.onDark}}
-.site-ftr__legal nav{display:flex;flex-wrap:wrap;gap:12px 24px}
-.site-ftr__legal nav a{display:inline;margin:0}
 
 .u-hero{background:${SITE.bone};padding-block:106px 86px}
 .u-hero h1{margin:0;max-width:15ch;font-family:${SITE.display};font-synthesis:none;font-size:clamp(52px,5.8vw,82px);font-weight:800;line-height:0.96;letter-spacing:-0.05em;color:${SITE.headingInk}}
@@ -420,21 +559,24 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .u-notice p{margin:0;font-size:19px;line-height:1.5;max-width:52ch}
 .u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:${SITE.green}}
 
-@media (max-width:960px){.site-ftr__cols,.site-ftr__cols--en{grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}}
-/* Tablet band: three nav links plus FREE ASSESSMENT no longer fit on one row,
-   so the links move into the burger menu while the CTA stays in the bar. */
-@media (min-width:681px) and (max-width:900px){
+/* Footer: six columns on wide screens, then three, then two, then one. */
+@media (max-width:1180px){.site-ftr__cols{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 32px}.site-ftr__brand{grid-column:1 / -1}}
+@media (max-width:640px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:400px){.site-ftr__cols{grid-template-columns:1fr}}
+/* Header: five nav entries plus the CTA need ~1180px. Below that the entries
+   move into the menu; the CTA stays in the bar down to phone widths. */
+@media (max-width:1199px){
   .site-hdr__nav{display:none}
-  .site-hdr__in>*:last-child{margin-left:auto}
+  .site-hdr__end{margin-left:auto}
   .site-hdr__burger{display:flex;margin-left:6px}
   .site-menu .hdr-cta{display:none}
 }
+@media (min-width:1200px){.site-menu{display:none!important}}
 @media (max-width:680px){
   .site-hdr,.site-hdr__in{min-height:68px}
   .site-hdr__brand{font-size:23px}
-  .site-hdr__nav,.site-hdr__lang,.site-hdr__end{display:none}
-  .site-hdr__in>*:last-child{margin-left:auto}
-  .site-hdr__burger{display:flex}
+  .site-hdr__end .hdr-cta{display:none}
+  .site-menu .hdr-cta{display:flex}
 }
 @media (max-width:900px){
   .u-shell,.u-shell--wide{grid-template-columns:1fr;column-gap:0}
@@ -445,7 +587,6 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
   .u-shell__gutter{display:none}
 }
 @media (max-width:640px){
-  .site-ftr__cols{grid-template-columns:1fr;gap:40px}
   .site-ftr__legal{flex-direction:column;align-items:flex-start;gap:20px}
   .u-hero{padding-block:67px 58px}
   .u-read,.u-shell__body{font-size:18px}
@@ -462,7 +603,6 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 }
 @media (max-width:360px){
   .hero-cta{max-width:100%;padding-inline:16px;gap:8px}
-  html[lang="el"] .hero-cta{font-size:14px}
 }
 /* ── Shared motion primitives ────────────────────────────────────────────────
    Every rule here is gated on .mo, which window.Motion puts on <html> at
@@ -524,276 +664,305 @@ function BrandIcon({
     d: BRAND_PATHS[name]
   }));
 }
-function Wordmark({
-  lang
-}) {
+function Wordmark() {
   return React.createElement('a', {
     className: 'site-hdr__brand',
-    href: cPath('home', lang),
-    'aria-label': 'Aggelos Mouzakitis'
+    href: '/',
+    'aria-label': 'Aggelos Mouzakitis, home'
   }, 'Aggelos', React.createElement('span', null, '.'));
+}
+function Chevron() {
+  return React.createElement('svg', {
+    className: 'site-hdr__chev',
+    viewBox: '0 0 10 10',
+    'aria-hidden': 'true',
+    focusable: 'false'
+  }, React.createElement('path', {
+    d: 'M1.5 3.5 5 7l3.5-3.5',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.6,
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round'
+  }));
 }
 
 // ─── HEADER ──────────────────────────────────────────────────────────────────
+// Disclosure navigation (WAI-ARIA APG "disclosure navigation menu"): each group
+// is a button that shows or hides a list of ordinary links. Not role="menu" —
+// these are page links, and screen-reader users should hear them as links.
+// One panel open at a time; Escape, a click outside or focus leaving the nav
+// closes it. Panels are in the DOM when closed (hidden), so the prerendered
+// HTML carries every link for crawlers.
 function SiteHeader({
-  page,
-  lang = 'en'
+  path
 }) {
-  const [open, setOpen] = React.useState(false); // mobile burger menu
+  const t = cT();
+  const here = path || currentPath();
+  const [openId, setOpenId] = React.useState(null); // desktop panel
+  const [menuOpen, setMenuOpen] = React.useState(false); // mobile menu
+  const [subOpen, setSubOpen] = React.useState({}); // mobile accordions
+  const navRef = React.useRef(null);
+  const btnRefs = React.useRef({});
+  const burgerRef = React.useRef(null);
+  const isHere = href => href === here;
+  const groupHasHere = g => g.href ? isHere(g.href) : g.overview && isHere(g.overview.href) || navLinks(g).some(l => isHere(l.href));
+  React.useEffect(() => {
+    if (!openId && !menuOpen) return undefined;
+    const onKey = e => {
+      if (e.key !== 'Escape') return;
+      if (openId) {
+        const b = btnRefs.current[openId];
+        setOpenId(null);
+        if (b) b.focus();
+      } else if (menuOpen) {
+        setMenuOpen(false);
+        if (burgerRef.current) burgerRef.current.focus();
+      }
+    };
+    const onDown = e => {
+      if (openId && navRef.current && !navRef.current.contains(e.target)) setOpenId(null);
+    };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('mousedown', onDown);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onDown);
+    };
+  }, [openId, menuOpen]);
+  const onNavBlur = e => {
+    if (navRef.current && e.relatedTarget && !navRef.current.contains(e.relatedTarget)) setOpenId(null);
+  };
+  const link = (l, cls) => React.createElement('a', {
+    className: cls,
+    href: l.href,
+    'aria-current': isHere(l.href) ? 'page' : undefined
+  }, l.label);
+  const listOf = links => React.createElement('ul', null, links.map(l => React.createElement('li', {
+    key: l.href
+  }, link(l))));
+  const panelBody = g => {
+    if (g.columns) return g.columns.map((col, i) => React.createElement('div', {
+      key: i
+    }, listOf(col)));
+    return [g.overview ? React.createElement('a', {
+      key: 'over',
+      className: 'site-hdr__over',
+      href: g.overview.href,
+      'aria-current': isHere(g.overview.href) ? 'page' : undefined
+    }, React.createElement('span', null, g.overview.label), React.createElement('span', {
+      'aria-hidden': 'true'
+    }, '→')) : null, React.createElement(React.Fragment, {
+      key: 'list'
+    }, listOf(g.items))];
+  };
 
-  const t = cT(lang);
-  const other = lang === 'el' ? 'en' : 'el';
-  const showWork = lang === 'en'; // offer pages + group work are English-only
-  const homeItem = {
-    id: 'home',
-    label: t.home
-  };
-  const restItems = [{
-    id: 'about',
-    label: t.why
-  }, {
-    id: 'reviews',
-    label: t.reviews
-  }];
-  const link = it => React.createElement('a', {
-    key: it.id,
-    href: cPath(it.id, lang),
-    'aria-current': page === it.id ? 'page' : undefined
-  }, it.label);
-  const langHref = CHROME_PATHS[page] ? cPath(page, other) : other === 'el' ? '/el/' : '/';
-  // English header CTA is the flagship Find Your Focus Area assessment — the
-  // site's single dominant action; Greek keeps the "ask anonymously" VideoAsk
-  // form (no Greek assessment). Free Tools, the section that holds every tool,
-  // stays one click away as ordinary navigation.
-  const ctaHref = lang === 'el' ? 'https://www.videoask.com/fuv51iuq1' : FOCUS_AREA_URL;
-  // Greek label is intentionally plain uppercase (no accents on capitals).
-  const ctaLabel = lang === 'el' ? 'ΡΩΤΑ ΑΝΩΝΥΜΑ' : t.start;
-  const ctaExt = lang === 'el' ? ext : null;
-  const ctaCurrent = page === 'find-your-focus-area' ? 'page' : undefined;
-  // Keep the CTA present in the header on every page (including the assessment
-  // itself); it never disappears.
-  const showCta = true;
-
-  // English header is deliberately lean: Work with me, Free tools, About,
-  // FREE ASSESSMENT →. Greek keeps its current Home / About / Reviews nav.
-  const aboutItem = {
-    id: 'about',
-    label: t.why
-  };
-  const workItem = {
-    id: 'work-with-me',
-    label: 'Work with me'
-  };
-  const toolsItem = {
-    id: 'free-tools',
-    label: t.freeTools
-  };
-  let navChildren;
-  if (lang === 'en') {
-    navChildren = [];
-    if (showWork) navChildren.push(link(workItem));
-    navChildren.push(link(toolsItem));
-    navChildren.push(link(aboutItem));
-  } else {
-    navChildren = [link(homeItem)];
-    restItems.forEach(it => navChildren.push(link(it)));
-  }
-  let menuChildren;
-  if (lang === 'en') {
-    menuChildren = [];
-    if (showWork) menuChildren.push(link(workItem));
-    menuChildren.push(link(toolsItem));
-    menuChildren.push(link(aboutItem));
-  } else {
-    menuChildren = [link(homeItem)];
-    restItems.forEach(it => menuChildren.push(link(it)));
-  }
-  if (SHOW_LANG_SWITCHER) menuChildren.push(React.createElement('a', {
-    key: 'lang',
-    href: langHref,
-    hrefLang: other,
-    style: {
-      color: SITE.onDark
+  // ── Desktop ──
+  const desktopItems = NAV.map((g, i) => {
+    const cls = 'site-hdr__item' + (i === NAV.length - 1 ? ' site-hdr__item--end' : '');
+    if (g.href) {
+      return React.createElement('li', {
+        key: g.id,
+        className: cls
+      }, React.createElement('a', {
+        className: 'site-hdr__top',
+        href: g.href,
+        'aria-current': isHere(g.href) ? 'page' : undefined
+      }, React.createElement('span', null, g.label)));
     }
-  }, t.other));
-  if (showCta) menuChildren.push(React.createElement('a', {
-    key: 'cta',
+    const open = openId === g.id;
+    const panelId = 'nav-panel-' + g.id;
+    return React.createElement('li', {
+      key: g.id,
+      className: cls
+    }, React.createElement('button', {
+      type: 'button',
+      className: 'site-hdr__top' + (groupHasHere(g) ? ' is-current' : ''),
+      'aria-expanded': open ? 'true' : 'false',
+      'aria-controls': panelId,
+      ref: el => {
+        btnRefs.current[g.id] = el;
+      },
+      onClick: () => setOpenId(open ? null : g.id)
+    }, React.createElement('span', null, g.label), React.createElement(Chevron)), React.createElement('div', {
+      id: panelId,
+      className: 'site-hdr__panel' + (g.columns ? ' site-hdr__panel--wide' : ''),
+      hidden: !open
+    }, panelBody(g)));
+  });
+
+  // ── Mobile / tablet ──
+  const menuItems = NAV.map(g => {
+    if (g.href) {
+      return React.createElement('li', {
+        key: g.id,
+        className: 'site-menu__group'
+      }, React.createElement('a', {
+        className: 'site-menu__top',
+        href: g.href,
+        'aria-current': isHere(g.href) ? 'page' : undefined
+      }, g.label));
+    }
+    const open = !!subOpen[g.id];
+    const subId = 'menu-sub-' + g.id;
+    const links = (g.overview ? [g.overview] : []).concat(navLinks(g));
+    return React.createElement('li', {
+      key: g.id,
+      className: 'site-menu__group'
+    }, React.createElement('button', {
+      type: 'button',
+      className: 'site-menu__top',
+      'aria-expanded': open ? 'true' : 'false',
+      'aria-controls': subId,
+      onClick: () => setSubOpen(Object.assign({}, subOpen, {
+        [g.id]: !open
+      }))
+    }, React.createElement('span', null, g.label), React.createElement(Chevron)), React.createElement('ul', {
+      id: subId,
+      className: 'site-menu__sub',
+      hidden: !open
+    }, links.map(l => React.createElement('li', {
+      key: l.href
+    }, link(l)))));
+  });
+  const cta = () => React.createElement('a', {
     className: 'hdr-cta',
-    href: ctaHref,
-    'aria-current': ctaCurrent,
-    ...ctaExt
-  }, React.createElement('span', null, ctaLabel), React.createElement('span', null, '→')));
-  return React.createElement(React.Fragment, null, React.createElement('header', {
+    href: CONTACT_URL,
+    'aria-current': isHere(CONTACT_URL) ? 'page' : undefined
+  }, React.createElement('span', null, t.cta), React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '→'));
+  return React.createElement(React.Fragment, null, React.createElement('a', {
+    className: 'skip-link',
+    href: '#main'
+  }, 'Skip to content'), React.createElement('header', {
     className: 'site-hdr'
   }, React.createElement('div', {
     className: 'site-container site-hdr__in'
-  }, React.createElement(Wordmark, {
-    lang
-  }), React.createElement('nav', {
-    className: 'site-hdr__nav'
-  }, navChildren), React.createElement('div', {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      justifySelf: 'end'
-    }
-  }, React.createElement('div', {
+  }, React.createElement(Wordmark), React.createElement('nav', {
+    className: 'site-hdr__nav',
+    'aria-label': 'Main',
+    ref: navRef,
+    onBlur: onNavBlur
+  }, React.createElement('ul', {
+    className: 'site-hdr__list'
+  }, desktopItems)), React.createElement('div', {
     className: 'site-hdr__end'
-  }, SHOW_LANG_SWITCHER && React.createElement('a', {
-    className: 'site-hdr__lang',
-    href: langHref,
-    hrefLang: other
-  }, t.other), showCta && React.createElement('a', {
-    className: 'hdr-cta',
-    href: ctaHref,
-    'aria-current': ctaCurrent,
-    ...ctaExt
-  }, React.createElement('span', null, ctaLabel), React.createElement('span', null, '→'))), React.createElement('button', {
+  }, cta()), React.createElement('button', {
+    ref: burgerRef,
     className: 'site-hdr__burger',
     type: 'button',
-    'aria-label': t.menu,
-    'aria-expanded': open ? 'true' : 'false',
-    onClick: () => setOpen(!open)
-  }, React.createElement('span'), React.createElement('span'), React.createElement('span'))))), open && React.createElement('div', {
-    className: 'site-menu'
+    'aria-label': menuOpen ? t.closeMenu : t.menu,
+    'aria-expanded': menuOpen ? 'true' : 'false',
+    'aria-controls': 'site-menu',
+    onClick: () => setMenuOpen(!menuOpen)
+  }, React.createElement('span'), React.createElement('span'), React.createElement('span')))), React.createElement('nav', {
+    id: 'site-menu',
+    className: 'site-menu',
+    'aria-label': 'Main',
+    hidden: !menuOpen
   }, React.createElement('div', {
     className: 'site-container'
-  }, menuChildren)));
+  }, React.createElement('ul', {
+    className: 'site-menu__list'
+  }, menuItems), cta())));
 }
 
-// ─── BLACK CTA STRIP ─────────────────────────────────────────────────────────
-// Site-wide CTA choice on general pages: the free assessment is the dominant
-// action; the full Free Tools collection and the service page are the softer
-// second routes. Greek has none of these pages, so it keeps a single pill into
-// its own flow.
+// ─── CLOSING CTA STRIP ───────────────────────────────────────────────────────
+// Used by LegacyShell pages (the two tools set cta:false; the held imposter-
+// syndrome page shows it). No slogan of its own: an optional heading, the
+// primary call to action and the confidentiality link.
 function BlackCtaStrip({
-  lang = 'en',
-  heading,
-  label
+  heading
 }) {
-  const t = cT(lang);
-  const isEn = lang !== 'el';
-  const soft = (href, text) => React.createElement('a', {
-    className: 'cta-strip__soft',
-    href
-  }, React.createElement('span', null, text), React.createElement('span', {
-    'aria-hidden': 'true'
-  }, '→'));
+  const t = cT();
   return React.createElement('section', {
     className: 'cta-strip'
   }, React.createElement('div', {
     className: 'site-container'
-  }, React.createElement('h2', {
+  }, heading ? React.createElement('h2', {
     className: 'cta-strip__h'
-  }, heading || t.ctaHeading), React.createElement('div', null, React.createElement('a', {
+  }, heading) : null, React.createElement('div', null, React.createElement('a', {
     className: 'pill pill--green',
-    href: isEn ? FOCUS_AREA_URL : cPath('diagnostic', lang)
-  }, React.createElement('span', null, label || (isEn ? 'FREE ASSESSMENT' : t.ctaBtn)), React.createElement('span', null, '→'))), isEn ? React.createElement('div', {
-    className: 'cta-strip__softrow'
-  }, soft(FREE_TOOLS_URL, 'Explore all free tools'), soft(WORK_WITH_ME_URL, 'See how I work')) : null, React.createElement('a', {
+    href: CONTACT_URL
+  }, React.createElement('span', null, t.cta), React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '→'))), React.createElement('a', {
     className: 'cta-strip__sub',
-    href: cPath('confidentiality', lang)
-  }, React.createElement('span', null, t.confidentiality), React.createElement('span', null, '→'))));
+    href: cPath('confidentiality')
+  }, React.createElement('span', null, t.confidentiality), React.createElement('span', {
+    'aria-hidden': 'true'
+  }, '→'))));
 }
 
 // ─── FOOTER ──────────────────────────────────────────────────────────────────
-function SiteFooterX({
-  lang = 'en'
-}) {
-  const t = cT(lang);
+function SiteFooterX() {
+  const t = cT();
   const year = new Date().getFullYear();
-  const social = (name, href, label) => React.createElement('a', {
+  const social = (name, href) => React.createElement('li', {
+    key: name
+  }, React.createElement('a', Object.assign({
     href,
-    key: name,
-    ...ext
-  }, React.createElement(BrandIcon, {
-    name
-  }), React.createElement('span', null, label || name));
+    'aria-label': name
+  }, ext), React.createElement(BrandIcon, {
+    name,
+    size: 18
+  })));
   return React.createElement('footer', {
     className: 'site-ftr'
   }, React.createElement('div', {
     className: 'site-container'
   }, React.createElement('div', {
-    className: 'site-ftr__cols' + (lang === 'en' ? ' site-ftr__cols--en' : '')
-  }, React.createElement('div', null, React.createElement('div', {
+    className: 'site-ftr__cols'
+  }, React.createElement('div', {
+    className: 'site-ftr__brand'
+  }, React.createElement('a', {
     className: 'site-hdr__brand',
+    href: '/',
     style: {
       fontSize: 20
-    }
-  }, 'Aggelos', React.createElement('span', null, '.')), React.createElement('div', {
-    className: 'site-ftr__roles'
-  }, React.createElement('div', null, t.role1), React.createElement('div', {
-    style: {
-      marginTop: 8
-    }
-  }, t.role2))),
-  // Work with me — the single 1:1 service page plus the free group format.
-  lang === 'en' ? React.createElement('nav', null, React.createElement('div', {
+    },
+    'aria-label': 'Aggelos Mouzakitis, home'
+  }, 'Aggelos', React.createElement('span', null, '.')), React.createElement('p', {
+    className: 'site-ftr__role'
+  }, t.role), React.createElement('ul', {
+    className: 'site-ftr__social',
+    'aria-label': t.follow
+  }, social('LinkedIn', EXTERNAL.linkedin), social('Instagram', EXTERNAL.instagram), social('YouTube', EXTERNAL.youtube), social('TikTok', EXTERNAL.tiktok))), FOOTER_NAV.map(g => React.createElement('nav', {
+    key: g.label,
+    className: 'site-ftr__col',
+    'aria-label': g.label
+  }, React.createElement('p', {
     className: 'site-ftr__head'
-  }, 'WORK WITH ME'), React.createElement('a', {
-    href: WORK_WITH_ME_URL
-  }, 'Work with me'), React.createElement('a', {
-    href: '/wtf-friday/'
-  }, 'WTF Friday')) : null, React.createElement('nav', null, React.createElement('div', {
-    className: 'site-ftr__head'
-  }, t.navigate), React.createElement('a', {
-    href: cPath('home', lang)
-  }, t.home), React.createElement('a', {
-    href: cPath('about', lang)
-  }, t.why), React.createElement('a', {
-    href: cPath('reviews', lang)
-  }, t.reviews),
-  // English: Free Tools (primary discovery) then the softer orientation
-  // flow. Greek has neither page, so it keeps the Greek diagnostic link.
-  lang === 'en' ? React.createElement('a', {
-    href: FREE_TOOLS_URL
-  }, t.freeTools) : React.createElement('a', {
-    href: cPath('diagnostic', lang)
-  }, t.apply)), React.createElement('nav', null, React.createElement('div', {
-    className: 'site-ftr__head'
-  }, t.content), React.createElement('a', {
-    href: EXTERNAL.undisguised,
-    ...ext
-  }, t.articles + ' ↗'), React.createElement('a', {
-    href: EXTERNAL.youtube,
-    ...ext
-  }, 'YouTube ↗'), React.createElement('a', lang === 'el' ? {
-    href: 'https://www.videoask.com/fuv51iuq1',
-    ...ext
-  } : {
-    href: cPath('ask-me-anything', lang)
-  }, t.askAnon + ' ↗')), React.createElement('nav', null, React.createElement('div', {
-    className: 'site-ftr__head'
-  }, t.follow), social('LinkedIn', EXTERNAL.linkedin), social('Instagram', EXTERNAL.instagram), social('TikTok', EXTERNAL.tiktok))), React.createElement('div', {
+  }, g.label), React.createElement('ul', null, g.items.map(l => React.createElement('li', {
+    key: l.href
+  }, React.createElement('a', {
+    href: l.href
+  }, l.label))))))), React.createElement('div', {
     className: 'site-ftr__rule'
   }), React.createElement('div', {
     className: 'site-ftr__legal'
-  }, React.createElement('div', null, '© ' + year + ' Aggelos Mouzakitis. ' + t.rights), React.createElement('nav', null, React.createElement('a', {
-    href: cPath('confidentiality', lang)
-  }, t.confidentiality), React.createElement('a', {
-    href: cPath('confidentiality', lang) + '#terms'
-  }, t.terms), React.createElement('a', {
-    href: cPath('confidentiality', lang) + '#privacy'
-  }, t.privacy)))));
+  }, React.createElement('p', {
+    style: {
+      margin: 0
+    }
+  }, '© ' + year + ' Aggelos Mouzakitis. ' + t.rights))));
 }
 
 // ─── UNIVERSAL CONTENT LAYOUT ────────────────────────────────────────────────
 // For indexed long-form pages authored with this layout: supplies chrome, the
 // light page hero and the reading column. Content passes through unchanged.
 function UniversalContentLayout({
-  page,
-  lang = 'en',
   title,
   standfirst,
   children,
   ctaHeading,
-  ctaLabel,
   wide
 }) {
-  return React.createElement(React.Fragment, null, React.createElement(ChromeStyles), React.createElement(SiteHeader, {
-    page,
-    lang
-  }), React.createElement('main', null, React.createElement('section', {
+  return React.createElement(React.Fragment, null, React.createElement(ChromeStyles), React.createElement(SiteHeader, null), React.createElement('main', {
+    id: 'main',
+    tabIndex: -1
+  }, React.createElement('section', {
     className: 'u-hero'
   }, React.createElement('div', {
     className: 'site-container'
@@ -802,12 +971,8 @@ function UniversalContentLayout({
   }, React.createElement('div', {
     className: wide ? 'site-container' : 'u-read'
   }, children)), React.createElement(BlackCtaStrip, {
-    lang,
-    heading: ctaHeading,
-    label: ctaLabel
-  })), React.createElement(SiteFooterX, {
-    lang
-  }));
+    heading: ctaHeading
+  })), React.createElement(SiteFooterX, null));
 }
 
 // ─── LEGACY SHELL ────────────────────────────────────────────────────────────
@@ -832,8 +997,6 @@ function InnerShell({
   }, children));
 }
 function LegacyShell({
-  page,
-  lang = 'en',
   children,
   form,
   wide,
@@ -852,19 +1015,18 @@ function LegacyShell({
     wide,
     eyebrow
   }, children);
-  return React.createElement(React.Fragment, null, React.createElement(ChromeStyles), React.createElement(SiteHeader, {
-    page,
-    lang
-  }), React.createElement('main', null, React.createElement('section', {
+  return React.createElement(React.Fragment, null, React.createElement(ChromeStyles), React.createElement(SiteHeader, null), React.createElement('main', {
+    id: 'main',
+    tabIndex: -1,
+    style: {
+      outline: 'none'
+    }
+  }, React.createElement('section', {
     className: 'u-main',
     style: {
       paddingBlock: '64px 96px'
     }
-  }, inner), cta ? React.createElement(BlackCtaStrip, {
-    lang
-  }) : null), React.createElement(SiteFooterX, {
-    lang
-  }));
+  }, inner), cta ? React.createElement(BlackCtaStrip, null) : null), React.createElement(SiteFooterX, null));
 }
 
 // ─── Shared motion utility ───────────────────────────────────────────────────
@@ -1186,7 +1348,10 @@ Object.assign(window, {
   BlackCtaStrip,
   UniversalContentLayout,
   LegacyShell,
+  NAV,
+  FOOTER_NAV,
+  CONTACT_URL,
   FREE_TOOLS_URL,
   FREE_TOOL_LINKS,
-  FOCUS_AREA_URL
+  currentPath
 });
