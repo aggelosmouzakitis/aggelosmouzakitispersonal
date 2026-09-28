@@ -1,66 +1,63 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Repositioning migration — legacy persona/service URLs → new architecture.
-# See site-unification/04-redirect-map.csv. All 301, force=true so the redirect
-# wins even though the old index.html files still exist. Bare + splat forms are
-# both listed so /founders and /founders/ each resolve in a single hop.
+# Redirects — psychotherapy-first migration (Sep 2026).
+#
+# One rule per retired URL, each pointing straight at its final page, so every
+# old URL resolves in exactly one hop: 301 where a close replacement exists,
+# 410 Gone where the page was removed on purpose and nothing replaces it (the
+# 410 body is the site's 404 page). force = true so a rule wins over any file
+# still on disk. Netlify matches a rule with or without the trailing slash;
+# each old URL is listed bare and with /* so /x, /x/ and anything under /x/
+# all resolve in that single hop. Specific rules come before the catch-alls
+# that share their prefix. scripts/qa-routes.js checks every row against the
+# migration table; scripts/seo/seo-check.js emulates these rules.
+#
+# Not here on purpose:
+#   /imposter-syndrome-therapy/  HOLD — still served as it was until its
+#                                Search Console / backlink review is done.
+#   /hot-seat-coworking-spaces/  unrelated utility PDF (rules further down).
 # ─────────────────────────────────────────────────────────────────────────────
 
-# ─── Greek (/el/) pages unpublished → English homepage ───────────────────────
-# All Greek-language pages are retired. force=true so the redirect wins over the
-# still-present /el/*/index.html files, in a single hop. NOTE: /ask-me-anything/el
-# is intentionally NOT matched here (it lives outside the /el/ prefix) and stays live.
-[[redirects]]
-  from = "/el"
-  to = "/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/el/*"
-  to = "/"
-  status = 301
-  force = true
-
-# ─── Three services + Start Here consolidated into /work-with-me/ ───────────
-# Permanent. force=true so the redirect wins over any leftover index.html, and
-# bare + splat forms are both listed so each old URL resolves in a single hop.
-[[redirects]]
-  from = "/psychotherapy-decision-coaching"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/psychotherapy-decision-coaching/*"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/career-strategy-consulting"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/career-strategy-consulting/*"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/solopreneur-growth-consulting"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/solopreneur-growth-consulting/*"
-  to = "/work-with-me/"
-  status = 301
-  force = true
+# ─── Old offer, booking and diagnostic routes ────────────────────────────────────
+# /schedule and /faqs used to go to the homepage; they now go to the page
+# that replaced them (/contact/ and /faq/).
 [[redirects]]
   from = "/start-here"
-  to = "/work-with-me/"
+  to = "/considering-therapy/"
   status = 301
   force = true
 [[redirects]]
   from = "/start-here/*"
-  to = "/work-with-me/"
+  to = "/considering-therapy/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/psychotherapy-decision-coaching"
+  to = "/individual-psychotherapy/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/psychotherapy-decision-coaching/*"
+  to = "/individual-psychotherapy/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/career-strategy-consulting"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/career-strategy-consulting/*"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/solopreneur-growth-consulting"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/solopreneur-growth-consulting/*"
+  to = "/professional-coaching/"
   status = 301
   force = true
 [[redirects]]
@@ -73,72 +70,6 @@
   to = "/work-with-me/"
   status = 301
   force = true
-
-# ─── Retired diagnostic + thin SEO landing pages → most relevant live page ───
-[[redirects]]
-  from = "/startingdiagnostic"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/startingdiagnostic/*"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/greek-speaking-therapist-london"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/greek-speaking-therapist-london/*"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/greek-speaking-therapist-manchester"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/greek-speaking-therapist-manchester/*"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/greek-speaking-therapist-dublin"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/greek-speaking-therapist-dublin/*"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/greek-speaking-therapist-new-york"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/greek-speaking-therapist-new-york/*"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-
-# ─── Blog retired → homepage ───
-[[redirects]]
-  from = "/blog"
-  to = "/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/blog/*"
-  to = "/"
-  status = 301
-  force = true
-
-# how-i-work → 1:1 (core page removed; method content merged into / and /1-to-1/)
 [[redirects]]
   from = "/how-i-work"
   to = "/work-with-me/"
@@ -149,42 +80,36 @@
   to = "/work-with-me/"
   status = 301
   force = true
-
-# el/how-i-work → el/1-to-1 (Greek method page merged into the Greek offer page)
-
-# NOTE: /founders/, /solopreneurs/, /therapy-for-founders/, /therapy-for-executives/,
-# /imposter-syndrome-therapy/, /executive-burnout-therapy/ and /career-transition-therapy/
-# were previously 301'd here. They are now restored as indexable SEO landing pages
-# (200, self-canonical, in sitemap.xml + prerender), so their redirects were removed.
-
-# ─── Pre-existing retired pages ──────────────────────────────────────────────
+[[redirects]]
+  from = "/book"
+  to = "/contact/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/book/*"
+  to = "/contact/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/schedule"
-  to = "/"
+  to = "/contact/"
   status = 301
   force = true
-
 [[redirects]]
   from = "/schedule/*"
-  to = "/"
+  to = "/contact/"
   status = 301
   force = true
-
 [[redirects]]
-  from = "/faqs"
-  to = "/"
+  from = "/startingdiagnostic"
+  to = "/considering-therapy/"
   status = 301
   force = true
-
 [[redirects]]
-  from = "/faqs/*"
-  to = "/"
+  from = "/startingdiagnostic/*"
+  to = "/considering-therapy/"
   status = 301
   force = true
-
-# ─── Burnout Diagnostic → Free Tools "Are you burned out?" ──────────────────
-# The legacy burnout diagnostic's public URL now points at the new burnout tool
-# so existing links land on the actual burnout assessment (not the general one).
 [[redirects]]
   from = "/burnout-diagnostic"
   to = "/free-tools/burned-out/"
@@ -195,31 +120,271 @@
   to = "/free-tools/burned-out/"
   status = 301
   force = true
-
-# ─── Clarity Tools → Free Tools (section rename + IA change) ─────────────────
-# "Free Tools" is now the umbrella section for every free interactive resource;
-# "Clarity tool" survives only as the TYPE of these five diagnostics. Each old
-# URL resolves in ONE direct 301 to its exact new equivalent — the per-tool
-# rules are listed before the catch-all so the specific match always wins.
-# Bare + trailing-slash forms are both listed so either resolves in a single hop.
 [[redirects]]
-  from = "/clarity-tools/business-constraint"
-  to = "/free-tools/business-constraint/"
+  from = "/faqs"
+  to = "/faq/"
   status = 301
   force = true
 [[redirects]]
-  from = "/clarity-tools/business-constraint/"
-  to = "/free-tools/business-constraint/"
+  from = "/faqs/*"
+  to = "/faq/"
+  status = 301
+  force = true
+
+# ─── Hidden and retired pages ────────────────────────────────────────────────────
+# Previously still served with noindex. /ask-me-anything/* includes the Greek
+# page at /ask-me-anything/el, which a printed QR code points to.
+[[redirects]]
+  from = "/founders"
+  to = "/therapy-for-founders/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/founders/*"
+  to = "/therapy-for-founders/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/solopreneurs"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/solopreneurs/*"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/getinterviewed"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/getinterviewed/*"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/wtf-friday"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/wtf-friday/*"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/ask-me-anything"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/ask-me-anything/*"
+  to = "/404.html"
+  status = 410
+  force = true
+
+# ─── Greek site (/el/) — retired, no Greek-language equivalent ───────────────────
+# Each known page goes to its closest English page; anything else under /el/
+# falls through to the homepage.
+[[redirects]]
+  from = "/el/about"
+  to = "/about/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/1-to-1"
+  to = "/work-with-me/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/reviews"
+  to = "/reviews/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/executive-coaching"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/career-coaching"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/burnout"
+  to = "/executive-burnout-therapy/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/imposter-syndrome"
+  to = "/achievement-self-worth/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/startingdiagnostic"
+  to = "/considering-therapy/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/confidentiality"
+  to = "/confidentiality/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/book"
+  to = "/contact/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el"
+  to = "/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/el/*"
+  to = "/"
+  status = 301
+  force = true
+
+# ─── Greek-speaking city pages — not rebuilt ─────────────────────────────────────
+# London, Dublin and Manchester go to the one Greek-speaking page; New York is
+# gone. City pages return only once location eligibility is confirmed.
+[[redirects]]
+  from = "/greek-speaking-therapist-london"
+  to = "/greek-speaking-psychotherapist/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-london/*"
+  to = "/greek-speaking-psychotherapist/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-dublin"
+  to = "/greek-speaking-psychotherapist/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-dublin/*"
+  to = "/greek-speaking-psychotherapist/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-manchester"
+  to = "/greek-speaking-psychotherapist/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-manchester/*"
+  to = "/greek-speaking-psychotherapist/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-new-york"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/greek-speaking-therapist-new-york/*"
+  to = "/404.html"
+  status = 410
+  force = true
+
+# ─── Free tools — two stay, the rest retire ──────────────────────────────────────
+# /free-tools/quit-your-job/ and /free-tools/burned-out/ stay live. The business
+# tools, Roast My Offer and Find Your Focus Area are retired; each old URL, and
+# each old /clarity-tools/ URL, goes straight to its final page with no chain.
+[[redirects]]
+  from = "/free-tools/business-constraint"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/free-tools/business-constraint/*"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/business-constraint"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/business-constraint/*"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/free-tools/strategy-or-execution"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/free-tools/strategy-or-execution/*"
+  to = "/professional-coaching/"
   status = 301
   force = true
 [[redirects]]
   from = "/clarity-tools/strategy-or-execution"
-  to = "/free-tools/strategy-or-execution/"
+  to = "/professional-coaching/"
   status = 301
   force = true
 [[redirects]]
-  from = "/clarity-tools/strategy-or-execution/"
-  to = "/free-tools/strategy-or-execution/"
+  from = "/clarity-tools/strategy-or-execution/*"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/free-tools/become-a-solopreneur"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/free-tools/become-a-solopreneur/*"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/become-a-solopreneur"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/clarity-tools/become-a-solopreneur/*"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/free-tools/roast-my-offer"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/free-tools/roast-my-offer/*"
+  to = "/professional-coaching/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/free-tools/find-your-focus-area"
+  to = "/free-tools/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/free-tools/find-your-focus-area/*"
+  to = "/free-tools/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/find-your-focus-area"
+  to = "/free-tools/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/find-your-focus-area/*"
+  to = "/free-tools/"
   status = 301
   force = true
 [[redirects]]
@@ -228,7 +393,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/clarity-tools/quit-your-job/"
+  from = "/clarity-tools/quit-your-job/*"
   to = "/free-tools/quit-your-job/"
   status = 301
   force = true
@@ -238,28 +403,12 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/clarity-tools/burned-out/"
+  from = "/clarity-tools/burned-out/*"
   to = "/free-tools/burned-out/"
   status = 301
   force = true
 [[redirects]]
-  from = "/clarity-tools/become-a-solopreneur"
-  to = "/free-tools/become-a-solopreneur/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/clarity-tools/become-a-solopreneur/"
-  to = "/free-tools/become-a-solopreneur/"
-  status = 301
-  force = true
-# Section root + anything else left under the old prefix.
-[[redirects]]
   from = "/clarity-tools"
-  to = "/free-tools/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/clarity-tools/"
   to = "/free-tools/"
   status = 301
   force = true
@@ -269,53 +418,64 @@
   status = 301
   force = true
 
-# ─── Find Your Focus Area lives at the root ──────────────────────────────────
-# The flagship assessment is /find-your-focus-area/. It is also the first item in
-# Free Tools, so the path a visitor might guess from the other tools' URLs
-# resolves to it in one hop.
+# ─── Deleted drafts and microsites — gone ────────────────────────────────────────
+# /logoutclub/* includes /logoutclub/el/.
 [[redirects]]
-  from = "/free-tools/find-your-focus-area"
-  to = "/find-your-focus-area/"
-  status = 301
+  from = "/draft/experience-to-offer"
+  to = "/404.html"
+  status = 410
   force = true
 [[redirects]]
-  from = "/free-tools/find-your-focus-area/*"
-  to = "/find-your-focus-area/"
-  status = 301
+  from = "/draft/experience-to-offer/*"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/draft/private-sparring"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/draft/private-sparring/*"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/draft/solo-business-growth"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/draft/solo-business-growth/*"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/logoutclub"
+  to = "/404.html"
+  status = 410
+  force = true
+[[redirects]]
+  from = "/logoutclub/*"
+  to = "/404.html"
+  status = 410
   force = true
 
-# ─── Book-a-call (Calendly) deactivated → route to the contact page ───────────
-# The Calendly booking pages are retired; every "book a call" intent now goes to
-# the contact form (orientation interest preselected). force=true wins over the
-# existing /book/ index.html, which is kept in the repo but no longer served.
+# ─── Writing (/blog/) ────────────────────────────────────────────────────────────
+# /blog/ is the live Writing hub. force = false, so this rule only applies
+# where no page exists: the old essays (not restored yet) land on the hub,
+# while /blog/ itself and any essay restored later as blog/<slug>/index.html
+# are served normally without touching this file.
 [[redirects]]
-  from = "/book"
-  to = "/contact/?interest=orientation"
+  from = "/blog/*"
+  to = "/blog/"
   status = 301
-  force = true
-[[redirects]]
-  from = "/book/*"
-  to = "/contact/?interest=orientation"
-  status = 301
-  force = true
+  force = false
 
-# ─── Greek "Ask Me Anything" — exact QR-code URL (no trailing slash) ──────────
-# The printed QR code points to /ask-me-anything/el exactly. Serve the Greek
-# page directly at that path with a 200 rewrite so the URL stays as-is (no
-# redirect to a trailing slash). The trailing-slash form still resolves normally
-# via the directory index.
-[[redirects]]
-  from = "/ask-me-anything/el"
-  to = "/ask-me-anything/el/index.html"
-  status = 200
-  force = true
-
-# ─── Hot Seat coworking PDF — clean link that opens the PDF ───────────────────
-# Serve the PDF bytes directly at /hot-seat-coworking-spaces (200 rewrite = keep
-# the URL; force = win over the directory's index.html) so the link opens the PDF
-# in the browser's native viewer. Both bare and trailing-slash forms resolve in
-# one hop; the directory's index.html stays as a fallback for other environments.
-# The page is kept out of search via X-Robots-Tag below (not in sitemap/prerender).
+# ─── Hot Seat coworking PDF — clean link that opens the PDF ──────────────────────
+# Serve the PDF bytes directly at /hot-seat-coworking-spaces (200 rewrite =
+# keep the URL; force = win over the directory's index.html). Kept out of
+# search by the X-Robots-Tag header below.
 [[redirects]]
   from = "/hot-seat-coworking-spaces"
   to = "/hot-seat-coworking-spaces/hot-seat-coworking.pdf"
