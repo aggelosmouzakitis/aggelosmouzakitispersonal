@@ -1121,11 +1121,18 @@ window.CLARITY_DATA['quit-your-job'] = {
     count: '20 questions',
     start: 'Start assessment →'
   },
+  // Result links: the related page and the consultation route (the labels
+  // are the Free Tools page's own, from the final editorial copy).
   cta: {
     heading: 'Want another perspective?',
-    sub: 'A working session can help you separate what needs to change from whether you need to leave, without anyone telling you what to do.',
-    label: 'SEE HOW I WORK →',
-    href: '/work-with-me/'
+    links: [{
+      label: 'Career Change & Decisions',
+      href: '/career-transition-therapy/'
+    }, {
+      label: 'Book a consultation',
+      href: '/contact/',
+      primary: true
+    }]
   },
   breakdownGroups: [{
     title: 'What is pushing you',
@@ -2283,9 +2290,15 @@ window.CLARITY_DATA['burned-out'] = {
   },
   cta: {
     heading: 'Want another perspective?',
-    sub: 'If the result points to depletion, boredom, or a loss of fit, a working session can help you decide what to change. For clinical concerns, speak to a professional.',
-    label: 'SEE HOW I WORK →',
-    href: '/work-with-me/'
+    sub: 'For clinical concerns, speak to a professional.',
+    links: [{
+      label: 'Burnout & Can\u2019t Switch Off',
+      href: '/executive-burnout-therapy/'
+    }, {
+      label: 'Book a consultation',
+      href: '/contact/',
+      primary: true
+    }]
   },
   breakdownGroups: [{
     title: 'Work strain',

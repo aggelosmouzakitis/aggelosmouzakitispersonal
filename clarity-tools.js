@@ -884,7 +884,8 @@ function ClarityResult({
       margin: 0
     }
   }, interp.context)) : null,
-  // 10. Want another perspective?
+  // 10. Want another perspective? — the related page and the consultation
+  // route (`links`); older tool data with a single `href`/`label` still works.
   React.createElement('div', {
     style: {
       marginTop: '3rem',
@@ -900,12 +901,30 @@ function ClarityResult({
       color: '#3A403A',
       margin: '0 0 .6rem'
     }
-  }, data.cta.heading), React.createElement('p', {
+  }, data.cta.heading), data.cta.sub ? React.createElement('p', {
     style: {
       ...C.p,
       marginBottom: '1.3rem'
     }
-  }, data.cta.sub), React.createElement('a', {
+  }, data.cta.sub) : null, data.cta.links ? React.createElement('div', {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      alignItems: 'center',
+      gap: '14px 24px',
+      marginTop: data.cta.sub ? 0 : '1.3rem'
+    }
+  }, data.cta.links.map(function (l, i) {
+    return React.createElement('a', {
+      key: i,
+      href: l.href,
+      className: 'cta-btn',
+      style: l.primary ? C.cta : {
+        ...C.cta,
+        ...C.ctaSec
+      }
+    }, l.label + ' →');
+  })) : React.createElement('a', {
     href: data.cta.href,
     className: 'cta-btn',
     style: C.cta

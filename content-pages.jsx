@@ -457,20 +457,20 @@ function SvcCta({ href, children, ghost }) {
 }
 function SvcNote({ children }) { return React.createElement('p', { className: 'svc-note' }, children); }
 function SvcEyebrow({ children }) { return React.createElement('p', { className: 'svc-eyebrow' }, children); }
-// Site-wide discovery pair: the free assessment is the dominant action, the
-// service page the softer second route. The full Free Tools collection stays
-// one click away in the header and in the closing strip below.
-const SVC_ASSESSMENT_URL = (typeof window !== 'undefined' && window.FOCUS_AREA_URL) || '/find-your-focus-area/';
+// The site-wide primary action is the consultation route (/contact/); the
+// service page is the softer second route. Only the held
+// /imposter-syndrome-therapy/ page still renders these components.
+const SVC_CONTACT_URL = (typeof window !== 'undefined' && window.CONTACT_URL) || '/contact/';
 function SvcHeroCta() {
   return React.createElement('div', { className: 'svc-ctarow svc-ctarow--hero' },
-    React.createElement(SvcCta, { href: SVC_ASSESSMENT_URL }, 'FREE ASSESSMENT →'),
+    React.createElement(SvcCta, { href: SVC_CONTACT_URL }, 'BOOK A CONSULTATION →'),
     React.createElement(SvcCta, { href: '/work-with-me/', ghost: true }, 'SEE HOW I WORK →'));
 }
 function SvcClosingCta({ title, body }) {
   return React.createElement('section', { className: 'svc-close' },
     React.createElement('h2', { className: 'svc-close__h' }, title),
     body ? React.createElement('p', { className: 'svc-close__p' }, body) : null,
-    React.createElement('a', { href: SVC_ASSESSMENT_URL, className: 'cta-btn svc-close__cta' }, 'FREE ASSESSMENT →'),
+    React.createElement('a', { href: SVC_CONTACT_URL, className: 'cta-btn svc-close__cta' }, 'BOOK A CONSULTATION →'),
     React.createElement('a', { href: '/work-with-me/', className: 'svc-close__soft' },
       React.createElement('span', null, 'See how I work'), React.createElement('span', { 'aria-hidden': 'true' }, '→')));
 }
