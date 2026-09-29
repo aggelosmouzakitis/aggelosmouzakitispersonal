@@ -1,940 +1,1259 @@
-// site-pages.jsx — renders the 24 canonical pages from site-copy.js.
+// site-pages.jsx — renders the 25 canonical pages from the canonical copy.
 //
-// Loaded after site-chrome.js (tokens, header, footer, Motion) and site-copy.js
-// (window.SITE_COPY, the final editorial copy). Each page shell calls
-// renderSitePage('<id>'); scripts/seo/prerender.js snapshots the result into
-// the page's #root so the copy is in the HTML before any JavaScript runs.
+// Loaded after site-nav.js, site-chrome.js and site-copy.js. Each page shell
+// calls renderSitePage("<id>"); scripts/seo/prerender.js snapshots the result
+// into the page's #root so the copy is in the HTML before any JavaScript runs.
 //
-// Copy is never written here. This file decides only how blocks look:
-//   PAGE_TYPES     one shell per kind of page (home, service, audience, problem,
-//                  resource, faq, reviews, tools, writing, contact, legal, about, hub)
-//   INLINE_LINKS   service names in body copy that link to their page
-//   RELATED        "Related" rows that complete the internal-link graph where
-//                  the editorial CTAs leave a required link out
-// A CTA whose destination does not exist yet has href: null in the copy data
-// (see scripts/copy/extract-editorial.py) and is left out, never re-pointed.
-//
-// Everything is scoped in one IIFE so nothing collides with the other bundles'
-// top-level names. Exposes window.renderSitePage and window.SitePage.
+// One visual system for every page ("Direction v4"): the 1240px site grid and
+// the centred 760px reading column, one type scale (Archivo Black for the H1
+// only; Inter Tight for H2, H3 and the rare statement; Inter for the rest) and
+// one of each component — primary button, secondary link, service row,
+// resource column, credential cell, FAQ row, continue row, dark section, image
+// frame and the close. The words come verbatim from site-copy.jsx; this file
+// only decides how they are set. Where the design sets one paragraph as several
+// elements (a lead line and rows, a statement and the rest), the sentences are
+// split, never reworded (scripts/copy/check-copy.py checks them in order).
+
 (function () {
+  const {
+    useState,
+    useEffect,
+    useRef
+  } = React;
   const e = React.createElement;
-  const S = window.SITE;
   const COPY = window.SITE_COPY && window.SITE_COPY.pages || {};
+  const CONTACT_URL = window.CONTACT_URL || '/contact/';
 
-  // ── Contextual links ───────────────────────────────────────────────────────
-  // Only words already in the copy become links, and only the first time they
-  // appear on a page. Page id → [phrase, href].
-  const INLINE_LINKS = {
-    faq: [['Individual Psychotherapy', '/individual-psychotherapy/'], ['Couples Therapy', '/couples-therapy/'], ['Professional Coaching', '/professional-coaching/']],
-    'therapy-for-executives': [['Professional Coaching', '/professional-coaching/']]
-  };
-
-  // The implementation brief's link graph (Phase 11) where the editorial CTAs
-  // do not already carry the link: audience pages → Individual Psychotherapy,
-  // problem pages → a service + an audience page + an adjacent problem,
-  // Considering Therapy → Individual Psychotherapy / FAQ / Reviews, About →
-  // Reviews, Reviews → About. Labels are the navigation's own page names.
-  const L = {
-    ip: {
-      label: 'Individual Psychotherapy',
-      href: '/individual-psychotherapy/'
-    },
-    tech: {
-      label: 'Men in Tech & Demanding Careers',
-      href: '/therapy-for-men-in-tech/'
-    },
-    execs: {
-      label: 'Executives & Leaders',
-      href: '/therapy-for-executives/'
-    },
-    rel: {
-      label: 'Relationship Problems',
-      href: '/relationship-problems-men/'
-    },
-    ach: {
-      label: 'Achievement & Self-Worth',
-      href: '/achievement-self-worth/'
-    },
-    faq: {
-      label: 'FAQ',
-      href: '/faq/'
-    },
-    reviews: {
-      label: 'Reviews',
-      href: '/reviews/'
-    },
-    about: {
-      label: 'About',
-      href: '/about/'
-    }
-  };
-  const RELATED = {
-    'therapy-for-men-in-tech': [L.ip],
-    'therapy-for-executives': [L.ip],
-    'greek-speaking-psychotherapist': [L.ip],
-    'relationship-problems-men': [L.tech],
-    'separation-divorce-men': [L.ip, L.rel, L.tech],
-    'executive-burnout-therapy': [L.ip, L.tech],
-    'career-transition-therapy': [L.ip, L.execs],
-    'anxiety-overthinking': [L.ip, L.tech, L.ach],
-    'achievement-self-worth': [L.ip, L.tech],
-    'considering-therapy': [L.ip, L.faq, L.reviews],
-    about: [L.reviews],
-    reviews: [L.about]
-  };
-
-  // ── Rich text ──────────────────────────────────────────────────────────────
-  // "**bold**" marks the source's bold runs. Configured phrases become links.
-  function linkify(text, ctx, keyBase) {
-    const phrases = ctx.links || [];
-    for (let i = 0; i < phrases.length; i++) {
-      const [phrase, href] = phrases[i];
-      if (ctx.used[phrase]) continue;
-      const at = text.indexOf(phrase);
-      if (at < 0) continue;
-      ctx.used[phrase] = true;
-      return [].concat(at ? linkify(text.slice(0, at), ctx, keyBase + 'a') : [], [e('a', {
-        key: keyBase + 'l',
-        href
-      }, phrase)], linkify(text.slice(at + phrase.length), ctx, keyBase + 'b'));
-    }
-    return text ? [text] : [];
+  // ── Text helpers ───────────────────────────────────────────────────────────
+  // Sentences of a paragraph (no lookbehind: older Safari cannot parse it).
+  function sentences(text) {
+    return text.replace(/([.!?…][”’]?)\s+(?=[“‘"(A-Z0-9])/g, '$1\u0000').split('\u0000').filter(Boolean);
   }
+  const plain = t => t.replace(/\*\*/g, '');
+
+  // **bold** → <strong>; on some pages a bold service name is also its link.
+  const INLINE_LINKS = {
+    faq: {
+      'Individual Psychotherapy': '/individual-psychotherapy/',
+      'Couples Therapy': '/couples-therapy/',
+      'Professional Coaching': '/professional-coaching/',
+      'Considering Therapy': '/considering-therapy/'
+    }
+  };
   function rich(text, ctx) {
-    const c = ctx || {
-      links: [],
-      used: {}
-    };
-    return String(text).split(/(\*\*[^*]+\*\*)/).filter(Boolean).map((part, i) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
-        return e('strong', {
-          key: i
-        }, linkify(part.slice(2, -2), c, 's' + i));
-      }
-      return e(React.Fragment, {
+    const links = ctx && INLINE_LINKS[ctx.id] || {};
+    return text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean).map((part, i) => {
+      const m = part.match(/^\*\*([^*]+)\*\*$/);
+      if (!m) return part;
+      if (links[m[1]]) return e('a', {
+        key: i,
+        className: 'inl',
+        href: links[m[1]]
+      }, m[1]);
+      return e('strong', {
         key: i
-      }, linkify(part, c, 't' + i));
+      }, m[1]);
     });
   }
-  const plain = text => String(text).replace(/\*\*/g, '');
 
-  // ── Calls to action ────────────────────────────────────────────────────────
-  // The consultation route is the one filled button; every other CTA is a
-  // quieter arrow link. A CTA without a destination (href: null in the copy
-  // data: essays not yet restored, Terms/Privacy not yet written) is left out
-  // rather than pointed somewhere it does not mean.
-  const isPrimary = it => it.href === window.CONTACT_URL;
+  // ── Actions ────────────────────────────────────────────────────────────────
+  const Arrow = () => e('span', {
+    'aria-hidden': 'true'
+  }, '→');
   const isExternal = href => /^https?:/.test(href);
-  function Cta({
+  function TLink({
     item,
-    tone
+    className
   }) {
-    if (!item.href) return null;
-    const arrow = item.arrow ? e('span', {
-      'aria-hidden': 'true'
-    }, '→') : null;
-    const extra = isExternal(item.href) ? {
+    const ext = isExternal(item.href) ? {
       target: '_blank',
       rel: 'noopener noreferrer'
     } : {};
-    if (isPrimary(item)) {
-      return e('a', Object.assign({
-        className: 'sp-btn',
-        href: item.href
-      }, extra), e('span', null, item.label), arrow);
-    }
     return e('a', Object.assign({
-      className: 'sp-link' + (tone === 'dark' ? ' sp-link--dark' : ''),
+      className: 'tlink' + (className ? ' ' + className : ''),
       href: item.href
-    }, extra), e('span', null, item.label), arrow);
+    }, ext), e('span', null, item.label), e(Arrow));
   }
-  function CtaRow({
+  function Btn({
+    item
+  }) {
+    return e('a', {
+      className: 'btn',
+      href: item.href
+    }, item.label, ' ', e(Arrow));
+  }
+  // Book a consultation is the primary action wherever it appears; everything
+  // else is a secondary link. Links whose page is not published are left out.
+  const isPrimary = it => it.href === CONTACT_URL;
+  function Actions({
     items,
-    tone
+    className
   }) {
     const live = items.filter(it => it.href);
     if (!live.length) return null;
     return e('div', {
-      className: 'sp-ctas'
-    }, live.map((it, i) => e(Cta, {
-      key: i,
-      item: it,
-      tone
+      className: className || 'actions'
+    }, live.map(it => e(isPrimary(it) ? Btn : TLink, {
+      key: it.label + it.href,
+      item: it
     })));
   }
-  function RelatedRow({
-    items,
-    tone
-  }) {
-    if (!items || !items.length) return null;
-    return e('p', {
-      className: 'sp-related' + (tone === 'dark' ? ' sp-related--dark' : '')
-    }, e('span', {
-      className: 'sp-related__k'
-    }, 'Related:'), items.map((it, i) => e(Cta, {
-      key: i,
-      item: Object.assign({
-        arrow: true
-      }, it),
-      tone
-    })));
-  }
+  const findCta = (blocks, label) => {
+    for (const b of blocks) if (b.t === 'ctas') for (const it of b.items) if (it.label === label) return it;
+    return null;
+  };
 
   // ── Blocks ─────────────────────────────────────────────────────────────────
-  const isQuotedLine = t => /^“[\s\S]*”\.?$/.test(t);
-  function Block({
-    b,
-    ctx,
-    tone
-  }) {
-    switch (b.t) {
-      case 'p':
-        return e('p', {
-          className: isQuotedLine(b.text) ? 'sp-p sp-p--said' : 'sp-p'
-        }, rich(b.text, ctx));
-      case 'list':
-        return e('ul', {
-          className: 'sp-list'
-        }, b.items.map((it, i) => e('li', {
-          key: i
-        }, rich(it, ctx))));
-      case 'ctas':
-        return e(CtaRow, {
-          items: b.items,
-          tone
-        });
-      case 'related':
-        return e(RelatedRow, {
-          items: [b],
-          tone
-        });
-      case 'meta':
-        return e('p', {
-          className: 'sp-meta'
-        }, b.text);
-      case 'quote':
-        return e('figure', {
-          className: 'sp-quote'
-        }, e('blockquote', null, e('p', null, b.text)), b.cite ? e('figcaption', null, b.cite) : null);
-      case 'sub':
-        return e('div', {
-          className: 'sp-sub'
-        }, e('h3', {
-          className: 'sp-h3'
-        }, b.h3), e(Blocks, {
-          blocks: b.blocks,
-          ctx,
-          tone
-        }));
-      default:
-        return null;
-    }
-  }
+  // The default setting of every copy block. `roles` maps a paragraph index to
+  // a text role: 'emph' (a short opening line), 'strong' (a closing line).
   function Blocks({
     blocks,
     ctx,
-    tone
+    roles,
+    dark
   }) {
-    return e(React.Fragment, null, blocks.map((b, i) => e(Block, {
-      key: i,
-      b,
-      ctx,
-      tone
-    })));
+    let pIndex = -1;
+    return blocks.map((b, i) => {
+      const key = b.t + i;
+      switch (b.t) {
+        case 'p':
+          {
+            pIndex++;
+            const role = roles && roles[pIndex];
+            return e('p', {
+              key,
+              className: 'p' + (role ? ' p--' + role : '')
+            }, rich(b.text, ctx));
+          }
+        case 'lines':
+          return e('ul', {
+            key,
+            className: 'lines'
+          }, b.lines.map(l => e('li', {
+            key: l
+          }, rich(l, ctx))));
+        case 'list':
+          return e('ul', {
+            key,
+            className: 'list'
+          }, b.items.map(it => e('li', {
+            key: it
+          }, rich(it, ctx))));
+        case 'ctas':
+          return e(Actions, {
+            key,
+            items: b.items,
+            className: 'links'
+          });
+        case 'related':
+          return e('p', {
+            key,
+            className: 'related'
+          }, 'Related: ', b.items.filter(it => it.href).map(it => e(TLink, {
+            key: it.label,
+            item: it
+          })));
+        case 'meta':
+          return e('p', {
+            key,
+            className: 'meta'
+          }, b.text);
+        case 'pairs':
+          return e('dl', {
+            key,
+            className: 'facts'
+          }, b.items.map(it => e('div', {
+            key: it.a
+          }, e('dt', null, it.a), e('dd', null, it.b))));
+        case 'quote':
+          return e('figure', {
+            key,
+            className: 'quote'
+          }, e('blockquote', null, e('p', null, b.text)), e('figcaption', null, b.cite));
+        case 'sub':
+          return e('div', {
+            key,
+            className: 'subsec'
+          }, e('h3', {
+            className: 'h3'
+          }, b.h3), e('div', {
+            className: 'flow'
+          }, e(Blocks, {
+            blocks: b.blocks,
+            ctx,
+            dark
+          })));
+        default:
+          return null;
+      }
+    });
+  }
+
+  // A short, single-sentence opening paragraph becomes the section's emphasis
+  // line — the same role on every page, so equivalent openings read alike.
+  function defaultRoles(blocks) {
+    const ps = blocks.filter(b => b.t === 'p');
+    if (ps.length >= 2 && sentences(plain(ps[0].text)).length === 1 && plain(ps[0].text).length <= 90) return {
+      0: 'emph'
+    };
+    return null;
   }
 
   // ── Sections ───────────────────────────────────────────────────────────────
-  // A section is a <section> labelled by its h2. `variant` picks the layout.
-  function Section({
+  function ReadSection({
     s,
     ctx,
-    variant,
-    num,
+    roles,
     children
   }) {
-    const hid = 'h-' + s.id;
-    const head = [e('span', {
-      key: 'r',
-      className: 'sp-rule',
-      'data-mo': 'rule-l',
-      'aria-hidden': 'true'
-    }), num ? e('span', {
-      key: 'n',
-      className: 'sp-num',
-      'aria-hidden': 'true'
-    }, (num < 10 ? '0' : '') + num + ' /') : null, e('h2', {
-      key: 'h',
-      className: 'sp-h2',
-      id: hid
-    }, s.h2)];
-    const body = children || e(Blocks, {
+    return e('section', {
+      className: 'sec',
+      id: s.id,
+      'aria-labelledby': s.id + '-h'
+    }, e('div', {
+      className: 'read'
+    }, e('h2', {
+      className: 'h2',
+      id: s.id + '-h'
+    }, s.h2), children || e('div', {
+      className: 'flow'
+    }, e(Blocks, {
       blocks: s.blocks,
-      ctx
-    });
-    if (variant === 'rail') {
-      return e('section', {
-        className: 'sp-sec sp-sec--rail',
-        id: s.id,
-        'aria-labelledby': hid
-      }, e('div', {
-        className: 'sp-sec__rail'
-      }, head), e('div', {
-        className: 'sp-sec__body'
-      }, body));
+      ctx,
+      roles: roles === undefined ? defaultRoles(s.blocks) : roles
+    }))));
+  }
+
+  // Dark section: H2 and a short statement on the left (5fr), the rest on the
+  // right (7fr), top-aligned. The statement is the opening sentence, split off
+  // the first paragraph when that sentence is short.
+  function DarkSection({
+    s,
+    ctx
+  }) {
+    const blocks = s.blocks.slice();
+    let statement = null;
+    const first = blocks.findIndex(b => b.t === 'p');
+    if (first === 0) {
+      const ss = sentences(blocks[0].text);
+      if (plain(ss[0]).length <= 90) {
+        statement = ss[0];
+        const rest = ss.slice(1).join(' ');
+        if (rest) blocks[0] = {
+          t: 'p',
+          text: rest
+        };else blocks.shift();
+      }
     }
     return e('section', {
-      className: 'sp-sec' + (variant ? ' sp-sec--' + variant : ''),
+      className: 'band dark on-dark',
       id: s.id,
-      'aria-labelledby': hid
-    }, head, body);
-  }
-
-  // The editorial "Contact" section that ends most pages: a forest band.
-  function Closing({
-    s,
-    related
-  }) {
-    const hid = 'h-' + s.id;
-    return e('section', {
-      className: 'sp-close',
-      id: s.id,
-      'aria-labelledby': hid
+      'aria-labelledby': s.id + '-h'
     }, e('div', {
-      className: 'sp-close__in'
+      className: 'wrap dark__in'
+    }, e('div', {
+      style: {
+        minWidth: 0
+      }
     }, e('h2', {
-      className: 'sp-close__h',
-      id: hid
-    }, s.h2), e(Blocks, {
-      blocks: s.blocks,
-      ctx: {
-        links: [],
-        used: {}
-      },
-      tone: 'dark'
-    }), related ? e(RelatedRow, {
-      items: related,
-      tone: 'dark'
-    }) : null));
+      className: 'h2',
+      id: s.id + '-h'
+    }, s.h2), statement ? e('p', {
+      className: 'dark__statement'
+    }, rich(statement, ctx)) : null), e('div', {
+      className: 'dark__body flow'
+    }, e(Blocks, {
+      blocks,
+      ctx,
+      dark: true
+    }))));
   }
 
-  // ── Hero (inner pages) ─────────────────────────────────────────────────────
-  function Hero({
+  // Burnout's dark section: the H2 across the top, then 5/7 — the opening
+  // line in sage on the left, the rest on the right with its last line ruled.
+  function DarkTopSection({
+    s,
+    ctx
+  }) {
+    const ps = s.blocks.filter(b => b.t === 'p');
+    const rest = s.blocks.filter(b => b !== ps[0]);
+    const lastP = rest.filter(b => b.t === 'p').length - 1;
+    return e('section', {
+      className: 'band dark on-dark',
+      id: s.id,
+      'aria-labelledby': s.id + '-h'
+    }, e('div', {
+      className: 'wrap dark__in dark__in--top'
+    }, e('h2', {
+      className: 'h2 dark__h2-top',
+      id: s.id + '-h'
+    }, s.h2), e('p', {
+      className: 'dark__lead'
+    }, rich(ps[0].text, ctx)), e('div', {
+      className: 'dark__body flow'
+    }, e(Blocks, {
+      blocks: rest,
+      ctx,
+      dark: true,
+      roles: {
+        [lastP]: 'rule'
+      }
+    }))));
+  }
+
+  // Photo split: a full-bleed photograph beside the section's text, 1:1.
+  function PhotoSplit({
+    s,
+    ctx,
+    photo,
+    dark
+  }) {
+    return e('section', {
+      className: 'band split' + (dark ? ' split--dark on-dark' : ''),
+      id: s.id,
+      'aria-labelledby': s.id + '-h'
+    }, e('figure', {
+      className: 'split__fig'
+    }, e('img', {
+      src: photo.src,
+      alt: photo.alt,
+      loading: 'lazy',
+      decoding: 'async',
+      style: {
+        objectPosition: photo.pos || '50% 30%'
+      }
+    })), e('div', {
+      className: 'split__body'
+    }, e('div', {
+      className: 'split__text'
+    }, e('h2', {
+      className: 'h2',
+      id: s.id + '-h'
+    }, s.h2), e('div', {
+      className: 'flow'
+    }, e(Blocks, {
+      blocks: s.blocks,
+      ctx,
+      dark
+    })))));
+  }
+
+  // Questions and answers: one accordion row each; the page's first is open.
+  function FaqSection({
+    s,
+    ctx,
+    openFirst
+  }) {
+    return e('section', {
+      className: 'sec',
+      id: s.id,
+      'aria-labelledby': s.id + '-h'
+    }, e('div', {
+      className: 'read'
+    }, e('h2', {
+      className: 'h2',
+      id: s.id + '-h'
+    }, s.h2), e('div', {
+      className: 'faq'
+    }, s.blocks.filter(b => b.t === 'sub').map((q, i) => e('details', {
+      key: q.h3,
+      open: openFirst && i === 0 ? true : undefined
+    }, e('summary', null, e('h3', null, q.h3), e('span', {
+      className: 'faq__sign',
+      'aria-hidden': 'true'
+    }, '+')), e('div', {
+      className: 'faq__a flow'
+    }, e(Blocks, {
+      blocks: q.blocks,
+      ctx
+    })))))));
+  }
+  const isFaq = s => s.blocks.length > 0 && s.blocks.every(b => b.t === 'sub' && /\?$/.test(b.h3));
+
+  // "Continue with": modest rows, the heading set as a label.
+  function ContinueSection({
+    s
+  }) {
+    const items = [].concat.apply([], s.blocks.filter(b => b.t === 'ctas').map(b => b.items)).filter(it => it.href);
+    return e('nav', {
+      className: 'continue read',
+      'aria-labelledby': s.id + '-h'
+    }, e('h2', {
+      className: 'label continue__label',
+      id: s.id + '-h'
+    }, s.h2), e('div', {
+      className: 'continue__list'
+    }, items.map(it => e('a', {
+      key: it.href,
+      href: it.href
+    }, it.label, e('span', {
+      'aria-hidden': 'true'
+    }, '→')))));
+  }
+
+  // The page's final "Contact" section as the dark close.
+  function Close({
+    s,
+    ctx
+  }) {
+    const ps = s.blocks.filter(b => b.t === 'p');
+    const items = [].concat.apply([], s.blocks.filter(b => b.t === 'ctas').map(b => b.items)).filter(it => it.href);
+    const text = ps.map(p => plain(p.text)).join(' ');
+    return e(window.CloseBand, {
+      label: s.h2,
+      text,
+      actions: items.map(it => e(isPrimary(it) ? Btn : TLink, {
+        key: it.href,
+        item: it
+      }))
+    });
+  }
+  const isClose = (s, i, all) => i === all.length - 1 && (s.h2 === 'Contact' || s.h2 === 'How to start');
+
+  // ── Heroes ─────────────────────────────────────────────────────────────────
+  function HeroText({
     p,
     ctx,
-    aside
+    h1Class
   }) {
-    const blocks = p.hero.blocks;
-    return e('section', {
-      className: 'sp-hero sp-hero--' + p.type + (aside ? ' sp-hero--aside' : '')
-    }, e('div', {
-      className: 'sp-hero__in'
-    }, e('div', {
-      className: 'sp-hero__copy'
-    }, p.hero.eyebrow ? e('p', {
-      className: 'sp-eyebrow'
-    }, p.hero.eyebrow) : null, e('h1', {
-      className: 'sp-h1',
+    const h = p.hero;
+    const ps = h.blocks.filter(b => b.t === 'p');
+    const ctas = [].concat.apply([], h.blocks.filter(b => b.t === 'ctas').map(b => b.items));
+    return e(React.Fragment, null, e('p', {
+      className: 'eyebrow'
+    }, h.eyebrow), e('h1', {
+      className: 'h1' + (h1Class ? ' ' + h1Class : ''),
       id: 'page-title'
-    }, p.hero.h1), e('div', {
-      className: 'sp-hero__lead'
-    }, blocks.map((b, i) => b.t === 'p' ? e('p', {
+    }, h.h1), h.sub ? e('p', {
+      className: 'sub'
+    }, h.sub) : null, ps.map((b, i) => e('p', {
       key: i,
-      className: 'sp-lead'
-    }, rich(b.text, ctx)) : e(Block, {
-      key: i,
-      b,
-      ctx
-    })))), aside || null));
+      className: 'lead'
+    }, rich(b.text, ctx))), ctas.length ? e(Actions, {
+      items: ctas
+    }) : null);
   }
-  function Portrait({
-    src,
-    w,
-    h,
-    className,
-    eager
+  function Frame({
+    photo
   }) {
     return e('figure', {
-      className: 'sp-portrait ' + (className || '')
+      className: 'frame'
+    }, e('div', {
+      className: 'frame__img'
     }, e('img', {
-      src,
-      alt: 'Aggelos Mouzakitis',
-      width: w,
-      height: h,
-      decoding: 'async',
-      loading: eager ? 'eager' : 'lazy'
+      src: photo.src,
+      alt: photo.alt,
+      fetchPriority: 'high',
+      style: {
+        objectPosition: photo.pos || '50% 30%'
+      }
+    })));
+  }
+  function Hero({
+    p,
+    ctx
+  }) {
+    const photo = HERO_PHOTO[p.id];
+    if (photo) {
+      return e('header', {
+        className: 'wrap hero-split'
+      }, e('div', {
+        style: {
+          minWidth: 0
+        }
+      }, e(HeroText, {
+        p,
+        ctx
+      })), e(Frame, {
+        photo
+      }));
+    }
+    return e('header', {
+      className: 'read hero-read'
+    }, e(HeroText, {
+      p,
+      ctx
     }));
   }
 
-  // ── Page frame ─────────────────────────────────────────────────────────────
-  function Frame({
-    p,
-    children
+  // ── Layout decisions, page by page ─────────────────────────────────────────
+  // Photography only where an existing photograph of Aggelos helps the page.
+  // (The old offer-page portraits are not used: their graphic backgrounds
+  // belong to the retired design.)
+  const HERO_PHOTO = {
+    'individual-psychotherapy': {
+      src: '/img/aggelos-opinion.jpeg',
+      alt: 'Aggelos Mouzakitis in conversation',
+      pos: '52% 30%'
+    },
+    about: {
+      src: '/img/aggelos-continuation.webp',
+      alt: 'Aggelos Mouzakitis',
+      pos: '50% 22%'
+    }
+  };
+  // At most one strong interruption per page: a dark section, or a photo split.
+  const DARK = {
+    'individual-psychotherapy': 'functioning-at-work',
+    'couples-therapy': 'work-and-the-relationship',
+    'professional-coaching': 'psychotherapy-instead',
+    'greek-speaking-psychotherapist': 'career-and-migration',
+    'relationship-problems-men': 'resentment-and-avoidance',
+    'separation-divorce-men': 'grief-after-a-relationship-ends',
+    'work-affecting-relationship': 'im-doing-this-for-us',
+    'career-transition-therapy': 'career-identity',
+    'anxiety-overthinking': 'anxiety-that-looks-productive',
+    'achievement-self-worth': 'perfectionism',
+    'considering-therapy': 'i-already-understand-why-i-do-it',
+    about: 'from-customer-research-to-clinical-work'
+  };
+  const DARK_TOP = {
+    'executive-burnout-therapy': 'sometimes-the-workload-is-ridiculous'
+  };
+  const PHOTO_SPLIT = {
+    'therapy-for-men-in-tech': {
+      id: 'my-background',
+      src: '/img/aggelos-homepage.webp',
+      alt: 'Aggelos Mouzakitis speaking on stage at a technology conference',
+      pos: '44% 38%'
+    },
+    'therapy-for-founders': {
+      id: 'my-background',
+      src: '/img/wtf-friday-speaking.webp',
+      alt: 'Aggelos Mouzakitis leading a workshop',
+      pos: '28% 30%'
+    },
+    'therapy-for-executives': {
+      id: 'my-background',
+      src: '/img/aggelos-opinion.jpeg',
+      alt: 'Aggelos Mouzakitis in conversation',
+      pos: '52% 30%'
+    }
+  };
+  // Text roles the reference designs set explicitly (paragraph index → role).
+  const ROLES = {
+    'executive-burnout-therapy': {
+      'time-off-doesnt-always-fix-it': {
+        2: 'strong'
+      }
+    }
+  };
+
+  // ── Individual Psychotherapy (reference design) ───────────────────────────
+  function TriggersSection({
+    s,
+    ctx
   }) {
-    return e(React.Fragment, null, e(window.ChromeStyles), e(SitePageStyles), e(window.SiteHeader, {
-      path: p.url
-    }), e('main', {
-      id: 'main',
-      className: 'sp sp--' + p.type,
-      tabIndex: -1
-    }, children), e(window.SiteFooterX, null));
+    const ps = s.blocks.filter(b => b.t === 'p');
+    return e('section', {
+      className: 'sec',
+      id: s.id,
+      'aria-labelledby': s.id + '-h'
+    }, e('div', {
+      className: 'wrap'
+    }, e('h2', {
+      className: 'h2',
+      id: s.id + '-h'
+    }, s.h2), e('p', {
+      className: 'p p--lead500'
+    }, rich(ps[0].text, ctx)), e('ul', {
+      className: 'grid2'
+    }, sentences(ps[1].text).map(t => e('li', {
+      key: t
+    }, rich(t, ctx))))));
   }
-
-  // Splits the trailing editorial "Contact" section off the body.
-  function splitClosing(sections) {
-    const last = sections[sections.length - 1];
-    if (last && last.id === 'contact') return [sections.slice(0, -1), last];
-    return [sections, null];
+  function StatementSection({
+    s,
+    ctx,
+    where
+  }) {
+    // where = 'first': the first paragraph's opening sentence is the statement;
+    // 'last': the last paragraph's closing sentence is.
+    const blocks = s.blocks.slice();
+    const idx = where === 'first' ? blocks.findIndex(b => b.t === 'p') : blocks.map(b => b.t).lastIndexOf('p');
+    const ss = sentences(blocks[idx].text);
+    const stmt = where === 'first' ? ss[0] : ss[ss.length - 1];
+    const rest = (where === 'first' ? ss.slice(1) : ss.slice(0, -1)).join(' ');
+    const before = blocks.slice(0, idx);
+    const after = blocks.slice(idx + 1);
+    const restBlock = rest ? [{
+      t: 'p',
+      text: rest
+    }] : [];
+    const stmtEl = e('p', {
+      className: 'statement',
+      key: 'stmt'
+    }, rich(stmt, ctx));
+    return e(ReadSection, {
+      s,
+      ctx
+    }, e('div', {
+      className: 'flow'
+    }, where === 'first' ? [stmtEl, e(Blocks, {
+      key: 'b',
+      blocks: before.concat(restBlock, after),
+      ctx
+    })] : [e(Blocks, {
+      key: 'a',
+      blocks: before.concat(restBlock),
+      ctx
+    }), stmtEl, e(Blocks, {
+      key: 'b',
+      blocks: after,
+      ctx
+    })]));
   }
-  const newCtx = p => ({
-    links: INLINE_LINKS[p.id] || [],
-    used: {}
-  });
+  // Two equal routes: each paragraph with its own link under its own label.
+  function RoutesSection({
+    s,
+    ctx,
+    routes
+  }) {
+    const ps = s.blocks.filter(b => b.t === 'p');
+    return e('section', {
+      className: 'sec',
+      id: s.id,
+      'aria-labelledby': s.id + '-h'
+    }, e('div', {
+      className: 'wrap'
+    }, e('h2', {
+      className: 'h2',
+      id: s.id + '-h'
+    }, s.h2), e('div', {
+      className: 'routes'
+    }, routes.map((r, i) => {
+      const link = findCta(s.blocks, r.link);
+      return e('div', {
+        key: r.h3,
+        className: 'route'
+      }, e('h3', {
+        className: 'h3'
+      }, r.h3), e('p', {
+        className: 'p'
+      }, rich(ps[i].text, ctx)), link ? e('div', {
+        className: 'links'
+      }, e(TLink, {
+        item: link
+      })) : null);
+    }))));
+  }
+  const INDIVIDUAL = {
+    'what-brings-people-in': (s, ctx) => e(TriggersSection, {
+      s,
+      ctx
+    }),
+    'what-happens-in-sessions': (s, ctx) => e(StatementSection, {
+      s,
+      ctx,
+      where: 'first'
+    }),
+    'work-in-psychotherapy': (s, ctx) => e(StatementSection, {
+      s,
+      ctx,
+      where: 'last'
+    }),
+    relationships: (s, ctx) => e(RoutesSection, {
+      s,
+      ctx,
+      routes: [{
+        h3: 'Individual psychotherapy',
+        link: 'Relationship problems'
+      }, {
+        h3: 'Couples therapy',
+        link: 'Couples therapy'
+      }]
+    })
+  };
+  const CUSTOM_SECTIONS = {
+    'individual-psychotherapy': INDIVIDUAL
+  };
 
-  // ── Generic page: service, audience, problem, resource, faq, legal, hub, about
-  const SECTION_VARIANT = {
-    audience: () => 'rail',
-    faq: () => 'rail',
-    problem: () => null,
-    service: s => s.id === 'practicalities' ? 'panel' : null,
-    hub: s => ['individual-psychotherapy', 'couples-therapy', 'professional-coaching'].indexOf(s.id) >= 0 ? 'card' : null
-  };
-  const NUMBERED = {
-    problem: true
-  };
+  // ── Generic page: hero, then each section in its setting ──────────────────
+  function sectionFor(p, s, i, all, ctx, state) {
+    const custom = CUSTOM_SECTIONS[p.id] && CUSTOM_SECTIONS[p.id][s.id];
+    if (custom) return custom(s, ctx);
+    if (isClose(s, i, all)) return e(Close, {
+      s,
+      ctx
+    });
+    if (s.h2 === 'Continue with') return e(ContinueSection, {
+      s
+    });
+    if (DARK[p.id] === s.id) return e(DarkSection, {
+      s,
+      ctx
+    });
+    if (DARK_TOP[p.id] === s.id) return e(DarkTopSection, {
+      s,
+      ctx
+    });
+    const photo = PHOTO_SPLIT[p.id];
+    if (photo && photo.id === s.id) return e(PhotoSplit, {
+      s,
+      ctx,
+      photo
+    });
+    if (isFaq(s)) {
+      const openFirst = !state.opened;
+      state.opened = true;
+      return e(FaqSection, {
+        s,
+        ctx,
+        openFirst
+      });
+    }
+    const roles = ROLES[p.id] && ROLES[p.id][s.id];
+    return e(ReadSection, {
+      s,
+      ctx,
+      roles
+    });
+  }
+  function Sections({
+    p,
+    ctx,
+    sections
+  }) {
+    const list = sections || p.sections;
+    const state = {
+      opened: false
+    };
+    return list.map((s, i) => e(React.Fragment, {
+      key: s.id
+    }, sectionFor(p, s, i, list, ctx, state)));
+  }
   function GenericPage({
     p
   }) {
-    const ctx = newCtx(p);
-    const [sections, closing] = splitClosing(p.sections);
-    // The Terms and privacy section is only two links, and no Terms or Privacy
-    // text exists on the site yet: it stays hidden until those pages exist.
-    const visible = sections.filter(s => !(s.id === 'terms-and-privacy' && s.blocks.every(b => b.t === 'ctas' && b.items.every(it => !it.href))));
-    const related = RELATED[p.id];
-    const pick = SECTION_VARIANT[p.type];
-    const aside = p.type === 'about' ? e(Portrait, {
-      src: '/img/aggelos-continuation.webp',
-      w: 2048,
-      h: 1536,
-      className: 'sp-portrait--hero',
-      eager: true
-    }) : null;
-
-    // Work With Me: its three service sections sit side by side as cards.
-    const cards = p.type === 'hub' ? visible.filter(s => pick(s) === 'card') : [];
-    let n = 0;
-    const renderSec = s => {
-      const variant = pick ? pick(s) : null;
-      if (variant === 'card') return null;
-      n += 1;
-      const isFaq = /questions$/.test(s.id) || p.type === 'faq';
-      return e(Section, {
-        key: s.id,
-        s,
-        ctx,
-        variant: isFaq && variant !== 'rail' ? 'faq' : variant,
-        num: NUMBERED[p.type] ? n : null
-      });
+    const ctx = {
+      id: p.id
     };
-    const body = [];
-    visible.forEach(s => {
-      if (p.type === 'hub' && cards.length && s === cards[0]) {
-        body.push(e('div', {
-          key: 'cards',
-          className: 'sp-cards sp-cards--3'
-        }, cards.map(c => e(Section, {
-          key: c.id,
-          s: c,
-          ctx,
-          variant: 'card'
-        }))));
-      }
-      body.push(renderSec(s));
-    });
-    return e(Frame, {
-      p
-    }, e(Hero, {
+    return e(React.Fragment, null, e(Hero, {
       p,
-      ctx,
-      aside
-    }), e('div', {
-      className: 'sp-body sp-body--' + p.type
-    }, body, !closing ? e(RelatedRow, {
-      items: related
-    }) : null), closing ? e(Closing, {
-      s: closing,
-      related
-    }) : null);
-  }
-
-  // ── Homepage ───────────────────────────────────────────────────────────────
-  const PT_SEAL = {
-    profile: 'https://www.psychologytoday.com/profile/1662603',
-    src: 'https://member.psychologytoday.com/verified-seal.js',
-    badge: '13',
-    id: '1662603',
-    code: 'aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy8xMy9wcm9maWxlLzE2NjI2MDM/Y2FsbGJhY2s9c3hjYWxsYmFjaw=='
-  };
-  // Psychology Today's verification seal. Their embed is an empty
-  // <a class="sx-verified-seal"> plus a script that fills it; the script is
-  // added only after React has committed the anchor (a static tag would fill
-  // the prerendered copy, which createRoot then replaces).
-  function VerifiedSeal() {
-    React.useEffect(function () {
-      const s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.src = PT_SEAL.src;
-      s.setAttribute('data-badge', PT_SEAL.badge);
-      s.setAttribute('data-id', PT_SEAL.id);
-      s.setAttribute('data-code', PT_SEAL.code);
-      document.body.appendChild(s);
-      return function () {
-        s.remove();
-      };
-    }, []);
-    return e('div', {
-      className: 'home-hero__seal'
-    }, e('a', {
-      href: PT_SEAL.profile,
-      className: 'sx-verified-seal',
-      'aria-label': 'Verified by Psychology Today'
+      ctx
+    }), e(Sections, {
+      p,
+      ctx
     }));
   }
 
-  // Hairlines behind the hero with one green square that travels the lowest
-  // line over the first ~320px of scroll. Scroll-linked, never on load; inert
-  // under reduced motion (Motion.track hands it its final state once).
-  function HeroField() {
-    const svg = React.useRef(null);
-    const n = React.useRef({});
-    React.useEffect(function () {
-      const M = window.Motion;
-      const el = svg.current;
-      if (!el || !M) return undefined;
-      const mq = window.matchMedia('(max-width: 900px)');
-      function apply(p) {
-        const mobile = mq.matches;
-        const set = function (k, a, v) {
-          if (n.current[k]) n.current[k].setAttribute(a, v);
-        };
-        if (n.current.field) n.current.field.setAttribute('transform', 'translate(0 ' + (mobile ? -8 * p : -12 * p).toFixed(2) + ')');
-        if (mobile) {
-          const mx = 60 + 64 * M.travel(M.clamp01(p / 0.8));
-          set('trailM', 'x2', mx.toFixed(2));
-          set('sqM', 'x', (mx - 4).toFixed(2));
-          return;
-        }
-        const ox = 700 + 244 * M.travel(M.clamp01(p / 0.7));
-        set('trail', 'x2', ox.toFixed(2));
-        set('sq', 'x', (ox - 5).toFixed(2));
-        const dp = M.travel(M.clamp01((p - 0.62) / 0.38));
-        set('drop', 'y2', (604 + 60 * dp).toFixed(2));
-      }
-      M.track(el, {
-        distance: 320,
-        onProgress: apply
-      });
-      return function () {
-        M.release(el);
-      };
-    }, []);
-    const ref = function (k) {
-      return function (el) {
-        n.current[k] = el;
-      };
-    };
-    const lines = [];
-    for (let y = 128; y <= 576; y += 28) lines.push(y);
-    const linesM = [];
-    for (let y = 60; y <= 372; y += 24) linesM.push(y);
-    return e('svg', {
-      className: 'home-hero__field',
-      ref: svg,
-      viewBox: '0 0 1440 661',
-      preserveAspectRatio: 'none',
-      'aria-hidden': 'true',
-      focusable: 'false'
-    }, e('defs', null, e('linearGradient', {
-      id: 'hfFade',
-      gradientUnits: 'userSpaceOnUse',
-      x1: 520,
-      y1: 0,
-      x2: 980,
-      y2: 0
-    }, e('stop', {
-      offset: '0',
-      stopColor: '#171919',
-      stopOpacity: '0'
-    }), e('stop', {
-      offset: '1',
-      stopColor: '#171919',
-      stopOpacity: '0.11'
-    })), e('linearGradient', {
-      id: 'hfFadeM',
-      gradientUnits: 'userSpaceOnUse',
-      x1: 0,
-      y1: 0,
-      x2: 390,
-      y2: 0
-    }, e('stop', {
-      offset: '0',
-      stopColor: '#171919',
-      stopOpacity: '0'
-    }), e('stop', {
-      offset: '0.35',
-      stopColor: '#171919',
-      stopOpacity: '0.08'
-    }), e('stop', {
-      offset: '1',
-      stopColor: '#171919',
-      stopOpacity: '0.08'
-    }))), e('g', {
-      ref: ref('field')
-    }, e('g', {
-      className: 'home-hero__field-d'
-    }, lines.map(function (y) {
-      return e('line', {
-        key: 'l' + y,
-        x1: 520,
-        y1: y,
-        x2: 1440,
-        y2: y,
-        stroke: 'url(#hfFade)',
-        strokeWidth: 1
-      });
-    }), e('line', {
-      x1: 520,
-      y1: 604,
-      x2: 1440,
-      y2: 604,
-      stroke: 'url(#hfFade)',
-      strokeWidth: 1
-    }), e('line', {
-      ref: ref('trail'),
-      x1: 700,
-      y1: 604,
-      x2: 700,
-      y2: 604,
-      stroke: '#047857',
-      strokeWidth: 1.25,
-      opacity: 0.7
-    }), e('line', {
-      ref: ref('drop'),
-      x1: 950.4,
-      y1: 604,
-      x2: 950.4,
-      y2: 604,
-      stroke: '#047857',
-      strokeWidth: 1.5
-    }), e('rect', {
-      ref: ref('sq'),
-      x: 695,
-      y: 599,
-      width: 10,
-      height: 10,
-      fill: '#047857'
-    })), e('g', {
-      className: 'home-hero__field-m'
-    }, linesM.map(function (y) {
-      return e('line', {
-        key: 'm' + y,
-        x1: 0,
-        y1: y,
-        x2: 390,
-        y2: y,
-        stroke: 'url(#hfFadeM)',
-        strokeWidth: 1
-      });
-    }), e('line', {
-      ref: ref('trailM'),
-      x1: 60,
-      y1: 372,
-      x2: 60,
-      y2: 372,
-      stroke: '#047857',
-      strokeWidth: 1.25,
-      opacity: 0.7
-    }), e('rect', {
-      ref: ref('sqM'),
-      x: 56,
-      y: 368,
-      width: 8,
-      height: 8,
-      fill: '#047857'
-    }))));
-  }
+  // ── Homepage (reference design) ────────────────────────────────────────────
+  // The four recognition rows pair each sentence with the page it points to.
+  const HOME_ROWS = ['Relationship problems', 'Career change & decisions', 'Anxiety & overthinking', 'Burnout & can’t switch off'];
+  const HOME_PHOTOS = {
+    hero: {
+      src: '/img/aggelos-continuation.webp',
+      alt: 'Aggelos Mouzakitis'
+    },
+    context: {
+      src: '/img/aggelos-homepage.webp',
+      alt: 'Aggelos Mouzakitis speaking on stage at a technology conference',
+      pos: '44% 38%'
+    },
+    about: {
+      src: '/img/wtf-friday-speaking.webp',
+      alt: 'Aggelos Mouzakitis leading a workshop',
+      pos: '28% 30%'
+    }
+  };
   function HomePage({
     p
   }) {
-    const ctx = newCtx(p);
-    const byId = {};
+    const ctx = {
+      id: p.id
+    };
+    const S = {};
     p.sections.forEach(s => {
-      byId[s.id] = s;
+      S[s.id] = s;
     });
-    const heroParas = p.hero.blocks.filter(b => b.t === 'p');
-    const heroCtas = (p.hero.blocks.find(b => b.t === 'ctas') || {
-      items: []
-    }).items;
-    const primary = heroCtas.filter(isPrimary);
-    const soft = heroCtas.filter(it => !isPrimary(it));
-    const hero = e('section', {
+    const out = [];
+    out.push(e('section', {
+      key: 'hero',
       className: 'home-hero',
-      key: 'hero'
-    }, e(HeroField, null), e('div', {
-      className: 'home-hero__grid'
+      'aria-labelledby': 'page-title'
     }, e('div', {
-      className: 'home-hero__copy'
-    }, e('p', {
-      className: 'home-hero__eyebrow'
-    }, p.hero.eyebrow), e('h1', {
-      className: 'home-hero__title',
-      id: 'page-title'
+      className: 'home-hero__lines',
+      'aria-hidden': 'true'
     }, e('span', {
-      className: 'home-hero__line'
-    }, p.hero.h1)), heroParas.map((b, i) => e('p', {
+      className: 'home-hero__axis'
+    }), Array.from({
+      length: 10
+    }, (_, i) => e('span', {
       key: i,
-      className: 'home-hero__support'
-    }, rich(b.text, ctx))), e('div', {
-      className: 'home-hero__ctarow'
-    }, primary.map((it, i) => e('a', {
-      key: 'p' + i,
-      className: 'hero-cta hero-cta--caps',
-      href: it.href
-    }, e('span', null, it.label), e('span', {
-      'aria-hidden': 'true'
-    }, '→'))), soft.map((it, i) => e('a', {
-      key: 's' + i,
-      className: 'home-hero__soft',
-      href: it.href
-    }, e('span', null, it.label), e('span', {
-      'aria-hidden': 'true'
-    }, '→')))), e(VerifiedSeal, null)), e('figure', {
-      className: 'home-hero__photo'
+      className: 'home-hero__field',
+      style: {
+        top: 22 + i * 7 + '%'
+      }
+    }))), e('div', {
+      className: 'wrap home-hero__in'
     }, e('div', {
-      className: 'home-hero__frame'
+      className: 'home-hero__text'
+    }, e(HeroText, {
+      p,
+      ctx,
+      h1Class: 'h1--home'
+    })), e('figure', {
+      className: 'home-fig'
+    }, e('span', {
+      className: 'home-fig__disc',
+      'aria-hidden': 'true'
+    }), e('span', {
+      className: 'home-fig__cut',
+      'aria-hidden': 'true'
+    }), e('span', {
+      className: 'home-fig__img'
     }, e('img', {
-      src: '/img/aggelos-homepage.webp?v=2',
-      alt: 'Aggelos Mouzakitis',
-      width: 2048,
-      height: 1365,
-      loading: 'eager',
-      fetchpriority: 'high',
-      decoding: 'async'
-    })))));
-    const band = (id, cls, inner) => {
-      const s = byId[id];
-      if (!s) return null;
-      const hid = 'h-' + s.id;
-      return e('section', {
-        key: id,
-        id: s.id,
-        className: 'hm-band ' + cls,
-        'aria-labelledby': hid
-      }, e('div', {
-        className: 'hm-band__in'
+      src: HOME_PHOTOS.hero.src,
+      alt: HOME_PHOTOS.hero.alt,
+      fetchPriority: 'high'
+    }))))));
+    const creds = S['credential-strip'];
+    if (creds) {
+      const pairs = creds.blocks.find(b => b.t === 'pairs');
+      out.push(e('section', {
+        key: 'creds',
+        className: 'creds',
+        'aria-label': 'Background'
+      }, e('ul', {
+        className: 'wrap'
+      }, pairs.items.map(it => e('li', {
+        key: it.a
       }, e('span', {
-        className: 'sp-rule',
-        'data-mo': 'rule-l',
-        'aria-hidden': 'true'
-      }), e('h2', {
-        className: 'sp-h2',
-        id: hid
-      }, s.h2), inner ? inner(s) : e(Blocks, {
-        blocks: s.blocks,
-        ctx,
-        tone: /hm-band--dark/.test(cls) ? 'dark' : null
-      })));
-    };
-
-    // "Ways to work with me": one card per service.
-    const ways = s => e('div', {
-      className: 'sp-cards sp-cards--3'
-    }, s.blocks.filter(b => b.t === 'sub').map((b, i) => e('div', {
-      key: i,
-      className: 'hm-card'
-    }, e('span', {
-      className: 'hm-card__n',
-      'aria-hidden': 'true'
-    }, '0' + (i + 1)), e('h3', {
-      className: 'sp-h3'
-    }, b.h3), e(Blocks, {
-      blocks: b.blocks,
-      ctx
-    }))));
-
-    // "If you want to read first": each resource paragraph beside its own link,
-    // in the editorial's order.
-    const readFirst = s => {
-      const paras = s.blocks.filter(b => b.t === 'p');
-      const links = (s.blocks.find(b => b.t === 'ctas') || {
-        items: []
-      }).items;
-      return e('div', {
-        className: 'sp-cards sp-cards--3'
-      }, paras.map((b, i) => e('div', {
-        key: i,
-        className: 'hm-read'
+        className: 'creds__a'
+      }, it.a), e('span', {
+        className: 'creds__b'
+      }, it.b))))));
+    }
+    const brings = S['what-brings-people-here'];
+    if (brings) {
+      const para = brings.blocks.find(b => b.t === 'p');
+      const ss = sentences(para.text);
+      const links = HOME_ROWS.map(l => findCta(brings.blocks, l));
+      const rowsOk = ss.length === HOME_ROWS.length + 1 && links.every(Boolean);
+      out.push(e('section', {
+        key: 'brings',
+        className: 'sec',
+        id: brings.id,
+        'aria-labelledby': 'brings-h'
+      }, e('div', {
+        className: 'wrap'
+      }, e('h2', {
+        className: 'h2',
+        id: 'brings-h'
+      }, brings.h2), rowsOk ? e(React.Fragment, null, e('p', {
+        className: 'p p--emph recog__lead'
+      }, ss[0]), e('div', {
+        className: 'recog'
+      }, ss.slice(1).map((t, i) => e('div', {
+        key: t,
+        className: 'recog__row'
+      }, e('p', null, t), e(TLink, {
+        item: links[i]
+      }))))) : e('div', {
+        className: 'flow'
+      }, e(Blocks, {
+        blocks: brings.blocks,
+        ctx
+      })))));
+    }
+    const context = S['work-is-part-of-the-context'];
+    if (context) out.push(e(PhotoSplit, {
+      key: 'context',
+      s: context,
+      ctx,
+      photo: HOME_PHOTOS.context,
+      dark: true
+    }));
+    const how = S['how-i-work'];
+    if (how) {
+      const ps = how.blocks.filter(b => b.t === 'p');
+      const s1 = sentences(ps[0].text);
+      const s2 = sentences(ps[1].text);
+      const link = how.blocks.find(b => b.t === 'ctas');
+      out.push(e('section', {
+        key: 'how',
+        className: 'sec',
+        id: how.id,
+        'aria-labelledby': 'how-h'
+      }, e('div', {
+        className: 'wrap'
+      }, e('h2', {
+        className: 'h2',
+        id: 'how-h'
+      }, how.h2), e('p', {
+        className: 'statement home-how__statement'
+      }, s1[0]), e('div', {
+        className: 'home-how'
       }, e('p', {
-        className: 'sp-p'
-      }, rich(b.text, ctx)), links[i] ? e(CtaRow, {
-        items: [links[i]]
-      }) : null)));
-    };
+        className: 'p'
+      }, s1.slice(1).join(' ')), e('div', {
+        style: {
+          minWidth: 0
+        }
+      }, e('p', {
+        className: 'p home-how__lines'
+      }, s2.map((t, i) => e('span', {
+        key: t,
+        className: /^Sometimes/.test(t) ? 'is-mid' : i === s2.length - 1 ? 'is-last' : null
+      }, t, i < s2.length - 1 ? ' ' : null))), link ? e(Actions, {
+        items: link.items,
+        className: 'links'
+      }) : null)))));
+    }
+    const ways = S['ways-to-work-with-me'];
+    if (ways) {
+      const subs = ways.blocks.filter(b => b.t === 'sub');
+      out.push(e('section', {
+        key: 'ways',
+        className: 'sec',
+        id: ways.id,
+        'aria-labelledby': 'ways-h'
+      }, e('div', {
+        className: 'wrap'
+      }, e('h2', {
+        className: 'h2',
+        id: 'ways-h'
+      }, ways.h2), e(ServiceRows, {
+        rows: subs.map(sub => ({
+          title: sub.h3,
+          blocks: sub.blocks,
+          tag: 'h3'
+        })),
+        ctx
+      }))));
+    }
+    const read = S['if-you-want-to-read-first'];
+    if (read) {
+      const ps = read.blocks.filter(b => b.t === 'p');
+      const links = [].concat.apply([], read.blocks.filter(b => b.t === 'ctas').map(b => b.items));
+      out.push(e('section', {
+        key: 'read',
+        className: 'band sage',
+        id: read.id,
+        'aria-labelledby': 'read-h'
+      }, e('div', {
+        className: 'wrap sage__in'
+      }, e('h2', {
+        className: 'h2',
+        id: 'read-h'
+      }, read.h2), e('div', {
+        className: 'cols3'
+      }, ps.map((b, i) => {
+        const m = b.text.match(/^\*\*([^*]+)\*\*/);
+        return e('div', {
+          key: i,
+          className: 'col'
+        }, m ? e('h3', {
+          className: 'h3'
+        }, m[1]) : null, e('p', {
+          className: 'p'
+        }, plain(b.text)), links[i] ? e('div', {
+          className: 'links'
+        }, e(TLink, {
+          item: links[i]
+        })) : null);
+      })))));
+    }
+    const about = S['about-me'];
+    if (about) out.push(e(PhotoSplit, {
+      key: 'about',
+      s: about,
+      ctx,
+      photo: HOME_PHOTOS.about
+    }));
+    const contact = S.contact;
+    if (contact) out.push(e(Close, {
+      key: 'close',
+      s: contact,
+      ctx
+    }));
+    return out;
+  }
 
-    // "About me": the speaking photograph beside the training paragraph.
-    const aboutMe = s => e('div', {
-      className: 'hm-about'
-    }, e(Portrait, {
-      src: '/img/aggelos-opinion.jpeg',
-      w: 800,
-      h: 800,
-      className: 'hm-about__img'
-    }), e('div', null, e(Blocks, {
+  // Service rows: number, title, then the description and its link.
+  function ServiceRows({
+    rows,
+    ctx
+  }) {
+    return e('div', {
+      className: 'rows'
+    }, rows.map((r, i) => e('div', {
+      key: r.title,
+      className: 'row',
+      id: r.id
+    }, e('span', {
+      className: 'row__num',
+      'aria-hidden': 'true'
+    }, String(i + 1).padStart(2, '0')), e(r.tag, {
+      className: 'row__title',
+      id: r.id ? r.id + '-h' : undefined
+    }, r.title), e('div', {
+      className: 'row__body flow'
+    }, e(Blocks, {
+      blocks: r.blocks,
+      ctx
+    })))));
+  }
+
+  // ── Work With Me: the three services as equal rows ─────────────────────────
+  const SERVICE_SECTIONS = ['individual-psychotherapy', 'couples-therapy', 'professional-coaching'];
+  function WorkWithMePage({
+    p
+  }) {
+    const ctx = {
+      id: p.id
+    };
+    const svc = p.sections.filter(s => SERVICE_SECTIONS.includes(s.id));
+    const rest = p.sections.filter(s => !SERVICE_SECTIONS.includes(s.id));
+    return e(React.Fragment, null, e(Hero, {
+      p,
+      ctx
+    }), e('section', {
+      className: 'sec',
+      'aria-label': 'Services'
+    }, e('div', {
+      className: 'wrap'
+    }, e(ServiceRows, {
+      rows: svc.map(s => ({
+        title: s.h2,
+        blocks: s.blocks,
+        tag: 'h2',
+        id: s.id
+      })),
+      ctx
+    }))), e(Sections, {
+      p,
+      ctx,
+      sections: rest
+    }));
+  }
+
+  // ── Therapy vs Coaching: one restrained comparison, then reading ──────────
+  const COMPARISON = ['when-coaching-is-enough', 'when-psychotherapy-gives-us-more-room'];
+  function TherapyVsCoachingPage({
+    p
+  }) {
+    const ctx = {
+      id: p.id
+    };
+    const pair = COMPARISON.map(id => p.sections.find(s => s.id === id)).filter(Boolean);
+    const rest = p.sections.filter(s => !COMPARISON.includes(s.id));
+    return e(React.Fragment, null, e(Hero, {
+      p,
+      ctx
+    }), pair.length === 2 ? e('div', {
+      className: 'sec'
+    }, e('div', {
+      className: 'wrap compare'
+    }, pair.map(s => e('section', {
+      key: s.id,
+      id: s.id,
+      className: 'compare__col',
+      'aria-labelledby': s.id + '-h'
+    }, e('h2', {
+      className: 'compare__h',
+      id: s.id + '-h'
+    }, s.h2), e('div', {
+      className: 'flow'
+    }, e(Blocks, {
       blocks: s.blocks,
       ctx
-    })));
-    const closing = byId.contact;
-    return e(Frame, {
-      p
-    }, hero, band('what-brings-people-here', 'hm-band--deep'), band('work-is-part-of-the-context', 'hm-band--dark'), band('how-i-work', ''), band('ways-to-work-with-me', 'hm-band--deep', ways), band('if-you-want-to-read-first', '', readFirst), band('about-me', 'hm-band--deep', aboutMe), closing ? e(Closing, {
-      s: closing
-    }) : null);
+    })))))) : null, e(Sections, {
+      p,
+      ctx,
+      sections: pair.length === 2 ? rest : p.sections
+    }));
   }
 
   // ── Reviews ────────────────────────────────────────────────────────────────
-  // Two contexts, kept apart and labelled by the copy's own headings:
-  // anonymous psychotherapy feedback and attributed GrowthMentor sessions.
-  // No stars, no ratings, no aggregate.
   function ReviewsPage({
     p
   }) {
-    const ctx = newCtx(p);
-    const [sections, closing] = splitClosing(p.sections);
-    return e(Frame, {
-      p
-    }, e(Hero, {
+    const ctx = {
+      id: p.id
+    };
+    return e(React.Fragment, null, e(Hero, {
       p,
       ctx
-    }), e('div', {
-      className: 'sp-body sp-body--reviews'
-    }, sections.map(s => {
-      const quotes = s.blocks.filter(b => b.t === 'quote');
-      if (!quotes.length) return e(Section, {
+    }), p.sections.map((s, i, all) => {
+      if (isClose(s, i, all)) return e(Close, {
         key: s.id,
         s,
-        ctx,
-        variant: 'note'
-      });
-      return e(Section, {
-        key: s.id,
-        s,
-        ctx,
-        variant: 'wide'
-      }, e('div', {
-        className: 'sp-quotes'
-      }, quotes.map((b, i) => e(Block, {
-        key: i,
-        b,
         ctx
-      }))));
-    })), closing ? e(Closing, {
-      s: closing,
-      related: RELATED[p.id]
-    }) : null);
+      });
+      if (s.blocks.some(b => b.t === 'quote')) {
+        return e('section', {
+          key: s.id,
+          className: 'sec',
+          id: s.id,
+          'aria-labelledby': s.id + '-h'
+        }, e('div', {
+          className: 'read'
+        }, e('h2', {
+          className: 'h2',
+          id: s.id + '-h'
+        }, s.h2), e('div', {
+          className: 'quotes'
+        }, e(Blocks, {
+          blocks: s.blocks,
+          ctx
+        }))));
+      }
+      return e(ReadSection, {
+        key: s.id,
+        s,
+        ctx
+      });
+    }));
   }
 
   // ── Free Tools ─────────────────────────────────────────────────────────────
   function ToolsPage({
     p
   }) {
-    const ctx = newCtx(p);
-    const tools = p.sections.filter(s => s.blocks.some(b => b.t === 'ctas' && b.items.some(it => /^\/free-tools\//.test(it.href || ''))));
-    const rest = p.sections.filter(s => tools.indexOf(s) < 0);
-    return e(Frame, {
-      p
-    }, e(Hero, {
+    const ctx = {
+      id: p.id
+    };
+    return e(React.Fragment, null, e(Hero, {
       p,
       ctx
-    }), e('div', {
-      className: 'sp-body sp-body--tools'
-    }, e('div', {
-      className: 'sp-cards sp-cards--2'
-    }, tools.map(s => e(Section, {
-      key: s.id,
-      s,
-      ctx,
-      variant: 'card'
-    }))), rest.map(s => e(Section, {
-      key: s.id,
-      s,
-      ctx
-    }))));
+    }), p.sections.map(s => {
+      const tool = s.blocks.some(b => b.t === 'meta');
+      if (!tool) {
+        return e('section', {
+          key: s.id,
+          className: 'sec',
+          id: s.id,
+          'aria-labelledby': s.id + '-h'
+        }, e('div', {
+          className: 'read'
+        }, e('h2', {
+          className: 'h2',
+          id: s.id + '-h'
+        }, s.h2), e('div', {
+          className: 'flow'
+        }, e(Blocks, {
+          blocks: s.blocks.filter(b => b.t !== 'ctas'),
+          ctx
+        })), e(Actions, {
+          items: [].concat.apply([], s.blocks.filter(b => b.t === 'ctas').map(b => b.items))
+        })));
+      }
+      const start = s.blocks.find(b => b.t === 'ctas');
+      const meta = s.blocks.find(b => b.t === 'meta');
+      const others = s.blocks.filter(b => b !== start && b !== meta);
+      return e('section', {
+        key: s.id,
+        className: 'sec',
+        id: s.id,
+        'aria-labelledby': s.id + '-h'
+      }, e('div', {
+        className: 'read tool'
+      }, e('h2', {
+        className: 'h2',
+        id: s.id + '-h'
+      }, s.h2), e('div', {
+        className: 'flow'
+      }, e(Blocks, {
+        blocks: others.filter(b => b.t === 'p'),
+        ctx
+      })), e('div', {
+        className: 'actions'
+      }, start.items.map(it => e('a', {
+        key: it.href,
+        className: 'btn',
+        href: it.href
+      }, it.label, ' ', e(Arrow))), meta ? e('span', {
+        className: 'meta'
+      }, meta.text) : null), e('div', {
+        className: 'flow tool__related'
+      }, e(Blocks, {
+        blocks: others.filter(b => b.t !== 'p'),
+        ctx
+      }))));
+    }));
   }
 
   // ── Writing ────────────────────────────────────────────────────────────────
   function WritingPage({
     p
   }) {
-    const ctx = newCtx(p);
-    const [sections, closing] = splitClosing(p.sections);
-    return e(Frame, {
-      p
-    }, e(Hero, {
+    const ctx = {
+      id: p.id
+    };
+    return e(React.Fragment, null, e(Hero, {
       p,
       ctx
-    }), e('div', {
-      className: 'sp-body sp-body--writing'
-    }, sections.map(s => {
-      if (s.id === 'featured') {
-        return e(Section, {
-          key: s.id,
-          s,
-          ctx,
-          variant: 'wide'
-        }, e('ol', {
-          className: 'wr-featured'
-        }, s.blocks.filter(b => b.t === 'sub').map((b, i) => e('li', {
-          key: i
-        }, e('h3', {
-          className: 'sp-h3'
-        }, b.h3), e(Blocks, {
-          blocks: b.blocks,
-          ctx
-        })))));
-      }
-      if (s.id === 'browse-by-subject') {
-        return e(Section, {
-          key: s.id,
-          s,
-          ctx,
-          variant: 'wide'
-        }, e('div', {
-          className: 'sp-cards sp-cards--3'
-        }, s.blocks.filter(b => b.t === 'sub').map((b, i) => e('div', {
-          key: i,
-          className: 'wr-subject'
-        }, e('h3', {
-          className: 'sp-h3'
-        }, b.h3), e(Blocks, {
-          blocks: b.blocks,
-          ctx
-        })))));
-      }
-      return e(Section, {
+    }), p.sections.map((s, i, all) => {
+      if (isClose(s, i, all)) return e(Close, {
         key: s.id,
         s,
-        ctx,
-        variant: s.id === 'undisguised' ? 'panel' : null
+        ctx
       });
-    })), closing ? e(Closing, {
-      s: closing
-    }) : null);
+      const subs = s.blocks.filter(b => b.t === 'sub');
+      if (s.id === 'featured') {
+        return e('section', {
+          key: s.id,
+          className: 'sec',
+          id: s.id,
+          'aria-labelledby': s.id + '-h'
+        }, e('div', {
+          className: 'read'
+        }, e('h2', {
+          className: 'h2',
+          id: s.id + '-h'
+        }, s.h2), e('div', {
+          className: 'essays'
+        }, subs.map(sub => e('article', {
+          key: sub.h3,
+          className: 'essay'
+        }, e('h3', {
+          className: 'h3'
+        }, sub.h3), e('div', {
+          className: 'flow'
+        }, e(Blocks, {
+          blocks: sub.blocks,
+          ctx
+        })))))));
+      }
+      if (subs.length && subs.length === s.blocks.length) {
+        return e('section', {
+          key: s.id,
+          className: 'sec',
+          id: s.id,
+          'aria-labelledby': s.id + '-h'
+        }, e('div', {
+          className: 'wrap'
+        }, e('h2', {
+          className: 'h2',
+          id: s.id + '-h'
+        }, s.h2), e('div', {
+          className: 'cols3'
+        }, subs.map(sub => e('div', {
+          key: sub.h3,
+          className: 'col'
+        }, e('h3', {
+          className: 'h3'
+        }, sub.h3), e('div', {
+          className: 'flow'
+        }, e(Blocks, {
+          blocks: sub.blocks,
+          ctx
+        })))))));
+      }
+      return e(ReadSection, {
+        key: s.id,
+        s,
+        ctx
+      });
+    }));
   }
 
   // ── Contact ────────────────────────────────────────────────────────────────
   // Delivery goes through window.submitLead (lead-capture.js): the EmailJS
   // notification plus a row in the enquiries sheet, the same path the contact
-  // form has always used. Validation, the honeypot and the soft rate limit are
-  // carried over from the previous form.
+  // form has always used. Validation, the honeypot, the soft rate limit and the
+  // analytics events are unchanged.
   const MAXLEN = 3000;
   const COUNTER_FROM = 2600;
   const CONTACT_TEMPLATE = 'template_6mv5hou';
@@ -964,11 +1283,10 @@
   function ContactForm({
     form
   }) {
-    const R = React;
     const fields = form.fields;
     const labelOf = i => fields[i] ? fields[i].label : '';
-    // The four fields of the editorial spec, in its order; Service is optional
-    // so nobody has to decide on a service before getting in touch.
+    // The four fields of the copy, in its order; Service is optional so nobody
+    // has to decide on a service before getting in touch.
     const L = {
       name: labelOf(0),
       email: labelOf(1),
@@ -979,7 +1297,7 @@
       label: 'Service',
       options: []
     };
-    const [v, setV] = R.useState({
+    const [v, setV] = useState({
       name: '',
       email: '',
       location: '',
@@ -987,24 +1305,24 @@
       service: '',
       company: ''
     });
-    const [errors, setErrors] = R.useState({});
-    const [formErr, setFormErr] = R.useState(false);
-    const [status, setStatus] = R.useState('idle'); // idle | sending | success
+    const [errors, setErrors] = useState({});
+    const [formErr, setFormErr] = useState(false);
+    const [status, setStatus] = useState('idle'); // idle | sending | success
     const refs = {
-      name: R.useRef(null),
-      email: R.useRef(null),
-      location: R.useRef(null),
-      message: R.useRef(null)
+      name: useRef(null),
+      email: useRef(null),
+      location: useRef(null),
+      message: useRef(null)
     };
-    const live = R.useRef(null);
-    const successRef = R.useRef(null);
-    const lastRef = R.useRef(0);
-    R.useEffect(() => {
+    const live = useRef(null);
+    const successRef = useRef(null);
+    const lastRef = useRef(0);
+    useEffect(() => {
       track('contact_page_viewed', {
         source_page: document.referrer || 'direct'
       });
     }, []);
-    R.useEffect(() => {
+    useEffect(() => {
       if (status === 'success' && successRef.current) {
         try {
           successRef.current.focus();
@@ -1110,34 +1428,31 @@
     });
     if (status === 'success') {
       return e('div', {
-        className: 'sp-form sp-form--done'
+        className: 'ct-form ct-form--done'
       }, liveRegion, e('h2', {
         className: 'sp-form__done',
         tabIndex: -1,
         ref: successRef
       }, 'Thank you. I’ve got your message.'), e('p', {
-        className: 'sp-p'
+        className: 'p'
       }, 'I’ll read it myself and get back to you personally.'), e('div', {
-        className: 'sp-ctas'
-      }, e('a', {
-        className: 'sp-link',
-        href: '/'
-      }, e('span', null, 'Back to the homepage'), e('span', {
-        'aria-hidden': 'true'
-      }, '→'))));
+        className: 'links'
+      }, e(TLink, {
+        item: {
+          label: 'Back to the homepage',
+          href: '/'
+        }
+      })));
     }
     const field = (key, label, input, help) => {
       const er = errors[key];
       const desc = [help ? key + '-help' : null, er ? key + '-err' : null].filter(Boolean).join(' ') || undefined;
       return e('div', {
-        className: 'sp-field'
+        className: 'ct-field'
       }, e('label', {
-        className: 'sp-label',
+        className: 'ct-label',
         htmlFor: 'ct-' + key
-      }, label, ' ', e('span', {
-        className: 'sp-req',
-        'aria-hidden': 'true'
-      }, '*')), e(input.tag, Object.assign({
+      }, label), e(input.tag, Object.assign({
         id: 'ct-' + key,
         ref: refs[key],
         required: true,
@@ -1153,12 +1468,12 @@
     };
     const count = v.message.length >= COUNTER_FROM ? e('p', {
       id: 'message-help',
-      className: 'sp-help',
+      className: 'ct-help',
       'aria-live': 'polite'
     }, v.message.length + ' / ' + MAXLEN) : null;
     const sending = status === 'sending';
     return e('form', {
-      className: 'sp-form',
+      className: 'ct-form',
       noValidate: true,
       onSubmit,
       'aria-labelledby': 'page-title'
@@ -1181,44 +1496,39 @@
       autoComplete: 'off',
       value: v.company,
       onChange: set('company')
-    })), field('name', L.name, {
+    })), e('div', {
+      className: 'ct-pair'
+    }, field('name', L.name, {
       tag: 'input',
       props: {
-        className: 'sp-input',
+        className: 'ct-input',
         type: 'text',
         autoComplete: 'name'
       }
     }), field('email', L.email, {
       tag: 'input',
       props: {
-        className: 'sp-input',
+        className: 'ct-input',
         type: 'email',
         autoComplete: 'email',
         inputMode: 'email'
       }
-    }), field('location', L.location, {
+    })), field('location', L.location, {
       tag: 'input',
       props: {
-        className: 'sp-input',
+        className: 'ct-input',
         type: 'text',
         autoComplete: 'country-name'
       }
-    }), field('message', L.message, {
-      tag: 'textarea',
-      props: {
-        className: 'sp-input sp-textarea',
-        rows: 6,
-        maxLength: MAXLEN
-      }
-    }, count), e('fieldset', {
-      className: 'sp-field'
+    }), e('fieldset', {
+      className: 'ct-field ct-service'
     }, e('legend', {
-      className: 'sp-label'
+      className: 'ct-label'
     }, service.label), e('div', {
-      className: 'sp-choices'
+      className: 'ct-choices'
     }, service.options.map(opt => e('label', {
       key: opt,
-      className: 'sp-choice'
+      className: 'ct-choice'
     }, e('input', {
       type: 'radio',
       name: 'service',
@@ -1232,304 +1542,359 @@
           interest: slugOf(opt)
         });
       }
-    }), e('span', null, opt))))), e('button', {
-      className: 'sp-btn sp-btn--submit',
+    }), e('span', null, opt))))), field('message', L.message, {
+      tag: 'textarea',
+      props: {
+        className: 'ct-input ct-textarea',
+        rows: 6,
+        maxLength: MAXLEN
+      }
+    }, count), e('button', {
+      className: 'btn ct-submit',
       type: 'submit',
       disabled: sending
-    }, e('span', null, sending ? 'Sending…' : form.submit.label), sending || !form.submit.arrow ? null : e('span', {
-      'aria-hidden': 'true'
-    }, '→')));
+    }, e('span', null, sending ? 'Sending…' : form.submit.label), sending ? null : e(Arrow)));
   }
   function ContactPage({
     p
   }) {
-    const ctx = newCtx(p);
-    return e(Frame, {
-      p
-    }, e(Hero, {
-      p,
-      ctx
-    }), e('div', {
-      className: 'sp-body sp-body--contact'
+    const ctx = {
+      id: p.id
+    };
+    const h = p.hero;
+    const ps = h.blocks.filter(b => b.t === 'p');
+    const next = p.sections.find(s => s.id === 'what-happens-next');
+    const privacy = p.sections.find(s => s.id === 'privacy');
+    const others = p.sections.filter(s => s !== next && s !== privacy);
+    return e('div', {
+      className: 'wrap contact'
+    }, e('header', {
+      className: 'contact__head'
+    }, e('p', {
+      className: 'eyebrow'
+    }, h.eyebrow), e('h1', {
+      className: 'h1',
+      id: 'page-title'
+    }, h.h1), ps.map((b, i) => e('p', {
+      key: i,
+      className: 'lead' + (i === ps.length - 1 && ps.length > 1 ? ' lead--strong' : '')
+    }, rich(b.text, ctx)))), e('div', {
+      className: 'contact__grid'
     }, e('div', {
-      className: 'ct2-grid'
-    }, e('div', {
-      className: 'ct2-form'
+      className: 'contact__form'
     }, e(ContactForm, {
       form: p.form
-    })), e('div', {
-      className: 'ct2-aside'
-    }, p.sections.map(s => e(Section, {
+    })), e('aside', {
+      className: 'contact__aside'
+    }, next ? e('section', {
+      className: 'contact__next',
+      'aria-labelledby': 'next-h'
+    }, e('h2', {
+      className: 'contact__h',
+      id: 'next-h'
+    }, next.h2), e('div', {
+      className: 'flow'
+    }, e(Blocks, {
+      blocks: next.blocks,
+      ctx
+    }))) : null, privacy ? e('section', {
+      className: 'contact__privacy',
+      'aria-labelledby': 'privacy-h'
+    }, e('h2', {
+      className: 'label contact__privacy-h',
+      id: 'privacy-h'
+    }, privacy.h2), e('div', {
+      className: 'flow'
+    }, e(Blocks, {
+      blocks: privacy.blocks,
+      ctx
+    }))) : null, others.map(s => e(ReadSection, {
       key: s.id,
       s,
-      ctx,
-      variant: 'aside'
-    }))))));
+      ctx
+    })))));
   }
 
   // ── Router ─────────────────────────────────────────────────────────────────
-  const PAGE_TYPES = {
+  const PAGES = {
     home: HomePage,
+    'work-with-me': WorkWithMePage,
+    'therapy-vs-coaching': TherapyVsCoachingPage,
     reviews: ReviewsPage,
-    tools: ToolsPage,
-    writing: WritingPage,
+    'free-tools': ToolsPage,
+    blog: WritingPage,
     contact: ContactPage
+  };
+  const FAMILY = {
+    problem: 'fam-problem',
+    audience: 'fam-audience',
+    service: 'fam-service',
+    resource: 'fam-resource'
   };
   function SitePage({
     id
   }) {
-    // Decorative rules draw in as they arrive (never text; see Motion).
-    React.useEffect(() => {
-      const M = window.Motion;
-      if (!M) return;
-      document.querySelectorAll('.sp-rule[data-mo]').forEach(el => M.onView(el, n => n.classList.add('is-in')));
-    }, [id]);
     const p = COPY[id];
     if (!p) return null;
-    const Page = PAGE_TYPES[p.type] || GenericPage;
-    return e(Page, {
+    const Page = PAGES[id] || GenericPage;
+    return e(React.Fragment, null, e(window.ChromeStyles), e('style', {
+      dangerouslySetInnerHTML: {
+        __html: CSS
+      }
+    }), e(window.SiteHeader), e('main', {
+      id: 'main',
+      tabIndex: -1,
+      className: 'pg ' + (FAMILY[p.type] || 'fam-' + p.type) + ' pg--' + id
+    }, e(Page, {
       p
-    });
+    })), e(window.SiteFooterX));
   }
   function renderSitePage(id) {
-    ReactDOM.createRoot(document.getElementById('root')).render(e(SitePage, {
+    const root = document.getElementById('root');
+    ReactDOM.createRoot(root).render(e(SitePage, {
       id
     }));
   }
 
   // ── Styles ─────────────────────────────────────────────────────────────────
-  // Same tokens, type roles and components as the rest of the site (see
-  // site-chrome.jsx): bone grounds, forest bands, one green, Archivo Black for
-  // display headings, Inter Tight for section headings, Inter for reading.
+  // Tokens (colours, fonts, --gutter, --sec) and the button, link, header,
+  // footer and close styles live in site-chrome.jsx.
   const CSS = `
-.sp{--sp-max:var(--page-max);background:${S.bone};color:${S.inkText};outline:none}
-/* Container per page type: reading pages sit in one centred column like the
-   previous service pages; rail and card pages use more of the canvas. */
-.sp--service,.sp--problem,.sp--resource,.sp--legal{--sp-max:880px}
-.sp--audience,.sp--faq,.sp--about{--sp-max:1180px}
-.sp-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-:where(.sp) p{margin:0}
+.pg{display:block;outline:none}
+.pg img{filter:grayscale(1) contrast(1.12) brightness(.96) sepia(.14)}
+.label{margin:0;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
 
-/* Hero */
-.sp-hero{position:relative;background:${S.bone};border-bottom:1px solid ${S.rule}}
-.sp-hero__in{width:min(var(--page-canvas),var(--sp-max));margin-inline:auto;padding-block:clamp(56px,7vw,104px) clamp(48px,6vw,84px)}
-.sp-hero--aside .sp-hero__in{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,0.75fr);gap:clamp(32px,5vw,72px);align-items:center}
-.sp-hero__copy{max-width:900px}
-.sp-eyebrow{margin:0 0 18px;font-family:${S.archivo};font-synthesis:none;font-size:13px;line-height:1.35;letter-spacing:0.07em;text-transform:uppercase;color:${S.green}}
-.sp-h1{margin:0;max-width:21ch;font-family:${S.archivo};font-synthesis:none;font-size:clamp(38px,4.6vw,64px);font-weight:400;line-height:1;letter-spacing:-0.045em;color:${S.headingInk};text-wrap:balance}
-.sp-h1::after{content:"";display:block;width:96px;height:1px;background:${S.green};margin-top:26px}
-.sp-hero__lead{margin-top:26px;max-width:680px}
-.sp-lead{font-size:clamp(19px,1.6vw,21px);line-height:1.55;color:#2C312C}
-.sp-lead + .sp-lead{margin-top:16px}
-.sp-hero .sp-ctas{margin-top:30px}
+/* Type */
+.eyebrow{margin:0 0 18px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.h1{margin:0;max-width:17ch;font-family:var(--font-display);font-weight:400;font-size:clamp(40px,calc(30px + 2.1vw),60px);line-height:1.0;letter-spacing:-.04em;color:var(--heading);text-wrap:balance}
+.hero-read .h1{max-width:16ch}
+.h1--home{max-width:15ch}
+.sub{margin:22px 0 0;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .6vw),30px);font-weight:650;line-height:1.2;letter-spacing:-.02em;color:var(--green);text-wrap:balance}
+.lead{margin:24px 0 0;max-width:58ch;font-size:clamp(19px,calc(18.4px + .12vw),20px);line-height:1.55;color:var(--body);text-wrap:pretty}
+.sub + .lead{margin-top:26px}
+.lead + .lead{margin-top:16px}
+.h2{margin:0 0 24px;font-family:var(--font-heading);font-size:clamp(30px,calc(26px + 1vw),40px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
+.h3{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .3vw),24.5px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading);text-wrap:balance}
+.p{margin:0;font-size:clamp(17px,calc(16px + .14vw),18px);line-height:1.7;color:var(--body);text-wrap:pretty}
+.p strong{font-weight:600;color:var(--heading)}
+.p--emph{font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--heading)}
+.p--lead500{margin:0 0 32px;font-size:clamp(19px,calc(18.4px + .12vw),20px);font-weight:500;line-height:1.5;color:var(--ink-2)}
+.p--strong{font-weight:600;color:var(--heading)}
+.statement{margin:0;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .7vw),32px);font-weight:650;line-height:1.18;letter-spacing:-.02em;color:var(--heading);text-wrap:balance}
+.inl{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor}
+.inl:hover{color:var(--green-pressed)}
+.meta{margin:0;font-size:15px;line-height:1.5;color:var(--meta)}
+.related{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:0 10px;font-size:15px;color:var(--meta)}
 
-/* Body and sections */
-.sp-body{width:min(var(--page-canvas),var(--sp-max));margin-inline:auto;padding-block:clamp(16px,3vw,40px) clamp(72px,9vw,120px)}
-.sp-sec{max-width:760px;padding-top:clamp(52px,6vw,76px)}
-.sp-sec--wide,.sp-sec--note{max-width:none}
-.sp-sec--note{max-width:760px}
-.sp-rule{display:block;width:56px;height:2px;margin-bottom:22px;background:${S.green};transform-origin:left center}
-.sp-num{display:block;margin:0 0 10px;font-family:${S.archivo};font-size:clamp(18px,1.9vw,22px);line-height:1;letter-spacing:-0.03em;color:${S.green}}
-.sp-h2{margin:0 0 20px;font-family:${S.display};font-synthesis:none;font-size:clamp(28px,3vw,40px);font-weight:800;line-height:1.06;letter-spacing:-0.035em;color:${S.headingInk};text-wrap:balance}
-.sp-h3{margin:0 0 10px;font-family:${S.display};font-synthesis:none;font-size:clamp(20px,1.8vw,23px);font-weight:750;line-height:1.2;letter-spacing:-0.02em;color:${S.headingInk}}
-.sp-p{max-width:68ch;font-size:18px;line-height:1.68;color:${S.ink2}}
-.sp-p + .sp-p,.sp-p + .sp-list,.sp-list + .sp-p{margin-top:18px}
-.sp-p strong,.sp-list strong{font-weight:700;color:${S.inkText}}
-.sp-p a,.sp-list a,.sp-lead a{color:${S.green};text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
-.sp-p a:hover,.sp-list a:hover{text-decoration-thickness:2px}
-.sp-p--said{font-family:${S.display};font-size:clamp(20px,1.9vw,24px);font-weight:700;line-height:1.3;letter-spacing:-0.015em;color:${S.headingInk};padding-left:20px;border-left:3px solid ${S.green}}
-.sp-p--said + .sp-p--said{margin-top:14px}
-.sp-list{max-width:68ch;margin:0;padding:0;list-style:none}
-.sp-list li{position:relative;padding:12px 0 12px 26px;border-top:1px solid ${S.rule};font-size:18px;line-height:1.55;color:${S.ink2}}
-.sp-list li:last-child{border-bottom:1px solid ${S.rule}}
-.sp-list li::before{content:"";position:absolute;left:0;top:24px;width:12px;height:2px;background:${S.green}}
-.sp-meta{margin-top:14px;font-size:14px;line-height:1.5;color:${S.metaLight};font-style:italic}
+/* Flow: paragraph → paragraph 18px, content → link 22px */
+.flow>*{margin-top:0;margin-bottom:0}
+.flow>*+*{margin-top:18px}
+.flow>.links,.flow>.actions{margin-top:22px}
+.flow>.statement+*{margin-top:24px}
+.flow>.facts+*{margin-top:32px}
+.flow>*+.statement{margin-top:24px}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;margin-top:32px}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 28px}
+.subsec+.subsec{margin-top:40px}
 
-/* Calls to action */
-.sp-ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:26px}
-.sp-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:${S.green};color:${S.bone};border:0;border-radius:0;font-family:${S.body};font-size:15px;font-weight:750;line-height:1.2;letter-spacing:0.045em;text-transform:uppercase;text-align:center;cursor:pointer;transition:background var(--dur-hover),gap var(--dur-hover)}
-.sp-btn:hover{background:${S.greenPressed};gap:13px}
-.sp-btn[disabled]{opacity:.6;cursor:progress}
-.sp-link{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding-bottom:4px;border-bottom:1px solid rgba(23,25,25,0.3);font-size:13.5px;font-weight:700;line-height:1.3;letter-spacing:0.06em;text-transform:uppercase;color:#2C312C;transition:color var(--dur-hover),border-color var(--dur-hover),gap var(--dur-hover)}
-.sp-link:hover{color:${S.green};border-bottom-color:${S.green};gap:12px}
-.sp-link--dark{color:${S.sage};border-bottom-color:rgba(143,191,167,0.45)}
-.sp-link--dark:hover{color:${S.bone};border-bottom-color:${S.bone}}
-.sp-related{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;max-width:760px;margin-top:clamp(40px,5vw,56px)}
-.sp-related__k{font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${S.metaLight}}
-.sp-related--dark .sp-related__k{color:${S.onForest}}
-.sp-sec .sp-related,.sp-sub .sp-related{margin-top:16px}
+/* Heroes */
+.hero-split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px clamp(40px,5vw,72px);align-items:center;padding-block:clamp(48px,5vw,72px) clamp(56px,6vw,88px)}
+.hero-read{padding-top:clamp(56px,6vw,88px)}
+.frame{position:relative;margin:12px;justify-self:end;width:min(calc(100% - 24px),420px)}
+.frame::before{content:"";position:absolute;inset:-12px;border:1px solid rgba(4,120,87,.6);pointer-events:none}
+.frame__img{aspect-ratio:4/5;overflow:hidden;background:var(--forest)}
+.frame__img img{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:899px){.hero-split{grid-template-columns:minmax(0,1fr)}.frame{justify-self:start;width:min(calc(100% - 24px),320px)}}
 
-/* Section variants */
-.sp-sec--panel{max-width:820px;margin-top:clamp(52px,6vw,76px);padding:clamp(28px,4vw,44px);background:${S.boneDeep};border-left:3px solid ${S.green}}
-.sp-sec--panel .sp-rule{display:none}
-.sp-sec--rail{display:grid;grid-template-columns:minmax(200px,300px) minmax(0,760px);gap:clamp(28px,4vw,64px);max-width:none;align-items:start}
-.sp-sec__rail{position:sticky;top:24px}
-.sp-sec__rail .sp-h2{font-size:clamp(24px,2.4vw,32px)}
-.sp-sec--faq .sp-sub,.sp-sec--rail .sp-sub{padding:22px 0;border-top:1px solid ${S.rule}}
-.sp-sec--faq .sp-sub:last-child,.sp-sec--rail .sp-sub:last-child{border-bottom:1px solid ${S.rule}}
-.sp-sec--faq .sp-sub .sp-p + .sp-p,.sp-sec--rail .sp-sub .sp-p + .sp-p{margin-top:12px}
-.sp-sec--rail .sp-sec__body > .sp-sub:first-child{border-top:0;padding-top:0}
-.sp-sec--aside{max-width:none;padding-top:0}
-.sp-sec--aside + .sp-sec--aside{margin-top:44px}
-.sp-sec--aside .sp-h2{font-size:clamp(24px,2.3vw,30px)}
+/* Sections: 96px apart; reading sections on problem pages 88px */
+.sec{padding-top:var(--sec)}
+.fam-problem .sec+.sec{padding-top:clamp(64px,6.1vw,88px)}
+.pg>:last-child:not(.band){padding-bottom:var(--sec)}
+.band{margin-top:var(--sec)}
+.band+.band{margin-top:0}
+.pg>.band:first-child{margin-top:0}
 
-/* Cards (Work With Me, Free Tools, homepage, Writing subjects) */
-.sp-cards{display:grid;gap:clamp(18px,2.2vw,28px);margin-top:clamp(52px,6vw,76px)}
-.sp-cards--3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.sp-sec .sp-cards{margin-top:8px}
-.sp-cards--2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.sp-sec--card{display:flex;flex-direction:column;max-width:none;padding:clamp(26px,3vw,38px);background:${S.boneDeep};border-top:2px solid ${S.green}}
-.sp-sec--card .sp-rule{display:none}
-.sp-sec--card .sp-h2{font-size:clamp(24px,2.3vw,30px)}
-.sp-sec--card .sp-ctas{margin-top:auto;padding-top:24px}
-.sp-sec--card .sp-meta{margin-top:12px}
+/* Dark section: 5/7, top-aligned */
+.dark{background:var(--forest);color:var(--bone)}
+.dark__in{padding-block:var(--sec);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px clamp(48px,6.5vw,96px);align-items:start}
+.dark .h2{color:var(--bone)}
+.dark .p{color:var(--on-forest)}
+.dark .p strong{color:var(--bone)}
+.dark__statement{margin:0;max-width:22ch;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .6vw),30px);font-weight:650;line-height:1.2;letter-spacing:-.02em;color:var(--sage);text-wrap:balance}
+.dark__body{min-width:0;max-width:620px}
+.dark__in--top{row-gap:0}
+.dark__h2-top{grid-column:1/-1;max-width:24ch;margin-bottom:clamp(28px,3vw,40px);font-size:clamp(30px,calc(26px + 1.1vw),42px)}
+.dark__lead{margin:0;max-width:30ch;font-size:clamp(19px,calc(18px + .25vw),21.5px);font-weight:600;line-height:1.45;color:var(--sage);text-wrap:pretty}
+.dark .p--rule{padding-left:18px;border-left:2px solid var(--sage);font-weight:600;color:var(--bone)}
+@media (max-width:899px){.dark__in{grid-template-columns:minmax(0,1fr)}.dark__in--top{row-gap:24px}.dark__h2-top{margin-bottom:0}}
 
-/* Reviews: quotes in a grid, no ratings */
-.sp-quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.2vw,28px)}
-.sp-quote{display:flex;flex-direction:column;justify-content:space-between;gap:22px;margin:0;padding:clamp(24px,3vw,34px);background:${S.boneDeep};border-left:3px solid ${S.green}}
-.sp-quote blockquote{margin:0}
-.sp-quote blockquote p{font-size:18px;line-height:1.62;color:${S.inkText}}
-.sp-quote figcaption{font-size:13px;font-weight:700;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;color:${S.metaLight}}
+/* Photo split: 1:1, the photograph full-bleed */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);container-type:inline-size}
+.split--dark{background:var(--forest);color:var(--bone)}
+.split--dark .h2{color:var(--bone)}
+.split--dark .p{color:var(--on-forest)}
+.split__fig{position:relative;margin:0;min-height:600px;overflow:hidden;background:var(--forest)}
+.split__fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.split--dark .split__fig img{filter:grayscale(1) contrast(1.12) brightness(.9) sepia(.14)}
+.split__body{min-width:0;display:flex;align-items:center;padding:var(--sec) calc((100vw - min(1240px, 100vw - 2 * var(--gutter))) / 2) var(--sec) clamp(48px,5.5vw,80px);padding-right:calc((100cqw - min(1240px, 100cqw - 2 * var(--gutter))) / 2)}
+.split__text{max-width:560px}
+@media (max-width:899px){.split{grid-template-columns:minmax(0,1fr)}.split__fig{min-height:280px}.split__body{padding:56px var(--gutter) 64px}}
 
-/* Writing */
-.wr-featured{margin:0;padding:0;list-style:none;border-top:1px solid ${S.rule}}
-.wr-featured li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 40px;padding:26px 0;border-bottom:1px solid ${S.rule}}
-.wr-featured li .sp-h3{grid-row:span 2;margin:0}
-.wr-featured li .sp-related{margin-top:10px}
-.wr-subject{padding:clamp(22px,2.6vw,30px);background:${S.boneDeep}}
-.wr-subject .sp-ctas{margin-top:20px}
+/* FAQ rows */
+.faq{border-top:1px solid var(--rule-2)}
+.faq details{border-bottom:1px solid var(--rule-2)}
+.faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:24px;min-height:64px;padding:22px 0;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary h3{margin:0;font-family:var(--font-heading);font-size:clamp(19px,calc(18.5px + .1vw),20px);font-weight:650;line-height:1.35;color:var(--heading)}
+.faq summary:hover h3{color:var(--green)}
+.faq__sign{flex:0 0 auto;color:var(--green);font-size:24px;line-height:1;transition:transform 200ms cubic-bezier(.22,1,.36,1)}
+.faq details[open] .faq__sign{transform:rotate(45deg)}
+.faq__a{padding:0 0 24px}
+.faq__a .p{font-size:clamp(17px,calc(16.4px + .1vw),17.5px);line-height:1.65}
 
-/* Closing band — the editorial "Contact" section */
-.sp-close{background:${S.forest};color:${S.onForest};border-top:2px solid ${S.green}}
-.sp-close__in{width:min(var(--page-canvas),var(--sp-max));margin-inline:auto;padding-block:clamp(64px,8vw,112px)}
-.sp-close__h{margin:0 0 18px;font-family:${S.archivo};font-synthesis:none;font-size:clamp(36px,4.4vw,60px);font-weight:400;line-height:1;letter-spacing:-0.045em;color:${S.bone}}
-.sp-close .sp-p{max-width:52ch;font-size:clamp(19px,1.6vw,21px);line-height:1.55;color:${S.onForest}}
-.sp-close .sp-ctas{margin-top:34px}
-.sp-close .sp-related{margin-top:34px}
+/* Continue with */
+.continue{padding-top:clamp(56px,5vw,72px)}
+.continue__label{margin:0 0 14px;color:var(--meta)}
+.continue__list{border-bottom:1px solid rgba(23,25,25,.2)}
+.continue__list a{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:56px;border-top:1px solid rgba(23,25,25,.2);font-size:17px;font-weight:600;color:var(--heading)}
+.continue__list a span{color:var(--green)}
+.continue__list a:hover{color:var(--green)}
 
-/* Homepage bands */
-.hm-band{background:${S.bone}}
-.hm-band--deep{background:${S.boneDeep}}
-.hm-band--dark{background:${S.forest};color:${S.onForest}}
-.hm-band--dark .sp-h2{color:${S.bone}}
-.hm-band--dark .sp-p{color:${S.onForest}}
-.hm-band--dark .sp-rule{background:${S.sage}}
-.hm-band__in{width:var(--page-canvas);margin-inline:auto;padding-block:clamp(64px,8vw,108px)}
-.hm-band__in > .sp-p{max-width:62ch}
-.hm-band__in > .sp-h2{max-width:22ch}
-.hm-band .sp-cards{margin-top:28px}
-.hm-card{display:flex;flex-direction:column;padding:clamp(24px,2.8vw,34px);background:${S.bone};border-top:2px solid ${S.green}}
-.hm-card__n{margin-bottom:14px;font-family:${S.archivo};font-size:20px;line-height:1;color:${S.green}}
-.hm-card .sp-ctas{margin-top:auto;padding-top:22px}
-.hm-read{display:flex;flex-direction:column;padding-top:18px;border-top:1px solid ${S.rule}}
-.hm-read .sp-ctas{margin-top:auto;padding-top:18px}
-.hm-about{display:grid;grid-template-columns:minmax(180px,300px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;margin-top:8px}
-.hm-about .sp-p{max-width:62ch}
+/* Service rows */
+.rows{border-bottom:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:56px minmax(0,5fr) minmax(0,7fr);gap:8px 32px;padding:32px 0;border-top:1px solid var(--rule);align-items:start}
+.row__num{font-size:14px;font-weight:700;line-height:1.9;letter-spacing:.04em;color:var(--meta)}
+.row__title{margin:0;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .4vw),26px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading)}
+.row__body{min-width:0}
+.row__body .p{max-width:52ch;line-height:1.65}
+.row__body .links{margin-top:12px}
+@media (max-width:899px){.row{grid-template-columns:minmax(0,1fr)}}
 
-/* Portraits share the site's duotone */
-.sp-portrait{margin:0}
-.sp-portrait img{display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14)}
-.sp-portrait--hero img{aspect-ratio:4/5;object-fit:cover;object-position:50% 30%}
-.hm-about__img img{aspect-ratio:1;object-fit:cover}
+/* Resource columns */
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px clamp(32px,4vw,56px)}
+.col{min-width:0;padding-top:20px;border-top:1px solid rgba(23,25,25,.3)}
+.col .h3{margin-bottom:12px}
+.col .p{font-size:17px;line-height:1.62}
+.col .links{margin-top:14px}
+.col .flow>.links{margin-top:14px}
+@media (max-width:899px){.cols3{grid-template-columns:minmax(0,1fr)}}
+.sage{background:var(--sage-bg)}
+.sage__in{padding-block:var(--sec)}
+
+/* Routes, triggers, facts, lists, quotes */
+.routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px clamp(40px,5.5vw,80px);align-items:start}
+.route{min-width:0;padding-top:22px;border-top:1px solid rgba(23,25,25,.24)}
+.route .p{max-width:56ch}
+.route .links{margin-top:22px}
+.grid2{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(40px,5.5vw,80px);border-bottom:1px solid var(--rule)}
+.grid2 li{padding:18px 0 16px;border-top:1px solid var(--rule);font-size:clamp(19px,calc(18px + .2vw),21px);font-weight:500;line-height:1.4;color:var(--heading)}
+@media (max-width:759px){.routes,.grid2{grid-template-columns:minmax(0,1fr)}}
+.facts{margin:0 0 14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--rule-2)}
+.facts div{padding:16px 16px 16px 0}
+.facts dt{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
+.facts dd{margin:6px 0 0;font-size:17.5px;font-weight:600;color:var(--heading)}
+@media (max-width:559px){.facts{grid-template-columns:minmax(0,1fr)}.facts div+div{border-top:1px solid var(--rule)}}
+.list{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--rule)}
+.list li{padding:14px 0;border-top:1px solid var(--rule);font-size:clamp(17px,calc(16px + .14vw),18px);font-weight:500;line-height:1.5;color:var(--heading)}
+.lines{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--green)}
+.lines li{font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--heading)}
+.lines li+li{margin-top:10px}
+.quotes{border-top:1px solid var(--rule)}
+.quote{margin:0;padding:28px 0;border-bottom:1px solid var(--rule)}
+.quote blockquote{margin:0}
+.quote blockquote p{margin:0;font-size:clamp(18px,calc(17px + .2vw),19.5px);line-height:1.6;color:var(--heading);text-wrap:pretty}
+.quote figcaption{margin-top:14px;font-size:13px;font-weight:700;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
+.quotes>.flow{display:block}
+
+/* Homepage */
+.home-hero{position:relative;overflow:clip}
+.home-hero__lines{position:absolute;inset:0;pointer-events:none}
+.home-hero__axis{position:absolute;top:0;bottom:0;left:62%;width:1px;background:rgba(4,120,87,.4)}
+.home-hero__field{position:absolute;left:42%;right:0;height:1px;background:linear-gradient(90deg,rgba(23,25,25,0),rgba(23,25,25,.08))}
+.home-hero__in{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center;gap:48px clamp(40px,5vw,72px);padding-block:clamp(48px,5vw,72px) clamp(56px,6vw,88px)}
+.home-hero__text{position:relative;z-index:2;min-width:0}
+.home-hero .lead{max-width:560px}
+.home-fig{position:relative;z-index:1;width:clamp(320px,32vw,460px);aspect-ratio:1;justify-self:end;margin:0}
+.home-fig__disc,.home-fig__cut{position:absolute;inset:6% -4% -2% 8%;border-radius:50%}
+.home-fig__disc{background:var(--green)}
+.home-fig__cut{background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,.92) 58%)}
+.home-fig__img{position:absolute;inset:0;overflow:hidden;border-radius:50%;background:var(--forest)}
+.home-fig__img img{position:absolute;left:-6%;top:5%;width:130%;height:130%;max-width:none;object-fit:cover;object-position:47% 0%}
+@media (max-width:899px){.home-hero__lines{display:none}.home-hero__in{grid-template-columns:minmax(0,1fr)}.home-fig{width:min(80%,320px);justify-self:center}}
+.creds{border-block:1px solid rgba(23,25,25,.16)}
+.creds ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.creds li{padding:22px 24px;border-left:1px solid rgba(23,25,25,.16)}
+.creds li:first-child{padding-left:0;border-left:0}
+.creds__a{display:block;font-size:16.5px;font-weight:650;line-height:1.3;color:var(--heading)}
+.creds__b{display:block;margin-top:4px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
+@media (max-width:759px){.creds ul{grid-template-columns:repeat(2,minmax(0,1fr))}.creds li{padding:18px 16px 18px 0;border-left:0}.creds li:nth-child(even){padding:18px 0 18px 16px;border-left:1px solid rgba(23,25,25,.16)}.creds li:nth-child(n+3){border-top:1px solid rgba(23,25,25,.16)}}
+.recog__lead{margin:0 0 32px;color:var(--ink-2);font-weight:400}
+.recog{border-bottom:1px solid var(--rule)}
+.recog__row{display:grid;grid-template-columns:minmax(0,1fr) 280px;align-items:center;gap:10px 40px;min-height:88px;padding:14px 0;border-top:1px solid var(--rule)}
+.recog__row p{margin:0;max-width:48ch;font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:500;line-height:1.4;color:var(--heading)}
+@media (max-width:899px){.recog__row{grid-template-columns:minmax(0,1fr);padding:18px 0 14px}}
+.home-how__statement{margin:0 0 32px}
+.home-how{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px clamp(40px,6vw,96px);align-items:start}
+.home-how__lines span{display:block}
+.home-how__lines .is-mid{margin-top:8px;font-weight:550;color:var(--heading)}
+.home-how__lines span:first-child+.is-mid{margin-top:14px}
+.home-how__lines .is-last{margin-top:14px;font-weight:650;color:var(--heading)}
+.home-how .links{margin-top:22px}
+@media (max-width:899px){.home-how{grid-template-columns:minmax(0,1fr)}}
+
+/* Therapy vs Coaching */
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px clamp(40px,5.5vw,80px);align-items:start}
+.compare__col{min-width:0;padding-top:22px;border-top:2px solid var(--heading)}
+.compare__h{margin:0 0 18px;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .4vw),26px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading);text-wrap:balance}
+@media (max-width:899px){.compare{grid-template-columns:minmax(0,1fr)}}
+
+/* Free Tools, Writing */
+.tool .actions{margin-top:26px}
+.tool__related{margin-top:18px}
+.essays{border-bottom:1px solid var(--rule)}
+.essay{padding:28px 0;border-top:1px solid var(--rule)}
+.essay .h3{margin-bottom:10px}
 
 /* Contact */
-.ct2-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:start;margin-top:clamp(44px,5vw,64px)}
-.sp-form{padding:clamp(24px,3vw,40px);background:${S.boneDeep};border-top:2px solid ${S.green}}
-.sp-field{margin:0 0 22px;padding:0;border:0}
-.sp-label{display:block;margin-bottom:8px;padding:0;font-size:15px;font-weight:700;letter-spacing:0.01em;color:${S.inkText}}
-.sp-req{color:${S.green}}
-.sp-input{display:block;width:100%;min-height:52px;padding:13px 15px;border:1px solid rgba(23,25,25,0.28);border-radius:0;background:${S.bone};color:${S.inkText};font:inherit;font-size:16px;line-height:1.5;outline:none;transition:border-color .16s,box-shadow .16s}
-.sp-textarea{min-height:170px;resize:vertical}
-.sp-input:focus{border-color:${S.green};box-shadow:0 0 0 3px rgba(4,120,87,0.22)}
-.sp-input[aria-invalid="true"]{border-color:#B42318}
-.sp-err{margin-top:8px;font-size:14px;font-weight:600;line-height:1.45;color:#B42318}
-.sp-help{margin-top:8px;font-size:13px;color:${S.metaLight};text-align:right}
-.sp-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.sp-choice{display:flex;align-items:center;gap:10px;min-height:48px;padding:10px 14px;border:1px solid rgba(23,25,25,0.22);background:${S.bone};font-size:16px;line-height:1.3;color:${S.inkText};cursor:pointer}
-.sp-choice input{width:18px;height:18px;margin:0;accent-color:${S.green};flex-shrink:0}
-.sp-choice:has(input:checked){border-color:${S.green};box-shadow:inset 3px 0 0 ${S.green}}
-.sp-choice:has(input:focus-visible){outline:3px solid ${S.green};outline-offset:2px}
-.sp-btn--submit{width:100%;margin-top:8px}
-.sp-formerr{margin:0 0 20px;padding:14px 16px;border:1px solid rgba(180,35,24,.45);background:rgba(180,35,24,.06);font-size:15px;line-height:1.55;color:#B42318}
-.sp-formerr a{color:#B42318;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.contact{padding-block:clamp(48px,6vw,88px) var(--sec)}
+.contact__head{max-width:720px}
+.contact__head .h1{max-width:16ch}
+.lead--strong{margin-top:12px;font-weight:600;color:var(--heading)}
+.contact__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px clamp(40px,6vw,96px);margin-top:clamp(36px,4vw,56px);align-items:start}
+.contact__form{min-width:0;padding-top:28px;border-top:3px solid var(--green)}
+.contact__aside{min-width:0;display:flex;flex-direction:column;gap:36px}
+.contact__next{padding-top:28px;border-top:1px solid rgba(23,25,25,.26)}
+.contact__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(22px,calc(19px + .5vw),27px);font-weight:800;letter-spacing:-.025em;color:var(--heading)}
+.contact__next .p{font-size:17px;line-height:1.65}
+.contact__privacy{padding:24px;background:var(--bone-deep)}
+.contact__privacy-h{margin-bottom:12px;color:var(--green)}
+.contact__privacy .p{font-size:17px;line-height:1.6}
+.contact__privacy .links{margin-top:10px}
+.ct-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 20px}
+.ct-field{display:block;margin:0 0 22px;padding:0;border:0;min-width:0}
+.ct-label{display:block;margin-bottom:8px;padding:0;font-size:14px;font-weight:700;color:var(--heading)}
+.ct-input{display:block;width:100%;min-height:52px;padding:12px 14px;background:var(--bone);border:1px solid rgba(23,25,25,.3);border-radius:0;font:inherit;font-size:16px;line-height:1.4;color:var(--heading)}
+.ct-input:focus{outline:3px solid var(--green);outline-offset:1px;border-color:var(--green)}
+.ct-input[aria-invalid="true"]{border-color:#A3362A}
+.ct-textarea{min-height:170px;padding:14px;line-height:1.55;resize:vertical}
+.ct-choices{display:flex;flex-wrap:wrap;gap:8px}
+.ct-choice{position:relative;display:inline-flex}
+.ct-choice input{position:absolute;opacity:0;width:1px;height:1px}
+.ct-choice span{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid rgba(23,25,25,.3);font-size:15px;font-weight:600;color:var(--heading);cursor:pointer}
+.ct-choice input:checked+span{background:var(--heading);border-color:var(--heading);color:var(--bone)}
+.ct-choice input:focus-visible+span{outline:3px solid var(--green);outline-offset:2px}
+.ct-help{margin:6px 0 0;font-size:14px;color:var(--meta)}
+.sp-err{margin:6px 0 0;font-size:14px;font-weight:600;color:#A3362A}
+.sp-formerr{margin:0 0 22px;padding:14px 16px;border-left:3px solid #A3362A;background:rgba(163,54,42,.06);font-size:16px;line-height:1.55;color:var(--heading)}
+.sp-formerr a{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor}
+.ct-submit{width:100%;min-height:56px}
+.ct-submit[disabled]{opacity:.7;cursor:progress}
 .sp-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.sp-form--done{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
-.sp-form__done{margin:0;font-family:${S.display};font-size:clamp(26px,3vw,34px);font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:${S.headingInk};outline:none}
+.sp-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sp-form__done{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + .8vw),32px);font-weight:800;letter-spacing:-.03em;color:var(--heading);outline:none}
 
-/* Responsive */
-@media (max-width:1100px){
-  .sp-cards--3{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media (max-width:960px){
-  .sp-hero--aside .sp-hero__in{grid-template-columns:1fr}
-  .sp-portrait--hero{max-width:420px}
-  .sp-sec--rail{grid-template-columns:1fr;gap:0}
-  .sp-sec__rail{position:static}
-  .ct2-grid{grid-template-columns:1fr}
-  .wr-featured li{grid-template-columns:1fr}
-  .wr-featured li .sp-h3{grid-row:auto}
-}
-@media (max-width:760px){
-  .sp-cards--3,.sp-cards--2,.sp-quotes{grid-template-columns:1fr}
-  .hm-about{grid-template-columns:1fr}
-  .hm-about__img{max-width:260px}
-  .sp-p,.sp-list li,.sp-quote blockquote p{font-size:17px}
-  .sp-choices{grid-template-columns:1fr}
-}
-@media (max-width:420px){
-  .sp-ctas .sp-btn{width:100%}
-}
-
-/* Homepage hero (unchanged from the previous homepage) */
-.home-hero{position:relative;overflow:clip;background:${S.bone};color:${S.heroInk}}
-.home-hero::before{content:"";position:absolute;top:0;bottom:0;left:66%;width:1px;background:rgba(4,120,87,0.55);pointer-events:none}
-.home-hero__field{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.home-hero__field-m{display:none}
-@media (max-width:900px){
-  .home-hero__field-d{display:none}
-  .home-hero__field-m{display:block}
-  .home-hero::before{display:none}
-}
-.home-hero__grid{width:var(--page-canvas);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(380px,0.78fr);align-items:center;gap:48px;padding-block:88px 112px}
-.home-hero__copy{position:relative;z-index:2;min-width:0;max-width:820px;color:${S.heroInk}}
-.home-hero__eyebrow{max-width:560px;margin:0;color:${S.green};font-family:${S.archivo};font-synthesis:none;font-size:13px;font-weight:400;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
-.home-hero__title{max-width:none;margin:16px 0 0;font-family:${S.archivo};font-synthesis:none;font-weight:400;font-size:clamp(40px,4.4vw,58px);line-height:0.98;letter-spacing:-0.05em;color:${S.heroInk};text-wrap:balance}
-.home-hero__title::after{content:"";display:block;width:96px;height:1px;background:${S.green};margin:22px 0 22px}
-.home-hero__title .home-hero__line{display:block}
-.home-hero__support{max-width:640px;margin:0 0 18px;color:#2C312C;font-family:${S.body};font-size:20px;font-weight:400;line-height:1.5}
-.home-hero__support:last-of-type{margin-bottom:30px}
-.home-hero__photo{position:relative;z-index:1;width:clamp(380px,32vw,560px);max-width:100%;aspect-ratio:1;justify-self:end;margin:0}
-.home-hero__photo::before{content:"";position:absolute;z-index:0;inset:6% -4% -2% 8%;border-radius:50%;background:${S.green}}
-.home-hero__photo::after{content:"";position:absolute;z-index:0;inset:6% -4% -2% 8%;border-radius:50%;background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,0.92) 58%);pointer-events:none}
-.home-hero__frame{position:absolute;z-index:1;inset:0;overflow:hidden;border-radius:50%}
-.home-hero__frame img{width:100%;height:100%;object-fit:cover;object-position:56% 44%;transform:scale(1.58);filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14)}
-.home-hero__ctarow{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
-.hero-cta--caps{font-size:15px;font-weight:750;letter-spacing:0.045em;text-transform:uppercase}
-.home-hero__soft{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#2C312C;border-bottom:1px solid rgba(23,25,25,0.3);padding-bottom:4px;min-height:32px;transition:color .18s,border-color .18s,gap .18s}
-.home-hero__soft:hover{color:${S.green};border-bottom-color:${S.green};gap:12px}
-.home-hero__seal{display:flex;align-items:center;min-height:48px;margin-top:20px}
-.home-hero__seal .sx-verified-seal{display:inline-flex;align-items:center;line-height:0}
-.home-hero__seal img,.home-hero__seal svg{max-width:160px;max-height:48px;width:auto;height:auto;object-fit:contain;filter:none}
-@media (max-width:1151px) and (min-width:521px){
-  .home-hero__grid{grid-template-columns:1fr;gap:30px;width:100%;max-width:none;padding:64px 40px 84px;min-height:0}
-  .home-hero__title{font-size:clamp(40px,6.0vw,54px)}
-  .home-hero__support{max-width:620px}
-  .home-hero__photo{width:min(58%,380px);justify-self:center}
-}
-@media (max-width:520px){
-  .home-hero__grid{grid-template-columns:1fr;gap:34px;width:100%;max-width:none;padding:66px 20px 80px;min-height:0}
-  .home-hero__title{font-size:clamp(34px,8.6vw,44px)}
-  .home-hero__support{font-size:18px;line-height:1.5}
-  .home-hero__photo{width:min(82%,310px);justify-self:center}
-}
+@media (max-width:599px){.btn{white-space:normal;text-align:center}}
 `;
-  function SitePageStyles() {
-    return e('style', {
-      dangerouslySetInnerHTML: {
-        __html: CSS
-      }
-    });
-  }
   window.renderSitePage = renderSitePage;
   window.SitePage = SitePage;
 })();

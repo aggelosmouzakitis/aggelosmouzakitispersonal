@@ -38,7 +38,7 @@ body { background: #F3F0E8; color: #171919; font-family: var(--font-body); font-
 a { color: inherit; text-decoration: none; }
 ::selection { background: #047857; color: #F3F0E8; }
 img { max-width: 100%; filter: grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14); }
-.site-grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: 0.40; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E"); background-size: 160px 160px; }
+.site-grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: 0.06; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E"); background-size: 160px 160px; }
 @media print { .site-grain { display: none; } }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #047857; outline-offset: 2px; border-radius: 2px; }
 @media (prefers-reduced-motion: reduce){ html { scroll-behavior: auto; } *{transition-duration:.001ms!important;animation-duration:.001ms!important} }
@@ -72,514 +72,351 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 <div class="site-grain" aria-hidden="true"></div>
 <div id="root"><style>
 :root{
+  --bone:#F3F0E8;--bone-deep:#EDE8DB;--sage-bg:#DAE4D8;--forest:#16231E;
+  --green:#047857;--green-pressed:#03654A;--sage:#8FBFA7;
+  --heading:#14201C;--ink:#171919;--body:#2C312C;--ink-2:#3A403A;--meta:#6A6F67;
+  --on-forest:#C8D1C8;--on-forest-2:#C0C9BF;
+  --rule:rgba(23,25,25,0.18);--rule-2:rgba(23,25,25,0.22);--rule-forest:rgba(243,240,232,0.16);
   --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --font-heading:"Inter Tight","Inter",system-ui,sans-serif;
   --font-display:"Archivo Black","Inter Tight","Inter",system-ui,sans-serif;
-  --brand-green:#047857;
-  /* Editorial Japandi palette (ten tokens) */
-  --bone:#F3F0E8;--bone-deep:#EDE8DB;--forest:#16231E;--forest-deep:#101A16;
-  --green:#047857;--green-pressed:#03654A;--sage:#8FBFA7;
-  --ink:#171919;--heading-ink:#14201C;--ink-2:#3A403A;--on-forest:#C0C9BF;--meta:#6A6F67;
-  --rule:rgba(23,25,25,0.18);--rule-on-forest:rgba(243,240,232,0.16);
-  /* Coral — resistance, anxiety, friction, blocked movement. Green stays
-     progress, forest depth, bone the editorial canvas. Four values because one
-     coral cannot carry small text on bone, large graphics and text on forest at
-     once: --coral is graphics and large emphasis, --coral-ink is small coral
-     text on light ground (5.2:1 on bone, where --coral manages only 3.6:1),
-     --coral-on-forest is coral on the dark ground, --coral-tint the chip wash.
-     Supersedes the page-scoped --wm-clay. */
-  --coral:#CF5A3D;
-  --coral-ink:#AA432F;
-  --coral-on-forest:#E4896C;
-  --coral-tint:#F6E2DE;
-  /* Motion. Two easings: settle for things arriving and coming to rest, travel
-     for things crossing distance. No bounce, no spring anywhere. */
-  --ease-settle:cubic-bezier(.22,1,.36,1);
-  --ease-travel:cubic-bezier(.65,0,.35,1);
-  --dur-hover:180ms;
-  --dur-nudge:220ms;
-  --dur-rule:260ms;
-  --dur-draw:360ms;
-  --dur-text:480ms;
-  --dur-state:520ms;
-  --stagger-line:40ms;
-  --stagger-item:60ms;
-  --stagger-row:80ms;
-  --rise:12px;
-  /* The one page canvas: header, hero, every section container and the footer
-     resolve against it, so the whole page shares a single grid instead of the
-     three it used to have (1320 / 1280 / 1280, each with its own gutter).
-     Fluid to the viewport minus a gutter, capped so the eye still has an edge
-     to work against on very large screens.
-       - up to ~1040px the 5vw ramp binds and matches the old container exactly,
-         so phones and tablets are pixel-identical;
-       - through the laptop band the 52px gutter holds proportions close to what
-         they were (header and hero sat on a flat 32px gutter, the sections on
-         5vw — this lands between the two and finally aligns them);
-       - past ~1664px the cap takes over at 1560 instead of 1280/1320.
-     Individual text blocks keep their own smaller measures on top of this. */
-  --page-max:1560px;
-  --page-gutter:clamp(20px,5vw,52px);
-  --page-canvas:min(var(--page-max),calc(100% - 2 * var(--page-gutter)));
+  --site-max:1240px;--read-max:760px;
+  --gutter:clamp(22px,4vw,52px);
+  --sec:clamp(64px,6.7vw,96px);
 }
 html,body,#root{height:auto}
-/* Every page except /work-with-me/ carries a star-selector margin reset in its
-   own static preamble; that page was authored later and never got one, so the UA's
-   8px body margin survived and inset the whole page — full-bleed header and
-   section backgrounds included — by 8px, which also made the page canvas
-   resolve 16px narrower there than everywhere else. Zero it here so the chrome
-   guarantees it on every page instead of each page having to remember. */
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0}
 #root{display:block;overflow:visible}
-#sidebar{display:none!important}
-#main-scroll{overflow:visible;background:#F3F0E8;color:#171919}
-#main-scroll::-webkit-scrollbar{width:0}
-body{background:#F3F0E8;color:#171919;font-family:var(--font-body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
-::selection{background:#047857;color:#F3F0E8}
-#main-scroll a,a{color:inherit;text-decoration:none}
-#main-scroll strong{border:0;padding:0;color:inherit;font-weight:600}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #047857;outline-offset:2px;border-radius:2px}
-/* Global photographic duotone — no full-colour photography anywhere (avatars, OG, portraits) */
-img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14)}
-/* Single page-level film grain: one overlay per page, above content, below modals */
-.site-grain{position:fixed;inset:0;pointer-events:none;z-index:90;opacity:0.40;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E");background-size:160px 160px}
-@media print{.site-grain{display:none}}
-
-.site-container{width:var(--page-canvas);margin-inline:auto}
-
-/* Skip link: first focusable element on every page, visible only on focus. */
-.skip-link{position:absolute;left:12px;top:-80px;z-index:300;padding:12px 18px;background:#F3F0E8;color:#171919;font-size:15px;font-weight:700;box-shadow:0 0 0 3px #047857;transition:top .15s}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+.site-grain{opacity:0.06}
+.wrap{width:min(var(--site-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.read{width:min(var(--read-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.skip-link{position:absolute;left:12px;top:-60px;z-index:200;padding:12px 18px;background:var(--bone);color:var(--heading);font:600 15px/1 var(--font-body);border:2px solid var(--green)}
 .skip-link:focus{top:12px}
-.site-hdr{position:relative;z-index:200;width:100%;min-height:76px;background:#16231E;border-bottom:1px solid rgba(243,240,232,0.16)}
-/* Logo hard-left; nav and the Book a consultation CTA grouped hard-right. */
-.site-hdr__in{width:var(--page-canvas);min-height:76px;display:flex;align-items:center;gap:22px}
-.site-hdr__in>*{min-width:0}
-.site-hdr__brand{display:inline-flex;align-items:flex-end;gap:1px;color:#F3F0E8;font-family:var(--font-heading);font-size:26px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
-.site-hdr__brand span{color:#047857}
-.site-hdr__nav{margin-left:auto}
-.site-hdr__list{display:flex;align-items:center;gap:6px;margin:0;padding:0;list-style:none}
-.site-hdr__item{position:relative}
-/* Top-level entries: links and panel toggles share one look. */
-.site-hdr__top{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 10px;background:none;border:0;border-radius:0;cursor:pointer;font:inherit;color:#F3F0E8;font-size:14px;font-weight:650;line-height:1;text-transform:uppercase;letter-spacing:0.04em;opacity:.84;transition:opacity .18s;white-space:nowrap}
-.site-hdr__top:hover,.site-hdr__top[aria-expanded="true"]{opacity:1}
-.site-hdr__top>span:first-child{padding-block:4px 2px;border-bottom:2px solid transparent}
-.site-hdr__top[aria-current] >span:first-child,.site-hdr__top.is-current>span:first-child{border-bottom-color:#047857}
-.site-hdr__top[aria-current],.site-hdr__top.is-current{opacity:1}
-.site-hdr__chev{width:9px;height:9px;flex-shrink:0;transition:transform var(--dur-hover) var(--ease-settle)}
-.site-hdr__top[aria-expanded="true"] .site-hdr__chev{transform:rotate(180deg)}
-/* Dropdown panels: forest-deep, a 2px green top rule like the footer. */
-.site-hdr__panel{position:absolute;top:calc(100% + 16px);left:0;min-width:300px;padding:18px 0 14px;background:#101A16;border:1px solid rgba(243,240,232,0.16);border-top:2px solid #047857;box-shadow:0 18px 40px rgba(16,26,22,0.28)}
-.site-hdr__panel[hidden]{display:none}
-.site-hdr__item--end .site-hdr__panel{left:auto;right:0}
-.site-hdr__panel--wide{display:grid;grid-template-columns:repeat(2,minmax(250px,1fr));min-width:560px}
-.site-hdr__panel ul{margin:0;padding:0;list-style:none}
-.site-hdr__panel a{display:block;padding:10px 22px;color:#C0C9BF;font-size:15px;line-height:1.35;text-transform:none;letter-spacing:0;transition:color .18s,background .18s}
-.site-hdr__panel a:hover{color:#F3F0E8;background:rgba(143,191,167,0.08)}
-.site-hdr__panel a[aria-current]{color:#F3F0E8;box-shadow:inset 3px 0 0 #047857}
-.site-hdr__panel .site-hdr__over{display:flex;align-items:center;gap:8px;margin-bottom:6px;padding-bottom:12px;border-bottom:1px solid rgba(243,240,232,0.16);color:#8FBFA7;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
-.site-hdr__panel .site-hdr__over:hover{color:#F3F0E8}
-.site-hdr__end{display:flex;align-items:center;gap:14px}
-.hdr-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;background:#047857;color:#F3F0E8;font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
-.hdr-cta:hover{background:#03654A;gap:11px}
-.site-hdr__burger{display:none;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer}
-.site-hdr__burger span{display:block;width:24px;height:2px;background:#F3F0E8;transition:transform var(--dur-hover) var(--ease-settle),opacity var(--dur-hover)}
-.site-hdr__burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.site-hdr__burger[aria-expanded="true"] span:nth-child(2){opacity:0}
-.site-hdr__burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-/* Mobile / tablet menu: the same hierarchy as the desktop panels, as
-   accordions, so twenty-odd links never arrive as one flat list. */
-.site-menu{position:relative;z-index:210;background:#16231E;border-bottom:1px solid rgba(243,240,232,0.16);padding-block:8px 28px}
-.site-menu[hidden]{display:none}
-.site-menu__list{margin:0;padding:0;list-style:none}
-.site-menu__group{border-bottom:1px solid rgba(243,240,232,0.16)}
-.site-menu__top{display:flex;width:100%;align-items:center;justify-content:space-between;gap:16px;min-height:56px;padding:0;background:none;border:0;cursor:pointer;font:inherit;color:#F3F0E8;font-size:16px;font-weight:650;letter-spacing:0.03em;text-transform:uppercase;text-align:left}
-.site-menu__top[aria-current]{color:#8FBFA7}
-.site-menu__top .site-hdr__chev{width:11px;height:11px}
-.site-menu__top[aria-expanded="true"] .site-hdr__chev{transform:rotate(180deg)}
-.site-menu__sub{margin:0;padding:0 0 14px;list-style:none}
-.site-menu__sub[hidden]{display:none}
-.site-menu__sub a{display:block;padding:9px 0 9px 16px;border-left:1px solid rgba(243,240,232,0.16);color:#C0C9BF;font-size:16px;line-height:1.35}
-.site-menu__sub a[aria-current]{color:#F3F0E8;border-left:2px solid #047857;padding-left:15px}
-.site-menu .hdr-cta{display:flex;width:100%;margin-top:24px;min-height:52px;font-size:13px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.on-dark a:focus-visible,.on-dark button:focus-visible{outline-color:var(--sage)}
 
-.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:700;white-space:nowrap;transition:gap .18s,filter .18s}
-.pill--green{height:72px;padding-inline:44px;background:#047857;color:#F3F0E8;font-size:16px}
-.pill--green:hover{gap:12px;background:#03654A}
-.hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:#047857;color:#F3F0E8;font-size:16px;font-weight:600;letter-spacing:0.01em;white-space:nowrap;border-radius:0;transition:filter .18s,gap .18s}
-.hero-cta:hover{background:#03654A;gap:13px}
+/* Primary action: green rectangle, 52px, 15px/700 caps. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 24px;background:var(--green);color:var(--bone);border:0;border-radius:0;font:700 15px/1 var(--font-body);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:gap 180ms,background 180ms}
+.btn:hover{background:var(--green-pressed);color:var(--bone);gap:13px}
+/* Secondary action: 16px/600 green, underline + arrow. */
+.tlink{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:16px;font-weight:600;line-height:1.3;color:var(--green);transition:gap 180ms,color 180ms}
+.tlink>span:first-child{border-bottom:1.5px solid currentColor;padding-bottom:2px}
+.tlink:hover{color:var(--green-pressed);gap:12px}
+.on-dark .tlink{color:var(--bone)}
+.on-dark .tlink:hover{color:var(--sage)}
 
-.cta-strip{padding-block:clamp(86px,10.8vw,132px);text-align:center;background:#16231E}
-.cta-strip__h{margin:0 auto;max-width:20ch;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(36px,4.4vw,60px);font-weight:800;line-height:1;letter-spacing:-0.045em;color:#F3F0E8;text-wrap:balance}
-.cta-strip .pill--green{margin-top:44px}
-.cta-strip__soft{display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-size:14px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#8FBFA7;transition:gap .18s,color .18s}
-.cta-strip__soft:hover{gap:13px;color:#F3F0E8}
-.cta-strip__softrow{display:flex;flex-wrap:wrap;justify-content:center;column-gap:36px}
-.cta-strip__sub{display:inline-flex;gap:8px;margin-top:24px;font-size:15px;color:#C0C9BF;transition:gap .18s,color .18s}
-.cta-strip__sub:hover{gap:12px;color:#F3F0E8}
+/* Header */
+.hdr{position:relative;z-index:50;background:var(--forest);border-bottom:1px solid var(--rule-forest);font-family:var(--font-body)}
+.hdr__in{min-height:74px;display:flex;align-items:center;gap:24px}
+.hdr__brand{display:inline-flex;align-items:center;min-height:44px;gap:1px;color:var(--bone);font-family:var(--font-heading);font-size:25px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
+.hdr__brand span,.ftr__brand span{color:var(--green)}
+.hdr__nav{margin-left:auto;display:flex;align-items:center;gap:30px}
+.hdr__item{position:relative;display:flex;align-items:center}
+.hdr__link,.hdr__btn{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0;background:none;border:0;border-bottom:2px solid transparent;color:var(--bone);font-family:inherit;font-size:13.5px;font-weight:650;line-height:1;letter-spacing:0.06em;text-transform:uppercase;opacity:.85;cursor:pointer}
+.hdr__link:hover,.hdr__btn:hover,.hdr__btn[aria-expanded="true"],.hdr__link.is-current,.hdr__btn.is-current{opacity:1;color:var(--bone)}
+.hdr__link.is-current,.hdr__btn.is-current{border-bottom-color:var(--green)}
+.hdr__btn svg{transition:transform 200ms cubic-bezier(.22,1,.36,1)}
+.hdr__btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.hdr__panel{position:absolute;top:calc(100% + 15px);left:-20px;width:360px;background:var(--bone);border:1px solid rgba(23,25,25,0.14);box-shadow:0 20px 44px -20px rgba(0,0,0,0.4);padding:8px 0}
+.hdr__panel[hidden],.mmenu[hidden],.mmenu__links[hidden]{display:none}
+.hdr__panel a{display:block;padding:12px 20px;font-size:16px;font-weight:500;line-height:1.35;color:var(--heading)}
+.hdr__panel a:hover{background:rgba(4,120,87,0.07);color:var(--green)}
+.hdr__panel a[aria-current="page"]{color:var(--green);font-weight:600}
+.hdr__sep{height:1px;margin:8px 20px;background:rgba(23,25,25,0.16)}
+.hdr__cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;background:transparent;border:1px solid rgba(243,240,232,0.7);color:var(--bone);font-size:13.5px;font-weight:700;line-height:1;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;transition:background 180ms,color 180ms,border-color 180ms}
+.hdr__cta:hover{background:var(--bone);color:var(--forest);border-color:var(--bone)}
+.hdr__menu-btn{display:none;margin-left:auto;align-items:center;gap:12px;min-height:48px;padding:0 2px 0 12px;background:none;border:0;cursor:pointer;color:var(--bone);font-family:inherit;font-size:13.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+.hdr__burger{display:flex;flex-direction:column;gap:5px;width:22px}
+.hdr__burger span{height:2px;background:var(--bone)}
+@media (max-width:1079px){.hdr__nav,.hdr__cta{display:none}.hdr__menu-btn{display:inline-flex}}
+@media (min-width:1080px){.mmenu{display:none}}
+.mmenu{background:var(--bone);border-bottom:1px solid rgba(23,25,25,0.14);box-shadow:0 20px 40px -24px rgba(0,0,0,0.35)}
+.mmenu__in{width:calc(100% - 44px);margin-inline:auto;padding:8px 0 22px}
+.mmenu__group{border-bottom:1px solid rgba(23,25,25,0.14)}
+.mmenu__toggle{display:flex;width:100%;justify-content:space-between;align-items:center;min-height:56px;padding:0;background:none;border:0;cursor:pointer;color:var(--heading);font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.mmenu__sign{font-size:22px;font-weight:400;color:var(--green)}
+.mmenu__links{padding:0 0 12px}
+.mmenu__links a{display:flex;align-items:center;min-height:46px;font-size:17px;font-weight:500;color:var(--heading)}
+.mmenu__links a[aria-current="page"]{color:var(--green);font-weight:600}
+.mmenu__sep{height:1px;margin:6px 0;background:rgba(23,25,25,0.12)}
+.mmenu__link{display:flex;align-items:center;min-height:56px;border-bottom:1px solid rgba(23,25,25,0.14);font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--heading)}
+.mmenu__cta{display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;margin-top:20px;background:var(--green);color:var(--bone);font-size:15px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase}
 
-.site-ftr{border-top:2px solid #047857;padding-block:64px 32px;background:#16231E;color:#C0C9BF}
-.site-ftr__cols{display:grid;grid-template-columns:minmax(200px,1.15fr) repeat(5,minmax(0,1fr));gap:36px;align-items:start}
-.site-ftr__head{margin:0 0 18px;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8FBFA7}
-.site-ftr__col ul{margin:0;padding:0;list-style:none}
-.site-ftr__col li{margin-bottom:11px}
-.site-ftr a{color:#C0C9BF;transition:color .18s}
-.site-ftr a:hover{color:#F3F0E8}
-.site-ftr__col a{font-size:15px;line-height:1.4}
-.site-ftr__role{margin:18px 0 0;font-size:15px;line-height:1.4;color:#C0C9BF}
-.site-ftr__social{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
-.site-ftr__social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(243,240,232,0.16)}
-.site-ftr__social a:hover{border-color:#8FBFA7}
-.site-ftr__rule{height:1px;background:rgba(243,240,232,0.16);margin-block:48px 24px}
-.site-ftr__legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;font-size:13px;color:#C0C9BF}
+/* Close: a 13px label above one sentence and the primary action. */
+.close{background:var(--forest);text-align:center}
+.close__in{padding-block:var(--sec)}
+.close__label{margin:0 0 18px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage)}
+.close__text{margin:0 auto;max-width:24ch;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .7vw),32px);font-weight:650;line-height:1.18;letter-spacing:-0.02em;color:var(--bone);text-wrap:balance}
+.close__text--long{max-width:56ch;font-family:var(--font-body);font-size:clamp(18px,calc(17px + .2vw),20px);font-weight:400;line-height:1.6;letter-spacing:0;color:var(--on-forest)}
+.close__actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 28px;margin-top:32px}
 
-.u-main{background:#F3F0E8;padding-block:0 115px;color:#171919}
+/* Footer */
+.ftr{background:var(--forest);color:var(--on-forest-2);border-top:2px solid var(--green);padding-block:clamp(48px,6vw,72px) 32px;font-family:var(--font-body)}
+.ftr__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:40px;align-items:start}
+.ftr__brand{display:inline-flex;align-items:center;min-height:44px;color:var(--bone);font-family:var(--font-heading);font-size:22px;font-weight:750;line-height:1;letter-spacing:-0.035em}
+.ftr__tag{margin:18px 0 0;max-width:26ch;font-size:15px;line-height:1.5}
+.ftr__social{display:flex;gap:14px;margin:20px 0 0;padding:0;list-style:none}
+.ftr__social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--rule-forest);color:var(--on-forest-2)}
+.ftr__social a:hover{color:var(--bone);border-color:var(--sage)}
+.ftr__col{display:flex;flex-direction:column;min-width:0}
+.ftr__head{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage)}
+.ftr__col a{padding:7px 0;font-size:15px;line-height:1.4}
+.ftr__col a:hover,.ftr__legal a:hover{color:var(--bone)}
+.ftr__rule{height:1px;background:var(--rule-forest);margin-block:48px 24px}
+.ftr__bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 32px;font-size:13px;line-height:1.5}
+.ftr__legal{display:flex;flex-wrap:wrap;gap:4px 24px}
+.ftr__legal a{display:inline-flex;align-items:center;min-height:44px}
+@media (max-width:759px){.ftr__col a{display:flex;align-items:center;min-height:44px;padding:0}}
 
-/* ── Shared inner-page shell: asymmetrical editorial grid (rail | reading column | gutter) ── */
-.u-shell{max-width:1180px;margin-inline:auto;padding-inline:clamp(24px,5vw,72px);display:grid;grid-template-columns:minmax(120px,170px) minmax(0,760px) minmax(0,1fr);column-gap:clamp(28px,4vw,64px)}
-.u-shell--wide{grid-template-columns:minmax(120px,170px) minmax(0,860px) minmax(0,1fr)}
-.u-shell__rail{grid-column:1;min-width:0}
-.u-shell__rail::before{content:"";display:block;width:100%;height:3px;background:var(--brand-green,#047857)}
-.u-shell__rail .u-eyebrow{display:block;margin-top:16px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.4;letter-spacing:0.10em;text-transform:uppercase;color:#047857}
-.u-shell__body{grid-column:2;min-width:0}
-.u-shell__gutter{grid-column:3}
+/* Legacy shell: the tools and /ask-me-anything/el render their own content. */
+.u-main{padding-block:64px 96px}
+.u-form{width:min(var(--read-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
 
-.u-shell__body{font-size:19px;line-height:1.72;color:#171919}
-.u-shell__body h1{font-family:var(--font-heading);font-synthesis:none;font-size:clamp(48px,5vw,64px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;margin:0 0 32px}
-.u-shell__body h2{margin:80px 0 24px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(32px,3.6vw,46px);font-weight:800;line-height:1.04;letter-spacing:-0.04em}
-.u-shell__body h3{margin:48px 0 16px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(24px,2.8vw,32px);font-weight:750;line-height:1.1;letter-spacing:-0.03em}
-.u-shell__body p + p{margin-top:24px}
-.u-shell__body ul,.u-shell__body ol{margin:24px 0;padding-left:24px}
-.u-shell__body li + li{margin-top:12px}
-.u-shell__body a{color:#047857;text-decoration:underline;text-underline-offset:3px}
-.u-shell__body blockquote{margin:48px 0;padding-left:28px;border-left:4px solid #047857;font-family:var(--font-heading);font-size:28px;line-height:1.3}
-.u-shell__body hr{border:0;border-top:1px solid rgba(23,25,25,0.18);margin:64px 0}
-.u-shell__body img{display:block;height:auto;margin:48px 0}
-.u-form{width:min(760px,calc(100% - 40px));margin-inline:auto}
-
-/* One shared branded callout for deeper pages (dark band, warm text, green rule) */
-.u-callout{margin:40px 0;padding:26px 30px;background:#16231E;color:#F3F0E8;border-left:3px solid #8FBFA7;border-radius:0}
-.u-callout :is(p,li){color:#C0C9BF}
-.u-callout > *:first-child{margin-top:0}
-.u-callout > *:last-child{margin-bottom:0}
-
-.u-faq details{border-top:1px solid rgba(23,25,25,0.18);padding:20px 0}
-.u-faq details:last-of-type{border-bottom:1px solid rgba(23,25,25,0.18)}
-.u-faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:24px;cursor:pointer;list-style:none;font-weight:600;font-size:20px;line-height:1.4}
-.u-faq summary::-webkit-details-marker{display:none}
-.u-faq summary::after{content:"+";color:#047857;font-size:26px;line-height:1;flex-shrink:0}
-.u-faq details[open] summary::after{content:"\2212"}
-.u-faq details > *:not(summary){margin-top:16px}
-.u-faq--dark details{border-color:rgba(243,240,232,0.16)}
-.u-faq--dark summary{color:#F3F0E8}
-.u-faq--dark summary::after{color:#8FBFA7}
-.u-faq--dark details > *:not(summary){color:#C0C9BF}
-
-.u-related a{display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid rgba(23,25,25,0.18);color:#171919}
-.u-related a:last-child{border-bottom:1px solid rgba(23,25,25,0.18)}
-.u-related a:hover{color:#047857}
-
-.u-notice{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding:24px 0;border-top:1px solid rgba(23,25,25,0.18);border-bottom:1px solid rgba(23,25,25,0.18);margin-bottom:56px}
-.u-notice p{margin:0;font-size:19px;line-height:1.5;max-width:52ch}
-.u-notice a{font-weight:700;font-size:14px;letter-spacing:0.06em;color:#047857}
-
-/* Footer: six columns on wide screens, then three, then two, then one. */
-@media (max-width:1180px){.site-ftr__cols{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 32px}.site-ftr__brand{grid-column:1 / -1}}
-@media (max-width:640px){.site-ftr__cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:400px){.site-ftr__cols{grid-template-columns:1fr}}
-/* Header: five nav entries plus the CTA need ~1180px. Below that the entries
-   move into the menu; the CTA stays in the bar down to phone widths. */
-@media (max-width:1199px){
-  .site-hdr__nav{display:none}
-  .site-hdr__end{margin-left:auto}
-  .site-hdr__burger{display:flex;margin-left:6px}
-  .site-menu .hdr-cta{display:none}
-}
-@media (min-width:1200px){.site-menu{display:none!important}}
-@media (max-width:680px){
-  .site-hdr,.site-hdr__in{min-height:68px}
-  .site-hdr__brand{font-size:23px}
-  .site-hdr__end .hdr-cta{display:none}
-  .site-menu .hdr-cta{display:flex}
-}
-@media (max-width:900px){
-  .u-shell,.u-shell--wide{grid-template-columns:1fr;column-gap:0}
-  .u-shell__rail{grid-column:1;margin-bottom:20px}
-  .u-shell__rail::before{width:56px}
-  .u-shell__rail .u-eyebrow{margin-top:12px}
-  .u-shell__body{grid-column:1}
-  .u-shell__gutter{display:none}
-}
-@media (max-width:640px){
-  .site-ftr__legal{flex-direction:column;align-items:flex-start;gap:20px}
-  .u-shell__body{font-size:18px}
-  .u-shell__body h2{margin-top:56px}
-}
-@media (max-width:680px){
-  .pill--green{max-width:100%;padding-inline:clamp(22px,6.5vw,44px);font-size:clamp(15px,2.35vw,16px)}
-}
-@media (max-width:520px){
-  .cta-strip__h{font-size:clamp(28px,6.9vw,36px)}
-}
-@media (max-width:420px){
-  .hero-cta{padding-inline:16px}
-}
-@media (max-width:360px){
-  .hero-cta{max-width:100%;padding-inline:16px;gap:8px}
-}
-/* ── Shared motion primitives ────────────────────────────────────────────────
-   Every rule here is gated on .mo, which window.Motion puts on <html> at
-   runtime and only when motion is allowed. Nothing is hidden by a stylesheet,
-   so the prerendered page is complete and readable with JS disabled, and a
-   reduced-motion visitor never gets .mo and therefore lands on the final state
-   with no transition to sit through. Motion also refuses to arm anything that
-   is already on screen when it initialises, so arming can never blank or move
-   content the visitor is looking at. */
-.mo [data-mo]{opacity:0}
-.mo [data-mo="rise"]{transform:translate3d(0,var(--rise),0)}
-.mo [data-mo="rise-sm"]{transform:translate3d(0,calc(var(--rise) / 2),0)}
-.mo [data-mo].is-in{opacity:1;transform:none;
-  transition:opacity var(--dur-text) var(--ease-settle) var(--mo-delay,0ms),transform var(--dur-text) var(--ease-settle) var(--mo-delay,0ms)}
-/* Rules that grow from an origin rather than fading in. */
-.mo [data-mo="rule-l"],.mo [data-mo="rule-r"]{opacity:1;transform:scaleX(0)}
-.mo [data-mo="rule-l"]{transform-origin:left center}
-.mo [data-mo="rule-r"]{transform-origin:right center}
-.mo [data-mo^="rule-"].is-in{transform:scaleX(1);
-  transition:transform var(--dur-rule) var(--ease-settle) var(--mo-delay,0ms)}
-/* SVG line drawing. Motion.draw() sets pathLength="1" so one dash length
-   covers any geometry and the offset is a plain 0–1 number. */
-.mo [data-mo-draw]{stroke-dasharray:1;stroke-dashoffset:1}
-.mo [data-mo-draw].is-in{stroke-dashoffset:0;
-  transition:stroke-dashoffset var(--dur-draw) var(--ease-travel) var(--mo-delay,0ms)}
-@media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
-@media print{#sidebar{display:none!important}.site-hdr,.site-ftr,.cta-strip{display:none!important}}
+@media print{.hdr,.ftr,.close,.site-grain{display:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 </style><style>
-.sp{--sp-max:var(--page-max);background:#F3F0E8;color:#171919;outline:none}
-/* Container per page type: reading pages sit in one centred column like the
-   previous service pages; rail and card pages use more of the canvas. */
-.sp--service,.sp--problem,.sp--resource,.sp--legal{--sp-max:880px}
-.sp--audience,.sp--faq,.sp--about{--sp-max:1180px}
-.sp-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-:where(.sp) p{margin:0}
+.pg{display:block;outline:none}
+.pg img{filter:grayscale(1) contrast(1.12) brightness(.96) sepia(.14)}
+.label{margin:0;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
 
-/* Hero */
-.sp-hero{position:relative;background:#F3F0E8;border-bottom:1px solid rgba(23,25,25,0.18)}
-.sp-hero__in{width:min(var(--page-canvas),var(--sp-max));margin-inline:auto;padding-block:clamp(56px,7vw,104px) clamp(48px,6vw,84px)}
-.sp-hero--aside .sp-hero__in{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,0.75fr);gap:clamp(32px,5vw,72px);align-items:center}
-.sp-hero__copy{max-width:900px}
-.sp-eyebrow{margin:0 0 18px;font-family:var(--font-display);font-synthesis:none;font-size:13px;line-height:1.35;letter-spacing:0.07em;text-transform:uppercase;color:#047857}
-.sp-h1{margin:0;max-width:21ch;font-family:var(--font-display);font-synthesis:none;font-size:clamp(38px,4.6vw,64px);font-weight:400;line-height:1;letter-spacing:-0.045em;color:#14201C;text-wrap:balance}
-.sp-h1::after{content:"";display:block;width:96px;height:1px;background:#047857;margin-top:26px}
-.sp-hero__lead{margin-top:26px;max-width:680px}
-.sp-lead{font-size:clamp(19px,1.6vw,21px);line-height:1.55;color:#2C312C}
-.sp-lead + .sp-lead{margin-top:16px}
-.sp-hero .sp-ctas{margin-top:30px}
+/* Type */
+.eyebrow{margin:0 0 18px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.h1{margin:0;max-width:17ch;font-family:var(--font-display);font-weight:400;font-size:clamp(40px,calc(30px + 2.1vw),60px);line-height:1.0;letter-spacing:-.04em;color:var(--heading);text-wrap:balance}
+.hero-read .h1{max-width:16ch}
+.h1--home{max-width:15ch}
+.sub{margin:22px 0 0;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .6vw),30px);font-weight:650;line-height:1.2;letter-spacing:-.02em;color:var(--green);text-wrap:balance}
+.lead{margin:24px 0 0;max-width:58ch;font-size:clamp(19px,calc(18.4px + .12vw),20px);line-height:1.55;color:var(--body);text-wrap:pretty}
+.sub + .lead{margin-top:26px}
+.lead + .lead{margin-top:16px}
+.h2{margin:0 0 24px;font-family:var(--font-heading);font-size:clamp(30px,calc(26px + 1vw),40px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
+.h3{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .3vw),24.5px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading);text-wrap:balance}
+.p{margin:0;font-size:clamp(17px,calc(16px + .14vw),18px);line-height:1.7;color:var(--body);text-wrap:pretty}
+.p strong{font-weight:600;color:var(--heading)}
+.p--emph{font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--heading)}
+.p--lead500{margin:0 0 32px;font-size:clamp(19px,calc(18.4px + .12vw),20px);font-weight:500;line-height:1.5;color:var(--ink-2)}
+.p--strong{font-weight:600;color:var(--heading)}
+.statement{margin:0;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .7vw),32px);font-weight:650;line-height:1.18;letter-spacing:-.02em;color:var(--heading);text-wrap:balance}
+.inl{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor}
+.inl:hover{color:var(--green-pressed)}
+.meta{margin:0;font-size:15px;line-height:1.5;color:var(--meta)}
+.related{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:0 10px;font-size:15px;color:var(--meta)}
 
-/* Body and sections */
-.sp-body{width:min(var(--page-canvas),var(--sp-max));margin-inline:auto;padding-block:clamp(16px,3vw,40px) clamp(72px,9vw,120px)}
-.sp-sec{max-width:760px;padding-top:clamp(52px,6vw,76px)}
-.sp-sec--wide,.sp-sec--note{max-width:none}
-.sp-sec--note{max-width:760px}
-.sp-rule{display:block;width:56px;height:2px;margin-bottom:22px;background:#047857;transform-origin:left center}
-.sp-num{display:block;margin:0 0 10px;font-family:var(--font-display);font-size:clamp(18px,1.9vw,22px);line-height:1;letter-spacing:-0.03em;color:#047857}
-.sp-h2{margin:0 0 20px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(28px,3vw,40px);font-weight:800;line-height:1.06;letter-spacing:-0.035em;color:#14201C;text-wrap:balance}
-.sp-h3{margin:0 0 10px;font-family:var(--font-heading);font-synthesis:none;font-size:clamp(20px,1.8vw,23px);font-weight:750;line-height:1.2;letter-spacing:-0.02em;color:#14201C}
-.sp-p{max-width:68ch;font-size:18px;line-height:1.68;color:#3A403A}
-.sp-p + .sp-p,.sp-p + .sp-list,.sp-list + .sp-p{margin-top:18px}
-.sp-p strong,.sp-list strong{font-weight:700;color:#171919}
-.sp-p a,.sp-list a,.sp-lead a{color:#047857;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
-.sp-p a:hover,.sp-list a:hover{text-decoration-thickness:2px}
-.sp-p--said{font-family:var(--font-heading);font-size:clamp(20px,1.9vw,24px);font-weight:700;line-height:1.3;letter-spacing:-0.015em;color:#14201C;padding-left:20px;border-left:3px solid #047857}
-.sp-p--said + .sp-p--said{margin-top:14px}
-.sp-list{max-width:68ch;margin:0;padding:0;list-style:none}
-.sp-list li{position:relative;padding:12px 0 12px 26px;border-top:1px solid rgba(23,25,25,0.18);font-size:18px;line-height:1.55;color:#3A403A}
-.sp-list li:last-child{border-bottom:1px solid rgba(23,25,25,0.18)}
-.sp-list li::before{content:"";position:absolute;left:0;top:24px;width:12px;height:2px;background:#047857}
-.sp-meta{margin-top:14px;font-size:14px;line-height:1.5;color:#6A6F67;font-style:italic}
+/* Flow: paragraph → paragraph 18px, content → link 22px */
+.flow>*{margin-top:0;margin-bottom:0}
+.flow>*+*{margin-top:18px}
+.flow>.links,.flow>.actions{margin-top:22px}
+.flow>.statement+*{margin-top:24px}
+.flow>.facts+*{margin-top:32px}
+.flow>*+.statement{margin-top:24px}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;margin-top:32px}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 28px}
+.subsec+.subsec{margin-top:40px}
 
-/* Calls to action */
-.sp-ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:26px}
-.sp-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:55px;padding:0 24px;background:#047857;color:#F3F0E8;border:0;border-radius:0;font-family:var(--font-body);font-size:15px;font-weight:750;line-height:1.2;letter-spacing:0.045em;text-transform:uppercase;text-align:center;cursor:pointer;transition:background var(--dur-hover),gap var(--dur-hover)}
-.sp-btn:hover{background:#03654A;gap:13px}
-.sp-btn[disabled]{opacity:.6;cursor:progress}
-.sp-link{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding-bottom:4px;border-bottom:1px solid rgba(23,25,25,0.3);font-size:13.5px;font-weight:700;line-height:1.3;letter-spacing:0.06em;text-transform:uppercase;color:#2C312C;transition:color var(--dur-hover),border-color var(--dur-hover),gap var(--dur-hover)}
-.sp-link:hover{color:#047857;border-bottom-color:#047857;gap:12px}
-.sp-link--dark{color:#8FBFA7;border-bottom-color:rgba(143,191,167,0.45)}
-.sp-link--dark:hover{color:#F3F0E8;border-bottom-color:#F3F0E8}
-.sp-related{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;max-width:760px;margin-top:clamp(40px,5vw,56px)}
-.sp-related__k{font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6A6F67}
-.sp-related--dark .sp-related__k{color:#C0C9BF}
-.sp-sec .sp-related,.sp-sub .sp-related{margin-top:16px}
+/* Heroes */
+.hero-split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px clamp(40px,5vw,72px);align-items:center;padding-block:clamp(48px,5vw,72px) clamp(56px,6vw,88px)}
+.hero-read{padding-top:clamp(56px,6vw,88px)}
+.frame{position:relative;margin:12px;justify-self:end;width:min(calc(100% - 24px),420px)}
+.frame::before{content:"";position:absolute;inset:-12px;border:1px solid rgba(4,120,87,.6);pointer-events:none}
+.frame__img{aspect-ratio:4/5;overflow:hidden;background:var(--forest)}
+.frame__img img{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:899px){.hero-split{grid-template-columns:minmax(0,1fr)}.frame{justify-self:start;width:min(calc(100% - 24px),320px)}}
 
-/* Section variants */
-.sp-sec--panel{max-width:820px;margin-top:clamp(52px,6vw,76px);padding:clamp(28px,4vw,44px);background:#EDE8DB;border-left:3px solid #047857}
-.sp-sec--panel .sp-rule{display:none}
-.sp-sec--rail{display:grid;grid-template-columns:minmax(200px,300px) minmax(0,760px);gap:clamp(28px,4vw,64px);max-width:none;align-items:start}
-.sp-sec__rail{position:sticky;top:24px}
-.sp-sec__rail .sp-h2{font-size:clamp(24px,2.4vw,32px)}
-.sp-sec--faq .sp-sub,.sp-sec--rail .sp-sub{padding:22px 0;border-top:1px solid rgba(23,25,25,0.18)}
-.sp-sec--faq .sp-sub:last-child,.sp-sec--rail .sp-sub:last-child{border-bottom:1px solid rgba(23,25,25,0.18)}
-.sp-sec--faq .sp-sub .sp-p + .sp-p,.sp-sec--rail .sp-sub .sp-p + .sp-p{margin-top:12px}
-.sp-sec--rail .sp-sec__body > .sp-sub:first-child{border-top:0;padding-top:0}
-.sp-sec--aside{max-width:none;padding-top:0}
-.sp-sec--aside + .sp-sec--aside{margin-top:44px}
-.sp-sec--aside .sp-h2{font-size:clamp(24px,2.3vw,30px)}
+/* Sections: 96px apart; reading sections on problem pages 88px */
+.sec{padding-top:var(--sec)}
+.fam-problem .sec+.sec{padding-top:clamp(64px,6.1vw,88px)}
+.pg>:last-child:not(.band){padding-bottom:var(--sec)}
+.band{margin-top:var(--sec)}
+.band+.band{margin-top:0}
+.pg>.band:first-child{margin-top:0}
 
-/* Cards (Work With Me, Free Tools, homepage, Writing subjects) */
-.sp-cards{display:grid;gap:clamp(18px,2.2vw,28px);margin-top:clamp(52px,6vw,76px)}
-.sp-cards--3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.sp-sec .sp-cards{margin-top:8px}
-.sp-cards--2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.sp-sec--card{display:flex;flex-direction:column;max-width:none;padding:clamp(26px,3vw,38px);background:#EDE8DB;border-top:2px solid #047857}
-.sp-sec--card .sp-rule{display:none}
-.sp-sec--card .sp-h2{font-size:clamp(24px,2.3vw,30px)}
-.sp-sec--card .sp-ctas{margin-top:auto;padding-top:24px}
-.sp-sec--card .sp-meta{margin-top:12px}
+/* Dark section: 5/7, top-aligned */
+.dark{background:var(--forest);color:var(--bone)}
+.dark__in{padding-block:var(--sec);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px clamp(48px,6.5vw,96px);align-items:start}
+.dark .h2{color:var(--bone)}
+.dark .p{color:var(--on-forest)}
+.dark .p strong{color:var(--bone)}
+.dark__statement{margin:0;max-width:22ch;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .6vw),30px);font-weight:650;line-height:1.2;letter-spacing:-.02em;color:var(--sage);text-wrap:balance}
+.dark__body{min-width:0;max-width:620px}
+.dark__in--top{row-gap:0}
+.dark__h2-top{grid-column:1/-1;max-width:24ch;margin-bottom:clamp(28px,3vw,40px);font-size:clamp(30px,calc(26px + 1.1vw),42px)}
+.dark__lead{margin:0;max-width:30ch;font-size:clamp(19px,calc(18px + .25vw),21.5px);font-weight:600;line-height:1.45;color:var(--sage);text-wrap:pretty}
+.dark .p--rule{padding-left:18px;border-left:2px solid var(--sage);font-weight:600;color:var(--bone)}
+@media (max-width:899px){.dark__in{grid-template-columns:minmax(0,1fr)}.dark__in--top{row-gap:24px}.dark__h2-top{margin-bottom:0}}
 
-/* Reviews: quotes in a grid, no ratings */
-.sp-quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.2vw,28px)}
-.sp-quote{display:flex;flex-direction:column;justify-content:space-between;gap:22px;margin:0;padding:clamp(24px,3vw,34px);background:#EDE8DB;border-left:3px solid #047857}
-.sp-quote blockquote{margin:0}
-.sp-quote blockquote p{font-size:18px;line-height:1.62;color:#171919}
-.sp-quote figcaption{font-size:13px;font-weight:700;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;color:#6A6F67}
+/* Photo split: 1:1, the photograph full-bleed */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);container-type:inline-size}
+.split--dark{background:var(--forest);color:var(--bone)}
+.split--dark .h2{color:var(--bone)}
+.split--dark .p{color:var(--on-forest)}
+.split__fig{position:relative;margin:0;min-height:600px;overflow:hidden;background:var(--forest)}
+.split__fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.split--dark .split__fig img{filter:grayscale(1) contrast(1.12) brightness(.9) sepia(.14)}
+.split__body{min-width:0;display:flex;align-items:center;padding:var(--sec) calc((100vw - min(1240px, 100vw - 2 * var(--gutter))) / 2) var(--sec) clamp(48px,5.5vw,80px);padding-right:calc((100cqw - min(1240px, 100cqw - 2 * var(--gutter))) / 2)}
+.split__text{max-width:560px}
+@media (max-width:899px){.split{grid-template-columns:minmax(0,1fr)}.split__fig{min-height:280px}.split__body{padding:56px var(--gutter) 64px}}
 
-/* Writing */
-.wr-featured{margin:0;padding:0;list-style:none;border-top:1px solid rgba(23,25,25,0.18)}
-.wr-featured li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 40px;padding:26px 0;border-bottom:1px solid rgba(23,25,25,0.18)}
-.wr-featured li .sp-h3{grid-row:span 2;margin:0}
-.wr-featured li .sp-related{margin-top:10px}
-.wr-subject{padding:clamp(22px,2.6vw,30px);background:#EDE8DB}
-.wr-subject .sp-ctas{margin-top:20px}
+/* FAQ rows */
+.faq{border-top:1px solid var(--rule-2)}
+.faq details{border-bottom:1px solid var(--rule-2)}
+.faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:24px;min-height:64px;padding:22px 0;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary h3{margin:0;font-family:var(--font-heading);font-size:clamp(19px,calc(18.5px + .1vw),20px);font-weight:650;line-height:1.35;color:var(--heading)}
+.faq summary:hover h3{color:var(--green)}
+.faq__sign{flex:0 0 auto;color:var(--green);font-size:24px;line-height:1;transition:transform 200ms cubic-bezier(.22,1,.36,1)}
+.faq details[open] .faq__sign{transform:rotate(45deg)}
+.faq__a{padding:0 0 24px}
+.faq__a .p{font-size:clamp(17px,calc(16.4px + .1vw),17.5px);line-height:1.65}
 
-/* Closing band — the editorial "Contact" section */
-.sp-close{background:#16231E;color:#C0C9BF;border-top:2px solid #047857}
-.sp-close__in{width:min(var(--page-canvas),var(--sp-max));margin-inline:auto;padding-block:clamp(64px,8vw,112px)}
-.sp-close__h{margin:0 0 18px;font-family:var(--font-display);font-synthesis:none;font-size:clamp(36px,4.4vw,60px);font-weight:400;line-height:1;letter-spacing:-0.045em;color:#F3F0E8}
-.sp-close .sp-p{max-width:52ch;font-size:clamp(19px,1.6vw,21px);line-height:1.55;color:#C0C9BF}
-.sp-close .sp-ctas{margin-top:34px}
-.sp-close .sp-related{margin-top:34px}
+/* Continue with */
+.continue{padding-top:clamp(56px,5vw,72px)}
+.continue__label{margin:0 0 14px;color:var(--meta)}
+.continue__list{border-bottom:1px solid rgba(23,25,25,.2)}
+.continue__list a{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:56px;border-top:1px solid rgba(23,25,25,.2);font-size:17px;font-weight:600;color:var(--heading)}
+.continue__list a span{color:var(--green)}
+.continue__list a:hover{color:var(--green)}
 
-/* Homepage bands */
-.hm-band{background:#F3F0E8}
-.hm-band--deep{background:#EDE8DB}
-.hm-band--dark{background:#16231E;color:#C0C9BF}
-.hm-band--dark .sp-h2{color:#F3F0E8}
-.hm-band--dark .sp-p{color:#C0C9BF}
-.hm-band--dark .sp-rule{background:#8FBFA7}
-.hm-band__in{width:var(--page-canvas);margin-inline:auto;padding-block:clamp(64px,8vw,108px)}
-.hm-band__in > .sp-p{max-width:62ch}
-.hm-band__in > .sp-h2{max-width:22ch}
-.hm-band .sp-cards{margin-top:28px}
-.hm-card{display:flex;flex-direction:column;padding:clamp(24px,2.8vw,34px);background:#F3F0E8;border-top:2px solid #047857}
-.hm-card__n{margin-bottom:14px;font-family:var(--font-display);font-size:20px;line-height:1;color:#047857}
-.hm-card .sp-ctas{margin-top:auto;padding-top:22px}
-.hm-read{display:flex;flex-direction:column;padding-top:18px;border-top:1px solid rgba(23,25,25,0.18)}
-.hm-read .sp-ctas{margin-top:auto;padding-top:18px}
-.hm-about{display:grid;grid-template-columns:minmax(180px,300px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;margin-top:8px}
-.hm-about .sp-p{max-width:62ch}
+/* Service rows */
+.rows{border-bottom:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:56px minmax(0,5fr) minmax(0,7fr);gap:8px 32px;padding:32px 0;border-top:1px solid var(--rule);align-items:start}
+.row__num{font-size:14px;font-weight:700;line-height:1.9;letter-spacing:.04em;color:var(--meta)}
+.row__title{margin:0;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .4vw),26px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading)}
+.row__body{min-width:0}
+.row__body .p{max-width:52ch;line-height:1.65}
+.row__body .links{margin-top:12px}
+@media (max-width:899px){.row{grid-template-columns:minmax(0,1fr)}}
 
-/* Portraits share the site's duotone */
-.sp-portrait{margin:0}
-.sp-portrait img{display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14)}
-.sp-portrait--hero img{aspect-ratio:4/5;object-fit:cover;object-position:50% 30%}
-.hm-about__img img{aspect-ratio:1;object-fit:cover}
+/* Resource columns */
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px clamp(32px,4vw,56px)}
+.col{min-width:0;padding-top:20px;border-top:1px solid rgba(23,25,25,.3)}
+.col .h3{margin-bottom:12px}
+.col .p{font-size:17px;line-height:1.62}
+.col .links{margin-top:14px}
+.col .flow>.links{margin-top:14px}
+@media (max-width:899px){.cols3{grid-template-columns:minmax(0,1fr)}}
+.sage{background:var(--sage-bg)}
+.sage__in{padding-block:var(--sec)}
+
+/* Routes, triggers, facts, lists, quotes */
+.routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px clamp(40px,5.5vw,80px);align-items:start}
+.route{min-width:0;padding-top:22px;border-top:1px solid rgba(23,25,25,.24)}
+.route .p{max-width:56ch}
+.route .links{margin-top:22px}
+.grid2{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(40px,5.5vw,80px);border-bottom:1px solid var(--rule)}
+.grid2 li{padding:18px 0 16px;border-top:1px solid var(--rule);font-size:clamp(19px,calc(18px + .2vw),21px);font-weight:500;line-height:1.4;color:var(--heading)}
+@media (max-width:759px){.routes,.grid2{grid-template-columns:minmax(0,1fr)}}
+.facts{margin:0 0 14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--rule-2)}
+.facts div{padding:16px 16px 16px 0}
+.facts dt{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
+.facts dd{margin:6px 0 0;font-size:17.5px;font-weight:600;color:var(--heading)}
+@media (max-width:559px){.facts{grid-template-columns:minmax(0,1fr)}.facts div+div{border-top:1px solid var(--rule)}}
+.list{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--rule)}
+.list li{padding:14px 0;border-top:1px solid var(--rule);font-size:clamp(17px,calc(16px + .14vw),18px);font-weight:500;line-height:1.5;color:var(--heading)}
+.lines{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--green)}
+.lines li{font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--heading)}
+.lines li+li{margin-top:10px}
+.quotes{border-top:1px solid var(--rule)}
+.quote{margin:0;padding:28px 0;border-bottom:1px solid var(--rule)}
+.quote blockquote{margin:0}
+.quote blockquote p{margin:0;font-size:clamp(18px,calc(17px + .2vw),19.5px);line-height:1.6;color:var(--heading);text-wrap:pretty}
+.quote figcaption{margin-top:14px;font-size:13px;font-weight:700;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
+.quotes>.flow{display:block}
+
+/* Homepage */
+.home-hero{position:relative;overflow:clip}
+.home-hero__lines{position:absolute;inset:0;pointer-events:none}
+.home-hero__axis{position:absolute;top:0;bottom:0;left:62%;width:1px;background:rgba(4,120,87,.4)}
+.home-hero__field{position:absolute;left:42%;right:0;height:1px;background:linear-gradient(90deg,rgba(23,25,25,0),rgba(23,25,25,.08))}
+.home-hero__in{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center;gap:48px clamp(40px,5vw,72px);padding-block:clamp(48px,5vw,72px) clamp(56px,6vw,88px)}
+.home-hero__text{position:relative;z-index:2;min-width:0}
+.home-hero .lead{max-width:560px}
+.home-fig{position:relative;z-index:1;width:clamp(320px,32vw,460px);aspect-ratio:1;justify-self:end;margin:0}
+.home-fig__disc,.home-fig__cut{position:absolute;inset:6% -4% -2% 8%;border-radius:50%}
+.home-fig__disc{background:var(--green)}
+.home-fig__cut{background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,.92) 58%)}
+.home-fig__img{position:absolute;inset:0;overflow:hidden;border-radius:50%;background:var(--forest)}
+.home-fig__img img{position:absolute;left:-6%;top:5%;width:130%;height:130%;max-width:none;object-fit:cover;object-position:47% 0%}
+@media (max-width:899px){.home-hero__lines{display:none}.home-hero__in{grid-template-columns:minmax(0,1fr)}.home-fig{width:min(80%,320px);justify-self:center}}
+.creds{border-block:1px solid rgba(23,25,25,.16)}
+.creds ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.creds li{padding:22px 24px;border-left:1px solid rgba(23,25,25,.16)}
+.creds li:first-child{padding-left:0;border-left:0}
+.creds__a{display:block;font-size:16.5px;font-weight:650;line-height:1.3;color:var(--heading)}
+.creds__b{display:block;margin-top:4px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
+@media (max-width:759px){.creds ul{grid-template-columns:repeat(2,minmax(0,1fr))}.creds li{padding:18px 16px 18px 0;border-left:0}.creds li:nth-child(even){padding:18px 0 18px 16px;border-left:1px solid rgba(23,25,25,.16)}.creds li:nth-child(n+3){border-top:1px solid rgba(23,25,25,.16)}}
+.recog__lead{margin:0 0 32px;color:var(--ink-2);font-weight:400}
+.recog{border-bottom:1px solid var(--rule)}
+.recog__row{display:grid;grid-template-columns:minmax(0,1fr) 280px;align-items:center;gap:10px 40px;min-height:88px;padding:14px 0;border-top:1px solid var(--rule)}
+.recog__row p{margin:0;max-width:48ch;font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:500;line-height:1.4;color:var(--heading)}
+@media (max-width:899px){.recog__row{grid-template-columns:minmax(0,1fr);padding:18px 0 14px}}
+.home-how__statement{margin:0 0 32px}
+.home-how{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px clamp(40px,6vw,96px);align-items:start}
+.home-how__lines span{display:block}
+.home-how__lines .is-mid{margin-top:8px;font-weight:550;color:var(--heading)}
+.home-how__lines span:first-child+.is-mid{margin-top:14px}
+.home-how__lines .is-last{margin-top:14px;font-weight:650;color:var(--heading)}
+.home-how .links{margin-top:22px}
+@media (max-width:899px){.home-how{grid-template-columns:minmax(0,1fr)}}
+
+/* Therapy vs Coaching */
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px clamp(40px,5.5vw,80px);align-items:start}
+.compare__col{min-width:0;padding-top:22px;border-top:2px solid var(--heading)}
+.compare__h{margin:0 0 18px;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .4vw),26px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading);text-wrap:balance}
+@media (max-width:899px){.compare{grid-template-columns:minmax(0,1fr)}}
+
+/* Free Tools, Writing */
+.tool .actions{margin-top:26px}
+.tool__related{margin-top:18px}
+.essays{border-bottom:1px solid var(--rule)}
+.essay{padding:28px 0;border-top:1px solid var(--rule)}
+.essay .h3{margin-bottom:10px}
 
 /* Contact */
-.ct2-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:start;margin-top:clamp(44px,5vw,64px)}
-.sp-form{padding:clamp(24px,3vw,40px);background:#EDE8DB;border-top:2px solid #047857}
-.sp-field{margin:0 0 22px;padding:0;border:0}
-.sp-label{display:block;margin-bottom:8px;padding:0;font-size:15px;font-weight:700;letter-spacing:0.01em;color:#171919}
-.sp-req{color:#047857}
-.sp-input{display:block;width:100%;min-height:52px;padding:13px 15px;border:1px solid rgba(23,25,25,0.28);border-radius:0;background:#F3F0E8;color:#171919;font:inherit;font-size:16px;line-height:1.5;outline:none;transition:border-color .16s,box-shadow .16s}
-.sp-textarea{min-height:170px;resize:vertical}
-.sp-input:focus{border-color:#047857;box-shadow:0 0 0 3px rgba(4,120,87,0.22)}
-.sp-input[aria-invalid="true"]{border-color:#B42318}
-.sp-err{margin-top:8px;font-size:14px;font-weight:600;line-height:1.45;color:#B42318}
-.sp-help{margin-top:8px;font-size:13px;color:#6A6F67;text-align:right}
-.sp-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.sp-choice{display:flex;align-items:center;gap:10px;min-height:48px;padding:10px 14px;border:1px solid rgba(23,25,25,0.22);background:#F3F0E8;font-size:16px;line-height:1.3;color:#171919;cursor:pointer}
-.sp-choice input{width:18px;height:18px;margin:0;accent-color:#047857;flex-shrink:0}
-.sp-choice:has(input:checked){border-color:#047857;box-shadow:inset 3px 0 0 #047857}
-.sp-choice:has(input:focus-visible){outline:3px solid #047857;outline-offset:2px}
-.sp-btn--submit{width:100%;margin-top:8px}
-.sp-formerr{margin:0 0 20px;padding:14px 16px;border:1px solid rgba(180,35,24,.45);background:rgba(180,35,24,.06);font-size:15px;line-height:1.55;color:#B42318}
-.sp-formerr a{color:#B42318;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.contact{padding-block:clamp(48px,6vw,88px) var(--sec)}
+.contact__head{max-width:720px}
+.contact__head .h1{max-width:16ch}
+.lead--strong{margin-top:12px;font-weight:600;color:var(--heading)}
+.contact__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px clamp(40px,6vw,96px);margin-top:clamp(36px,4vw,56px);align-items:start}
+.contact__form{min-width:0;padding-top:28px;border-top:3px solid var(--green)}
+.contact__aside{min-width:0;display:flex;flex-direction:column;gap:36px}
+.contact__next{padding-top:28px;border-top:1px solid rgba(23,25,25,.26)}
+.contact__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(22px,calc(19px + .5vw),27px);font-weight:800;letter-spacing:-.025em;color:var(--heading)}
+.contact__next .p{font-size:17px;line-height:1.65}
+.contact__privacy{padding:24px;background:var(--bone-deep)}
+.contact__privacy-h{margin-bottom:12px;color:var(--green)}
+.contact__privacy .p{font-size:17px;line-height:1.6}
+.contact__privacy .links{margin-top:10px}
+.ct-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 20px}
+.ct-field{display:block;margin:0 0 22px;padding:0;border:0;min-width:0}
+.ct-label{display:block;margin-bottom:8px;padding:0;font-size:14px;font-weight:700;color:var(--heading)}
+.ct-input{display:block;width:100%;min-height:52px;padding:12px 14px;background:var(--bone);border:1px solid rgba(23,25,25,.3);border-radius:0;font:inherit;font-size:16px;line-height:1.4;color:var(--heading)}
+.ct-input:focus{outline:3px solid var(--green);outline-offset:1px;border-color:var(--green)}
+.ct-input[aria-invalid="true"]{border-color:#A3362A}
+.ct-textarea{min-height:170px;padding:14px;line-height:1.55;resize:vertical}
+.ct-choices{display:flex;flex-wrap:wrap;gap:8px}
+.ct-choice{position:relative;display:inline-flex}
+.ct-choice input{position:absolute;opacity:0;width:1px;height:1px}
+.ct-choice span{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid rgba(23,25,25,.3);font-size:15px;font-weight:600;color:var(--heading);cursor:pointer}
+.ct-choice input:checked+span{background:var(--heading);border-color:var(--heading);color:var(--bone)}
+.ct-choice input:focus-visible+span{outline:3px solid var(--green);outline-offset:2px}
+.ct-help{margin:6px 0 0;font-size:14px;color:var(--meta)}
+.sp-err{margin:6px 0 0;font-size:14px;font-weight:600;color:#A3362A}
+.sp-formerr{margin:0 0 22px;padding:14px 16px;border-left:3px solid #A3362A;background:rgba(163,54,42,.06);font-size:16px;line-height:1.55;color:var(--heading)}
+.sp-formerr a{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor}
+.ct-submit{width:100%;min-height:56px}
+.ct-submit[disabled]{opacity:.7;cursor:progress}
 .sp-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.sp-form--done{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
-.sp-form__done{margin:0;font-family:var(--font-heading);font-size:clamp(26px,3vw,34px);font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:#14201C;outline:none}
+.sp-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sp-form__done{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + .8vw),32px);font-weight:800;letter-spacing:-.03em;color:var(--heading);outline:none}
 
-/* Responsive */
-@media (max-width:1100px){
-  .sp-cards--3{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media (max-width:960px){
-  .sp-hero--aside .sp-hero__in{grid-template-columns:1fr}
-  .sp-portrait--hero{max-width:420px}
-  .sp-sec--rail{grid-template-columns:1fr;gap:0}
-  .sp-sec__rail{position:static}
-  .ct2-grid{grid-template-columns:1fr}
-  .wr-featured li{grid-template-columns:1fr}
-  .wr-featured li .sp-h3{grid-row:auto}
-}
-@media (max-width:760px){
-  .sp-cards--3,.sp-cards--2,.sp-quotes{grid-template-columns:1fr}
-  .hm-about{grid-template-columns:1fr}
-  .hm-about__img{max-width:260px}
-  .sp-p,.sp-list li,.sp-quote blockquote p{font-size:17px}
-  .sp-choices{grid-template-columns:1fr}
-}
-@media (max-width:420px){
-  .sp-ctas .sp-btn{width:100%}
-}
-
-/* Homepage hero (unchanged from the previous homepage) */
-.home-hero{position:relative;overflow:clip;background:#F3F0E8;color:#14201C}
-.home-hero::before{content:"";position:absolute;top:0;bottom:0;left:66%;width:1px;background:rgba(4,120,87,0.55);pointer-events:none}
-.home-hero__field{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.home-hero__field-m{display:none}
-@media (max-width:900px){
-  .home-hero__field-d{display:none}
-  .home-hero__field-m{display:block}
-  .home-hero::before{display:none}
-}
-.home-hero__grid{width:var(--page-canvas);min-height:600px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(380px,0.78fr);align-items:center;gap:48px;padding-block:88px 112px}
-.home-hero__copy{position:relative;z-index:2;min-width:0;max-width:820px;color:#14201C}
-.home-hero__eyebrow{max-width:560px;margin:0;color:#047857;font-family:var(--font-display);font-synthesis:none;font-size:13px;font-weight:400;line-height:1.35;letter-spacing:0.055em;text-transform:uppercase}
-.home-hero__title{max-width:none;margin:16px 0 0;font-family:var(--font-display);font-synthesis:none;font-weight:400;font-size:clamp(40px,4.4vw,58px);line-height:0.98;letter-spacing:-0.05em;color:#14201C;text-wrap:balance}
-.home-hero__title::after{content:"";display:block;width:96px;height:1px;background:#047857;margin:22px 0 22px}
-.home-hero__title .home-hero__line{display:block}
-.home-hero__support{max-width:640px;margin:0 0 18px;color:#2C312C;font-family:var(--font-body);font-size:20px;font-weight:400;line-height:1.5}
-.home-hero__support:last-of-type{margin-bottom:30px}
-.home-hero__photo{position:relative;z-index:1;width:clamp(380px,32vw,560px);max-width:100%;aspect-ratio:1;justify-self:end;margin:0}
-.home-hero__photo::before{content:"";position:absolute;z-index:0;inset:6% -4% -2% 8%;border-radius:50%;background:#047857}
-.home-hero__photo::after{content:"";position:absolute;z-index:0;inset:6% -4% -2% 8%;border-radius:50%;background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,0.92) 58%);pointer-events:none}
-.home-hero__frame{position:absolute;z-index:1;inset:0;overflow:hidden;border-radius:50%}
-.home-hero__frame img{width:100%;height:100%;object-fit:cover;object-position:56% 44%;transform:scale(1.58);filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14)}
-.home-hero__ctarow{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
-.hero-cta--caps{font-size:15px;font-weight:750;letter-spacing:0.045em;text-transform:uppercase}
-.home-hero__soft{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#2C312C;border-bottom:1px solid rgba(23,25,25,0.3);padding-bottom:4px;min-height:32px;transition:color .18s,border-color .18s,gap .18s}
-.home-hero__soft:hover{color:#047857;border-bottom-color:#047857;gap:12px}
-.home-hero__seal{display:flex;align-items:center;min-height:48px;margin-top:20px}
-.home-hero__seal .sx-verified-seal{display:inline-flex;align-items:center;line-height:0}
-.home-hero__seal img,.home-hero__seal svg{max-width:160px;max-height:48px;width:auto;height:auto;object-fit:contain;filter:none}
-@media (max-width:1151px) and (min-width:521px){
-  .home-hero__grid{grid-template-columns:1fr;gap:30px;width:100%;max-width:none;padding:64px 40px 84px;min-height:0}
-  .home-hero__title{font-size:clamp(40px,6.0vw,54px)}
-  .home-hero__support{max-width:620px}
-  .home-hero__photo{width:min(58%,380px);justify-self:center}
-}
-@media (max-width:520px){
-  .home-hero__grid{grid-template-columns:1fr;gap:34px;width:100%;max-width:none;padding:66px 20px 80px;min-height:0}
-  .home-hero__title{font-size:clamp(34px,8.6vw,44px)}
-  .home-hero__support{font-size:18px;line-height:1.5}
-  .home-hero__photo{width:min(82%,310px);justify-self:center}
-}
-</style><a class="skip-link" href="#main">Skip to content</a><header class="site-hdr"><div class="site-container site-hdr__in"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis, home">Aggelos<span>.</span></a><nav class="site-hdr__nav" aria-label="Main"><ul class="site-hdr__list"><li class="site-hdr__item"><button type="button" class="site-hdr__top" aria-expanded="false" aria-controls="nav-panel-work"><span>Work with me</span><svg class="site-hdr__chev" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div id="nav-panel-work" class="site-hdr__panel" hidden=""><a class="site-hdr__over" href="/work-with-me/"><span>Work with me</span><span aria-hidden="true">→</span></a><ul><li><a href="/individual-psychotherapy/">Individual Psychotherapy</a></li><li><a href="/couples-therapy/">Couples Therapy</a></li><li><a href="/professional-coaching/">Professional Coaching</a></li></ul></div></li><li class="site-hdr__item"><button type="button" class="site-hdr__top" aria-expanded="false" aria-controls="nav-panel-who"><span>Who I work with</span><svg class="site-hdr__chev" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div id="nav-panel-who" class="site-hdr__panel" hidden=""><ul><li><a href="/therapy-for-men-in-tech/">Men in Tech &amp; Demanding Careers</a></li><li><a href="/therapy-for-founders/">Founders &amp; Business Owners</a></li><li><a href="/therapy-for-executives/">Executives &amp; Leaders</a></li><li><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></li></ul></div></li><li class="site-hdr__item"><button type="button" class="site-hdr__top" aria-expanded="false" aria-controls="nav-panel-problems"><span>Common problems</span><svg class="site-hdr__chev" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div id="nav-panel-problems" class="site-hdr__panel site-hdr__panel--wide" hidden=""><div><ul><li><a href="/relationship-problems-men/">Relationship Problems</a></li><li><a href="/separation-divorce-men/">Separation &amp; Divorce</a></li><li><a href="/work-affecting-relationship/">Work &amp; Relationships</a></li></ul></div><div><ul><li><a href="/executive-burnout-therapy/">Burnout &amp; Can’t Switch Off</a></li><li><a href="/career-transition-therapy/">Career Change &amp; Decisions</a></li><li><a href="/anxiety-overthinking/">Anxiety &amp; Overthinking</a></li><li><a href="/achievement-self-worth/">Achievement &amp; Self-Worth</a></li></ul></div></div></li><li class="site-hdr__item"><a class="site-hdr__top" href="/about/"><span>About</span></a></li><li class="site-hdr__item site-hdr__item--end"><button type="button" class="site-hdr__top is-current" aria-expanded="false" aria-controls="nav-panel-resources"><span>Resources</span><svg class="site-hdr__chev" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div id="nav-panel-resources" class="site-hdr__panel" hidden=""><ul><li><a href="/considering-therapy/">Considering Therapy</a></li><li><a href="/blog/">Writing</a></li><li><a href="/free-tools/">Free Tools</a></li><li><a href="/faq/" aria-current="page">FAQ</a></li></ul></div></li></ul></nav><div class="site-hdr__end"><a class="hdr-cta" href="/contact/"><span>Book a consultation</span><span aria-hidden="true">→</span></a></div><button class="site-hdr__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button></div></header><nav id="site-menu" class="site-menu" aria-label="Main" hidden=""><div class="site-container"><ul class="site-menu__list"><li class="site-menu__group"><button type="button" class="site-menu__top" aria-expanded="false" aria-controls="menu-sub-work"><span>Work with me</span><svg class="site-hdr__chev" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><ul id="menu-sub-work" class="site-menu__sub" hidden=""><li><a href="/work-with-me/">Work with me</a></li><li><a href="/individual-psychotherapy/">Individual Psychotherapy</a></li><li><a href="/couples-therapy/">Couples Therapy</a></li><li><a href="/professional-coaching/">Professional Coaching</a></li></ul></li><li class="site-menu__group"><button type="button" class="site-menu__top" aria-expanded="false" aria-controls="menu-sub-who"><span>Who I work with</span><svg class="site-hdr__chev" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><ul id="menu-sub-who" class="site-menu__sub" hidden=""><li><a href="/therapy-for-men-in-tech/">Men in Tech &amp; Demanding Careers</a></li><li><a href="/therapy-for-founders/">Founders &amp; Business Owners</a></li><li><a href="/therapy-for-executives/">Executives &amp; Leaders</a></li><li><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></li></ul></li><li class="site-menu__group"><button type="button" class="site-menu__top" aria-expanded="false" aria-controls="menu-sub-problems"><span>Common problems</span><svg class="site-hdr__chev" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><ul id="menu-sub-problems" class="site-menu__sub" hidden=""><li><a href="/relationship-problems-men/">Relationship Problems</a></li><li><a href="/separation-divorce-men/">Separation &amp; Divorce</a></li><li><a href="/work-affecting-relationship/">Work &amp; Relationships</a></li><li><a href="/executive-burnout-therapy/">Burnout &amp; Can’t Switch Off</a></li><li><a href="/career-transition-therapy/">Career Change &amp; Decisions</a></li><li><a href="/anxiety-overthinking/">Anxiety &amp; Overthinking</a></li><li><a href="/achievement-self-worth/">Achievement &amp; Self-Worth</a></li></ul></li><li class="site-menu__group"><a class="site-menu__top" href="/about/">About</a></li><li class="site-menu__group"><button type="button" class="site-menu__top" aria-expanded="false" aria-controls="menu-sub-resources"><span>Resources</span><svg class="site-hdr__chev" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><ul id="menu-sub-resources" class="site-menu__sub" hidden=""><li><a href="/considering-therapy/">Considering Therapy</a></li><li><a href="/blog/">Writing</a></li><li><a href="/free-tools/">Free Tools</a></li><li><a href="/faq/" aria-current="page">FAQ</a></li></ul></li></ul><a class="hdr-cta" href="/contact/"><span>Book a consultation</span><span aria-hidden="true">→</span></a></div></nav><main id="main" class="sp sp--faq" tabindex="-1"><section class="sp-hero sp-hero--faq"><div class="sp-hero__in"><div class="sp-hero__copy"><p class="sp-eyebrow">FAQ</p><h1 class="sp-h1" id="page-title">Practical questions about working together.</h1><div class="sp-hero__lead"><p class="sp-lead">For a fuller explanation of what therapy itself is like, see <strong>Considering Therapy</strong>.</p><div class="sp-ctas"><a class="sp-link" href="/considering-therapy/"><span>Considering therapy</span><span aria-hidden="true">→</span></a></div></div></div></div></section><div class="sp-body sp-body--faq"><section class="sp-sec sp-sec--rail" id="services" aria-labelledby="h-services"><div class="sp-sec__rail"><span class="sp-rule is-in" data-mo="rule-l" aria-hidden="true"></span><h2 class="sp-h2" id="h-services">Services</h2></div><div class="sp-sec__body"><div class="sp-sub"><h3 class="sp-h3">What services do you offer?</h3><p class="sp-p">Three. <strong><a href="/individual-psychotherapy/">Individual Psychotherapy</a></strong> is the main part of my practice. <strong><a href="/couples-therapy/">Couples Therapy</a></strong> is for partners who want to work on the relationship together. <strong><a href="/professional-coaching/">Professional Coaching</a></strong> is a separate service for bounded professional decisions and situations.</p></div><div class="sp-sub"><h3 class="sp-h3">How do I know whether I need psychotherapy or coaching?</h3><p class="sp-p">If the question can stay focused on options, trade-offs and action, coaching may be enough. If the same decision is tied up with anxiety, relationships, self-worth or a recurring personal pattern, psychotherapy usually gives us more useful scope.</p><p class="sp-p">Describe the situation when you contact me. I will tell you what I think fits.</p></div><div class="sp-sub"><h3 class="sp-h3">Do you only work with men?</h3><p class="sp-p">No. The practice is positioned mainly towards men in technology, startups, business and other demanding careers. I also work with other adults where the fit is appropriate.</p></div><div class="sp-sub"><h3 class="sp-h3">Do you only work with people in technology?</h3><p class="sp-p">No. Technology is the professional environment I know most deeply. I also work with founders, business owners, executives and people in other demanding careers.</p></div><div class="sp-sub"><h3 class="sp-h3">Do you work with couples?</h3><p class="sp-p">Yes. Couples Therapy is a separate service from individual psychotherapy.</p></div></div></section><section class="sp-sec sp-sec--rail" id="individual-psychotherapy" aria-labelledby="h-individual-psychotherapy"><div class="sp-sec__rail"><span class="sp-rule is-in" data-mo="rule-l" aria-hidden="true"></span><h2 class="sp-h2" id="h-individual-psychotherapy">Individual Psychotherapy</h2></div><div class="sp-sec__body"><div class="sp-sub"><h3 class="sp-h3">How long is a psychotherapy session?</h3><p class="sp-p">Usually <strong>50–60 minutes</strong>.</p></div><div class="sp-sub"><h3 class="sp-h3">How often do we meet?</h3><p class="sp-p">I normally work <strong>weekly for at least the first few months</strong>. After that, we can review frequency together.</p><p class="sp-p">Consistency matters. Therapy is hard to develop if sessions only happen occasionally when something has become urgent.</p></div><div class="sp-sub"><h3 class="sp-h3">Am I committing to a fixed number of sessions?</h3><p class="sp-p">No. You can stop whenever you choose.</p><p class="sp-p">I do ask people to begin with a realistic view of psychotherapy. It usually needs continuity, especially early on.</p></div><div class="sp-sub"><h3 class="sp-h3">How long does therapy take?</h3><p class="sp-p">There is no standard duration. Some people come around a particular period or issue. Others continue for longer because the therapy becomes broader. We review that as the work develops.</p></div><div class="sp-sub"><h3 class="sp-h3">Can I take a break or stop?</h3><p class="sp-p">Yes. Where possible, I prefer that we talk about ending or taking a break rather than simply disappearing.</p></div></div></section><section class="sp-sec sp-sec--rail" id="couples-therapy" aria-labelledby="h-couples-therapy"><div class="sp-sec__rail"><span class="sp-rule is-in" data-mo="rule-l" aria-hidden="true"></span><h2 class="sp-h2" id="h-couples-therapy">Couples Therapy</h2></div><div class="sp-sec__body"><div class="sp-sub"><h3 class="sp-h3">How long is a couples session?</h3><p class="sp-p">There are two common formats. <strong>Weekly sessions usually last 50–60 minutes. Biweekly sessions can last 90 minutes.</strong> We agree the structure before ongoing work begins.</p></div><div class="sp-sub"><h3 class="sp-h3">Do we need to be close to separation before starting?</h3><p class="sp-p">No. Couples come with recurring conflict, emotional distance, trust problems and other relationship difficulties well before separation.</p></div><div class="sp-sub"><h3 class="sp-h3">Can I come alone about my relationship?</h3><p class="sp-p">Yes. That would normally be Individual Psychotherapy.</p></div><div class="sp-sub"><h3 class="sp-h3">What if one of us is more interested in therapy than the other?</h3><p class="sp-p">That is common. Equal enthusiasm is not required. Both people do need enough willingness to participate honestly.</p></div></div></section><section class="sp-sec sp-sec--rail" id="fees" aria-labelledby="h-fees"><div class="sp-sec__rail"><span class="sp-rule is-in" data-mo="rule-l" aria-hidden="true"></span><h2 class="sp-h2" id="h-fees">Fees</h2></div><div class="sp-sec__body"><div class="sp-sub"><h3 class="sp-h3">How much does it cost?</h3><p class="sp-p">I don’t publish one universal fee because my fees vary depending on the circumstances and location of the work. I tell you the relevant fee before we agree to begin.</p></div><div class="sp-sub"><h3 class="sp-h3">Why not list a single price?</h3><p class="sp-p">Because it would be inaccurate for some clients.</p></div></div></section><section class="sp-sec sp-sec--rail" id="starting" aria-labelledby="h-starting"><div class="sp-sec__rail"><span class="sp-rule is-in" data-mo="rule-l" aria-hidden="true"></span><h2 class="sp-h2" id="h-starting">Starting</h2></div><div class="sp-sec__body"><div class="sp-sub"><h3 class="sp-h3">What happens when I contact you?</h3><p class="sp-p">Send a short description of what brings you here and where you are currently located. I read it myself. If the situation falls within what I offer, we arrange an initial conversation.</p></div><div class="sp-sub"><h3 class="sp-h3">Do I need a diagnosis?</h3><p class="sp-p">No.</p></div><div class="sp-sub"><h3 class="sp-h3">What if I cannot explain the issue clearly?</h3><p class="sp-p">A simple description is enough. “I cannot switch off,” “my relationship is going badly,” or “I keep thinking about leaving” all work as starting points.</p></div><div class="sp-sub"><h3 class="sp-h3">What if you think I need something different?</h3><p class="sp-p">I will say so. Another therapist, doctor, specialist service or different form of support may be more appropriate.</p></div></div></section><section class="sp-sec sp-sec--rail" id="how-i-work" aria-labelledby="h-how-i-work"><div class="sp-sec__rail"><span class="sp-rule is-in" data-mo="rule-l" aria-hidden="true"></span><h2 class="sp-h2" id="h-how-i-work">How I work</h2></div><div class="sp-sec__body"><div class="sp-sub"><h3 class="sp-h3">What kind of psychotherapy do you practise?</h3><p class="sp-p">My training is in integrative counselling and psychotherapy. I draw from different therapeutic perspectives according to the person and the issue rather than running everyone through one fixed model.</p></div><div class="sp-sub"><h3 class="sp-h3">Will you give me advice?</h3><p class="sp-p">Sometimes. I also make observations and ask direct questions. Important life decisions remain yours.</p></div><div class="sp-sub"><h3 class="sp-h3">Are sessions structured?</h3><p class="sp-p">There is enough continuity that we should both understand what we are working on. I don’t run every client through a standard programme.</p></div><div class="sp-sub"><h3 class="sp-h3">Will we talk about childhood?</h3><p class="sp-p">If it helps explain something active in the present. We start with the issue that brought you in.</p></div><div class="sp-sub"><h3 class="sp-h3">Can I talk about work in psychotherapy?</h3><p class="sp-p">Yes. Work is part of life.</p></div><div class="sp-sub"><h3 class="sp-h3">Can we move between psychotherapy and coaching?</h3><p class="sp-p">Potentially, where that is appropriate. The change is discussed explicitly.</p></div></div></section><section class="sp-sec sp-sec--rail" id="language-and-location" aria-labelledby="h-language-and-location"><div class="sp-sec__rail"><span class="sp-rule is-in" data-mo="rule-l" aria-hidden="true"></span><h2 class="sp-h2" id="h-language-and-location">Language and location</h2></div><div class="sp-sec__body"><div class="sp-sub"><h3 class="sp-h3">Are sessions online?</h3><p class="sp-p">Yes. My work is primarily online by video.</p></div><div class="sp-sub"><h3 class="sp-h3">What languages do you work in?</h3><p class="sp-p">Greek and English. Sessions can take place in either language or move between them naturally.</p></div><div class="sp-sub"><h3 class="sp-h3">Can you work with me if I live abroad?</h3><p class="sp-p">Possibly. Professional rules depend on where both therapist and client are located. Tell me where you are currently based and I will confirm before ongoing therapy begins.</p></div></div></section><section class="sp-sec sp-sec--rail" id="confidentiality" aria-labelledby="h-confidentiality"><div class="sp-sec__rail"><span class="sp-rule is-in" data-mo="rule-l" aria-hidden="true"></span><h2 class="sp-h2" id="h-confidentiality">Confidentiality</h2></div><div class="sp-sec__body"><div class="sp-sub"><h3 class="sp-h3">Is psychotherapy confidential?</h3><p class="sp-p">Yes, within the professional and legal limits that apply. Those limits are explained before ongoing work begins.</p></div><div class="sp-sub"><h3 class="sp-h3">Do you use clinical supervision?</h3><p class="sp-p">Yes. Clinical supervision is a normal part of responsible psychotherapy practice and is handled confidentially.</p></div><div class="sp-sub"><h3 class="sp-h3">Are you BACP registered?</h3><p class="sp-p">Yes. I am a registered member of the British Association for Counselling and Psychotherapy.</p></div><div class="sp-sub"><h3 class="sp-h3">Is this a crisis service?</h3><p class="sp-p">No. I don’t provide emergency psychiatric or crisis-response services. If you or somebody else is in immediate danger, use the appropriate emergency or crisis service where you are located.</p></div></div></section></div><section class="sp-close" id="contact" aria-labelledby="h-contact"><div class="sp-close__in"><h2 class="sp-close__h" id="h-contact">Contact</h2><p class="sp-p">If you have a question that is specific to your situation, ask it directly.</p><div class="sp-ctas"><a class="sp-btn" href="/contact/"><span>Book a consultation</span><span aria-hidden="true">→</span></a></div></div></section></main><footer class="site-ftr"><div class="site-container"><div class="site-ftr__cols"><div class="site-ftr__brand"><a class="site-hdr__brand" href="/" aria-label="Aggelos Mouzakitis, home" style="font-size: 20px;">Aggelos<span>.</span></a><p class="site-ftr__role">BACP-registered psychotherapist</p><ul class="site-ftr__social" aria-label="Follow"><li><a href="https://linkedin.com/in/growth-product-manager/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a></li><li><a href="https://www.instagram.com/_aggelosmouzakitis_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg></a></li><li><a href="https://youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M23.5 6.51a3.02 3.02 0 0 0-2.12-2.14C19.5 3.86 12 3.86 12 3.86s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.51C0 8.4 0 12 0 12s0 3.6.5 5.49a3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14C24 15.6 24 12 24 12s0-3.6-.5-5.49zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"></path></svg></a></li><li><a href="https://www.tiktok.com/@aggelosmouz" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink: 0;"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg></a></li></ul></div><nav class="site-ftr__col" aria-label="Work with me"><p class="site-ftr__head">Work with me</p><ul><li><a href="/individual-psychotherapy/">Individual Psychotherapy</a></li><li><a href="/couples-therapy/">Couples Therapy</a></li><li><a href="/professional-coaching/">Professional Coaching</a></li></ul></nav><nav class="site-ftr__col" aria-label="Who I work with"><p class="site-ftr__head">Who I work with</p><ul><li><a href="/therapy-for-men-in-tech/">Men in Tech</a></li><li><a href="/therapy-for-founders/">Founders</a></li><li><a href="/therapy-for-executives/">Executives</a></li><li><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></li></ul></nav><nav class="site-ftr__col" aria-label="Problems"><p class="site-ftr__head">Problems</p><ul><li><a href="/relationship-problems-men/">Relationships</a></li><li><a href="/separation-divorce-men/">Separation &amp; Divorce</a></li><li><a href="/work-affecting-relationship/">Work &amp; Relationships</a></li><li><a href="/executive-burnout-therapy/">Burnout</a></li><li><a href="/career-transition-therapy/">Career Change</a></li><li><a href="/anxiety-overthinking/">Anxiety &amp; Overthinking</a></li><li><a href="/achievement-self-worth/">Achievement &amp; Self-Worth</a></li></ul></nav><nav class="site-ftr__col" aria-label="Resources"><p class="site-ftr__head">Resources</p><ul><li><a href="/considering-therapy/">Considering Therapy</a></li><li><a href="/blog/">Writing</a></li><li><a href="/free-tools/">Free Tools</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/reviews/">Reviews</a></li></ul></nav><nav class="site-ftr__col" aria-label="About"><p class="site-ftr__head">About</p><ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/confidentiality/">Confidentiality</a></li></ul></nav></div><div class="site-ftr__rule"></div><div class="site-ftr__legal"><p style="margin: 0px;">© 2026 Aggelos Mouzakitis. All rights reserved.</p></div></div></footer></div>
+@media (max-width:599px){.btn{white-space:normal;text-align:center}}
+</style><header class="hdr"><a class="skip-link" href="#main">Skip to content</a><div class="wrap hdr__in"><a href="/" class="hdr__brand" aria-label="Aggelos Mouzakitis, home">Aggelos<span>.</span></a><nav class="hdr__nav" aria-label="Primary"><div class="hdr__item"><a href="/" class="hdr__link">Home</a></div><div class="hdr__item"><a href="/about/" class="hdr__link">About</a></div><div class="hdr__item"><button type="button" class="hdr__btn" aria-expanded="false" aria-controls="nav-services">Services<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg></button><div id="nav-services" class="hdr__panel" hidden=""><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a><div class="hdr__sep" role="presentation"></div><a href="/therapy-for-men-in-tech/">Therapy for Men in Tech &amp; Business</a><a href="/therapy-for-executives/">Therapy for Executives &amp; Senior Leaders</a><a href="/therapy-for-founders/">Therapy for Entrepreneurs, Founders &amp; Business Owners</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></div></div><div class="hdr__item"><button type="button" class="hdr__btn" aria-expanded="false" aria-controls="nav-resources">Resources<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg></button><div id="nav-resources" class="hdr__panel" hidden=""><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/">Writing</a><a href="/free-tools/">Free Tools</a><a href="/reviews/">Reviews</a></div></div><div class="hdr__item"><a href="/faq/" class="hdr__link is-current" aria-current="page">FAQ</a></div></nav><a href="/contact/" class="hdr__cta">Book a consultation<span aria-hidden="true">→</span></a><button type="button" class="hdr__menu-btn" aria-expanded="false" aria-controls="site-menu">Menu<span class="hdr__burger" aria-hidden="true"><span></span><span></span><span></span></span></button></div><nav id="site-menu" class="mmenu" aria-label="Primary" hidden=""><div class="mmenu__in"><div class="mmenu__group"><button type="button" class="mmenu__toggle" aria-expanded="false" aria-controls="m-services">Services<span class="mmenu__sign" aria-hidden="true">+</span></button><div id="m-services" class="mmenu__links" hidden=""><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a><div class="mmenu__sep" role="presentation"></div><a href="/therapy-for-men-in-tech/">Therapy for Men in Tech &amp; Business</a><a href="/therapy-for-executives/">Therapy for Executives &amp; Senior Leaders</a><a href="/therapy-for-founders/">Therapy for Entrepreneurs, Founders &amp; Business Owners</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></div></div><div class="mmenu__group"><button type="button" class="mmenu__toggle" aria-expanded="false" aria-controls="m-resources">Resources<span class="mmenu__sign" aria-hidden="true">+</span></button><div id="m-resources" class="mmenu__links" hidden=""><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/">Writing</a><a href="/free-tools/">Free Tools</a><a href="/reviews/">Reviews</a></div></div><a href="/" class="mmenu__link">Home</a><a href="/about/" class="mmenu__link">About</a><a href="/faq/" class="mmenu__link" aria-current="page">FAQ</a><a href="/contact/" class="mmenu__cta">Book a consultation<span aria-hidden="true">→</span></a></div></nav></header><main id="main" tabindex="-1" class="pg fam-faq pg--faq"><header class="read hero-read"><p class="eyebrow">FAQ</p><h1 class="h1" id="page-title">Practical questions about working together.</h1><p class="lead">For a fuller explanation of what therapy itself is like, see <a class="inl" href="/considering-therapy/">Considering Therapy</a>.</p><div class="actions"><a class="tlink" href="/considering-therapy/"><span>Considering therapy</span><span aria-hidden="true">→</span></a></div></header><section class="sec" id="services" aria-labelledby="services-h"><div class="read"><h2 class="h2" id="services-h">Services</h2><div class="faq"><details open=""><summary><h3>What services do you offer?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Three. <a class="inl" href="/individual-psychotherapy/">Individual Psychotherapy</a> is the main part of my practice. <a class="inl" href="/couples-therapy/">Couples Therapy</a> is for partners who want to work on the relationship together. <a class="inl" href="/professional-coaching/">Professional Coaching</a> is a separate service for bounded professional decisions and situations.</p></div></details><details><summary><h3>How do I know whether I need psychotherapy or coaching?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">If the question can stay focused on options, trade-offs and action, coaching may be enough. If the same decision is tied up with anxiety, relationships, self-worth or a recurring personal pattern, psychotherapy usually gives us more useful scope.</p><p class="p">Describe the situation when you contact me. I will tell you what I think fits.</p><div class="links"><a class="tlink" href="/therapy-vs-coaching/"><span>Therapy vs coaching</span><span aria-hidden="true">→</span></a></div></div></details><details><summary><h3>Do you only work with men?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">No. The practice is positioned mainly towards men in technology, startups, business and other demanding careers. I also work with other adults where the fit is appropriate.</p></div></details><details><summary><h3>Do you only work with people in technology?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">No. Technology is the professional environment I know most deeply. I also work with founders, business owners, executives and people in other demanding careers.</p></div></details><details><summary><h3>Do you work with couples?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Yes. Couples Therapy is a separate service from individual psychotherapy.</p></div></details></div></div></section><section class="sec" id="individual-psychotherapy" aria-labelledby="individual-psychotherapy-h"><div class="read"><h2 class="h2" id="individual-psychotherapy-h">Individual Psychotherapy</h2><div class="faq"><details><summary><h3>How long is a psychotherapy session?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Usually <strong>50–60 minutes</strong>.</p></div></details><details><summary><h3>How often do we meet?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">I normally work <strong>weekly for at least the first few months</strong>. After that, we can review frequency together.</p><p class="p">Consistency matters. Therapy is hard to develop if sessions only happen occasionally when something has become urgent.</p></div></details><details><summary><h3>Am I committing to a fixed number of sessions?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">No. You can stop whenever you choose.</p><p class="p">I do ask people to begin with a realistic view of psychotherapy. It usually needs continuity, especially early on.</p></div></details><details><summary><h3>How long does therapy take?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">There is no standard duration. Some people come around a particular period or issue. Others continue for longer because the therapy becomes broader. We review that as the work develops.</p></div></details><details><summary><h3>Can I take a break or stop?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Yes. Where possible, I prefer that we talk about ending or taking a break rather than simply disappearing.</p></div></details></div></div></section><section class="sec" id="couples-therapy" aria-labelledby="couples-therapy-h"><div class="read"><h2 class="h2" id="couples-therapy-h">Couples Therapy</h2><div class="faq"><details><summary><h3>How long is a couples session?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">There are two common formats. <strong>Weekly sessions usually last 50–60 minutes. Biweekly sessions can last 90 minutes.</strong> We agree the structure before ongoing work begins.</p></div></details><details><summary><h3>Do we need to be close to separation before starting?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">No. Couples come with recurring conflict, emotional distance, trust problems and other relationship difficulties well before separation.</p></div></details><details><summary><h3>Can I come alone about my relationship?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Yes. That would normally be Individual Psychotherapy.</p></div></details><details><summary><h3>What if one of us is more interested in therapy than the other?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">That is common. Equal enthusiasm is not required. Both people do need enough willingness to participate honestly.</p></div></details></div></div></section><section class="sec" id="fees" aria-labelledby="fees-h"><div class="read"><h2 class="h2" id="fees-h">Fees</h2><div class="faq"><details><summary><h3>How much does it cost?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">I don’t publish one universal fee because my fees vary depending on the circumstances and location of the work. I tell you the relevant fee before we agree to begin.</p></div></details><details><summary><h3>Why not list a single price?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Because it would be inaccurate for some clients.</p></div></details></div></div></section><section class="sec" id="starting" aria-labelledby="starting-h"><div class="read"><h2 class="h2" id="starting-h">Starting</h2><div class="faq"><details><summary><h3>What happens when I contact you?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Send a short description of what brings you here and where you are currently located. I read it myself. If the situation falls within what I offer, we arrange an initial conversation.</p></div></details><details><summary><h3>Do I need a diagnosis?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">No.</p></div></details><details><summary><h3>What if I cannot explain the issue clearly?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">A simple description is enough. “I cannot switch off,” “my relationship is going badly,” or “I keep thinking about leaving” all work as starting points.</p></div></details><details><summary><h3>What if you think I need something different?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">I will say so. Another therapist, doctor, specialist service or different form of support may be more appropriate.</p></div></details></div></div></section><section class="sec" id="how-i-work" aria-labelledby="how-i-work-h"><div class="read"><h2 class="h2" id="how-i-work-h">How I work</h2><div class="faq"><details><summary><h3>What kind of psychotherapy do you practise?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">My training is in integrative counselling and psychotherapy. I draw from different therapeutic perspectives according to the person and the issue rather than running everyone through one fixed model.</p></div></details><details><summary><h3>Will you give me advice?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Sometimes. I also make observations and ask direct questions. Important life decisions remain yours.</p></div></details><details><summary><h3>Are sessions structured?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">There is enough continuity that we should both understand what we are working on. I don’t run every client through a standard programme.</p></div></details><details><summary><h3>Will we talk about childhood?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">If it helps explain something active in the present. We start with the issue that brought you in.</p></div></details><details><summary><h3>Can I talk about work in psychotherapy?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Yes. Work is part of life.</p></div></details><details><summary><h3>Can we move between psychotherapy and coaching?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Potentially, where that is appropriate. The change is discussed explicitly.</p></div></details></div></div></section><section class="sec" id="language-and-location" aria-labelledby="language-and-location-h"><div class="read"><h2 class="h2" id="language-and-location-h">Language and location</h2><div class="faq"><details><summary><h3>Are sessions online?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Yes. My work is primarily online by video.</p></div></details><details><summary><h3>What languages do you work in?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Greek and English. Sessions can take place in either language or move between them naturally.</p></div></details><details><summary><h3>Can you work with me if I live abroad?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Possibly. Professional rules depend on where both therapist and client are located. Tell me where you are currently based and I will confirm before ongoing therapy begins.</p></div></details></div></div></section><section class="sec" id="confidentiality" aria-labelledby="confidentiality-h"><div class="read"><h2 class="h2" id="confidentiality-h">Confidentiality</h2><div class="faq"><details><summary><h3>Is psychotherapy confidential?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Yes, within the professional and legal limits that apply. Those limits are explained before ongoing work begins.</p></div></details><details><summary><h3>Do you use clinical supervision?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Yes. Clinical supervision is a normal part of responsible psychotherapy practice and is handled confidentially.</p></div></details><details><summary><h3>Are you BACP registered?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">Yes. I am a registered member of the British Association for Counselling and Psychotherapy.</p></div></details><details><summary><h3>Is this a crisis service?</h3><span class="faq__sign" aria-hidden="true">+</span></summary><div class="faq__a flow"><p class="p">No. I don’t provide emergency psychiatric or crisis-response services. If you or somebody else is in immediate danger, use the appropriate emergency or crisis service where you are located.</p></div></details></div></div></section><section class="band close on-dark" aria-labelledby="close-h"><div class="read close__in"><h2 id="close-h" class="close__label">Contact</h2><p class="close__text">If you have a question that is specific to your situation, ask it directly.</p><div class="close__actions"><a class="btn" href="/contact/">Book a consultation <span aria-hidden="true">→</span></a></div></div></section></main><footer class="ftr"><div class="wrap"><div class="ftr__grid"><div style="min-width: 0px;"><a href="/" class="ftr__brand" aria-label="Aggelos Mouzakitis, home">Aggelos<span>.</span></a><p class="ftr__tag">BACP-registered psychotherapist · Background in tech, product &amp; growth</p><ul class="ftr__social" aria-label="Social media"><li><a href="https://linkedin.com/in/growth-product-manager/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a></li><li><a href="https://www.instagram.com/_aggelosmouzakitis_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg></a></li><li><a href="https://www.tiktok.com/@aggelosmouz" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg></a></li></ul></div><nav class="ftr__col" aria-label="Work with me"><p class="ftr__head">Work with me</p><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a></nav><nav class="ftr__col" aria-label="Who I work with"><p class="ftr__head">Who I work with</p><a href="/therapy-for-men-in-tech/">Men in Tech &amp; Demanding Careers</a><a href="/therapy-for-founders/">Founders &amp; Business Owners</a><a href="/therapy-for-executives/">Executives &amp; Leaders</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></nav><nav class="ftr__col" aria-label="Common problems"><p class="ftr__head">Common problems</p><a href="/relationship-problems-men/">Relationships &amp; Separation</a><a href="/work-affecting-relationship/">Work &amp; Relationships</a><a href="/executive-burnout-therapy/">Burnout &amp; Can’t Switch Off</a><a href="/career-transition-therapy/">Career Change &amp; Decisions</a><a href="/anxiety-overthinking/">Anxiety &amp; Overthinking</a><a href="/achievement-self-worth/">Achievement &amp; Self-Worth</a></nav><nav class="ftr__col" aria-label="Practice"><p class="ftr__head">Practice</p><a href="/about/">About</a><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/">Writing</a><a href="/free-tools/">Free Tools</a><a href="/faq/">FAQ</a><a href="/reviews/">Reviews</a><a href="/contact/">Contact</a></nav></div><div class="ftr__rule" role="presentation"></div><div class="ftr__bottom"><p style="margin: 0px;">© 2026 Aggelos Mouzakitis. All rights reserved.</p><nav class="ftr__legal" aria-label="Legal"><a href="/confidentiality/">Confidentiality</a></nav></div></div></footer></div>
 <script src="/react.production.min.js?v=d949f1c368" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js?v=35f4f974f4" crossorigin="anonymous"></script>
-<script src="/site-chrome.js?v=fe6410819f"></script>
-<script src="/site-copy.js?v=d0eef7d4da"></script>
-<script src="/site-pages.js?v=bd038cfb06"></script>
+<script src="/site-nav.js?v=845fe0238a"></script>
+<script src="/site-chrome.js?v=1eee8d7876"></script>
+<script src="/site-copy.js?v=70fa43de28"></script>
+<script src="/site-pages.js?v=710661ef2d"></script>
 <script>renderSitePage("faq");</script>
 </body>
 </html>

@@ -1122,7 +1122,7 @@ window.CLARITY_DATA['quit-your-job'] = {
     start: 'Start assessment →'
   },
   // Result links: the related page and the consultation route (the labels
-  // are the Free Tools page's own, from the final editorial copy).
+  // are the Free Tools page's own, from the canonical copy).
   cta: {
     heading: 'Want another perspective?',
     links: [{

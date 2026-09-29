@@ -335,22 +335,23 @@ function clarityStyles(mob) {
       fontFamily: 'inherit'
     },
     eyebrow: {
-      fontSize: '12px',
+      fontSize: '13px',
       fontWeight: 700,
-      letterSpacing: '.06em',
+      letterSpacing: '.08em',
       textTransform: 'uppercase',
-      color: '#6A6F67',
-      lineHeight: 1.6
+      color: '#047857',
+      lineHeight: 1.3,
+      marginBottom: '18px'
     },
     h1: {
-      fontFamily: 'var(--font-heading)',
+      fontFamily: 'var(--font-display)',
       fontSynthesis: 'none',
-      fontSize: mob ? '30px' : '44px',
-      fontWeight: 800,
-      lineHeight: 1.05,
-      letterSpacing: '-.035em',
-      color: '#3A403A',
-      margin: '0 0 1.25rem'
+      fontSize: mob ? '40px' : '56px',
+      fontWeight: 400,
+      lineHeight: 1.0,
+      letterSpacing: '-.04em',
+      color: '#14201C',
+      margin: '0 0 1.5rem'
     },
     p: {
       margin: '0 0 1.2rem',
@@ -376,15 +377,20 @@ function clarityStyles(mob) {
     cta: {
       fontFamily: 'inherit',
       fontWeight: 700,
-      fontSize: '13px',
-      letterSpacing: '.06em',
+      fontSize: '15px',
+      lineHeight: 1,
+      letterSpacing: '.04em',
       textTransform: 'uppercase',
       color: '#F3F0E8',
       background: CL_ACC,
       border: '1.5px solid ' + CL_ACC,
-      borderRadius: '2px',
-      padding: '.9rem 1.7rem',
-      display: 'inline-block',
+      borderRadius: 0,
+      minHeight: '52px',
+      padding: '0 24px',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '9px',
       cursor: 'pointer',
       textDecoration: 'none'
     },
