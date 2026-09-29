@@ -11,8 +11,8 @@
 //   npm run seo:stamp                    # content-hash every ?v=
 //   npm run seo:check                    # gate
 //
-// Replaces scripts/gen-core-pages.js, which generated the retired
-// business-advisor shells.
+// It replaced gen-core-pages.js (removed; in git history), which generated the
+// retired business-advisor shells.
 
 const fs = require('fs');
 const path = require('path');

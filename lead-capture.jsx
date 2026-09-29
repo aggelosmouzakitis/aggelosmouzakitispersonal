@@ -18,11 +18,11 @@
 //
 // NEITHER template picks up `subject` on its own — both were verified against
 // real delivered mail:
-//   • template_6mv5hou (contact, WTF Friday) ships EmailJS's stock "Contact Us"
+//   • template_6mv5hou (contact form) ships EmailJS's stock "Contact Us"
 //     layout. Its Subject is "Contact Us: {{title}}" — a variable nothing sends,
 //     which is why those arrive titled just "Contact Us:". Its body wraps
 //     {{message}} in boilerplate ("A message by … has been received").
-//   • template_wdsrbdo (clarity tools, waitlist) has Subject
+//   • template_wdsrbdo (clarity tools) has Subject
 //     "New burnout diagnostic submission - {{overall_grade}} - {{user_email}}",
 //     a leftover from the retired burnout diagnostic, which is why every tool
 //     mail looked the same. Its body prints its own field list and ignores
@@ -43,18 +43,11 @@ var LEAD_EMAILJS_PUBLIC_KEY = 'bfBcHLXj2nKaev_lT';
 
 // The things that can produce a lead. `tag` is the bracketed prefix that
 // makes the inbox sortable; `template` is the EmailJS template that form has
-// always used — unchanged on purpose. The Focus Area assessment has its own
-// admin template, template_fdba9kr (a copy of template_wdsrbdo), whose EmailJS
-// Auto-Reply (template_gcj2lrd) emails the person their result. That
-// Auto-Reply fires on every send through its template, so no other source
-// here may use template_fdba9kr, and template_wdsrbdo must not carry it.
+// always used — unchanged on purpose. (template_fdba9kr, the retired Focus Area
+// assessment's, auto-replies to whoever submits through it: do not reuse it.)
 var LEAD_SOURCES = {
   'contact':       { tag: 'CONTACT',  label: 'Contact form',       template: 'template_6mv5hou' },
-  'wtf-friday':    { tag: 'WTF',      label: 'WTF Friday',         template: 'template_6mv5hou' },
   'clarity-tool':  { tag: 'TOOL',     label: 'Clarity tool',       template: 'template_wdsrbdo' },
-  'tool-waitlist': { tag: 'WAITLIST', label: 'Free tool waitlist', template: 'template_wdsrbdo' },
-  'roast-my-offer': { tag: 'ROAST',    label: 'Roast My Offer',     template: 'template_wdsrbdo' },
-  'find-your-focus-area': { tag: 'FOCUS', label: 'Find Your Focus Area', template: 'template_fdba9kr' },
 };
 
 function leadSource(id) {
@@ -100,9 +93,8 @@ function leadPostToSheet(payload) {
 
 // ── The one entry point ──────────────────────────────────────────────────────
 // rec: {
-//   source       'contact' | 'wtf-friday' | 'clarity-tool' | 'tool-waitlist' |
-//                'roast-my-offer' | 'find-your-focus-area'
-//   detail       machine identifier — interest value, tool slug, waitlist id
+//   source       'contact' | 'clarity-tool'
+//   detail       machine identifier — interest value, tool slug
 //   detailLabel  human version of the above, used in the subject
 //   name, email  as captured (one full-name field; no splitting)
 //   notes        short summary for the sheet's Notes column

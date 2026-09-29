@@ -46,7 +46,7 @@ var PROP_KEY = 'LEADS_SHEET_ID';
 
 var COLUMNS = [
   'Timestamp',      // when the submission arrived
-  'Source',         // contact | wtf-friday | clarity-tool | tool-waitlist
+  'Source',         // contact | clarity-tool (older rows: retired forms)
   'Source detail',  // the specific thing: interest chosen, tool name, waitlist tool
   'Name',           // full name as given (one field, not split)
   'Email',
