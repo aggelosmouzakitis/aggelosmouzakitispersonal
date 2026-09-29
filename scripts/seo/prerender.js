@@ -4,23 +4,13 @@ const ROOT = '/home/user/aggelosmouzakitispersonal';
 const reactJs = fs.readFileSync(ROOT + '/node_modules/react/umd/react.production.min.js', 'utf8');
 const reactDomJs = fs.readFileSync(ROOT + '/node_modules/react-dom/umd/react-dom.production.min.js', 'utf8');
 
-// Every page that is served and indexable: the 24 canonical pages
-// (site-pages.js, from scripts/seo/site-meta.js), the two free tools and the
-// held /imposter-syndrome-therapy/ page. FAQ extraction is off everywhere:
-// the site publishes no FAQPage schema.
-const PAGES = require('./site-meta.js').PAGES.map((p) => ({ f: p.file, faq: false }));
-
-// Individual blog posts don't use the #root App shell — they're static articles
-// that mount only the Sidebar into #sidebar-mount. Without a prerendered snapshot,
-// the sidebar (including the "Work With Me" CTA) is invisible until the unpkg
-// React/ReactDOM CDN scripts load, which is why it could look "missing" or
-// inconsistent versus every other page (all of which have a baked-in fallback).
-const BLOG_POST_FILES = fs.existsSync(ROOT + '/blog')
-  ? fs.readdirSync(ROOT + '/blog', { withFileTypes: true })
-      .filter(d => d.isDirectory())
-      .map(d => `blog/${d.name}/index.html`)
-      .filter(f => fs.existsSync(ROOT + '/' + f))
-  : [];
+// Every page the site serves: the 24 canonical pages (site-pages.js, from
+// scripts/seo/site-meta.js), the two free tools, and the served pages that are
+// deliberately outside the sitemap (EXTRA).
+const EXTRA = [
+  'ask-me-anything/el/index.html', // printed QR codes — noindex, see the page
+];
+const PAGES = require('./site-meta.js').PAGES.map((p) => p.file).concat(EXTRA);
 
 function injectPrerender(html, inner) {
   // Replace #root (empty or already-populated) with the captured innerHTML.
@@ -28,12 +18,6 @@ function injectPrerender(html, inner) {
   const re = /<div id="root">[\s\S]*?<\/div>(\s*<script)/;
   if (!re.test(html)) throw new Error('root anchor not found');
   return html.replace(re, (m, g1) => '<div id="root">' + inner + '</div>' + g1);
-}
-
-function injectSidebarPrerender(html, inner) {
-  const re = /<div id="sidebar-mount">[\s\S]*?<\/div>(\s*<div id="content-area")/;
-  if (!re.test(html)) throw new Error('sidebar-mount anchor not found');
-  return html.replace(re, (m, g1) => '<div id="sidebar-mount">' + inner + '</div>' + g1);
 }
 
 (async () => {
@@ -51,22 +35,18 @@ function injectSidebarPrerender(html, inner) {
     return route.abort(); // fonts, remote images, anything else external
   });
 
-  const faqOut = {};
   const report = [];
 
-  for (const p of PAGES) {
+  for (const f of PAGES) {
     const page = await ctx.newPage();
     const errs = [];
     page.on('pageerror', e => errs.push(String(e)));
-    await page.goto('http://localhost:8099/' + p.f, { waitUntil: 'load' });
+    await page.goto('http://localhost:8099/' + f, { waitUntil: 'load' });
     // Wait for React to render real content
     try { await page.waitForFunction(() => {
       const r = document.getElementById('root');
       return r && r.innerText && r.innerText.trim().length > 200;
     }, { timeout: 8000 }); } catch (e) {}
-    if (p.f === 'blog/index.html') {
-      try { await page.waitForSelector('.post-item', { timeout: 8000 }); } catch (e) {}
-    }
     await page.waitForTimeout(350);
 
     // Settle every motion primitive before capturing. The snapshot is what a
@@ -79,64 +59,15 @@ function injectSidebarPrerender(html, inner) {
     });
     await page.waitForTimeout(60);
 
-    // Capture pre-render HTML
+    // Capture pre-render HTML and write it back into the page's #root
     const inner = await page.evaluate(() => document.getElementById('root').innerHTML);
-
-    // Extract FAQ pairs if applicable
-    let faqs = [];
-    if (p.faq) {
-      faqs = await page.evaluate(() => {
-        // Find the section whose h2 label mentions "question"
-        const h2s = [...document.querySelectorAll('h2')];
-        const label = h2s.find(h => /question/i.test(h.innerText));
-        if (!label) return [];
-        const section = label.closest('section') || label.parentElement;
-        const out = [];
-        // Each FaqItem = a div containing an h3 (question) + following content (answer)
-        section.querySelectorAll('h3').forEach(h3 => {
-          const q = h3.innerText.trim();
-          // answer = text of the h3's parent minus the question
-          const parent = h3.parentElement;
-          let a = parent ? parent.innerText.replace(h3.innerText, '').trim() : '';
-          if (q && a) out.push({ q, a });
-        });
-        return out;
-      });
-      faqOut[p.f] = faqs;
-    }
-
-    // Write pre-rendered HTML back to file
-    const filePath = ROOT + '/' + p.f;
-    let html = fs.readFileSync(filePath, 'utf8');
-    html = injectPrerender(html, inner);
-    fs.writeFileSync(filePath, html);
-
-    report.push({ file: p.f, prerenderChars: inner.length, faqs: faqs.length, jsErrors: errs });
-    await page.close();
-  }
-
-  for (const f of BLOG_POST_FILES) {
-    const page = await ctx.newPage();
-    const errs = [];
-    page.on('pageerror', e => errs.push(String(e)));
-    await page.goto('http://localhost:8099/' + f, { waitUntil: 'load' });
-    try { await page.waitForFunction(() => {
-      const m = document.getElementById('sidebar-mount');
-      return m && m.innerText && m.innerText.trim().length > 20;
-    }, { timeout: 8000 }); } catch (e) {}
-    await page.waitForTimeout(500);
-
-    const inner = await page.evaluate(() => document.getElementById('sidebar-mount').innerHTML);
     const filePath = ROOT + '/' + f;
-    let html = fs.readFileSync(filePath, 'utf8');
-    html = injectSidebarPrerender(html, inner);
-    fs.writeFileSync(filePath, html);
+    fs.writeFileSync(filePath, injectPrerender(fs.readFileSync(filePath, 'utf8'), inner));
 
     report.push({ file: f, prerenderChars: inner.length, jsErrors: errs });
     await page.close();
   }
 
-  fs.writeFileSync('/tmp/faqs.json', JSON.stringify(faqOut, null, 2));
   await browser.close();
   console.log(JSON.stringify(report, null, 2));
 })();

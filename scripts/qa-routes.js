@@ -1,21 +1,25 @@
 // qa-routes.js — status of every canonical and legacy route, against the
 // migration table (implementation brief, Phases 1 and 5).
 //
-// Serves the repo through the Netlify emulator (scripts/seo/netlify-emulator.js),
-// requests each URL with and without its trailing slash, follows redirects and
-// checks: the status, the number of hops (a legacy URL must resolve in exactly
-// one) and that every redirect lands on a 200. Prints a Markdown table.
+// Builds public/ (scripts/build-public.js) and serves it through the Netlify
+// emulator (scripts/seo/netlify-emulator.js), requests each URL with and
+// without its trailing slash, follows redirects and checks: the status, the
+// number of hops (a legacy URL must resolve in exactly one) and that every
+// redirect lands on a 200. Also checks that netlify.toml and the table agree
+// rule for rule, and that no repository internal is served. Prints a Markdown
+// table.
 //
 //   node scripts/qa-routes.js            # table + exit code
 //   node scripts/qa-routes.js --md FILE  # also write the table to FILE
 
 const fs = require('fs');
 const http = require('http');
-const { serve } = require('./seo/netlify-emulator.js');
+const { serve, loadRedirects, PUBLIC } = require('./seo/netlify-emulator.js');
+const { build } = require('./build-public.js');
 
 const PORT = 8124;
 
-const { CANONICAL, LEGACY } = require('./seo/routes.js');
+const { CANONICAL, LEGACY, INTERNAL } = require('./seo/routes.js');
 
 function get(url) {
   return new Promise((resolve) => {
@@ -42,7 +46,8 @@ async function trace(p) {
 }
 
 (async () => {
-  const server = serve();
+  build();
+  const server = serve(PUBLIC);
   await new Promise((r) => server.listen(PORT, r));
   const rows = [];
   const problems = [];
@@ -66,16 +71,32 @@ async function trace(p) {
     // the slash-less form: one hop to the canonical URL
     if (u !== '/') await check(u.replace(/\/$/, ''), 301, u, 'bare form', 'canonical');
   }
+  const listed = new Set(LEGACY.map(([u]) => u));
   for (const [u, s, t, n] of LEGACY) {
     await check(u, s, t, n, 'legacy');
     const bare = u.replace(/\/$/, '');
-    if (bare !== u && bare && !u.startsWith('/this-page')) {
+    if (bare !== u && bare && !listed.has(bare) && !u.startsWith('/this-page')) {
       // A bare legacy URL must resolve in one hop too (no /x → /x/ → target).
       const expBare = s === 200 ? 301 : s;
       await check(bare, expBare, s === 200 ? u : t, (n ? n + '; ' : '') + 'bare form', 'legacy');
     }
   }
+  for (const u of INTERNAL) await check(u, 404, null, 'repository internal, not published', 'internal');
   server.close();
+
+  // netlify.toml and the table must agree: every rule is a row, and every
+  // 3xx/410 row is a rule (Netlify matches with or without the slash).
+  const norm = (u) => (u.length > 1 ? u.replace(/\/$/, '') : u);
+  const rules = loadRedirects();
+  const ruleFroms = new Set(rules.map((r) => norm(r.from)));
+  const rowUrls = new Set(LEGACY.map(([u]) => norm(u)));
+  for (const r of rules) {
+    if (r.from.startsWith('/hot-seat-coworking-spaces')) continue; // utility PDF, not a migration
+    if (!rowUrls.has(norm(r.from))) problems.push(`netlify.toml rule ${r.from} is not in scripts/seo/routes.js`);
+  }
+  for (const [u, s] of LEGACY) {
+    if ((s === 301 || s === 410) && !ruleFroms.has(norm(u))) problems.push(`routes.js row ${u} (${s}) has no netlify.toml rule`);
+  }
 
   const md = ['| Route | Expected | Actual | OK | Note |', '|---|---|---|---|---|']
     .concat(rows.map((r) => `| \`${r.url}\` | ${r.expected} | ${r.got} | ${r.ok ? '✓' : '✗'} | ${r.note} |`))

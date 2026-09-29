@@ -1,20 +1,29 @@
 # ─────────────────────────────────────────────────────────────────────────────
+# Build — publish the public site only.
+#
+# scripts/build-public.js copies the pages and assets the site serves into
+# public/ (an allowlist) and checks every local link in them resolves there.
+# Netlify serves public/ alone, so repo internals — scripts/, docs, reports,
+# JSX sources, tooling, node_modules — are never reachable. The script uses
+# Node built-ins only and copies the committed, prebuilt output.
+# ─────────────────────────────────────────────────────────────────────────────
+[build]
+  command = "node scripts/build-public.js"
+  publish = "public"
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Redirects — psychotherapy-first migration (Sep 2026).
 #
-# One rule per retired URL, each pointing straight at its final page, so every
-# old URL resolves in exactly one hop: 301 where a close replacement exists,
-# 410 Gone where the page was removed on purpose and nothing replaces it (the
-# 410 body is the site's 404 page). force = true so a rule wins over any file
-# still on disk. Netlify matches a rule with or without the trailing slash;
-# each old URL is listed bare and with /* so /x, /x/ and anything under /x/
-# all resolve in that single hop. Specific rules come before the catch-alls
-# that share their prefix. scripts/qa-routes.js checks every row against the
-# migration table; scripts/seo/seo-check.js emulates these rules.
-#
-# Not here on purpose:
-#   /imposter-syndrome-therapy/  HOLD — still served as it was until its
-#                                Search Console / backlink review is done.
-#   /hot-seat-coworking-spaces/  unrelated utility PDF (rules further down).
+# One rule per URL that really existed, each pointing straight at its final
+# page, so every old URL resolves in exactly one hop: 301 where a close
+# replacement exists, 410 Gone where the page was removed on purpose and
+# nothing replaces it (the 410 body is the site's 404 page). Netlify matches a
+# rule with or without the trailing slash, so each URL is listed once, bare.
+# There are no catch-alls: a URL that never existed (/el/anything,
+# /blog/anything, /founders/anything) is a plain 404. force = true so a rule
+# wins over any file still on disk — except the essays, see Writing below.
+# scripts/qa-routes.js checks every row against scripts/seo/routes.js;
+# scripts/seo/seo-check.js emulates these rules.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ─── Old offer, booking and diagnostic routes ────────────────────────────────────
@@ -26,17 +35,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/start-here/*"
-  to = "/considering-therapy/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/psychotherapy-decision-coaching"
-  to = "/individual-psychotherapy/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/psychotherapy-decision-coaching/*"
   to = "/individual-psychotherapy/"
   status = 301
   force = true
@@ -46,17 +45,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/career-strategy-consulting/*"
-  to = "/professional-coaching/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/solopreneur-growth-consulting"
-  to = "/professional-coaching/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/solopreneur-growth-consulting/*"
   to = "/professional-coaching/"
   status = 301
   force = true
@@ -66,17 +55,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/1-to-1/*"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/how-i-work"
-  to = "/work-with-me/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/how-i-work/*"
   to = "/work-with-me/"
   status = 301
   force = true
@@ -86,17 +65,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/book/*"
-  to = "/contact/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/schedule"
-  to = "/contact/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/schedule/*"
   to = "/contact/"
   status = 301
   force = true
@@ -106,17 +75,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/startingdiagnostic/*"
-  to = "/considering-therapy/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/burnout-diagnostic"
-  to = "/free-tools/burned-out/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/burnout-diagnostic/*"
   to = "/free-tools/burned-out/"
   status = 301
   force = true
@@ -125,22 +84,17 @@
   to = "/faq/"
   status = 301
   force = true
+
+# ─── Imposter syndrome page — merged into Achievement & Self-Worth ───────────────
 [[redirects]]
-  from = "/faqs/*"
-  to = "/faq/"
+  from = "/imposter-syndrome-therapy"
+  to = "/achievement-self-worth/"
   status = 301
   force = true
 
 # ─── Hidden and retired pages ────────────────────────────────────────────────────
-# Previously still served with noindex. /ask-me-anything/* includes the Greek
-# page at /ask-me-anything/el, which a printed QR code points to.
 [[redirects]]
   from = "/founders"
-  to = "/therapy-for-founders/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/founders/*"
   to = "/therapy-for-founders/"
   status = 301
   force = true
@@ -150,17 +104,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/solopreneurs/*"
-  to = "/professional-coaching/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/getinterviewed"
-  to = "/404.html"
-  status = 410
-  force = true
-[[redirects]]
-  from = "/getinterviewed/*"
   to = "/404.html"
   status = 410
   force = true
@@ -170,24 +114,24 @@
   status = 410
   force = true
 [[redirects]]
-  from = "/wtf-friday/*"
-  to = "/404.html"
-  status = 410
-  force = true
-[[redirects]]
   from = "/ask-me-anything"
   to = "/404.html"
   status = 410
   force = true
+# /ask-me-anything/el stays live on purpose, for now: printed QR codes point
+# at this exact URL. The 200 rewrite serves the page at the printed address
+# (no redirect to the trailing-slash form). noindex, follow (headers below and
+# the page's robots meta); not in the sitemap or navigation. Remove this rule,
+# the headers and ask-me-anything/el/ together once the QR codes are retired.
 [[redirects]]
-  from = "/ask-me-anything/*"
-  to = "/404.html"
-  status = 410
+  from = "/ask-me-anything/el"
+  to = "/ask-me-anything/el/index.html"
+  status = 200
   force = true
 
 # ─── Greek site (/el/) — retired, no Greek-language equivalent ───────────────────
-# Each known page goes to its closest English page; anything else under /el/
-# falls through to the homepage.
+# Each page that existed goes to its closest English page. Only /el/ itself goes
+# to the homepage; any other /el/ URL never existed and is a 404.
 [[redirects]]
   from = "/el/about"
   to = "/about/"
@@ -243,11 +187,6 @@
   to = "/"
   status = 301
   force = true
-[[redirects]]
-  from = "/el/*"
-  to = "/"
-  status = 301
-  force = true
 
 # ─── Greek-speaking city pages — not rebuilt ─────────────────────────────────────
 # London, Dublin and Manchester go to the one Greek-speaking page; New York is
@@ -258,17 +197,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/greek-speaking-therapist-london/*"
-  to = "/greek-speaking-psychotherapist/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/greek-speaking-therapist-dublin"
-  to = "/greek-speaking-psychotherapist/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/greek-speaking-therapist-dublin/*"
   to = "/greek-speaking-psychotherapist/"
   status = 301
   force = true
@@ -278,17 +207,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/greek-speaking-therapist-manchester/*"
-  to = "/greek-speaking-psychotherapist/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/greek-speaking-therapist-new-york"
-  to = "/404.html"
-  status = 410
-  force = true
-[[redirects]]
-  from = "/greek-speaking-therapist-new-york/*"
   to = "/404.html"
   status = 410
   force = true
@@ -303,17 +222,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/free-tools/business-constraint/*"
-  to = "/professional-coaching/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/clarity-tools/business-constraint"
-  to = "/professional-coaching/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/clarity-tools/business-constraint/*"
   to = "/professional-coaching/"
   status = 301
   force = true
@@ -323,17 +232,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/free-tools/strategy-or-execution/*"
-  to = "/professional-coaching/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/clarity-tools/strategy-or-execution"
-  to = "/professional-coaching/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/clarity-tools/strategy-or-execution/*"
   to = "/professional-coaching/"
   status = 301
   force = true
@@ -343,17 +242,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/free-tools/become-a-solopreneur/*"
-  to = "/professional-coaching/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/clarity-tools/become-a-solopreneur"
-  to = "/professional-coaching/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/clarity-tools/become-a-solopreneur/*"
   to = "/professional-coaching/"
   status = 301
   force = true
@@ -363,17 +252,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/free-tools/roast-my-offer/*"
-  to = "/professional-coaching/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/free-tools/find-your-focus-area"
-  to = "/free-tools/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/free-tools/find-your-focus-area/*"
   to = "/free-tools/"
   status = 301
   force = true
@@ -383,17 +262,7 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/find-your-focus-area/*"
-  to = "/free-tools/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/clarity-tools/quit-your-job"
-  to = "/free-tools/quit-your-job/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/clarity-tools/quit-your-job/*"
   to = "/free-tools/quit-your-job/"
   status = 301
   force = true
@@ -403,30 +272,14 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/clarity-tools/burned-out/*"
-  to = "/free-tools/burned-out/"
-  status = 301
-  force = true
-[[redirects]]
   from = "/clarity-tools"
-  to = "/free-tools/"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/clarity-tools/*"
   to = "/free-tools/"
   status = 301
   force = true
 
 # ─── Deleted drafts and microsites — gone ────────────────────────────────────────
-# /logoutclub/* includes /logoutclub/el/.
 [[redirects]]
   from = "/draft/experience-to-offer"
-  to = "/404.html"
-  status = 410
-  force = true
-[[redirects]]
-  from = "/draft/experience-to-offer/*"
   to = "/404.html"
   status = 410
   force = true
@@ -436,17 +289,7 @@
   status = 410
   force = true
 [[redirects]]
-  from = "/draft/private-sparring/*"
-  to = "/404.html"
-  status = 410
-  force = true
-[[redirects]]
   from = "/draft/solo-business-growth"
-  to = "/404.html"
-  status = 410
-  force = true
-[[redirects]]
-  from = "/draft/solo-business-growth/*"
   to = "/404.html"
   status = 410
   force = true
@@ -456,19 +299,157 @@
   status = 410
   force = true
 [[redirects]]
-  from = "/logoutclub/*"
+  from = "/logoutclub/el"
   to = "/404.html"
   status = 410
   force = true
 
-# ─── Writing (/blog/) ────────────────────────────────────────────────────────────
-# /blog/ is the live Writing hub. force = false, so this rule only applies
-# where no page exists: the old essays (not restored yet) land on the hub,
-# while /blog/ itself and any essay restored later as blog/<slug>/index.html
-# are served normally without touching this file.
+# ─── Writing (/blog/) — one rule per old essay ───────────────────────────────────
+# /blog/ is the live Writing hub. Each old essay goes to the canonical page that
+# covers its main subject (301), or is gone (410) where no page does; the reason
+# for each is in scripts/seo/routes.js. force = false on purpose: publishing an
+# essay again as blog/<slug>/index.html (listed in scripts/seo/site-meta.js, so
+# it is published and in the sitemap) makes Netlify serve it at its original
+# URL and skip its rule, with no other change here; tidy the rule away then.
+# There is no /blog/* rule, so a slug that never existed is a 404.
 [[redirects]]
-  from = "/blog/*"
-  to = "/blog/"
+  from = "/blog/high-functioning-burnout-pandemic"
+  to = "/executive-burnout-therapy/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/high-performance-as-a-way-to-get-accepted-by-your-family"
+  to = "/achievement-self-worth/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/is-it-post-holiday-anxiety-or-just-clarity"
+  to = "/career-transition-therapy/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/sample-post"
+  to = "/achievement-self-worth/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/self-analysis-as-a-meta-way-to-maintain-control"
+  to = "/considering-therapy/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/shared-accountability-leading-without-authority"
+  to = "/therapy-for-men-in-tech/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/the-coaching-industrys-credibility-problem"
+  to = "/404.html"
+  status = 410
+  force = false
+[[redirects]]
+  from = "/blog/the-elaborate-performance-of-trying-to-change"
+  to = "/considering-therapy/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/the-high-cost-of-endless-pondering"
+  to = "/anxiety-overthinking/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/the-loneliness-and-emotional-pressure-that-founders-experience"
+  to = "/therapy-for-founders/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/the-parent-archetypes-creating-high-performers-with-chronic-self-doubt"
+  to = "/achievement-self-worth/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/the-turtle-and-the-shell"
+  to = "/career-transition-therapy/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/therapy-has-a-branding-problem"
+  to = "/considering-therapy/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/vacation-same-feeling"
+  to = "/executive-burnout-therapy/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/we-ve-turned-adhd-diagnosis-into-a-trend"
+  to = "/404.html"
+  status = 410
+  force = false
+[[redirects]]
+  from = "/blog/what-doubt-is-actually-protecting-you-from"
+  to = "/anxiety-overthinking/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/what-lost-purpose-actually-means-for-many-high-performers"
+  to = "/achievement-self-worth/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/what-went-wrong-ep01-productivity"
+  to = "/executive-burnout-therapy/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/what-went-wrong-ep02-happiness"
+  to = "/achievement-self-worth/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/what-went-wrong-ep03-body-and-therapy"
+  to = "/considering-therapy/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/what-went-wrong-ep04-avoidance"
+  to = "/anxiety-overthinking/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/when-founder-builds-a-company-around-his-life"
+  to = "/therapy-for-founders/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/when-the-drive-to-succeed-is-really-just-the-fear-of-falling-behind"
+  to = "/achievement-self-worth/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/who-are-you-if-you-are-not-crushing-it"
+  to = "/achievement-self-worth/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/why-do-high-performers-keep-winning-and-still-feel-stuck"
+  to = "/achievement-self-worth/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/why-hard-work-alone-doesnt-advance-you"
+  to = "/therapy-for-executives/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/you-re-creating-the-exact-problem-you-re-trying-to-avoid"
+  to = "/career-transition-therapy/"
+  status = 301
+  force = false
+[[redirects]]
+  from = "/blog/you-re-just-trading-one-type-of-friction-for-another"
+  to = "/career-transition-therapy/"
   status = 301
   force = false
 
@@ -532,22 +513,6 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
-# Keep non-content resources out of the index (crawlable so the noindex is seen)
-[[headers]]
-  for = "/admin/*"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
-
-[[headers]]
-  for = "/blog/posts.json"
-  [headers.values]
-    X-Robots-Tag = "noindex"
-
-[[headers]]
-  for = "/blog/post-template.html"
-  [headers.values]
-    X-Robots-Tag = "noindex"
-
 # Archive of retired pages — private copies, never indexed.
 # /archive/ holds frozen copies of every retired page (scripts/archive/build.js).
 # Each page there also carries a robots meta; this header covers the frozen JS,
@@ -567,6 +532,16 @@
   for = "/archive/_assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# /ask-me-anything/el (printed QR codes) — reachable, followed, never indexed.
+[[headers]]
+  for = "/ask-me-anything/el"
+  [headers.values]
+    X-Robots-Tag = "noindex, follow"
+[[headers]]
+  for = "/ask-me-anything/el/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, follow"
 
 # Hot Seat coworking PDF — keep the page and the PDF out of search indexes.
 # Covers the clean URL, its trailing-slash form, and the underlying file so the

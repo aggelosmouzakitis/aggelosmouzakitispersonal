@@ -1,31 +1,36 @@
 // seo-check.js — crawl the built site and fail on anything that would hurt search.
 //
-// Serves the repo over HTTP with the same redirect rules Netlify applies, then
-// checks every URL in scripts/seo/site-meta.js plus every internal link it can
-// reach. Exits non-zero if any ERROR-level problem is found, so it can gate a
-// deploy.
+// Builds public/ (scripts/build-public.js — exactly what Netlify publishes),
+// serves it over HTTP with the same redirect and header rules Netlify applies,
+// then checks every URL in scripts/seo/site-meta.js plus every internal link it
+// can reach. Exits non-zero if any ERROR-level problem is found, so it can gate
+// a deploy.
 //
 //   node scripts/seo/seo-check.js          # report + exit code
 //   node scripts/seo/seo-check.js --warn   # also print non-blocking warnings
 //
 // Checks: HTTP status, redirect hops, real 404s, title (present + unique),
-// meta description (present + unique on priority pages), canonical (present,
+// meta description (present + unique), canonical (present,
 // self-referencing, single), robots (no accidental noindex), <html lang="en">,
 // no /el/ alternates, exactly one H1, Open Graph completeness, og:url ===
 // canonical, OG image resolves, JSON-LD parses and asserts nothing the page
 // does not (no price, offers, reviews, ratings, address, areaServed, FAQPage,
 // LocalBusiness or medical types), retired positioning wording, internal links
 // that 404 or go through a redirect, retired URLs linked from anywhere, orphan
-// pages, every legacy URL in routes.js (one 301 hop or a real 410), bundle
-// cache-busting, sitemap integrity and the private archive's noindex.
+// pages, every legacy URL in routes.js (one 301 hop, a real 410, or a 404 for
+// URLs that never existed), no catch-all redirects, every 301 rule one hop to
+// a 200, the /ask-me-anything/el QR page (200 at its printed URL, noindex,
+// follow), bundle cache-busting, sitemap integrity, repository internals not
+// served, and the private archive (published byte for byte, noindex).
 
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const { ORIGIN, PAGES } = require('./site-meta.js');
 const { hashOf, SRC_RE } = require('./stamp-assets.js');
-const { serve: netlifyServe } = require('./netlify-emulator.js');
-const { LEGACY } = require('./routes.js');
+const { serve: netlifyServe, loadRedirects, PUBLIC } = require('./netlify-emulator.js');
+const { LEGACY, INTERNAL } = require('./routes.js');
+const { build: buildPublic } = require('../build-public.js');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const PORT = 8123;
@@ -42,6 +47,7 @@ const RETIRED = [
   '/free-tools/business-constraint/', '/free-tools/strategy-or-execution/',
   '/free-tools/become-a-solopreneur/', '/free-tools/roast-my-offer/',
   '/free-tools/find-your-focus-area/', '/greek-speaking-therapist-', '/draft/', '/logoutclub/',
+  '/imposter-syndrome-therapy/',
 ];
 // Positioning and wording retired with the business-advisor site (brief,
 // Phase 13), plus claims the practice does not make. Case-insensitive.
@@ -59,18 +65,14 @@ const RETIRED_LABELS = [
 // with nothing in the repo establishing it as a separate, accurate metric.
 const SUPERSEDED_CLAIMS = [/\b500\+?\s*(?:compan|business|\u03b5\u03c0\u03b9\u03c7\u03b5\u03b9\u03c1)/i, /more than 500\s*(?:compan|business|of them)/i];
 
-// The final editorial copy gives these pages the same meta description, and
-// metadata is used exactly as written. Listed so the check still catches any
-// new, accidental duplicate. (Pairs are sorted, space-separated.)
-const DUPLICATE_OK = new Set(['/ /therapy-for-men-in-tech/']);
-
 const errors = [];
 const warnings = [];
 const err = (url, msg) => errors.push(`${url} — ${msg}`);
 const warn = (url, msg) => warnings.push(`${url} — ${msg}`);
 
 // ─── Netlify emulation (scripts/seo/netlify-emulator.js) ─────────────────────
-const serve = () => netlifyServe(ROOT);
+// public/ is rebuilt first, so the check always sees what would be published.
+const serve = () => { buildPublic(); return netlifyServe(PUBLIC); };
 
 function get(url) {
   return new Promise((resolve) => {
@@ -145,12 +147,9 @@ async function main() {
     const desc = decode(one(h, /<meta name="description" content="([\s\S]*?)">/) || '');
     if (!desc) err(url, 'missing meta description');
     else {
-      if (seenDescs.has(desc)) {
-        const pair = [seenDescs.get(desc), url].sort().join(' ');
-        if (DUPLICATE_OK.has(pair)) warn(url, `same description as ${seenDescs.get(desc)} (as written in the final editorial copy)`);
-        else err(url, `duplicate description, also on ${seenDescs.get(desc)}`);
-      }
+      if (seenDescs.has(desc)) err(url, `duplicate description, also on ${seenDescs.get(desc)}`);
       seenDescs.set(desc, url);
+      if (desc !== p.description) err(url, 'meta description does not match site-meta');
     }
 
     // canonical — exactly one, self-referencing, https, trailing slash
@@ -264,15 +263,12 @@ async function main() {
   for (const p of PAGES) {
     if (p.url === '/') continue;
     const sources = linkTargets.get(p.url);
-    if (!sources || sources.size === 0) {
-      // A held page keeps its status quo until its review; say so, don't fail.
-      if (p.hold) warn(p.url, 'HOLD page has no inbound internal links');
-      else err(p.url, 'orphan — indexable and in the sitemap, but no page links to it');
-    }
+    if (!sources || sources.size === 0) err(p.url, 'orphan — indexable and in the sitemap, but no page links to it');
   }
 
   // ── Redirects: every legacy URL in the migration table (routes.js) — one
-  //    301 hop straight to its final page, or a real 410 ────────────────────
+  //    301 hop straight to its final page, a real 410, or a 404 for a URL
+  //    that never existed ───────────────────────────────────────────────────
   for (const [r, status, target] of LEGACY) {
     const t = await trace(r);
     const first = t.hops.length ? t.hops[0].status : t.status;
@@ -282,6 +278,37 @@ async function main() {
       if (t.final !== target) err(r, `redirects to ${t.final}, expected ${target}`);
       if (t.status !== 200) err(r, `redirect destination returns ${t.status}`);
     }
+  }
+
+  // ── Every redirect rule: no catch-alls, and each 3xx lands on a 200 in
+  //    exactly one hop (also for rules not in the table) ─────────────────────
+  for (const rule of loadRedirects()) {
+    if (rule.from.includes('*')) err(rule.from, 'catch-all rule — list each URL that existed instead');
+    if (rule.status < 300 || rule.status >= 400) continue;
+    const t = await trace(rule.from);
+    if (!t.hops.length) continue; // force = false, shadowed by a page published again
+    if (t.hops.length !== 1 || t.status !== 200) {
+      err(rule.from, `rule resolves in ${t.hops.length} hop(s) to a ${t.status}: ${t.hops.map((h) => h.to).join(' → ')}`);
+    }
+  }
+
+  // ── /ask-me-anything/el: printed QR codes point at this exact URL. It must
+  //    answer 200 there (no redirect), stay out of the index and still work.
+  for (const u of ['/ask-me-anything/el', '/ask-me-anything/el/']) {
+    const r = await get(`http://localhost:${PORT}${u}`);
+    if (r.status !== 200) { err(u, `QR page returns ${r.status}, expected 200 at the printed URL`); continue; }
+    const hq = head(r.body);
+    if (one(hq, /<meta name="robots" content="([^"]*)"/) !== 'noindex, follow') err(u, 'QR page robots meta is not "noindex, follow"');
+    if (r.headers['x-robots-tag'] !== 'noindex, follow') err(u, `QR page X-Robots-Tag is ${r.headers['x-robots-tag']}`);
+    if (/<link rel="(canonical|alternate)"/.test(hq)) err(u, 'QR page declares a canonical or alternate');
+    if (!r.body.includes('src="https://www.videoask.com/fuv51iuq1"')) err(u, 'QR page lost its VideoAsk embed');
+    if (!/<html lang="el"/.test(r.body)) err(u, 'QR page is not lang="el"');
+  }
+
+  // ── Repository internals are not published: each must be a plain 404 ─────
+  for (const u of INTERNAL) {
+    const r = await get(`http://localhost:${PORT}${u}`);
+    if (r.status !== 404) err(u, `internal file is served (${r.status})`);
   }
 
   // ── Cache busting: every bundle URL must carry its current content hash ───
@@ -337,20 +364,28 @@ async function main() {
   // scripts/archive/build.js writes /archive/. Every page there carries a
   // noindex meta and netlify.toml sends the same as X-Robots-Tag; the link and
   // sitemap checks above keep it undiscoverable from the live site.
+  // public/archive/ must be the repo's archive/ byte for byte.
   const archiveDir = path.join(ROOT, 'archive');
   if (fs.existsSync(archiveDir)) {
     const archived = [];
     const walk = (d) => {
       for (const e of fs.readdirSync(d, { withFileTypes: true })) {
         if (e.isDirectory()) walk(path.join(d, e.name));
-        else if (e.name.endsWith('.html')) archived.push(path.join(d, e.name));
+        else archived.push(path.join(d, e.name));
       }
     };
     walk(archiveDir);
     for (const f of archived) {
+      const rel = path.relative(ROOT, f);
+      const pub = path.join(PUBLIC, rel);
+      if (!fs.existsSync(pub) || !fs.readFileSync(pub).equals(fs.readFileSync(f))) err('/' + rel, 'not published identically');
+      if (!f.endsWith('.html')) continue;
       const robots = one(fs.readFileSync(f, 'utf8'), /<meta name="robots" content="([^"]*)"/);
-      if (!robots || !/noindex/i.test(robots)) err('/' + path.relative(ROOT, f), 'archived page is not noindex');
+      if (!robots || !/noindex/i.test(robots)) err('/' + rel, 'archived page is not noindex');
     }
+    const ar = await get(`http://localhost:${PORT}/archive/`);
+    if (ar.status !== 200) err('/archive/', `returns ${ar.status}`);
+    if (!/noindex/.test(ar.headers['x-robots-tag'] || '')) err('/archive/', 'served without X-Robots-Tag: noindex');
     const toml = fs.readFileSync(path.join(ROOT, 'netlify.toml'), 'utf8');
     if (!/for = "\/archive\/\*"\s*\[headers\.values\]\s*X-Robots-Tag = "noindex/.test(toml)) {
       err('/archive/', 'netlify.toml does not send X-Robots-Tag: noindex for /archive/*');

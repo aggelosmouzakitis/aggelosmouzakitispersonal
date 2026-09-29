@@ -59,7 +59,7 @@ TYPE_BY_URL = {
 
 # ── CTA wording → destination ────────────────────────────────────────────────
 # None = the editorial names a destination that does not exist yet; the UI
-# leaves that link out rather than pointing it somewhere else (see HELD below).
+# leaves that link out rather than pointing it somewhere else.
 CTA_HREF = {
     'Book a consultation': '/contact/',
     'Individual psychotherapy': '/individual-psychotherapy/',
@@ -112,15 +112,6 @@ PLANNED_ESSAYS = {
     'The high cost of endless pondering': '/blog/the-high-cost-of-endless-pondering/',
 }
 
-# Testimonials held back from publication. Each one's wording differs from the
-# feedback recorded in the previous site's copy (content-pages.jsx, marked
-# "verbatim"), so it cannot be published as a verbatim quote until checked
-# against the original (brief, Phase 9). Matched on the opening words.
-HELD_QUOTES = [
-    '“I started working with Aggelos during a confusing period in my career.',
-]
-
-
 def smart(s):
     """Typographic apostrophes only; the document already uses curly quotes."""
     return s.replace("'", '’')
@@ -164,7 +155,6 @@ def main(path):
 
     pages = []
     notes = []
-    held = []
     page = None
     section = None
     sub = None
@@ -299,10 +289,7 @@ def main(path):
             blocks[-1]['cite'] = smart(text)
             continue
         if all_italic and text.startswith('“'):
-            block = {'t': 'quote', 'text': smart(text)}
-            if any(text.startswith(h) for h in HELD_QUOTES):
-                block['held'] = True
-            push(block)
+            push({'t': 'quote', 'text': smart(text)})
             continue
         if all_italic:
             push({'t': 'meta', 'text': smart(text)})
@@ -325,18 +312,6 @@ def main(path):
         if url not in TYPE_BY_URL:
             raise SystemExit(f'page without a known URL: {pg["name"]} ({url})')
         pid = 'home' if url == '/' else url.strip('/').replace('/', '-')
-        for s in pg['sections']:
-            # drop held testimonials entirely: they must not ship in the bundle
-            before = len(s['blocks'])
-            kept = []
-            for b in s['blocks']:
-                if b['t'] == 'quote' and b.get('held'):
-                    held.append({'page': url, 'section': s['h2'], 'text': b['text'], 'cite': b.get('cite')})
-                    continue
-                kept.append(b)
-            s['blocks'] = kept
-            if len(kept) != before:
-                s['heldQuotes'] = before - len(kept)
         entry = {
             'id': pid, 'num': pg['num'], 'name': pg['name'], 'url': url, 'type': TYPE_BY_URL[url],
             'seoTitle': pg.get('seoTitle'), 'metaDescription': pg.get('metaDescription'),
@@ -358,7 +333,7 @@ def main(path):
     if missing:
         raise SystemExit(f'pages missing from the document: {missing}')
 
-    return out, notes, held, nav
+    return out, notes, nav
 
 
 def serialise(pages):
@@ -395,7 +370,7 @@ if __name__ == '__main__':
         raise SystemExit(__doc__)
     src = sys.argv[1]
     dest = sys.argv[2] if len(sys.argv) > 2 else 'site-copy.jsx'
-    pages, notes, held, nav = main(src)
+    pages, notes, nav = main(src)
     header = (
         '// site-copy.jsx — the final editorial copy for the 24 canonical pages.\n'
         '//\n'
@@ -419,6 +394,3 @@ if __name__ == '__main__':
     print(f'\n{len(notes)} implementation/launch note(s) left out of the copy:')
     for n in notes:
         print(f'  [{n["page"]}] {n["note"]}')
-    print(f'\n{len(held)} testimonial(s) held back:')
-    for h in held:
-        print(f'  [{h["page"]} / {h["section"]}] {h["cite"]}: {h["text"][:90]}…')

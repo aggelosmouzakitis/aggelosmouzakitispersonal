@@ -18,10 +18,9 @@ const ROOT = path.resolve(__dirname, '..');
 // Page → the sources that actually change its content. A page's lastmod is the
 // most recent commit date across its own file and those sources. The canonical
 // pages are rendered by site-pages.jsx from site-copy.jsx; the two tools by
-// the clarity engine; the held imposter-syndrome page by content-pages.jsx.
+// the clarity engine.
 const CANONICAL_SOURCES = ['site-copy.jsx', 'site-pages.jsx', 'site-chrome.jsx'];
 const TOOL_SOURCES = ['clarity-data.jsx', 'clarity-tools.jsx', 'site-chrome.jsx'];
-const HOLD_SOURCES = ['content-pages.jsx', 'site-chrome.jsx'];
 
 function lastCommitDate(file) {
   try {
@@ -32,10 +31,7 @@ function lastCommitDate(file) {
 }
 
 function lastmodFor(p) {
-  const files = [p.file];
-  if (p.hold) files.push(...HOLD_SOURCES);
-  else if (p.og) files.push(...CANONICAL_SOURCES);
-  else files.push(...TOOL_SOURCES);
+  const files = [p.file].concat(p.og ? CANONICAL_SOURCES : TOOL_SOURCES);
 
   const dates = files
     .map((f) => (fs.existsSync(path.join(ROOT, f)) ? lastCommitDate(f) : null))

@@ -2,7 +2,8 @@
 //
 // The 24 canonical pages take their title and meta description verbatim from
 // the final editorial copy (site-copy.jsx, generated from the editorial
-// document), so metadata cannot drift from the copy. Open Graph reuses them;
+// document), so metadata cannot drift from the copy — except the two meta
+// descriptions in DESCRIPTIONS, approved after the document. Open Graph reuses them;
 // the OG image shows the page's eyebrow and H1 (scripts/seo/og.js).
 // `scripts/seo/apply-metadata.js` writes all of this into each page's <head>;
 // `scripts/seo/seo-check.js` verifies the result; `scripts/gen-sitemap.js`
@@ -145,17 +146,26 @@ const SERVICE_TYPE = {
 };
 const PAGE_TYPE = { about: 'ProfilePage', contact: 'ContactPage', 'free-tools': 'CollectionPage' };
 
+// The editorial document gives the homepage and Therapy for Men in Tech the same
+// meta description. Each has its own, approved separately (Sep 2026); every
+// other page uses the document's.
+const DESCRIPTIONS = {
+  home: 'Online psychotherapy primarily for men in tech, startups and demanding careers, with Aggelos Mouzakitis, BACP-registered psychotherapist.',
+  'therapy-for-men-in-tech': 'Online psychotherapy for men in tech and demanding careers dealing with work pressure, overthinking, relationships, burnout and difficult decisions.',
+};
+
 function canonicalPage([id, priority, changefreq, crumb]) {
   const c = COPY[id];
   if (!c) throw new Error(`site-copy.jsx has no page "${id}"`);
   const url = c.url;
   const file = url === '/' ? 'index.html' : url.slice(1) + 'index.html';
+  const description = DESCRIPTIONS[id] || c.metaDescription;
   const entry = {
     file, url, priority, changefreq,
     title: c.seoTitle,
-    description: c.metaDescription,
+    description,
     ogTitle: c.seoTitle,
-    ogDescription: c.metaDescription,
+    ogDescription: description,
     ogImage: abs('/img/og/v2/' + id + '.png'),
     ogImageAlt: c.hero.h1,
     og: { key: id, label: id === 'home' ? 'Aggelos Mouzakitis' : c.hero.eyebrow, title: c.hero.h1 },
@@ -178,7 +188,7 @@ function canonicalPage([id, priority, changefreq, crumb]) {
   if (SERVICE_TYPE[id]) {
     nodes.push({
       '@type': 'Service', '@id': abs(url) + '#service', name: crumb, serviceType: SERVICE_TYPE[id],
-      url: abs(url), description: c.metaDescription, provider: { '@id': PERSON_ID },
+      url: abs(url), description, provider: { '@id': PERSON_ID },
     });
   }
   if (id === 'free-tools') {
@@ -219,19 +229,6 @@ const PAGES = CANONICAL.map(canonicalPage).concat([
     ogImageAlt: "Free career clarity tool: what's making you want to quit your job?",
     schema: toolNodes('/free-tools/quit-your-job/', "What's making you want to quit your job?",
       'A 20-question self-assessment that distinguishes the role, the manager, the company, the field and burnout as reasons for wanting to leave a job. Directional, not a clinical assessment.'),
-  },
-  // ── HOLD: /imposter-syndrome-therapy/ keeps its existing metadata, status
-  //    and sitemap entry until its Search Console / backlink review decides
-  //    whether it merges into /achievement-self-worth/. Do not change here.
-  {
-    file: 'imposter-syndrome-therapy/index.html', url: '/imposter-syndrome-therapy/', priority: '0.6', changefreq: 'yearly', hold: true,
-    title: 'Imposter Syndrome Therapy for Executives | Aggelos Mouzakitis',
-    description: 'For people who can see the evidence that they are good at their work but cannot feel it. Psychotherapy that works on what keeps producing the feeling.',
-    ogTitle: 'Imposter Syndrome Therapy',
-    ogDescription: 'You can see the evidence that you are good at this. You just cannot feel it.',
-    ogImage: abs('/img/og/imposter-syndrome-therapy.png'),
-    ogImageAlt: 'Imposter syndrome therapy with Aggelos Mouzakitis',
-    schema: pageNodes('/imposter-syndrome-therapy/', 'Imposter Syndrome Therapy', 'Imposter syndrome therapy').concat([PERSON_REF]),
   },
 ]);
 

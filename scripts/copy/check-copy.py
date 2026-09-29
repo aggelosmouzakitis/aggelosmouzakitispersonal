@@ -29,9 +29,7 @@ EXPECTED_MISSING = {
     'Terms and privacy': 'no Terms or Privacy text exists yet to link to',
     'Terms': 'no Terms text exists yet',
     'Privacy': 'no Privacy text exists yet (contact page H2 "Privacy" is checked separately)',
-    'Anonymous client · Technology executive': 'testimonial held: wording differs from recorded feedback',
 }
-HELD_QUOTE_START = '“I started working with Aggelos during a confusing period'
 
 INLINE = r'</?(?:strong|em|b|i|a|span|abbr|small)\b[^>]*>'
 
@@ -82,17 +80,9 @@ def main(src):
         file = ROOT / ('index.html' if url == '/' else url.strip('/') + '/index.html')
         body = page_text(file)
         missing = []
-        skip_next_cite = False
         for style, text in pg['items']:
             t = text[len('Related:'):] if text.startswith('Related:') else text
-            key = norm(t)
-            label = key.strip()
-            if skip_next_cite:
-                skip_next_cite = False
-                continue
-            if text.startswith(HELD_QUOTE_START):
-                skip_next_cite = True
-                continue
+            label = norm(t)
             if label in {norm(k) for k in EXPECTED_MISSING} and not (url == '/contact/' and label == 'Privacy'):
                 continue
             if label not in body:

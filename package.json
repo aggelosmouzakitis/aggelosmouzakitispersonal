@@ -14,7 +14,8 @@
     "seo:check": "node scripts/seo/seo-check.js",
     "seo:indexnow": "node scripts/seo/indexnow.js",
     "archive": "node scripts/archive/build.js",
-    "qa:routes": "node scripts/qa-routes.js"
+    "qa:routes": "node scripts/qa-routes.js",
+    "public": "node scripts/build-public.js"
   },
   "repository": {
     "type": "git",
