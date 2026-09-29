@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel site-chrome.jsx -o site-chrome.js && babel site-copy.jsx -o site-copy.js && babel site-pages.jsx -o site-pages.js && babel lead-capture.jsx -o lead-capture.js && babel clarity-data.jsx -o clarity-data.js && babel clarity-tools.jsx -o clarity-tools.js",
+    "build": "babel site-nav.jsx -o site-nav.js && babel site-chrome.jsx -o site-chrome.js && babel site-copy.jsx -o site-copy.js && babel site-pages.jsx -o site-pages.js && babel lead-capture.jsx -o lead-capture.js && babel clarity-data.jsx -o clarity-data.js && babel clarity-tools.jsx -o clarity-tools.js",
     "pages": "node scripts/gen-site-pages.js",
-    "copy": "python3 scripts/copy/extract-editorial.py",
+    "copy": "python3 scripts/copy/extract-canonical.py",
     "test": "node scripts/seo/seo-check.js",
     "seo:meta": "node scripts/seo/apply-metadata.js",
     "seo:stamp": "node scripts/seo/stamp-assets.js",
@@ -15,7 +15,9 @@
     "seo:indexnow": "node scripts/seo/indexnow.js",
     "archive": "node scripts/archive/build.js",
     "qa:routes": "node scripts/qa-routes.js",
-    "public": "node scripts/build-public.js"
+    "public": "node scripts/build-public.js",
+    "seo:llms": "node scripts/seo/gen-llms.js",
+    "seo:og": "node scripts/seo/og.js"
   },
   "repository": {
     "type": "git",

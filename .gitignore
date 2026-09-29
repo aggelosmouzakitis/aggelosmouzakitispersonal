@@ -1,3 +1,4 @@
 node_modules/
 # Built by scripts/build-public.js; Netlify publishes it (netlify.toml [build]).
 public/
+__pycache__/

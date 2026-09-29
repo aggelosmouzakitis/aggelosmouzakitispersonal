@@ -5,21 +5,31 @@ metadata) with a prerendered snapshot of the React page inside `#root`, so
 crawlers and no-JS visitors get the full copy and React takes over on load.
 Netlify runs no compile step; it only assembles `public/` (see Publish).
 
+## Where the copy comes from
+`content/canonical-copy.md` is the approved "Canonical Website Copy & Metadata"
+document and the only source of page wording, header and footer labels, SEO
+titles and meta descriptions. It is kept in the repository but never published.
+`npm run copy` (`scripts/copy/extract-canonical.py`) turns it into
+`site-copy.jsx` (the 25 pages) and `site-nav.jsx` (header and footer wording,
+loaded on every page including the tools). Both are generated: edit the
+document, not them.
+
 ## When to re-run
-- The editorial document changed: re-extract the copy, then the full pipeline.
+- The canonical document changed: replace `content/canonical-copy.md`, then
+  the full pipeline from `npm run copy`.
 - A `.jsx` file changed (`site-chrome`, `site-pages`, `lead-capture`,
   `clarity-*`): the full pipeline from `npm run build`.
-- A page title or H1 changed: also regenerate the Open Graph images.
+- A page title or H1 changed: also regenerate the Open Graph images and llms.txt.
 - `netlify.toml` or `scripts/seo/routes.js` changed: `npm run qa:routes`.
 
 ## One-time setup
     npm ci                                            # babel + react UMD builds
-    pip install python-docx                           # copy extraction only
     python3 -m http.server 8099 &                     # prerender reads the repo from here
     # Playwright with Chromium must be available (prerender.js, og.js)
 
 ## Run — in this order
-    npm run copy -- path/to/Final_Editorial.docx     # document → site-copy.jsx
+    npm run copy                      # content/canonical-copy.md → site-copy.jsx, site-nav.jsx
+    npm run pages                     # page shells (only when a page is added or the shell changes)
     npm run seo:meta                  # titles, descriptions, canonicals, OG, JSON-LD
     npm run build                     # JSX → JS (before stamping: stamps hash the built files)
     node scripts/seo/prerender.js     # static snapshot into every page's #root
@@ -27,12 +37,13 @@ Netlify runs no compile step; it only assembles `public/` (see Publish).
     npm run seo:sitemap               # sitemap.xml (lastmod from git history)
     npm run seo:check                 # gate: builds public/, then checks it (fails on errors)
     npm run qa:routes                 # every canonical and legacy URL, one hop, 404s, internals
-    python3 scripts/copy/check-copy.py path/to/Final_Editorial.docx   # copy is verbatim
+    python3 scripts/copy/check-copy.py   # every sentence of the document is on its page, in order
 
-    node scripts/seo/og.js            # only when a page title/H1 changed
+    npm run seo:og                    # Open Graph images, only when a page title/H1 changed
+    npm run seo:llms                  # llms.txt, when a page is added or a description changed
 
-`scripts/gen-site-pages.js` writes the page shells; run it only when a page is
-added or the shell itself changes, then run the whole list above.
+`scripts/gen-site-pages.js` (`npm run pages`) rewrites every shell and empties
+its `#root`, so run the whole list after it.
 
 ## Publish
 `netlify.toml` sets `[build] command = "node scripts/build-public.js"` and
