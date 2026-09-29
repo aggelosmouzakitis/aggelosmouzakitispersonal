@@ -1,9 +1,8 @@
 // site-meta.js — one source of truth for every indexable page's metadata.
 //
-// The 24 canonical pages take their title and meta description verbatim from
-// the final editorial copy (site-copy.jsx, generated from the editorial
-// document), so metadata cannot drift from the copy — except the two meta
-// descriptions in DESCRIPTIONS, approved after the document. Open Graph reuses them;
+// The 25 canonical pages take their title and meta description verbatim from
+// the canonical copy (site-copy.jsx, generated from content/canonical-copy.md),
+// so metadata cannot drift from the copy. Open Graph reuses them;
 // the OG image shows the page's eyebrow and H1 (scripts/seo/og.js).
 // `scripts/seo/apply-metadata.js` writes all of this into each page's <head>;
 // `scripts/seo/seo-check.js` verifies the result; `scripts/gen-sitemap.js`
@@ -30,7 +29,8 @@ const OG_DEFAULT = ORIGIN + '/img/og/v2/home.png';
 
 const abs = (p) => ORIGIN + p;
 
-// The final editorial copy (plain JavaScript that sets window.SITE_COPY).
+// The canonical copy (site-copy.jsx, generated from content/canonical-copy.md;
+// plain JavaScript that sets window.SITE_COPY).
 const COPY = (() => {
   const window = {};
   // eslint-disable-next-line no-eval
@@ -107,7 +107,7 @@ function toolNodes(urlPath, name, description) {
   }]);
 }
 
-// ─── The 24 canonical pages ──────────────────────────────────────────────────
+// ─── The 25 canonical pages ──────────────────────────────────────────────────
 // [id, sitemap priority, changefreq, breadcrumb label]. Order is sitemap order.
 const CANONICAL = [
   ['home', '1.0', 'monthly', null],
@@ -128,6 +128,7 @@ const CANONICAL = [
   ['achievement-self-worth', '0.8', 'monthly', 'Achievement & Self-Worth'],
   ['about', '0.7', 'yearly', 'About'],
   ['considering-therapy', '0.7', 'monthly', 'Considering Therapy'],
+  ['therapy-vs-coaching', '0.7', 'monthly', 'Therapy vs Coaching'],
   ['faq', '0.6', 'monthly', 'FAQ'],
   ['reviews', '0.6', 'monthly', 'Reviews'],
   ['free-tools', '0.5', 'monthly', 'Free Tools'],
@@ -146,20 +147,12 @@ const SERVICE_TYPE = {
 };
 const PAGE_TYPE = { about: 'ProfilePage', contact: 'ContactPage', 'free-tools': 'CollectionPage' };
 
-// The editorial document gives the homepage and Therapy for Men in Tech the same
-// meta description. Each has its own, approved separately (Sep 2026); every
-// other page uses the document's.
-const DESCRIPTIONS = {
-  home: 'Online psychotherapy primarily for men in tech, startups and demanding careers, with Aggelos Mouzakitis, BACP-registered psychotherapist.',
-  'therapy-for-men-in-tech': 'Online psychotherapy for men in tech and demanding careers dealing with work pressure, overthinking, relationships, burnout and difficult decisions.',
-};
-
 function canonicalPage([id, priority, changefreq, crumb]) {
   const c = COPY[id];
   if (!c) throw new Error(`site-copy.jsx has no page "${id}"`);
   const url = c.url;
   const file = url === '/' ? 'index.html' : url.slice(1) + 'index.html';
-  const description = DESCRIPTIONS[id] || c.metaDescription;
+  const description = c.metaDescription;
   const entry = {
     file, url, priority, changefreq,
     title: c.seoTitle,

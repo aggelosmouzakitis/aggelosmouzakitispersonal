@@ -10,7 +10,7 @@ const CANONICAL = [
   '/therapy-for-executives/', '/greek-speaking-psychotherapist/', '/relationship-problems-men/',
   '/separation-divorce-men/', '/work-affecting-relationship/', '/executive-burnout-therapy/',
   '/career-transition-therapy/', '/anxiety-overthinking/', '/achievement-self-worth/',
-  '/considering-therapy/', '/faq/', '/reviews/', '/free-tools/', '/blog/', '/contact/',
+  '/considering-therapy/', '/therapy-vs-coaching/', '/faq/', '/reviews/', '/free-tools/', '/blog/', '/contact/',
   '/confidentiality/',
 ].map((u) => [u, 200, null, 'canonical']).concat([
   ['/free-tools/quit-your-job/', 200, null, 'tool (kept)'],
@@ -125,7 +125,8 @@ const INTERNAL = [
   '/package-lock.json', '/.babelrc', '/.gitignore', '/.github/workflows/build.yml',
   '/scripts/', '/scripts/seo/seo-check.js', '/scripts/seo/routes.js', '/scripts/archive/pages.json',
   '/scripts/leads-apps-script.gs', '/site-unification/', '/site-unification/04-redirect-map.csv',
-  '/site-pages.jsx', '/site-copy.jsx', '/site-chrome.jsx', '/lead-capture.jsx',
+  '/site-pages.jsx', '/site-copy.jsx', '/site-chrome.jsx', '/site-nav.jsx', '/lead-capture.jsx',
+  '/content/', '/content/canonical-copy.md', '/scripts/copy/extract-canonical.py',
   '/node_modules/react/package.json', '/admin/', '/admin/config.yml', '/public/index.html',
 ];
 

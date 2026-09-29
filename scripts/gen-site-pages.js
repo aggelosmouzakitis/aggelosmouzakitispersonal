@@ -1,6 +1,6 @@
 // gen-site-pages.js — write the HTML shell of every canonical page.
 //
-// One shell per page in site-copy.jsx (the final editorial copy): the shared
+// One shell per page in site-copy.jsx (the canonical copy): the shared
 // <head> preamble (analytics, fonts, icons, base CSS), an empty #root and the
 // bundles that render it. Everything else is filled in by the steps after it:
 //
@@ -47,7 +47,7 @@ body { background: #F3F0E8; color: #171919; font-family: var(--font-body); font-
 a { color: inherit; text-decoration: none; }
 ::selection { background: #047857; color: #F3F0E8; }
 img { max-width: 100%; filter: grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14); }
-.site-grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: 0.40; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E"); background-size: 160px 160px; }
+.site-grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: 0.06; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E"); background-size: 160px 160px; }
 @media print { .site-grain { display: none; } }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #047857; outline-offset: 2px; border-radius: 2px; }
 @media (prefers-reduced-motion: reduce){ html { scroll-behavior: auto; } *{transition-duration:.001ms!important;animation-duration:.001ms!important} }
@@ -61,7 +61,7 @@ function fileFor(url) {
 function shell(p) {
   const isHome = p.id === 'home';
   const isContact = p.id === 'contact';
-  const preload = isHome ? '\n<link rel="preload" as="image" href="/img/aggelos-homepage.webp?v=2" fetchpriority="high">' : '';
+  const preload = isHome ? '\n<link rel="preload" as="image" href="/img/aggelos-continuation.webp" fetchpriority="high">' : '';
   const emailjs = isContact ? '\n<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>' : '';
   const lead = isContact ? '\n<script src="/lead-capture.js"></script>' : '';
   return `<!DOCTYPE html>
@@ -92,6 +92,7 @@ function shell(p) {
 <div id="root"></div>
 <script src="/react.production.min.js" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js" crossorigin="anonymous"></script>${emailjs}
+<script src="/site-nav.js"></script>
 <script src="/site-chrome.js"></script>
 <script src="/site-copy.js"></script>${lead}
 <script src="/site-pages.js"></script>
