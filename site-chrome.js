@@ -1,8 +1,8 @@
-// site-chrome.jsx — shared production chrome + universal content layout.
+// site-chrome.jsx — shared production chrome + the legacy page shell.
 // Plain React, compiled by babel like the other .jsx bundles. Loaded on every
 // page, before the page's own bundle. Exposes on window:
 //   SITE, CHROME_PATHS, EXTERNAL, cPath, cT, BrandIcon, ChromeStyles, Motion,
-//   SiteHeader, SiteFooterX, BlackCtaStrip, UniversalContentLayout, LegacyShell,
+//   SiteHeader, SiteFooterX, BlackCtaStrip, LegacyShell,
 //   NAV, FOOTER_NAV, CONTACT_URL, FREE_TOOLS_URL, FREE_TOOL_LINKS, currentPath
 //
 // One green across the whole site: #047857.
@@ -338,10 +338,11 @@ function currentPath() {
 }
 
 // ─── Stylesheet ──────────────────────────────────────────────────────────────
-// The legacy page shell (scripts/gen-core-pages.js) still ships the sidebar-era
-// rules: html,body,#root{height:100%}, #root{display:flex}, #main-scroll{overflow-y:auto}
-// and its old accent link colour. Rather than rewrite that generator's CSS,
-// the first block below neutralises those rules with equal-or-higher specificity.
+// Pages built on the legacy shell (the two free tools, /ask-me-anything/el)
+// still ship the sidebar-era rules in their <head>: html,body,#root{height:100%},
+// #root{display:flex}, #main-scroll{overflow-y:auto} and the old accent link
+// colour. The first block below neutralises those rules with equal-or-higher
+// specificity.
 const CHROME_CSS = `
 :root{
   --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -505,9 +506,6 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .site-ftr__rule{height:1px;background:${SITE.ruleOnDark};margin-block:48px 24px}
 .site-ftr__legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;font-size:13px;color:${SITE.onDark}}
 
-.u-hero{background:${SITE.bone};padding-block:106px 86px}
-.u-hero h1{margin:0;max-width:15ch;font-family:${SITE.display};font-synthesis:none;font-size:clamp(52px,5.8vw,82px);font-weight:800;line-height:0.96;letter-spacing:-0.05em;color:${SITE.headingInk}}
-.u-hero p{max-width:65ch;margin:32px 0 0;font-size:21px;line-height:1.55;color:${SITE.ink2}}
 .u-main{background:${SITE.bone};padding-block:0 115px;color:${SITE.inkText}}
 
 /* ── Shared inner-page shell: asymmetrical editorial grid (rail | reading column | gutter) ── */
@@ -519,18 +517,17 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 .u-shell__body{grid-column:2;min-width:0}
 .u-shell__gutter{grid-column:3}
 
-.u-read,.u-shell__body{font-size:19px;line-height:1.72;color:${SITE.inkText}}
-.u-read{width:min(740px,calc(100% - 40px));margin-inline:auto}
-.u-read h1,.u-shell__body h1{font-family:${SITE.display};font-synthesis:none;font-size:clamp(48px,5vw,64px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;margin:0 0 32px}
-.u-read h2,.u-shell__body h2{margin:80px 0 24px;font-family:${SITE.display};font-synthesis:none;font-size:clamp(32px,3.6vw,46px);font-weight:800;line-height:1.04;letter-spacing:-0.04em}
-.u-read h3,.u-shell__body h3{margin:48px 0 16px;font-family:${SITE.display};font-synthesis:none;font-size:clamp(24px,2.8vw,32px);font-weight:750;line-height:1.1;letter-spacing:-0.03em}
-.u-read p + p,.u-shell__body p + p{margin-top:24px}
-.u-read ul,.u-read ol,.u-shell__body ul,.u-shell__body ol{margin:24px 0;padding-left:24px}
-.u-read li + li,.u-shell__body li + li{margin-top:12px}
-#main-scroll .u-read a,.u-read a,.u-shell__body a{color:${SITE.green};text-decoration:underline;text-underline-offset:3px}
-.u-read blockquote,.u-shell__body blockquote{margin:48px 0;padding-left:28px;border-left:4px solid ${SITE.green};font-family:${SITE.display};font-size:28px;line-height:1.3}
-.u-read hr,.u-shell__body hr{border:0;border-top:1px solid ${SITE.rule};margin:64px 0}
-.u-read img,.u-shell__body img{display:block;height:auto;margin:48px 0}
+.u-shell__body{font-size:19px;line-height:1.72;color:${SITE.inkText}}
+.u-shell__body h1{font-family:${SITE.display};font-synthesis:none;font-size:clamp(48px,5vw,64px);font-weight:800;line-height:0.98;letter-spacing:-0.045em;margin:0 0 32px}
+.u-shell__body h2{margin:80px 0 24px;font-family:${SITE.display};font-synthesis:none;font-size:clamp(32px,3.6vw,46px);font-weight:800;line-height:1.04;letter-spacing:-0.04em}
+.u-shell__body h3{margin:48px 0 16px;font-family:${SITE.display};font-synthesis:none;font-size:clamp(24px,2.8vw,32px);font-weight:750;line-height:1.1;letter-spacing:-0.03em}
+.u-shell__body p + p{margin-top:24px}
+.u-shell__body ul,.u-shell__body ol{margin:24px 0;padding-left:24px}
+.u-shell__body li + li{margin-top:12px}
+.u-shell__body a{color:${SITE.green};text-decoration:underline;text-underline-offset:3px}
+.u-shell__body blockquote{margin:48px 0;padding-left:28px;border-left:4px solid ${SITE.green};font-family:${SITE.display};font-size:28px;line-height:1.3}
+.u-shell__body hr{border:0;border-top:1px solid ${SITE.rule};margin:64px 0}
+.u-shell__body img{display:block;height:auto;margin:48px 0}
 .u-form{width:min(760px,calc(100% - 40px));margin-inline:auto}
 
 /* One shared branded callout for deeper pages (dark band, warm text, green rule) */
@@ -588,9 +585,8 @@ img{max-width:100%;filter:grayscale(1) contrast(1.12) brightness(0.96) sepia(0.1
 }
 @media (max-width:640px){
   .site-ftr__legal{flex-direction:column;align-items:flex-start;gap:20px}
-  .u-hero{padding-block:67px 58px}
-  .u-read,.u-shell__body{font-size:18px}
-  .u-read h2,.u-shell__body h2{margin-top:56px}
+  .u-shell__body{font-size:18px}
+  .u-shell__body h2{margin-top:56px}
 }
 @media (max-width:680px){
   .pill--green{max-width:100%;padding-inline:clamp(22px,6.5vw,44px);font-size:clamp(15px,2.35vw,16px)}
@@ -869,9 +865,9 @@ function SiteHeader({
 }
 
 // ─── CLOSING CTA STRIP ───────────────────────────────────────────────────────
-// Used by LegacyShell pages (the two tools set cta:false; the held imposter-
-// syndrome page shows it). No slogan of its own: an optional heading, the
-// primary call to action and the confidentiality link.
+// Closes LegacyShell pages (the two tools set cta:false; /ask-me-anything/el
+// shows it). No slogan of its own: an optional heading, the primary call to
+// action and the confidentiality link.
 function BlackCtaStrip({
   heading
 }) {
@@ -947,32 +943,6 @@ function SiteFooterX() {
       margin: 0
     }
   }, '© ' + year + ' Aggelos Mouzakitis. ' + t.rights))));
-}
-
-// ─── UNIVERSAL CONTENT LAYOUT ────────────────────────────────────────────────
-// For indexed long-form pages authored with this layout: supplies chrome, the
-// light page hero and the reading column. Content passes through unchanged.
-function UniversalContentLayout({
-  title,
-  standfirst,
-  children,
-  ctaHeading,
-  wide
-}) {
-  return React.createElement(React.Fragment, null, React.createElement(ChromeStyles), React.createElement(SiteHeader, null), React.createElement('main', {
-    id: 'main',
-    tabIndex: -1
-  }, React.createElement('section', {
-    className: 'u-hero'
-  }, React.createElement('div', {
-    className: 'site-container'
-  }, React.createElement('h1', null, title), standfirst ? React.createElement('p', null, standfirst) : null)), React.createElement('section', {
-    className: 'u-main'
-  }, React.createElement('div', {
-    className: wide ? 'site-container' : 'u-read'
-  }, children)), React.createElement(BlackCtaStrip, {
-    heading: ctaHeading
-  })), React.createElement(SiteFooterX, null));
 }
 
 // ─── LEGACY SHELL ────────────────────────────────────────────────────────────
@@ -1346,7 +1316,6 @@ Object.assign(window, {
   SiteHeader,
   SiteFooterX,
   BlackCtaStrip,
-  UniversalContentLayout,
   LegacyShell,
   NAV,
   FOOTER_NAV,

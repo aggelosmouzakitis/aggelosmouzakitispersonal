@@ -2796,7 +2796,6 @@ window.SITE_COPY = {
       "sections": [{
         "h2": "Psychotherapy feedback",
         "id": "psychotherapy-feedback",
-        "heldQuotes": 1,
         "blocks": [{
           "t": "quote",
           "text": "“One of the most useful things is that Aggelos actually understands the environment I work in. I don’t need to explain corporate politics, startup pressure, targets, investors or why a career decision can feel more complicated than ‘follow your values.’ He understands the game, but he also notices what the game is doing to me.”",
@@ -2817,6 +2816,10 @@ window.SITE_COPY = {
           "t": "quote",
           "text": "“I trust Aggelos because he is not constantly trying to reassure me. He listens carefully, but he does not automatically agree with the version of events I bring into the session. Sometimes he points out something I would rather not see.”",
           "cite": "Anonymous client · Product leader"
+        }, {
+          "t": "quote",
+          "text": "“I started working with Aggelos during a confusing period in my career. On paper, things were going well, but internally I was questioning almost everything. Over several sessions, he helped me separate legitimate concerns from old fears around performance, failure and how other people saw me.”",
+          "cite": "Anonymous client · Technology executive"
         }]
       }, {
         "h2": "Public mentoring reviews",

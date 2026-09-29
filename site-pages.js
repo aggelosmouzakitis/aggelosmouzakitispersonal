@@ -938,6 +938,8 @@
   const MAXLEN = 3000;
   const COUNTER_FROM = 2600;
   const CONTACT_TEMPLATE = 'template_6mv5hou';
+  // Offered only if sending fails; the address the previous site published.
+  const CONTACT_EMAIL = 'aggelos.mouzakitis@gmail.com';
   function track(name, params) {
     try {
       if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
@@ -1163,15 +1165,9 @@
     }, liveRegion, formErr ? e('div', {
       className: 'sp-formerr',
       role: 'alert'
-    }, 'Something went wrong and your message was not sent. Please try again, or send me a DM on ', e('a', {
-      href: window.EXTERNAL.linkedin,
-      target: '_blank',
-      rel: 'noopener noreferrer'
-    }, 'LinkedIn'), ' or ', e('a', {
-      href: window.EXTERNAL.instagram,
-      target: '_blank',
-      rel: 'noopener noreferrer'
-    }, 'Instagram'), '.') : null,
+    }, 'Something went wrong and your message was not sent. Please try again. If the form is not working, you can email me at ', e('a', {
+      href: 'mailto:' + CONTACT_EMAIL
+    }, CONTACT_EMAIL), '.') : null,
     // Honeypot: off-screen and out of the tab order; people never fill it.
     e('div', {
       className: 'sp-hp',
