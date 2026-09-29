@@ -11,19 +11,32 @@
 //
 //   node scripts/qa-routes.js            # table + exit code
 //   node scripts/qa-routes.js --md FILE  # also write the table to FILE
+//   node scripts/qa-routes.js --live https://aggelosmouzakitis.com
+//                                        # the same checks against a deployed
+//                                        # site instead of the local build
 
 const fs = require('fs');
 const http = require('http');
+const https = require('https');
 const { serve, loadRedirects, PUBLIC } = require('./seo/netlify-emulator.js');
 const { build } = require('./build-public.js');
 
 const PORT = 8124;
+const li = process.argv.indexOf('--live');
+const LIVE = li > 0 ? String(process.argv[li + 1] || '').replace(/\/+$/, '') : null;
+if (li > 0 && !/^https?:\/\/[^/]+$/.test(LIVE)) {
+  console.error('usage: node scripts/qa-routes.js --live https://host');
+  process.exit(2);
+}
+const BASE = LIVE || `http://localhost:${PORT}`;
+const ORIGIN = new URL(BASE).origin;
 
 const { CANONICAL, LEGACY, INTERNAL } = require('./seo/routes.js');
 
 function get(url) {
+  const mod = url.startsWith('https:') ? https : http;
   return new Promise((resolve) => {
-    http.get(url, (res) => {
+    mod.get(url, { headers: { 'user-agent': 'qa-routes (aggelosmouzakitis.com)' } }, (res) => {
       res.resume();
       res.on('end', () => resolve({ status: res.statusCode, location: res.headers.location }));
     }).on('error', () => resolve({ status: 0 }));
@@ -34,10 +47,14 @@ async function trace(p) {
   const hops = [];
   let cur = p;
   for (let i = 0; i < 6; i++) {
-    const r = await get(`http://localhost:${PORT}${cur}`);
+    const r = await get(/^https?:/.test(cur) ? cur : BASE + cur);
     if (r.status >= 300 && r.status < 400 && r.location) {
-      hops.push({ status: r.status, to: r.location });
-      cur = r.location;
+      // A live host may answer with an absolute Location; same-origin
+      // targets are compared as paths, anything else stays absolute (and
+      // fails the target check).
+      const loc = new URL(r.location, BASE + cur);
+      cur = loc.origin === ORIGIN ? loc.pathname + loc.search : loc.href;
+      hops.push({ status: r.status, to: cur });
       continue;
     }
     return { first: hops.length ? hops[0].status : r.status, hops, final: cur, finalStatus: r.status };
@@ -46,9 +63,12 @@ async function trace(p) {
 }
 
 (async () => {
-  build();
-  const server = serve(PUBLIC);
-  await new Promise((r) => server.listen(PORT, r));
+  let server = null;
+  if (!LIVE) {
+    build();
+    server = serve(PUBLIC);
+    await new Promise((r) => server.listen(PORT, r));
+  }
   const rows = [];
   const problems = [];
 
@@ -82,7 +102,7 @@ async function trace(p) {
     }
   }
   for (const u of INTERNAL) await check(u, 404, null, 'repository internal, not published', 'internal');
-  server.close();
+  if (server) server.close();
 
   // netlify.toml and the table must agree: every rule is a row, and every
   // 3xx/410 row is a rule (Netlify matches with or without the slash).
@@ -104,7 +124,7 @@ async function trace(p) {
   console.log(md);
   const i = process.argv.indexOf('--md');
   if (i > 0 && process.argv[i + 1]) fs.writeFileSync(process.argv[i + 1], md + '\n');
-  console.log(`\n${rows.length} requests, ${problems.length} problem(s)`);
+  console.log(`\n${BASE}: ${rows.length} requests, ${problems.length} problem(s)`);
   for (const p of problems) console.log('  ✗ ' + p);
   process.exit(problems.length ? 1 : 0);
 })();

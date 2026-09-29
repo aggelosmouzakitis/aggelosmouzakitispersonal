@@ -4,8 +4,8 @@
   "description": "Online psychotherapy primarily for men in tech, startups and demanding careers, with Aggelos Mouzakitis, BACP-registered psychotherapist.",
   "start_url": "/",
   "display": "minimal-ui",
-  "background_color": "#FFFFFF",
-  "theme_color": "#F5F5F5",
+  "background_color": "#F3F0E8",
+  "theme_color": "#F3F0E8",
   "lang": "en",
   "icons": [
     {
