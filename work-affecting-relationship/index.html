@@ -367,7 +367,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 /* Free Tools, Writing */
 .tool .actions{margin-top:26px}
 .tool__related{margin-top:18px}
-.tool--featured{padding:clamp(28px,4vw,44px);background:var(--bone-deep);border-top:3px solid var(--green)}
+/* The card reaches --feat-bleed past the reading axis on each side (24px on
+   desktop, less than the gutter on small screens); its copy stays on the axis. */
+.tool--featured{--feat-bleed:min(24px,calc(var(--gutter) - 8px));margin-inline:calc(-1 * var(--feat-bleed));padding:clamp(28px,4vw,44px) var(--feat-bleed);background:var(--bone-deep);border-top:3px solid var(--green)}
 .tool--featured .eyebrow{margin-bottom:14px}
 
 /* The Work & Life Check call to action (WorkLifeCheckCTA) */
@@ -419,7 +421,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .ct-help{margin:6px 0 0;font-size:14px;color:var(--meta)}
 .sp-err{margin:6px 0 0;font-size:14px;font-weight:600;color:#A3362A}
 .sp-formerr{margin:0 0 22px;padding:14px 16px;border-left:3px solid #A3362A;background:rgba(163,54,42,.06);font-size:16px;line-height:1.55;color:var(--heading)}
-.sp-formerr a{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor}
+.sp-formerr a{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor;overflow-wrap:anywhere}
+.sp-formerr p{margin:0}
+.sp-formerr p+p{margin-top:6px}
 .ct-submit{width:100%;min-height:56px}
 .ct-submit[disabled]{opacity:.7;cursor:progress}
 .sp-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -431,10 +435,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .mid{width:min(960px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
 .wide{width:min(1120px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
 .sec--step{padding-top:clamp(80px,8.4vw,120px)}
-.read .p,.col .p,.compare .p,.contact__aside .p{max-width:36em}
-.read .p--emph{max-width:32em}
+.read .p,.read-l .p,.col .p,.compare .p,.contact__aside .p{max-width:36em}
+.read .p--emph,.read-l .p--emph{max-width:32em}
+/* A reading column that starts on its container's left edge (.wrap or .mid)
+   instead of the page's centred reading axis; same width as .read. */
+.read-l{max-width:var(--read-max)}
 .quote blockquote p{max-width:34em}
 .practical__rest{margin-top:40px}
+.sec--pre-faq + .sec{padding-top:clamp(88px,6.7vw,96px)}
 .cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (min-width:760px) and (max-width:1099px){
   .cols3:not(.cols2){grid-template-columns:minmax(0,1fr);row-gap:0}
@@ -451,7 +459,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 <script src="/site-nav.js?v=845fe0238a"></script>
 <script src="/site-chrome.js?v=6edd6ff4eb"></script>
 <script src="/site-copy.js?v=7e65acfab8"></script>
-<script src="/site-pages.js?v=d32e0d262b"></script>
+<script src="/site-pages.js?v=d442da44af"></script>
 <script>renderSitePage("work-affecting-relationship");</script>
 </body>
 </html>

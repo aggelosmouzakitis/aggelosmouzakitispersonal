@@ -28,7 +28,8 @@
 //                     "Contact Us: {{title}}", and a body that prints
 //                     {{message}}, so the full notification of any form reads
 //                     correctly with no dashboard change (title = subject).
-//                     Recommended in the dashboard: Subject {{subject}}.
+//                     Recommended in the dashboard: Subject {{{subject}}}
+//                     (content/emails/EMAILJS.md).
 //   template_gcj2lrd  USER result email (To: {{user_email}}), sent directly;
 //                     the Work & Life Check's result (content/emails/…).
 //   template_wdsrbdo  the old tools notification. No longer sent: its body
@@ -58,7 +59,7 @@ var LEAD_SOURCES = {
     tag: 'CONTACT',
     label: 'Contact form',
     subject: function (r) {
-      return '[Website contact] ' + (leadStr(r.detailLabel) || 'Not specified') + ' — ' + (leadStr(r.name) || leadStr(r.email));
+      return 'New website enquiry — ' + (leadStr(r.name) || leadStr(r.email));
     }
   },
   'clarity-tool': {
@@ -84,7 +85,7 @@ function leadSource(id) {
   };
 }
 
-// "[Website contact] Individual Psychotherapy — Maria Papadopoulou"
+// "New website enquiry — Maria Papadopoulou"
 function leadSubject(rec) {
   if (leadStr(rec.subject)) return leadStr(rec.subject);
   var src = leadSource(rec.source);
@@ -110,6 +111,18 @@ function leadMerge() {
     for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) out[k] = o[k];
   }
   return out;
+}
+
+// Only the fields that have a value.
+function leadCompact(o) {
+  var out = {};
+  for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k) && leadStr(o[k]) !== '') out[k] = o[k];
+  return out;
+}
+
+// "2026-09-30 16:56 UTC": unambiguous for whoever reads it, wherever they are.
+function leadTime(when) {
+  return when.toISOString().slice(0, 16).replace('T', ' ') + ' UTC';
 }
 
 // One answer or a timeout, never both, never neither.
@@ -201,6 +214,10 @@ function leadEmail(template, params) {
 //   notes        short human summary — the sheet's Notes column
 //   body         the form's own detailed text; the owner email prints the
 //                header block, then this
+//   message      optional: the owner email's complete text instead (no
+//                header block), for a form with its own notification format
+//   when         optional Date of the submission (default: now), so a form's
+//                own text and the row carry the same time
 //   subject      optional; otherwise the source's subject line
 //   newsletter   true/false only where a form asks (none does today)
 //   detailExtra  tool-specific fields, flattened, for the sheet's last column
@@ -211,10 +228,10 @@ function leadEmail(template, params) {
 function submitLead(rec, done) {
   rec = rec || {};
   var src = leadSource(rec.source);
-  var when = new Date();
+  var when = rec.when instanceof Date ? rec.when : new Date();
   rec.pageUrl = rec.pageUrl || (typeof window !== 'undefined' ? window.location.href : '');
   var subject = leadSubject(rec);
-  var message = leadHeader(rec, when) + (leadStr(rec.body) || leadStr(rec.notes) || '');
+  var message = leadStr(rec.message) || leadHeader(rec, when) + (leadStr(rec.body) || leadStr(rec.notes) || '');
 
   // The normalized row (the Apps Script's columns) …
   var payload = {
@@ -241,17 +258,19 @@ function submitLead(rec, done) {
     reply_to: leadStr(rec.email),
     user_name: leadStr(rec.name),
     user_email: leadStr(rec.email),
-    interest: leadStr(rec.detailLabel) || leadStr(rec.detail) || src.label,
+    interest: leadStr(rec.detailLabel) || leadStr(rec.detail),
     source_page: rec.sourcePage || rec.pageUrl
   };
   // The sheet: the row plus everything the form described, as before; the
   // row's own fields win. The owner email: the same, the form's fields winning,
-  // and `title`, which the canonical template's stock subject
-  // ("Contact Us: {{title}}") shows.
+  // plus `title` and `time`, which the canonical template's stock layout
+  // prints ("Contact Us: {{title}}", {{time}}). A field left empty is not sent
+  // to the email at all, so no template prints a placeholder for it.
   var row = leadMerge(legacy, rec.params, payload);
-  var owner = leadMerge({
-    title: subject
-  }, legacy, payload, rec.params);
+  var owner = leadCompact(leadMerge({
+    title: subject,
+    time: leadTime(when)
+  }, legacy, payload, rec.params));
   var jobs = [leadPostToSheet(row), leadEmail(LEAD_OWNER_TEMPLATE, owner), rec.reply && rec.reply.template ? leadEmail(rec.reply.template, rec.reply.params || {}) : Promise.resolve({
     status: 'skipped',
     detail: ''

@@ -280,14 +280,25 @@
 
   // ── Questions ──────────────────────────────────────────────────────────────
   // Fifteen statements, three per area, on one five-point scale (s 0–4), then
-  // the two context questions, which are not scored. Where a statement cannot
-  // apply (no open decision, no household), "not applicable" drops it from that
-  // area's score; each area keeps at least one statement without that option.
+  // the two context questions, which are not scored. A statement gets the
+  // optional not-applicable answer only when its premise may not hold for
+  // someone, and the wording names that premise; answering it drops the
+  // statement from that area's score. Everywhere else "Not true" already
+  // covers it:
+  //   • decision 2 and 3 are about "that decision" / "the decision": for
+  //     someone with no open decision they cannot apply. Decision 1 asks
+  //     whether there is one, so "Not true" answers it.
+  //   • relationship 1 and 3 are about tension and difficulty "at home", which
+  //     presumes a shared home life. Relationship 2 ("people close to me")
+  //     applies to anyone.
+  //   • switching off, recovery, performance and the two context questions
+  //     apply to anyone working.
+  // Each area keeps at least one statement without the option.
   const TRUE_SCALE = ['Not true', 'Slightly true', 'Somewhat true', 'Mostly true', 'Very true'];
   const scale = (labels) => labels.map((t, s) => ({ t, s }));
   const q = (id, dim, text, na) => Object.assign({ id, dim, text, options: scale(TRUE_SCALE) }, na ? { na: true, naText: na } : {});
   const NO_DECISION = 'I am not facing a decision like this';
-  const NOT_MINE = 'Not applicable to me';
+  const NO_HOME = 'This does not apply to my home life';
   const QUESTIONS = [
     q('wl_switching_1', 'switching', 'After the workday ends, I keep going over conversations, problems or tomorrow’s work in my head.'),
     q('wl_switching_2', 'switching', 'I check messages or updates outside working hours when nothing actually requires it.'),
@@ -298,9 +309,9 @@
     q('wl_decision_1', 'decision', 'An important decision about my work or career has stayed open for months.'),
     q('wl_decision_2', 'decision', 'More information or analysis no longer changes how I feel about that decision.', NO_DECISION),
     q('wl_decision_3', 'decision', 'Part of me is waiting for circumstances to make the decision for me.', NO_DECISION),
-    q('wl_relationship_1', 'relationship', 'Work comes up in tension or arguments at home.', NOT_MINE),
+    q('wl_relationship_1', 'relationship', 'Work comes up in tension or arguments at home.', NO_HOME),
     q('wl_relationship_2', 'relationship', 'People close to me say, or show, that I am there but not really present.'),
-    q('wl_relationship_3', 'relationship', 'When things at home feel difficult, work becomes the easier place to put my attention.', NOT_MINE),
+    q('wl_relationship_3', 'relationship', 'When things at home feel difficult, work becomes the easier place to put my attention.', NO_HOME),
     q('wl_performance_1', 'performance', 'A setback at work affects how I feel about myself far more than its practical consequences.'),
     q('wl_performance_2', 'performance', 'A good result brings me relief more than satisfaction.'),
     q('wl_performance_3', 'performance', 'When someone in my field moves faster than me, it stays with me longer than I would like.'),

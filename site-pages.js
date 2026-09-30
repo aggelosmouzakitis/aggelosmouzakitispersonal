@@ -124,16 +124,8 @@
     button: 'Take the check'
   };
   const WLC_BUTTON = 'Take the Work & Life Check';
+  // The homepage carries the check in its hero only (WLC_HERO), no panel.
   const WLC_PLACEMENTS = {
-    home: {
-      after: 'what-brings-people-here',
-      variant: 'feature',
-      source: 'home-feature',
-      eyebrow: 'Not sure where to start?',
-      headline: 'What is work actually costing you?',
-      body: 'The Work & Life Check looks at five places where professional pressure tends to show up, including recovery, decisions, relationships and how much weight performance is carrying.',
-      button: 'Take the 4-minute check'
-    },
     'therapy-for-men-in-tech': {
       after: 'when-work-continues-after-hours',
       variant: 'inline',
@@ -213,7 +205,7 @@
       source: 'blog-feature'
     }
   };
-  // The homepage hero keeps Book a consultation first; this is its second action.
+  // The homepage hero has exactly two actions: Book a consultation, then this.
   const WLC_HERO = {
     label: WLC_BUTTON,
     href: wlcHref('home-hero')
@@ -394,18 +386,18 @@
   }
 
   // ── Sections ───────────────────────────────────────────────────────────────
+  // axis: 'wrap' | 'mid' keeps the reading width but starts the column on that
+  // container's left edge (the site's 1240, or the 960 section axis) instead of
+  // the page's centred reading axis.
   function ReadSection({
     s,
     ctx,
     roles,
-    children
+    children,
+    axis
   }) {
-    return e('section', {
-      className: 'sec',
-      id: s.id,
-      'aria-labelledby': s.id + '-h'
-    }, e('div', {
-      className: 'read'
+    const col = className => e('div', {
+      className
     }, e('h2', {
       className: 'h2',
       id: s.id + '-h'
@@ -415,7 +407,14 @@
       blocks: s.blocks,
       ctx,
       roles: roles === undefined ? defaultRoles(s.blocks) : roles
-    }))));
+    })));
+    return e('section', {
+      className: 'sec',
+      id: s.id,
+      'aria-labelledby': s.id + '-h'
+    }, axis ? e('div', {
+      className: axis
+    }, col('read-l')) : col('read'));
   }
 
   // Dark section: one reading column on the page's centred axis (the same as
@@ -611,12 +610,15 @@
     p,
     ctx,
     h1Class,
-    extra
+    extra,
+    primaryOnly
   }) {
     const h = p.hero;
     const ps = h.blocks.filter(b => b.t === 'p');
     let ctas = [].concat.apply([], h.blocks.filter(b => b.t === 'ctas').map(b => b.items));
-    // `extra` joins as the second action, after the page's primary one.
+    // primaryOnly keeps just the page's primary action (Book a consultation);
+    // `extra` joins as the second action, after it.
+    if (primaryOnly) ctas = ctas.filter(isPrimary);
     if (extra) ctas = ctas.slice(0, 1).concat([extra], ctas.slice(1));
     return e(React.Fragment, null, e('p', {
       className: 'eyebrow'
@@ -729,6 +731,15 @@
       pos: '50% 0%'
     }
   };
+  // Reading sections that stay on the axis of what comes before them instead of
+  // the centred reading axis ('wrap' = the hero's left edge). About: Before
+  // psychotherapy continues the hero's text axis; the dark section after it is
+  // where the page moves to the centred long-form axis.
+  const AXIS = {
+    about: {
+      'before-psychotherapy': 'wrap'
+    }
+  };
   // Text roles the reference designs set explicitly (paragraph index → role).
   const ROLES = {
     'executive-burnout-therapy': {
@@ -764,7 +775,8 @@
   function StatementSection({
     s,
     ctx,
-    where
+    where,
+    axis
   }) {
     // where = 'first': the first paragraph's opening sentence is the statement;
     // 'last': the last paragraph's closing sentence is.
@@ -785,7 +797,8 @@
     }, rich(stmt, ctx));
     return e(ReadSection, {
       s,
-      ctx
+      ctx,
+      axis
     }, e('div', {
       className: 'flow'
     }, where === 'first' ? [stmtEl, e(Blocks, {
@@ -836,8 +849,10 @@
       })) : null);
     }))));
   }
-  // Practical facts on the 960 axis shared with Relationships, three equal
-  // columns; the explanatory prose returns to the reading column.
+  // Practical facts across the 960 axis shared with Work in psychotherapy and
+  // Relationships, three equal columns; the explanatory prose keeps the
+  // reading width on that same left edge. The FAQ after it returns to the
+  // centred reading axis, after a clearer gap (.sec--pre-faq + .sec).
   function PracticalSection({
     s,
     ctx
@@ -845,7 +860,7 @@
     const facts = s.blocks.filter(b => b.t === 'pairs');
     const rest = s.blocks.filter(b => b.t !== 'pairs');
     return e('section', {
-      className: 'sec',
+      className: 'sec sec--pre-faq',
       id: s.id,
       'aria-labelledby': s.id + '-h'
     }, e('div', {
@@ -856,12 +871,12 @@
     }, s.h2), e(Blocks, {
       blocks: facts,
       ctx
-    })), e('div', {
-      className: 'read practical__rest flow'
+    }), e('div', {
+      className: 'read-l practical__rest flow'
     }, e(Blocks, {
       blocks: rest,
       ctx
-    })));
+    }))));
   }
   const INDIVIDUAL = {
     'what-brings-people-in': (s, ctx) => e(TriggersSection, {
@@ -873,10 +888,12 @@
       ctx,
       where: 'first'
     }),
+    // Work in psychotherapy, Relationships and Practicalities share the 960 axis.
     'work-in-psychotherapy': (s, ctx) => e(StatementSection, {
       s,
       ctx,
-      where: 'last'
+      where: 'last',
+      axis: 'mid'
     }),
     practicalities: (s, ctx) => e(PracticalSection, {
       s,
@@ -936,7 +953,8 @@
     return e(ReadSection, {
       s,
       ctx,
-      roles
+      roles,
+      axis: AXIS[p.id] && AXIS[p.id][s.id]
     });
   }
   function Sections({
@@ -1014,13 +1032,17 @@
       }
     }))), e('div', {
       className: 'wrap home-hero__in'
-    }, e('div', {
+    },
+    // Two actions: Book a consultation, then the Work & Life Check. Individual
+    // psychotherapy is reached from the Services menu and Ways to work with me.
+    e('div', {
       className: 'home-hero__text'
     }, e(HeroText, {
       p,
       ctx,
       h1Class: 'h1--home',
-      extra: WLC_HERO
+      extra: WLC_HERO,
+      primaryOnly: true
     })), e('figure', {
       className: 'home-fig'
     }, e('span', {
@@ -1071,7 +1093,6 @@
         blocks: brings.blocks,
         ctx
       })))));
-      out.push(wlcAfter('home', brings.id, 'wlc'));
     }
     const context = S['work-is-part-of-the-context'];
     if (context) out.push(e(PhotoSplit, {
@@ -1088,14 +1109,18 @@
       const s2 = sentences(ps[1].text);
       const link = how.blocks.find(b => b.t === 'ctas');
       // One reading column: H2, the opening sentence as the lead, then the
-      // prose; the closing sentence is the only (body-size) emphasis.
+      // prose; the closing sentence is the only (body-size) emphasis. The
+      // column keeps the reading width but starts on the site's left edge, the
+      // same anchor as Ways to work with me below it.
       out.push(e('section', {
         key: 'how',
         className: 'sec',
         id: how.id,
         'aria-labelledby': 'how-h'
       }, e('div', {
-        className: 'read'
+        className: 'wrap'
+      }, e('div', {
+        className: 'read-l'
       }, e('h2', {
         className: 'h2',
         id: 'how-h'
@@ -1112,7 +1137,7 @@
       }, s2[s2.length - 1]), link ? e(Actions, {
         items: link.items,
         className: 'links'
-      }) : null))));
+      }) : null)))));
     }
     const ways = S['ways-to-work-with-me'];
     if (ways) {
@@ -1324,13 +1349,18 @@
   // ── Free Tools ─────────────────────────────────────────────────────────────
   // The Work & Life Check comes first, set as the featured entry (the broad
   // check that routes on); the narrower burnout and career tools follow.
+  // The featured entry: its copy sits on the same reading axis as the tool
+  // titles below it; only the card (background and top rule) reaches past
+  // that axis on both sides.
   function FeaturedTool() {
     return e('section', {
       className: 'sec',
       id: 'the-work-and-life-check',
       'aria-labelledby': 'the-work-and-life-check-h'
     }, e('div', {
-      className: 'read tool tool--featured'
+      className: 'read'
+    }, e('div', {
+      className: 'tool tool--featured'
     }, e('p', {
       className: 'eyebrow'
     }, WLC_TOOL.label), e('h2', {
@@ -1347,7 +1377,7 @@
       href: wlcHref(WLC_TOOL.source)
     }, WLC_TOOL.button, ' ', e(Arrow)), e('span', {
       className: 'meta'
-    }, WLC_TOOL.meta))));
+    }, WLC_TOOL.meta)))));
   }
   function ToolsPage({
     p
@@ -1492,11 +1522,14 @@
   }
 
   // ── Contact ────────────────────────────────────────────────────────────────
-  // Delivery goes through window.submitLead (lead-capture.js): a row in the
-  // leads sheet and the owner notification, run independently. The form shows
-  // success once the enquiry is recorded by either; it shows the error (with
-  // the address below) only when neither went through. Validation, the
-  // honeypot, the soft rate limit and the analytics events are unchanged.
+  // Delivery goes through window.submitLead (lead-capture.js), the same path as
+  // the diagnostics' notifications: the EmailJS notification to Aggelos (the
+  // canonical owner template, Reply-To the visitor) and a row in the leads
+  // sheet, run independently. The success state appears only once EmailJS has
+  // accepted the notification; otherwise the form comes back with everything
+  // still filled in and the address to write to directly. One send in flight at
+  // a time. Validation, the honeypot, the soft rate limit and the analytics
+  // events are unchanged.
   const MAXLEN = 3000;
   const COUNTER_FROM = 2600;
   // Offered only if sending fails; the address the previous site published.
@@ -1545,7 +1578,7 @@
       location: '',
       message: '',
       service: '',
-      company: ''
+      hp: ''
     });
     const [errors, setErrors] = useState({});
     const [formErr, setFormErr] = useState(false);
@@ -1559,6 +1592,8 @@
     const live = useRef(null);
     const successRef = useRef(null);
     const lastRef = useRef(0);
+    const sendingRef = useRef(false); // true from submit until EmailJS answers: no second send
+
     useEffect(() => {
       track('contact_page_viewed', {
         source_page: document.referrer || 'direct'
@@ -1569,7 +1604,7 @@
         try {
           successRef.current.focus();
         } catch (err) {/* focus is best-effort */}
-        announce('Thank you. Your message has been sent.');
+        announce('Thanks. Your message has been sent.');
       }
     }, [status]);
     const announce = t => {
@@ -1589,15 +1624,20 @@
     }
     function onSubmit(ev) {
       ev.preventDefault();
+      if (sendingRef.current) return; // a send is in flight: clicks and Enter do nothing
       const src = document.referrer || 'direct';
       track('form_submission_attempted', {
         interest: v.service || 'none',
         source_page: src
       });
-      if (v.company) {
+      // Honeypot: bots only. Looks sent, sends nothing.
+      if (v.hp) {
+        track('form_submission_honeypot', {
+          source_page: src
+        });
         setStatus('success');
         return;
-      } // honeypot: bots only
+      }
       const er = validate();
       setErrors(er);
       const order = ['name', 'email', 'location', 'message'];
@@ -1616,27 +1656,35 @@
         return;
       }
       setFormErr(false);
+      sendingRef.current = true;
       setStatus('sending');
       announce('Sending your message.');
-      const svc = v.service || 'Not specified';
-      const msg = sanitizeLong(v.message).slice(0, MAXLEN);
+      const when = new Date();
+      const name = sanitize(v.name);
+      const email = sanitize(v.email);
       const loc = sanitize(v.location).slice(0, 200);
-      const body = ['Location: ' + loc, 'Service: ' + svc, '', 'Message:', msg, '', 'Referrer: ' + src].join('\n');
+      const msg = sanitizeLong(v.message).slice(0, MAXLEN);
+      const svc = v.service; // optional: only in the email when chosen
+      // The notification exactly as it arrives. Every visible field; the
+      // optional one only when it has a value.
+      const message = ['New enquiry from aggelosmouzakitis.com', '', 'Name:', name, '', 'Email:', email, '', L.location + ':', loc, ''].concat(svc ? ['Interest / reason for contact:', svc, ''] : [], ['Message:', msg, '', 'Page:', window.location.href, '', 'Submitted:', when.toISOString().slice(0, 16).replace('T', ' ') + ' UTC', '', 'Reply-to:', email]).join('\n');
       const ok = () => {
+        sendingRef.current = false;
         lastRef.current = Date.now();
         safeSet('ct_last', String(lastRef.current));
         track('form_submission_succeeded', {
-          interest: v.service ? slugOf(v.service) : 'none',
+          interest: svc ? slugOf(svc) : 'none',
           source_page: src
         });
         setStatus('success');
       };
       const fail = err => {
+        sendingRef.current = false;
         try {
           console.error('Contact send error:', err);
         } catch (e2) {/* noop */}
         track('form_submission_failed', {
-          interest: v.service ? slugOf(v.service) : 'none',
+          interest: svc ? slugOf(svc) : 'none',
           source_page: src
         });
         setStatus('idle');
@@ -1649,12 +1697,13 @@
       }
       window.submitLead({
         source: 'contact',
-        detail: v.service ? slugOf(v.service) : 'not-specified',
+        detail: svc ? slugOf(svc) : '',
         detailLabel: svc,
-        name: sanitize(v.name),
-        email: sanitize(v.email),
+        name,
+        email,
         notes: msg,
-        body,
+        message,
+        when,
         sourcePage: src,
         detailExtra: 'location: ' + loc,
         params: {
@@ -1662,7 +1711,9 @@
           service: svc
         }
       }, (recorded, res) => {
-        if (recorded) ok();else fail(new Error('Lead not recorded: ' + JSON.stringify(res && res.detail)));
+        // Sent means EmailJS accepted the notification. The sheet row is
+        // written either way, but it is not what tells Aggelos.
+        if (res && res.owner === 'ok') ok();else fail(new Error('Notification not sent: ' + JSON.stringify(res && res.detail)));
       });
     }
     const liveRegion = e('div', {
@@ -1678,9 +1729,9 @@
         className: 'sp-form__done',
         tabIndex: -1,
         ref: successRef
-      }, 'Thank you. I’ve got your message.'), e('p', {
+      }, 'Thanks. Your message has been sent.'), e('p', {
         className: 'p'
-      }, 'I’ll read it myself and get back to you personally.'), e('div', {
+      }, 'I’ll get back to you as soon as I can.'), e('div', {
         className: 'links'
       }, e(TLink, {
         item: {
@@ -1725,22 +1776,30 @@
     }, liveRegion, formErr ? e('div', {
       className: 'sp-formerr',
       role: 'alert'
-    }, 'Something went wrong and your message was not sent. Please try again. If the form is not working, you can email me at ', e('a', {
+    }, e('p', null, 'Something went wrong and your message was not sent.'), e('p', null, 'Please try again or email me directly at ', e('a', {
       href: 'mailto:' + CONTACT_EMAIL
-    }, CONTACT_EMAIL), '.') : null,
-    // Honeypot: off-screen and out of the tab order; people never fill it.
+    }, CONTACT_EMAIL), '.')) : null,
+    // Honeypot: off-screen, out of the tab order and hidden from assistive
+    // technology; people never fill it. Its label and id match no autofill
+    // category: a hidden field called "Company" gets filled by browsers and
+    // password managers along with the name and email, which would turn a
+    // real enquiry into a silent fake success. Password managers are told to
+    // skip it as well.
     e('div', {
       className: 'sp-hp',
       'aria-hidden': 'true'
     }, e('label', {
-      htmlFor: 'ct-company'
-    }, 'Company'), e('input', {
-      id: 'ct-company',
+      htmlFor: 'ct-hp'
+    }, 'Leave this field empty'), e('input', {
+      id: 'ct-hp',
       type: 'text',
       tabIndex: -1,
       autoComplete: 'off',
-      value: v.company,
-      onChange: set('company')
+      'data-lpignore': 'true',
+      'data-1p-ignore': 'true',
+      'data-form-type': 'other',
+      value: v.hp,
+      onChange: set('hp')
     })), e('div', {
       className: 'ct-pair'
     }, field('name', L.name, {
@@ -2077,7 +2136,9 @@
 /* Free Tools, Writing */
 .tool .actions{margin-top:26px}
 .tool__related{margin-top:18px}
-.tool--featured{padding:clamp(28px,4vw,44px);background:var(--bone-deep);border-top:3px solid var(--green)}
+/* The card reaches --feat-bleed past the reading axis on each side (24px on
+   desktop, less than the gutter on small screens); its copy stays on the axis. */
+.tool--featured{--feat-bleed:min(24px,calc(var(--gutter) - 8px));margin-inline:calc(-1 * var(--feat-bleed));padding:clamp(28px,4vw,44px) var(--feat-bleed);background:var(--bone-deep);border-top:3px solid var(--green)}
 .tool--featured .eyebrow{margin-bottom:14px}
 
 /* The Work & Life Check call to action (WorkLifeCheckCTA) */
@@ -2129,7 +2190,9 @@
 .ct-help{margin:6px 0 0;font-size:14px;color:var(--meta)}
 .sp-err{margin:6px 0 0;font-size:14px;font-weight:600;color:#A3362A}
 .sp-formerr{margin:0 0 22px;padding:14px 16px;border-left:3px solid #A3362A;background:rgba(163,54,42,.06);font-size:16px;line-height:1.55;color:var(--heading)}
-.sp-formerr a{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor}
+.sp-formerr a{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor;overflow-wrap:anywhere}
+.sp-formerr p{margin:0}
+.sp-formerr p+p{margin-top:6px}
 .ct-submit{width:100%;min-height:56px}
 .ct-submit[disabled]{opacity:.7;cursor:progress}
 .sp-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -2141,10 +2204,14 @@
 .mid{width:min(960px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
 .wide{width:min(1120px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
 .sec--step{padding-top:clamp(80px,8.4vw,120px)}
-.read .p,.col .p,.compare .p,.contact__aside .p{max-width:36em}
-.read .p--emph{max-width:32em}
+.read .p,.read-l .p,.col .p,.compare .p,.contact__aside .p{max-width:36em}
+.read .p--emph,.read-l .p--emph{max-width:32em}
+/* A reading column that starts on its container's left edge (.wrap or .mid)
+   instead of the page's centred reading axis; same width as .read. */
+.read-l{max-width:var(--read-max)}
 .quote blockquote p{max-width:34em}
 .practical__rest{margin-top:40px}
+.sec--pre-faq + .sec{padding-top:clamp(88px,6.7vw,96px)}
 .cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (min-width:760px) and (max-width:1099px){
   .cols3:not(.cols2){grid-template-columns:minmax(0,1fr);row-gap:0}

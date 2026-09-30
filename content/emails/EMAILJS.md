@@ -90,11 +90,11 @@ deleted.
 
 ### To `template_6mv5hou` (every lead)
 
-Always:
-- **The row:** `subject`, `title` (= subject), `message` (the full plain-text
-  notification), `submitted_at`, `source`, `source_label`, `detail`,
-  `detail_label`, `name`, `email`, `notes`, `page_url`, `newsletter`,
-  `detail_extra`, `lead`.
+Always, when they have a value (an empty field is not sent at all):
+- **The row:** `subject`, `title` (= subject), `time` (e.g. `2026-09-30 16:56
+  UTC`), `message` (the full plain-text notification), `submitted_at`,
+  `source`, `source_label`, `detail`, `detail_label`, `name`, `email`,
+  `notes`, `page_url`, `newsletter`, `detail_extra`, `lead`.
 - **The older names:** `from_name`, `from_email`, `reply_to`, `user_name`,
   `user_email`, `interest`, `source_page`.
 
@@ -102,9 +102,44 @@ Plus each form's own fields:
 
 | Source | Subject | Extra fields |
 |---|---|---|
-| `contact` | `[Website contact] <service, or Not specified> — <name>` | `location`, `service` |
+| `contact` | `New website enquiry — <name>` | `location`, `service` (only when chosen) |
 | `clarity-tool` (`burned-out`, `quit-your-job`) | `[TOOL] <tool title> — <name or email>` | `overall_grade`, `overall_score`, `section_breakdown`, `all_answers` |
 | `work-life-check` | `[Work & Life Check] <primary result> — <email>` | `primary_result_title`, `secondary_result_title`, `switching_off_score`, `recovery_score`, `decision_score`, `relationship_score`, `performance_score`, `environment_change_answer` (Q16), `repeating_pattern_answer` (Q17), `context_type`, `timestamp` |
+
+The contact notification (`message`) is exactly:
+
+```
+New enquiry from aggelosmouzakitis.com
+
+Name:
+<name>
+
+Email:
+<email>
+
+Current location / country:
+<location>
+
+Interest / reason for contact:      (only when a service was chosen)
+<service>
+
+Message:
+<full message>
+
+Page:
+<page URL>
+
+Submitted:
+<YYYY-MM-DD HH:MM UTC>
+
+Reply-to:
+<email>
+```
+
+The contact form shows "Thanks. Your message has been sent." only once EmailJS
+has accepted this notification. If EmailJS refuses it or doesn't answer within
+15 seconds, the form shows the failure message with the direct address and
+keeps everything the person typed. The sheet row is written either way.
 
 The Work & Life Check notification (`message`) opens with the following lines,
 then the result exactly as emailed, then all 17 answers:

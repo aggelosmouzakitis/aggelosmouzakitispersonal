@@ -417,26 +417,14 @@ function clarityStyles(mob) {
         display: 'block'
       };
     },
+    // The optional not-applicable answer is the same row as every answer on
+    // the scale (size, colour, padding, full-width target, hover, focus and
+    // selected state). Only its position sets it apart: 14px below the
+    // hairline that closes the scale.
     naChoice: function (sel) {
-      return {
-        width: '100%',
-        textAlign: 'left',
-        border: '0',
-        borderLeft: sel ? '2px solid ' + CL_ACC : '2px solid transparent',
-        borderTop: '1px solid rgba(23,25,25,.14)',
-        padding: mob ? '.8rem .6rem .8rem 1rem' : '.85rem .6rem .85rem 1.1rem',
-        borderRadius: '0',
-        background: 'transparent',
-        color: sel ? CL_ACC : '#6A6F67',
-        fontWeight: sel ? 700 : 400,
-        fontFamily: 'inherit',
-        fontSize: '15px',
-        lineHeight: 1.5,
-        cursor: 'pointer',
-        marginTop: '.5rem',
-        transition: 'border-color .12s, color .12s',
-        display: 'block'
-      };
+      return Object.assign(this.choice(sel), {
+        marginTop: '14px'
+      });
     },
     field: {
       width: '100%',
@@ -1206,14 +1194,18 @@ function ClarityTool({
       var on = sel === oi;
       return React.createElement('button', {
         key: oi,
+        type: 'button',
         className: 'opt-btn',
+        'aria-pressed': on,
         style: C.choice(on),
         onClick: function () {
           choose(q, i, oi);
         }
       }, o.t);
     }), q.na ? React.createElement('button', {
-      className: 'opt-btn',
+      type: 'button',
+      className: 'opt-btn opt-btn--na',
+      'aria-pressed': sel === 'na',
       style: C.naChoice(sel === 'na'),
       onClick: function () {
         choose(q, i, 'na');

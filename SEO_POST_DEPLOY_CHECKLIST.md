@@ -109,12 +109,15 @@ the Work & Life Check result content live only there.
 Then open each page with `?leaddebug=1`. The panel that appears after
 submitting shows each operation's outcome.
 
-1. `/contact/?leaddebug=1`: send one real enquiry. Expect
+1. `/contact/?leaddebug=1`: send one enquiry with Name `WEBSITE FORM TEST`,
+   your own address, and Message `Automated final QA test. Safe to ignore.`
+   Expect "Thanks. Your message has been sent." and
    `sheet ok · owner ok · reply skipped`, then:
    - a new row in the Leads tab
    - one `template_6mv5hou` send in EmailJS → History
    - the notification in the inbox, subject
-     `[Website contact] <service> — <name>`, and Reply goes to the sender
+     `New website enquiry — WEBSITE FORM TEST`, and Reply goes to the address
+     you entered
 2. `/work-life-check/?leaddebug=1`: complete the check with your own address.
    Expect `sheet ok · owner ok · reply ok`, the result on screen, and:
    - a row (Source `work-life-check`)
