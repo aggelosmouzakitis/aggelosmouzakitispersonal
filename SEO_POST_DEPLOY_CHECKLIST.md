@@ -99,28 +99,43 @@ for p in / /individual-psychotherapy/ /therapy-vs-coaching/; do
 done
 ```
 
-## 8. The contact form, once, by hand
+## 8. Leads: the forms, once each, by hand
 
-The automated QA stubs EmailJS, so delivery itself is only proven in
-production: send one real enquiry from `/contact/` and confirm it arrives
-(EmailJS template `template_6mv5hou`, subject `[CONTACT] …`).
+The automated QA stubs EmailJS and the sheet, so delivery itself is only proven
+in production. First make the EmailJS dashboard changes in
+`content/emails/EMAILJS.md` (sections 1–4). The owner template's recipient and
+the Work & Life Check result content live only there.
 
-### The Work & Life Check result email (one-time setup, then one test)
+Then open each page with `?leaddebug=1`. The panel that appears after
+submitting shows each operation's outcome.
 
-"Email me my result" on `/work-life-check/` sends the person their result
-through an EmailJS template that has to be created once, in the EmailJS
-dashboard: paste `content/emails/work-life-check-result.html` (the comment at
-its top lists To, Subject and the Template ID, `template_wlc_result`). Until
-then the page says the email did not go through; the private copy to you
-(`[TOOL] The Work & Life Check …`, template `template_wdsrbdo`) arrives either
-way. Then complete the check once, ask for the email, and confirm both arrive.
+1. `/contact/?leaddebug=1`: send one real enquiry. Expect
+   `sheet ok · owner ok · reply skipped`, then:
+   - a new row in the Leads tab
+   - one `template_6mv5hou` send in EmailJS → History
+   - the notification in the inbox, subject
+     `[Website contact] <service> — <name>`, and Reply goes to the sender
+2. `/work-life-check/?leaddebug=1`: complete the check with your own address.
+   Expect `sheet ok · owner ok · reply ok`, the result on screen, and:
+   - a row (Source `work-life-check`)
+   - the notification `[Work & Life Check] <result> — <email>`
+   - the result email `Your Work & Life Check result: <result>`: check the
+     sender name, that Reply-To is `aggelos.mouzakitis@gmail.com`, and that
+     the links open
+   - repeat with the tie and low-signal answers listed in `EMAILJS.md`
+3. `/free-tools/burned-out/?leaddebug=1` and `/free-tools/quit-your-job/`:
+   one each. Expect a row and a `[TOOL] …` notification.
+
+None of these subscribes the address to anything.
 
 ### GA4: register the Work & Life Check parameters
 
 The check sends `work_life_check_view`, `_start`, `_complete`, `_email`,
 `_consultation_click` and `_related_page_click` with `source_page`,
 `primary_result`, `secondary_result`, `context_type` (and `result_type`,
-`link_url`). GA4 only reports custom parameters once they are registered:
+`link_url`, and `email_delivery` on `_email`). Every form also sends
+`lead_capture_error` (`source`, `stage`, `error_detail`) when a sheet write or
+an email fails. GA4 only reports custom parameters once they are registered:
 Admin → Custom definitions → Create custom dimension (scope: Event) for each.
 
 ## 9. Submit to search engines

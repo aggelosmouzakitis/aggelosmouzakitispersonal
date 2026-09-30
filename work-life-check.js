@@ -1,19 +1,22 @@
 // work-life-check.jsx — The Work & Life Check, on the Clarity Tools engine.
 //
-// Loaded by /work-life-check/ after clarity-tools.js. It registers one more
-// assessment in window.CLARITY_DATA, so the questions, the one-at-a-time UI,
-// the 0–100 dimension scoring, answer persistence and the lead pipeline are
-// the engine's (clarity-tools.jsx). What is specific to this check lives here:
+// Loaded by /work-life-check/ after lead-capture.js and clarity-tools.js. It
+// registers one more assessment in window.CLARITY_DATA, so the questions, the
+// one-at-a-time UI, the 0–100 dimension scoring, the email screen before the
+// result and answer persistence are the engine's (clarity-tools.jsx), and every
+// submission goes through the site's one lead-capture layer (lead-capture.jsx).
+// What is specific to this check lives here:
 //   • the five areas and their public names (used on screen, in the email and
 //     in analytics, always exactly as written in AREAS)
 //   • the result logic: rank the five areas, primary = highest, secondary =
 //     second; equal rounded scores = "Two areas stand out"; every area in the
 //     engine's lowest band (0–24) = "Nothing clearly dominates"; the context
 //     read from Q16 and Q17
-//   • the result screen, shown before any email is asked for
-//   • "Email me my result": a copy to the person (EmailJS template
-//     WLC_RESULT_TEMPLATE, see content/emails/work-life-check-result.html) and
-//     the usual private notification + sheet row (lead-capture.js)
+//   • the submission behind the email screen: one lead — the sheet row, the
+//     owner notification and the person's result email (template_gcj2lrd, the
+//     diagnostics' existing result template; content/emails/…) — then the
+//     result, whether or not that email went out
+//   • the result screen
 //   • analytics: work_life_check_* events carrying source_page, primary_result,
 //     secondary_result and context_type. Nothing depends on analytics loading.
 //
@@ -21,9 +24,6 @@
 
 (function () {
   const e = React.createElement;
-  const {
-    useState
-  } = React;
   const SLUG = 'work-life-check';
   const ORIGIN = 'https://aggelosmouzakitis.com';
 
@@ -156,17 +156,14 @@
       button: 'Considering therapy?',
       href: '/considering-therapy/'
     },
-    email: {
-      eyebrow: 'Keep this',
-      h2: 'Want a copy of your result?',
-      body: 'I can email you the result, your five-area profile and the two pages most relevant to what came up.',
-      field: 'Email address',
-      button: 'Email me my result',
-      sending: 'Sending…',
-      sent: 'Sent. It should reach your inbox within a few minutes.',
-      failed: 'That did not go through. Please try again in a moment.',
-      invalid: 'Please enter a valid email address.',
-      privacy: 'A copy also goes privately to Aggelos. Your address is not added to any mailing list.'
+    // The email screen before the result (the engine's; only these two lines differ).
+    gate: {
+      text: 'Enter your email to see your result. A copy is emailed to you, and your answers also go privately to Aggelos, who reviews these himself.',
+      note: 'Your individual answers are not sent to analytics. Your email is used to send you this result and is not added to any mailing list.'
+    },
+    delivery: {
+      sent: 'A copy of your result is on its way to {email}.',
+      failed: 'We couldn’t send your copy by email. Your result is available below.'
     },
     close: {
       h2: 'If this has been going on for a while',
@@ -325,193 +322,185 @@
     return list.filter((p, n) => list.findIndex(x => x.href === p.href) === n);
   }
 
-  // ── Plain text of the result (email and notification) ─────────────────────
+  // ── The result as email fields ─────────────────────────────────────────────
+  // One EmailJS template draws all three kinds of result (content/emails/
+  // work-life-check-result.html). Every heading that differs between a normal,
+  // a tied and a low-signal result travels as its own field, and a section a
+  // result does not have travels empty, so the template needs no logic;
+  // is_tie / is_low_signal are sent too, for a template that wants them.
   const plain = t => t.replace(/\*\*/g, '');
   const para = list => list.map(plain).join('\n\n');
-  const scoreLine = r => r.area.label + ' — ' + r.score + '/100';
-
-  // Reading links travel as slugs ("career-transition-therapy"): the email
-  // template writes https://aggelosmouzakitis.com/{{reading_slug}}/, so the host
-  // of every link in the email is fixed by the template, not by the page.
-  const slugOf = href => href.replace(/^\/|\/$/g, '');
-  function readingVars(pages) {
-    const v = {};
-    [0, 1, 2].forEach(n => {
-      const p = pages[n];
-      const k = n ? 'reading' + (n + 1) : 'reading';
-      v[k + '_title'] = p ? p.title : '';
-      v[k + '_button'] = p ? p.button : '';
-      v[k + '_slug'] = p ? slugOf(p.href) : '';
-    });
-    v.reading_url = ORIGIN + pages[0].href;
-    v.reading_text = pages.map(p => p.title + ' — ' + ORIGIN + p.href).join('\n');
-    return v;
-  }
-  function emailVars(result, email) {
+  // The *_html twins: the same paragraphs as escaped markup, for the template's
+  // {{{triple braces}}}, so paragraph breaks survive clients that ignore
+  // white-space (Outlook on Windows). Only the check's own copy goes in them.
+  const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const htmlText = t => esc(t).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  const paraHtml = list => list.map(t => '<p style="margin:0 0 14px">' + htmlText(t) + '</p>').join('');
+  const SCORE_FIELDS = [['switching', 'switching_off_score'], ['recovery', 'recovery_score'], ['decision', 'decision_score'], ['relationship', 'relationship_score'], ['performance', 'performance_score']];
+  const LOW_READING = [{
+    title: 'Writing',
+    href: '/blog/'
+  }, {
+    title: 'Considering therapy',
+    href: '/considering-therapy/'
+  }];
+  const DISCLAIMER = 'This check is intended to give you a useful place to look, not a diagnosis or clinical score. It reflects how you answered today and should be read as context, not a label.';
+  const SIGNATURE = 'Aggelos Mouzakitis\nBACP-Registered Integrative Psychotherapist\nPsychotherapy for men in tech, startups & demanding careers\n\naggelosmouzakitis.com';
+  const Q16 = QUESTIONS.find(qq => qq.id === 'wl_q16');
+  const Q17 = QUESTIONS.find(qq => qq.id === 'wl_q17');
+  const answerText = (qq, a) => a === 'na' ? 'N/A' : a == null ? '—' : qq.options[a] ? qq.options[a].t : '—';
+  function emailVars(result, person) {
     const i = result.interp;
-    const profile = i.ranked.map(scoreLine).join('\n') + '\n\n' + COPY.patternNote;
-    const context = i.context.title + '\n\n' + para(i.context.body);
-    const fixed = {
-      considering_url: ORIGIN + COPY.considering.href,
-      contact_url: ORIGIN + COPY.close.primary.href
-    };
-    if (i.type === 'low_signal') {
-      return Object.assign({
-        user_email: email,
-        to_email: email,
-        result_heading: COPY.low.h1,
-        primary_label: '',
-        primary_title: '',
-        primary_lead: COPY.low.lead,
-        primary_body: para(COPY.low.body),
-        secondary_label: '',
-        secondary_body: '',
-        profile_text: profile,
-        context_title: i.context.title,
-        context_body: para(i.context.body),
-        context_text: context,
-        next_label: '',
-        next_text: ''
-      }, readingVars(COPY.low.ctas.slice(0, 1).map(c => ({
-        title: 'Writing',
-        button: c.label,
-        href: c.href
-      }))), fixed);
-    }
+    const email = person && person.email || '';
+    const first = (person && person.name || '').trim().split(/\s+/)[0] || '';
+    const low = i.type === 'low_signal';
     const tie = i.type === 'tie';
-    const blocks = [i.primary].concat(tie ? [i.secondary] : []);
-    return Object.assign({
+    const pages = low ? LOW_READING : readingFor(i);
+    const v = {
       user_email: email,
       to_email: email,
-      result_heading: tie ? COPY.h1Tie : COPY.h1,
-      primary_label: tie ? '' : COPY.primaryLabel,
-      primary_title: blocks.map(a => a.label).join('\n'),
-      primary_lead: tie ? '' : i.primary.lead,
-      primary_body: tie ? blocks.map(a => a.label.toUpperCase() + '\n\n' + a.lead + '\n\n' + para(a.body)).join('\n\n\n') : para(i.primary.body),
-      secondary_label: tie ? '' : COPY.secondaryLabel,
-      secondary_body: tie ? '' : para(i.secondary.secondary),
-      profile_text: profile,
+      greeting: first ? 'Hi ' + first + ',' : 'Hi,',
+      email_subject: tie ? 'Your Work & Life Check results' : low ? 'Your Work & Life Check result' : 'Your Work & Life Check result: ' + i.primary.label,
+      is_tie: tie ? 'true' : 'false',
+      is_low_signal: low ? 'true' : 'false',
+      intro_line: low ? '' : tie ? 'Two areas stand out equally in your answers:' : 'Your answers point most strongly towards:',
+      pattern_label: low ? 'YOUR RESULT' : tie ? 'TWO AREAS STAND OUT' : 'YOUR STRONGEST PATTERN',
+      primary_result_title: low ? COPY.low.h1 : tie ? '' : i.primary.label,
+      tie_result_1: tie ? i.primary.label : '',
+      tie_result_2: tie ? i.secondary.label : '',
+      primary_lead: low ? COPY.low.lead : tie ? '' : i.primary.lead,
+      what_label: low ? '' : 'WHAT THIS MAY MEAN',
+      primary_interpretation: low ? para(COPY.low.body) : tie ? [i.primary, i.secondary].map(x => x.label.toUpperCase() + '\n\n' + x.lead + '\n\n' + para(x.body)).join('\n\n\n') : para(i.primary.body),
+      next_label: low ? '' : 'ONE THING TO LOOK AT NEXT',
+      primary_next_question: low ? '' : para(i.primary.next),
+      secondary_label: low || tie ? '' : 'ALSO SHOWING UP',
+      secondary_result_title: low || tie ? '' : i.secondary.label,
+      secondary_interpretation: low || tie ? '' : para(i.secondary.secondary),
       context_title: i.context.title,
-      context_body: para(i.context.body),
-      context_text: context,
-      next_label: COPY.nextH2,
-      next_text: para(i.primary.next)
-    }, readingVars(readingFor(i)), fixed);
+      context_interpretation: para(i.context.body),
+      related_page_title: pages[0].title,
+      related_page_url: ORIGIN + pages[0].href,
+      secondary_related_page_title: pages[1] ? pages[1].title : '',
+      secondary_related_page_url: pages[1] ? ORIGIN + pages[1].href : '',
+      consultation_intro: low ? '' : 'If you would rather talk about what is going on directly:',
+      consultation_label: low ? '' : 'Book a consultation:',
+      consultation_url: low ? '' : ORIGIN + COPY.close.primary.href,
+      source_page: SOURCE
+    };
+    SCORE_FIELDS.forEach(([key, field]) => {
+      const r = i.ranked.find(x => x.area.key === key);
+      v[field] = (r ? r.score : 0) + '/100';
+    });
+    v.primary_interpretation_html = low ? paraHtml(COPY.low.body) : tie ? [i.primary, i.secondary].map(x => '<p style="margin:0 0 8px;font-size:18px;font-weight:700;line-height:1.3;color:#14201C">' + esc(x.label) + '</p>' + '<p style="margin:0 0 14px;font-weight:600;color:#14201C">' + esc(x.lead) + '</p>' + paraHtml(x.body)).join('<p style="margin:0 0 14px">&nbsp;</p>') : paraHtml(i.primary.body);
+    v.primary_next_question_html = low ? '' : paraHtml(i.primary.next);
+    v.secondary_interpretation_html = low || tie ? '' : paraHtml(i.secondary.secondary);
+    v.context_interpretation_html = paraHtml(i.context.body);
+    v.result_text = resultText(v);
+    return v;
   }
 
-  // The same result as one plain-text document: what the person receives, in
-  // the order the page shows it. Also the body of the private notification.
-  function resultText(result) {
-    const v = emailVars(result, '');
-    const i = result.interp;
+  // The same email as plain text, section by section, in the email's order:
+  // what the person receives (result_text) and the body of the notification.
+  function resultText(v) {
     const L = [];
-    const sec = (label, text) => {
-      if (text) {
-        L.push(label.toUpperCase());
-        L.push(text);
-        L.push('');
-      }
+    const block = (label, texts) => {
+      const t = texts.filter(Boolean);
+      if (!t.length) return;
+      if (label) L.push(label);
+      t.forEach(x => L.push(x));
+      L.push('');
     };
-    L.push(v.result_heading.toUpperCase());
-    L.push('');
-    if (i.type !== 'low_signal') {
-      L.push(COPY.intro);
-      L.push('');
-    }
-    if (v.primary_label) L.push(v.primary_label.toUpperCase() + ': ' + v.primary_title);
-    if (v.secondary_label) L.push(v.secondary_label.toUpperCase() + ': ' + i.secondary.label);
-    if (v.primary_label) L.push('');
-    if (v.primary_lead) {
-      L.push(v.primary_lead);
-      L.push('');
-    }
-    L.push(v.primary_body);
-    L.push('');
-    sec(COPY.secondaryLabel, v.secondary_body);
-    sec(COPY.patternH2, v.profile_text);
-    sec(COPY.contextEyebrow, v.context_text);
-    sec(COPY.nextH2, v.next_text);
-    sec(COPY.readingLabel, v.reading_text);
-    L.push(COPY.considering.label + ' — ' + v.considering_url);
-    L.push(COPY.close.primary.label + ' — ' + v.contact_url);
+    L.push(v.greeting, '', 'Thanks for taking the Work & Life Check.', '');
+    if (v.intro_line) L.push(v.intro_line, '');
+    block(v.pattern_label, [v.primary_result_title, v.tie_result_1, v.tie_result_2, v.primary_lead]);
+    block(v.what_label, [v.primary_interpretation]);
+    block(v.next_label, [v.primary_next_question]);
+    block(v.secondary_label, [v.secondary_result_title, v.secondary_interpretation]);
+    block('YOUR FIVE-AREA PROFILE', [AREAS.map((x, n) => x.label + ':\n' + v[SCORE_FIELDS[n][1]]).join('\n\n')]);
+    block('CONTEXT', [v.context_title, v.context_interpretation]);
+    block('READ NEXT', [v.related_page_title + '\n' + v.related_page_url, v.secondary_related_page_title ? v.secondary_related_page_title + '\n' + v.secondary_related_page_url : '']);
+    if (v.consultation_url) block('', [v.consultation_intro, v.consultation_label + '\n' + v.consultation_url]);
+    L.push(DISCLAIMER, '', SIGNATURE);
     return L.join('\n');
   }
-
-  // ── Email my result ────────────────────────────────────────────────────────
-  // Two sends, independent of each other:
-  //   1. the person's copy, through WLC_RESULT_TEMPLATE (To: {{user_email}}).
-  //      It must exist in the EmailJS dashboard; the template to paste is
-  //      content/emails/work-life-check-result.html.
-  //   2. the private notification + sheet row through window.submitLead
-  //      (lead-capture.js, source 'work-life-check', template_wdsrbdo — the
-  //      template the other tools already use).
-  // done(ok) reports the person's copy; it always fires (6 s at most).
-  const WLC_EMAILJS_SERVICE = 'service_i4xq7vg';
-  const WLC_EMAILJS_PUBLIC_KEY = 'bfBcHLXj2nKaev_lT';
-  const WLC_RESULT_TEMPLATE = 'template_wlc_result';
   function answersReport(answers) {
     return QUESTIONS.map((qq, n) => {
       const a = answers[qq.id];
-      const txt = a === 'na' ? 'N/A' : a == null ? '—' : qq.options[a] ? qq.options[a].t : '—';
-      return n + 1 + '. ' + qq.text + '\n   → ' + txt + (qq.dim ? '  [' + AREA[qq.dim].label + (a != null && a !== 'na' ? ', ' + a + '/4' : '') + ']' : '  [context]');
+      return n + 1 + '. ' + qq.text + '\n   → ' + answerText(qq, a) + (qq.dim ? '  [' + AREA[qq.dim].label + (a != null && a !== 'na' ? ', ' + a + '/4' : '') + ']' : '  [context]');
     }).join('\n');
   }
-  function sendResult(result, answers, email, done) {
-    let settled = false;
-    const finish = ok => {
-      if (!settled) {
-        settled = true;
-        done(ok);
-      }
-    };
-    const vars = emailVars(result, email);
+
+  // ── The submission behind the email screen ─────────────────────────────────
+  // One lead through window.submitLead (lead-capture.js), three independent
+  // parts: the sheet row, the owner notification (the site's one owner
+  // template) and the person's result email (WLC_RESULT_TEMPLATE,
+  // To: {{user_email}}). The result is shown whatever happens to the email;
+  // `delivery` tells the result screen whether the copy went out.
+  const WLC_RESULT_TEMPLATE = 'template_gcj2lrd';
+  const SHORT = {
+    switching: 'Switching off',
+    recovery: 'Recovery',
+    decision: 'Decision',
+    relationship: 'Relationship',
+    performance: 'Performance'
+  };
+  function onSubmit(result, answers, person, reveal) {
+    const i = result.interp;
     const o = outcome(result);
-    const text = resultText(result);
-    // 2. Notification + sheet (fire and forget; never blocks the person's copy).
-    try {
-      if (typeof window.submitLead === 'function') {
-        const summary = o.result_type === 'low_signal' ? o.primary_result : o.primary_result + (o.secondary_result ? ' · also ' + o.secondary_result : '');
-        window.submitLead({
-          source: 'work-life-check',
-          detail: SLUG,
-          detailLabel: 'The Work & Life Check',
-          name: '',
-          email,
-          notes: summary + ' · context: ' + result.interp.context.title,
-          body: '── RESULT ──\nResult type: ' + o.result_type + '\nSource: ' + SOURCE + '\n\n' + text + '\n\n── ALL ANSWERS (verbatim) ──\n' + answersReport(answers),
-          detailExtra: 'source=' + SOURCE + '; type=' + o.result_type + '; primary=' + o.primary_result + '; secondary=' + o.secondary_result + '; context=' + o.context_type + '; ' + result.interp.ranked.map(r => r.area.key + '=' + r.score).join(', '),
-          template: 'template_wdsrbdo',
-          params: {
-            overall_grade: 'The Work & Life Check — ' + summary,
-            overall_score: summary,
-            section_breakdown: vars.profile_text + '\n\n' + vars.context_text,
-            all_answers: text + '\n\n' + answersReport(answers)
-          }
-        }, function () {});
-      }
-    } catch (err) {/* the notification is best-effort */}
-    // 1. The person's copy.
-    if (!window.emailjs) {
-      finish(false);
+    const v = emailVars(result, person);
+    const low = i.type === 'low_signal';
+    const tie = i.type === 'tie';
+    const title = low ? COPY.low.h1 : tie ? i.primary.label + ' + ' + i.secondary.label : i.primary.label;
+    const secondary = low ? '—' : tie ? '— (tie: ' + i.secondary.label + ' shares the top score)' : i.secondary.label;
+    const scores = SCORE_FIELDS.map(([key, field]) => SHORT[key] + ' ' + v[field].replace('/100', '')).join(' | ');
+    const stamp = new Date().toISOString();
+    const q16 = answerText(Q16, answers.wl_q16);
+    const q17 = answerText(Q17, answers.wl_q17);
+    const body = ['Email:          ' + person.email, 'First name:     ' + (person.name || '—'), 'Source:         ' + SOURCE, 'Result type:    ' + i.type, 'Primary:        ' + title, 'Secondary:      ' + secondary, 'Switching off:  ' + v.switching_off_score, 'Recovery:       ' + v.recovery_score, 'Decision:       ' + v.decision_score, 'Relationship:   ' + v.relationship_score, 'Performance:    ' + v.performance_score, 'Q16:            ' + q16, 'Q17:            ' + q17, 'Context:        ' + i.context.key + ' — ' + i.context.title, 'Timestamp:      ' + stamp, '', '── THE RESULT AS EMAILED TO THEM ──', v.result_text, '', '── ALL ANSWERS (verbatim) ──', answersReport(answers)].join('\n');
+    const finish = (recorded, res) => {
+      const delivery = {
+        email: person.email,
+        reply: res && res.reply || 'failed',
+        recorded: !!recorded
+      };
+      track('work_life_check_email', Object.assign({
+        email_delivery: delivery.reply
+      }, o));
+      reveal(delivery);
+    };
+    if (typeof window.submitLead !== 'function') {
+      finish(false, null);
       return;
     }
-    try {
-      window.emailjs.send(WLC_EMAILJS_SERVICE, WLC_RESULT_TEMPLATE, Object.assign({
-        result_text: text
-      }, vars), WLC_EMAILJS_PUBLIC_KEY).then(function () {
-        finish(true);
-      }).catch(function (err) {
-        try {
-          console.error('Result email error:', err);
-        } catch (e2) {/* noop */}
-        finish(false);
-      });
-      setTimeout(function () {
-        finish(false);
-      }, 6000);
-    } catch (err) {
-      finish(false);
-    }
+    window.submitLead({
+      source: 'work-life-check',
+      detail: i.primaryKey,
+      detailLabel: title,
+      name: person.name || '',
+      email: person.email,
+      notes: 'Primary: ' + title + '\nSecondary: ' + secondary + '\nContext: ' + i.context.title + '\nScores: ' + scores,
+      body,
+      detailExtra: 'source=' + SOURCE + '; type=' + i.type + '; context=' + i.context.key + '; q16=' + q16 + '; q17=' + q17,
+      params: {
+        user_email: person.email,
+        source_page: SOURCE,
+        primary_result_title: title,
+        secondary_result_title: secondary,
+        switching_off_score: v.switching_off_score,
+        recovery_score: v.recovery_score,
+        decision_score: v.decision_score,
+        relationship_score: v.relationship_score,
+        performance_score: v.performance_score,
+        environment_change_answer: q16,
+        repeating_pattern_answer: q17,
+        context_type: i.context.key,
+        timestamp: stamp
+      },
+      reply: {
+        template: WLC_RESULT_TEMPLATE,
+        params: v
+      }
+    }, finish);
   }
 
   // ── Result screen ──────────────────────────────────────────────────────────
@@ -593,84 +582,23 @@
       list: context.body
     })));
   }
-  function EmailBlock({
-    result,
-    answers,
-    o
+
+  // Whether the emailed copy went out — one restrained line, never a blocker.
+  function DeliveryNote({
+    delivery
   }) {
-    const [email, setEmail] = useState('');
-    const [state, setState] = useState('idle'); // idle | invalid | sending | sent | failed
-    const busy = state === 'sending';
-    const submit = ev => {
-      ev.preventDefault();
-      if (busy) return;
-      const em = (email || '').trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) {
-        setState('invalid');
-        return;
-      }
-      setState('sending');
-      track('work_life_check_email', o);
-      sendResult(result, answers, em, ok => setState(ok ? 'sent' : 'failed'));
-    };
-    const msg = {
-      invalid: COPY.email.invalid,
-      sending: COPY.email.sending,
-      sent: COPY.email.sent,
-      failed: COPY.email.failed
-    }[state];
-    return e('section', {
-      className: 'wlc-sec wlc-email',
-      'aria-labelledby': 'wlc-email-h'
-    }, e('p', {
-      className: 'wlc-eyebrow'
-    }, COPY.email.eyebrow), e('h2', {
-      className: 'wlc-h2',
-      id: 'wlc-email-h'
-    }, COPY.email.h2), e('p', {
-      className: 'wlc-p'
-    }, COPY.email.body), state === 'sent' ? e('p', {
-      className: 'wlc-status is-ok',
+    if (!delivery) return null;
+    return delivery.reply === 'ok' ? e('p', {
+      className: 'wlc-delivery',
       role: 'status'
-    }, COPY.email.sent) : e('form', {
-      className: 'wlc-form',
-      onSubmit: submit,
-      noValidate: true
-    }, e('label', {
-      className: 'wlc-label',
-      htmlFor: 'wlc-email'
-    }, COPY.email.field), e('div', {
-      className: 'wlc-form__row'
-    }, e('input', {
-      id: 'wlc-email',
-      className: 'wlc-input',
-      type: 'email',
-      name: 'email',
-      autoComplete: 'email',
-      inputMode: 'email',
-      value: email,
-      onChange: ev => {
-        setEmail(ev.target.value);
-        if (state === 'invalid' || state === 'failed') setState('idle');
-      },
-      'aria-invalid': state === 'invalid' ? 'true' : undefined,
-      'aria-describedby': 'wlc-email-msg'
-    }), e('button', {
-      type: 'submit',
-      className: 'btn wlc-submit',
-      disabled: busy
-    }, busy ? COPY.email.sending : COPY.email.button, busy ? null : ' ', busy ? null : e(Arrow))), e('p', {
-      id: 'wlc-email-msg',
-      className: 'wlc-status' + (state === 'invalid' || state === 'failed' ? ' is-err' : ''),
-      role: 'status',
-      'aria-live': 'polite'
-    }, msg || ''), e('p', {
-      className: 'wlc-small'
-    }, COPY.email.privacy)));
+    }, COPY.delivery.sent.replace('{email}', delivery.email)) : e('p', {
+      className: 'wlc-delivery is-warn',
+      role: 'status'
+    }, COPY.delivery.failed);
   }
   function Result({
     result,
-    answers,
+    delivery,
     restart
   }) {
     const i = result.interp;
@@ -713,7 +641,9 @@
         className: 'wlc-h1',
         id: 'wlc-title',
         tabIndex: -1
-      }, COPY.low.h1)), e('div', {
+      }, COPY.low.h1), e(DeliveryNote, {
+        delivery
+      })), e('div', {
         className: 'wlc-flow wlc-first'
       }, e('p', {
         className: 'wlc-emph'
@@ -741,10 +671,6 @@
         className: 'wlc-note'
       }, COPY.patternNote)), e(ContextBlock, {
         context: i.context
-      }), e(EmailBlock, {
-        result,
-        answers,
-        o
       }), again);
     }
     const tie = i.type === 'tie';
@@ -786,7 +712,9 @@
       tabIndex: -1
     }, tie ? COPY.h1Tie : COPY.h1), e('p', {
       className: 'wlc-intro'
-    }, COPY.intro)),
+    }, COPY.intro), e(DeliveryNote, {
+      delivery
+    })),
     // 3–4. Primary pattern and its interpretation (both, equally, in a tie)
     e('div', {
       className: 'wlc-areas' + (tie ? ' wlc-areas--tie' : '')
@@ -867,13 +795,7 @@
       label: COPY.considering.button,
       onClick: related(COPY.considering.href)
     }))))),
-    // 9. Email a copy (only after the result has been shown)
-    e(EmailBlock, {
-      result,
-      answers,
-      o
-    }),
-    // 10. Consultation
+    // 9. Consultation
     e('section', {
       className: 'wlc-close on-dark',
       'aria-labelledby': 'wlc-close-h'
@@ -956,28 +878,18 @@
 .wlc-read+.wlc-read{margin-top:18px;padding-top:16px;border-top:1px solid var(--rule)}
 @media (max-width:659px){.wlc-cards{grid-template-columns:minmax(0,1fr)}}
 
-/* 9. Email */
-.wlc-form{margin-top:24px}
-.wlc-label[for]{display:block;margin-bottom:8px;letter-spacing:.06em;color:var(--heading)}
-.wlc-form__row{display:flex;flex-wrap:wrap;gap:12px}
-.wlc-input{flex:1 1 260px;min-width:0;min-height:52px;padding:12px 14px;background:var(--bone);border:1px solid rgba(23,25,25,.3);border-radius:0;font:inherit;font-size:16px;line-height:1.4;color:var(--heading)}
-.wlc-input:focus{outline:3px solid var(--green);outline-offset:1px;border-color:var(--green)}
-.wlc-input[aria-invalid="true"]{border-color:#A3362A}
-.wlc-submit{flex:0 0 auto}
-.wlc-submit[disabled]{opacity:.7;cursor:progress}
-.wlc-status{margin:10px 0 0;min-height:1.4em;font-size:15px;line-height:1.5;color:var(--meta)}
-.wlc-status.is-err{font-weight:600;color:#A3362A}
-.wlc-status.is-ok{margin-top:20px;padding:14px 16px;border-left:3px solid var(--green);background:rgba(4,120,87,.06);font-size:16px;font-weight:600;color:var(--heading)}
-.wlc-small{margin:6px 0 0;max-width:36em;font-size:14px;line-height:1.55;color:var(--meta)}
+/* The emailed copy: one restrained line under the intro */
+.wlc-delivery{margin:18px 0 0;max-width:36em;font-size:15px;line-height:1.5;color:var(--meta)}
+.wlc-delivery.is-warn{padding:12px 14px;border-left:3px solid #B7791F;background:rgba(183,121,31,.08);font-weight:600;color:var(--heading)}
 
-/* 10. Consultation */
+/* 9. Consultation */
 .wlc-close{margin-top:clamp(56px,6vw,80px);padding:clamp(28px,4vw,44px);background:var(--forest);color:var(--bone)}
 .wlc-close .wlc-h2{color:var(--bone)}
 .wlc-close .wlc-p{color:var(--on-forest)}
 .wlc-again{margin:32px 0 0}
 .wlc-again__btn{min-height:44px;padding:0;background:none;border:0;font:inherit;font-size:15px;font-weight:600;color:var(--meta);border-bottom:1px solid currentColor;cursor:pointer}
 .wlc-again__btn:hover{color:var(--heading)}
-@media (max-width:599px){.wlc-submit{width:100%}.wlc .btn{white-space:normal;text-align:center}}
+@media (max-width:599px){.wlc .btn{white-space:normal;text-align:center}}
 `;
 
   // ── Registration ───────────────────────────────────────────────────────────
@@ -992,7 +904,8 @@
       note: 'This is a reflection tool, not a clinical assessment or diagnosis.',
       count: '17 questions',
       time: 'About 4 minutes',
-      emailNote: null,
+      // emailNote: the engine's line, as on the other diagnostics — an email
+      // is asked for at the end, before the result.
       start: 'Start the check →'
     },
     scaleHint: 'How true is this for you at the moment?',
@@ -1003,9 +916,12 @@
     })),
     questions: QUESTIONS,
     interpret,
-    // Engine hooks (clarity-tools.jsx): the result comes straight after the last
-    // answer, stays on refresh, and is drawn by Result.
-    resultFirst: true,
+    // Engine hooks (clarity-tools.jsx): scored as soon as the last answer is in;
+    // the engine's email screen, then this check's own submission; the
+    // unlocked result stays for the session; drawn by Result.
+    gate: COPY.gate,
+    onSubmit,
+    keepResult: true,
     Result,
     onView: () => track('work_life_check_view'),
     onStart: () => track('work_life_check_start'),

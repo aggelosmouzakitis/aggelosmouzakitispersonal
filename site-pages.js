@@ -1492,13 +1492,13 @@
   }
 
   // ── Contact ────────────────────────────────────────────────────────────────
-  // Delivery goes through window.submitLead (lead-capture.js): the EmailJS
-  // notification plus a row in the enquiries sheet, the same path the contact
-  // form has always used. Validation, the honeypot, the soft rate limit and the
-  // analytics events are unchanged.
+  // Delivery goes through window.submitLead (lead-capture.js): a row in the
+  // leads sheet and the owner notification, run independently. The form shows
+  // success once the enquiry is recorded by either; it shows the error (with
+  // the address below) only when neither went through. Validation, the
+  // honeypot, the soft rate limit and the analytics events are unchanged.
   const MAXLEN = 3000;
   const COUNTER_FROM = 2600;
-  const CONTACT_TEMPLATE = 'template_6mv5hou';
   // Offered only if sending fails; the address the previous site published.
   const CONTACT_EMAIL = 'aggelos.mouzakitis@gmail.com';
   function track(name, params) {
@@ -1657,9 +1657,12 @@
         body,
         sourcePage: src,
         detailExtra: 'location: ' + loc,
-        template: CONTACT_TEMPLATE
-      }, sent => {
-        if (sent) ok();else fail(new Error('Lead send failed'));
+        params: {
+          location: loc,
+          service: svc
+        }
+      }, (recorded, res) => {
+        if (recorded) ok();else fail(new Error('Lead not recorded: ' + JSON.stringify(res && res.detail)));
       });
     }
     const liveRegion = e('div', {

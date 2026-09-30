@@ -23,11 +23,9 @@
 // own compute() so weighting and dependencies (documented in clarity-data.js)
 // are respected.
 
-// Notification + sheet go through the shared path in lead-capture.js. The
-// EmailJS template is unchanged — the tools still render through template_wdsrbdo
-// with every field it already received; lead-capture only adds the subject,
-// the standard header block and the flat keys the sheet reads.
-const CLARITY_EMAILJS_TEMPLATE = 'template_wdsrbdo';
+// Notification + sheet go through the shared path in lead-capture.js: one row in
+// the leads sheet and the owner notification (its canonical template), with
+// every field the tools' old template rendered still sent, spelled as before.
 if (window.emailjs) {
   try {
     emailjs.init({
@@ -300,8 +298,7 @@ function claritySubmit(data, answers, result, person, done) {
       email: person.email,
       notes: result.interp.primary || gradeTxt,
       body: report,
-      template: CLARITY_EMAILJS_TEMPLATE,
-      // Everything template_wdsrbdo already rendered, spelled exactly as before.
+      // The fields the tools' notification has always carried, spelled as before.
       params: {
         overall_grade: gradeTxt,
         overall_score: result.interp.primary || '',
@@ -938,13 +935,19 @@ function ClarityResult({
 }
 
 // ── Root component ────────────────────────────────────────────────────────────
-// Optional per-assessment hooks (all off unless the data sets them; the two
-// original tools set none):
-//   resultFirst  the result follows the last answer (no email gate) and stays
-//                on refresh until restarted; the assessment asks for an email
-//                inside its own result, if at all
-//   Result       component drawing the result: { data, result, answers, restart }
-//   onView / onStart / onComplete(result)   analytics callbacks
+// Optional per-assessment hooks (all off unless the data sets them; the burnout
+// and career tools set none and run exactly as before):
+//   onComplete(result)  the answers are scored as soon as the last one is in
+//                (before the email screen), e.g. for analytics
+//   onSubmit(result, answers, person, reveal)
+//                replaces claritySubmit: the assessment's own lead submission.
+//                reveal(delivery) shows the result; `delivery` is passed on to
+//                Result (e.g. whether the emailed copy went out)
+//   gate         { text, note }: the email screen's sentence and privacy line
+//   keepResult   the unlocked result stays for the session (a refresh shows it
+//                again, without asking or sending again) until restarted
+//   Result       component drawing the result: { data, result, answers, delivery, restart }
+//   onView / onStart   analytics callbacks
 //   intro.emailNote  replaces the "No email is needed…" line (null hides it)
 //   scaleHint    a line under every scored question
 function ClarityTool({
@@ -958,7 +961,7 @@ function ClarityTool({
   var mob = typeof window !== 'undefined' && window.innerWidth < 768;
   var C = clarityStyles(mob);
   var total = data ? data.questions.length : 0;
-  var resultFirst = !!(data && data.resultFirst);
+  var keep = !!(data && data.keepResult);
   var storeKey = 'clarity:' + slug;
   var load = function () {
     try {
@@ -969,11 +972,11 @@ function ClarityTool({
     }
   };
   var initial = load();
-  // A finished result-first assessment reopens on its result (scored once).
+  // An unlocked keepResult assessment reopens on its result (scored once).
   var restoredRef = useRef(undefined);
   if (restoredRef.current === undefined) {
     restoredRef.current = null;
-    if (resultFirst && initial.done && initial.answers) {
+    if (keep && initial.unlocked && initial.answers) {
       try {
         restoredRef.current = clarityScore(data, initial.answers);
       } catch (e) {
@@ -984,12 +987,14 @@ function ClarityTool({
   var restored = restoredRef.current;
   var [screen, setScreen] = useState(restored ? 'result' : 'intro'); // 'intro' | qIndex | 'email' | 'result'
   var [answers, setAnswers] = useState(initial.answers || {});
-  var [done, setDone] = useState(!!restored);
+  var [unlocked, setUnlocked] = useState(!!restored);
+  var [delivery, setDelivery] = useState(restored ? initial.delivery || null : null);
   var [name, setName] = useState('');
   var [email, setEmail] = useState('');
   var [sending, setSending] = useState(false);
   var [err, setErr] = useState('');
   var [result, setResult] = useState(restored);
+  var submittingRef = useRef(false);
   var scrollTop = function () {
     var s = typeof document !== 'undefined' && document.getElementById('main-scroll');
     if (s) s.scrollTop = 0;
@@ -1001,14 +1006,15 @@ function ClarityTool({
   // Persist answers as the user progresses (survives an accidental refresh).
   useEffect(function () {
     try {
-      sessionStorage.setItem(storeKey, JSON.stringify(done ? {
+      sessionStorage.setItem(storeKey, JSON.stringify(unlocked ? {
         answers: answers,
-        done: true
+        unlocked: true,
+        delivery: delivery
       } : {
         answers: answers
       }));
     } catch (e) {}
-  }, [answers, done]);
+  }, [answers, unlocked, delivery]);
   useEffect(function () {
     if (data && data.onView) data.onView();
   }, []);
@@ -1027,14 +1033,16 @@ function ClarityTool({
     go(0);
   };
 
-  // Result-first: clear the finished answers and return to the start screen.
+  // keepResult: clear the finished answers and return to the start screen.
   var restart = function () {
     try {
       sessionStorage.removeItem(storeKey);
     } catch (e) {}
     setAnswers({});
     setResult(null);
-    setDone(false);
+    setUnlocked(false);
+    setDelivery(null);
+    submittingRef.current = false;
     go('intro');
   };
 
@@ -1072,30 +1080,23 @@ function ClarityTool({
     });
     if (i + 1 < total) {
       go(i + 1);
-    } else if (resultFirst) {
-      var res = clarityScore(data, answers);
-      clarityTrack('assessment_completed', {
-        assessment: slug
-      });
-      clarityTrack('result_generated', {
-        assessment: slug,
-        primary: res.interp.primaryKey || null
-      });
-      setResult(res);
-      setDone(true);
-      if (data.onComplete) data.onComplete(res);
-      go('result');
-    } else {
-      clarityTrack('assessment_completed', {
-        assessment: slug
-      });
-      go('email');
+      return;
     }
+    clarityTrack('assessment_completed', {
+      assessment: slug
+    });
+    if (data.onComplete) {
+      try {
+        data.onComplete(clarityScore(data, answers));
+      } catch (e) {}
+    }
+    go('email');
   };
   var back = function (i) {
     if (i === 0) go('intro');else go(i - 1);
   };
   var submit = function () {
+    if (submittingRef.current) return; // one submission per unlock, however many clicks or Enters
     var em = (email || '').trim();
     var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
     if (!valid) {
@@ -1103,6 +1104,7 @@ function ClarityTool({
       return;
     }
     setErr('');
+    submittingRef.current = true;
     setSending(true);
     clarityTrack('email_submitted', {
       assessment: slug
@@ -1112,18 +1114,24 @@ function ClarityTool({
       name: (name || '').trim(),
       email: em
     };
-    claritySubmit(data, answers, res, person, function () {
+    var reveal = function (info) {
       setSending(false);
       setResult(res);
+      setDelivery(info || null);
       clarityTrack('result_generated', {
         assessment: slug,
         overall_bracket: res.overall ? res.overall.bracket : null,
         primary: res.interp.primaryKey || null
       });
-      try {
-        sessionStorage.removeItem(storeKey);
-      } catch (e) {}
+      if (keep) setUnlocked(true);else {
+        try {
+          sessionStorage.removeItem(storeKey);
+        } catch (e) {}
+      }
       go('result');
+    };
+    if (data.onSubmit) data.onSubmit(res, answers, person, reveal);else claritySubmit(data, answers, res, person, function () {
+      reveal(null);
     });
   };
 
@@ -1249,6 +1257,7 @@ function ClarityTool({
 
   // ---- Email capture ----
   if (screen === 'email') {
+    var gate = data.gate || {};
     return React.createElement('div', {
       style: C.page
     }, React.createElement(ClarityProgress, {
@@ -1262,18 +1271,21 @@ function ClarityTool({
       }
     }, 'Your answers are ready'), React.createElement('p', {
       style: C.p
-    }, 'Enter your email to see your result. A copy of your breakdown is also sent to Aggelos, who reviews these himself.'), React.createElement('div', {
+    }, gate.text || 'Enter your email to see your result. A copy of your breakdown is also sent to Aggelos, who reviews these himself.'), React.createElement('div', {
       style: {
         marginBottom: '1.1rem'
       }
     }, React.createElement('label', {
+      htmlFor: 'clarity-name',
       style: {
         ...C.eyebrow,
         display: 'block',
         marginBottom: '.5rem'
       }
     }, 'First name (optional)'), React.createElement('input', {
+      id: 'clarity-name',
       type: 'text',
+      autoComplete: 'given-name',
       value: name,
       onChange: function (e) {
         setName(e.target.value);
@@ -1284,13 +1296,16 @@ function ClarityTool({
         marginBottom: '1.3rem'
       }
     }, React.createElement('label', {
+      htmlFor: 'clarity-email',
       style: {
         ...C.eyebrow,
         display: 'block',
         marginBottom: '.5rem'
       }
     }, 'Email'), React.createElement('input', {
+      id: 'clarity-email',
       type: 'email',
+      autoComplete: 'email',
       value: email,
       onChange: function (e) {
         setEmail(e.target.value);
@@ -1301,6 +1316,7 @@ function ClarityTool({
         if (e.key === 'Enter') submit();
       }
     })), err ? React.createElement('p', {
+      role: 'alert',
       style: {
         color: '#c0392b',
         fontSize: '14px',
@@ -1318,6 +1334,7 @@ function ClarityTool({
         ...C.cta,
         ...C.ctaSec
       },
+      disabled: sending,
       onClick: function () {
         go(total - 1);
       }
@@ -1336,7 +1353,7 @@ function ClarityTool({
         lineHeight: 1.6,
         marginTop: '1.4rem'
       }
-    }, 'Your individual answers are not sent to analytics. They go only to the result you see and to the private notification Aggelos receives.'));
+    }, gate.note || 'Your individual answers are not sent to analytics. They go only to the result you see and to the private notification Aggelos receives.'));
   }
 
   // ---- Result ----
@@ -1345,6 +1362,7 @@ function ClarityTool({
       data: data,
       result: result,
       answers: answers,
+      delivery: delivery,
       restart: restart
     });
     return React.createElement('div', {
