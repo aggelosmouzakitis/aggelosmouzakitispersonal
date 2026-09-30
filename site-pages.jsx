@@ -151,15 +151,19 @@
   }
 
   // Burnout's dark section: the H2 across the top, then 5/7 — the opening
-  // line in sage on the left, the rest on the right with its last line ruled.
+  // sentence in sage on the left, the rest on the right with its last line
+  // ruled.
   function DarkTopSection({ s, ctx }) {
     const ps = s.blocks.filter((b) => b.t === 'p');
-    const rest = s.blocks.filter((b) => b !== ps[0]);
+    const ss = sentences(ps[0].text);
+    const lead = ss[0];
+    const more = ss.slice(1).join(' ');
+    const rest = s.blocks.reduce((out, b) => (b !== ps[0] ? out.concat(b) : more ? out.concat({ t: 'p', text: more }) : out), []);
     const lastP = rest.filter((b) => b.t === 'p').length - 1;
     return e('section', { className: 'band dark on-dark', id: s.id, 'aria-labelledby': s.id + '-h' },
       e('div', { className: 'wrap dark__in dark__in--top' },
         e('h2', { className: 'h2 dark__h2-top', id: s.id + '-h' }, s.h2),
-        e('p', { className: 'dark__lead' }, rich(ps[0].text, ctx)),
+        e('p', { className: 'dark__lead' }, rich(lead, ctx)),
         e('div', { className: 'dark__body flow' }, e(Blocks, { blocks: rest, ctx, dark: true, roles: { [lastP]: 'rule' } }))));
   }
 
@@ -249,18 +253,18 @@
   const DARK = {
     'individual-psychotherapy': 'functioning-at-work',
     'couples-therapy': 'work-and-the-relationship',
-    'professional-coaching': 'psychotherapy-instead',
-    'greek-speaking-psychotherapist': 'career-and-migration',
+    'professional-coaching': 'when-psychotherapy-fits-better',
+    'greek-speaking-psychotherapist': 'living-abroad',
     'relationship-problems-men': 'resentment-and-avoidance',
     'separation-divorce-men': 'grief-after-a-relationship-ends',
-    'work-affecting-relationship': 'im-doing-this-for-us',
+    'work-affecting-relationship': 'work-security-and-the-relationship',
     'career-transition-therapy': 'career-identity',
     'anxiety-overthinking': 'anxiety-that-looks-productive',
     'achievement-self-worth': 'perfectionism',
     'considering-therapy': 'i-already-understand-why-i-do-it',
     about: 'from-customer-research-to-clinical-work',
   };
-  const DARK_TOP = { 'executive-burnout-therapy': 'sometimes-the-workload-is-ridiculous' };
+  const DARK_TOP = { 'executive-burnout-therapy': 'when-the-workload-is-the-problem' };
   const PHOTO_SPLIT = {
     'therapy-for-men-in-tech': { id: 'my-background', src: '/img/aggelos-homepage.webp', alt: 'Aggelos Mouzakitis speaking on stage at a technology conference', pos: '44% 38%' },
     'therapy-for-founders': { id: 'my-background', src: '/img/wtf-friday-speaking.webp', alt: 'Aggelos Mouzakitis leading a workshop', pos: '28% 30%' },
@@ -353,8 +357,6 @@
   }
 
   // ── Homepage (reference design) ────────────────────────────────────────────
-  // The four recognition rows pair each sentence with the page it points to.
-  const HOME_ROWS = ['Relationship problems', 'Career change & decisions', 'Anxiety & overthinking', 'Burnout & can’t switch off'];
   const HOME_PHOTOS = {
     hero: { src: '/img/aggelos-continuation.webp', alt: 'Aggelos Mouzakitis' },
     context: { src: '/img/aggelos-homepage.webp', alt: 'Aggelos Mouzakitis speaking on stage at a technology conference', pos: '44% 38%' },
@@ -387,19 +389,10 @@
 
     const brings = S['what-brings-people-here'];
     if (brings) {
-      const para = brings.blocks.find((b) => b.t === 'p');
-      const ss = sentences(para.text);
-      const links = HOME_ROWS.map((l) => findCta(brings.blocks, l));
-      const rowsOk = ss.length === HOME_ROWS.length + 1 && links.every(Boolean);
       out.push(e('section', { key: 'brings', className: 'sec', id: brings.id, 'aria-labelledby': 'brings-h' },
         e('div', { className: 'wrap' },
           e('h2', { className: 'h2', id: 'brings-h' }, brings.h2),
-          rowsOk
-            ? e(React.Fragment, null,
-              e('p', { className: 'p p--emph recog__lead' }, ss[0]),
-              e('div', { className: 'recog' }, ss.slice(1).map((t, i) => e('div', { key: t, className: 'recog__row' },
-                e('p', null, t), e(TLink, { item: links[i] })))))
-            : e('div', { className: 'flow' }, e(Blocks, { blocks: brings.blocks, ctx })))));
+          e('div', { className: 'flow home-brings' }, e(Blocks, { blocks: brings.blocks, ctx })))));
     }
 
     const context = S['work-is-part-of-the-context'];
@@ -420,7 +413,7 @@
             e('div', { style: { minWidth: 0 } },
               e('p', { className: 'p home-how__lines' }, s2.map((t, i) => e('span', {
                 key: t,
-                className: /^Sometimes/.test(t) ? 'is-mid' : i === s2.length - 1 ? 'is-last' : null,
+                className: i === s2.length - 1 ? 'is-last' : i > 0 ? 'is-mid' : null,
               }, t, i < s2.length - 1 ? ' ' : null))),
               link ? e(Actions, { items: link.items, className: 'links' }) : null)))));
     }
@@ -955,11 +948,7 @@
 .creds__a{display:block;font-size:16.5px;font-weight:650;line-height:1.3;color:var(--heading)}
 .creds__b{display:block;margin-top:4px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
 @media (max-width:759px){.creds ul{grid-template-columns:repeat(2,minmax(0,1fr))}.creds li{padding:18px 16px 18px 0;border-left:0}.creds li:nth-child(even){padding:18px 0 18px 16px;border-left:1px solid rgba(23,25,25,.16)}.creds li:nth-child(n+3){border-top:1px solid rgba(23,25,25,.16)}}
-.recog__lead{margin:0 0 32px;color:var(--ink-2);font-weight:400}
-.recog{border-bottom:1px solid var(--rule)}
-.recog__row{display:grid;grid-template-columns:minmax(0,1fr) 280px;align-items:center;gap:10px 40px;min-height:88px;padding:14px 0;border-top:1px solid var(--rule)}
-.recog__row p{margin:0;max-width:48ch;font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:500;line-height:1.4;color:var(--heading)}
-@media (max-width:899px){.recog__row{grid-template-columns:minmax(0,1fr);padding:18px 0 14px}}
+.home-brings>.p{max-width:64ch}
 .home-how__statement{margin:0 0 32px}
 .home-how{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px clamp(40px,6vw,96px);align-items:start}
 .home-how__lines span{display:block}
