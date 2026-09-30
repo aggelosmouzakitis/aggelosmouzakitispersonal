@@ -78,24 +78,24 @@ Confidentiality
 | # | Page | URL | SEO title | Meta description | H1 |
 |---:|---|---|---|---|---|
 | 1 | Homepage | / | Aggelos Mouzakitis \| Psychotherapist for Men in Tech & Business | Online psychotherapy primarily for men in tech, startups and demanding careers, with Aggelos Mouzakitis, BACP-registered psychotherapist. | Therapy for men in tech, startups and demanding careers. |
-| 2 | About | /about/ | About Aggelos Mouzakitis \| Psychotherapist & Tech Background | About Aggelos Mouzakitis, BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy and more than 18 years across product, growth and technology. | I spent most of my career in product and growth before I became a psychotherapist. |
+| 2 | About | /about/ | About Aggelos Mouzakitis \| Psychotherapist & Tech Background | About Aggelos Mouzakitis, BACP-registered psychotherapist with integrative, EMDR and somatic training and 18+ years in technology, product and growth. | I spent most of my career in product and growth before I became a psychotherapist. |
 | 3 | Work With Me | /work-with-me/ | Psychotherapy, Couples Therapy & Coaching \| Aggelos Mouzakitis | Individual psychotherapy, couples therapy and professional coaching with Aggelos Mouzakitis. Online work for relationships, burnout, anxiety, career decisions and professional problems. | Three ways to work together. |
 | 4 | Individual Psychotherapy | /individual-psychotherapy/ | Online Individual Psychotherapy \| Aggelos Mouzakitis | Online individual psychotherapy for relationships, burnout, anxiety, difficult decisions and recurring patterns, with a BACP-registered psychotherapist. | Individual psychotherapy for the parts of life that aren't resolving on their own. |
-| 5 | Couples Therapy | /couples-therapy/ | Online Couples Therapy \| Conflict, Distance & Work Pressure | Online couples therapy for recurring conflict, emotional distance and relationships affected by work, pressure and major life changes. | Couples therapy for relationships that keep getting stuck in the same places. |
-| 6 | Professional Coaching | /professional-coaching/ | Professional Coaching for Tech & Career Decisions \| Aggelos Mouzakitis | Professional coaching for experienced people in tech, startups and business facing career decisions, leadership situations, transitions and difficult professional choices. | Professional coaching for a decision you actually have to make. |
+| 5 | Couples Therapy | /couples-therapy/ | Online Couples Therapy \| Conflict, Distance & Work Pressure | Online couples therapy for recurring conflict, emotional distance and relationships affected by work, pressure and major life changes. | Online couples therapy for recurring conflict, distance and relationship strain. |
+| 6 | Professional Coaching | /professional-coaching/ | Professional Coaching for Tech & Career Decisions \| Aggelos Mouzakitis | Professional coaching for experienced people in tech, startups and business making career, leadership, independence and other difficult professional decisions. | Professional coaching for a decision you actually have to make. |
 | 7 | Therapy vs Coaching | /therapy-vs-coaching/ | Therapy vs Coaching: Which Fits Your Situation? | A practical guide to the difference between psychotherapy and professional coaching, especially for career decisions, anxiety, recurring patterns and problems that cross between work and personal life. | Therapy or coaching? |
 | 8 | Men in Tech & Demanding Careers | /therapy-for-men-in-tech/ | Therapy for Men \| Tech, Business & Demanding Careers | Online psychotherapy for men in tech, startups and demanding careers dealing with relationships, burnout, anxiety, difficult decisions and work taking over life. | Therapy for men in tech, business and demanding careers. |
 | 9 | Founders & Business Owners | /therapy-for-founders/ | Therapy for Entrepreneurs, Founders & Business Owners | Online psychotherapy for entrepreneurs, founders and business owners dealing with pressure, burnout, relationships, difficult decisions and identity beyond the company. | Therapy for entrepreneurs, founders and business owners. |
 | 10 | Executives & Leaders | /therapy-for-executives/ | Executive Therapist \| Therapy for Executives & Leaders | Online psychotherapy for executives and senior leaders dealing with pressure, burnout, difficult decisions, relationships, career transitions and the personal cost of responsibility. | Psychotherapy for executives and senior leaders. |
-| 11 | Greek-speaking Psychotherapy | /greek-speaking-psychotherapist/ | Greek-Speaking Psychotherapist Online \| Aggelos Mouzakitis | Online psychotherapy in Greek or English for Greek-speaking adults dealing with relationships, anxiety, work, major decisions and life between countries. | Psychotherapy in Greek or English. |
-| 12 | Relationship Problems | /relationship-problems-men/ | Relationship Problems for Men \| Psychotherapy with Aggelos Mouzakitis | Psychotherapy for men dealing with recurring conflict, emotional distance, withdrawal, resentment, separation and difficult relationship patterns. | Individual psychotherapy for men who are having trouble in a relationship. |
+| 11 | Greek-speaking Psychotherapy | /greek-speaking-psychotherapist/ | Greek-Speaking Psychotherapist Online \| Aggelos Mouzakitis | Online psychotherapy in Greek or English with a Greek-speaking psychotherapist, especially for Greeks living abroad and people working in tech and international careers. | Online psychotherapy in Greek or English. |
+| 12 | Relationship Problems | /relationship-problems-men/ | Relationship Problems for Men \| Psychotherapy with Aggelos Mouzakitis | Psychotherapy for men dealing with recurring conflict, emotional distance, withdrawal, resentment, separation and difficult relationship patterns. | Individual psychotherapy for men dealing with relationship problems. |
 | 13 | Separation & Divorce | /separation-divorce-men/ | Therapy for Men Going Through Separation or Divorce \| Aggelos Mouzakitis | Online psychotherapy for men dealing with separation, divorce, relationship endings, anger, grief, difficult decisions and keeping the rest of life functioning. | Psychotherapy during separation, divorce or the end of a long relationship. |
 | 14 | When Work Is Affecting Your Relationship | /work-affecting-relationship/ | When Work Is Affecting Your Relationship \| Psychotherapy | Psychotherapy for when work, ambition, burnout or professional pressure is creating distance, conflict or resentment in a relationship. | When work is starting to damage the relationship. |
 | 15 | Burnout & Can't Switch Off | /executive-burnout-therapy/ | Burnout Therapist \| Therapy for Burnout & Work Stress | Online psychotherapy for burnout, exhaustion and difficulty switching off in tech and demanding careers, especially when rest alone is no longer solving the issue. | Therapy for burnout when you can't switch off. |
-| 16 | Career Change & Decisions | /career-transition-therapy/ | Therapy for Career Change & Difficult Career Decisions | Psychotherapy for career change, job loss and difficult career decisions when work, identity, fear and self-worth have become difficult to separate. | Psychotherapy for career decisions that have stopped being only about the job. |
-| 17 | Anxiety & Overthinking | /anxiety-overthinking/ | Therapy for Anxiety & Overthinking \| Aggelos Mouzakitis | Online psychotherapy for anxiety, overthinking, constant scenario-running and difficult decisions, particularly for men in tech and demanding careers. | When thinking stops producing new information. |
-| 18 | Achievement, Failure & Self-Worth | /achievement-self-worth/ | Therapy for Achievement, Perfectionism & Self-Worth \| Aggelos Mouzakitis | Psychotherapy for people whose self-worth has become closely tied to achievement, performance, comparison, perfectionism or fear of failure. | When success keeps becoming the new baseline. |
-| 19 | Considering Therapy | /considering-therapy/ | Considering Therapy? What to Expect \| Aggelos Mouzakitis | A plain explanation of what psychotherapy with Aggelos Mouzakitis is like, what happens in sessions, how often therapy meets and whether it may fit. | If you are wondering whether you “need therapy”, this page is for you. |
+| 16 | Career Change & Decisions | /career-transition-therapy/ | Therapy for Career Change & Difficult Career Decisions | Psychotherapy for career change, job loss and difficult career decisions when work, identity, fear and self-worth have become difficult to separate. | Therapy for career change and difficult career decisions. |
+| 17 | Anxiety & Overthinking | /anxiety-overthinking/ | Therapy for Anxiety & Overthinking \| Aggelos Mouzakitis | Online psychotherapy for anxiety, overthinking, constant scenario-running and difficult decisions, particularly for men in tech and demanding careers. | Therapy for anxiety and overthinking. |
+| 18 | Achievement, Failure & Self-Worth | /achievement-self-worth/ | Therapy for Achievement, Perfectionism & Self-Worth \| Aggelos Mouzakitis | Psychotherapy for people whose self-worth has become closely tied to achievement, performance, comparison, perfectionism or fear of failure. | Psychotherapy for achievement, perfectionism and self-worth. |
+| 19 | Considering Therapy | /considering-therapy/ | Considering Therapy? What to Expect \| Aggelos Mouzakitis | A plain explanation of what psychotherapy with Aggelos Mouzakitis is like, what happens in sessions, how often therapy meets and whether it may fit. | Considering therapy? |
 | 20 | FAQ | /faq/ | Psychotherapy FAQ \| Aggelos Mouzakitis | Practical answers about services, session length, frequency, fees, confidentiality, languages and online psychotherapy with Aggelos Mouzakitis. | Practical questions about working together. |
 | 21 | Reviews | /reviews/ | Reviews & Client Feedback \| Aggelos Mouzakitis | Feedback from psychotherapy clients and from people Aggelos Mouzakitis has worked with through mentoring and professional advisory conversations. | Feedback from people I have worked with. |
 | 22 | Free Tools | /free-tools/ | Free Tools for Burnout & Career Decisions \| Aggelos Mouzakitis | Short reflection tools for burnout, difficult career decisions and situations where work has become hard to separate from the rest of life. | Two short reflection tools. |
@@ -117,7 +117,7 @@ Confidentiality
 
 # Therapy for men in tech, startups and demanding careers.
 
-Most of the people I work with are used to solving problems for a living. That works well until the problem is a relationship, a career you no longer want, or a mind that keeps working long after the day is over.
+The people who come here are often used to solving problems for a living. That works well until the problem is a relationship, a career you no longer want, or a mind that keeps working long after the day is over.
 
 **Book a consultation →**  
 **Individual psychotherapy →**
@@ -138,7 +138,7 @@ Registered psychotherapist
 
 ## What brings people here
 
-The reason is usually specific. A partner says the relationship can't continue like this. A job you once wanted now feels wrong. Sunday anxiety starts on Saturday. You are still performing at work but have become irritable everywhere else.
+People usually arrive with something specific already happening such as a relationship that is deteriorating, a job they no longer want, anxiety that starts before the week does, or the sense that they are still performing at work but have much less patience everywhere else.
 
 
 **Relationship problems →**  
@@ -148,19 +148,19 @@ The reason is usually specific. A partner says the relationship can't continue l
 
 ## Work is part of the context
 
-I work mainly with men whose professional lives carry a lot of weight. The work is psychotherapy, with enough familiarity with tech, startups and business that you don't have to translate the environment first.
+The practice is focused mainly on men whose professional lives carry a lot of weight. The work is psychotherapy, with enough familiarity with tech, startups and business that the professional environment does not need to be explained from scratch.
 
-A well-paid role is harder to leave when your family depends on the income. A founder can't treat a company like a job with a notice period. You handle the reorganisation professionally and are still surprised by how hard it hits.
+A well-paid role can be difficult to leave when a family depends on the income. A founder cannot treat a company like a job with a notice period. A reorganisation can be handled professionally and still have a significant personal effect.
 
-I spent more than 18 years in product and growth before training as a psychotherapist, including seven years running my own consultancy and work with more than 100 technology companies. I know enough about this environment that you don't have to spend half the session explaining it.
+Before psychotherapy, I spent more than 18 years in product and growth, including seven years running a consultancy and work with more than 100 technology companies.
 
 **About me →**
 
 ## How I work
 
-I am fairly active in sessions. I ask questions, look closely at what happened and tell you what I notice. If an explanation sounds convincing but the same behaviour keeps producing the same result, I will probably want to stay with that.
+I am fairly active in sessions. The work is conversational, but it is not passive. We stay close to what happened, what you made of it and what followed. Patterns and contradictions are pointed out when they seem important.
 
-I don't assume every difficulty has a hidden psychological meaning. Sometimes the job is bad. Sometimes the relationship is ending. Sometimes you need more money. Therapy gets deeper when there is a reason to go deeper.
+Not every difficulty needs a hidden psychological explanation. A job can be badly designed, a relationship can be ending and money can be a real constraint. The work goes deeper when there is a reason to go deeper.
 
 **How individual psychotherapy works →**
 
@@ -195,7 +195,7 @@ For a clearly professional decision or situation that can stay focused on work, 
 
 ## About me
 
-I trained in Integrative Counselling & Psychotherapy after years of working with decisions from a different angle. My training includes an MSc in Integrative Counselling & Psychotherapy from the University of Derby, graduate studies in Psychology, clinical placement at the Psychiatric Clinic of Metaxa Cancer Hospital, and BACP registration.
+My clinical background includes an MSc in Integrative Counselling & Psychotherapy from the University of Derby, graduate studies in Psychology, EMDR, somatic training, clinical placement at the Psychiatric Clinic of Metaxa Cancer Hospital, and BACP registration. Before psychotherapy, I spent more than 18 years in product, growth and technology.
 
 **Read more about me →**
 
@@ -211,7 +211,7 @@ If you think this might fit, tell me briefly what brings you here.
 
 **URL:** `/about/`  
 **SEO title:** About Aggelos Mouzakitis | Psychotherapist & Tech Background  
-**Meta description:** About Aggelos Mouzakitis, BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy and more than 18 years across product, growth and technology.
+**Meta description:** About Aggelos Mouzakitis, BACP-registered psychotherapist with integrative, EMDR and somatic training and 18+ years in technology, product and growth.
 
 ## Hero
 
@@ -221,52 +221,58 @@ If you think this might fit, tell me briefly what brings you here.
 
 For more than 18 years I worked in technology, product and growth. Seven of those years were spent running my own consultancy, where I worked with more than 100 technology companies. I have also worked inside larger organisations and built two startups.
 
-Both startups failed.
-
 ## Before psychotherapy
 
 That world is still familiar to me. I spent most of my adult working life around difficult decisions, commercial pressure and people trying to build things in uncertain conditions.
 
-I became increasingly interested in the part that business language explains badly. Why does somebody stay in a role they say they hate? Why does a smart person keep avoiding the same conversation? Why can somebody understand a pattern perfectly and repeat it anyway?
-
-That interest eventually took me into psychotherapy.
+Over time, I became more interested in the parts of those decisions that business language could not explain well such as why someone stays in a role they say they hate, avoids a conversation they know they need to have, or understands a pattern clearly and still repeats it. That interest eventually took me into psychotherapy.
 
 ## From customer research to clinical work
 
-A lot of my earlier work involved customer interviews and Jobs to be Done. Good interviews teach you not to stop at the first explanation. People usually have a coherent account of why they made a decision. The timeline often tells you more.
+My previous work involved a lot of customer research and Jobs to be Done interviews. That trained me to pay attention to sequence: what changed, what happened next and what kept a decision open.
 
-I kept that habit. In therapy I still care about what changed, what happened next and what keeps something in place. The difference is that the subject is a person's life, not a purchase decision.
+The same discipline is useful in therapy, but the work itself is clinical rather than commercial. The focus is what is happening in a person's life and what keeps the current pattern in place.
 
-## Training
+## Training and credentials
 
 My clinical and academic background includes:
 
-- MSc Integrative Counselling & Psychotherapy, University of Derby
-- Graduate studies in Psychology, The American College of Greece
-- Clinical placement, Psychiatric Clinic, Metaxa Cancer Hospital
-- Registered member of the British Association for Counselling and Psychotherapy (BACP)
+- MSc Integrative Counselling & Psychotherapy - University of Derby
+- Graduate studies in Psychology - The American College of Greece
+- EMDR Practitioner
+- Somatic Shaking Practitioner
+- Clinical placement, Psychiatric Clinic - Metaxa Cancer Hospital
+- Registered Member - British Association for Counselling and Psychotherapy (BACP)
 
-My psychotherapy training is integrative. I don't run every client through one model or a fixed sequence of exercises.
+My psychotherapy training is integrative. Sessions are not organised around one model or a fixed sequence of exercises.
+
+## Earlier education and professional training
+
+- Business Administration - University of Piraeus
+- Designing AI Products - MIT
+- Product Design - Ministry of Product
+- UX Design - Google
+- Jobs to be Done & consumer psychology - applied across product, purchasing decisions and growth
 
 ## Why my previous career still matters
 
-I know what it is like to work in environments where people are judged on output, responsibility is unevenly distributed and a decision that sounds simple from the outside has very real financial or professional consequences.
+My previous career was spent in environments where people are judged on output, responsibility is unevenly distributed and apparently simple decisions can have real financial and professional consequences.
 
-That familiarity saves explanation. It also means I won't assume that every work problem is psychological. If your manager changed and you hate working for the new one, that may simply be true.
+That context is useful in therapy because work problems do not need to be translated into generic language before we can discuss them. It also means an external problem can remain an external problem. A difficult manager, a badly designed role or an unstable company may be exactly that.
 
-If the same kind of difficulty keeps following you across jobs, relationships or decisions, the current situation is probably not the whole story.
+When the same difficulty keeps appearing across jobs, relationships or decisions, there may be more to understand than the current situation alone.
 
-## How I tend to work
+## How I work
 
-I ask a lot of questions. I am direct when I think something important is being avoided, and I don't find automatic reassurance especially useful.
+My style is goal-oriented and active. The work is direct and collaborative. Questions stay close to what happened, what followed and where the same pattern may be repeating.
 
-I also don't think the therapist should become another authority whose opinion you depend on. The work should help you see more clearly what is yours to decide.
+Automatic reassurance is not especially useful when it closes the conversation too early. The aim is also not to replace your judgement with the therapist's. The work should leave you with a clearer understanding of the situation and more room to decide what to do with it.
 
 ## Who I work with
 
-My practice is positioned mainly towards men in technology, startups, business and other demanding professional careers. I also work with couples and with Greek-speaking adults who want to work in Greek, English or both.
+The practice is focused mainly on men in technology, startups, business and other demanding professional careers. I also work with couples and with Greek-speaking adults who want to work in Greek, English or both.
 
-Once therapy begins, the subject is your life. Work is part of that life, not the whole of it.
+Professional context matters when it is relevant. It does not determine what therapy has to be about.
 
 **Work with me →**
 
@@ -290,7 +296,7 @@ If the way I work sounds useful, get in touch.
 
 # Three ways to work together.
 
-Individual psychotherapy is the main part of my practice. I also offer couples therapy and a separate professional coaching service.
+Individual psychotherapy is the main part of the practice, alongside couples therapy and a separate professional coaching service.
 
 **Book a consultation →**
 
@@ -298,7 +304,7 @@ Individual psychotherapy is the main part of my practice. I also offer couples t
 
 Individual psychotherapy is the right starting point when the issue is affecting more than one decision. Relationship problems, anxiety, burnout, irritability, separation, grief, recurring patterns and career decisions that have become personally loaded all fit here.
 
-Sessions are online and normally last 50–60 minutes. I usually begin weekly.
+Sessions are online, normally 50–60 minutes and usually weekly at the start.
 
 **Explore individual psychotherapy →**
 
@@ -320,17 +326,15 @@ My background in product, growth and consulting is directly relevant here. The c
 
 ## Which service fits?
 
-A useful distinction is scope.
+The useful distinction is scope.
 
-If the issue reaches into anxiety, relationships, self-worth, grief or a recurring personal pattern, I will usually suggest psychotherapy. If both partners want to work on the relationship, couples therapy makes more sense. If the question can stay professional, coaching is often enough.
+If the issue reaches into anxiety, relationships, self-worth, grief or a recurring personal pattern, individual psychotherapy usually gives us enough room. If both partners want to work directly on the relationship, couples therapy fits better. If the issue can stay primarily professional, coaching may be enough.
 
-You can also just describe the situation. I will tell you what I think fits.
-
-**Therapy vs coaching →**
+If you are not sure, describe the situation when you contact me and I will tell you which service seems most appropriate.
 
 ## How to start
 
-Send a short note about what brings you here and where you are currently located. I read enquiries myself. If the situation falls within what I offer, we arrange an initial conversation.
+Send a short note about what brings you here and where you are currently located. If the situation falls within what I offer, we arrange an initial conversation.
 
 **Book a consultation →**
 
@@ -348,23 +352,23 @@ Send a short note about what brings you here and where you are currently located
 
 # Individual psychotherapy for the parts of life that aren't resolving on their own.
 
-People rarely come because they have developed a perfect psychological explanation. They come because something keeps costing them. A relationship is getting worse. Work won't leave their head. A decision has been open for months. They are still functioning, but with much more effort than before.
+Most people arrive with something concrete such as a relationship that is getting worse, work they cannot stop thinking about, a decision that has stayed open for months, or the sense that ordinary life is taking much more effort than it used to. You do not need a psychological explanation before starting.
 
 **Book a consultation →**
 
 ## What brings people in
 
-One of my first questions is usually: what changed?
+We usually start with what changed.
 
 A partner raised separation seriously. You were passed over for a role and reacted more strongly than you expected. You keep telling yourself the job is temporary but have been saying that for two years. You have started snapping at people you care about.
 
 ## What happens in sessions
 
-I am fairly active. I ask for detail, especially around sequence: what happened, what you made of it, what you did next and what happened after that.
+I am fairly active in sessions. We stay close to detail and sequence: what happened, what you made of it, what you did next and what happened after that.
 
-Analytical clients are often very good at explaining themselves. Sometimes the explanation is accurate and the behaviour still hasn't changed.
+Analytical clients are often very good at explaining themselves. The explanation can be accurate and the behaviour can still remain unchanged.
 
-Earlier experiences, family, relationships and the body enter the conversation when they help us make sense of something active now. I don't force every present-day difficulty into a childhood story.
+Earlier experiences, family, relationships and the body enter the conversation when they help us understand something active now. Present-day difficulties are not automatically turned into childhood stories.
 
 ## Functioning at work
 
@@ -374,9 +378,9 @@ Competence makes this easy to miss. Nobody at work is likely to intervene while 
 
 ## Work in psychotherapy
 
-Work belongs in the room when it matters. Salary, a difficult manager, a company in trouble, being laid off or simply realising that you dislike your role are legitimate parts of the situation.
+Work belongs in the room when it matters. Salary, a difficult manager, a company in trouble, redundancy or simply realising that you dislike your role are legitimate parts of the situation.
 
-I spent most of my previous career in product and growth, so the professional context is familiar. Therapy still stays therapy.
+My previous career was in product and growth, so the professional context is familiar. That context can be discussed without turning psychotherapy into coaching.
 
 **Psychotherapy for men in tech →**
 
@@ -400,7 +404,7 @@ Online
 **Frequency**  
 Usually weekly at first
 
-Sessions are online and usually last **50–60 minutes**. I normally work **weekly for at least the first few months**. We can review frequency later.
+I normally work **weekly for at least the first few months**. We can review frequency later.
 
 You can stop therapy whenever you choose. I ask people to start with a realistic level of commitment because psychotherapy is difficult to develop through occasional sessions booked only when something has blown up.
 
@@ -412,7 +416,7 @@ Before ongoing work begins, I confirm that I can work with you based on your loc
 No. A diagnosis is not a prerequisite for psychotherapy.
 
 ### Will you give me advice?
-Sometimes. I will also offer observations and challenge reasoning that looks incomplete. The important decisions remain yours.
+Sometimes. I will also point out patterns or reasoning that look incomplete. The important decisions remain yours.
 
 ### What if I am already seeing another therapist?
 Tell me before we start. Parallel work needs to make sense clinically and practically.
@@ -435,11 +439,11 @@ If you want to talk about whether individual psychotherapy fits, book a consulta
 
 **COUPLES THERAPY**
 
-# Couples therapy for relationships that keep getting stuck in the same places.
+# Online couples therapy for recurring conflict, distance and relationship strain.
 
-The argument is about money one week and work the next. What matters more is what happens between you once the conversation gets difficult.
+Couples come with recurring arguments, emotional distance, damaged trust or the effect of work and other pressures on the relationship.
 
-In couples therapy, both of you are in the room and the relationship becomes the focus.
+Both partners attend so the interaction itself can be worked with directly.
 
 **Book a consultation →**
 
@@ -455,23 +459,23 @@ Other couples come after a specific rupture, a period of mistrust or because sep
 
 Couples usually arrive with different versions of what is wrong.
 
-I watch what happens while each person tells the story. Who starts explaining? Who gives up? What gets heard as criticism? What happens immediately before one of you withdraws or raises the temperature?
+The work pays attention to what happens while each person tells the story: who starts explaining, who gives up, what gets heard as criticism and what happens immediately before one person withdraws or the conversation escalates.
 
-We don't need to settle whose account is stronger before working with what happens between you.
+We do not need to settle whose account is stronger before working with what happens between you.
 
 ## Work and the relationship
 
 A demanding job changes a relationship in very ordinary ways. You miss dinner again. One partner is still checking messages during the evening. A holiday gets planned around a launch. The person doing the work thinks, with good reason, that they are carrying responsibility for the family. The other is tired of living around the job.
 
-I understand the professional side of that conflict. I also won't use the job as an automatic explanation for everything happening at home.
+Professional pressure can be real without becoming an automatic explanation for everything happening at home.
 
 **When work is affecting your relationship →**
 
-## What couples therapy is not
+## How I work with couples
 
-I don't arbitrate the marriage or distribute blame evenly for the sake of appearing neutral. If a behaviour is damaging the relationship, I will say so.
+Couples therapy is not about arbitrating the relationship or making both people equally responsible for every problem. If a behaviour is damaging the relationship, that needs to be named clearly.
 
-Both people need enough willingness to look at their own part. Equal enthusiasm about therapy is not required.
+Both partners need enough willingness to look at their own part. They do not need to arrive equally enthusiastic about therapy.
 
 ## Individual or couples therapy?
 
@@ -508,7 +512,7 @@ If both of you want to talk about the relationship, book a consultation.
 
 **URL:** `/professional-coaching/`  
 **SEO title:** Professional Coaching for Tech & Career Decisions | Aggelos Mouzakitis  
-**Meta description:** Professional coaching for experienced people in tech, startups and business facing career decisions, leadership situations, transitions and difficult professional choices.
+**Meta description:** Professional coaching for experienced people in tech, startups and business making career, leadership, independence and other difficult professional decisions.
 
 ## Hero
 
@@ -516,44 +520,51 @@ If both of you want to talk about the relationship, book a consultation.
 
 # Professional coaching for a decision you actually have to make.
 
-This service is for work questions that can stay work questions: leaving a role, taking an opportunity, going independent, dealing with a manager or thinking through a difficult leadership situation.
+This is a separate service from psychotherapy. It is for experienced people in tech, startups and business who have a professional decision with real trade-offs and want a serious place to work it through.
 
 **Book a consultation →**
 
-## Start with the decision
+## When coaching fits
 
-I am less interested in a five-year vision than in the decision that is already creating friction.
+Coaching fits when the problem can remain primarily professional.
 
-What changed? Why is the current situation no longer good enough? What are you hoping the alternative will fix? What would you lose by moving?
+You may be deciding whether to leave a role, take an opportunity, go independent, change direction, deal with a difficult manager or work through a leadership decision with incomplete information.
 
-Years of Jobs to be Done research made this kind of investigation familiar to me. It is usually more useful than producing another pros-and-cons list.
+The fact that a decision is emotional does not automatically make it a psychotherapy problem. A job can matter enormously and still be a work decision.
 
-## The professional context
+## What we work on
 
-My background in product, growth, customer research and Jobs to be Done is directly relevant here. I also spent seven years running a consultancy.
+The starting point is the decision itself: what changed, what makes staying attractive, what you expect the alternative to solve, which assumptions are facts and which have not been tested.
 
-You might hate the role and still have a family depending on the salary. Another tranche of equity might vest in six months. Going independent sounds attractive until we look properly at how you would find clients.
+The aim is to understand the trade-offs clearly enough to make a decision or identify what needs to be tested before making one.
 
+## Professional context
 
-## How I work
+Career decisions are rarely made in clean conditions. Salary, equity matters, family commitments matter. The market may be poor. A title can take years to earn. Going independent sounds different once the question of where clients will come from becomes concrete.
 
-I will challenge assumptions that look weak. If there is a way to test an option before making it irreversible, we can design that test. If you have been researching the same choice for six months and no new information is appearing, I will stop assuming more research is the answer.
+Before psychotherapy, I spent more than 18 years in product and growth, including seven years running a consultancy and work with more than 100 technology companies. The professional context is usually familiar enough that the work can stay focused on the decision rather than explaining the environment.
 
-Coaching still leaves the decision with you.
+## How sessions work
 
-## Psychotherapy instead
+Assumptions are challenged when they look weak. Options can be tested before they become irreversible where that is practical. If the same decision has been researched for six months and no new information is appearing, more research is unlikely to solve it.
 
-A professional question occasionally opens into something broader. Every career move turns into panic about disappointing people. A manageable setback feels humiliating. The same relationship with authority keeps repeating across different companies.
+The decision remains yours.
 
-If that is where the work is going, I will say so and discuss psychotherapy as a separate service.
+## When psychotherapy fits better
 
-**Individual psychotherapy →**  
-**Career change & decisions →**  
+Coaching should not quietly turn into psychotherapy.
+
+If every career move becomes panic about disappointing people, a manageable setback feels humiliating, work is damaging your relationship, or the same difficulty with authority keeps repeating across companies, individual psychotherapy may provide a better scope for the work.
+
+If that becomes clear, I will say so directly.
+
+**Individual psychotherapy →**
+**Career change & decisions →**
 **Therapy vs coaching →**
 
 ## Practicalities
 
-Coaching is online. Format and frequency depend on the issue and are agreed before we begin.
+Coaching is online. Format and frequency depend on the decision and are agreed before we begin.
 
 ## Contact
 
@@ -587,7 +598,7 @@ Coaching works well when there is a real professional decision to make and the w
 
 You might be deciding whether to leave a role, take an opportunity, go independent, deal with a leadership situation or compare two options with meaningful trade-offs.
 
-In that kind of work, I am interested in what changed, what you are hoping the alternative will fix, what makes staying attractive and what you would lose by moving. We can test assumptions, compare options and design small experiments where that is possible before making something irreversible.
+The work looks at what changed, what you are hoping the alternative will fix, what makes staying attractive and what you would lose by moving. Assumptions can be tested and options compared before making something irreversible where that is practical.
 
 The conversation can remain practical without pretending the decision is emotionally neutral. Leaving a well-paid job may still involve fear. Going independent may still involve uncertainty. That does not automatically make the problem a psychotherapy problem.
 
@@ -607,31 +618,29 @@ Psychotherapy allows us to work with the immediate situation while also followin
 
 **Individual psychotherapy →**
 
-## The same question can change category
+## A work question can change scope
 
 A career decision can begin as a coaching question and turn out to contain deeper psychological material.
 
-You may start by asking whether to leave a job. Once we look closely, the difficult part may be the salary, the equity and the effect on your family. That can remain a professional decision.
+You may start by asking whether to leave a job. The difficult part may be salary, equity and the effect on your family, in which case the work can remain primarily professional.
 
-Or we may find that every possible move becomes a referendum on whether you are successful enough, loyal enough or disappointing somebody. The job is still real. The psychological material is real too.
+In other cases, every possible move becomes tied to whether you are successful enough, loyal enough or disappointing somebody. That is where psychotherapy may offer a more useful scope.
 
-The reverse also happens. Not every difficult feeling needs to become therapy. Sometimes the role is badly designed. Sometimes the manager is the problem. Sometimes you need more money. Sometimes you need to decide and act.
+The reverse is also true. A badly designed role, a poor manager or a financial constraint can be exactly what it appears to be. Not every difficult feeling needs a psychological explanation.
 
-The point is not to force a professional problem into a psychological explanation. It is to use enough scope for the problem that is actually there.
+## How the two services differ
 
-## What changes in the room
+Coaching stays organised around the professional question. Product, growth, customer research, Jobs to be Done and consulting experience are directly relevant to that work. The focus is evidence, assumptions, options and action.
 
-In coaching, the work stays organised around the professional question. My background in product, growth, customer research, Jobs to be Done and consulting is directly relevant. I will challenge assumptions, look for evidence and help you test options where possible.
+In psychotherapy, the professional context remains relevant but does not define the boundary of the work. If the decision connects to anxiety, self-worth, relationships or earlier patterns, there is room to follow it there.
 
-In psychotherapy, the professional context still belongs in the room, but it is not the boundary of the work. If the decision connects to a recurring relationship pattern, anxiety, self-worth or something from earlier life, we can follow it there.
-
-The two services are separate. If I think the scope should change, I will say so explicitly rather than quietly turning coaching into therapy or therapy into consulting.
+The two services are separate. If the scope needs to change, that is discussed explicitly rather than allowing coaching to drift into therapy or therapy into consulting.
 
 ## If you are not sure
 
 You do not need to classify the problem perfectly before contacting me.
 
-Tell me what is happening, what decision or difficulty has brought you here and where you are currently located. I will tell you whether I think individual psychotherapy, professional coaching or something else is the better fit.
+Tell me what is happening, what decision or difficulty has brought you here and where you are currently located. I will tell you whether individual psychotherapy, professional coaching or another option seems the better fit.
 
 For a broader explanation of what psychotherapy itself is like, see Considering Therapy.
 
@@ -659,19 +668,19 @@ If you are not sure which category fits, describe the situation rather than choo
 
 # Therapy for men in tech, business and demanding careers.
 
-You can be good at the job and still be sleeping badly, thinking about work through dinner or wondering why one performance conversation has occupied your head for three days.
+You can be doing well professionally and still be sleeping badly, carrying work into dinner or spending days replaying one performance conversation.
 
-This is the professional environment I know best.
+Tech, product and business are familiar contexts from more than 18 years working in them.
 
 **Book a consultation →**
 
 ## The professional culture matters
 
-Technology rewards speed, competence and the ability to keep moving through uncertainty. Teams change. Priorities move. Roles get redefined. A manager leaves and the job you accepted becomes a different job six weeks later.
+Technology roles often combine rapid change, visible performance and unclear boundaries around responsibility. Teams change, priorities move, roles get redefined and a manager leaving can turn the job you accepted into a different job very quickly.
 
-None of that is imaginary stress. I spent years working inside that world, so I don't need it translated into generic language about balance.
+Those details matter because they shape the pressure around the problem. They do not need to be translated into generic language about work-life balance before therapy can begin.
 
-## After work
+## When work continues after hours
 
 A common pattern is that the workday ends before the thinking does.
 
@@ -683,7 +692,7 @@ The same behaviour can come from burnout, anxiety, habit, responsibility or simp
 
 ## Performance and self-worth
 
-Work becomes more psychologically expensive when professional feedback starts deciding how you feel about yourself.
+Professional feedback can start affecting self-worth more than the event itself would suggest.
 
 A good review gives relief. A bad one ruins the weekend. Somebody else gets promoted and the reaction is much bigger than the practical consequence.
 
@@ -693,7 +702,7 @@ The workplace offers endless opportunities to measure yourself.
 
 ## What happens at home
 
-Relationships usually notice this before a CV does.
+The effects often show up at home before they affect performance at work.
 
 Your partner gets a version of you that has very little patience left. A normal request feels like one more task. You keep explaining why this month is unusually intense, and eventually your partner stops believing that next month will be different.
 
@@ -702,13 +711,13 @@ Your partner gets a version of you that has very little patience left. A normal 
 
 ## Therapy with me
 
-We start with the actual issue. If you hate the job, we talk about the job. If the relationship is in trouble, we talk about the relationship. If you have spent six months trying to make a decision, one of the first things I will ask is what changed and why it is still open.
+Sessions start with the problem that brought you in. A difficult job stays a work problem until there is a reason to look further. A relationship problem stays a relationship problem. A decision that has remained open for months deserves a closer look at what is keeping it open.
 
-I won't use the job to explain away what is happening elsewhere.
+Professional context matters, but it does not become the explanation for everything else in your life.
 
 ## My background
 
-I spent most of my previous career in product and growth. The environment is familiar enough that you won't spend the first twenty minutes explaining how it works.
+Before psychotherapy, I spent most of my career in product and growth. The environment is familiar enough that sessions do not need to begin with a long explanation of how it works.
 
 **About me →**
 
@@ -743,11 +752,9 @@ If this sounds like the kind of context you want your therapist to understand, g
 
 # Therapy for entrepreneurs, founders and business owners.
 
-**Therapy for people who own the thing they are trying to switch off from.**
+Founding or owning a business makes it difficult to separate work from the rest of life. Money, staff, relationships and your own sense of identity can become tied to the same decisions.
 
-A company is harder to contain than a job. Employees, investors, personal money, a co-founder, friendships and years of identity are often tied into the same decision.
-
-I work with founders and business owners when that overlap starts causing trouble outside the company as well as inside it.
+Therapy can help when that overlap starts creating problems in the company, at home or in the way you are functioning yourself.
 
 **Book a consultation →**
 
@@ -755,13 +762,13 @@ I work with founders and business owners when that overlap starts causing troubl
 
 An employee can decide to resign. A founder deciding whether to step back is also thinking about staff, customers, investors and a relationship that has already organised years of life around the company.
 
-This is why “just step back” is often useless advice. There is often nowhere clean to step back to.
+That is why stepping back can be more complicated than reducing hours or delegating more work.
 
 ## Working harder
 
 There is always another customer to call, another number to check or another operational problem that genuinely deserves attention.
 
-At some point the activity stops improving the situation and mostly makes uncertainty easier to tolerate.
+At some point, more activity stops improving the situation and starts functioning mainly as a way to manage uncertainty.
 
 ## Co-founders and partners
 
@@ -772,7 +779,7 @@ Partners live with the company too. They live with the late nights, financial ri
 **Work & relationships →**  
 **Couples therapy →**
 
-## After the milestone
+## After growth, funding or exit
 
 Pressure can hide questions for a long time because there is always something urgent to do.
 
@@ -780,9 +787,9 @@ Then the round closes, the company becomes profitable, a senior hire takes over 
 
 ## My background
 
-I ran a consultancy for seven years and built two startups. Neither startup succeeded.
+Before psychotherapy, I ran a consultancy for seven years, built two startups and spent most of my previous career working with technology companies.
 
-I know enough about the operating world around founders that we can stay with the actual issue. I am not your startup adviser in the therapy room.
+That experience is useful context, but therapy is not startup advice. The operating environment can be understood without turning the session into a strategy meeting.
 
 ## Therapy or coaching?
 
@@ -814,11 +821,9 @@ If the company is taking up more of your life than you want it to, book a consul
 
 # Psychotherapy for executives and senior leaders.
 
-**Psychotherapy for people who spend a lot of the day being the person with an answer.**
+Senior roles bring responsibility, limited places to speak candidly and decisions that can affect other people's work and livelihoods.
 
-Senior roles involve more than difficult decisions. They also involve editing what you say, carrying information other people do not have and thinking carefully about who can hear which version of the truth.
-
-That leaves surprisingly few neutral places to think out loud.
+Much of the day may involve editing what you say, carrying information other people do not have and deciding what can reasonably be shared with whom. That can leave very few neutral places to think out loud.
 
 **Book a consultation →**
 
@@ -830,7 +835,7 @@ You are now responsible for outcomes produced through other people. You spend mo
 
 Some people discover that they are excellent at their profession and don't particularly enjoy the senior job built on top of it.
 
-## Who can you actually talk to?
+## Limited places to speak openly
 
 A team member cannot always hear your uncertainty. A peer may also be competing for influence. Your manager has their own agenda. Your partner already lives with the consequences of the role.
 
@@ -840,9 +845,9 @@ Keeping some things to yourself is professionally sensible. The difficulty start
 
 Being passed over, losing scope or watching somebody younger move faster may hit harder than the organisational event alone explains.
 
-I don't assume that every disappointment is secretly about childhood or self-worth. Sometimes the decision was unfair. Sometimes the company is badly run.
+Not every disappointment needs a psychological explanation. A decision may simply have been unfair or the organisation badly run.
 
-But when the event occupies far more mental space than its practical consequence, I want to understand why.
+The useful question is why some events continue taking up far more mental space than their practical consequences would suggest.
 
 **Achievement & self-worth →**
 
@@ -864,14 +869,14 @@ There is nothing irrational about finding that difficult.
 
 ## My background
 
-I spent years inside larger technology organisations and around senior decision-making. I know what matrixed responsibility and organisational politics look like from the inside.
+My previous career included years inside larger technology organisations and around senior decision-making. Matrixed responsibility, organisational politics and the pressure around senior roles are familiar contexts.
 
 **About me →**
 
 ## Common questions
 
 ### Do I need to be C-suite?
-No. This page also fits directors, senior managers and experienced professionals whose role carries significant responsibility and visibility.
+No. I also work with directors, senior managers and other experienced professionals whose role carries significant responsibility, visibility or organisational pressure.
 
 ### Is this executive coaching?
 No. This page is about psychotherapy. Professional Coaching is a separate service for bounded professional decisions.
@@ -891,59 +896,47 @@ Book a consultation if you want a private place to think about what is going on.
 
 **URL:** `/greek-speaking-psychotherapist/`  
 **SEO title:** Greek-Speaking Psychotherapist Online | Aggelos Mouzakitis  
-**Meta description:** Online psychotherapy in Greek or English for Greek-speaking adults dealing with relationships, anxiety, work, major decisions and life between countries.
+**Meta description:** Online psychotherapy in Greek or English with a Greek-speaking psychotherapist, especially for Greeks living abroad and people working in tech and international careers.
 
 ## Hero
 
 **GREEK-SPEAKING PSYCHOTHERAPY**
 
-# Psychotherapy in Greek or English.
+# Online psychotherapy in Greek or English.
 
-Some people think in English at work and in Greek when they are angry, embarrassed or talking about family. Others have lived abroad long enough that the opposite happens.
+This page is mainly for Greek-speaking people who want therapy with someone who shares the language and cultural context without needing it explained from scratch.
 
-Sessions can take place in Greek, English or move between the two.
+It is especially relevant to Greeks living abroad, including people working in tech, startups and other international careers who may find that combination difficult to find where they live.
 
 **Book a consultation →**
 
-## Language in therapy
+## Shared language and culture
 
-Translation is not always neutral.
+Some subjects are easier to discuss in Greek. Family dynamics, humour, shame, obligation and the way certain things are said can lose something when translated.
 
-A family phrase that sounds ordinary in Greek can become strangely formal in English. A professional situation you have lived entirely in English may feel artificial when translated back.
-
-We use the language that makes the conversation more accurate. There is no rule that says a session has to stay in one.
+Large parts of professional life may happen entirely in English. Sessions can be in Greek, in English or move naturally between the two.
 
 ## Living abroad
 
-Living abroad eventually becomes ordinary life. You have a job, friends, routines and perhaps a partner or children there.
+Living abroad can create practical and personal questions that stay in the background for years. Parents and family may be in another country. A partner may have a different idea of where home is. Returning to Greece may remain an open question without becoming a real plan.
 
-Greece still remains present in practical and emotional ways. Parents age in another country. Family opinions continue from a distance. You may spend years saying you will probably return one day without ever deciding whether you want to.
+Those issues do not need to be the reason for therapy, but they are useful context when they matter.
 
-I am familiar with that tension from my own international work and life.
+## Work and professional context
 
-## Career and migration
+Many Greek-speaking clients who find this practice relevant work in technology, startups, business or other demanding international careers.
 
-For many Greeks abroad, work is part of why they left.
+Before psychotherapy, I spent more than 18 years in product and growth. Both the professional environment and the experience of living and working across countries are familiar contexts.
 
-Losing a job can therefore reopen much more than the question of employment. A promotion may make staying abroad easier professionally while making the decision to return harder. A relationship may have two completely different ideas of where home is.
+## What people bring
 
-It still takes up a lot of space when you are the one deciding.
+Therapy can be about relationship problems, anxiety, burnout, separation, family conflict, grief, career decisions or anything else that would normally bring somebody to psychotherapy.
 
-## What you can bring
+Being Greek is context, not the subject you are required to talk about.
 
-The therapy doesn't have to be about being Greek or living abroad.
+## Practicalities
 
-People come with relationship problems, separation, anxiety, burnout, grief, family conflict, career decisions and other difficulties that happen to be easier to discuss in Greek.
-
-## How I work
-
-My approach is integrative and fairly direct. I ask questions, look closely at what has happened and tell you what I notice.
-
-A session might stay entirely in Greek, entirely in English or move between the two without ceremony.
-
-## Online work and location
-
-Sessions are online by video. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are located and the rules that apply there.
+Sessions are online by video. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there.
 
 ## Common questions
 
@@ -951,17 +944,17 @@ Sessions are online by video. Before ongoing psychotherapy begins, I confirm tha
 Yes.
 
 ### Can we switch between Greek and English?
-Yes.
+Yes. Use whichever language makes the conversation more accurate.
 
 ### Do I need to live outside Greece?
-No. The page leans into diaspora because the language and migration context is especially relevant there, but the service is not limited to people abroad.
+No. This page is particularly relevant to Greeks abroad because finding a Greek-speaking therapist with similar professional context can be difficult locally, but the service is not defined by migration status.
 
 ### Do you work only with men?
-My wider practice is positioned mainly towards men in tech, startups, business and demanding careers. Greek-speaking psychotherapy is broader.
+No. The wider practice is positioned mainly towards men in tech, startups, business and demanding careers. Greek-speaking psychotherapy is broader.
 
 ## Contact
 
-If you would rather have the conversation in Greek, say so when you contact me.
+If you would prefer to work in Greek, mention it when you contact me.
 
 **Book a consultation →**
 
@@ -977,7 +970,7 @@ If you would rather have the conversation in Greek, say so when you contact me.
 
 **RELATIONSHIP PROBLEMS**
 
-# Individual psychotherapy for men who are having trouble in a relationship.
+# Individual psychotherapy for men dealing with relationship problems.
 
 The issue is often obvious. You keep having the same argument. Your partner says you have become distant. Separation has been mentioned. Or both of you have stopped talking properly because you already know how the conversation will go.
 
@@ -987,15 +980,13 @@ You can work on your part even if your partner never comes to therapy.
 
 ## Why people come
 
-Relationship problems often become urgent before they become psychologically interesting.
-
-A partner says something has to change. Somebody threatens to leave and means it this time. You realise you have been living around the same conflict for years.
+People often look for therapy when the relationship has become difficult to ignore. A partner may be talking seriously about leaving, or the same conflict may have been repeating for years without either person knowing what to do differently.
 
 ## Problem-solving does not always help
 
 A partner says they feel ignored. You explain why you were busy. They hear another explanation for why their experience should make sense to them. You hear an accusation that ignores everything you have been doing.
 
-You may both be arguing accurately and still getting nowhere.
+Both people can have a valid account of what happened and still repeat the same interaction.
 
 In therapy we look at what happens next, not only at which account is factually stronger.
 
@@ -1009,11 +1000,11 @@ Understanding the pattern doesn't excuse harmful behaviour.
 
 ## Resentment and avoidance
 
-Conflict avoidance looks peaceful for a while.
+Avoiding conflict can reduce tension in the moment and build resentment over time.
 
-You agree to something you don't want, tell yourself it isn't worth the argument and carry on. Months later you are furious about a set of decisions your partner may not know you opposed.
+You agree to something you do not want, decide it is not worth the argument and carry on. Months later, you may be angry about decisions your partner did not know you opposed.
 
-I would rather work with an awkward honest conversation than a private ledger.
+Therapy can help bring those disagreements into the open before resentment becomes the main way they are expressed.
 
 ## Should I stay?
 
@@ -1069,13 +1060,13 @@ Meetings still have agendas. Colleagues may know very little about what is happe
 
 That structure can be useful. It can also make it possible to look completely fine until the workday ends.
 
-## Anger and the story of what happened
+## Making sense of what happened
 
-Separation quickly produces very clean explanations. One person ruined everything. You wasted ten years. You were stupid not to see it earlier.
+During separation, people often settle quickly on a simple explanation of what happened: one person ruined everything, years were wasted, or the signs should have been obvious much earlier.
 
-Some of those thoughts may contain truth. They are also being formed during a highly charged period.
+Some of that may contain truth, but the account is being formed during a highly charged period when anger, grief and fear are all active.
 
-Therapy gives you somewhere to sort the history out without needing the account to be simple.
+Therapy gives you somewhere to sort through the history without requiring the explanation to be simple.
 
 ## Grief after a relationship ends
 
@@ -1103,9 +1094,9 @@ Handovers, school events, money, new partners and decisions about the children c
 
 ## Reconciliation
 
-A good week can make returning feel obvious. A bad interaction can make the opposite feel obvious.
+Feelings about reconciliation can change quickly during a separation. A good week may make returning feel possible; a painful interaction may make the opposite feel obvious.
 
-Before treating either feeling as a decision, I want to know what has actually changed.
+Before treating either reaction as a decision, it is useful to understand what has actually changed and what has not.
 
 ## Contact
 
@@ -1127,34 +1118,34 @@ If you are going through a separation or divorce and want somewhere to think cle
 
 # When work is starting to damage the relationship.
 
-The company genuinely needs you this week. Your partner is also furious that this has been true every week since January.
+Work can be genuinely demanding and still create a relationship problem when the same pressure repeatedly determines evenings, weekends and plans.
 
 
 **Book a consultation →**
 
 ## How the shift happens
 
-It rarely starts with a decision to put work first.
+It usually develops gradually rather than through a deliberate decision to put work first.
 
 A difficult quarter needs more hours. The team gets smaller. A promotion increases responsibility. A client becomes unstable. You keep your phone nearby because something important really could happen.
 
 Then one day the temporary arrangement is simply the arrangement.
 
-## “I'm doing this for us”
+## Work, security and the relationship
 
 People often mean this sincerely.
 
 Work pays for the house, creates security and funds the life you are building together. Your partner may still feel that the relationship has been organised around your job.
 
-I don't find it very useful to argue about which contribution should count more. I want to know what the current arrangement actually looks like and whether both people are still willing to live inside it.
+The useful question is what the current arrangement actually looks like, what it costs each person and whether both people are still willing to live with it.
 
-## The workday ends before the thinking does
+## When work follows you home
 
 You close the laptop and continue thinking about the company for the rest of the evening.
 
 A meeting gets replayed. You check whether someone replied. Tomorrow's difficult conversation has already started in your head.
 
-From the inside, this feels like responsibility. From the other side of the table, it often looks like absence.
+From your side, this may feel like responsibility. To your partner, it can feel like you are not really there.
 
 ## Why work can feel easier
 
@@ -1162,7 +1153,7 @@ Work gives many capable people something relationships do not: clear problems, m
 
 That becomes relevant when every difficult evening ends with another hour at the laptop or another task that suddenly feels urgent.
 
-Sometimes work really does need the extra hour. If this keeps happening whenever home gets difficult, I want to understand that too.
+Sometimes work really does need the extra hour. If work repeatedly becomes easier to return to whenever home feels difficult, that pattern is worth understanding too.
 
 ## Founders and business owners
 
@@ -1215,7 +1206,7 @@ If work has become a regular source of conflict at home, book a consultation.
 
 # Therapy for burnout when you can't switch off.
 
-**Burnout does not always look like collapse.**
+**You can be burned out and still be performing well at work.**
 
 A lot of people remain productive for a long time. The calendar is full, the work is getting done and nobody at the office thinks there is a crisis.
 
@@ -1237,15 +1228,13 @@ Others spend half of it checking messages and the other half dreading the return
 
 At that point, hours worked are only part of the picture.
 
-## Sometimes the workload is ridiculous
+## When the workload is the problem
 
-Therapy is not going to make an understaffed team properly staffed.
+Therapy cannot make an understaffed team properly staffed. An abusive manager remains abusive. A founder with six months of runway has a real business problem. A role that quietly became two roles is still badly designed.
 
-An abusive manager remains abusive. A founder with six months of runway has a real business problem. A role that quietly became two roles is still badly designed.
+External problems should not be turned into psychological ones simply because they are being discussed in therapy.
 
-I don't want to psychologise an external problem just because we are sitting in a therapy session.
-
-## Responsibility without a stopping point
+## When responsibility has no clear limit
 
 The more difficult pattern appears when the external pressure combines with an internal rule that says you should be able to carry all of it.
 
@@ -1253,11 +1242,11 @@ You solved the difficult thing once, so people bring you the next one. You keep 
 
 ## Losing motivation
 
-Burnout often flattens interest before it destroys ability.
+Burnout can reduce motivation before it affects performance.
 
-Work that used to absorb you starts feeling irritating. You force yourself through tasks that were once easy and then worry that the loss of motivation means you chose the wrong career.
+Work that used to absorb you starts feeling irritating. Tasks that were once easy require much more effort, and the loss of motivation can start raising questions about whether you chose the wrong career.
 
-Maybe you did. I am cautious about making the largest career decision of your life while you are completely exhausted.
+That may eventually be an important career question, but it is difficult to assess clearly while you are completely exhausted.
 
 **Career change & decisions →**
 
@@ -1273,9 +1262,9 @@ If professional outcomes are doing that much emotional work, resting gets harder
 
 People use different language for this: burnout, work stress, exhaustion or simply not being able to switch off. The label matters less than the pattern and what is keeping it going.
 
-I look at the whole picture: the role, sleep, workload, relationships, how responsibility is handled and what happens when you try to stop.
+Therapy looks at the role, sleep, workload, relationships, how responsibility is handled and what happens when you try to stop.
 
-Sometimes the conclusion is practical and external. Sometimes the same pattern has followed you across several jobs. Often there is a bit of both.
+Sometimes the main conclusion is practical and external. Sometimes the same pattern has followed you across several jobs. Often both are relevant.
 
 ## Continue with
 
@@ -1315,27 +1304,25 @@ If you have been functioning through exhaustion for a while, book a consultation
 
 **CAREER CHANGE & DECISIONS**
 
-# Psychotherapy for career decisions that have stopped being only about the job.
+# Therapy for career change and difficult career decisions.
 
-You have wanted to leave for a year. The salary is good, your family is used to it and another chunk of equity vests in six months.
+You may have wanted to leave for a year, but the salary is good, your family is used to it and another chunk of equity vests in six months.
 
-There is nothing irrational about finding that difficult.
+Career decisions become more complicated when income, identity, family expectations and self-worth are tied to the same choice.
 
 **Book a consultation →**
 
 ## Leaving a good job
 
-Good jobs are often harder to leave than bad ones.
+A good job can be difficult to leave because nothing is bad enough to force the decision. The company may be respectable, the money decent and the role one you are still good at.
 
-A respectable company, decent money and a role you are still good at do not give you a clean reason to go. Nothing is bad enough to force you out. The decision stays with you.
-
-People sometimes wait for the job to become worse so they can leave without feeling responsible for the choice.
+Without a clear external reason to leave, the choice remains yours. Some people end up waiting for the job to become worse because that would make the decision easier to justify.
 
 ## More analysis
 
 You know the salary. You have researched the market. You have discussed the title, risk, commute and future options. Six months later, the decision is still open.
 
-When that happens, I stop assuming information is the missing piece.
+When that happens, information is probably no longer the missing piece.
 
 The harder part may be losing status, earning less for a while, disappointing somebody or accepting that a career you invested heavily in no longer fits.
 
@@ -1345,7 +1332,7 @@ Work gives more than income.
 
 It gives structure, expertise, community and an answer to the question “what do you do?” Leaving then means giving up a version of yourself that took years to build.
 
-Calling this sunk-cost thinking is sometimes too neat. You may have spent fifteen years becoming the person who has this job.
+A purely financial idea such as sunk cost does not capture everything involved. You may have spent fifteen years building the expertise, identity and relationships attached to this role.
 
 ## Job loss
 
@@ -1372,11 +1359,11 @@ Psychotherapy gives us more room when the choice is tangled up with fear, self-w
 **Psychotherapy for executives →**  
 **Therapy vs coaching →**
 
-## How I work with career decisions
+## How therapy approaches career decisions
 
 The timeline is useful here. What changed? When did the current situation stop being acceptable? What still makes staying attractive? What are you expecting the alternative to solve?
 
-My Jobs to be Done background makes this kind of investigation familiar. In psychotherapy, we can follow the decision further when the material warrants it.
+My Jobs to be Done background makes that kind of investigation familiar. Psychotherapy gives us room to follow the decision further when fear, self-worth, family expectations or recurring patterns become part of it.
 
 ## Contact
 
@@ -1396,11 +1383,11 @@ If you have been circling the same career decision for months, book a consultati
 
 **ANXIETY & OVERTHINKING**
 
-# When thinking stops producing new information.
+# Therapy for anxiety and overthinking.
 
-You research the decision until you feel calmer. A few hours later, another objection appears and the analysis starts again.
+**Overthinking can continue long after there is useful information left to gather.**
 
-At some point the research has stopped helping.
+You research the decision until you feel calmer, then another objection appears and the analysis starts again. The problem is no longer a lack of information.
 
 **Book a consultation →**
 
@@ -1414,15 +1401,15 @@ The useful part is the sequence: what starts the thinking, what settles it for a
 
 ## The demand for certainty
 
-Good analysis improves a decision. Chronic overthinking asks for something analysis cannot provide: certainty that you will not regret the choice.
+Good analysis improves a decision. Overthinking often continues because the aim has shifted from making a reasonable choice to finding certainty that the choice will not be regretted.
 
-Another article, conversation or spreadsheet helps for a while and then expires. The mind finds the exception and starts again.
+Another article, conversation or spreadsheet can provide temporary relief without resolving that underlying demand for certainty.
 
 ## Real risks
 
 A weak job market is real. Sometimes the company really is unstable. Your partner may genuinely be difficult to read.
 
-I don't think therapy is useful when it treats ordinary uncertainty as pathology.
+Ordinary uncertainty does not need to be treated as pathology.
 
 The question is whether your thinking is helping you respond to the risk or whether it has become the price you pay before allowing yourself to act.
 
@@ -1436,17 +1423,15 @@ Eventually the search for the perfect adviser becomes part of the same loop.
 
 ## Anxiety that looks productive
 
-Anxiety doesn't always slow people down. It can make them prepare more, check more and work harder.
+Anxiety can increase preparation, checking and work rather than slowing somebody down.
 
-That version is especially easy to miss in professional environments because it gets rewarded.
+That can be difficult to notice in professional environments because the behaviour is often rewarded, even when the person becomes less able to stop.
 
-You can become more successful and less able to stop.
+## How therapy can help
 
-## How I work
+Sessions look closely at the sequence: what triggered the anxiety, what you thought, what you did to reduce it and how long the relief lasted.
 
-In sessions we map the sequence closely. What triggered the anxiety? What did you think? What did you do to reduce it? How long did the relief last?
-
-We are not trying to stop you thinking. We are looking at when thinking helps and when it mainly buys temporary certainty.
+The aim is not to stop useful thinking. It is to distinguish analysis that improves a decision from analysis that mainly buys temporary certainty.
 
 ## Continue with
 
@@ -1471,11 +1456,11 @@ If the same analysis keeps restarting, book a consultation.
 
 **ACHIEVEMENT, FAILURE & SELF-WORTH**
 
-# When success keeps becoming the new baseline.
+# Psychotherapy for achievement, perfectionism and self-worth.
 
-The promotion feels good for a weekend. On Monday it is the new normal.
+A promotion, strong review or business win can feel good and still become the new normal very quickly.
 
-For some people, achievement stops feeling like satisfaction and starts functioning more like temporary relief.
+For some people, achievement gradually becomes one of the main ways they regulate how they feel about themselves.
 
 **Book a consultation →**
 
@@ -1489,15 +1474,13 @@ A bad review ruins the weekend. A failed business feels humiliating long after t
 
 Technology and business provide an endless supply of people who appear to be ahead.
 
-There is always somebody younger, better funded, more senior or moving faster. The benchmark keeps moving because the comparison is not only measuring progress. It is also settling, briefly, the fear of being behind.
+There is always somebody younger, better funded, more senior or moving faster. Comparison can become less about measuring progress and more about finding temporary reassurance that you are not falling behind.
 
-## Where achievement became useful
+## What achievement is doing for you
 
 Doing well may have brought praise, independence or a reliable way to reduce conflict at home. For others, it was simply the first place they felt competent.
 
-I don't assume there is one origin story.
-
-I do want to know what achievement currently provides that feels difficult to get elsewhere.
+There is no single explanation for how this develops. The useful question is what achievement currently provides that feels difficult to get elsewhere.
 
 ## Perfectionism
 
@@ -1525,9 +1508,9 @@ If being competent is central to how you feel okay, criticism from a partner is 
 
 ## Therapy
 
-I am not trying to make ambitious people less ambitious.
+The goal is not to make ambitious people less ambitious.
 
-I am interested in whether the ambition still belongs to you, what happens when you fail, and whether a result gets to decide how you feel about yourself for the rest of the week.
+The question is whether the ambition still feels like yours, what happens when you fail and how much authority a result gets to have over how you feel about yourself.
 
 ## Continue with
 
@@ -1552,43 +1535,39 @@ If achievement has started carrying more psychological weight than you want it t
 
 **CONSIDERING THERAPY**
 
-# If you are wondering whether you “need therapy”, this page is for you.
+# Considering therapy?
 
-Most people I work with are not deciding whether they qualify for therapy. They are trying to work out whether talking to a therapist would be useful for a specific thing that is already affecting their life.
+You do not need to decide whether you “qualify” for therapy before contacting a therapist. The more useful question is whether it could help with something specific that is already affecting your life.
 
 **Book a consultation →**
 
 ## How serious does it need to be?
 
-There is no collapse requirement.
+You do not need to be in crisis. People often wait because they are still working, parenting and generally functioning, even while a relationship is deteriorating, sleep is poor or the same decision has remained open for months.
 
-People often wait because they are still working, parenting and generally functioning. Meanwhile the relationship is getting worse, sleep is poor or the same decision has been open for half a year.
-
-I would look at cost before severity. How much space is this taking up? What is it doing to your relationships, attention or judgement? How long has the same thing been repeating?
+A more useful question is what the problem is costing you: how much space it takes up, what it is doing to your relationships, attention or judgement, and how long the same pattern has been repeating.
 
 ## “I already understand why I do it”
 
 Analytical clients often arrive with a good explanation already. You may understand why you avoid conflict, where the pattern started and what a therapist is likely to say about it. Then the same thing happens again on Thursday.
 
-Insight is useful. Therapy gets more interesting where the explanation stops changing the behaviour.
+Insight is useful, but understanding a pattern intellectually does not always change what happens when the situation appears again.
 
 ## What happens for 50–60 minutes?
 
-We talk about the issue that brought you in.
+Sessions start with the issue that brought you in.
 
-I ask specific questions about what happened before and after the moment you are describing. I will tell you when I notice a pattern, a contradiction or an explanation that seems to be doing too much work.
+We look closely at what happened before and after the moment you are describing. I will point out patterns, contradictions or explanations that seem important when they appear.
 
-Some sessions stay close to the immediate situation. Others move into earlier experiences, family or relationships because that is where the material leads.
+Some sessions stay close to the immediate situation. Others move into earlier experiences, family or relationships when that helps make sense of what is happening now.
 
 ## If you are sceptical
 
-You don't have to believe in therapy as an idea. The first few sessions should give you enough evidence to decide whether the conversations are useful and whether I am somebody you can work with.
-
-I think therapy should earn credibility through the work itself.
+You do not have to believe in therapy as an idea. The first few sessions should give you enough information to decide whether the conversations are useful and whether I am somebody you can work with.
 
 ## Starting without a polished explanation
 
-A first message can be very simple.
+You do not need a polished explanation before getting in touch. A first message can be as simple as:
 
 “I can't switch off.”  
 “My relationship is going badly.”  
@@ -1605,7 +1584,7 @@ You can stop whenever you choose. I do ask people to be realistic about commitme
 
 ## The first conversation
 
-Send a short note about what brings you here and where you are located. I read enquiries myself.
+Send a short note about what brings you here and where you are located.
 
 If the situation fits what I offer, we arrange an initial conversation. The relevant fee and any location-specific practicalities are made clear before ongoing work begins.
 
@@ -1820,7 +1799,7 @@ Psychotherapy feedback is anonymous because the material is personal. Public men
 
 ## About anonymity
 
-Psychotherapy involves material that people reasonably want to keep private. Anonymous feedback is used for that reason. Public mentoring reviews came from a different kind of work and are labelled separately.
+Psychotherapy feedback is anonymous because the work involves material people reasonably want to keep private. Public mentoring reviews came from a different kind of work and are labelled separately.
 
 ## Contact
 
@@ -1885,7 +1864,7 @@ There is no ideal score. The result gives you a more precise description of the 
 
 # Writing on work, relationships and psychotherapy.
 
-I write about work, relationships, ambition, decisions and the parts of professional life that are harder to separate from the rest of life.
+The writing covers work, relationships, ambition, decisions and the parts of professional life that are difficult to separate from the rest of life.
 
 ## Featured
 
@@ -1947,7 +1926,7 @@ Writing on ambition, distance, conflict and what happens when one partner feels 
 
 ## Undisguised
 
-I also send writing by email through **Undisguised**. It is where I publish more regularly and where some ideas stay because they do not need to become permanent website pages.
+Undisguised is my email newsletter. It includes essays and shorter ideas about work, relationships, identity and psychotherapy, including pieces that do not need to become permanent website articles.
 
 **Read Undisguised →**
 
@@ -1974,7 +1953,7 @@ If you have already spent a long time thinking about something and want to talk 
 
 Include where you are currently located and whether you are asking about individual psychotherapy, couples therapy, professional coaching or are not sure yet.
 
-I read enquiries myself.
+Enquiries are reviewed personally.
 
 ## Suggested form fields
 
@@ -1988,9 +1967,9 @@ I read enquiries myself.
 
 ## What happens next
 
-If the situation falls within what I offer, we arrange an initial conversation. Before ongoing work begins, I will make the fee, session format and any location-specific practicalities clear.
+If the situation falls within what I offer, we arrange an initial conversation. Before ongoing work begins, the fee, session format and any location-specific practicalities are made clear.
 
-If I think another therapist, doctor or specialist service would be more appropriate, I will say so.
+If another therapist, doctor or specialist service appears more appropriate, I will say so.
 
 ## Privacy
 
@@ -2013,11 +1992,11 @@ Please avoid sending highly sensitive medical or personal information through th
 
 # Confidentiality
 
-What you say in psychotherapy is treated as confidential, within the professional and legal limits that apply. I explain those limits before ongoing work begins.
+What you say in psychotherapy is treated as confidential, within the professional and legal limits that apply. Those limits are explained before ongoing work begins.
 
 ## Clinical supervision
 
-I use clinical supervision as part of responsible psychotherapy practice. Supervision is handled confidentially and focuses on the quality and safety of the therapeutic work.
+Clinical supervision is part of responsible psychotherapy practice. It is handled confidentially and focuses on the quality and safety of the therapeutic work.
 
 ## Records and communication
 

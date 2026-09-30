@@ -24,7 +24,7 @@ window.SITE_COPY = {
       "seoTitle": "Aggelos Mouzakitis | Psychotherapist for Men in Tech & Business",
       "metaDescription": "Online psychotherapy primarily for men in tech, startups and demanding careers, with Aggelos Mouzakitis, BACP-registered psychotherapist.",
       "hero": {"eyebrow": "BACP-REGISTERED PSYCHOTHERAPIST · BACKGROUND IN TECH, PRODUCT & GROWTH", "h1": "Therapy for men in tech, startups and demanding careers.", "blocks": [
-        {"t": "p", "text": "Most of the people I work with are used to solving problems for a living. That works well until the problem is a relationship, a career you no longer want, or a mind that keeps working long after the day is over."},
+        {"t": "p", "text": "The people who come here are often used to solving problems for a living. That works well until the problem is a relationship, a career you no longer want, or a mind that keeps working long after the day is over."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}, {"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}]}
       ]},
       "sections": [
@@ -32,18 +32,18 @@ window.SITE_COPY = {
           {"t": "pairs", "items": [{"a": "18+ years", "b": "Product & growth"}, {"a": "100+", "b": "Technology companies"}, {"a": "MSc", "b": "Integrative Counselling & Psychotherapy"}, {"a": "BACP", "b": "Registered psychotherapist"}]}
         ]},
         {"h2": "What brings people here", "id": "what-brings-people-here", "blocks": [
-          {"t": "p", "text": "The reason is usually specific. A partner says the relationship can’t continue like this. A job you once wanted now feels wrong. Sunday anxiety starts on Saturday. You are still performing at work but have become irritable everywhere else."},
+          {"t": "p", "text": "People usually arrive with something specific already happening such as a relationship that is deteriorating, a job they no longer want, anxiety that starts before the week does, or the sense that they are still performing at work but have much less patience everywhere else."},
           {"t": "ctas", "items": [{"label": "Relationship problems", "href": "/relationship-problems-men/"}, {"label": "Burnout & can’t switch off", "href": "/executive-burnout-therapy/"}, {"label": "Career change & decisions", "href": "/career-transition-therapy/"}, {"label": "Anxiety & overthinking", "href": "/anxiety-overthinking/"}]}
         ]},
         {"h2": "Work is part of the context", "id": "work-is-part-of-the-context", "blocks": [
-          {"t": "p", "text": "I work mainly with men whose professional lives carry a lot of weight. The work is psychotherapy, with enough familiarity with tech, startups and business that you don’t have to translate the environment first."},
-          {"t": "p", "text": "A well-paid role is harder to leave when your family depends on the income. A founder can’t treat a company like a job with a notice period. You handle the reorganisation professionally and are still surprised by how hard it hits."},
-          {"t": "p", "text": "I spent more than 18 years in product and growth before training as a psychotherapist, including seven years running my own consultancy and work with more than 100 technology companies. I know enough about this environment that you don’t have to spend half the session explaining it."},
+          {"t": "p", "text": "The practice is focused mainly on men whose professional lives carry a lot of weight. The work is psychotherapy, with enough familiarity with tech, startups and business that the professional environment does not need to be explained from scratch."},
+          {"t": "p", "text": "A well-paid role can be difficult to leave when a family depends on the income. A founder cannot treat a company like a job with a notice period. A reorganisation can be handled professionally and still have a significant personal effect."},
+          {"t": "p", "text": "Before psychotherapy, I spent more than 18 years in product and growth, including seven years running a consultancy and work with more than 100 technology companies."},
           {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
         ]},
         {"h2": "How I work", "id": "how-i-work", "blocks": [
-          {"t": "p", "text": "I am fairly active in sessions. I ask questions, look closely at what happened and tell you what I notice. If an explanation sounds convincing but the same behaviour keeps producing the same result, I will probably want to stay with that."},
-          {"t": "p", "text": "I don’t assume every difficulty has a hidden psychological meaning. Sometimes the job is bad. Sometimes the relationship is ending. Sometimes you need more money. Therapy gets deeper when there is a reason to go deeper."},
+          {"t": "p", "text": "I am fairly active in sessions. The work is conversational, but it is not passive. We stay close to what happened, what you made of it and what followed. Patterns and contradictions are pointed out when they seem important."},
+          {"t": "p", "text": "Not every difficulty needs a hidden psychological explanation. A job can be badly designed, a relationship can be ending and money can be a real constraint. The work goes deeper when there is a reason to go deeper."},
           {"t": "ctas", "items": [{"label": "How individual psychotherapy works", "href": "/individual-psychotherapy/"}]}
         ]},
         {"h2": "Ways to work with me", "id": "ways-to-work-with-me", "blocks": [
@@ -58,7 +58,7 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "Considering therapy", "href": "/considering-therapy/"}, {"label": "Writing", "href": "/blog/"}, {"label": "Free tools", "href": "/free-tools/"}]}
         ]},
         {"h2": "About me", "id": "about-me", "blocks": [
-          {"t": "p", "text": "I trained in Integrative Counselling & Psychotherapy after years of working with decisions from a different angle. My training includes an MSc in Integrative Counselling & Psychotherapy from the University of Derby, graduate studies in Psychology, clinical placement at the Psychiatric Clinic of Metaxa Cancer Hospital, and BACP registration."},
+          {"t": "p", "text": "My clinical background includes an MSc in Integrative Counselling & Psychotherapy from the University of Derby, graduate studies in Psychology, EMDR, somatic training, clinical placement at the Psychiatric Clinic of Metaxa Cancer Hospital, and BACP registration. Before psychotherapy, I spent more than 18 years in product, growth and technology."},
           {"t": "ctas", "items": [{"label": "Read more about me", "href": "/about/"}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
@@ -74,38 +74,39 @@ window.SITE_COPY = {
       "url": "/about/",
       "type": "about",
       "seoTitle": "About Aggelos Mouzakitis | Psychotherapist & Tech Background",
-      "metaDescription": "About Aggelos Mouzakitis, BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy and more than 18 years across product, growth and technology.",
+      "metaDescription": "About Aggelos Mouzakitis, BACP-registered psychotherapist with integrative, EMDR and somatic training and 18+ years in technology, product and growth.",
       "hero": {"eyebrow": "ABOUT", "h1": "I spent most of my career in product and growth before I became a psychotherapist.", "blocks": [
-        {"t": "p", "text": "For more than 18 years I worked in technology, product and growth. Seven of those years were spent running my own consultancy, where I worked with more than 100 technology companies. I have also worked inside larger organisations and built two startups."},
-        {"t": "p", "text": "Both startups failed."}
+        {"t": "p", "text": "For more than 18 years I worked in technology, product and growth. Seven of those years were spent running my own consultancy, where I worked with more than 100 technology companies. I have also worked inside larger organisations and built two startups."}
       ]},
       "sections": [
         {"h2": "Before psychotherapy", "id": "before-psychotherapy", "blocks": [
           {"t": "p", "text": "That world is still familiar to me. I spent most of my adult working life around difficult decisions, commercial pressure and people trying to build things in uncertain conditions."},
-          {"t": "p", "text": "I became increasingly interested in the part that business language explains badly. Why does somebody stay in a role they say they hate? Why does a smart person keep avoiding the same conversation? Why can somebody understand a pattern perfectly and repeat it anyway?"},
-          {"t": "p", "text": "That interest eventually took me into psychotherapy."}
+          {"t": "p", "text": "Over time, I became more interested in the parts of those decisions that business language could not explain well such as why someone stays in a role they say they hate, avoids a conversation they know they need to have, or understands a pattern clearly and still repeats it. That interest eventually took me into psychotherapy."}
         ]},
         {"h2": "From customer research to clinical work", "id": "from-customer-research-to-clinical-work", "blocks": [
-          {"t": "p", "text": "A lot of my earlier work involved customer interviews and Jobs to be Done. Good interviews teach you not to stop at the first explanation. People usually have a coherent account of why they made a decision. The timeline often tells you more."},
-          {"t": "p", "text": "I kept that habit. In therapy I still care about what changed, what happened next and what keeps something in place. The difference is that the subject is a person’s life, not a purchase decision."}
+          {"t": "p", "text": "My previous work involved a lot of customer research and Jobs to be Done interviews. That trained me to pay attention to sequence: what changed, what happened next and what kept a decision open."},
+          {"t": "p", "text": "The same discipline is useful in therapy, but the work itself is clinical rather than commercial. The focus is what is happening in a person’s life and what keeps the current pattern in place."}
         ]},
-        {"h2": "Training", "id": "training", "blocks": [
+        {"h2": "Training and credentials", "id": "training-and-credentials", "blocks": [
           {"t": "p", "text": "My clinical and academic background includes:"},
-          {"t": "list", "items": ["MSc Integrative Counselling & Psychotherapy, University of Derby", "Graduate studies in Psychology, The American College of Greece", "Clinical placement, Psychiatric Clinic, Metaxa Cancer Hospital", "Registered member of the British Association for Counselling and Psychotherapy (BACP)"]},
-          {"t": "p", "text": "My psychotherapy training is integrative. I don’t run every client through one model or a fixed sequence of exercises."}
+          {"t": "list", "items": ["MSc Integrative Counselling & Psychotherapy - University of Derby", "Graduate studies in Psychology - The American College of Greece", "EMDR Practitioner", "Somatic Shaking Practitioner", "Clinical placement, Psychiatric Clinic - Metaxa Cancer Hospital", "Registered Member - British Association for Counselling and Psychotherapy (BACP)"]},
+          {"t": "p", "text": "My psychotherapy training is integrative. Sessions are not organised around one model or a fixed sequence of exercises."}
+        ]},
+        {"h2": "Earlier education and professional training", "id": "earlier-education-and-professional-training", "blocks": [
+          {"t": "list", "items": ["Business Administration - University of Piraeus", "Designing AI Products - MIT", "Product Design - Ministry of Product", "UX Design - Google", "Jobs to be Done & consumer psychology - applied across product, purchasing decisions and growth"]}
         ]},
         {"h2": "Why my previous career still matters", "id": "why-my-previous-career-still-matters", "blocks": [
-          {"t": "p", "text": "I know what it is like to work in environments where people are judged on output, responsibility is unevenly distributed and a decision that sounds simple from the outside has very real financial or professional consequences."},
-          {"t": "p", "text": "That familiarity saves explanation. It also means I won’t assume that every work problem is psychological. If your manager changed and you hate working for the new one, that may simply be true."},
-          {"t": "p", "text": "If the same kind of difficulty keeps following you across jobs, relationships or decisions, the current situation is probably not the whole story."}
+          {"t": "p", "text": "My previous career was spent in environments where people are judged on output, responsibility is unevenly distributed and apparently simple decisions can have real financial and professional consequences."},
+          {"t": "p", "text": "That context is useful in therapy because work problems do not need to be translated into generic language before we can discuss them. It also means an external problem can remain an external problem. A difficult manager, a badly designed role or an unstable company may be exactly that."},
+          {"t": "p", "text": "When the same difficulty keeps appearing across jobs, relationships or decisions, there may be more to understand than the current situation alone."}
         ]},
-        {"h2": "How I tend to work", "id": "how-i-tend-to-work", "blocks": [
-          {"t": "p", "text": "I ask a lot of questions. I am direct when I think something important is being avoided, and I don’t find automatic reassurance especially useful."},
-          {"t": "p", "text": "I also don’t think the therapist should become another authority whose opinion you depend on. The work should help you see more clearly what is yours to decide."}
+        {"h2": "How I work", "id": "how-i-work", "blocks": [
+          {"t": "p", "text": "My style is goal-oriented and active. The work is direct and collaborative. Questions stay close to what happened, what followed and where the same pattern may be repeating."},
+          {"t": "p", "text": "Automatic reassurance is not especially useful when it closes the conversation too early. The aim is also not to replace your judgement with the therapist’s. The work should leave you with a clearer understanding of the situation and more room to decide what to do with it."}
         ]},
         {"h2": "Who I work with", "id": "who-i-work-with", "blocks": [
-          {"t": "p", "text": "My practice is positioned mainly towards men in technology, startups, business and other demanding professional careers. I also work with couples and with Greek-speaking adults who want to work in Greek, English or both."},
-          {"t": "p", "text": "Once therapy begins, the subject is your life. Work is part of that life, not the whole of it."},
+          {"t": "p", "text": "The practice is focused mainly on men in technology, startups, business and other demanding professional careers. I also work with couples and with Greek-speaking adults who want to work in Greek, English or both."},
+          {"t": "p", "text": "Professional context matters when it is relevant. It does not determine what therapy has to be about."},
           {"t": "ctas", "items": [{"label": "Work with me", "href": "/work-with-me/"}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
@@ -123,13 +124,13 @@ window.SITE_COPY = {
       "seoTitle": "Psychotherapy, Couples Therapy & Coaching | Aggelos Mouzakitis",
       "metaDescription": "Individual psychotherapy, couples therapy and professional coaching with Aggelos Mouzakitis. Online work for relationships, burnout, anxiety, career decisions and professional problems.",
       "hero": {"eyebrow": "WORK WITH ME", "h1": "Three ways to work together.", "blocks": [
-        {"t": "p", "text": "Individual psychotherapy is the main part of my practice. I also offer couples therapy and a separate professional coaching service."},
+        {"t": "p", "text": "Individual psychotherapy is the main part of the practice, alongside couples therapy and a separate professional coaching service."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Individual Psychotherapy", "id": "individual-psychotherapy", "blocks": [
           {"t": "p", "text": "Individual psychotherapy is the right starting point when the issue is affecting more than one decision. Relationship problems, anxiety, burnout, irritability, separation, grief, recurring patterns and career decisions that have become personally loaded all fit here."},
-          {"t": "p", "text": "Sessions are online and normally last 50–60 minutes. I usually begin weekly."},
+          {"t": "p", "text": "Sessions are online, normally 50–60 minutes and usually weekly at the start."},
           {"t": "ctas", "items": [{"label": "Explore individual psychotherapy", "href": "/individual-psychotherapy/"}]}
         ]},
         {"h2": "Couples Therapy", "id": "couples-therapy", "blocks": [
@@ -143,13 +144,12 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "Explore professional coaching", "href": "/professional-coaching/"}]}
         ]},
         {"h2": "Which service fits?", "id": "which-service-fits", "blocks": [
-          {"t": "p", "text": "A useful distinction is scope."},
-          {"t": "p", "text": "If the issue reaches into anxiety, relationships, self-worth, grief or a recurring personal pattern, I will usually suggest psychotherapy. If both partners want to work on the relationship, couples therapy makes more sense. If the question can stay professional, coaching is often enough."},
-          {"t": "p", "text": "You can also just describe the situation. I will tell you what I think fits."},
-          {"t": "ctas", "items": [{"label": "Therapy vs coaching", "href": "/therapy-vs-coaching/"}]}
+          {"t": "p", "text": "The useful distinction is scope."},
+          {"t": "p", "text": "If the issue reaches into anxiety, relationships, self-worth, grief or a recurring personal pattern, individual psychotherapy usually gives us enough room. If both partners want to work directly on the relationship, couples therapy fits better. If the issue can stay primarily professional, coaching may be enough."},
+          {"t": "p", "text": "If you are not sure, describe the situation when you contact me and I will tell you which service seems most appropriate."}
         ]},
         {"h2": "How to start", "id": "how-to-start", "blocks": [
-          {"t": "p", "text": "Send a short note about what brings you here and where you are currently located. I read enquiries myself. If the situation falls within what I offer, we arrange an initial conversation."},
+          {"t": "p", "text": "Send a short note about what brings you here and where you are currently located. If the situation falls within what I offer, we arrange an initial conversation."},
           {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
         ]}
       ]
@@ -163,26 +163,26 @@ window.SITE_COPY = {
       "seoTitle": "Online Individual Psychotherapy | Aggelos Mouzakitis",
       "metaDescription": "Online individual psychotherapy for relationships, burnout, anxiety, difficult decisions and recurring patterns, with a BACP-registered psychotherapist.",
       "hero": {"eyebrow": "INDIVIDUAL PSYCHOTHERAPY", "h1": "Individual psychotherapy for the parts of life that aren’t resolving on their own.", "blocks": [
-        {"t": "p", "text": "People rarely come because they have developed a perfect psychological explanation. They come because something keeps costing them. A relationship is getting worse. Work won’t leave their head. A decision has been open for months. They are still functioning, but with much more effort than before."},
+        {"t": "p", "text": "Most people arrive with something concrete such as a relationship that is getting worse, work they cannot stop thinking about, a decision that has stayed open for months, or the sense that ordinary life is taking much more effort than it used to. You do not need a psychological explanation before starting."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "What brings people in", "id": "what-brings-people-in", "blocks": [
-          {"t": "p", "text": "One of my first questions is usually: what changed?"},
+          {"t": "p", "text": "We usually start with what changed."},
           {"t": "p", "text": "A partner raised separation seriously. You were passed over for a role and reacted more strongly than you expected. You keep telling yourself the job is temporary but have been saying that for two years. You have started snapping at people you care about."}
         ]},
         {"h2": "What happens in sessions", "id": "what-happens-in-sessions", "blocks": [
-          {"t": "p", "text": "I am fairly active. I ask for detail, especially around sequence: what happened, what you made of it, what you did next and what happened after that."},
-          {"t": "p", "text": "Analytical clients are often very good at explaining themselves. Sometimes the explanation is accurate and the behaviour still hasn’t changed."},
-          {"t": "p", "text": "Earlier experiences, family, relationships and the body enter the conversation when they help us make sense of something active now. I don’t force every present-day difficulty into a childhood story."}
+          {"t": "p", "text": "I am fairly active in sessions. We stay close to detail and sequence: what happened, what you made of it, what you did next and what happened after that."},
+          {"t": "p", "text": "Analytical clients are often very good at explaining themselves. The explanation can be accurate and the behaviour can still remain unchanged."},
+          {"t": "p", "text": "Earlier experiences, family, relationships and the body enter the conversation when they help us understand something active now. Present-day difficulties are not automatically turned into childhood stories."}
         ]},
         {"h2": "Functioning at work", "id": "functioning-at-work", "blocks": [
           {"t": "p", "text": "Functioning at work is a poor test of how the rest of your life is going. People remain productive while sleeping badly, withdrawing from a partner or losing interest in almost everything outside work."},
           {"t": "p", "text": "Competence makes this easy to miss. Nobody at work is likely to intervene while the output still looks good."}
         ]},
         {"h2": "Work in psychotherapy", "id": "work-in-psychotherapy", "blocks": [
-          {"t": "p", "text": "Work belongs in the room when it matters. Salary, a difficult manager, a company in trouble, being laid off or simply realising that you dislike your role are legitimate parts of the situation."},
-          {"t": "p", "text": "I spent most of my previous career in product and growth, so the professional context is familiar. Therapy still stays therapy."},
+          {"t": "p", "text": "Work belongs in the room when it matters. Salary, a difficult manager, a company in trouble, redundancy or simply realising that you dislike your role are legitimate parts of the situation."},
+          {"t": "p", "text": "My previous career was in product and growth, so the professional context is familiar. That context can be discussed without turning psychotherapy into coaching."},
           {"t": "ctas", "items": [{"label": "Psychotherapy for men in tech", "href": "/therapy-for-men-in-tech/"}]}
         ]},
         {"h2": "Relationships", "id": "relationships", "blocks": [
@@ -192,13 +192,13 @@ window.SITE_COPY = {
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
           {"t": "pairs", "items": [{"a": "Format", "b": "Online"}, {"a": "Sessions", "b": "50–60 minutes"}, {"a": "Frequency", "b": "Usually weekly at first"}]},
-          {"t": "p", "text": "Sessions are online and usually last **50–60 minutes**. I normally work **weekly for at least the first few months**. We can review frequency later."},
+          {"t": "p", "text": "I normally work **weekly for at least the first few months**. We can review frequency later."},
           {"t": "p", "text": "You can stop therapy whenever you choose. I ask people to start with a realistic level of commitment because psychotherapy is difficult to develop through occasional sessions booked only when something has blown up."},
           {"t": "p", "text": "Before ongoing work begins, I confirm that I can work with you based on your location and circumstances."}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Do I need a diagnosis?", "blocks": [{"t": "p", "text": "No. A diagnosis is not a prerequisite for psychotherapy."}]},
-          {"t": "sub", "h3": "Will you give me advice?", "blocks": [{"t": "p", "text": "Sometimes. I will also offer observations and challenge reasoning that looks incomplete. The important decisions remain yours."}]},
+          {"t": "sub", "h3": "Will you give me advice?", "blocks": [{"t": "p", "text": "Sometimes. I will also point out patterns or reasoning that look incomplete. The important decisions remain yours."}]},
           {"t": "sub", "h3": "What if I am already seeing another therapist?", "blocks": [{"t": "p", "text": "Tell me before we start. Parallel work needs to make sense clinically and practically."}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
@@ -215,9 +215,9 @@ window.SITE_COPY = {
       "type": "service",
       "seoTitle": "Online Couples Therapy | Conflict, Distance & Work Pressure",
       "metaDescription": "Online couples therapy for recurring conflict, emotional distance and relationships affected by work, pressure and major life changes.",
-      "hero": {"eyebrow": "COUPLES THERAPY", "h1": "Couples therapy for relationships that keep getting stuck in the same places.", "blocks": [
-        {"t": "p", "text": "The argument is about money one week and work the next. What matters more is what happens between you once the conversation gets difficult."},
-        {"t": "p", "text": "In couples therapy, both of you are in the room and the relationship becomes the focus."},
+      "hero": {"eyebrow": "COUPLES THERAPY", "h1": "Online couples therapy for recurring conflict, distance and relationship strain.", "blocks": [
+        {"t": "p", "text": "Couples come with recurring arguments, emotional distance, damaged trust or the effect of work and other pressures on the relationship."},
+        {"t": "p", "text": "Both partners attend so the interaction itself can be worked with directly."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
@@ -228,17 +228,17 @@ window.SITE_COPY = {
         ]},
         {"h2": "What happens in the room", "id": "what-happens-in-the-room", "blocks": [
           {"t": "p", "text": "Couples usually arrive with different versions of what is wrong."},
-          {"t": "p", "text": "I watch what happens while each person tells the story. Who starts explaining? Who gives up? What gets heard as criticism? What happens immediately before one of you withdraws or raises the temperature?"},
-          {"t": "p", "text": "We don’t need to settle whose account is stronger before working with what happens between you."}
+          {"t": "p", "text": "The work pays attention to what happens while each person tells the story: who starts explaining, who gives up, what gets heard as criticism and what happens immediately before one person withdraws or the conversation escalates."},
+          {"t": "p", "text": "We do not need to settle whose account is stronger before working with what happens between you."}
         ]},
         {"h2": "Work and the relationship", "id": "work-and-the-relationship", "blocks": [
           {"t": "p", "text": "A demanding job changes a relationship in very ordinary ways. You miss dinner again. One partner is still checking messages during the evening. A holiday gets planned around a launch. The person doing the work thinks, with good reason, that they are carrying responsibility for the family. The other is tired of living around the job."},
-          {"t": "p", "text": "I understand the professional side of that conflict. I also won’t use the job as an automatic explanation for everything happening at home."},
+          {"t": "p", "text": "Professional pressure can be real without becoming an automatic explanation for everything happening at home."},
           {"t": "ctas", "items": [{"label": "When work is affecting your relationship", "href": "/work-affecting-relationship/"}]}
         ]},
-        {"h2": "What couples therapy is not", "id": "what-couples-therapy-is-not", "blocks": [
-          {"t": "p", "text": "I don’t arbitrate the marriage or distribute blame evenly for the sake of appearing neutral. If a behaviour is damaging the relationship, I will say so."},
-          {"t": "p", "text": "Both people need enough willingness to look at their own part. Equal enthusiasm about therapy is not required."}
+        {"h2": "How I work with couples", "id": "how-i-work-with-couples", "blocks": [
+          {"t": "p", "text": "Couples therapy is not about arbitrating the relationship or making both people equally responsible for every problem. If a behaviour is damaging the relationship, that needs to be named clearly."},
+          {"t": "p", "text": "Both partners need enough willingness to look at their own part. They do not need to arrive equally enthusiastic about therapy."}
         ]},
         {"h2": "Individual or couples therapy?", "id": "individual-or-couples-therapy", "blocks": [
           {"t": "p", "text": "Come individually when you want to understand your own behaviour or your partner does not want to attend. Come as a couple when both of you want to work directly on the relationship."},
@@ -266,32 +266,37 @@ window.SITE_COPY = {
       "url": "/professional-coaching/",
       "type": "service",
       "seoTitle": "Professional Coaching for Tech & Career Decisions | Aggelos Mouzakitis",
-      "metaDescription": "Professional coaching for experienced people in tech, startups and business facing career decisions, leadership situations, transitions and difficult professional choices.",
+      "metaDescription": "Professional coaching for experienced people in tech, startups and business making career, leadership, independence and other difficult professional decisions.",
       "hero": {"eyebrow": "PROFESSIONAL COACHING", "h1": "Professional coaching for a decision you actually have to make.", "blocks": [
-        {"t": "p", "text": "This service is for work questions that can stay work questions: leaving a role, taking an opportunity, going independent, dealing with a manager or thinking through a difficult leadership situation."},
+        {"t": "p", "text": "This is a separate service from psychotherapy. It is for experienced people in tech, startups and business who have a professional decision with real trade-offs and want a serious place to work it through."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
-        {"h2": "Start with the decision", "id": "start-with-the-decision", "blocks": [
-          {"t": "p", "text": "I am less interested in a five-year vision than in the decision that is already creating friction."},
-          {"t": "p", "text": "What changed? Why is the current situation no longer good enough? What are you hoping the alternative will fix? What would you lose by moving?"},
-          {"t": "p", "text": "Years of Jobs to be Done research made this kind of investigation familiar to me. It is usually more useful than producing another pros-and-cons list."}
+        {"h2": "When coaching fits", "id": "when-coaching-fits", "blocks": [
+          {"t": "p", "text": "Coaching fits when the problem can remain primarily professional."},
+          {"t": "p", "text": "You may be deciding whether to leave a role, take an opportunity, go independent, change direction, deal with a difficult manager or work through a leadership decision with incomplete information."},
+          {"t": "p", "text": "The fact that a decision is emotional does not automatically make it a psychotherapy problem. A job can matter enormously and still be a work decision."}
         ]},
-        {"h2": "The professional context", "id": "the-professional-context", "blocks": [
-          {"t": "p", "text": "My background in product, growth, customer research and Jobs to be Done is directly relevant here. I also spent seven years running a consultancy."},
-          {"t": "p", "text": "You might hate the role and still have a family depending on the salary. Another tranche of equity might vest in six months. Going independent sounds attractive until we look properly at how you would find clients."}
+        {"h2": "What we work on", "id": "what-we-work-on", "blocks": [
+          {"t": "p", "text": "The starting point is the decision itself: what changed, what makes staying attractive, what you expect the alternative to solve, which assumptions are facts and which have not been tested."},
+          {"t": "p", "text": "The aim is to understand the trade-offs clearly enough to make a decision or identify what needs to be tested before making one."}
         ]},
-        {"h2": "How I work", "id": "how-i-work", "blocks": [
-          {"t": "p", "text": "I will challenge assumptions that look weak. If there is a way to test an option before making it irreversible, we can design that test. If you have been researching the same choice for six months and no new information is appearing, I will stop assuming more research is the answer."},
-          {"t": "p", "text": "Coaching still leaves the decision with you."}
+        {"h2": "Professional context", "id": "professional-context", "blocks": [
+          {"t": "p", "text": "Career decisions are rarely made in clean conditions. Salary, equity matters, family commitments matter. The market may be poor. A title can take years to earn. Going independent sounds different once the question of where clients will come from becomes concrete."},
+          {"t": "p", "text": "Before psychotherapy, I spent more than 18 years in product and growth, including seven years running a consultancy and work with more than 100 technology companies. The professional context is usually familiar enough that the work can stay focused on the decision rather than explaining the environment."}
         ]},
-        {"h2": "Psychotherapy instead", "id": "psychotherapy-instead", "blocks": [
-          {"t": "p", "text": "A professional question occasionally opens into something broader. Every career move turns into panic about disappointing people. A manageable setback feels humiliating. The same relationship with authority keeps repeating across different companies."},
-          {"t": "p", "text": "If that is where the work is going, I will say so and discuss psychotherapy as a separate service."},
+        {"h2": "How sessions work", "id": "how-sessions-work", "blocks": [
+          {"t": "p", "text": "Assumptions are challenged when they look weak. Options can be tested before they become irreversible where that is practical. If the same decision has been researched for six months and no new information is appearing, more research is unlikely to solve it."},
+          {"t": "p", "text": "The decision remains yours."}
+        ]},
+        {"h2": "When psychotherapy fits better", "id": "when-psychotherapy-fits-better", "blocks": [
+          {"t": "p", "text": "Coaching should not quietly turn into psychotherapy."},
+          {"t": "p", "text": "If every career move becomes panic about disappointing people, a manageable setback feels humiliating, work is damaging your relationship, or the same difficulty with authority keeps repeating across companies, individual psychotherapy may provide a better scope for the work."},
+          {"t": "p", "text": "If that becomes clear, I will say so directly."},
           {"t": "ctas", "items": [{"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}, {"label": "Career change & decisions", "href": "/career-transition-therapy/"}, {"label": "Therapy vs coaching", "href": "/therapy-vs-coaching/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "p", "text": "Coaching is online. Format and frequency depend on the issue and are agreed before we begin."}
+          {"t": "p", "text": "Coaching is online. Format and frequency depend on the decision and are agreed before we begin."}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "Tell me the professional decision you are trying to make."},
@@ -316,7 +321,7 @@ window.SITE_COPY = {
         {"h2": "When coaching is enough", "id": "when-coaching-is-enough", "blocks": [
           {"t": "p", "text": "Coaching works well when there is a real professional decision to make and the work can stay focused on that decision."},
           {"t": "p", "text": "You might be deciding whether to leave a role, take an opportunity, go independent, deal with a leadership situation or compare two options with meaningful trade-offs."},
-          {"t": "p", "text": "In that kind of work, I am interested in what changed, what you are hoping the alternative will fix, what makes staying attractive and what you would lose by moving. We can test assumptions, compare options and design small experiments where that is possible before making something irreversible."},
+          {"t": "p", "text": "The work looks at what changed, what you are hoping the alternative will fix, what makes staying attractive and what you would lose by moving. Assumptions can be tested and options compared before making something irreversible where that is practical."},
           {"t": "p", "text": "The conversation can remain practical without pretending the decision is emotionally neutral. Leaving a well-paid job may still involve fear. Going independent may still involve uncertainty. That does not automatically make the problem a psychotherapy problem."},
           {"t": "p", "text": "A bounded professional problem can still be difficult, expensive and emotionally charged. The distinction is not that coaching deals with rational problems while psychotherapy deals with feelings. It is whether the work can stay usefully organised around the professional situation itself, or whether the same difficulty is pulling us repeatedly into other parts of your life."},
           {"t": "ctas", "items": [{"label": "Professional coaching", "href": "/professional-coaching/"}]}
@@ -328,21 +333,20 @@ window.SITE_COPY = {
           {"t": "p", "text": "Psychotherapy allows us to work with the immediate situation while also following anxiety, self-worth, grief, shame, relationships and earlier patterns when they are relevant."},
           {"t": "ctas", "items": [{"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}]}
         ]},
-        {"h2": "The same question can change category", "id": "the-same-question-can-change-category", "blocks": [
+        {"h2": "A work question can change scope", "id": "a-work-question-can-change-scope", "blocks": [
           {"t": "p", "text": "A career decision can begin as a coaching question and turn out to contain deeper psychological material."},
-          {"t": "p", "text": "You may start by asking whether to leave a job. Once we look closely, the difficult part may be the salary, the equity and the effect on your family. That can remain a professional decision."},
-          {"t": "p", "text": "Or we may find that every possible move becomes a referendum on whether you are successful enough, loyal enough or disappointing somebody. The job is still real. The psychological material is real too."},
-          {"t": "p", "text": "The reverse also happens. Not every difficult feeling needs to become therapy. Sometimes the role is badly designed. Sometimes the manager is the problem. Sometimes you need more money. Sometimes you need to decide and act."},
-          {"t": "p", "text": "The point is not to force a professional problem into a psychological explanation. It is to use enough scope for the problem that is actually there."}
+          {"t": "p", "text": "You may start by asking whether to leave a job. The difficult part may be salary, equity and the effect on your family, in which case the work can remain primarily professional."},
+          {"t": "p", "text": "In other cases, every possible move becomes tied to whether you are successful enough, loyal enough or disappointing somebody. That is where psychotherapy may offer a more useful scope."},
+          {"t": "p", "text": "The reverse is also true. A badly designed role, a poor manager or a financial constraint can be exactly what it appears to be. Not every difficult feeling needs a psychological explanation."}
         ]},
-        {"h2": "What changes in the room", "id": "what-changes-in-the-room", "blocks": [
-          {"t": "p", "text": "In coaching, the work stays organised around the professional question. My background in product, growth, customer research, Jobs to be Done and consulting is directly relevant. I will challenge assumptions, look for evidence and help you test options where possible."},
-          {"t": "p", "text": "In psychotherapy, the professional context still belongs in the room, but it is not the boundary of the work. If the decision connects to a recurring relationship pattern, anxiety, self-worth or something from earlier life, we can follow it there."},
-          {"t": "p", "text": "The two services are separate. If I think the scope should change, I will say so explicitly rather than quietly turning coaching into therapy or therapy into consulting."}
+        {"h2": "How the two services differ", "id": "how-the-two-services-differ", "blocks": [
+          {"t": "p", "text": "Coaching stays organised around the professional question. Product, growth, customer research, Jobs to be Done and consulting experience are directly relevant to that work. The focus is evidence, assumptions, options and action."},
+          {"t": "p", "text": "In psychotherapy, the professional context remains relevant but does not define the boundary of the work. If the decision connects to anxiety, self-worth, relationships or earlier patterns, there is room to follow it there."},
+          {"t": "p", "text": "The two services are separate. If the scope needs to change, that is discussed explicitly rather than allowing coaching to drift into therapy or therapy into consulting."}
         ]},
         {"h2": "If you are not sure", "id": "if-you-are-not-sure", "blocks": [
           {"t": "p", "text": "You do not need to classify the problem perfectly before contacting me."},
-          {"t": "p", "text": "Tell me what is happening, what decision or difficulty has brought you here and where you are currently located. I will tell you whether I think individual psychotherapy, professional coaching or something else is the better fit."},
+          {"t": "p", "text": "Tell me what is happening, what decision or difficulty has brought you here and where you are currently located. I will tell you whether individual psychotherapy, professional coaching or another option seems the better fit."},
           {"t": "p", "text": "For a broader explanation of what psychotherapy itself is like, see Considering Therapy."},
           {"t": "ctas", "items": [{"label": "Considering Therapy", "href": "/considering-therapy/"}, {"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}, {"label": "Professional coaching", "href": "/professional-coaching/"}]}
         ]},
@@ -361,38 +365,38 @@ window.SITE_COPY = {
       "seoTitle": "Therapy for Men | Tech, Business & Demanding Careers",
       "metaDescription": "Online psychotherapy for men in tech, startups and demanding careers dealing with relationships, burnout, anxiety, difficult decisions and work taking over life.",
       "hero": {"eyebrow": "MEN IN TECH & DEMANDING CAREERS", "h1": "Therapy for men in tech, business and demanding careers.", "blocks": [
-        {"t": "p", "text": "You can be good at the job and still be sleeping badly, thinking about work through dinner or wondering why one performance conversation has occupied your head for three days."},
-        {"t": "p", "text": "This is the professional environment I know best."},
+        {"t": "p", "text": "You can be doing well professionally and still be sleeping badly, carrying work into dinner or spending days replaying one performance conversation."},
+        {"t": "p", "text": "Tech, product and business are familiar contexts from more than 18 years working in them."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "The professional culture matters", "id": "the-professional-culture-matters", "blocks": [
-          {"t": "p", "text": "Technology rewards speed, competence and the ability to keep moving through uncertainty. Teams change. Priorities move. Roles get redefined. A manager leaves and the job you accepted becomes a different job six weeks later."},
-          {"t": "p", "text": "None of that is imaginary stress. I spent years working inside that world, so I don’t need it translated into generic language about balance."}
+          {"t": "p", "text": "Technology roles often combine rapid change, visible performance and unclear boundaries around responsibility. Teams change, priorities move, roles get redefined and a manager leaving can turn the job you accepted into a different job very quickly."},
+          {"t": "p", "text": "Those details matter because they shape the pressure around the problem. They do not need to be translated into generic language about work-life balance before therapy can begin."}
         ]},
-        {"h2": "After work", "id": "after-work", "blocks": [
+        {"h2": "When work continues after hours", "id": "when-work-continues-after-hours", "blocks": [
           {"t": "p", "text": "A common pattern is that the workday ends before the thinking does."},
           {"t": "p", "text": "You are at dinner but still replaying a product review. You are on holiday and checking whether somebody replied. You have a difficult conversation tomorrow and are already having it in your head tonight."},
           {"t": "p", "text": "The same behaviour can come from burnout, anxiety, habit, responsibility or simply a role that is taking too much attention. We work out which one we are dealing with."},
           {"t": "ctas", "items": [{"label": "Burnout & can’t switch off", "href": "/executive-burnout-therapy/"}]}
         ]},
         {"h2": "Performance and self-worth", "id": "performance-and-self-worth", "blocks": [
-          {"t": "p", "text": "Work becomes more psychologically expensive when professional feedback starts deciding how you feel about yourself."},
+          {"t": "p", "text": "Professional feedback can start affecting self-worth more than the event itself would suggest."},
           {"t": "p", "text": "A good review gives relief. A bad one ruins the weekend. Somebody else gets promoted and the reaction is much bigger than the practical consequence."},
           {"t": "p", "text": "The workplace offers endless opportunities to measure yourself."},
           {"t": "ctas", "items": [{"label": "Achievement & self-worth", "href": "/achievement-self-worth/"}]}
         ]},
         {"h2": "What happens at home", "id": "what-happens-at-home", "blocks": [
-          {"t": "p", "text": "Relationships usually notice this before a CV does."},
+          {"t": "p", "text": "The effects often show up at home before they affect performance at work."},
           {"t": "p", "text": "Your partner gets a version of you that has very little patience left. A normal request feels like one more task. You keep explaining why this month is unusually intense, and eventually your partner stops believing that next month will be different."},
           {"t": "ctas", "items": [{"label": "Work & relationships", "href": "/work-affecting-relationship/"}, {"label": "Relationship problems", "href": "/relationship-problems-men/"}]}
         ]},
         {"h2": "Therapy with me", "id": "therapy-with-me", "blocks": [
-          {"t": "p", "text": "We start with the actual issue. If you hate the job, we talk about the job. If the relationship is in trouble, we talk about the relationship. If you have spent six months trying to make a decision, one of the first things I will ask is what changed and why it is still open."},
-          {"t": "p", "text": "I won’t use the job to explain away what is happening elsewhere."}
+          {"t": "p", "text": "Sessions start with the problem that brought you in. A difficult job stays a work problem until there is a reason to look further. A relationship problem stays a relationship problem. A decision that has remained open for months deserves a closer look at what is keeping it open."},
+          {"t": "p", "text": "Professional context matters, but it does not become the explanation for everything else in your life."}
         ]},
         {"h2": "My background", "id": "my-background", "blocks": [
-          {"t": "p", "text": "I spent most of my previous career in product and growth. The environment is familiar enough that you won’t spend the first twenty minutes explaining how it works."},
+          {"t": "p", "text": "Before psychotherapy, I spent most of my career in product and growth. The environment is familiar enough that sessions do not need to begin with a long explanation of how it works."},
           {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
@@ -414,32 +418,32 @@ window.SITE_COPY = {
       "type": "audience",
       "seoTitle": "Therapy for Entrepreneurs, Founders & Business Owners",
       "metaDescription": "Online psychotherapy for entrepreneurs, founders and business owners dealing with pressure, burnout, relationships, difficult decisions and identity beyond the company.",
-      "hero": {"eyebrow": "FOUNDERS & BUSINESS OWNERS", "h1": "Therapy for entrepreneurs, founders and business owners.", "sub": "Therapy for people who own the thing they are trying to switch off from.", "blocks": [
-        {"t": "p", "text": "A company is harder to contain than a job. Employees, investors, personal money, a co-founder, friendships and years of identity are often tied into the same decision."},
-        {"t": "p", "text": "I work with founders and business owners when that overlap starts causing trouble outside the company as well as inside it."},
+      "hero": {"eyebrow": "FOUNDERS & BUSINESS OWNERS", "h1": "Therapy for entrepreneurs, founders and business owners.", "blocks": [
+        {"t": "p", "text": "Founding or owning a business makes it difficult to separate work from the rest of life. Money, staff, relationships and your own sense of identity can become tied to the same decisions."},
+        {"t": "p", "text": "Therapy can help when that overlap starts creating problems in the company, at home or in the way you are functioning yourself."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Ownership changes the stakes", "id": "ownership-changes-the-stakes", "blocks": [
           {"t": "p", "text": "An employee can decide to resign. A founder deciding whether to step back is also thinking about staff, customers, investors and a relationship that has already organised years of life around the company."},
-          {"t": "p", "text": "This is why “just step back” is often useless advice. There is often nowhere clean to step back to."}
+          {"t": "p", "text": "That is why stepping back can be more complicated than reducing hours or delegating more work."}
         ]},
         {"h2": "Working harder", "id": "working-harder", "blocks": [
           {"t": "p", "text": "There is always another customer to call, another number to check or another operational problem that genuinely deserves attention."},
-          {"t": "p", "text": "At some point the activity stops improving the situation and mostly makes uncertainty easier to tolerate."}
+          {"t": "p", "text": "At some point, more activity stops improving the situation and starts functioning mainly as a way to manage uncertainty."}
         ]},
         {"h2": "Co-founders and partners", "id": "co-founders-and-partners", "blocks": [
           {"t": "p", "text": "A co-founder disagreement is rarely only a strategic disagreement once trust has deteriorated. By then, a conversation about the roadmap may also be carrying years of dependency, competition, loyalty and resentment."},
           {"t": "p", "text": "Partners live with the company too. They live with the late nights, financial risk, interrupted holidays and the sentence “after this quarter” being repeated for the fourth time."},
           {"t": "ctas", "items": [{"label": "Work & relationships", "href": "/work-affecting-relationship/"}, {"label": "Couples therapy", "href": "/couples-therapy/"}]}
         ]},
-        {"h2": "After the milestone", "id": "after-the-milestone", "blocks": [
+        {"h2": "After growth, funding or exit", "id": "after-growth-funding-or-exit", "blocks": [
           {"t": "p", "text": "Pressure can hide questions for a long time because there is always something urgent to do."},
           {"t": "p", "text": "Then the round closes, the company becomes profitable, a senior hire takes over more of the operation or the business is sold. The expected relief is smaller than expected."}
         ]},
         {"h2": "My background", "id": "my-background", "blocks": [
-          {"t": "p", "text": "I ran a consultancy for seven years and built two startups. Neither startup succeeded."},
-          {"t": "p", "text": "I know enough about the operating world around founders that we can stay with the actual issue. I am not your startup adviser in the therapy room."}
+          {"t": "p", "text": "Before psychotherapy, I ran a consultancy for seven years, built two startups and spent most of my previous career working with technology companies."},
+          {"t": "p", "text": "That experience is useful context, but therapy is not startup advice. The operating environment can be understood without turning the session into a strategy meeting."}
         ]},
         {"h2": "Therapy or coaching?", "id": "therapy-or-coaching", "blocks": [
           {"t": "p", "text": "If you need to evaluate a business or career decision, Professional Coaching may be enough."},
@@ -460,9 +464,9 @@ window.SITE_COPY = {
       "type": "audience",
       "seoTitle": "Executive Therapist | Therapy for Executives & Leaders",
       "metaDescription": "Online psychotherapy for executives and senior leaders dealing with pressure, burnout, difficult decisions, relationships, career transitions and the personal cost of responsibility.",
-      "hero": {"eyebrow": "EXECUTIVES & LEADERS", "h1": "Psychotherapy for executives and senior leaders.", "sub": "Psychotherapy for people who spend a lot of the day being the person with an answer.", "blocks": [
-        {"t": "p", "text": "Senior roles involve more than difficult decisions. They also involve editing what you say, carrying information other people do not have and thinking carefully about who can hear which version of the truth."},
-        {"t": "p", "text": "That leaves surprisingly few neutral places to think out loud."},
+      "hero": {"eyebrow": "EXECUTIVES & LEADERS", "h1": "Psychotherapy for executives and senior leaders.", "blocks": [
+        {"t": "p", "text": "Senior roles bring responsibility, limited places to speak candidly and decisions that can affect other people’s work and livelihoods."},
+        {"t": "p", "text": "Much of the day may involve editing what you say, carrying information other people do not have and deciding what can reasonably be shared with whom. That can leave very few neutral places to think out loud."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
@@ -471,14 +475,14 @@ window.SITE_COPY = {
           {"t": "p", "text": "You are now responsible for outcomes produced through other people. You spend more time in politics, compensation discussions, restructures and conversations where everyone has an interest."},
           {"t": "p", "text": "Some people discover that they are excellent at their profession and don’t particularly enjoy the senior job built on top of it."}
         ]},
-        {"h2": "Who can you actually talk to?", "id": "who-can-you-actually-talk-to", "blocks": [
+        {"h2": "Limited places to speak openly", "id": "limited-places-to-speak-openly", "blocks": [
           {"t": "p", "text": "A team member cannot always hear your uncertainty. A peer may also be competing for influence. Your manager has their own agenda. Your partner already lives with the consequences of the role."},
           {"t": "p", "text": "Keeping some things to yourself is professionally sensible. The difficulty starts when there is nowhere left to put the unedited version."}
         ]},
         {"h2": "Performance and status", "id": "performance-and-status", "blocks": [
           {"t": "p", "text": "Being passed over, losing scope or watching somebody younger move faster may hit harder than the organisational event alone explains."},
-          {"t": "p", "text": "I don’t assume that every disappointment is secretly about childhood or self-worth. Sometimes the decision was unfair. Sometimes the company is badly run."},
-          {"t": "p", "text": "But when the event occupies far more mental space than its practical consequence, I want to understand why."},
+          {"t": "p", "text": "Not every disappointment needs a psychological explanation. A decision may simply have been unfair or the organisation badly run."},
+          {"t": "p", "text": "The useful question is why some events continue taking up far more mental space than their practical consequences would suggest."},
           {"t": "ctas", "items": [{"label": "Achievement & self-worth", "href": "/achievement-self-worth/"}]}
         ]},
         {"h2": "What happens at home", "id": "what-happens-at-home", "blocks": [
@@ -492,11 +496,11 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "Career change & decisions", "href": "/career-transition-therapy/"}]}
         ]},
         {"h2": "My background", "id": "my-background", "blocks": [
-          {"t": "p", "text": "I spent years inside larger technology organisations and around senior decision-making. I know what matrixed responsibility and organisational politics look like from the inside."},
+          {"t": "p", "text": "My previous career included years inside larger technology organisations and around senior decision-making. Matrixed responsibility, organisational politics and the pressure around senior roles are familiar contexts."},
           {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
-          {"t": "sub", "h3": "Do I need to be C-suite?", "blocks": [{"t": "p", "text": "No. This page also fits directors, senior managers and experienced professionals whose role carries significant responsibility and visibility."}]},
+          {"t": "sub", "h3": "Do I need to be C-suite?", "blocks": [{"t": "p", "text": "No. I also work with directors, senior managers and other experienced professionals whose role carries significant responsibility, visibility or organisational pressure."}]},
           {"t": "sub", "h3": "Is this executive coaching?", "blocks": [{"t": "p", "text": "No. This page is about psychotherapy. Professional Coaching is a separate service for bounded professional decisions."}]},
           {"t": "sub", "h3": "What if the issue has nothing to do with work?", "blocks": [{"t": "p", "text": "That is fine. Seniority explains part of the context I know well. It does not determine what you bring."}]}
         ]},
@@ -513,47 +517,40 @@ window.SITE_COPY = {
       "url": "/greek-speaking-psychotherapist/",
       "type": "audience",
       "seoTitle": "Greek-Speaking Psychotherapist Online | Aggelos Mouzakitis",
-      "metaDescription": "Online psychotherapy in Greek or English for Greek-speaking adults dealing with relationships, anxiety, work, major decisions and life between countries.",
-      "hero": {"eyebrow": "GREEK-SPEAKING PSYCHOTHERAPY", "h1": "Psychotherapy in Greek or English.", "blocks": [
-        {"t": "p", "text": "Some people think in English at work and in Greek when they are angry, embarrassed or talking about family. Others have lived abroad long enough that the opposite happens."},
-        {"t": "p", "text": "Sessions can take place in Greek, English or move between the two."},
+      "metaDescription": "Online psychotherapy in Greek or English with a Greek-speaking psychotherapist, especially for Greeks living abroad and people working in tech and international careers.",
+      "hero": {"eyebrow": "GREEK-SPEAKING PSYCHOTHERAPY", "h1": "Online psychotherapy in Greek or English.", "blocks": [
+        {"t": "p", "text": "This page is mainly for Greek-speaking people who want therapy with someone who shares the language and cultural context without needing it explained from scratch."},
+        {"t": "p", "text": "It is especially relevant to Greeks living abroad, including people working in tech, startups and other international careers who may find that combination difficult to find where they live."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
-        {"h2": "Language in therapy", "id": "language-in-therapy", "blocks": [
-          {"t": "p", "text": "Translation is not always neutral."},
-          {"t": "p", "text": "A family phrase that sounds ordinary in Greek can become strangely formal in English. A professional situation you have lived entirely in English may feel artificial when translated back."},
-          {"t": "p", "text": "We use the language that makes the conversation more accurate. There is no rule that says a session has to stay in one."}
+        {"h2": "Shared language and culture", "id": "shared-language-and-culture", "blocks": [
+          {"t": "p", "text": "Some subjects are easier to discuss in Greek. Family dynamics, humour, shame, obligation and the way certain things are said can lose something when translated."},
+          {"t": "p", "text": "Large parts of professional life may happen entirely in English. Sessions can be in Greek, in English or move naturally between the two."}
         ]},
         {"h2": "Living abroad", "id": "living-abroad", "blocks": [
-          {"t": "p", "text": "Living abroad eventually becomes ordinary life. You have a job, friends, routines and perhaps a partner or children there."},
-          {"t": "p", "text": "Greece still remains present in practical and emotional ways. Parents age in another country. Family opinions continue from a distance. You may spend years saying you will probably return one day without ever deciding whether you want to."},
-          {"t": "p", "text": "I am familiar with that tension from my own international work and life."}
+          {"t": "p", "text": "Living abroad can create practical and personal questions that stay in the background for years. Parents and family may be in another country. A partner may have a different idea of where home is. Returning to Greece may remain an open question without becoming a real plan."},
+          {"t": "p", "text": "Those issues do not need to be the reason for therapy, but they are useful context when they matter."}
         ]},
-        {"h2": "Career and migration", "id": "career-and-migration", "blocks": [
-          {"t": "p", "text": "For many Greeks abroad, work is part of why they left."},
-          {"t": "p", "text": "Losing a job can therefore reopen much more than the question of employment. A promotion may make staying abroad easier professionally while making the decision to return harder. A relationship may have two completely different ideas of where home is."},
-          {"t": "p", "text": "It still takes up a lot of space when you are the one deciding."}
+        {"h2": "Work and professional context", "id": "work-and-professional-context", "blocks": [
+          {"t": "p", "text": "Many Greek-speaking clients who find this practice relevant work in technology, startups, business or other demanding international careers."},
+          {"t": "p", "text": "Before psychotherapy, I spent more than 18 years in product and growth. Both the professional environment and the experience of living and working across countries are familiar contexts."}
         ]},
-        {"h2": "What you can bring", "id": "what-you-can-bring", "blocks": [
-          {"t": "p", "text": "The therapy doesn’t have to be about being Greek or living abroad."},
-          {"t": "p", "text": "People come with relationship problems, separation, anxiety, burnout, grief, family conflict, career decisions and other difficulties that happen to be easier to discuss in Greek."}
+        {"h2": "What people bring", "id": "what-people-bring", "blocks": [
+          {"t": "p", "text": "Therapy can be about relationship problems, anxiety, burnout, separation, family conflict, grief, career decisions or anything else that would normally bring somebody to psychotherapy."},
+          {"t": "p", "text": "Being Greek is context, not the subject you are required to talk about."}
         ]},
-        {"h2": "How I work", "id": "how-i-work", "blocks": [
-          {"t": "p", "text": "My approach is integrative and fairly direct. I ask questions, look closely at what has happened and tell you what I notice."},
-          {"t": "p", "text": "A session might stay entirely in Greek, entirely in English or move between the two without ceremony."}
-        ]},
-        {"h2": "Online work and location", "id": "online-work-and-location", "blocks": [
-          {"t": "p", "text": "Sessions are online by video. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are located and the rules that apply there."}
+        {"h2": "Practicalities", "id": "practicalities", "blocks": [
+          {"t": "p", "text": "Sessions are online by video. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there."}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Can sessions be entirely in Greek?", "blocks": [{"t": "p", "text": "Yes."}]},
-          {"t": "sub", "h3": "Can we switch between Greek and English?", "blocks": [{"t": "p", "text": "Yes."}]},
-          {"t": "sub", "h3": "Do I need to live outside Greece?", "blocks": [{"t": "p", "text": "No. The page leans into diaspora because the language and migration context is especially relevant there, but the service is not limited to people abroad."}]},
-          {"t": "sub", "h3": "Do you work only with men?", "blocks": [{"t": "p", "text": "My wider practice is positioned mainly towards men in tech, startups, business and demanding careers. Greek-speaking psychotherapy is broader."}]}
+          {"t": "sub", "h3": "Can we switch between Greek and English?", "blocks": [{"t": "p", "text": "Yes. Use whichever language makes the conversation more accurate."}]},
+          {"t": "sub", "h3": "Do I need to live outside Greece?", "blocks": [{"t": "p", "text": "No. This page is particularly relevant to Greeks abroad because finding a Greek-speaking therapist with similar professional context can be difficult locally, but the service is not defined by migration status."}]},
+          {"t": "sub", "h3": "Do you work only with men?", "blocks": [{"t": "p", "text": "No. The wider practice is positioned mainly towards men in tech, startups, business and demanding careers. Greek-speaking psychotherapy is broader."}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
-          {"t": "p", "text": "If you would rather have the conversation in Greek, say so when you contact me."},
+          {"t": "p", "text": "If you would prefer to work in Greek, mention it when you contact me."},
           {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
         ]}
       ]
@@ -566,19 +563,18 @@ window.SITE_COPY = {
       "type": "problem",
       "seoTitle": "Relationship Problems for Men | Psychotherapy with Aggelos Mouzakitis",
       "metaDescription": "Psychotherapy for men dealing with recurring conflict, emotional distance, withdrawal, resentment, separation and difficult relationship patterns.",
-      "hero": {"eyebrow": "RELATIONSHIP PROBLEMS", "h1": "Individual psychotherapy for men who are having trouble in a relationship.", "blocks": [
+      "hero": {"eyebrow": "RELATIONSHIP PROBLEMS", "h1": "Individual psychotherapy for men dealing with relationship problems.", "blocks": [
         {"t": "p", "text": "The issue is often obvious. You keep having the same argument. Your partner says you have become distant. Separation has been mentioned. Or both of you have stopped talking properly because you already know how the conversation will go."},
         {"t": "p", "text": "You can work on your part even if your partner never comes to therapy."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Why people come", "id": "why-people-come", "blocks": [
-          {"t": "p", "text": "Relationship problems often become urgent before they become psychologically interesting."},
-          {"t": "p", "text": "A partner says something has to change. Somebody threatens to leave and means it this time. You realise you have been living around the same conflict for years."}
+          {"t": "p", "text": "People often look for therapy when the relationship has become difficult to ignore. A partner may be talking seriously about leaving, or the same conflict may have been repeating for years without either person knowing what to do differently."}
         ]},
         {"h2": "Problem-solving does not always help", "id": "problem-solving-does-not-always-help", "blocks": [
           {"t": "p", "text": "A partner says they feel ignored. You explain why you were busy. They hear another explanation for why their experience should make sense to them. You hear an accusation that ignores everything you have been doing."},
-          {"t": "p", "text": "You may both be arguing accurately and still getting nowhere."},
+          {"t": "p", "text": "Both people can have a valid account of what happened and still repeat the same interaction."},
           {"t": "p", "text": "In therapy we look at what happens next, not only at which account is factually stronger."}
         ]},
         {"h2": "Withdrawal, anger and defensiveness", "id": "withdrawal-anger-and-defensiveness", "blocks": [
@@ -587,9 +583,9 @@ window.SITE_COPY = {
           {"t": "p", "text": "Understanding the pattern doesn’t excuse harmful behaviour."}
         ]},
         {"h2": "Resentment and avoidance", "id": "resentment-and-avoidance", "blocks": [
-          {"t": "p", "text": "Conflict avoidance looks peaceful for a while."},
-          {"t": "p", "text": "You agree to something you don’t want, tell yourself it isn’t worth the argument and carry on. Months later you are furious about a set of decisions your partner may not know you opposed."},
-          {"t": "p", "text": "I would rather work with an awkward honest conversation than a private ledger."}
+          {"t": "p", "text": "Avoiding conflict can reduce tension in the moment and build resentment over time."},
+          {"t": "p", "text": "You agree to something you do not want, decide it is not worth the argument and carry on. Months later, you may be angry about decisions your partner did not know you opposed."},
+          {"t": "p", "text": "Therapy can help bring those disagreements into the open before resentment becomes the main way they are expressed."}
         ]},
         {"h2": "Should I stay?", "id": "should-i-stay", "blocks": [
           {"t": "p", "text": "Therapy doesn’t assume that the relationship should continue."},
@@ -628,10 +624,10 @@ window.SITE_COPY = {
           {"t": "p", "text": "Meetings still have agendas. Colleagues may know very little about what is happening. Clients still want answers."},
           {"t": "p", "text": "That structure can be useful. It can also make it possible to look completely fine until the workday ends."}
         ]},
-        {"h2": "Anger and the story of what happened", "id": "anger-and-the-story-of-what-happened", "blocks": [
-          {"t": "p", "text": "Separation quickly produces very clean explanations. One person ruined everything. You wasted ten years. You were stupid not to see it earlier."},
-          {"t": "p", "text": "Some of those thoughts may contain truth. They are also being formed during a highly charged period."},
-          {"t": "p", "text": "Therapy gives you somewhere to sort the history out without needing the account to be simple."}
+        {"h2": "Making sense of what happened", "id": "making-sense-of-what-happened", "blocks": [
+          {"t": "p", "text": "During separation, people often settle quickly on a simple explanation of what happened: one person ruined everything, years were wasted, or the signs should have been obvious much earlier."},
+          {"t": "p", "text": "Some of that may contain truth, but the account is being formed during a highly charged period when anger, grief and fear are all active."},
+          {"t": "p", "text": "Therapy gives you somewhere to sort through the history without requiring the explanation to be simple."}
         ]},
         {"h2": "Grief after a relationship ends", "id": "grief-after-a-relationship-ends", "blocks": [
           {"t": "p", "text": "Missing somebody doesn’t necessarily mean you should go back."},
@@ -649,8 +645,8 @@ window.SITE_COPY = {
           {"t": "p", "text": "Handovers, school events, money, new partners and decisions about the children can keep emotions active. Psychotherapy can help with your side of that. It is not legal advice and does not replace specialist family support where that is needed."}
         ]},
         {"h2": "Reconciliation", "id": "reconciliation", "blocks": [
-          {"t": "p", "text": "A good week can make returning feel obvious. A bad interaction can make the opposite feel obvious."},
-          {"t": "p", "text": "Before treating either feeling as a decision, I want to know what has actually changed."}
+          {"t": "p", "text": "Feelings about reconciliation can change quickly during a separation. A good week may make returning feel possible; a painful interaction may make the opposite feel obvious."},
+          {"t": "p", "text": "Before treating either reaction as a decision, it is useful to understand what has actually changed and what has not."}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you are going through a separation or divorce and want somewhere to think clearly, book a consultation."},
@@ -667,29 +663,29 @@ window.SITE_COPY = {
       "seoTitle": "When Work Is Affecting Your Relationship | Psychotherapy",
       "metaDescription": "Psychotherapy for when work, ambition, burnout or professional pressure is creating distance, conflict or resentment in a relationship.",
       "hero": {"eyebrow": "WORK & RELATIONSHIPS", "h1": "When work is starting to damage the relationship.", "blocks": [
-        {"t": "p", "text": "The company genuinely needs you this week. Your partner is also furious that this has been true every week since January."},
+        {"t": "p", "text": "Work can be genuinely demanding and still create a relationship problem when the same pressure repeatedly determines evenings, weekends and plans."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "How the shift happens", "id": "how-the-shift-happens", "blocks": [
-          {"t": "p", "text": "It rarely starts with a decision to put work first."},
+          {"t": "p", "text": "It usually develops gradually rather than through a deliberate decision to put work first."},
           {"t": "p", "text": "A difficult quarter needs more hours. The team gets smaller. A promotion increases responsibility. A client becomes unstable. You keep your phone nearby because something important really could happen."},
           {"t": "p", "text": "Then one day the temporary arrangement is simply the arrangement."}
         ]},
-        {"h2": "“I’m doing this for us”", "id": "im-doing-this-for-us", "blocks": [
+        {"h2": "Work, security and the relationship", "id": "work-security-and-the-relationship", "blocks": [
           {"t": "p", "text": "People often mean this sincerely."},
           {"t": "p", "text": "Work pays for the house, creates security and funds the life you are building together. Your partner may still feel that the relationship has been organised around your job."},
-          {"t": "p", "text": "I don’t find it very useful to argue about which contribution should count more. I want to know what the current arrangement actually looks like and whether both people are still willing to live inside it."}
+          {"t": "p", "text": "The useful question is what the current arrangement actually looks like, what it costs each person and whether both people are still willing to live with it."}
         ]},
-        {"h2": "The workday ends before the thinking does", "id": "the-workday-ends-before-the-thinking-does", "blocks": [
+        {"h2": "When work follows you home", "id": "when-work-follows-you-home", "blocks": [
           {"t": "p", "text": "You close the laptop and continue thinking about the company for the rest of the evening."},
           {"t": "p", "text": "A meeting gets replayed. You check whether someone replied. Tomorrow’s difficult conversation has already started in your head."},
-          {"t": "p", "text": "From the inside, this feels like responsibility. From the other side of the table, it often looks like absence."}
+          {"t": "p", "text": "From your side, this may feel like responsibility. To your partner, it can feel like you are not really there."}
         ]},
         {"h2": "Why work can feel easier", "id": "why-work-can-feel-easier", "blocks": [
           {"t": "p", "text": "Work gives many capable people something relationships do not: clear problems, measurable progress and a sense of competence."},
           {"t": "p", "text": "That becomes relevant when every difficult evening ends with another hour at the laptop or another task that suddenly feels urgent."},
-          {"t": "p", "text": "Sometimes work really does need the extra hour. If this keeps happening whenever home gets difficult, I want to understand that too."}
+          {"t": "p", "text": "Sometimes work really does need the extra hour. If work repeatedly becomes easier to return to whenever home feels difficult, that pattern is worth understanding too."}
         ]},
         {"h2": "Founders and business owners", "id": "founders-and-business-owners", "blocks": [
           {"t": "p", "text": "Founders have a particularly difficult version of this because there is rarely a clean external boundary. The company will happily take as much attention as you give it."},
@@ -723,7 +719,7 @@ window.SITE_COPY = {
       "type": "problem",
       "seoTitle": "Burnout Therapist | Therapy for Burnout & Work Stress",
       "metaDescription": "Online psychotherapy for burnout, exhaustion and difficulty switching off in tech and demanding careers, especially when rest alone is no longer solving the issue.",
-      "hero": {"eyebrow": "BURNOUT & CAN’T SWITCH OFF", "h1": "Therapy for burnout when you can’t switch off.", "sub": "Burnout does not always look like collapse.", "blocks": [
+      "hero": {"eyebrow": "BURNOUT & CAN’T SWITCH OFF", "h1": "Therapy for burnout when you can’t switch off.", "sub": "You can be burned out and still be performing well at work.", "blocks": [
         {"t": "p", "text": "A lot of people remain productive for a long time. The calendar is full, the work is getting done and nobody at the office thinks there is a crisis."},
         {"t": "p", "text": "Outside work, sleep gets worse, patience gets shorter and time off stops doing what it used to do."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
@@ -738,19 +734,18 @@ window.SITE_COPY = {
           {"t": "p", "text": "Others spend half of it checking messages and the other half dreading the return. Some turn the holiday into a different project because doing nothing feels worse."},
           {"t": "p", "text": "At that point, hours worked are only part of the picture."}
         ]},
-        {"h2": "Sometimes the workload is ridiculous", "id": "sometimes-the-workload-is-ridiculous", "blocks": [
-          {"t": "p", "text": "Therapy is not going to make an understaffed team properly staffed."},
-          {"t": "p", "text": "An abusive manager remains abusive. A founder with six months of runway has a real business problem. A role that quietly became two roles is still badly designed."},
-          {"t": "p", "text": "I don’t want to psychologise an external problem just because we are sitting in a therapy session."}
+        {"h2": "When the workload is the problem", "id": "when-the-workload-is-the-problem", "blocks": [
+          {"t": "p", "text": "Therapy cannot make an understaffed team properly staffed. An abusive manager remains abusive. A founder with six months of runway has a real business problem. A role that quietly became two roles is still badly designed."},
+          {"t": "p", "text": "External problems should not be turned into psychological ones simply because they are being discussed in therapy."}
         ]},
-        {"h2": "Responsibility without a stopping point", "id": "responsibility-without-a-stopping-point", "blocks": [
+        {"h2": "When responsibility has no clear limit", "id": "when-responsibility-has-no-clear-limit", "blocks": [
           {"t": "p", "text": "The more difficult pattern appears when the external pressure combines with an internal rule that says you should be able to carry all of it."},
           {"t": "p", "text": "You solved the difficult thing once, so people bring you the next one. You keep saying yes because dropping something feels irresponsible. Eventually there is no obvious moment when enough becomes enough."}
         ]},
         {"h2": "Losing motivation", "id": "losing-motivation", "blocks": [
-          {"t": "p", "text": "Burnout often flattens interest before it destroys ability."},
-          {"t": "p", "text": "Work that used to absorb you starts feeling irritating. You force yourself through tasks that were once easy and then worry that the loss of motivation means you chose the wrong career."},
-          {"t": "p", "text": "Maybe you did. I am cautious about making the largest career decision of your life while you are completely exhausted."},
+          {"t": "p", "text": "Burnout can reduce motivation before it affects performance."},
+          {"t": "p", "text": "Work that used to absorb you starts feeling irritating. Tasks that were once easy require much more effort, and the loss of motivation can start raising questions about whether you chose the wrong career."},
+          {"t": "p", "text": "That may eventually be an important career question, but it is difficult to assess clearly while you are completely exhausted."},
           {"t": "ctas", "items": [{"label": "Career change & decisions", "href": "/career-transition-therapy/"}]}
         ]},
         {"h2": "Work and self-worth", "id": "work-and-self-worth", "blocks": [
@@ -760,8 +755,8 @@ window.SITE_COPY = {
         ]},
         {"h2": "What therapy focuses on", "id": "what-therapy-focuses-on", "blocks": [
           {"t": "p", "text": "People use different language for this: burnout, work stress, exhaustion or simply not being able to switch off. The label matters less than the pattern and what is keeping it going."},
-          {"t": "p", "text": "I look at the whole picture: the role, sleep, workload, relationships, how responsibility is handled and what happens when you try to stop."},
-          {"t": "p", "text": "Sometimes the conclusion is practical and external. Sometimes the same pattern has followed you across several jobs. Often there is a bit of both."}
+          {"t": "p", "text": "Therapy looks at the role, sleep, workload, relationships, how responsibility is handled and what happens when you try to stop."},
+          {"t": "p", "text": "Sometimes the main conclusion is practical and external. Sometimes the same pattern has followed you across several jobs. Often both are relevant."}
         ]},
         {"h2": "Continue with", "id": "continue-with", "blocks": [
           {"t": "ctas", "items": [{"label": "Therapy for men", "href": "/therapy-for-men-in-tech/"}, {"label": "Psychotherapy for executives", "href": "/therapy-for-executives/"}, {"label": "Therapy for entrepreneurs, founders and business owners", "href": "/therapy-for-founders/"}]}
@@ -786,26 +781,25 @@ window.SITE_COPY = {
       "type": "problem",
       "seoTitle": "Therapy for Career Change & Difficult Career Decisions",
       "metaDescription": "Psychotherapy for career change, job loss and difficult career decisions when work, identity, fear and self-worth have become difficult to separate.",
-      "hero": {"eyebrow": "CAREER CHANGE & DECISIONS", "h1": "Psychotherapy for career decisions that have stopped being only about the job.", "blocks": [
-        {"t": "p", "text": "You have wanted to leave for a year. The salary is good, your family is used to it and another chunk of equity vests in six months."},
-        {"t": "p", "text": "There is nothing irrational about finding that difficult."},
+      "hero": {"eyebrow": "CAREER CHANGE & DECISIONS", "h1": "Therapy for career change and difficult career decisions.", "blocks": [
+        {"t": "p", "text": "You may have wanted to leave for a year, but the salary is good, your family is used to it and another chunk of equity vests in six months."},
+        {"t": "p", "text": "Career decisions become more complicated when income, identity, family expectations and self-worth are tied to the same choice."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Leaving a good job", "id": "leaving-a-good-job", "blocks": [
-          {"t": "p", "text": "Good jobs are often harder to leave than bad ones."},
-          {"t": "p", "text": "A respectable company, decent money and a role you are still good at do not give you a clean reason to go. Nothing is bad enough to force you out. The decision stays with you."},
-          {"t": "p", "text": "People sometimes wait for the job to become worse so they can leave without feeling responsible for the choice."}
+          {"t": "p", "text": "A good job can be difficult to leave because nothing is bad enough to force the decision. The company may be respectable, the money decent and the role one you are still good at."},
+          {"t": "p", "text": "Without a clear external reason to leave, the choice remains yours. Some people end up waiting for the job to become worse because that would make the decision easier to justify."}
         ]},
         {"h2": "More analysis", "id": "more-analysis", "blocks": [
           {"t": "p", "text": "You know the salary. You have researched the market. You have discussed the title, risk, commute and future options. Six months later, the decision is still open."},
-          {"t": "p", "text": "When that happens, I stop assuming information is the missing piece."},
+          {"t": "p", "text": "When that happens, information is probably no longer the missing piece."},
           {"t": "p", "text": "The harder part may be losing status, earning less for a while, disappointing somebody or accepting that a career you invested heavily in no longer fits."}
         ]},
         {"h2": "Career identity", "id": "career-identity", "blocks": [
           {"t": "p", "text": "Work gives more than income."},
           {"t": "p", "text": "It gives structure, expertise, community and an answer to the question “what do you do?” Leaving then means giving up a version of yourself that took years to build."},
-          {"t": "p", "text": "Calling this sunk-cost thinking is sometimes too neat. You may have spent fifteen years becoming the person who has this job."}
+          {"t": "p", "text": "A purely financial idea such as sunk cost does not capture everything involved. You may have spent fifteen years building the expertise, identity and relationships attached to this role."}
         ]},
         {"h2": "Job loss", "id": "job-loss", "blocks": [
           {"t": "p", "text": "Redundancy and company failure create immediate practical problems. They can also land as rejection."},
@@ -821,9 +815,9 @@ window.SITE_COPY = {
           {"t": "p", "text": "Psychotherapy gives us more room when the choice is tangled up with fear, self-worth, family expectations, grief or a pattern that has appeared in other parts of life."},
           {"t": "ctas", "items": [{"label": "Professional coaching", "href": "/professional-coaching/"}, {"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}, {"label": "Psychotherapy for executives", "href": "/therapy-for-executives/"}, {"label": "Therapy vs coaching", "href": "/therapy-vs-coaching/"}]}
         ]},
-        {"h2": "How I work with career decisions", "id": "how-i-work-with-career-decisions", "blocks": [
+        {"h2": "How therapy approaches career decisions", "id": "how-therapy-approaches-career-decisions", "blocks": [
           {"t": "p", "text": "The timeline is useful here. What changed? When did the current situation stop being acceptable? What still makes staying attractive? What are you expecting the alternative to solve?"},
-          {"t": "p", "text": "My Jobs to be Done background makes this kind of investigation familiar. In psychotherapy, we can follow the decision further when the material warrants it."}
+          {"t": "p", "text": "My Jobs to be Done background makes that kind of investigation familiar. Psychotherapy gives us room to follow the decision further when fear, self-worth, family expectations or recurring patterns become part of it."}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you have been circling the same career decision for months, book a consultation."},
@@ -839,9 +833,8 @@ window.SITE_COPY = {
       "type": "problem",
       "seoTitle": "Therapy for Anxiety & Overthinking | Aggelos Mouzakitis",
       "metaDescription": "Online psychotherapy for anxiety, overthinking, constant scenario-running and difficult decisions, particularly for men in tech and demanding careers.",
-      "hero": {"eyebrow": "ANXIETY & OVERTHINKING", "h1": "When thinking stops producing new information.", "blocks": [
-        {"t": "p", "text": "You research the decision until you feel calmer. A few hours later, another objection appears and the analysis starts again."},
-        {"t": "p", "text": "At some point the research has stopped helping."},
+      "hero": {"eyebrow": "ANXIETY & OVERTHINKING", "h1": "Therapy for anxiety and overthinking.", "sub": "Overthinking can continue long after there is useful information left to gather.", "blocks": [
+        {"t": "p", "text": "You research the decision until you feel calmer, then another objection appears and the analysis starts again. The problem is no longer a lack of information."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
@@ -851,12 +844,12 @@ window.SITE_COPY = {
           {"t": "p", "text": "The useful part is the sequence: what starts the thinking, what settles it for a while and what makes it return."}
         ]},
         {"h2": "The demand for certainty", "id": "the-demand-for-certainty", "blocks": [
-          {"t": "p", "text": "Good analysis improves a decision. Chronic overthinking asks for something analysis cannot provide: certainty that you will not regret the choice."},
-          {"t": "p", "text": "Another article, conversation or spreadsheet helps for a while and then expires. The mind finds the exception and starts again."}
+          {"t": "p", "text": "Good analysis improves a decision. Overthinking often continues because the aim has shifted from making a reasonable choice to finding certainty that the choice will not be regretted."},
+          {"t": "p", "text": "Another article, conversation or spreadsheet can provide temporary relief without resolving that underlying demand for certainty."}
         ]},
         {"h2": "Real risks", "id": "real-risks", "blocks": [
           {"t": "p", "text": "A weak job market is real. Sometimes the company really is unstable. Your partner may genuinely be difficult to read."},
-          {"t": "p", "text": "I don’t think therapy is useful when it treats ordinary uncertainty as pathology."},
+          {"t": "p", "text": "Ordinary uncertainty does not need to be treated as pathology."},
           {"t": "p", "text": "The question is whether your thinking is helping you respond to the risk or whether it has become the price you pay before allowing yourself to act."}
         ]},
         {"h2": "Self-trust", "id": "self-trust", "blocks": [
@@ -865,13 +858,12 @@ window.SITE_COPY = {
           {"t": "p", "text": "Eventually the search for the perfect adviser becomes part of the same loop."}
         ]},
         {"h2": "Anxiety that looks productive", "id": "anxiety-that-looks-productive", "blocks": [
-          {"t": "p", "text": "Anxiety doesn’t always slow people down. It can make them prepare more, check more and work harder."},
-          {"t": "p", "text": "That version is especially easy to miss in professional environments because it gets rewarded."},
-          {"t": "p", "text": "You can become more successful and less able to stop."}
+          {"t": "p", "text": "Anxiety can increase preparation, checking and work rather than slowing somebody down."},
+          {"t": "p", "text": "That can be difficult to notice in professional environments because the behaviour is often rewarded, even when the person becomes less able to stop."}
         ]},
-        {"h2": "How I work", "id": "how-i-work", "blocks": [
-          {"t": "p", "text": "In sessions we map the sequence closely. What triggered the anxiety? What did you think? What did you do to reduce it? How long did the relief last?"},
-          {"t": "p", "text": "We are not trying to stop you thinking. We are looking at when thinking helps and when it mainly buys temporary certainty."}
+        {"h2": "How therapy can help", "id": "how-therapy-can-help", "blocks": [
+          {"t": "p", "text": "Sessions look closely at the sequence: what triggered the anxiety, what you thought, what you did to reduce it and how long the relief lasted."},
+          {"t": "p", "text": "The aim is not to stop useful thinking. It is to distinguish analysis that improves a decision from analysis that mainly buys temporary certainty."}
         ]},
         {"h2": "Continue with", "id": "continue-with", "blocks": [
           {"t": "ctas", "items": [{"label": "Therapy for men", "href": "/therapy-for-men-in-tech/"}, {"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}]}
@@ -890,9 +882,9 @@ window.SITE_COPY = {
       "type": "problem",
       "seoTitle": "Therapy for Achievement, Perfectionism & Self-Worth | Aggelos Mouzakitis",
       "metaDescription": "Psychotherapy for people whose self-worth has become closely tied to achievement, performance, comparison, perfectionism or fear of failure.",
-      "hero": {"eyebrow": "ACHIEVEMENT, FAILURE & SELF-WORTH", "h1": "When success keeps becoming the new baseline.", "blocks": [
-        {"t": "p", "text": "The promotion feels good for a weekend. On Monday it is the new normal."},
-        {"t": "p", "text": "For some people, achievement stops feeling like satisfaction and starts functioning more like temporary relief."},
+      "hero": {"eyebrow": "ACHIEVEMENT, FAILURE & SELF-WORTH", "h1": "Psychotherapy for achievement, perfectionism and self-worth.", "blocks": [
+        {"t": "p", "text": "A promotion, strong review or business win can feel good and still become the new normal very quickly."},
+        {"t": "p", "text": "For some people, achievement gradually becomes one of the main ways they regulate how they feel about themselves."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
@@ -902,12 +894,11 @@ window.SITE_COPY = {
         ]},
         {"h2": "Comparison", "id": "comparison", "blocks": [
           {"t": "p", "text": "Technology and business provide an endless supply of people who appear to be ahead."},
-          {"t": "p", "text": "There is always somebody younger, better funded, more senior or moving faster. The benchmark keeps moving because the comparison is not only measuring progress. It is also settling, briefly, the fear of being behind."}
+          {"t": "p", "text": "There is always somebody younger, better funded, more senior or moving faster. Comparison can become less about measuring progress and more about finding temporary reassurance that you are not falling behind."}
         ]},
-        {"h2": "Where achievement became useful", "id": "where-achievement-became-useful", "blocks": [
+        {"h2": "What achievement is doing for you", "id": "what-achievement-is-doing-for-you", "blocks": [
           {"t": "p", "text": "Doing well may have brought praise, independence or a reliable way to reduce conflict at home. For others, it was simply the first place they felt competent."},
-          {"t": "p", "text": "I don’t assume there is one origin story."},
-          {"t": "p", "text": "I do want to know what achievement currently provides that feels difficult to get elsewhere."}
+          {"t": "p", "text": "There is no single explanation for how this develops. The useful question is what achievement currently provides that feels difficult to get elsewhere."}
         ]},
         {"h2": "Perfectionism", "id": "perfectionism", "blocks": [
           {"t": "p", "text": "High standards are often rewarded for years."},
@@ -925,8 +916,8 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "Relationship problems", "href": "/relationship-problems-men/"}]}
         ]},
         {"h2": "Therapy", "id": "therapy", "blocks": [
-          {"t": "p", "text": "I am not trying to make ambitious people less ambitious."},
-          {"t": "p", "text": "I am interested in whether the ambition still belongs to you, what happens when you fail, and whether a result gets to decide how you feel about yourself for the rest of the week."}
+          {"t": "p", "text": "The goal is not to make ambitious people less ambitious."},
+          {"t": "p", "text": "The question is whether the ambition still feels like yours, what happens when you fail and how much authority a result gets to have over how you feel about yourself."}
         ]},
         {"h2": "Continue with", "id": "continue-with", "blocks": [
           {"t": "ctas", "items": [{"label": "Therapy for men", "href": "/therapy-for-men-in-tech/"}, {"label": "Psychotherapy for executives", "href": "/therapy-for-executives/"}]}
@@ -945,31 +936,29 @@ window.SITE_COPY = {
       "type": "resource",
       "seoTitle": "Considering Therapy? What to Expect | Aggelos Mouzakitis",
       "metaDescription": "A plain explanation of what psychotherapy with Aggelos Mouzakitis is like, what happens in sessions, how often therapy meets and whether it may fit.",
-      "hero": {"eyebrow": "CONSIDERING THERAPY", "h1": "If you are wondering whether you “need therapy”, this page is for you.", "blocks": [
-        {"t": "p", "text": "Most people I work with are not deciding whether they qualify for therapy. They are trying to work out whether talking to a therapist would be useful for a specific thing that is already affecting their life."},
+      "hero": {"eyebrow": "CONSIDERING THERAPY", "h1": "Considering therapy?", "blocks": [
+        {"t": "p", "text": "You do not need to decide whether you “qualify” for therapy before contacting a therapist. The more useful question is whether it could help with something specific that is already affecting your life."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "How serious does it need to be?", "id": "how-serious-does-it-need-to-be", "blocks": [
-          {"t": "p", "text": "There is no collapse requirement."},
-          {"t": "p", "text": "People often wait because they are still working, parenting and generally functioning. Meanwhile the relationship is getting worse, sleep is poor or the same decision has been open for half a year."},
-          {"t": "p", "text": "I would look at cost before severity. How much space is this taking up? What is it doing to your relationships, attention or judgement? How long has the same thing been repeating?"}
+          {"t": "p", "text": "You do not need to be in crisis. People often wait because they are still working, parenting and generally functioning, even while a relationship is deteriorating, sleep is poor or the same decision has remained open for months."},
+          {"t": "p", "text": "A more useful question is what the problem is costing you: how much space it takes up, what it is doing to your relationships, attention or judgement, and how long the same pattern has been repeating."}
         ]},
         {"h2": "“I already understand why I do it”", "id": "i-already-understand-why-i-do-it", "blocks": [
           {"t": "p", "text": "Analytical clients often arrive with a good explanation already. You may understand why you avoid conflict, where the pattern started and what a therapist is likely to say about it. Then the same thing happens again on Thursday."},
-          {"t": "p", "text": "Insight is useful. Therapy gets more interesting where the explanation stops changing the behaviour."}
+          {"t": "p", "text": "Insight is useful, but understanding a pattern intellectually does not always change what happens when the situation appears again."}
         ]},
         {"h2": "What happens for 50–60 minutes?", "id": "what-happens-for-50-60-minutes", "blocks": [
-          {"t": "p", "text": "We talk about the issue that brought you in."},
-          {"t": "p", "text": "I ask specific questions about what happened before and after the moment you are describing. I will tell you when I notice a pattern, a contradiction or an explanation that seems to be doing too much work."},
-          {"t": "p", "text": "Some sessions stay close to the immediate situation. Others move into earlier experiences, family or relationships because that is where the material leads."}
+          {"t": "p", "text": "Sessions start with the issue that brought you in."},
+          {"t": "p", "text": "We look closely at what happened before and after the moment you are describing. I will point out patterns, contradictions or explanations that seem important when they appear."},
+          {"t": "p", "text": "Some sessions stay close to the immediate situation. Others move into earlier experiences, family or relationships when that helps make sense of what is happening now."}
         ]},
         {"h2": "If you are sceptical", "id": "if-you-are-sceptical", "blocks": [
-          {"t": "p", "text": "You don’t have to believe in therapy as an idea. The first few sessions should give you enough evidence to decide whether the conversations are useful and whether I am somebody you can work with."},
-          {"t": "p", "text": "I think therapy should earn credibility through the work itself."}
+          {"t": "p", "text": "You do not have to believe in therapy as an idea. The first few sessions should give you enough information to decide whether the conversations are useful and whether I am somebody you can work with."}
         ]},
         {"h2": "Starting without a polished explanation", "id": "starting-without-a-polished-explanation", "blocks": [
-          {"t": "p", "text": "A first message can be very simple."},
+          {"t": "p", "text": "You do not need a polished explanation before getting in touch. A first message can be as simple as:"},
           {"t": "lines", "lines": ["“I can’t switch off.”", "“My relationship is going badly.”", "“I keep thinking about leaving.”", "“I don’t really know what is wrong, but I haven’t felt like myself for a while.”"]}
         ]},
         {"h2": "Frequency and commitment", "id": "frequency-and-commitment", "blocks": [
@@ -978,7 +967,7 @@ window.SITE_COPY = {
           {"t": "p", "text": "You can stop whenever you choose. I do ask people to be realistic about commitment. Psychotherapy is different from booking an occasional conversation only when something urgent happens."}
         ]},
         {"h2": "The first conversation", "id": "the-first-conversation", "blocks": [
-          {"t": "p", "text": "Send a short note about what brings you here and where you are located. I read enquiries myself."},
+          {"t": "p", "text": "Send a short note about what brings you here and where you are located."},
           {"t": "p", "text": "If the situation fits what I offer, we arrange an initial conversation. The relevant fee and any location-specific practicalities are made clear before ongoing work begins."}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
@@ -1081,7 +1070,7 @@ window.SITE_COPY = {
           {"t": "quote", "text": "“As a senior marketer myself, it’s not easy finding perspectives that are truly new to me, but Aggelos really knows his stuff, and introduced me to a totally new ways of doing customer interviews for marketing research.”", "cite": "Ophir Prusak · GrowthMentor session"}
         ]},
         {"h2": "About anonymity", "id": "about-anonymity", "blocks": [
-          {"t": "p", "text": "Psychotherapy involves material that people reasonably want to keep private. Anonymous feedback is used for that reason. Public mentoring reviews came from a different kind of work and are labelled separately."}
+          {"t": "p", "text": "Psychotherapy feedback is anonymous because the work involves material people reasonably want to keep private. Public mentoring reviews came from a different kind of work and are labelled separately."}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If the way I work sounds right for you, you can read more about therapy or get in touch."},
@@ -1129,7 +1118,7 @@ window.SITE_COPY = {
       "metaDescription": "Essays on work, ambition, burnout, relationships, career decisions, anxiety, achievement and the psychological life behind demanding careers.",
       "navLabel": "Writing",
       "hero": {"eyebrow": "WRITING", "h1": "Writing on work, relationships and psychotherapy.", "blocks": [
-        {"t": "p", "text": "I write about work, relationships, ambition, decisions and the parts of professional life that are harder to separate from the rest of life."}
+        {"t": "p", "text": "The writing covers work, relationships, ambition, decisions and the parts of professional life that are difficult to separate from the rest of life."}
       ]},
       "sections": [
         {"h2": "Featured", "id": "featured", "blocks": [
@@ -1147,7 +1136,7 @@ window.SITE_COPY = {
           {"t": "sub", "h3": "Relationships & Work", "blocks": [{"t": "p", "text": "Writing on ambition, distance, conflict and what happens when one partner feels they are living around the other’s job."}, {"t": "ctas", "items": [{"label": "Work & Relationships", "href": "/work-affecting-relationship/"}]}]}
         ]},
         {"h2": "Undisguised", "id": "undisguised", "blocks": [
-          {"t": "p", "text": "I also send writing by email through **Undisguised**. It is where I publish more regularly and where some ideas stay because they do not need to become permanent website pages."},
+          {"t": "p", "text": "Undisguised is my email newsletter. It includes essays and shorter ideas about work, relationships, identity and psychotherapy, including pieces that do not need to become permanent website articles."},
           {"t": "ctas", "items": [{"label": "Read Undisguised", "href": "https://www.undisguised.io/"}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
@@ -1166,12 +1155,12 @@ window.SITE_COPY = {
       "metaDescription": "Contact Aggelos Mouzakitis about individual psychotherapy, couples therapy or professional coaching. Online sessions in Greek or English.",
       "hero": {"eyebrow": "CONTACT", "h1": "Tell me briefly what brings you here.", "blocks": [
         {"t": "p", "text": "Include where you are currently located and whether you are asking about individual psychotherapy, couples therapy, professional coaching or are not sure yet."},
-        {"t": "p", "text": "I read enquiries myself."}
+        {"t": "p", "text": "Enquiries are reviewed personally."}
       ]},
       "sections": [
         {"h2": "What happens next", "id": "what-happens-next", "blocks": [
-          {"t": "p", "text": "If the situation falls within what I offer, we arrange an initial conversation. Before ongoing work begins, I will make the fee, session format and any location-specific practicalities clear."},
-          {"t": "p", "text": "If I think another therapist, doctor or specialist service would be more appropriate, I will say so."}
+          {"t": "p", "text": "If the situation falls within what I offer, we arrange an initial conversation. Before ongoing work begins, the fee, session format and any location-specific practicalities are made clear."},
+          {"t": "p", "text": "If another therapist, doctor or specialist service appears more appropriate, I will say so."}
         ]},
         {"h2": "Privacy", "id": "privacy", "blocks": [
           {"t": "p", "text": "Please avoid sending highly sensitive medical or personal information through the first contact form."},
@@ -1189,11 +1178,11 @@ window.SITE_COPY = {
       "seoTitle": "Confidentiality | Aggelos Mouzakitis",
       "metaDescription": "Information about confidentiality, clinical supervision, records, communication and the limits that apply to psychotherapy with Aggelos Mouzakitis.",
       "hero": {"eyebrow": "CONFIDENTIALITY", "h1": "Confidentiality", "blocks": [
-        {"t": "p", "text": "What you say in psychotherapy is treated as confidential, within the professional and legal limits that apply. I explain those limits before ongoing work begins."}
+        {"t": "p", "text": "What you say in psychotherapy is treated as confidential, within the professional and legal limits that apply. Those limits are explained before ongoing work begins."}
       ]},
       "sections": [
         {"h2": "Clinical supervision", "id": "clinical-supervision", "blocks": [
-          {"t": "p", "text": "I use clinical supervision as part of responsible psychotherapy practice. Supervision is handled confidentially and focuses on the quality and safety of the therapeutic work."}
+          {"t": "p", "text": "Clinical supervision is part of responsible psychotherapy practice. It is handled confidentially and focuses on the quality and safety of the therapeutic work."}
         ]},
         {"h2": "Records and communication", "id": "records-and-communication", "blocks": [
           {"t": "p", "text": "Practical communication, records and information collected through the website are handled according to the privacy arrangements that apply to the practice."},
