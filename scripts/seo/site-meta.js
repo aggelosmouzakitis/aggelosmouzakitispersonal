@@ -39,16 +39,18 @@ const COPY = (() => {
 })();
 
 // ─── The one Person node ─────────────────────────────────────────────────────
-// Only facts the site states: BACP registration and the MSc (About, FAQ), the
-// languages (Greek-speaking page, FAQ) and the areas each page covers.
+// Only facts the site states: BACP registration, the MSc, EMDR and somatic
+// training and the universities (About, FAQ), the languages (Greek-speaking
+// page, FAQ) and the areas each page covers. The image is the approved About
+// portrait; the description is the About page's, without its "About …" framing.
 const PERSON_FULL = {
   '@type': 'Person',
   '@id': PERSON_ID,
   name: 'Aggelos Mouzakitis',
   url: ORIGIN + '/',
-  image: abs('/img/aggelos.jpg'),
+  image: abs('/img/aggelos-about.webp'),
   jobTitle: 'BACP-registered psychotherapist',
-  description: COPY.about.metaDescription,
+  description: COPY.about.metaDescription.replace(/^About Aggelos Mouzakitis,\s*/, '').replace(/^./, (ch) => ch.toUpperCase()),
   knowsLanguage: ['en', 'el'],
   knowsAbout: [
     'Psychotherapy', 'Couples therapy', 'Professional coaching', 'Relationship problems',
@@ -69,6 +71,13 @@ const PERSON_FULL = {
     { '@type': 'EducationalOccupationalCredential', credentialCategory: 'degree',
       name: 'MSc Integrative Counselling & Psychotherapy',
       recognizedBy: { '@type': 'CollegeOrUniversity', name: 'University of Derby' } },
+    { '@type': 'EducationalOccupationalCredential', credentialCategory: 'certificate', name: 'EMDR Practitioner' },
+    { '@type': 'EducationalOccupationalCredential', credentialCategory: 'certificate', name: 'Somatic Shaking Practitioner' },
+  ],
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'University of Derby' },
+    { '@type': 'CollegeOrUniversity', name: 'The American College of Greece' },
+    { '@type': 'CollegeOrUniversity', name: 'University of Piraeus' },
   ],
 };
 const PERSON_REF = { '@type': 'Person', '@id': PERSON_ID, name: 'Aggelos Mouzakitis', url: ORIGIN + '/' };

@@ -515,7 +515,7 @@
   const PHOTO_SPLIT = {
     'therapy-for-men-in-tech': {
       id: 'my-background',
-      src: '/img/aggelos-homepage.webp',
+      src: '/img/aggelos-homepage-1600.webp',
       alt: 'Aggelos Mouzakitis speaking on stage at a technology conference',
       pos: '44% 38%'
     },
@@ -777,7 +777,7 @@
       alt: 'Aggelos Mouzakitis'
     },
     context: {
-      src: '/img/aggelos-homepage.webp',
+      src: '/img/aggelos-homepage-1600.webp',
       alt: 'Aggelos Mouzakitis speaking on stage at a technology conference',
       pos: '44% 38%'
     },

@@ -45,6 +45,15 @@ document, not them.
 `scripts/gen-site-pages.js` (`npm run pages`) rewrites every shell and empties
 its `#root`, so run the whole list after it.
 
+## Fonts
+The three typefaces are self-hosted from `fonts/` (the exact WOFF2 subsets
+Google Fonts serves, same unicode ranges). `scripts/fonts.js` lists them and
+builds the `<head>` block: two preloads and the inline `@font-face` rules. The
+page shells get it from `gen-site-pages.js`; the hand-made pages (the two
+tools, `/ask-me-anything/el`, `404.html`) from `node scripts/sync-fonts.js`,
+which only needs re-running when `scripts/fonts.js` changes. File names carry
+the upstream version because `/fonts/*` is cached immutably.
+
 ## Publish
 `netlify.toml` sets `[build] command = "node scripts/build-public.js"` and
 `publish = "public"`. The script copies an allowlist — the pages in

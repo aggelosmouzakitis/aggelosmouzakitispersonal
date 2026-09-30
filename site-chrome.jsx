@@ -21,7 +21,7 @@ const NAV_DATA = window.SITE_NAV || { nav: { items: [], cta: null }, footer: { g
 const CONTACT_URL = '/contact/';
 const EXTERNAL = {
   undisguised: 'https://www.undisguised.io/',
-  linkedin: 'https://linkedin.com/in/growth-product-manager/',
+  linkedin: 'https://www.linkedin.com/in/growth-product-manager/',
   instagram: 'https://www.instagram.com/_aggelosmouzakitis_/',
   tiktok: 'https://www.tiktok.com/@aggelosmouz',
 };

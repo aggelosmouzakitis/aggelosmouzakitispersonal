@@ -266,7 +266,7 @@
   };
   const DARK_TOP = { 'executive-burnout-therapy': 'when-the-workload-is-the-problem' };
   const PHOTO_SPLIT = {
-    'therapy-for-men-in-tech': { id: 'my-background', src: '/img/aggelos-homepage.webp', alt: 'Aggelos Mouzakitis speaking on stage at a technology conference', pos: '44% 38%' },
+    'therapy-for-men-in-tech': { id: 'my-background', src: '/img/aggelos-homepage-1600.webp', alt: 'Aggelos Mouzakitis speaking on stage at a technology conference', pos: '44% 38%' },
     'therapy-for-founders': { id: 'my-background', src: '/img/wtf-friday-speaking.webp', alt: 'Aggelos Mouzakitis leading a workshop', pos: '28% 30%' },
     'therapy-for-executives': { id: 'my-background', src: '/img/aggelos-executives.webp', alt: 'Aggelos Mouzakitis', pos: '50% 0%' },
   };
@@ -371,7 +371,7 @@
   // ── Homepage (reference design) ────────────────────────────────────────────
   const HOME_PHOTOS = {
     hero: { src: '/img/aggelos-home.webp', alt: 'Aggelos Mouzakitis' },
-    context: { src: '/img/aggelos-homepage.webp', alt: 'Aggelos Mouzakitis speaking on stage at a technology conference', pos: '44% 38%' },
+    context: { src: '/img/aggelos-homepage-1600.webp', alt: 'Aggelos Mouzakitis speaking on stage at a technology conference', pos: '44% 38%' },
     about: { src: '/img/wtf-friday-speaking.webp', alt: 'Aggelos Mouzakitis leading a workshop', pos: '28% 30%' },
   };
   function HomePage({ p }) {

@@ -1,0 +1,26 @@
+// sync-fonts.js — write the self-hosted font block (scripts/fonts.js) into
+// the pages that are not generated from a shell: the two free tools,
+// /ask-me-anything/el and 404.html. Replaces either an earlier block between
+// <!-- fonts --> markers or the old Google Fonts links. Run after changing
+// scripts/fonts.js:
+//   node scripts/sync-fonts.js
+
+const fs = require('fs');
+const path = require('path');
+const { FONT_HEAD } = require('./fonts.js');
+
+const ROOT = path.resolve(__dirname, '..');
+const PAGES = ['free-tools/burned-out/index.html', 'free-tools/quit-your-job/index.html', 'ask-me-anything/el/index.html', '404.html'];
+const MARKED = /<!-- fonts -->[\s\S]*?<!-- \/fonts -->/;
+const GOOGLE = /<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*<link[^>]*fonts\.googleapis\.com\/css2[^>]*>(?:<noscript>[\s\S]*?<\/noscript>)?/;
+
+for (const rel of PAGES) {
+  const file = path.join(ROOT, rel);
+  const html = fs.readFileSync(file, 'utf8');
+  const re = MARKED.test(html) ? MARKED : GOOGLE;
+  if (!re.test(html)) throw new Error(`sync-fonts: no font block or Google Fonts links in ${rel}`);
+  const out = html.replace(re, FONT_HEAD);
+  if (/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(out)) throw new Error(`sync-fonts: Google Fonts still referenced in ${rel}`);
+  fs.writeFileSync(file, out);
+  console.log(`  ${out === html ? 'unchanged' : 'updated  '} ${rel}`);
+}

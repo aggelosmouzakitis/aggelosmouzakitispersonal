@@ -47,6 +47,7 @@ const FILES = [
 // [directory, which files] — a README dropped into img/ is not an asset.
 const DIRS = [
   ['img', (f) => /\.(png|jpe?g|webp|avif|gif|svg|ico)$/i.test(f)],
+  ['fonts', (f) => /\.woff2$/i.test(f)], // self-hosted, see scripts/fonts.js
   ['archive', () => true],
 ];
 
