@@ -27,7 +27,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const { ORIGIN, PAGES } = require('./site-meta.js');
-const { hashOf, SRC_RE } = require('./stamp-assets.js');
+const { hashOf, SRC_RE, ICON_RE } = require('./stamp-assets.js');
 const { serve: netlifyServe, loadRedirects, PUBLIC } = require('./netlify-emulator.js');
 const { LEGACY, INTERNAL } = require('./routes.js');
 const { build: buildPublic } = require('../build-public.js');
@@ -316,11 +316,12 @@ async function main() {
   // ── Cache busting: every bundle URL must carry its current content hash ───
   // netlify.toml serves /*.js as immutable for a year, so a page that points at
   // a stale ?v= pins returning visitors to old JS — and the site's CSS lives
-  // inside those bundles, so a stale pin silently reverts the design.
+  // inside those bundles, so a stale pin silently reverts the design. The
+  // site-icon links are stamped the same way.
   for (const p of PAGES) {
     const t = await trace(p.url);
     if (t.status !== 200) continue;
-    for (const m of t.body.matchAll(SRC_RE)) {
+    for (const m of [...t.body.matchAll(SRC_RE), ...t.body.matchAll(ICON_RE)]) {
       const [, asset, query] = m;
       const want = hashOf(asset);
       if (!want) continue; // not a bundle we ship

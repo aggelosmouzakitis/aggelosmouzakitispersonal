@@ -1,5 +1,6 @@
-// stamp-assets.js — rewrite every local <script src="/x.js?v=…"> to the file's
-// content hash.
+// stamp-assets.js — rewrite every local <script src="/x.js?v=…">, and every
+// site-icon link (<link href="/favicon….png|ico?v=…">, apple-touch-icon,
+// android-chrome), to the file's content hash.
 //
 // netlify.toml serves /*.js with `max-age=31536000, immutable`, which is right
 // only if the URL changes when the file does. The ?v= number used to be typed
@@ -11,6 +12,10 @@
 // Hashing the file removes the decision: the URL changes exactly when the
 // bytes change, and never otherwise. seo-check.js fails if any page is stamped
 // with anything but the current hash, so this cannot silently rot again.
+//
+// The icons keep fixed names (/favicon.ico is also requested by browsers on
+// their own), so their links get the same treatment: a new icon reaches every
+// returning visitor on their next page view instead of waiting out a cache.
 //
 // Run after `npm run build` (the hash must match the built file):
 //   node scripts/seo/stamp-assets.js
@@ -51,15 +56,18 @@ function hashOf(asset) {
 
 // src="/name.js?v=anything" — local, root-level bundles only.
 const SRC_RE = /src="(\/[A-Za-z0-9._-]+\.js)(\?v=[^"]*)?"/g;
+// href="/favicon-32x32.png?v=anything" — the root-level site icons.
+const ICON_RE = /href="(\/(?:favicon|apple-touch-icon|android-chrome)[A-Za-z0-9._-]*\.(?:ico|png))(\?v=[^"]*)?"/g;
 
 function stamp(html) {
   const seen = new Set();
-  const out = html.replace(SRC_RE, (m, asset) => {
+  const withHash = (attr) => (m, asset) => {
     const h = hashOf(asset);
     if (!h) return m; // not a file we ship — leave it exactly as it is
     seen.add(asset);
-    return `src="${asset}?v=${h}"`;
-  });
+    return `${attr}="${asset}?v=${h}"`;
+  };
+  const out = html.replace(SRC_RE, withHash('src')).replace(ICON_RE, withHash('href'));
   return { out, seen };
 }
 
@@ -79,4 +87,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { hashOf, stamp, SRC_RE };
+module.exports = { hashOf, stamp, SRC_RE, ICON_RE };

@@ -497,25 +497,45 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Site icons: fixed names, so one day, not a year. Pages link them with a
+# content-hash ?v= (scripts/seo/stamp-assets.js), so a new icon shows at once
+# wherever those links are read; the bare URLs (the /favicon.ico browsers
+# request on their own, the manifest's icons, link previews) catch up within
+# a day instead of keeping a year-old copy.
 [[headers]]
   for = "/favicon.ico"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400"
 
 [[headers]]
-  for = "/favicon.svg"
+  for = "/favicon-16x16.png"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400"
 
 [[headers]]
-  for = "/favicon.png"
+  for = "/favicon-32x32.png"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/favicon-48x48.png"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
 
 [[headers]]
   for = "/apple-touch-icon.png"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/android-chrome-192x192.png"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/android-chrome-512x512.png"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
 
 [[headers]]
   for = "/manifest.json"
