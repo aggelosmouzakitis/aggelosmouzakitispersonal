@@ -240,20 +240,22 @@ function SiteHeader() {
           links(it.items, 'd', () => setOpen(null))));
     }));
 
-  const groups = nav.items.filter((it) => it.items);
-  const singles = nav.items.filter((it) => !it.items);
+  // The mobile menu keeps the desktop order (Home, About, Services, Resources,
+  // FAQ): links stay links, the two groups become accordions in place.
   const mobile = ce('nav', { id: 'site-menu', className: 'mmenu', 'aria-label': 'Primary', hidden: !menu },
     ce('div', { className: 'mmenu__in' },
-      groups.map((g) => {
-        const id = slugOf(g.label);
+      nav.items.map((it) => {
+        if (!it.items) {
+          return ce('a', { key: it.label, href: it.href, className: 'mmenu__link', 'aria-current': isCur(it.href) ? 'page' : undefined }, it.label);
+        }
+        const id = slugOf(it.label);
         const expanded = macc === id;
-        return ce('div', { key: g.label, className: 'mmenu__group' },
+        return ce('div', { key: it.label, className: 'mmenu__group' },
           ce('button', { type: 'button', className: 'mmenu__toggle', 'aria-expanded': expanded ? 'true' : 'false', 'aria-controls': 'm-' + id,
             onClick: () => setMacc(expanded ? null : id) },
-            g.label, ce('span', { className: 'mmenu__sign', 'aria-hidden': 'true' }, expanded ? '−' : '+')),
-          ce('div', { id: 'm-' + id, className: 'mmenu__links', hidden: !expanded }, links(g.items, 'm')));
+            it.label, ce('span', { className: 'mmenu__sign', 'aria-hidden': 'true' }, expanded ? '−' : '+')),
+          ce('div', { id: 'm-' + id, className: 'mmenu__links', hidden: !expanded }, links(it.items, 'm')));
       }),
-      singles.map((it) => ce('a', { key: it.label, href: it.href, className: 'mmenu__link', 'aria-current': isCur(it.href) ? 'page' : undefined }, it.label)),
       nav.cta ? ce('a', { href: nav.cta.href, className: 'mmenu__cta' }, nav.cta.label, ce('span', { 'aria-hidden': 'true' }, '→')) : null));
 
   return ce('header', { className: 'hdr', ref: rootRef },
