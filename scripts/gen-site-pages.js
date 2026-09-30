@@ -61,7 +61,7 @@ function fileFor(url) {
 function shell(p) {
   const isHome = p.id === 'home';
   const isContact = p.id === 'contact';
-  const preload = isHome ? '\n<link rel="preload" as="image" href="/img/aggelos-continuation.webp" fetchpriority="high">' : '';
+  const preload = isHome ? '\n<link rel="preload" as="image" href="/img/aggelos-home.webp" fetchpriority="high">' : '';
   const emailjs = isContact ? '\n<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>' : '';
   const lead = isContact ? '\n<script src="/lead-capture.js"></script>' : '';
   return `<!DOCTYPE html>

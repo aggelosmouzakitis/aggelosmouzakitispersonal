@@ -224,9 +224,9 @@
     }))));
   }
 
-  // Dark section: H2 and a short statement on the left (5fr), the rest on the
-  // right (7fr), top-aligned. The statement is the opening sentence, split off
-  // the first paragraph when that sentence is short.
+  // Dark section: one reading column on the page's centred axis (the same as
+  // every reading section). H2, then the opening sentence as the section lead
+  // (sage) when it is short, then the rest. The dark band is the transition.
   function DarkSection({
     s,
     ctx
@@ -250,28 +250,23 @@
       id: s.id,
       'aria-labelledby': s.id + '-h'
     }, e('div', {
-      className: 'wrap dark__in'
-    }, e('div', {
-      style: {
-        minWidth: 0
-      }
+      className: 'read dark__in'
     }, e('h2', {
       className: 'h2',
       id: s.id + '-h'
-    }, s.h2), statement ? e('p', {
-      className: 'dark__statement'
-    }, rich(statement, ctx)) : null), e('div', {
-      className: 'dark__body flow'
-    }, e(Blocks, {
+    }, s.h2), e('div', {
+      className: 'flow'
+    }, statement ? e('p', {
+      className: 'p p--emph'
+    }, rich(statement, ctx)) : null, e(Blocks, {
       blocks,
       ctx,
       dark: true
     }))));
   }
 
-  // Burnout's dark section: the H2 across the top, then 5/7 — the opening
-  // sentence in sage on the left, the rest on the right with its last line
-  // ruled.
+  // Burnout's dark section: the same single column. The opening sentence is
+  // the lead; the closing line is the section's one (modest, ruled) pull quote.
   function DarkTopSection({
     s,
     ctx
@@ -290,15 +285,15 @@
       id: s.id,
       'aria-labelledby': s.id + '-h'
     }, e('div', {
-      className: 'wrap dark__in dark__in--top'
+      className: 'read dark__in'
     }, e('h2', {
-      className: 'h2 dark__h2-top',
+      className: 'h2',
       id: s.id + '-h'
-    }, s.h2), e('p', {
-      className: 'dark__lead'
-    }, rich(lead, ctx)), e('div', {
-      className: 'dark__body flow'
-    }, e(Blocks, {
+    }, s.h2), e('div', {
+      className: 'flow'
+    }, e('p', {
+      className: 'p p--emph'
+    }, rich(lead, ctx)), e(Blocks, {
       blocks: rest,
       ctx,
       dark: true,
@@ -429,7 +424,7 @@
     return e(React.Fragment, null, e('p', {
       className: 'eyebrow'
     }, h.eyebrow), e('h1', {
-      className: 'h1' + (h1Class ? ' ' + h1Class : ''),
+      className: 'h1' + (h1Class ? ' ' + h1Class : '') + (plain(h.h1).length > 60 ? ' h1--long' : ''),
       id: 'page-title'
     }, h.h1), h.sub ? e('p', {
       className: 'sub'
@@ -494,9 +489,9 @@
       pos: '52% 30%'
     },
     about: {
-      src: '/img/aggelos-continuation.webp',
+      src: '/img/aggelos-about.webp',
       alt: 'Aggelos Mouzakitis',
-      pos: '50% 22%'
+      pos: '50% 0%'
     }
   };
   // At most one strong interruption per page: a dark section, or a photo split.
@@ -532,9 +527,9 @@
     },
     'therapy-for-executives': {
       id: 'my-background',
-      src: '/img/aggelos-opinion.jpeg',
-      alt: 'Aggelos Mouzakitis in conversation',
-      pos: '52% 30%'
+      src: '/img/aggelos-executives.webp',
+      alt: 'Aggelos Mouzakitis',
+      pos: '50% 0%'
     }
   };
   // Text roles the reference designs set explicitly (paragraph index → role).
@@ -557,14 +552,14 @@
       id: s.id,
       'aria-labelledby': s.id + '-h'
     }, e('div', {
-      className: 'wrap'
+      className: 'read'
     }, e('h2', {
       className: 'h2',
       id: s.id + '-h'
     }, s.h2), e('p', {
-      className: 'p p--lead500'
+      className: 'p p--emph'
     }, rich(ps[0].text, ctx)), e('ul', {
-      className: 'grid2'
+      className: 'recog2'
     }, sentences(ps[1].text).map(t => e('li', {
       key: t
     }, rich(t, ctx))))));
@@ -588,7 +583,7 @@
       text: rest
     }] : [];
     const stmtEl = e('p', {
-      className: 'statement',
+      className: where === 'first' ? 'p p--emph' : 'p p--strong',
       key: 'stmt'
     }, rich(stmt, ctx));
     return e(ReadSection, {
@@ -618,11 +613,11 @@
   }) {
     const ps = s.blocks.filter(b => b.t === 'p');
     return e('section', {
-      className: 'sec',
+      className: 'sec sec--step',
       id: s.id,
       'aria-labelledby': s.id + '-h'
     }, e('div', {
-      className: 'wrap'
+      className: 'mid'
     }, e('h2', {
       className: 'h2',
       id: s.id + '-h'
@@ -644,6 +639,33 @@
       })) : null);
     }))));
   }
+  // Practical facts on the 960 axis shared with Relationships, three equal
+  // columns; the explanatory prose returns to the reading column.
+  function PracticalSection({
+    s,
+    ctx
+  }) {
+    const facts = s.blocks.filter(b => b.t === 'pairs');
+    const rest = s.blocks.filter(b => b.t !== 'pairs');
+    return e('section', {
+      className: 'sec',
+      id: s.id,
+      'aria-labelledby': s.id + '-h'
+    }, e('div', {
+      className: 'mid'
+    }, e('h2', {
+      className: 'h2',
+      id: s.id + '-h'
+    }, s.h2), e(Blocks, {
+      blocks: facts,
+      ctx
+    })), e('div', {
+      className: 'read practical__rest flow'
+    }, e(Blocks, {
+      blocks: rest,
+      ctx
+    })));
+  }
   const INDIVIDUAL = {
     'what-brings-people-in': (s, ctx) => e(TriggersSection, {
       s,
@@ -658,6 +680,10 @@
       s,
       ctx,
       where: 'last'
+    }),
+    practicalities: (s, ctx) => e(PracticalSection, {
+      s,
+      ctx
     }),
     relationships: (s, ctx) => e(RoutesSection, {
       s,
@@ -747,7 +773,7 @@
   // ── Homepage (reference design) ────────────────────────────────────────────
   const HOME_PHOTOS = {
     hero: {
-      src: '/img/aggelos-continuation.webp',
+      src: '/img/aggelos-home.webp',
       alt: 'Aggelos Mouzakitis'
     },
     context: {
@@ -862,35 +888,32 @@
       const s1 = sentences(ps[0].text);
       const s2 = sentences(ps[1].text);
       const link = how.blocks.find(b => b.t === 'ctas');
+      // One reading column: H2, the opening sentence as the lead, then the
+      // prose; the closing sentence is the only (body-size) emphasis.
       out.push(e('section', {
         key: 'how',
         className: 'sec',
         id: how.id,
         'aria-labelledby': 'how-h'
       }, e('div', {
-        className: 'wrap'
+        className: 'read'
       }, e('h2', {
         className: 'h2',
         id: 'how-h'
-      }, how.h2), e('p', {
-        className: 'statement home-how__statement'
-      }, s1[0]), e('div', {
-        className: 'home-how'
+      }, how.h2), e('div', {
+        className: 'flow'
       }, e('p', {
+        className: 'p p--emph'
+      }, s1[0]), e('p', {
         className: 'p'
-      }, s1.slice(1).join(' ')), e('div', {
-        style: {
-          minWidth: 0
-        }
-      }, e('p', {
-        className: 'p home-how__lines'
-      }, s2.map((t, i) => e('span', {
-        key: t,
-        className: i === s2.length - 1 ? 'is-last' : i > 0 ? 'is-mid' : null
-      }, t, i < s2.length - 1 ? ' ' : null))), link ? e(Actions, {
+      }, s1.slice(1).join(' ')), s2.length > 1 ? e('p', {
+        className: 'p'
+      }, s2.slice(0, -1).join(' ')) : null, e('p', {
+        className: 'p p--strong'
+      }, s2[s2.length - 1]), link ? e(Actions, {
         items: link.items,
         className: 'links'
-      }) : null)))));
+      }) : null))));
     }
     const ways = S['ways-to-work-with-me'];
     if (ways) {
@@ -1036,7 +1059,7 @@
     }), pair.length === 2 ? e('div', {
       className: 'sec'
     }, e('div', {
-      className: 'wrap compare'
+      className: 'wide compare'
     }, pair.map(s => e('section', {
       key: s.id,
       id: s.id,
@@ -1215,12 +1238,12 @@
           id: s.id,
           'aria-labelledby': s.id + '-h'
         }, e('div', {
-          className: 'wrap'
+          className: 'mid'
         }, e('h2', {
           className: 'h2',
           id: s.id + '-h'
         }, s.h2), e('div', {
-          className: 'cols3'
+          className: 'cols3 cols2'
         }, subs.map(sub => e('div', {
           key: sub.h3,
           className: 'col'
@@ -1658,11 +1681,12 @@
 
 /* Type */
 .eyebrow{margin:0 0 18px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
-.h1{margin:0;max-width:17ch;font-family:var(--font-display);font-weight:400;font-size:clamp(40px,calc(30px + 2.1vw),60px);line-height:1.0;letter-spacing:-.04em;color:var(--heading);text-wrap:balance}
-.hero-read .h1{max-width:16ch}
-.h1--home{max-width:15ch}
+.h1{margin:0;max-width:17ch;font-family:var(--font-display);font-weight:400;font-size:clamp(34px,calc(22px + 2.9vw),60px);line-height:1.0;letter-spacing:-.04em;color:var(--heading);text-wrap:balance}
+.hero-read .h1{max-width:none}
+.h1--home{max-width:none;font-size:clamp(34px,calc(18.5px + 2.9vw),60px)}
+.h1--long{max-width:none;font-size:clamp(34px,calc(20px + 1.95vw),48px);line-height:1.04}
 .sub{margin:22px 0 0;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .6vw),30px);font-weight:650;line-height:1.2;letter-spacing:-.02em;color:var(--green);text-wrap:balance}
-.lead{margin:24px 0 0;max-width:58ch;font-size:clamp(19px,calc(18.4px + .12vw),20px);line-height:1.55;color:var(--body);text-wrap:pretty}
+.lead{margin:24px 0 0;max-width:32em;font-size:clamp(19px,calc(18.4px + .12vw),20px);line-height:1.55;color:var(--body);text-wrap:pretty}
 .sub + .lead{margin-top:26px}
 .lead + .lead{margin-top:16px}
 .h2{margin:0 0 24px;font-family:var(--font-heading);font-size:clamp(30px,calc(26px + 1vw),40px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
@@ -1670,9 +1694,7 @@
 .p{margin:0;font-size:clamp(17px,calc(16px + .14vw),18px);line-height:1.7;color:var(--body);text-wrap:pretty}
 .p strong{font-weight:600;color:var(--heading)}
 .p--emph{font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--heading)}
-.p--lead500{margin:0 0 32px;font-size:clamp(19px,calc(18.4px + .12vw),20px);font-weight:500;line-height:1.5;color:var(--ink-2)}
 .p--strong{font-weight:600;color:var(--heading)}
-.statement{margin:0;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .7vw),32px);font-weight:650;line-height:1.18;letter-spacing:-.02em;color:var(--heading);text-wrap:balance}
 .inl{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor}
 .inl:hover{color:var(--green-pressed)}
 .meta{margin:0;font-size:15px;line-height:1.5;color:var(--meta)}
@@ -1682,9 +1704,8 @@
 .flow>*{margin-top:0;margin-bottom:0}
 .flow>*+*{margin-top:18px}
 .flow>.links,.flow>.actions{margin-top:22px}
-.flow>.statement+*{margin-top:24px}
 .flow>.facts+*{margin-top:32px}
-.flow>*+.statement{margin-top:24px}
+.flow>.p--emph+*{margin-top:20px}
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;margin-top:32px}
 .links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 28px}
 .subsec+.subsec{margin-top:40px}
@@ -1706,19 +1727,14 @@
 .band+.band{margin-top:0}
 .pg>.band:first-child{margin-top:0}
 
-/* Dark section: 5/7, top-aligned */
+/* Dark section: one reading column on the 760 axis */
 .dark{background:var(--forest);color:var(--bone)}
-.dark__in{padding-block:var(--sec);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px clamp(48px,6.5vw,96px);align-items:start}
+.dark__in{padding-block:var(--sec)}
 .dark .h2{color:var(--bone)}
 .dark .p{color:var(--on-forest)}
 .dark .p strong{color:var(--bone)}
-.dark__statement{margin:0;max-width:22ch;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .6vw),30px);font-weight:650;line-height:1.2;letter-spacing:-.02em;color:var(--sage);text-wrap:balance}
-.dark__body{min-width:0;max-width:620px}
-.dark__in--top{row-gap:0}
-.dark__h2-top{grid-column:1/-1;max-width:24ch;margin-bottom:clamp(28px,3vw,40px);font-size:clamp(30px,calc(26px + 1.1vw),42px)}
-.dark__lead{margin:0;max-width:30ch;font-size:clamp(19px,calc(18px + .25vw),21.5px);font-weight:600;line-height:1.45;color:var(--sage);text-wrap:pretty}
+.dark .p--emph{color:var(--sage)}
 .dark .p--rule{padding-left:18px;border-left:2px solid var(--sage);font-weight:600;color:var(--bone)}
-@media (max-width:899px){.dark__in{grid-template-columns:minmax(0,1fr)}.dark__in--top{row-gap:24px}.dark__h2-top{margin-bottom:0}}
 
 /* Photo split: 1:1, the photograph full-bleed */
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);container-type:inline-size}
@@ -1778,9 +1794,9 @@
 .route{min-width:0;padding-top:22px;border-top:1px solid rgba(23,25,25,.24)}
 .route .p{max-width:56ch}
 .route .links{margin-top:22px}
-.grid2{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(40px,5.5vw,80px);border-bottom:1px solid var(--rule)}
-.grid2 li{padding:18px 0 16px;border-top:1px solid var(--rule);font-size:clamp(19px,calc(18px + .2vw),21px);font-weight:500;line-height:1.4;color:var(--heading)}
-@media (max-width:759px){.routes,.grid2{grid-template-columns:minmax(0,1fr)}}
+.recog2{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}
+.recog2 li{padding:20px 0 24px;border-top:1px solid var(--rule);font-size:clamp(17px,calc(16px + .14vw),18px);line-height:1.6;color:var(--heading);text-wrap:pretty}
+@media (max-width:759px){.routes,.recog2{grid-template-columns:minmax(0,1fr)}}
 .facts{margin:0 0 14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--rule-2)}
 .facts div{padding:16px 16px 16px 0}
 .facts dt{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
@@ -1811,7 +1827,7 @@
 .home-fig__disc{background:var(--green)}
 .home-fig__cut{background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,.92) 58%)}
 .home-fig__img{position:absolute;inset:0;overflow:hidden;border-radius:50%;background:var(--forest)}
-.home-fig__img img{position:absolute;left:-6%;top:5%;width:130%;height:130%;max-width:none;object-fit:cover;object-position:47% 0%}
+.home-fig__img img{position:absolute;left:-10%;top:0;width:120%;height:auto;max-width:none}
 @media (max-width:899px){.home-hero__lines{display:none}.home-hero__in{grid-template-columns:minmax(0,1fr)}.home-fig{width:min(80%,320px);justify-self:center}}
 .creds{border-block:1px solid rgba(23,25,25,.16)}
 .creds ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -1820,15 +1836,7 @@
 .creds__a{display:block;font-size:16.5px;font-weight:650;line-height:1.3;color:var(--heading)}
 .creds__b{display:block;margin-top:4px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
 @media (max-width:759px){.creds ul{grid-template-columns:repeat(2,minmax(0,1fr))}.creds li{padding:18px 16px 18px 0;border-left:0}.creds li:nth-child(even){padding:18px 0 18px 16px;border-left:1px solid rgba(23,25,25,.16)}.creds li:nth-child(n+3){border-top:1px solid rgba(23,25,25,.16)}}
-.home-brings>.p{max-width:64ch}
-.home-how__statement{margin:0 0 32px}
-.home-how{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px clamp(40px,6vw,96px);align-items:start}
-.home-how__lines span{display:block}
-.home-how__lines .is-mid{margin-top:8px;font-weight:550;color:var(--heading)}
-.home-how__lines span:first-child+.is-mid{margin-top:14px}
-.home-how__lines .is-last{margin-top:14px;font-weight:650;color:var(--heading)}
-.home-how .links{margin-top:22px}
-@media (max-width:899px){.home-how{grid-template-columns:minmax(0,1fr)}}
+.home-brings>.p{max-width:36em}
 
 /* Therapy vs Coaching */
 .compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px clamp(40px,5.5vw,80px);align-items:start}
@@ -1880,6 +1888,24 @@
 .sp-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .sp-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .sp-form__done{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + .8vw),32px);font-weight:800;letter-spacing:-.03em;color:var(--heading);outline:none}
+
+/* Composition axes: 760 reading (.read), 960 paired/practical (.mid), 1120 comparison (.wide), 1240 hero/photo/services (.wrap).
+   Body measure inside the reading axis: 36em (≈ 72 characters); leads 32em (≈ 62). */
+.mid{width:min(960px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.wide{width:min(1120px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.sec--step{padding-top:clamp(80px,8.4vw,120px)}
+.read .p,.col .p,.compare .p,.contact__aside .p{max-width:36em}
+.read .p--emph{max-width:32em}
+.quote blockquote p{max-width:34em}
+.practical__rest{margin-top:40px}
+.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:760px) and (max-width:1099px){
+  .cols3:not(.cols2){grid-template-columns:minmax(0,1fr);row-gap:0}
+  .cols3:not(.cols2) .col{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:32px;align-content:start;padding-block:22px 30px}
+  .cols3:not(.cols2) .col>*{grid-column:2}
+  .cols3:not(.cols2) .col>.h3{grid-column:1;grid-row:1/span 3}
+}
+@media (max-width:759px){.cols2{grid-template-columns:minmax(0,1fr)}}
 
 @media (max-width:599px){.btn{white-space:normal;text-align:center}}
 `;
