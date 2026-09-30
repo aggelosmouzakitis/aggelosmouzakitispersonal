@@ -12,7 +12,9 @@
 // frame and the close. The words come verbatim from site-copy.jsx; this file
 // only decides how they are set. Where the design sets one paragraph as several
 // elements (a lead line and rows, a statement and the rest), the sentences are
-// split, never reworded (scripts/copy/check-copy.py checks them in order).
+// split, never reworded (scripts/copy/check-copy.py checks them in order). The
+// one exception is the Work & Life Check call to action (WLC_PLACEMENTS and the
+// featured entry on /free-tools/), whose wording belongs to that component.
 
 (function () {
   const { useState, useEffect, useRef } = React;
@@ -69,6 +71,94 @@
   const findCta = (blocks, label) => {
     for (const b of blocks) if (b.t === 'ctas') for (const it of b.items) if (it.label === label) return it;
     return null;
+  };
+
+  // ── The Work & Life Check: one call to action, placed page by page ────────
+  // Three variants: feature (a panel with its own heading and the filled
+  // button; exploratory pages), inline (a lead line and an outlined button;
+  // problem pages) and compact (one line and a text link; service and audience
+  // pages, where Book a consultation stays the primary action). Every link is
+  // a plain <a href> to /work-life-check/?source=<page>-<variant>: the check
+  // reads the source for its analytics (source_page), then drops it from the
+  // address bar; the page's canonical is the bare URL. The wording is the
+  // brief's, placement by placement. Not placed on Contact, Confidentiality,
+  // FAQ, Reviews, About, Couples Therapy or the Greek-speaking page.
+  const WLC_URL = '/work-life-check/';
+  const wlcHref = (source) => WLC_URL + '?source=' + source;
+  const WLC_DEFAULT = {
+    eyebrow: 'Not sure what is actually going on?',
+    headline: 'Take the Work & Life Check',
+    body: 'Four minutes. Five areas. A clearer view of where work is currently costing you most.',
+    button: 'Take the check',
+  };
+  const WLC_BUTTON = 'Take the Work & Life Check';
+  const WLC_PLACEMENTS = {
+    home: { after: 'what-brings-people-here', variant: 'feature', source: 'home-feature',
+      eyebrow: 'Not sure where to start?', headline: 'What is work actually costing you?',
+      body: 'The Work & Life Check looks at five places where professional pressure tends to show up, including recovery, decisions, relationships and how much weight performance is carrying.',
+      button: 'Take the 4-minute check' },
+    'therapy-for-men-in-tech': { after: 'when-work-continues-after-hours', variant: 'inline', source: 'men-in-tech-inline',
+      lead: 'Not sure which part of this is actually the problem?',
+      body: 'The Work & Life Check looks at switching off, recovery, difficult decisions, relationships and the weight of performance.',
+      button: WLC_BUTTON },
+    'executive-burnout-therapy': { after: 'time-off-doesnt-always-fix-it', variant: 'inline', source: 'burnout-inline',
+      lead: 'Not sure whether this is mainly burnout, the job itself or something broader?', button: WLC_BUTTON },
+    'therapy-for-executives': { after: 'what-happens-at-home', variant: 'compact', source: 'executives-compact',
+      body: 'See where the pressure is showing up most.', button: WLC_BUTTON },
+    'therapy-for-founders': { after: 'after-growth-funding-or-exit', variant: 'compact', source: 'founders-compact',
+      body: 'If the company is affecting more than the company, the Work & Life Check can help separate where the pressure is landing.', button: WLC_BUTTON },
+    'career-transition-therapy': { after: 'more-analysis', variant: 'inline', source: 'career-inline',
+      lead: 'If the decision has been open for months, check what else may be keeping it open.', button: WLC_BUTTON },
+    'work-affecting-relationship': { after: 'when-work-follows-you-home', variant: 'inline', source: 'work-relationship-inline',
+      lead: 'See whether the main pressure is work itself, difficulty switching off, recovery or what is happening at home.', button: WLC_BUTTON },
+    'achievement-self-worth': { after: 'perfectionism', variant: 'compact', source: 'achievement-compact',
+      body: 'See how much weight work and performance are carrying elsewhere in your life.', button: WLC_BUTTON },
+    'anxiety-overthinking': { after: 'anxiety-that-looks-productive', variant: 'compact', source: 'anxiety-compact',
+      body: 'See whether the loop is showing up mainly in work, recovery, decisions, relationships or performance.', button: WLC_BUTTON },
+    'considering-therapy': { after: 'the-first-conversation', variant: 'feature', source: 'considering-therapy-feature',
+      eyebrow: 'Still not sure what you would bring?', headline: 'Start with the situation, not a diagnosis.',
+      body: 'The Work & Life Check gives you a structured look at five areas that often bring people here.', button: WLC_BUTTON },
+    'work-with-me': { after: 'which-service-fits', variant: 'compact', source: 'work-with-me-compact',
+      body: 'Not sure what kind of help fits yet?', button: 'Take the Work & Life Check first' },
+    blog: { after: 'featured', variant: 'feature', source: 'blog-feature' },
+  };
+  // The homepage hero keeps Book a consultation first; this is its second action.
+  const WLC_HERO = { label: WLC_BUTTON, href: wlcHref('home-hero') };
+  // The first and featured entry on /free-tools/.
+  const WLC_TOOL = {
+    label: 'Start here',
+    title: 'The Work & Life Check',
+    body: 'A 4-minute check for when work is going fine on paper but something around it is not. See where the friction is showing up: switching off, recovery, decisions, relationships or the weight of performance.',
+    meta: 'About 4 minutes',
+    button: WLC_BUTTON,
+    source: 'free-tools-featured',
+  };
+
+  function WorkLifeCheckCTA({ variant, source, eyebrow, headline, lead, body, button }) {
+    const href = wlcHref(source);
+    if (variant === 'feature') {
+      const c = { eyebrow: eyebrow || WLC_DEFAULT.eyebrow, headline: headline || WLC_DEFAULT.headline, body: body || WLC_DEFAULT.body, button: button || WLC_DEFAULT.button };
+      return e('section', { className: 'sec wlcta-sec', 'aria-labelledby': 'wlcta-h' },
+        e('div', { className: 'read' },
+          e('div', { className: 'wlcta wlcta--feature' },
+            e('p', { className: 'eyebrow' }, c.eyebrow),
+            e('h2', { className: 'wlcta__h', id: 'wlcta-h' }, c.headline),
+            e('p', { className: 'p' }, c.body),
+            e('div', { className: 'actions' }, e('a', { className: 'btn', href }, c.button, ' ', e(Arrow))))));
+    }
+    if (variant === 'inline') {
+      return e('aside', { className: 'read wlcta wlcta--inline', 'aria-label': 'The Work & Life Check' },
+        e('p', { className: 'wlcta__lead' }, lead),
+        body ? e('p', { className: 'p' }, body) : null,
+        e('a', { className: 'btn btn--ghost', href }, button || WLC_BUTTON, ' ', e(Arrow)));
+    }
+    return e('aside', { className: 'read wlcta wlcta--compact', 'aria-label': 'The Work & Life Check' },
+      e('p', { className: 'wlcta__text' }, body),
+      e(TLink, { item: { label: button || WLC_BUTTON, href } }));
+  }
+  const wlcAfter = (id, sectionId, key) => {
+    const w = WLC_PLACEMENTS[id];
+    return w && w.after === sectionId ? e(WorkLifeCheckCTA, Object.assign({ key: key || 'wlc' }, w)) : null;
   };
 
   // ── Blocks ─────────────────────────────────────────────────────────────────
@@ -215,10 +305,12 @@
   const isClose = (s, i, all) => i === all.length - 1 && (s.h2 === 'Contact' || s.h2 === 'How to start');
 
   // ── Heroes ─────────────────────────────────────────────────────────────────
-  function HeroText({ p, ctx, h1Class }) {
+  function HeroText({ p, ctx, h1Class, extra }) {
     const h = p.hero;
     const ps = h.blocks.filter((b) => b.t === 'p');
-    const ctas = [].concat.apply([], h.blocks.filter((b) => b.t === 'ctas').map((b) => b.items));
+    let ctas = [].concat.apply([], h.blocks.filter((b) => b.t === 'ctas').map((b) => b.items));
+    // `extra` joins as the second action, after the page's primary one.
+    if (extra) ctas = ctas.slice(0, 1).concat([extra], ctas.slice(1));
     return e(React.Fragment, null,
       e('p', { className: 'eyebrow' }, h.eyebrow),
       e('h1', { className: 'h1' + (h1Class ? ' ' + h1Class : '') + (plain(h.h1).length > 60 ? ' h1--long' : ''), id: 'page-title' }, h.h1),
@@ -361,7 +453,7 @@
   function Sections({ p, ctx, sections }) {
     const list = sections || p.sections;
     const state = { opened: false };
-    return list.map((s, i) => e(React.Fragment, { key: s.id }, sectionFor(p, s, i, list, ctx, state)));
+    return list.map((s, i) => e(React.Fragment, { key: s.id }, sectionFor(p, s, i, list, ctx, state), wlcAfter(p.id, s.id)));
   }
   function GenericPage({ p }) {
     const ctx = { id: p.id };
@@ -385,7 +477,7 @@
         e('span', { className: 'home-hero__axis' }),
         Array.from({ length: 10 }, (_, i) => e('span', { key: i, className: 'home-hero__field', style: { top: (22 + i * 7) + '%' } }))),
       e('div', { className: 'wrap home-hero__in' },
-        e('div', { className: 'home-hero__text' }, e(HeroText, { p, ctx, h1Class: 'h1--home' })),
+        e('div', { className: 'home-hero__text' }, e(HeroText, { p, ctx, h1Class: 'h1--home', extra: WLC_HERO })),
         e('figure', { className: 'home-fig' },
           e('span', { className: 'home-fig__disc', 'aria-hidden': 'true' }),
           e('span', { className: 'home-fig__cut', 'aria-hidden': 'true' }),
@@ -405,6 +497,7 @@
         e('div', { className: 'wrap' },
           e('h2', { className: 'h2', id: 'brings-h' }, brings.h2),
           e('div', { className: 'flow home-brings' }, e(Blocks, { blocks: brings.blocks, ctx })))));
+      out.push(wlcAfter('home', brings.id, 'wlc'));
     }
 
     const context = S['work-is-part-of-the-context'];
@@ -515,9 +608,21 @@
   }
 
   // ── Free Tools ─────────────────────────────────────────────────────────────
+  // The Work & Life Check comes first, set as the featured entry (the broad
+  // check that routes on); the narrower burnout and career tools follow.
+  function FeaturedTool() {
+    return e('section', { className: 'sec', id: 'the-work-and-life-check', 'aria-labelledby': 'the-work-and-life-check-h' },
+      e('div', { className: 'read tool tool--featured' },
+        e('p', { className: 'eyebrow' }, WLC_TOOL.label),
+        e('h2', { className: 'h2', id: 'the-work-and-life-check-h' }, WLC_TOOL.title),
+        e('div', { className: 'flow' }, e('p', { className: 'p' }, WLC_TOOL.body)),
+        e('div', { className: 'actions' },
+          e('a', { className: 'btn', href: wlcHref(WLC_TOOL.source) }, WLC_TOOL.button, ' ', e(Arrow)),
+          e('span', { className: 'meta' }, WLC_TOOL.meta))));
+  }
   function ToolsPage({ p }) {
     const ctx = { id: p.id };
-    return e(React.Fragment, null, e(Hero, { p, ctx }), p.sections.map((s) => {
+    return e(React.Fragment, null, e(Hero, { p, ctx }), e(FeaturedTool), p.sections.map((s) => {
       const tool = s.blocks.some((b) => b.t === 'meta');
       if (!tool) {
         return e('section', { key: s.id, className: 'sec', id: s.id, 'aria-labelledby': s.id + '-h' },
@@ -547,12 +652,14 @@
       if (isClose(s, i, all)) return e(Close, { key: s.id, s, ctx });
       const subs = s.blocks.filter((b) => b.t === 'sub');
       if (s.id === 'featured') {
-        return e('section', { key: s.id, className: 'sec', id: s.id, 'aria-labelledby': s.id + '-h' },
-          e('div', { className: 'read' },
-            e('h2', { className: 'h2', id: s.id + '-h' }, s.h2),
-            e('div', { className: 'essays' }, subs.map((sub) => e('article', { key: sub.h3, className: 'essay' },
-              e('h3', { className: 'h3' }, sub.h3),
-              e('div', { className: 'flow' }, e(Blocks, { blocks: sub.blocks, ctx })))))));
+        return e(React.Fragment, { key: s.id },
+          e('section', { className: 'sec', id: s.id, 'aria-labelledby': s.id + '-h' },
+            e('div', { className: 'read' },
+              e('h2', { className: 'h2', id: s.id + '-h' }, s.h2),
+              e('div', { className: 'essays' }, subs.map((sub) => e('article', { key: sub.h3, className: 'essay' },
+                e('h3', { className: 'h3' }, sub.h3),
+                e('div', { className: 'flow' }, e(Blocks, { blocks: sub.blocks, ctx }))))))),
+          wlcAfter(p.id, s.id));
       }
       if (subs.length && subs.length === s.blocks.length) {
         return e('section', { key: s.id, className: 'sec', id: s.id, 'aria-labelledby': s.id + '-h' },
@@ -963,6 +1070,23 @@
 /* Free Tools, Writing */
 .tool .actions{margin-top:26px}
 .tool__related{margin-top:18px}
+.tool--featured{padding:clamp(28px,4vw,44px);background:var(--bone-deep);border-top:3px solid var(--green)}
+.tool--featured .eyebrow{margin-bottom:14px}
+
+/* The Work & Life Check call to action (WorkLifeCheckCTA) */
+.wlcta--feature{padding:clamp(28px,4vw,44px);background:var(--bone-deep);border-top:3px solid var(--green)}
+.wlcta--feature .eyebrow{margin-bottom:14px}
+.wlcta__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + 1vw),34px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
+.wlcta--feature .actions{margin-top:26px}
+.wlcta--inline{margin-top:clamp(40px,4.5vw,56px);padding:26px 0 30px;border-top:2px solid var(--green);border-bottom:1px solid var(--rule)}
+.wlcta__lead{margin:0;max-width:32em;font-family:var(--font-heading);font-size:clamp(21px,calc(19.5px + .4vw),24px);font-weight:700;line-height:1.3;letter-spacing:-.015em;color:var(--heading);text-wrap:balance}
+.wlcta--inline .p{margin-top:12px}
+.wlcta--inline .btn{margin-top:22px}
+.btn--ghost{background:transparent;color:var(--green);box-shadow:inset 0 0 0 1.5px var(--green)}
+.btn--ghost:hover{background:var(--green);color:var(--bone)}
+.wlcta--compact{margin-top:clamp(36px,4vw,48px);padding:18px 0 12px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.wlcta__text{margin:0;max-width:36em;font-size:clamp(17px,calc(16px + .14vw),18px);font-weight:600;line-height:1.5;color:var(--heading);text-wrap:pretty}
+.wlcta--compact .tlink{margin-top:2px}
 .essays{border-bottom:1px solid var(--rule)}
 .essay{padding:28px 0;border-top:1px solid var(--rule)}
 .essay .h3{margin-bottom:10px}

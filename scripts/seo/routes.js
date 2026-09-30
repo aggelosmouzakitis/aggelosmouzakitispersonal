@@ -13,6 +13,7 @@ const CANONICAL = [
   '/considering-therapy/', '/therapy-vs-coaching/', '/faq/', '/reviews/', '/free-tools/', '/blog/', '/contact/',
   '/confidentiality/',
 ].map((u) => [u, 200, null, 'canonical']).concat([
+  ['/work-life-check/', 200, null, 'tool'],
   ['/free-tools/quit-your-job/', 200, null, 'tool (kept)'],
   ['/free-tools/burned-out/', 200, null, 'tool (kept)'],
 ]);

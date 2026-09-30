@@ -5,7 +5,7 @@ const reactJs = fs.readFileSync(ROOT + '/node_modules/react/umd/react.production
 const reactDomJs = fs.readFileSync(ROOT + '/node_modules/react-dom/umd/react-dom.production.min.js', 'utf8');
 
 // Every page the site serves: the 25 canonical pages (site-pages.js, from
-// scripts/seo/site-meta.js), the two free tools, and the served pages that are
+// scripts/seo/site-meta.js), the free tools, and the served pages that are
 // deliberately outside the sitemap (EXTRA).
 const EXTRA = [
   'ask-me-anything/el/index.html', // printed QR codes — noindex, see the page

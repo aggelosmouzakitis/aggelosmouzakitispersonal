@@ -54,6 +54,13 @@ var LEAD_SOURCES = {
     tag: 'TOOL',
     label: 'Clarity tool',
     template: 'template_wdsrbdo'
+  },
+  // "Email me my result" on /work-life-check/: the private copy of what the
+  // person asked to be sent (work-life-check.jsx sends their own copy).
+  'work-life-check': {
+    tag: 'TOOL',
+    label: 'Work & Life Check',
+    template: 'template_wdsrbdo'
   }
 };
 function leadSource(id) {

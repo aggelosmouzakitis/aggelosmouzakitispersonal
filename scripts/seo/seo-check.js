@@ -58,7 +58,9 @@ const RETIRED_LABELS = [
   /wtf friday/i, /ask me something/i, /ask me anything/i, /licensed psychotherapist/i,
   /working globally/i, /\bworldwide\b/i,
   /psychotherapy \/ decision coaching/i, /career strategy consulting/i,
-  /solo business growth consulting/i, /not sure where to start\?/i,
+  /solo business growth consulting/i,
+  // ("Not sure where to start?" was retired with the old /start-here/ flow; it
+  // is back, by brief, as the eyebrow of the homepage Work & Life Check panel.)
 ];
 // Superseded numbers. The approved claim is "100+ technology companies"; the
 // older "500+ companies" survived only in a two-versions-ago migration note,

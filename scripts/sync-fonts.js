@@ -1,5 +1,5 @@
 // sync-fonts.js — write the self-hosted font block (scripts/fonts.js) into
-// the pages that are not generated from a shell: the two free tools,
+// the pages that are not generated from a shell: the three free tools,
 // /ask-me-anything/el and 404.html. Replaces either an earlier block between
 // <!-- fonts --> markers or the old Google Fonts links. Run after changing
 // scripts/fonts.js:
@@ -10,7 +10,7 @@ const path = require('path');
 const { FONT_HEAD, fontHead } = require('./fonts.js');
 
 const ROOT = path.resolve(__dirname, '..');
-const PAGES = ['free-tools/burned-out/index.html', 'free-tools/quit-your-job/index.html', 'ask-me-anything/el/index.html', '404.html'];
+const PAGES = ['work-life-check/index.html', 'free-tools/burned-out/index.html', 'free-tools/quit-your-job/index.html', 'ask-me-anything/el/index.html', '404.html'];
 // /ask-me-anything/el opens in Greek: its body (Inter) and H1 (Inter Tight)
 // need the greek subsets first; Archivo Black has no Greek glyphs.
 const HEAD = { 'ask-me-anything/el/index.html': fontHead(['inter-v20-greek.woff2', 'inter-tight-v9-greek.woff2']) };

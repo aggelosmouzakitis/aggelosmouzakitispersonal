@@ -31,7 +31,7 @@ function lastCommitDate(file) {
 }
 
 function lastmodFor(p) {
-  const files = [p.file].concat(p.og ? CANONICAL_SOURCES : TOOL_SOURCES);
+  const files = [p.file].concat(p.sources || (p.og ? CANONICAL_SOURCES : TOOL_SOURCES));
 
   const dates = files
     .map((f) => (fs.existsSync(path.join(ROOT, f)) ? lastCommitDate(f) : null))

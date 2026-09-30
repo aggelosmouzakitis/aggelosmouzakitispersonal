@@ -19,12 +19,13 @@ const GROUPS = [
   ['Common problems', ['/relationship-problems-men/', '/separation-divorce-men/', '/work-affecting-relationship/',
     '/executive-burnout-therapy/', '/career-transition-therapy/', '/anxiety-overthinking/', '/achievement-self-worth/']],
   ['Resources', ['/considering-therapy/', '/therapy-vs-coaching/', '/faq/', '/blog/', '/free-tools/',
-    '/free-tools/burned-out/', '/free-tools/quit-your-job/', '/reviews/']],
+    '/work-life-check/', '/free-tools/burned-out/', '/free-tools/quit-your-job/', '/reviews/']],
   ['About and contact', ['/about/', '/contact/', '/confidentiality/']],
 ];
 
-// The two tools are not in the canonical copy; their entries describe them plainly.
+// The tools are not in the canonical copy; their entries describe them plainly.
 const TOOLS = {
+  '/work-life-check/': ['The Work & Life Check', 'A free 4-minute reflection on where work may be costing you most, across five areas: switching off, recovery, an open decision, relationships and the weight of performance. Not a clinical assessment and not a diagnosis.'],
   '/free-tools/burned-out/': ['Are you burned out?', 'A short reflection tool on burnout. Not a clinical assessment and not a diagnosis.'],
   '/free-tools/quit-your-job/': ['What’s making you want to quit your job?', 'A short reflection tool on wanting to leave a job. Not a clinical assessment and not a diagnosis.'],
 };

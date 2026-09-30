@@ -365,6 +365,15 @@ function ClarityResult({ data, result, C, mob }) {
 }
 
 // ── Root component ────────────────────────────────────────────────────────────
+// Optional per-assessment hooks (all off unless the data sets them; the two
+// original tools set none):
+//   resultFirst  the result follows the last answer (no email gate) and stays
+//                on refresh until restarted; the assessment asks for an email
+//                inside its own result, if at all
+//   Result       component drawing the result: { data, result, answers, restart }
+//   onView / onStart / onComplete(result)   analytics callbacks
+//   intro.emailNote  replaces the "No email is needed…" line (null hides it)
+//   scaleHint    a line under every scored question
 function ClarityTool({ slug }) {
   var React_ = React;
   var useState = React_.useState, useEffect = React_.useEffect, useRef = React_.useRef;
@@ -372,19 +381,28 @@ function ClarityTool({ slug }) {
   var mob = typeof window !== 'undefined' && window.innerWidth < 768;
   var C = clarityStyles(mob);
   var total = data ? data.questions.length : 0;
+  var resultFirst = !!(data && data.resultFirst);
 
   var storeKey = 'clarity:' + slug;
   var load = function () {
     try { var raw = sessionStorage.getItem(storeKey); return raw ? JSON.parse(raw) : {}; } catch (e) { return {}; }
   };
   var initial = load();
-  var [screen, setScreen] = useState('intro'); // 'intro' | qIndex | 'email' | 'result'
+  // A finished result-first assessment reopens on its result (scored once).
+  var restoredRef = useRef(undefined);
+  if (restoredRef.current === undefined) {
+    restoredRef.current = null;
+    if (resultFirst && initial.done && initial.answers) { try { restoredRef.current = clarityScore(data, initial.answers); } catch (e) { restoredRef.current = null; } }
+  }
+  var restored = restoredRef.current;
+  var [screen, setScreen] = useState(restored ? 'result' : 'intro'); // 'intro' | qIndex | 'email' | 'result'
   var [answers, setAnswers] = useState(initial.answers || {});
+  var [done, setDone] = useState(!!restored);
   var [name, setName] = useState('');
   var [email, setEmail] = useState('');
   var [sending, setSending] = useState(false);
   var [err, setErr] = useState('');
-  var [result, setResult] = useState(null);
+  var [result, setResult] = useState(restored);
 
   var scrollTop = function () {
     var s = typeof document !== 'undefined' && document.getElementById('main-scroll');
@@ -394,14 +412,22 @@ function ClarityTool({ slug }) {
   useEffect(function () { scrollTop(); }, [screen]);
   // Persist answers as the user progresses (survives an accidental refresh).
   useEffect(function () {
-    try { sessionStorage.setItem(storeKey, JSON.stringify({ answers: answers })); } catch (e) {}
-  }, [answers]);
+    try { sessionStorage.setItem(storeKey, JSON.stringify(done ? { answers: answers, done: true } : { answers: answers })); } catch (e) {}
+  }, [answers, done]);
+  useEffect(function () { if (data && data.onView) data.onView(); }, []);
 
   if (!data) return React.createElement('div', { style: C.page }, React.createElement('p', null, 'Assessment not found.'));
 
   var go = function (s) { setScreen(s); scrollTop(); };
 
-  var start = function () { clarityTrack('assessment_started', { assessment: slug }); go(0); };
+  var start = function () { clarityTrack('assessment_started', { assessment: slug }); if (data.onStart) data.onStart(); go(0); };
+
+  // Result-first: clear the finished answers and return to the start screen.
+  var restart = function () {
+    try { sessionStorage.removeItem(storeKey); } catch (e) {}
+    setAnswers({}); setResult(null); setDone(false);
+    go('intro');
+  };
 
   // Choosing records the answer and nothing more; Continue moves on. If the
   // Continue button sits below the fold on a short screen, bring it into view.
@@ -421,6 +447,14 @@ function ClarityTool({ slug }) {
     if (answers[q.id] == null) return;
     clarityTrack('assessment_question_progress', { assessment: slug, question: i + 1, total: total });
     if (i + 1 < total) { go(i + 1); }
+    else if (resultFirst) {
+      var res = clarityScore(data, answers);
+      clarityTrack('assessment_completed', { assessment: slug });
+      clarityTrack('result_generated', { assessment: slug, primary: res.interp.primaryKey || null });
+      setResult(res); setDone(true);
+      if (data.onComplete) data.onComplete(res);
+      go('result');
+    }
     else { clarityTrack('assessment_completed', { assessment: slug }); go('email'); }
   };
 
@@ -446,13 +480,14 @@ function ClarityTool({ slug }) {
 
   // ---- Intro / starting screen ----
   if (screen === 'intro') {
+    var emailNote = data.intro.emailNote !== undefined ? data.intro.emailNote : 'No email is needed to begin. You will be asked for one at the end to receive your result.';
     return React.createElement('div', { style: C.page },
       React.createElement('div', { style: { ...C.eyebrow, color: CL_ACC, marginBottom: '1rem' } }, data.intro.eyebrow),
       React.createElement('h1', { style: C.h1 }, data.title),
       data.intro.paras.map(function (p, i) { return React.createElement('p', { key: i, style: C.p }, p); }),
       data.intro.note ? React.createElement('p', { style: { fontSize: '15px', color: '#3A403A', lineHeight: 1.6, margin: '0 0 1.4rem', paddingLeft: '.9rem', borderLeft: '2px solid ' + CL_ACC, fontWeight: 600 } }, data.intro.note) : null,
-      React.createElement('p', { style: { ...C.note, marginBottom: '.4rem' } }, data.intro.count + (data.intro.time ? ' · ' + data.intro.time : '')),
-      React.createElement('p', { style: { ...C.note, marginBottom: '2rem' } }, 'No email is needed to begin. You will be asked for one at the end to receive your result.'),
+      React.createElement('p', { style: { ...C.note, marginBottom: emailNote ? '.4rem' : '2rem' } }, data.intro.count + (data.intro.time ? ' · ' + data.intro.time : '')),
+      emailNote ? React.createElement('p', { style: { ...C.note, marginBottom: '2rem' } }, emailNote) : null,
       React.createElement('button', { className: 'cta-btn', style: C.cta, onClick: start }, data.intro.start));
   }
 
@@ -461,9 +496,11 @@ function ClarityTool({ slug }) {
     var i = screen;
     var q = data.questions[i];
     var sel = answers[q.id];
+    var hint = data.scaleHint && q.dim && !q.context ? data.scaleHint : null;
     return React.createElement('div', { style: C.page },
       React.createElement(ClarityProgress, { i: i, total: total, C: C }),
-      React.createElement('p', { style: C.qText }, q.text),
+      React.createElement('p', { style: hint ? { ...C.qText, marginBottom: '.7rem' } : C.qText }, q.text),
+      hint ? React.createElement('p', { style: { ...C.note, margin: '0 0 1.3rem' } }, hint) : null,
       q.options.map(function (o, oi) {
         var on = sel === oi;
         return React.createElement('button', { key: oi, className: 'opt-btn', style: C.choice(on), onClick: function () { choose(q, i, oi); } }, o.t);
@@ -501,6 +538,7 @@ function ClarityTool({ slug }) {
 
   // ---- Result ----
   if (screen === 'result' && result) {
+    if (data.Result) return React.createElement(data.Result, { data: data, result: result, answers: answers, restart: restart });
     return React.createElement('div', { style: C.page }, React.createElement(ClarityResult, { data: data, result: result, C: C, mob: mob }));
   }
   return null;

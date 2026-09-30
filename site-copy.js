@@ -3009,10 +3009,10 @@ window.SITE_COPY = {
       "metaDescription": "Short reflection tools for burnout, difficult career decisions and situations where work has become hard to separate from the rest of life.",
       "hero": {
         "eyebrow": "FREE TOOLS",
-        "h1": "Two short reflection tools.",
+        "h1": "Three short reflection tools.",
         "blocks": [{
           "t": "p",
-          "text": "They are not clinical assessments and they do not produce a diagnosis. They are simply a structured way to look at two common situations: burnout and wanting to leave a job."
+          "text": "They are not clinical assessments and they do not produce a diagnosis. They are simply a structured way to look at what work is costing you, burnout and wanting to leave a job."
         }]
       },
       "sections": [{

@@ -1086,8 +1086,8 @@ window.SITE_COPY = {
       "type": "tools",
       "seoTitle": "Free Tools for Burnout & Career Decisions | Aggelos Mouzakitis",
       "metaDescription": "Short reflection tools for burnout, difficult career decisions and situations where work has become hard to separate from the rest of life.",
-      "hero": {"eyebrow": "FREE TOOLS", "h1": "Two short reflection tools.", "blocks": [
-        {"t": "p", "text": "They are not clinical assessments and they do not produce a diagnosis. They are simply a structured way to look at two common situations: burnout and wanting to leave a job."}
+      "hero": {"eyebrow": "FREE TOOLS", "h1": "Three short reflection tools.", "blocks": [
+        {"t": "p", "text": "They are not clinical assessments and they do not produce a diagnosis. They are simply a structured way to look at what work is costing you, burnout and wanting to leave a job."}
       ]},
       "sections": [
         {"h2": "Are you burned out?", "id": "are-you-burned-out", "blocks": [

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel site-nav.jsx -o site-nav.js && babel site-chrome.jsx -o site-chrome.js && babel site-copy.jsx -o site-copy.js && babel site-pages.jsx -o site-pages.js && babel lead-capture.jsx -o lead-capture.js && babel clarity-data.jsx -o clarity-data.js && babel clarity-tools.jsx -o clarity-tools.js",
+    "build": "babel site-nav.jsx -o site-nav.js && babel site-chrome.jsx -o site-chrome.js && babel site-copy.jsx -o site-copy.js && babel site-pages.jsx -o site-pages.js && babel lead-capture.jsx -o lead-capture.js && babel clarity-data.jsx -o clarity-data.js && babel clarity-tools.jsx -o clarity-tools.js && babel work-life-check.jsx -o work-life-check.js",
     "pages": "node scripts/gen-site-pages.js",
     "copy": "python3 scripts/copy/extract-canonical.py",
     "test": "node scripts/seo/seo-check.js",

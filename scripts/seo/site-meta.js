@@ -155,6 +155,17 @@ const SERVICE_TYPE = {
   'professional-coaching': 'Professional coaching',
 };
 const PAGE_TYPE = { about: 'ProfilePage', contact: 'ContactPage', 'free-tools': 'CollectionPage' };
+// A page whose H1 changed after its share card was published gets a new card
+// file: /img/* is served immutable, so the old URL keeps the old picture.
+const OG_FILE = { 'free-tools': 'free-tools-2' };
+
+// The free tools in the order /free-tools/ shows them (the Work & Life Check
+// first, the entry point) — the ItemList and llms.txt use the same order.
+const TOOL_LIST = [
+  ['/work-life-check/', 'The Work & Life Check'],
+  ['/free-tools/burned-out/', 'Are you burned out?'],
+  ['/free-tools/quit-your-job/', 'What’s making you want to quit your job?'],
+];
 
 function canonicalPage([id, priority, changefreq, crumb]) {
   const c = COPY[id];
@@ -168,9 +179,9 @@ function canonicalPage([id, priority, changefreq, crumb]) {
     description,
     ogTitle: c.seoTitle,
     ogDescription: description,
-    ogImage: abs('/img/og/v2/' + id + '.png'),
+    ogImage: abs('/img/og/v2/' + (OG_FILE[id] || id) + '.png'),
     ogImageAlt: c.hero.h1,
-    og: { key: id, label: id === 'home' ? 'Aggelos Mouzakitis' : c.hero.eyebrow, title: c.hero.h1 },
+    og: { key: OG_FILE[id] || id, label: id === 'home' ? 'Aggelos Mouzakitis' : c.hero.eyebrow, title: c.hero.h1 },
   };
   if (id === 'home') {
     entry.schema = [PERSON_FULL, WEBSITE, {
@@ -196,18 +207,33 @@ function canonicalPage([id, priority, changefreq, crumb]) {
   if (id === 'free-tools') {
     nodes.push({
       '@type': 'ItemList', '@id': abs('/free-tools/') + '#collection',
-      name: 'Free Tools', numberOfItems: 2, itemListOrder: 'https://schema.org/ItemListUnordered',
-      itemListElement: [
-        ['/free-tools/burned-out/', 'Are you burned out?'],
-        ['/free-tools/quit-your-job/', 'What’s making you want to quit your job?'],
-      ].map(([p, n], i) => ({ '@type': 'ListItem', position: i + 1, name: n, url: abs(p) })),
+      name: 'Free Tools', numberOfItems: TOOL_LIST.length, itemListOrder: 'https://schema.org/ItemListOrderAscending',
+      itemListElement: TOOL_LIST.map(([p, n], i) => ({ '@type': 'ListItem', position: i + 1, name: n, url: abs(p) })),
     });
   }
   entry.schema = nodes.concat([PERSON_REF]);
   return entry;
 }
 
+const WLC_DESCRIPTION = 'A free 4-minute reflection for people whose work is affecting recovery, decisions, relationships or how they feel about themselves.';
+
 const PAGES = CANONICAL.map(canonicalPage).concat([
+  // ── The Work & Life Check: the main entry tool (work-life-check.jsx on the
+  //    clarity engine). Its results are drawn in the page and never get a URL
+  //    of their own, so only the landing page exists to be indexed.
+  {
+    file: 'work-life-check/index.html', url: '/work-life-check/', priority: '0.6', changefreq: 'monthly',
+    title: 'The Work & Life Check | Aggelos Mouzakitis',
+    description: WLC_DESCRIPTION,
+    ogTitle: 'The Work & Life Check | Aggelos Mouzakitis',
+    ogDescription: WLC_DESCRIPTION,
+    ogImage: abs('/img/og/v2/work-life-check.png'),
+    ogImageAlt: 'The Work & Life Check: What is work actually costing you?',
+    og: { key: 'work-life-check', label: 'The Work & Life Check', title: 'What is work actually costing you?' },
+    sources: ['work-life-check.jsx', 'clarity-tools.jsx', 'site-chrome.jsx'],
+    schema: toolNodes('/work-life-check/', 'The Work & Life Check',
+      'A 17-question reflection on five areas where work can cost more than it shows: switching off, recovery, an open decision, relationships and the weight of performance. A reflection tool, not a clinical assessment or diagnosis.'),
+  },
   // ── The two free tools that stay public. Their pages are the tools
   //    themselves; titles and descriptions are unchanged.
   {
@@ -234,4 +260,4 @@ const PAGES = CANONICAL.map(canonicalPage).concat([
   },
 ]);
 
-module.exports = { ORIGIN, SITE_NAME, PERSON_ID, WEBSITE_ID, OG_DEFAULT, PAGES, COPY };
+module.exports = { ORIGIN, SITE_NAME, PERSON_ID, WEBSITE_ID, OG_DEFAULT, PAGES, COPY, TOOL_LIST };

@@ -25,7 +25,7 @@ diff <(curl -s "$SITE/" | grep -o 'site-[a-z]*\.js?v=[0-9a-f]*' | sort) \
 ## 2. Every route, one command
 
 The same table the local gate uses (`scripts/seo/routes.js`), requested from
-production: the 25 canonical pages and 2 tools (200, bare form one hop to the
+production: the 25 canonical pages and 3 tools (200, bare form one hop to the
 slash), every legacy URL (301 in one hop to a 200, or 410), the 28 old essays,
 `/ask-me-anything/el` (200), real 404s for URLs that never existed, and every
 repository internal (404).
@@ -51,7 +51,7 @@ done
 
 ```bash
 curl -s "$SITE/robots.txt" | grep -i '^sitemap'                 # the sitemap URL
-curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 27
+curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 28
 curl -sI "$SITE/llms.txt" | head -1                              # 200
 
 # every sitemap URL must be 200 and self-canonical
@@ -105,6 +105,24 @@ The automated QA stubs EmailJS, so delivery itself is only proven in
 production: send one real enquiry from `/contact/` and confirm it arrives
 (EmailJS template `template_6mv5hou`, subject `[CONTACT] …`).
 
+### The Work & Life Check result email (one-time setup, then one test)
+
+"Email me my result" on `/work-life-check/` sends the person their result
+through an EmailJS template that has to be created once, in the EmailJS
+dashboard: paste `content/emails/work-life-check-result.html` (the comment at
+its top lists To, Subject and the Template ID, `template_wlc_result`). Until
+then the page says the email did not go through; the private copy to you
+(`[TOOL] The Work & Life Check …`, template `template_wdsrbdo`) arrives either
+way. Then complete the check once, ask for the email, and confirm both arrive.
+
+### GA4: register the Work & Life Check parameters
+
+The check sends `work_life_check_view`, `_start`, `_complete`, `_email`,
+`_consultation_click` and `_related_page_click` with `source_page`,
+`primary_result`, `secondary_result`, `context_type` (and `result_type`,
+`link_url`). GA4 only reports custom parameters once they are registered:
+Admin → Custom definitions → Create custom dimension (scope: Event) for each.
+
 ## 9. Submit to search engines
 
 ```bash
@@ -116,7 +134,7 @@ open "https://www.bing.com/webmasters"
 
 # IndexNow: confirm the key file is live BEFORE submitting
 curl -s "$SITE/f4a06bec48967c20f68efb4d562c6b71.txt"   # must print the key, nothing else
-npm run seo:indexnow                                    # the 27 sitemap URLs
+npm run seo:indexnow                                    # the 28 sitemap URLs
 
 # the retired URLs too, so they get re-crawled and dropped
 node scripts/seo/indexnow.js $(node -e "const {LEGACY}=require('./scripts/seo/routes.js');console.log(LEGACY.filter((r)=>r[1]===301||r[1]===410).map((r)=>r[0]).join(' '))")
@@ -126,7 +144,7 @@ node scripts/seo/indexnow.js $(node -e "const {LEGACY}=require('./scripts/seo/ro
 
 - Rich Results Test — <https://search.google.com/test/rich-results> — `/`,
   `/individual-psychotherapy/`, `/therapy-vs-coaching/`, `/about/`,
-  `/free-tools/burned-out/`.
+  `/free-tools/burned-out/`, `/work-life-check/`.
 - Schema Markup Validator — <https://validator.schema.org/> — same URLs. One
   `Person` with `@id` ending `/#person`; no `Service` on `/therapy-vs-coaching/`.
 - PageSpeed Insights — <https://pagespeed.web.dev/> — `/`,

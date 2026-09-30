@@ -98,7 +98,7 @@ Confidentiality
 | 19 | Considering Therapy | /considering-therapy/ | Considering Therapy? What to Expect \| Aggelos Mouzakitis | A plain explanation of what psychotherapy with Aggelos Mouzakitis is like, what happens in sessions, how often therapy meets and whether it may fit. | Considering therapy? |
 | 20 | FAQ | /faq/ | Psychotherapy FAQ \| Aggelos Mouzakitis | Practical answers about services, session length, frequency, fees, confidentiality, languages and online psychotherapy with Aggelos Mouzakitis. | Practical questions about working together. |
 | 21 | Reviews | /reviews/ | Reviews & Client Feedback \| Aggelos Mouzakitis | Feedback from psychotherapy clients and from people Aggelos Mouzakitis has worked with through mentoring and professional advisory conversations. | Feedback from people I have worked with. |
-| 22 | Free Tools | /free-tools/ | Free Tools for Burnout & Career Decisions \| Aggelos Mouzakitis | Short reflection tools for burnout, difficult career decisions and situations where work has become hard to separate from the rest of life. | Two short reflection tools. |
+| 22 | Free Tools | /free-tools/ | Free Tools for Burnout & Career Decisions \| Aggelos Mouzakitis | Short reflection tools for burnout, difficult career decisions and situations where work has become hard to separate from the rest of life. | Three short reflection tools. |
 | 23 | Writing | /blog/ | Writing on Work, Relationships & Psychotherapy \| Aggelos Mouzakitis | Essays on work, ambition, burnout, relationships, career decisions, anxiety, achievement and the psychological life behind demanding careers. | Writing on work, relationships and psychotherapy. |
 | 24 | Contact | /contact/ | Contact Aggelos Mouzakitis \| Book a Consultation | Contact Aggelos Mouzakitis about individual psychotherapy, couples therapy or professional coaching. Online sessions in Greek or English. | Tell me briefly what brings you here. |
 | 25 | Confidentiality | /confidentiality/ | Confidentiality \| Aggelos Mouzakitis | Information about confidentiality, clinical supervision, records, communication and the limits that apply to psychotherapy with Aggelos Mouzakitis. | Confidentiality |
@@ -1820,9 +1820,9 @@ If the way I work sounds right for you, you can read more about therapy or get i
 
 **FREE TOOLS**
 
-# Two short reflection tools.
+# Three short reflection tools.
 
-They are not clinical assessments and they do not produce a diagnosis. They are simply a structured way to look at two common situations: burnout and wanting to leave a job.
+They are not clinical assessments and they do not produce a diagnosis. They are simply a structured way to look at what work is costing you, burnout and wanting to leave a job.
 
 ## Are you burned out?
 
