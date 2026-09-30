@@ -37,11 +37,15 @@ const FONT_CSS = FACES.map(([family, weight, file, range]) =>
   `@font-face{font-family:'${family}';font-style:normal;font-weight:${weight};font-display:swap;` +
   `src:url(/fonts/${file}) format('woff2');unicode-range:${range}}`).join('\n');
 
-// Preloaded: body text and the H1 face, latin only (every page's first screen).
-const PRELOAD = ['inter-v20-latin.woff2', 'archivo-black-v23-latin.woff2']
+const preload = (files) => files
   .map((f) => `<link rel="preload" href="/fonts/${f}" as="font" type="font/woff2" crossorigin>`).join('\n');
 
-// The block every page's <head> carries (between markers, so it can be re-synced).
-const FONT_HEAD = `<!-- fonts -->\n${PRELOAD}\n<style>\n${FONT_CSS}\n</style>\n<!-- /fonts -->`;
+// Preloaded: body text and the H1 face, latin only (every page's first screen).
+const PRELOAD = preload(['inter-v20-latin.woff2', 'archivo-black-v23-latin.woff2']);
 
-module.exports = { FACES, FONT_CSS, PRELOAD, FONT_HEAD };
+// The block a page's <head> carries (between markers, so it can be re-synced).
+// A page whose first screen is not latin passes its own preload files.
+const fontHead = (files) => `<!-- fonts -->\n${files ? preload(files) : PRELOAD}\n<style>\n${FONT_CSS}\n</style>\n<!-- /fonts -->`;
+const FONT_HEAD = fontHead();
+
+module.exports = { FACES, FONT_CSS, PRELOAD, FONT_HEAD, fontHead };
