@@ -53,7 +53,7 @@ done
 
 ```bash
 curl -s "$SITE/robots.txt" | grep -i '^sitemap'                 # the sitemap URL
-curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 35 (28 + 3 guides + 4 essays published again)
+curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 36 (28 + 4 guides + 4 essays published again)
 curl -sI "$SITE/llms.txt" | head -1                              # 200
 
 # every sitemap URL must be 200 and self-canonical
@@ -154,7 +154,7 @@ open "https://www.bing.com/webmasters"
 
 # IndexNow: confirm the key file is live BEFORE submitting
 curl -s "$SITE/f4a06bec48967c20f68efb4d562c6b71.txt"   # must print the key, nothing else
-npm run seo:indexnow                                    # every sitemap URL (35)
+npm run seo:indexnow                                    # every sitemap URL (36)
 
 # the retired URLs too, so they get re-crawled and dropped
 node scripts/seo/indexnow.js $(node -e "const {LEGACY}=require('./scripts/seo/routes.js');console.log(LEGACY.filter((r)=>r[1]===301||r[1]===410).map((r)=>r[0]).join(' '))")
@@ -166,7 +166,7 @@ node scripts/seo/indexnow.js $(node -e "const {LEGACY}=require('./scripts/seo/ro
   `/individual-psychotherapy/`, `/therapy-vs-coaching/`, `/about/`,
   `/free-tools/burned-out/`, `/work-life-check/`, and each article
   (`/work-anxiety/`, `/burnout-at-work/`,
-  `/my-job-gives-me-anxiety-should-i-quit/`): one valid `BlogPosting` with the visible date, no
+  `/my-job-gives-me-anxiety-should-i-quit/`, `/cant-switch-off-from-work/`): one valid `BlogPosting` with the visible date, no
   `FAQPage`.
 - Schema Markup Validator — <https://validator.schema.org/> — same URLs. One
   `Person` with `@id` ending `/#person`; no `Service` on `/therapy-vs-coaching/`.

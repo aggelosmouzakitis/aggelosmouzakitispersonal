@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KV83RRF6ZM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KV83RRF6ZM');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- fonts -->
+<link rel="preload" href="/fonts/inter-v20-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/archivo-black-v23-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-greek.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-greek-ext.woff2) format('woff2');unicode-range:U+1F00-1FFF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-cyrillic.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-cyrillic-ext.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-greek.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-greek-ext.woff2) format('woff2');unicode-range:U+1F00-1FFF}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-cyrillic.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-cyrillic-ext.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/archivo-black-v23-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/archivo-black-v23-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+</style>
+<!-- /fonts -->
+<!-- Favicon / site icons -->
+<link rel="icon" href="/favicon.ico?v=dc7484cf7c" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5d5e245bf0">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=b708bdc3f1">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=022b5f081c">
+<meta name="theme-color" content="#F3F0E8">
+<meta name="author" content="Aggelos Mouzakitis">
+<link rel="manifest" href="/manifest.json">
+<style>
+:root{
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-display: "Archivo Black", "Inter Tight", "Inter", system-ui, sans-serif;
+  --brand-green: #047857;
+  /* Editorial Japandi palette (ten tokens) */
+  --bone: #F3F0E8; --bone-deep: #EDE8DB; --forest: #16231E; --forest-deep: #101A16;
+  --green: #047857; --green-pressed: #03654A; --sage: #8FBFA7;
+  --ink: #171919; --heading-ink: #14201C; --ink-2: #3A403A; --on-forest: #C0C9BF; --meta: #6A6F67;
+  --rule: rgba(23,25,25,0.18); --rule-on-forest: rgba(243,240,232,0.16);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: #F3F0E8; color: #171919; font-family: var(--font-body); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+#root { display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: #047857; color: #F3F0E8; }
+img { max-width: 100%; filter: grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14); }
+.site-grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: 0.06; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E"); background-size: 160px 160px; }
+@media print { .site-grain { display: none; } }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #047857; outline-offset: 2px; border-radius: 2px; }
+@media (prefers-reduced-motion: reduce){ html { scroll-behavior: auto; } *{transition-duration:.001ms!important;animation-duration:.001ms!important} }
+@media print { .site-hdr, .site-ftr, .cta-strip { display: none !important; } }
+</style>
+<title>Why You Can’t Switch Off From Work</title>
+<meta name="description" content="Still thinking about work after hours? Understand how responsibility, unclear expectations and anxiety keep you checking, and what can help you switch off.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://aggelosmouzakitis.com/cant-switch-off-from-work/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Aggelos Mouzakitis">
+<meta property="og:locale" content="en_IE">
+<meta property="og:title" content="Why You Can’t Switch Off From Work">
+<meta property="og:description" content="Still thinking about work after hours? Understand how responsibility, unclear expectations and anxiety keep you checking, and what can help you switch off.">
+<meta property="og:url" content="https://aggelosmouzakitis.com/cant-switch-off-from-work/">
+<meta property="og:image" content="https://aggelosmouzakitis.com/img/og/v2/cant-switch-off-from-work.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Why You Can’t Switch Off From Work, Even When You’re Not Working">
+<meta property="article:published_time" content="2026-10-01T22:57:00+01:00">
+<meta property="article:section" content="Career &amp; Work">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why You Can’t Switch Off From Work">
+<meta name="twitter:description" content="Still thinking about work after hours? Understand how responsibility, unclear expectations and anxiety keep you checking, and what can help you switch off.">
+<meta name="twitter:image" content="https://aggelosmouzakitis.com/img/og/v2/cant-switch-off-from-work.png">
+<meta name="twitter:image:alt" content="Why You Can’t Switch Off From Work, Even When You’re Not Working">
+<link rel="alternate" hreflang="en" href="https://aggelosmouzakitis.com/cant-switch-off-from-work/">
+<link rel="alternate" hreflang="x-default" href="https://aggelosmouzakitis.com/cant-switch-off-from-work/">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://aggelosmouzakitis.com/cant-switch-off-from-work/#article","url":"https://aggelosmouzakitis.com/cant-switch-off-from-work/","mainEntityOfPage":"https://aggelosmouzakitis.com/cant-switch-off-from-work/","headline":"Why You Can’t Switch Off From Work, Even When You’re Not Working","description":"Still thinking about work after hours? Understand how responsibility, unclear expectations and anxiety keep you checking, and what can help you switch off.","author":{"@type":"Person","@id":"https://aggelosmouzakitis.com/#person","name":"Aggelos Mouzakitis","url":"https://aggelosmouzakitis.com/about/"},"publisher":{"@id":"https://aggelosmouzakitis.com/#person"},"datePublished":"2026-10-01T22:57:00+01:00","inLanguage":"en-GB","articleSection":"Career & Work","wordCount":2062},{"@type":"BreadcrumbList","@id":"https://aggelosmouzakitis.com/cant-switch-off-from-work/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://aggelosmouzakitis.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://aggelosmouzakitis.com/blog/"},{"@type":"ListItem","position":3,"name":"Why You Can’t Switch Off From Work, Even When You’re Not Working","item":"https://aggelosmouzakitis.com/cant-switch-off-from-work/"}]}]}</script>
+</head>
+<body>
+<div class="site-grain" aria-hidden="true"></div>
+<div id="root"><style>
+:root{
+  --bone:#F3F0E8;--bone-deep:#EDE8DB;--sage-bg:#DAE4D8;--forest:#16231E;
+  --green:#047857;--green-pressed:#03654A;--sage:#8FBFA7;
+  --heading:#14201C;--ink:#171919;--body:#2C312C;--ink-2:#3A403A;--meta:#6A6F67;
+  --on-forest:#C8D1C8;--on-forest-2:#C0C9BF;
+  --rule:rgba(23,25,25,0.18);--rule-2:rgba(23,25,25,0.22);--rule-forest:rgba(243,240,232,0.16);
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-heading:"Inter Tight","Inter",system-ui,sans-serif;
+  --font-display:"Archivo Black","Inter Tight","Inter",system-ui,sans-serif;
+  --site-max:1240px;--read-max:760px;
+  --gutter:clamp(22px,4vw,52px);
+  --sec:clamp(64px,6.7vw,96px);
+}
+html,body,#root{height:auto}
+#root{display:block;overflow:visible}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+.site-grain{opacity:0.06}
+.wrap{width:min(var(--site-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.read{width:min(var(--read-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.skip-link{position:absolute;left:12px;top:-60px;z-index:200;padding:12px 18px;background:var(--bone);color:var(--heading);font:600 15px/1 var(--font-body);border:2px solid var(--green)}
+.skip-link:focus{top:12px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.on-dark a:focus-visible,.on-dark button:focus-visible{outline-color:var(--sage)}
+
+/* Primary action: green rectangle, 52px, 15px/700 caps. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 24px;background:var(--green);color:var(--bone);border:0;border-radius:0;font:700 15px/1 var(--font-body);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:gap 180ms,background 180ms}
+.btn:hover{background:var(--green-pressed);color:var(--bone);gap:13px}
+/* Secondary action: 16px/600 green, underline + arrow. */
+.tlink{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:16px;font-weight:600;line-height:1.3;color:var(--green);transition:gap 180ms,color 180ms}
+.tlink>span:first-child{border-bottom:1.5px solid currentColor;padding-bottom:2px}
+.tlink:hover{color:var(--green-pressed);gap:12px}
+.on-dark .tlink{color:var(--bone)}
+.on-dark .tlink:hover{color:var(--sage)}
+
+/* Header */
+.hdr{position:relative;z-index:50;background:var(--forest);border-bottom:1px solid var(--rule-forest);font-family:var(--font-body)}
+.hdr__in{min-height:74px;display:flex;align-items:center;gap:24px}
+.hdr__brand{display:inline-flex;align-items:center;min-height:44px;gap:1px;color:var(--bone);font-family:var(--font-heading);font-size:25px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
+.hdr__brand span,.ftr__brand span{color:var(--green)}
+.hdr__nav{margin-left:auto;display:flex;align-items:center;gap:30px}
+.hdr__item{position:relative;display:flex;align-items:center}
+.hdr__link,.hdr__btn{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0;background:none;border:0;border-bottom:2px solid transparent;color:var(--bone);font-family:inherit;font-size:13.5px;font-weight:650;line-height:1;letter-spacing:0.06em;text-transform:uppercase;opacity:.85;cursor:pointer}
+.hdr__link:hover,.hdr__btn:hover,.hdr__btn[aria-expanded="true"],.hdr__link.is-current,.hdr__btn.is-current{opacity:1;color:var(--bone)}
+.hdr__link.is-current,.hdr__btn.is-current{border-bottom-color:var(--green)}
+.hdr__btn svg{transition:transform 200ms cubic-bezier(.22,1,.36,1)}
+.hdr__btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.hdr__panel{position:absolute;top:calc(100% + 15px);left:-20px;width:360px;background:var(--bone);border:1px solid rgba(23,25,25,0.14);box-shadow:0 20px 44px -20px rgba(0,0,0,0.4);padding:8px 0}
+.hdr__panel[hidden],.mmenu[hidden],.mmenu__links[hidden]{display:none}
+.hdr__panel a{display:block;padding:12px 20px;font-size:16px;font-weight:500;line-height:1.35;color:var(--heading)}
+.hdr__panel a:hover{background:rgba(4,120,87,0.07);color:var(--green)}
+.hdr__panel a[aria-current="page"],.hdr__panel a[aria-current="true"]{color:var(--green);font-weight:600}
+.hdr__sep{height:1px;margin:8px 20px;background:rgba(23,25,25,0.16)}
+.hdr__cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;background:transparent;border:1px solid rgba(243,240,232,0.7);color:var(--bone);font-size:13.5px;font-weight:700;line-height:1;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;transition:background 180ms,color 180ms,border-color 180ms}
+.hdr__cta:hover{background:var(--bone);color:var(--forest);border-color:var(--bone)}
+.hdr__menu-btn{display:none;margin-left:auto;align-items:center;gap:12px;min-height:48px;padding:0 2px 0 12px;background:none;border:0;cursor:pointer;color:var(--bone);font-family:inherit;font-size:13.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+.hdr__burger{display:flex;flex-direction:column;gap:5px;width:22px}
+.hdr__burger span{height:2px;background:var(--bone)}
+@media (max-width:1079px){.hdr__nav,.hdr__cta{display:none}.hdr__menu-btn{display:inline-flex}}
+@media (min-width:1080px){.mmenu{display:none}}
+.mmenu{background:var(--bone);border-bottom:1px solid rgba(23,25,25,0.14);box-shadow:0 20px 40px -24px rgba(0,0,0,0.35)}
+.mmenu__in{width:calc(100% - 44px);margin-inline:auto;padding:8px 0 22px}
+.mmenu__group{border-bottom:1px solid rgba(23,25,25,0.14)}
+.mmenu__toggle{display:flex;width:100%;justify-content:space-between;align-items:center;min-height:56px;padding:0;background:none;border:0;cursor:pointer;color:var(--heading);font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.mmenu__sign{font-size:22px;font-weight:400;color:var(--green)}
+.mmenu__links{padding:0 0 12px}
+.mmenu__links a{display:flex;align-items:center;min-height:46px;font-size:17px;font-weight:500;color:var(--heading)}
+.mmenu__links a[aria-current="page"],.mmenu__links a[aria-current="true"]{color:var(--green);font-weight:600}
+.mmenu__sep{height:1px;margin:6px 0;background:rgba(23,25,25,0.12)}
+.mmenu__link{display:flex;align-items:center;min-height:56px;border-bottom:1px solid rgba(23,25,25,0.14);font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--heading)}
+.mmenu__cta{display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;margin-top:20px;background:var(--green);color:var(--bone);font-size:15px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase}
+
+/* Close: a 13px label above one sentence and the primary action. */
+.close{background:var(--forest);text-align:center}
+.close__in{padding-block:var(--sec)}
+.close__label{margin:0 0 18px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage)}
+.close__text{margin:0 auto;max-width:24ch;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .7vw),32px);font-weight:650;line-height:1.18;letter-spacing:-0.02em;color:var(--bone);text-wrap:balance}
+.close__text--long{max-width:56ch;font-family:var(--font-body);font-size:clamp(18px,calc(17px + .2vw),20px);font-weight:400;line-height:1.6;letter-spacing:0;color:var(--on-forest)}
+.close__actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 28px;margin-top:32px}
+
+/* Footer */
+.ftr{background:var(--forest);color:var(--on-forest-2);border-top:2px solid var(--green);padding-block:clamp(48px,6vw,72px) 32px;font-family:var(--font-body)}
+.ftr__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:40px;align-items:start}
+.ftr__brand{display:inline-flex;align-items:center;min-height:44px;color:var(--bone);font-family:var(--font-heading);font-size:22px;font-weight:750;line-height:1;letter-spacing:-0.035em}
+.ftr__tag{margin:18px 0 0;max-width:26ch;font-size:15px;line-height:1.5}
+.ftr__social{display:flex;gap:14px;margin:20px 0 0;padding:0;list-style:none}
+.ftr__social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--rule-forest);color:var(--on-forest-2)}
+.ftr__social a:hover{color:var(--bone);border-color:var(--sage)}
+.ftr__col{display:flex;flex-direction:column;min-width:0}
+.ftr__head{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage)}
+.ftr__col a{padding:7px 0;font-size:15px;line-height:1.4}
+.ftr__col a:hover,.ftr__legal a:hover{color:var(--bone)}
+.ftr__rule{height:1px;background:var(--rule-forest);margin-block:48px 24px}
+.ftr__bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 32px;font-size:13px;line-height:1.5}
+.ftr__legal{display:flex;flex-wrap:wrap;gap:4px 24px}
+.ftr__legal a{display:inline-flex;align-items:center;min-height:44px}
+@media (max-width:759px){.ftr__col a{display:flex;align-items:center;min-height:44px;padding:0}}
+
+/* Legacy shell: the tools and /ask-me-anything/el render their own content. */
+.u-main{padding-block:64px 96px}
+.u-form{width:min(var(--read-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
+
+@media print{.hdr,.ftr,.close,.site-grain{display:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
+</style><style>
+.pg{display:block;outline:none}
+.pg img{filter:grayscale(1) contrast(1.12) brightness(.96) sepia(.14)}
+.label{margin:0;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
+
+/* Type */
+.eyebrow{margin:0 0 18px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.h1{margin:0;max-width:17ch;font-family:var(--font-display);font-weight:400;font-size:clamp(34px,calc(22px + 2.9vw),60px);line-height:1.0;letter-spacing:-.04em;color:var(--heading);text-wrap:balance}
+.hero-read .h1{max-width:none}
+.h1--home{max-width:none;font-size:clamp(34px,calc(18.5px + 2.9vw),60px)}
+.h1--long{max-width:none;font-size:clamp(34px,calc(20px + 1.95vw),48px);line-height:1.04}
+.sub{margin:22px 0 0;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .6vw),30px);font-weight:650;line-height:1.2;letter-spacing:-.02em;color:var(--green);text-wrap:balance}
+.lead{margin:24px 0 0;max-width:32em;font-size:clamp(19px,calc(18.4px + .12vw),20px);line-height:1.55;color:var(--body);text-wrap:pretty}
+.sub + .lead{margin-top:26px}
+.lead + .lead{margin-top:16px}
+.h2{margin:0 0 24px;font-family:var(--font-heading);font-size:clamp(30px,calc(26px + 1vw),40px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
+.h3{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .3vw),24.5px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading);text-wrap:balance}
+.p{margin:0;font-size:clamp(17px,calc(16px + .14vw),18px);line-height:1.7;color:var(--body);text-wrap:pretty}
+.p strong{font-weight:600;color:var(--heading)}
+.p--emph{font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--heading)}
+.p--strong{font-weight:600;color:var(--heading)}
+.inl{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor}
+.inl:hover{color:var(--green-pressed)}
+.meta{margin:0;font-size:15px;line-height:1.5;color:var(--meta)}
+.related{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:0 10px;font-size:15px;color:var(--meta)}
+
+/* Flow: paragraph → paragraph 18px, content → link 22px */
+.flow>*{margin-top:0;margin-bottom:0}
+.flow>*+*{margin-top:18px}
+.flow>.links,.flow>.actions{margin-top:22px}
+.flow>.facts+*{margin-top:32px}
+.flow>.p--emph+*{margin-top:20px}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;margin-top:32px}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 28px}
+.subsec+.subsec{margin-top:40px}
+
+/* Heroes */
+.hero-split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px clamp(40px,5vw,72px);align-items:center;padding-block:clamp(48px,5vw,72px) clamp(56px,6vw,88px)}
+.hero-read{padding-top:clamp(56px,6vw,88px)}
+.frame{position:relative;margin:12px;justify-self:end;width:min(calc(100% - 24px),420px)}
+.frame::before{content:"";position:absolute;inset:-12px;border:1px solid rgba(4,120,87,.6);pointer-events:none}
+.frame__img{aspect-ratio:4/5;overflow:hidden;background:var(--forest)}
+.frame__img img{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:899px){.hero-split{grid-template-columns:minmax(0,1fr)}.frame{justify-self:start;width:min(calc(100% - 24px),320px)}}
+
+/* Sections: 96px apart; reading sections on problem pages 88px */
+.sec{padding-top:var(--sec)}
+.fam-problem .sec+.sec{padding-top:clamp(64px,6.1vw,88px)}
+.pg>:last-child:not(.band){padding-bottom:var(--sec)}
+.band{margin-top:var(--sec)}
+.band+.band{margin-top:0}
+.pg>.band:first-child{margin-top:0}
+
+/* Dark section: one reading column on the 760 axis */
+.dark{background:var(--forest);color:var(--bone)}
+.dark__in{padding-block:var(--sec)}
+.dark .h2{color:var(--bone)}
+.dark .p{color:var(--on-forest)}
+.dark .p strong{color:var(--bone)}
+.dark .p--emph{color:var(--sage)}
+.dark .p--rule{padding-left:18px;border-left:2px solid var(--sage);font-weight:600;color:var(--bone)}
+
+/* Photo split: 1:1, the photograph full-bleed */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);container-type:inline-size}
+.split--dark{background:var(--forest);color:var(--bone)}
+.split--dark .h2{color:var(--bone)}
+.split--dark .p{color:var(--on-forest)}
+.split__fig{position:relative;margin:0;min-height:600px;overflow:hidden;background:var(--forest)}
+.split__fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.split--dark .split__fig img{filter:grayscale(1) contrast(1.12) brightness(.9) sepia(.14)}
+.split__body{min-width:0;display:flex;align-items:center;padding:var(--sec) calc((100vw - min(1240px, 100vw - 2 * var(--gutter))) / 2) var(--sec) clamp(48px,5.5vw,80px);padding-right:calc((100cqw - min(1240px, 100cqw - 2 * var(--gutter))) / 2)}
+.split__text{max-width:560px}
+@media (max-width:899px){.split{grid-template-columns:minmax(0,1fr)}.split__fig{min-height:280px}.split__body{padding:56px var(--gutter) 64px}}
+
+/* FAQ rows */
+.faq{border-top:1px solid var(--rule-2)}
+.faq details{border-bottom:1px solid var(--rule-2)}
+.faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:24px;min-height:64px;padding:22px 0;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary h3{margin:0;font-family:var(--font-heading);font-size:clamp(19px,calc(18.5px + .1vw),20px);font-weight:650;line-height:1.35;color:var(--heading)}
+.faq summary:hover h3{color:var(--green)}
+.faq__sign{flex:0 0 auto;color:var(--green);font-size:24px;line-height:1;transition:transform 200ms cubic-bezier(.22,1,.36,1)}
+.faq details[open] .faq__sign{transform:rotate(45deg)}
+.faq__a{padding:0 0 24px}
+.faq__a .p{font-size:clamp(17px,calc(16.4px + .1vw),17.5px);line-height:1.65}
+
+/* Continue with */
+.continue{padding-top:clamp(56px,5vw,72px)}
+.continue__label{margin:0 0 14px;color:var(--meta)}
+.continue__list{border-bottom:1px solid rgba(23,25,25,.2)}
+.continue__list a{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:56px;border-top:1px solid rgba(23,25,25,.2);font-size:17px;font-weight:600;color:var(--heading)}
+.continue__list a span{color:var(--green)}
+.continue__list a:hover{color:var(--green)}
+
+/* Service rows */
+.rows{border-bottom:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:56px minmax(0,5fr) minmax(0,7fr);gap:8px 32px;padding:32px 0;border-top:1px solid var(--rule);align-items:start}
+.row__num{font-size:14px;font-weight:700;line-height:1.9;letter-spacing:.04em;color:var(--meta)}
+.row__title{margin:0;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .4vw),26px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading)}
+.row__body{min-width:0}
+.row__body .p{max-width:52ch;line-height:1.65}
+.row__body .links{margin-top:12px}
+@media (max-width:899px){.row{grid-template-columns:minmax(0,1fr)}}
+
+/* Resource columns */
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px clamp(32px,4vw,56px)}
+.col{min-width:0;padding-top:20px;border-top:1px solid rgba(23,25,25,.3)}
+.col .h3{margin-bottom:12px}
+.col .p{font-size:17px;line-height:1.62}
+.col .links{margin-top:14px}
+.col .flow>.links{margin-top:14px}
+@media (max-width:899px){.cols3{grid-template-columns:minmax(0,1fr)}}
+.sage{background:var(--sage-bg)}
+.sage__in{padding-block:var(--sec)}
+
+/* Routes, triggers, facts, lists, quotes */
+.routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px clamp(40px,5.5vw,80px);align-items:start}
+.route{min-width:0;padding-top:22px;border-top:1px solid rgba(23,25,25,.24)}
+.route .p{max-width:56ch}
+.route .links{margin-top:22px}
+.recog2{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}
+.recog2 li{padding:20px 0 24px;border-top:1px solid var(--rule);font-size:clamp(17px,calc(16px + .14vw),18px);line-height:1.6;color:var(--heading);text-wrap:pretty}
+@media (max-width:759px){.routes,.recog2{grid-template-columns:minmax(0,1fr)}}
+.facts{margin:0 0 14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--rule-2)}
+.facts div{padding:16px 16px 16px 0}
+.facts dt{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
+.facts dd{margin:6px 0 0;font-size:17.5px;font-weight:600;color:var(--heading)}
+@media (max-width:559px){.facts{grid-template-columns:minmax(0,1fr)}.facts div+div{border-top:1px solid var(--rule)}}
+.list{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--rule)}
+.list li{padding:14px 0;border-top:1px solid var(--rule);font-size:clamp(17px,calc(16px + .14vw),18px);font-weight:500;line-height:1.5;color:var(--heading)}
+.lines{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--green)}
+.lines li{font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--heading)}
+.lines li+li{margin-top:10px}
+.quotes{border-top:1px solid var(--rule)}
+.quote{margin:0;padding:28px 0;border-bottom:1px solid var(--rule)}
+.quote blockquote{margin:0}
+.quote blockquote p{margin:0;font-size:clamp(18px,calc(17px + .2vw),19.5px);line-height:1.6;color:var(--heading);text-wrap:pretty}
+.quote figcaption{margin-top:14px;font-size:13px;font-weight:700;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
+.quotes>.flow{display:block}
+
+/* Homepage */
+.home-hero{position:relative;overflow:clip}
+.home-hero__lines{position:absolute;inset:0;pointer-events:none}
+.home-hero__axis{position:absolute;top:0;bottom:0;left:62%;width:1px;background:rgba(4,120,87,.4)}
+.home-hero__field{position:absolute;left:42%;right:0;height:1px;background:linear-gradient(90deg,rgba(23,25,25,0),rgba(23,25,25,.08))}
+.home-hero__in{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center;gap:48px clamp(40px,5vw,72px);padding-block:clamp(48px,5vw,72px) clamp(56px,6vw,88px)}
+.home-hero__text{position:relative;z-index:2;min-width:0}
+.home-hero .lead{max-width:560px}
+.home-fig{position:relative;z-index:1;width:clamp(320px,32vw,460px);aspect-ratio:1;justify-self:end;margin:0}
+.home-fig__disc,.home-fig__cut{position:absolute;inset:6% -4% -2% 8%;border-radius:50%}
+.home-fig__disc{background:var(--green)}
+.home-fig__cut{background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,.92) 58%)}
+.home-fig__img{position:absolute;inset:0;overflow:hidden;border-radius:50%;background:var(--forest)}
+.home-fig__img img{position:absolute;left:-10%;top:0;width:120%;height:auto;max-width:none}
+@media (max-width:899px){.home-hero__lines{display:none}.home-hero__in{grid-template-columns:minmax(0,1fr)}.home-fig{width:min(80%,320px);justify-self:center}}
+.creds{border-block:1px solid rgba(23,25,25,.16)}
+.creds ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.creds li{padding:22px 24px;border-left:1px solid rgba(23,25,25,.16)}
+.creds li:first-child{padding-left:0;border-left:0}
+.creds__a{display:block;font-size:16.5px;font-weight:650;line-height:1.3;color:var(--heading)}
+.creds__b{display:block;margin-top:4px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
+@media (max-width:759px){.creds ul{grid-template-columns:repeat(2,minmax(0,1fr))}.creds li{padding:18px 16px 18px 0;border-left:0}.creds li:nth-child(even){padding:18px 0 18px 16px;border-left:1px solid rgba(23,25,25,.16)}.creds li:nth-child(n+3){border-top:1px solid rgba(23,25,25,.16)}}
+.home-brings>.p{max-width:36em}
+
+/* Therapy vs Coaching */
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px clamp(40px,5.5vw,80px);align-items:start}
+.compare__col{min-width:0;padding-top:22px;border-top:2px solid var(--heading)}
+.compare__h{margin:0 0 18px;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .4vw),26px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading);text-wrap:balance}
+@media (max-width:899px){.compare{grid-template-columns:minmax(0,1fr)}}
+
+/* Free Tools, Writing */
+.tool .actions{margin-top:26px}
+.tool__related{margin-top:18px}
+/* The card reaches --feat-bleed past the reading axis on each side (24px on
+   desktop, less than the gutter on small screens); its copy stays on the axis. */
+.tool--featured{--feat-bleed:min(24px,calc(var(--gutter) - 8px));margin-inline:calc(-1 * var(--feat-bleed));padding:clamp(28px,4vw,44px) var(--feat-bleed);background:var(--bone-deep);border-top:3px solid var(--green)}
+.tool--featured .eyebrow{margin-bottom:14px}
+
+/* The Work & Life Check call to action (WorkLifeCheckCTA) */
+.wlcta--feature{padding:clamp(28px,4vw,44px);background:var(--bone-deep);border-top:3px solid var(--green)}
+.wlcta--feature .eyebrow{margin-bottom:14px}
+.wlcta__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + 1vw),34px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
+.wlcta--feature .actions{margin-top:26px}
+.wlcta--inline{margin-top:clamp(40px,4.5vw,56px);padding:26px 0 30px;border-top:2px solid var(--green);border-bottom:1px solid var(--rule)}
+.wlcta__lead{margin:0;max-width:32em;font-family:var(--font-heading);font-size:clamp(21px,calc(19.5px + .4vw),24px);font-weight:700;line-height:1.3;letter-spacing:-.015em;color:var(--heading);text-wrap:balance}
+.wlcta--inline .p{margin-top:12px}
+.wlcta--inline .btn{margin-top:22px}
+.btn--ghost{background:transparent;color:var(--green);box-shadow:inset 0 0 0 1.5px var(--green)}
+.btn--ghost:hover{background:var(--green);color:var(--bone)}
+.wlcta--compact{margin-top:clamp(36px,4vw,48px);padding:18px 0 12px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.wlcta__text{margin:0;max-width:36em;font-size:clamp(17px,calc(16px + .14vw),18px);font-weight:600;line-height:1.5;color:var(--heading);text-wrap:pretty}
+.wlcta--compact .tlink{margin-top:2px}
+.essays{border-bottom:1px solid var(--rule)}
+.essay{padding:28px 0;border-top:1px solid var(--rule)}
+.essay .h3{margin-bottom:10px}
+.essay__meta{margin:0 0 10px;font-size:15px;line-height:1.5;color:var(--meta)}
+.essay__meta .art-meta__cat{font-weight:700;color:var(--heading)}
+.essay__link{color:var(--heading);text-decoration:underline;text-decoration-thickness:1.5px;text-decoration-color:transparent;text-underline-offset:.16em;transition:color 180ms,text-decoration-color 180ms}
+.essay__link:hover{color:var(--green);text-decoration-color:currentColor}
+.essay .flow>.links+.related{margin-top:4px}
+
+/* Contact */
+.contact{padding-block:clamp(48px,6vw,88px) var(--sec)}
+.contact__head{max-width:720px}
+.contact__head .h1{max-width:16ch}
+.lead--strong{margin-top:12px;font-weight:600;color:var(--heading)}
+.contact__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px clamp(40px,6vw,96px);margin-top:clamp(36px,4vw,56px);align-items:start}
+.contact__form{min-width:0;padding-top:28px;border-top:3px solid var(--green)}
+.contact__aside{min-width:0;display:flex;flex-direction:column;gap:36px}
+.contact__next{padding-top:28px;border-top:1px solid rgba(23,25,25,.26)}
+.contact__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(22px,calc(19px + .5vw),27px);font-weight:800;letter-spacing:-.025em;color:var(--heading)}
+.contact__next .p{font-size:17px;line-height:1.65}
+.contact__privacy{padding:24px;background:var(--bone-deep)}
+.contact__privacy-h{margin-bottom:12px;color:var(--green)}
+.contact__privacy .p{font-size:17px;line-height:1.6}
+.contact__privacy .links{margin-top:10px}
+.ct-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 20px}
+.ct-field{display:block;margin:0 0 22px;padding:0;border:0;min-width:0}
+.ct-label{display:block;margin-bottom:8px;padding:0;font-size:14px;font-weight:700;color:var(--heading)}
+.ct-input{display:block;width:100%;min-height:52px;padding:12px 14px;background:var(--bone);border:1px solid rgba(23,25,25,.3);border-radius:0;font:inherit;font-size:16px;line-height:1.4;color:var(--heading)}
+.ct-input:focus{outline:3px solid var(--green);outline-offset:1px;border-color:var(--green)}
+.ct-input[aria-invalid="true"]{border-color:#A3362A}
+.ct-textarea{min-height:170px;padding:14px;line-height:1.55;resize:vertical}
+.ct-choices{display:flex;flex-wrap:wrap;gap:8px}
+.ct-choice{position:relative;display:inline-flex}
+.ct-choice input{position:absolute;opacity:0;width:1px;height:1px}
+.ct-choice span{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid rgba(23,25,25,.3);font-size:15px;font-weight:600;color:var(--heading);cursor:pointer}
+.ct-choice input:checked+span{background:var(--heading);border-color:var(--heading);color:var(--bone)}
+.ct-choice input:focus-visible+span{outline:3px solid var(--green);outline-offset:2px}
+.ct-help{margin:6px 0 0;font-size:14px;color:var(--meta)}
+.sp-err{margin:6px 0 0;font-size:14px;font-weight:600;color:#A3362A}
+.sp-formerr{margin:0 0 22px;padding:14px 16px;border-left:3px solid #A3362A;background:rgba(163,54,42,.06);font-size:16px;line-height:1.55;color:var(--heading)}
+.sp-formerr a{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor;overflow-wrap:anywhere}
+.sp-formerr p{margin:0}
+.sp-formerr p+p{margin-top:6px}
+.ct-submit{width:100%;min-height:56px}
+.ct-submit[disabled]{opacity:.7;cursor:progress}
+.sp-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.sp-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sp-form__done{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + .8vw),32px);font-weight:800;letter-spacing:-.03em;color:var(--heading);outline:none}
+
+/* Composition axes: 760 reading (.read), 960 paired/practical (.mid), 1120 comparison (.wide), 1240 hero/photo/services (.wrap).
+   Body measure inside the reading axis: 36em (≈ 72 characters); leads 32em (≈ 62). */
+.mid{width:min(960px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.wide{width:min(1120px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.sec--step{padding-top:clamp(80px,8.4vw,120px)}
+.read .p,.read-l .p,.col .p,.compare .p,.contact__aside .p{max-width:36em}
+.read .p--emph,.read-l .p--emph{max-width:32em}
+/* A reading column that starts on its container's left edge (.wrap or .mid)
+   instead of the page's centred reading axis; same width as .read. */
+.read-l{max-width:var(--read-max)}
+.quote blockquote p{max-width:34em}
+.practical__rest{margin-top:40px}
+.sec--pre-faq + .sec{padding-top:clamp(88px,6.7vw,96px)}
+.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:760px) and (max-width:1099px){
+  .cols3:not(.cols2){grid-template-columns:minmax(0,1fr);row-gap:0}
+  .cols3:not(.cols2) .col{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:32px;align-content:start;padding-block:22px 30px}
+  .cols3:not(.cols2) .col>*{grid-column:2}
+  .cols3:not(.cols2) .col>.h3{grid-column:1;grid-row:1/span 3}
+}
+@media (max-width:759px){.cols2{grid-template-columns:minmax(0,1fr)}}
+
+@media (max-width:599px){.btn{white-space:normal;text-align:center}}
+
+.art-head{padding-top:clamp(48px,5.5vw,80px)}
+.art-crumbs ol{display:flex;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+.art-crumbs a{display:inline-flex;align-items:center;min-height:44px;margin-block:-12px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.art-crumbs a:hover{color:var(--green-pressed);text-decoration:underline;text-underline-offset:4px}
+.art-meta{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--meta)}
+.art-meta__cat{font-weight:700;color:var(--heading)}
+.art-h1{margin-top:20px}
+.art-deck{max-width:34em}
+
+/* Author strip: compact, one line of image and three of text */
+.art-author{display:flex;align-items:center;gap:16px;margin-top:32px;padding-block:16px;border-block:1px solid var(--rule)}
+.art-author__fig{position:relative;flex:0 0 auto;width:60px;height:60px;border-radius:50%;overflow:hidden;background:var(--forest)}
+.art-author__fig img{position:absolute;left:50%;top:0;width:160%;max-width:none;height:auto;transform:translate(-48%,-9%)}
+.art-author__text{min-width:0}
+.art-author p{margin:0}
+.art-author__name{font-size:16.5px;font-weight:650;line-height:1.35;color:var(--heading)}
+.art-author__name a{border-bottom:1.5px solid rgba(4,120,87,.45);transition:color 180ms,border-color 180ms}
+.art-author__name a:hover{color:var(--green);border-bottom-color:currentColor}
+.art-author__line{margin-top:3px;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.art-author__line--bg{color:var(--meta)}
+@media (max-width:559px){.art-author{align-items:flex-start}}
+
+/* On this page: in the flow, numbered like the site's rows */
+.art-toc{margin-top:40px}
+.art-toc__label{margin:0 0 12px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
+.art-toc__list{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule-2);counter-reset:toc}
+.art-toc__list li{counter-increment:toc;border-bottom:1px solid var(--rule)}
+.art-toc__list a{display:flex;align-items:baseline;gap:14px;min-height:44px;padding:10px 0;font-size:16.5px;font-weight:550;line-height:1.4;color:var(--heading);transition:color 180ms}
+.art-toc__list a::before{content:counter(toc,decimal-leading-zero);content:counter(toc,decimal-leading-zero) / "";flex:0 0 26px;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--green);font-variant-numeric:tabular-nums}
+.art-toc__list a:hover{color:var(--green)}
+
+/* Body. The site header is not sticky: a target heading only needs air. */
+.art-body{padding-top:clamp(48px,5vw,64px)}
+.art h2[id],.art-cta h2[id]{scroll-margin-top:24px}
+.art-sec{padding-top:clamp(56px,6vw,80px)}
+.art .h2{margin-bottom:22px;font-size:clamp(28px,calc(24px + 1vw),36px)}
+.art .p{font-size:clamp(17px,calc(16px + .2vw),18.5px);line-height:1.72}
+.art .p strong{font-weight:650}
+.flow>.art-sub{margin-top:clamp(36px,4vw,48px)}
+.art-a{color:var(--green);text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:rgba(4,120,87,.55);text-underline-offset:.2em;transition:color 180ms,text-decoration-color 180ms}
+.art-a:hover{color:var(--green-pressed);text-decoration-color:currentColor;text-decoration-thickness:2px}
+.art-list{margin:0;padding-left:1.25em}
+.art-list li{padding-left:.35em;font-size:clamp(17px,calc(16px + .2vw),18.5px);line-height:1.68;color:var(--body);text-wrap:pretty}
+.art-list li+li{margin-top:12px}
+.art-list li::marker{color:var(--green)}
+.art-list strong{font-weight:650;color:var(--heading)}
+.art-list--ol{padding-left:1.4em}
+.art-list--ol li::marker{font-weight:700;font-variant-numeric:tabular-nums}
+/* An essay's pull quote and section break */
+.art-quote{margin:0;padding:4px 0 4px 22px;border-left:2px solid var(--green)}
+.art .art-quote .p{font-family:var(--font-heading);font-size:clamp(20px,calc(18.5px + .4vw),23px);font-weight:600;line-height:1.45;letter-spacing:-.01em;color:var(--heading)}
+.art-hr{width:64px;height:0;margin-inline:0;border:0;border-top:2px solid var(--rule-2)}
+.flow>.art-quote,.flow>.art-hr{margin-top:32px}
+.flow>.art-quote+*,.flow>.art-hr+*{margin-top:32px}
+.flow>.art-list,.flow>.art-table,.flow>.art-table-scroll,.flow>.art-callout{margin-top:24px}
+.flow>.art-list+*,.flow>.art-table+*,.flow>.art-table-scroll+*,.flow>.art-callout+*{margin-top:24px}
+
+/* Comparison table: the first column narrower than the two evidence columns */
+.art-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15.5px;line-height:1.55;color:var(--body)}
+.art-table caption{caption-side:top;margin:0 0 14px;text-align:left;font-size:17px;font-weight:600;line-height:1.45;color:var(--heading)}
+.art-table__key{width:24%}
+.art-table thead th{padding:0 16px 12px 0;border-bottom:2px solid var(--heading);text-align:left;vertical-align:bottom;font-family:var(--font-heading);font-size:15px;font-weight:700;line-height:1.3;color:var(--heading)}
+.art-table tbody th,.art-table td{padding:14px 18px 16px 0;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.art-table tbody th{font-weight:650;line-height:1.4;color:var(--heading)}
+.art-table tr>:last-child{padding-right:0}
+@media (max-width:640px){
+  .art-table--stack,.art-table--stack tbody,.art-table--stack tr,.art-table--stack th,.art-table--stack td{display:block;width:auto}
+  .art-table--stack caption{display:block}
+  .art-table--stack colgroup{display:none}
+  .art-table--stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .art-table--stack tbody tr{padding:16px 0 20px;border-top:2px solid var(--heading)}
+  .art-table--stack tbody th,.art-table--stack td{padding:0;border:0}
+  .art-table--stack tbody th{font-family:var(--font-heading);font-size:18px;font-weight:700}
+  .art-table--stack td{margin-top:14px}
+  .art-table--stack [data-label]::before{content:attr(data-label);content:attr(data-label) / "";display:block;margin-bottom:4px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.35;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
+  .art-table--scroll{min-width:34rem}
+}
+/* A table that scrolls in its own region on narrow screens (focusable, so a
+   keyboard can scroll it). A soft shadow shows at an edge only while there is
+   more table beyond it: bone covers scroll with the content and hide the
+   shadows at either end. */
+.art-table-scroll{overflow-x:auto;overscroll-behavior-x:contain;background:linear-gradient(to right,var(--bone) 40%,rgba(243,240,232,0)) left center/28px 100% no-repeat local,linear-gradient(to left,var(--bone) 40%,rgba(243,240,232,0)) right center/28px 100% no-repeat local,radial-gradient(farthest-side at 0 50%,rgba(23,25,25,.18),rgba(23,25,25,0)) left center/12px 100% no-repeat scroll,radial-gradient(farthest-side at 100% 50%,rgba(23,25,25,.18),rgba(23,25,25,0)) right center/12px 100% no-repeat scroll}
+.art-table-scroll:focus-visible{outline:3px solid var(--green);outline-offset:4px}
+
+/* The one safety callout: restrained, the paragraph and its links intact */
+.art-callout{padding:20px 22px;background:var(--bone-deep);border-left:3px solid var(--heading)}
+
+/* Questions, answered in full: no accordion */
+.art-sec--faq .flow>.art-sub{margin-top:0;padding:24px 0 26px;border-top:1px solid var(--rule)}
+.art-sec--faq .flow>.art-sub:last-child{border-bottom:1px solid var(--rule)}
+.art-sec--faq .h3{margin-bottom:10px;font-size:clamp(19px,calc(18px + .25vw),21px)}
+
+/* References: the editorial list, smaller, hanging numbers */
+.art-refs{margin:0;padding-left:1.7em;font-size:15.5px;line-height:1.6;color:var(--ink-2)}
+.art-refs li{padding-left:.4em;overflow-wrap:break-word}
+.art-refs li+li{margin-top:10px}
+.art-refs li::marker{font-weight:600;color:var(--meta);font-variant-numeric:tabular-nums}
+
+/* The close: the site's dark band, the article's CTA in it */
+.art-cta .art-cta__h{margin:0 auto}
+.art-cta .art-cta__p{margin:18px auto 0}
+</style><header class="hdr"><a class="skip-link" href="#main">Skip to content</a><div class="wrap hdr__in"><a href="/" class="hdr__brand" aria-label="Aggelos Mouzakitis, home">Aggelos<span>.</span></a><nav class="hdr__nav" aria-label="Primary"><div class="hdr__item"><a href="/" class="hdr__link">Home</a></div><div class="hdr__item"><a href="/about/" class="hdr__link">About</a></div><div class="hdr__item"><button type="button" class="hdr__btn" aria-expanded="false" aria-controls="nav-services">Services<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg></button><div id="nav-services" class="hdr__panel" hidden=""><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a><div class="hdr__sep" role="presentation"></div><a href="/therapy-for-men-in-tech/">Therapy for Men in Tech &amp; Business</a><a href="/therapy-for-executives/">Therapy for Executives &amp; Senior Leaders</a><a href="/therapy-for-founders/">Therapy for Entrepreneurs, Founders &amp; Business Owners</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></div></div><div class="hdr__item"><button type="button" class="hdr__btn is-current" aria-expanded="false" aria-controls="nav-resources">Resources<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg></button><div id="nav-resources" class="hdr__panel" hidden=""><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/" aria-current="true">Writing</a><a href="/free-tools/">Free Tools</a><a href="/reviews/">Reviews</a></div></div><div class="hdr__item"><a href="/faq/" class="hdr__link">FAQ</a></div></nav><a href="/contact/" class="hdr__cta">Book a consultation<span aria-hidden="true">→</span></a><button type="button" class="hdr__menu-btn" aria-expanded="false" aria-controls="site-menu">Menu<span class="hdr__burger" aria-hidden="true"><span></span><span></span><span></span></span></button></div><nav id="site-menu" class="mmenu" aria-label="Primary" hidden=""><div class="mmenu__in"><a href="/" class="mmenu__link">Home</a><a href="/about/" class="mmenu__link">About</a><div class="mmenu__group"><button type="button" class="mmenu__toggle" aria-expanded="false" aria-controls="m-services">Services<span class="mmenu__sign" aria-hidden="true">+</span></button><div id="m-services" class="mmenu__links" hidden=""><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a><div class="mmenu__sep" role="presentation"></div><a href="/therapy-for-men-in-tech/">Therapy for Men in Tech &amp; Business</a><a href="/therapy-for-executives/">Therapy for Executives &amp; Senior Leaders</a><a href="/therapy-for-founders/">Therapy for Entrepreneurs, Founders &amp; Business Owners</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></div></div><div class="mmenu__group"><button type="button" class="mmenu__toggle" aria-expanded="false" aria-controls="m-resources">Resources<span class="mmenu__sign" aria-hidden="true">+</span></button><div id="m-resources" class="mmenu__links" hidden=""><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/" aria-current="true">Writing</a><a href="/free-tools/">Free Tools</a><a href="/reviews/">Reviews</a></div></div><a href="/faq/" class="mmenu__link">FAQ</a><a href="/contact/" class="mmenu__cta">Book a consultation<span aria-hidden="true">→</span></a></div></nav></header><main id="main" tabindex="-1" class="pg fam-article pg--cant-switch-off-from-work"><article class="art" aria-labelledby="page-title"><header class="read art-head"><nav class="art-crumbs" aria-label="Breadcrumb"><ol><li><a href="/blog/">Writing</a></li></ol></nav><p class="art-meta"><span class="art-meta__cat">Guide</span> · <time datetime="2026-10-01T22:57:00+01:00">October 2026</time> · 11 min read</p><h1 class="h1 art-h1 h1--long" id="page-title">Why You Can’t Switch Off From Work, Even When You’re Not Working</h1><p class="lead art-deck">Work can keep occupying your attention after hours for different reasons. Understanding what keeps it there helps you decide what to change.</p><div class="art-author"><span class="art-author__fig"><img src="/img/aggelos-about.webp" alt="Aggelos Mouzakitis, psychotherapist and article author" width="840" height="1050" decoding="async"></span><div class="art-author__text"><p class="art-author__name"><a href="/about/" rel="author">Aggelos Mouzakitis</a></p><p class="art-author__line">BACP-registered Psychotherapist · MSc Integrative Counselling &amp; Psychotherapy</p><p class="art-author__line art-author__line--bg">Background in product and growth · 100+ technology companies advised</p></div></div><nav class="art-toc" aria-labelledby="art-toc-label"><p class="art-toc__label" id="art-toc-label">On this page</p><ol class="art-toc__list"><li><a href="#what-not-switching-off-actually-looks-like">What “not switching off” actually looks like</a></li><li><a href="#why-your-brain-keeps-work-running-after-work">Why your brain keeps work running after work</a></li><li><a href="#why-boundaries-arent-always-enough">Why boundaries aren’t always enough</a></li><li><a href="#responsibility-makes-switching-off-harder">Responsibility makes switching off harder</a></li><li><a href="#why-rest-can-feel-irresponsible">Why rest can feel irresponsible</a></li><li><a href="#is-this-anxiety-workaholism-or-burnout">Is this anxiety, workaholism or burnout?</a></li><li><a href="#what-to-change-at-work">What to change at work</a></li><li><a href="#what-to-examine-in-yourself">What to examine in yourself</a></li><li><a href="#when-therapy-becomes-useful">When therapy becomes useful</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li><li><a href="#references">References</a></li></ol></nav></header><div class="read art-body"><div class="flow"><p class="p">The laptop is closed and dinner has started, but you are still composing tomorrow’s reply. Someone asks you a question and you realise you have missed the conversation. You haven’t done any more work, yet the evening has been spent preparing for it.</p><p class="p">Sometimes something important is unresolved. Sometimes you have dealt with it as far as you can, and your mind keeps returning to what might happen. Both can occur together.</p><p class="p">Psychologists call the ability to mentally step away from work <strong>psychological detachment</strong>. If you can’t switch off from work, the useful starting point is what is keeping your attention occupied: an outstanding responsibility, unclear expectations, fear of consequences, or difficulty feeling okay when you stop.</p></div><section class="art-sec"><h2 class="h2" id="what-not-switching-off-actually-looks-like">What “not switching off” actually looks like</h2><div class="flow"><p class="p">You may be doing very little visible work while spending much of your evening on it mentally:</p><ul class="art-list"><li>Replaying a meeting, especially the moment you think you sounded uncertain.</li><li>Rehearsing tomorrow’s conversation until you have an answer for every possible objection.</li><li>Checking email at night, closing it, then reopening it without a notification.</li><li>Imagining a failure that someone will discover while you are offline.</li><li>Trying to solve next week’s problems during dinner or while falling asleep.</li></ul><p class="p">A useful idea on a walk is different from repeatedly reviewing a conversation and feeling worse. <a class="art-a" href="https://pubmed.ncbi.nlm.nih.gov/31434205/">Research distinguishes several forms of after-hours thinking</a>, including problem-solving, positive reflection and distressed rumination; their associations with wellbeing differ.</p><p class="p">Consider whether the thinking produces a next action, whether you can leave it, and what it costs. Repeatedly missing conversations or becoming impatient when interrupted can also become a <a class="art-a" href="/work-affecting-relationship/">problem in your relationship</a>.</p></div></section><section class="art-sec"><h2 class="h2" id="why-your-brain-keeps-work-running-after-work">Why your brain keeps work running after work</h2><div class="flow"><div class="art-sub"><h3 class="h3">Unfinished or ambiguous tasks</h3><div class="flow"><p class="p">A proposal awaiting approval can stay on your mind because you don’t know whether it is finished or about to come back with another demand. A <a class="art-a" href="https://research.rug.nl/en/publications/unfinished-work-tasks-and-work-related-thoughts-during-off-job-ti/">2026 meta-analysis</a> found an association between unfinished tasks and thinking about work outside working hours, particularly distressed rumination. This does not mean every incomplete task prevents rest. Importance, expectations and how the task is managed matter.</p></div></div><div class="art-sub"><h3 class="h3">Perceived threat</h3><div class="flow"><p class="p">A manager’s “Can we talk tomorrow?” leaves room for interpretation. If criticism or job loss feels likely, you may spend the evening trying to prepare. That concern could reflect previous treatment at work, current insecurity or a tendency to interpret uncertainty as danger. Establish what actually happened before deciding which explanation fits.</p></div></div><div class="art-sub"><h3 class="h3">High responsibility</h3><div class="flow"><p class="p">If nobody has accepted a handover, there may be a real reason to remain alert. Knowing that a customer, patient or production system depends on you differs from worrying about an ordinary unanswered message. The question is what requires action tonight and who is responsible for it.</p></div></div><div class="art-sub"><h3 class="h3">Work becoming psychologically central</h3><div class="flow"><p class="p">If being competent is your main source of confidence, a possible mistake can feel consequential long after you have taken reasonable precautions. Staying connected may help you feel that you are still useful or keeping up. This is one way <a class="art-a" href="/achievement-self-worth/">achievement and self-worth</a> can become tied together, though it is not the explanation for everyone who works hard.</p></div></div></div></section><section class="art-sec"><h2 class="h2" id="why-boundaries-arent-always-enough">Why boundaries aren’t always enough</h2><div class="flow"><p class="p">Turning off Slack can remove interruptions. It helps less if your manager still expects an immediate response or you spend the next hour wondering whether someone is disappointed in you.</p><p class="p"><a class="art-a" href="https://news.lehigh.edu/the-negative-impact-of-after-hours-work-email">Research reported by Lehigh University</a> linked organisational expectations about after-hours email with difficulty detaching, beyond the time people actually spent emailing. Availability can occupy your attention even while the phone stays silent.</p><p class="p">Look at what happens after you check. Did you find something actionable? Or did you feel briefly calmer, then need to check again? The second pattern suggests checking may be providing reassurance rather than resolving work. Boundaries remain useful, but agreement about availability and your response to uncertainty may need attention alongside them.</p></div></section><section class="art-sec"><h2 class="h2" id="responsibility-makes-switching-off-harder">Responsibility makes switching off harder</h2><div class="flow"><p class="p">Founders may be worrying about payroll. Managers may be carrying an unresolved staffing problem. Senior individual contributors may know precisely what could break overnight. “It isn’t your company” offers little help when it is, or when your role includes genuine operational responsibility.</p><p class="p">For on-call work, useful arrangements include a defined rota, actionable alerts, backup and clear escalation. <a class="art-a" href="https://sre.google/sre-book/being-on-call/">Google’s guidance on being on call</a> describes these operational protections. They make it clearer when attention is required and when responsibility belongs elsewhere.</p><p class="p">If you are a small business owner without spare staff, cover may be expensive or unavailable. That can require difficult decisions about service commitments or financial risk. No evening routine can create capacity that the business does not have.</p><p class="p">Responsibility still needs limits. Once someone else has accepted the handover, monitoring the same system all evening may add little protection. <strong>Being accountable does not require watching continuously.</strong> Establish what you would actually do with new information before assuming you need to keep looking.</p></div></section><section class="art-sec"><h2 class="h2" id="why-rest-can-feel-irresponsible">Why rest can feel irresponsible</h2><div class="flow"><p class="p">You sit down, remember something you could improve, and get up again. Rest has become acceptable only when nothing remains to do. In an expanding role, that condition may never arrive.</p><p class="p">The workplace can teach this. If late replies attract praise and time off attracts criticism, feeling guilty about relaxing makes sense. A <a class="art-a" href="https://digitalcommons.odu.edu/psychology_fac_pubs/254/">2026 study of 202 workers</a> linked a perceived climate of overwork with guilt about recovery and poorer detachment. It suggests that apparently personal guilt can have an organisational context.</p><p class="p">There may also be a private standard: reliable people are always available; successful people stay ahead. Ask what an evening off would supposedly say about you. The practical consequences and the judgement you make about yourself may be different.</p><p class="p">If worry has become evidence that you care, resting can feel like withdrawing care. You can take a commitment seriously, make a reasonable plan and still experience discomfort when you stop. That discomfort deserves examination; it does not automatically create another obligation.</p></div></section><section class="art-sec"><h2 class="h2" id="is-this-anxiety-workaholism-or-burnout">Is this anxiety, workaholism or burnout?</h2><div class="flow"><p class="p">Difficulty switching off can occur with each, and they can overlap:</p><ul class="art-list"><li><strong>Work anxiety:</strong> worry about consequences, criticism or uncertainty keeps you preparing and checking. The <a class="art-a" href="/work-anxiety/">work anxiety guide</a> explores workplace pressures and recurring personal patterns.</li><li><strong>Workaholism:</strong> a hard-to-control drive to work excessively, including when it is not required. A <a class="art-a" href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1252373/full">systematic review</a> notes disagreement about definitions and measurement. Long hours alone do not establish it.</li><li><strong>Burnout:</strong> <a class="art-a" href="https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases">WHO describes</a> a pattern of exhaustion, distance or cynicism about the job, and reduced effectiveness following chronic workplace stress that has not been successfully managed. It is an occupational phenomenon, not itself a medical diagnosis. See <a class="art-a" href="/burnout-at-work/">burnout at work</a> for recovery and workplace changes.</li></ul><p class="p">These descriptions cannot diagnose why you are unable to relax after work. Sleep problems or anxiety deserve attention without first finding the perfect label.</p></div></section><section class="art-sec"><h2 class="h2" id="what-to-change-at-work">What to change at work</h2><div class="flow"><p class="p">Start with the arrangement that keeps requiring your attention. <a class="art-a" href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work">WHO recommends organisational interventions</a> that address working conditions, including excessive demands and unclear roles.</p><ol class="art-list art-list--ol"><li><strong>Clarify what is enough for now.</strong> Ask what must be delivered, what can wait and who decides whether it is acceptable. “Everything is urgent” needs a priority decision from whoever assigns the work.</li><li><strong>Record the next action.</strong> Before finishing, note what remains, who owns it and when it will be revisited. “Awaiting finance’s figures; follow up tomorrow at 10” is more useful than “sort budget”. A <a class="art-a" href="https://bpspsychub.onlinelibrary.wiley.com/doi/10.1111/joop.12137">planning study</a> found this helped detachment, particularly among people who usually struggled to disengage. It is an aid, not a guarantee.</li><li><strong>Define an after-hours emergency.</strong> Agree what requires action tonight, how you will be contacted and who provides cover. Keep necessary on-call alerts available; ordinary messages can wait according to the agreed arrangement.</li><li><strong>Make availability explicit.</strong> Try: “Outside my on-call week, I’ll read messages the next working morning. Does anything require a different arrangement?” This tests expectations rather than leaving you to infer them.</li><li><strong>Reduce recurring overload.</strong> If every evening contains genuine unfinished urgent work, negotiate scope, deadlines or staffing. A shutdown list cannot make an impossible workload manageable.</li></ol><p class="p">Where requests for reasonable changes repeatedly fail, consider transfer or leaving, with the financial realities included. <a class="art-a" href="/my-job-gives-me-anxiety-should-i-quit/">My job gives me anxiety. Should I quit?</a> offers criteria for that decision.</p></div></section><section class="art-sec"><h2 class="h2" id="what-to-examine-in-yourself">What to examine in yourself</h2><div class="flow"><p class="p">Take one recent evening and follow the sequence. What brought work to mind? What did you expect would happen? What did you do next, and how long did the relief last?</p><p class="p">The central question is: <strong>What do I believe happens if I stop monitoring?</strong> An actual incident without cover requires an operational response. Fear that a delayed reply makes you look uncommitted raises a different question about expectations and approval.</p><p class="p">Repeated reassurance can briefly settle anxiety while helping to maintain it, as <a class="art-a" href="https://www.cci.health.wa.gov.au/News/New-Resources-to-Help-Manage-Reassurance-Seeking">guidance from the Centre for Clinical Interventions explains</a>. Email checking may serve a similar function. If no action is due, consider a small experiment during an agreed off-duty period: leave routine email until morning and compare the predicted consequence with what happens. Use a low-stakes situation where no safety or on-call duty is involved.</p><p class="p">Notice whether the same demand for certainty appears elsewhere. That can help distinguish this job’s demands from a broader <a class="art-a" href="/anxiety-overthinking/">pattern of anxiety and overthinking</a>. Also consider whether returning to work lets you postpone a difficult conversation or an unstructured evening. That is a possibility to investigate, not an assumption about your motives.</p><p class="p">Make room for something you want to do outside work. It needn’t become a recovery project with targets. If a work thought returns, you can recognise it and return to the conversation or activity without treating its arrival as a failed evening.</p></div></section><section class="art-sec"><h2 class="h2" id="when-therapy-becomes-useful">When therapy becomes useful</h2><div class="flow"><p class="p">Therapy can help when checking and rumination repeatedly affect sleep or relationships, or continue after reasonable workplace changes. The work can examine what triggers the pattern, what checking provides and why stopping feels difficult. It should also leave room for the possibility that the job needs to change.</p><p class="p">A <a class="art-a" href="https://pubmed.ncbi.nlm.nih.gov/34096763/">meta-analysis of detachment interventions</a> found improvement on average across varied programmes. It does not identify one exercise that works for everybody. A coach or experienced colleague may be more useful for a bounded workload or leadership problem; the <a class="art-a" href="/therapy-vs-coaching/">therapy versus coaching guide</a> explains the distinction.</p><p class="p">Speak to a GP if you are struggling to cope, have persistent anxiety or physical symptoms needing assessment. <a class="art-a" href="https://www.nhs.uk/conditions/insomnia/">NHS guidance on insomnia</a> recommends medical advice when sleep difficulties affect daily life or persist despite changes. You do not have to wait until you can no longer work.</p></div></section><section class="art-sec art-sec--faq"><h2 class="h2" id="frequently-asked-questions">Frequently asked questions</h2><div class="flow"><div class="art-sub"><h3 class="h3">Why do holidays not help me switch off?</h3><div class="flow"><p class="p">A holiday can give you distance while leaving the underlying arrangement intact. You may still be responsible for decisions, expecting a backlog or trying to prevent criticism by checking. Before going away, agree cover, decision-making authority and how genuine emergencies will reach you. If you continue feeling compelled to monitor after those arrangements are clear, examine what you expect checking to prevent. Poor detachment on holiday alone does not establish burnout.</p></div></div><div class="art-sub"><h3 class="h3">Should I stop checking work email at night completely?</h3><div class="flow"><p class="p">That depends on your duties. Where evening availability is required, clarify the channel, response time and coverage. Outside agreed duties, routine checking may be unnecessary, especially if it mainly offers temporary relief. Avoid quietly replacing undefined availability with a personal rule that nobody else knows about. Establish the expectation, then test a manageable period without routine checking. If the employer requires constant availability, the working arrangement needs attention.</p></div></div><div class="art-sub"><h3 class="h3">How can I detach after work if I work from home?</h3><div class="flow"><p class="p">Record tomorrow’s next action, close the work applications and make a transition into something else: a walk, cooking or time with another person. Choose something that fits your life rather than an elaborate ritual. A separate device or workspace can help where available. If work keeps intruding, check whether the interruption is external, an unresolved decision or a repeated worry. Each needs a different response.</p></div></div><div class="art-sub"><h3 class="h3">Do I need to stop all thoughts about work to recover properly?</h3><div class="flow"><p class="p">No. A brief idea or an enjoyable recollection does not make your time off unsuccessful. Pay attention to whether thinking is distressing, difficult to leave or repeatedly displaces sleep and relationships. You can note a useful idea once and return to what you were doing. Trying to police every work thought can become another demand. The aim is greater choice about your attention and enough opportunity to recover.</p></div></div></div></section><section class="art-sec art-sec--references"><h2 class="h2" id="references">References</h2><div class="flow"><ol class="art-refs"><li>Weigelt, O., Gierer, P., &amp; Syrek, C. J. (2019). <a class="art-a" href="https://pubmed.ncbi.nlm.nih.gov/31434205/">My Mind is Working Overtime: Towards an Integrative Perspective of Psychological Detachment, Work-Related Rumination, and Work Reflection</a>. <em>International Journal of Environmental Research and Public Health</em>, 16, 2987.</li><li>Wendsche, J., Weigelt, O., &amp; Syrek, C. J. (2026). <a class="art-a" href="https://research.rug.nl/en/publications/unfinished-work-tasks-and-work-related-thoughts-during-off-job-ti/">Unfinished work tasks and work-related thoughts during off-job time: meta-analysis of the Zeigarnik effect in a work-recovery context</a>. <em>Anxiety, Stress, &amp; Coping</em>, 39, 385–407.</li><li>Lehigh University (2017). <a class="art-a" href="https://news.lehigh.edu/the-negative-impact-of-after-hours-work-email">The Negative Impact of After-Hours Work Email</a>. Research report.</li><li>Google (2016). <a class="art-a" href="https://sre.google/sre-book/being-on-call/">Being On-Call</a>. <em>Site Reliability Engineering</em>.</li><li>Terry, J. D., &amp; Cigularov, K. P. (2026). <a class="art-a" href="https://digitalcommons.odu.edu/psychology_fac_pubs/254/">I Can’t Stop: The Effects of Psychological Climate for Overwork on Recovery Experiences</a>. <em>Occupational Health Science</em>, 10, Article 7.</li><li>Andersen, F. B., et al. (2023). <a class="art-a" href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1252373/full">The prevalence of workaholism: a systematic review and meta-analysis</a>. <em>Frontiers in Psychology</em>, 14, 1252373.</li><li>World Health Organization (2019). <a class="art-a" href="https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases">Burn-out an occupational phenomenon: International Classification of Diseases</a>.</li><li>World Health Organization (2026). <a class="art-a" href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work">Mental health at work</a>.</li><li>Smit, B. W. (2016). <a class="art-a" href="https://bpspsychub.onlinelibrary.wiley.com/doi/10.1111/joop.12137">Successfully leaving work at work: The self-regulatory underpinnings of psychological detachment</a>. <em>Journal of Occupational and Organizational Psychology</em>, 89, 493–514.</li><li>Centre for Clinical Interventions (2025). <a class="art-a" href="https://www.cci.health.wa.gov.au/News/New-Resources-to-Help-Manage-Reassurance-Seeking">New Resources to Help Manage Reassurance Seeking</a>. Government of Western Australia.</li><li>Karabinski, T., et al. (2021). <a class="art-a" href="https://pubmed.ncbi.nlm.nih.gov/34096763/">Interventions for improving psychological detachment from work: A meta-analysis</a>. <em>Journal of Occupational Health Psychology</em>, 26, 224–242.</li><li>NHS (2024). <a class="art-a" href="https://www.nhs.uk/conditions/insomnia/">Insomnia</a>.</li></ol></div></section></div></article><section class="band close on-dark art-cta" aria-labelledby="a-conversation-about-what-keeps-work-on-your-mind"><div class="read close__in"><p class="close__label">WORK WITH ME</p><h2 class="close__text art-cta__h" id="a-conversation-about-what-keeps-work-on-your-mind">A conversation about what keeps work on your mind</h2><p class="close__text close__text--long art-cta__p">If work keeps occupying your evenings, we can look at what happens when you try to stop and what you expect checking to prevent. You can bring the practical demands of the job into that conversation. Describe what is happening and where you are located, and we can discuss whether psychotherapy, coaching or another form of support fits.</p><div class="close__actions"><a class="btn" href="/contact/">Book a conversation <span aria-hidden="true">→</span></a></div></div></section></main><footer class="ftr"><div class="wrap"><div class="ftr__grid"><div style="min-width: 0px;"><a href="/" class="ftr__brand" aria-label="Aggelos Mouzakitis, home">Aggelos<span>.</span></a><p class="ftr__tag">BACP-registered psychotherapist · Background in tech, product &amp; growth</p><ul class="ftr__social" aria-label="Social media"><li><a href="https://www.linkedin.com/in/growth-product-manager/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a></li><li><a href="https://www.instagram.com/_aggelosmouzakitis_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg></a></li><li><a href="https://www.tiktok.com/@aggelosmouz" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg></a></li></ul></div><nav class="ftr__col" aria-label="Work with me"><p class="ftr__head">Work with me</p><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a></nav><nav class="ftr__col" aria-label="Who I work with"><p class="ftr__head">Who I work with</p><a href="/therapy-for-men-in-tech/">Men in Tech &amp; Demanding Careers</a><a href="/therapy-for-founders/">Founders &amp; Business Owners</a><a href="/therapy-for-executives/">Executives &amp; Leaders</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></nav><nav class="ftr__col" aria-label="Common problems"><p class="ftr__head">Common problems</p><a href="/relationship-problems-men/">Relationships &amp; Separation</a><a href="/work-affecting-relationship/">Work &amp; Relationships</a><a href="/executive-burnout-therapy/">Burnout &amp; Can’t Switch Off</a><a href="/career-transition-therapy/">Career Change &amp; Decisions</a><a href="/anxiety-overthinking/">Anxiety &amp; Overthinking</a><a href="/achievement-self-worth/">Achievement &amp; Self-Worth</a></nav><nav class="ftr__col" aria-label="Practice"><p class="ftr__head">Practice</p><a href="/about/">About</a><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/">Writing</a><a href="/free-tools/">Free Tools</a><a href="/faq/">FAQ</a><a href="/reviews/">Reviews</a><a href="/contact/">Contact</a></nav></div><div class="ftr__rule" role="presentation"></div><div class="ftr__bottom"><p style="margin: 0px;">© 2026 Aggelos Mouzakitis. All rights reserved.</p><nav class="ftr__legal" aria-label="Legal"><a href="/confidentiality/">Confidentiality</a></nav></div></div></footer></div>
+<script src="/react.production.min.js?v=d949f1c368" crossorigin="anonymous"></script>
+<script src="/react-dom.production.min.js?v=35f4f974f4" crossorigin="anonymous"></script>
+<script src="/site-nav.js?v=845fe0238a"></script>
+<script src="/site-chrome.js?v=ebc8547ebf"></script>
+<script src="/article-cant-switch-off-from-work.js?v=16c1c2ec0c"></script>
+<script src="/site-pages.js?v=126bcbbe0e"></script>
+<script>renderArticlePage("cant-switch-off-from-work");</script>
+</body>
+</html>

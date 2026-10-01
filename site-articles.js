@@ -8,6 +8,21 @@
 // placeholders are left out with their pointers.
 
 window.SITE_ARTICLES = [{
+  "id": "cant-switch-off-from-work",
+  "url": "/cant-switch-off-from-work/",
+  "h1": "Why You Can’t Switch Off From Work, Even When You’re Not Working",
+  "deck": "Work can keep occupying your attention after hours for different reasons. Understanding what keeps it there helps you decide what to change.",
+  "category": "Career & Work",
+  "type": "Guide",
+  "labels": ["Guide"],
+  "published": "2026-10-01T22:57:00+01:00",
+  "publishedLabel": "October 2026",
+  "readTime": "11 min read",
+  "related": {
+    "label": "Burnout & Can’t Switch Off",
+    "href": "/executive-burnout-therapy/"
+  }
+}, {
   "id": "my-job-gives-me-anxiety-should-i-quit",
   "url": "/my-job-gives-me-anxiety-should-i-quit/",
   "h1": "My Job Gives Me Anxiety. Should I Quit?",

@@ -155,6 +155,32 @@ const ARTICLES = [
     wordCount: ['headline', 'deck', 'body'],
     links: {},
   },
+  {
+    slug: 'cant-switch-off-from-work',
+    brief: 'content/articles/cant-switch-off-from-work.md',
+    published: '2026-10-01T22:57:00+01:00',
+    modified: null,
+    // "Category: Career & Work. Article type label: Guide." and "Display a
+    // restrained metadata line: `Guide · [actual publication month and year]
+    // · 11 min read`": the line shows Guide; the category is articleSection.
+    category: 'Career & Work',
+    type: 'Guide',
+    labels: ['Guide'],
+    readTime: '11 min read',
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    related: { label: 'Burnout & Can’t Switch Off', href: '/executive-burnout-therapy/' },
+    // "Preserve the inline GP and insomnia guidance … It does not require a
+    // separate warning banner": no callout.
+    callout: null,
+    // The brief sets no scope: the editorial text, as for the other guides
+    // whose briefs leave the references out.
+    wordCount: ['headline', 'deck', 'body'],
+    // "Do not invent an image URL or use an arbitrary portrait as a claimed
+    // article illustration": no image in the BlogPosting.
+    schemaImage: 'none',
+    links: {},
+  },
   // The four essays the canonical copy features on /blog/, brought back from
   // the archive at their original URLs (from-archive.js): text word for word,
   // first publication dates kept, the canonical entries made real.
