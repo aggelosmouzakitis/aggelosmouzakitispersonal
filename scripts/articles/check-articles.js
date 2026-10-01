@@ -24,7 +24,10 @@
 //   - no [INTERNAL LINK NEEDED] marker in any published file.
 // As a reader gets it (JavaScript on)
 //   - no page-level horizontal overflow from 320px to 1280px;
-//   - below 640px the table's column labels show beside every cell;
+//   - below 640px the table is set as its brief asks: labelled row groups
+//     with the column label beside every cell ('stack'), or its columns kept
+//     in a labelled, focusable region that scrolls ('scroll'); its text is
+//     never shrunk to fit;
 //   - every TOC link lands its heading at the top of the viewport, with
 //     scrolling smooth only for readers who have not asked for less motion;
 //   - the header marks Writing as the article's section.
@@ -68,20 +71,27 @@ function runs(md) {
 function expected(a, report) {
   const src = fs.readFileSync(path.join(ROOT, a.brief), 'utf8');
   const blocks = blocksOf(splitParts(src, a.slug)['2'], a.slug);
-  // The documented differences: hidden pointers, the moved caption sentence.
+  // The documented differences: resolved placeholders become their links,
+  // unresolved ones are hidden with their pointers, a caption sentence moves
+  // into the table, a caption Part 3 writes joins it, and the thematic break
+  // before the CTA is the CTA band's own edge.
   const hidden = report.blockers.map((b) => norm(b.hidden || `[INTERNAL LINK NEEDED: ${b.placeholder}]`));
   const out = [];
-  const caption = a.table && a.table.caption ? norm(a.table.caption) : null;
+  const cfg = a.table || {};
+  const moved = cfg.caption && (cfg.captionFrom || 'paragraph') === 'paragraph' ? norm(cfg.caption) : null;
   blocks.forEach((b, i) => {
+    if (b.t === 'hr') return;
     if (b.t === 'h') { out.push(Object.assign({ kind: 'h' + b.level }, runs(b.md))); return; }
     if (b.t === 'p') {
-      let md = norm(b.md);
+      let raw = b.md;
+      for (const r of report.resolved) raw = raw.split(r.from).join(r.to);
+      let md = norm(raw);
       for (const h of hidden) if (md.includes(h)) md = norm(md.replace(h, ' '));
       if (!md) return;
       const next = blocks[i + 1];
-      if (caption && next && next.t === 'table' && md.endsWith(' ' + caption)) {
-        out.push(Object.assign({ kind: 'p' }, runs(md.slice(0, -caption.length))));
-        out.push(Object.assign({ kind: 'caption' }, runs(caption)));
+      if (moved && next && next.t === 'table' && md.endsWith(' ' + moved)) {
+        out.push(Object.assign({ kind: 'p' }, runs(md.slice(0, -moved.length))));
+        out.push(Object.assign({ kind: 'caption' }, runs(moved)));
         return;
       }
       const button = md.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
@@ -90,6 +100,7 @@ function expected(a, report) {
       return;
     }
     if (b.t === 'ul' || b.t === 'ol') { b.items.forEach((it) => out.push(Object.assign({ kind: 'li' }, runs(it)))); return; }
+    if (cfg.caption && cfg.captionFrom === 'brief') out.push(Object.assign({ kind: 'caption' }, runs(cfg.caption)));
     const rows = b.rows.map((r) => r.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim()));
     rows[0].forEach((c) => out.push(Object.assign({ kind: 'th' }, runs(c))));
     rows.slice(2).forEach((r) => r.forEach((c, j) => out.push(Object.assign({ kind: j ? 'td' : 'th' }, runs(c)))));
@@ -178,7 +189,8 @@ async function checkArticle(browser, a) {
     const ld = qa('script[type="application/ld+json"]').map((x) => x.textContent);
     const head = (sel, attr) => { const el = document.head.querySelector(sel); return el ? el.getAttribute(attr) : null; };
     const words = (els) => els.map((el) => el.textContent).join(' ').split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
-    const blocks = (root) => (root ? [...root.querySelectorAll('h2, h3, p, li, caption, th, td')] : []);
+    // (a visually hidden caption names the table; it is not article text)
+    const blocks = (root) => (root ? [...root.querySelectorAll('h2, h3, p, li, caption:not(.sp-vh), th, td')] : []);
     const refsSec = q('.art-sec--references');
     const bodyEls = [...qa('.art-body > .flow > p'), ...qa('.art-body > .art-sec:not(.art-sec--references)').flatMap(blocks)];
     const ids = qa('[id]').map((el) => el.id);
@@ -200,12 +212,17 @@ async function checkArticle(browser, a) {
       dupIds: ids.filter((x, i) => ids.indexOf(x) !== i),
       table: table && {
         caption: t(table.querySelector('caption')),
+        captionHidden: !!table.querySelector('caption.sp-vh'),
         describedBy: t(desc),
         labelledBy: named ? named.tagName + '#' + named.id : null,
         cols: table.querySelectorAll('thead th[scope="col"]').length,
         rows: table.querySelectorAll('tbody tr').length,
         rowHeaders: table.querySelectorAll('tbody th[scope="row"]').length,
         roles: !!table.querySelector('[role="columnheader"]') && !!table.querySelector('[role="rowheader"]') && !!table.querySelector('[role="cell"]'),
+        // the scrolling region: [role, its name, focusable]
+        region: table.parentElement.matches('.art-table-scroll')
+          ? [table.parentElement.getAttribute('role'), t(document.getElementById(table.parentElement.getAttribute('aria-labelledby'))), table.parentElement.getAttribute('tabindex')]
+          : null,
       },
       faq: q('.art-sec--faq') ? q('.art-sec--faq').querySelectorAll('h3').length : 0,
       accordions: qa('main details, main summary').length,
@@ -232,7 +249,8 @@ async function checkArticle(browser, a) {
   eq('element after the H1', s.h1Next, 'lead art-deck');
   if (!s.order) err(slug, 'header order is not breadcrumb → metadata → H1 → deck → author → TOC → introduction');
   eq('breadcrumb', s.crumbs, [['/blog/', 'Writing']]);
-  const metaLine = `${art.meta.category} · ${art.meta.publishedLabel} · ${art.meta.readTime}` + (art.meta.modified ? ` · Updated ${art.meta.modifiedLabel}` : '');
+  const metaLine = [art.meta.category, art.meta.type, art.meta.publishedLabel, art.meta.readTime].filter(Boolean).join(' · ') +
+    (art.meta.modified ? ` · Updated ${art.meta.modifiedLabel}` : '');
   eq('metadata line', s.meta, metaLine);
   eq('metadata date', s.time, art.meta.published);
   eq('author image', s.img, [art.author.image, art.author.alt]);
@@ -248,12 +266,14 @@ async function checkArticle(browser, a) {
   art.sections.forEach((x) => x.blocks.forEach((b) => { if (b.t === 'table') tbl.push(b); if (b.t === 'sub') b.blocks.forEach((c) => c.t === 'table' && tbl.push(c)); }));
   if (tbl.length) {
     const t = tbl[0];
-    const desc = art.sections.flatMap((x) => x.blocks.flatMap((b) => (b.t === 'sub' ? b.blocks : [b]))).find((b) => b.id === t.describedBy);
+    const desc = t.describedBy && art.sections.flatMap((x) => x.blocks.flatMap((b) => (b.t === 'sub' ? b.blocks : [b]))).find((b) => b.id === t.describedBy);
     eq('table', s.table, {
       caption: t.caption || null,
-      describedBy: plain(desc.text),
+      captionHidden: !!t.captionHidden,
+      describedBy: desc ? plain(desc.text) : null,
       labelledBy: t.labelledBy ? 'H2#' + t.labelledBy : null,
       cols: t.head.length, rows: t.rows.length, rowHeaders: t.rows.length, roles: true,
+      region: t.narrow === 'scroll' ? ['region', t.caption || art.sections.find((x) => x.id === t.labelledBy).h2, '0'] : null,
     });
   }
   const faq = art.sections.find((x) => x.kind === 'faq');
@@ -279,15 +299,16 @@ async function checkArticle(browser, a) {
     eq('BlogPosting', bp, Object.assign({
       '@type': 'BlogPosting', '@id': ORIGIN + art.url + '#article', url: ORIGIN + art.url, mainEntityOfPage: ORIGIN + art.url,
       headline: art.h1, description: art.description,
-      author: { '@type': 'Person', name: art.author.name, url: ORIGIN + art.author.href },
+      author: { '@type': 'Person', '@id': PERSON_ID, name: art.author.name, url: ORIGIN + art.author.href },
       publisher: { '@id': PERSON_ID },
       datePublished: art.meta.published,
     }, art.meta.modified ? { dateModified: art.meta.modified } : {}, {
       inLanguage: 'en-GB', articleSection: art.meta.category,
       image: ORIGIN + art.author.image, wordCount: pageWords,
     }));
-    const person = graph.find((x) => x['@id'] === PERSON_ID);
-    if (!person || !person.name) err(slug, 'the publisher (the site’s Person) is not in the graph');
+    // One Person: the author is the site's Person entity, and no other node
+    // describes it differently.
+    if (graph.some((x) => x['@id'] === PERSON_ID)) err(slug, 'a second node for the site’s Person beside the author');
   }
 
   // No placeholder marker in anything published for this page.
@@ -308,10 +329,14 @@ async function checkArticle(browser, a) {
       const cells = [...document.querySelectorAll('.art-table tbody th, .art-table tbody td')];
       const labels = cells.map((el) => [getComputedStyle(el, '::before').content, el.getAttribute('data-label')]);
       const thead = document.querySelector('.art-table thead');
+      const region = document.querySelector('.art-table-scroll');
       return {
         over,
+        mode: document.querySelector('.art-table--scroll') ? 'scroll' : document.querySelector('.art-table') ? 'stack' : null,
         labelled: cells.length > 0 && labels.every(([content, label]) => content.includes(JSON.stringify(label))),
         theadShown: thead ? thead.getBoundingClientRect().height > 2 : null,
+        scrolls: region ? region.scrollWidth > region.clientWidth : null,
+        fontPx: cells.length ? parseFloat(getComputedStyle(cells[cells.length - 1]).fontSize) : null,
         section: [
           !!document.querySelector('.hdr__btn.is-current'),
           [...document.querySelectorAll('.hdr__panel a, .mmenu__links a')].filter((x) => x.getAttribute('aria-current') === 'true').map((x) => x.getAttribute('href')),
@@ -319,8 +344,11 @@ async function checkArticle(browser, a) {
       };
     });
     if (r.over > 0) err(slug, `${width}px: page overflows horizontally by ${r.over}px`);
-    if (width < 640 && r.theadShown !== null && (r.theadShown || !r.labelled)) err(slug, `${width}px: the table is not set as labelled row groups`);
-    if (width >= 768 && r.theadShown === false) err(slug, `${width}px: the table header row is hidden`);
+    if (r.mode === 'stack' && width < 640 && (r.theadShown || !r.labelled)) err(slug, `${width}px: the table is not set as labelled row groups`);
+    if (r.mode === 'scroll' && width < 640 && (!r.theadShown || !r.scrolls)) err(slug, `${width}px: the table does not keep its columns and scroll in its region`);
+    if (r.mode && width >= 768 && r.theadShown === false) err(slug, `${width}px: the table header row is hidden`);
+    if (r.mode === 'scroll' && width >= 768 && r.scrolls) err(slug, `${width}px: the table scrolls where it should fit`);
+    if (r.fontPx !== null && r.fontPx < 15) err(slug, `${width}px: table text shrunk to ${r.fontPx}px`);
     if (width === 1280) {
       eq('header section', r.section, [true, ['/blog/', '/blog/']]);
       // Every TOC link lands its heading at the top, instantly (reduced motion).

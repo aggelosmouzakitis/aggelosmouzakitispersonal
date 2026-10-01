@@ -27,11 +27,16 @@
 //   authorImage the brief's "[USE APPROVED AGGELOS AUTHOR IMAGE]": the approved
 //               About portrait, already the image of the site's Person entity.
 //   related     the canonical page the /blog/ listing names under "Related:".
-//   table       caption: a sentence that ends the paragraph before the table
-//               and becomes its <caption> (visible once); without one, the
-//               table is named by its section's H2. note: the start of the
-//               paragraph next to the table (before or after it) that
-//               describes it (aria-describedby).
+//   table       caption: the table's <caption> — a sentence moved from the end
+//               of the paragraph before the table (captionFrom 'paragraph',
+//               the default; visible once), or one Part 3 writes
+//               (captionFrom 'brief'); captionHidden keeps it for assistive
+//               technology only. Without a caption the table is named by its
+//               section's H2. note: the start of the paragraph next to the
+//               table (before or after it) that describes it
+//               (aria-describedby). narrow: below 640px, 'stack' (labelled
+//               row groups, the default) or 'scroll' (the table scrolls in a
+//               labelled, focusable region).
 //   callout     the one safety callout, if the brief asks for one: the final
 //               paragraph of `section`, beginning with `startsWith`.
 //   wordCount   what the brief counts: 'headline', 'deck', 'body' (the
@@ -67,9 +72,11 @@ const ARTICLES = [
     links: {
       'guide to rumination and repeatedly replaying work conversations': null,
       'guide to workplace boundaries when saying no has consequences': null,
-      // Must be the editorial article itself, not the quit-your-job tool or
-      // a career service page.
-      'Article 3, deciding whether to quit your job, including health, finances and alternatives': null,
+      // Article 3 is the editorial guide published with it in this release
+      // (its brief names this guide and burnout-at-work as companion
+      // Articles 1 and 2), not the quit-your-job tool or a career service page.
+      'Article 3, deciding whether to quit your job, including health, finances and alternatives':
+        '[the guide to deciding whether to quit your job](/my-job-gives-me-anxiety-should-i-quit/)',
     },
   },
   {
@@ -110,6 +117,28 @@ const ARTICLES = [
         resolved: null,
       },
     },
+  },
+  {
+    slug: 'my-job-gives-me-anxiety-should-i-quit',
+    brief: 'content/articles/my-job-gives-me-anxiety-should-i-quit.md',
+    published: '2026-10-01T22:36:00+01:00',
+    modified: null,
+    // "Category label: `Career & Work`. Article type label: `Guide`."
+    category: 'Career & Work',
+    type: 'Guide',
+    readTime: '11 min read',
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    related: { label: 'Career Change & Decisions', href: '/career-transition-therapy/' },
+    // Part 3 writes the caption ("visually hidden if the template requires":
+    // hidden, so the visible article stays Part 2) and asks for scrolling in
+    // a labelled, keyboard-accessible wrapper on narrow screens, not cards.
+    table: { caption: 'Changes to test before resigning and what to observe', captionFrom: 'brief', captionHidden: true, narrow: 'scroll' },
+    // "may use the template's restrained safety-note treatment"
+    callout: { section: 'Therapist, career coach or mentor?', startsWith: 'If you cannot keep yourself safe' },
+    // "excluding navigation, the author strip, References and the commercial CTA"
+    wordCount: ['headline', 'deck', 'body'],
+    links: {},
   },
 ];
 

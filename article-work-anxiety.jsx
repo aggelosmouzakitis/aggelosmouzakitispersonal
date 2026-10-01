@@ -115,7 +115,7 @@ window.SITE_ARTICLE_PAGES["work-anxiety"] = {
     ]},
     {"h2":"Does work anxiety mean you should quit?","id":"work-anxiety-and-quitting", "blocks": [
       {"t":"p","text":"No. Work anxiety is a reason to investigate the situation, and leaving may be a sensible result of that investigation. Persistent mistreatment, unmanageable demands or a role that cannot be made workable deserve serious consideration, alongside income and health. Therapy does not create an obligation to stay."},
-      {"t":"p","text":"If a recurring anxiety pattern is involved, changing jobs may help without resolving all of it. That is a reason to address the pattern alongside the decision, rather than proof that a move would be pointless."}
+      {"t":"p","text":"If a recurring anxiety pattern is involved, changing jobs may help without resolving all of it. That is a reason to address the pattern alongside the decision, rather than proof that a move would be pointless. For the fuller decision, see [the guide to deciding whether to quit your job](/my-job-gives-me-anxiety-should-i-quit/)."}
     ]},
     {"h2":"When professional help makes sense","id":"when-professional-help-makes-sense", "blocks": [
       {"t":"p","text":"Seek support when anxiety is repeatedly disrupting sleep, making it hard to attend or complete work, causing panic, narrowing what you can do or affecting life at home. You can also seek help before reaching that point. There is no need to demonstrate that the job has become unbearable or to exhaust every self-help suggestion first."},
@@ -150,5 +150,5 @@ window.SITE_ARTICLE_PAGES["work-anxiety"] = {
     ]}
   ],
   "cta": {"id":"talk-through-work-anxiety","eyebrow":"WORK WITH ME","h2":"Talk through what is happening around work","text":"I work with people whose anxiety around work is affecting how they spend their days or how they are at home. An initial conversation can help us consider what needs attention and whether working together makes sense. If another kind of support fits better, I will say so.","button":{"label":"Book a conversation","href":"/contact/"}},
-  "wordCount": 4671
+  "wordCount": 4685
 };

@@ -323,7 +323,7 @@ window.SITE_ARTICLE_PAGES["work-anxiety"] = {
       "text": "No. Work anxiety is a reason to investigate the situation, and leaving may be a sensible result of that investigation. Persistent mistreatment, unmanageable demands or a role that cannot be made workable deserve serious consideration, alongside income and health. Therapy does not create an obligation to stay."
     }, {
       "t": "p",
-      "text": "If a recurring anxiety pattern is involved, changing jobs may help without resolving all of it. That is a reason to address the pattern alongside the decision, rather than proof that a move would be pointless."
+      "text": "If a recurring anxiety pattern is involved, changing jobs may help without resolving all of it. That is a reason to address the pattern alongside the decision, rather than proof that a move would be pointless. For the fuller decision, see [the guide to deciding whether to quit your job](/my-job-gives-me-anxiety-should-i-quit/)."
     }]
   }, {
     "h2": "When professional help makes sense",
@@ -414,5 +414,5 @@ window.SITE_ARTICLE_PAGES["work-anxiety"] = {
       "href": "/contact/"
     }
   },
-  "wordCount": 4671
+  "wordCount": 4685
 };

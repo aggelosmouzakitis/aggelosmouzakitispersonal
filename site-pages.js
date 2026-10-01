@@ -2029,7 +2029,7 @@
       className: className || 'art-meta'
     }, e('span', {
       className: 'art-meta__cat'
-    }, meta.category), ' · ', e('time', {
+    }, meta.category), ' · ', meta.type ? meta.type + ' · ' : null, e('time', {
       dateTime: meta.published
     }, meta.publishedLabel), ' · ', meta.readTime, meta.modified ? e(React.Fragment, null, ' · Updated ', e('time', {
       dateTime: meta.modified
@@ -2092,20 +2092,28 @@
   }
   const plainMd = t => t.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/\*\*?([^*]+)\*\*?/g, '$1');
 
-  // A real table with header cells both ways, named by its caption or, when
-  // the brief gives none, by its section's H2. Below 640px the rows become
-  // labelled groups: the explicit roles keep the table semantics that some
+  // A real table with header cells both ways, named by its caption (visible,
+  // or for assistive technology only) or, when the brief gives none, by its
+  // section's H2. Below 640px, as its brief asks: 'stack' turns the rows into
+  // labelled groups — the explicit roles keep the table semantics that some
   // browsers drop once the display changes, and each cell shows its column
-  // label (data-label, drawn by CSS and not read twice).
+  // label (data-label, drawn by CSS and not read twice) — or 'scroll' keeps
+  // the table and lets it scroll inside its own labelled, focusable region,
+  // so the page itself never scrolls sideways.
   function ArticleTable({
     t
   }) {
-    return e('table', {
-      className: 'art-table',
+    const scroll = t.narrow === 'scroll';
+    const name = t.caption ? 'art-table-caption' : t.labelledBy;
+    const table = e('table', {
+      className: 'art-table art-table--' + (scroll ? 'scroll' : 'stack'),
       role: 'table',
       'aria-labelledby': t.caption ? undefined : t.labelledBy,
       'aria-describedby': t.describedBy
-    }, t.caption ? e('caption', null, inlineMd(t.caption)) : null, e('colgroup', null, t.head.map((h, i) => e('col', {
+    }, t.caption ? e('caption', {
+      id: 'art-table-caption',
+      className: t.captionHidden ? 'sp-vh' : undefined
+    }, inlineMd(t.caption)) : null, e('colgroup', null, t.head.map((h, i) => e('col', {
       key: i,
       className: i ? 'art-table__ev' : 'art-table__key'
     }))), e('thead', {
@@ -2131,6 +2139,12 @@
       role: 'rowheader',
       'data-label': plainMd(t.head[0])
     }, inlineMd(c)))))));
+    return scroll ? e('div', {
+      className: 'art-table-scroll',
+      role: 'region',
+      'aria-labelledby': name,
+      tabIndex: 0
+    }, table) : table;
   }
   function ArticleBlocks({
     blocks
@@ -2630,8 +2644,8 @@
 .art-list li+li{margin-top:12px}
 .art-list li::marker{color:var(--green)}
 .art-list strong{font-weight:650;color:var(--heading)}
-.flow>.art-list,.flow>.art-table,.flow>.art-callout{margin-top:24px}
-.flow>.art-list+*,.flow>.art-table+*,.flow>.art-callout+*{margin-top:24px}
+.flow>.art-list,.flow>.art-table,.flow>.art-table-scroll,.flow>.art-callout{margin-top:24px}
+.flow>.art-list+*,.flow>.art-table+*,.flow>.art-table-scroll+*,.flow>.art-callout+*{margin-top:24px}
 
 /* Comparison table: the first column narrower than the two evidence columns */
 .art-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15.5px;line-height:1.55;color:var(--body)}
@@ -2642,16 +2656,23 @@
 .art-table tbody th{font-weight:650;line-height:1.4;color:var(--heading)}
 .art-table tr>:last-child{padding-right:0}
 @media (max-width:640px){
-  .art-table,.art-table tbody,.art-table tr,.art-table th,.art-table td{display:block;width:auto}
-  .art-table caption{display:block}
-  .art-table colgroup{display:none}
-  .art-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  .art-table tbody tr{padding:16px 0 20px;border-top:2px solid var(--heading)}
-  .art-table tbody th,.art-table td{padding:0;border:0}
-  .art-table tbody th{font-family:var(--font-heading);font-size:18px;font-weight:700}
-  .art-table td{margin-top:14px}
-  .art-table [data-label]::before{content:attr(data-label);content:attr(data-label) / "";display:block;margin-bottom:4px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.35;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
+  .art-table--stack,.art-table--stack tbody,.art-table--stack tr,.art-table--stack th,.art-table--stack td{display:block;width:auto}
+  .art-table--stack caption{display:block}
+  .art-table--stack colgroup{display:none}
+  .art-table--stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .art-table--stack tbody tr{padding:16px 0 20px;border-top:2px solid var(--heading)}
+  .art-table--stack tbody th,.art-table--stack td{padding:0;border:0}
+  .art-table--stack tbody th{font-family:var(--font-heading);font-size:18px;font-weight:700}
+  .art-table--stack td{margin-top:14px}
+  .art-table--stack [data-label]::before{content:attr(data-label);content:attr(data-label) / "";display:block;margin-bottom:4px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.35;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
+  .art-table--scroll{min-width:34rem}
 }
+/* A table that scrolls in its own region on narrow screens (focusable, so a
+   keyboard can scroll it). A soft shadow shows at an edge only while there is
+   more table beyond it: bone covers scroll with the content and hide the
+   shadows at either end. */
+.art-table-scroll{overflow-x:auto;overscroll-behavior-x:contain;background:linear-gradient(to right,var(--bone) 40%,rgba(243,240,232,0)) left center/28px 100% no-repeat local,linear-gradient(to left,var(--bone) 40%,rgba(243,240,232,0)) right center/28px 100% no-repeat local,radial-gradient(farthest-side at 0 50%,rgba(23,25,25,.18),rgba(23,25,25,0)) left center/12px 100% no-repeat scroll,radial-gradient(farthest-side at 100% 50%,rgba(23,25,25,.18),rgba(23,25,25,0)) right center/12px 100% no-repeat scroll}
+.art-table-scroll:focus-visible{outline:3px solid var(--green);outline-offset:4px}
 
 /* The one safety callout: restrained, the paragraph and its links intact */
 .art-callout{padding:20px 22px;background:var(--bone-deep);border-left:3px solid var(--heading)}

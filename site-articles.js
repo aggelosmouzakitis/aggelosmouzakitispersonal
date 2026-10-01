@@ -8,6 +8,20 @@
 // placeholders are left out with their pointers.
 
 window.SITE_ARTICLES = [{
+  "id": "my-job-gives-me-anxiety-should-i-quit",
+  "url": "/my-job-gives-me-anxiety-should-i-quit/",
+  "h1": "My Job Gives Me Anxiety. Should I Quit?",
+  "deck": "How to assess what leaving could resolve, what might remain and which changes are worth testing.",
+  "category": "Career & Work",
+  "type": "Guide",
+  "published": "2026-10-01T22:36:00+01:00",
+  "publishedLabel": "October 2026",
+  "readTime": "11 min read",
+  "related": {
+    "label": "Career Change & Decisions",
+    "href": "/career-transition-therapy/"
+  }
+}, {
   "id": "burnout-at-work",
   "url": "/burnout-at-work/",
   "h1": "Burnout at Work: Signs, Causes and What Recovery Actually Requires",

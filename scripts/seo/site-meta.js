@@ -222,7 +222,8 @@ function canonicalPage([id, priority, changefreq, crumb]) {
 // Each article in scripts/articles/articles.js, at its own URL, with the title
 // tag, meta description and H1 of its brief (article-<slug>.jsx, generated
 // from it). Structured data: one BlogPosting with only what the page shows —
-// headline, description, the author linked to /about/, the site's Person as
+// headline, description, the author (the site's one Person, here with the
+// URL of the author page the byline links to, /about/), the same Person as
 // publisher, the release date, en-GB, its section, the approved author image
 // it shows and its word count — plus the breadcrumb the page shows
 // (Home › Writing › the article). No FAQPage: the FAQ stays visible only.
@@ -232,7 +233,7 @@ function articlePage(a) {
   const posting = {
     '@type': 'BlogPosting', '@id': url + '#article', url, mainEntityOfPage: url,
     headline: art.h1, description: art.description,
-    author: { '@type': 'Person', name: art.author.name, url: abs(art.author.href) },
+    author: { '@type': 'Person', '@id': PERSON_ID, name: art.author.name, url: abs(art.author.href) },
     publisher: { '@id': PERSON_ID },
     datePublished: art.meta.published,
   };
@@ -262,7 +263,7 @@ function articlePage(a) {
     og: { key: a.slug, label: art.meta.category, title: art.h1 },
     sources: [ARTICLE_REGISTRY.dataSource(a), a.brief, 'site-pages.jsx', 'site-chrome.jsx'],
     bundles: [ARTICLE_REGISTRY.dataBundle(a)],
-    schema: [posting, breadcrumb, PERSON_REF],
+    schema: [posting, breadcrumb],
   };
 }
 const ARTICLE_PAGES = ARTICLE_REGISTRY.ARTICLES.map(articlePage);

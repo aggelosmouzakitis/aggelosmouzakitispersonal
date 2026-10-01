@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KV83RRF6ZM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KV83RRF6ZM');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- fonts -->
+<link rel="preload" href="/fonts/inter-v20-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/archivo-black-v23-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-greek.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-greek-ext.woff2) format('woff2');unicode-range:U+1F00-1FFF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-cyrillic.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-cyrillic-ext.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-greek.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-greek-ext.woff2) format('woff2');unicode-range:U+1F00-1FFF}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-cyrillic.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-cyrillic-ext.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/archivo-black-v23-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/archivo-black-v23-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+</style>
+<!-- /fonts -->
+<!-- Favicon / site icons -->
+<link rel="icon" href="/favicon.ico?v=dc7484cf7c" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5d5e245bf0">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=b708bdc3f1">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=022b5f081c">
+<meta name="theme-color" content="#F3F0E8">
+<meta name="author" content="Aggelos Mouzakitis">
+<link rel="manifest" href="/manifest.json">
+<style>
+:root{
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-display: "Archivo Black", "Inter Tight", "Inter", system-ui, sans-serif;
+  --brand-green: #047857;
+  /* Editorial Japandi palette (ten tokens) */
+  --bone: #F3F0E8; --bone-deep: #EDE8DB; --forest: #16231E; --forest-deep: #101A16;
+  --green: #047857; --green-pressed: #03654A; --sage: #8FBFA7;
+  --ink: #171919; --heading-ink: #14201C; --ink-2: #3A403A; --on-forest: #C0C9BF; --meta: #6A6F67;
+  --rule: rgba(23,25,25,0.18); --rule-on-forest: rgba(243,240,232,0.16);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: #F3F0E8; color: #171919; font-family: var(--font-body); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+#root { display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: #047857; color: #F3F0E8; }
+img { max-width: 100%; filter: grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14); }
+.site-grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: 0.06; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E"); background-size: 160px 160px; }
+@media print { .site-grain { display: none; } }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #047857; outline-offset: 2px; border-radius: 2px; }
+@media (prefers-reduced-motion: reduce){ html { scroll-behavior: auto; } *{transition-duration:.001ms!important;animation-duration:.001ms!important} }
+@media print { .site-hdr, .site-ftr, .cta-strip { display: none !important; } }
+</style>
+<title>My Job Gives Me Anxiety. Should I Quit?</title>
+<meta name="description" content="Should you quit a job that causes anxiety? Assess the workplace, test realistic changes and weigh your health, finances and options before deciding.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://aggelosmouzakitis.com/my-job-gives-me-anxiety-should-i-quit/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Aggelos Mouzakitis">
+<meta property="og:locale" content="en_IE">
+<meta property="og:title" content="My Job Gives Me Anxiety. Should I Quit?">
+<meta property="og:description" content="Should you quit a job that causes anxiety? Assess the workplace, test realistic changes and weigh your health, finances and options before deciding.">
+<meta property="og:url" content="https://aggelosmouzakitis.com/my-job-gives-me-anxiety-should-i-quit/">
+<meta property="og:image" content="https://aggelosmouzakitis.com/img/og/v2/my-job-gives-me-anxiety-should-i-quit.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="My Job Gives Me Anxiety. Should I Quit?">
+<meta property="article:published_time" content="2026-10-01T22:36:00+01:00">
+<meta property="article:section" content="Career &amp; Work">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="My Job Gives Me Anxiety. Should I Quit?">
+<meta name="twitter:description" content="Should you quit a job that causes anxiety? Assess the workplace, test realistic changes and weigh your health, finances and options before deciding.">
+<meta name="twitter:image" content="https://aggelosmouzakitis.com/img/og/v2/my-job-gives-me-anxiety-should-i-quit.png">
+<meta name="twitter:image:alt" content="My Job Gives Me Anxiety. Should I Quit?">
+<link rel="alternate" hreflang="en" href="https://aggelosmouzakitis.com/my-job-gives-me-anxiety-should-i-quit/">
+<link rel="alternate" hreflang="x-default" href="https://aggelosmouzakitis.com/my-job-gives-me-anxiety-should-i-quit/">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://aggelosmouzakitis.com/my-job-gives-me-anxiety-should-i-quit/#article","url":"https://aggelosmouzakitis.com/my-job-gives-me-anxiety-should-i-quit/","mainEntityOfPage":"https://aggelosmouzakitis.com/my-job-gives-me-anxiety-should-i-quit/","headline":"My Job Gives Me Anxiety. Should I Quit?","description":"Should you quit a job that causes anxiety? Assess the workplace, test realistic changes and weigh your health, finances and options before deciding.","author":{"@type":"Person","@id":"https://aggelosmouzakitis.com/#person","name":"Aggelos Mouzakitis","url":"https://aggelosmouzakitis.com/about/"},"publisher":{"@id":"https://aggelosmouzakitis.com/#person"},"datePublished":"2026-10-01T22:36:00+01:00","inLanguage":"en-GB","articleSection":"Career & Work","image":"https://aggelosmouzakitis.com/img/aggelos-about.webp","wordCount":2115},{"@type":"BreadcrumbList","@id":"https://aggelosmouzakitis.com/my-job-gives-me-anxiety-should-i-quit/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://aggelosmouzakitis.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://aggelosmouzakitis.com/blog/"},{"@type":"ListItem","position":3,"name":"My Job Gives Me Anxiety. Should I Quit?","item":"https://aggelosmouzakitis.com/my-job-gives-me-anxiety-should-i-quit/"}]}]}</script>
+</head>
+<body>
+<div class="site-grain" aria-hidden="true"></div>
+<div id="root"><style>
+:root{
+  --bone:#F3F0E8;--bone-deep:#EDE8DB;--sage-bg:#DAE4D8;--forest:#16231E;
+  --green:#047857;--green-pressed:#03654A;--sage:#8FBFA7;
+  --heading:#14201C;--ink:#171919;--body:#2C312C;--ink-2:#3A403A;--meta:#6A6F67;
+  --on-forest:#C8D1C8;--on-forest-2:#C0C9BF;
+  --rule:rgba(23,25,25,0.18);--rule-2:rgba(23,25,25,0.22);--rule-forest:rgba(243,240,232,0.16);
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-heading:"Inter Tight","Inter",system-ui,sans-serif;
+  --font-display:"Archivo Black","Inter Tight","Inter",system-ui,sans-serif;
+  --site-max:1240px;--read-max:760px;
+  --gutter:clamp(22px,4vw,52px);
+  --sec:clamp(64px,6.7vw,96px);
+}
+html,body,#root{height:auto}
+#root{display:block;overflow:visible}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+.site-grain{opacity:0.06}
+.wrap{width:min(var(--site-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.read{width:min(var(--read-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.skip-link{position:absolute;left:12px;top:-60px;z-index:200;padding:12px 18px;background:var(--bone);color:var(--heading);font:600 15px/1 var(--font-body);border:2px solid var(--green)}
+.skip-link:focus{top:12px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.on-dark a:focus-visible,.on-dark button:focus-visible{outline-color:var(--sage)}
+
+/* Primary action: green rectangle, 52px, 15px/700 caps. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 24px;background:var(--green);color:var(--bone);border:0;border-radius:0;font:700 15px/1 var(--font-body);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:gap 180ms,background 180ms}
+.btn:hover{background:var(--green-pressed);color:var(--bone);gap:13px}
+/* Secondary action: 16px/600 green, underline + arrow. */
+.tlink{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:16px;font-weight:600;line-height:1.3;color:var(--green);transition:gap 180ms,color 180ms}
+.tlink>span:first-child{border-bottom:1.5px solid currentColor;padding-bottom:2px}
+.tlink:hover{color:var(--green-pressed);gap:12px}
+.on-dark .tlink{color:var(--bone)}
+.on-dark .tlink:hover{color:var(--sage)}
+
+/* Header */
+.hdr{position:relative;z-index:50;background:var(--forest);border-bottom:1px solid var(--rule-forest);font-family:var(--font-body)}
+.hdr__in{min-height:74px;display:flex;align-items:center;gap:24px}
+.hdr__brand{display:inline-flex;align-items:center;min-height:44px;gap:1px;color:var(--bone);font-family:var(--font-heading);font-size:25px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
+.hdr__brand span,.ftr__brand span{color:var(--green)}
+.hdr__nav{margin-left:auto;display:flex;align-items:center;gap:30px}
+.hdr__item{position:relative;display:flex;align-items:center}
+.hdr__link,.hdr__btn{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0;background:none;border:0;border-bottom:2px solid transparent;color:var(--bone);font-family:inherit;font-size:13.5px;font-weight:650;line-height:1;letter-spacing:0.06em;text-transform:uppercase;opacity:.85;cursor:pointer}
+.hdr__link:hover,.hdr__btn:hover,.hdr__btn[aria-expanded="true"],.hdr__link.is-current,.hdr__btn.is-current{opacity:1;color:var(--bone)}
+.hdr__link.is-current,.hdr__btn.is-current{border-bottom-color:var(--green)}
+.hdr__btn svg{transition:transform 200ms cubic-bezier(.22,1,.36,1)}
+.hdr__btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.hdr__panel{position:absolute;top:calc(100% + 15px);left:-20px;width:360px;background:var(--bone);border:1px solid rgba(23,25,25,0.14);box-shadow:0 20px 44px -20px rgba(0,0,0,0.4);padding:8px 0}
+.hdr__panel[hidden],.mmenu[hidden],.mmenu__links[hidden]{display:none}
+.hdr__panel a{display:block;padding:12px 20px;font-size:16px;font-weight:500;line-height:1.35;color:var(--heading)}
+.hdr__panel a:hover{background:rgba(4,120,87,0.07);color:var(--green)}
+.hdr__panel a[aria-current="page"],.hdr__panel a[aria-current="true"]{color:var(--green);font-weight:600}
+.hdr__sep{height:1px;margin:8px 20px;background:rgba(23,25,25,0.16)}
+.hdr__cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;background:transparent;border:1px solid rgba(243,240,232,0.7);color:var(--bone);font-size:13.5px;font-weight:700;line-height:1;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;transition:background 180ms,color 180ms,border-color 180ms}
+.hdr__cta:hover{background:var(--bone);color:var(--forest);border-color:var(--bone)}
+.hdr__menu-btn{display:none;margin-left:auto;align-items:center;gap:12px;min-height:48px;padding:0 2px 0 12px;background:none;border:0;cursor:pointer;color:var(--bone);font-family:inherit;font-size:13.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+.hdr__burger{display:flex;flex-direction:column;gap:5px;width:22px}
+.hdr__burger span{height:2px;background:var(--bone)}
+@media (max-width:1079px){.hdr__nav,.hdr__cta{display:none}.hdr__menu-btn{display:inline-flex}}
+@media (min-width:1080px){.mmenu{display:none}}
+.mmenu{background:var(--bone);border-bottom:1px solid rgba(23,25,25,0.14);box-shadow:0 20px 40px -24px rgba(0,0,0,0.35)}
+.mmenu__in{width:calc(100% - 44px);margin-inline:auto;padding:8px 0 22px}
+.mmenu__group{border-bottom:1px solid rgba(23,25,25,0.14)}
+.mmenu__toggle{display:flex;width:100%;justify-content:space-between;align-items:center;min-height:56px;padding:0;background:none;border:0;cursor:pointer;color:var(--heading);font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.mmenu__sign{font-size:22px;font-weight:400;color:var(--green)}
+.mmenu__links{padding:0 0 12px}
+.mmenu__links a{display:flex;align-items:center;min-height:46px;font-size:17px;font-weight:500;color:var(--heading)}
+.mmenu__links a[aria-current="page"],.mmenu__links a[aria-current="true"]{color:var(--green);font-weight:600}
+.mmenu__sep{height:1px;margin:6px 0;background:rgba(23,25,25,0.12)}
+.mmenu__link{display:flex;align-items:center;min-height:56px;border-bottom:1px solid rgba(23,25,25,0.14);font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--heading)}
+.mmenu__cta{display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;margin-top:20px;background:var(--green);color:var(--bone);font-size:15px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase}
+
+/* Close: a 13px label above one sentence and the primary action. */
+.close{background:var(--forest);text-align:center}
+.close__in{padding-block:var(--sec)}
+.close__label{margin:0 0 18px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage)}
+.close__text{margin:0 auto;max-width:24ch;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .7vw),32px);font-weight:650;line-height:1.18;letter-spacing:-0.02em;color:var(--bone);text-wrap:balance}
+.close__text--long{max-width:56ch;font-family:var(--font-body);font-size:clamp(18px,calc(17px + .2vw),20px);font-weight:400;line-height:1.6;letter-spacing:0;color:var(--on-forest)}
+.close__actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 28px;margin-top:32px}
+
+/* Footer */
+.ftr{background:var(--forest);color:var(--on-forest-2);border-top:2px solid var(--green);padding-block:clamp(48px,6vw,72px) 32px;font-family:var(--font-body)}
+.ftr__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:40px;align-items:start}
+.ftr__brand{display:inline-flex;align-items:center;min-height:44px;color:var(--bone);font-family:var(--font-heading);font-size:22px;font-weight:750;line-height:1;letter-spacing:-0.035em}
+.ftr__tag{margin:18px 0 0;max-width:26ch;font-size:15px;line-height:1.5}
+.ftr__social{display:flex;gap:14px;margin:20px 0 0;padding:0;list-style:none}
+.ftr__social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--rule-forest);color:var(--on-forest-2)}
+.ftr__social a:hover{color:var(--bone);border-color:var(--sage)}
+.ftr__col{display:flex;flex-direction:column;min-width:0}
+.ftr__head{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage)}
+.ftr__col a{padding:7px 0;font-size:15px;line-height:1.4}
+.ftr__col a:hover,.ftr__legal a:hover{color:var(--bone)}
+.ftr__rule{height:1px;background:var(--rule-forest);margin-block:48px 24px}
+.ftr__bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 32px;font-size:13px;line-height:1.5}
+.ftr__legal{display:flex;flex-wrap:wrap;gap:4px 24px}
+.ftr__legal a{display:inline-flex;align-items:center;min-height:44px}
+@media (max-width:759px){.ftr__col a{display:flex;align-items:center;min-height:44px;padding:0}}
+
+/* Legacy shell: the tools and /ask-me-anything/el render their own content. */
+.u-main{padding-block:64px 96px}
+.u-form{width:min(var(--read-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
+
+@media print{.hdr,.ftr,.close,.site-grain{display:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
+</style><style>
+.pg{display:block;outline:none}
+.pg img{filter:grayscale(1) contrast(1.12) brightness(.96) sepia(.14)}
+.label{margin:0;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
+
+/* Type */
+.eyebrow{margin:0 0 18px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.h1{margin:0;max-width:17ch;font-family:var(--font-display);font-weight:400;font-size:clamp(34px,calc(22px + 2.9vw),60px);line-height:1.0;letter-spacing:-.04em;color:var(--heading);text-wrap:balance}
+.hero-read .h1{max-width:none}
+.h1--home{max-width:none;font-size:clamp(34px,calc(18.5px + 2.9vw),60px)}
+.h1--long{max-width:none;font-size:clamp(34px,calc(20px + 1.95vw),48px);line-height:1.04}
+.sub{margin:22px 0 0;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .6vw),30px);font-weight:650;line-height:1.2;letter-spacing:-.02em;color:var(--green);text-wrap:balance}
+.lead{margin:24px 0 0;max-width:32em;font-size:clamp(19px,calc(18.4px + .12vw),20px);line-height:1.55;color:var(--body);text-wrap:pretty}
+.sub + .lead{margin-top:26px}
+.lead + .lead{margin-top:16px}
+.h2{margin:0 0 24px;font-family:var(--font-heading);font-size:clamp(30px,calc(26px + 1vw),40px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
+.h3{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .3vw),24.5px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading);text-wrap:balance}
+.p{margin:0;font-size:clamp(17px,calc(16px + .14vw),18px);line-height:1.7;color:var(--body);text-wrap:pretty}
+.p strong{font-weight:600;color:var(--heading)}
+.p--emph{font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--heading)}
+.p--strong{font-weight:600;color:var(--heading)}
+.inl{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor}
+.inl:hover{color:var(--green-pressed)}
+.meta{margin:0;font-size:15px;line-height:1.5;color:var(--meta)}
+.related{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:0 10px;font-size:15px;color:var(--meta)}
+
+/* Flow: paragraph → paragraph 18px, content → link 22px */
+.flow>*{margin-top:0;margin-bottom:0}
+.flow>*+*{margin-top:18px}
+.flow>.links,.flow>.actions{margin-top:22px}
+.flow>.facts+*{margin-top:32px}
+.flow>.p--emph+*{margin-top:20px}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;margin-top:32px}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 28px}
+.subsec+.subsec{margin-top:40px}
+
+/* Heroes */
+.hero-split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px clamp(40px,5vw,72px);align-items:center;padding-block:clamp(48px,5vw,72px) clamp(56px,6vw,88px)}
+.hero-read{padding-top:clamp(56px,6vw,88px)}
+.frame{position:relative;margin:12px;justify-self:end;width:min(calc(100% - 24px),420px)}
+.frame::before{content:"";position:absolute;inset:-12px;border:1px solid rgba(4,120,87,.6);pointer-events:none}
+.frame__img{aspect-ratio:4/5;overflow:hidden;background:var(--forest)}
+.frame__img img{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:899px){.hero-split{grid-template-columns:minmax(0,1fr)}.frame{justify-self:start;width:min(calc(100% - 24px),320px)}}
+
+/* Sections: 96px apart; reading sections on problem pages 88px */
+.sec{padding-top:var(--sec)}
+.fam-problem .sec+.sec{padding-top:clamp(64px,6.1vw,88px)}
+.pg>:last-child:not(.band){padding-bottom:var(--sec)}
+.band{margin-top:var(--sec)}
+.band+.band{margin-top:0}
+.pg>.band:first-child{margin-top:0}
+
+/* Dark section: one reading column on the 760 axis */
+.dark{background:var(--forest);color:var(--bone)}
+.dark__in{padding-block:var(--sec)}
+.dark .h2{color:var(--bone)}
+.dark .p{color:var(--on-forest)}
+.dark .p strong{color:var(--bone)}
+.dark .p--emph{color:var(--sage)}
+.dark .p--rule{padding-left:18px;border-left:2px solid var(--sage);font-weight:600;color:var(--bone)}
+
+/* Photo split: 1:1, the photograph full-bleed */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);container-type:inline-size}
+.split--dark{background:var(--forest);color:var(--bone)}
+.split--dark .h2{color:var(--bone)}
+.split--dark .p{color:var(--on-forest)}
+.split__fig{position:relative;margin:0;min-height:600px;overflow:hidden;background:var(--forest)}
+.split__fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.split--dark .split__fig img{filter:grayscale(1) contrast(1.12) brightness(.9) sepia(.14)}
+.split__body{min-width:0;display:flex;align-items:center;padding:var(--sec) calc((100vw - min(1240px, 100vw - 2 * var(--gutter))) / 2) var(--sec) clamp(48px,5.5vw,80px);padding-right:calc((100cqw - min(1240px, 100cqw - 2 * var(--gutter))) / 2)}
+.split__text{max-width:560px}
+@media (max-width:899px){.split{grid-template-columns:minmax(0,1fr)}.split__fig{min-height:280px}.split__body{padding:56px var(--gutter) 64px}}
+
+/* FAQ rows */
+.faq{border-top:1px solid var(--rule-2)}
+.faq details{border-bottom:1px solid var(--rule-2)}
+.faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:24px;min-height:64px;padding:22px 0;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary h3{margin:0;font-family:var(--font-heading);font-size:clamp(19px,calc(18.5px + .1vw),20px);font-weight:650;line-height:1.35;color:var(--heading)}
+.faq summary:hover h3{color:var(--green)}
+.faq__sign{flex:0 0 auto;color:var(--green);font-size:24px;line-height:1;transition:transform 200ms cubic-bezier(.22,1,.36,1)}
+.faq details[open] .faq__sign{transform:rotate(45deg)}
+.faq__a{padding:0 0 24px}
+.faq__a .p{font-size:clamp(17px,calc(16.4px + .1vw),17.5px);line-height:1.65}
+
+/* Continue with */
+.continue{padding-top:clamp(56px,5vw,72px)}
+.continue__label{margin:0 0 14px;color:var(--meta)}
+.continue__list{border-bottom:1px solid rgba(23,25,25,.2)}
+.continue__list a{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:56px;border-top:1px solid rgba(23,25,25,.2);font-size:17px;font-weight:600;color:var(--heading)}
+.continue__list a span{color:var(--green)}
+.continue__list a:hover{color:var(--green)}
+
+/* Service rows */
+.rows{border-bottom:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:56px minmax(0,5fr) minmax(0,7fr);gap:8px 32px;padding:32px 0;border-top:1px solid var(--rule);align-items:start}
+.row__num{font-size:14px;font-weight:700;line-height:1.9;letter-spacing:.04em;color:var(--meta)}
+.row__title{margin:0;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .4vw),26px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading)}
+.row__body{min-width:0}
+.row__body .p{max-width:52ch;line-height:1.65}
+.row__body .links{margin-top:12px}
+@media (max-width:899px){.row{grid-template-columns:minmax(0,1fr)}}
+
+/* Resource columns */
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px clamp(32px,4vw,56px)}
+.col{min-width:0;padding-top:20px;border-top:1px solid rgba(23,25,25,.3)}
+.col .h3{margin-bottom:12px}
+.col .p{font-size:17px;line-height:1.62}
+.col .links{margin-top:14px}
+.col .flow>.links{margin-top:14px}
+@media (max-width:899px){.cols3{grid-template-columns:minmax(0,1fr)}}
+.sage{background:var(--sage-bg)}
+.sage__in{padding-block:var(--sec)}
+
+/* Routes, triggers, facts, lists, quotes */
+.routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px clamp(40px,5.5vw,80px);align-items:start}
+.route{min-width:0;padding-top:22px;border-top:1px solid rgba(23,25,25,.24)}
+.route .p{max-width:56ch}
+.route .links{margin-top:22px}
+.recog2{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}
+.recog2 li{padding:20px 0 24px;border-top:1px solid var(--rule);font-size:clamp(17px,calc(16px + .14vw),18px);line-height:1.6;color:var(--heading);text-wrap:pretty}
+@media (max-width:759px){.routes,.recog2{grid-template-columns:minmax(0,1fr)}}
+.facts{margin:0 0 14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--rule-2)}
+.facts div{padding:16px 16px 16px 0}
+.facts dt{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
+.facts dd{margin:6px 0 0;font-size:17.5px;font-weight:600;color:var(--heading)}
+@media (max-width:559px){.facts{grid-template-columns:minmax(0,1fr)}.facts div+div{border-top:1px solid var(--rule)}}
+.list{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--rule)}
+.list li{padding:14px 0;border-top:1px solid var(--rule);font-size:clamp(17px,calc(16px + .14vw),18px);font-weight:500;line-height:1.5;color:var(--heading)}
+.lines{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--green)}
+.lines li{font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--heading)}
+.lines li+li{margin-top:10px}
+.quotes{border-top:1px solid var(--rule)}
+.quote{margin:0;padding:28px 0;border-bottom:1px solid var(--rule)}
+.quote blockquote{margin:0}
+.quote blockquote p{margin:0;font-size:clamp(18px,calc(17px + .2vw),19.5px);line-height:1.6;color:var(--heading);text-wrap:pretty}
+.quote figcaption{margin-top:14px;font-size:13px;font-weight:700;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
+.quotes>.flow{display:block}
+
+/* Homepage */
+.home-hero{position:relative;overflow:clip}
+.home-hero__lines{position:absolute;inset:0;pointer-events:none}
+.home-hero__axis{position:absolute;top:0;bottom:0;left:62%;width:1px;background:rgba(4,120,87,.4)}
+.home-hero__field{position:absolute;left:42%;right:0;height:1px;background:linear-gradient(90deg,rgba(23,25,25,0),rgba(23,25,25,.08))}
+.home-hero__in{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center;gap:48px clamp(40px,5vw,72px);padding-block:clamp(48px,5vw,72px) clamp(56px,6vw,88px)}
+.home-hero__text{position:relative;z-index:2;min-width:0}
+.home-hero .lead{max-width:560px}
+.home-fig{position:relative;z-index:1;width:clamp(320px,32vw,460px);aspect-ratio:1;justify-self:end;margin:0}
+.home-fig__disc,.home-fig__cut{position:absolute;inset:6% -4% -2% 8%;border-radius:50%}
+.home-fig__disc{background:var(--green)}
+.home-fig__cut{background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,.92) 58%)}
+.home-fig__img{position:absolute;inset:0;overflow:hidden;border-radius:50%;background:var(--forest)}
+.home-fig__img img{position:absolute;left:-10%;top:0;width:120%;height:auto;max-width:none}
+@media (max-width:899px){.home-hero__lines{display:none}.home-hero__in{grid-template-columns:minmax(0,1fr)}.home-fig{width:min(80%,320px);justify-self:center}}
+.creds{border-block:1px solid rgba(23,25,25,.16)}
+.creds ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.creds li{padding:22px 24px;border-left:1px solid rgba(23,25,25,.16)}
+.creds li:first-child{padding-left:0;border-left:0}
+.creds__a{display:block;font-size:16.5px;font-weight:650;line-height:1.3;color:var(--heading)}
+.creds__b{display:block;margin-top:4px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
+@media (max-width:759px){.creds ul{grid-template-columns:repeat(2,minmax(0,1fr))}.creds li{padding:18px 16px 18px 0;border-left:0}.creds li:nth-child(even){padding:18px 0 18px 16px;border-left:1px solid rgba(23,25,25,.16)}.creds li:nth-child(n+3){border-top:1px solid rgba(23,25,25,.16)}}
+.home-brings>.p{max-width:36em}
+
+/* Therapy vs Coaching */
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px clamp(40px,5.5vw,80px);align-items:start}
+.compare__col{min-width:0;padding-top:22px;border-top:2px solid var(--heading)}
+.compare__h{margin:0 0 18px;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .4vw),26px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading);text-wrap:balance}
+@media (max-width:899px){.compare{grid-template-columns:minmax(0,1fr)}}
+
+/* Free Tools, Writing */
+.tool .actions{margin-top:26px}
+.tool__related{margin-top:18px}
+/* The card reaches --feat-bleed past the reading axis on each side (24px on
+   desktop, less than the gutter on small screens); its copy stays on the axis. */
+.tool--featured{--feat-bleed:min(24px,calc(var(--gutter) - 8px));margin-inline:calc(-1 * var(--feat-bleed));padding:clamp(28px,4vw,44px) var(--feat-bleed);background:var(--bone-deep);border-top:3px solid var(--green)}
+.tool--featured .eyebrow{margin-bottom:14px}
+
+/* The Work & Life Check call to action (WorkLifeCheckCTA) */
+.wlcta--feature{padding:clamp(28px,4vw,44px);background:var(--bone-deep);border-top:3px solid var(--green)}
+.wlcta--feature .eyebrow{margin-bottom:14px}
+.wlcta__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + 1vw),34px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
+.wlcta--feature .actions{margin-top:26px}
+.wlcta--inline{margin-top:clamp(40px,4.5vw,56px);padding:26px 0 30px;border-top:2px solid var(--green);border-bottom:1px solid var(--rule)}
+.wlcta__lead{margin:0;max-width:32em;font-family:var(--font-heading);font-size:clamp(21px,calc(19.5px + .4vw),24px);font-weight:700;line-height:1.3;letter-spacing:-.015em;color:var(--heading);text-wrap:balance}
+.wlcta--inline .p{margin-top:12px}
+.wlcta--inline .btn{margin-top:22px}
+.btn--ghost{background:transparent;color:var(--green);box-shadow:inset 0 0 0 1.5px var(--green)}
+.btn--ghost:hover{background:var(--green);color:var(--bone)}
+.wlcta--compact{margin-top:clamp(36px,4vw,48px);padding:18px 0 12px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.wlcta__text{margin:0;max-width:36em;font-size:clamp(17px,calc(16px + .14vw),18px);font-weight:600;line-height:1.5;color:var(--heading);text-wrap:pretty}
+.wlcta--compact .tlink{margin-top:2px}
+.essays{border-bottom:1px solid var(--rule)}
+.essay{padding:28px 0;border-top:1px solid var(--rule)}
+.essay .h3{margin-bottom:10px}
+.essay__meta{margin:0 0 10px;font-size:15px;line-height:1.5;color:var(--meta)}
+.essay__meta .art-meta__cat{font-weight:700;color:var(--heading)}
+.essay__link{color:var(--heading);text-decoration:underline;text-decoration-thickness:1.5px;text-decoration-color:transparent;text-underline-offset:.16em;transition:color 180ms,text-decoration-color 180ms}
+.essay__link:hover{color:var(--green);text-decoration-color:currentColor}
+.essay .flow>.links+.related{margin-top:4px}
+
+/* Contact */
+.contact{padding-block:clamp(48px,6vw,88px) var(--sec)}
+.contact__head{max-width:720px}
+.contact__head .h1{max-width:16ch}
+.lead--strong{margin-top:12px;font-weight:600;color:var(--heading)}
+.contact__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px clamp(40px,6vw,96px);margin-top:clamp(36px,4vw,56px);align-items:start}
+.contact__form{min-width:0;padding-top:28px;border-top:3px solid var(--green)}
+.contact__aside{min-width:0;display:flex;flex-direction:column;gap:36px}
+.contact__next{padding-top:28px;border-top:1px solid rgba(23,25,25,.26)}
+.contact__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(22px,calc(19px + .5vw),27px);font-weight:800;letter-spacing:-.025em;color:var(--heading)}
+.contact__next .p{font-size:17px;line-height:1.65}
+.contact__privacy{padding:24px;background:var(--bone-deep)}
+.contact__privacy-h{margin-bottom:12px;color:var(--green)}
+.contact__privacy .p{font-size:17px;line-height:1.6}
+.contact__privacy .links{margin-top:10px}
+.ct-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 20px}
+.ct-field{display:block;margin:0 0 22px;padding:0;border:0;min-width:0}
+.ct-label{display:block;margin-bottom:8px;padding:0;font-size:14px;font-weight:700;color:var(--heading)}
+.ct-input{display:block;width:100%;min-height:52px;padding:12px 14px;background:var(--bone);border:1px solid rgba(23,25,25,.3);border-radius:0;font:inherit;font-size:16px;line-height:1.4;color:var(--heading)}
+.ct-input:focus{outline:3px solid var(--green);outline-offset:1px;border-color:var(--green)}
+.ct-input[aria-invalid="true"]{border-color:#A3362A}
+.ct-textarea{min-height:170px;padding:14px;line-height:1.55;resize:vertical}
+.ct-choices{display:flex;flex-wrap:wrap;gap:8px}
+.ct-choice{position:relative;display:inline-flex}
+.ct-choice input{position:absolute;opacity:0;width:1px;height:1px}
+.ct-choice span{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid rgba(23,25,25,.3);font-size:15px;font-weight:600;color:var(--heading);cursor:pointer}
+.ct-choice input:checked+span{background:var(--heading);border-color:var(--heading);color:var(--bone)}
+.ct-choice input:focus-visible+span{outline:3px solid var(--green);outline-offset:2px}
+.ct-help{margin:6px 0 0;font-size:14px;color:var(--meta)}
+.sp-err{margin:6px 0 0;font-size:14px;font-weight:600;color:#A3362A}
+.sp-formerr{margin:0 0 22px;padding:14px 16px;border-left:3px solid #A3362A;background:rgba(163,54,42,.06);font-size:16px;line-height:1.55;color:var(--heading)}
+.sp-formerr a{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor;overflow-wrap:anywhere}
+.sp-formerr p{margin:0}
+.sp-formerr p+p{margin-top:6px}
+.ct-submit{width:100%;min-height:56px}
+.ct-submit[disabled]{opacity:.7;cursor:progress}
+.sp-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.sp-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sp-form__done{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + .8vw),32px);font-weight:800;letter-spacing:-.03em;color:var(--heading);outline:none}
+
+/* Composition axes: 760 reading (.read), 960 paired/practical (.mid), 1120 comparison (.wide), 1240 hero/photo/services (.wrap).
+   Body measure inside the reading axis: 36em (≈ 72 characters); leads 32em (≈ 62). */
+.mid{width:min(960px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.wide{width:min(1120px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.sec--step{padding-top:clamp(80px,8.4vw,120px)}
+.read .p,.read-l .p,.col .p,.compare .p,.contact__aside .p{max-width:36em}
+.read .p--emph,.read-l .p--emph{max-width:32em}
+/* A reading column that starts on its container's left edge (.wrap or .mid)
+   instead of the page's centred reading axis; same width as .read. */
+.read-l{max-width:var(--read-max)}
+.quote blockquote p{max-width:34em}
+.practical__rest{margin-top:40px}
+.sec--pre-faq + .sec{padding-top:clamp(88px,6.7vw,96px)}
+.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:760px) and (max-width:1099px){
+  .cols3:not(.cols2){grid-template-columns:minmax(0,1fr);row-gap:0}
+  .cols3:not(.cols2) .col{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:32px;align-content:start;padding-block:22px 30px}
+  .cols3:not(.cols2) .col>*{grid-column:2}
+  .cols3:not(.cols2) .col>.h3{grid-column:1;grid-row:1/span 3}
+}
+@media (max-width:759px){.cols2{grid-template-columns:minmax(0,1fr)}}
+
+@media (max-width:599px){.btn{white-space:normal;text-align:center}}
+
+.art-head{padding-top:clamp(48px,5.5vw,80px)}
+.art-crumbs ol{display:flex;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+.art-crumbs a{display:inline-flex;align-items:center;min-height:44px;margin-block:-12px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.art-crumbs a:hover{color:var(--green-pressed);text-decoration:underline;text-underline-offset:4px}
+.art-meta{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--meta)}
+.art-meta__cat{font-weight:700;color:var(--heading)}
+.art-h1{margin-top:20px}
+.art-deck{max-width:34em}
+
+/* Author strip: compact, one line of image and three of text */
+.art-author{display:flex;align-items:center;gap:16px;margin-top:32px;padding-block:16px;border-block:1px solid var(--rule)}
+.art-author__fig{position:relative;flex:0 0 auto;width:60px;height:60px;border-radius:50%;overflow:hidden;background:var(--forest)}
+.art-author__fig img{position:absolute;left:50%;top:0;width:160%;max-width:none;height:auto;transform:translate(-48%,-9%)}
+.art-author__text{min-width:0}
+.art-author p{margin:0}
+.art-author__name{font-size:16.5px;font-weight:650;line-height:1.35;color:var(--heading)}
+.art-author__name a{border-bottom:1.5px solid rgba(4,120,87,.45);transition:color 180ms,border-color 180ms}
+.art-author__name a:hover{color:var(--green);border-bottom-color:currentColor}
+.art-author__line{margin-top:3px;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.art-author__line--bg{color:var(--meta)}
+@media (max-width:559px){.art-author{align-items:flex-start}}
+
+/* On this page: in the flow, numbered like the site's rows */
+.art-toc{margin-top:40px}
+.art-toc__label{margin:0 0 12px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
+.art-toc__list{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule-2);counter-reset:toc}
+.art-toc__list li{counter-increment:toc;border-bottom:1px solid var(--rule)}
+.art-toc__list a{display:flex;align-items:baseline;gap:14px;min-height:44px;padding:10px 0;font-size:16.5px;font-weight:550;line-height:1.4;color:var(--heading);transition:color 180ms}
+.art-toc__list a::before{content:counter(toc,decimal-leading-zero);content:counter(toc,decimal-leading-zero) / "";flex:0 0 26px;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--green);font-variant-numeric:tabular-nums}
+.art-toc__list a:hover{color:var(--green)}
+
+/* Body. The site header is not sticky: a target heading only needs air. */
+.art-body{padding-top:clamp(48px,5vw,64px)}
+.art h2[id],.art-cta h2[id]{scroll-margin-top:24px}
+.art-sec{padding-top:clamp(56px,6vw,80px)}
+.art .h2{margin-bottom:22px;font-size:clamp(28px,calc(24px + 1vw),36px)}
+.art .p{font-size:clamp(17px,calc(16px + .2vw),18.5px);line-height:1.72}
+.art .p strong{font-weight:650}
+.flow>.art-sub{margin-top:clamp(36px,4vw,48px)}
+.art-a{color:var(--green);text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:rgba(4,120,87,.55);text-underline-offset:.2em;transition:color 180ms,text-decoration-color 180ms}
+.art-a:hover{color:var(--green-pressed);text-decoration-color:currentColor;text-decoration-thickness:2px}
+.art-list{margin:0;padding-left:1.25em}
+.art-list li{padding-left:.35em;font-size:clamp(17px,calc(16px + .2vw),18.5px);line-height:1.68;color:var(--body);text-wrap:pretty}
+.art-list li+li{margin-top:12px}
+.art-list li::marker{color:var(--green)}
+.art-list strong{font-weight:650;color:var(--heading)}
+.flow>.art-list,.flow>.art-table,.flow>.art-table-scroll,.flow>.art-callout{margin-top:24px}
+.flow>.art-list+*,.flow>.art-table+*,.flow>.art-table-scroll+*,.flow>.art-callout+*{margin-top:24px}
+
+/* Comparison table: the first column narrower than the two evidence columns */
+.art-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15.5px;line-height:1.55;color:var(--body)}
+.art-table caption{caption-side:top;margin:0 0 14px;text-align:left;font-size:17px;font-weight:600;line-height:1.45;color:var(--heading)}
+.art-table__key{width:24%}
+.art-table thead th{padding:0 16px 12px 0;border-bottom:2px solid var(--heading);text-align:left;vertical-align:bottom;font-family:var(--font-heading);font-size:15px;font-weight:700;line-height:1.3;color:var(--heading)}
+.art-table tbody th,.art-table td{padding:14px 18px 16px 0;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.art-table tbody th{font-weight:650;line-height:1.4;color:var(--heading)}
+.art-table tr>:last-child{padding-right:0}
+@media (max-width:640px){
+  .art-table--stack,.art-table--stack tbody,.art-table--stack tr,.art-table--stack th,.art-table--stack td{display:block;width:auto}
+  .art-table--stack caption{display:block}
+  .art-table--stack colgroup{display:none}
+  .art-table--stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .art-table--stack tbody tr{padding:16px 0 20px;border-top:2px solid var(--heading)}
+  .art-table--stack tbody th,.art-table--stack td{padding:0;border:0}
+  .art-table--stack tbody th{font-family:var(--font-heading);font-size:18px;font-weight:700}
+  .art-table--stack td{margin-top:14px}
+  .art-table--stack [data-label]::before{content:attr(data-label);content:attr(data-label) / "";display:block;margin-bottom:4px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.35;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
+  .art-table--scroll{min-width:34rem}
+}
+/* A table that scrolls in its own region on narrow screens (focusable, so a
+   keyboard can scroll it). A soft shadow shows at an edge only while there is
+   more table beyond it: bone covers scroll with the content and hide the
+   shadows at either end. */
+.art-table-scroll{overflow-x:auto;overscroll-behavior-x:contain;background:linear-gradient(to right,var(--bone) 40%,rgba(243,240,232,0)) left center/28px 100% no-repeat local,linear-gradient(to left,var(--bone) 40%,rgba(243,240,232,0)) right center/28px 100% no-repeat local,radial-gradient(farthest-side at 0 50%,rgba(23,25,25,.18),rgba(23,25,25,0)) left center/12px 100% no-repeat scroll,radial-gradient(farthest-side at 100% 50%,rgba(23,25,25,.18),rgba(23,25,25,0)) right center/12px 100% no-repeat scroll}
+.art-table-scroll:focus-visible{outline:3px solid var(--green);outline-offset:4px}
+
+/* The one safety callout: restrained, the paragraph and its links intact */
+.art-callout{padding:20px 22px;background:var(--bone-deep);border-left:3px solid var(--heading)}
+
+/* Questions, answered in full: no accordion */
+.art-sec--faq .flow>.art-sub{margin-top:0;padding:24px 0 26px;border-top:1px solid var(--rule)}
+.art-sec--faq .flow>.art-sub:last-child{border-bottom:1px solid var(--rule)}
+.art-sec--faq .h3{margin-bottom:10px;font-size:clamp(19px,calc(18px + .25vw),21px)}
+
+/* References: the editorial list, smaller, hanging numbers */
+.art-refs{margin:0;padding-left:1.7em;font-size:15.5px;line-height:1.6;color:var(--ink-2)}
+.art-refs li{padding-left:.4em;overflow-wrap:break-word}
+.art-refs li+li{margin-top:10px}
+.art-refs li::marker{font-weight:600;color:var(--meta);font-variant-numeric:tabular-nums}
+
+/* The close: the site's dark band, the article's CTA in it */
+.art-cta .art-cta__h{margin:0 auto}
+.art-cta .art-cta__p{margin:18px auto 0}
+</style><header class="hdr"><a class="skip-link" href="#main">Skip to content</a><div class="wrap hdr__in"><a href="/" class="hdr__brand" aria-label="Aggelos Mouzakitis, home">Aggelos<span>.</span></a><nav class="hdr__nav" aria-label="Primary"><div class="hdr__item"><a href="/" class="hdr__link">Home</a></div><div class="hdr__item"><a href="/about/" class="hdr__link">About</a></div><div class="hdr__item"><button type="button" class="hdr__btn" aria-expanded="false" aria-controls="nav-services">Services<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg></button><div id="nav-services" class="hdr__panel" hidden=""><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a><div class="hdr__sep" role="presentation"></div><a href="/therapy-for-men-in-tech/">Therapy for Men in Tech &amp; Business</a><a href="/therapy-for-executives/">Therapy for Executives &amp; Senior Leaders</a><a href="/therapy-for-founders/">Therapy for Entrepreneurs, Founders &amp; Business Owners</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></div></div><div class="hdr__item"><button type="button" class="hdr__btn is-current" aria-expanded="false" aria-controls="nav-resources">Resources<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg></button><div id="nav-resources" class="hdr__panel" hidden=""><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/" aria-current="true">Writing</a><a href="/free-tools/">Free Tools</a><a href="/reviews/">Reviews</a></div></div><div class="hdr__item"><a href="/faq/" class="hdr__link">FAQ</a></div></nav><a href="/contact/" class="hdr__cta">Book a consultation<span aria-hidden="true">→</span></a><button type="button" class="hdr__menu-btn" aria-expanded="false" aria-controls="site-menu">Menu<span class="hdr__burger" aria-hidden="true"><span></span><span></span><span></span></span></button></div><nav id="site-menu" class="mmenu" aria-label="Primary" hidden=""><div class="mmenu__in"><a href="/" class="mmenu__link">Home</a><a href="/about/" class="mmenu__link">About</a><div class="mmenu__group"><button type="button" class="mmenu__toggle" aria-expanded="false" aria-controls="m-services">Services<span class="mmenu__sign" aria-hidden="true">+</span></button><div id="m-services" class="mmenu__links" hidden=""><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a><div class="mmenu__sep" role="presentation"></div><a href="/therapy-for-men-in-tech/">Therapy for Men in Tech &amp; Business</a><a href="/therapy-for-executives/">Therapy for Executives &amp; Senior Leaders</a><a href="/therapy-for-founders/">Therapy for Entrepreneurs, Founders &amp; Business Owners</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></div></div><div class="mmenu__group"><button type="button" class="mmenu__toggle" aria-expanded="false" aria-controls="m-resources">Resources<span class="mmenu__sign" aria-hidden="true">+</span></button><div id="m-resources" class="mmenu__links" hidden=""><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/" aria-current="true">Writing</a><a href="/free-tools/">Free Tools</a><a href="/reviews/">Reviews</a></div></div><a href="/faq/" class="mmenu__link">FAQ</a><a href="/contact/" class="mmenu__cta">Book a consultation<span aria-hidden="true">→</span></a></div></nav></header><main id="main" tabindex="-1" class="pg fam-article pg--my-job-gives-me-anxiety-should-i-quit"><article class="art" aria-labelledby="page-title"><header class="read art-head"><nav class="art-crumbs" aria-label="Breadcrumb"><ol><li><a href="/blog/">Writing</a></li></ol></nav><p class="art-meta"><span class="art-meta__cat">Career &amp; Work</span> · Guide · <time datetime="2026-10-01T22:36:00+01:00">October 2026</time> · 11 min read</p><h1 class="h1 art-h1" id="page-title">My Job Gives Me Anxiety. Should I Quit?</h1><p class="lead art-deck">How to assess what leaving could resolve, what might remain and which changes are worth testing.</p><div class="art-author"><span class="art-author__fig"><img src="/img/aggelos-about.webp" alt="Aggelos Mouzakitis, psychotherapist and article author" width="840" height="1050" decoding="async"></span><div class="art-author__text"><p class="art-author__name"><a href="/about/" rel="author">Aggelos Mouzakitis</a></p><p class="art-author__line">BACP-registered Psychotherapist · MSc Integrative Counselling &amp; Psychotherapy</p><p class="art-author__line art-author__line--bg">Background in product and growth · 100+ technology companies advised</p></div></div><nav class="art-toc" aria-labelledby="art-toc-label"><p class="art-toc__label" id="art-toc-label">On this page</p><ol class="art-toc__list"><li><a href="#first-work-out-what-is-actually-causing-the-anxiety">First work out what is actually causing the anxiety</a></li><li><a href="#signs-the-job-itself-may-be-the-problem">Signs the job itself may be the problem</a></li><li><a href="#signs-changing-jobs-might-not-solve-everything">Signs changing jobs might not solve everything</a></li><li><a href="#are-you-actually-burned-out">Are you actually burned out?</a></li><li><a href="#what-to-test-before-resigning">What to test before resigning</a></li><li><a href="#when-quitting-is-a-reasonable-conclusion">When quitting is a reasonable conclusion</a></li><li><a href="#dont-psychologise-the-financial-reality">Don’t psychologise the financial reality</a></li><li><a href="#why-some-people-stay-stuck-in-the-decision-for-months">Why some people stay stuck in the decision for months</a></li><li><a href="#therapist-career-coach-or-mentor">Therapist, career coach or mentor?</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li><li><a href="#references">References</a></li></ol></nav></header><div class="read art-body"><div class="flow"><p class="p"><strong>Anxiety is evidence that something needs attention.</strong> By itself, it does not establish that quitting is the right solution. Leaving may be reasonable when work is harming your health and there is little prospect of meaningful change. In other situations, a different workload, support or treatment could make staying possible.</p><p class="p">You might draft a resignation email after another sleepless night, then close it because the mortgage is due. You need to understand what is happening, what could realistically change and what each option would cost.</p></div><section class="art-sec"><h2 class="h2" id="first-work-out-what-is-actually-causing-the-anxiety">First work out what is actually causing the anxiety</h2><div class="flow"><p class="p">Start with specific episodes. What happened before the dread increased? Which tasks or people are involved? Compare what the job requires with what you add because leaving something unchecked feels unbearable. Consider five areas:</p><ul class="art-list"><li><strong>Workload and role design:</strong> Two vacancies remain unfilled, every project is urgent and responsibility comes without authority to change deadlines.</li><li><strong>Manager and culture:</strong> Expectations change after delivery, questions attract ridicule or ordinary disagreements threaten your standing.</li><li><strong>Job insecurity:</strong> Redundancy discussions or a short contract create a genuine threat to income. Repeatedly reading Slack for clues may add to it.</li><li><strong>Skill and responsibility mismatch:</strong> A promotion brings unfamiliar work without training, or management duties leave little room for work you actually want to do.</li><li><strong>Patterns that may follow you elsewhere:</strong> You keep polishing completed work, accept every request or experience a routine correction as evidence that you are about to be dismissed.</li></ul><p class="p"><a class="art-a" href="https://pubmed.ncbi.nlm.nih.gov/28108676/">Research on work-related mental health risks</a> associates high demands, low control and poor support with common mental health problems. It cannot establish the cause of one person’s anxiety.</p><p class="p">The <a class="art-a" href="/work-anxiety/">guide to work anxiety</a> explains how workplace conditions and existing anxiety can interact. You do not need to assign all responsibility to one side before taking action.</p></div></section><section class="art-sec"><h2 class="h2" id="signs-the-job-itself-may-be-the-problem">Signs the job itself may be the problem</h2><div class="flow"><p class="p">Look for conditions you can describe beyond how distressed you feel. Examples include:</p><ul class="art-list"><li>Colleagues also cannot meet expectations within reasonable hours, and vacancies are repeatedly left unfilled.</li><li>Your manager shouts, humiliates people publicly or threatens retaliation for raising concerns.</li><li>You are expected to conceal mistakes, mislead customers or work against important professional values.</li><li>Attempts to clarify priorities produce more demands without anything being removed.</li><li>Your sleep, health or ability to function keeps deteriorating despite reasonable efforts to recover and obtain support.</li></ul><p class="p">The <a class="art-a" href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work">WHO identifies understaffing, bullying and unclear roles among workplace mental health risks</a>. A wellbeing seminar does little to establish whether those conditions have changed.</p><p class="p">Other people appearing fine does not settle the question. They may have different duties, more protection or difficulties you cannot see. If work is <a class="art-a" href="/work-affecting-relationship/">affecting your relationship</a>, include that cost rather than judging the situation solely by your performance review.</p></div></section><section class="art-sec"><h2 class="h2" id="signs-changing-jobs-might-not-solve-everything">Signs changing jobs might not solve everything</h2><div class="flow"><p class="p">Perhaps the same fear has appeared under several managers, including supportive ones. You reread a routine email repeatedly, ask a colleague whether you sounded competent, feel briefly reassured and then need to ask again. A lighter week barely changes the checking.</p><p class="p">This may suggest that <a class="art-a" href="/anxiety-overthinking/">anxiety and overthinking</a> need attention alongside the job decision. The Centre for Clinical Interventions explains how <a class="art-a" href="https://www.cci.health.wa.gov.au/News/New-Resources-to-Help-Manage-Reassurance-Seeking">repeated reassurance can relieve fear briefly while reinforcing anxiety over time</a>. Necessary quality checks and requests for clear instructions serve a different purpose.</p><p class="p">Repeating difficulties across roles does not prove that you are the problem. You may have repeatedly entered understaffed workplaces, or still be recovering from an earlier experience. Feeling better on holiday is also a clue with several possible explanations, including rest and temporary distance from a feared situation.</p><p class="p">Leaving can improve the conditions while some anxiety remains. You can change jobs and work on recurring patterns at the same time.</p></div></section><section class="art-sec"><h2 class="h2" id="are-you-actually-burned-out">Are you actually burned out?</h2><div class="flow"><p class="p">You may worry about tomorrow while feeling too exhausted to care about the work itself. Tasks that once felt manageable take longer, and you become impatient with people who need you.</p><p class="p">The <a class="art-a" href="https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases">WHO’s occupational framing of burnout</a> includes exhaustion, distance or cynicism towards work, and reduced professional efficacy. Burnout is an occupational phenomenon, rather than a psychiatric diagnosis. Anxiety, depression and physical health problems can overlap with this experience.</p><p class="p">A good performance review does not assess your health. The <a class="art-a" href="/burnout-at-work/">burnout at work guide</a> looks at what recovery requires when you are still delivering. Persistent exhaustion or difficulties functioning warrant assessment, rather than assuming resignation alone will resolve them.</p></div></section><section class="art-sec"><h2 class="h2" id="what-to-test-before-resigning">What to test before resigning</h2><div class="flow"><p class="p">Where it is safe and feasible, test a change that addresses a plausible cause. You are looking for information about whether the role can become workable. You do not have to complete these tests before leaving an abusive or unsafe situation.</p><div class="art-table-scroll" role="region" aria-labelledby="art-table-caption" tabindex="0"><table class="art-table art-table--scroll" role="table"><caption id="art-table-caption" class="sp-vh">Changes to test before resigning and what to observe</caption><colgroup><col class="art-table__key"><col class="art-table__ev"><col class="art-table__ev"></colgroup><thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Possible change</th><th scope="col" role="columnheader">What to ask or try</th><th scope="col" role="columnheader">What to observe</th></tr></thead><tbody role="rowgroup"><tr role="row"><th scope="row" role="rowheader" data-label="Possible change">Reduce scope</th><td role="cell" data-label="What to ask or try">Remove a project, change a deadline or secure additional cover.</td><td role="cell" data-label="What to observe">Does the work actually decrease, or merely move into your evenings?</td></tr><tr role="row"><th scope="row" role="rowheader" data-label="Possible change">Clarify priorities</th><td role="cell" data-label="What to ask or try">Ask your manager which task should wait when demands conflict.</td><td role="cell" data-label="What to observe">Are priorities clear and respected when new work arrives?</td></tr><tr role="row"><th scope="row" role="rowheader" data-label="Possible change">Take leave</th><td role="cell" data-label="What to ask or try">Use annual leave for rest; discuss sickness absence if you are unwell.</td><td role="cell" data-label="What to observe">What improves away from work, and what will change on return?</td></tr><tr role="row"><th scope="row" role="rowheader" data-label="Possible change">Test a boundary</th><td role="cell" data-label="What to ask or try">Agree an end to routine evening messages, where duties allow.</td><td role="cell" data-label="What to observe">Is the agreement respected? What happens to your fear of being unavailable?</td></tr><tr role="row"><th scope="row" role="rowheader" data-label="Possible change">Stop voluntary overwork</th><td role="cell" data-label="What to ask or try">Decline an optional extra or finish routine work at the agreed standard.</td><td role="cell" data-label="What to observe">Is more effort required by the employer, or driven by your fear of disappointing someone?</td></tr><tr role="row"><th scope="row" role="rowheader" data-label="Possible change">Explore an internal transfer</th><td role="cell" data-label="What to ask or try">Investigate another team or role.</td><td role="cell" data-label="What to observe">Would it change the manager, duties or conditions that concern you?</td></tr></tbody></table></div><p class="p">A manager conversation can be concrete: “I can complete A and B by Friday. C needs another person or a later deadline. Which should take priority?” <a class="art-a" href="https://www.acas.org.uk/reasonable-adjustments/mental-health-adjustments">Acas describes adjustments to tasks, deadlines and responsibilities</a> that may help. If your manager is the source of harm, seek another appropriate route, such as a union representative, occupational health or independent advice.</p><p class="p">Agree when to review an implemented change. A fortnight might show whether evening boundaries are respected; longer may be needed to assess recovery. These are examples, not clinical waiting periods. <strong>Worsening health is a reason to review sooner.</strong> A promise without implementation gives you little reason to extend the trial indefinitely.</p><p class="p">A <a class="art-a" href="https://patient.info/forums/discuss/anxiety-is-making-me-want-to-leave-my-job-373028">first-person Patient.info discussion</a> describes relief during leave followed by renewed anxiety, despite supportive colleagues and an unchanged workload. This is an individual account, not scientific evidence. It illustrates why being listened to and having the demands change are separate things to check.</p><p class="p">If anxiety means you cannot work or your health is worsening, speak to a GP. <a class="art-a" href="https://www.acas.org.uk/managing-work-related-stress/time-off-with-stress">Sickness absence may provide time to recover</a>; follow the relevant absence policy and check pay and documentation requirements. Leave can create space for assessment without committing you to resignation.</p></div></section><section class="art-sec"><h2 class="h2" id="when-quitting-is-a-reasonable-conclusion">When quitting is a reasonable conclusion</h2><div class="flow"><p class="p">Leaving becomes more reasonable when the main source of harm is built into the role, changes have failed or are unlikely to happen, and the cost of continuing is substantial. Repeated humiliation, unsafe demands or a serious values conflict may already provide enough information. Seeking advice about an exit can begin before another attempt to negotiate.</p><p class="p">A respectable employer can offer a role that no longer fits. You are allowed to leave without proving that it is abusive. Ask what a different role must change: fewer direct reports, predictable hours, clearer authority or work you can support ethically. That gives you criteria for assessing vacancies.</p><p class="p">Having recurring anxiety does not oblige you to stay. It does mean that an exit plan may need psychological or medical support as well as another employer. If you remain temporarily, specify what you are staying for and when you will reconsider.</p></div></section><section class="art-sec"><h2 class="h2" id="dont-psychologise-the-financial-reality">Don’t psychologise the financial reality</h2><div class="flow"><p class="p">A mortgage, dependants or an employment-linked visa can sharply limit your options. Fear about losing income may reflect accurate arithmetic. Healthcare, savings, debt and the availability of suitable work also belong in the decision.</p><p class="p">Write down essential monthly costs, accessible savings and any confirmed income during leave or a notice period. Compare finding another role while employed with a period without earnings. Include a slower job search than you hope for, without treating any fixed number of months’ savings as universally sufficient.</p><p class="p"><a class="art-a" href="https://pure.amsterdamumc.nl/en/publications/mental-health-effects-of-unemployment-and-re-employment-a-systema/">A systematic review of unemployment and re-employment</a> found associations with worsening and improving mental health respectively, but rated the evidence low certainty. These population findings cannot tell you whether leaving your particular job will help. They do challenge the assumption that unemployment is automatically restorative.</p><p class="p">Check <a class="art-a" href="https://www.citizensadvice.org.uk/work/resigning/deciding-whether-to-resign/">resignation implications with Citizens Advice</a> or an appropriate adviser before giving notice, including effects on pay, benefits or potential claims. Obtain qualified immigration advice if your status depends on employment. Staying while seeking an alternative can be sensible; if staying is becoming unsafe, get help reviewing the options urgently.</p></div></section><section class="art-sec"><h2 class="h2" id="why-some-people-stay-stuck-in-the-decision-for-months">Why some people stay stuck in the decision for months</h2><div class="flow"><p class="p">Sometimes information is missing: you do not know your sick pay, whether a transfer exists or what another employer would offer. Those questions can be investigated.</p><p class="p">In other cases, you know the practical options and keep asking someone else whether leaving would be a mistake. Each conversation settles you briefly, then the question returns. You may be seeking a guarantee that no decision can provide.</p><p class="p">There can also be grief in leaving. You invested years in a career, wanted this promotion or liked being recognised as successful. <a class="art-a" href="/achievement-self-worth/">Achievement and self-worth</a> can become closely connected, so a less prestigious role feels personally diminishing even when it suits your life better. Leaving may mean accepting that one hoped-for future is no longer attractive.</p><p class="p">Try writing down what would justify staying, what would justify leaving and which unanswered questions could genuinely change your judgement. Put dates beside the questions you can investigate. If every answer creates another hypothetical, the difficulty may now include tolerating uncertainty and possible regret. <a class="art-a" href="/career-transition-therapy/">Therapy for difficult career decisions</a> can address that part without pretending the financial constraints have disappeared.</p></div></section><section class="art-sec"><h2 class="h2" id="therapist-career-coach-or-mentor">Therapist, career coach or mentor?</h2><div class="flow"><p class="p">A career coach can help compare roles, prepare conversations and organise a job search. A mentor with relevant industry experience can assess whether expectations are realistic and suggest alternatives. Something being common in your industry does not make it harmless.</p><p class="p">A therapist can help when the decision repeatedly becomes tangled with panic, shame, fear of disappointing people or an inability to stop checking. <a class="art-a" href="https://pubmed.ncbi.nlm.nih.gov/37271039/">Research on psychological treatment for generalised anxiety</a> supports work on intolerance of uncertainty. That does not establish that your job decision is an anxiety disorder. A therapist should help you examine your experience and exercise your judgement, rather than decide whether your employer is good or bad.</p><p class="p">The distinction between <a class="art-a" href="/therapy-vs-coaching/">therapy and coaching</a> concerns what kind of help the problem needs. If anxiety is affecting sleep, everyday functioning or your ability to work, <a class="art-a" href="https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/anxiety-fear-panic/">speak to a GP</a>. Assessment can guide treatment and discussions about leave. Employment disputes need appropriate employment advice.</p><div class="art-callout"><p class="p">If you cannot keep yourself safe, <a class="art-a" href="https://www.nhs.uk/nhs-services/mental-health-services/where-to-get-urgent-help-for-mental-health/">seek immediate help</a>. In the UK, call 999 or go to A&amp;E. Elsewhere, contact your local emergency service.</p></div></div></section><section class="art-sec art-sec--faq"><h2 class="h2" id="frequently-asked-questions">Frequently asked questions</h2><div class="flow"><div class="art-sub"><h3 class="h3">Will quitting my job cure my anxiety?</h3><div class="flow"><p class="p">Leaving may remove a major source of distress, but it cannot guarantee that anxiety ends. Recovery can take time, and checking, fear of criticism or broader worries may remain. After leaving, assess what improves and what still needs help. Continued anxiety does not, by itself, mean that leaving was a mistake.</p></div></div><div class="art-sub"><h3 class="h3">Should I take sick leave before deciding whether to quit?</h3><div class="flow"><p class="p">If you are unwell or struggling to function, discuss this with a GP and follow your workplace’s sickness procedure. Sick leave may create time for treatment and practical planning. Check your actual pay entitlement and agree manageable contact where possible. You do not have to settle your entire career decision before seeking medical help.</p></div></div><div class="art-sub"><h3 class="h3">How long should I try to fix work anxiety before leaving?</h3><div class="flow"><p class="p">There is no universal deadline. Choose a review date that matches the change being tested, your health and the consequences of waiting. Assess what has actually changed, rather than restarting the clock after each reassuring conversation. If conditions remain harmful or your health deteriorates, seek support and reconsider earlier. Serious harm does not require a trial period.</p></div></div><div class="art-sub"><h3 class="h3">What if I need the money and cannot afford to quit?</h3><div class="flow"><p class="p">Start with the options you can access: medical support, changes to duties, an internal move, employment advice or a job search while still employed. Work out the financial consequences of each before giving notice. If they all seem impossible, ask an appropriate adviser to review your situation; assumptions about sick pay, benefits or contractual rights may need checking.</p></div></div></div></section><section class="art-sec art-sec--references"><h2 class="h2" id="references">References</h2><div class="flow"><ol class="art-refs"><li>Harvey, S. B., et al. (2017). <a class="art-a" href="https://pubmed.ncbi.nlm.nih.gov/28108676/">Can work make you mentally ill? A systematic meta-review of work-related risk factors for common mental health problems</a>. <em>Occupational and Environmental Medicine</em>.</li><li>World Health Organization (2026). <a class="art-a" href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work">Mental health at work</a>.</li><li>Centre for Clinical Interventions (2025). <a class="art-a" href="https://www.cci.health.wa.gov.au/News/New-Resources-to-Help-Manage-Reassurance-Seeking">New resources to help manage reassurance seeking</a>.</li><li>World Health Organization (2019). <a class="art-a" href="https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases">Burn-out an occupational phenomenon: International Classification of Diseases</a>.</li><li>Acas (2025). <a class="art-a" href="https://www.acas.org.uk/reasonable-adjustments/mental-health-adjustments">Mental health adjustments</a> and <a class="art-a" href="https://www.acas.org.uk/managing-work-related-stress/time-off-with-stress">Time off with stress</a>.</li><li>Sterud, T., et al. (2025). <a class="art-a" href="https://pure.amsterdamumc.nl/en/publications/mental-health-effects-of-unemployment-and-re-employment-a-systema/">Mental health effects of unemployment and re-employment: a systematic review and meta-analysis of longitudinal studies</a>. <em>Occupational and Environmental Medicine</em>, 82, 343–353.</li><li>Citizens Advice. <a class="art-a" href="https://www.citizensadvice.org.uk/work/resigning/deciding-whether-to-resign/">Resigning from your job</a>.</li><li>Wilson, E. J., Abbott, M. J., and Norton, A. R. (2023). <a class="art-a" href="https://pubmed.ncbi.nlm.nih.gov/37271039/">The impact of psychological treatment on intolerance of uncertainty in generalized anxiety disorder: a systematic review and meta-analysis</a>. <em>Journal of Anxiety Disorders</em>, 97, 102729.</li><li>NHS (2026). <a class="art-a" href="https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/anxiety-fear-panic/">Anxiety, fear and panic</a>.</li></ol></div></section></div></article><section class="band close on-dark art-cta" aria-labelledby="talk-through-the-decision-about-your-job"><div class="read close__in"><p class="close__label">WORK WITH ME</p><h2 class="close__text art-cta__h" id="talk-through-the-decision-about-your-job">Talk through the decision about your job</h2><p class="close__text close__text--long art-cta__p">I work with people whose career decisions are tied up with anxiety, self-worth or repeated difficulty choosing. If you would like help examining what is keeping this decision open, tell me briefly what is happening. We can discuss whether psychotherapy, professional coaching or another kind of support fits your situation.</p><div class="close__actions"><a class="btn" href="/contact/">Book a conversation <span aria-hidden="true">→</span></a></div></div></section></main><footer class="ftr"><div class="wrap"><div class="ftr__grid"><div style="min-width: 0px;"><a href="/" class="ftr__brand" aria-label="Aggelos Mouzakitis, home">Aggelos<span>.</span></a><p class="ftr__tag">BACP-registered psychotherapist · Background in tech, product &amp; growth</p><ul class="ftr__social" aria-label="Social media"><li><a href="https://www.linkedin.com/in/growth-product-manager/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a></li><li><a href="https://www.instagram.com/_aggelosmouzakitis_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg></a></li><li><a href="https://www.tiktok.com/@aggelosmouz" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg></a></li></ul></div><nav class="ftr__col" aria-label="Work with me"><p class="ftr__head">Work with me</p><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a></nav><nav class="ftr__col" aria-label="Who I work with"><p class="ftr__head">Who I work with</p><a href="/therapy-for-men-in-tech/">Men in Tech &amp; Demanding Careers</a><a href="/therapy-for-founders/">Founders &amp; Business Owners</a><a href="/therapy-for-executives/">Executives &amp; Leaders</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></nav><nav class="ftr__col" aria-label="Common problems"><p class="ftr__head">Common problems</p><a href="/relationship-problems-men/">Relationships &amp; Separation</a><a href="/work-affecting-relationship/">Work &amp; Relationships</a><a href="/executive-burnout-therapy/">Burnout &amp; Can’t Switch Off</a><a href="/career-transition-therapy/">Career Change &amp; Decisions</a><a href="/anxiety-overthinking/">Anxiety &amp; Overthinking</a><a href="/achievement-self-worth/">Achievement &amp; Self-Worth</a></nav><nav class="ftr__col" aria-label="Practice"><p class="ftr__head">Practice</p><a href="/about/">About</a><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/">Writing</a><a href="/free-tools/">Free Tools</a><a href="/faq/">FAQ</a><a href="/reviews/">Reviews</a><a href="/contact/">Contact</a></nav></div><div class="ftr__rule" role="presentation"></div><div class="ftr__bottom"><p style="margin: 0px;">© 2026 Aggelos Mouzakitis. All rights reserved.</p><nav class="ftr__legal" aria-label="Legal"><a href="/confidentiality/">Confidentiality</a></nav></div></div></footer></div>
+<script src="/react.production.min.js?v=d949f1c368" crossorigin="anonymous"></script>
+<script src="/react-dom.production.min.js?v=35f4f974f4" crossorigin="anonymous"></script>
+<script src="/site-nav.js?v=845fe0238a"></script>
+<script src="/site-chrome.js?v=ebc8547ebf"></script>
+<script src="/article-my-job-gives-me-anxiety-should-i-quit.js?v=4e22aa60f1"></script>
+<script src="/site-pages.js?v=2a66ea1c22"></script>
+<script>renderArticlePage("my-job-gives-me-anxiety-should-i-quit");</script>
+</body>
+</html>

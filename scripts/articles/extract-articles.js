@@ -64,10 +64,13 @@ const sentencesOf = (md) => md.split(/(?<=[.!?…][”’")\]]?)\s+(?=[A-Z“‘
 function normaliseLinks(md, slug) {
   return md.replace(/\]\(([^)\s]+)\)/g, (m, href) => {
     if (href.startsWith(ORIGIN + '/')) return '](' + href.slice(ORIGIN.length) + ')';
-    if (!/^https:\/\//.test(href)) fail(slug, `link is neither ${ORIGIN} nor https: ${href}`);
+    if (/^\/(?!\/)/.test(href)) return m;
+    if (!/^https:\/\//.test(href)) fail(slug, `link is neither a site path nor https: ${href}`);
     return m;
   });
 }
+
+const slugify = (s) => s.toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 // Every bracket and asterisk must belong to markup the renderer draws, so
 // nothing reaches the page as stray Markdown.
@@ -108,10 +111,16 @@ function subsections(text) {
 
 // "Key: `value`" lines of a subsection, bulleted or not; keys lower-case and
 // without "Exact" ("- Exact heading: `…`" and "Heading: `…`" are one field).
+// A key that names a link ("Exact name, linked to `/about/`") also gives
+// "<key> link".
 function fieldsOf(text) {
   const out = {};
-  for (const m of text.matchAll(/^(?:- )?([A-Za-z][^:`\n]*?): `([^`]+)`/gm)) {
-    out[m[1].trim().toLowerCase().replace(/^exact /, '')] = m[2];
+  for (const m of text.matchAll(/^(?:- )?(.+?): `([^`]+)`\s*$/gm)) {
+    const raw = m[1].trim();
+    const key = raw.replace(/,?\s*linked to `[^`]+`/i, '').trim().toLowerCase().replace(/^exact /, '');
+    out[key] = m[2];
+    const link = raw.match(/linked to `([^`]+)`/i);
+    if (link) out[key + ' link'] = link[1];
   }
   return out;
 }
@@ -133,6 +142,7 @@ function blocksOf(md, slug) {
     let m;
     if (!line.trim()) { flush(); continue; }
     if ((m = line.match(/^(#{1,6})\s+(.+)$/))) { flush(); out.push({ t: 'h', level: m[1].length, md: m[2].trim() }); continue; }
+    if (/^(?:-{3,}|\*{3,}|_{3,})$/.test(line)) { flush(); out.push({ t: 'hr' }); continue; }
     if ((m = line.match(/^[-*] (.+)$/))) {
       if (!list || list.t !== 'ul') { flush(); list = { t: 'ul', items: [] }; }
       list.items.push(m[1].trim());
@@ -179,20 +189,19 @@ function extract(a) {
   const notes = subsections(parts['3']);
   const need = (t) => notes[t] || fail(slug, `Part 3 has no "### ${t}"`);
   const tocText = need('Table of contents');
-  const tocLabel = (tocText.match(/Label:? `([^`]+)`/) || [])[1] || fail(slug, 'Part 3 TOC has no label');
+  const tocLabel = (tocText.match(/label:? `([^`]+)`/i) || [])[1] || fail(slug, 'Part 3 TOC has no label');
   const toc = [...tocText.matchAll(/^\|\s*([^|`]+?)\s*\|\s*`#([a-z0-9-]+)`\s*\|$/gm)]
     .map((m) => ({ label: smart(m[1]), id: m[2] }));
   if (!toc.length) fail(slug, 'Part 3 TOC table is empty');
-  const ctaId = (tocText.match(/Assign `#([a-z0-9-]+)` to the final commercial CTA H2/)
-    || tocText.match(/final CTA the ID `#?([a-z0-9-]+)`/) || [])[1] || fail(slug, 'Part 3 gives no id for the final CTA H2');
-  const ids = toc.map((t) => t.id).concat(ctaId);
-  if (new Set(ids).size !== ids.length) fail(slug, 'duplicate anchor IDs in Part 3');
+  // The CTA heading's id, when Part 3 gives one (else one from its words).
+  const ctaIdGiven = (tocText.match(/Assign `#([a-z0-9-]+)` to the final commercial CTA H2/)
+    || tocText.match(/final CTA the ID `#?([a-z0-9-]+)`/) || [])[1];
 
   const authorText = need('Author block');
   const af = fieldsOf(authorText);
   const author = {
     name: af['name'],
-    href: ((authorText.match(/Link the (?:author['’]s )?name to `([^`]+)`/) || [])[1] || '').replace(ORIGIN, ''),
+    href: (af['name link'] || (authorText.match(/Link the (?:author['’]s )?name to `([^`]+)`/) || [])[1] || '').replace(ORIGIN, ''),
     image: a.authorImage,
     width: a.authorImageSize[0],
     height: a.authorImageSize[1],
@@ -204,15 +213,19 @@ function extract(a) {
   if (/^\[/.test(af.image || '') && !a.authorImage) fail(slug, 'the brief asks for the approved image: set authorImage in articles.js');
 
   const ctaSpec = fieldsOf(need('Final CTA'));
+  const ctaId = ctaIdGiven || slugify(ctaSpec.heading || '');
+  const ids = toc.map((t) => t.id).concat(ctaId);
+  if (!ctaId || new Set(ids).size !== ids.length) fail(slug, 'duplicate or missing anchor IDs in Part 3');
   const header = need('Article header');
-  for (const v of [a.category, a.readTime]) {
+  for (const v of [a.category, a.type, a.readTime].filter(Boolean)) {
     if (!header.includes('`' + v + '`')) fail(slug, `articles.js says "${v}"; Part 3 Article header does not`);
   }
   const canonical = (header.match(/Canonical URL: `([^`]+)`/) || [])[1];
   if (canonical && canonical !== ORIGIN + url) fail(slug, `Part 3 canonical is ${canonical}`);
-  const deckFull = (header.match(/^> (.+)$/m) || [])[1];
+  const deckFull = (header.match(/^> (.+)$/m) || header.match(/is the deck: `([^`]+)`/) || [])[1];
   const deckStart = (header.match(/deck is the paragraph beginning [“"`]([^”"`]+)[”"`]/) || [])[1];
-  const introStart = (header.match(/(?:introduction|body opening) begins [“"`]([^”"`]+)[”"`]/) || [])[1];
+  const introStart = (header.match(/(?:introduction|body opening) begins [“"`]([^”"`]+)[”"`]/)
+    || header.match(/paragraph beginning [“"`]([^”"`]+)[”"`] starts the article introduction/) || [])[1];
   const introCount = NUMBERS[((header.match(/\b(one|two|three|four|five|six) (?:opening )?paragraphs\b/i) || [])[1] || '').toLowerCase()];
 
   // Part 2: the article.
@@ -236,7 +249,7 @@ function extract(a) {
       if (given && !(given.includes(marker) && out.includes(given))) fail(slug, `pointer for "${m[1]}" is not in the article with its placeholder`);
       if (cfg.resolved) {
         out = out.replace(given || marker, () => cfg.resolved);
-        report.resolved.push(m[1]);
+        report.resolved.push({ placeholder: m[1], from: given || marker, to: cfg.resolved });
         continue;
       }
       if (where !== 'p') fail(slug, `unresolved placeholder outside a paragraph: ${md.slice(0, 80)}`);
@@ -259,7 +272,17 @@ function extract(a) {
   let section = null;
   let sub = null;
   let cta = null;
-  for (const b of blocks) {
+  for (const [i, b] of blocks.entries()) {
+    if (b.t === 'hr') {
+      // A thematic break is only accepted where the brief marks the boundary
+      // before the CTA (its eyebrow, then its heading): the CTA's own band
+      // draws that boundary.
+      const eyebrow = blocks[i + 1];
+      const heading = blocks[i + 2];
+      if (!(eyebrow && eyebrow.t === 'p' && eyebrow.md === ctaSpec.eyebrow && heading && heading.t === 'h' &&
+        smart(heading.md) === smart(ctaSpec.heading || ''))) fail(slug, 'a thematic break (---) outside the CTA boundary');
+      continue;
+    }
     if (b.t === 'h' && b.level === 2) {
       const h2 = text(b.md, 'heading');
       sub = null;
@@ -316,7 +339,7 @@ function extract(a) {
   if (!deck || deck.t !== 'p') fail(slug, 'no deck under the H1');
   if (deckFull && deck.text !== smart(deckFull)) fail(slug, 'the deck differs from the one quoted in Part 3');
   if (deckStart && !deck.text.startsWith(smart(deckStart))) fail(slug, 'the deck does not begin as Part 3 says');
-  if (introStart && !(intro[0] && intro[0].text.startsWith(smart(introStart)))) fail(slug, 'the introduction does not begin as Part 3 says');
+  if (introStart && !(intro[0] && plain(intro[0].text).startsWith(smart(introStart)))) fail(slug, 'the introduction does not begin as Part 3 says');
   if (introCount && intro.length !== introCount) fail(slug, `the introduction has ${intro.length} paragraphs; Part 3 says ${introCount}`);
   if (intro.some((b) => b.t !== 'p')) fail(slug, 'the introduction holds more than paragraphs');
 
@@ -338,9 +361,11 @@ function extract(a) {
   if (smart(ctaSpec['button label'] || '') !== cta.button.label) fail(slug, 'CTA button label differs from Part 3');
   if ((ctaSpec.destination || '').replace(ORIGIN, '') !== cta.button.href) fail(slug, 'CTA destination differs from Part 3');
 
-  // A table: named by its caption sentence (moved from the end of the
-  // paragraph before it) or by its section's H2; described by the paragraph
-  // next to it that articles.js names.
+  // A table: named by its caption (a sentence moved from the end of the
+  // paragraph before it, or one Part 3 writes, visible or not) or else by its
+  // section's H2; described by the paragraph next to it that articles.js
+  // names, if any; set for narrow screens as labelled row groups ('stack',
+  // the default) or as a table that scrolls inside its own region ('scroll').
   const listsOf = (s) => [s.blocks].concat(s.blocks.filter((b) => b.t === 'sub').map((q) => q.blocks));
   const tables = [];
   sections.forEach((s) => listsOf(s).forEach((list) => list.forEach((b, i) => {
@@ -352,31 +377,39 @@ function extract(a) {
     const cfg = a.table || fail(slug, 'a table needs its caption or note (articles.js table)');
     const before = list[i - 1];
     const after = list[i + 1];
-    if (cfg.caption) {
+    if (cfg.caption && (cfg.captionFrom || 'paragraph') === 'paragraph') {
       const caption = smart(cfg.caption);
       if (!before || before.t !== 'p' || !before.text.endsWith(' ' + caption)) {
         fail(slug, `the paragraph before the table does not end with "${caption}"`);
       }
       before.text = before.text.slice(0, -caption.length).trim();
       t.caption = caption;
+    } else if (cfg.caption) {
+      if (!parts['3'].includes('`' + cfg.caption + '`')) fail(slug, `Part 3 does not give the caption "${cfg.caption}"`);
+      t.caption = smart(cfg.caption);
     } else {
       t.labelledBy = s.id;
     }
-    const note = [before, after].find((b) => b && b.t === 'p' && plain(b.text).startsWith(smart(cfg.note)));
-    if (!note) fail(slug, `no paragraph next to the table begins "${cfg.note}"`);
-    note.id = 'table-note';
-    t.describedBy = note.id;
+    if (cfg.captionHidden) t.captionHidden = true;
+    if (cfg.narrow === 'scroll') t.narrow = 'scroll';
+    else if (cfg.narrow && cfg.narrow !== 'stack') fail(slug, `table.narrow is 'stack' or 'scroll', not ${cfg.narrow}`);
+    if (cfg.note) {
+      const note = [before, after].find((b) => b && b.t === 'p' && plain(b.text).startsWith(smart(cfg.note)));
+      if (!note) fail(slug, `no paragraph next to the table begins "${cfg.note}"`);
+      note.id = 'table-note';
+      t.describedBy = note.id;
+    }
     const all = [];
     sections.forEach((x) => listsOf(x).forEach((l) => l.forEach((b) => b.t === 'p' && all.push(plain(b.text)))));
-    if (t.caption && all.some((p) => p.includes(t.caption))) fail(slug, 'the caption sentence would be visible twice');
+    if (t.caption && !t.captionHidden && all.some((p) => p.includes(t.caption))) fail(slug, 'the caption sentence would be visible twice');
   }
 
   // The one callout, if the brief asks for one: the final paragraph of its
   // section, beginning as specified.
   if (a.callout) {
-    const s = sections.find((x) => x.h2 === a.callout.section) || fail(slug, `no section "${a.callout.section}"`);
+    const s = sections.find((x) => x.h2 === smart(a.callout.section)) || fail(slug, `no section "${a.callout.section}"`);
     const last = s.blocks[s.blocks.length - 1];
-    if (!last || last.t !== 'p' || !last.text.startsWith('**' + a.callout.startsWith + '**')) {
+    if (!last || last.t !== 'p' || !plain(last.text).startsWith(smart(a.callout.startsWith))) {
       fail(slug, `the final paragraph of "${a.callout.section}" does not begin with ${a.callout.startsWith}`);
     }
     last.role = 'callout';
@@ -391,6 +424,7 @@ function extract(a) {
   };
   const meta = {
     category: a.category,
+    ...(a.type ? { type: a.type } : {}),
     published: a.published,
     publishedLabel: monthOf(a.published, 'published'),
     readTime: a.readTime,
@@ -404,8 +438,9 @@ function extract(a) {
   // wordCount over what the brief counts (articles.js wordCount); never the
   // breadcrumb, metadata line, author block, TOC or CTA.
   const scope = new Set(a.wordCount || ['headline', 'deck', 'body', 'references']);
+  // (A visually hidden caption is an accessible name, not article text.)
   const textOf = (b) => (b.t === 'p' ? [b.text] : b.t === 'sub' ? [b.h3].concat(...b.blocks.map(textOf))
-    : b.t === 'table' ? [b.caption || ''].concat(b.head, ...b.rows) : b.items);
+    : b.t === 'table' ? [b.captionHidden ? '' : b.caption || ''].concat(b.head, ...b.rows) : b.items);
   const sectionText = (s) => [s.h2].concat(...s.blocks.map(textOf));
   const counted = [].concat(
     scope.has('headline') ? [h1.md] : [],
@@ -429,11 +464,9 @@ function extract(a) {
     cta,
     wordCount,
   };
-  const entry = {
-    id: slug, url, h1: page.h1, deck: page.deck,
-    category: meta.category, published: meta.published, publishedLabel: meta.publishedLabel,
-    readTime: meta.readTime, related: a.related || null,
-  };
+  const entry = Object.assign({ id: slug, url, h1: page.h1, deck: page.deck, category: meta.category },
+    meta.type ? { type: meta.type } : {},
+    { published: meta.published, publishedLabel: meta.publishedLabel, readTime: meta.readTime, related: a.related || null });
   return { page, entry, report };
 }
 
@@ -480,7 +513,7 @@ function main() {
     fs.writeFileSync(path.join(ROOT, dataSource(a)), out);
     entries.push(entry);
     console.log(`wrote ${dataSource(a)}: ${page.sections.length} sections, wordCount ${page.wordCount}`);
-    for (const k of report.resolved) console.log(`  link placeholder resolved: ${k}`);
+    for (const r of report.resolved) console.log(`  link placeholder resolved: ${r.placeholder}\n      → ${r.to}`);
     for (const b of report.blockers) blockers.push(Object.assign({ slug: a.slug }, b));
   }
   // Newest first: the order the listing shows.
