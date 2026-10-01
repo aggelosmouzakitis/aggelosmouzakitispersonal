@@ -8,7 +8,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { ORIGIN, PAGES, COPY } = require('./site-meta.js');
+const { ORIGIN, PAGES, COPY, ARTICLE_PAGES } = require('./site-meta.js');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 
@@ -20,8 +20,10 @@ const GROUPS = [
     '/executive-burnout-therapy/', '/career-transition-therapy/', '/anxiety-overthinking/', '/achievement-self-worth/']],
   ['Resources', ['/considering-therapy/', '/therapy-vs-coaching/', '/faq/', '/blog/', '/free-tools/',
     '/work-life-check/', '/free-tools/burned-out/', '/free-tools/quit-your-job/', '/reviews/']],
+  // The articles on the blog, newest first (their own URLs, listed on /blog/).
+  ['Writing', ARTICLE_PAGES.slice().sort((x, y) => Date.parse(y.article.publishedTime) - Date.parse(x.article.publishedTime)).map((p) => p.url)],
   ['About and contact', ['/about/', '/contact/', '/confidentiality/']],
-];
+].filter(([, urls]) => urls.length);
 
 // The tools are not in the canonical copy; their entries describe them plainly.
 const TOOLS = {
@@ -37,8 +39,8 @@ function entry(url) {
   if (TOOLS[url]) return `- [${TOOLS[url][0]}](${ORIGIN}${url}): ${TOOLS[url][1]}`;
   const p = byUrl.get(url);
   const c = copyByUrl.get(url);
-  if (!p || !c) throw new Error(`gen-llms: no page for ${url}`);
-  return `- [${c.navLabel || c.name}](${ORIGIN}${url}): ${p.description}`;
+  if (!p || !(c || p.name)) throw new Error(`gen-llms: no page for ${url}`);
+  return `- [${c ? c.navLabel || c.name : p.name}](${ORIGIN}${url}): ${p.description}`;
 }
 
 const listed = new Set([].concat(...GROUPS.map((g) => g[1])));

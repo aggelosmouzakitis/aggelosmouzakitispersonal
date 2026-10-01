@@ -14,9 +14,30 @@ titles and meta descriptions. It is kept in the repository but never published.
 loaded on every page including the tools). Both are generated: edit the
 document, not them.
 
+## Articles
+Long-form articles live at their own URLs (`/work-anxiety/`) but sit on the
+blog: `/blog/` lists them first under Featured (newest first), their
+breadcrumb is Home › Writing and the header marks Writing as their section.
+Each one's editorial brief is `content/articles/<slug>.md` (Part 2 is the
+article, word for word; Part 3 gives the TOC anchor IDs, author block and
+CTA); `scripts/articles/articles.js` holds what the brief leaves open (the
+release date, the approved image, how its link placeholders resolve).
+`npm run articles` (`scripts/articles/extract-articles.js`) turns them into
+`article-<slug>.jsx` (the page's data) and `site-articles.jsx` (the listing);
+`site-pages.jsx` draws them (`renderArticlePage`). `npm run articles:check`
+proves each published page against its brief, block by block, and lists any
+`[INTERNAL LINK NEEDED]` placeholder still unresolved as a PUBLICATION
+BLOCKER (kept out of the page, but to be resolved before release).
+
+To add one: save the brief as `content/articles/<slug>.md`, add an entry to
+`scripts/articles/articles.js`, then the full pipeline from `npm run articles`
+(with `npm run pages`, and `node scripts/seo/og.js <slug>` for its share card).
+
 ## When to re-run
 - The canonical document changed: replace `content/canonical-copy.md`, then
   the full pipeline from `npm run copy`.
+- An article brief or `scripts/articles/articles.js` changed: the full
+  pipeline from `npm run articles`.
 - A `.jsx` file changed (`site-chrome`, `site-pages`, `lead-capture`,
   `clarity-*`): the full pipeline from `npm run build`.
 - A page title or H1 changed: also regenerate the Open Graph images and llms.txt.
@@ -29,6 +50,7 @@ document, not them.
 
 ## Run — in this order
     npm run copy                      # content/canonical-copy.md → site-copy.jsx, site-nav.jsx
+    npm run articles                  # content/articles/*.md → article-<slug>.jsx, site-articles.jsx
     npm run pages                     # page shells (only when a page is added or the shell changes)
     npm run seo:meta                  # titles, descriptions, canonicals, OG, JSON-LD
     npm run build                     # JSX → JS (before stamping: stamps hash the built files)
@@ -38,8 +60,10 @@ document, not them.
     npm run seo:check                 # gate: builds public/, then checks it (fails on errors)
     npm run qa:routes                 # every canonical and legacy URL, one hop, 404s, internals
     python3 scripts/copy/check-copy.py   # every sentence of the document is on its page, in order
+    npm run articles:check            # every article against its brief; lists publication blockers
 
     npm run seo:og                    # Open Graph images, only when a page title/H1 changed
+    node scripts/seo/og.js <og key>   # only the named pages' images (a new article's)
     npm run seo:llms                  # llms.txt, when a page is added or a description changed
 
 `scripts/gen-site-pages.js` (`npm run pages`) rewrites every shell and empties

@@ -22,6 +22,7 @@ const OWNED = [
   /[ \t]*<meta\s+name=["']robots["'][^>]*>\r?\n?/gi,
   /[ \t]*<link\s+rel=["']canonical["'][^>]*>\r?\n?/gi,
   /[ \t]*<meta\s+property=["']og:[^"']*["'][^>]*>\r?\n?/gi,
+  /[ \t]*<meta\s+property=["']article:[^"']*["'][^>]*>\r?\n?/gi,
   /[ \t]*<meta\s+name=["']twitter:[^"']*["'][^>]*>\r?\n?/gi,
   /[ \t]*<link\s+rel=["']alternate["'][^>]*hreflang=[^>]*>\r?\n?/gi,
   /[ \t]*<script\s+type=["']application\/ld\+json["'][\s\S]*?<\/script>\r?\n?/gi,
@@ -48,6 +49,12 @@ function headBlock(p) {
   L.push(`<meta property="og:image:width" content="1200">`);
   L.push(`<meta property="og:image:height" content="630">`);
   L.push(`<meta property="og:image:alt" content="${esc(p.ogImageAlt || p.ogTitle || p.title)}">`);
+  // Articles (og:type article): their release, revision and section.
+  if (p.article) {
+    L.push(`<meta property="article:published_time" content="${esc(p.article.publishedTime)}">`);
+    if (p.article.modifiedTime) L.push(`<meta property="article:modified_time" content="${esc(p.article.modifiedTime)}">`);
+    L.push(`<meta property="article:section" content="${esc(p.article.section)}">`);
+  }
   L.push(`<meta name="twitter:card" content="summary_large_image">`);
   L.push(`<meta name="twitter:title" content="${esc(p.ogTitle || p.title)}">`);
   L.push(`<meta name="twitter:description" content="${esc(p.ogDescription || p.description)}">`);

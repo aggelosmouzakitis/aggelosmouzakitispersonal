@@ -25,7 +25,8 @@ diff <(curl -s "$SITE/" | grep -o 'site-[a-z]*\.js?v=[0-9a-f]*' | sort) \
 ## 2. Every route, one command
 
 The same table the local gate uses (`scripts/seo/routes.js`), requested from
-production: the 25 canonical pages and 3 tools (200, bare form one hop to the
+production: the 25 canonical pages, 3 tools and the articles in
+`scripts/articles/articles.js` (200, bare form one hop to the
 slash), every legacy URL (301 in one hop to a 200, or 410), the 28 old essays,
 `/ask-me-anything/el` (200), real 404s for URLs that never existed, and every
 repository internal (404).
@@ -51,7 +52,7 @@ done
 
 ```bash
 curl -s "$SITE/robots.txt" | grep -i '^sitemap'                 # the sitemap URL
-curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 28
+curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 29 (28 + 1 article)
 curl -sI "$SITE/llms.txt" | head -1                              # 200
 
 # every sitemap URL must be 200 and self-canonical
@@ -152,7 +153,7 @@ open "https://www.bing.com/webmasters"
 
 # IndexNow: confirm the key file is live BEFORE submitting
 curl -s "$SITE/f4a06bec48967c20f68efb4d562c6b71.txt"   # must print the key, nothing else
-npm run seo:indexnow                                    # the 28 sitemap URLs
+npm run seo:indexnow                                    # every sitemap URL (29)
 
 # the retired URLs too, so they get re-crawled and dropped
 node scripts/seo/indexnow.js $(node -e "const {LEGACY}=require('./scripts/seo/routes.js');console.log(LEGACY.filter((r)=>r[1]===301||r[1]===410).map((r)=>r[0]).join(' '))")
@@ -162,7 +163,9 @@ node scripts/seo/indexnow.js $(node -e "const {LEGACY}=require('./scripts/seo/ro
 
 - Rich Results Test — <https://search.google.com/test/rich-results> — `/`,
   `/individual-psychotherapy/`, `/therapy-vs-coaching/`, `/about/`,
-  `/free-tools/burned-out/`, `/work-life-check/`.
+  `/free-tools/burned-out/`, `/work-life-check/`, and each article
+  (`/work-anxiety/`): one valid `BlogPosting` with the visible date, no
+  `FAQPage`.
 - Schema Markup Validator — <https://validator.schema.org/> — same URLs. One
   `Person` with `@id` ending `/#person`; no `Service` on `/therapy-vs-coaching/`.
 - PageSpeed Insights — <https://pagespeed.web.dev/> — `/`,

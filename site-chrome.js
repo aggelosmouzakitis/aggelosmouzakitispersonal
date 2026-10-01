@@ -105,7 +105,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .hdr__panel[hidden],.mmenu[hidden],.mmenu__links[hidden]{display:none}
 .hdr__panel a{display:block;padding:12px 20px;font-size:16px;font-weight:500;line-height:1.35;color:var(--heading)}
 .hdr__panel a:hover{background:rgba(4,120,87,0.07);color:var(--green)}
-.hdr__panel a[aria-current="page"]{color:var(--green);font-weight:600}
+.hdr__panel a[aria-current="page"],.hdr__panel a[aria-current="true"]{color:var(--green);font-weight:600}
 .hdr__sep{height:1px;margin:8px 20px;background:rgba(23,25,25,0.16)}
 .hdr__cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;background:transparent;border:1px solid rgba(243,240,232,0.7);color:var(--bone);font-size:13.5px;font-weight:700;line-height:1;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;transition:background 180ms,color 180ms,border-color 180ms}
 .hdr__cta:hover{background:var(--bone);color:var(--forest);border-color:var(--bone)}
@@ -121,7 +121,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .mmenu__sign{font-size:22px;font-weight:400;color:var(--green)}
 .mmenu__links{padding:0 0 12px}
 .mmenu__links a{display:flex;align-items:center;min-height:46px;font-size:17px;font-weight:500;color:var(--heading)}
-.mmenu__links a[aria-current="page"]{color:var(--green);font-weight:600}
+.mmenu__links a[aria-current="page"],.mmenu__links a[aria-current="true"]{color:var(--green);font-weight:600}
 .mmenu__sep{height:1px;margin:6px 0;background:rgba(23,25,25,0.12)}
 .mmenu__link{display:flex;align-items:center;min-height:56px;border-bottom:1px solid rgba(23,25,25,0.14);font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--heading)}
 .mmenu__cta{display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;margin-top:20px;background:var(--green);color:var(--bone);font-size:15px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase}
@@ -201,7 +201,12 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
   // focus to the button, as do a click outside and focus leaving the nav.
   // Below 1080px one Menu button opens a bone panel: Services and Resources as
   // accordions, then Home, About, FAQ and the filled call to action.
-  function SiteHeader() {
+  // `section` names the section a page sits in without being its page: an
+  // article at its own URL sits on the blog (/blog/), so its group reads as
+  // current and its link carries aria-current="true".
+  function SiteHeader({
+    section
+  }) {
     const nav = NAV_DATA.nav;
     const cur = currentPath();
     const [open, setOpen] = useState(null);
@@ -233,7 +238,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
       };
     }, [open, menu]);
     const isCur = href => href === cur;
-    const groupCur = g => (g.items || []).some(l => isCur(l.href));
+    const inSection = href => !!section && href === section && !isCur(href);
+    const ariaCur = href => isCur(href) ? 'page' : inSection(href) ? 'true' : undefined;
+    const groupCur = g => (g.items || []).some(l => isCur(l.href) || inSection(l.href));
     const onNavBlur = ev => {
       if (open && !ev.currentTarget.contains(ev.relatedTarget)) setOpen(null);
     };
@@ -244,7 +251,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
     }) : ce('a', {
       key: l.href,
       href: l.href,
-      'aria-current': isCur(l.href) ? 'page' : undefined,
+      'aria-current': ariaCur(l.href),
       onClick: onPick
     }, l.label));
     const desktop = ce('nav', {

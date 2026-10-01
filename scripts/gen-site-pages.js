@@ -1,8 +1,11 @@
-// gen-site-pages.js — write the HTML shell of every canonical page.
+// gen-site-pages.js — write the HTML shell of every canonical page and article.
 //
-// One shell per page in site-copy.jsx (the canonical copy): the shared
-// <head> preamble (analytics, fonts, icons, base CSS), an empty #root and the
-// bundles that render it. Everything else is filled in by the steps after it:
+// One shell per page in site-copy.jsx (the canonical copy) and per article in
+// scripts/articles/articles.js: the shared <head> preamble (analytics, fonts,
+// icons, base CSS), an empty #root and the bundles that render it. An article
+// loads its own data (article-<slug>.js) instead of the canonical copy; /blog/
+// also loads the article listing (site-articles.js). Everything else is filled
+// in by the steps after it:
 //
 //   node scripts/gen-site-pages.js       # this: shells
 //   node scripts/seo/apply-metadata.js   # <head> metadata from site-meta.js
@@ -17,6 +20,7 @@
 const fs = require('fs');
 const path = require('path');
 const { FONT_HEAD } = require('./fonts.js');
+const { ARTICLES, dataBundle, INDEX_BUNDLE } = require('./articles/articles.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const GA = 'G-KV83RRF6ZM';
@@ -59,12 +63,26 @@ function fileFor(url) {
   return url === '/' ? 'index.html' : url.replace(/^\//, '') + 'index.html';
 }
 
-function shell(p) {
+const script = (src) => `\n<script src="/${src}"></script>`;
+
+// A canonical page: the canonical copy, rendered by renderSitePage.
+function canonicalShell(p) {
   const isHome = p.id === 'home';
   const isContact = p.id === 'contact';
-  const preload = isHome ? '\n<link rel="preload" as="image" href="/img/aggelos-home.webp" fetchpriority="high">' : '';
-  const emailjs = isContact ? '\n<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>' : '';
-  const lead = isContact ? '\n<script src="/lead-capture.js"></script>' : '';
+  return shell({
+    preload: isHome ? '\n<link rel="preload" as="image" href="/img/aggelos-home.webp" fetchpriority="high">' : '',
+    emailjs: isContact ? '\n<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>' : '',
+    data: script('site-copy.js') + (isContact ? script('lead-capture.js') : '') + (p.id === 'blog' ? script(INDEX_BUNDLE) : ''),
+    render: `renderSitePage(${JSON.stringify(p.id)});`,
+  });
+}
+
+// An article: its own data instead of the canonical copy.
+function articleShell(a) {
+  return shell({ preload: '', emailjs: '', data: script(dataBundle(a)), render: `renderArticlePage(${JSON.stringify(a.slug)});` });
+}
+
+function shell({ preload, emailjs, data, render }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,22 +112,23 @@ ${FONT_HEAD}
 <script src="/react.production.min.js" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js" crossorigin="anonymous"></script>${emailjs}
 <script src="/site-nav.js"></script>
-<script src="/site-chrome.js"></script>
-<script src="/site-copy.js"></script>${lead}
+<script src="/site-chrome.js"></script>${data}
 <script src="/site-pages.js"></script>
-<script>renderSitePage(${JSON.stringify(p.id)});</script>
+<script>${render}</script>
 </body>
 </html>
 `;
 }
 
 let n = 0;
-for (const p of PAGES) {
-  const rel = fileFor(p.url);
+const write = (url, html) => {
+  const rel = fileFor(url);
   const out = path.join(ROOT, rel);
   fs.mkdirSync(path.dirname(out), { recursive: true });
-  fs.writeFileSync(out, shell(p));
+  fs.writeFileSync(out, html);
   n++;
   console.log(`  ${rel}`);
-}
+};
+for (const p of PAGES) write(p.url, canonicalShell(p));
+for (const a of ARTICLES) write('/' + a.slug + '/', articleShell(a));
 console.log(`gen-site-pages: ${n} shells written`);

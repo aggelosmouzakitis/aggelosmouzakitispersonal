@@ -5,10 +5,10 @@
 // publishes public/ (netlify.toml [build] publish), and this script fills it
 // from an allowlist, so nothing outside the lists below can be requested:
 //   pages  every page in scripts/seo/site-meta.js (the 25 canonical pages,
-//          the Work & Life Check and the two free tools), plus EXTRA_PAGES — served on purpose, but
-//          outside the sitemap;
+//          the Work & Life Check, the two free tools and the articles), plus
+//          EXTRA_PAGES — served on purpose, but outside the sitemap;
 //   FILES  the root files browsers and crawlers ask for, and the bundles the
-//          pages load;
+//          pages load (each article's own data bundle comes from site-meta.js);
 //   DIRS   img/ (image files only) and archive/, copied whole, exactly as
 //          scripts/archive/build.js writes it (private, noindex).
 // Then every local src/href in the published pages must be a published file
@@ -43,8 +43,8 @@ const FILES = [
   'f4a06bec48967c20f68efb4d562c6b71.txt', // IndexNow key (scripts/seo/indexnow.js)
   'react.production.min.js', 'react-dom.production.min.js',
   'site-nav.js', 'site-chrome.js', 'site-copy.js', 'site-pages.js', 'lead-capture.js',
-  'clarity-data.js', 'clarity-tools.js', 'work-life-check.js',
-];
+  'clarity-data.js', 'clarity-tools.js', 'work-life-check.js', 'site-articles.js',
+].concat(...PAGES.map((p) => p.bundles || []));
 
 // [directory, which files] — a README dropped into img/ is not an asset.
 const DIRS = [

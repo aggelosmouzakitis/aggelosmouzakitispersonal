@@ -2,8 +2,10 @@
 //
 // The 25 canonical pages take their title and meta description verbatim from
 // the canonical copy (site-copy.jsx, generated from content/canonical-copy.md),
-// so metadata cannot drift from the copy. Open Graph reuses them;
-// the OG image shows the page's eyebrow and H1 (scripts/seo/og.js).
+// and each article from its brief (article-<slug>.jsx, generated from
+// content/articles/<slug>.md), so metadata cannot drift from the copy. Open
+// Graph reuses them; the OG image shows the page's eyebrow (an article's
+// category) and H1 (scripts/seo/og.js).
 // `scripts/seo/apply-metadata.js` writes all of this into each page's <head>;
 // `scripts/seo/seo-check.js` verifies the result; `scripts/gen-sitemap.js`
 // builds sitemap.xml from the same table.
@@ -20,6 +22,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const ARTICLE_REGISTRY = require('../articles/articles.js');
 
 const ORIGIN = 'https://aggelosmouzakitis.com';
 const PERSON_ID = ORIGIN + '/#person';
@@ -215,6 +218,55 @@ function canonicalPage([id, priority, changefreq, crumb]) {
   return entry;
 }
 
+// ─── Articles ────────────────────────────────────────────────────────────────
+// Each article in scripts/articles/articles.js, at its own URL, with the title
+// tag, meta description and H1 of its brief (article-<slug>.jsx, generated
+// from it). Structured data: one BlogPosting with only what the page shows —
+// headline, description, the author linked to /about/, the site's Person as
+// publisher, the release date, en-GB, its section, the approved author image
+// it shows and its word count — plus the breadcrumb the page shows
+// (Home › Writing › the article). No FAQPage: the FAQ stays visible only.
+function articlePage(a) {
+  const art = ARTICLE_REGISTRY.loadArticle(a);
+  const url = abs(art.url);
+  const posting = {
+    '@type': 'BlogPosting', '@id': url + '#article', url, mainEntityOfPage: url,
+    headline: art.h1, description: art.description,
+    author: { '@type': 'Person', name: art.author.name, url: abs(art.author.href) },
+    publisher: { '@id': PERSON_ID },
+    datePublished: art.meta.published,
+  };
+  if (art.meta.modified) posting.dateModified = art.meta.modified;
+  Object.assign(posting, {
+    inLanguage: 'en-GB', articleSection: art.meta.category,
+    image: abs(art.author.image), wordCount: art.wordCount,
+  });
+  const breadcrumb = {
+    '@type': 'BreadcrumbList', '@id': url + '#breadcrumb', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: ORIGIN + '/' },
+      { '@type': 'ListItem', position: 2, name: COPY.blog.navLabel, item: abs(COPY.blog.url) },
+      { '@type': 'ListItem', position: 3, name: art.h1, item: url },
+    ],
+  };
+  return {
+    file: ARTICLE_REGISTRY.pageFile(a), url: art.url, priority: '0.7', changefreq: 'monthly',
+    name: art.h1,
+    title: art.title,
+    description: art.description,
+    ogType: 'article',
+    article: { publishedTime: art.meta.published, modifiedTime: art.meta.modified || null, section: art.meta.category },
+    ogTitle: art.title,
+    ogDescription: art.description,
+    ogImage: abs('/img/og/v2/' + a.slug + '.png'),
+    ogImageAlt: art.h1,
+    og: { key: a.slug, label: art.meta.category, title: art.h1 },
+    sources: [ARTICLE_REGISTRY.dataSource(a), a.brief, 'site-pages.jsx', 'site-chrome.jsx'],
+    bundles: [ARTICLE_REGISTRY.dataBundle(a)],
+    schema: [posting, breadcrumb, PERSON_REF],
+  };
+}
+const ARTICLE_PAGES = ARTICLE_REGISTRY.ARTICLES.map(articlePage);
+
 const WLC_DESCRIPTION = 'A free 4-minute reflection for people whose work is affecting recovery, decisions, relationships or how they feel about themselves.';
 
 const PAGES = CANONICAL.map(canonicalPage).concat([
@@ -258,6 +310,6 @@ const PAGES = CANONICAL.map(canonicalPage).concat([
     schema: toolNodes('/free-tools/quit-your-job/', "What's making you want to quit your job?",
       'A 20-question self-assessment that distinguishes the role, the manager, the company, the field and burnout as reasons for wanting to leave a job. Directional, not a clinical assessment.'),
   },
-]);
+]).concat(ARTICLE_PAGES);
 
-module.exports = { ORIGIN, SITE_NAME, PERSON_ID, WEBSITE_ID, OG_DEFAULT, PAGES, COPY, TOOL_LIST };
+module.exports = { ORIGIN, SITE_NAME, PERSON_ID, WEBSITE_ID, OG_DEFAULT, PAGES, COPY, TOOL_LIST, ARTICLE_PAGES };

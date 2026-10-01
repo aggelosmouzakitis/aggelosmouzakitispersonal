@@ -1,4 +1,5 @@
-// site-pages.jsx — renders the 25 canonical pages from the canonical copy.
+// site-pages.jsx — renders the 25 canonical pages from the canonical copy, and
+// the articles (renderArticlePage, from article-<slug>.js; see "Articles").
 //
 // Loaded after site-nav.js, site-chrome.js and site-copy.js. Each page shell
 // calls renderSitePage("<id>"); scripts/seo/prerender.js snapshots the result
@@ -46,6 +47,46 @@
       if (links[m[1]]) return e('a', { key: i, className: 'inl', href: links[m[1]] }, m[1]);
       return e('strong', { key: i }, m[1]);
     });
+  }
+
+  // The articles' inline Markdown: **bold**, *italic* and [text](href), as
+  // scripts/articles/extract-articles.js leaves them in the strings.
+  function inlineMd(text) {
+    const out = [];
+    let buf = '';
+    let i = 0;
+    const flush = () => { if (buf) { out.push(buf); buf = ''; } };
+    while (i < text.length) {
+      const c = text[i];
+      if (c === '*') {
+        const strong = text[i + 1] === '*';
+        const open = strong ? 2 : 1;
+        const j = text.indexOf(strong ? '**' : '*', i + open);
+        if (j > i + open) {
+          flush();
+          out.push(e(strong ? 'strong' : 'em', { key: out.length }, inlineMd(text.slice(i + open, j))));
+          i = j + open;
+          continue;
+        }
+      } else if (c === '[') {
+        const mid = text.indexOf('](', i + 1);
+        let j = mid + 2;
+        for (let depth = 0; mid > i && j < text.length; j++) {
+          if (text[j] === '(') depth++;
+          else if (text[j] === ')') { if (!depth) break; depth--; }
+        }
+        if (mid > i && j < text.length) {
+          flush();
+          out.push(e('a', { key: out.length, className: 'art-a', href: text.slice(mid + 2, j) }, inlineMd(text.slice(i + 1, mid))));
+          i = j + 1;
+          continue;
+        }
+      }
+      buf += c;
+      i++;
+    }
+    flush();
+    return out;
   }
 
   // ── Actions ────────────────────────────────────────────────────────────────
@@ -664,8 +705,26 @@
   }
 
   // ── Writing ────────────────────────────────────────────────────────────────
+  // The published articles (site-articles.js, newest first) open Featured:
+  // they live at their own URLs but sit on the blog. The essays from the
+  // canonical copy follow; their Read links stay withheld until they return.
+  function ArticleEntry({ a }) {
+    return e('article', { className: 'essay essay--live' },
+      e(ArticleMeta, { meta: a, className: 'essay__meta' }),
+      e('h3', { className: 'h3' }, e('a', { className: 'essay__link', href: a.url }, a.h1)),
+      e('div', { className: 'flow' },
+        e('p', { className: 'p' }, inlineMd(a.deck)),
+        // "Read" is the listing's own link wording; the title completes its
+        // name for anyone moving from link to link.
+        e('div', { className: 'links' },
+          e('a', { className: 'tlink', href: a.url },
+            e('span', null, 'Read', e('span', { className: 'sp-vh' }, ': ' + a.h1)), e(Arrow))),
+        a.related ? e('p', { className: 'related' }, 'Related: ', e(TLink, { item: a.related })) : null));
+  }
+
   function WritingPage({ p }) {
     const ctx = { id: p.id };
+    const live = window.SITE_ARTICLES || [];
     return e(React.Fragment, null, e(Hero, { p, ctx }), p.sections.map((s, i, all) => {
       if (isClose(s, i, all)) return e(Close, { key: s.id, s, ctx });
       const subs = s.blocks.filter((b) => b.t === 'sub');
@@ -674,9 +733,11 @@
           e('section', { className: 'sec', id: s.id, 'aria-labelledby': s.id + '-h' },
             e('div', { className: 'read' },
               e('h2', { className: 'h2', id: s.id + '-h' }, s.h2),
-              e('div', { className: 'essays' }, subs.map((sub) => e('article', { key: sub.h3, className: 'essay' },
-                e('h3', { className: 'h3' }, sub.h3),
-                e('div', { className: 'flow' }, e(Blocks, { blocks: sub.blocks, ctx }))))))),
+              e('div', { className: 'essays' },
+                live.map((a) => e(ArticleEntry, { key: a.id, a })),
+                subs.map((sub) => e('article', { key: sub.h3, className: 'essay' },
+                  e('h3', { className: 'h3' }, sub.h3),
+                  e('div', { className: 'flow' }, e(Blocks, { blocks: sub.blocks, ctx }))))))),
           wlcAfter(p.id, s.id));
       }
       if (subs.length && subs.length === s.blocks.length) {
@@ -918,6 +979,128 @@
           others.map((s) => e(ReadSection, { key: s.id, s, ctx })))));
   }
 
+  // ── Articles ───────────────────────────────────────────────────────────────
+  // A long-form article (window.SITE_ARTICLE_PAGES[slug], generated from its
+  // brief by scripts/articles/extract-articles.js) on the site's reading axis:
+  // breadcrumb to Writing, metadata line, the one H1, the deck, the author
+  // strip, the TOC, the introduction, then each section under the H2 id its
+  // brief gives (the TOC targets). Words, links and emphasis come verbatim
+  // from the data; this only sets them. The commercial close follows the
+  // article, outside it, as the one booking action on the page.
+  function ArticleMeta({ meta, className }) {
+    return e('p', { className: className || 'art-meta' },
+      e('span', { className: 'art-meta__cat' }, meta.category), ' · ',
+      e('time', { dateTime: meta.published }, meta.publishedLabel), ' · ',
+      meta.readTime,
+      meta.modified ? e(React.Fragment, null, ' · Updated ', e('time', { dateTime: meta.modified }, meta.modifiedLabel)) : null);
+  }
+
+  // The header's wording for a link, so the breadcrumb says what the menu says.
+  function navLabel(href, fallback) {
+    const nav = (window.SITE_NAV && window.SITE_NAV.nav) || { items: [] };
+    for (const it of nav.items) for (const l of [it].concat(it.items || [])) if (l.href === href && l.label) return l.label;
+    return fallback;
+  }
+
+  function AuthorStrip({ a }) {
+    return e('div', { className: 'art-author' },
+      e('span', { className: 'art-author__fig' },
+        e('img', { src: a.image, alt: a.alt, width: a.width, height: a.height, decoding: 'async' })),
+      e('div', { className: 'art-author__text' },
+        e('p', { className: 'art-author__name' }, e('a', { href: a.href, rel: 'author' }, a.name)),
+        e('p', { className: 'art-author__line' }, a.credential),
+        e('p', { className: 'art-author__line art-author__line--bg' }, a.background)));
+  }
+
+  // In normal document flow; plain anchors, so it works before JavaScript and
+  // scrolls as the reader's motion preference allows (base CSS).
+  function ArticleToc({ toc }) {
+    return e('nav', { className: 'art-toc', 'aria-labelledby': 'art-toc-label' },
+      e('p', { className: 'art-toc__label', id: 'art-toc-label' }, toc.label),
+      e('ol', { className: 'art-toc__list' }, toc.items.map((it) => e('li', { key: it.id },
+        e('a', { href: '#' + it.id }, it.label)))));
+  }
+
+  const plainMd = (t) => t.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/\*\*?([^*]+)\*\*?/g, '$1');
+
+  // A real table with header cells both ways. Below 640px the rows become
+  // labelled groups: the explicit roles keep the table semantics that some
+  // browsers drop once the display changes, and each cell shows its column
+  // label (data-label, drawn by CSS and not read twice).
+  function ArticleTable({ t }) {
+    return e('table', { className: 'art-table', role: 'table', 'aria-describedby': t.describedBy },
+      e('caption', null, inlineMd(t.caption)),
+      e('colgroup', null, t.head.map((h, i) => e('col', { key: i, className: i ? 'art-table__ev' : 'art-table__key' }))),
+      e('thead', { role: 'rowgroup' }, e('tr', { role: 'row' },
+        t.head.map((h, i) => e('th', { key: i, scope: 'col', role: 'columnheader' }, inlineMd(h))))),
+      e('tbody', { role: 'rowgroup' }, t.rows.map((r, i) => e('tr', { key: i, role: 'row' }, r.map((c, j) => (j
+        ? e('td', { key: j, role: 'cell', 'data-label': plainMd(t.head[j]) }, inlineMd(c))
+        : e('th', { key: j, scope: 'row', role: 'rowheader', 'data-label': plainMd(t.head[0]) }, inlineMd(c))))))));
+  }
+
+  function ArticleBlocks({ blocks }) {
+    return blocks.map((b, i) => {
+      switch (b.t) {
+        case 'p':
+          if (b.role === 'callout') return e('div', { key: i, className: 'art-callout' }, e('p', { className: 'p' }, inlineMd(b.text)));
+          return e('p', { key: i, className: 'p', id: b.id }, inlineMd(b.text));
+        case 'ul':
+          return e('ul', { key: i, className: 'art-list' }, b.items.map((it, j) => e('li', { key: j }, inlineMd(it))));
+        case 'ol':
+          return e('ol', { key: i, className: 'art-refs' }, b.items.map((it, j) => e('li', { key: j }, inlineMd(it))));
+        case 'table':
+          return e(ArticleTable, { key: i, t: b });
+        case 'sub':
+          return e('div', { key: i, className: 'art-sub' },
+            e('h3', { className: 'h3' }, b.h3),
+            e('div', { className: 'flow' }, e(ArticleBlocks, { blocks: b.blocks })));
+        default:
+          return null;
+      }
+    });
+  }
+
+  function ArticlePage({ a }) {
+    return e(React.Fragment, null,
+      e('article', { className: 'art', 'aria-labelledby': 'page-title' },
+        e('header', { className: 'read art-head' },
+          e('nav', { className: 'art-crumbs', 'aria-label': 'Breadcrumb' },
+            e('ol', null, e('li', null, e('a', { href: '/blog/' }, navLabel('/blog/', 'Writing'))))),
+          e(ArticleMeta, { meta: a.meta }),
+          e('h1', { className: 'h1 art-h1' + (a.h1.length > 60 ? ' h1--long' : ''), id: 'page-title' }, a.h1),
+          e('p', { className: 'lead art-deck' }, inlineMd(a.deck)),
+          e(AuthorStrip, { a: a.author }),
+          e(ArticleToc, { toc: a.toc })),
+        e('div', { className: 'read art-body' },
+          e('div', { className: 'flow' }, e(ArticleBlocks, { blocks: a.intro })),
+          a.sections.map((s) => e('section', { key: s.id, className: 'art-sec' + (s.kind ? ' art-sec--' + s.kind : '') },
+            e('h2', { className: 'h2', id: s.id }, s.h2),
+            e('div', { className: 'flow' }, e(ArticleBlocks, { blocks: s.blocks })))))),
+      // The site's close, carrying the article's own call to action.
+      e('section', { className: 'band close on-dark art-cta', 'aria-labelledby': a.cta.id },
+        e('div', { className: 'read close__in' },
+          e('p', { className: 'close__label' }, a.cta.eyebrow),
+          e('h2', { className: 'close__text art-cta__h', id: a.cta.id }, a.cta.h2),
+          e('p', { className: 'close__text close__text--long art-cta__p' }, a.cta.text),
+          e('div', { className: 'close__actions' }, e(Btn, { item: a.cta.button })))));
+  }
+
+  function ArticleSite({ id }) {
+    const a = (window.SITE_ARTICLE_PAGES || {})[id];
+    if (!a) return null;
+    return e(React.Fragment, null,
+      e(window.ChromeStyles),
+      e('style', { dangerouslySetInnerHTML: { __html: CSS + ARTICLE_CSS } }),
+      // An article sits on the blog: the header marks Writing as its section.
+      e(window.SiteHeader, { section: '/blog/' }),
+      e('main', { id: 'main', tabIndex: -1, className: 'pg fam-article pg--' + id }, e(ArticlePage, { a })),
+      e(window.SiteFooterX));
+  }
+
+  function renderArticlePage(id) {
+    ReactDOM.createRoot(document.getElementById('root')).render(e(ArticleSite, { id }));
+  }
+
   // ── Router ─────────────────────────────────────────────────────────────────
   const PAGES = {
     home: HomePage,
@@ -1146,6 +1329,11 @@
 .essays{border-bottom:1px solid var(--rule)}
 .essay{padding:28px 0;border-top:1px solid var(--rule)}
 .essay .h3{margin-bottom:10px}
+.essay__meta{margin:0 0 10px;font-size:15px;line-height:1.5;color:var(--meta)}
+.essay__meta .art-meta__cat{font-weight:700;color:var(--heading)}
+.essay__link{color:var(--heading);text-decoration:underline;text-decoration-thickness:1.5px;text-decoration-color:transparent;text-underline-offset:.16em;transition:color 180ms,text-decoration-color 180ms}
+.essay__link:hover{color:var(--green);text-decoration-color:currentColor}
+.essay .flow>.links+.related{margin-top:4px}
 
 /* Contact */
 .contact{padding-block:clamp(48px,6vw,88px) var(--sec)}
@@ -1212,6 +1400,98 @@
 @media (max-width:599px){.btn{white-space:normal;text-align:center}}
 `;
 
+  // Articles only (ArticleSite adds it after CSS): the long-form reading
+  // column on the 760 axis, body measure 36em.
+  const ARTICLE_CSS = `
+.art-head{padding-top:clamp(48px,5.5vw,80px)}
+.art-crumbs ol{display:flex;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+.art-crumbs a{display:inline-flex;align-items:center;min-height:44px;margin-block:-12px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.art-crumbs a:hover{color:var(--green-pressed);text-decoration:underline;text-underline-offset:4px}
+.art-meta{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--meta)}
+.art-meta__cat{font-weight:700;color:var(--heading)}
+.art-h1{margin-top:20px}
+.art-deck{max-width:34em}
+
+/* Author strip: compact, one line of image and three of text */
+.art-author{display:flex;align-items:center;gap:16px;margin-top:32px;padding-block:16px;border-block:1px solid var(--rule)}
+.art-author__fig{position:relative;flex:0 0 auto;width:60px;height:60px;border-radius:50%;overflow:hidden;background:var(--forest)}
+.art-author__fig img{position:absolute;left:50%;top:0;width:160%;max-width:none;height:auto;transform:translate(-48%,-9%)}
+.art-author__text{min-width:0}
+.art-author p{margin:0}
+.art-author__name{font-size:16.5px;font-weight:650;line-height:1.35;color:var(--heading)}
+.art-author__name a{border-bottom:1.5px solid rgba(4,120,87,.45);transition:color 180ms,border-color 180ms}
+.art-author__name a:hover{color:var(--green);border-bottom-color:currentColor}
+.art-author__line{margin-top:3px;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.art-author__line--bg{color:var(--meta)}
+@media (max-width:559px){.art-author{align-items:flex-start}}
+
+/* On this page: in the flow, numbered like the site's rows */
+.art-toc{margin-top:40px}
+.art-toc__label{margin:0 0 12px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
+.art-toc__list{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule-2);counter-reset:toc}
+.art-toc__list li{counter-increment:toc;border-bottom:1px solid var(--rule)}
+.art-toc__list a{display:flex;align-items:baseline;gap:14px;min-height:44px;padding:10px 0;font-size:16.5px;font-weight:550;line-height:1.4;color:var(--heading);transition:color 180ms}
+.art-toc__list a::before{content:counter(toc,decimal-leading-zero);content:counter(toc,decimal-leading-zero) / "";flex:0 0 26px;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--green);font-variant-numeric:tabular-nums}
+.art-toc__list a:hover{color:var(--green)}
+
+/* Body. The site header is not sticky: a target heading only needs air. */
+.art-body{padding-top:clamp(48px,5vw,64px)}
+.art h2[id],.art-cta h2[id]{scroll-margin-top:24px}
+.art-sec{padding-top:clamp(56px,6vw,80px)}
+.art .h2{margin-bottom:22px;font-size:clamp(28px,calc(24px + 1vw),36px)}
+.art .p{font-size:clamp(17px,calc(16px + .2vw),18.5px);line-height:1.72}
+.art .p strong{font-weight:650}
+.flow>.art-sub{margin-top:clamp(36px,4vw,48px)}
+.art-a{color:var(--green);text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:rgba(4,120,87,.55);text-underline-offset:.2em;transition:color 180ms,text-decoration-color 180ms}
+.art-a:hover{color:var(--green-pressed);text-decoration-color:currentColor;text-decoration-thickness:2px}
+.art-list{margin:0;padding-left:1.25em}
+.art-list li{padding-left:.35em;font-size:clamp(17px,calc(16px + .2vw),18.5px);line-height:1.68;color:var(--body);text-wrap:pretty}
+.art-list li+li{margin-top:12px}
+.art-list li::marker{color:var(--green)}
+.art-list strong{font-weight:650;color:var(--heading)}
+.flow>.art-list,.flow>.art-table,.flow>.art-callout{margin-top:24px}
+.flow>.art-list+*,.flow>.art-table+*,.flow>.art-callout+*{margin-top:24px}
+
+/* Comparison table: the first column narrower than the two evidence columns */
+.art-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15.5px;line-height:1.55;color:var(--body)}
+.art-table caption{caption-side:top;margin:0 0 14px;text-align:left;font-size:17px;font-weight:600;line-height:1.45;color:var(--heading)}
+.art-table__key{width:24%}
+.art-table thead th{padding:0 16px 12px 0;border-bottom:2px solid var(--heading);text-align:left;vertical-align:bottom;font-family:var(--font-heading);font-size:15px;font-weight:700;line-height:1.3;color:var(--heading)}
+.art-table tbody th,.art-table td{padding:14px 18px 16px 0;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.art-table tbody th{font-weight:650;line-height:1.4;color:var(--heading)}
+.art-table tr>:last-child{padding-right:0}
+@media (max-width:640px){
+  .art-table,.art-table tbody,.art-table tr,.art-table th,.art-table td{display:block;width:auto}
+  .art-table caption{display:block}
+  .art-table colgroup{display:none}
+  .art-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .art-table tbody tr{padding:16px 0 20px;border-top:2px solid var(--heading)}
+  .art-table tbody th,.art-table td{padding:0;border:0}
+  .art-table tbody th{font-family:var(--font-heading);font-size:18px;font-weight:700}
+  .art-table td{margin-top:14px}
+  .art-table [data-label]::before{content:attr(data-label);content:attr(data-label) / "";display:block;margin-bottom:4px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.35;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
+}
+
+/* The one safety callout: restrained, the paragraph and its links intact */
+.art-callout{padding:20px 22px;background:var(--bone-deep);border-left:3px solid var(--heading)}
+
+/* Questions, answered in full: no accordion */
+.art-sec--faq .flow>.art-sub{margin-top:0;padding:24px 0 26px;border-top:1px solid var(--rule)}
+.art-sec--faq .flow>.art-sub:last-child{border-bottom:1px solid var(--rule)}
+.art-sec--faq .h3{margin-bottom:10px;font-size:clamp(19px,calc(18px + .25vw),21px)}
+
+/* References: the editorial list, smaller, hanging numbers */
+.art-refs{margin:0;padding-left:1.7em;font-size:15.5px;line-height:1.6;color:var(--ink-2)}
+.art-refs li{padding-left:.4em;overflow-wrap:break-word}
+.art-refs li+li{margin-top:10px}
+.art-refs li::marker{font-weight:600;color:var(--meta);font-variant-numeric:tabular-nums}
+
+/* The close: the site's dark band, the article's CTA in it */
+.art-cta .art-cta__h{margin:0 auto}
+.art-cta .art-cta__p{margin:18px auto 0}
+`;
+
   window.renderSitePage = renderSitePage;
   window.SitePage = SitePage;
+  window.renderArticlePage = renderArticlePage;
 })();

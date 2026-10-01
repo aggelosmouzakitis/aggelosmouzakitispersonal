@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel site-nav.jsx -o site-nav.js && babel site-chrome.jsx -o site-chrome.js && babel site-copy.jsx -o site-copy.js && babel site-pages.jsx -o site-pages.js && babel lead-capture.jsx -o lead-capture.js && babel clarity-data.jsx -o clarity-data.js && babel clarity-tools.jsx -o clarity-tools.js && babel work-life-check.jsx -o work-life-check.js",
+    "build": "babel site-nav.jsx -o site-nav.js && babel site-chrome.jsx -o site-chrome.js && babel site-copy.jsx -o site-copy.js && babel site-pages.jsx -o site-pages.js && babel lead-capture.jsx -o lead-capture.js && babel clarity-data.jsx -o clarity-data.js && babel clarity-tools.jsx -o clarity-tools.js && babel work-life-check.jsx -o work-life-check.js && babel site-articles.jsx article-*.jsx --out-dir .",
     "pages": "node scripts/gen-site-pages.js",
     "copy": "python3 scripts/copy/extract-canonical.py",
+    "articles": "node scripts/articles/extract-articles.js",
+    "articles:check": "node scripts/articles/check-articles.js",
     "test": "node scripts/seo/seo-check.js",
     "seo:meta": "node scripts/seo/apply-metadata.js",
     "seo:stamp": "node scripts/seo/stamp-assets.js",

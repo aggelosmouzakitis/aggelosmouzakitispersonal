@@ -3,6 +3,8 @@
 // the retirements the brief did not list, marked "not in brief").
 // Used by scripts/qa-routes.js (full status table) and scripts/seo/seo-check.js.
 
+const { ARTICLES } = require('../articles/articles.js');
+
 // [url, expected status of the first response, final target (301s), note]
 const CANONICAL = [
   '/', '/about/', '/work-with-me/', '/individual-psychotherapy/', '/couples-therapy/',
@@ -16,7 +18,7 @@ const CANONICAL = [
   ['/work-life-check/', 200, null, 'tool'],
   ['/free-tools/quit-your-job/', 200, null, 'tool (kept)'],
   ['/free-tools/burned-out/', 200, null, 'tool (kept)'],
-]);
+], ARTICLES.map((a) => ['/' + a.slug + '/', 200, null, 'article (listed on /blog/)']));
 
 // The old essays, one explicit rule each in netlify.toml (force = false, so an
 // essay published again at blog/<slug>/index.html is served at its original
@@ -129,6 +131,8 @@ const INTERNAL = [
   '/site-pages.jsx', '/site-copy.jsx', '/site-chrome.jsx', '/site-nav.jsx', '/lead-capture.jsx',
   '/content/', '/content/canonical-copy.md', '/scripts/copy/extract-canonical.py',
   '/node_modules/react/package.json', '/admin/', '/admin/config.yml', '/public/index.html',
-];
+  // the article briefs (handoff notes included) and their sources
+  '/scripts/articles/articles.js', '/site-articles.jsx',
+].concat(ARTICLES.map((a) => '/' + a.brief), ARTICLES.map((a) => '/article-' + a.slug + '.jsx'));
 
 module.exports = { CANONICAL, LEGACY, ESSAYS, INTERNAL };

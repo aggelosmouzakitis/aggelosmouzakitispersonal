@@ -2,11 +2,17 @@ const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const fs = require('fs');
 const ROOT = '/home/user/aggelosmouzakitispersonal';
 // Pages to draw: /tmp/og_pages.json if present ([{key,label,title}]), else
-// every page in site-meta.js that declares `og` (the canonical pages), drawn
-// into img/og/v2/ — a new path, because /img/* is served immutable for a year.
+// every page in site-meta.js that declares `og` (the canonical pages and the
+// articles), drawn into img/og/v2/ — a new path, because /img/* is served
+// immutable for a year. Name og keys to draw only those pages, e.g. a new
+// article's card without redrawing (and re-publishing) the others:
+//   node scripts/seo/og.js work-anxiety
+const only = process.argv.slice(2);
 const pages = fs.existsSync('/tmp/og_pages.json')
   ? JSON.parse(fs.readFileSync('/tmp/og_pages.json','utf8'))
-  : require('./site-meta.js').PAGES.filter((p) => p.og).map((p) => ({ key: 'v2/' + p.og.key, label: p.og.label, title: p.og.title }));
+  : require('./site-meta.js').PAGES.filter((p) => p.og && (!only.length || only.includes(p.og.key)))
+    .map((p) => ({ key: 'v2/' + p.og.key, label: p.og.label, title: p.og.title }));
+if (only.length && pages.length !== only.length) throw new Error(`og.js: no page with og key ${only.filter((k) => !pages.some((p) => p.key === 'v2/' + k)).join(', ')}`);
 fs.mkdirSync(ROOT + '/img/og/v2', { recursive: true });
 
 const tpl = (label, title) => `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
