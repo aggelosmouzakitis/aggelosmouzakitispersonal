@@ -72,6 +72,45 @@ const ARTICLES = [
       'Article 3, deciding whether to quit your job, including health, finances and alternatives': null,
     },
   },
+  {
+    slug: 'burnout-at-work',
+    brief: 'content/articles/burnout-at-work.md',
+    published: '2026-10-01T22:26:00+01:00',
+    modified: null,
+    category: 'Guide',
+    readTime: '15 min read',
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    // A separate educational guide: related to the service page, never
+    // redirected or canonicalised to it.
+    related: { label: 'Burnout & Can’t Switch Off', href: '/executive-burnout-therapy/' },
+    // No caption sentence: the table is named by its H2 ("Burnout vs stress")
+    // and described by the sentence the brief keeps directly below it.
+    table: { note: 'This is an orientation, not a diagnostic test.' },
+    // The urgent-help paragraph stays normal text: no callout.
+    callout: null,
+    // "the implemented editorial body, including FAQ and excluding
+    // navigation, references and commercial CTA"
+    wordCount: ['body'],
+    // Each placeholder follows a sentence that only leads to its guide; while
+    // unresolved, both stay out of the page. Resolve with the brief's own
+    // wording linked, e.g. '[The companion guide](/…/) examines the situation
+    // where you are still delivering but have very little left afterwards.'
+    links: {
+      'Article 5, high-functioning exhaustion and maintaining performance while depleted': {
+        pointer: 'The companion guide examines the situation where you are still delivering but have very little left afterwards. [INTERNAL LINK NEEDED: Article 5, high-functioning exhaustion and maintaining performance while depleted]',
+        resolved: null,
+      },
+      'Article 10, stress versus burnout': {
+        pointer: 'The full comparison considers the overlaps in more detail. [INTERNAL LINK NEEDED: Article 10, stress versus burnout]',
+        resolved: null,
+      },
+      'comparison guide covering burnout, anxiety and depression': {
+        pointer: 'The comparison guide examines these overlaps and the limits of self-assessment. [INTERNAL LINK NEEDED: comparison guide covering burnout, anxiety and depression]',
+        resolved: null,
+      },
+    },
+  },
 ];
 
 const ORIGIN = 'https://aggelosmouzakitis.com';

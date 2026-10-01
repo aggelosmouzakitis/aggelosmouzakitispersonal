@@ -8,6 +8,19 @@
 // placeholders are left out with their pointers.
 
 window.SITE_ARTICLES = [{
+  "id": "burnout-at-work",
+  "url": "/burnout-at-work/",
+  "h1": "Burnout at Work: Signs, Causes and What Recovery Actually Requires",
+  "deck": "Recognising burnout is only part of the problem. Recovery depends on understanding which demands, working conditions or personal patterns have left you exhausted.",
+  "category": "Guide",
+  "published": "2026-10-01T22:26:00+01:00",
+  "publishedLabel": "October 2026",
+  "readTime": "15 min read",
+  "related": {
+    "label": "Burnout & Can’t Switch Off",
+    "href": "/executive-burnout-therapy/"
+  }
+}, {
   "id": "work-anxiety",
   "url": "/work-anxiety/",
   "h1": "Work Anxiety: Why Work Gets Into Your Head and What to Do About It",

@@ -1023,13 +1023,14 @@
 
   const plainMd = (t) => t.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/\*\*?([^*]+)\*\*?/g, '$1');
 
-  // A real table with header cells both ways. Below 640px the rows become
+  // A real table with header cells both ways, named by its caption or, when
+  // the brief gives none, by its section's H2. Below 640px the rows become
   // labelled groups: the explicit roles keep the table semantics that some
   // browsers drop once the display changes, and each cell shows its column
   // label (data-label, drawn by CSS and not read twice).
   function ArticleTable({ t }) {
-    return e('table', { className: 'art-table', role: 'table', 'aria-describedby': t.describedBy },
-      e('caption', null, inlineMd(t.caption)),
+    return e('table', { className: 'art-table', role: 'table', 'aria-labelledby': t.caption ? undefined : t.labelledBy, 'aria-describedby': t.describedBy },
+      t.caption ? e('caption', null, inlineMd(t.caption)) : null,
       e('colgroup', null, t.head.map((h, i) => e('col', { key: i, className: i ? 'art-table__ev' : 'art-table__key' }))),
       e('thead', { role: 'rowgroup' }, e('tr', { role: 'row' },
         t.head.map((h, i) => e('th', { key: i, scope: 'col', role: 'columnheader' }, inlineMd(h))))),

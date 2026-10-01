@@ -52,7 +52,7 @@ done
 
 ```bash
 curl -s "$SITE/robots.txt" | grep -i '^sitemap'                 # the sitemap URL
-curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 29 (28 + 1 article)
+curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 30 (28 + 2 articles)
 curl -sI "$SITE/llms.txt" | head -1                              # 200
 
 # every sitemap URL must be 200 and self-canonical
@@ -153,7 +153,7 @@ open "https://www.bing.com/webmasters"
 
 # IndexNow: confirm the key file is live BEFORE submitting
 curl -s "$SITE/f4a06bec48967c20f68efb4d562c6b71.txt"   # must print the key, nothing else
-npm run seo:indexnow                                    # every sitemap URL (29)
+npm run seo:indexnow                                    # every sitemap URL (30)
 
 # the retired URLs too, so they get re-crawled and dropped
 node scripts/seo/indexnow.js $(node -e "const {LEGACY}=require('./scripts/seo/routes.js');console.log(LEGACY.filter((r)=>r[1]===301||r[1]===410).map((r)=>r[0]).join(' '))")
@@ -164,7 +164,7 @@ node scripts/seo/indexnow.js $(node -e "const {LEGACY}=require('./scripts/seo/ro
 - Rich Results Test — <https://search.google.com/test/rich-results> — `/`,
   `/individual-psychotherapy/`, `/therapy-vs-coaching/`, `/about/`,
   `/free-tools/burned-out/`, `/work-life-check/`, and each article
-  (`/work-anxiety/`): one valid `BlogPosting` with the visible date, no
+  (`/work-anxiety/`, `/burnout-at-work/`): one valid `BlogPosting` with the visible date, no
   `FAQPage`.
 - Schema Markup Validator — <https://validator.schema.org/> — same URLs. One
   `Person` with `@id` ending `/#person`; no `Service` on `/therapy-vs-coaching/`.
