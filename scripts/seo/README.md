@@ -41,6 +41,14 @@ Featured entry it makes real (`listing`), and its netlify.toml rule and
 routes.js row go. Any other archived essay can come back the same way. A
 Featured entry with no published essay is left off /blog/, never shown dead.
 
+An article that substantively replaces an earlier one at another URL (the
+guide `/high-functioning-burnout/` replaces the essay
+`/blog/high-functioning-burnout-pandemic/`) lists the former URLs in its
+articles.js `replaces`: it keeps the first publication date, adds the date of
+its update, and each former URL, including the essay's frozen copy under
+`/archive/` (a `force = true` rule, since that file exists), is one 301
+straight to it (netlify.toml and routes.js; check-articles.js proves it).
+
 ## When to re-run
 - The canonical document changed: replace `content/canonical-copy.md`, then
   the full pipeline from `npm run copy`.

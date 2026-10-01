@@ -21,7 +21,9 @@
 //   - head: title, description, canonical, og:type article; the BlogPosting
 //     (headline, description, author, publisher, dates, en-GB, section, the
 //     image the page shows, wordCount recounted from the page); no FAQPage;
-//   - no [INTERNAL LINK NEEDED] marker in any published file.
+//   - no [INTERNAL LINK NEEDED] marker in any published file;
+//   - an article that replaces an earlier one: each former URL is a single
+//     301 straight to it.
 // As a reader gets it (JavaScript on)
 //   - no page-level horizontal overflow from 320px to 1280px;
 //   - below 640px the table is set as its brief asks: labelled row groups
@@ -52,6 +54,12 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const PORT = 8125;
 const BASE = `http://localhost:${PORT}`;
 const MARKER = /INTERNAL LINK NEEDED/;
+
+// The first response for a URL: its status and where it redirects.
+const status = (u) => new Promise((resolve) => require('http').get(u, (res) => {
+  res.resume();
+  resolve({ status: res.statusCode, location: res.headers.location });
+}).on('error', () => resolve({ status: 0 })));
 
 const errors = [];
 const archived = {}; // essays proven word for word against the archive: slug → words
@@ -227,7 +235,7 @@ async function checkArticle(browser, a) {
       order: order(...['nav.art-crumbs', 'p.art-meta', 'h1', 'p.art-deck', '.art-author', 'nav.art-toc', '.art-body p'].filter((x) => x !== 'nav.art-toc' || q(x))),
       crumbs: qa('nav.art-crumbs a').map((x) => [x.getAttribute('href'), t(x)]),
       meta: t(q('p.art-meta')),
-      time: q('p.art-meta time') && q('p.art-meta time').getAttribute('datetime'),
+      times: qa('p.art-meta time').map((x) => x.getAttribute('datetime')),
       img: q('.art-author img') && [q('.art-author img').getAttribute('src'), q('.art-author img').getAttribute('alt')],
       authorLink: q('.art-author__name a') && [q('.art-author__name a').getAttribute('href'), t(q('.art-author__name a'))],
       authorLines: qa('.art-author__line').map(t),
@@ -267,6 +275,7 @@ async function checkArticle(browser, a) {
       canonical: head('link[rel="canonical"]', 'href'),
       ogType: head('meta[property="og:type"]', 'content'),
       published: head('meta[property="article:published_time"]', 'content'),
+      modified: head('meta[property="article:modified_time"]', 'content'),
       ld,
       html: document.documentElement.outerHTML,
     };
@@ -281,7 +290,7 @@ async function checkArticle(browser, a) {
   const metaLine = (art.meta.labels || [art.meta.category, art.meta.type].filter(Boolean)).concat(art.meta.publishedLabel, art.meta.readTime).join(' · ') +
     (art.meta.modified ? ` · Updated ${art.meta.modifiedLabel}` : '');
   eq('metadata line', s.meta, metaLine);
-  eq('metadata date', s.time, art.meta.published);
+  eq('metadata dates', s.times, [art.meta.published].concat(art.meta.modified ? [art.meta.modified] : []));
   eq('author image', s.img, [art.author.image, art.author.alt]);
   eq('author name', s.authorLink, [art.author.href, art.author.name]);
   eq('author lines', s.authorLines, [art.author.credential, art.author.background]);
@@ -324,6 +333,15 @@ async function checkArticle(browser, a) {
   eq('canonical', s.canonical, ORIGIN + art.url);
   eq('og:type', s.ogType, 'article');
   eq('article:published_time', s.published, art.meta.published);
+  eq('article:modified_time', s.modified, art.meta.modified || null);
+  // An article that replaces an earlier one: each former URL, with or
+  // without its trailing slash, is one 301 straight here.
+  for (const from of a.replaces || []) {
+    for (const u of [from, from.replace(/\/$/, '')]) {
+      const r = await status(BASE + u);
+      if (r.status !== 301 || r.location !== art.url) err(slug, `${u} answers ${r.status}${r.location ? ' → ' + r.location : ''}, expected one 301 to ${art.url}`);
+    }
+  }
   const graph = [].concat(...s.ld.map((x) => JSON.parse(x)['@graph'] || []));
   const posts = graph.filter((x) => x['@type'] === 'BlogPosting');
   if (graph.some((x) => x['@type'] === 'FAQPage')) err(slug, 'FAQPage structured data');
@@ -335,12 +353,13 @@ async function checkArticle(browser, a) {
     eq('BlogPosting', bp, Object.assign({
       '@type': 'BlogPosting', '@id': ORIGIN + art.url + '#article', url: ORIGIN + art.url, mainEntityOfPage: ORIGIN + art.url,
       headline: art.h1, description: art.description,
-      author: { '@type': 'Person', '@id': PERSON_ID, name: art.author.name, url: ORIGIN + art.author.href },
+      author: Object.assign({ '@type': 'Person', '@id': PERSON_ID, name: art.author.name, url: ORIGIN + art.author.href },
+        a.schemaImage === 'author' ? { image: ORIGIN + art.author.image } : {}),
       publisher: { '@id': PERSON_ID },
       datePublished: art.meta.published,
     }, art.meta.modified ? { dateModified: art.meta.modified } : {}, {
       inLanguage: a.inLanguage || 'en-GB', articleSection: art.meta.category,
-    }, a.schemaImage === 'none' ? {} : { image: ORIGIN + art.author.image }, {
+    }, a.schemaImage === 'none' || a.schemaImage === 'author' ? {} : { image: ORIGIN + art.author.image }, {
       wordCount: pageWords,
     }));
     // One Person: the author is the site's Person entity, and no other node

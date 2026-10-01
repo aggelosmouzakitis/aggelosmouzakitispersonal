@@ -74,6 +74,21 @@ window.SITE_ARTICLES = [{
   "related": null,
   "listing": "You took the vacation. You came back feeling the same way."
 }, {
+  "id": "high-functioning-burnout",
+  "url": "/high-functioning-burnout/",
+  "h1": "High-Functioning Burnout: When You’re Still Performing but Running on Empty",
+  "deck": "Continued performance can conceal how much harder working has become. Understanding that cost helps you decide what needs attention.",
+  "category": "Guide",
+  "published": "2026-04-16",
+  "publishedLabel": "April 2026",
+  "readTime": "12 min read",
+  "modified": "2026-10-01",
+  "modifiedLabel": "October 2026",
+  "related": {
+    "label": "Burnout & Can’t Switch Off",
+    "href": "/executive-burnout-therapy/"
+  }
+}, {
   "id": "the-loneliness-and-emotional-pressure-that-founders-experience",
   "url": "/blog/the-loneliness-and-emotional-pressure-that-founders-experience/",
   "h1": "The loneliness and emotional pressure that founders experience",

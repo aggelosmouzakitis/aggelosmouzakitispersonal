@@ -51,7 +51,8 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
     {"h2":"Can you be burned out and still perform well?","id":"burned-out-and-still-perform-well", "blocks": [
       {"t":"p","text":"Yes. You can meet deadlines while feeling exhausted and detached. A [meta-analysis of 45 studies](https://pure.ul.ie/en/publications/the-link-between-burnout-and-job-performance-a-meta-analysis/) found associations between burnout dimensions and poorer performance, but those relationships do not make an individual’s output a reliable test of their health."},
       {"t":"p","text":"Consider the cost of maintaining that output. The report that once took an afternoon now takes the afternoon and most of the evening. Familiar tasks remain possible, but there is little capacity for anything unexpected. Your family may see the change before anyone at work does."},
-      {"t":"p","text":"**Performance and the cost of performance are different things to assess.** “High-functioning burnout” is a description people use, rather than a separate recognised diagnosis. Continuing to work neither confirms burnout nor rules it out."}
+      {"t":"p","text":"**Performance and the cost of performance are different things to assess.** “High-functioning burnout” is a description people use, rather than a separate recognised diagnosis. Continuing to work neither confirms burnout nor rules it out."},
+      {"t":"p","text":"The [companion guide](/high-functioning-burnout/) examines the situation where you are still delivering but have very little left afterwards."}
     ]},
     {"h2":"Burnout vs stress","id":"burnout-vs-stress", "blocks": [
       {"t":"p","text":"Stress can be brief or chronic. It can cause exhaustion and withdrawal as well as urgency or worry. Burnout describes a more particular pattern associated with sustained workplace stress, so a neat division between “stressed and engaged” and “burned out and indifferent” misses how people experience both."},
@@ -149,5 +150,5 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
     ]}
   ],
   "cta": {"id":"talk-through-exhaustion","eyebrow":"WORK WITH ME","h2":"Talk through what has left you exhausted","text":"I work with people whose working lives have become difficult to sustain. An initial conversation can help us consider what needs attention and whether psychotherapy would be useful. If the situation calls for medical care, changes at work or another kind of support, that should be part of the discussion.","button":{"label":"Book a conversation","href":"/contact/"}},
-  "wordCount": 3074
+  "wordCount": 3091
 };

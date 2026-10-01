@@ -54,9 +54,17 @@
 //               page's close from the canonical copy.
 //   labels      the metadata line's labels when the brief fixes them
 //               ("Guide · <date> · …"); default: category, then type.
+//   replaces    an article that substantively replaces an earlier one at
+//               another URL: those former URLs, each a direct 301 here
+//               (netlify.toml, scripts/seo/routes.js). `published` keeps the
+//               first publication date as recorded, and `modified` is the day
+//               the revision went live, both as dates where no verified time
+//               exists (no time of day or offset invented).
 //   inLanguage  for BlogPosting (default en-GB, as the guides' briefs ask).
 //   schemaImage 'none' when the brief rules out the author portrait as the
-//               article's image; default: the approved author image.
+//               article's image; 'author' when the brief keeps it to the
+//               author's image field (the BlogPosting's author, not the
+//               article); default: the approved author image.
 //   links       Part 2's [INTERNAL LINK NEEDED: …] placeholders, by their text.
 //               While unresolved (null, or { pointer } without `resolved`),
 //               the pointer stays out of the published page and
@@ -119,9 +127,11 @@ const ARTICLES = [
     // wording linked, e.g. '[The companion guide](/…/) examines the situation
     // where you are still delivering but have very little left afterwards.'
     links: {
+      // Article 5 is the high-functioning burnout guide ("still performing
+      // but running on empty"), live at /high-functioning-burnout/.
       'Article 5, high-functioning exhaustion and maintaining performance while depleted': {
         pointer: 'The companion guide examines the situation where you are still delivering but have very little left afterwards. [INTERNAL LINK NEEDED: Article 5, high-functioning exhaustion and maintaining performance while depleted]',
-        resolved: null,
+        resolved: 'The [companion guide](/high-functioning-burnout/) examines the situation where you are still delivering but have very little left afterwards.',
       },
       'Article 10, stress versus burnout': {
         pointer: 'The full comparison considers the overlaps in more detail. [INTERNAL LINK NEEDED: Article 10, stress versus burnout]',
@@ -179,6 +189,35 @@ const ARTICLES = [
     // "Do not invent an image URL or use an arbitrary portrait as a claimed
     // article illustration": no image in the BlogPosting.
     schemaImage: 'none',
+    links: {},
+  },
+  {
+    slug: 'high-functioning-burnout',
+    brief: 'content/articles/high-functioning-burnout.md',
+    // A substantive replacement of the essay published at
+    // /blog/high-functioning-burnout-pandemic/ on 16 April 2026 (its archived
+    // page records datePublished 2026-04-16, a date only). That date stays;
+    // `modified` is the day this revision went live.
+    replaces: ['/blog/high-functioning-burnout-pandemic/', '/archive/blog/high-functioning-burnout-pandemic/'],
+    published: '2026-04-16',
+    modified: '2026-10-01',
+    category: 'Guide',
+    readTime: '12 min read',
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    related: { label: 'Burnout & Can’t Switch Off', href: '/executive-burnout-therapy/' },
+    // Part 3 writes the "Accessible caption" (hidden, so the visible article
+    // stays Part 2) and asks that "any necessary scrolling must stay within an
+    // accessible table wrapper": the table keeps its rows and columns.
+    table: { caption: 'Patterns to examine during demanding work; this comparison is not a diagnostic test', captionFrom: 'brief', captionHidden: true, narrow: 'scroll' },
+    // "no additional diagnostic or alarmist banner is required"
+    callout: null,
+    // "from the deployed editorial body, excluding site chrome": the body, FAQ
+    // included, as for burnout-at-work's "editorial body".
+    wordCount: ['body'],
+    // "Use the approved author portrait only in the appropriate author-image
+    // field; do not invent a separate editorial illustration."
+    schemaImage: 'author',
     links: {},
   },
   // The four essays the canonical copy features on /blog/, brought back from

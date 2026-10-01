@@ -239,9 +239,11 @@ function articlePage(a) {
   };
   if (art.meta.modified) posting.dateModified = art.meta.modified;
   Object.assign(posting, { inLanguage: a.inLanguage || 'en-GB', articleSection: art.meta.category });
-  // The approved author image the page shows, unless the brief rules a
-  // portrait out as the article's image (then none: never an invented one).
-  if (a.schemaImage !== 'none') posting.image = abs(art.author.image);
+  // The approved author image the page shows: the article's image, or the
+  // author's where the brief keeps the portrait to that field ('author'), or
+  // none where it rules a portrait out ('none'): never an invented one.
+  if (a.schemaImage === 'author') posting.author.image = abs(art.author.image);
+  else if (a.schemaImage !== 'none') posting.image = abs(art.author.image);
   posting.wordCount = art.wordCount;
   const labels = art.meta.labels || [art.meta.category, art.meta.type].filter(Boolean);
   const breadcrumb = {

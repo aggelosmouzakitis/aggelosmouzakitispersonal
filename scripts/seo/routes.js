@@ -22,13 +22,14 @@ const CANONICAL = [
 
 // The old essays, one explicit rule each in netlify.toml (force = false, so an
 // essay published again at blog/<slug>/index.html is served at its original
-// URL). 301 where a canonical page covers the essay's main subject; 410 where
-// none does. Featured = the four the canonical copy lists under Featured on
-// /blog/, published again (scripts/articles/articles.js): they are live
-// pages now, their rules removed, so they leave this list (filter below).
+// URL). 301 where a canonical page covers the essay's main subject, or to the
+// article that replaced it; 410 where none does. Featured = the four the
+// canonical copy lists under Featured on /blog/, published again
+// (scripts/articles/articles.js): they are live pages now, their rules
+// removed, so they leave this list (filter below).
 // [slug, target or null for 410, reason]
 const ESSAYS_ALL = [
-  ['high-functioning-burnout-pandemic', '/executive-burnout-therapy/', 'burnout in high performers who keep performing'],
+  ['high-functioning-burnout-pandemic', '/high-functioning-burnout/', 'rewritten as the guide that replaces it (articles.js `replaces`)'],
   ['high-performance-as-a-way-to-get-accepted-by-your-family', '/achievement-self-worth/', 'achievement as the way to earn family approval'],
   ['is-it-post-holiday-anxiety-or-just-clarity', '/career-transition-therapy/', 'post-holiday dread as clarity about leaving the job'],
   ['sample-post', '/achievement-self-worth/', 'performance regulating self-worth; live two days in April 2026'],
@@ -114,6 +115,9 @@ const LEGACY = [
   ['/clarity-tools/', 301, '/free-tools/'],
 ].concat(ESSAYS.map(([slug, to, why]) => [`/blog/${slug}/`, to ? 301 : 410, to, 'essay: ' + why]), [
   ['/archive/', 200, null, 'private, noindex'],
+  // The replaced essay's frozen copy: a duplicate of the old text (force = true).
+  ['/archive/blog/high-functioning-burnout-pandemic/', 301, '/high-functioning-burnout/', 'archived copy of a replaced essay'],
+  ['/archive/blog/high-functioning-burnout-pandemic/index.html', 301, '/high-functioning-burnout/', 'archived copy of a replaced essay'],
   // URLs that never existed are plain 404s: no catch-all sends them anywhere.
   ['/this-page-does-not-exist/', 404, null],
   ['/el/unknown-page/', 404, null, 'never existed (no /el/* fallback)'],

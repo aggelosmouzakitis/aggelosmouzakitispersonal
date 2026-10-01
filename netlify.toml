@@ -314,11 +314,26 @@
 # The four essays the canonical copy features on /blog/ are published again
 # that way (scripts/articles/articles.js), so their rules are gone.
 # There is no /blog/* rule, so a slug that never existed is a 404.
+#
+# This essay was substantively rewritten as the guide /high-functioning-burnout/
+# (scripts/articles/articles.js `replaces`), so its URL and its frozen copy in
+# the private archive both 301 straight there. The archived copy exists as a
+# file, so its rules are force = true: the old text is never served again.
 [[redirects]]
   from = "/blog/high-functioning-burnout-pandemic"
-  to = "/executive-burnout-therapy/"
+  to = "/high-functioning-burnout/"
   status = 301
   force = false
+[[redirects]]
+  from = "/archive/blog/high-functioning-burnout-pandemic"
+  to = "/high-functioning-burnout/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/archive/blog/high-functioning-burnout-pandemic/index.html"
+  to = "/high-functioning-burnout/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/blog/high-performance-as-a-way-to-get-accepted-by-your-family"
   to = "/achievement-self-worth/"

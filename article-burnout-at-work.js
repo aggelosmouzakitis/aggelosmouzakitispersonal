@@ -152,6 +152,9 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
     }, {
       "t": "p",
       "text": "**Performance and the cost of performance are different things to assess.** “High-functioning burnout” is a description people use, rather than a separate recognised diagnosis. Continuing to work neither confirms burnout nor rules it out."
+    }, {
+      "t": "p",
+      "text": "The [companion guide](/high-functioning-burnout/) examines the situation where you are still delivering but have very little left afterwards."
     }]
   }, {
     "h2": "Burnout vs stress",
@@ -408,5 +411,5 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
       "href": "/contact/"
     }
   },
-  "wordCount": 3074
+  "wordCount": 3091
 };
