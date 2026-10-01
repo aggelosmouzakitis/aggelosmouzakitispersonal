@@ -8,6 +8,19 @@
 // placeholders are left out with their pointers.
 
 window.SITE_ARTICLES = [{
+  "id": "career-change-anxiety",
+  "url": "/career-change-anxiety/",
+  "h1": "Career Change Anxiety: How to Tell Fear From a Bad Decision",
+  "deck": "A career change can be worth considering and still carry serious risks. Understanding your anxiety helps you decide what to investigate, what to change and what you may have to accept.",
+  "category": "Guide",
+  "published": "2026-10-01T23:20:00+01:00",
+  "publishedLabel": "October 2026",
+  "readTime": "14 min read",
+  "related": {
+    "label": "Career Change & Decisions",
+    "href": "/career-transition-therapy/"
+  }
+}, {
   "id": "cant-switch-off-from-work",
   "url": "/cant-switch-off-from-work/",
   "h1": "Why You Can’t Switch Off From Work, Even When You’re Not Working",

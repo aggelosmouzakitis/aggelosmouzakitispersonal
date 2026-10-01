@@ -237,7 +237,7 @@ function extract(a) {
   for (const v of [a.category, a.type, a.readTime].filter(Boolean)) {
     if (!header.includes(v)) fail(slug, `articles.js says "${v}"; Part 3 Article header does not`);
   }
-  const canonical = (header.match(/Canonical URL: `([^`]+)`/) || [])[1];
+  const canonical = (header.match(/canonical URL:? `([^`]+)`/i) || [])[1];
   if (canonical && canonical !== ORIGIN + url) fail(slug, `Part 3 canonical is ${canonical}`);
   const Q = '[“"`]([^”"`]+)[”"`]';
   const first = (...res) => (res.map((re) => header.match(re)).find(Boolean) || [])[1];

@@ -220,6 +220,32 @@ const ARTICLES = [
     schemaImage: 'author',
     links: {},
   },
+  {
+    slug: 'career-change-anxiety',
+    brief: 'content/articles/career-change-anxiety.md',
+    published: '2026-10-01T23:20:00+01:00',
+    modified: null,
+    category: 'Guide',
+    readTime: '14 min read',
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    // An informational guide beside the service page: related to it, never
+    // redirected or canonicalised to it.
+    related: { label: 'Career Change & Decisions', href: '/career-transition-therapy/' },
+    // Part 3 writes the "Accessible caption" (hidden, so the visible article
+    // stays Part 2); "any necessary horizontal scrolling belongs inside an
+    // accessible wrapper".
+    table: { caption: 'Questions to distinguish dissatisfaction with a role, an employer or a career', captionFrom: 'brief', captionHidden: true, narrow: 'scroll' },
+    // "No … additional callout or clinical safety banner is required"
+    callout: null,
+    // "from the deployed editorial body, excluding site chrome, TOC and this
+    // document's other parts"
+    wordCount: ['body'],
+    // "Reuse the established author identity and approved portrait in the
+    // appropriate author-image field. Do not invent an editorial image."
+    schemaImage: 'author',
+    links: {},
+  },
   // The four essays the canonical copy features on /blog/, brought back from
   // the archive at their original URLs (from-archive.js): text word for word,
   // first publication dates kept, the canonical entries made real.
