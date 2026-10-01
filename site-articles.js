@@ -13,7 +13,7 @@ window.SITE_ARTICLES = [{
   "h1": "Career Change at 40: What Makes Starting Again So Difficult",
   "deck": "Changing careers in your 40s can mean giving up things you genuinely value. A useful decision takes those losses seriously and examines how a different working life would fit the life you already have.",
   "category": "Guide",
-  "published": "2026-10-01T23:40:00+01:00",
+  "published": "2026-10-01T23:36:00+01:00",
   "publishedLabel": "October 2026",
   "readTime": "14 min read",
   "related": {

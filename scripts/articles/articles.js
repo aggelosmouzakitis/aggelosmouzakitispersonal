@@ -254,7 +254,7 @@ const ARTICLES = [
   {
     slug: 'career-change-at-40',
     brief: 'content/articles/career-change-at-40.md',
-    published: '2026-10-01T23:40:00+01:00',
+    published: '2026-10-01T23:36:00+01:00',
     modified: null,
     // "`dateModified`: the actual publication timestamp initially"
     schemaModified: 'published',
