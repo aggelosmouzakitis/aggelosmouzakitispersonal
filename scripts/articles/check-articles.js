@@ -54,6 +54,7 @@ const BASE = `http://localhost:${PORT}`;
 const MARKER = /INTERNAL LINK NEEDED/;
 
 const errors = [];
+const archived = {}; // essays proven word for word against the archive: slug → words
 const err = (slug, msg) => errors.push(`${slug} — ${msg}`);
 const norm = (s) => String(s).replace(/[’‘]/g, "'").replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
 const relative = (href) => (href.startsWith(ORIGIN + '/') ? href.slice(ORIGIN.length) : href);
@@ -82,6 +83,7 @@ function expected(a, report) {
   blocks.forEach((b, i) => {
     if (b.t === 'hr') return;
     if (b.t === 'h') { out.push(Object.assign({ kind: 'h' + b.level }, runs(b.md))); return; }
+    if (b.t === 'quote') { out.push(Object.assign({ kind: 'p' }, runs(b.md))); return; }
     if (b.t === 'p') {
       let raw = b.md;
       for (const r of report.resolved) raw = raw.split(r.from).join(r.to);
@@ -136,6 +138,22 @@ function pageBlocks() {
   return out;
 }
 
+// An essay brought back: the words of its archived page (title, standfirst,
+// body), in order. Conversion debris ("_ **", "##") has no letters, so it
+// drops out; quotes are compared as quotes, whatever their shape.
+const decodeHtml = (s) => s.replace(/&#(\d+);/g, (m, n) => String.fromCodePoint(+n))
+  .replace(/&#x([0-9a-f]+);/gi, (m, n) => String.fromCodePoint(parseInt(n, 16)))
+  .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+  .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
+const tokens = (s) => norm(s).replace(/[“”]/g, '"').split(' ').filter((w) => /[\p{L}\p{N}]/u.test(w));
+function archiveTokens(a) {
+  const html = fs.readFileSync(path.join(ROOT, a.source), 'utf8');
+  const pick = (re) => (html.match(re) || [])[1] || '';
+  const body = html.slice(html.indexOf('<article'), html.indexOf('</article>'));
+  return tokens(decodeHtml([pick(/<h1 class="article-title">([\s\S]*?)<\/h1>/), pick(/<p class="article-desc">([\s\S]*?)<\/p>/),
+    body.replace(/<\/?(?:strong|em|b|i|a|span)\b[^>]*>/g, '').replace(/<[^>]+>/g, ' ')].join(' ')));
+}
+
 function compareBlocks(slug, want, got) {
   const show = (b) => (b ? `${b.kind}: "${b.text.slice(0, 80)}"` : '(nothing)');
   const n = Math.max(want.length, got.length);
@@ -174,6 +192,15 @@ async function checkArticle(browser, a) {
   const want = expected(a, report);
   const got = await p.evaluate(pageBlocks);
   const n = compareBlocks(slug, want, got);
+  if (a.source) {
+    const was = archiveTokens(a);
+    const now = tokens(got.map((b) => b.text).join(' '));
+    const at = was.findIndex((w, i) => w !== now[i]);
+    if (at >= 0 || was.length !== now.length) {
+      const i = at >= 0 ? at : Math.min(was.length, now.length);
+      err(slug, `differs from its archived text (${a.source}) at word ${i + 1}:\n      archive: ${was.slice(Math.max(0, i - 5), i + 6).join(' ')}\n      page:    ${now.slice(Math.max(0, i - 5), i + 6).join(' ')}`);
+    } else archived[slug] = was.length;
+  }
 
   const s = await p.evaluate(() => {
     const q = (sel) => document.querySelector(sel);
@@ -192,12 +219,12 @@ async function checkArticle(browser, a) {
     // (a visually hidden caption names the table; it is not article text)
     const blocks = (root) => (root ? [...root.querySelectorAll('h2, h3, p, li, caption:not(.sp-vh), th, td')] : []);
     const refsSec = q('.art-sec--references');
-    const bodyEls = [...qa('.art-body > .flow > p'), ...qa('.art-body > .art-sec:not(.art-sec--references)').flatMap(blocks)];
+    const bodyEls = [...qa('.art-body > .flow p'), ...qa('.art-body > .art-sec:not(.art-sec--references)').flatMap(blocks)];
     const ids = qa('[id]').map((el) => el.id);
     return {
       h1: h1.map(t),
       h1Next: h1[0] && h1[0].nextElementSibling ? h1[0].nextElementSibling.className : null,
-      order: order('nav.art-crumbs', 'p.art-meta', 'h1', 'p.art-deck', '.art-author', 'nav.art-toc', '.art-body p'),
+      order: order(...['nav.art-crumbs', 'p.art-meta', 'h1', 'p.art-deck', '.art-author', 'nav.art-toc', '.art-body p'].filter((x) => x !== 'nav.art-toc' || q(x))),
       crumbs: qa('nav.art-crumbs a').map((x) => [x.getAttribute('href'), t(x)]),
       meta: t(q('p.art-meta')),
       time: q('p.art-meta time') && q('p.art-meta time').getAttribute('datetime'),
@@ -207,7 +234,9 @@ async function checkArticle(browser, a) {
       tocLabel: t(tocLabel),
       toc: qa('nav.art-toc li a').map((x) => [x.getAttribute('href'), t(x)]),
       h2s: qa('article.art h2').map((x) => [x.id, t(x)]),
-      cta: { eyebrow: t(q('.art-cta .close__label')), h2: q('.art-cta h2') && [q('.art-cta h2').id, t(q('.art-cta h2'))], links: qa('.art-cta a').map((x) => [x.getAttribute('href'), t(x)]) },
+      cta: { eyebrow: t(q('.art-cta .close__label')), h2: q('.art-cta h2') && [q('.art-cta h2').id, t(q('.art-cta h2'))], links: qa('.art-cta a').map((x) => [x.getAttribute('href'), t(x).replace(/\s*→$/, '')]) },
+      close: q('main section.close:not(.art-cta)') && { label: t(q('main section.close:not(.art-cta) .close__label')), text: t(q('main section.close:not(.art-cta) .close__text')),
+        links: qa('main section.close:not(.art-cta) a').map((x) => [x.getAttribute('href'), t(x).replace(/\s*→$/, '')]) },
       booking: qa('main a[href="/contact/"]').length,
       dupIds: ids.filter((x, i) => ids.indexOf(x) !== i),
       table: table && {
@@ -249,17 +278,24 @@ async function checkArticle(browser, a) {
   eq('element after the H1', s.h1Next, 'lead art-deck');
   if (!s.order) err(slug, 'header order is not breadcrumb → metadata → H1 → deck → author → TOC → introduction');
   eq('breadcrumb', s.crumbs, [['/blog/', 'Writing']]);
-  const metaLine = [art.meta.category, art.meta.type, art.meta.publishedLabel, art.meta.readTime].filter(Boolean).join(' · ') +
+  const metaLine = (art.meta.labels || [art.meta.category, art.meta.type].filter(Boolean)).concat(art.meta.publishedLabel, art.meta.readTime).join(' · ') +
     (art.meta.modified ? ` · Updated ${art.meta.modifiedLabel}` : '');
   eq('metadata line', s.meta, metaLine);
   eq('metadata date', s.time, art.meta.published);
   eq('author image', s.img, [art.author.image, art.author.alt]);
   eq('author name', s.authorLink, [art.author.href, art.author.name]);
   eq('author lines', s.authorLines, [art.author.credential, art.author.background]);
-  eq('TOC label', s.tocLabel, art.toc.label);
-  eq('TOC', s.toc, art.toc.items.map((it) => ['#' + it.id, it.label]));
+  eq('TOC label', s.tocLabel, art.toc ? art.toc.label : null);
+  eq('TOC', s.toc, art.toc ? art.toc.items.map((it) => ['#' + it.id, it.label]) : []);
   eq('H2 ids', s.h2s, art.sections.map((x) => [x.id, x.h2]));
-  eq('CTA', s.cta, { eyebrow: art.cta.eyebrow, h2: [art.cta.id, art.cta.h2], links: [[art.cta.button.href, art.cta.button.label + ' →']] });
+  if (art.cta) {
+    eq('CTA', s.cta, { eyebrow: art.cta.eyebrow, h2: [art.cta.id, art.cta.h2], links: [[art.cta.button.href, art.cta.button.label]] });
+    eq('closes', s.close, null);
+  } else {
+    eq('close (the Writing page’s)', s.close, { label: art.close.label, text: art.close.text,
+      links: art.close.actions.map((it) => [it.href, it.label]) });
+    eq('CTA', s.cta.links, []);
+  }
   eq('booking links in the content', s.booking, 1);
   eq('duplicate ids', s.dupIds, []);
   const tbl = [];
@@ -303,8 +339,9 @@ async function checkArticle(browser, a) {
       publisher: { '@id': PERSON_ID },
       datePublished: art.meta.published,
     }, art.meta.modified ? { dateModified: art.meta.modified } : {}, {
-      inLanguage: 'en-GB', articleSection: art.meta.category,
-      image: ORIGIN + art.author.image, wordCount: pageWords,
+      inLanguage: a.inLanguage || 'en-GB', articleSection: art.meta.category,
+    }, a.schemaImage === 'none' ? {} : { image: ORIGIN + art.author.image }, {
+      wordCount: pageWords,
     }));
     // One Person: the author is the site's Person entity, and no other node
     // describes it differently.
@@ -323,7 +360,7 @@ async function checkArticle(browser, a) {
     await c.route(/googletagmanager|emailjs/, (r) => r.fulfill({ body: '' }));
     const pg = await c.newPage();
     await pg.goto(url, { waitUntil: 'load' });
-    await pg.waitForFunction(() => document.querySelector('.art-cta .btn'));
+    await pg.waitForFunction(() => document.querySelector('main section.close .btn'));
     const r = await pg.evaluate(() => {
       const over = document.documentElement.scrollWidth - document.documentElement.clientWidth;
       const cells = [...document.querySelectorAll('.art-table tbody th, .art-table tbody td')];
@@ -354,7 +391,7 @@ async function checkArticle(browser, a) {
       // Every TOC link lands its heading at the top, instantly (reduced motion).
       const behaviour = await pg.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior);
       if (behaviour !== 'auto') err(slug, `scroll-behavior is ${behaviour} for a reader who asked for reduced motion`);
-      for (const it of art.toc.items) {
+      for (const it of art.toc ? art.toc.items : []) {
         await pg.click(`nav.art-toc a[href="#${it.id}"]`);
         await pg.waitForTimeout(60);
         const top = await pg.evaluate((id) => document.getElementById(id).getBoundingClientRect().top, it.id);
@@ -372,7 +409,8 @@ async function checkArticle(browser, a) {
   await c2.close();
 
   console.log(`${errors.some((e) => e.startsWith(slug + ' ')) ? 'ERR' : 'OK '} ${art.url.padEnd(20)} ${n} blocks against the brief, ` +
-    `${art.toc.items.length} TOC targets, wordCount ${art.wordCount}`);
+    `${art.toc ? art.toc.items.length + ' TOC targets' : 'no TOC'}, wordCount ${art.wordCount}` +
+    (archived[slug] ? `, ${archived[slug]} words as archived` : ''));
   return report.blockers.map((b) => Object.assign({ slug }, b));
 }
 

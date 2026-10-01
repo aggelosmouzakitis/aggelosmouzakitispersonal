@@ -311,6 +311,8 @@
 # essay again as blog/<slug>/index.html (listed in scripts/seo/site-meta.js, so
 # it is published and in the sitemap) makes Netlify serve it at its original
 # URL and skip its rule, with no other change here; tidy the rule away then.
+# The four essays the canonical copy features on /blog/ are published again
+# that way (scripts/articles/articles.js), so their rules are gone.
 # There is no /blog/* rule, so a slug that never existed is a 404.
 [[redirects]]
   from = "/blog/high-functioning-burnout-pandemic"
@@ -353,16 +355,6 @@
   status = 301
   force = false
 [[redirects]]
-  from = "/blog/the-high-cost-of-endless-pondering"
-  to = "/anxiety-overthinking/"
-  status = 301
-  force = false
-[[redirects]]
-  from = "/blog/the-loneliness-and-emotional-pressure-that-founders-experience"
-  to = "/therapy-for-founders/"
-  status = 301
-  force = false
-[[redirects]]
   from = "/blog/the-parent-archetypes-creating-high-performers-with-chronic-self-doubt"
   to = "/achievement-self-worth/"
   status = 301
@@ -375,11 +367,6 @@
 [[redirects]]
   from = "/blog/therapy-has-a-branding-problem"
   to = "/considering-therapy/"
-  status = 301
-  force = false
-[[redirects]]
-  from = "/blog/vacation-same-feeling"
-  to = "/executive-burnout-therapy/"
   status = 301
   force = false
 [[redirects]]
@@ -424,11 +411,6 @@
   force = false
 [[redirects]]
   from = "/blog/when-the-drive-to-succeed-is-really-just-the-fear-of-falling-behind"
-  to = "/achievement-self-worth/"
-  status = 301
-  force = false
-[[redirects]]
-  from = "/blog/who-are-you-if-you-are-not-crushing-it"
   to = "/achievement-self-worth/"
   status = 301
   force = false

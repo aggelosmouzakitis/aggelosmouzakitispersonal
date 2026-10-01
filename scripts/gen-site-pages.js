@@ -20,7 +20,7 @@
 const fs = require('fs');
 const path = require('path');
 const { FONT_HEAD } = require('./fonts.js');
-const { ARTICLES, dataBundle, INDEX_BUNDLE } = require('./articles/articles.js');
+const { ARTICLES, urlOf, dataBundle, INDEX_BUNDLE } = require('./articles/articles.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const GA = 'G-KV83RRF6ZM';
@@ -130,5 +130,5 @@ const write = (url, html) => {
   console.log(`  ${rel}`);
 };
 for (const p of PAGES) write(p.url, canonicalShell(p));
-for (const a of ARTICLES) write('/' + a.slug + '/', articleShell(a));
+for (const a of ARTICLES) write(urlOf(a), articleShell(a));
 console.log(`gen-site-pages: ${n} shells written`);

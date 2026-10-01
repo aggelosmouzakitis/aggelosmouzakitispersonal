@@ -27,7 +27,8 @@ diff <(curl -s "$SITE/" | grep -o 'site-[a-z]*\.js?v=[0-9a-f]*' | sort) \
 The same table the local gate uses (`scripts/seo/routes.js`), requested from
 production: the 25 canonical pages, 3 tools and the articles in
 `scripts/articles/articles.js` (200, bare form one hop to the
-slash), every legacy URL (301 in one hop to a 200, or 410), the 28 old essays,
+slash), every legacy URL (301 in one hop to a 200, or 410), the 24 old essays
+still retired (the four Featured essays are live again at their own URLs),
 `/ask-me-anything/el` (200), real 404s for URLs that never existed, and every
 repository internal (404).
 
@@ -52,7 +53,7 @@ done
 
 ```bash
 curl -s "$SITE/robots.txt" | grep -i '^sitemap'                 # the sitemap URL
-curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 31 (28 + 3 articles)
+curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 35 (28 + 3 guides + 4 essays published again)
 curl -sI "$SITE/llms.txt" | head -1                              # 200
 
 # every sitemap URL must be 200 and self-canonical
@@ -153,7 +154,7 @@ open "https://www.bing.com/webmasters"
 
 # IndexNow: confirm the key file is live BEFORE submitting
 curl -s "$SITE/f4a06bec48967c20f68efb4d562c6b71.txt"   # must print the key, nothing else
-npm run seo:indexnow                                    # every sitemap URL (31)
+npm run seo:indexnow                                    # every sitemap URL (35)
 
 # the retired URLs too, so they get re-crawled and dropped
 node scripts/seo/indexnow.js $(node -e "const {LEGACY}=require('./scripts/seo/routes.js');console.log(LEGACY.filter((r)=>r[1]===301||r[1]===410).map((r)=>r[0]).join(' '))")

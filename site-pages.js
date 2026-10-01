@@ -1500,9 +1500,12 @@
   }
 
   // ── Writing ────────────────────────────────────────────────────────────────
-  // The published articles (site-articles.js, newest first) open Featured:
-  // they live at their own URLs but sit on the blog. The essays from the
-  // canonical copy follow; their Read links stay withheld until they return.
+  // The published guides (site-articles.js, newest first) open Featured:
+  // they live at their own URLs but sit on the blog. The essays the canonical
+  // copy features follow, each made real by its published essay (an article
+  // whose `listing` is the entry's title): its own wording, plus the date,
+  // the read time, the title and Read linked to it. An entry with no
+  // published essay is left out rather than shown as a dead end.
   function ArticleEntry({
     a
   }) {
@@ -1536,6 +1539,45 @@
       item: a.related
     })) : null));
   }
+
+  // A canonical Featured entry with its essay: the entry's wording (title,
+  // description, Read, Related) with the essay's date and read time, and the
+  // title and Read linked to it.
+  function EssayEntry({
+    sub,
+    a,
+    ctx
+  }) {
+    const desc = sub.blocks.filter(b => b.t === 'p');
+    const related = sub.blocks.filter(b => b.t === 'related');
+    const read = findCta(sub.blocks, 'Read');
+    return e('article', {
+      className: 'essay essay--live'
+    }, e(ArticleMeta, {
+      meta: a,
+      className: 'essay__meta'
+    }), e('h3', {
+      className: 'h3'
+    }, e('a', {
+      className: 'essay__link',
+      href: a.url
+    }, sub.h3)), e('div', {
+      className: 'flow'
+    }, e(Blocks, {
+      blocks: desc,
+      ctx
+    }), e('div', {
+      className: 'links'
+    }, e('a', {
+      className: 'tlink',
+      href: a.url
+    }, e('span', null, read ? read.label : 'Read', e('span', {
+      className: 'sp-vh'
+    }, ': ' + sub.h3)), e(Arrow))), e(Blocks, {
+      blocks: related,
+      ctx
+    })));
+  }
   function WritingPage({
     p
   }) {
@@ -1543,6 +1585,8 @@
       id: p.id
     };
     const live = window.SITE_ARTICLES || [];
+    const guides = live.filter(a => !a.listing);
+    const essayFor = title => live.find(a => a.listing === title);
     return e(React.Fragment, null, e(Hero, {
       p,
       ctx
@@ -1567,20 +1611,18 @@
           id: s.id + '-h'
         }, s.h2), e('div', {
           className: 'essays'
-        }, live.map(a => e(ArticleEntry, {
+        }, guides.map(a => e(ArticleEntry, {
           key: a.id,
           a
-        })), subs.map(sub => e('article', {
-          key: sub.h3,
-          className: 'essay'
-        }, e('h3', {
-          className: 'h3'
-        }, sub.h3), e('div', {
-          className: 'flow'
-        }, e(Blocks, {
-          blocks: sub.blocks,
-          ctx
-        }))))))), wlcAfter(p.id, s.id));
+        })), subs.map(sub => {
+          const a = essayFor(sub.h3);
+          return a ? e(EssayEntry, {
+            key: sub.h3,
+            sub,
+            a,
+            ctx
+          }) : null;
+        })))), wlcAfter(p.id, s.id));
       }
       if (subs.length && subs.length === s.blocks.length) {
         return e('section', {
@@ -2025,11 +2067,14 @@
     meta,
     className
   }) {
+    // The brief's labels when it fixes the line ("Guide · …"), else the
+    // category, then the type.
+    const labels = meta.labels || [meta.category, meta.type].filter(Boolean);
     return e('p', {
       className: className || 'art-meta'
     }, e('span', {
       className: 'art-meta__cat'
-    }, meta.category), ' · ', meta.type ? meta.type + ' · ' : null, e('time', {
+    }, labels[0]), ' · ', labels.slice(1).map(l => l + ' · ').join('') || null, e('time', {
       dateTime: meta.published
     }, meta.publishedLabel), ' · ', meta.readTime, meta.modified ? e(React.Fragment, null, ' · Updated ', e('time', {
       dateTime: meta.modified
@@ -2146,8 +2191,12 @@
       tabIndex: 0
     }, table) : table;
   }
+
+  // `refs`: the numbered list is the References (the editorial reference
+  // treatment); any other numbered list is a numbered list in the text.
   function ArticleBlocks({
-    blocks
+    blocks,
+    refs
   }) {
     return blocks.map((b, i) => {
       switch (b.t) {
@@ -2163,6 +2212,18 @@
             className: 'p',
             id: b.id
           }, inlineMd(b.text));
+        case 'quote':
+          return e('blockquote', {
+            key: i,
+            className: 'art-quote'
+          }, e('p', {
+            className: 'p'
+          }, inlineMd(b.text)));
+        case 'hr':
+          return e('hr', {
+            key: i,
+            className: 'art-hr'
+          });
         case 'ul':
           return e('ul', {
             key: i,
@@ -2173,7 +2234,7 @@
         case 'ol':
           return e('ol', {
             key: i,
-            className: 'art-refs'
+            className: refs ? 'art-refs' : 'art-list art-list--ol'
           }, b.items.map((it, j) => e('li', {
             key: j
           }, inlineMd(it))));
@@ -2220,9 +2281,9 @@
       className: 'lead art-deck'
     }, inlineMd(a.deck)), e(AuthorStrip, {
       a: a.author
-    }), e(ArticleToc, {
+    }), a.toc ? e(ArticleToc, {
       toc: a.toc
-    })), e('div', {
+    }) : null), e('div', {
       className: 'read art-body'
     }, e('div', {
       className: 'flow'
@@ -2237,10 +2298,11 @@
     }, s.h2), e('div', {
       className: 'flow'
     }, e(ArticleBlocks, {
-      blocks: s.blocks
-    })))))),
+      blocks: s.blocks,
+      refs: s.kind === 'references'
+    })))))), a.cta
     // The site's close, carrying the article's own call to action.
-    e('section', {
+    ? e('section', {
       className: 'band close on-dark art-cta',
       'aria-labelledby': a.cta.id
     }, e('div', {
@@ -2256,7 +2318,16 @@
       className: 'close__actions'
     }, e(Btn, {
       item: a.cta.button
-    })))));
+    }))))
+    // An essay: the Writing page's own close, word for word.
+    : e(window.CloseBand, {
+      label: a.close.label,
+      text: a.close.text,
+      actions: a.close.actions.map(it => e(isPrimary(it) ? Btn : TLink, {
+        key: it.href,
+        item: it
+      }))
+    }));
   }
   function ArticleSite({
     id
@@ -2644,6 +2715,14 @@
 .art-list li+li{margin-top:12px}
 .art-list li::marker{color:var(--green)}
 .art-list strong{font-weight:650;color:var(--heading)}
+.art-list--ol{padding-left:1.4em}
+.art-list--ol li::marker{font-weight:700;font-variant-numeric:tabular-nums}
+/* An essay's pull quote and section break */
+.art-quote{margin:0;padding:4px 0 4px 22px;border-left:2px solid var(--green)}
+.art .art-quote .p{font-family:var(--font-heading);font-size:clamp(20px,calc(18.5px + .4vw),23px);font-weight:600;line-height:1.45;letter-spacing:-.01em;color:var(--heading)}
+.art-hr{width:64px;height:0;margin-inline:0;border:0;border-top:2px solid var(--rule-2)}
+.flow>.art-quote,.flow>.art-hr{margin-top:32px}
+.flow>.art-quote+*,.flow>.art-hr+*{margin-top:32px}
 .flow>.art-list,.flow>.art-table,.flow>.art-table-scroll,.flow>.art-callout{margin-top:24px}
 .flow>.art-list+*,.flow>.art-table+*,.flow>.art-table-scroll+*,.flow>.art-callout+*{margin-top:24px}
 

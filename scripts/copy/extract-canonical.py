@@ -59,8 +59,10 @@ TYPE_BY_URL = {
 }
 
 # ── Link wording in the page copy → destination ──────────────────────────────
-# None = the copy names a destination that is not published yet (the essays on
-# /blog/); the UI leaves that link out rather than pointing it somewhere else.
+# None = the wording has no one destination: each "Read" under Featured on
+# /blog/ goes to its own essay, which site-pages.jsx takes from the published
+# essays (site-articles.js, scripts/articles/articles.js `listing`); an entry
+# whose essay is not published is left off the page rather than shown dead.
 CTA_HREF = {
     'Book a consultation': '/contact/',
     'Individual psychotherapy': '/individual-psychotherapy/',

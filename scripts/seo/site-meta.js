@@ -238,10 +238,12 @@ function articlePage(a) {
     datePublished: art.meta.published,
   };
   if (art.meta.modified) posting.dateModified = art.meta.modified;
-  Object.assign(posting, {
-    inLanguage: 'en-GB', articleSection: art.meta.category,
-    image: abs(art.author.image), wordCount: art.wordCount,
-  });
+  Object.assign(posting, { inLanguage: a.inLanguage || 'en-GB', articleSection: art.meta.category });
+  // The approved author image the page shows, unless the brief rules a
+  // portrait out as the article's image (then none: never an invented one).
+  if (a.schemaImage !== 'none') posting.image = abs(art.author.image);
+  posting.wordCount = art.wordCount;
+  const labels = art.meta.labels || [art.meta.category, art.meta.type].filter(Boolean);
   const breadcrumb = {
     '@type': 'BreadcrumbList', '@id': url + '#breadcrumb', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: ORIGIN + '/' },
@@ -260,7 +262,7 @@ function articlePage(a) {
     ogDescription: art.description,
     ogImage: abs('/img/og/v2/' + a.slug + '.png'),
     ogImageAlt: art.h1,
-    og: { key: a.slug, label: art.meta.category, title: art.h1 },
+    og: { key: a.slug, label: labels[0], title: art.h1 },
     sources: [ARTICLE_REGISTRY.dataSource(a), a.brief, 'site-pages.jsx', 'site-chrome.jsx'],
     bundles: [ARTICLE_REGISTRY.dataBundle(a)],
     schema: [posting, breadcrumb],

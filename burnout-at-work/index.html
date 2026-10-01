@@ -509,6 +509,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .art-list li+li{margin-top:12px}
 .art-list li::marker{color:var(--green)}
 .art-list strong{font-weight:650;color:var(--heading)}
+.art-list--ol{padding-left:1.4em}
+.art-list--ol li::marker{font-weight:700;font-variant-numeric:tabular-nums}
+/* An essay's pull quote and section break */
+.art-quote{margin:0;padding:4px 0 4px 22px;border-left:2px solid var(--green)}
+.art .art-quote .p{font-family:var(--font-heading);font-size:clamp(20px,calc(18.5px + .4vw),23px);font-weight:600;line-height:1.45;letter-spacing:-.01em;color:var(--heading)}
+.art-hr{width:64px;height:0;margin-inline:0;border:0;border-top:2px solid var(--rule-2)}
+.flow>.art-quote,.flow>.art-hr{margin-top:32px}
+.flow>.art-quote+*,.flow>.art-hr+*{margin-top:32px}
 .flow>.art-list,.flow>.art-table,.flow>.art-table-scroll,.flow>.art-callout{margin-top:24px}
 .flow>.art-list+*,.flow>.art-table+*,.flow>.art-table-scroll+*,.flow>.art-callout+*{margin-top:24px}
 
@@ -562,7 +570,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 <script src="/site-nav.js?v=845fe0238a"></script>
 <script src="/site-chrome.js?v=ebc8547ebf"></script>
 <script src="/article-burnout-at-work.js?v=2460dd04ec"></script>
-<script src="/site-pages.js?v=2a66ea1c22"></script>
+<script src="/site-pages.js?v=126bcbbe0e"></script>
 <script>renderArticlePage("burnout-at-work");</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 // the retirements the brief did not list, marked "not in brief").
 // Used by scripts/qa-routes.js (full status table) and scripts/seo/seo-check.js.
 
-const { ARTICLES } = require('../articles/articles.js');
+const { ARTICLES, urlOf } = require('../articles/articles.js');
 
 // [url, expected status of the first response, final target (301s), note]
 const CANONICAL = [
@@ -18,15 +18,16 @@ const CANONICAL = [
   ['/work-life-check/', 200, null, 'tool'],
   ['/free-tools/quit-your-job/', 200, null, 'tool (kept)'],
   ['/free-tools/burned-out/', 200, null, 'tool (kept)'],
-], ARTICLES.map((a) => ['/' + a.slug + '/', 200, null, 'article (listed on /blog/)']));
+], ARTICLES.map((a) => [urlOf(a), 200, null, a.source ? 'essay, published again (listed on /blog/)' : 'article (listed on /blog/)']));
 
 // The old essays, one explicit rule each in netlify.toml (force = false, so an
 // essay published again at blog/<slug>/index.html is served at its original
 // URL). 301 where a canonical page covers the essay's main subject; 410 where
-// none does. Featured = listed under "Selected essays" on /blog/, the first
-// candidates to be published again.
+// none does. Featured = the four the canonical copy lists under Featured on
+// /blog/, published again (scripts/articles/articles.js): they are live
+// pages now, their rules removed, so they leave this list (filter below).
 // [slug, target or null for 410, reason]
-const ESSAYS = [
+const ESSAYS_ALL = [
   ['high-functioning-burnout-pandemic', '/executive-burnout-therapy/', 'burnout in high performers who keep performing'],
   ['high-performance-as-a-way-to-get-accepted-by-your-family', '/achievement-self-worth/', 'achievement as the way to earn family approval'],
   ['is-it-post-holiday-anxiety-or-just-clarity', '/career-transition-therapy/', 'post-holiday dread as clarity about leaving the job'],
@@ -56,6 +57,7 @@ const ESSAYS = [
   ['you-re-creating-the-exact-problem-you-re-trying-to-avoid', '/career-transition-therapy/', 'checked out while waiting to leave'],
   ['you-re-just-trading-one-type-of-friction-for-another', '/career-transition-therapy/', 'changing jobs to escape friction'],
 ];
+const ESSAYS = ESSAYS_ALL.filter(([slug]) => !ARTICLES.some((a) => urlOf(a) === `/blog/${slug}/`));
 
 const LEGACY = [
   ['/start-here/', 301, '/considering-therapy/'],

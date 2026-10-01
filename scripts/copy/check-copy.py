@@ -32,7 +32,6 @@ spec.loader.exec_module(extract)
 # Wording in the document that is intentionally not visible on the page.
 EXPECTED_MISSING = {
     'Credential strip': 'a structural label: the strip itself has no visible heading',
-    'Read': 'essay links withheld until the essays are published again (Writing)',
 }
 
 INLINE = r'</?(?:strong|em|b|i|a|span|abbr|small|br)\b[^>]*>'

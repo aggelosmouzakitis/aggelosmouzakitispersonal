@@ -42,6 +42,21 @@
 //   wordCount   what the brief counts: 'headline', 'deck', 'body' (the
 //               introduction and every section, FAQ included), 'references'.
 //               Never the breadcrumb, metadata line, author block, TOC or CTA.
+//   url         the page's path when it is not /<slug>/ (an essay brought back
+//               keeps its original /blog/<slug>/).
+//   source      an essay brought back: the archived page its text comes from
+//               (scripts/articles/from-archive.js); check-articles.js proves
+//               the page carries that text word for word.
+//   listing     an essay brought back: the title of the canonical Featured
+//               entry on /blog/ it makes real (that entry's own wording stays;
+//               it gains the date, the read time and its links).
+//   close       'writing': no CTA of its own; the page ends with the Writing
+//               page's close from the canonical copy.
+//   labels      the metadata line's labels when the brief fixes them
+//               ("Guide · <date> · …"); default: category, then type.
+//   inLanguage  for BlogPosting (default en-GB, as the guides' briefs ask).
+//   schemaImage 'none' when the brief rules out the author portrait as the
+//               article's image; default: the approved author image.
 //   links       Part 2's [INTERNAL LINK NEEDED: …] placeholders, by their text.
 //               While unresolved (null, or { pointer } without `resolved`),
 //               the pointer stays out of the published page and
@@ -140,12 +155,40 @@ const ARTICLES = [
     wordCount: ['headline', 'deck', 'body'],
     links: {},
   },
+  // The four essays the canonical copy features on /blog/, brought back from
+  // the archive at their original URLs (from-archive.js): text word for word,
+  // first publication dates kept, the canonical entries made real.
+  ...[
+    ['vacation-same-feeling', 'You took the vacation. You came back feeling the same way.', '2026-04-24', '2 min read'],
+    ['who-are-you-if-you-are-not-crushing-it', 'Who are you if you’re not “crushing” it?', '2026-01-27', '7 min read'],
+    ['the-loneliness-and-emotional-pressure-that-founders-experience', 'The loneliness and emotional pressure that founders experience', '2026-02-09', '10 min read'],
+    ['the-high-cost-of-endless-pondering', 'The high cost of endless pondering', '2025-12-02', '10 min read'],
+  ].map(([slug, listing, published, readTime]) => ({
+    slug,
+    url: `/blog/${slug}/`,
+    brief: `content/articles/${slug}.md`,
+    source: `archive/blog/${slug}/index.html`,
+    listing,
+    published,
+    modified: null,
+    category: 'Essay',
+    readTime,
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    related: null, // the canonical entry names its own
+    close: 'writing',
+    // written in mixed British and American spelling, before the guides
+    inLanguage: 'en',
+    wordCount: ['headline', 'deck', 'body'],
+    links: {},
+  })),
 ];
 
 const ORIGIN = 'https://aggelosmouzakitis.com';
 
 // The generated files for an article (the page loads its data bundle).
-const pageFile = (a) => a.slug + '/index.html';
+const urlOf = (a) => a.url || '/' + a.slug + '/';
+const pageFile = (a) => urlOf(a).slice(1) + 'index.html';
 const dataSource = (a) => 'article-' + a.slug + '.jsx';
 const dataBundle = (a) => 'article-' + a.slug + '.js';
 const INDEX_SOURCE = 'site-articles.jsx';
@@ -165,4 +208,4 @@ function loadArticle(a) {
   return page;
 }
 
-module.exports = { ARTICLES, ORIGIN, pageFile, dataSource, dataBundle, INDEX_SOURCE, INDEX_BUNDLE, loadArticle };
+module.exports = { ARTICLES, ORIGIN, urlOf, pageFile, dataSource, dataBundle, INDEX_SOURCE, INDEX_BUNDLE, loadArticle };

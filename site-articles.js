@@ -47,4 +47,48 @@ window.SITE_ARTICLES = [{
     "label": "Anxiety & Overthinking",
     "href": "/anxiety-overthinking/"
   }
+}, {
+  "id": "vacation-same-feeling",
+  "url": "/blog/vacation-same-feeling/",
+  "h1": "You took the vacation. You came back feeling the same way.",
+  "deck": "The problem usually isn’t the workload. It’s what the workload is compensating for.",
+  "category": "Essay",
+  "published": "2026-04-24",
+  "publishedLabel": "April 2026",
+  "readTime": "2 min read",
+  "related": null,
+  "listing": "You took the vacation. You came back feeling the same way."
+}, {
+  "id": "the-loneliness-and-emotional-pressure-that-founders-experience",
+  "url": "/blog/the-loneliness-and-emotional-pressure-that-founders-experience/",
+  "h1": "The loneliness and emotional pressure that founders experience",
+  "deck": "There’s a specific isolation that shows up in founders that’s distinct from regular loneliness.",
+  "category": "Essay",
+  "published": "2026-02-09",
+  "publishedLabel": "February 2026",
+  "readTime": "10 min read",
+  "related": null,
+  "listing": "The loneliness and emotional pressure that founders experience"
+}, {
+  "id": "who-are-you-if-you-are-not-crushing-it",
+  "url": "/blog/who-are-you-if-you-are-not-crushing-it/",
+  "h1": "Who are you if you are not “crushing” it?",
+  "deck": "When your identity is enmeshed with the concept of constant success.",
+  "category": "Essay",
+  "published": "2026-01-27",
+  "publishedLabel": "January 2026",
+  "readTime": "7 min read",
+  "related": null,
+  "listing": "Who are you if you’re not “crushing” it?"
+}, {
+  "id": "the-high-cost-of-endless-pondering",
+  "url": "/blog/the-high-cost-of-endless-pondering/",
+  "h1": "The high cost of endless pondering",
+  "deck": "And why it’s causing the opposite of what you want to achieve.",
+  "category": "Essay",
+  "published": "2025-12-02",
+  "publishedLabel": "December 2025",
+  "readTime": "10 min read",
+  "related": null,
+  "listing": "The high cost of endless pondering"
 }];

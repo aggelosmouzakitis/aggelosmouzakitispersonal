@@ -33,6 +33,14 @@ To add one: save the brief as `content/articles/<slug>.md`, add an entry to
 `scripts/articles/articles.js`, then the full pipeline from `npm run articles`
 (with `npm run pages`, and `node scripts/seo/og.js <slug>` for its share card).
 
+The four essays the canonical copy features on /blog/ are back the same way, at
+their original `/blog/<slug>/` URLs: `node scripts/articles/from-archive.js
+<slug>` turns the archived page into its source (word for word; only the old
+site's conversion debris is repaired), its articles.js entry names the
+Featured entry it makes real (`listing`), and its netlify.toml rule and
+routes.js row go. Any other archived essay can come back the same way. A
+Featured entry with no published essay is left off /blog/, never shown dead.
+
 ## When to re-run
 - The canonical document changed: replace `content/canonical-copy.md`, then
   the full pipeline from `npm run copy`.

@@ -42,8 +42,10 @@ class BriefError extends Error {}
 const fail = (slug, msg) => { throw new BriefError(`${slug}: ${msg}`); };
 
 // ── Text helpers ─────────────────────────────────────────────────────────────
-// Typographic apostrophes in the words, never inside a link's address.
-const smart = (s) => s.split(/(\]\([^)\s]*\))/).map((part, i) => (i % 2 ? part : part.replace(/'/g, '’'))).join('');
+// Typographic apostrophes in the words, never inside a link's address; a
+// straight quote that opens a quotation ('the one who succeeds') opens it.
+const smart = (s) => s.split(/(\]\([^)\s]*\))/).map((part, i) => (i % 2 ? part
+  : part.replace(/(^|[\s(“[—–-])'(?=[\p{L}\p{N}])/gu, '$1‘').replace(/'/g, '’'))).join('');
 const straight = (s) => s.replace(/’/g, "'");
 
 // Inline Markdown → plain text: the words a reader sees.
@@ -111,31 +113,34 @@ function subsections(text) {
 
 // "Key: `value`" lines of a subsection, bulleted or not; keys lower-case and
 // without "Exact" ("- Exact heading: `…`" and "Heading: `…`" are one field).
-// A key that names a link ("Exact name, linked to `/about/`") also gives
-// "<key> link".
+// A field that names a link ("Exact name, linked to `/about/`: `…`" or
+// "Name: `…`, linked to `/about/`.") also gives "<key> link".
 function fieldsOf(text) {
   const out = {};
-  for (const m of text.matchAll(/^(?:- )?(.+?): `([^`]+)`\s*$/gm)) {
+  for (const m of text.matchAll(/^(?:- )?(.+?): `([^`]+)`(?:,? linked to `([^`]+)`\.?)?\s*$/gm)) {
     const raw = m[1].trim();
     const key = raw.replace(/,?\s*linked to `[^`]+`/i, '').trim().toLowerCase().replace(/^exact /, '');
     out[key] = m[2];
-    const link = raw.match(/linked to `([^`]+)`/i);
-    if (link) out[key + ' link'] = link[1];
+    const link = m[3] || (raw.match(/linked to `([^`]+)`/i) || [])[1];
+    if (link) out[key + ' link'] = link;
   }
   return out;
 }
 
-// Markdown blocks: headings, paragraphs (lines joined), lists, pipe tables.
+// Markdown blocks: headings, paragraphs (lines joined), lists, pipe tables,
+// block quotes, thematic breaks.
 function blocksOf(md, slug) {
   const out = [];
   let para = null;
   let list = null;
   let table = null;
+  let quote = null;
   const flush = () => {
     if (para) out.push({ t: 'p', md: para.join(' ') });
     if (list) out.push(list);
     if (table) out.push(table);
-    para = list = table = null;
+    if (quote) out.push({ t: 'quote', md: quote.join(' ') });
+    para = list = table = quote = null;
   };
   for (const raw of md.split('\n')) {
     const line = raw.replace(/\s+$/, '');
@@ -159,8 +164,13 @@ function blocksOf(md, slug) {
       table.rows.push(line);
       continue;
     }
-    if (/^\s/.test(raw) || line.startsWith('>')) fail(slug, `unsupported Markdown (indented or quoted): ${line.slice(0, 60)}`);
-    if (list || table) fail(slug, `text directly after a list or table: ${line.slice(0, 60)}`);
+    if ((m = line.match(/^> ?(.*)$/))) {
+      if (!quote) { flush(); quote = []; }
+      quote.push(m[1].trim());
+      continue;
+    }
+    if (/^\s/.test(raw)) fail(slug, `unsupported Markdown (indented): ${line.slice(0, 60)}`);
+    if (list || table || quote) fail(slug, `text directly after a list, table or quote: ${line.slice(0, 60)}`);
     para = para || [];
     para.push(line.trim());
   }
@@ -179,20 +189,21 @@ function extract(a) {
 
   // Part 1: the page spec.
   const spec = specOf(parts['1']);
-  const url = '/' + slug + '/';
+  const url = a.url || '/' + slug + '/';
   if (spec.URL !== ORIGIN + url && spec.URL !== url) fail(slug, `Part 1 URL is ${spec.URL}, expected ${url}`);
   for (const k of ['Title tag', 'Meta description', 'H1']) if (!spec[k]) fail(slug, `Part 1 has no ${k}`);
   const minutes = ((spec['Estimated reading time'] || '').match(/(\d+) minute/) || [])[1];
   if (minutes && !a.readTime.startsWith(minutes + ' ')) fail(slug, `Part 1 says ${minutes} minutes; articles.js says "${a.readTime}"`);
 
-  // Part 3: TOC, CTA id, author block, CTA wording, header notes.
+  // Part 3: TOC (if the brief gives one), CTA id, author block, CTA wording
+  // (or the close articles.js names), header notes.
   const notes = subsections(parts['3']);
   const need = (t) => notes[t] || fail(slug, `Part 3 has no "### ${t}"`);
-  const tocText = need('Table of contents');
-  const tocLabel = (tocText.match(/label:? `([^`]+)`/i) || [])[1] || fail(slug, 'Part 3 TOC has no label');
+  const tocText = notes['Table of contents'] || '';
+  const tocLabel = tocText ? (tocText.match(/label:? `([^`]+)`/i) || [])[1] || fail(slug, 'Part 3 TOC has no label') : null;
   const toc = [...tocText.matchAll(/^\|\s*([^|`]+?)\s*\|\s*`#([a-z0-9-]+)`\s*\|$/gm)]
     .map((m) => ({ label: smart(m[1]), id: m[2] }));
-  if (!toc.length) fail(slug, 'Part 3 TOC table is empty');
+  if (tocText && !toc.length) fail(slug, 'Part 3 TOC table is empty');
   // The CTA heading's id, when Part 3 gives one (else one from its words).
   const ctaIdGiven = (tocText.match(/Assign `#([a-z0-9-]+)` to the final commercial CTA H2/)
     || tocText.match(/final CTA the ID `#?([a-z0-9-]+)`/) || [])[1];
@@ -206,26 +217,30 @@ function extract(a) {
     width: a.authorImageSize[0],
     height: a.authorImageSize[1],
     alt: af['alt text'],
-    credential: af['credential line'] || af['credentials line'],
-    background: af['background line'],
+    credential: af['credential line'] || af['credentials line'] || af['credentials'] || af['credential'],
+    background: af['background line'] || af['background'],
   };
   for (const [k, v] of Object.entries(author)) if (!v) fail(slug, `author block: no ${k}`);
   if (/^\[/.test(af.image || '') && !a.authorImage) fail(slug, 'the brief asks for the approved image: set authorImage in articles.js');
 
-  const ctaSpec = fieldsOf(need('Final CTA'));
-  const ctaId = ctaIdGiven || slugify(ctaSpec.heading || '');
-  const ids = toc.map((t) => t.id).concat(ctaId);
-  if (!ctaId || new Set(ids).size !== ids.length) fail(slug, 'duplicate or missing anchor IDs in Part 3');
+  const ctaSpec = notes['Final CTA'] ? fieldsOf(notes['Final CTA']) : {};
+  if (!notes['Final CTA'] && a.close !== 'writing') fail(slug, 'no Final CTA in Part 3 and no close in articles.js');
+  const ctaId = notes['Final CTA'] ? ctaIdGiven || slugify(ctaSpec.heading || '') : null;
+  const ids = toc.map((t) => t.id).concat(notes['Final CTA'] ? [ctaId] : []);
+  if ((notes['Final CTA'] && !ctaId) || new Set(ids).size !== ids.length) fail(slug, 'duplicate or missing anchor IDs in Part 3');
   const header = need('Article header');
   for (const v of [a.category, a.type, a.readTime].filter(Boolean)) {
-    if (!header.includes('`' + v + '`')) fail(slug, `articles.js says "${v}"; Part 3 Article header does not`);
+    if (!header.includes(v)) fail(slug, `articles.js says "${v}"; Part 3 Article header does not`);
   }
   const canonical = (header.match(/Canonical URL: `([^`]+)`/) || [])[1];
   if (canonical && canonical !== ORIGIN + url) fail(slug, `Part 3 canonical is ${canonical}`);
-  const deckFull = (header.match(/^> (.+)$/m) || header.match(/is the deck: `([^`]+)`/) || [])[1];
-  const deckStart = (header.match(/deck is the paragraph beginning [“"`]([^”"`]+)[”"`]/) || [])[1];
-  const introStart = (header.match(/(?:introduction|body opening) begins [“"`]([^”"`]+)[”"`]/)
-    || header.match(/paragraph beginning [“"`]([^”"`]+)[”"`] starts the article introduction/) || [])[1];
+  const Q = '[“"`]([^”"`]+)[”"`]';
+  const first = (...res) => (res.map((re) => header.match(re)).find(Boolean) || [])[1];
+  const deckFull = first(/^> (.+)$/m, /is the deck: `([^`]+)`/);
+  const deckStart = first(new RegExp('deck is the paragraph beginning ' + Q), new RegExp('paragraph under the H1, beginning ' + Q + ', is the deck'),
+    new RegExp('the deck, the paragraph beginning ' + Q));
+  const introStart = first(new RegExp('(?:introduction|body opening) begins ' + Q), new RegExp('paragraph beginning ' + Q + ' starts the article introduction'),
+    new RegExp('beginning ' + Q + ' starts the body'));
   const introCount = NUMBERS[((header.match(/\b(one|two|three|four|five|six) (?:opening )?paragraphs\b/i) || [])[1] || '').toLowerCase()];
 
   // Part 2: the article.
@@ -274,13 +289,15 @@ function extract(a) {
   let cta = null;
   for (const [i, b] of blocks.entries()) {
     if (b.t === 'hr') {
-      // A thematic break is only accepted where the brief marks the boundary
-      // before the CTA (its eyebrow, then its heading): the CTA's own band
-      // draws that boundary.
+      // A thematic break that marks the boundary before the CTA (its eyebrow,
+      // then its heading) is the CTA band's own edge; anywhere else it is a
+      // section break the article keeps.
       const eyebrow = blocks[i + 1];
       const heading = blocks[i + 2];
-      if (!(eyebrow && eyebrow.t === 'p' && eyebrow.md === ctaSpec.eyebrow && heading && heading.t === 'h' &&
-        smart(heading.md) === smart(ctaSpec.heading || ''))) fail(slug, 'a thematic break (---) outside the CTA boundary');
+      if (ctaSpec.heading && eyebrow && eyebrow.t === 'p' && eyebrow.md === ctaSpec.eyebrow && heading && heading.t === 'h' &&
+        smart(heading.md) === smart(ctaSpec.heading)) continue;
+      if (cta) fail(slug, 'a thematic break inside the CTA');
+      (sub ? sub.blocks : section ? section.blocks : intro).push({ t: 'hr' });
       continue;
     }
     if (b.t === 'h' && b.level === 2) {
@@ -313,6 +330,8 @@ function extract(a) {
       block = { t: 'p', text: t };
     } else if (b.t === 'ul' || b.t === 'ol') {
       block = { t: b.t, items: b.items.map((it) => text(it, 'list')) };
+    } else if (b.t === 'quote') {
+      block = { t: 'quote', text: text(b.md, 'quote') };
     } else {
       const rows = b.rows.map(cellsOf);
       if (rows.length < 3 || !rows[1].every((c) => /^:?-{3,}:?$/.test(c))) fail(slug, 'malformed table');
@@ -340,26 +359,45 @@ function extract(a) {
   if (deckFull && deck.text !== smart(deckFull)) fail(slug, 'the deck differs from the one quoted in Part 3');
   if (deckStart && !deck.text.startsWith(smart(deckStart))) fail(slug, 'the deck does not begin as Part 3 says');
   if (introStart && !(intro[0] && plain(intro[0].text).startsWith(smart(introStart)))) fail(slug, 'the introduction does not begin as Part 3 says');
-  if (introCount && intro.length !== introCount) fail(slug, `the introduction has ${intro.length} paragraphs; Part 3 says ${introCount}`);
-  if (intro.some((b) => b.t !== 'p')) fail(slug, 'the introduction holds more than paragraphs');
+  if (introCount && intro.filter((b) => b.t === 'p').length !== introCount) fail(slug, `the introduction has ${intro.length} paragraphs; Part 3 says ${introCount}`);
+  if (intro.some((b) => !['p', 'quote', 'hr'].includes(b.t))) fail(slug, 'the introduction holds more than paragraphs');
 
   // Sections ↔ the TOC table: same headings, same order; ids from the table.
+  // Without a TOC (an essay), each H2 still gets an id from its words.
   const got = sections.map((s) => s.h2);
-  if (got.join('\n') !== toc.map((t) => t.label).join('\n')) {
+  if (toc.length && got.join('\n') !== toc.map((t) => t.label).join('\n')) {
     fail(slug, `the H2s and the Part 3 TOC differ:\n  H2s: ${got.join(' | ')}\n  TOC: ${toc.map((t) => t.label).join(' | ')}`);
   }
+  const used = new Set();
   sections.forEach((s, i) => {
-    s.id = toc[i].id;
+    let id = toc.length ? toc[i].id : slugify(plain(s.h2));
+    for (let n = 2; !toc.length && used.has(id); n++) id = slugify(plain(s.h2)) + '-' + n;
+    used.add(s.id = id);
     const subs = s.blocks.filter((b) => b.t === 'sub');
     if (s.blocks.length && subs.length === s.blocks.length && subs.every((q) => /\?$/.test(q.h3))) s.kind = 'faq';
     if (s.blocks.length === 1 && s.blocks[0].t === 'ol') s.kind = 'references';
   });
 
-  // The CTA against Part 3, word for word.
-  if (!cta || !cta.text || !cta.button) fail(slug, 'the CTA is incomplete');
-  if (smart(ctaSpec.copy || '') !== cta.text) fail(slug, 'CTA copy differs from Part 3');
-  if (smart(ctaSpec['button label'] || '') !== cta.button.label) fail(slug, 'CTA button label differs from Part 3');
-  if ((ctaSpec.destination || '').replace(ORIGIN, '') !== cta.button.href) fail(slug, 'CTA destination differs from Part 3');
+  // The CTA against Part 3, word for word; or, for an essay, the Writing
+  // page's own close from the canonical copy (no new wording).
+  let close = null;
+  if (notes['Final CTA']) {
+    if (!cta || !cta.text || !cta.button) fail(slug, 'the CTA is incomplete');
+    if (smart(ctaSpec.copy || '') !== cta.text) fail(slug, 'CTA copy differs from Part 3');
+    if (smart(ctaSpec['button label'] || '') !== cta.button.label) fail(slug, 'CTA button label differs from Part 3');
+    if ((ctaSpec.destination || '').replace(ORIGIN, '') !== cta.button.href) fail(slug, 'CTA destination differs from Part 3');
+  } else {
+    if (cta) fail(slug, 'a CTA in Part 2 without its Final CTA spec');
+    const window = {};
+    // eslint-disable-next-line no-eval
+    eval(fs.readFileSync(path.join(ROOT, 'site-copy.jsx'), 'utf8'));
+    const writing = window.SITE_COPY.pages.blog.sections.find((s) => s.id === 'contact');
+    close = {
+      label: writing.h2,
+      text: writing.blocks.filter((b) => b.t === 'p').map((b) => b.text).join(' '),
+      actions: [].concat(...writing.blocks.filter((b) => b.t === 'ctas').map((b) => b.items)).filter((it) => it.href),
+    };
+  }
 
   // A table: named by its caption (a sentence moved from the end of the
   // paragraph before it, or one Part 3 writes, visible or not) or else by its
@@ -416,15 +454,20 @@ function extract(a) {
   }
 
   // Published dates, from articles.js, read as written (never shifted by a
-  // time zone): "October 2026".
+  // time zone): "October 2026". A new article gives its release with a time
+  // and offset; an essay brought back keeps the date it was first published,
+  // which is all its archived page recorded.
   const monthOf = (iso, what) => {
-    const m = /^(\d{4})-(\d{2})-(\d{2})T\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:\d{2})$/.exec(iso || '');
-    if (!m) fail(slug, `${what} must be ISO 8601 with a time and an offset, e.g. 2026-10-01T09:00:00+01:00`);
+    const m = /^(\d{4})-(\d{2})-(\d{2})(?:T\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:\d{2}))?$/.exec(iso || '');
+    if (!m || (!a.source && iso.length === 10)) fail(slug, `${what} must be ISO 8601 with a time and an offset, e.g. 2026-10-01T09:00:00+01:00`);
     return MONTHS[+m[2] - 1] + ' ' + m[1];
   };
+  // The metadata line shows `labels` when the brief fixes it ("Guide · …"),
+  // else the category and the type.
   const meta = {
     category: a.category,
     ...(a.type ? { type: a.type } : {}),
+    ...(a.labels ? { labels: a.labels } : {}),
     published: a.published,
     publishedLabel: monthOf(a.published, 'published'),
     readTime: a.readTime,
@@ -439,8 +482,9 @@ function extract(a) {
   // breadcrumb, metadata line, author block, TOC or CTA.
   const scope = new Set(a.wordCount || ['headline', 'deck', 'body', 'references']);
   // (A visually hidden caption is an accessible name, not article text.)
-  const textOf = (b) => (b.t === 'p' ? [b.text] : b.t === 'sub' ? [b.h3].concat(...b.blocks.map(textOf))
-    : b.t === 'table' ? [b.captionHidden ? '' : b.caption || ''].concat(b.head, ...b.rows) : b.items);
+  const textOf = (b) => (b.t === 'p' || b.t === 'quote' ? [b.text] : b.t === 'hr' ? []
+    : b.t === 'sub' ? [b.h3].concat(...b.blocks.map(textOf))
+      : b.t === 'table' ? [b.captionHidden ? '' : b.caption || ''].concat(b.head, ...b.rows) : b.items);
   const sectionText = (s) => [s.h2].concat(...s.blocks.map(textOf));
   const counted = [].concat(
     scope.has('headline') ? [h1.md] : [],
@@ -458,15 +502,20 @@ function extract(a) {
     deck: deck.text,
     meta,
     author,
-    toc: { label: tocLabel, items: toc },
+    toc: toc.length ? { label: tocLabel, items: toc } : null,
     intro,
     sections,
     cta,
+    ...(close ? { close } : {}),
     wordCount,
   };
+  // The listing on /blog/. An essay brought back fills the canonical Featured
+  // entry it was listed under (`listing`, that entry's title) rather than
+  // adding one of its own.
   const entry = Object.assign({ id: slug, url, h1: page.h1, deck: page.deck, category: meta.category },
-    meta.type ? { type: meta.type } : {},
-    { published: meta.published, publishedLabel: meta.publishedLabel, readTime: meta.readTime, related: a.related || null });
+    meta.type ? { type: meta.type } : {}, meta.labels ? { labels: meta.labels } : {},
+    { published: meta.published, publishedLabel: meta.publishedLabel, readTime: meta.readTime, related: a.related || null },
+    a.listing ? { listing: smart(a.listing) } : {});
   return { page, entry, report };
 }
 
