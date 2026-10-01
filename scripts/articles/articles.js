@@ -65,6 +65,10 @@
 //   schemaModified 'published' when the brief asks for dateModified to equal
 //               the publication timestamp until a substantive update (no
 //               visible "Updated").
+//   relink      links in Part 2 to a page the site has since merged into
+//               another: { from: to }, the target its netlify.toml 301 rule
+//               already gives (the extractor checks it). The anchor text stays;
+//               the link skips the redirect.
 //   inLanguage  for BlogPosting (default en-GB, as the guides' briefs ask).
 //   schemaImage 'none' when the brief rules out the author portrait as the
 //               article's image; 'author' when the brief keeps it to the
@@ -276,6 +280,39 @@ const ARTICLES = [
     // invent a hero image": the author portrait is not an article image.
     schemaImage: 'none',
     links: {},
+  },
+  {
+    slug: 'imposter-syndrome-at-work',
+    brief: 'content/articles/imposter-syndrome-at-work.md',
+    published: '2026-10-01T23:48:00+01:00',
+    modified: null,
+    // "`dateModified`: the publication timestamp initially"
+    schemaModified: 'published',
+    category: 'Guide',
+    readTime: '13 min read',
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    related: { label: 'Achievement & Self-Worth', href: '/achievement-self-worth/' },
+    // "Accessible name: `…`" (hidden: the visible article stays Part 2); three
+    // long columns scroll inside an accessibly named, focusable wrapper.
+    table: { caption: 'Questions for assessing imposter feelings and development needs', captionFrom: 'brief', captionHidden: true, narrow: 'scroll' },
+    callout: null,
+    // "calculate from the public editorial content"
+    wordCount: ['headline', 'deck', 'body'],
+    // "`image`: only an approved image actually used on the page. Do not
+    // invent a hero image": no article image.
+    schemaImage: 'none',
+    // The brief takes /imposter-syndrome-therapy/ for a live service page, but
+    // it was merged into Achievement & Self-Worth (its 301 since the canonical
+    // restructure): the anchor stays, the link goes straight there.
+    relink: { '/imposter-syndrome-therapy/': '/achievement-self-worth/' },
+    links: {
+      // Article 9 (perfectionism at work) is not published yet. Once it is,
+      // resolve with the brief's authorised wording, e.g.
+      // '[the guide to perfectionism at work](/…/)'. Until then only the
+      // placeholder (a sentence of its own) stays out of the page.
+      'Article 9 guide to perfectionism at work': null,
+    },
   },
   // The four essays the canonical copy features on /blog/, brought back from
   // the archive at their original URLs (from-archive.js): text word for word,

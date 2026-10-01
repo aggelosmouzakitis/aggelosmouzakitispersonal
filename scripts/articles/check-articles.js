@@ -78,7 +78,9 @@ function runs(md) {
 }
 
 function expected(a, report) {
-  const src = fs.readFileSync(path.join(ROOT, a.brief), 'utf8');
+  let src = fs.readFileSync(path.join(ROOT, a.brief), 'utf8');
+  // A link to a merged page goes straight to where it now 301s (relink).
+  for (const [from, to] of Object.entries(a.relink || {})) src = src.split('](' + from + ')').join('](' + to + ')');
   const blocks = blocksOf(splitParts(src, a.slug)['2'], a.slug);
   // The documented differences: resolved placeholders become their links,
   // unresolved ones are hidden with their pointers, a caption sentence moves

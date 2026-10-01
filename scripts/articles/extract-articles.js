@@ -243,11 +243,18 @@ function extract(a) {
   const first = (...res) => (res.map((re) => header.match(re)).find(Boolean) || [])[1];
   const deckFull = first(/^> (.+)$/m, /is the deck: `([^`]+)`/);
   const deckStart = first(new RegExp('deck is the paragraph beginning ' + Q), new RegExp('paragraph under the H1, beginning ' + Q + ', is the deck'),
-    new RegExp('the deck, the paragraph beginning ' + Q), new RegExp('deck is the first paragraph (?:under|after) the H1, beginning ' + Q));
+    new RegExp('the deck, the paragraph beginning ' + Q), new RegExp('deck is the first paragraph (?:under|after) the H1, beginning ' + Q),
+    new RegExp('first paragraph (?:under|after) the H1, beginning ' + Q + ',? as the deck'));
   const introStart = first(new RegExp('(?:introduction|body opening) begins ' + Q), new RegExp('paragraph beginning ' + Q + ' starts the article introduction'),
     new RegExp('beginning ' + Q + ' starts the body'), new RegExp('before the opening paragraph beginning ' + Q));
   const introCount = NUMBERS[((header.match(/\b(one|two|three|four|five|six) (?:opening )?paragraphs\b/i) || [])[1] || '').toLowerCase()];
   const deckSentences = NUMBERS[((header.match(/\b(one|two|three)-sentence deck\b/i) || [])[1] || '').toLowerCase()];
+
+  for (const [from, to] of Object.entries(a.relink || {})) {
+    const rule = require('../seo/netlify-emulator.js').loadRedirects().find((r) => r.from.replace(/\/$/, '') === from.replace(/\/$/, ''));
+    if (!rule || rule.status !== 301 || rule.to !== to) fail(slug, `relink ${from} → ${to} does not match its netlify.toml rule`);
+    if (!parts['2'].includes('](' + from + ')')) fail(slug, `relink ${from}: Part 2 does not link to it`);
+  }
 
   // Part 2: the article.
   const blocks = blocksOf(parts['2'], slug);
@@ -282,8 +289,11 @@ function extract(a) {
   };
 
   // Placeholders, typography and links, block by block; inline Markdown checked.
+  // A link to a page the site has since merged elsewhere goes straight to
+  // where that URL now 301s (articles.js relink; checked against netlify.toml).
+  const relinked = (md) => md.replace(/\]\(([^)\s]+)\)/g, (m, href) => (a.relink && a.relink[href] ? '](' + a.relink[href] + ')' : m));
   const text = (md, where) => {
-    const out = normaliseLinks(smart(placeholders(md, where)), slug);
+    const out = relinked(normaliseLinks(smart(placeholders(md, where)), slug));
     checkInline(out, slug, where);
     return out;
   };

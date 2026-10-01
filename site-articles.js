@@ -8,6 +8,19 @@
 // placeholders are left out with their pointers.
 
 window.SITE_ARTICLES = [{
+  "id": "imposter-syndrome-at-work",
+  "url": "/imposter-syndrome-at-work/",
+  "h1": "Imposter Syndrome at Work: Why Competence Doesn’t Always Make You Feel Competent",
+  "deck": "Imposter feelings can affect how you prepare, delegate and respond to feedback. Understanding those behaviours helps you assess both your competence and the cost of trying to prove it.",
+  "category": "Guide",
+  "published": "2026-10-01T23:48:00+01:00",
+  "publishedLabel": "October 2026",
+  "readTime": "13 min read",
+  "related": {
+    "label": "Achievement & Self-Worth",
+    "href": "/achievement-self-worth/"
+  }
+}, {
   "id": "career-change-at-40",
   "url": "/career-change-at-40/",
   "h1": "Career Change at 40: What Makes Starting Again So Difficult",
