@@ -2150,8 +2150,9 @@
   }) {
     const scroll = t.narrow === 'scroll';
     const name = t.caption ? 'art-table-caption' : t.labelledBy;
+    const num = i => t.align && t.align[i] ? 'art-num art-num--' + t.align[i] : undefined;
     const table = e('table', {
-      className: 'art-table art-table--' + (scroll ? 'scroll' : 'stack'),
+      className: 'art-table art-table--' + (t.narrow || 'stack'),
       role: 'table',
       'aria-labelledby': t.caption ? undefined : t.labelledBy,
       'aria-describedby': t.describedBy
@@ -2168,7 +2169,8 @@
     }, t.head.map((h, i) => e('th', {
       key: i,
       scope: 'col',
-      role: 'columnheader'
+      role: 'columnheader',
+      className: num(i)
     }, inlineMd(h))))), e('tbody', {
       role: 'rowgroup'
     }, t.rows.map((r, i) => e('tr', {
@@ -2177,6 +2179,7 @@
     }, r.map((c, j) => j ? e('td', {
       key: j,
       role: 'cell',
+      className: num(j),
       'data-label': plainMd(t.head[j])
     }, inlineMd(c)) : e('th', {
       key: j,
@@ -2734,6 +2737,10 @@
 .art-table tbody th,.art-table td{padding:14px 18px 16px 0;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
 .art-table tbody th{font-weight:650;line-height:1.4;color:var(--heading)}
 .art-table tr>:last-child{padding-right:0}
+.art-table .art-num--right{text-align:right;font-variant-numeric:tabular-nums}
+.art-table .art-num--center{text-align:center}
+.art-table--fit .art-table__key{width:auto}
+.art-table--fit .art-table__ev{width:9.5em}
 @media (max-width:640px){
   .art-table--stack,.art-table--stack tbody,.art-table--stack tr,.art-table--stack th,.art-table--stack td{display:block;width:auto}
   .art-table--stack caption{display:block}

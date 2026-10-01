@@ -243,9 +243,9 @@ function extract(a) {
   const first = (...res) => (res.map((re) => header.match(re)).find(Boolean) || [])[1];
   const deckFull = first(/^> (.+)$/m, /is the deck: `([^`]+)`/);
   const deckStart = first(new RegExp('deck is the paragraph beginning ' + Q), new RegExp('paragraph under the H1, beginning ' + Q + ', is the deck'),
-    new RegExp('the deck, the paragraph beginning ' + Q));
+    new RegExp('the deck, the paragraph beginning ' + Q), new RegExp('deck is the first paragraph (?:under|after) the H1, beginning ' + Q));
   const introStart = first(new RegExp('(?:introduction|body opening) begins ' + Q), new RegExp('paragraph beginning ' + Q + ' starts the article introduction'),
-    new RegExp('beginning ' + Q + ' starts the body'));
+    new RegExp('beginning ' + Q + ' starts the body'), new RegExp('before the opening paragraph beginning ' + Q));
   const introCount = NUMBERS[((header.match(/\b(one|two|three|four|five|six) (?:opening )?paragraphs\b/i) || [])[1] || '').toLowerCase()];
   const deckSentences = NUMBERS[((header.match(/\b(one|two|three)-sentence deck\b/i) || [])[1] || '').toLowerCase()];
 
@@ -345,6 +345,9 @@ function extract(a) {
       const body = rows.slice(2).map((r) => r.map((c) => text(c, 'table')));
       if (body.some((r) => r.length !== head.length)) fail(slug, 'table row with the wrong number of cells');
       block = { t: 'table', head, rows: body };
+      // Column alignment from the delimiter row ("---:" right-aligns amounts).
+      const align = rows[1].map((c) => (/^:-+:$/.test(c) ? 'center' : /-:$/.test(c) ? 'right' : null));
+      if (align.some(Boolean)) block.align = align;
     }
     if (cta) {
       // After the CTA heading: its copy, then the paragraph that is its link.
@@ -436,8 +439,8 @@ function extract(a) {
       t.labelledBy = s.id;
     }
     if (cfg.captionHidden) t.captionHidden = true;
-    if (cfg.narrow === 'scroll') t.narrow = 'scroll';
-    else if (cfg.narrow && cfg.narrow !== 'stack') fail(slug, `table.narrow is 'stack' or 'scroll', not ${cfg.narrow}`);
+    if (cfg.narrow === 'scroll' || cfg.narrow === 'fit') t.narrow = cfg.narrow;
+    else if (cfg.narrow && cfg.narrow !== 'stack') fail(slug, `table.narrow is 'stack', 'scroll' or 'fit', not ${cfg.narrow}`);
     if (cfg.note) {
       const note = [before, after].find((b) => b && b.t === 'p' && plain(b.text).startsWith(smart(cfg.note)));
       if (!note) fail(slug, `no paragraph next to the table begins "${cfg.note}"`);

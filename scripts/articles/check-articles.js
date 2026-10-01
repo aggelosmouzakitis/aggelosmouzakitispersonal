@@ -357,7 +357,7 @@ async function checkArticle(browser, a) {
         a.schemaImage === 'author' ? { image: ORIGIN + art.author.image } : {}),
       publisher: { '@id': PERSON_ID },
       datePublished: art.meta.published,
-    }, art.meta.modified ? { dateModified: art.meta.modified } : {}, {
+    }, art.meta.modified ? { dateModified: art.meta.modified } : a.schemaModified === 'published' ? { dateModified: art.meta.published } : {}, {
       inLanguage: a.inLanguage || 'en-GB', articleSection: art.meta.category,
     }, a.schemaImage === 'none' || a.schemaImage === 'author' ? {} : { image: ORIGIN + art.author.image }, {
       wordCount: pageWords,
@@ -388,7 +388,8 @@ async function checkArticle(browser, a) {
       const region = document.querySelector('.art-table-scroll');
       return {
         over,
-        mode: document.querySelector('.art-table--scroll') ? 'scroll' : document.querySelector('.art-table') ? 'stack' : null,
+        mode: document.querySelector('.art-table--scroll') ? 'scroll' : document.querySelector('.art-table--fit') ? 'fit' : document.querySelector('.art-table') ? 'stack' : null,
+        aligned: [...document.querySelectorAll('.art-table .art-num--right')].every((el) => getComputedStyle(el).textAlign === 'right'),
         labelled: cells.length > 0 && labels.every(([content, label]) => content.includes(JSON.stringify(label))),
         theadShown: thead ? thead.getBoundingClientRect().height > 2 : null,
         scrolls: region ? region.scrollWidth > region.clientWidth : null,
@@ -404,6 +405,8 @@ async function checkArticle(browser, a) {
     if (r.mode === 'scroll' && width < 640 && (!r.theadShown || !r.scrolls)) err(slug, `${width}px: the table does not keep its columns and scroll in its region`);
     if (r.mode && width >= 768 && r.theadShown === false) err(slug, `${width}px: the table header row is hidden`);
     if (r.mode === 'scroll' && width >= 768 && r.scrolls) err(slug, `${width}px: the table scrolls where it should fit`);
+    if (r.mode === 'fit' && !r.theadShown) err(slug, `${width}px: the table header row is hidden`);
+    if (!r.aligned) err(slug, `${width}px: a right-aligned column is not right-aligned`);
     if (r.fontPx !== null && r.fontPx < 15) err(slug, `${width}px: table text shrunk to ${r.fontPx}px`);
     if (width === 1280) {
       eq('header section', r.section, [true, ['/blog/', '/blog/']]);

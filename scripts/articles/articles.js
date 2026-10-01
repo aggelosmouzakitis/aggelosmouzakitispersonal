@@ -35,8 +35,10 @@
 //               section's H2. note: the start of the paragraph next to the
 //               table (before or after it) that describes it
 //               (aria-describedby). narrow: below 640px, 'stack' (labelled
-//               row groups, the default) or 'scroll' (the table scrolls in a
-//               labelled, focusable region).
+//               row groups, the default), 'scroll' (the table scrolls in a
+//               labelled, focusable region) or 'fit' (a narrow table that
+//               stays a table and wraps). A "---:" delimiter right-aligns its
+//               column (amounts).
 //   callout     the one safety callout, if the brief asks for one: the final
 //               paragraph of `section`, beginning with `startsWith`.
 //   wordCount   what the brief counts: 'headline', 'deck', 'body' (the
@@ -60,6 +62,9 @@
 //               first publication date as recorded, and `modified` is the day
 //               the revision went live, both as dates where no verified time
 //               exists (no time of day or offset invented).
+//   schemaModified 'published' when the brief asks for dateModified to equal
+//               the publication timestamp until a substantive update (no
+//               visible "Updated").
 //   inLanguage  for BlogPosting (default en-GB, as the guides' briefs ask).
 //   schemaImage 'none' when the brief rules out the author portrait as the
 //               article's image; 'author' when the brief keeps it to the
@@ -244,6 +249,32 @@ const ARTICLES = [
     // "Reuse the established author identity and approved portrait in the
     // appropriate author-image field. Do not invent an editorial image."
     schemaImage: 'author',
+    links: {},
+  },
+  {
+    slug: 'career-change-at-40',
+    brief: 'content/articles/career-change-at-40.md',
+    published: '2026-10-01T23:40:00+01:00',
+    modified: null,
+    // "`dateModified`: the actual publication timestamp initially"
+    schemaModified: 'published',
+    category: 'Guide',
+    readTime: '14 min read',
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    // Distinct from /career-change-anxiety/ and the service page it relates to.
+    related: { label: 'Career Change & Decisions', href: '/career-transition-therapy/' },
+    // "Accessible name: `Illustrative household transition budget`" (hidden:
+    // the visible article stays Part 2); two columns that wrap, amounts
+    // right-aligned.
+    table: { caption: 'Illustrative household transition budget', captionFrom: 'brief', captionHidden: true, narrow: 'fit' },
+    // "do not add an unrelated safety banner"
+    callout: null,
+    // "calculate from the published editorial content"
+    wordCount: ['headline', 'deck', 'body'],
+    // "`image`: … omit if there is no suitable existing article image. Do not
+    // invent a hero image": the author portrait is not an article image.
+    schemaImage: 'none',
     links: {},
   },
   // The four essays the canonical copy features on /blog/, brought back from

@@ -238,6 +238,8 @@ function articlePage(a) {
     datePublished: art.meta.published,
   };
   if (art.meta.modified) posting.dateModified = art.meta.modified;
+  // A brief that asks for dateModified to start as the publication timestamp.
+  else if (a.schemaModified === 'published') posting.dateModified = art.meta.published;
   Object.assign(posting, { inLanguage: a.inLanguage || 'en-GB', articleSection: art.meta.category });
   // The approved author image the page shows: the article's image, or the
   // author's where the brief keeps the portrait to that field ('author'), or
