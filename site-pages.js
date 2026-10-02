@@ -2707,6 +2707,7 @@
 .art-body{padding-top:clamp(48px,5vw,64px)}
 .art h2[id],.art-cta h2[id]{scroll-margin-top:24px}
 .art-sec{padding-top:clamp(56px,6vw,80px)}
+.art-sec--notice{margin-top:clamp(56px,6vw,80px);padding:28px clamp(20px,3vw,32px) 30px;background:var(--bone-deep);border-left:3px solid var(--heading)}
 .art .h2{margin-bottom:22px;font-size:clamp(28px,calc(24px + 1vw),36px)}
 .art .p{font-size:clamp(17px,calc(16px + .2vw),18.5px);line-height:1.72}
 .art .p strong{font-weight:650}

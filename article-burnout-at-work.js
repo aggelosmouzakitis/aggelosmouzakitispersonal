@@ -170,7 +170,7 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
       "describedBy": "table-note"
     }, {
       "t": "p",
-      "text": "This is an orientation, not a diagnostic test.",
+      "text": "This is an orientation, not a diagnostic test. The [full comparison](/burnout-vs-stress-depression/) considers the overlaps in more detail.",
       "id": "table-note"
     }]
   }, {
@@ -411,5 +411,5 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
       "href": "/contact/"
     }
   },
-  "wordCount": 3091
+  "wordCount": 3100
 };

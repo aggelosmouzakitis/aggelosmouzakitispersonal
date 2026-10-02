@@ -67,6 +67,7 @@ function normaliseLinks(md, slug) {
   return md.replace(/\]\(([^)\s]+)\)/g, (m, href) => {
     if (href.startsWith(ORIGIN + '/')) return '](' + href.slice(ORIGIN.length) + ')';
     if (/^\/(?!\/)/.test(href)) return m;
+    if (/^tel:\+?\d+$/.test(href)) return m; // a phone number the brief supplies
     if (!/^https:\/\//.test(href)) fail(slug, `link is neither a site path nor https: ${href}`);
     return m;
   });
@@ -396,6 +397,7 @@ function extract(a) {
     const subs = s.blocks.filter((b) => b.t === 'sub');
     if (s.blocks.length && subs.length === s.blocks.length && subs.every((q) => /\?$/.test(q.h3))) s.kind = 'faq';
     if (s.blocks.length === 1 && s.blocks[0].t === 'ol') s.kind = 'references';
+    if (a.notice && s.h2 === smart(a.notice)) s.kind = 'notice';
   });
 
   // The CTA against Part 3, word for word; or, for an essay, the Writing
@@ -461,6 +463,8 @@ function extract(a) {
     sections.forEach((x) => listsOf(x).forEach((l) => l.forEach((b) => b.t === 'p' && all.push(plain(b.text)))));
     if (t.caption && !t.captionHidden && all.some((p) => p.includes(t.caption))) fail(slug, 'the caption sentence would be visible twice');
   }
+
+  if (a.notice && !sections.some((s) => s.kind === 'notice')) fail(slug, `no section "${a.notice}" for the notice`);
 
   // The one callout, if the brief asks for one: the final paragraph of its
   // section, beginning as specified.

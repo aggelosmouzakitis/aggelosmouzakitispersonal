@@ -57,7 +57,7 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
     {"h2":"Burnout vs stress","id":"burnout-vs-stress", "blocks": [
       {"t":"p","text":"Stress can be brief or chronic. It can cause exhaustion and withdrawal as well as urgency or worry. Burnout describes a more particular pattern associated with sustained workplace stress, so a neat division between “stressed and engaged” and “burned out and indifferent” misses how people experience both."},
       {"t":"table","head":["What to compare","Work stress","Occupational burnout"],"rows":[["Pattern","Pressure may rise around a specific demand, or continue over time.","Persistent depletion is accompanied by growing distance from work and reduced efficacy."],["Relationship with work","You may remain engaged, become anxious or start avoiding tasks.","Cynicism or detachment becomes a prominent part of the picture."],["What needs attention","The demands, available resources and effect on health.","Those factors, alongside recovery and the changes in your relationship with the job."]],"labelledBy":"burnout-vs-stress","describedBy":"table-note"},
-      {"t":"p","text":"This is an orientation, not a diagnostic test.","id":"table-note"}
+      {"t":"p","text":"This is an orientation, not a diagnostic test. The [full comparison](/burnout-vs-stress-depression/) considers the overlaps in more detail.","id":"table-note"}
     ]},
     {"h2":"What causes burnout","id":"what-causes-burnout", "blocks": [
       {"t":"p","text":"Start with the work as it is organised. A person can be conscientious, able to rest and still become depleted by an impossible job. The [HSE Management Standards](https://www.hse.gov.uk/stress/standards/overview.htm) direct attention to demands, control, support, relationships, role and organisational change."},
@@ -150,5 +150,5 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
     ]}
   ],
   "cta": {"id":"talk-through-exhaustion","eyebrow":"WORK WITH ME","h2":"Talk through what has left you exhausted","text":"I work with people whose working lives have become difficult to sustain. An initial conversation can help us consider what needs attention and whether psychotherapy would be useful. If the situation calls for medical care, changes at work or another kind of support, that should be part of the discussion.","button":{"label":"Book a conversation","href":"/contact/"}},
-  "wordCount": 3091
+  "wordCount": 3100
 };

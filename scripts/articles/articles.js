@@ -69,6 +69,9 @@
 //               another: { from: to }, the target its netlify.toml 301 rule
 //               already gives (the extractor checks it). The anchor text stays;
 //               the link skips the redirect.
+//   notice      the H2 of a section the brief keeps fully visible in the
+//               restrained notice treatment (an urgent-help section): the
+//               whole section, heading included, in the callout's style.
 //   inLanguage  for BlogPosting (default en-GB, as the guides' briefs ask).
 //   schemaImage 'none' when the brief rules out the author portrait as the
 //               article's image; 'author' when the brief keeps it to the
@@ -144,7 +147,8 @@ const ARTICLES = [
       },
       'Article 10, stress versus burnout': {
         pointer: 'The full comparison considers the overlaps in more detail. [INTERNAL LINK NEEDED: Article 10, stress versus burnout]',
-        resolved: null,
+        // Article 10 is the stress / burnout / depression comparison guide.
+        resolved: 'The [full comparison](/burnout-vs-stress-depression/) considers the overlaps in more detail.',
       },
       'comparison guide covering burnout, anxiety and depression': {
         pointer: 'The comparison guide examines these overlaps and the limits of self-assessment. [INTERNAL LINK NEEDED: comparison guide covering burnout, anxiety and depression]',
@@ -334,6 +338,31 @@ const ARTICLES = [
     wordCount: ['headline', 'deck', 'body'],
     // "`image`: an approved image actually used on the page. Do not invent a
     // hero image": the page has no article image.
+    schemaImage: 'none',
+    links: {},
+  },
+  {
+    slug: 'burnout-vs-stress-depression',
+    brief: 'content/articles/burnout-vs-stress-depression.md',
+    published: '2026-10-02T07:16:00+01:00',
+    modified: null,
+    // "`dateModified`: initially the publication timestamp"
+    schemaModified: 'published',
+    category: 'Guide',
+    readTime: '11 min read',
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    related: { label: 'Burnout & Can’t Switch Off', href: '/executive-burnout-therapy/' },
+    // "Accessible name: `…`" (hidden: the visible article stays Part 2); four
+    // columns scroll inside an accessibly named, focusable wrapper.
+    table: { caption: 'Broad tendencies in stress, occupational burnout and depression', captionFrom: 'brief', captionHidden: true, narrow: 'scroll' },
+    callout: null,
+    // "Keep `When to get urgent help` completely visible …, using the
+    // established restrained notice treatment"
+    notice: 'When to get urgent help',
+    // "calculate from visible editorial content"
+    wordCount: ['headline', 'deck', 'body'],
+    // As for the other guides of this series: no article image to give.
     schemaImage: 'none',
     links: {},
   },

@@ -8,6 +8,19 @@
 // placeholders are left out with their pointers.
 
 window.SITE_ARTICLES = [{
+  "id": "burnout-vs-stress-depression",
+  "url": "/burnout-vs-stress-depression/",
+  "h1": "Burnout vs Stress vs Depression: How to Tell the Difference",
+  "deck": "Stress is a response to demands. Burnout describes a pattern associated with prolonged workplace stress. Depression is a recognised clinical condition that can affect mood, interest and everyday functioning. Their symptoms overlap, and this article cannot diagnose which you are experiencing.",
+  "category": "Guide",
+  "published": "2026-10-02T07:16:00+01:00",
+  "publishedLabel": "October 2026",
+  "readTime": "11 min read",
+  "related": {
+    "label": "Burnout & Can’t Switch Off",
+    "href": "/executive-burnout-therapy/"
+  }
+}, {
   "id": "perfectionism-at-work",
   "url": "/perfectionism-at-work/",
   "h1": "Perfectionism at Work: When High Standards Start Costing You",

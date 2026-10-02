@@ -323,6 +323,8 @@ async function checkArticle(browser, a) {
       region: t.narrow === 'scroll' ? ['region', t.caption || art.sections.find((x) => x.id === t.labelledBy).h2, '0'] : null,
     });
   }
+  const notice = art.sections.find((x) => x.kind === 'notice');
+  if (notice && !s.html.includes(`<section class="art-sec art-sec--notice"><h2 class="h2" id="${notice.id}">`)) err(slug, `the "${notice.h2}" section is not in the notice treatment`);
   const faq = art.sections.find((x) => x.kind === 'faq');
   eq('FAQ questions', s.faq, faq ? faq.blocks.length : 0);
   eq('accordions', s.accordions, 0);
