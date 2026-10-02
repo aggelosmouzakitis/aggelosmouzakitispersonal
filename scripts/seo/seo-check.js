@@ -268,6 +268,23 @@ async function main() {
     if (!sources || sources.size === 0) err(p.url, 'orphan — indexable and in the sitemap, but no page links to it');
   }
 
+  // ── Contextual links (site-pages.jsx CONTEXT_LINKS): each exact phrase is
+  //    linked once on its page, in the prerendered HTML ─────────────────────
+  {
+    const src = fs.readFileSync(path.join(__dirname, '..', '..', 'site-pages.jsx'), 'utf8');
+    const block = (src.match(/CONTEXT_LINKS:BEGIN\n\s*const CONTEXT_LINKS = (\[[\s\S]*?\]);\n\s*\/\/ CONTEXT_LINKS:END/) || [])[1];
+    if (!block) err('site-pages.jsx', 'CONTEXT_LINKS block not found');
+    // eslint-disable-next-line no-eval
+    for (const [id, phrase, href] of block ? eval(block) : []) {
+      const page = PAGES.find((x) => x.file === (id === 'home' ? 'index.html' : id + '/index.html'));
+      if (!page) { err(id, 'contextual link on an unknown page'); continue; }
+      const html = fs.readFileSync(path.join(PUBLIC, page.file), 'utf8');
+      const n = html.split(`<a class="inl" href="${href}">${phrase}</a>`).length - 1;
+      if (n !== 1) err(page.url, `contextual link "${phrase}" → ${href} appears ${n} times, expected once`);
+      if (!PAGES.some((x) => x.url === href)) err(page.url, `contextual link target ${href} is not a published page`);
+    }
+  }
+
   // ── Redirects: every legacy URL in the migration table (routes.js) — one
   //    301 hop straight to its final page, a real 410, or a 404 for a URL
   //    that never existed ───────────────────────────────────────────────────

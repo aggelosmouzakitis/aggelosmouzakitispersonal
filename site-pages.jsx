@@ -39,14 +39,40 @@
       'Considering Therapy': '/considering-therapy/',
     },
   };
+  // Contextual links from a page's copy to the guide that covers that exact
+  // subject: [page id, exact phrase, href], each linked once on its page. The
+  // canonical wording is untouched (only an <a> is added around the phrase);
+  // scripts/seo/seo-check.js proves every phrase is on its page, once.
+  // CONTEXT_LINKS:BEGIN
+  const CONTEXT_LINKS = [
+    ['individual-psychotherapy', 'Functioning at work is a poor test of how the rest of your life is going', '/high-functioning-burnout/'],
+    ['therapy-for-men-in-tech', 'the workday ends before the thinking does', '/cant-switch-off-from-work/'],
+    ['considering-therapy', 'I can’t switch off', '/cant-switch-off-from-work/'],
+    ['therapy-vs-coaching', 'whether to leave a job', '/my-job-gives-me-anxiety-should-i-quit/'],
+    ['therapy-vs-coaching', 'still researching the same choice six months later', '/career-change-anxiety/'],
+  ];
+  // CONTEXT_LINKS:END
+  function contextLinks(part, ctx, key) {
+    if (!ctx) return [part];
+    ctx.linked = ctx.linked || new Set();
+    for (const [id, phrase, href] of CONTEXT_LINKS) {
+      const at = part.indexOf(phrase);
+      if (id !== ctx.id || ctx.linked.has(phrase) || at < 0) continue;
+      ctx.linked.add(phrase);
+      return [].concat(contextLinks(part.slice(0, at), ctx, key + 'a'),
+        e('a', { key: key + 'l', className: 'inl', href }, phrase),
+        contextLinks(part.slice(at + phrase.length), ctx, key + 'b'));
+    }
+    return [part];
+  }
   function rich(text, ctx) {
     const links = (ctx && INLINE_LINKS[ctx.id]) || {};
-    return text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean).map((part, i) => {
+    return [].concat(...text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean).map((part, i) => {
       const m = part.match(/^\*\*([^*]+)\*\*$/);
-      if (!m) return part;
+      if (!m) return contextLinks(part, ctx, 'c' + i);
       if (links[m[1]]) return e('a', { key: i, className: 'inl', href: links[m[1]] }, m[1]);
       return e('strong', { key: i }, m[1]);
-    });
+    }));
   }
 
   // The articles' inline Markdown: **bold**, *italic* and [text](href), as
