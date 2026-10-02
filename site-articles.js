@@ -8,6 +8,19 @@
 // placeholders are left out with their pointers.
 
 window.SITE_ARTICLES = [{
+  "id": "perfectionism-at-work",
+  "url": "/perfectionism-at-work/",
+  "h1": "Perfectionism at Work: When High Standards Start Costing You",
+  "deck": "Some work needs exceptional care. The difficulty begins when extra checking, preparation or control keeps expanding without a clear improvement in what the work delivers.",
+  "category": "Guide",
+  "published": "2026-10-02T06:53:00+01:00",
+  "publishedLabel": "October 2026",
+  "readTime": "12 min read",
+  "related": {
+    "label": "Achievement & Self-Worth",
+    "href": "/achievement-self-worth/"
+  }
+}, {
   "id": "imposter-syndrome-at-work",
   "url": "/imposter-syndrome-at-work/",
   "h1": "Imposter Syndrome at Work: Why Competence Doesn’t Always Make You Feel Competent",

@@ -55,7 +55,7 @@ window.SITE_ARTICLE_PAGES["imposter-syndrome-at-work"] = {
       {"t":"p","text":"You complete what the brief requires, then add another evening of checking. The question has shifted from whether the work is useful to whether it could attract any criticism. Even a good result leaves room for someone to ask something you have not anticipated."},
       {"t":"p","text":"A [2025 meta-analysis](https://ray.yorksj.ac.uk/id/eprint/12307/) found a much stronger relationship between impostor phenomenon and perfectionistic concerns than between impostor phenomenon and high standards alone. Concerns include fear of mistakes and doubts about performance. The findings show an association, rather than proving that perfectionism causes the experience in every person."},
       {"t":"p","text":"For some people, attempting to eliminate criticism makes it difficult to learn what ordinary, adequate preparation would produce. When a project succeeds after extensive checking, you may conclude that checking prevented exposure and must be repeated. That is a possible explanation to investigate, rather than a reason to label all careful work unhealthy."},
-      {"t":"p","text":"Distinguish required quality from extra precautions driven by fear. A professional standard may be exacting and entirely appropriate. The difficulty arises when you keep adding requirements that the task does not need."}
+      {"t":"p","text":"Distinguish required quality from extra precautions driven by fear. A professional standard may be exacting and entirely appropriate. The difficulty arises when you keep adding requirements that the task does not need. [the guide to perfectionism at work](/perfectionism-at-work/)"}
     ]},
     {"h2":"Why achievement often fails to fix it","id":"why-achievement-does-not-fix-it", "blocks": [
       {"t":"p","text":"An easy task apparently does not count. A difficult task only went well because you worked unusually hard. A colleague’s help means you cannot claim the outcome. Each explanation can leave the belief about your ability untouched."},
@@ -113,5 +113,5 @@ window.SITE_ARTICLE_PAGES["imposter-syndrome-at-work"] = {
     ]}
   ],
   "cta": {"id":"discuss-the-pattern-behind-the-doubt","eyebrow":"WORK WITH ME","h2":"Discuss the pattern behind the doubt","text":"I work with professionals whose concerns about competence keep shaping how they work, even when the feedback is positive. We can discuss the situation, the behaviour you want to change and whether therapy is an appropriate way to work on it.","button":{"label":"Book a conversation","href":"/contact/"}},
-  "wordCount": 2522
+  "wordCount": 2528
 };

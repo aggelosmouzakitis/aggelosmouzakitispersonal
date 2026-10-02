@@ -307,12 +307,35 @@ const ARTICLES = [
     // restructure): the anchor stays, the link goes straight there.
     relink: { '/imposter-syndrome-therapy/': '/achievement-self-worth/' },
     links: {
-      // Article 9 (perfectionism at work) is not published yet. Once it is,
-      // resolve with the brief's authorised wording, e.g.
-      // '[the guide to perfectionism at work](/…/)'. Until then only the
-      // placeholder (a sentence of its own) stays out of the page.
-      'Article 9 guide to perfectionism at work': null,
+      // Article 9 is the perfectionism guide, live at /perfectionism-at-work/.
+      // The brief authorises exactly this replacement: "Replace the
+      // placeholder with the contextual linked phrase `the guide to
+      // perfectionism at work`".
+      'Article 9 guide to perfectionism at work': '[the guide to perfectionism at work](/perfectionism-at-work/)',
     },
+  },
+  {
+    slug: 'perfectionism-at-work',
+    brief: 'content/articles/perfectionism-at-work.md',
+    published: '2026-10-02T06:53:00+01:00',
+    modified: null,
+    // "`dateModified`: initially the publication timestamp"
+    schemaModified: 'published',
+    category: 'Guide',
+    readTime: '12 min read',
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    related: { label: 'Achievement & Self-Worth', href: '/achievement-self-worth/' },
+    // "Accessible name: `…`" (hidden: the visible article stays Part 2);
+    // three long columns scroll inside an accessibly named, focusable wrapper.
+    table: { caption: 'Examples of task-specific quality requirements and stopping rules', captionFrom: 'brief', captionHidden: true, narrow: 'scroll' },
+    callout: null,
+    // "calculate from visible editorial content"
+    wordCount: ['headline', 'deck', 'body'],
+    // "`image`: an approved image actually used on the page. Do not invent a
+    // hero image": the page has no article image.
+    schemaImage: 'none',
+    links: {},
   },
   // The four essays the canonical copy features on /blog/, brought back from
   // the archive at their original URLs (from-archive.js): text word for word,

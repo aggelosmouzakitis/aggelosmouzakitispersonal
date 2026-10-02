@@ -165,7 +165,7 @@ window.SITE_ARTICLE_PAGES["imposter-syndrome-at-work"] = {
       "text": "For some people, attempting to eliminate criticism makes it difficult to learn what ordinary, adequate preparation would produce. When a project succeeds after extensive checking, you may conclude that checking prevented exposure and must be repeated. That is a possible explanation to investigate, rather than a reason to label all careful work unhealthy."
     }, {
       "t": "p",
-      "text": "Distinguish required quality from extra precautions driven by fear. A professional standard may be exacting and entirely appropriate. The difficulty arises when you keep adding requirements that the task does not need."
+      "text": "Distinguish required quality from extra precautions driven by fear. A professional standard may be exacting and entirely appropriate. The difficulty arises when you keep adding requirements that the task does not need. [the guide to perfectionism at work](/perfectionism-at-work/)"
     }]
   }, {
     "h2": "Why achievement often fails to fix it",
@@ -314,5 +314,5 @@ window.SITE_ARTICLE_PAGES["imposter-syndrome-at-work"] = {
       "href": "/contact/"
     }
   },
-  "wordCount": 2522
+  "wordCount": 2528
 };
