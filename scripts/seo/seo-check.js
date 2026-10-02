@@ -285,6 +285,16 @@ async function main() {
   // ── Every redirect rule: no catch-alls, and each 3xx lands on a 200 in
   //    exactly one hop (also for rules not in the table) ─────────────────────
   for (const rule of loadRedirects()) {
+    // A whole retired host (a domain alias): every path one 301 to the same
+    // path on the main site, never a rewrite that would serve a duplicate.
+    if (/^https?:\/\//.test(rule.from)) {
+      const host = new URL(rule.from.replace('*', '')).host;
+      if (/^(www\.)?aggelosmouzakitis\.com$/.test(host)) err(rule.from, 'host rule on the main site itself');
+      if (!rule.from.endsWith('/*') || rule.status !== 301 || !rule.force || rule.to !== ORIGIN + '/:splat') {
+        err(rule.from, `retired host must 301 (force) every path to ${ORIGIN}/:splat`);
+      }
+      continue;
+    }
     if (rule.from.includes('*')) err(rule.from, 'catch-all rule — list each URL that existed instead');
     if (rule.status < 300 || rule.status >= 400) continue;
     const t = await trace(rule.from);

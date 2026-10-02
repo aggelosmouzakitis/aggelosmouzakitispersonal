@@ -42,11 +42,14 @@ Expect `0 problem(s)` on the last line.
 
 ## 3. Host and protocol
 
-Each variant should be a single hop to the https apex URL.
+Each variant should be a single hop to the https apex URL. The retired
+`logoutclub.` subdomain must 301 every path to the same path on the apex
+(`/about/` → `https://aggelosmouzakitis.com/about/`), never serve a copy.
 
 ```bash
 for u in http://aggelosmouzakitis.com/ https://www.aggelosmouzakitis.com/ \
-         http://www.aggelosmouzakitis.com/ ; do
+         http://www.aggelosmouzakitis.com/ \
+         https://logoutclub.aggelosmouzakitis.com/ https://logoutclub.aggelosmouzakitis.com/about/ ; do
   echo "== $u"; curl -sIL -o /dev/null -w '  hops=%{num_redirects} final=%{url_effective} code=%{http_code}\n' "$u"
 done
 ```

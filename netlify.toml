@@ -12,6 +12,28 @@
   publish = "public"
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Retired host: logoutclub.aggelosmouzakitis.com
+# -----------------------------------------------------------------------------
+# A domain alias of this site that served the Log Out Club microsite through
+# host-scoped rewrites. The microsite was retired on 10 Sep 2026 (frozen,
+# private copy at /archive/logoutclub/) and its rewrites removed, so the alias
+# began serving a duplicate of the whole site. Every URL on it now 301s to the
+# same path on the main site: one canonical host, nothing duplicated. First in
+# the file so no path rule answers on that host. Host-scoped rules are checked
+# by scripts/seo/seo-check.js (301, force, to https://aggelosmouzakitis.com).
+# ─────────────────────────────────────────────────────────────────────────────
+[[redirects]]
+  from = "https://logoutclub.aggelosmouzakitis.com/*"
+  to = "https://aggelosmouzakitis.com/:splat"
+  status = 301
+  force = true
+[[redirects]]
+  from = "http://logoutclub.aggelosmouzakitis.com/*"
+  to = "https://aggelosmouzakitis.com/:splat"
+  status = 301
+  force = true
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Redirects — psychotherapy-first migration (Sep 2026).
 #
 # One rule per URL that really existed, each pointing straight at its final

@@ -112,6 +112,7 @@ async function trace(p) {
   const rowUrls = new Set(LEGACY.map(([u]) => norm(u)));
   for (const r of rules) {
     if (r.from.startsWith('/hot-seat-coworking-spaces')) continue; // utility PDF, not a migration
+    if (/^https?:\/\//.test(r.from)) continue; // a whole retired host (checked by seo-check.js)
     if (!rowUrls.has(norm(r.from))) problems.push(`netlify.toml rule ${r.from} is not in scripts/seo/routes.js`);
   }
   for (const [u, s] of LEGACY) {

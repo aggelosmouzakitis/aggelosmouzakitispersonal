@@ -89,6 +89,7 @@ function fileFor(root, pathname) {
 function resolve(pathname, redirects, root = PUBLIC) {
   const existing = fileFor(root, pathname);
   for (const r of redirects) {
+    if (/^https?:\/\//.test(r.from)) continue; // host-scoped: only for that host, never the main site
     const m = match(r, pathname);
     if (!m) continue;
     if (!r.force && existing) continue; // shadowed by a real file
