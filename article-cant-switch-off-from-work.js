@@ -225,7 +225,7 @@ window.SITE_ARTICLE_PAGES["cant-switch-off-from-work"] = {
     "id": "when-therapy-becomes-useful",
     "blocks": [{
       "t": "p",
-      "text": "Therapy can help when checking and rumination repeatedly affect sleep or relationships, or continue after reasonable workplace changes. The work can examine what triggers the pattern, what checking provides and why stopping feels difficult. It should also leave room for the possibility that the job needs to change."
+      "text": "[Therapy can help when checking and rumination repeatedly affect sleep or relationships](/executive-burnout-therapy/), or continue after reasonable workplace changes. The work can examine what triggers the pattern, what checking provides and why stopping feels difficult. It should also leave room for the possibility that the job needs to change."
     }, {
       "t": "p",
       "text": "A [meta-analysis of detachment interventions](https://pubmed.ncbi.nlm.nih.gov/34096763/) found improvement on average across varied programmes. It does not identify one exercise that works for everybody. A coach or experienced colleague may be more useful for a bounded workload or leadership problem; the [therapy versus coaching guide](/therapy-vs-coaching/) explains the distinction."

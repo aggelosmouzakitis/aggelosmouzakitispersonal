@@ -354,7 +354,7 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
       "text": "Persistent low mood or loss of enjoyment also warrants help. The [NHS advises seeing a GP for depression symptoms lasting most of the day, every day, for more than two weeks](https://www.nhs.uk/mental-health/conditions/depression-in-adults/symptoms/). Seek help sooner if symptoms are severe or you are struggling to cope. A GP can assess health concerns and discuss treatment or support, including whether time away from work is appropriate."
     }, {
       "t": "p",
-      "text": "Therapy may help when repeated overcommitment or difficulty stopping is contributing, or when the experience has affected how you see yourself. It can also help with associated anxiety or depression. Staffing, unsafe conditions and employment disputes require action beyond sessions. [Considering therapy](/considering-therapy/) explains what beginning the work involves."
+      "text": "[Therapy may help when repeated overcommitment or difficulty stopping is contributing](/executive-burnout-therapy/), or when the experience has affected how you see yourself. It can also help with associated anxiety or depression. Staffing, unsafe conditions and employment disputes require action beyond sessions. [Considering therapy](/considering-therapy/) explains what beginning the work involves."
     }, {
       "t": "p",
       "text": "**Urgent help:** If you are at immediate risk of harming yourself or cannot stay safe, seek emergency help now. In the UK, call 999 or go to A&E; elsewhere, contact local emergency services. The [NHS explains urgent mental health support options](https://www.nhs.uk/nhs-services/mental-health-services/where-to-get-urgent-help-for-mental-health/)."

@@ -72,6 +72,11 @@
 //   notice      the H2 of a section the brief keeps fully visible in the
 //               restrained notice treatment (an urgent-help section): the
 //               whole section, heading included, in the callout's style.
+//   contextLinks internal links the site adds to the article's own wording,
+//               beyond those its brief supplies: [exact phrase, href]. The
+//               phrase must occur once and outside any link; it is wrapped,
+//               never reworded. Used sparingly, to tie the guides together and
+//               give each a path to its service page.
 //   inLanguage  for BlogPosting (default en-GB, as the guides' briefs ask).
 //   schemaImage 'none' when the brief rules out the author portrait as the
 //               article's image; 'author' when the brief keeps it to the
@@ -92,6 +97,7 @@
 const ARTICLES = [
   {
     slug: 'work-anxiety',
+    contextLinks: [['Fear of being exposed as inadequate', '/imposter-syndrome-at-work/'], ['perfectionism develops around preventing criticism or embarrassment', '/perfectionism-at-work/']],
     brief: 'content/articles/work-anxiety.md',
     published: '2026-10-01T22:04:00+01:00',
     modified: null,
@@ -116,6 +122,7 @@ const ARTICLES = [
   },
   {
     slug: 'burnout-at-work',
+    contextLinks: [['Therapy may help when repeated overcommitment or difficulty stopping is contributing', '/executive-burnout-therapy/']],
     brief: 'content/articles/burnout-at-work.md',
     published: '2026-10-01T22:26:00+01:00',
     modified: null,
@@ -180,6 +187,7 @@ const ARTICLES = [
   },
   {
     slug: 'cant-switch-off-from-work',
+    contextLinks: [['Therapy can help when checking and rumination repeatedly affect sleep or relationships', '/executive-burnout-therapy/']],
     brief: 'content/articles/cant-switch-off-from-work.md',
     published: '2026-10-01T22:57:00+01:00',
     modified: null,
@@ -206,6 +214,7 @@ const ARTICLES = [
   },
   {
     slug: 'high-functioning-burnout',
+    contextLinks: [['Stress and burnout overlap', '/burnout-vs-stress-depression/'], ['Therapy can help with recurring patterns and distress', '/executive-burnout-therapy/']],
     brief: 'content/articles/high-functioning-burnout.md',
     // A substantive replacement of the essay published at
     // /blog/high-functioning-burnout-pandemic/ on 16 April 2026 (its archived
@@ -235,6 +244,7 @@ const ARTICLES = [
   },
   {
     slug: 'career-change-anxiety',
+    contextLinks: [['An adjacent move may preserve more experience than retraining for a completely different occupation', '/career-change-at-40/']],
     brief: 'content/articles/career-change-anxiety.md',
     published: '2026-10-01T23:20:00+01:00',
     modified: null,
@@ -320,6 +330,7 @@ const ARTICLES = [
   },
   {
     slug: 'perfectionism-at-work',
+    contextLinks: [['keep delivering while feeling progressively more exhausted and resentful', '/high-functioning-burnout/']],
     brief: 'content/articles/perfectionism-at-work.md',
     published: '2026-10-02T06:53:00+01:00',
     modified: null,
@@ -343,6 +354,7 @@ const ARTICLES = [
   },
   {
     slug: 'burnout-vs-stress-depression',
+    contextLinks: [['personal patterns that contribute to overwork', '/executive-burnout-therapy/']],
     brief: 'content/articles/burnout-vs-stress-depression.md',
     published: '2026-10-02T07:14:00+01:00',
     modified: null,

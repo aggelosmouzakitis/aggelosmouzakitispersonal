@@ -269,7 +269,7 @@ window.SITE_ARTICLE_PAGES["burnout-vs-stress-depression"] = {
       "h3": "Can therapy treat burnout, or do I need a different job?",
       "blocks": [{
         "t": "p",
-        "text": "Therapy can help with distress, associated mental health difficulties and personal patterns that contribute to overwork. Recovery may also require changes in workload, management, control or responsibilities. Whether that means adjustments, leave, a transfer or another job depends on the situation and your constraints. A GP or occupational health professional may be useful alongside therapy. You can explore these options without committing immediately to resignation."
+        "text": "Therapy can help with distress, associated mental health difficulties and [personal patterns that contribute to overwork](/executive-burnout-therapy/). Recovery may also require changes in workload, management, control or responsibilities. Whether that means adjustments, leave, a transfer or another job depends on the situation and your constraints. A GP or occupational health professional may be useful alongside therapy. You can explore these options without committing immediately to resignation."
       }]
     }]
   }, {

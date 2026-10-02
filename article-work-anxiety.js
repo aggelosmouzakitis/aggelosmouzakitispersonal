@@ -152,13 +152,13 @@ window.SITE_ARTICLE_PAGES["work-anxiety"] = {
       "h3": "Standards, exposure and self-worth",
       "blocks": [{
         "t": "p",
-        "text": "An internal update takes an hour to prepare, then another hour to check. The information was adequate after the first pass, but you keep working because a possible objection feels difficult to tolerate. For some people, perfectionism develops around preventing criticism or embarrassment. Others learned the habit in a workplace that penalised small mistakes."
+        "text": "An internal update takes an hour to prepare, then another hour to check. The information was adequate after the first pass, but you keep working because a possible objection feels difficult to tolerate. For some people, [perfectionism develops around preventing criticism or embarrassment](/perfectionism-at-work/). Others learned the habit in a workplace that penalised small mistakes."
       }, {
         "t": "p",
         "text": "A [2024 meta-analysis of perfectionism and psychological symptoms](https://discovery.ucl.ac.uk/id/eprint/10182847/) found that concerns about mistakes and others’ expectations had stronger associations with distress than striving for high standards. Those associations do not establish a single cause. They support looking more closely at what happens when a standard is missed, rather than assuming that ambition itself is the problem."
       }, {
         "t": "p",
-        "text": "Fear of being exposed as inadequate can make learning feel dangerous. A promotion creates more visibility; instead of asking for the information you need, you try to make sure nobody notices you need it. The resulting preparation may improve the work while making each meeting harder to face."
+        "text": "[Fear of being exposed as inadequate](/imposter-syndrome-at-work/) can make learning feel dangerous. A promotion creates more visibility; instead of asking for the information you need, you try to make sure nobody notices you need it. The resulting preparation may improve the work while making each meeting harder to face."
       }, {
         "t": "p",
         "text": "Work can also become central to self-worth. A disappointing review has implications for pay and promotion. If it additionally becomes evidence that you are a disappointing person, the emotional consequences extend well beyond the review. The relationship between [achievement, perfectionism and self-worth](/achievement-self-worth/) is worth examining when the same conclusion follows very different professional setbacks."

@@ -149,7 +149,7 @@ window.SITE_ARTICLE_PAGES["perfectionism-at-work"] = {
     "id": "perfectionism-and-burnout",
     "blocks": [{
       "t": "p",
-      "text": "Another evening of checking reduces the time available to recover. If this repeats, you may keep delivering while feeling progressively more exhausted and resentful. The extra effort can also hide an unreasonable workload from people who only see completed tasks."
+      "text": "Another evening of checking reduces the time available to recover. If this repeats, you may [keep delivering while feeling progressively more exhausted and resentful](/high-functioning-burnout/). The extra effort can also hide an unreasonable workload from people who only see completed tasks."
     }, {
       "t": "p",
       "text": "A [meta-analysis covering work, education and sport](https://pubmed.ncbi.nlm.nih.gov/26231736/) found stronger positive relationships between burnout and perfectionistic concerns than between burnout and strivings. These associations support taking concerns seriously, without establishing that perfectionism causes every case of burnout."

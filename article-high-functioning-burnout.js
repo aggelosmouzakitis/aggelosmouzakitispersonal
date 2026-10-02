@@ -158,7 +158,7 @@ window.SITE_ARTICLE_PAGES["high-functioning-burnout"] = {
       "narrow": "scroll"
     }, {
       "t": "p",
-      "text": "Stress and burnout overlap; they are not clean opposites in which stressed people care and burned-out people do not. You can be exhausted and still anxious about doing well. If worry, checking or fear of criticism is prominent, the [work anxiety guide](/work-anxiety/) explores those experiences in more detail."
+      "text": "[Stress and burnout overlap](/burnout-vs-stress-depression/); they are not clean opposites in which stressed people care and burned-out people do not. You can be exhausted and still anxious about doing well. If worry, checking or fear of criticism is prominent, the [work anxiety guide](/work-anxiety/) explores those experiences in more detail."
     }]
   }, {
     "h2": "Why high performers often keep going",
@@ -253,7 +253,7 @@ window.SITE_ARTICLE_PAGES["high-functioning-burnout"] = {
       "text": "A GP can assess mental and physical contributors. The [NHS guidance on tiredness and fatigue](https://www.nhs.uk/symptoms/tiredness-and-fatigue/) explains why persistent fatigue should not simply be self-diagnosed: sleep disorders and other health conditions can contribute. Burnout is one possible account of occupational difficulties, rather than a substitute for assessment."
     }, {
       "t": "p",
-      "text": "Anxiety and depression can overlap with exhaustion. [Loss of interest, low mood and sleep changes](https://www.nhs.uk/mental-health/conditions/depression-in-adults/symptoms/) may warrant assessment even while you are earning, attending meetings and caring for others. Therapy can help with recurring patterns and distress; medical support or changes at work may also be needed."
+      "text": "Anxiety and depression can overlap with exhaustion. [Loss of interest, low mood and sleep changes](https://www.nhs.uk/mental-health/conditions/depression-in-adults/symptoms/) may warrant assessment even while you are earning, attending meetings and caring for others. [Therapy can help with recurring patterns and distress](/executive-burnout-therapy/); medical support or changes at work may also be needed."
     }, {
       "t": "p",
       "text": "If you are [considering therapy](/considering-therapy/), bring the ordinary details of how you keep going, including what you have stopped doing elsewhere. They help make the problem clearer without requiring you to prove that you have reached a particular level of burnout."

@@ -50,6 +50,14 @@
     ['considering-therapy', 'I can’t switch off', '/cant-switch-off-from-work/'],
     ['therapy-vs-coaching', 'whether to leave a job', '/my-job-gives-me-anxiety-should-i-quit/'],
     ['therapy-vs-coaching', 'still researching the same choice six months later', '/career-change-anxiety/'],
+    ['executive-burnout-therapy', 'what it now costs to maintain the same output', '/high-functioning-burnout/'],
+    ['executive-burnout-therapy', 'Short periods of fatigue usually improve when pressure drops and recovery improves', '/burnout-vs-stress-depression/'],
+    ['career-transition-therapy', 'Six months later, the decision is still open', '/career-change-anxiety/'],
+    ['career-transition-therapy', 'giving up a version of yourself that took years to build', '/career-change-at-40/'],
+    ['anxiety-overthinking', 'Anxiety can increase preparation, checking and work rather than slowing somebody down', '/work-anxiety/'],
+    ['achievement-self-worth', 'being careful turns into needing to be beyond criticism', '/perfectionism-at-work/'],
+    ['work-affecting-relationship', 'continue thinking about the company for the rest of the evening', '/cant-switch-off-from-work/'],
+    ['work-affecting-relationship', 'Burnout often shows up in relationships before it shows up in performance', '/burnout-at-work/'],
   ];
   // CONTEXT_LINKS:END
   function contextLinks(part, ctx, key) {

@@ -373,6 +373,28 @@ function extract(a) {
     else intro.push(block);
   }
 
+  // Contextual links the site adds to the article's own wording (articles.js
+  // contextLinks): each exact phrase, found once in the article and outside
+  // any link, is wrapped in a link. No word changes.
+  for (const [phrase, href] of a.contextLinks || []) {
+    const holders = [];
+    const scan = (list) => list.forEach((b, i) => {
+      if (b.t === 'sub') scan(b.blocks);
+      else if (typeof b.text === 'string') holders.push([b, 'text']);
+      else if (b.items) b.items.forEach((it, j) => holders.push([b.items, j]));
+    });
+    scan(intro);
+    sections.forEach((s) => scan(s.blocks));
+    const hits = holders.filter(([o, k]) => o[k].includes(phrase));
+    const count = hits.reduce((n, [o, k]) => n + o[k].split(phrase).length - 1, 0);
+    if (count !== 1) fail(slug, `contextLinks: "${phrase}" occurs ${count} times, expected once`);
+    const [o, k] = hits[0];
+    const at = o[k].indexOf(phrase);
+    const before = o[k].slice(0, at);
+    if ((before.match(/\[/g) || []).length !== (before.match(/\]/g) || []).length) fail(slug, `contextLinks: "${phrase}" is inside a link`);
+    o[k] = before + '[' + phrase + '](' + href + ')' + o[k].slice(at + phrase.length);
+  }
+
   // The deck, then the introduction.
   const deck = intro.shift();
   if (!deck || deck.t !== 'p') fail(slug, 'no deck under the H1');

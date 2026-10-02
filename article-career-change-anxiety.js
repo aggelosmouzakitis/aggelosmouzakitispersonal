@@ -271,7 +271,7 @@ window.SITE_ARTICLE_PAGES["career-change-anxiety"] = {
       "h3": "Am I too old to change careers?",
       "blocks": [{
         "t": "p",
-        "text": "Age alone cannot answer that. Examine the training period, entry requirements, likely income and years you expect to work in the new field. [OECD research on career mobility](https://www.oecd.org/en/publications/promoting-better-career-choices-for-longer-working-lives_1ef9a0d0-en/full-report/component-7.html) identifies genuine barriers, including age discrimination and limited opportunities. These should inform your plan. An adjacent move may preserve more experience than retraining for a completely different occupation; the feasibility depends on the specific route, rather than a universal age limit."
+        "text": "Age alone cannot answer that. Examine the training period, entry requirements, likely income and years you expect to work in the new field. [OECD research on career mobility](https://www.oecd.org/en/publications/promoting-better-career-choices-for-longer-working-lives_1ef9a0d0-en/full-report/component-7.html) identifies genuine barriers, including age discrimination and limited opportunities. These should inform your plan. [An adjacent move may preserve more experience than retraining for a completely different occupation](/career-change-at-40/); the feasibility depends on the specific route, rather than a universal age limit."
       }]
     }, {
       "t": "sub",
