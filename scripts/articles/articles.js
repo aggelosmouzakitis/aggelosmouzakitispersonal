@@ -344,7 +344,7 @@ const ARTICLES = [
   {
     slug: 'burnout-vs-stress-depression',
     brief: 'content/articles/burnout-vs-stress-depression.md',
-    published: '2026-10-02T07:16:00+01:00',
+    published: '2026-10-02T07:14:00+01:00',
     modified: null,
     // "`dateModified`: initially the publication timestamp"
     schemaModified: 'published',

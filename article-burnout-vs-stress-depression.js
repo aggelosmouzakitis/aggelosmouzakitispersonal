@@ -19,7 +19,7 @@ window.SITE_ARTICLE_PAGES["burnout-vs-stress-depression"] = {
   "deck": "Stress is a response to demands. Burnout describes a pattern associated with prolonged workplace stress. Depression is a recognised clinical condition that can affect mood, interest and everyday functioning. Their symptoms overlap, and this article cannot diagnose which you are experiencing.",
   "meta": {
     "category": "Guide",
-    "published": "2026-10-02T07:16:00+01:00",
+    "published": "2026-10-02T07:14:00+01:00",
     "publishedLabel": "October 2026",
     "readTime": "11 min read"
   },
