@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KV83RRF6ZM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-KV83RRF6ZM');
+  // gtag.js, the heaviest script the page loads, comes in on the reader's
+  // first scroll, tap, click or key press, or 5 seconds after the page has
+  // loaded, so it never competes with the page itself; what is queued above
+  // is sent when it runs.
+  (function () {
+    var events = ['scroll', 'wheel', 'pointerdown', 'pointermove', 'touchstart', 'keydown'];
+    var done = false;
+    function load() {
+      if (done) return;
+      done = true;
+      events.forEach(function (t) { removeEventListener(t, load, true); });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-KV83RRF6ZM';
+      document.head.appendChild(s);
+    }
+    events.forEach(function (t) { addEventListener(t, load, { capture: true, passive: true }); });
+    addEventListener('load', function () { setTimeout(load, 5000); });
+  })();
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- fonts -->
 <link rel="preload" href="/fonts/inter-v20-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-black-v23-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-tight-v9-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 @font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
@@ -33,7 +52,7 @@
 </style>
 <!-- /fonts -->
 <!-- Favicon / site icons -->
-<link rel="icon" href="/favicon.ico?v=dc7484cf7c" sizes="any">
+<link rel="icon" href="/favicon.ico?v=2edc963114" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5d5e245bf0">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=b708bdc3f1">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=022b5f081c">
@@ -257,6 +276,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .dark .p strong{color:var(--bone)}
 .dark .p--emph{color:var(--sage)}
 .dark .p--rule{padding-left:18px;border-left:2px solid var(--sage);font-weight:600;color:var(--bone)}
+/* An inline link on forest is bone, like the secondary link there: green is
+   only 3:1 on forest. */
+.on-dark .inl{color:var(--bone)}
+.on-dark .inl:hover{color:var(--sage)}
 
 /* Photo split: 1:1, the photograph full-bleed */
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);container-type:inline-size}
@@ -310,6 +333,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 @media (max-width:899px){.cols3{grid-template-columns:minmax(0,1fr)}}
 .sage{background:var(--sage-bg)}
 .sage__in{padding-block:var(--sec)}
+/* Green text on a tinted ground (sage here, bone-deep below) is the pressed
+   green: #047857 is 4.2:1 on sage and 4.48:1 on bone-deep, under the 4.5:1
+   text needs; the pressed green is 5.4:1 and 5.8:1. Rules and buttons keep
+   the brand green. */
+.sage .tlink,.sage .inl,.sage .eyebrow{color:var(--green-pressed)}
 
 /* Routes, triggers, facts, lists, quotes */
 .routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px clamp(40px,5.5vw,80px);align-items:start}
@@ -349,7 +377,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .home-fig__disc{background:var(--green)}
 .home-fig__cut{background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,.92) 58%)}
 .home-fig__img{position:absolute;inset:0;overflow:hidden;border-radius:50%;background:var(--forest)}
-.home-fig__img img{position:absolute;left:-10%;top:0;width:120%;height:auto;max-width:none}
+/* The photo is the square of the portrait the circle shows (PHOTOS). */
+.home-fig__img img{position:absolute;left:0;top:0;width:100%;height:100%}
 @media (max-width:899px){.home-hero__lines{display:none}.home-hero__in{grid-template-columns:minmax(0,1fr)}.home-fig{width:min(80%,320px);justify-self:center}}
 .creds{border-block:1px solid rgba(23,25,25,.16)}
 .creds ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -373,10 +402,12 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
    desktop, less than the gutter on small screens); its copy stays on the axis. */
 .tool--featured{--feat-bleed:min(24px,calc(var(--gutter) - 8px));margin-inline:calc(-1 * var(--feat-bleed));padding:clamp(28px,4vw,44px) var(--feat-bleed);background:var(--bone-deep);border-top:3px solid var(--green)}
 .tool--featured .eyebrow{margin-bottom:14px}
+.tool--featured .eyebrow,.tool--featured .tlink,.tool--featured .inl{color:var(--green-pressed)}
+.tool--featured .meta{color:var(--ink-2)}
 
 /* The Work & Life Check call to action (WorkLifeCheckCTA) */
 .wlcta--feature{padding:clamp(28px,4vw,44px);background:var(--bone-deep);border-top:3px solid var(--green)}
-.wlcta--feature .eyebrow{margin-bottom:14px}
+.wlcta--feature .eyebrow{margin-bottom:14px;color:var(--green-pressed)}
 .wlcta__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + 1vw),34px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
 .wlcta--feature .actions{margin-top:26px}
 .wlcta--inline{margin-top:clamp(40px,4.5vw,56px);padding:26px 0 30px;border-top:2px solid var(--green);border-bottom:1px solid var(--rule)}
@@ -409,7 +440,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .contact__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(22px,calc(19px + .5vw),27px);font-weight:800;letter-spacing:-.025em;color:var(--heading)}
 .contact__next .p{font-size:17px;line-height:1.65}
 .contact__privacy{padding:24px;background:var(--bone-deep)}
-.contact__privacy-h{margin-bottom:12px;color:var(--green)}
+.contact__privacy-h{margin-bottom:12px;color:var(--green-pressed)}
+.contact__privacy .tlink,.contact__privacy .inl{color:var(--green-pressed)}
 .contact__privacy .p{font-size:17px;line-height:1.6}
 .contact__privacy .links{margin-top:10px}
 .ct-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 20px}
@@ -468,7 +500,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 <script src="/site-chrome.js?v=ebc8547ebf"></script>
 <script src="/site-copy.js?v=7e65acfab8"></script>
 <script src="/lead-capture.js?v=9acfede619"></script>
-<script src="/site-pages.js?v=0b2f325b56"></script>
+<script src="/site-pages.js?v=664642c682"></script>
 <script>renderSitePage("contact");</script>
 </body>
 </html>

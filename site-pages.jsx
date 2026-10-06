@@ -333,11 +333,64 @@
           e(Blocks, { blocks: rest, ctx, dark: true, roles: { [lastP]: 'rule' } }))));
   }
 
+  // ── Photographs ───────────────────────────────────────────────────────────
+  // Every photograph the pages show, with the widths scripts/images.js cuts
+  // from it (img/<name>-<width>.webp, already grey: the grey the CSS filter
+  // gives every photo, so they look the same at a fraction of the weight).
+  // The browser takes the smallest width that covers the photo's `sizes` at
+  // its pixel density; `src` stays the original, for anything without srcset.
+  // A photo drawn only in part is cut to that part first (`crop`: left, top,
+  // width, height in the original's pixels; `name` names the cut), and its
+  // `src` is then the largest cut.
+  // PHOTOS:BEGIN
+  const PHOTOS = {
+    // The homepage portrait shows only the circle in its top square: the
+    // original, 4:5, was drawn 120% of the circle's width from -10%.
+    '/img/aggelos-home.webp': { name: 'aggelos-home-square', crop: [80, 0, 800, 800], widths: [360, 520, 640, 800] },
+    '/img/aggelos-about.webp': { widths: [192, 480, 640, 840] },
+    '/img/aggelos-opinion.jpeg': { widths: [480, 640, 800] },
+    '/img/aggelos-homepage-1600.webp': { widths: [760, 1200, 1600] },
+    '/img/wtf-friday-speaking.webp': { widths: [760, 1280] },
+    '/img/aggelos-executives.webp': { widths: [800, 1200] },
+  };
+  // PHOTOS:END
+  // How wide each photo slot is drawn (CSS px), from its layout rules.
+  const SIZES = {
+    // .home-fig: min(80% of the column, 320px) below 900px, clamp(320px,
+    // 32vw, 460px) above; its photo is the square it shows.
+    homeHero: '(max-width: 443px) calc(80vw - 35px), (max-width: 999px) 320px, (max-width: 1437px) 32vw, 460px',
+    // .frame: at most 320px wide below 900px, 420px above, 4:5, which the
+    // photo covers: one wider than 4:5 is drawn wider than the frame.
+    frame: (ratio) => {
+      const k = Math.max(1, 1.25 * (ratio || 0.8));
+      return `(max-width: 899px) ${Math.round(320 * k)}px, ${Math.round(420 * k)}px`;
+    },
+    // .split__fig: the full width below 900px, half of it above, which the
+    // photo covers (object-fit: cover) over a figure about 760px tall: a photo
+    // `ratio` wide to 1 tall is drawn about 760 × ratio px wide.
+    split: (ratio) => {
+      const w = Math.round(760 * (ratio || 1));
+      return `(max-width: 899px) 100vw, (max-width: ${2 * w}px) ${w}px, 50vw`;
+    },
+    // .art-author__fig img: 160% of a 60px circle.
+    avatar: '96px',
+  };
+  function photoProps(src, sizes) {
+    const p = PHOTOS[src];
+    if (!p) return { src };
+    const file = (w) => (p.name ? '/img/' + p.name : src.replace(/\.\w+$/, '')) + '-' + w + '.webp';
+    return {
+      src: p.crop ? file(p.widths[p.widths.length - 1]) : src,
+      srcSet: p.widths.map((w) => file(w) + ' ' + w + 'w').join(', '),
+      sizes,
+    };
+  }
+
   // Photo split: a full-bleed photograph beside the section's text, 1:1.
   function PhotoSplit({ s, ctx, photo, dark }) {
     return e('section', { className: 'band split' + (dark ? ' split--dark on-dark' : ''), id: s.id, 'aria-labelledby': s.id + '-h' },
       e('figure', { className: 'split__fig' },
-        e('img', { src: photo.src, alt: photo.alt, loading: 'lazy', decoding: 'async', style: { objectPosition: photo.pos || '50% 30%' } })),
+        e('img', Object.assign(photoProps(photo.src, SIZES.split(photo.ratio)), { alt: photo.alt, loading: 'lazy', decoding: 'async', style: { objectPosition: photo.pos || '50% 30%' } }))),
       e('div', { className: 'split__body' },
         e('div', { className: 'split__text' },
           e('h2', { className: 'h2', id: s.id + '-h' }, s.h2),
@@ -399,7 +452,7 @@
   function Frame({ photo }) {
     return e('figure', { className: 'frame' },
       e('div', { className: 'frame__img' },
-        e('img', { src: photo.src, alt: photo.alt, fetchPriority: 'high', style: { objectPosition: photo.pos || '50% 30%' } })));
+        e('img', Object.assign(photoProps(photo.src, SIZES.frame(photo.ratio)), { alt: photo.alt, fetchPriority: 'high', style: { objectPosition: photo.pos || '50% 30%' } }))));
   }
   function Hero({ p, ctx }) {
     const photo = HERO_PHOTO[p.id];
@@ -416,8 +469,8 @@
   // (The old offer-page portraits are not used: their graphic backgrounds
   // belong to the retired design.)
   const HERO_PHOTO = {
-    'individual-psychotherapy': { src: '/img/aggelos-opinion.jpeg', alt: 'Aggelos Mouzakitis in conversation', pos: '52% 30%' },
-    about: { src: '/img/aggelos-about.webp', alt: 'Aggelos Mouzakitis', pos: '50% 0%' },
+    'individual-psychotherapy': { src: '/img/aggelos-opinion.jpeg', ratio: 1, alt: 'Aggelos Mouzakitis in conversation', pos: '52% 30%' },
+    about: { src: '/img/aggelos-about.webp', ratio: 0.8, alt: 'Aggelos Mouzakitis', pos: '50% 0%' },
   };
   // At most one strong interruption per page: a dark section, or a photo split.
   const DARK = {
@@ -436,9 +489,9 @@
   };
   const DARK_TOP = { 'executive-burnout-therapy': 'when-the-workload-is-the-problem' };
   const PHOTO_SPLIT = {
-    'therapy-for-men-in-tech': { id: 'my-background', src: '/img/aggelos-homepage-1600.webp', alt: 'Aggelos Mouzakitis speaking on stage at a technology conference', pos: '44% 38%' },
-    'therapy-for-founders': { id: 'my-background', src: '/img/wtf-friday-speaking.webp', alt: 'Aggelos Mouzakitis leading a workshop', pos: '28% 30%' },
-    'therapy-for-executives': { id: 'my-background', src: '/img/aggelos-executives.webp', alt: 'Aggelos Mouzakitis', pos: '50% 0%' },
+    'therapy-for-men-in-tech': { id: 'my-background', src: '/img/aggelos-homepage-1600.webp', ratio: 1.5, alt: 'Aggelos Mouzakitis speaking on stage at a technology conference', pos: '44% 38%' },
+    'therapy-for-founders': { id: 'my-background', src: '/img/wtf-friday-speaking.webp', ratio: 1.5, alt: 'Aggelos Mouzakitis leading a workshop', pos: '28% 30%' },
+    'therapy-for-executives': { id: 'my-background', src: '/img/aggelos-executives.webp', ratio: 1, alt: 'Aggelos Mouzakitis', pos: '50% 0%' },
   };
   // Reading sections that stay on the axis of what comes before them instead of
   // the centred reading axis ('wrap' = the hero's left edge). About: Before
@@ -549,8 +602,8 @@
   // ── Homepage (reference design) ────────────────────────────────────────────
   const HOME_PHOTOS = {
     hero: { src: '/img/aggelos-home.webp', alt: 'Aggelos Mouzakitis' },
-    context: { src: '/img/aggelos-homepage-1600.webp', alt: 'Aggelos Mouzakitis speaking on stage at a technology conference', pos: '44% 38%' },
-    about: { src: '/img/wtf-friday-speaking.webp', alt: 'Aggelos Mouzakitis leading a workshop', pos: '28% 30%' },
+    context: { src: '/img/aggelos-homepage-1600.webp', ratio: 1.5, alt: 'Aggelos Mouzakitis speaking on stage at a technology conference', pos: '44% 38%' },
+    about: { src: '/img/wtf-friday-speaking.webp', ratio: 1.5, alt: 'Aggelos Mouzakitis leading a workshop', pos: '28% 30%' },
   };
   function HomePage({ p }) {
     const ctx = { id: p.id };
@@ -569,7 +622,7 @@
         e('figure', { className: 'home-fig' },
           e('span', { className: 'home-fig__disc', 'aria-hidden': 'true' }),
           e('span', { className: 'home-fig__cut', 'aria-hidden': 'true' }),
-          e('span', { className: 'home-fig__img' }, e('img', { src: HOME_PHOTOS.hero.src, alt: HOME_PHOTOS.hero.alt, fetchPriority: 'high' }))))));
+          e('span', { className: 'home-fig__img' }, e('img', Object.assign(photoProps(HOME_PHOTOS.hero.src, SIZES.homeHero), { alt: HOME_PHOTOS.hero.alt, fetchPriority: 'high' })))))));
 
     const creds = S['credential-strip'];
     if (creds) {
@@ -1067,7 +1120,7 @@
   function AuthorStrip({ a }) {
     return e('div', { className: 'art-author' },
       e('span', { className: 'art-author__fig' },
-        e('img', { src: a.image, alt: a.alt, width: a.width, height: a.height, decoding: 'async' })),
+        e('img', Object.assign(photoProps(a.image, SIZES.avatar), { alt: a.alt, width: a.width, height: a.height, decoding: 'async' }))),
       e('div', { className: 'art-author__text' },
         e('p', { className: 'art-author__name' }, e('a', { href: a.href, rel: 'author' }, a.name)),
         e('p', { className: 'art-author__line' }, a.credential),
@@ -1278,6 +1331,10 @@
 .dark .p strong{color:var(--bone)}
 .dark .p--emph{color:var(--sage)}
 .dark .p--rule{padding-left:18px;border-left:2px solid var(--sage);font-weight:600;color:var(--bone)}
+/* An inline link on forest is bone, like the secondary link there: green is
+   only 3:1 on forest. */
+.on-dark .inl{color:var(--bone)}
+.on-dark .inl:hover{color:var(--sage)}
 
 /* Photo split: 1:1, the photograph full-bleed */
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);container-type:inline-size}
@@ -1331,6 +1388,11 @@
 @media (max-width:899px){.cols3{grid-template-columns:minmax(0,1fr)}}
 .sage{background:var(--sage-bg)}
 .sage__in{padding-block:var(--sec)}
+/* Green text on a tinted ground (sage here, bone-deep below) is the pressed
+   green: #047857 is 4.2:1 on sage and 4.48:1 on bone-deep, under the 4.5:1
+   text needs; the pressed green is 5.4:1 and 5.8:1. Rules and buttons keep
+   the brand green. */
+.sage .tlink,.sage .inl,.sage .eyebrow{color:var(--green-pressed)}
 
 /* Routes, triggers, facts, lists, quotes */
 .routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px clamp(40px,5.5vw,80px);align-items:start}
@@ -1370,7 +1432,8 @@
 .home-fig__disc{background:var(--green)}
 .home-fig__cut{background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,.92) 58%)}
 .home-fig__img{position:absolute;inset:0;overflow:hidden;border-radius:50%;background:var(--forest)}
-.home-fig__img img{position:absolute;left:-10%;top:0;width:120%;height:auto;max-width:none}
+/* The photo is the square of the portrait the circle shows (PHOTOS). */
+.home-fig__img img{position:absolute;left:0;top:0;width:100%;height:100%}
 @media (max-width:899px){.home-hero__lines{display:none}.home-hero__in{grid-template-columns:minmax(0,1fr)}.home-fig{width:min(80%,320px);justify-self:center}}
 .creds{border-block:1px solid rgba(23,25,25,.16)}
 .creds ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -1394,10 +1457,12 @@
    desktop, less than the gutter on small screens); its copy stays on the axis. */
 .tool--featured{--feat-bleed:min(24px,calc(var(--gutter) - 8px));margin-inline:calc(-1 * var(--feat-bleed));padding:clamp(28px,4vw,44px) var(--feat-bleed);background:var(--bone-deep);border-top:3px solid var(--green)}
 .tool--featured .eyebrow{margin-bottom:14px}
+.tool--featured .eyebrow,.tool--featured .tlink,.tool--featured .inl{color:var(--green-pressed)}
+.tool--featured .meta{color:var(--ink-2)}
 
 /* The Work & Life Check call to action (WorkLifeCheckCTA) */
 .wlcta--feature{padding:clamp(28px,4vw,44px);background:var(--bone-deep);border-top:3px solid var(--green)}
-.wlcta--feature .eyebrow{margin-bottom:14px}
+.wlcta--feature .eyebrow{margin-bottom:14px;color:var(--green-pressed)}
 .wlcta__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + 1vw),34px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
 .wlcta--feature .actions{margin-top:26px}
 .wlcta--inline{margin-top:clamp(40px,4.5vw,56px);padding:26px 0 30px;border-top:2px solid var(--green);border-bottom:1px solid var(--rule)}
@@ -1430,7 +1495,8 @@
 .contact__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(22px,calc(19px + .5vw),27px);font-weight:800;letter-spacing:-.025em;color:var(--heading)}
 .contact__next .p{font-size:17px;line-height:1.65}
 .contact__privacy{padding:24px;background:var(--bone-deep)}
-.contact__privacy-h{margin-bottom:12px;color:var(--green)}
+.contact__privacy-h{margin-bottom:12px;color:var(--green-pressed)}
+.contact__privacy .tlink,.contact__privacy .inl{color:var(--green-pressed)}
 .contact__privacy .p{font-size:17px;line-height:1.6}
 .contact__privacy .links{margin-top:10px}
 .ct-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 20px}
@@ -1528,6 +1594,9 @@
 .flow>.art-sub{margin-top:clamp(36px,4vw,48px)}
 .art-a{color:var(--green);text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:rgba(4,120,87,.55);text-underline-offset:.2em;transition:color 180ms,text-decoration-color 180ms}
 .art-a:hover{color:var(--green-pressed);text-decoration-color:currentColor;text-decoration-thickness:2px}
+/* On the bone-deep notice and callout, the pressed green (see .sage). */
+.art-sec--notice .art-a,.art-callout .art-a{color:var(--green-pressed)}
+.art-sec--notice .art-a:hover,.art-callout .art-a:hover{color:var(--heading)}
 .art-list{margin:0;padding-left:1.25em}
 .art-list li{padding-left:.35em;font-size:clamp(17px,calc(16px + .2vw),18.5px);line-height:1.68;color:var(--body);text-wrap:pretty}
 .art-list li+li{margin-top:12px}

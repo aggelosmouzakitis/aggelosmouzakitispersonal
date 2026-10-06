@@ -2,10 +2,13 @@
 //
 // One shell per page in site-copy.jsx (the canonical copy) and per article in
 // scripts/articles/articles.js: the shared <head> preamble (analytics, fonts,
-// icons, base CSS), an empty #root and the bundles that render it. An article
-// loads its own data (article-<slug>.js) instead of the canonical copy; /blog/
-// also loads the article listing (site-articles.js). Everything else is filled
-// in by the steps after it:
+// icons, base CSS), an empty #root and the page's scripts. A static page (all
+// but /contact/, see LIVE) loads only site-header.js; /contact/ loads React
+// and the bundles that render it. RECIPES says how React draws each page (an
+// article from its own data, article-<slug>.js, instead of the canonical
+// copy; /blog/ with the article listing, site-articles.js), for the live page
+// and for scripts/seo/prerender.js. Everything else is filled in by the steps
+// after it:
 //
 //   node scripts/gen-site-pages.js       # this: shells
 //   node scripts/seo/apply-metadata.js   # <head> metadata from site-meta.js
@@ -63,35 +66,84 @@ function fileFor(url) {
   return url === '/' ? 'index.html' : url.replace(/^\//, '') + 'index.html';
 }
 
+// Pages whose React stays live in the browser: /contact/, the one canonical
+// page that changes once it is drawn (its form). Every other page, and every
+// article, is static: the prerendered snapshot in #root is the whole page and
+// site-header.js runs its header, so it loads no React, no page bundle and no
+// render call. Drawing the page a second time in the browser only delayed it:
+// the download and parse of the bundles held up its first paint, and the
+// re-render was most of its main-thread work.
+const LIVE = new Set(['contact']);
+
+// How React draws a page: the bundles it needs between site-chrome.js and
+// site-pages.js, and the call that renders it. A live page runs this in the
+// browser; for a static page only scripts/seo/prerender.js does, to take the
+// snapshot.
+function canonicalRecipe(p) {
+  return {
+    file: fileFor(p.url),
+    live: LIVE.has(p.id),
+    emailjs: p.id === 'contact',
+    bundles: ['site-copy.js'].concat(p.id === 'contact' ? ['lead-capture.js'] : [], p.id === 'blog' ? [INDEX_BUNDLE] : []),
+    render: `renderSitePage(${JSON.stringify(p.id)});`,
+  };
+}
+// An article: its own data instead of the canonical copy.
+function articleRecipe(a) {
+  return {
+    file: fileFor(urlOf(a)),
+    live: false,
+    emailjs: false,
+    bundles: [dataBundle(a)],
+    render: `renderArticlePage(${JSON.stringify(a.slug)});`,
+  };
+}
+const RECIPES = PAGES.map(canonicalRecipe).concat(ARTICLES.map(articleRecipe));
+
+// Every script React needs to draw a page, in load order.
+const reactScripts = (r) => ['react.production.min.js', 'react-dom.production.min.js', 'site-nav.js', 'site-chrome.js']
+  .concat(r.bundles, ['site-pages.js']);
+
 const script = (src) => `\n<script src="/${src}"></script>`;
 
-// A canonical page: the canonical copy, rendered by renderSitePage.
-function canonicalShell(p) {
-  const isHome = p.id === 'home';
-  const isContact = p.id === 'contact';
-  return shell({
-    preload: isHome ? '\n<link rel="preload" as="image" href="/img/aggelos-home.webp" fetchpriority="high">' : '',
-    emailjs: isContact ? '\n<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>' : '',
-    data: script('site-copy.js') + (isContact ? script('lead-capture.js') : '') + (p.id === 'blog' ? script(INDEX_BUNDLE) : ''),
-    render: `renderSitePage(${JSON.stringify(p.id)});`,
-  });
+function bodyScripts(r) {
+  if (!r.live) return '\n<script src="/site-header.js" async></script>';
+  return `
+<script src="/react.production.min.js" crossorigin="anonymous"></script>
+<script src="/react-dom.production.min.js" crossorigin="anonymous"></script>` +
+    (r.emailjs ? '\n<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>' : '') +
+    reactScripts(r).slice(2).map(script).join('') +
+    `\n<script>${r.render}</script>`;
 }
 
-// An article: its own data instead of the canonical copy.
-function articleShell(a) {
-  return shell({ preload: '', emailjs: '', data: script(dataBundle(a)), render: `renderArticlePage(${JSON.stringify(a.slug)});` });
-}
-
-function shell({ preload, emailjs, data, render }) {
+function shell(r) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=${GA}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', '${GA}');
+  // gtag.js, the heaviest script the page loads, comes in on the reader's
+  // first scroll, tap, click or key press, or 5 seconds after the page has
+  // loaded, so it never competes with the page itself; what is queued above
+  // is sent when it runs.
+  (function () {
+    var events = ['scroll', 'wheel', 'pointerdown', 'pointermove', 'touchstart', 'keydown'];
+    var done = false;
+    function load() {
+      if (done) return;
+      done = true;
+      events.forEach(function (t) { removeEventListener(t, load, true); });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=${GA}';
+      document.head.appendChild(s);
+    }
+    events.forEach(function (t) { addEventListener(t, load, { capture: true, passive: true }); });
+    addEventListener('load', function () { setTimeout(load, 5000); });
+  })();
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -100,7 +152,7 @@ ${FONT_HEAD}
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">${preload}
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#F3F0E8">
 <meta name="author" content="Aggelos Mouzakitis">
 <link rel="manifest" href="/manifest.json">
@@ -108,27 +160,20 @@ ${FONT_HEAD}
 </head>
 <body>
 <div class="site-grain" aria-hidden="true"></div>
-<div id="root"></div>
-<script src="/react.production.min.js" crossorigin="anonymous"></script>
-<script src="/react-dom.production.min.js" crossorigin="anonymous"></script>${emailjs}
-<script src="/site-nav.js"></script>
-<script src="/site-chrome.js"></script>${data}
-<script src="/site-pages.js"></script>
-<script>${render}</script>
+<div id="root"></div>${bodyScripts(r)}
 </body>
 </html>
 `;
 }
 
-let n = 0;
-const write = (url, html) => {
-  const rel = fileFor(url);
-  const out = path.join(ROOT, rel);
-  fs.mkdirSync(path.dirname(out), { recursive: true });
-  fs.writeFileSync(out, html);
-  n++;
-  console.log(`  ${rel}`);
-};
-for (const p of PAGES) write(p.url, canonicalShell(p));
-for (const a of ARTICLES) write(urlOf(a), articleShell(a));
-console.log(`gen-site-pages: ${n} shells written`);
+module.exports = { RECIPES, reactScripts };
+
+if (require.main === module) {
+  for (const r of RECIPES) {
+    const out = path.join(ROOT, r.file);
+    fs.mkdirSync(path.dirname(out), { recursive: true });
+    fs.writeFileSync(out, shell(r));
+    console.log(`  ${r.file}`);
+  }
+  console.log(`gen-site-pages: ${RECIPES.length} shells written`);
+}

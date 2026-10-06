@@ -2,7 +2,8 @@
 
 The pages are committed as static HTML: each one is a shell (analytics, fonts,
 metadata) with a prerendered snapshot of the React page inside `#root`, so
-crawlers and no-JS visitors get the full copy and React takes over on load.
+crawlers and no-JS visitors get the full copy. On /contact/ React takes over
+on load (its form); every other page stays static (see Static pages).
 Netlify runs no compile step; it only assembles `public/` (see Publish).
 
 ## Where the copy comes from
@@ -54,8 +55,11 @@ straight to it (netlify.toml and routes.js; check-articles.js proves it).
   the full pipeline from `npm run copy`.
 - An article brief or `scripts/articles/articles.js` changed: the full
   pipeline from `npm run articles`.
-- A `.jsx` file changed (`site-chrome`, `site-pages`, `lead-capture`,
-  `clarity-*`): the full pipeline from `npm run build`.
+- A `.jsx` file changed (`site-chrome`, `site-pages`, `site-header`,
+  `lead-capture`, `clarity-*`): the full pipeline from `npm run build`.
+- A photograph was added or its widths changed (`PHOTOS` in `site-pages.jsx`):
+  `npm run images` first (see Photographs), then the full pipeline
+  from `npm run build`.
 - A page title or H1 changed: also regenerate the Open Graph images and llms.txt.
 - `netlify.toml` or `scripts/seo/routes.js` changed: `npm run qa:routes`.
 
@@ -85,10 +89,38 @@ straight to it (netlify.toml and routes.js; check-articles.js proves it).
 `scripts/gen-site-pages.js` (`npm run pages`) rewrites every shell and empties
 its `#root`, so run the whole list after it.
 
+## Static pages
+A page whose content never changes once it is drawn ships without React: every
+canonical page but /contact/, and every article (`LIVE` in
+`scripts/gen-site-pages.js`). Its shell loads only `site-header.js` (async),
+which gives the prerendered header the menus `SiteHeader` has in React and
+keeps the footer's year current; `prerender.js` draws the page with React from
+the same recipe (`RECIPES`) a live page runs in the browser. Re-rendering an
+identical page in the browser cost a phone most of a second: the bundles had
+to arrive and run before the first paint, and the render was most of the
+main-thread work. A page that needs React in the browser (a form, a tool)
+goes in `LIVE`.
+
+Google Analytics: the shells queue `gtag` calls inline and load gtag.js, the
+heaviest script a page loads, on the reader's first scroll, tap, click or key
+press, or 5 seconds after load, so it never competes with the page. Visits
+that end within 5 seconds without any interaction are not counted.
+
+## Photographs
+`PHOTOS` in `site-pages.jsx` lists every photograph the pages show and the
+widths it is offered at; the components draw them with `srcset`/`sizes`, so a
+phone downloads a width near the one it shows. `npm run images` cuts
+those widths (`img/<name>-<width>.webp`), grey like the CSS filter draws them
+(the filter's grayscale then changes nothing, and grey files are lighter), and
+cut to the part the page shows where `crop` says so. It needs sharp, which is
+not a project dependency: `npm install --no-save sharp`. It writes only files
+that do not exist yet (`/img/*` is cached immutably): rename a changed
+original rather than overwriting it.
+
 ## Fonts
 The three typefaces are self-hosted from `fonts/` (the exact WOFF2 subsets
 Google Fonts serves, same unicode ranges). `scripts/fonts.js` lists them and
-builds the `<head>` block: two preloads and the inline `@font-face` rules. The
+builds the `<head>` block: three preloads and the inline `@font-face` rules. The
 page shells get it from `gen-site-pages.js`; the hand-made pages (the two
 tools, `/ask-me-anything/el`, `404.html`) from `node scripts/sync-fonts.js`,
 which only needs re-running when `scripts/fonts.js` changes. File names carry

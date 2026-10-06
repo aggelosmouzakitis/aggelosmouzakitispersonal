@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KV83RRF6ZM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-KV83RRF6ZM');
+  // gtag.js, the heaviest script the page loads, comes in on the reader's
+  // first scroll, tap, click or key press, or 5 seconds after the page has
+  // loaded, so it never competes with the page itself; what is queued above
+  // is sent when it runs.
+  (function () {
+    var events = ['scroll', 'wheel', 'pointerdown', 'pointermove', 'touchstart', 'keydown'];
+    var done = false;
+    function load() {
+      if (done) return;
+      done = true;
+      events.forEach(function (t) { removeEventListener(t, load, true); });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-KV83RRF6ZM';
+      document.head.appendChild(s);
+    }
+    events.forEach(function (t) { addEventListener(t, load, { capture: true, passive: true }); });
+    addEventListener('load', function () { setTimeout(load, 5000); });
+  })();
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- fonts -->
 <link rel="preload" href="/fonts/inter-v20-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-black-v23-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-tight-v9-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 @font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
@@ -33,7 +52,7 @@
 </style>
 <!-- /fonts -->
 <!-- Favicon / site icons -->
-<link rel="icon" href="/favicon.ico?v=dc7484cf7c" sizes="any">
+<link rel="icon" href="/favicon.ico?v=2edc963114" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5d5e245bf0">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=b708bdc3f1">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=022b5f081c">
@@ -257,6 +276,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .dark .p strong{color:var(--bone)}
 .dark .p--emph{color:var(--sage)}
 .dark .p--rule{padding-left:18px;border-left:2px solid var(--sage);font-weight:600;color:var(--bone)}
+/* An inline link on forest is bone, like the secondary link there: green is
+   only 3:1 on forest. */
+.on-dark .inl{color:var(--bone)}
+.on-dark .inl:hover{color:var(--sage)}
 
 /* Photo split: 1:1, the photograph full-bleed */
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);container-type:inline-size}
@@ -310,6 +333,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 @media (max-width:899px){.cols3{grid-template-columns:minmax(0,1fr)}}
 .sage{background:var(--sage-bg)}
 .sage__in{padding-block:var(--sec)}
+/* Green text on a tinted ground (sage here, bone-deep below) is the pressed
+   green: #047857 is 4.2:1 on sage and 4.48:1 on bone-deep, under the 4.5:1
+   text needs; the pressed green is 5.4:1 and 5.8:1. Rules and buttons keep
+   the brand green. */
+.sage .tlink,.sage .inl,.sage .eyebrow{color:var(--green-pressed)}
 
 /* Routes, triggers, facts, lists, quotes */
 .routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px clamp(40px,5.5vw,80px);align-items:start}
@@ -349,7 +377,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .home-fig__disc{background:var(--green)}
 .home-fig__cut{background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,.92) 58%)}
 .home-fig__img{position:absolute;inset:0;overflow:hidden;border-radius:50%;background:var(--forest)}
-.home-fig__img img{position:absolute;left:-10%;top:0;width:120%;height:auto;max-width:none}
+/* The photo is the square of the portrait the circle shows (PHOTOS). */
+.home-fig__img img{position:absolute;left:0;top:0;width:100%;height:100%}
 @media (max-width:899px){.home-hero__lines{display:none}.home-hero__in{grid-template-columns:minmax(0,1fr)}.home-fig{width:min(80%,320px);justify-self:center}}
 .creds{border-block:1px solid rgba(23,25,25,.16)}
 .creds ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -373,10 +402,12 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
    desktop, less than the gutter on small screens); its copy stays on the axis. */
 .tool--featured{--feat-bleed:min(24px,calc(var(--gutter) - 8px));margin-inline:calc(-1 * var(--feat-bleed));padding:clamp(28px,4vw,44px) var(--feat-bleed);background:var(--bone-deep);border-top:3px solid var(--green)}
 .tool--featured .eyebrow{margin-bottom:14px}
+.tool--featured .eyebrow,.tool--featured .tlink,.tool--featured .inl{color:var(--green-pressed)}
+.tool--featured .meta{color:var(--ink-2)}
 
 /* The Work & Life Check call to action (WorkLifeCheckCTA) */
 .wlcta--feature{padding:clamp(28px,4vw,44px);background:var(--bone-deep);border-top:3px solid var(--green)}
-.wlcta--feature .eyebrow{margin-bottom:14px}
+.wlcta--feature .eyebrow{margin-bottom:14px;color:var(--green-pressed)}
 .wlcta__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + 1vw),34px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
 .wlcta--feature .actions{margin-top:26px}
 .wlcta--inline{margin-top:clamp(40px,4.5vw,56px);padding:26px 0 30px;border-top:2px solid var(--green);border-bottom:1px solid var(--rule)}
@@ -409,7 +440,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .contact__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(22px,calc(19px + .5vw),27px);font-weight:800;letter-spacing:-.025em;color:var(--heading)}
 .contact__next .p{font-size:17px;line-height:1.65}
 .contact__privacy{padding:24px;background:var(--bone-deep)}
-.contact__privacy-h{margin-bottom:12px;color:var(--green)}
+.contact__privacy-h{margin-bottom:12px;color:var(--green-pressed)}
+.contact__privacy .tlink,.contact__privacy .inl{color:var(--green-pressed)}
 .contact__privacy .p{font-size:17px;line-height:1.6}
 .contact__privacy .links{margin-top:10px}
 .ct-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 20px}
@@ -461,12 +493,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 
 @media (max-width:599px){.btn{white-space:normal;text-align:center}}
 </style><header class="hdr"><a class="skip-link" href="#main">Skip to content</a><div class="wrap hdr__in"><a href="/" class="hdr__brand" aria-label="Aggelos Mouzakitis, home">Aggelos<span>.</span></a><nav class="hdr__nav" aria-label="Primary"><div class="hdr__item"><a href="/" class="hdr__link">Home</a></div><div class="hdr__item"><a href="/about/" class="hdr__link">About</a></div><div class="hdr__item"><button type="button" class="hdr__btn" aria-expanded="false" aria-controls="nav-services">Services<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg></button><div id="nav-services" class="hdr__panel" hidden=""><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a><div class="hdr__sep" role="presentation"></div><a href="/therapy-for-men-in-tech/">Therapy for Men in Tech &amp; Business</a><a href="/therapy-for-executives/">Therapy for Executives &amp; Senior Leaders</a><a href="/therapy-for-founders/">Therapy for Entrepreneurs, Founders &amp; Business Owners</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></div></div><div class="hdr__item"><button type="button" class="hdr__btn" aria-expanded="false" aria-controls="nav-resources">Resources<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg></button><div id="nav-resources" class="hdr__panel" hidden=""><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/">Writing</a><a href="/free-tools/">Free Tools</a><a href="/reviews/">Reviews</a></div></div><div class="hdr__item"><a href="/faq/" class="hdr__link">FAQ</a></div></nav><a href="/contact/" class="hdr__cta">Book a consultation<span aria-hidden="true">→</span></a><button type="button" class="hdr__menu-btn" aria-expanded="false" aria-controls="site-menu">Menu<span class="hdr__burger" aria-hidden="true"><span></span><span></span><span></span></span></button></div><nav id="site-menu" class="mmenu" aria-label="Primary" hidden=""><div class="mmenu__in"><a href="/" class="mmenu__link">Home</a><a href="/about/" class="mmenu__link">About</a><div class="mmenu__group"><button type="button" class="mmenu__toggle" aria-expanded="false" aria-controls="m-services">Services<span class="mmenu__sign" aria-hidden="true">+</span></button><div id="m-services" class="mmenu__links" hidden=""><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a><div class="mmenu__sep" role="presentation"></div><a href="/therapy-for-men-in-tech/">Therapy for Men in Tech &amp; Business</a><a href="/therapy-for-executives/">Therapy for Executives &amp; Senior Leaders</a><a href="/therapy-for-founders/">Therapy for Entrepreneurs, Founders &amp; Business Owners</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></div></div><div class="mmenu__group"><button type="button" class="mmenu__toggle" aria-expanded="false" aria-controls="m-resources">Resources<span class="mmenu__sign" aria-hidden="true">+</span></button><div id="m-resources" class="mmenu__links" hidden=""><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/">Writing</a><a href="/free-tools/">Free Tools</a><a href="/reviews/">Reviews</a></div></div><a href="/faq/" class="mmenu__link">FAQ</a><a href="/contact/" class="mmenu__cta">Book a consultation<span aria-hidden="true">→</span></a></div></nav></header><main id="main" tabindex="-1" class="pg fam-problem pg--career-transition-therapy"><header class="read hero-read"><p class="eyebrow">CAREER CHANGE &amp; DECISIONS</p><h1 class="h1" id="page-title">Therapy for career change and difficult career decisions.</h1><p class="lead">You may have wanted to leave for a year, but the salary is good, your family is used to it and another chunk of equity vests in six months.</p><p class="lead">Career decisions become more complicated when income, identity, family expectations and self-worth are tied to the same choice.</p><div class="actions"><a class="btn" href="/contact/">Book a consultation <span aria-hidden="true">→</span></a></div></header><section class="sec" id="leaving-a-good-job" aria-labelledby="leaving-a-good-job-h"><div class="read"><h2 class="h2" id="leaving-a-good-job-h">Leaving a good job</h2><div class="flow"><p class="p">A good job can be difficult to leave because nothing is bad enough to force the decision. The company may be respectable, the money decent and the role one you are still good at.</p><p class="p">Without a clear external reason to leave, the choice remains yours. Some people end up waiting for the job to become worse because that would make the decision easier to justify.</p></div></div></section><section class="sec" id="more-analysis" aria-labelledby="more-analysis-h"><div class="read"><h2 class="h2" id="more-analysis-h">More analysis</h2><div class="flow"><p class="p">You know the salary. You have researched the market. You have discussed the title, risk, commute and future options. <a class="inl" href="/career-change-anxiety/">Six months later, the decision is still open</a>.</p><p class="p">When that happens, information is probably no longer the missing piece.</p><p class="p">The harder part may be losing status, earning less for a while, disappointing somebody or accepting that a career you invested heavily in no longer fits.</p></div></div></section><aside class="read wlcta wlcta--inline" aria-label="The Work &amp; Life Check"><p class="wlcta__lead">If the decision has been open for months, check what else may be keeping it open.</p><a class="btn btn--ghost" href="/work-life-check/?source=career-inline">Take the Work &amp; Life Check <span aria-hidden="true">→</span></a></aside><section class="band dark on-dark" id="career-identity" aria-labelledby="career-identity-h"><div class="read dark__in"><h2 class="h2" id="career-identity-h">Career identity</h2><div class="flow"><p class="p p--emph">Work gives more than income.</p><p class="p">It gives structure, expertise, community and an answer to the question “what do you do?” Leaving then means <a class="inl" href="/career-change-at-40/">giving up a version of yourself that took years to build</a>.</p><p class="p">A purely financial idea such as sunk cost does not capture everything involved. You may have spent fifteen years building the expertise, identity and relationships attached to this role.</p></div></div></section><section class="sec" id="job-loss" aria-labelledby="job-loss-h"><div class="read"><h2 class="h2" id="job-loss-h">Job loss</h2><div class="flow"><p class="p">Redundancy and company failure create immediate practical problems. They can also land as rejection.</p><p class="p">A common response is to start applying immediately because action feels better than stopping. That may be sensible. It can also postpone the emotional part of the loss until later.</p></div></div></section><section class="sec" id="after-success" aria-labelledby="after-success-h"><div class="read"><h2 class="h2" id="after-success-h">After success</h2><div class="flow"><p class="p p--emph">The same question appears after success.</p><p class="p">You get the promotion, sell the company or reach the senior level you were aiming for and discover that you are less interested in the life attached to it than you expected.</p><p class="p">That doesn’t invalidate the years before it. People change.</p></div></div></section><section class="sec" id="therapy-or-coaching" aria-labelledby="therapy-or-coaching-h"><div class="read"><h2 class="h2" id="therapy-or-coaching-h">Therapy or coaching?</h2><div class="flow"><p class="p">Professional Coaching is often enough when the job is to compare options, test assumptions and make a professional decision.</p><p class="p">Psychotherapy gives us more room when the choice is tangled up with fear, self-worth, family expectations, grief or a pattern that has appeared in other parts of life.</p><div class="links"><a class="tlink" href="/professional-coaching/"><span>Professional coaching</span><span aria-hidden="true">→</span></a><a class="tlink" href="/individual-psychotherapy/"><span>Individual psychotherapy</span><span aria-hidden="true">→</span></a><a class="tlink" href="/therapy-for-executives/"><span>Psychotherapy for executives</span><span aria-hidden="true">→</span></a><a class="tlink" href="/therapy-vs-coaching/"><span>Therapy vs coaching</span><span aria-hidden="true">→</span></a></div></div></div></section><section class="sec" id="how-therapy-approaches-career-decisions" aria-labelledby="how-therapy-approaches-career-decisions-h"><div class="read"><h2 class="h2" id="how-therapy-approaches-career-decisions-h">How therapy approaches career decisions</h2><div class="flow"><p class="p">The timeline is useful here. What changed? When did the current situation stop being acceptable? What still makes staying attractive? What are you expecting the alternative to solve?</p><p class="p">My Jobs to be Done background makes that kind of investigation familiar. Psychotherapy gives us room to follow the decision further when fear, self-worth, family expectations or recurring patterns become part of it.</p></div></div></section><section class="band close on-dark" aria-labelledby="close-h"><div class="read close__in"><h2 id="close-h" class="close__label">Contact</h2><p class="close__text">If you have been circling the same career decision for months, book a consultation.</p><div class="close__actions"><a class="btn" href="/contact/">Book a consultation <span aria-hidden="true">→</span></a></div></div></section></main><footer class="ftr"><div class="wrap"><div class="ftr__grid"><div style="min-width: 0px;"><a href="/" class="ftr__brand" aria-label="Aggelos Mouzakitis, home">Aggelos<span>.</span></a><p class="ftr__tag">BACP-registered psychotherapist · Background in tech, product &amp; growth</p><ul class="ftr__social" aria-label="Social media"><li><a href="https://www.linkedin.com/in/growth-product-manager/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a></li><li><a href="https://www.instagram.com/_aggelosmouzakitis_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg></a></li><li><a href="https://www.tiktok.com/@aggelosmouz" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg></a></li></ul></div><nav class="ftr__col" aria-label="Work with me"><p class="ftr__head">Work with me</p><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a></nav><nav class="ftr__col" aria-label="Who I work with"><p class="ftr__head">Who I work with</p><a href="/therapy-for-men-in-tech/">Men in Tech &amp; Demanding Careers</a><a href="/therapy-for-founders/">Founders &amp; Business Owners</a><a href="/therapy-for-executives/">Executives &amp; Leaders</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></nav><nav class="ftr__col" aria-label="Common problems"><p class="ftr__head">Common problems</p><a href="/relationship-problems-men/">Relationships &amp; Separation</a><a href="/work-affecting-relationship/">Work &amp; Relationships</a><a href="/executive-burnout-therapy/">Burnout &amp; Can’t Switch Off</a><a href="/career-transition-therapy/">Career Change &amp; Decisions</a><a href="/anxiety-overthinking/">Anxiety &amp; Overthinking</a><a href="/achievement-self-worth/">Achievement &amp; Self-Worth</a></nav><nav class="ftr__col" aria-label="Practice"><p class="ftr__head">Practice</p><a href="/about/">About</a><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/">Writing</a><a href="/free-tools/">Free Tools</a><a href="/faq/">FAQ</a><a href="/reviews/">Reviews</a><a href="/contact/">Contact</a></nav></div><div class="ftr__rule" role="presentation"></div><div class="ftr__bottom"><p style="margin: 0px;">© 2026 Aggelos Mouzakitis. All rights reserved.</p><nav class="ftr__legal" aria-label="Legal"><a href="/confidentiality/">Confidentiality</a></nav></div></div></footer></div>
-<script src="/react.production.min.js?v=d949f1c368" crossorigin="anonymous"></script>
-<script src="/react-dom.production.min.js?v=35f4f974f4" crossorigin="anonymous"></script>
-<script src="/site-nav.js?v=845fe0238a"></script>
-<script src="/site-chrome.js?v=ebc8547ebf"></script>
-<script src="/site-copy.js?v=7e65acfab8"></script>
-<script src="/site-pages.js?v=0b2f325b56"></script>
-<script>renderSitePage("career-transition-therapy");</script>
+<script src="/site-header.js?v=cc311e7df5" async></script>
 </body>
 </html>

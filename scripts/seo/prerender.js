@@ -11,6 +11,11 @@ const EXTRA = [
   'ask-me-anything/el/index.html', // printed QR codes — noindex, see the page
 ];
 const PAGES = require('./site-meta.js').PAGES.map((p) => p.file).concat(EXTRA);
+// A static page ships without React (scripts/gen-site-pages.js): it is drawn
+// here, with the bundles and the render call a live page would run, and the
+// snapshot is all the browser gets. The others render themselves.
+const { RECIPES, reactScripts } = require('../gen-site-pages.js');
+const STATIC = new Map(RECIPES.filter((r) => !r.live).map((r) => [r.file, r]));
 
 function injectPrerender(html, inner) {
   // Replace #root (empty or already-populated) with the captured innerHTML.
@@ -42,6 +47,13 @@ function injectPrerender(html, inner) {
     const errs = [];
     page.on('pageerror', e => errs.push(String(e)));
     await page.goto('http://localhost:8099/' + f, { waitUntil: 'load' });
+    const recipe = STATIC.get(f);
+    if (recipe) {
+      // Clear the previous snapshot so the wait below sees the new render.
+      await page.evaluate(() => { document.getElementById('root').textContent = ''; });
+      for (const src of reactScripts(recipe)) await page.addScriptTag({ url: '/' + src });
+      await page.addScriptTag({ content: recipe.render });
+    }
     // Wait for React to render real content
     try { await page.waitForFunction(() => {
       const r = document.getElementById('root');

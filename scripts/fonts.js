@@ -40,8 +40,10 @@ const FONT_CSS = FACES.map(([family, weight, file, range]) =>
 const preload = (files) => files
   .map((f) => `<link rel="preload" href="/fonts/${f}" as="font" type="font/woff2" crossorigin>`).join('\n');
 
-// Preloaded: body text and the H1 face, latin only (every page's first screen).
-const PRELOAD = preload(['inter-v20-latin.woff2', 'archivo-black-v23-latin.woff2']);
+// Preloaded: body text, the H1 face and the heading face (the header's
+// wordmark is set in it), latin only: every page's first screen uses all
+// three, and a face found only by laying the page out is fetched late.
+const PRELOAD = preload(['inter-v20-latin.woff2', 'archivo-black-v23-latin.woff2', 'inter-tight-v9-latin.woff2']);
 
 // The block a page's <head> carries (between markers, so it can be re-synced).
 // A page whose first screen is not latin passes its own preload files.
