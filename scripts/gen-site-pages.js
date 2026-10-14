@@ -75,16 +75,22 @@ function fileFor(url) {
 // re-render was most of its main-thread work.
 const LIVE = new Set(['contact']);
 
+// A static page's own plain script, if it has one: /undisguised/ draws its
+// map's progress from the reader's scroll (site-undisguised.js).
+const PAGE_SCRIPTS = { undisguised: ['site-undisguised.js'] };
+
 // How React draws a page: the bundles it needs between site-chrome.js and
 // site-pages.js, and the call that renders it. A live page runs this in the
 // browser; for a static page only scripts/seo/prerender.js does, to take the
-// snapshot.
+// snapshot. `scripts` are the plain scripts a static page loads besides
+// site-header.js (async, no React; PAGE_SCRIPTS).
 function canonicalRecipe(p) {
   return {
     file: fileFor(p.url),
     live: LIVE.has(p.id),
     emailjs: p.id === 'contact',
     bundles: ['site-copy.js'].concat(p.id === 'contact' ? ['lead-capture.js'] : [], p.id === 'blog' ? [INDEX_BUNDLE] : []),
+    scripts: PAGE_SCRIPTS[p.id] || [],
     render: `renderSitePage(${JSON.stringify(p.id)});`,
   };
 }
@@ -107,7 +113,7 @@ const reactScripts = (r) => ['react.production.min.js', 'react-dom.production.mi
 const script = (src) => `\n<script src="/${src}"></script>`;
 
 function bodyScripts(r) {
-  if (!r.live) return '\n<script src="/site-header.js" async></script>';
+  if (!r.live) return ['site-header.js'].concat(r.scripts || []).map((src) => `\n<script src="/${src}" async></script>`).join('');
   return `
 <script src="/react.production.min.js" crossorigin="anonymous"></script>
 <script src="/react-dom.production.min.js" crossorigin="anonymous"></script>` +

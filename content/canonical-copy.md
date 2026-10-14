@@ -22,6 +22,7 @@
 **Resources**
 - Considering Therapy
 - Therapy vs Coaching
+- Undisguised
 - Writing
 - Free Tools
 - Reviews
@@ -37,6 +38,8 @@ Problem pages remain live and are reached through contextual links and related-n
 **Aggelos.**
 
 BACP-registered psychotherapist · Background in tech, product & growth
+
+**Signature:** Undisguised · The thinking behind my work
 
 **Work with me**
 - Individual Psychotherapy
@@ -102,6 +105,7 @@ Confidentiality
 | 23 | Writing | /blog/ | Writing on Work, Relationships & Psychotherapy \| Aggelos Mouzakitis | Essays on work, ambition, burnout, relationships, career decisions, anxiety, achievement and the psychological life behind demanding careers. | Writing on work, relationships and psychotherapy. |
 | 24 | Contact | /contact/ | Contact Aggelos Mouzakitis \| Book a Consultation | Contact Aggelos Mouzakitis about individual psychotherapy, couples therapy or professional coaching. Online sessions in Greek or English. | Tell me briefly what brings you here. |
 | 25 | Confidentiality | /confidentiality/ | Confidentiality \| Aggelos Mouzakitis | Information about confidentiality, clinical supervision, records, communication and the limits that apply to psychotherapy with Aggelos Mouzakitis. | Confidentiality |
+| 26 | Undisguised | /undisguised/ | Undisguised: A Manifesto for Living Deliberately \| Aggelos Mouzakitis | A manifesto by Aggelos Mouzakitis on understanding what drives us, questioning the roles we've learned to play and making more deliberate choices about how we live. | Undisguised. |
 
 ---
 
@@ -146,6 +150,12 @@ People usually arrive with something specific already happening such as a relati
 **Career change & decisions →**  
 **Anxiety & overthinking →**
 
+## Undisguised · A manifesto
+
+Living deliberately, rather than by fear, approval, performance or inherited expectations.
+
+**Explore the Undisguised Map →**
+
 ## Work is part of the context
 
 The practice is focused mainly on men whose professional lives carry a lot of weight. The work is psychotherapy, with enough familiarity with tech, startups and business that the professional environment does not need to be explained from scratch.
@@ -163,6 +173,8 @@ I am fairly active in sessions. The work is conversational, but it is not passiv
 Not every difficulty needs a hidden psychological explanation. A job can be badly designed, a relationship can be ending and money can be a real constraint. The work goes deeper when there is a reason to go deeper.
 
 **How individual psychotherapy works →**
+
+**The thinking behind my work: Undisguised →**
 
 ## Ways to work with me
 
@@ -193,17 +205,31 @@ For a clearly professional decision or situation that can stay focused on work, 
 **Writing →**  
 **Free tools →**
 
+### Undisguised · The map
+
+A way of understanding what drives us and making more deliberate choices about how we live.
+
+I · See Clearly  
+II · Choose Deliberately  
+III · Act Courageously  
+IV · Live Connected
+
+**Explore the manifesto →**
+
 ## About me
 
 My clinical background includes an MSc in Integrative Counselling & Psychotherapy from the University of Derby, graduate studies in Psychology, EMDR, somatic training, clinical placement at the Psychiatric Clinic of Metaxa Cancer Hospital, and BACP registration. Before psychotherapy, I spent more than 18 years in product, growth and technology.
 
-**Read more about me →**
+**Read more about me →**  
+**My philosophy: Undisguised →**
 
 ## Contact
 
 If you think this might fit, tell me briefly what brings you here.
 
 **Book a consultation →**
+
+**Prefer to read first? Explore Undisguised →**
 
 ---
 
@@ -2011,5 +2037,161 @@ Specific limits depend on professional duties and the jurisdiction relevant to t
 ## Crisis support
 
 This practice is not an emergency psychiatric or crisis-response service. If you or somebody else is in immediate danger, contact the appropriate emergency or crisis service where you are located.
+
+---
+
+# 26. Undisguised
+
+**URL:** `/undisguised/`  
+**SEO title:** Undisguised: A Manifesto for Living Deliberately | Aggelos Mouzakitis  
+**Meta description:** A manifesto by Aggelos Mouzakitis on understanding what drives us, questioning the roles we've learned to play and making more deliberate choices about how we live.  
+**Navigation label:** Undisguised
+
+**Note:** Undisguised is a point of view, not a clinical model, a treatment method or a service. The four familiar patterns (Ambition, Independence, Responsibility, Being liked) describe where things show up; the four movements of the map (See Clearly, Choose Deliberately, Act Courageously, Live Connected) are something to return to, not a fixed sequence of steps.
+
+## Hero
+
+**UNDISGUISED · A MANIFESTO**
+
+# Undisguised.
+
+**Living deliberately, rather than by fear, approval, performance or inherited expectations.**
+
+Undisguised is an approach to life about understanding what drives us, questioning the roles we've learned to play, and making more deliberate choices about how we live.
+
+**Explore the Undisguised Map →**  
+**Read the Undisguised newsletter →**
+
+## The four movements
+
+**I · See Clearly**  
+Understand what's driving you.
+
+**II · Choose Deliberately**  
+Decide what deserves a place in your life.
+
+**III · Act Courageously**  
+Do something with what you've understood.
+
+**IV · Live Connected**  
+Build a life that includes other people.
+
+## We develop ways of getting what we need from the world.
+
+**Being useful**  
+might have earned us appreciation.
+
+**Working harder than everyone else**  
+might have brought recognition.
+
+**Keeping people happy**  
+might have helped us avoid conflict.
+
+Over time, these behaviors can become part of how we see ourselves.
+
+The reliable one.  
+The independent one.  
+The person who always figures things out.
+
+And sometimes, we keep behaving this way long after the circumstances that made it necessary have changed.
+
+## Four familiar patterns
+
+**Eyebrow:** Where it shows up
+
+**Ambition**  
+You've achieved more than you expected. **Somehow, slowing down still feels like falling behind.**
+
+**Independence**  
+You're comfortable handling almost anything alone. **Asking someone for help is another matter.**
+
+**Responsibility**  
+You keep accepting obligations you don't have time for. **You're beginning to resent the people who depend on you.**
+
+**Being liked**  
+You avoid saying something that might upset your partner. **Six months later, you're having the same argument.**
+
+These patterns have different explanations for different people. They're worth examining when they become difficult to change, even when they're costing us something important.
+
+## The Undisguised Map
+
+**Eyebrow:** Something to return to
+
+See Clearly → Choose Deliberately → Act Courageously → Live Connected
+
+### Understand what's driving you.
+
+**Eyebrow:** I — See Clearly
+
+Pay attention to what you repeatedly do, particularly when your reactions seem out of proportion to the situation.
+
+A decision about work may also involve your sense of worth. Avoiding a conversation may have something to do with how you've learned to handle disagreement.
+
+**Understanding the pattern gives you more to work with.**
+
+**Question:** What am I trying to protect, prove, or avoid?
+
+### Decide what deserves a place in your life.
+
+**Eyebrow:** II — Choose Deliberately
+
+We can spend years pursuing things that made sense at one point without questioning whether they still do.
+
+- The career you've invested in.
+- The expectations you've accepted.
+- The responsibilities you've taken on.
+
+**Some are worth keeping. Others deserve another look.**
+
+**Question:** What matters enough to me that I'm willing to accept the cost?
+
+### Do something with what you've understood.
+
+**Eyebrow:** III — Act Courageously
+
+You can know exactly why you avoid conflict and still struggle to tell someone you're unhappy.
+
+Understanding helps. Eventually, the conversation has to happen, the decision has to be made, or something about your behavior has to change.
+
+**That often means accepting consequences you would prefer to avoid.**
+
+**Question:** What am I avoiding because of what might happen next?
+
+### Build a life that includes other people.
+
+**Eyebrow:** IV — Live Connected
+
+Independence can make life easier in many ways. It can also make it difficult to let people close enough to know when things aren't going well.
+
+Our choices affect the people around us. The relationships we build, the responsibilities we accept, and how we respond when someone needs us are all part of the life we're choosing.
+
+**Question:** How are my choices affecting the people I care about?
+
+## Ambition, independence, loyalty and responsibility can be some of your greatest qualities.
+
+But consider what happens when you try to behave differently.
+
+Can you rest without feeling guilty?  
+Ask for help without feeling incompetent?  
+Disappoint someone without spending the evening thinking about what they might think of you?
+
+There may be good reasons for these reactions. Understanding them can make it easier to recognize when a familiar response is helping and when it's getting in your way.
+
+## A strength should give you more choices in life.
+
+It's worth paying attention when it starts taking choices away.
+
+## Our histories will continue to influence us.
+
+We'll still make decisions out of fear sometimes, avoid difficult conversations, and discover that things we thought mattered no longer do.
+
+We can get better at recognizing these patterns and deciding how we want to respond.
+
+## The Undisguised Map
+
+The Undisguised Map is something to return to when we notice ourselves slipping into familiar ways of living without much thought.
+
+**Return to the Map →**  
+**Read Undisguised →**
 
 ---

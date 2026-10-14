@@ -13,7 +13,7 @@ const CANONICAL = [
   '/separation-divorce-men/', '/work-affecting-relationship/', '/executive-burnout-therapy/',
   '/career-transition-therapy/', '/anxiety-overthinking/', '/achievement-self-worth/',
   '/considering-therapy/', '/therapy-vs-coaching/', '/faq/', '/reviews/', '/free-tools/', '/blog/', '/contact/',
-  '/confidentiality/',
+  '/confidentiality/', '/undisguised/',
 ].map((u) => [u, 200, null, 'canonical']).concat([
   ['/work-life-check/', 200, null, 'tool'],
   ['/free-tools/quit-your-job/', 200, null, 'tool (kept)'],

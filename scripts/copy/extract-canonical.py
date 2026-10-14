@@ -13,9 +13,17 @@ that document arrives:
 The document lives in the repository at content/canonical-copy.md (it is not
 published); replace that file with a new version, then re-run.
 
-site-copy.jsx holds the 25 pages (loaded by the canonical pages only);
+site-copy.jsx holds the 26 pages (loaded by the canonical pages only);
 site-nav.jsx holds the header and footer wording (loaded on every page,
 including the tools, so it is kept separate and small).
+
+Besides plain Markdown, the document uses a few labelled lines, each read
+here and never published as written:
+  **Eyebrow:** text    the small label above a section's H2 or an H3
+  **Question:** text   a reflective question, set apart (Undisguised)
+  **Note:** text       an editorial note about a page (before its Hero);
+                       kept with the page data, never rendered
+  **Signature:** label · text   the footer's signature link (Footer copy)
 
 The only liberties it takes are typographic: straight apostrophes become
 typographic ones (don't -> don’t) and "→" is split off link labels and drawn
@@ -56,6 +64,7 @@ TYPE_BY_URL = {
     '/blog/': 'writing',
     '/contact/': 'contact',
     '/confidentiality/': 'legal',
+    '/undisguised/': 'manifesto',
 }
 
 # ── Link wording in the page copy → destination ──────────────────────────────
@@ -104,6 +113,16 @@ CTA_HREF = {
     'Take the burnout check-in': '/free-tools/burned-out/',
     'Take the career reflection': '/free-tools/quit-your-job/',
     'Read Undisguised': 'https://www.undisguised.io/',
+    'Read the Undisguised newsletter': 'https://www.undisguised.io/',
+    # The manifesto (/undisguised/). A link to it from another page is set as
+    # the site's quiet signature link (site-pages.jsx, UdLink); on the page
+    # itself, a link to its own map becomes a plain in-page anchor.
+    'Explore the Undisguised Map': '/undisguised/#map',
+    'Return to the Map': '/undisguised/#map',
+    'Explore the manifesto': '/undisguised/',
+    'The thinking behind my work: Undisguised': '/undisguised/',
+    'My philosophy: Undisguised': '/undisguised/',
+    'Prefer to read first? Explore Undisguised': '/undisguised/',
     'Read': None,
 }
 
@@ -132,6 +151,7 @@ NAV_HREF = {
     'Achievement & Self-Worth': '/achievement-self-worth/',
     'Considering Therapy': '/considering-therapy/',
     'Therapy vs Coaching': '/therapy-vs-coaching/',
+    'Undisguised': '/undisguised/',
     'Writing': '/blog/',
     'Free Tools': '/free-tools/',
     'Reviews': '/reviews/',
@@ -240,7 +260,7 @@ def classify(lines, where):
 def parse_nav(blocks):
     """The header and footer sections at the top of the document."""
     nav = {'items': [], 'cta': None}
-    footer = {'brand': None, 'tagline': None, 'groups': [], 'legal': [], 'rights': None}
+    footer = {'brand': None, 'tagline': None, 'signature': None, 'groups': [], 'legal': [], 'rights': None}
     section = None
     group = None
     for b in blocks:
@@ -268,6 +288,12 @@ def parse_nav(blocks):
         elif section == 'Footer copy':
             if b[0] == 'p':
                 text = b[1][0]
+                # The signature under the brand: "label · text", linked by its label.
+                m = re.match(r'^\*\*Signature:\*\*\s*(.+?)\s+·\s+(.+)$', text)
+                if m:
+                    label = smart(m.group(1).strip())
+                    footer['signature'] = {'label': label, 'text': smart(m.group(2).strip()), 'href': nav_href(label)}
+                    continue
                 m = BOLD_LINE_RE.match(text)
                 if m and footer['brand'] is None:
                     footer['brand'] = m.group(1)
@@ -357,6 +383,26 @@ def main(path):
                     val = m.group(2).strip()
                     page[key] = val.strip('`') if key == 'url' else smart(val)
                 continue
+            # An editorial note before the Hero: kept, never rendered.
+            m = re.match(r'^\*\*Note:\*\*\s*(.+)$', lines[0])
+            if m and not in_hero and section is None:
+                page['note'] = smart(' '.join([m.group(1)] + lines[1:]).strip())
+                continue
+            # The label above a section's H2 (or an H3): first thing after it.
+            m = re.match(r'^\*\*Eyebrow:\*\*\s*(.+)$', lines[0])
+            if m and len(lines) == 1 and section is not None:
+                owner = sub if sub else section
+                if owner['blocks'] or 'eyebrow' in owner:
+                    raise SystemExit(f'{where}: an Eyebrow line must come straight after its heading ({owner.get("h2") or owner.get("h3")!r})')
+                owner['eyebrow'] = smart(m.group(1).strip())
+                continue
+            # A reflective question, set apart from the prose.
+            m = re.match(r'^\*\*Question:\*\*\s*(.+)$', lines[0])
+            if m and len(lines) == 1 and target is not None:
+                target.append({'t': 'question', 'text': smart(m.group(1).strip())})
+                continue
+            if target is None:
+                raise SystemExit(f'{where}: copy outside the Hero or a section: {lines[0][:60]!r}')
             if in_hero:
                 bold = BOLD_LINE_RE.match(lines[0]) if len(lines) == 1 else None
                 if bold and not CTA_RE.match(lines[0]):
@@ -424,6 +470,8 @@ def main(path):
                  'seoTitle': pg.get('seoTitle'), 'metaDescription': pg.get('metaDescription')}
         if pg.get('navLabel'):
             entry['navLabel'] = pg['navLabel']
+        if pg.get('note'):
+            entry['note'] = pg['note']
         hero = {'eyebrow': pg['hero']['eyebrow'], 'h1': pg['hero']['h1']}
         if pg['hero'].get('sub'):
             hero['sub'] = pg['hero']['sub']
@@ -493,11 +541,12 @@ if __name__ == '__main__':
               '// rather than editing it here. Only typography differs from the source\n'
               '// (typographic apostrophes; → drawn by the UI).\n')
     copy_header = (
-        '// site-copy.jsx — the canonical copy for the 25 canonical pages.\n//\n' + source + '//\n'
-        '// Shape: pages[id] = { url, type, seoTitle, metaDescription, hero, sections }\n'
+        '// site-copy.jsx — the canonical copy for the 26 canonical pages.\n//\n' + source + '//\n'
+        '// Shape: pages[id] = { url, type, seoTitle, metaDescription, note?, hero, sections }\n'
         '//   hero     = { eyebrow, h1, sub?, blocks }\n'
-        '//   sections = [{ h2, id, blocks }]\n'
-        '//   blocks   = p | lines | list | ctas | related | meta | pairs | quote | sub (an h3 with its own blocks)\n'
+        '//   sections = [{ h2, id, eyebrow?, blocks }]\n'
+        '//   blocks   = p | lines | list | ctas | related | meta | pairs | quote | question\n'
+        '//              | sub (an h3, its eyebrow? and its own blocks)\n'
         '//   **text** marks the bold runs of the source.\n'
         '// Rendered by site-pages.jsx; SEO fields are read by scripts/seo/site-meta.js.\n\n'
     )

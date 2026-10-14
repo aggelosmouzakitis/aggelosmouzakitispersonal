@@ -119,6 +119,7 @@ async function main() {
   const seenTitles = new Map();
   const seenDescs = new Map();
   const linkTargets = new Map(); // path -> Set(pages that link to it)
+  const anchorLinks = []; // { from, target, id } for every #fragment link
 
   // ── Every page in the metadata table ──────────────────────────────────────
   for (const p of PAGES) {
@@ -244,6 +245,19 @@ async function main() {
       if (!linkTargets.has(href)) linkTargets.set(href, new Set());
       linkTargets.get(href).add(url);
     }
+    // and every link to an anchor: on another page (/undisguised/#map) or
+    // on this one (#map); the fragment's id must exist where it points
+    for (const m of body.matchAll(/href="(\/[^"#?]*)?#([^"]+)"/g)) {
+      anchorLinks.push({ from: url, target: m[1] || url, id: decode(m[2]) });
+    }
+  }
+
+  // ── Anchors: every #fragment link lands on an element with that id ────────
+  for (const a of anchorLinks) {
+    const dest = PAGES.find((x) => x.url === a.target);
+    if (!dest) continue; // a target that is not a page is reported as a link above
+    const destHtml = fs.readFileSync(path.join(PUBLIC, dest.file), 'utf8');
+    if (!destHtml.includes(` id="${a.id}"`)) err(a.from, `link to ${a.target}#${a.id}: no element with that id`);
   }
 
   // ── Internal links: no 404s, no links through a redirect ──────────────────
@@ -269,7 +283,9 @@ async function main() {
   }
 
   // ── Contextual links (site-pages.jsx CONTEXT_LINKS): each exact phrase is
-  //    linked once on its page, in the prerendered HTML ─────────────────────
+  //    linked once on its page, in the prerendered HTML, to a published page
+  //    and, for a deep link (/undisguised/#see-clearly), to an id that exists
+  //    on that page ─────────────────────────────────────────────────────────
   {
     const src = fs.readFileSync(path.join(__dirname, '..', '..', 'site-pages.jsx'), 'utf8');
     const block = (src.match(/CONTEXT_LINKS:BEGIN\n\s*const CONTEXT_LINKS = (\[[\s\S]*?\]);\n\s*\/\/ CONTEXT_LINKS:END/) || [])[1];
@@ -281,7 +297,13 @@ async function main() {
       const html = fs.readFileSync(path.join(PUBLIC, page.file), 'utf8');
       const n = html.split(`<a class="inl" href="${href}">${phrase}</a>`).length - 1;
       if (n !== 1) err(page.url, `contextual link "${phrase}" → ${href} appears ${n} times, expected once`);
-      if (!PAGES.some((x) => x.url === href)) err(page.url, `contextual link target ${href} is not a published page`);
+      const [target, anchor] = href.split('#');
+      const dest = PAGES.find((x) => x.url === target);
+      if (!dest) { err(page.url, `contextual link target ${href} is not a published page`); continue; }
+      if (anchor !== undefined) {
+        const destHtml = fs.readFileSync(path.join(PUBLIC, dest.file), 'utf8');
+        if (!destHtml.includes(` id="${anchor}"`)) err(page.url, `contextual link ${href}: no element with id "${anchor}" on ${target}`);
+      }
     }
   }
 

@@ -4,7 +4,7 @@
 // scripts, planning documents, the archive's build inputs, tooling. Netlify
 // publishes public/ (netlify.toml [build] publish), and this script fills it
 // from an allowlist, so nothing outside the lists below can be requested:
-//   pages  every page in scripts/seo/site-meta.js (the 25 canonical pages,
+//   pages  every page in scripts/seo/site-meta.js (the 26 canonical pages,
 //          the Work & Life Check, the two free tools and the articles), plus
 //          EXTRA_PAGES — served on purpose, but outside the sitemap;
 //   FILES  the root files browsers and crawlers ask for, and the bundles the
@@ -41,7 +41,7 @@ const FILES = [
   'favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png', 'favicon-48x48.png',
   'apple-touch-icon.png', 'android-chrome-192x192.png', 'android-chrome-512x512.png',
   'f4a06bec48967c20f68efb4d562c6b71.txt', // IndexNow key (scripts/seo/indexnow.js)
-  'react.production.min.js', 'react-dom.production.min.js', 'site-header.js',
+  'react.production.min.js', 'react-dom.production.min.js', 'site-header.js', 'site-undisguised.js',
   'site-nav.js', 'site-chrome.js', 'site-copy.js', 'site-pages.js', 'lead-capture.js',
   'clarity-data.js', 'clarity-tools.js', 'work-life-check.js', 'site-articles.js',
 ].concat(...PAGES.map((p) => p.bundles || []));

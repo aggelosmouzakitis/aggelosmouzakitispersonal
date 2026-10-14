@@ -11,7 +11,7 @@ Netlify runs no compile step; it only assembles `public/` (see Publish).
 document and the only source of page wording, header and footer labels, SEO
 titles and meta descriptions. It is kept in the repository but never published.
 `npm run copy` (`scripts/copy/extract-canonical.py`) turns it into
-`site-copy.jsx` (the 25 pages) and `site-nav.jsx` (header and footer wording,
+`site-copy.jsx` (the 26 pages) and `site-nav.jsx` (header and footer wording,
 loaded on every page including the tools). Both are generated: edit the
 document, not them.
 
@@ -55,7 +55,7 @@ straight to it (netlify.toml and routes.js; check-articles.js proves it).
   the full pipeline from `npm run copy`.
 - An article brief or `scripts/articles/articles.js` changed: the full
   pipeline from `npm run articles`.
-- A `.jsx` file changed (`site-chrome`, `site-pages`, `site-header`,
+- A `.jsx` file changed (`site-chrome`, `site-pages`, `site-header`, `site-undisguised`,
   `lead-capture`, `clarity-*`): the full pipeline from `npm run build`.
 - A photograph was added or its widths changed (`PHOTOS` in `site-pages.jsx`):
   `npm run images` first (see Photographs), then the full pipeline
@@ -100,6 +100,26 @@ identical page in the browser cost a phone most of a second: the bundles had
 to arrive and run before the first paint, and the render was most of the
 main-thread work. A page that needs React in the browser (a form, a tool)
 goes in `LIVE`.
+
+A static page can still carry a small plain script of its own
+(`PAGE_SCRIPTS` in `scripts/gen-site-pages.js`, loaded async like
+`site-header.js`). /undisguised/, the manifesto, loads `site-undisguised.js`
+(from `site-undisguised.jsx`): the map follows the reader's scroll and the
+blocks below the fold rise into place. Its snapshot is complete without it.
+
+## Undisguised
+The manifesto at /undisguised/ is page 26 of the canonical copy, and its
+thread through the site comes from the same document and code: the
+homepage's ribbon, the "How I work" and "About me" links, the feature that
+closes "If you want to read first", the closing invitation, the footer
+signature (`**Signature:**` under Footer copy) and the Resources menu item.
+Any link to it from a section's links is set as the quiet `UdLink`, under the
+section's actions, never as a button. The contextual links into its four
+movements (`/undisguised/#see-clearly` …) are `CONTEXT_LINKS` in
+`site-pages.jsx`, at most one per page; `seo:check` proves each phrase and
+that every `#anchor` link on the site lands on an existing id. The
+document's labelled lines `**Eyebrow:**`, `**Question:**` and `**Note:**`
+are described in `scripts/copy/extract-canonical.py`.
 
 Google Analytics: the shells queue `gtag` calls inline and load gtag.js, the
 heaviest script a page loads, on the reader's first scroll, tap, click or key

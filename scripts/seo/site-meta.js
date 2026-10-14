@@ -119,7 +119,7 @@ function toolNodes(urlPath, name, description) {
   }]);
 }
 
-// ─── The 25 canonical pages ──────────────────────────────────────────────────
+// ─── The 26 canonical pages ──────────────────────────────────────────────────
 // [id, sitemap priority, changefreq, breadcrumb label]. Order is sitemap order.
 const CANONICAL = [
   ['home', '1.0', 'monthly', null],
@@ -141,6 +141,7 @@ const CANONICAL = [
   ['about', '0.7', 'yearly', 'About'],
   ['considering-therapy', '0.7', 'monthly', 'Considering Therapy'],
   ['therapy-vs-coaching', '0.7', 'monthly', 'Therapy vs Coaching'],
+  ['undisguised', '0.6', 'monthly', 'Undisguised'],
   ['faq', '0.6', 'monthly', 'FAQ'],
   ['reviews', '0.6', 'monthly', 'Reviews'],
   ['free-tools', '0.5', 'monthly', 'Free Tools'],
@@ -195,6 +196,8 @@ function canonicalPage([id, priority, changefreq, crumb]) {
   }
   const trail = SERVICE_TYPE[id] ? [['Work with me', '/work-with-me/']] : [];
   const nodes = pageNodes(url, c.seoTitle, crumb, PAGE_TYPE[id], trail);
+  // The manifesto's map is drawn by its own small script as well.
+  if (id === 'undisguised') entry.sources = ['site-copy.jsx', 'site-pages.jsx', 'site-chrome.jsx', 'site-undisguised.jsx'];
   if (id === 'about') {
     nodes[0].mainEntity = { '@id': PERSON_ID };
     delete nodes[0].about;

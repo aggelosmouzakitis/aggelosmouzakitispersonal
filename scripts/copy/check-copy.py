@@ -32,6 +32,8 @@ spec.loader.exec_module(extract)
 # Wording in the document that is intentionally not visible on the page.
 EXPECTED_MISSING = {
     'Credential strip': 'a structural label: the strip itself has no visible heading',
+    'The four movements': 'a structural label: the strip of the four movements on /undisguised/ '
+                          'is a navigation landmark named by it (aria-label), with no visible heading',
 }
 
 INLINE = r'</?(?:strong|em|b|i|a|span|abbr|small|br)\b[^>]*>'
@@ -81,7 +83,12 @@ def items_for(page):
             elif t == 'quote':
                 out.extend(('seq', s) for s in sentences(b['text']))
                 out.append(('seq', norm(b['cite'])))
+            elif t == 'question':
+                out.append(('seq', norm(b['text'])))
             elif t == 'sub':
+                # an eyebrow is drawn above its heading
+                if b.get('eyebrow'):
+                    out.append(('seq', norm(b['eyebrow'])))
                 out.append(('seq', norm(b['h3'])))
                 blocks(b['blocks'])
 
@@ -92,6 +99,8 @@ def items_for(page):
         out.append(('seq', norm(hero['sub'])))
     blocks(hero['blocks'])
     for s in page['sections']:
+        if s.get('eyebrow'):
+            out.append(('seq', norm(s['eyebrow'])))
         out.append(('seq', norm(s['h2'])))
         blocks(s['blocks'])
     if page.get('form'):
@@ -154,6 +163,8 @@ def main(src):
         chrome.extend(i['label'] for i in it.get('items', []))
     chrome.append(nav['cta']['label'])
     chrome.append(footer['tagline'])
+    if footer.get('signature'):
+        chrome.append(footer['signature']['label'] + ' · ' + footer['signature']['text'])
     for g in footer['groups']:
         chrome.append(g['label'])
         chrome.extend(i['label'] for i in g['items'])

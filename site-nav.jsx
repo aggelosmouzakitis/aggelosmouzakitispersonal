@@ -64,6 +64,10 @@ window.SITE_NAV = {
             "href": "/therapy-vs-coaching/"
           },
           {
+            "label": "Undisguised",
+            "href": "/undisguised/"
+          },
+          {
             "label": "Writing",
             "href": "/blog/"
           },
@@ -90,6 +94,11 @@ window.SITE_NAV = {
   "footer": {
     "brand": "Aggelos.",
     "tagline": "BACP-registered psychotherapist · Background in tech, product & growth",
+    "signature": {
+      "label": "Undisguised",
+      "text": "The thinking behind my work",
+      "href": "/undisguised/"
+    },
     "groups": [
       {
         "label": "Work with me",

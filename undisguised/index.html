@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KV83RRF6ZM');
+  // gtag.js, the heaviest script the page loads, comes in on the reader's
+  // first scroll, tap, click or key press, or 5 seconds after the page has
+  // loaded, so it never competes with the page itself; what is queued above
+  // is sent when it runs.
+  (function () {
+    var events = ['scroll', 'wheel', 'pointerdown', 'pointermove', 'touchstart', 'keydown'];
+    var done = false;
+    function load() {
+      if (done) return;
+      done = true;
+      events.forEach(function (t) { removeEventListener(t, load, true); });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-KV83RRF6ZM';
+      document.head.appendChild(s);
+    }
+    events.forEach(function (t) { addEventListener(t, load, { capture: true, passive: true }); });
+    addEventListener('load', function () { setTimeout(load, 5000); });
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- fonts -->
+<link rel="preload" href="/fonts/inter-v20-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/archivo-black-v23-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-tight-v9-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-greek.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-greek-ext.woff2) format('woff2');unicode-range:U+1F00-1FFF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-cyrillic.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-cyrillic-ext.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter-v20-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-greek.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-greek-ext.woff2) format('woff2');unicode-range:U+1F00-1FFF}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-cyrillic.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-cyrillic-ext.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:600 900;font-display:swap;src:url(/fonts/inter-tight-v9-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/archivo-black-v23-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/archivo-black-v23-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+</style>
+<!-- /fonts -->
+<!-- Favicon / site icons -->
+<link rel="icon" href="/favicon.ico?v=2edc963114" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5d5e245bf0">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=b708bdc3f1">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=022b5f081c">
+<meta name="theme-color" content="#F3F0E8">
+<meta name="author" content="Aggelos Mouzakitis">
+<link rel="manifest" href="/manifest.json">
+<style>
+:root{
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-display: "Archivo Black", "Inter Tight", "Inter", system-ui, sans-serif;
+  --brand-green: #047857;
+  /* Editorial Japandi palette (ten tokens) */
+  --bone: #F3F0E8; --bone-deep: #EDE8DB; --forest: #16231E; --forest-deep: #101A16;
+  --green: #047857; --green-pressed: #03654A; --sage: #8FBFA7;
+  --ink: #171919; --heading-ink: #14201C; --ink-2: #3A403A; --on-forest: #C0C9BF; --meta: #6A6F67;
+  --rule: rgba(23,25,25,0.18); --rule-on-forest: rgba(243,240,232,0.16);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: #F3F0E8; color: #171919; font-family: var(--font-body); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+#root { display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: #047857; color: #F3F0E8; }
+img { max-width: 100%; filter: grayscale(1) contrast(1.12) brightness(0.96) sepia(0.14); }
+.site-grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: 0.06; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E"); background-size: 160px 160px; }
+@media print { .site-grain { display: none; } }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #047857; outline-offset: 2px; border-radius: 2px; }
+@media (prefers-reduced-motion: reduce){ html { scroll-behavior: auto; } *{transition-duration:.001ms!important;animation-duration:.001ms!important} }
+@media print { .site-hdr, .site-ftr, .cta-strip { display: none !important; } }
+</style>
+<title>Undisguised: A Manifesto for Living Deliberately | Aggelos Mouzakitis</title>
+<meta name="description" content="A manifesto by Aggelos Mouzakitis on understanding what drives us, questioning the roles we’ve learned to play and making more deliberate choices about how we live.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://aggelosmouzakitis.com/undisguised/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Aggelos Mouzakitis">
+<meta property="og:locale" content="en_IE">
+<meta property="og:title" content="Undisguised: A Manifesto for Living Deliberately | Aggelos Mouzakitis">
+<meta property="og:description" content="A manifesto by Aggelos Mouzakitis on understanding what drives us, questioning the roles we’ve learned to play and making more deliberate choices about how we live.">
+<meta property="og:url" content="https://aggelosmouzakitis.com/undisguised/">
+<meta property="og:image" content="https://aggelosmouzakitis.com/img/og/v2/undisguised.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Undisguised.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Undisguised: A Manifesto for Living Deliberately | Aggelos Mouzakitis">
+<meta name="twitter:description" content="A manifesto by Aggelos Mouzakitis on understanding what drives us, questioning the roles we’ve learned to play and making more deliberate choices about how we live.">
+<meta name="twitter:image" content="https://aggelosmouzakitis.com/img/og/v2/undisguised.png">
+<meta name="twitter:image:alt" content="Undisguised.">
+<link rel="alternate" hreflang="en" href="https://aggelosmouzakitis.com/undisguised/">
+<link rel="alternate" hreflang="x-default" href="https://aggelosmouzakitis.com/undisguised/">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://aggelosmouzakitis.com/undisguised/#webpage","url":"https://aggelosmouzakitis.com/undisguised/","name":"Undisguised: A Manifesto for Living Deliberately | Aggelos Mouzakitis","isPartOf":{"@id":"https://aggelosmouzakitis.com/#website"},"inLanguage":"en","about":{"@id":"https://aggelosmouzakitis.com/#person"}},{"@type":"BreadcrumbList","@id":"https://aggelosmouzakitis.com/undisguised/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://aggelosmouzakitis.com/"},{"@type":"ListItem","position":2,"name":"Undisguised","item":"https://aggelosmouzakitis.com/undisguised/"}]},{"@type":"Person","@id":"https://aggelosmouzakitis.com/#person","name":"Aggelos Mouzakitis","url":"https://aggelosmouzakitis.com/"}]}</script>
+</head>
+<body>
+<div class="site-grain" aria-hidden="true"></div>
+<div id="root"><style>
+:root{
+  --bone:#F3F0E8;--bone-deep:#EDE8DB;--sage-bg:#DAE4D8;--forest:#16231E;
+  --green:#047857;--green-pressed:#03654A;--sage:#8FBFA7;
+  --heading:#14201C;--ink:#171919;--body:#2C312C;--ink-2:#3A403A;--meta:#6A6F67;
+  --on-forest:#C8D1C8;--on-forest-2:#C0C9BF;
+  --rule:rgba(23,25,25,0.18);--rule-2:rgba(23,25,25,0.22);--rule-forest:rgba(243,240,232,0.16);
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-heading:"Inter Tight","Inter",system-ui,sans-serif;
+  --font-display:"Archivo Black","Inter Tight","Inter",system-ui,sans-serif;
+  --site-max:1240px;--read-max:760px;
+  --gutter:clamp(22px,4vw,52px);
+  --sec:clamp(64px,6.7vw,96px);
+}
+html,body,#root{height:auto}
+#root{display:block;overflow:visible}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+.site-grain{opacity:0.06}
+.wrap{width:min(var(--site-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.read{width:min(var(--read-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.skip-link{position:absolute;left:12px;top:-60px;z-index:200;padding:12px 18px;background:var(--bone);color:var(--heading);font:600 15px/1 var(--font-body);border:2px solid var(--green)}
+.skip-link:focus{top:12px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.on-dark a:focus-visible,.on-dark button:focus-visible{outline-color:var(--sage)}
+
+/* Primary action: green rectangle, 52px, 15px/700 caps. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 24px;background:var(--green);color:var(--bone);border:0;border-radius:0;font:700 15px/1 var(--font-body);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:gap 180ms,background 180ms}
+.btn:hover{background:var(--green-pressed);color:var(--bone);gap:13px}
+/* Secondary action: 16px/600 green, underline + arrow. */
+.tlink{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:16px;font-weight:600;line-height:1.3;color:var(--green);transition:gap 180ms,color 180ms}
+.tlink>span:first-child{border-bottom:1.5px solid currentColor;padding-bottom:2px}
+.tlink:hover{color:var(--green-pressed);gap:12px}
+.on-dark .tlink{color:var(--bone)}
+.on-dark .tlink:hover{color:var(--sage)}
+
+/* Header */
+.hdr{position:relative;z-index:50;background:var(--forest);border-bottom:1px solid var(--rule-forest);font-family:var(--font-body)}
+.hdr__in{min-height:74px;display:flex;align-items:center;gap:24px}
+.hdr__brand{display:inline-flex;align-items:center;min-height:44px;gap:1px;color:var(--bone);font-family:var(--font-heading);font-size:25px;font-weight:750;line-height:1;letter-spacing:-0.035em;white-space:nowrap}
+.hdr__brand span,.ftr__brand span{color:var(--green)}
+.hdr__nav{margin-left:auto;display:flex;align-items:center;gap:30px}
+.hdr__item{position:relative;display:flex;align-items:center}
+.hdr__link,.hdr__btn{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0;background:none;border:0;border-bottom:2px solid transparent;color:var(--bone);font-family:inherit;font-size:13.5px;font-weight:650;line-height:1;letter-spacing:0.06em;text-transform:uppercase;opacity:.85;cursor:pointer}
+.hdr__link:hover,.hdr__btn:hover,.hdr__btn[aria-expanded="true"],.hdr__link.is-current,.hdr__btn.is-current{opacity:1;color:var(--bone)}
+.hdr__link.is-current,.hdr__btn.is-current{border-bottom-color:var(--green)}
+.hdr__btn svg{transition:transform 200ms cubic-bezier(.22,1,.36,1)}
+.hdr__btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.hdr__panel{position:absolute;top:calc(100% + 15px);left:-20px;width:360px;background:var(--bone);border:1px solid rgba(23,25,25,0.14);box-shadow:0 20px 44px -20px rgba(0,0,0,0.4);padding:8px 0}
+.hdr__panel[hidden],.mmenu[hidden],.mmenu__links[hidden]{display:none}
+.hdr__panel a{display:block;padding:12px 20px;font-size:16px;font-weight:500;line-height:1.35;color:var(--heading)}
+.hdr__panel a:hover{background:rgba(4,120,87,0.07);color:var(--green)}
+.hdr__panel a[aria-current="page"],.hdr__panel a[aria-current="true"]{color:var(--green);font-weight:600}
+.hdr__sep{height:1px;margin:8px 20px;background:rgba(23,25,25,0.16)}
+.hdr__cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;background:transparent;border:1px solid rgba(243,240,232,0.7);color:var(--bone);font-size:13.5px;font-weight:700;line-height:1;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;transition:background 180ms,color 180ms,border-color 180ms}
+.hdr__cta:hover{background:var(--bone);color:var(--forest);border-color:var(--bone)}
+.hdr__menu-btn{display:none;margin-left:auto;align-items:center;gap:12px;min-height:48px;padding:0 2px 0 12px;background:none;border:0;cursor:pointer;color:var(--bone);font-family:inherit;font-size:13.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+.hdr__burger{display:flex;flex-direction:column;gap:5px;width:22px}
+.hdr__burger span{height:2px;background:var(--bone)}
+@media (max-width:1079px){.hdr__nav,.hdr__cta{display:none}.hdr__menu-btn{display:inline-flex}}
+@media (min-width:1080px){.mmenu{display:none}}
+.mmenu{background:var(--bone);border-bottom:1px solid rgba(23,25,25,0.14);box-shadow:0 20px 40px -24px rgba(0,0,0,0.35)}
+.mmenu__in{width:calc(100% - 44px);margin-inline:auto;padding:8px 0 22px}
+.mmenu__group{border-bottom:1px solid rgba(23,25,25,0.14)}
+.mmenu__toggle{display:flex;width:100%;justify-content:space-between;align-items:center;min-height:56px;padding:0;background:none;border:0;cursor:pointer;color:var(--heading);font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.mmenu__sign{font-size:22px;font-weight:400;color:var(--green)}
+.mmenu__links{padding:0 0 12px}
+.mmenu__links a{display:flex;align-items:center;min-height:46px;font-size:17px;font-weight:500;color:var(--heading)}
+.mmenu__links a[aria-current="page"],.mmenu__links a[aria-current="true"]{color:var(--green);font-weight:600}
+.mmenu__sep{height:1px;margin:6px 0;background:rgba(23,25,25,0.12)}
+.mmenu__link{display:flex;align-items:center;min-height:56px;border-bottom:1px solid rgba(23,25,25,0.14);font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--heading)}
+.mmenu__cta{display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;margin-top:20px;background:var(--green);color:var(--bone);font-size:15px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase}
+
+/* Close: a 13px label above one sentence and the primary action. */
+.close{background:var(--forest);text-align:center}
+.close__in{padding-block:var(--sec)}
+.close__label{margin:0 0 18px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage)}
+.close__text{margin:0 auto;max-width:24ch;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .7vw),32px);font-weight:650;line-height:1.18;letter-spacing:-0.02em;color:var(--bone);text-wrap:balance}
+.close__text--long{max-width:56ch;font-family:var(--font-body);font-size:clamp(18px,calc(17px + .2vw),20px);font-weight:400;line-height:1.6;letter-spacing:0;color:var(--on-forest)}
+.close__actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 28px;margin-top:32px}
+/* A quieter pathway under the primary action (UdLink, site-pages.jsx). */
+.close__aside{display:flex;flex-wrap:wrap;justify-content:center;margin:14px 0 0}
+
+/* The Undisguised mark: the manifesto map's ring with its "you are here"
+   point at I. It signs every quiet link to /undisguised/. */
+.ud-mark{flex:0 0 auto;width:16px;height:16px;overflow:visible}
+.ud-mark__ring{fill:none;stroke:var(--ud-ring,currentColor);stroke-width:1.6}
+.ud-mark__dot{fill:var(--ud-dot,var(--heading));stroke:var(--ud-cut,var(--bone));stroke-width:1.8}
+
+/* Footer */
+.ftr{background:var(--forest);color:var(--on-forest-2);border-top:2px solid var(--green);padding-block:clamp(48px,6vw,72px) 32px;font-family:var(--font-body)}
+.ftr__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:40px;align-items:start}
+.ftr__brand{display:inline-flex;align-items:center;min-height:44px;color:var(--bone);font-family:var(--font-heading);font-size:22px;font-weight:750;line-height:1;letter-spacing:-0.035em}
+.ftr__tag{margin:18px 0 0;max-width:26ch;font-size:15px;line-height:1.5}
+/* The signature under the brand description: secondary to it, sage. */
+.ftr__sig{--ud-ring:var(--sage);--ud-dot:var(--bone);--ud-cut:var(--forest);display:block;width:fit-content;max-width:100%;margin-top:6px;padding-block:12px;font-size:14px;line-height:1.4;color:var(--on-forest-2);transition:color 180ms}
+.ftr__sig .ud-mark{display:inline-block;margin-right:8px;vertical-align:-3px}
+.ftr__sig-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);white-space:nowrap;transition:color 180ms}
+.ftr__sig-arrow{display:inline-block;color:var(--sage);transition:transform 180ms}
+.ftr__sig:hover,.ftr__sig:hover .ftr__sig-label{color:var(--bone)}
+.ftr__sig:hover .ftr__sig-arrow{transform:translate(2px,-2px)}
+.ftr__sig+.ftr__social{margin-top:12px}
+/* One line where it fits; in the narrow brand column of the wide footer, a
+   two-line lockup (the separator stays, for screen readers). */
+.ftr__id{min-width:0;container-type:inline-size}
+@container (max-width:339px){
+  .ftr__sig-label{display:block;margin-bottom:4px}
+  .ftr__sig-sep{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+.ftr__social{display:flex;gap:14px;margin:20px 0 0;padding:0;list-style:none}
+.ftr__social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--rule-forest);color:var(--on-forest-2)}
+.ftr__social a:hover{color:var(--bone);border-color:var(--sage)}
+.ftr__col{display:flex;flex-direction:column;min-width:0}
+.ftr__head{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage)}
+.ftr__col a{padding:7px 0;font-size:15px;line-height:1.4}
+.ftr__col a:hover,.ftr__legal a:hover{color:var(--bone)}
+.ftr__rule{height:1px;background:var(--rule-forest);margin-block:48px 24px}
+.ftr__bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 32px;font-size:13px;line-height:1.5}
+.ftr__legal{display:flex;flex-wrap:wrap;gap:4px 24px}
+.ftr__legal a{display:inline-flex;align-items:center;min-height:44px}
+@media (max-width:759px){.ftr__col a{display:flex;align-items:center;min-height:44px;padding:0}}
+
+/* Legacy shell: the tools and /ask-me-anything/el render their own content. */
+.u-main{padding-block:64px 96px}
+.u-form{width:min(var(--read-max),calc(100% - 2 * var(--gutter)));margin-inline:auto}
+
+@media print{.hdr,.ftr,.close,.site-grain{display:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
+</style><style>
+.pg{display:block;outline:none}
+.pg img{filter:grayscale(1) contrast(1.12) brightness(.96) sepia(.14)}
+.label{margin:0;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
+
+/* Type */
+.eyebrow{margin:0 0 18px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.h1{margin:0;max-width:17ch;font-family:var(--font-display);font-weight:400;font-size:clamp(34px,calc(22px + 2.9vw),60px);line-height:1.0;letter-spacing:-.04em;color:var(--heading);text-wrap:balance}
+.hero-read .h1{max-width:none}
+.h1--home{max-width:none;font-size:clamp(34px,calc(18.5px + 2.9vw),60px)}
+.h1--long{max-width:none;font-size:clamp(34px,calc(20px + 1.95vw),48px);line-height:1.04}
+.sub{margin:22px 0 0;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .6vw),30px);font-weight:650;line-height:1.2;letter-spacing:-.02em;color:var(--green);text-wrap:balance}
+.lead{margin:24px 0 0;max-width:32em;font-size:clamp(19px,calc(18.4px + .12vw),20px);line-height:1.55;color:var(--body);text-wrap:pretty}
+.sub + .lead{margin-top:26px}
+.lead + .lead{margin-top:16px}
+.h2{margin:0 0 24px;font-family:var(--font-heading);font-size:clamp(30px,calc(26px + 1vw),40px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
+.h3{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .3vw),24.5px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading);text-wrap:balance}
+.p{margin:0;font-size:clamp(17px,calc(16px + .14vw),18px);line-height:1.7;color:var(--body);text-wrap:pretty}
+.p strong{font-weight:600;color:var(--heading)}
+.p--emph{font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--heading)}
+.p--strong{font-weight:600;color:var(--heading)}
+.inl{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor}
+.inl:hover{color:var(--green-pressed)}
+.meta{margin:0;font-size:15px;line-height:1.5;color:var(--meta)}
+.related{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:0 10px;font-size:15px;color:var(--meta)}
+
+/* Undisguised, the quiet link (UdLink): under a section's links, one step
+   below them — 15px, the lead-in muted, the name the underlined word. */
+.ud-aside{margin:0;display:flex;flex-wrap:wrap;gap:0 24px}
+.flow>.links+.ud-aside,.flow>.actions+.ud-aside{margin-top:0}
+.ud-link{--ud-ring:var(--green);display:inline-flex;flex-wrap:wrap;align-items:center;column-gap:.42em;min-height:44px;font-size:15px;font-weight:500;line-height:1.4;color:var(--ink-2);transition:color 180ms}
+.ud-link .ud-mark{margin-right:.28em}
+.ud-link__name{font-weight:650;color:var(--green);border-bottom:1.5px solid currentColor;padding-bottom:1px;transition:color 180ms}
+.ud-link__arrow{color:var(--green);transition:transform 180ms,color 180ms}
+.ud-link:hover{color:var(--heading)}
+.ud-link:hover .ud-link__name,.ud-link:hover .ud-link__arrow{color:var(--green-pressed)}
+.ud-link:hover .ud-link__arrow{transform:translateX(3px)}
+.on-dark .ud-link{--ud-ring:var(--sage);--ud-dot:var(--bone);--ud-cut:var(--forest);color:var(--on-forest)}
+.on-dark .ud-link__name,.on-dark .ud-link__arrow{color:var(--bone)}
+.on-dark .ud-link:hover{color:var(--bone)}
+.on-dark .ud-link:hover .ud-link__name,.on-dark .ud-link:hover .ud-link__arrow{color:var(--sage)}
+
+/* Flow: paragraph → paragraph 18px, content → link 22px */
+.flow>*{margin-top:0;margin-bottom:0}
+.flow>*+*{margin-top:18px}
+.flow>.links,.flow>.actions{margin-top:22px}
+.flow>.facts+*{margin-top:32px}
+.flow>.p--emph+*{margin-top:20px}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;margin-top:32px}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 28px}
+.subsec+.subsec{margin-top:40px}
+
+/* Heroes */
+.hero-split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px clamp(40px,5vw,72px);align-items:center;padding-block:clamp(48px,5vw,72px) clamp(56px,6vw,88px)}
+.hero-read{padding-top:clamp(56px,6vw,88px)}
+.frame{position:relative;margin:12px;justify-self:end;width:min(calc(100% - 24px),420px)}
+.frame::before{content:"";position:absolute;inset:-12px;border:1px solid rgba(4,120,87,.6);pointer-events:none}
+.frame__img{aspect-ratio:4/5;overflow:hidden;background:var(--forest)}
+.frame__img img{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:899px){.hero-split{grid-template-columns:minmax(0,1fr)}.frame{justify-self:start;width:min(calc(100% - 24px),320px)}}
+
+/* Sections: 96px apart; reading sections on problem pages 88px */
+.sec{padding-top:var(--sec)}
+.fam-problem .sec+.sec{padding-top:clamp(64px,6.1vw,88px)}
+.pg>:last-child:not(.band){padding-bottom:var(--sec)}
+.band{margin-top:var(--sec)}
+.band+.band{margin-top:0}
+.pg>.band:first-child{margin-top:0}
+
+/* Dark section: one reading column on the 760 axis */
+.dark{background:var(--forest);color:var(--bone)}
+.dark__in{padding-block:var(--sec)}
+.dark .h2{color:var(--bone)}
+.dark .p{color:var(--on-forest)}
+.dark .p strong{color:var(--bone)}
+.dark .p--emph{color:var(--sage)}
+.dark .p--rule{padding-left:18px;border-left:2px solid var(--sage);font-weight:600;color:var(--bone)}
+/* An inline link on forest is bone, like the secondary link there: green is
+   only 3:1 on forest. */
+.on-dark .inl{color:var(--bone)}
+.on-dark .inl:hover{color:var(--sage)}
+
+/* Photo split: 1:1, the photograph full-bleed */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);container-type:inline-size}
+.split--dark{background:var(--forest);color:var(--bone)}
+.split--dark .h2{color:var(--bone)}
+.split--dark .p{color:var(--on-forest)}
+.split__fig{position:relative;margin:0;min-height:600px;overflow:hidden;background:var(--forest)}
+.split__fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.split--dark .split__fig img{filter:grayscale(1) contrast(1.12) brightness(.9) sepia(.14)}
+.split__body{min-width:0;display:flex;align-items:center;padding:var(--sec) calc((100vw - min(1240px, 100vw - 2 * var(--gutter))) / 2) var(--sec) clamp(48px,5.5vw,80px);padding-right:calc((100cqw - min(1240px, 100cqw - 2 * var(--gutter))) / 2)}
+.split__text{max-width:560px}
+@media (max-width:899px){.split{grid-template-columns:minmax(0,1fr)}.split__fig{min-height:280px}.split__body{padding:56px var(--gutter) 64px}}
+
+/* FAQ rows */
+.faq{border-top:1px solid var(--rule-2)}
+.faq details{border-bottom:1px solid var(--rule-2)}
+.faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:24px;min-height:64px;padding:22px 0;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary h3{margin:0;font-family:var(--font-heading);font-size:clamp(19px,calc(18.5px + .1vw),20px);font-weight:650;line-height:1.35;color:var(--heading)}
+.faq summary:hover h3{color:var(--green)}
+.faq__sign{flex:0 0 auto;color:var(--green);font-size:24px;line-height:1;transition:transform 200ms cubic-bezier(.22,1,.36,1)}
+.faq details[open] .faq__sign{transform:rotate(45deg)}
+.faq__a{padding:0 0 24px}
+.faq__a .p{font-size:clamp(17px,calc(16.4px + .1vw),17.5px);line-height:1.65}
+
+/* Continue with */
+.continue{padding-top:clamp(56px,5vw,72px)}
+.continue__label{margin:0 0 14px;color:var(--meta)}
+.continue__list{border-bottom:1px solid rgba(23,25,25,.2)}
+.continue__list a{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:56px;border-top:1px solid rgba(23,25,25,.2);font-size:17px;font-weight:600;color:var(--heading)}
+.continue__list a span{color:var(--green)}
+.continue__list a:hover{color:var(--green)}
+
+/* Service rows */
+.rows{border-bottom:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:56px minmax(0,5fr) minmax(0,7fr);gap:8px 32px;padding:32px 0;border-top:1px solid var(--rule);align-items:start}
+.row__num{font-size:14px;font-weight:700;line-height:1.9;letter-spacing:.04em;color:var(--meta)}
+.row__title{margin:0;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .4vw),26px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading)}
+.row__body{min-width:0}
+.row__body .p{max-width:52ch;line-height:1.65}
+.row__body .links{margin-top:12px}
+@media (max-width:899px){.row{grid-template-columns:minmax(0,1fr)}}
+
+/* Resource columns */
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px clamp(32px,4vw,56px)}
+.col{min-width:0;padding-top:20px;border-top:1px solid rgba(23,25,25,.3)}
+.col .h3{margin-bottom:12px}
+.col .p{font-size:17px;line-height:1.62}
+.col .links{margin-top:14px}
+.col .flow>.links{margin-top:14px}
+@media (max-width:899px){.cols3{grid-template-columns:minmax(0,1fr)}}
+.sage{background:var(--sage-bg)}
+.sage__in{padding-block:var(--sec)}
+/* Green text on a tinted ground (sage here, bone-deep below) is the pressed
+   green: #047857 is 4.2:1 on sage and 4.48:1 on bone-deep, under the 4.5:1
+   text needs; the pressed green is 5.4:1 and 5.8:1. Rules and buttons keep
+   the brand green. */
+.sage .tlink,.sage .inl,.sage .eyebrow{color:var(--green-pressed)}
+
+/* Routes, triggers, facts, lists, quotes */
+.routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px clamp(40px,5.5vw,80px);align-items:start}
+.route{min-width:0;padding-top:22px;border-top:1px solid rgba(23,25,25,.24)}
+.route .p{max-width:56ch}
+.route .links{margin-top:22px}
+.recog2{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}
+.recog2 li{padding:20px 0 24px;border-top:1px solid var(--rule);font-size:clamp(17px,calc(16px + .14vw),18px);line-height:1.6;color:var(--heading);text-wrap:pretty}
+@media (max-width:759px){.routes,.recog2{grid-template-columns:minmax(0,1fr)}}
+.facts{margin:0 0 14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--rule-2)}
+.facts div{padding:16px 16px 16px 0}
+.facts dt{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--meta)}
+.facts dd{margin:6px 0 0;font-size:17.5px;font-weight:600;color:var(--heading)}
+@media (max-width:559px){.facts{grid-template-columns:minmax(0,1fr)}.facts div+div{border-top:1px solid var(--rule)}}
+.list{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--rule)}
+.list li{padding:14px 0;border-top:1px solid var(--rule);font-size:clamp(17px,calc(16px + .14vw),18px);font-weight:500;line-height:1.5;color:var(--heading)}
+.lines{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--green)}
+.lines li{font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--heading)}
+.lines li+li{margin-top:10px}
+.quotes{border-top:1px solid var(--rule)}
+.quote{margin:0;padding:28px 0;border-bottom:1px solid var(--rule)}
+.quote blockquote{margin:0}
+.quote blockquote p{margin:0;font-size:clamp(18px,calc(17px + .2vw),19.5px);line-height:1.6;color:var(--heading);text-wrap:pretty}
+.quote figcaption{margin-top:14px;font-size:13px;font-weight:700;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
+.quotes>.flow{display:block}
+
+/* Homepage */
+.home-hero{position:relative;overflow:clip}
+.home-hero__lines{position:absolute;inset:0;pointer-events:none}
+.home-hero__axis{position:absolute;top:0;bottom:0;left:62%;width:1px;background:rgba(4,120,87,.4)}
+.home-hero__field{position:absolute;left:42%;right:0;height:1px;background:linear-gradient(90deg,rgba(23,25,25,0),rgba(23,25,25,.08))}
+.home-hero__in{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center;gap:48px clamp(40px,5vw,72px);padding-block:clamp(48px,5vw,72px) clamp(56px,6vw,88px)}
+.home-hero__text{position:relative;z-index:2;min-width:0}
+.home-hero .lead{max-width:560px}
+.home-fig{position:relative;z-index:1;width:clamp(320px,32vw,460px);aspect-ratio:1;justify-self:end;margin:0}
+.home-fig__disc,.home-fig__cut{position:absolute;inset:6% -4% -2% 8%;border-radius:50%}
+.home-fig__disc{background:var(--green)}
+.home-fig__cut{background:linear-gradient(90deg,rgba(243,240,232,0) 58%,rgba(243,240,232,.92) 58%)}
+.home-fig__img{position:absolute;inset:0;overflow:hidden;border-radius:50%;background:var(--forest)}
+/* The photo is the square of the portrait the circle shows (PHOTOS). */
+.home-fig__img img{position:absolute;left:0;top:0;width:100%;height:100%}
+@media (max-width:899px){.home-hero__lines{display:none}.home-hero__in{grid-template-columns:minmax(0,1fr)}.home-fig{width:min(80%,320px);justify-self:center}}
+.creds{border-block:1px solid rgba(23,25,25,.16)}
+.creds ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.creds li{padding:22px 24px;border-left:1px solid rgba(23,25,25,.16)}
+.creds li:first-child{padding-left:0;border-left:0}
+.creds__a{display:block;font-size:16.5px;font-weight:650;line-height:1.3;color:var(--heading)}
+.creds__b{display:block;margin-top:4px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
+@media (max-width:759px){.creds ul{grid-template-columns:repeat(2,minmax(0,1fr))}.creds li{padding:18px 16px 18px 0;border-left:0}.creds li:nth-child(even){padding:18px 0 18px 16px;border-left:1px solid rgba(23,25,25,.16)}.creds li:nth-child(n+3){border-top:1px solid rgba(23,25,25,.16)}}
+.home-brings>.p{max-width:36em}
+
+/* Therapy vs Coaching */
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px clamp(40px,5.5vw,80px);align-items:start}
+.compare__col{min-width:0;padding-top:22px;border-top:2px solid var(--heading)}
+.compare__h{margin:0 0 18px;font-family:var(--font-heading);font-size:clamp(22px,calc(20.5px + .4vw),26px);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--heading);text-wrap:balance}
+@media (max-width:899px){.compare{grid-template-columns:minmax(0,1fr)}}
+
+/* Free Tools, Writing */
+.tool .actions{margin-top:26px}
+.tool__related{margin-top:18px}
+/* The card reaches --feat-bleed past the reading axis on each side (24px on
+   desktop, less than the gutter on small screens); its copy stays on the axis. */
+.tool--featured{--feat-bleed:min(24px,calc(var(--gutter) - 8px));margin-inline:calc(-1 * var(--feat-bleed));padding:clamp(28px,4vw,44px) var(--feat-bleed);background:var(--bone-deep);border-top:3px solid var(--green)}
+.tool--featured .eyebrow{margin-bottom:14px}
+.tool--featured .eyebrow,.tool--featured .tlink,.tool--featured .inl{color:var(--green-pressed)}
+.tool--featured .meta{color:var(--ink-2)}
+
+/* The Work & Life Check call to action (WorkLifeCheckCTA) */
+.wlcta--feature{padding:clamp(28px,4vw,44px);background:var(--bone-deep);border-top:3px solid var(--green)}
+.wlcta--feature .eyebrow{margin-bottom:14px;color:var(--green-pressed)}
+.wlcta__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + 1vw),34px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--heading);text-wrap:balance}
+.wlcta--feature .actions{margin-top:26px}
+.wlcta--inline{margin-top:clamp(40px,4.5vw,56px);padding:26px 0 30px;border-top:2px solid var(--green);border-bottom:1px solid var(--rule)}
+.wlcta__lead{margin:0;max-width:32em;font-family:var(--font-heading);font-size:clamp(21px,calc(19.5px + .4vw),24px);font-weight:700;line-height:1.3;letter-spacing:-.015em;color:var(--heading);text-wrap:balance}
+.wlcta--inline .p{margin-top:12px}
+.wlcta--inline .btn{margin-top:22px}
+.btn--ghost{background:transparent;color:var(--green);box-shadow:inset 0 0 0 1.5px var(--green)}
+.btn--ghost:hover{background:var(--green);color:var(--bone)}
+.wlcta--compact{margin-top:clamp(36px,4vw,48px);padding:18px 0 12px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.wlcta__text{margin:0;max-width:36em;font-size:clamp(17px,calc(16px + .14vw),18px);font-weight:600;line-height:1.5;color:var(--heading);text-wrap:pretty}
+.wlcta--compact .tlink{margin-top:2px}
+.essays{border-bottom:1px solid var(--rule)}
+.essay{padding:28px 0;border-top:1px solid var(--rule)}
+.essay .h3{margin-bottom:10px}
+.essay__meta{margin:0 0 10px;font-size:15px;line-height:1.5;color:var(--meta)}
+.essay__meta .art-meta__cat{font-weight:700;color:var(--heading)}
+.essay__link{color:var(--heading);text-decoration:underline;text-decoration-thickness:1.5px;text-decoration-color:transparent;text-underline-offset:.16em;transition:color 180ms,text-decoration-color 180ms}
+.essay__link:hover{color:var(--green);text-decoration-color:currentColor}
+.essay .flow>.links+.related{margin-top:4px}
+
+/* Contact */
+.contact{padding-block:clamp(48px,6vw,88px) var(--sec)}
+.contact__head{max-width:720px}
+.contact__head .h1{max-width:16ch}
+.lead--strong{margin-top:12px;font-weight:600;color:var(--heading)}
+.contact__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px clamp(40px,6vw,96px);margin-top:clamp(36px,4vw,56px);align-items:start}
+.contact__form{min-width:0;padding-top:28px;border-top:3px solid var(--green)}
+.contact__aside{min-width:0;display:flex;flex-direction:column;gap:36px}
+.contact__next{padding-top:28px;border-top:1px solid rgba(23,25,25,.26)}
+.contact__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(22px,calc(19px + .5vw),27px);font-weight:800;letter-spacing:-.025em;color:var(--heading)}
+.contact__next .p{font-size:17px;line-height:1.65}
+.contact__privacy{padding:24px;background:var(--bone-deep)}
+.contact__privacy-h{margin-bottom:12px;color:var(--green-pressed)}
+.contact__privacy .tlink,.contact__privacy .inl{color:var(--green-pressed)}
+.contact__privacy .p{font-size:17px;line-height:1.6}
+.contact__privacy .links{margin-top:10px}
+.ct-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 20px}
+.ct-field{display:block;margin:0 0 22px;padding:0;border:0;min-width:0}
+.ct-label{display:block;margin-bottom:8px;padding:0;font-size:14px;font-weight:700;color:var(--heading)}
+.ct-input{display:block;width:100%;min-height:52px;padding:12px 14px;background:var(--bone);border:1px solid rgba(23,25,25,.3);border-radius:0;font:inherit;font-size:16px;line-height:1.4;color:var(--heading)}
+.ct-input:focus{outline:3px solid var(--green);outline-offset:1px;border-color:var(--green)}
+.ct-input[aria-invalid="true"]{border-color:#A3362A}
+.ct-textarea{min-height:170px;padding:14px;line-height:1.55;resize:vertical}
+.ct-choices{display:flex;flex-wrap:wrap;gap:8px}
+.ct-choice{position:relative;display:inline-flex}
+.ct-choice input{position:absolute;opacity:0;width:1px;height:1px}
+.ct-choice span{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid rgba(23,25,25,.3);font-size:15px;font-weight:600;color:var(--heading);cursor:pointer}
+.ct-choice input:checked+span{background:var(--heading);border-color:var(--heading);color:var(--bone)}
+.ct-choice input:focus-visible+span{outline:3px solid var(--green);outline-offset:2px}
+.ct-help{margin:6px 0 0;font-size:14px;color:var(--meta)}
+.sp-err{margin:6px 0 0;font-size:14px;font-weight:600;color:#A3362A}
+.sp-formerr{margin:0 0 22px;padding:14px 16px;border-left:3px solid #A3362A;background:rgba(163,54,42,.06);font-size:16px;line-height:1.55;color:var(--heading)}
+.sp-formerr a{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor;overflow-wrap:anywhere}
+.sp-formerr p{margin:0}
+.sp-formerr p+p{margin-top:6px}
+.ct-submit{width:100%;min-height:56px}
+.ct-submit[disabled]{opacity:.7;cursor:progress}
+.sp-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.sp-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sp-form__done{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + .8vw),32px);font-weight:800;letter-spacing:-.03em;color:var(--heading);outline:none}
+
+/* Composition axes: 760 reading (.read), 960 paired/practical (.mid), 1120 comparison (.wide), 1240 hero/photo/services (.wrap).
+   Body measure inside the reading axis: 36em (≈ 72 characters); leads 32em (≈ 62). */
+.mid{width:min(960px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.wide{width:min(1120px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
+.sec--step{padding-top:clamp(80px,8.4vw,120px)}
+.read .p,.read-l .p,.col .p,.compare .p,.contact__aside .p{max-width:36em}
+.read .p--emph,.read-l .p--emph{max-width:32em}
+/* A reading column that starts on its container's left edge (.wrap or .mid)
+   instead of the page's centred reading axis; same width as .read. */
+.read-l{max-width:var(--read-max)}
+.quote blockquote p{max-width:34em}
+.practical__rest{margin-top:40px}
+.sec--pre-faq + .sec{padding-top:clamp(88px,6.7vw,96px)}
+.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:760px) and (max-width:1099px){
+  .cols3:not(.cols2){grid-template-columns:minmax(0,1fr);row-gap:0}
+  .cols3:not(.cols2) .col{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:32px;align-content:start;padding-block:22px 30px}
+  .cols3:not(.cols2) .col>*{grid-column:2}
+  .cols3:not(.cols2) .col>.h3{grid-column:1;grid-row:1/span 3}
+}
+@media (max-width:759px){.cols2{grid-template-columns:minmax(0,1fr)}}
+
+@media (max-width:599px){.btn{white-space:normal;text-align:center}}
+
+.ud-emblem{display:block;width:100%;height:100%;overflow:visible}
+.ud-emblem *{vector-effect:non-scaling-stroke}
+.ud-emblem__ticks{fill:none;stroke:var(--bone);stroke-opacity:.3;stroke-width:1}
+.ud-emblem__ring{fill:none;stroke:var(--bone);stroke-opacity:.4;stroke-width:1}
+.ud-emblem__inner{fill:none;stroke:var(--bone);stroke-opacity:.14;stroke-width:1;stroke-dasharray:2 4}
+/* The arc scales with the figure (its draw-in is measured along the path):
+   about 2.5px wide on the manifesto's hero, 2px on the ribbon. */
+.ud-emblem .ud-emblem__arc{vector-effect:none;fill:none;stroke:var(--sage);stroke-width:1.2;stroke-linecap:round;stroke-dasharray:1}
+.ud-hero .ud-emblem__arc{stroke-width:.55}
+.ud-ribbon .ud-emblem__arc{stroke-width:2}
+.ud-emblem__node{fill:var(--bone)}
+.ud-emblem__node--now{fill:var(--sage)}
+.ud-emblem__node--next{fill:var(--forest);stroke:var(--bone);stroke-opacity:.7;stroke-width:1}
+.ud-emblem__here{fill:none;stroke:var(--sage);stroke-width:1}
+.ud-emblem__label{font-family:var(--font-body);font-weight:700;font-size:3.6px;letter-spacing:.08em;fill:var(--sage)}
+
+/* Hero: the homepage's composition (.home-hero, .home-fig) */
+.ud-h1{margin:0;font-family:var(--font-display);font-weight:400;font-size:clamp(44px,calc(20px + 6.2vw),108px);line-height:.96;letter-spacing:-.045em;color:var(--heading)}
+.ud-h1 span{color:var(--green)}
+.ud-hero .sub{max-width:22em}
+.ud-hero .lead{max-width:32em}
+.ud-hero .home-fig__img .ud-emblem{position:absolute;inset:0}
+@media (prefers-reduced-motion:no-preference){
+  .ud-in{animation:ud-rise .9s cubic-bezier(.22,1,.36,1) backwards}
+  .ud-h1.ud-in{animation-name:ud-lift}
+  .home-hero__text>.ud-in:nth-child(1){animation-delay:.06s}
+  .home-hero__text>.ud-in:nth-child(2){animation-delay:.17s}
+  .home-hero__text>.ud-in:nth-child(3){animation-delay:.28s}
+  .home-hero__text>.ud-in:nth-child(4){animation-delay:.39s}
+  .home-hero__text>.ud-in:nth-child(5){animation-delay:.5s}
+  .ud-hero .ud-emblem__arc{animation:ud-arc 1.8s cubic-bezier(.65,0,.35,1) .45s backwards}
+  .ud-hero .ud-emblem__here{transform-box:fill-box;transform-origin:center;animation:ud-pop .6s cubic-bezier(.22,1,.36,1) 2.15s backwards}
+}
+@keyframes ud-rise{from{opacity:0;transform:translateY(18px)}}
+@keyframes ud-lift{from{transform:translateY(18px)}}
+@keyframes ud-arc{from{stroke-dashoffset:1}}
+@keyframes ud-pop{from{opacity:0;transform:scale(.4)}}
+
+/* The four movements: a ruled strip of anchors */
+.ud-strip{border-block:1px solid rgba(23,25,25,.16)}
+.ud-strip__in{overflow:hidden}
+.ud-strip__list{list-style:none;margin:-1px 0 0 -1px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.ud-strip__list a{display:block;height:100%;padding:22px 24px;border-left:1px solid rgba(23,25,25,.16);border-top:1px solid rgba(23,25,25,.16);transition:background 180ms}
+.ud-strip__list a:hover{background:rgba(4,120,87,.05)}
+.ud-strip__list a:focus-visible{outline-offset:-3px}
+.ud-strip__a{display:block;font-size:16.5px;font-weight:650;line-height:1.3;color:var(--heading)}
+.ud-strip__b{display:block;margin-top:4px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
+.ud-num{color:var(--green)}
+@media (max-width:899px){.ud-strip__list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:479px){.ud-strip__list a{padding:18px 16px}.ud-strip__a{font-size:15.5px}.ud-strip__b{font-size:14px}}
+
+/* The roles we learn */
+.ud-h2--lead{font-size:clamp(30px,calc(24px + 1.6vw),46px);line-height:1.06}
+.ud-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px clamp(32px,4vw,56px);margin-top:clamp(28px,3vw,40px)}
+.ud-roles__after{margin-top:clamp(56px,5vw,72px);display:flex;flex-direction:column;gap:26px}
+.ud-ones{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--green);display:flex;flex-direction:column;gap:10px}
+.ud-ones li{font-family:var(--font-heading);font-size:clamp(24px,calc(20px + 1vw),32px);font-weight:800;line-height:1.15;letter-spacing:-.025em;color:var(--heading)}
+.ud-note{margin-top:32px;max-width:36em}
+@media (max-width:759px){.ud-roles{grid-template-columns:minmax(0,1fr)}}
+
+/* The Undisguised Map */
+.ud-map{background:var(--forest);color:var(--bone)}
+.ud-map__in{padding-block:var(--sec)}
+.ud-map .eyebrow{color:var(--sage)}
+.ud-map__h{margin:0;font-family:var(--font-display);font-weight:400;font-size:clamp(36px,calc(20px + 3.6vw),68px);line-height:1;letter-spacing:-.04em;color:var(--bone);text-wrap:balance}
+.ud-map__seq{margin:22px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;font-family:var(--font-heading);font-size:clamp(19px,calc(17px + .5vw),24px);font-weight:650;line-height:1.3;letter-spacing:-.015em;color:var(--on-forest)}
+.ud-map__seq>[aria-hidden]{color:var(--sage)}
+.ud-map__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px clamp(40px,6vw,96px);margin-top:clamp(40px,5vw,64px)}
+.ud-map__left,.ud-map__right{min-width:0}
+.ud-map__sticky{position:sticky;top:max(24px,calc(50vh - 300px))}
+.ud-map__svg{display:block;width:100%;max-width:560px;height:auto;margin-inline:auto;overflow:visible}
+.ud-map__corners{fill:none;stroke:var(--bone);stroke-opacity:.32;stroke-width:1}
+.ud-map__inner{fill:none;stroke:var(--bone);stroke-opacity:.14;stroke-width:1;stroke-dasharray:2 7}
+.ud-map__ticks{fill:none;stroke:var(--bone);stroke-opacity:.3;stroke-width:1}
+.ud-map__ring{fill:none;stroke:var(--bone);stroke-opacity:.3;stroke-width:1}
+.ud-map__arc{fill:none;stroke:var(--sage);stroke-width:3;stroke-linecap:round}
+.ud-map__spoke{stroke:var(--bone);stroke-opacity:.45;stroke-width:1}
+.ud-map__node{stroke:var(--bone);stroke-opacity:.75;stroke-width:1.5;transition:fill .4s ease}
+.ud-map__label{transition:opacity .5s ease}
+.ud-map__t-num{font-family:var(--font-body);font-weight:700;font-size:14px;letter-spacing:.08em;fill:var(--sage)}
+.ud-map__t-name{font-family:var(--font-heading);font-weight:700;font-size:27px;letter-spacing:-.018em;fill:var(--bone)}
+.ud-map__t-big{font-family:var(--font-display);font-size:68px;letter-spacing:-.04em;fill:var(--bone)}
+.ud-map__t-cap{font-family:var(--font-body);font-weight:700;font-size:12.5px;letter-spacing:.12em;fill:var(--sage)}
+.ud-map__dot{fill:var(--bone);stroke:var(--forest);stroke-width:4}
+.ud-map__legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 28px;margin-top:20px;font-size:12px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--on-forest-2)}
+.ud-map__legend>span{display:inline-flex;align-items:center;gap:10px}
+.ud-map__key-dot{width:12px;height:12px;border-radius:50%;background:var(--bone);box-shadow:0 0 0 3px var(--forest),0 0 0 4px rgba(243,240,232,.4)}
+.ud-map__key-line{width:22px;height:3px;border-radius:2px;background:var(--sage)}
+.ud-map__strip{display:none}
+.ud-stage{display:flex;flex-direction:column;justify-content:center;padding:48px 0;scroll-margin-top:24px}
+.ud-stage__h{margin:0 0 24px;font-family:var(--font-heading);font-size:clamp(28px,calc(22px + 1.4vw),42px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--bone);text-wrap:balance}
+.ud-stage__body{display:flex;flex-direction:column;gap:18px;max-width:36em}
+.ud-stage__body .p{color:var(--on-forest)}
+.ud-stage__list{list-style:none;margin:4px 0;padding:0;border-bottom:1px solid var(--rule-forest)}
+.ud-stage__list li{padding:14px 0;border-top:1px solid var(--rule-forest);font-size:clamp(17px,calc(16px + .14vw),18px);font-weight:500;line-height:1.5;color:var(--bone)}
+.ud-take{margin:0;font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--sage)}
+.ud-q{margin:32px 0 0;max-width:26em;padding-left:18px;border-left:2px solid var(--sage);font-family:var(--font-heading);font-size:clamp(21px,calc(19px + .6vw),27px);font-weight:700;line-height:1.28;letter-spacing:-.018em;color:var(--bone);text-wrap:balance}
+/* Wide: the figure stays while the movements pass; once the script runs, the
+   ones not being read recede. Narrow: the figure leads, a pinned strip shows
+   which movement is being read. */
+@media (min-width:980px){
+  .ud-stage{min-height:84vh}
+  .ud-map.is-live .ud-stage{opacity:.34;transition:opacity .6s ease}
+  .ud-map.is-live .ud-stage.is-active{opacity:1}
+}
+@media (max-width:979px){
+  .ud-map__grid{grid-template-columns:minmax(0,1fr)}
+  .ud-map__sticky{position:static}
+  .ud-map__svg{max-width:480px}
+  .ud-map__strip{position:sticky;top:0;z-index:5;display:flex;background:var(--forest);border-bottom:1px solid var(--rule-forest)}
+  .ud-map__strip span{flex:1 1 0;padding:16px 0 12px;text-align:center;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,240,232,.55);border-bottom:2px solid transparent;transition:color .3s,border-color .3s}
+  .ud-map__strip span.is-active{color:var(--bone);border-bottom-color:var(--sage)}
+}
+
+/* On strength: can you … without … */
+.ud-without{list-style:none;margin:clamp(32px,4vw,48px) 0 0;padding:0;border-bottom:1px solid var(--rule)}
+.ud-without li{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 28px;padding:28px 0;border-top:1px solid var(--rule)}
+.ud-without__a{flex:1 1 260px;min-width:0;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + 1vw),34px);font-weight:800;line-height:1.15;letter-spacing:-.025em;color:var(--heading)}
+.ud-without__w{flex:0 0 96px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.ud-without__b{flex:2 1 320px;min-width:0;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + 1vw),34px);font-weight:600;line-height:1.15;letter-spacing:-.025em;color:var(--ink-2);text-wrap:balance}
+
+/* The aphorism, on sage */
+.ud-choices{background:var(--sage-bg);color:var(--heading)}
+.ud-choices__in{padding-block:clamp(64px,7vw,104px)}
+.ud-choices__a,.ud-choices__b{margin:0;font-family:var(--font-heading);font-size:clamp(30px,calc(18px + 3vw),60px);font-weight:800;line-height:1.04;letter-spacing:-.035em;color:var(--heading);text-wrap:balance}
+.ud-choices__a{max-width:17ch}
+.ud-choices__b{margin-left:auto;max-width:19ch}
+.ud-choices__b span{color:var(--green-pressed)}
+.ud-fan{display:block;width:100%;height:auto;margin:clamp(24px,4vw,48px) 0;overflow:visible}
+.ud-fan path{fill:none;stroke:var(--green);stroke-width:1;stroke-opacity:.55}
+.ud-fan .ud-fan__main{stroke-width:2.5;stroke-opacity:1}
+.ud-fan__from{fill:var(--forest)}
+.ud-fan__to{fill:var(--sage-bg);stroke:var(--green);stroke-width:2}
+
+/* Close */
+.ud-close__mark{display:block;width:48px;height:48px;margin:0 auto 22px}
+.ud-close .close__text{max-width:28ch}
+</style><header class="hdr"><a class="skip-link" href="#main">Skip to content</a><div class="wrap hdr__in"><a href="/" class="hdr__brand" aria-label="Aggelos Mouzakitis, home">Aggelos<span>.</span></a><nav class="hdr__nav" aria-label="Primary"><div class="hdr__item"><a href="/" class="hdr__link">Home</a></div><div class="hdr__item"><a href="/about/" class="hdr__link">About</a></div><div class="hdr__item"><button type="button" class="hdr__btn" aria-expanded="false" aria-controls="nav-services">Services<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg></button><div id="nav-services" class="hdr__panel" hidden=""><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a><div class="hdr__sep" role="presentation"></div><a href="/therapy-for-men-in-tech/">Therapy for Men in Tech &amp; Business</a><a href="/therapy-for-executives/">Therapy for Executives &amp; Senior Leaders</a><a href="/therapy-for-founders/">Therapy for Entrepreneurs, Founders &amp; Business Owners</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></div></div><div class="hdr__item"><button type="button" class="hdr__btn is-current" aria-expanded="false" aria-controls="nav-resources">Resources<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"></path></svg></button><div id="nav-resources" class="hdr__panel" hidden=""><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/undisguised/" aria-current="page">Undisguised</a><a href="/blog/">Writing</a><a href="/free-tools/">Free Tools</a><a href="/reviews/">Reviews</a></div></div><div class="hdr__item"><a href="/faq/" class="hdr__link">FAQ</a></div></nav><a href="/contact/" class="hdr__cta">Book a consultation<span aria-hidden="true">→</span></a><button type="button" class="hdr__menu-btn" aria-expanded="false" aria-controls="site-menu">Menu<span class="hdr__burger" aria-hidden="true"><span></span><span></span><span></span></span></button></div><nav id="site-menu" class="mmenu" aria-label="Primary" hidden=""><div class="mmenu__in"><a href="/" class="mmenu__link">Home</a><a href="/about/" class="mmenu__link">About</a><div class="mmenu__group"><button type="button" class="mmenu__toggle" aria-expanded="false" aria-controls="m-services">Services<span class="mmenu__sign" aria-hidden="true">+</span></button><div id="m-services" class="mmenu__links" hidden=""><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a><div class="mmenu__sep" role="presentation"></div><a href="/therapy-for-men-in-tech/">Therapy for Men in Tech &amp; Business</a><a href="/therapy-for-executives/">Therapy for Executives &amp; Senior Leaders</a><a href="/therapy-for-founders/">Therapy for Entrepreneurs, Founders &amp; Business Owners</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></div></div><div class="mmenu__group"><button type="button" class="mmenu__toggle" aria-expanded="false" aria-controls="m-resources">Resources<span class="mmenu__sign" aria-hidden="true">+</span></button><div id="m-resources" class="mmenu__links" hidden=""><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/undisguised/" aria-current="page">Undisguised</a><a href="/blog/">Writing</a><a href="/free-tools/">Free Tools</a><a href="/reviews/">Reviews</a></div></div><a href="/faq/" class="mmenu__link">FAQ</a><a href="/contact/" class="mmenu__cta">Book a consultation<span aria-hidden="true">→</span></a></div></nav></header><main id="main" tabindex="-1" class="pg fam-manifesto pg--undisguised"><section class="home-hero ud-hero" aria-labelledby="page-title"><div class="home-hero__lines" aria-hidden="true"><span class="home-hero__axis"></span><span class="home-hero__field" style="top: 22%;"></span><span class="home-hero__field" style="top: 29%;"></span><span class="home-hero__field" style="top: 36%;"></span><span class="home-hero__field" style="top: 43%;"></span><span class="home-hero__field" style="top: 50%;"></span><span class="home-hero__field" style="top: 57%;"></span><span class="home-hero__field" style="top: 64%;"></span><span class="home-hero__field" style="top: 71%;"></span><span class="home-hero__field" style="top: 78%;"></span><span class="home-hero__field" style="top: 85%;"></span></div><div class="wrap home-hero__in"><div class="home-hero__text"><p class="eyebrow ud-in">UNDISGUISED · A MANIFESTO</p><h1 class="ud-h1 ud-in" id="page-title">Undisguised<span>.</span></h1><p class="sub ud-in">Living deliberately, rather than by fear, approval, performance or inherited expectations.</p><p class="lead ud-in">Undisguised is an approach to life about understanding what drives us, questioning the roles we’ve learned to play, and making more deliberate choices about how we live.</p><div class="actions ud-in"><a class="btn" href="#map">Explore the Undisguised Map <span aria-hidden="true">↓</span></a><a class="tlink" href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer"><span>Read the Undisguised newsletter</span><span aria-hidden="true">→</span></a></div></div><figure class="home-fig ud-fig"><span class="home-fig__disc" aria-hidden="true"></span><span class="home-fig__cut" aria-hidden="true"></span><span class="home-fig__img"><svg class="ud-emblem" viewBox="0 0 100 100" role="img" aria-label="The Undisguised Map"><path class="ud-emblem__ticks" d="M83.00 50.00L86.50 50.00M82.50 55.73L83.98 55.99M81.01 61.29L82.42 61.80M78.58 66.50L79.88 67.25M75.28 71.21L76.43 72.18M71.21 75.28L72.18 76.43M66.50 78.58L67.25 79.88M61.29 81.01L61.80 82.42M55.73 82.50L55.99 83.98M50.00 83.00L50.00 86.50M44.27 82.50L44.01 83.98M38.71 81.01L38.20 82.42M33.50 78.58L32.75 79.88M28.79 75.28L27.82 76.43M24.72 71.21L23.57 72.18M21.42 66.50L20.12 67.25M18.99 61.29L17.58 61.80M17.50 55.73L16.02 55.99M17.00 50.00L13.50 50.00M17.50 44.27L16.02 44.01M18.99 38.71L17.58 38.20M21.42 33.50L20.12 32.75M24.72 28.79L23.57 27.82M28.79 24.72L27.82 23.57M33.50 21.42L32.75 20.12M38.71 18.99L38.20 17.58M44.27 17.50L44.01 16.02M50.00 17.00L50.00 13.50M55.73 17.50L55.99 16.02M61.29 18.99L61.80 17.58M66.50 21.42L67.25 20.12M71.21 24.72L72.18 23.57M75.28 28.79L76.43 27.82M78.58 33.50L79.88 32.75M81.01 38.71L82.42 38.20M82.50 44.27L83.98 44.01"></path><circle class="ud-emblem__ring" cx="50" cy="50" r="30"></circle><circle class="ud-emblem__inner" cx="50" cy="50" r="17"></circle><path class="ud-emblem__arc" d="M28.79 28.79A30 30 0 0 1 71.21 71.21" pathLength="1"></path><circle class="ud-emblem__node" cx="28.8" cy="28.8" r="2"></circle><circle class="ud-emblem__node" cx="71.2" cy="28.8" r="2"></circle><circle class="ud-emblem__node ud-emblem__node--now" cx="71.2" cy="71.2" r="2"></circle><circle class="ud-emblem__node ud-emblem__node--next" cx="28.8" cy="71.2" r="2"></circle><circle class="ud-emblem__here" cx="71.2" cy="71.2" r="3.4"></circle><text class="ud-emblem__label" x="22.5" y="22.5" text-anchor="end">I</text><text class="ud-emblem__label" x="77.5" y="22.5">II</text><text class="ud-emblem__label" x="77.5" y="80.5">III</text><text class="ud-emblem__label" x="22.5" y="80.5" text-anchor="end">IV</text></svg></span></figure></div></section><nav class="ud-strip" aria-label="The four movements"><div class="wrap ud-strip__in"><ul class="ud-strip__list"><li><a href="#see-clearly"><span class="ud-strip__a"><span class="ud-num">I</span> · See Clearly</span> <span class="ud-strip__b">Understand what’s driving you.</span></a></li><li><a href="#choose-deliberately"><span class="ud-strip__a"><span class="ud-num">II</span> · Choose Deliberately</span> <span class="ud-strip__b">Decide what deserves a place in your life.</span></a></li><li><a href="#act-courageously"><span class="ud-strip__a"><span class="ud-num">III</span> · Act Courageously</span> <span class="ud-strip__b">Do something with what you’ve understood.</span></a></li><li><a href="#live-connected"><span class="ud-strip__a"><span class="ud-num">IV</span> · Live Connected</span> <span class="ud-strip__b">Build a life that includes other people.</span></a></li></ul></div></nav><section class="sec" id="roles" aria-labelledby="roles-h"><div class="wrap"><div class="read-l"><h2 class="h2 ud-h2--lead" id="roles-h" data-reveal="">We develop ways of getting what we need from the world.</h2></div><div class="ud-roles"><div class="col" data-reveal=""><h3 class="h3">Being useful</h3><p class="p">might have earned us appreciation.</p></div><div class="col" data-reveal=""><h3 class="h3">Working harder than everyone else</h3><p class="p">might have brought recognition.</p></div><div class="col" data-reveal=""><h3 class="h3">Keeping people happy</h3><p class="p">might have helped us avoid conflict.</p></div></div><div class="read-l ud-roles__after"><p class="p p--emph" data-reveal="">Over time, these behaviors can become part of how we see ourselves.</p><ul class="ud-ones" data-reveal=""><li>The reliable one.</li><li>The independent one.</li><li>The person who always figures things out.</li></ul><p class="p p--strong" data-reveal="">And sometimes, we keep behaving this way long after the circumstances that made it necessary have changed.</p></div></div></section><section class="sec sec--step" id="patterns" aria-labelledby="patterns-h"><div class="wrap"><p class="eyebrow">Where it shows up</p><h2 class="h2" id="patterns-h">Four familiar patterns</h2><div class="rows"><div class="row" data-reveal=""><span class="row__num" aria-hidden="true">01</span><h3 class="row__title">Ambition</h3><div class="row__body"><p class="p">You’ve achieved more than you expected. <strong>Somehow, slowing down still feels like falling behind.</strong></p></div></div><div class="row" data-reveal=""><span class="row__num" aria-hidden="true">02</span><h3 class="row__title">Independence</h3><div class="row__body"><p class="p">You’re comfortable handling almost anything alone. <strong>Asking someone for help is another matter.</strong></p></div></div><div class="row" data-reveal=""><span class="row__num" aria-hidden="true">03</span><h3 class="row__title">Responsibility</h3><div class="row__body"><p class="p">You keep accepting obligations you don’t have time for. <strong>You’re beginning to resent the people who depend on you.</strong></p></div></div><div class="row" data-reveal=""><span class="row__num" aria-hidden="true">04</span><h3 class="row__title">Being liked</h3><div class="row__body"><p class="p">You avoid saying something that might upset your partner. <strong>Six months later, you’re having the same argument.</strong></p></div></div></div><p class="p ud-note" data-reveal="">These patterns have different explanations for different people. They’re worth examining when they become difficult to change, even when they’re costing us something important.</p></div></section><section class="band ud-map on-dark" id="map" aria-labelledby="map-h"><div class="wrap ud-map__in"><p class="eyebrow">Something to return to</p><h2 class="ud-map__h" id="map-h">The Undisguised Map</h2><p class="ud-map__seq"><span>See Clearly</span> <span aria-hidden="true">→</span> <span>Choose Deliberately</span> <span aria-hidden="true">→</span> <span>Act Courageously</span> <span aria-hidden="true">→</span> <span>Live Connected</span> </p><div class="ud-map__grid"><div class="ud-map__left"><div class="ud-map__sticky"><svg class="ud-map__svg" viewBox="0 0 600 600" role="img" aria-label="The Undisguised Map: I See Clearly, II Choose Deliberately, III Act Courageously, IV Live Connected"><path class="ud-map__corners" d="M8 44V8H44M556 8H592V44M592 556V592H556M44 592H8V556"></path><circle class="ud-map__inner" cx="300" cy="300" r="118"></circle><path class="ud-map__ticks" d="M502.00 300.00L518.00 300.00M501.23 317.61L507.21 318.13M498.93 335.08L504.84 336.12M495.12 352.28L500.91 353.83M489.82 369.09L495.46 371.14M483.07 385.37L488.51 387.90M474.94 401.00L480.13 404.00M465.47 415.86L470.38 419.30M454.74 429.84L459.34 433.70M442.84 442.84L454.15 454.15M429.84 454.74L433.70 459.34M415.86 465.47L419.30 470.38M401.00 474.94L404.00 480.13M385.37 483.07L387.90 488.51M369.09 489.82L371.14 495.46M352.28 495.12L353.83 500.91M335.08 498.93L336.12 504.84M317.61 501.23L318.13 507.21M300.00 502.00L300.00 518.00M282.39 501.23L281.87 507.21M264.92 498.93L263.88 504.84M247.72 495.12L246.17 500.91M230.91 489.82L228.86 495.46M214.63 483.07L212.10 488.51M199.00 474.94L196.00 480.13M184.14 465.47L180.70 470.38M170.16 454.74L166.30 459.34M157.16 442.84L145.85 454.15M145.26 429.84L140.66 433.70M134.53 415.86L129.62 419.30M125.06 401.00L119.87 404.00M116.93 385.37L111.49 387.90M110.18 369.09L104.54 371.14M104.88 352.28L99.09 353.83M101.07 335.08L95.16 336.12M98.77 317.61L92.79 318.13M98.00 300.00L82.00 300.00M98.77 282.39L92.79 281.87M101.07 264.92L95.16 263.88M104.88 247.72L99.09 246.17M110.18 230.91L104.54 228.86M116.93 214.63L111.49 212.10M125.06 199.00L119.87 196.00M134.53 184.14L129.62 180.70M145.26 170.16L140.66 166.30M157.16 157.16L145.85 145.85M170.16 145.26L166.30 140.66M184.14 134.53L180.70 129.62M199.00 125.06L196.00 119.87M214.63 116.93L212.10 111.49M230.91 110.18L228.86 104.54M247.72 104.88L246.17 99.09M264.92 101.07L263.88 95.16M282.39 98.77L281.87 92.79M300.00 98.00L300.00 82.00M317.61 98.77L318.13 92.79M335.08 101.07L336.12 95.16M352.28 104.88L353.83 99.09M369.09 110.18L371.14 104.54M385.37 116.93L387.90 111.49M401.00 125.06L404.00 119.87M415.86 134.53L419.30 129.62M429.84 145.26L433.70 140.66M442.84 157.16L454.15 145.85M454.74 170.16L459.34 166.30M465.47 184.14L470.38 180.70M474.94 199.00L480.13 196.00M483.07 214.63L488.51 212.10M489.82 230.91L495.46 228.86M495.12 247.72L500.91 246.17M498.93 264.92L504.84 263.88M501.23 282.39L507.21 281.87"></path><circle class="ud-map__ring" cx="300" cy="300" r="190"></circle><circle class="ud-map__arc" cx="300" cy="300" r="190" stroke-dasharray="1193.8" transform="rotate(225 300 300)" style="stroke-dashoffset: 1193.8;"></circle><line class="ud-map__spoke" x1="157" y1="157" x2="128" y2="128"></line><line class="ud-map__spoke" x1="443" y1="157" x2="472" y2="128"></line><line class="ud-map__spoke" x1="443" y1="443" x2="472" y2="472"></line><line class="ud-map__spoke" x1="157" y1="443" x2="128" y2="472"></line><circle class="ud-map__node" cx="165.65" cy="165.65" r="9" style="fill: var(--sage);"></circle><circle class="ud-map__node" cx="434.35" cy="165.65" r="9" style="fill: var(--forest);"></circle><circle class="ud-map__node" cx="434.35" cy="434.35" r="9" style="fill: var(--forest);"></circle><circle class="ud-map__node" cx="165.65" cy="434.35" r="9" style="fill: var(--forest);"></circle><g class="ud-map__label" style="opacity: 1;"><text class="ud-map__t-num" x="40" y="58" text-anchor="start">I</text><text class="ud-map__t-name" x="40" y="90" text-anchor="start">See</text><text class="ud-map__t-name" x="40" y="119" text-anchor="start">Clearly</text></g><g class="ud-map__label" style="opacity: 0.38;"><text class="ud-map__t-num" x="560" y="58" text-anchor="end">II</text><text class="ud-map__t-name" x="560" y="90" text-anchor="end">Choose</text><text class="ud-map__t-name" x="560" y="119" text-anchor="end">Deliberately</text></g><g class="ud-map__label" style="opacity: 0.38;"><text class="ud-map__t-num" x="560" y="498" text-anchor="end">III</text><text class="ud-map__t-name" x="560" y="530" text-anchor="end">Act</text><text class="ud-map__t-name" x="560" y="559" text-anchor="end">Courageously</text></g><g class="ud-map__label" style="opacity: 0.38;"><text class="ud-map__t-num" x="40" y="498" text-anchor="start">IV</text><text class="ud-map__t-name" x="40" y="530" text-anchor="start">Live</text><text class="ud-map__t-name" x="40" y="559" text-anchor="start">Connected</text></g><g class="ud-map__center"><text class="ud-map__t-big" x="300" y="318" text-anchor="middle">I</text><text class="ud-map__t-cap" x="300" y="352" text-anchor="middle">SEE CLEARLY</text></g><circle class="ud-map__dot" cx="165.65" cy="165.65" r="8"></circle></svg><div class="ud-map__legend" aria-hidden="true"><span><span class="ud-map__key-dot"></span>You are here</span><span><span class="ud-map__key-line"></span>The way so far</span></div></div></div><div class="ud-map__right"><div class="ud-map__strip" aria-hidden="true"><span class="is-active">I See</span><span>II Choose</span><span>III Act</span><span>IV Connect</span></div><article class="ud-stage is-active" id="see-clearly" aria-labelledby="see-clearly-h" data-num="I" data-name="See Clearly"><p class="eyebrow">I — See Clearly</p><h3 class="ud-stage__h" id="see-clearly-h">Understand what’s driving you.</h3><div class="ud-stage__body"><p class="p">Pay attention to what you repeatedly do, particularly when your reactions seem out of proportion to the situation.</p><p class="p">A decision about work may also involve your sense of worth. Avoiding a conversation may have something to do with how you’ve learned to handle disagreement.</p><p class="ud-take">Understanding the pattern gives you more to work with.</p></div><p class="ud-q">What am I trying to protect, prove, or avoid?</p></article><article class="ud-stage" id="choose-deliberately" aria-labelledby="choose-deliberately-h" data-num="II" data-name="Choose Deliberately"><p class="eyebrow">II — Choose Deliberately</p><h3 class="ud-stage__h" id="choose-deliberately-h">Decide what deserves a place in your life.</h3><div class="ud-stage__body"><p class="p">We can spend years pursuing things that made sense at one point without questioning whether they still do.</p><ul class="ud-stage__list"><li>The career you’ve invested in.</li><li>The expectations you’ve accepted.</li><li>The responsibilities you’ve taken on.</li></ul><p class="ud-take">Some are worth keeping. Others deserve another look.</p></div><p class="ud-q">What matters enough to me that I’m willing to accept the cost?</p></article><article class="ud-stage" id="act-courageously" aria-labelledby="act-courageously-h" data-num="III" data-name="Act Courageously"><p class="eyebrow">III — Act Courageously</p><h3 class="ud-stage__h" id="act-courageously-h">Do something with what you’ve understood.</h3><div class="ud-stage__body"><p class="p">You can know exactly why you avoid conflict and still struggle to tell someone you’re unhappy.</p><p class="p">Understanding helps. Eventually, the conversation has to happen, the decision has to be made, or something about your behavior has to change.</p><p class="ud-take">That often means accepting consequences you would prefer to avoid.</p></div><p class="ud-q">What am I avoiding because of what might happen next?</p></article><article class="ud-stage" id="live-connected" aria-labelledby="live-connected-h" data-num="IV" data-name="Live Connected"><p class="eyebrow">IV — Live Connected</p><h3 class="ud-stage__h" id="live-connected-h">Build a life that includes other people.</h3><div class="ud-stage__body"><p class="p">Independence can make life easier in many ways. It can also make it difficult to let people close enough to know when things aren’t going well.</p><p class="p">Our choices affect the people around us. The relationships we build, the responsibilities we accept, and how we respond when someone needs us are all part of the life we’re choosing.</p></div><p class="ud-q">How are my choices affecting the people I care about?</p></article></div></div></div></section><section class="sec sec--step" id="strength" aria-labelledby="strength-h"><div class="wrap"><div class="read-l"><h2 class="h2" id="strength-h" data-reveal="">Ambition, independence, loyalty and responsibility can be some of your greatest qualities.</h2><p class="p p--emph" data-reveal="">But consider what happens when you try to behave differently.</p></div><ul class="ud-without"><li data-reveal=""><span class="ud-without__a">Can you rest</span> <span class="ud-without__w">without</span> <span class="ud-without__b">feeling guilty?</span></li><li data-reveal=""><span class="ud-without__a">Ask for help</span> <span class="ud-without__w">without</span> <span class="ud-without__b">feeling incompetent?</span></li><li data-reveal=""><span class="ud-without__a">Disappoint someone</span> <span class="ud-without__w">without</span> <span class="ud-without__b">spending the evening thinking about what they might think of you?</span></li></ul><p class="p ud-note" data-reveal="">There may be good reasons for these reactions. Understanding them can make it easier to recognize when a familiar response is helping and when it’s getting in your way.</p></div></section><section class="band ud-choices" aria-labelledby="choices-h"><div class="wrap ud-choices__in"><h2 class="ud-choices__a" id="choices-h" data-reveal="">A strength should give you more choices in life.</h2><svg class="ud-fan" viewBox="0 0 1000 200" aria-hidden="true" focusable="false"><path pathLength="1" d="M40 100Q500 -80 960 100"></path><path pathLength="1" d="M40 100Q500 -35 960 100"></path><path pathLength="1" d="M40 100Q500 10 960 100"></path><path pathLength="1" d="M40 100Q500 55 960 100"></path><path pathLength="1" class="ud-fan__main" d="M40 100L960 100"></path><path pathLength="1" d="M40 100Q500 145 960 100"></path><path pathLength="1" d="M40 100Q500 190 960 100"></path><path pathLength="1" d="M40 100Q500 235 960 100"></path><path pathLength="1" d="M40 100Q500 280 960 100"></path><circle class="ud-fan__from" cx="40" cy="100" r="9"></circle><circle class="ud-fan__to" cx="960" cy="100" r="6"></circle></svg><p class="ud-choices__b" data-reveal="">It’s worth paying attention when it starts taking choices <span>away.</span></p></div></section><section class="sec sec--step" id="epilogue" aria-labelledby="epilogue-h"><div class="wrap"><div class="read-l"><h2 class="h2" id="epilogue-h" data-reveal="">Our histories will continue to influence us.</h2><div class="flow"><p class="p" data-reveal="">We’ll still make decisions out of fear sometimes, avoid difficult conversations, and discover that things we thought mattered no longer do.</p><p class="p p--strong" data-reveal="">We can get better at recognizing these patterns and deciding how we want to respond.</p></div></div></div></section><section class="band close on-dark ud-close" aria-labelledby="close-h"><div class="read close__in"><svg class="ud-close__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="17" fill="none" stroke="var(--sage)" stroke-width="2"></circle><circle cx="12" cy="12" r="4.5" fill="var(--bone)" stroke="var(--forest)" stroke-width="2"></circle></svg><h2 class="close__label" id="close-h">The Undisguised Map</h2><p class="close__text">The Undisguised Map is something to return to when we notice ourselves slipping into familiar ways of living without much thought.</p><div class="close__actions"><a class="btn" href="#map">Return to the Map <span aria-hidden="true">↑</span></a><a class="tlink" href="https://www.undisguised.io/" target="_blank" rel="noopener noreferrer"><span>Read Undisguised</span><span aria-hidden="true">→</span></a></div></div></section></main><footer class="ftr"><div class="wrap"><div class="ftr__grid"><div class="ftr__id"><a href="/" class="ftr__brand" aria-label="Aggelos Mouzakitis, home">Aggelos<span>.</span></a><p class="ftr__tag">BACP-registered psychotherapist · Background in tech, product &amp; growth</p><a class="ftr__sig" href="/undisguised/"><span class="ftr__sig-label"><svg class="ud-mark" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="ud-mark__ring" cx="12" cy="12" r="8.5"></circle><circle class="ud-mark__dot" cx="6" cy="6" r="3"></circle></svg>Undisguised</span><span class="ftr__sig-sep"> · </span>The thinking behind my work <span class="ftr__sig-arrow" aria-hidden="true">↗</span></a><ul class="ftr__social" aria-label="Social media"><li><a href="https://www.linkedin.com/in/growth-product-manager/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a></li><li><a href="https://www.instagram.com/_aggelosmouzakitis_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 7.85a4.15 4.15 0 1 0 0 8.3 4.15 4.15 0 0 0 0-8.3zm0 6.85a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.28-7.01a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"></path></svg></a></li><li><a href="https://www.tiktok.com/@aggelosmouz" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.7 5.7 0 0 0-.8-.06 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.23-1.48z"></path></svg></a></li></ul></div><nav class="ftr__col" aria-label="Work with me"><p class="ftr__head">Work with me</p><a href="/individual-psychotherapy/">Individual Psychotherapy</a><a href="/couples-therapy/">Couples Therapy</a><a href="/professional-coaching/">Professional Coaching</a></nav><nav class="ftr__col" aria-label="Who I work with"><p class="ftr__head">Who I work with</p><a href="/therapy-for-men-in-tech/">Men in Tech &amp; Demanding Careers</a><a href="/therapy-for-founders/">Founders &amp; Business Owners</a><a href="/therapy-for-executives/">Executives &amp; Leaders</a><a href="/greek-speaking-psychotherapist/">Greek-speaking Psychotherapy</a></nav><nav class="ftr__col" aria-label="Common problems"><p class="ftr__head">Common problems</p><a href="/relationship-problems-men/">Relationships &amp; Separation</a><a href="/work-affecting-relationship/">Work &amp; Relationships</a><a href="/executive-burnout-therapy/">Burnout &amp; Can’t Switch Off</a><a href="/career-transition-therapy/">Career Change &amp; Decisions</a><a href="/anxiety-overthinking/">Anxiety &amp; Overthinking</a><a href="/achievement-self-worth/">Achievement &amp; Self-Worth</a></nav><nav class="ftr__col" aria-label="Practice"><p class="ftr__head">Practice</p><a href="/about/">About</a><a href="/considering-therapy/">Considering Therapy</a><a href="/therapy-vs-coaching/">Therapy vs Coaching</a><a href="/blog/">Writing</a><a href="/free-tools/">Free Tools</a><a href="/faq/">FAQ</a><a href="/reviews/">Reviews</a><a href="/contact/">Contact</a></nav></div><div class="ftr__rule" role="presentation"></div><div class="ftr__bottom"><p style="margin: 0px;">© 2026 Aggelos Mouzakitis. All rights reserved.</p><nav class="ftr__legal" aria-label="Legal"><a href="/confidentiality/">Confidentiality</a></nav></div></div></footer></div>
+<script src="/site-header.js?v=cc311e7df5" async></script>
+<script src="/site-undisguised.js?v=5fbb81f666" async></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 // Plain React in one closure (nothing leaks but the exports below), compiled
 // by babel like the other .jsx bundles, loaded on every page after site-nav.js (the header and footer wording, generated from the
 // canonical copy) and before the page's own bundle. Exposes on window:
-//   ChromeStyles, SiteHeader, SiteFooterX, CloseBand, LegacyShell,
+//   ChromeStyles, SiteHeader, SiteFooterX, CloseBand, LegacyShell, UdMark,
 //   EXTERNAL, CONTACT_URL, currentPath
 //
 // Visual reference: "Direction v4" (one grid, one type scale, one of each
@@ -122,12 +122,35 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .close__text{margin:0 auto;max-width:24ch;font-family:var(--font-heading);font-size:clamp(26px,calc(22px + .7vw),32px);font-weight:650;line-height:1.18;letter-spacing:-0.02em;color:var(--bone);text-wrap:balance}
 .close__text--long{max-width:56ch;font-family:var(--font-body);font-size:clamp(18px,calc(17px + .2vw),20px);font-weight:400;line-height:1.6;letter-spacing:0;color:var(--on-forest)}
 .close__actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 28px;margin-top:32px}
+/* A quieter pathway under the primary action (UdLink, site-pages.jsx). */
+.close__aside{display:flex;flex-wrap:wrap;justify-content:center;margin:14px 0 0}
+
+/* The Undisguised mark: the manifesto map's ring with its "you are here"
+   point at I. It signs every quiet link to /undisguised/. */
+.ud-mark{flex:0 0 auto;width:16px;height:16px;overflow:visible}
+.ud-mark__ring{fill:none;stroke:var(--ud-ring,currentColor);stroke-width:1.6}
+.ud-mark__dot{fill:var(--ud-dot,var(--heading));stroke:var(--ud-cut,var(--bone));stroke-width:1.8}
 
 /* Footer */
 .ftr{background:var(--forest);color:var(--on-forest-2);border-top:2px solid var(--green);padding-block:clamp(48px,6vw,72px) 32px;font-family:var(--font-body)}
 .ftr__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:40px;align-items:start}
 .ftr__brand{display:inline-flex;align-items:center;min-height:44px;color:var(--bone);font-family:var(--font-heading);font-size:22px;font-weight:750;line-height:1;letter-spacing:-0.035em}
 .ftr__tag{margin:18px 0 0;max-width:26ch;font-size:15px;line-height:1.5}
+/* The signature under the brand description: secondary to it, sage. */
+.ftr__sig{--ud-ring:var(--sage);--ud-dot:var(--bone);--ud-cut:var(--forest);display:block;width:fit-content;max-width:100%;margin-top:6px;padding-block:12px;font-size:14px;line-height:1.4;color:var(--on-forest-2);transition:color 180ms}
+.ftr__sig .ud-mark{display:inline-block;margin-right:8px;vertical-align:-3px}
+.ftr__sig-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);white-space:nowrap;transition:color 180ms}
+.ftr__sig-arrow{display:inline-block;color:var(--sage);transition:transform 180ms}
+.ftr__sig:hover,.ftr__sig:hover .ftr__sig-label{color:var(--bone)}
+.ftr__sig:hover .ftr__sig-arrow{transform:translate(2px,-2px)}
+.ftr__sig+.ftr__social{margin-top:12px}
+/* One line where it fits; in the narrow brand column of the wide footer, a
+   two-line lockup (the separator stays, for screen readers). */
+.ftr__id{min-width:0;container-type:inline-size}
+@container (max-width:339px){
+  .ftr__sig-label{display:block;margin-bottom:4px}
+  .ftr__sig-sep{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
 .ftr__social{display:flex;gap:14px;margin:20px 0 0;padding:0;list-style:none}
 .ftr__social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--rule-forest);color:var(--on-forest-2)}
 .ftr__social a:hover{color:var(--bone);border-color:var(--sage)}
@@ -276,16 +299,30 @@ function SiteHeader({ section }) {
     mobile);
 }
 
+// ─── UNDISGUISED MARK ────────────────────────────────────────────────────────
+// The ring of the Undisguised map with its point at I ("you are here"), drawn
+// at text size beside the footer signature and the quiet links to the
+// manifesto. Colours come from --ud-ring, --ud-dot and --ud-cut (the ground it
+// sits on, which the point cuts out of the ring).
+function UdMark() {
+  return ce('svg', { className: 'ud-mark', width: 16, height: 16, viewBox: '0 0 24 24', 'aria-hidden': 'true', focusable: 'false' },
+    ce('circle', { className: 'ud-mark__ring', cx: 12, cy: 12, r: 8.5 }),
+    ce('circle', { className: 'ud-mark__dot', cx: 6, cy: 6, r: 3 }));
+}
+
 // ─── CLOSE ───────────────────────────────────────────────────────────────────
 // The dark, centred close of a page: its "Contact" heading set as a label,
 // one sentence, the primary action (and any secondary links, on dark).
-function CloseBand({ label, text, actions }) {
+// `aside` is a quieter pathway set under the actions, never beside the
+// primary one.
+function CloseBand({ label, text, actions, aside }) {
   const long = text && text.length > 110;
   return ce('section', { className: 'band close on-dark', 'aria-labelledby': label ? 'close-h' : undefined, 'aria-label': label ? undefined : 'Book a consultation' },
     ce('div', { className: 'read close__in' },
       label ? ce('h2', { id: 'close-h', className: 'close__label' }, label) : null,
       text ? ce('p', { className: 'close__text' + (long ? ' close__text--long' : '') }, text) : null,
-      ce('div', { className: 'close__actions', style: text || label ? null : { marginTop: 0 } }, actions)));
+      ce('div', { className: 'close__actions', style: text || label ? null : { marginTop: 0 } }, actions),
+      aside ? ce('p', { className: 'close__aside' }, aside) : null));
 }
 
 // ─── FOOTER ──────────────────────────────────────────────────────────────────
@@ -303,9 +340,15 @@ function SiteFooterX() {
   return ce('footer', { className: 'ftr' },
     ce('div', { className: 'wrap' },
       ce('div', { className: 'ftr__grid' },
-        ce('div', { style: { minWidth: 0 } },
+        ce('div', { className: 'ftr__id' },
           ce('a', { href: '/', className: 'ftr__brand', 'aria-label': 'Aggelos Mouzakitis, home' }, brand, ce('span', null, '.')),
           f.tagline ? ce('p', { className: 'ftr__tag' }, f.tagline) : null,
+          // The signature: the thinking behind the practice, one quiet line.
+          f.signature ? ce('a', { className: 'ftr__sig', href: f.signature.href },
+            ce('span', { className: 'ftr__sig-label' }, ce(UdMark), f.signature.label),
+            ce('span', { className: 'ftr__sig-sep' }, ' · '),
+            f.signature.text, ' ',
+            ce('span', { className: 'ftr__sig-arrow', 'aria-hidden': 'true' }, '↗')) : null,
           ce('ul', { className: 'ftr__social', 'aria-label': 'Social media' },
             SOCIAL.map(([name, href]) => ce('li', { key: name },
               ce('a', { href, 'aria-label': name, target: '_blank', rel: 'noopener noreferrer' },
@@ -335,7 +378,7 @@ function LegacyShell({ children, form, cta = true }) {
 }
 
 Object.assign(window, {
-  ChromeStyles, SiteHeader, SiteFooterX, CloseBand, LegacyShell,
+  ChromeStyles, SiteHeader, SiteFooterX, CloseBand, LegacyShell, UdMark,
   EXTERNAL, CONTACT_URL, currentPath,
 });
 })();

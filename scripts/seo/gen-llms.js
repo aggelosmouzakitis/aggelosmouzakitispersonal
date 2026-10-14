@@ -18,7 +18,7 @@ const GROUPS = [
   ['Who I work with', ['/therapy-for-men-in-tech/', '/therapy-for-founders/', '/therapy-for-executives/', '/greek-speaking-psychotherapist/']],
   ['Common problems', ['/relationship-problems-men/', '/separation-divorce-men/', '/work-affecting-relationship/',
     '/executive-burnout-therapy/', '/career-transition-therapy/', '/anxiety-overthinking/', '/achievement-self-worth/']],
-  ['Resources', ['/considering-therapy/', '/therapy-vs-coaching/', '/faq/', '/blog/', '/free-tools/',
+  ['Resources', ['/considering-therapy/', '/therapy-vs-coaching/', '/undisguised/', '/faq/', '/blog/', '/free-tools/',
     '/work-life-check/', '/free-tools/burned-out/', '/free-tools/quit-your-job/', '/reviews/']],
   // The articles on the blog, newest first (their own URLs, listed on /blog/).
   ['Writing', ARTICLE_PAGES.slice().sort((x, y) => Date.parse(y.article.publishedTime) - Date.parse(x.article.publishedTime)).map((p) => p.url)],
@@ -78,6 +78,13 @@ ${GROUPS.map(([h, urls]) => `## ${h}\n\n${urls.map(entry).join('\n')}`).join('\n
 
 - Professional description: "BACP-registered psychotherapist". "Licensed
   psychotherapist" is not accurate wording for this practice and is not used.
+- Undisguised (${ORIGIN}/undisguised/) is Aggelos Mouzakitis's point of view on
+  living deliberately: a manifesto, not a clinical model, treatment method,
+  assessment or service. It names four familiar patterns (Ambition,
+  Independence, Responsibility, Being liked) and four movements (See Clearly,
+  Choose Deliberately, Act Courageously, Live Connected); the movements are
+  something to return to, not a fixed sequence of steps. The Undisguised
+  newsletter is at https://www.undisguised.io/.
 - The previous business and career advisory site has been retired; its
   service, tool and Greek-language (/el/) URLs redirect to their closest
   current page or return 410 Gone.

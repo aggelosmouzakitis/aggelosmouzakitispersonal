@@ -1,4 +1,4 @@
-// site-pages.jsx — renders the 25 canonical pages from the canonical copy, and
+// site-pages.jsx — renders the 26 canonical pages from the canonical copy, and
 // the articles (renderArticlePage, from article-<slug>.js; see "Articles").
 //
 // Loaded after site-nav.js, site-chrome.js and site-copy.js. Each page shell
@@ -58,6 +58,25 @@
     ['achievement-self-worth', 'being careful turns into needing to be beyond criticism', '/perfectionism-at-work/'],
     ['work-affecting-relationship', 'continue thinking about the company for the rest of the evening', '/cant-switch-off-from-work/'],
     ['work-affecting-relationship', 'Burnout often shows up in relationships before it shows up in performance', '/burnout-at-work/'],
+    // Undisguised: a phrase that already says what one movement of the map is
+    // about links to that movement on /undisguised/, at most one per page.
+    // Phrases about the person, never about the therapy's method: the
+    // manifesto is a point of view, not the way sessions are run.
+    ['individual-psychotherapy', 'reacted more strongly than you expected', '/undisguised/#see-clearly'],
+    ['therapy-for-men-in-tech', 'the reaction is much bigger than the practical consequence', '/undisguised/#see-clearly'],
+    ['executive-burnout-therapy', 'an internal rule that says you should be able to carry all of it', '/undisguised/#see-clearly'],
+    ['anxiety-overthinking', 'what starts the thinking', '/undisguised/#see-clearly'],
+    ['achievement-self-worth', 'what achievement currently provides', '/undisguised/#see-clearly'],
+    ['career-transition-therapy', 'a career you invested heavily in no longer fits', '/undisguised/#choose-deliberately'],
+    ['professional-coaching', 'The decision remains yours', '/undisguised/#choose-deliberately'],
+    ['therapy-for-founders', 'Pressure can hide questions for a long time', '/undisguised/#choose-deliberately'],
+    ['separation-divorce-men', 'treating either reaction as a decision', '/undisguised/#choose-deliberately'],
+    ['about', 'why someone stays in a role they say they hate', '/undisguised/#choose-deliberately'],
+    ['relationship-problems-men', 'decide it is not worth the argument', '/undisguised/#act-courageously'],
+    ['considering-therapy', 'understand why you avoid conflict', '/undisguised/#act-courageously'],
+    ['therapy-for-executives', 'nowhere left to put the unedited version', '/undisguised/#live-connected'],
+    ['work-affecting-relationship', 'what it costs each person', '/undisguised/#live-connected'],
+    ['couples-therapy', 'carrying responsibility for the family', '/undisguised/#live-connected'],
   ];
   // CONTEXT_LINKS:END
   function contextLinks(part, ctx, key) {
@@ -137,11 +156,35 @@
   // Book a consultation is the primary action wherever it appears; everything
   // else is a secondary link. Links whose page is not published are left out.
   const isPrimary = (it) => it.href === CONTACT_URL;
+
+  // Undisguised, the manifesto (/undisguised/), runs through the site as a
+  // thread rather than a promotion: a link to it from another page is never a
+  // button and never sits beside the page's actions. It is set one step
+  // quieter, under them: the Undisguised mark, the copy's lead-in muted
+  // ("The thinking behind my work:") and the name as the link's underlined
+  // word.
+  const UD_URL = '/undisguised/';
+  const isUd = (it) => !!it.href && it.href.indexOf(UD_URL) === 0;
+  function UdLink({ item }) {
+    const m = item.label.match(/^(.*?[:?])\s+(.+)$/);
+    return e('a', { className: 'ud-link', href: item.href },
+      e(window.UdMark),
+      m ? e('span', { className: 'ud-link__pre' }, m[1]) : null, m ? ' ' : null,
+      e('span', { className: 'ud-link__name' }, m ? m[2] : item.label), ' ',
+      e('span', { className: 'ud-link__arrow', 'aria-hidden': 'true' }, '→'));
+  }
+  const udAside = (items, className) => (items.length
+    ? e('p', { key: 'ud', className: className || 'ud-aside' }, items.map((it) => e(UdLink, { key: it.label, item: it })))
+    : null);
+
   function Actions({ items, className }) {
     const live = items.filter((it) => it.href);
     if (!live.length) return null;
-    return e('div', { className: className || 'actions' },
-      live.map((it) => e(isPrimary(it) ? Btn : TLink, { key: it.label + it.href, item: it })));
+    const main = live.filter((it) => !isUd(it));
+    const row = main.length ? e('div', { key: 'row', className: className || 'actions' },
+      main.map((it) => e(isPrimary(it) ? Btn : TLink, { key: it.label + it.href, item: it }))) : null;
+    const aside = udAside(live.filter(isUd));
+    return aside ? e(React.Fragment, null, row, aside) : row;
   }
   const findCta = (blocks, label) => {
     for (const b of blocks) if (b.t === 'ctas') for (const it of b.items) if (it.label === label) return it;
@@ -420,15 +463,18 @@
         items.map((it) => e('a', { key: it.href, href: it.href }, it.label, e('span', { 'aria-hidden': 'true' }, '→')))));
   }
 
-  // The page's final "Contact" section as the dark close.
+  // The page's final "Contact" section as the dark close. A link to
+  // Undisguised stays under the primary action, as its quieter alternative.
   function Close({ s, ctx }) {
     const ps = s.blocks.filter((b) => b.t === 'p');
     const items = [].concat.apply([], s.blocks.filter((b) => b.t === 'ctas').map((b) => b.items)).filter((it) => it.href);
     const text = ps.map((p) => plain(p.text)).join(' ');
+    const ud = items.filter(isUd);
     return e(window.CloseBand, {
       label: s.h2,
       text,
-      actions: items.map((it) => e(isPrimary(it) ? Btn : TLink, { key: it.href, item: it })),
+      actions: items.filter((it) => !isUd(it)).map((it) => e(isPrimary(it) ? Btn : TLink, { key: it.href, item: it })),
+      aside: ud.length ? ud.map((it) => e(UdLink, { key: it.label, item: it })) : null,
     });
   }
   const isClose = (s, i, all) => i === all.length - 1 && (s.h2 === 'Contact' || s.h2 === 'How to start');
@@ -599,6 +645,70 @@
     return e(React.Fragment, null, e(Hero, { p, ctx }), e(Sections, { p, ctx }));
   }
 
+  // ── The Undisguised map emblem ─────────────────────────────────────────────
+  // The manifesto's figure (its hero, and small on the homepage's Undisguised
+  // ribbon): the map's ring and tick marks, its four points at the diagonals,
+  // the way so far drawn from I through II to III, and the ring that marks
+  // where you are. `title` makes it an image with that name; without it,
+  // decoration.
+  function mapTicks(c, r1, r2, r3, step) {
+    let d = '';
+    for (let a = 0; a < 360; a += step) {
+      const t = a * Math.PI / 180;
+      const r = a % 45 === 0 ? r3 : r2;
+      d += 'M' + (c + r1 * Math.cos(t)).toFixed(2) + ' ' + (c + r1 * Math.sin(t)).toFixed(2) +
+        'L' + (c + r * Math.cos(t)).toFixed(2) + ' ' + (c + r * Math.sin(t)).toFixed(2);
+    }
+    return d;
+  }
+  const EMBLEM_TICKS = mapTicks(50, 33, 34.5, 36.5, 10);
+  const EMBLEM_LABELS = [['I', 22.5, 22.5, 'end'], ['II', 77.5, 22.5], ['III', 77.5, 80.5], ['IV', 22.5, 80.5, 'end']];
+  // `tight` frames the ring and its ticks alone, for small sizes.
+  function MapEmblem({ title, labels, tight }) {
+    const a11y = title ? { role: 'img', 'aria-label': title } : { 'aria-hidden': 'true', focusable: 'false' };
+    return e('svg', Object.assign({ className: 'ud-emblem', viewBox: tight ? '12 12 76 76' : '0 0 100 100' }, a11y),
+      e('path', { className: 'ud-emblem__ticks', d: EMBLEM_TICKS }),
+      e('circle', { className: 'ud-emblem__ring', cx: 50, cy: 50, r: 30 }),
+      e('circle', { className: 'ud-emblem__inner', cx: 50, cy: 50, r: 17 }),
+      // The way so far, I → II → III: half the ring, drawn as its own path
+      // (a dashed circle's pattern would be measured in screen pixels here).
+      e('path', { className: 'ud-emblem__arc', d: 'M28.79 28.79A30 30 0 0 1 71.21 71.21', pathLength: 1 }),
+      e('circle', { className: 'ud-emblem__node', cx: 28.8, cy: 28.8, r: 2 }),
+      e('circle', { className: 'ud-emblem__node', cx: 71.2, cy: 28.8, r: 2 }),
+      e('circle', { className: 'ud-emblem__node ud-emblem__node--now', cx: 71.2, cy: 71.2, r: 2 }),
+      e('circle', { className: 'ud-emblem__node ud-emblem__node--next', cx: 28.8, cy: 71.2, r: 2 }),
+      e('circle', { className: 'ud-emblem__here', cx: 71.2, cy: 71.2, r: 3.4 }),
+      labels ? EMBLEM_LABELS.map(([t, x, y, anchor]) => e('text', { key: t, className: 'ud-emblem__label', x, y, textAnchor: anchor }, t)) : null);
+  }
+
+  // The four movements, previewed: I · See Clearly … IV · Live Connected as
+  // four stations on one ruled line, each a link to its part of the map.
+  function UdPreview({ lines, base }) {
+    return e('ol', { className: 'ud-preview' }, lines.map((l) => {
+      const [num, name] = l.split(' · ');
+      return e('li', { key: l },
+        e('a', { href: base + '#' + slugOf(name) },
+          e('span', { className: 'ud-preview__node', 'aria-hidden': 'true' }),
+          e('span', { className: 'ud-num' }, num), ' · ', name));
+    }));
+  }
+
+  // "If you want to read first", continued: below the three resources, under
+  // one heavier rule across the section, Undisguised as the section's own
+  // horizontal close — its label, one sentence and the link on the left, the
+  // four movements on the right.
+  function UdFeature({ sub }) {
+    const stmt = sub.blocks.find((b) => b.t === 'p');
+    const lines = sub.blocks.find((b) => b.t === 'lines');
+    const link = [].concat.apply([], sub.blocks.filter((b) => b.t === 'ctas').map((b) => b.items))[0];
+    return e('div', { className: 'ud-feature' },
+      e('div', { className: 'ud-feature__text' },
+        e('h3', { className: 'ud-feature__label' }, e(window.UdMark), ' ', sub.h3),
+        stmt ? e('p', { className: 'ud-feature__stmt' }, plain(stmt.text)) : null,
+        link ? e('div', { className: 'links' }, e(TLink, { item: link })) : null),
+      lines ? e(UdPreview, { lines: lines.lines, base: link ? link.href : UD_URL }) : null);
+  }
+
   // ── Homepage (reference design) ────────────────────────────────────────────
   const HOME_PHOTOS = {
     hero: { src: '/img/aggelos-home.webp', alt: 'Aggelos Mouzakitis' },
@@ -640,6 +750,24 @@
           e('div', { className: 'flow home-brings' }, e(Blocks, { blocks: brings.blocks, ctx })))));
     }
 
+    // Undisguised, as a shallow forest ribbon between what brings people here
+    // and the context of the work: the manifesto's emblem, its heading as the
+    // label, its one-line statement and a text link to the map. It leads into
+    // the dark photo split below, so it sits on the deeper forest, under the
+    // site's green rule, with a hairline where the split begins.
+    const ud = S['undisguised-a-manifesto'];
+    if (ud) {
+      const stmt = ud.blocks.find((b) => b.t === 'p');
+      const link = [].concat.apply([], ud.blocks.filter((b) => b.t === 'ctas').map((b) => b.items))[0];
+      out.push(e('section', { key: 'ud', className: 'band ud-ribbon on-dark', id: ud.id, 'aria-labelledby': 'ud-ribbon-h' },
+        e('div', { className: 'wrap ud-ribbon__in' },
+          e('span', { className: 'ud-ribbon__mark' }, e(MapEmblem, { tight: true })),
+          e('div', { className: 'ud-ribbon__text' },
+            e('h2', { className: 'ud-ribbon__label', id: 'ud-ribbon-h' }, ud.h2),
+            stmt ? e('p', { className: 'ud-ribbon__stmt' }, plain(stmt.text)) : null),
+          link ? e('a', { className: 'ud-ribbon__link', href: link.href }, e('span', null, link.label), e(Arrow)) : null)));
+    }
+
     const context = S['work-is-part-of-the-context'];
     if (context) out.push(e(PhotoSplit, { key: 'context', s: context, ctx, photo: HOME_PHOTOS.context, dark: true }));
 
@@ -648,7 +776,10 @@
       const ps = how.blocks.filter((b) => b.t === 'p');
       const s1 = sentences(ps[0].text);
       const s2 = sentences(ps[1].text);
-      const link = how.blocks.find((b) => b.t === 'ctas');
+      // The section's link, then (Actions sets it apart, under the link) the
+      // quiet one to the thinking behind the work, Undisguised.
+      const links = [].concat.apply([], how.blocks.filter((b) => b.t === 'ctas').map((b) => b.items));
+      const link = links.length ? { items: links } : null;
       // One reading column: H2, the opening sentence as the lead, then the
       // prose; the closing sentence is the only (body-size) emphasis. The
       // column keeps the reading width but starts on the site's left edge, the
@@ -677,6 +808,7 @@
     if (read) {
       const ps = read.blocks.filter((b) => b.t === 'p');
       const links = [].concat.apply([], read.blocks.filter((b) => b.t === 'ctas').map((b) => b.items));
+      const udSub = read.blocks.find((b) => b.t === 'sub');
       out.push(e('section', { key: 'read', className: 'band sage', id: read.id, 'aria-labelledby': 'read-h' },
         e('div', { className: 'wrap sage__in' },
           e('h2', { className: 'h2', id: 'read-h' }, read.h2),
@@ -686,7 +818,8 @@
               m ? e('h3', { className: 'h3' }, m[1]) : null,
               e('p', { className: 'p' }, plain(b.text)),
               links[i] ? e('div', { className: 'links' }, e(TLink, { item: links[i] })) : null);
-          })))));
+          })),
+          udSub ? e(UdFeature, { sub: udSub }) : null)));
     }
 
     const about = S['about-me'];
@@ -1237,6 +1370,221 @@
     ReactDOM.createRoot(document.getElementById('root')).render(e(ArticleSite, { id }));
   }
 
+  // ── Undisguised (/undisguised/): the manifesto ─────────────────────────────
+  // The approved design ("Undisguised Manifesto v2"), set from the canonical
+  // copy in its order: hero with the map emblem; the four movements as a
+  // strip of anchors; the roles we learn; four familiar patterns (the site's
+  // rows); the Undisguised Map on forest — the figure held in place while the
+  // four movements are read beside it; on strength; the sage aphorism with
+  // its widening lines; the epilogue; the close, which returns to the map.
+  // The page is static: site-undisguised.js (no React) gives the map its
+  // scroll-driven progress and the blocks marked data-reveal their entrance.
+  // Without it the page is complete: every movement at full strength and the
+  // figure at its first point. Patterns are where things show up; the four
+  // movements are the map. The two are kept apart, as in the copy.
+  //
+  // The figure's legend ("You are here", "The way so far") and the narrow
+  // screens' progress strip (I See … IV Connect) are the design's labels for
+  // the figure, not copy: both are hidden from assistive technology, which
+  // gets the figure's name and the four movements as headings.
+  const MAP_R = 190;
+  const MAP_C = 2 * Math.PI * MAP_R;
+  const MAP_TICKS = mapTicks(300, 202, 208, 218, 5);
+  // The four points on the ring, at its diagonals, from the top left.
+  const MAP_POINTS = [[165.65, 165.65], [434.35, 165.65], [434.35, 434.35], [165.65, 434.35]];
+  const MAP_SPOKES = [[157, 157, 128, 128], [443, 157, 472, 128], [443, 443, 472, 472], [157, 443, 128, 472]];
+  // Where each movement's name is set in the figure's corners: x, y, anchor.
+  const MAP_LABELS = [[40, 58, 'start'], [560, 58, 'end'], [560, 498, 'end'], [40, 498, 'start']];
+  const MAP_SHORT = ['See', 'Choose', 'Act', 'Connect'];
+  // The aphorism's lines: one straight, the others bowed either side of it.
+  const FAN_BOWS = [-80, -35, 10, 55, null, 145, 190, 235, 280];
+
+  function MapFigure({ name, stages }) {
+    return e('svg', { className: 'ud-map__svg', viewBox: '0 0 600 600', role: 'img',
+      'aria-label': name + ': ' + stages.map((s) => s.num + ' ' + s.name).join(', ') },
+    e('path', { className: 'ud-map__corners', d: 'M8 44V8H44M556 8H592V44M592 556V592H556M44 592H8V556' }),
+    e('circle', { className: 'ud-map__inner', cx: 300, cy: 300, r: 118 }),
+    e('path', { className: 'ud-map__ticks', d: MAP_TICKS }),
+    e('circle', { className: 'ud-map__ring', cx: 300, cy: 300, r: MAP_R }),
+    // The way so far: empty until the reader reaches the map (offset set as
+    // a style, so the build's settling of drawn lines leaves it alone).
+    e('circle', { className: 'ud-map__arc', cx: 300, cy: 300, r: MAP_R, strokeDasharray: MAP_C.toFixed(1),
+      transform: 'rotate(225 300 300)', style: { strokeDashoffset: MAP_C.toFixed(1) } }),
+    MAP_SPOKES.map(([x1, y1, x2, y2], i) => e('line', { key: 's' + i, className: 'ud-map__spoke', x1, y1, x2, y2 })),
+    MAP_POINTS.map(([cx, cy], i) => e('circle', { key: 'n' + i, className: 'ud-map__node', cx, cy, r: 9,
+      style: { fill: i === 0 ? 'var(--sage)' : 'var(--forest)' } })),
+    stages.map((s, i) => {
+      const [x, y, anchor] = MAP_LABELS[i];
+      return e('g', { key: 'g' + i, className: 'ud-map__label', style: { opacity: i === 0 ? 1 : 0.38 } },
+        e('text', { className: 'ud-map__t-num', x, y, textAnchor: anchor }, s.num),
+        s.name.split(' ').map((w, j) => e('text', { key: j, className: 'ud-map__t-name', x, y: y + 32 + j * 29, textAnchor: anchor }, w)));
+    }),
+    e('g', { className: 'ud-map__center' },
+      e('text', { className: 'ud-map__t-big', x: 300, y: 318, textAnchor: 'middle' }, stages[0].num),
+      e('text', { className: 'ud-map__t-cap', x: 300, y: 352, textAnchor: 'middle' }, stages[0].name.toUpperCase())),
+    e('circle', { className: 'ud-map__dot', cx: MAP_POINTS[0][0], cy: MAP_POINTS[0][1], r: 8 }));
+  }
+
+  // One movement of the map: its numbered label, the H3, the prose (a
+  // paragraph set wholly in bold is its sage takeaway) and its question.
+  function MapStage({ s, i, ctx }) {
+    const blocks = s.sub.blocks;
+    return e('article', { className: 'ud-stage' + (i === 0 ? ' is-active' : ''), id: s.id, 'aria-labelledby': s.id + '-h',
+      'data-num': s.num, 'data-name': s.name },
+    e('p', { className: 'eyebrow' }, s.sub.eyebrow),
+    e('h3', { className: 'ud-stage__h', id: s.id + '-h' }, s.sub.h3),
+    e('div', { className: 'ud-stage__body' }, blocks.filter((b) => b.t !== 'question').map((b, j) => {
+      if (b.t === 'list') return e('ul', { key: j, className: 'ud-stage__list' }, b.items.map((it) => e('li', { key: it }, rich(it, ctx))));
+      const take = b.t === 'p' && b.text.match(/^\*\*([^*]+)\*\*$/);
+      return take ? e('p', { key: j, className: 'ud-take' }, take[1]) : e('p', { key: j, className: 'p' }, rich(b.text, ctx));
+    })),
+    blocks.filter((b) => b.t === 'question').map((b, j) => e('p', { key: 'q' + j, className: 'ud-q' }, b.text)));
+  }
+
+  function UndisguisedPage({ p }) {
+    const ctx = { id: p.id };
+    const h = p.hero;
+    const [strip, roles, patterns, map, strength, choices, epilogue, close] = p.sections;
+    const ps = (blocks) => blocks.filter((b) => b.t === 'p');
+    // A link to this page's own map is a plain in-page anchor here.
+    const local = (href) => (href.indexOf(p.url + '#') === 0 ? href.slice(p.url.length) : href);
+    const ctasOf = (blocks) => [].concat.apply([], blocks.filter((b) => b.t === 'ctas').map((b) => b.items))
+      .filter((it) => it.href).map((it) => Object.assign({}, it, { href: local(it.href) }));
+    // An in-page action is the primary button, its arrow pointing the way.
+    const action = (it, arrow) => (it.href.charAt(0) === '#'
+      ? e('a', { key: it.label, className: 'btn', href: it.href }, it.label, ' ', e('span', { 'aria-hidden': 'true' }, arrow))
+      : e(TLink, { key: it.label, item: it }));
+    const stages = map.blocks.filter((b) => b.t === 'sub').map((sub) => {
+      const [num, name] = sub.eyebrow.split(/\s+—\s+/);
+      return { sub, num, name, id: slugOf(name) };
+    });
+    const out = [];
+
+    // Hero: the homepage's composition, with the map emblem in the figure.
+    out.push(e('section', { key: 'hero', className: 'home-hero ud-hero', 'aria-labelledby': 'page-title' },
+      e('div', { className: 'home-hero__lines', 'aria-hidden': 'true' },
+        e('span', { className: 'home-hero__axis' }),
+        Array.from({ length: 10 }, (_, i) => e('span', { key: i, className: 'home-hero__field', style: { top: (22 + i * 7) + '%' } }))),
+      e('div', { className: 'wrap home-hero__in' },
+        e('div', { className: 'home-hero__text' },
+          e('p', { className: 'eyebrow ud-in' }, h.eyebrow),
+          e('h1', { className: 'ud-h1 ud-in', id: 'page-title' }, h.h1.replace(/\.$/, ''), /\.$/.test(h.h1) ? e('span', null, '.') : null),
+          h.sub ? e('p', { className: 'sub ud-in' }, h.sub) : null,
+          ps(h.blocks).map((b, i) => e('p', { key: i, className: 'lead ud-in' }, rich(b.text, ctx))),
+          e('div', { className: 'actions ud-in' }, ctasOf(h.blocks).map((it) => action(it, '↓')))),
+        e('figure', { className: 'home-fig ud-fig' },
+          e('span', { className: 'home-fig__disc', 'aria-hidden': 'true' }),
+          e('span', { className: 'home-fig__cut', 'aria-hidden': 'true' }),
+          e('span', { className: 'home-fig__img' }, e(MapEmblem, { title: map.h2, labels: true }))))));
+
+    // The four movements: a strip of anchors into the map.
+    const moves = strip.blocks.find((b) => b.t === 'pairs');
+    out.push(e('nav', { key: 'strip', className: 'ud-strip', 'aria-label': strip.h2 },
+      e('div', { className: 'wrap ud-strip__in' },
+        e('ul', { className: 'ud-strip__list' }, moves.items.map((it) => {
+          const [num, name] = it.a.split(' · ');
+          return e('li', { key: it.a }, e('a', { href: '#' + slugOf(name) },
+            e('span', { className: 'ud-strip__a' }, e('span', { className: 'ud-num' }, num), ' · ', name), ' ',
+            e('span', { className: 'ud-strip__b' }, it.b)));
+        })))));
+
+    // The roles we learn: three ways of getting what we need, then what they
+    // become — the lead line, the three roles, the closing line.
+    const learned = roles.blocks.find((b) => b.t === 'pairs');
+    const after = roles.blocks.filter((b) => b.t !== 'pairs');
+    const lastP = after.map((b) => b.t).lastIndexOf('p');
+    out.push(e('section', { key: 'roles', className: 'sec', id: 'roles', 'aria-labelledby': 'roles-h' },
+      e('div', { className: 'wrap' },
+        e('div', { className: 'read-l' }, e('h2', { className: 'h2 ud-h2--lead', id: 'roles-h', 'data-reveal': '' }, roles.h2)),
+        e('div', { className: 'ud-roles' }, learned.items.map((it) => e('div', { key: it.a, className: 'col', 'data-reveal': '' },
+          e('h3', { className: 'h3' }, it.a), e('p', { className: 'p' }, rich(it.b, ctx))))),
+        e('div', { className: 'read-l ud-roles__after' }, after.map((b, i) => (b.t === 'lines'
+          ? e('ul', { key: i, className: 'ud-ones', 'data-reveal': '' }, b.lines.map((l) => e('li', { key: l }, l)))
+          : e('p', { key: i, className: 'p ' + (i === lastP ? 'p--strong' : 'p--emph'), 'data-reveal': '' }, rich(b.text, ctx))))))));
+
+    // Four familiar patterns: where it shows up, as the site's numbered rows.
+    const pats = patterns.blocks.find((b) => b.t === 'pairs');
+    out.push(e('section', { key: 'patterns', className: 'sec sec--step', id: 'patterns', 'aria-labelledby': 'patterns-h' },
+      e('div', { className: 'wrap' },
+        patterns.eyebrow ? e('p', { className: 'eyebrow' }, patterns.eyebrow) : null,
+        e('h2', { className: 'h2', id: 'patterns-h' }, patterns.h2),
+        e('div', { className: 'rows' }, pats.items.map((it, i) => e('div', { key: it.a, className: 'row', 'data-reveal': '' },
+          e('span', { className: 'row__num', 'aria-hidden': 'true' }, String(i + 1).padStart(2, '0')),
+          e('h3', { className: 'row__title' }, it.a),
+          e('div', { className: 'row__body' }, e('p', { className: 'p' }, rich(it.b, ctx)))))),
+        ps(patterns.blocks).map((b, i) => e('p', { key: i, className: 'p ud-note', 'data-reveal': '' }, rich(b.text, ctx))))));
+
+    // The Undisguised Map: the figure, held in place on wide screens while the
+    // four movements are read beside it.
+    const seq = ps(map.blocks)[0];
+    out.push(e('section', { key: 'map', className: 'band ud-map on-dark', id: 'map', 'aria-labelledby': 'map-h' },
+      e('div', { className: 'wrap ud-map__in' },
+        map.eyebrow ? e('p', { className: 'eyebrow' }, map.eyebrow) : null,
+        e('h2', { className: 'ud-map__h', id: 'map-h' }, map.h2),
+        seq ? e('p', { className: 'ud-map__seq' }, seq.text.split(/\s*→\s*/).map((t, i) => e(React.Fragment, { key: i },
+          i ? e('span', { 'aria-hidden': 'true' }, '→') : null, i ? ' ' : null, e('span', null, t), ' '))) : null,
+        e('div', { className: 'ud-map__grid' },
+          e('div', { className: 'ud-map__left' },
+            e('div', { className: 'ud-map__sticky' },
+              e(MapFigure, { name: map.h2, stages }),
+              e('div', { className: 'ud-map__legend', 'aria-hidden': 'true' },
+                e('span', null, e('span', { className: 'ud-map__key-dot' }), 'You are here'),
+                e('span', null, e('span', { className: 'ud-map__key-line' }), 'The way so far')))),
+          e('div', { className: 'ud-map__right' },
+            e('div', { className: 'ud-map__strip', 'aria-hidden': 'true' },
+              stages.map((s, i) => e('span', { key: s.id, className: i === 0 ? 'is-active' : undefined }, s.num + ' ' + MAP_SHORT[i]))),
+            stages.map((s, i) => e(MapStage, { key: s.id, s, i, ctx })))))));
+
+    // On strength: what happens when you try to behave differently.
+    const sps = ps(strength.blocks);
+    const rows = strength.blocks.find((b) => b.t === 'lines');
+    out.push(e('section', { key: 'strength', className: 'sec sec--step', id: 'strength', 'aria-labelledby': 'strength-h' },
+      e('div', { className: 'wrap' },
+        e('div', { className: 'read-l' },
+          e('h2', { className: 'h2', id: 'strength-h', 'data-reveal': '' }, strength.h2),
+          sps[0] ? e('p', { className: 'p p--emph', 'data-reveal': '' }, rich(sps[0].text, ctx)) : null),
+        rows ? e('ul', { className: 'ud-without' }, rows.lines.map((l) => {
+          const k = l.indexOf(' without ');
+          return e('li', { key: l, 'data-reveal': '' }, k < 0 ? l : [
+            e('span', { key: 'a', className: 'ud-without__a' }, l.slice(0, k)), ' ',
+            e('span', { key: 'w', className: 'ud-without__w' }, 'without'), ' ',
+            e('span', { key: 'b', className: 'ud-without__b' }, l.slice(k + 9))]);
+        })) : null,
+        sps.slice(1).map((b, i) => e('p', { key: i, className: 'p ud-note', 'data-reveal': '' }, rich(b.text, ctx))))));
+
+    // The aphorism, on sage: the statement, the widening lines, the reply.
+    const reply = ps(choices.blocks)[0];
+    const cut = reply ? reply.text.lastIndexOf(' ') : -1;
+    out.push(e('section', { key: 'choices', className: 'band ud-choices', 'aria-labelledby': 'choices-h' },
+      e('div', { className: 'wrap ud-choices__in' },
+        e('h2', { className: 'ud-choices__a', id: 'choices-h', 'data-reveal': '' }, choices.h2),
+        e('svg', { className: 'ud-fan', viewBox: '0 0 1000 200', 'aria-hidden': 'true', focusable: 'false' },
+          FAN_BOWS.map((q, i) => e('path', { key: i, pathLength: 1, className: q === null ? 'ud-fan__main' : undefined,
+            d: q === null ? 'M40 100L960 100' : 'M40 100Q500 ' + q + ' 960 100' })),
+          e('circle', { className: 'ud-fan__from', cx: 40, cy: 100, r: 9 }),
+          e('circle', { className: 'ud-fan__to', cx: 960, cy: 100, r: 6 })),
+        reply ? e('p', { className: 'ud-choices__b', 'data-reveal': '' }, reply.text.slice(0, cut), ' ', e('span', null, reply.text.slice(cut + 1))) : null)));
+
+    // Epilogue.
+    const eps = ps(epilogue.blocks);
+    out.push(e('section', { key: 'epilogue', className: 'sec sec--step', id: 'epilogue', 'aria-labelledby': 'epilogue-h' },
+      e('div', { className: 'wrap' }, e('div', { className: 'read-l' },
+        e('h2', { className: 'h2', id: 'epilogue-h', 'data-reveal': '' }, epilogue.h2),
+        e('div', { className: 'flow' }, eps.map((b, i) => e('p', { key: i, className: 'p' + (i === eps.length - 1 ? ' p--strong' : ''), 'data-reveal': '' }, rich(b.text, ctx))))))));
+
+    // The close: back to the map, and the newsletter. No booking action here:
+    // the manifesto ends on its own terms (the header keeps the way to book).
+    out.push(e('section', { key: 'close', className: 'band close on-dark ud-close', 'aria-labelledby': 'close-h' },
+      e('div', { className: 'read close__in' },
+        e('svg', { className: 'ud-close__mark', viewBox: '0 0 48 48', 'aria-hidden': 'true', focusable: 'false' },
+          e('circle', { cx: 24, cy: 24, r: 17, fill: 'none', stroke: 'var(--sage)', strokeWidth: 2 }),
+          e('circle', { cx: 12, cy: 12, r: 4.5, fill: 'var(--bone)', stroke: 'var(--forest)', strokeWidth: 2 })),
+        e('h2', { className: 'close__label', id: 'close-h' }, close.h2),
+        ps(close.blocks).map((b, i) => e('p', { key: i, className: 'close__text' }, plain(b.text))),
+        e('div', { className: 'close__actions' }, ctasOf(close.blocks).map((it) => action(it, '↑'))))));
+    return out;
+  }
+
   // ── Router ─────────────────────────────────────────────────────────────────
   const PAGES = {
     home: HomePage,
@@ -1246,6 +1594,7 @@
     'free-tools': ToolsPage,
     blog: WritingPage,
     contact: ContactPage,
+    undisguised: UndisguisedPage,
   };
   const FAMILY = { problem: 'fam-problem', audience: 'fam-audience', service: 'fam-service', resource: 'fam-resource' };
 
@@ -1253,9 +1602,14 @@
     const p = COPY[id];
     if (!p) return null;
     const Page = PAGES[id] || GenericPage;
+    // Undisguised styles only where they are drawn: the emblem on the
+    // homepage and the manifesto, the ribbon and the read-first feature on
+    // the homepage, the manifesto's own on its page.
+    const css = CSS + (id === 'home' || id === 'undisguised' ? UD_EMBLEM_CSS : '') +
+      (id === 'home' ? UD_HOME_CSS : '') + (id === 'undisguised' ? UD_PAGE_CSS : '');
     return e(React.Fragment, null,
       e(window.ChromeStyles),
-      e('style', { dangerouslySetInnerHTML: { __html: CSS } }),
+      e('style', { dangerouslySetInnerHTML: { __html: css } }),
       e(window.SiteHeader),
       e('main', { id: 'main', tabIndex: -1, className: 'pg ' + (FAMILY[p.type] || 'fam-' + p.type) + ' pg--' + id },
         e(Page, { p })),
@@ -1295,6 +1649,22 @@
 .inl:hover{color:var(--green-pressed)}
 .meta{margin:0;font-size:15px;line-height:1.5;color:var(--meta)}
 .related{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:0 10px;font-size:15px;color:var(--meta)}
+
+/* Undisguised, the quiet link (UdLink): under a section's links, one step
+   below them — 15px, the lead-in muted, the name the underlined word. */
+.ud-aside{margin:0;display:flex;flex-wrap:wrap;gap:0 24px}
+.flow>.links+.ud-aside,.flow>.actions+.ud-aside{margin-top:0}
+.ud-link{--ud-ring:var(--green);display:inline-flex;flex-wrap:wrap;align-items:center;column-gap:.42em;min-height:44px;font-size:15px;font-weight:500;line-height:1.4;color:var(--ink-2);transition:color 180ms}
+.ud-link .ud-mark{margin-right:.28em}
+.ud-link__name{font-weight:650;color:var(--green);border-bottom:1.5px solid currentColor;padding-bottom:1px;transition:color 180ms}
+.ud-link__arrow{color:var(--green);transition:transform 180ms,color 180ms}
+.ud-link:hover{color:var(--heading)}
+.ud-link:hover .ud-link__name,.ud-link:hover .ud-link__arrow{color:var(--green-pressed)}
+.ud-link:hover .ud-link__arrow{transform:translateX(3px)}
+.on-dark .ud-link{--ud-ring:var(--sage);--ud-dot:var(--bone);--ud-cut:var(--forest);color:var(--on-forest)}
+.on-dark .ud-link__name,.on-dark .ud-link__arrow{color:var(--bone)}
+.on-dark .ud-link:hover{color:var(--bone)}
+.on-dark .ud-link:hover .ud-link__name,.on-dark .ud-link:hover .ud-link__arrow{color:var(--sage)}
 
 /* Flow: paragraph → paragraph 18px, content → link 22px */
 .flow>*{margin-top:0;margin-bottom:0}
@@ -1661,6 +2031,188 @@
 /* The close: the site's dark band, the article's CTA in it */
 .art-cta .art-cta__h{margin:0 auto}
 .art-cta .art-cta__p{margin:18px auto 0}
+`;
+
+  // The Undisguised map emblem (MapEmblem): the manifesto's hero figure and
+  // the homepage ribbon's mark. Strokes keep their width at any size.
+  const UD_EMBLEM_CSS = `
+.ud-emblem{display:block;width:100%;height:100%;overflow:visible}
+.ud-emblem *{vector-effect:non-scaling-stroke}
+.ud-emblem__ticks{fill:none;stroke:var(--bone);stroke-opacity:.3;stroke-width:1}
+.ud-emblem__ring{fill:none;stroke:var(--bone);stroke-opacity:.4;stroke-width:1}
+.ud-emblem__inner{fill:none;stroke:var(--bone);stroke-opacity:.14;stroke-width:1;stroke-dasharray:2 4}
+/* The arc scales with the figure (its draw-in is measured along the path):
+   about 2.5px wide on the manifesto's hero, 2px on the ribbon. */
+.ud-emblem .ud-emblem__arc{vector-effect:none;fill:none;stroke:var(--sage);stroke-width:1.2;stroke-linecap:round;stroke-dasharray:1}
+.ud-hero .ud-emblem__arc{stroke-width:.55}
+.ud-ribbon .ud-emblem__arc{stroke-width:2}
+.ud-emblem__node{fill:var(--bone)}
+.ud-emblem__node--now{fill:var(--sage)}
+.ud-emblem__node--next{fill:var(--forest);stroke:var(--bone);stroke-opacity:.7;stroke-width:1}
+.ud-emblem__here{fill:none;stroke:var(--sage);stroke-width:1}
+.ud-emblem__label{font-family:var(--font-body);font-weight:700;font-size:3.6px;letter-spacing:.08em;fill:var(--sage)}
+`;
+
+  // Homepage only: the Undisguised ribbon after "What brings people here" and
+  // the feature that closes "If you want to read first".
+  const UD_HOME_CSS = `
+/* Ribbon: shallow, on the deeper forest, the site's green rule above it and
+   a hairline where the dark photo split below begins. Emblem · label and
+   statement · link; the link wraps under the statement on narrow screens. */
+.ud-ribbon{background:var(--forest-deep,#101A16);color:var(--bone);border-top:2px solid var(--green);border-bottom:1px solid var(--rule-forest)}
+.ud-ribbon__in{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px clamp(24px,3.5vw,48px);padding-block:clamp(36px,4.4vw,56px)}
+.ud-ribbon__mark{display:block;width:clamp(72px,7vw,96px);aspect-ratio:1}
+.ud-ribbon .ud-emblem__node--next{fill:var(--forest-deep,#101A16)}
+.ud-ribbon__label{margin:0 0 10px;font-family:var(--font-body);font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--sage)}
+.ud-ribbon__stmt{margin:0;max-width:26em;font-family:var(--font-heading);font-size:clamp(22px,calc(18px + 1vw),30px);font-weight:650;line-height:1.2;letter-spacing:-.02em;color:var(--bone);text-wrap:balance}
+.ud-ribbon__link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:16px;font-weight:600;line-height:1.3;color:var(--bone);white-space:nowrap;transition:gap 180ms,color 180ms}
+.ud-ribbon__link>span:first-child{border-bottom:1.5px solid var(--sage);padding-bottom:2px}
+.ud-ribbon__link:hover{color:var(--sage);gap:12px}
+@media (max-width:899px){.ud-ribbon__in{grid-template-columns:auto minmax(0,1fr)}.ud-ribbon__mark{width:64px;align-self:start}.ud-ribbon__link{grid-column:2;justify-self:start}}
+@media (max-width:599px){.ud-ribbon__in{grid-template-columns:minmax(0,1fr);row-gap:14px}.ud-ribbon__mark{display:none}.ud-ribbon__link{grid-column:auto;white-space:normal}}
+
+/* Read first: Undisguised under one heavier rule, as the section's own close:
+   label, sentence and link; then the four movements as stations on a line
+   (the first filled: where the map begins), each a link to its part. */
+.ud-feature{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:end;gap:30px clamp(40px,5vw,72px);margin-top:clamp(48px,5vw,72px);padding-top:28px;border-top:2px solid var(--heading)}
+.ud-feature__label{--ud-ring:var(--green-pressed);--ud-cut:var(--sage-bg);display:flex;align-items:center;gap:10px;margin:0 0 14px;font-family:var(--font-body);font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green-pressed)}
+.ud-feature__stmt{margin:0;max-width:24em;font-family:var(--font-heading);font-size:clamp(21px,calc(19px + .5vw),25px);font-weight:650;line-height:1.25;letter-spacing:-.015em;color:var(--heading);text-wrap:balance}
+.ud-feature .links{margin-top:12px}
+.ud-preview{list-style:none;margin:0 0 6px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.ud-preview a{position:relative;display:block;min-height:44px;padding:22px 14px 6px 0;border-top:1.5px solid rgba(20,32,28,.34);font-size:15.5px;font-weight:650;line-height:1.3;color:var(--heading);transition:color 180ms,border-color 180ms}
+.ud-preview__node{position:absolute;left:0;top:-7px;width:12px;height:12px;border-radius:50%;background:var(--sage-bg);box-shadow:inset 0 0 0 1.5px var(--heading);transition:background 180ms,box-shadow 180ms}
+.ud-preview li:first-child .ud-preview__node{background:var(--heading)}
+.ud-preview .ud-num{color:var(--green-pressed)}
+.ud-preview a:hover{color:var(--green-pressed);border-top-color:var(--green-pressed)}
+.ud-preview a:hover .ud-preview__node{background:var(--green-pressed);box-shadow:inset 0 0 0 1.5px var(--green-pressed)}
+.ud-preview a:focus-visible{outline-offset:-2px}
+@media (max-width:1099px){.ud-feature{grid-template-columns:minmax(0,1fr);align-items:start}}
+@media (max-width:599px){.ud-preview{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:24px}}
+`;
+
+  // /undisguised/ only: the manifesto. Values from the approved design.
+  const UD_PAGE_CSS = `
+/* Hero: the homepage's composition (.home-hero, .home-fig) */
+.ud-h1{margin:0;font-family:var(--font-display);font-weight:400;font-size:clamp(44px,calc(20px + 6.2vw),108px);line-height:.96;letter-spacing:-.045em;color:var(--heading)}
+.ud-h1 span{color:var(--green)}
+.ud-hero .sub{max-width:22em}
+.ud-hero .lead{max-width:32em}
+.ud-hero .home-fig__img .ud-emblem{position:absolute;inset:0}
+@media (prefers-reduced-motion:no-preference){
+  .ud-in{animation:ud-rise .9s cubic-bezier(.22,1,.36,1) backwards}
+  .ud-h1.ud-in{animation-name:ud-lift}
+  .home-hero__text>.ud-in:nth-child(1){animation-delay:.06s}
+  .home-hero__text>.ud-in:nth-child(2){animation-delay:.17s}
+  .home-hero__text>.ud-in:nth-child(3){animation-delay:.28s}
+  .home-hero__text>.ud-in:nth-child(4){animation-delay:.39s}
+  .home-hero__text>.ud-in:nth-child(5){animation-delay:.5s}
+  .ud-hero .ud-emblem__arc{animation:ud-arc 1.8s cubic-bezier(.65,0,.35,1) .45s backwards}
+  .ud-hero .ud-emblem__here{transform-box:fill-box;transform-origin:center;animation:ud-pop .6s cubic-bezier(.22,1,.36,1) 2.15s backwards}
+}
+@keyframes ud-rise{from{opacity:0;transform:translateY(18px)}}
+@keyframes ud-lift{from{transform:translateY(18px)}}
+@keyframes ud-arc{from{stroke-dashoffset:1}}
+@keyframes ud-pop{from{opacity:0;transform:scale(.4)}}
+
+/* The four movements: a ruled strip of anchors */
+.ud-strip{border-block:1px solid rgba(23,25,25,.16)}
+.ud-strip__in{overflow:hidden}
+.ud-strip__list{list-style:none;margin:-1px 0 0 -1px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.ud-strip__list a{display:block;height:100%;padding:22px 24px;border-left:1px solid rgba(23,25,25,.16);border-top:1px solid rgba(23,25,25,.16);transition:background 180ms}
+.ud-strip__list a:hover{background:rgba(4,120,87,.05)}
+.ud-strip__list a:focus-visible{outline-offset:-3px}
+.ud-strip__a{display:block;font-size:16.5px;font-weight:650;line-height:1.3;color:var(--heading)}
+.ud-strip__b{display:block;margin-top:4px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
+.ud-num{color:var(--green)}
+@media (max-width:899px){.ud-strip__list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:479px){.ud-strip__list a{padding:18px 16px}.ud-strip__a{font-size:15.5px}.ud-strip__b{font-size:14px}}
+
+/* The roles we learn */
+.ud-h2--lead{font-size:clamp(30px,calc(24px + 1.6vw),46px);line-height:1.06}
+.ud-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px clamp(32px,4vw,56px);margin-top:clamp(28px,3vw,40px)}
+.ud-roles__after{margin-top:clamp(56px,5vw,72px);display:flex;flex-direction:column;gap:26px}
+.ud-ones{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--green);display:flex;flex-direction:column;gap:10px}
+.ud-ones li{font-family:var(--font-heading);font-size:clamp(24px,calc(20px + 1vw),32px);font-weight:800;line-height:1.15;letter-spacing:-.025em;color:var(--heading)}
+.ud-note{margin-top:32px;max-width:36em}
+@media (max-width:759px){.ud-roles{grid-template-columns:minmax(0,1fr)}}
+
+/* The Undisguised Map */
+.ud-map{background:var(--forest);color:var(--bone)}
+.ud-map__in{padding-block:var(--sec)}
+.ud-map .eyebrow{color:var(--sage)}
+.ud-map__h{margin:0;font-family:var(--font-display);font-weight:400;font-size:clamp(36px,calc(20px + 3.6vw),68px);line-height:1;letter-spacing:-.04em;color:var(--bone);text-wrap:balance}
+.ud-map__seq{margin:22px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;font-family:var(--font-heading);font-size:clamp(19px,calc(17px + .5vw),24px);font-weight:650;line-height:1.3;letter-spacing:-.015em;color:var(--on-forest)}
+.ud-map__seq>[aria-hidden]{color:var(--sage)}
+.ud-map__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px clamp(40px,6vw,96px);margin-top:clamp(40px,5vw,64px)}
+.ud-map__left,.ud-map__right{min-width:0}
+.ud-map__sticky{position:sticky;top:max(24px,calc(50vh - 300px))}
+.ud-map__svg{display:block;width:100%;max-width:560px;height:auto;margin-inline:auto;overflow:visible}
+.ud-map__corners{fill:none;stroke:var(--bone);stroke-opacity:.32;stroke-width:1}
+.ud-map__inner{fill:none;stroke:var(--bone);stroke-opacity:.14;stroke-width:1;stroke-dasharray:2 7}
+.ud-map__ticks{fill:none;stroke:var(--bone);stroke-opacity:.3;stroke-width:1}
+.ud-map__ring{fill:none;stroke:var(--bone);stroke-opacity:.3;stroke-width:1}
+.ud-map__arc{fill:none;stroke:var(--sage);stroke-width:3;stroke-linecap:round}
+.ud-map__spoke{stroke:var(--bone);stroke-opacity:.45;stroke-width:1}
+.ud-map__node{stroke:var(--bone);stroke-opacity:.75;stroke-width:1.5;transition:fill .4s ease}
+.ud-map__label{transition:opacity .5s ease}
+.ud-map__t-num{font-family:var(--font-body);font-weight:700;font-size:14px;letter-spacing:.08em;fill:var(--sage)}
+.ud-map__t-name{font-family:var(--font-heading);font-weight:700;font-size:27px;letter-spacing:-.018em;fill:var(--bone)}
+.ud-map__t-big{font-family:var(--font-display);font-size:68px;letter-spacing:-.04em;fill:var(--bone)}
+.ud-map__t-cap{font-family:var(--font-body);font-weight:700;font-size:12.5px;letter-spacing:.12em;fill:var(--sage)}
+.ud-map__dot{fill:var(--bone);stroke:var(--forest);stroke-width:4}
+.ud-map__legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 28px;margin-top:20px;font-size:12px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--on-forest-2)}
+.ud-map__legend>span{display:inline-flex;align-items:center;gap:10px}
+.ud-map__key-dot{width:12px;height:12px;border-radius:50%;background:var(--bone);box-shadow:0 0 0 3px var(--forest),0 0 0 4px rgba(243,240,232,.4)}
+.ud-map__key-line{width:22px;height:3px;border-radius:2px;background:var(--sage)}
+.ud-map__strip{display:none}
+.ud-stage{display:flex;flex-direction:column;justify-content:center;padding:48px 0;scroll-margin-top:24px}
+.ud-stage__h{margin:0 0 24px;font-family:var(--font-heading);font-size:clamp(28px,calc(22px + 1.4vw),42px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--bone);text-wrap:balance}
+.ud-stage__body{display:flex;flex-direction:column;gap:18px;max-width:36em}
+.ud-stage__body .p{color:var(--on-forest)}
+.ud-stage__list{list-style:none;margin:4px 0;padding:0;border-bottom:1px solid var(--rule-forest)}
+.ud-stage__list li{padding:14px 0;border-top:1px solid var(--rule-forest);font-size:clamp(17px,calc(16px + .14vw),18px);font-weight:500;line-height:1.5;color:var(--bone)}
+.ud-take{margin:0;font-size:clamp(19px,calc(18.4px + .14vw),20.5px);font-weight:550;line-height:1.45;color:var(--sage)}
+.ud-q{margin:32px 0 0;max-width:26em;padding-left:18px;border-left:2px solid var(--sage);font-family:var(--font-heading);font-size:clamp(21px,calc(19px + .6vw),27px);font-weight:700;line-height:1.28;letter-spacing:-.018em;color:var(--bone);text-wrap:balance}
+/* Wide: the figure stays while the movements pass; once the script runs, the
+   ones not being read recede. Narrow: the figure leads, a pinned strip shows
+   which movement is being read. */
+@media (min-width:980px){
+  .ud-stage{min-height:84vh}
+  .ud-map.is-live .ud-stage{opacity:.34;transition:opacity .6s ease}
+  .ud-map.is-live .ud-stage.is-active{opacity:1}
+}
+@media (max-width:979px){
+  .ud-map__grid{grid-template-columns:minmax(0,1fr)}
+  .ud-map__sticky{position:static}
+  .ud-map__svg{max-width:480px}
+  .ud-map__strip{position:sticky;top:0;z-index:5;display:flex;background:var(--forest);border-bottom:1px solid var(--rule-forest)}
+  .ud-map__strip span{flex:1 1 0;padding:16px 0 12px;text-align:center;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,240,232,.55);border-bottom:2px solid transparent;transition:color .3s,border-color .3s}
+  .ud-map__strip span.is-active{color:var(--bone);border-bottom-color:var(--sage)}
+}
+
+/* On strength: can you … without … */
+.ud-without{list-style:none;margin:clamp(32px,4vw,48px) 0 0;padding:0;border-bottom:1px solid var(--rule)}
+.ud-without li{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 28px;padding:28px 0;border-top:1px solid var(--rule)}
+.ud-without__a{flex:1 1 260px;min-width:0;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + 1vw),34px);font-weight:800;line-height:1.15;letter-spacing:-.025em;color:var(--heading)}
+.ud-without__w{flex:0 0 96px;font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.ud-without__b{flex:2 1 320px;min-width:0;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + 1vw),34px);font-weight:600;line-height:1.15;letter-spacing:-.025em;color:var(--ink-2);text-wrap:balance}
+
+/* The aphorism, on sage */
+.ud-choices{background:var(--sage-bg);color:var(--heading)}
+.ud-choices__in{padding-block:clamp(64px,7vw,104px)}
+.ud-choices__a,.ud-choices__b{margin:0;font-family:var(--font-heading);font-size:clamp(30px,calc(18px + 3vw),60px);font-weight:800;line-height:1.04;letter-spacing:-.035em;color:var(--heading);text-wrap:balance}
+.ud-choices__a{max-width:17ch}
+.ud-choices__b{margin-left:auto;max-width:19ch}
+.ud-choices__b span{color:var(--green-pressed)}
+.ud-fan{display:block;width:100%;height:auto;margin:clamp(24px,4vw,48px) 0;overflow:visible}
+.ud-fan path{fill:none;stroke:var(--green);stroke-width:1;stroke-opacity:.55}
+.ud-fan .ud-fan__main{stroke-width:2.5;stroke-opacity:1}
+.ud-fan__from{fill:var(--forest)}
+.ud-fan__to{fill:var(--sage-bg);stroke:var(--green);stroke-width:2}
+
+/* Close */
+.ud-close__mark{display:block;width:48px;height:48px;margin:0 auto 22px}
+.ud-close .close__text{max-width:28ch}
 `;
 
   window.renderSitePage = renderSitePage;
