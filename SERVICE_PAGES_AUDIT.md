@@ -2,6 +2,11 @@
 
 25 October 2026. Pages: /individual-psychotherapy/, /couples-therapy/, /professional-coaching/, with /work-with-me/ as their hub. All measurements are taken from the build that is live on `main` (`51bbd37`).
 
+**Status, 25 October 2026:** P2, P3 and P4 are live (`b3974a6`), along with the coaching title and description from P1.
+- On coaching, the credentials joined the existing "Professional context" section rather than a new "My background" section, because that section already gives the 18 years, the consultancy and the 100 companies. The FAQ answer "How is this different from psychotherapy?" also drops its last sentence, which repeated the "When psychotherapy fits better" section.
+- Page length now: individual psychotherapy 698 words, couples therapy 628, professional coaching 575.
+- Still open: the individual-psychotherapy and couples titles and descriptions, the Work With Me description, and P5.
+
 ## Summary
 
 The technical side is in very good shape:
