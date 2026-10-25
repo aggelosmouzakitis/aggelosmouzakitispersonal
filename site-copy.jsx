@@ -200,11 +200,11 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "Relationship problems", "href": "/relationship-problems-men/"}, {"label": "Couples therapy", "href": "/couples-therapy/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "pairs", "items": [{"a": "Format", "b": "Online"}, {"a": "Sessions", "b": "50–60 minutes"}, {"a": "Frequency", "b": "Usually weekly at first"}]},
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
           {"t": "p", "text": "I normally work **weekly for at least the first few months**. We can review frequency later."},
           {"t": "p", "text": "You can stop therapy whenever you choose. I ask people to start with a realistic level of commitment because psychotherapy is difficult to develop through occasional sessions booked only when something has blown up."},
           {"t": "p", "text": "Before ongoing work begins, I confirm that I can work with you based on your location and circumstances."},
-          {"t": "p", "text": "Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour."}
+          {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Do I need a diagnosis?", "blocks": [{"t": "p", "text": "No. A diagnosis is not a prerequisite for psychotherapy."}]},
@@ -255,9 +255,10 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "p", "text": "Couples sessions are online. **Weekly sessions usually last 50–60 minutes. Biweekly sessions can be 90 minutes.** We agree the format before ongoing work begins."},
-          {"t": "p", "text": "I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."},
-          {"t": "p", "text": "Weekly sessions of 50–60 minutes are €100 or £90 each. The fee for the longer couples session is agreed separately before booking. The first conversation is a free introductory call, usually between 30 minutes and an hour."}
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes, or up to 90 minutes"}, {"a": "Frequency", "b": "Weekly, or every two weeks for the longer session"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per standard session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "p", "text": "We agree the format before ongoing work begins. I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."},
+          {"t": "p", "text": "The fee for the longer couples session is agreed separately before booking."},
+          {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Do we need to be close to separation?", "blocks": [{"t": "p", "text": "No. Couples come with recurring conflict, distance, trust problems and other relationship difficulties well before separation."}]},
@@ -307,8 +308,9 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}, {"label": "Career change & decisions", "href": "/career-transition-therapy/"}, {"label": "Therapy vs coaching", "href": "/therapy-vs-coaching/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "p", "text": "Coaching is online. Format and frequency depend on the decision and are agreed before we begin."},
-          {"t": "p", "text": "Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour."}
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Length agreed before starting"}, {"a": "Frequency", "b": "Depends on the decision"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "p", "text": "Format and frequency depend on the decision and are agreed before we begin."},
+          {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "Tell me the professional decision you are trying to make."},
@@ -416,13 +418,17 @@ window.SITE_COPY = {
           {"t": "p", "text": "Before psychotherapy, I spent most of my career in product and growth. The environment is familiar enough that sessions do not need to begin with a long explanation of how it works."},
           {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
         ]},
+        {"h2": "Practicalities", "id": "practicalities", "blocks": [
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "p", "text": "I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins."},
+          {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
+        ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Is this only for people in technology?", "blocks": [{"t": "p", "text": "No. Technology is the environment I know most deeply, but I also work with men in other demanding professional careers."}]},
           {"t": "sub", "h3": "Do I need to be a founder or executive?", "blocks": [{"t": "p", "text": "No. Senior individual contributors, consultants, managers and business owners can fit this practice as well."}]},
           {"t": "sub", "h3": "What if my main issue is my relationship?", "blocks": [{"t": "p", "text": "Then we work on the relationship. Your profession is context, not the subject you are required to talk about."}]},
           {"t": "sub", "h3": "Do you work with clients in the UK and Europe?", "blocks": [{"t": "p", "text": "Yes, online. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. I confirm that I can work with you based on where you are located before ongoing therapy begins."}]},
-          {"t": "sub", "h3": "Will my employer know?", "blocks": [{"t": "p", "text": "I do not provide reports to your employer. Sessions are confidential within the professional and legal limits that apply, which I explain before ongoing work begins."}]},
-          {"t": "sub", "h3": "How much does it cost, and how does it work?", "blocks": [{"t": "p", "text": "Sessions are €100 or £90 each, online by video, in English or Greek. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."}, {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}]}
+          {"t": "sub", "h3": "Will my employer know?", "blocks": [{"t": "p", "text": "I do not provide reports to your employer. Sessions are confidential within the professional and legal limits that apply, which I explain before ongoing work begins."}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If this sounds like the kind of context you want your therapist to understand, get in touch."},
@@ -477,12 +483,16 @@ window.SITE_COPY = {
           {"t": "p", "text": "If the company is entangled with anxiety, relationships, self-worth, grief or a pattern that keeps repeating despite good advice, Individual Psychotherapy gives us more room."},
           {"t": "ctas", "items": [{"label": "Professional coaching", "href": "/professional-coaching/"}, {"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}, {"label": "Therapy vs coaching", "href": "/therapy-vs-coaching/"}]}
         ]},
+        {"h2": "Practicalities", "id": "practicalities", "blocks": [
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "p", "text": "I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins."},
+          {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
+        ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Will my board, investors or co-founder know I am in therapy?", "blocks": [{"t": "p", "text": "I do not provide reports to your board, investors or co-founder. Sessions are confidential within the professional and legal limits that apply, which I explain before ongoing work begins."}]},
           {"t": "sub", "h3": "Can we talk about the business itself?", "blocks": [{"t": "p", "text": "Yes. Runway, hiring, a difficult board meeting or a dispute with a co-founder are legitimate parts of the situation. Therapy looks at what is happening to you around those decisions, not only at the decisions themselves."}]},
           {"t": "sub", "h3": "My co-founder relationship is the main problem. Can therapy help with that?", "blocks": [{"t": "p", "text": "Individual psychotherapy can focus heavily on a co-founder relationship. That can include trust, resentment, how decisions get made and whether you want to continue working together."}]},
-          {"t": "sub", "h3": "What about my partner?", "blocks": [{"t": "p", "text": "Partners live with the company too. If both of you want the relationship itself to be the focus, Couples Therapy is a separate service."}]},
-          {"t": "sub", "h3": "How much does it cost, and how does it work?", "blocks": [{"t": "p", "text": "Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."}, {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}]}
+          {"t": "sub", "h3": "What about my partner?", "blocks": [{"t": "p", "text": "Partners live with the company too. If both of you want the relationship itself to be the focus, Couples Therapy is a separate service."}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If the company is taking up more of your life than you want it to, book a consultation."},
@@ -538,13 +548,17 @@ window.SITE_COPY = {
           {"t": "p", "text": "My previous career included years inside larger technology organisations and around senior decision-making. Matrixed responsibility, organisational politics and the pressure around senior roles are familiar contexts."},
           {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
         ]},
+        {"h2": "Practicalities", "id": "practicalities", "blocks": [
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "p", "text": "I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins."},
+          {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
+        ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Do I need to be C-suite?", "blocks": [{"t": "p", "text": "No. I also work with directors, senior managers and other experienced professionals whose role carries significant responsibility, visibility or organisational pressure."}]},
           {"t": "sub", "h3": "Is this executive coaching?", "blocks": [{"t": "p", "text": "No. This page is about psychotherapy. Professional Coaching is a separate service for bounded professional decisions."}]},
           {"t": "sub", "h3": "What if the issue has nothing to do with work?", "blocks": [{"t": "p", "text": "That is fine. Seniority explains part of the context I know well. It does not determine what you bring."}]},
           {"t": "sub", "h3": "Can sessions fit around a senior schedule?", "blocks": [{"t": "p", "text": "Sessions are online, so there is no travel time. They are weekly at first, so the work needs a regular slot in the diary."}]},
-          {"t": "sub", "h3": "Do you work with leaders outside tech?", "blocks": [{"t": "p", "text": "Yes. Technology is the environment I know most deeply, but the pressures of senior roles are similar across many sectors."}]},
-          {"t": "sub", "h3": "How much does it cost, and how does it work?", "blocks": [{"t": "p", "text": "Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."}, {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}]}
+          {"t": "sub", "h3": "Do you work with leaders outside tech?", "blocks": [{"t": "p", "text": "Yes. Technology is the environment I know most deeply, but the pressures of senior roles are similar across many sectors."}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "Book a consultation if you want a private place to think about what is going on."},
@@ -583,8 +597,8 @@ window.SITE_COPY = {
           {"t": "p", "text": "Being Greek is context, not the subject you are required to talk about."}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "p", "text": "Sessions are online by video. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there."},
-          {"t": "p", "text": "I work with clients across the UK and Europe, including Greece. Sessions are €100 or £90 each, and the first conversation is a free introductory call, usually between 30 minutes and an hour."},
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "Greek or English"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "p", "text": "I work with clients across the UK and Europe, including Greece. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [

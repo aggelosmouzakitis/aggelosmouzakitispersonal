@@ -49,11 +49,11 @@ BACP-registered psychotherapist · Background in tech, product & growth
 - Professional Coaching
 
 **Who I work with**
+- Therapy for Men
 - Men in Tech & Demanding Careers
 - Software Engineers
 - Founders & Business Owners
 - Executives & Leaders
-- Therapy for Men
 - Greek-speaking Psychotherapy
 
 **Common problems**
@@ -434,13 +434,22 @@ If both partners want the relationship itself to be the focus, that is what Coup
 ## Practicalities
 
 **Format**  
-Online
+Online by video
 
 **Sessions**  
-50–60 minutes
+Usually 50–60 minutes
 
 **Frequency**  
-Usually weekly at first
+Normally weekly at first
+
+**Languages**  
+English or Greek
+
+**Fee**  
+€100 or £90 per session
+
+**Introductory call**  
+Free, usually 30 minutes to an hour
 
 I normally work **weekly for at least the first few months**. We can review frequency later.
 
@@ -448,7 +457,7 @@ You can stop therapy whenever you choose. I ask people to start with a realistic
 
 Before ongoing work begins, I confirm that I can work with you based on your location and circumstances.
 
-Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+**Fees and practicalities →**
 
 ## Common questions
 
@@ -525,11 +534,29 @@ Come individually when you want to understand your own behaviour or your partner
 
 ## Practicalities
 
-Couples sessions are online. **Weekly sessions usually last 50–60 minutes. Biweekly sessions can be 90 minutes.** We agree the format before ongoing work begins.
+**Format**  
+Online by video
 
-I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located.
+**Sessions**  
+Usually 50–60 minutes, or up to 90 minutes
 
-Weekly sessions of 50–60 minutes are €100 or £90 each. The fee for the longer couples session is agreed separately before booking. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+**Frequency**  
+Weekly, or every two weeks for the longer session
+
+**Languages**  
+English or Greek
+
+**Fee**  
+€100 or £90 per standard session
+
+**Introductory call**  
+Free, usually 30 minutes to an hour
+
+We agree the format before ongoing work begins. I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located.
+
+The fee for the longer couples session is agreed separately before booking.
+
+**Fees and practicalities →**
 
 ## Common questions
 
@@ -606,9 +633,27 @@ If that becomes clear, I will say so directly.
 
 ## Practicalities
 
-Coaching is online. Format and frequency depend on the decision and are agreed before we begin.
+**Format**  
+Online by video
 
-Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+**Sessions**  
+Length agreed before starting
+
+**Frequency**  
+Depends on the decision
+
+**Languages**  
+English or Greek
+
+**Fee**  
+€100 or £90 per session
+
+**Introductory call**  
+Free, usually 30 minutes to an hour
+
+Format and frequency depend on the decision and are agreed before we begin.
+
+**Fees and practicalities →**
 
 ## Contact
 
@@ -776,6 +821,30 @@ Before psychotherapy, I spent most of my career in product and growth. The envir
 
 **About me →**
 
+## Practicalities
+
+**Format**  
+Online by video
+
+**Sessions**  
+Usually 50–60 minutes
+
+**Frequency**  
+Normally weekly at first
+
+**Languages**  
+English or Greek
+
+**Fee**  
+€100 or £90 per session
+
+**Introductory call**  
+Free, usually 30 minutes to an hour
+
+I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins.
+
+**Fees and practicalities →**
+
 ## Common questions
 
 ### Is this only for people in technology?
@@ -793,10 +862,6 @@ Yes, online. The UK is the main focus of the practice, and I also work with clie
 ### Will my employer know?
 I do not provide reports to your employer. Sessions are confidential within the professional and legal limits that apply, which I explain before ongoing work begins.
 
-### How much does it cost, and how does it work?
-Sessions are €100 or £90 each, online by video, in English or Greek. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour.
-
-**Fees and practicalities →**
 
 ## Contact
 
@@ -879,6 +944,30 @@ If the company is entangled with anxiety, relationships, self-worth, grief or a 
 **Individual psychotherapy →**  
 **Therapy vs coaching →**
 
+## Practicalities
+
+**Format**  
+Online by video
+
+**Sessions**  
+Usually 50–60 minutes
+
+**Frequency**  
+Normally weekly at first
+
+**Languages**  
+English or Greek
+
+**Fee**  
+€100 or £90 per session
+
+**Introductory call**  
+Free, usually 30 minutes to an hour
+
+I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins.
+
+**Fees and practicalities →**
+
 ## Common questions
 
 ### Will my board, investors or co-founder know I am in therapy?
@@ -893,10 +982,6 @@ Individual psychotherapy can focus heavily on a co-founder relationship. That ca
 ### What about my partner?
 Partners live with the company too. If both of you want the relationship itself to be the focus, Couples Therapy is a separate service.
 
-### How much does it cost, and how does it work?
-Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour.
-
-**Fees and practicalities →**
 
 ## Contact
 
@@ -978,6 +1063,30 @@ My previous career included years inside larger technology organisations and aro
 
 **About me →**
 
+## Practicalities
+
+**Format**  
+Online by video
+
+**Sessions**  
+Usually 50–60 minutes
+
+**Frequency**  
+Normally weekly at first
+
+**Languages**  
+English or Greek
+
+**Fee**  
+€100 or £90 per session
+
+**Introductory call**  
+Free, usually 30 minutes to an hour
+
+I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins.
+
+**Fees and practicalities →**
+
 ## Common questions
 
 ### Do I need to be C-suite?
@@ -995,10 +1104,6 @@ Sessions are online, so there is no travel time. They are weekly at first, so th
 ### Do you work with leaders outside tech?
 Yes. Technology is the environment I know most deeply, but the pressures of senior roles are similar across many sectors.
 
-### How much does it cost, and how does it work?
-Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour.
-
-**Fees and practicalities →**
 
 ## Contact
 
@@ -1052,9 +1157,25 @@ Being Greek is context, not the subject you are required to talk about.
 
 ## Practicalities
 
-Sessions are online by video. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there.
+**Format**  
+Online by video
 
-I work with clients across the UK and Europe, including Greece. Sessions are €100 or £90 each, and the first conversation is a free introductory call, usually between 30 minutes and an hour.
+**Sessions**  
+Usually 50–60 minutes
+
+**Frequency**  
+Normally weekly at first
+
+**Languages**  
+Greek or English
+
+**Fee**  
+€100 or £90 per session
+
+**Introductory call**  
+Free, usually 30 minutes to an hour
+
+I work with clients across the UK and Europe, including Greece. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there.
 
 **Fees and practicalities →**
 

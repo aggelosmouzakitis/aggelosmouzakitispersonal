@@ -99,6 +99,9 @@ window.SITE_NAV = {
     }, {
       "label": "Who I work with",
       "items": [{
+        "label": "Therapy for Men",
+        "href": "/therapy-for-men/"
+      }, {
         "label": "Men in Tech & Demanding Careers",
         "href": "/therapy-for-men-in-tech/"
       }, {
@@ -110,9 +113,6 @@ window.SITE_NAV = {
       }, {
         "label": "Executives & Leaders",
         "href": "/therapy-for-executives/"
-      }, {
-        "label": "Therapy for Men",
-        "href": "/therapy-for-men/"
       }, {
         "label": "Greek-speaking Psychotherapy",
         "href": "/greek-speaking-psychotherapist/"

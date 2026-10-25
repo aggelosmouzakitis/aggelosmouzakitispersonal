@@ -571,13 +571,22 @@ window.SITE_COPY = {
           "t": "pairs",
           "items": [{
             "a": "Format",
-            "b": "Online"
+            "b": "Online by video"
           }, {
             "a": "Sessions",
-            "b": "50–60 minutes"
+            "b": "Usually 50–60 minutes"
           }, {
             "a": "Frequency",
-            "b": "Usually weekly at first"
+            "b": "Normally weekly at first"
+          }, {
+            "a": "Languages",
+            "b": "English or Greek"
+          }, {
+            "a": "Fee",
+            "b": "€100 or £90 per session"
+          }, {
+            "a": "Introductory call",
+            "b": "Free, usually 30 minutes to an hour"
           }]
         }, {
           "t": "p",
@@ -589,8 +598,11 @@ window.SITE_COPY = {
           "t": "p",
           "text": "Before ongoing work begins, I confirm that I can work with you based on your location and circumstances."
         }, {
-          "t": "p",
-          "text": "Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour."
+          "t": "ctas",
+          "items": [{
+            "label": "Fees and practicalities",
+            "href": "/fees-and-practicalities/"
+          }]
         }]
       }, {
         "h2": "Common questions",
@@ -726,14 +738,38 @@ window.SITE_COPY = {
         "h2": "Practicalities",
         "id": "practicalities",
         "blocks": [{
-          "t": "p",
-          "text": "Couples sessions are online. **Weekly sessions usually last 50–60 minutes. Biweekly sessions can be 90 minutes.** We agree the format before ongoing work begins."
+          "t": "pairs",
+          "items": [{
+            "a": "Format",
+            "b": "Online by video"
+          }, {
+            "a": "Sessions",
+            "b": "Usually 50–60 minutes, or up to 90 minutes"
+          }, {
+            "a": "Frequency",
+            "b": "Weekly, or every two weeks for the longer session"
+          }, {
+            "a": "Languages",
+            "b": "English or Greek"
+          }, {
+            "a": "Fee",
+            "b": "€100 or £90 per standard session"
+          }, {
+            "a": "Introductory call",
+            "b": "Free, usually 30 minutes to an hour"
+          }]
         }, {
           "t": "p",
-          "text": "I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."
+          "text": "We agree the format before ongoing work begins. I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."
         }, {
           "t": "p",
-          "text": "Weekly sessions of 50–60 minutes are €100 or £90 each. The fee for the longer couples session is agreed separately before booking. The first conversation is a free introductory call, usually between 30 minutes and an hour."
+          "text": "The fee for the longer couples session is agreed separately before booking."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "Fees and practicalities",
+            "href": "/fees-and-practicalities/"
+          }]
         }]
       }, {
         "h2": "Common questions",
@@ -869,11 +905,35 @@ window.SITE_COPY = {
         "h2": "Practicalities",
         "id": "practicalities",
         "blocks": [{
-          "t": "p",
-          "text": "Coaching is online. Format and frequency depend on the decision and are agreed before we begin."
+          "t": "pairs",
+          "items": [{
+            "a": "Format",
+            "b": "Online by video"
+          }, {
+            "a": "Sessions",
+            "b": "Length agreed before starting"
+          }, {
+            "a": "Frequency",
+            "b": "Depends on the decision"
+          }, {
+            "a": "Languages",
+            "b": "English or Greek"
+          }, {
+            "a": "Fee",
+            "b": "€100 or £90 per session"
+          }, {
+            "a": "Introductory call",
+            "b": "Free, usually 30 minutes to an hour"
+          }]
         }, {
           "t": "p",
-          "text": "Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour."
+          "text": "Format and frequency depend on the decision and are agreed before we begin."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "Fees and practicalities",
+            "href": "/fees-and-practicalities/"
+          }]
         }]
       }, {
         "h2": "Contact",
@@ -1172,6 +1232,40 @@ window.SITE_COPY = {
           }]
         }]
       }, {
+        "h2": "Practicalities",
+        "id": "practicalities",
+        "blocks": [{
+          "t": "pairs",
+          "items": [{
+            "a": "Format",
+            "b": "Online by video"
+          }, {
+            "a": "Sessions",
+            "b": "Usually 50–60 minutes"
+          }, {
+            "a": "Frequency",
+            "b": "Normally weekly at first"
+          }, {
+            "a": "Languages",
+            "b": "English or Greek"
+          }, {
+            "a": "Fee",
+            "b": "€100 or £90 per session"
+          }, {
+            "a": "Introductory call",
+            "b": "Free, usually 30 minutes to an hour"
+          }]
+        }, {
+          "t": "p",
+          "text": "I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "Fees and practicalities",
+            "href": "/fees-and-practicalities/"
+          }]
+        }]
+      }, {
         "h2": "Common questions",
         "id": "common-questions",
         "blocks": [{
@@ -1208,19 +1302,6 @@ window.SITE_COPY = {
           "blocks": [{
             "t": "p",
             "text": "I do not provide reports to your employer. Sessions are confidential within the professional and legal limits that apply, which I explain before ongoing work begins."
-          }]
-        }, {
-          "t": "sub",
-          "h3": "How much does it cost, and how does it work?",
-          "blocks": [{
-            "t": "p",
-            "text": "Sessions are €100 or £90 each, online by video, in English or Greek. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."
-          }, {
-            "t": "ctas",
-            "items": [{
-              "label": "Fees and practicalities",
-              "href": "/fees-and-practicalities/"
-            }]
           }]
         }]
       }, {
@@ -1370,6 +1451,40 @@ window.SITE_COPY = {
           }]
         }]
       }, {
+        "h2": "Practicalities",
+        "id": "practicalities",
+        "blocks": [{
+          "t": "pairs",
+          "items": [{
+            "a": "Format",
+            "b": "Online by video"
+          }, {
+            "a": "Sessions",
+            "b": "Usually 50–60 minutes"
+          }, {
+            "a": "Frequency",
+            "b": "Normally weekly at first"
+          }, {
+            "a": "Languages",
+            "b": "English or Greek"
+          }, {
+            "a": "Fee",
+            "b": "€100 or £90 per session"
+          }, {
+            "a": "Introductory call",
+            "b": "Free, usually 30 minutes to an hour"
+          }]
+        }, {
+          "t": "p",
+          "text": "I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "Fees and practicalities",
+            "href": "/fees-and-practicalities/"
+          }]
+        }]
+      }, {
         "h2": "Common questions",
         "id": "common-questions",
         "blocks": [{
@@ -1399,19 +1514,6 @@ window.SITE_COPY = {
           "blocks": [{
             "t": "p",
             "text": "Partners live with the company too. If both of you want the relationship itself to be the focus, Couples Therapy is a separate service."
-          }]
-        }, {
-          "t": "sub",
-          "h3": "How much does it cost, and how does it work?",
-          "blocks": [{
-            "t": "p",
-            "text": "Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."
-          }, {
-            "t": "ctas",
-            "items": [{
-              "label": "Fees and practicalities",
-              "href": "/fees-and-practicalities/"
-            }]
           }]
         }]
       }, {
@@ -1558,6 +1660,40 @@ window.SITE_COPY = {
           }]
         }]
       }, {
+        "h2": "Practicalities",
+        "id": "practicalities",
+        "blocks": [{
+          "t": "pairs",
+          "items": [{
+            "a": "Format",
+            "b": "Online by video"
+          }, {
+            "a": "Sessions",
+            "b": "Usually 50–60 minutes"
+          }, {
+            "a": "Frequency",
+            "b": "Normally weekly at first"
+          }, {
+            "a": "Languages",
+            "b": "English or Greek"
+          }, {
+            "a": "Fee",
+            "b": "€100 or £90 per session"
+          }, {
+            "a": "Introductory call",
+            "b": "Free, usually 30 minutes to an hour"
+          }]
+        }, {
+          "t": "p",
+          "text": "I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "Fees and practicalities",
+            "href": "/fees-and-practicalities/"
+          }]
+        }]
+      }, {
         "h2": "Common questions",
         "id": "common-questions",
         "blocks": [{
@@ -1594,19 +1730,6 @@ window.SITE_COPY = {
           "blocks": [{
             "t": "p",
             "text": "Yes. Technology is the environment I know most deeply, but the pressures of senior roles are similar across many sectors."
-          }]
-        }, {
-          "t": "sub",
-          "h3": "How much does it cost, and how does it work?",
-          "blocks": [{
-            "t": "p",
-            "text": "Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."
-          }, {
-            "t": "ctas",
-            "items": [{
-              "label": "Fees and practicalities",
-              "href": "/fees-and-practicalities/"
-            }]
           }]
         }]
       }, {
@@ -1693,11 +1816,29 @@ window.SITE_COPY = {
         "h2": "Practicalities",
         "id": "practicalities",
         "blocks": [{
-          "t": "p",
-          "text": "Sessions are online by video. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there."
+          "t": "pairs",
+          "items": [{
+            "a": "Format",
+            "b": "Online by video"
+          }, {
+            "a": "Sessions",
+            "b": "Usually 50–60 minutes"
+          }, {
+            "a": "Frequency",
+            "b": "Normally weekly at first"
+          }, {
+            "a": "Languages",
+            "b": "Greek or English"
+          }, {
+            "a": "Fee",
+            "b": "€100 or £90 per session"
+          }, {
+            "a": "Introductory call",
+            "b": "Free, usually 30 minutes to an hour"
+          }]
         }, {
           "t": "p",
-          "text": "I work with clients across the UK and Europe, including Greece. Sessions are €100 or £90 each, and the first conversation is a free introductory call, usually between 30 minutes and an hour."
+          "text": "I work with clients across the UK and Europe, including Greece. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there."
         }, {
           "t": "ctas",
           "items": [{
