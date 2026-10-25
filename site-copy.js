@@ -457,6 +457,9 @@ window.SITE_COPY = {
           "t": "p",
           "text": "Send a short note about what brings you here and where you are currently located. If the situation falls within what I offer, we arrange an initial conversation."
         }, {
+          "t": "p",
+          "text": "The first conversation is a free introductory call, usually between 30 minutes and an hour. Sessions after that are €100 or £90 each."
+        }, {
           "t": "ctas",
           "items": [{
             "label": "Book a consultation",
@@ -1656,6 +1659,9 @@ window.SITE_COPY = {
         "blocks": [{
           "t": "p",
           "text": "Sessions are online by video. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there."
+        }, {
+          "t": "p",
+          "text": "I work with clients across the UK and Europe, including Greece. Sessions are €100 or £90 each, and the first conversation is a free introductory call, usually between 30 minutes and an hour."
         }]
       }, {
         "h2": "Common questions",

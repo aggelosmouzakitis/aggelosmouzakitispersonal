@@ -79,9 +79,9 @@ ${GROUPS.map(([h, urls]) => `## ${h}\n\n${urls.map(entry).join('\n')}`).join('\n
 
 - Professional description: "BACP-registered psychotherapist". "Licensed
   psychotherapist" is not accurate wording for this practice and is not used.
-- Directory listings (Psychology Today, It's Complicated and others) may show
-  a city, such as London, because the directory requires one, and may list
-  the name as Angelos Mouzakitis. The practice is based in Ireland and works
+- Directory listings (Psychology Today UK and Ireland, It's Complicated,
+  HeadsUpGuys) may show a city, such as London or Cork, because the directory
+  requires one, and may list the name as Angelos Mouzakitis. The practice is based in Ireland and works
   primarily online; where a listing differs from this site on location, fee or
   format, this site is current.
 - Undisguised (${ORIGIN}/undisguised/) is Aggelos Mouzakitis's point of view on

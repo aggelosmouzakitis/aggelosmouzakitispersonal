@@ -65,9 +65,14 @@ const PERSON_FULL = {
     'Separation and divorce', 'Burnout', 'Career change', 'Anxiety', 'Self-worth',
   ],
   memberOf: { '@type': 'Organization', name: 'British Association for Counselling and Psychotherapy', alternateName: 'BACP', url: 'https://www.bacp.co.uk' },
+  // The directory profiles (their city is the directory's, see AREA_SERVED),
+  // then the mentoring profile and social accounts.
   sameAs: [
-    'https://www.psychologytoday.com/profile/1662603',
+    'https://www.psychologytoday.com/gb/counselling/aggelos-mouzakitis-london/1662603',
+    'https://www.psychologytoday.com/ie/counselling/aggelos-mouzakitis-cork-ck/1667120',
     'https://complicated.life/find-a-therapist/london/integrative-psychotherapist-angelos-mouzakitis',
+    'https://headsupguys.org/therapist/aggelos-mouzakitis/',
+    'https://mentorcruise.com/mentor/aggelosmouzakitis/',
     'https://www.linkedin.com/in/growth-product-manager/',
     'https://undisguised.io',
     'https://www.youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA',
