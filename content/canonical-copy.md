@@ -1218,6 +1218,8 @@ Feelings about reconciliation can change quickly during a separation. A good wee
 
 Before treating either reaction as a decision, it is useful to understand what has actually changed and what has not.
 
+**Therapy for men →**
+
 ## Contact
 
 If you are going through a separation or divorce and want somewhere to think clearly, book a consultation.
@@ -1302,7 +1304,7 @@ Couples therapy fits when both of you want to work directly on how the current a
 
 ## Continue with
 
-**Therapy for men →**  
+**Psychotherapy for men in tech →**  
 **Therapy for entrepreneurs, founders and business owners →**  
 **Couples therapy →**
 
@@ -1388,7 +1390,7 @@ Sometimes the main conclusion is practical and external. Sometimes the same patt
 
 ## Continue with
 
-**Therapy for men →**  
+**Psychotherapy for men in tech →**  
 **Psychotherapy for executives →**  
 **Therapy for entrepreneurs, founders and business owners →**
 
@@ -1634,7 +1636,7 @@ The question is whether the ambition still feels like yours, what happens when y
 
 ## Continue with
 
-**Therapy for men →**  
+**Psychotherapy for men in tech →**  
 **Psychotherapy for executives →**
 
 ## Contact

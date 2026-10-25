@@ -690,7 +690,8 @@ window.SITE_COPY = {
         ]},
         {"h2": "Reconciliation", "id": "reconciliation", "blocks": [
           {"t": "p", "text": "Feelings about reconciliation can change quickly during a separation. A good week may make returning feel possible; a painful interaction may make the opposite feel obvious."},
-          {"t": "p", "text": "Before treating either reaction as a decision, it is useful to understand what has actually changed and what has not."}
+          {"t": "p", "text": "Before treating either reaction as a decision, it is useful to understand what has actually changed and what has not."},
+          {"t": "ctas", "items": [{"label": "Therapy for men", "href": "/therapy-for-men/"}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you are going through a separation or divorce and want somewhere to think clearly, book a consultation."},
@@ -747,7 +748,7 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}, {"label": "Couples therapy", "href": "/couples-therapy/"}]}
         ]},
         {"h2": "Continue with", "id": "continue-with", "blocks": [
-          {"t": "ctas", "items": [{"label": "Therapy for men", "href": "/therapy-for-men/"}, {"label": "Therapy for entrepreneurs, founders and business owners", "href": "/therapy-for-founders/"}, {"label": "Couples therapy", "href": "/couples-therapy/"}]}
+          {"t": "ctas", "items": [{"label": "Psychotherapy for men in tech", "href": "/therapy-for-men-in-tech/"}, {"label": "Therapy for entrepreneurs, founders and business owners", "href": "/therapy-for-founders/"}, {"label": "Couples therapy", "href": "/couples-therapy/"}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If work has become a regular source of conflict at home, book a consultation."},
@@ -803,7 +804,7 @@ window.SITE_COPY = {
           {"t": "p", "text": "Sometimes the main conclusion is practical and external. Sometimes the same pattern has followed you across several jobs. Often both are relevant."}
         ]},
         {"h2": "Continue with", "id": "continue-with", "blocks": [
-          {"t": "ctas", "items": [{"label": "Therapy for men", "href": "/therapy-for-men/"}, {"label": "Psychotherapy for executives", "href": "/therapy-for-executives/"}, {"label": "Therapy for entrepreneurs, founders and business owners", "href": "/therapy-for-founders/"}]}
+          {"t": "ctas", "items": [{"label": "Psychotherapy for men in tech", "href": "/therapy-for-men-in-tech/"}, {"label": "Psychotherapy for executives", "href": "/therapy-for-executives/"}, {"label": "Therapy for entrepreneurs, founders and business owners", "href": "/therapy-for-founders/"}]}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "How do I know if I am burned out or just tired?", "blocks": [{"t": "p", "text": "Short periods of fatigue usually improve when pressure drops and recovery improves. Persistent exhaustion, irritability, difficulty switching off and loss of motivation deserve a closer look, especially when the pattern keeps returning."}]},
@@ -964,7 +965,7 @@ window.SITE_COPY = {
           {"t": "p", "text": "The question is whether the ambition still feels like yours, what happens when you fail and how much authority a result gets to have over how you feel about yourself."}
         ]},
         {"h2": "Continue with", "id": "continue-with", "blocks": [
-          {"t": "ctas", "items": [{"label": "Therapy for men", "href": "/therapy-for-men/"}, {"label": "Psychotherapy for executives", "href": "/therapy-for-executives/"}]}
+          {"t": "ctas", "items": [{"label": "Psychotherapy for men in tech", "href": "/therapy-for-men-in-tech/"}, {"label": "Psychotherapy for executives", "href": "/therapy-for-executives/"}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If achievement has started carrying more psychological weight than you want it to, book a consultation."},

@@ -1982,6 +1982,12 @@ window.SITE_COPY = {
         }, {
           "t": "p",
           "text": "Before treating either reaction as a decision, it is useful to understand what has actually changed and what has not."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "Therapy for men",
+            "href": "/therapy-for-men/"
+          }]
         }]
       }, {
         "h2": "Contact",
@@ -2129,8 +2135,8 @@ window.SITE_COPY = {
         "blocks": [{
           "t": "ctas",
           "items": [{
-            "label": "Therapy for men",
-            "href": "/therapy-for-men/"
+            "label": "Psychotherapy for men in tech",
+            "href": "/therapy-for-men-in-tech/"
           }, {
             "label": "Therapy for entrepreneurs, founders and business owners",
             "href": "/therapy-for-founders/"
@@ -2277,8 +2283,8 @@ window.SITE_COPY = {
         "blocks": [{
           "t": "ctas",
           "items": [{
-            "label": "Therapy for men",
-            "href": "/therapy-for-men/"
+            "label": "Psychotherapy for men in tech",
+            "href": "/therapy-for-men-in-tech/"
           }, {
             "label": "Psychotherapy for executives",
             "href": "/therapy-for-executives/"
@@ -2704,8 +2710,8 @@ window.SITE_COPY = {
         "blocks": [{
           "t": "ctas",
           "items": [{
-            "label": "Therapy for men",
-            "href": "/therapy-for-men/"
+            "label": "Psychotherapy for men in tech",
+            "href": "/therapy-for-men-in-tech/"
           }, {
             "label": "Psychotherapy for executives",
             "href": "/therapy-for-executives/"

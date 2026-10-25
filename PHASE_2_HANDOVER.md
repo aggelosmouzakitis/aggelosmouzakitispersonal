@@ -17,7 +17,7 @@ Prepared 25 October 2026. Branch `seo-phase-2`, started from `main` at `bdea0d0`
 | Couples therapy | "The fee for the longer couples session is agreed separately before booking." placed straight after the 50–60-minute fee sentence. |
 | Fee scope | Work With Me now says "Standard sessions after that are €100 or £90 each." Considering Therapy, the Greek-speaking page and the service pages describe individual sessions or one service, so their amounts stand. llms.txt scopes the fee to standard sessions and says the longer couples fee is agreed separately. |
 | Fees links | Added to Considering Therapy (The first conversation), Work With Me (How to start, beside the button), the Greek-speaking page (Practicalities) and /faq/. |
-| Individual psychotherapy | "Therapy for men →" beside "Psychotherapy for men in tech →". |
+| Individual psychotherapy | "Therapy for men →" beside "Psychotherapy for men in tech →". The other "Therapy for men" links are split by topic (decision 1). |
 | Guides | Can't switch off: "on-call work" in the on-call paragraph now links to the engineers page. Perfectionism at work: the existing "A senior engineer" link now points to the engineers page instead of men in tech. Both use the articles' `contextLinks`. |
 | Structured data | Each change is listed below the table. |
 | Sitemap, robots, llms.txt | Sitemap: the 3 new URLs added (46 URLs, valid XML). robots.txt is unchanged and blocks nothing. llms.txt: the new pages and the fee scope. |
@@ -58,7 +58,11 @@ Structured data changes:
 
 ### Decisions to review
 
-1. **"Therapy for men →" now goes to `/therapy-for-men/`.** The link appears on Relationship Problems, Work & Relationships, Burnout, Anxiety, Achievement and Individual Psychotherapy, and previously went to the men-in-tech page. With a page whose title and H1 are "therapy for men", those words should point to it. Otherwise the site sends Google mixed signals about which page answers "therapy for men". The wording is unchanged. If you'd rather keep a link to men in tech on the work-focused pages (Burnout, Work & Relationships, Achievement), the existing label "Psychotherapy for men in tech →" can replace it there.
+1. **The "Therapy for men →" links are split by topic (agreed 25 October).** These links all used to go to the men-in-tech page.
+   - "Therapy for men →" goes to `/therapy-for-men/` from Relationship Problems, Anxiety & Overthinking, Individual Psychotherapy and men in tech ("What happens at home"). It is also added to Separation & Divorce, after "Reconciliation".
+   - The work-focused pages (Burnout, Work & Relationships, Achievement) now say "Psychotherapy for men in tech →" and go to `/therapy-for-men-in-tech/`.
+
+   Each link's words name its destination, so "therapy for men" never points at two pages. Each page gets links from its own subject area.
 2. **The perfectionism link was retargeted.** "A senior engineer" was a Phase 1 link to men in tech. The brief asks for that example to link to the engineers page, and one phrase can only carry one link.
 3. **Header labels follow the menu's pattern.** The header says "Therapy for Software Engineers" and "Therapy for Men"; the footer and breadcrumb use "Software Engineers" and "Therapy for Men", as the brief gives them.
 4. **Audience on the existing three Services.** All five audience pages describe who they are for in the same way. The wording comes from each page's meta description.
