@@ -579,6 +579,9 @@ window.SITE_COPY = {
         }, {
           "t": "p",
           "text": "Before ongoing work begins, I confirm that I can work with you based on your location and circumstances."
+        }, {
+          "t": "p",
+          "text": "Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour."
         }]
       }, {
         "h2": "Common questions",
@@ -719,6 +722,9 @@ window.SITE_COPY = {
         }, {
           "t": "p",
           "text": "I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."
+        }, {
+          "t": "p",
+          "text": "Weekly sessions of 50–60 minutes are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour."
         }]
       }, {
         "h2": "Common questions",
@@ -856,6 +862,9 @@ window.SITE_COPY = {
         "blocks": [{
           "t": "p",
           "text": "Coaching is online. Format and frequency depend on the decision and are agreed before we begin."
+        }, {
+          "t": "p",
+          "text": "Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour."
         }]
       }, {
         "h2": "Contact",
@@ -1020,7 +1029,7 @@ window.SITE_COPY = {
       "url": "/therapy-for-men-in-tech/",
       "type": "audience",
       "seoTitle": "Therapist for Men in Tech | Online, UK & Europe",
-      "metaDescription": "Online therapy for men in tech, business and demanding careers, with a BACP-registered psychotherapist with 18+ years in product and growth.",
+      "metaDescription": "Online therapy for men in tech, business and demanding careers, from a BACP-registered psychotherapist with 18+ years in product and growth.",
       "hero": {
         "eyebrow": "MEN IN TECH & DEMANDING CAREERS",
         "h1": "Therapy for men in tech, business and demanding careers.",
@@ -3055,6 +3064,13 @@ window.SITE_COPY = {
           "blocks": [{
             "t": "p",
             "text": "I work with clients across the UK and Europe. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. Tell me where you are currently based and I will confirm before ongoing therapy begins."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Where are you based?",
+          "blocks": [{
+            "t": "p",
+            "text": "I am based in Ireland and work almost entirely online, with clients across the UK and Europe. Directory listings sometimes show a city because the directory asks for one; sessions are online wherever you are. Professional rules depend on where both of us are located, and I confirm that before ongoing therapy begins."
           }]
         }]
       }, {

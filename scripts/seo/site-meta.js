@@ -93,8 +93,10 @@ const PERSON_FULL = {
 const PERSON_REF = { '@type': 'Person', '@id': PERSON_ID, name: 'Aggelos Mouzakitis', url: ORIGIN + '/' };
 
 // ─── The practice ────────────────────────────────────────────────────────────
-// Online only: the area it serves, never an address, a city or geo (a
-// validator's warning about the missing address is expected).
+// Based in Ireland and almost entirely online (/faq/): the area it serves,
+// never an address, a city or geo. Directories that require a city show one;
+// the site states none (a validator's warning about the missing address is
+// expected).
 const AREA_SERVED = [
   { '@type': 'Country', name: 'United Kingdom' },
   { '@type': 'Country', name: 'Ireland' },
@@ -198,7 +200,10 @@ const AUDIENCE_SERVICE = ['therapy-for-men-in-tech', 'therapy-for-founders', 'th
 const OFFER_UNIT = { 'couples-therapy': 'Per 50–60 minute session' };
 // The pages that show questions and answers (a section of nothing but
 // questions, drawn as the FAQ accordion by site-pages.jsx). Their FAQPage
-// holds every one of them, in the page's own words.
+// holds them in the page's own words. A question asked on more than one page
+// is marked up once, on the first of them in sitemap order (Google: mark up
+// one instance of a repeated FAQ).
+const FAQ_MARKED = new Set();
 const FAQ_PAGES = [
   'individual-psychotherapy', 'couples-therapy', 'therapy-for-men-in-tech', 'therapy-for-founders',
   'therapy-for-executives', 'greek-speaking-psychotherapist', 'executive-burnout-therapy', 'faq',
@@ -209,9 +214,12 @@ const isFaq = (s) => s.blocks.length > 0 && s.blocks.every((b) => b.t === 'sub' 
 function faqOf(c) {
   const answer = (blocks) => blocks.map((b) => (b.t === 'p' ? b.text : b.t === 'lines' ? b.lines.join(' ')
     : b.t === 'list' ? b.items.join(' ') : null)).filter(Boolean).map(plain).join(' ');
-  const questions = [].concat(...c.sections.filter(isFaq).map((s) => s.blocks)).map((q) => ({
-    '@type': 'Question', name: plain(q.h3), acceptedAnswer: { '@type': 'Answer', text: answer(q.blocks) },
-  }));
+  const questions = [].concat(...c.sections.filter(isFaq).map((s) => s.blocks))
+    .filter((q) => !FAQ_MARKED.has(plain(q.h3)))
+    .map((q) => {
+      FAQ_MARKED.add(plain(q.h3));
+      return { '@type': 'Question', name: plain(q.h3), acceptedAnswer: { '@type': 'Answer', text: answer(q.blocks) } };
+    });
   if (!questions.length) throw new Error(`site-meta: ${c.url} is in FAQ_PAGES but shows no questions`);
   return questions;
 }
@@ -265,7 +273,7 @@ function canonicalPage([id, priority, changefreq, crumb]) {
       name: SERVICE_TYPE[id] ? crumb : c.hero.h1.replace(/\.$/, ''),
       serviceType: SERVICE_TYPE[id] || 'Psychotherapy',
       url: abs(url), description, provider: { '@id': PERSON_ID },
-      availableLanguage: ['en', 'el'], areaServed: AREA_SERVED,
+      areaServed: AREA_SERVED,
       offers: offers(OFFER_UNIT[id] || 'Per session'),
     });
   }

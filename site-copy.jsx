@@ -202,7 +202,8 @@ window.SITE_COPY = {
           {"t": "pairs", "items": [{"a": "Format", "b": "Online"}, {"a": "Sessions", "b": "50–60 minutes"}, {"a": "Frequency", "b": "Usually weekly at first"}]},
           {"t": "p", "text": "I normally work **weekly for at least the first few months**. We can review frequency later."},
           {"t": "p", "text": "You can stop therapy whenever you choose. I ask people to start with a realistic level of commitment because psychotherapy is difficult to develop through occasional sessions booked only when something has blown up."},
-          {"t": "p", "text": "Before ongoing work begins, I confirm that I can work with you based on your location and circumstances."}
+          {"t": "p", "text": "Before ongoing work begins, I confirm that I can work with you based on your location and circumstances."},
+          {"t": "p", "text": "Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour."}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Do I need a diagnosis?", "blocks": [{"t": "p", "text": "No. A diagnosis is not a prerequisite for psychotherapy."}]},
@@ -254,7 +255,8 @@ window.SITE_COPY = {
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
           {"t": "p", "text": "Couples sessions are online. **Weekly sessions usually last 50–60 minutes. Biweekly sessions can be 90 minutes.** We agree the format before ongoing work begins."},
-          {"t": "p", "text": "I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."}
+          {"t": "p", "text": "I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."},
+          {"t": "p", "text": "Weekly sessions of 50–60 minutes are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour."}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Do we need to be close to separation?", "blocks": [{"t": "p", "text": "No. Couples come with recurring conflict, distance, trust problems and other relationship difficulties well before separation."}]},
@@ -304,7 +306,8 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}, {"label": "Career change & decisions", "href": "/career-transition-therapy/"}, {"label": "Therapy vs coaching", "href": "/therapy-vs-coaching/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "p", "text": "Coaching is online. Format and frequency depend on the decision and are agreed before we begin."}
+          {"t": "p", "text": "Coaching is online. Format and frequency depend on the decision and are agreed before we begin."},
+          {"t": "p", "text": "Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour."}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "Tell me the professional decision you are trying to make."},
@@ -371,7 +374,7 @@ window.SITE_COPY = {
       "url": "/therapy-for-men-in-tech/",
       "type": "audience",
       "seoTitle": "Therapist for Men in Tech | Online, UK & Europe",
-      "metaDescription": "Online therapy for men in tech, business and demanding careers, with a BACP-registered psychotherapist with 18+ years in product and growth.",
+      "metaDescription": "Online therapy for men in tech, business and demanding careers, from a BACP-registered psychotherapist with 18+ years in product and growth.",
       "hero": {"eyebrow": "MEN IN TECH & DEMANDING CAREERS", "h1": "Therapy for men in tech, business and demanding careers.", "blocks": [
         {"t": "p", "text": "You can be doing well professionally and still be sleeping badly, carrying work into dinner or spending days replaying one performance conversation."},
         {"t": "p", "text": "Tech, product and business are familiar contexts from more than 18 years working in them."},
@@ -1069,7 +1072,8 @@ window.SITE_COPY = {
           {"t": "sub", "h3": "Are sessions online?", "blocks": [{"t": "p", "text": "Yes. My work is primarily online by video."}]},
           {"t": "sub", "h3": "What languages do you work in?", "blocks": [{"t": "p", "text": "Greek and English. Sessions can take place in either language or move between them naturally."}]},
           {"t": "sub", "h3": "Can you work with me if I live abroad?", "blocks": [{"t": "p", "text": "Possibly. Professional rules depend on where both therapist and client are located. Tell me where you are currently based and I will confirm before ongoing therapy begins."}]},
-          {"t": "sub", "h3": "Which countries can you work with clients in?", "blocks": [{"t": "p", "text": "I work with clients across the UK and Europe. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. Tell me where you are currently based and I will confirm before ongoing therapy begins."}]}
+          {"t": "sub", "h3": "Which countries can you work with clients in?", "blocks": [{"t": "p", "text": "I work with clients across the UK and Europe. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. Tell me where you are currently based and I will confirm before ongoing therapy begins."}]},
+          {"t": "sub", "h3": "Where are you based?", "blocks": [{"t": "p", "text": "I am based in Ireland and work almost entirely online, with clients across the UK and Europe. Directory listings sometimes show a city because the directory asks for one; sessions are online wherever you are. Professional rules depend on where both of us are located, and I confirm that before ongoing therapy begins."}]}
         ]},
         {"h2": "Confidentiality", "id": "confidentiality", "blocks": [
           {"t": "sub", "h3": "Is psychotherapy confidential?", "blocks": [{"t": "p", "text": "Yes, within the professional and legal limits that apply. Those limits are explained before ongoing work begins."}]},

@@ -65,10 +65,10 @@ and situations.
   for at least the first few months; frequency is reviewed together after that.
 - Couples sessions are weekly (usually 50–60 minutes) or biweekly (can be 90
   minutes); the format is agreed before ongoing work begins.
-- Work is primarily online by video, in Greek or English.
+- Based in Ireland. Work is primarily online by video, in Greek or English.
 - Fees: €100 or £90 per session.
 - The first conversation is a free introductory call, usually between 30 minutes and an hour.
-- Work is online only, for clients across the UK and Europe, with the UK as the main focus.
+- Clients are across the UK and Europe, including Ireland and Greece, with the UK as the main focus.
 - Professional rules depend on where both therapist and client are located;
   eligibility is confirmed before ongoing therapy begins.
 - This is not a crisis or emergency service.
@@ -79,6 +79,11 @@ ${GROUPS.map(([h, urls]) => `## ${h}\n\n${urls.map(entry).join('\n')}`).join('\n
 
 - Professional description: "BACP-registered psychotherapist". "Licensed
   psychotherapist" is not accurate wording for this practice and is not used.
+- Directory listings (Psychology Today, It's Complicated and others) may show
+  a city, such as London, because the directory requires one, and may list
+  the name as Angelos Mouzakitis. The practice is based in Ireland and works
+  primarily online; where a listing differs from this site on location, fee or
+  format, this site is current.
 - Undisguised (${ORIGIN}/undisguised/) is Aggelos Mouzakitis's point of view on
   living deliberately: a manifesto, not a clinical model, treatment method,
   assessment or service. It names four familiar patterns (Ambition,

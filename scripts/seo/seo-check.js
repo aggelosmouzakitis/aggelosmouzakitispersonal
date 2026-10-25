@@ -119,6 +119,7 @@ async function main() {
 
   const seenTitles = new Map();
   const seenDescs = new Map();
+  const seenFaq = new Map(); // FAQ schema question -> the one page that marks it up
   const linkTargets = new Map(); // path -> Set(pages that link to it)
   const anchorLinks = []; // { from, target, id } for every #fragment link
 
@@ -207,6 +208,8 @@ async function main() {
       for (const node of graph) {
         if (node['@type'] !== 'FAQPage') continue;
         for (const q of node.mainEntity || []) {
+          if (seenFaq.has(q.name)) err(url, `FAQ schema question also marked up on ${seenFaq.get(q.name)}: "${q.name.slice(0, 50)}"`);
+          seenFaq.set(q.name, url);
           if (!readable.includes(q.name)) err(url, `FAQ schema question not in page text: "${q.name.slice(0, 50)}"`);
           const a = (q.acceptedAnswer || {}).text || '';
           if (!a || !readable.includes(a)) err(url, `FAQ schema answer not in page text: "${q.name.slice(0, 50)}"`);

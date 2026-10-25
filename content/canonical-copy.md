@@ -87,7 +87,7 @@ Confidentiality
 | 5 | Couples Therapy | /couples-therapy/ | Online Couples Therapy \| Conflict, Distance & Work Pressure | Online couples therapy for recurring conflict, emotional distance and relationships affected by work, pressure and major life changes. | Online couples therapy for recurring conflict, distance and relationship strain. |
 | 6 | Professional Coaching | /professional-coaching/ | Professional Coaching for Tech & Career Decisions \| Aggelos Mouzakitis | Professional coaching for experienced people in tech, startups and business making career, leadership, independence and other difficult professional decisions. | Professional coaching for a decision you actually have to make. |
 | 7 | Therapy vs Coaching | /therapy-vs-coaching/ | Therapy vs Coaching: Which Fits Your Situation? | A practical guide to the difference between psychotherapy and professional coaching, especially for career decisions, anxiety, recurring patterns and problems that cross between work and personal life. | Therapy or coaching? |
-| 8 | Men in Tech & Demanding Careers | /therapy-for-men-in-tech/ | Therapist for Men in Tech \| Online, UK & Europe | Online therapy for men in tech, business and demanding careers, with a BACP-registered psychotherapist with 18+ years in product and growth. | Therapy for men in tech, business and demanding careers. |
+| 8 | Men in Tech & Demanding Careers | /therapy-for-men-in-tech/ | Therapist for Men in Tech \| Online, UK & Europe | Online therapy for men in tech, business and demanding careers, from a BACP-registered psychotherapist with 18+ years in product and growth. | Therapy for men in tech, business and demanding careers. |
 | 9 | Founders & Business Owners | /therapy-for-founders/ | Therapist for Startup Founders & Entrepreneurs \| Online | Online psychotherapy for startup founders, entrepreneurs and business owners, with a BACP-registered therapist who built two startups himself. | Therapy for entrepreneurs, founders and business owners. |
 | 10 | Executives & Leaders | /therapy-for-executives/ | Executive Therapist \| Online Therapy for Senior Leaders | Confidential online psychotherapy for executives, directors and senior leaders, with a BACP-registered psychotherapist who spent 18+ years in technology. | Psychotherapy for executives and senior leaders. |
 | 11 | Greek-speaking Psychotherapy | /greek-speaking-psychotherapist/ | Greek-Speaking Psychotherapist Online \| Aggelos Mouzakitis | Online psychotherapy in Greek or English with a Greek-speaking psychotherapist, especially for Greeks living abroad and people working in tech and international careers. | Online psychotherapy in Greek or English. |
@@ -436,6 +436,8 @@ You can stop therapy whenever you choose. I ask people to start with a realistic
 
 Before ongoing work begins, I confirm that I can work with you based on your location and circumstances.
 
+Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+
 ## Common questions
 
 ### Do I need a diagnosis?
@@ -515,6 +517,8 @@ Couples sessions are online. **Weekly sessions usually last 50–60 minutes. Biw
 
 I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located.
 
+Weekly sessions of 50–60 minutes are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+
 ## Common questions
 
 ### Do we need to be close to separation?
@@ -591,6 +595,8 @@ If that becomes clear, I will say so directly.
 ## Practicalities
 
 Coaching is online. Format and frequency depend on the decision and are agreed before we begin.
+
+Sessions are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour.
 
 ## Contact
 
@@ -686,7 +692,7 @@ If you are not sure which category fits, describe the situation rather than choo
 
 **URL:** `/therapy-for-men-in-tech/`  
 **SEO title:** Therapist for Men in Tech | Online, UK & Europe  
-**Meta description:** Online therapy for men in tech, business and demanding careers, with a BACP-registered psychotherapist with 18+ years in product and growth.
+**Meta description:** Online therapy for men in tech, business and demanding careers, from a BACP-registered psychotherapist with 18+ years in product and growth.
 
 ## Hero
 
@@ -1813,6 +1819,9 @@ Possibly. Professional rules depend on where both therapist and client are locat
 
 ### Which countries can you work with clients in?
 I work with clients across the UK and Europe. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. Tell me where you are currently based and I will confirm before ongoing therapy begins.
+
+### Where are you based?
+I am based in Ireland and work almost entirely online, with clients across the UK and Europe. Directory listings sometimes show a city because the directory asks for one; sessions are online wherever you are. Professional rules depend on where both of us are located, and I confirm that before ongoing therapy begins.
 
 ## Confidentiality
 
