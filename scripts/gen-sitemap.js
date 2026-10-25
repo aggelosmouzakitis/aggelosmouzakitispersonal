@@ -8,7 +8,7 @@
 // touched it), falling back to the file mtime, so the dates reflect real
 // content changes rather than the date of the build. Every page is committed
 // with its content prerendered (scripts/seo/prerender.js), so its file changes
-// whenever what it shows does; the shared sources (site-copy.jsx holds all 26
+// whenever what it shows does; the shared sources (site-copy.jsx holds all the
 // canonical pages) would move every page's date when one of them changes.
 //
 // Run: node scripts/gen-sitemap.js

@@ -11,7 +11,7 @@ Netlify runs no compile step; it only assembles `public/` (see Publish).
 document and the only source of page wording, header and footer labels, SEO
 titles and meta descriptions. It is kept in the repository but never published.
 `npm run copy` (`scripts/copy/extract-canonical.py`) turns it into
-`site-copy.jsx` (the 26 pages) and `site-nav.jsx` (header and footer wording,
+`site-copy.jsx` (the canonical pages) and `site-nav.jsx` (header and footer wording,
 loaded on every page including the tools). Both are generated: edit the
 document, not them.
 

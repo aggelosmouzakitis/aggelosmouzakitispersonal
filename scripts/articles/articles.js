@@ -189,7 +189,7 @@ const ARTICLES = [
   },
   {
     slug: 'cant-switch-off-from-work',
-    contextLinks: [['Therapy can help when checking and rumination repeatedly affect sleep or relationships', '/executive-burnout-therapy/'], ['Founders', '/therapy-for-founders/']],
+    contextLinks: [['Therapy can help when checking and rumination repeatedly affect sleep or relationships', '/executive-burnout-therapy/'], ['Founders', '/therapy-for-founders/'], ['on-call work', '/therapy-for-software-engineers/']],
     brief: 'content/articles/cant-switch-off-from-work.md',
     published: '2026-10-01T22:57:00+01:00',
     modified: null,
@@ -332,7 +332,7 @@ const ARTICLES = [
   },
   {
     slug: 'perfectionism-at-work',
-    contextLinks: [['keep delivering while feeling progressively more exhausted and resentful', '/high-functioning-burnout/'], ['A senior engineer', '/therapy-for-men-in-tech/']],
+    contextLinks: [['keep delivering while feeling progressively more exhausted and resentful', '/high-functioning-burnout/'], ['A senior engineer', '/therapy-for-software-engineers/']],
     brief: 'content/articles/perfectionism-at-work.md',
     published: '2026-10-02T06:53:00+01:00',
     modified: null,

@@ -14,8 +14,9 @@ const ROOT = path.resolve(__dirname, '..', '..');
 
 // [heading, page urls]
 const GROUPS = [
-  ['Work with me', ['/work-with-me/', '/individual-psychotherapy/', '/couples-therapy/', '/professional-coaching/']],
-  ['Who I work with', ['/therapy-for-men-in-tech/', '/therapy-for-founders/', '/therapy-for-executives/', '/greek-speaking-psychotherapist/']],
+  ['Work with me', ['/work-with-me/', '/individual-psychotherapy/', '/couples-therapy/', '/professional-coaching/', '/fees-and-practicalities/']],
+  ['Who I work with', ['/therapy-for-men-in-tech/', '/therapy-for-software-engineers/', '/therapy-for-founders/', '/therapy-for-executives/',
+    '/therapy-for-men/', '/greek-speaking-psychotherapist/']],
   ['Common problems', ['/relationship-problems-men/', '/separation-divorce-men/', '/work-affecting-relationship/',
     '/executive-burnout-therapy/', '/career-transition-therapy/', '/anxiety-overthinking/', '/achievement-self-worth/']],
   ['Resources', ['/considering-therapy/', '/therapy-vs-coaching/', '/undisguised/', '/faq/', '/blog/', '/free-tools/',
@@ -66,7 +67,9 @@ and situations.
 - Couples sessions are weekly (usually 50–60 minutes) or biweekly (can be 90
   minutes); the format is agreed before ongoing work begins.
 - Based in Ireland. Work is primarily online by video, in Greek or English.
-- Fees: €100 or £90 per session.
+- Fees: €100 or £90 per standard session (individual psychotherapy, a standard
+  50–60-minute couples session or professional coaching). The fee for the
+  longer couples session is agreed separately before booking.
 - The first conversation is a free introductory call, usually between 30 minutes and an hour.
 - Clients are across the UK and Europe, including Ireland and Greece, with the UK as the main focus.
 - Professional rules depend on where both therapist and client are located;

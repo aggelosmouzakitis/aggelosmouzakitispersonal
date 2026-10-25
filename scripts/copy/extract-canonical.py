@@ -13,7 +13,7 @@ that document arrives:
 The document lives in the repository at content/canonical-copy.md (it is not
 published); replace that file with a new version, then re-run.
 
-site-copy.jsx holds the 26 pages (loaded by the canonical pages only);
+site-copy.jsx holds the canonical pages (loaded by the canonical pages only);
 site-nav.jsx holds the header and footer wording (loaded on every page,
 including the tools, so it is kept separate and small).
 
@@ -65,6 +65,9 @@ TYPE_BY_URL = {
     '/contact/': 'contact',
     '/confidentiality/': 'legal',
     '/undisguised/': 'manifesto',
+    '/therapy-for-men/': 'audience',
+    '/therapy-for-software-engineers/': 'audience',
+    '/fees-and-practicalities/': 'resource',
 }
 
 # ── Link wording in the page copy → destination ──────────────────────────────
@@ -82,8 +85,10 @@ CTA_HREF = {
     'Professional coaching': '/professional-coaching/',
     'Explore professional coaching': '/professional-coaching/',
     'Therapy vs coaching': '/therapy-vs-coaching/',
-    'Therapy for men': '/therapy-for-men-in-tech/',
+    'Therapy for men': '/therapy-for-men/',
     'Psychotherapy for men in tech': '/therapy-for-men-in-tech/',
+    'Men in tech and demanding careers': '/therapy-for-men-in-tech/',
+    'Software engineers': '/therapy-for-software-engineers/',
     'Psychotherapy for executives': '/therapy-for-executives/',
     'Therapy for entrepreneurs, founders and business owners': '/therapy-for-founders/',
     'Therapy for founders': '/therapy-for-founders/',
@@ -101,10 +106,15 @@ CTA_HREF = {
     'Burnout & Can’t Switch Off': '/executive-burnout-therapy/',
     'Career change & decisions': '/career-transition-therapy/',
     'Career Change & Decisions': '/career-transition-therapy/',
+    'Career change and decisions': '/career-transition-therapy/',
     'Anxiety & overthinking': '/anxiety-overthinking/',
     'Anxiety & Overthinking': '/anxiety-overthinking/',
     'Achievement & self-worth': '/achievement-self-worth/',
     'Achievement & Self-Worth': '/achievement-self-worth/',
+    'Achievement and self-worth': '/achievement-self-worth/',
+    'Can’t switch off from work': '/cant-switch-off-from-work/',
+    'Fees and practicalities': '/fees-and-practicalities/',
+    'Greek-speaking psychotherapy': '/greek-speaking-psychotherapist/',
     'About me': '/about/',
     'Read more about me': '/about/',
     'Work with me': '/work-with-me/',
@@ -134,6 +144,7 @@ NAV_HREF = {
     'Home': '/',
     'About': '/about/',
     'FAQ': '/faq/',
+    'Fees & Practicalities': '/fees-and-practicalities/',
     'Contact': '/contact/',
     'Confidentiality': '/confidentiality/',
     'Individual Psychotherapy': '/individual-psychotherapy/',
@@ -142,10 +153,13 @@ NAV_HREF = {
     'Therapy for Men in Tech & Business': '/therapy-for-men-in-tech/',
     'Therapy for Executives & Senior Leaders': '/therapy-for-executives/',
     'Therapy for Entrepreneurs, Founders & Business Owners': '/therapy-for-founders/',
+    'Therapy for Software Engineers': '/therapy-for-software-engineers/',
+    'Therapy for Men': '/therapy-for-men/',
     'Greek-speaking Psychotherapy': '/greek-speaking-psychotherapist/',
     'Men in Tech & Demanding Careers': '/therapy-for-men-in-tech/',
     'Founders & Business Owners': '/therapy-for-founders/',
     'Executives & Leaders': '/therapy-for-executives/',
+    'Software Engineers': '/therapy-for-software-engineers/',
     'Relationships & Separation': '/relationship-problems-men/',
     'Work & Relationships': '/work-affecting-relationship/',
     'Burnout & Can’t Switch Off': '/executive-burnout-therapy/',
@@ -232,6 +246,12 @@ def paragraphs(lines):
 
 def classify(lines, where):
     """One Markdown paragraph (its hard-broken lines) → list of copy blocks."""
+    # A table: its header row, the delimiter row, then one line per row.
+    if len(lines) >= 3 and all(l.startswith('|') for l in lines):
+        if not re.match(r'^\|[\s:|-]+\|$', lines[1].strip()):
+            raise SystemExit(f'{where}: a table without its delimiter row: {lines[0][:60]!r}')
+        cells = lambda l: [smart(c.strip()) for c in l.strip().strip('|').split('|')]
+        return [{'t': 'table', 'head': cells(lines[0]), 'rows': [cells(l) for l in lines[2:]]}]
     structural = lambda l: CTA_RE.match(l) or RELATED_RE.match(l) or ITALIC_LINE_RE.match(l)
     if all(structural(l) for l in lines):
         # links, "Related:" links and short italic notes, one line each;
@@ -544,11 +564,11 @@ if __name__ == '__main__':
               '// rather than editing it here. Only typography differs from the source\n'
               '// (typographic apostrophes; → drawn by the UI).\n')
     copy_header = (
-        '// site-copy.jsx — the canonical copy for the 26 canonical pages.\n//\n' + source + '//\n'
+        f'// site-copy.jsx — the canonical copy for the {len(pages)} canonical pages.\n//\n' + source + '//\n'
         '// Shape: pages[id] = { url, type, seoTitle, metaDescription, note?, hero, sections }\n'
         '//   hero     = { eyebrow, h1, sub?, blocks }\n'
         '//   sections = [{ h2, id, eyebrow?, blocks }]\n'
-        '//   blocks   = p | lines | list | ctas | related | meta | pairs | quote | question\n'
+        '//   blocks   = p | lines | list | ctas | related | meta | pairs | quote | question | table\n'
         '//              | sub (an h3, its eyebrow? and its own blocks)\n'
         '//   **text** marks the bold runs of the source.\n'
         '// Rendered by site-pages.jsx; SEO fields are read by scripts/seo/site-meta.js.\n\n'

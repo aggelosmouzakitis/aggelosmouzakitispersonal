@@ -85,7 +85,7 @@ window.SITE_ARTICLE_PAGES["perfectionism-at-work"] = {
     "id": "high-standards-and-perfectionism",
     "blocks": [{
       "t": "p",
-      "text": "[A senior engineer](/therapy-for-men-in-tech/) checking a migration plan carefully may be doing exactly what the work needs. Repeatedly changing a routine update after its facts are correct may serve a different purpose. The visible behaviour matters, but so do the consequences of an error and the reason you keep going."
+      "text": "[A senior engineer](/therapy-for-software-engineers/) checking a migration plan carefully may be doing exactly what the work needs. Repeatedly changing a routine update after its facts are correct may serve a different purpose. The visible behaviour matters, but so do the consequences of an error and the reason you keep going."
     }, {
       "t": "p",
       "text": "Researchers commonly distinguish *perfectionistic strivings*, involving excessively high standards, from *perfectionistic concerns*, involving self-criticism, doubts and worries about evaluation. These dimensions can coexist. The [2026 review of perfectionism at work](https://www.annualreviews.org/content/journals/10.1146/annurev-orgpsych-020924-064336) also considers the workplace, leadership and team context, beyond perfectionism as an individual trait."

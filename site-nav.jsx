@@ -39,12 +39,20 @@ window.SITE_NAV = {
             "href": "/therapy-for-men-in-tech/"
           },
           {
+            "label": "Therapy for Software Engineers",
+            "href": "/therapy-for-software-engineers/"
+          },
+          {
             "label": "Therapy for Executives & Senior Leaders",
             "href": "/therapy-for-executives/"
           },
           {
             "label": "Therapy for Entrepreneurs, Founders & Business Owners",
             "href": "/therapy-for-founders/"
+          },
+          {
+            "label": "Therapy for Men",
+            "href": "/therapy-for-men/"
           },
           {
             "label": "Greek-speaking Psychotherapy",
@@ -125,12 +133,20 @@ window.SITE_NAV = {
             "href": "/therapy-for-men-in-tech/"
           },
           {
+            "label": "Software Engineers",
+            "href": "/therapy-for-software-engineers/"
+          },
+          {
             "label": "Founders & Business Owners",
             "href": "/therapy-for-founders/"
           },
           {
             "label": "Executives & Leaders",
             "href": "/therapy-for-executives/"
+          },
+          {
+            "label": "Therapy for Men",
+            "href": "/therapy-for-men/"
           },
           {
             "label": "Greek-speaking Psychotherapy",
@@ -193,6 +209,10 @@ window.SITE_NAV = {
           {
             "label": "FAQ",
             "href": "/faq/"
+          },
+          {
+            "label": "Fees & Practicalities",
+            "href": "/fees-and-practicalities/"
           },
           {
             "label": "Reviews",

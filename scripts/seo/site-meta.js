@@ -1,6 +1,6 @@
 // site-meta.js — one source of truth for every indexable page's metadata.
 //
-// The 25 canonical pages take their title and meta description verbatim from
+// The canonical pages take their title and meta description verbatim from
 // the canonical copy (site-copy.jsx, generated from content/canonical-copy.md),
 // and each article from its brief (article-<slug>.jsx, generated from
 // content/articles/<slug>.md), so metadata cannot drift from the copy. Open
@@ -80,7 +80,7 @@ const PERSON_FULL = {
     'https://www.tiktok.com/@aggelosmouz',
   ],
   hasCredential: [
-    { '@type': 'EducationalOccupationalCredential', credentialCategory: 'Professional Accreditation',
+    { '@type': 'EducationalOccupationalCredential', credentialCategory: 'Professional registration',
       name: 'Registered Member, BACP',
       recognizedBy: { '@type': 'Organization', name: 'British Association for Counselling and Psychotherapy', alternateName: 'BACP', url: 'https://www.bacp.co.uk' } },
     { '@type': 'EducationalOccupationalCredential', credentialCategory: 'degree',
@@ -108,18 +108,23 @@ const AREA_SERVED = [
   { '@type': 'Country', name: 'Greece' },
   { '@type': 'Continent', name: 'Europe' },
 ];
+// An Organization (schema.org deprecates ProfessionalService); the fee is on
+// each Service's offers, scoped to what it buys.
 const PRACTICE = {
-  '@type': 'ProfessionalService',
+  '@type': 'Organization',
   '@id': ORIGIN + '/#practice',
   name: 'Aggelos Mouzakitis',
   url: ORIGIN + '/',
   description: 'Online psychotherapy, couples therapy and professional coaching in English or Greek, for clients across the UK and Europe.',
   founder: { '@id': PERSON_ID },
-  priceRange: '€100 / £90 per session',
   knowsLanguage: ['en', 'el'],
   areaServed: AREA_SERVED,
 };
-// The published fee, the same for every service: one offer per currency.
+// Sessions are online by video, in English or Greek: the channel carries the
+// languages (availableLanguage is not a Service property).
+const CHANNEL = { '@type': 'ServiceChannel', name: 'Online by video', availableLanguage: ['en', 'el'] };
+// The published standard fee: one offer per currency. The longer couples
+// session's fee is agreed separately and has no offer.
 const offers = (description) => [
   { '@type': 'Offer', price: 100, priceCurrency: 'EUR', description },
   { '@type': 'Offer', price: 90, priceCurrency: 'GBP', description },
@@ -159,7 +164,7 @@ function toolNodes(urlPath, name, description) {
   }]);
 }
 
-// ─── The 26 canonical pages ──────────────────────────────────────────────────
+// ─── The canonical pages ─────────────────────────────────────────────────────
 // [id, sitemap priority, changefreq, breadcrumb label]. Order is sitemap order.
 const CANONICAL = [
   ['home', '1.0', 'monthly', null],
@@ -170,6 +175,8 @@ const CANONICAL = [
   ['therapy-for-men-in-tech', '0.8', 'monthly', 'Men in Tech & Demanding Careers'],
   ['therapy-for-founders', '0.8', 'monthly', 'Founders & Business Owners'],
   ['therapy-for-executives', '0.8', 'monthly', 'Executives & Leaders'],
+  ['therapy-for-men', '0.8', 'monthly', 'Therapy for Men'],
+  ['therapy-for-software-engineers', '0.8', 'monthly', 'Software Engineers'],
   ['greek-speaking-psychotherapist', '0.8', 'monthly', 'Greek-speaking Psychotherapy'],
   ['relationship-problems-men', '0.8', 'monthly', 'Relationship Problems'],
   ['separation-divorce-men', '0.8', 'monthly', 'Separation & Divorce'],
@@ -180,6 +187,7 @@ const CANONICAL = [
   ['achievement-self-worth', '0.8', 'monthly', 'Achievement & Self-Worth'],
   ['about', '0.7', 'yearly', 'About'],
   ['considering-therapy', '0.7', 'monthly', 'Considering Therapy'],
+  ['fees-and-practicalities', '0.7', 'monthly', 'Fees & Practicalities'],
   ['therapy-vs-coaching', '0.7', 'monthly', 'Therapy vs Coaching'],
   ['undisguised', '0.6', 'monthly', 'Undisguised'],
   ['faq', '0.6', 'monthly', 'FAQ'],
@@ -191,18 +199,32 @@ const CANONICAL = [
 ];
 
 // The three services sit under Work With Me in the breadcrumb and carry a
-// Service node: name, type, provider, the page's own description, the
-// languages, the area served and the published fee. The three audience pages
-// carry one too, named by their H1. Nothing about place or eligibility: the
-// pages say location is confirmed first.
+// Service node: name, type, provider, the page's own description, the online
+// channel and its languages, the area served and the published fee. The
+// audience pages carry one too, named by their H1, with who they are for.
+// Nothing about place or eligibility: the pages say location is confirmed
+// first.
 const SERVICE_TYPE = {
   'individual-psychotherapy': 'Psychotherapy',
   'couples-therapy': 'Couples therapy',
   'professional-coaching': 'Professional coaching',
 };
-const AUDIENCE_SERVICE = ['therapy-for-men-in-tech', 'therapy-for-founders', 'therapy-for-executives'];
-// What one fee buys, where a page states the session length with it.
-const OFFER_UNIT = { 'couples-therapy': 'Per 50–60 minute session' };
+// The audience pages, each a way into the same psychotherapy, and who each is
+// for (in the words of its meta description).
+const AUDIENCE = {
+  'therapy-for-men-in-tech': 'Men in tech, business and demanding careers',
+  'therapy-for-founders': 'Startup founders, entrepreneurs and business owners',
+  'therapy-for-executives': 'Executives, directors and senior leaders',
+  'therapy-for-men': 'Men',
+  'therapy-for-software-engineers': 'Software engineers',
+};
+// What one fee buys: an individual psychotherapy session unless the page
+// sells something else (coaching's format is agreed for the work).
+const OFFER_UNIT = {
+  'couples-therapy': 'Per standard 50–60-minute couples session',
+  'professional-coaching': 'Per professional coaching session',
+};
+const INDIVIDUAL_UNIT = 'Per 50–60-minute individual psychotherapy session';
 // The pages that show questions and answers (a section of nothing but
 // questions, drawn as the FAQ accordion by site-pages.jsx). Their FAQPage
 // holds them in the page's own words. A question asked on more than one page
@@ -211,7 +233,8 @@ const OFFER_UNIT = { 'couples-therapy': 'Per 50–60 minute session' };
 const FAQ_MARKED = new Set();
 const FAQ_PAGES = [
   'individual-psychotherapy', 'couples-therapy', 'therapy-for-men-in-tech', 'therapy-for-founders',
-  'therapy-for-executives', 'greek-speaking-psychotherapist', 'executive-burnout-therapy', 'faq',
+  'therapy-for-executives', 'therapy-for-men', 'therapy-for-software-engineers', 'greek-speaking-psychotherapist',
+  'executive-burnout-therapy', 'faq',
 ];
 const plain = (t) => t.replace(/\*\*/g, '');
 // site-pages.jsx isFaq: every block a question (an H3 ending in "?").
@@ -272,15 +295,18 @@ function canonicalPage([id, priority, changefreq, crumb]) {
     entry.schema = [PERSON_FULL, PRACTICE].concat(nodes);
     return entry;
   }
-  if (SERVICE_TYPE[id] || AUDIENCE_SERVICE.includes(id)) {
-    nodes.push({
+  if (SERVICE_TYPE[id] || AUDIENCE[id]) {
+    const service = {
       '@type': 'Service', '@id': abs(url) + '#service',
       name: SERVICE_TYPE[id] ? crumb : c.hero.h1.replace(/\.$/, ''),
       serviceType: SERVICE_TYPE[id] || 'Psychotherapy',
       url: abs(url), description, provider: { '@id': PERSON_ID },
-      areaServed: AREA_SERVED,
-      offers: offers(OFFER_UNIT[id] || 'Per session'),
-    });
+    };
+    if (AUDIENCE[id]) service.audience = { '@type': 'Audience', audienceType: AUDIENCE[id] };
+    nodes.push(Object.assign(service, {
+      availableChannel: CHANNEL, areaServed: AREA_SERVED,
+      offers: offers(OFFER_UNIT[id] || INDIVIDUAL_UNIT),
+    }));
   }
   if (FAQ_PAGES.includes(id)) entry.faq = faqOf(c);
   if (id === 'free-tools') {

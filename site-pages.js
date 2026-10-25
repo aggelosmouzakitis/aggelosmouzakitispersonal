@@ -1,4 +1,4 @@
-// site-pages.jsx — renders the 26 canonical pages from the canonical copy, and
+// site-pages.jsx — renders the canonical pages from the canonical copy, and
 // the articles (renderArticlePage, from article-<slug>.js; see "Articles").
 //
 // Loaded after site-nav.js, site-chrome.js and site-copy.js. Each page shell
@@ -48,7 +48,7 @@
   // canonical wording is untouched (only an <a> is added around the phrase);
   // scripts/seo/seo-check.js proves every phrase is on its page, once.
   // CONTEXT_LINKS:BEGIN
-  const CONTEXT_LINKS = [['individual-psychotherapy', 'Functioning at work is a poor test of how the rest of your life is going', '/high-functioning-burnout/'], ['therapy-for-men-in-tech', 'the workday ends before the thinking does', '/cant-switch-off-from-work/'], ['considering-therapy', 'I can’t switch off', '/cant-switch-off-from-work/'], ['therapy-vs-coaching', 'whether to leave a job', '/my-job-gives-me-anxiety-should-i-quit/'], ['therapy-vs-coaching', 'still researching the same choice six months later', '/career-change-anxiety/'], ['executive-burnout-therapy', 'what it now costs to maintain the same output', '/high-functioning-burnout/'], ['executive-burnout-therapy', 'Short periods of fatigue usually improve when pressure drops and recovery improves', '/burnout-vs-stress-depression/'], ['career-transition-therapy', 'Six months later, the decision is still open', '/career-change-anxiety/'], ['career-transition-therapy', 'giving up a version of yourself that took years to build', '/career-change-at-40/'], ['anxiety-overthinking', 'Anxiety can increase preparation, checking and work rather than slowing somebody down', '/work-anxiety/'], ['achievement-self-worth', 'being careful turns into needing to be beyond criticism', '/perfectionism-at-work/'], ['work-affecting-relationship', 'continue thinking about the company for the rest of the evening', '/cant-switch-off-from-work/'], ['work-affecting-relationship', 'Burnout often shows up in relationships before it shows up in performance', '/burnout-at-work/'],
+  const CONTEXT_LINKS = [['individual-psychotherapy', 'Functioning at work is a poor test of how the rest of your life is going', '/high-functioning-burnout/'], ['therapy-for-men-in-tech', 'the workday ends before the thinking does', '/cant-switch-off-from-work/'], ['considering-therapy', 'I can’t switch off', '/cant-switch-off-from-work/'], ['therapy-vs-coaching', 'whether to leave a job', '/my-job-gives-me-anxiety-should-i-quit/'], ['therapy-vs-coaching', 'still researching the same choice six months later', '/career-change-anxiety/'], ['executive-burnout-therapy', 'what it now costs to maintain the same output', '/high-functioning-burnout/'], ['executive-burnout-therapy', 'Short periods of fatigue usually improve when pressure drops and recovery improves', '/burnout-vs-stress-depression/'], ['career-transition-therapy', 'Six months later, the decision is still open', '/career-change-anxiety/'], ['career-transition-therapy', 'giving up a version of yourself that took years to build', '/career-change-at-40/'], ['anxiety-overthinking', 'Anxiety can increase preparation, checking and work rather than slowing somebody down', '/work-anxiety/'], ['achievement-self-worth', 'being careful turns into needing to be beyond criticism', '/perfectionism-at-work/'], ['work-affecting-relationship', 'continue thinking about the company for the rest of the evening', '/cant-switch-off-from-work/'], ['work-affecting-relationship', 'Burnout often shows up in relationships before it shows up in performance', '/burnout-at-work/'], ['therapy-for-software-engineers', 'Professional coaching', '/professional-coaching/'],
   // Undisguised: a phrase that already says what one movement of the map is
   // about links to that movement on /undisguised/, at most one per page.
   // Phrases about the person, never about the therapy's method: the
@@ -265,6 +265,13 @@
       body: 'See where the pressure is showing up most.',
       button: WLC_BUTTON
     },
+    'therapy-for-software-engineers': {
+      after: 'therapy-with-me',
+      variant: 'compact',
+      source: 'engineers-compact',
+      body: WLC_DEFAULT.body,
+      button: WLC_BUTTON
+    },
     'therapy-for-founders': {
       after: 'after-growth-funding-or-exit',
       variant: 'compact',
@@ -468,6 +475,13 @@
           }, b.items.map(it => e('div', {
             key: it.a
           }, e('dt', null, it.a), e('dd', null, it.b))));
+        case 'table':
+          return e(ArticleTable, {
+            key,
+            t: Object.assign({
+              narrow: 'stack'
+            }, b)
+          });
         case 'quote':
           return e('figure', {
             key,
@@ -521,7 +535,10 @@
     }, s.h2), children || e('div', {
       className: 'flow'
     }, e(Blocks, {
-      blocks: s.blocks,
+      // a table is named by its section's heading
+      blocks: s.blocks.map(b => b.t === 'table' ? Object.assign({
+        labelledBy: s.id + '-h'
+      }, b) : b),
       ctx,
       roles: roles === undefined ? defaultRoles(s.blocks) : roles
     })));
@@ -3249,7 +3266,7 @@
     // Undisguised styles only where they are drawn: the emblem on the
     // homepage and the manifesto, the ribbon and the read-first feature on
     // the homepage, the manifesto's own on its page.
-    const css = CSS + (id === 'home' || id === 'undisguised' ? UD_EMBLEM_CSS : '') + (id === 'home' ? UD_HOME_CSS : '') + (id === 'undisguised' ? UD_PAGE_CSS : '');
+    const css = CSS + (id === 'home' || id === 'undisguised' ? UD_EMBLEM_CSS : '') + (id === 'home' ? UD_HOME_CSS : '') + (id === 'undisguised' ? UD_PAGE_CSS : '') + (p.sections.some(s => s.blocks.some(b => b.t === 'table')) ? TABLE_CSS : '');
     return e(React.Fragment, null, e(window.ChromeStyles), e('style', {
       dangerouslySetInnerHTML: {
         __html: css
@@ -3567,6 +3584,44 @@
 @media (max-width:599px){.btn{white-space:normal;text-align:center}}
 `;
 
+  // The articles' tables (ArticleTable), also drawn on a canonical page whose
+  // copy has a table (/fees-and-practicalities/).
+  const TABLE_CSS = `
+.flow>.art-table,.flow>.art-table-scroll{margin-top:24px}
+.flow>.art-table+*,.flow>.art-table-scroll+*{margin-top:24px}
+
+/* Comparison table: the first column narrower than the two evidence columns */
+.art-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15.5px;line-height:1.55;color:var(--body)}
+.art-table caption{caption-side:top;margin:0 0 14px;text-align:left;font-size:17px;font-weight:600;line-height:1.45;color:var(--heading)}
+.art-table__key{width:24%}
+.art-table thead th{padding:0 16px 12px 0;border-bottom:2px solid var(--heading);text-align:left;vertical-align:bottom;font-family:var(--font-heading);font-size:15px;font-weight:700;line-height:1.3;color:var(--heading)}
+.art-table tbody th,.art-table td{padding:14px 18px 16px 0;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.art-table tbody th{font-weight:650;line-height:1.4;color:var(--heading)}
+.art-table tr>:last-child{padding-right:0}
+.art-table .art-num--right{text-align:right;font-variant-numeric:tabular-nums}
+.art-table .art-num--center{text-align:center}
+.art-table--fit .art-table__key{width:auto}
+.art-table--fit .art-table__ev{width:9.5em}
+@media (max-width:640px){
+  .art-table--stack,.art-table--stack tbody,.art-table--stack tr,.art-table--stack th,.art-table--stack td{display:block;width:auto}
+  .art-table--stack caption{display:block}
+  .art-table--stack colgroup{display:none}
+  .art-table--stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .art-table--stack tbody tr{padding:16px 0 20px;border-top:2px solid var(--heading)}
+  .art-table--stack tbody th,.art-table--stack td{padding:0;border:0}
+  .art-table--stack tbody th{font-family:var(--font-heading);font-size:18px;font-weight:700}
+  .art-table--stack td{margin-top:14px}
+  .art-table--stack [data-label]::before{content:attr(data-label);content:attr(data-label) / "";display:block;margin-bottom:4px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.35;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
+  .art-table--scroll{min-width:34rem}
+}
+/* A table that scrolls in its own region on narrow screens (focusable, so a
+   keyboard can scroll it). A soft shadow shows at an edge only while there is
+   more table beyond it: bone covers scroll with the content and hide the
+   shadows at either end. */
+.art-table-scroll{overflow-x:auto;overscroll-behavior-x:contain;background:linear-gradient(to right,var(--bone) 40%,rgba(243,240,232,0)) left center/28px 100% no-repeat local,linear-gradient(to left,var(--bone) 40%,rgba(243,240,232,0)) right center/28px 100% no-repeat local,radial-gradient(farthest-side at 0 50%,rgba(23,25,25,.18),rgba(23,25,25,0)) left center/12px 100% no-repeat scroll,radial-gradient(farthest-side at 100% 50%,rgba(23,25,25,.18),rgba(23,25,25,0)) right center/12px 100% no-repeat scroll}
+.art-table-scroll:focus-visible{outline:3px solid var(--green);outline-offset:4px}
+`;
+
   // Articles only (ArticleSite adds it after CSS): the long-form reading
   // column on the 760 axis, body measure 36em.
   const ARTICLE_CSS = `
@@ -3628,40 +3683,10 @@
 .art-hr{width:64px;height:0;margin-inline:0;border:0;border-top:2px solid var(--rule-2)}
 .flow>.art-quote,.flow>.art-hr{margin-top:32px}
 .flow>.art-quote+*,.flow>.art-hr+*{margin-top:32px}
-.flow>.art-list,.flow>.art-table,.flow>.art-table-scroll,.flow>.art-callout{margin-top:24px}
-.flow>.art-list+*,.flow>.art-table+*,.flow>.art-table-scroll+*,.flow>.art-callout+*{margin-top:24px}
+.flow>.art-list,.flow>.art-callout{margin-top:24px}
+.flow>.art-list+*,.flow>.art-callout+*{margin-top:24px}
 
-/* Comparison table: the first column narrower than the two evidence columns */
-.art-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15.5px;line-height:1.55;color:var(--body)}
-.art-table caption{caption-side:top;margin:0 0 14px;text-align:left;font-size:17px;font-weight:600;line-height:1.45;color:var(--heading)}
-.art-table__key{width:24%}
-.art-table thead th{padding:0 16px 12px 0;border-bottom:2px solid var(--heading);text-align:left;vertical-align:bottom;font-family:var(--font-heading);font-size:15px;font-weight:700;line-height:1.3;color:var(--heading)}
-.art-table tbody th,.art-table td{padding:14px 18px 16px 0;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
-.art-table tbody th{font-weight:650;line-height:1.4;color:var(--heading)}
-.art-table tr>:last-child{padding-right:0}
-.art-table .art-num--right{text-align:right;font-variant-numeric:tabular-nums}
-.art-table .art-num--center{text-align:center}
-.art-table--fit .art-table__key{width:auto}
-.art-table--fit .art-table__ev{width:9.5em}
-@media (max-width:640px){
-  .art-table--stack,.art-table--stack tbody,.art-table--stack tr,.art-table--stack th,.art-table--stack td{display:block;width:auto}
-  .art-table--stack caption{display:block}
-  .art-table--stack colgroup{display:none}
-  .art-table--stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  .art-table--stack tbody tr{padding:16px 0 20px;border-top:2px solid var(--heading)}
-  .art-table--stack tbody th,.art-table--stack td{padding:0;border:0}
-  .art-table--stack tbody th{font-family:var(--font-heading);font-size:18px;font-weight:700}
-  .art-table--stack td{margin-top:14px}
-  .art-table--stack [data-label]::before{content:attr(data-label);content:attr(data-label) / "";display:block;margin-bottom:4px;font-family:var(--font-body);font-size:12px;font-weight:700;line-height:1.35;letter-spacing:.06em;text-transform:uppercase;color:var(--meta)}
-  .art-table--scroll{min-width:34rem}
-}
-/* A table that scrolls in its own region on narrow screens (focusable, so a
-   keyboard can scroll it). A soft shadow shows at an edge only while there is
-   more table beyond it: bone covers scroll with the content and hide the
-   shadows at either end. */
-.art-table-scroll{overflow-x:auto;overscroll-behavior-x:contain;background:linear-gradient(to right,var(--bone) 40%,rgba(243,240,232,0)) left center/28px 100% no-repeat local,linear-gradient(to left,var(--bone) 40%,rgba(243,240,232,0)) right center/28px 100% no-repeat local,radial-gradient(farthest-side at 0 50%,rgba(23,25,25,.18),rgba(23,25,25,0)) left center/12px 100% no-repeat scroll,radial-gradient(farthest-side at 100% 50%,rgba(23,25,25,.18),rgba(23,25,25,0)) right center/12px 100% no-repeat scroll}
-.art-table-scroll:focus-visible{outline:3px solid var(--green);outline-offset:4px}
-
+${TABLE_CSS}
 /* The one safety callout: restrained, the paragraph and its links intact */
 .art-callout{padding:20px 22px;background:var(--bone-deep);border-left:3px solid var(--heading)}
 

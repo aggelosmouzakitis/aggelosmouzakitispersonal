@@ -4,7 +4,7 @@
 // scripts, planning documents, the archive's build inputs, tooling. Netlify
 // publishes public/ (netlify.toml [build] publish), and this script fills it
 // from an allowlist, so nothing outside the lists below can be requested:
-//   pages  every page in scripts/seo/site-meta.js (the 26 canonical pages,
+//   pages  every page in scripts/seo/site-meta.js (the canonical pages,
 //          the Work & Life Check, the two free tools and the articles), plus
 //          EXTRA_PAGES — served on purpose, but outside the sitemap;
 //   FILES  the root files browsers and crawlers ask for, and the bundles the

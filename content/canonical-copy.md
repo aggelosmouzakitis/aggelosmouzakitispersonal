@@ -15,8 +15,10 @@
 - Couples Therapy
 - Professional Coaching
 - Therapy for Men in Tech & Business
+- Therapy for Software Engineers
 - Therapy for Executives & Senior Leaders
 - Therapy for Entrepreneurs, Founders & Business Owners
+- Therapy for Men
 - Greek-speaking Psychotherapy
 
 **Resources**
@@ -48,8 +50,10 @@ BACP-registered psychotherapist · Background in tech, product & growth
 
 **Who I work with**
 - Men in Tech & Demanding Careers
+- Software Engineers
 - Founders & Business Owners
 - Executives & Leaders
+- Therapy for Men
 - Greek-speaking Psychotherapy
 
 **Common problems**
@@ -67,6 +71,7 @@ BACP-registered psychotherapist · Background in tech, product & growth
 - Writing
 - Free Tools
 - FAQ
+- Fees & Practicalities
 - Reviews
 - Contact
 
@@ -106,6 +111,9 @@ Confidentiality
 | 24 | Contact | /contact/ | Contact Aggelos Mouzakitis \| Book a Consultation | Contact Aggelos Mouzakitis about individual psychotherapy, couples therapy or professional coaching. Online sessions in Greek or English. | Tell me briefly what brings you here. |
 | 25 | Confidentiality | /confidentiality/ | Confidentiality \| Aggelos Mouzakitis | Information about confidentiality, clinical supervision, records, communication and the limits that apply to psychotherapy with Aggelos Mouzakitis. | Confidentiality |
 | 26 | Undisguised | /undisguised/ | Undisguised: A Manifesto for Living Deliberately \| Aggelos Mouzakitis | A manifesto by Aggelos Mouzakitis on understanding what drives us, questioning the roles we've learned to play and making more deliberate choices about how we live. | Undisguised. |
+| 27 | Therapy for Men | /therapy-for-men/ | Online Therapy for Men \| Aggelos Mouzakitis | Online psychotherapy for men dealing with relationship difficulties, responsibility, anxiety or decisions they keep putting off. In English or Greek. | Online therapy for men. |
+| 28 | Software Engineers | /therapy-for-software-engineers/ | Therapy for Software Engineers \| Aggelos Mouzakitis | Online therapy for software engineers dealing with on-call pressure, difficult feedback, career decisions or work that follows them home. English or Greek. | Online therapy for software engineers. |
+| 29 | Fees & Practicalities | /fees-and-practicalities/ | Therapy Fees & Practicalities \| Aggelos Mouzakitis | Online therapy costs €100 or £90 for a standard session. Session length, frequency, languages, the free introductory call and longer couples sessions. | Fees and practicalities. |
 
 ---
 
@@ -362,9 +370,10 @@ If you are not sure, describe the situation when you contact me and I will tell 
 
 Send a short note about what brings you here and where you are currently located. If the situation falls within what I offer, we arrange an initial conversation.
 
-The first conversation is a free introductory call, usually between 30 minutes and an hour. Sessions after that are €100 or £90 each.
+The first conversation is a free introductory call, usually between 30 minutes and an hour. Standard sessions after that are €100 or £90 each.
 
-**Book a consultation →**
+**Book a consultation →**  
+**Fees and practicalities →**
 
 ---
 
@@ -410,7 +419,8 @@ Work belongs in the room when it matters. Salary, a difficult manager, a company
 
 My previous career was in product and growth, so the professional context is familiar. That context can be discussed without turning psychotherapy into coaching.
 
-**Psychotherapy for men in tech →**
+**Psychotherapy for men in tech →**  
+**Therapy for men →**
 
 ## Relationships
 
@@ -519,7 +529,7 @@ Couples sessions are online. **Weekly sessions usually last 50–60 minutes. Biw
 
 I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located.
 
-Weekly sessions of 50–60 minutes are €100 or £90 each. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+Weekly sessions of 50–60 minutes are €100 or £90 each. The fee for the longer couples session is agreed separately before booking. The first conversation is a free introductory call, usually between 30 minutes and an hour.
 
 ## Common questions
 
@@ -721,7 +731,8 @@ Software engineers, engineering managers, product managers, designers, data peop
 The specific role matters less than the pattern: work that carries a lot of weight and a life outside it that is getting less of you.
 
 **Founders →**  
-**Executives →**
+**Executives →**  
+**Software engineers →**
 
 ## When work continues after hours
 
@@ -750,7 +761,8 @@ The effects often show up at home before they affect performance at work.
 Your partner gets a version of you that has very little patience left. A normal request feels like one more task. You keep explaining why this month is unusually intense, and eventually your partner stops believing that next month will be different.
 
 **Work & relationships →**  
-**Relationship problems →**
+**Relationship problems →**  
+**Therapy for men →**
 
 ## Therapy with me
 
@@ -779,10 +791,12 @@ Then we work on the relationship. Your profession is context, not the subject yo
 Yes, online. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. I confirm that I can work with you based on where you are located before ongoing therapy begins.
 
 ### Will my employer know?
-No. I do not contact your employer and nothing is shared with them. Confidentiality has professional and legal limits, which I explain before ongoing work begins.
+I do not provide reports to your employer. Sessions are confidential within the professional and legal limits that apply, which I explain before ongoing work begins.
 
 ### How much does it cost, and how does it work?
 Sessions are €100 or £90 each, online by video, in English or Greek. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+
+**Fees and practicalities →**
 
 ## Contact
 
@@ -847,6 +861,8 @@ Pressure can hide questions for a long time because there is always something ur
 
 Then the round closes, the company becomes profitable, a senior hire takes over more of the operation or the business is sold. The expected relief is smaller than expected.
 
+**Achievement & self-worth →**
+
 ## My background
 
 Before psychotherapy, I ran a consultancy for seven years, built two startups and spent most of my previous career working with technology companies.
@@ -866,7 +882,7 @@ If the company is entangled with anxiety, relationships, self-worth, grief or a 
 ## Common questions
 
 ### Will my board, investors or co-founder know I am in therapy?
-No. I do not report to anyone in your company, and nobody there is contacted. Confidentiality has professional and legal limits, which I explain before ongoing work begins.
+I do not provide reports to your board, investors or co-founder. Sessions are confidential within the professional and legal limits that apply, which I explain before ongoing work begins.
 
 ### Can we talk about the business itself?
 Yes. Runway, hiring, a difficult board meeting or a dispute with a co-founder are legitimate parts of the situation. Therapy looks at what is happening to you around those decisions, not only at the decisions themselves.
@@ -879,6 +895,8 @@ Partners live with the company too. If both of you want the relationship itself 
 
 ### How much does it cost, and how does it work?
 Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+
+**Fees and practicalities →**
 
 ## Contact
 
@@ -948,7 +966,7 @@ There is nothing irrational about finding that difficult.
 
 ## Discretion
 
-I do not report to your employer, board or anyone else in the organisation, and nobody there is contacted. Sessions are online, so there is no waiting room and no one to bump into.
+I do not provide reports to your employer or board. Sessions take place online, so you need somewhere you can speak privately.
 
 What we discuss is confidential within the professional and legal limits that apply. I explain those limits before ongoing work begins.
 
@@ -979,6 +997,8 @@ Yes. Technology is the environment I know most deeply, but the pressures of seni
 
 ### How much does it cost, and how does it work?
 Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+
+**Fees and practicalities →**
 
 ## Contact
 
@@ -1035,6 +1055,8 @@ Being Greek is context, not the subject you are required to talk about.
 Sessions are online by video. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there.
 
 I work with clients across the UK and Europe, including Greece. Sessions are €100 or £90 each, and the first conversation is a free introductory call, usually between 30 minutes and an hour.
+
+**Fees and practicalities →**
 
 ## Common questions
 
@@ -1688,6 +1710,8 @@ If the situation fits what I offer, we arrange an initial conversation. The rele
 
 The first conversation is a free introductory call, usually between 30 minutes and an hour, and ongoing sessions are €100 or £90 each.
 
+**Fees and practicalities →**
+
 ## Contact
 
 If you want to find out whether this fits, book a consultation.
@@ -1771,7 +1795,9 @@ That is common. Equal enthusiasm is not required. Both people do need enough wil
 ## Fees
 
 ### How much does it cost?
-Sessions are €100 or £90 each. The fee is per session and is the same for individual psychotherapy, couples therapy and professional coaching. I confirm it before we agree to begin.
+Standard sessions are €100 or £90. Individual psychotherapy and standard couples sessions usually last 50–60 minutes. The longer couples session has a separately agreed fee. Professional coaching is €100 or £90 per session, with its format agreed before starting.
+
+**Fees and practicalities →**
 
 ### Is the first conversation free?
 Yes. The first conversation is a free introductory call, usually between 30 minutes and an hour.
@@ -2273,5 +2299,267 @@ The Undisguised Map is something to return to when we notice ourselves slipping 
 
 **Return to the Map →**  
 **Read Undisguised →**
+
+---
+
+# 27. Therapy for Men
+
+**URL:** `/therapy-for-men/`  
+**SEO title:** Online Therapy for Men | Aggelos Mouzakitis  
+**Meta description:** Online psychotherapy for men dealing with relationship difficulties, responsibility, anxiety or decisions they keep putting off. In English or Greek.
+
+## Hero
+
+**THERAPY FOR MEN**
+
+# Online therapy for men.
+
+You may handle difficult conversations at work and still spend weeks putting one off with your partner. Each evening, there is another reason it can wait.
+
+I am a BACP-registered psychotherapist with a previous career in product and growth. Sessions are online, in English or Greek.
+
+**Book a consultation →**
+
+## Agreeing when you wanted to say no
+
+Agreeing can end an uncomfortable conversation quickly. The cost may only become apparent later, when you are doing something you did not want to do and resenting the person who asked.
+
+Sometimes the request is unreasonable or the other person is putting pressure on you. It may also be difficult to bear their disappointment, even when you think saying no would be fair. We can look at what has happened when you have refused before, and what you now expect from people when you disagree.
+
+## When conversations keep going wrong
+
+An argument can keep returning to your tone while the original issue stays untouched. You stop talking to avoid another row, then find that the silence becomes the next argument.
+
+If you are holding back something you expect your partner to reject, it can be hard to bring it up before you are already angry. Individual therapy can focus on how these exchanges develop, including what happens when you try to say what you want. The relationship itself may also have problems that saying things differently will not resolve.
+
+**Relationship problems →**
+
+## A decision you keep putting off
+
+You can make a convincing case for staying in a job and an equally convincing case for leaving. After another evening thinking it through, nothing has changed.
+
+The financial risk may be substantial. Leaving might also mean admitting how unhappy you have been, or disappointing people who thought this was what you wanted. Those concerns can remain even after you have answered most of the practical questions.
+
+**Career change and decisions →**  
+**Men in tech and demanding careers →**
+
+## What sessions are like
+
+We might spend time on the moment before you agreed to something you did not want, including the response you expected if you refused. I may notice that the same expectation has appeared in another situation and ask whether that connection fits.
+
+Earlier experiences can become relevant when they help explain what is happening now. You do not need a polished account of your life before we can begin, and you decide what to do with what we discuss.
+
+**How individual psychotherapy works →**
+
+## Practicalities
+
+**Format**  
+Online by video
+
+**Sessions**  
+Usually 50–60 minutes
+
+**Frequency**  
+Normally weekly at first
+
+**Languages**  
+English or Greek
+
+**Fee**  
+€100 or £90 per session
+
+**Introductory call**  
+Free, usually 30 minutes to an hour
+
+I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins.
+
+**Fees and practicalities →**
+
+## Common questions
+
+### Do I need to know exactly what is wrong?
+No. You can tell me what made you look for a therapist, even if you are unsure what to call it.
+
+### Do I need to work in tech to come?
+No. I also work with men in other careers and with difficulties that have little to do with work.
+
+### Can I come on my own about my relationship?
+Yes. Individual psychotherapy can focus on a relationship. Couples therapy is a separate service for partners who want to attend together.
+
+### Do you work exclusively with men?
+I mainly work with men. I also work with other adults when we are a suitable fit.
+
+## Contact
+
+Tell me briefly what has been happening and where you are currently located.
+
+**Book a consultation →**
+
+---
+
+# 28. Software Engineers
+
+**URL:** `/therapy-for-software-engineers/`  
+**SEO title:** Therapy for Software Engineers | Aggelos Mouzakitis  
+**Meta description:** Online therapy for software engineers dealing with on-call pressure, difficult feedback, career decisions or work that follows them home. English or Greek.
+
+## Hero
+
+**SOFTWARE ENGINEERS**
+
+# Online therapy for software engineers.
+
+The incident is resolved, but you keep the channel open. When your partner asks about the weekend, you realise you have missed most of the conversation.
+
+I am a BACP-registered psychotherapist with a previous career in product and growth. I offer online therapy in English or Greek.
+
+**Book a consultation →**
+
+## Checking after your shift ends
+
+Sometimes the coverage is thin and the person on call will need help. It is also possible to keep monitoring after a capable colleague has taken over, and to feel unsettled until you have checked for yourself.
+
+Before treating the checking as anxiety, I would want to know what happens when you do switch off. If you have been blamed for missed problems before, someone else taking over may do little to change what you expect. We need to understand which part of that responsibility still belongs to your current role.
+
+**Can't switch off from work →**
+
+## When feedback stays with you
+
+A reviewer asks for a change. You make it, then spend another hour checking code they did not comment on. The review may be finished while you are still trying to make sure nobody can find another reason to question your competence. Sometimes the feedback has been unfair or badly delivered. There can also be a cycle in which another check brings a little relief, so you repeat it the next time you doubt yourself. After a while, submitting work without that extra checking can feel like taking a risk.
+
+**Achievement and self-worth →**
+
+## Where the career goes next
+
+Moving from engineering into management can change what makes the work satisfying. More authority may come with less time doing the work you chose the profession for. A good salary can make a change difficult, even when the current role suits you badly. You may also be reluctant to discuss going back to an individual contributor role because you expect the move to be read as a failure.
+
+**Career change and decisions →**
+
+## Therapy with me
+
+Before psychotherapy, I spent more than 18 years in product and growth, including seven years running a consultancy and work with more than 100 technology companies.
+
+If a review keeps replaying for days, we might return to the comment itself and what you took it to mean about you. Earlier experiences of criticism may become relevant, especially if you find yourself expecting a similar response from people outside work. Sessions can also begin with a relationship difficulty or another part of your life that needs attention.
+
+**About me →**
+
+## Practicalities
+
+**Format**  
+Online by video
+
+**Sessions**  
+Usually 50–60 minutes
+
+**Frequency**  
+Normally weekly at first
+
+**Languages**  
+English or Greek
+
+**Fee**  
+€100 or £90 per session
+
+**Introductory call**  
+Free, usually 30 minutes to an hour
+
+I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins.
+
+**Fees and practicalities →**
+
+## Common questions
+
+### Which engineering roles is this page for?
+Software developers, senior and staff engineers, SREs and engineering managers may recognise these situations. We discuss whether the issue you bring fits what I offer before starting.
+
+### Do I need to be senior to work with you?
+No. Seniority is not a requirement.
+
+### Is this page only for male engineers?
+No. Much of my practice is with men, but I also work with other adults when we are a suitable fit.
+
+### What if I mainly want help with a career decision?
+Professional coaching is a separate service for a question that can stay focused on professional options and action. If the decision is entangled with anxiety, self-worth or a recurring personal pattern, psychotherapy may give us more useful scope.
+
+## Contact
+
+If work keeps occupying more of your life than you want it to, tell me what has been happening.
+
+**Book a consultation →**
+
+---
+
+# 29. Fees & Practicalities
+
+**URL:** `/fees-and-practicalities/`  
+**SEO title:** Therapy Fees & Practicalities | Aggelos Mouzakitis  
+**Meta description:** Online therapy costs €100 or £90 for a standard session. Session length, frequency, languages, the free introductory call and longer couples sessions.
+
+## Hero
+
+**FEES & PRACTICALITIES**
+
+# Fees and practicalities.
+
+Individual psychotherapy sessions cost €100 or £90 and usually last 50–60 minutes. The introductory call is free, usually between 30 minutes and an hour.
+
+**Book a consultation →**
+
+## Fees
+
+| Service | Session format | Fee |
+|---|---|---|
+| Individual psychotherapy | Usually 50–60 minutes | €100 or £90 per session |
+| Couples therapy | Usually 50–60 minutes | €100 or £90 per session |
+| Couples therapy, longer format | Up to 90 minutes, every two weeks | Fee agreed before booking |
+| Professional coaching | Format agreed before starting | €100 or £90 per session |
+
+I confirm the fee and currency before we agree to begin. The fee for the longer couples session is agreed separately.
+
+## How often we meet
+
+For individual psychotherapy, I normally work weekly for at least the first few months. We can review frequency later. There is no fixed number of sessions you must complete, and you can stop whenever you choose.
+
+Couples sessions are normally weekly, or every two weeks in the longer format. Coaching arrangements depend on the professional question we are working on.
+
+**Individual psychotherapy →**  
+**Couples therapy →**  
+**Professional coaching →**
+
+## Online sessions and location
+
+Sessions take place online by video. You need a reliable connection and somewhere you can speak without being overheard.
+
+I work with clients in the UK and elsewhere in Europe, including Ireland and Greece. Tell me where you are currently located when you get in touch. I confirm whether I can work with you before ongoing therapy begins.
+
+## Languages
+
+Sessions can be in English, in Greek or move between the two.
+
+**Greek-speaking psychotherapy →**
+
+## The first conversation
+
+Send a short note about what brings you here and where you are located. I read it myself. If the situation fits what I offer, we arrange an introductory call.
+
+The call gives us both a chance to consider whether working together makes sense before ongoing sessions are agreed.
+
+**Considering therapy →**
+
+## Confidentiality
+
+Psychotherapy is confidential within the professional and legal limits that apply. I explain those limits before ongoing work begins.
+
+**Confidentiality →**
+
+## Urgent help
+
+I do not provide emergency psychiatric or crisis-response services. If you or somebody else is in immediate danger, contact the appropriate emergency service where you are located.
+
+## Contact
+
+If you have a practical question that is specific to your situation, include it in your message.
+
+**Book a consultation →**
 
 ---

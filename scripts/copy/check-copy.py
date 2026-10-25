@@ -85,6 +85,9 @@ def items_for(page):
                 out.append(('seq', norm(b['cite'])))
             elif t == 'question':
                 out.append(('seq', norm(b['text'])))
+            elif t == 'table':
+                for row in [b['head']] + b['rows']:
+                    out.extend(('seq', norm(c)) for c in row)
             elif t == 'sub':
                 # an eyebrow is drawn above its heading
                 if b.get('eyebrow'):

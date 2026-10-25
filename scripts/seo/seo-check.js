@@ -14,9 +14,10 @@
 // self-referencing, single), robots (no accidental noindex), <html lang="en">,
 // no /el/ alternates, exactly one H1, Open Graph completeness, og:url ===
 // canonical, OG image resolves, JSON-LD parses and asserts nothing the site
-// does not (no reviews, ratings, address, geo, LocalBusiness or medical types;
-// offers only at the published fee; FAQPage only with the questions and
-// answers the page shows), retired positioning wording, internal links
+// does not (no reviews, ratings, address, geo, LocalBusiness, the deprecated
+// ProfessionalService or medical types; offers only at the published fee;
+// FAQPage only with the questions and answers the page shows), retired
+// positioning wording, internal links
 // that 404 or go through a redirect, retired URLs linked from anywhere, orphan
 // pages, every legacy URL in routes.js (one 301 hop, a real 410, or a 404 for
 // URLs that never existed), no catch-all redirects, every 301 rule one hop to
@@ -230,7 +231,7 @@ async function main() {
         if (!n || typeof n !== 'object') return;
         for (const t of [].concat(n['@type'] || [])) {
           if (MEDICAL.test(t)) err(url, `medical schema type "${t}" — the page describes no clinical service`);
-          if (/^(Review|AggregateRating|LocalBusiness)$/.test(t)) err(url, `schema type "${t}" — not published on this site`);
+          if (/^(Review|AggregateRating|LocalBusiness|ProfessionalService)$/.test(t)) err(url, `schema type "${t}" — not published on this site`);
           if (t === 'Offer' && FEES[n.priceCurrency] !== n.price) err(url, `offer of ${n.price} ${n.priceCurrency} is not the published fee`);
         }
         for (const k of Object.keys(n)) {
