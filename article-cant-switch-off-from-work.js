@@ -148,7 +148,7 @@ window.SITE_ARTICLE_PAGES["cant-switch-off-from-work"] = {
     "id": "responsibility-makes-switching-off-harder",
     "blocks": [{
       "t": "p",
-      "text": "Founders may be worrying about payroll. Managers may be carrying an unresolved staffing problem. Senior individual contributors may know precisely what could break overnight. “It isn’t your company” offers little help when it is, or when your role includes genuine operational responsibility."
+      "text": "[Founders](/therapy-for-founders/) may be worrying about payroll. Managers may be carrying an unresolved staffing problem. Senior individual contributors may know precisely what could break overnight. “It isn’t your company” offers little help when it is, or when your role includes genuine operational responsibility."
     }, {
       "t": "p",
       "text": "For on-call work, useful arrangements include a defined rota, actionable alerts, backup and clear escalation. [Google’s guidance on being on call](https://sre.google/sre-book/being-on-call/) describes these operational protections. They make it clearer when attention is required and when responsibility belongs elsewhere."

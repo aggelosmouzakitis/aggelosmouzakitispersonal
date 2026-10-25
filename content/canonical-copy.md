@@ -87,9 +87,9 @@ Confidentiality
 | 5 | Couples Therapy | /couples-therapy/ | Online Couples Therapy \| Conflict, Distance & Work Pressure | Online couples therapy for recurring conflict, emotional distance and relationships affected by work, pressure and major life changes. | Online couples therapy for recurring conflict, distance and relationship strain. |
 | 6 | Professional Coaching | /professional-coaching/ | Professional Coaching for Tech & Career Decisions \| Aggelos Mouzakitis | Professional coaching for experienced people in tech, startups and business making career, leadership, independence and other difficult professional decisions. | Professional coaching for a decision you actually have to make. |
 | 7 | Therapy vs Coaching | /therapy-vs-coaching/ | Therapy vs Coaching: Which Fits Your Situation? | A practical guide to the difference between psychotherapy and professional coaching, especially for career decisions, anxiety, recurring patterns and problems that cross between work and personal life. | Therapy or coaching? |
-| 8 | Men in Tech & Demanding Careers | /therapy-for-men-in-tech/ | Therapy for Men \| Tech, Business & Demanding Careers | Online psychotherapy for men in tech, startups and demanding careers dealing with relationships, burnout, anxiety, difficult decisions and work taking over life. | Therapy for men in tech, business and demanding careers. |
-| 9 | Founders & Business Owners | /therapy-for-founders/ | Therapy for Entrepreneurs, Founders & Business Owners | Online psychotherapy for entrepreneurs, founders and business owners dealing with pressure, burnout, relationships, difficult decisions and identity beyond the company. | Therapy for entrepreneurs, founders and business owners. |
-| 10 | Executives & Leaders | /therapy-for-executives/ | Executive Therapist \| Therapy for Executives & Leaders | Online psychotherapy for executives and senior leaders dealing with pressure, burnout, difficult decisions, relationships, career transitions and the personal cost of responsibility. | Psychotherapy for executives and senior leaders. |
+| 8 | Men in Tech & Demanding Careers | /therapy-for-men-in-tech/ | Therapist for Men in Tech \| Online, UK & Europe | Online therapy for men in tech, business and demanding careers, with a BACP-registered psychotherapist with 18+ years in product and growth. | Therapy for men in tech, business and demanding careers. |
+| 9 | Founders & Business Owners | /therapy-for-founders/ | Therapist for Startup Founders & Entrepreneurs \| Online | Online psychotherapy for startup founders, entrepreneurs and business owners, with a BACP-registered therapist who built two startups himself. | Therapy for entrepreneurs, founders and business owners. |
+| 10 | Executives & Leaders | /therapy-for-executives/ | Executive Therapist \| Online Therapy for Senior Leaders | Confidential online psychotherapy for executives, directors and senior leaders, with a BACP-registered psychotherapist who spent 18+ years in technology. | Psychotherapy for executives and senior leaders. |
 | 11 | Greek-speaking Psychotherapy | /greek-speaking-psychotherapist/ | Greek-Speaking Psychotherapist Online \| Aggelos Mouzakitis | Online psychotherapy in Greek or English with a Greek-speaking psychotherapist, especially for Greeks living abroad and people working in tech and international careers. | Online psychotherapy in Greek or English. |
 | 12 | Relationship Problems | /relationship-problems-men/ | Relationship Problems for Men \| Psychotherapy with Aggelos Mouzakitis | Psychotherapy for men dealing with recurring conflict, emotional distance, withdrawal, resentment, separation and difficult relationship patterns. | Individual psychotherapy for men dealing with relationship problems. |
 | 13 | Separation & Divorce | /separation-divorce-men/ | Therapy for Men Going Through Separation or Divorce \| Aggelos Mouzakitis | Online psychotherapy for men dealing with separation, divorce, relationship endings, anger, grief, difficult decisions and keeping the rest of life functioning. | Psychotherapy during separation, divorce or the end of a long relationship. |
@@ -685,8 +685,8 @@ If you are not sure which category fits, describe the situation rather than choo
 # 8. Men in Tech & Demanding Careers
 
 **URL:** `/therapy-for-men-in-tech/`  
-**SEO title:** Therapy for Men | Tech, Business & Demanding Careers  
-**Meta description:** Online psychotherapy for men in tech, startups and demanding careers dealing with relationships, burnout, anxiety, difficult decisions and work taking over life.
+**SEO title:** Therapist for Men in Tech | Online, UK & Europe  
+**Meta description:** Online therapy for men in tech, business and demanding careers, with a BACP-registered psychotherapist with 18+ years in product and growth.
 
 ## Hero
 
@@ -705,6 +705,15 @@ Tech, product and business are familiar contexts from more than 18 years working
 Technology roles often combine rapid change, visible performance and unclear boundaries around responsibility. Teams change, priorities move, roles get redefined and a manager leaving can turn the job you accepted into a different job very quickly.
 
 Those details matter because they shape the pressure around the problem. They do not need to be translated into generic language about work-life balance before therapy can begin.
+
+## Who tends to come
+
+Software engineers, engineering managers, product managers, designers, data people, consultants and founders. Some are early in their careers. Many are senior enough that very few people at work hear the full version of what is going on.
+
+The specific role matters less than the pattern: work that carries a lot of weight and a life outside it that is getting less of you.
+
+**Founders →**  
+**Executives →**
 
 ## When work continues after hours
 
@@ -758,6 +767,15 @@ No. Senior individual contributors, consultants, managers and business owners ca
 ### What if my main issue is my relationship?
 Then we work on the relationship. Your profession is context, not the subject you are required to talk about.
 
+### Do you work with clients in the UK and Europe?
+Yes, online. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. I confirm that I can work with you based on where you are located before ongoing therapy begins.
+
+### Will my employer know?
+No. I do not contact your employer and nothing is shared with them. Confidentiality has professional and legal limits, which I explain before ongoing work begins.
+
+### How much does it cost, and how does it work?
+Sessions are €100 or £90 each, online by video, in English or Greek. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+
 ## Contact
 
 If this sounds like the kind of context you want your therapist to understand, get in touch.
@@ -769,8 +787,8 @@ If this sounds like the kind of context you want your therapist to understand, g
 # 9. Founders & Business Owners
 
 **URL:** `/therapy-for-founders/`  
-**SEO title:** Therapy for Entrepreneurs, Founders & Business Owners  
-**Meta description:** Online psychotherapy for entrepreneurs, founders and business owners dealing with pressure, burnout, relationships, difficult decisions and identity beyond the company.
+**SEO title:** Therapist for Startup Founders & Entrepreneurs | Online  
+**Meta description:** Online psychotherapy for startup founders, entrepreneurs and business owners, with a BACP-registered therapist who built two startups himself.
 
 ## Hero
 
@@ -789,6 +807,16 @@ Therapy can help when that overlap starts creating problems in the company, at h
 An employee can decide to resign. A founder deciding whether to step back is also thinking about staff, customers, investors and a relationship that has already organised years of life around the company.
 
 That is why stepping back can be more complicated than reducing hours or delegating more work.
+
+## Nowhere to put the unedited version
+
+Founders spend a lot of time managing what different people can hear.
+
+Investors need confidence. The team needs direction. A co-founder may be part of the problem. Your partner already lives with the consequences of the company and may have heard enough about it for one week.
+
+Some of that editing is sensible. The difficulty starts when nobody gets the full picture, including you.
+
+**The loneliness and emotional pressure that founders experience →**
 
 ## Working harder
 
@@ -827,6 +855,23 @@ If the company is entangled with anxiety, relationships, self-worth, grief or a 
 **Individual psychotherapy →**  
 **Therapy vs coaching →**
 
+## Common questions
+
+### Will my board, investors or co-founder know I am in therapy?
+No. I do not report to anyone in your company, and nobody there is contacted. Confidentiality has professional and legal limits, which I explain before ongoing work begins.
+
+### Can we talk about the business itself?
+Yes. Runway, hiring, a difficult board meeting or a dispute with a co-founder are legitimate parts of the situation. Therapy looks at what is happening to you around those decisions, not only at the decisions themselves.
+
+### My co-founder relationship is the main problem. Can therapy help with that?
+Individual psychotherapy can focus heavily on a co-founder relationship. That can include trust, resentment, how decisions get made and whether you want to continue working together.
+
+### What about my partner?
+Partners live with the company too. If both of you want the relationship itself to be the focus, Couples Therapy is a separate service.
+
+### How much does it cost, and how does it work?
+Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+
 ## Contact
 
 If the company is taking up more of your life than you want it to, book a consultation.
@@ -838,8 +883,8 @@ If the company is taking up more of your life than you want it to, book a consul
 # 10. Executives & Leaders
 
 **URL:** `/therapy-for-executives/`  
-**SEO title:** Executive Therapist | Therapy for Executives & Leaders  
-**Meta description:** Online psychotherapy for executives and senior leaders dealing with pressure, burnout, difficult decisions, relationships, career transitions and the personal cost of responsibility.
+**SEO title:** Executive Therapist | Online Therapy for Senior Leaders  
+**Meta description:** Confidential online psychotherapy for executives, directors and senior leaders, with a BACP-registered psychotherapist who spent 18+ years in technology.
 
 ## Hero
 
@@ -893,6 +938,14 @@ There is nothing irrational about finding that difficult.
 
 **Career change & decisions →**
 
+## Discretion
+
+I do not report to your employer, board or anyone else in the organisation, and nobody there is contacted. Sessions are online, so there is no waiting room and no one to bump into.
+
+What we discuss is confidential within the professional and legal limits that apply. I explain those limits before ongoing work begins.
+
+**Confidentiality →**
+
 ## My background
 
 My previous career included years inside larger technology organisations and around senior decision-making. Matrixed responsibility, organisational politics and the pressure around senior roles are familiar contexts.
@@ -909,6 +962,15 @@ No. This page is about psychotherapy. Professional Coaching is a separate servic
 
 ### What if the issue has nothing to do with work?
 That is fine. Seniority explains part of the context I know well. It does not determine what you bring.
+
+### Can sessions fit around a senior schedule?
+Sessions are online, so there is no travel time. They are weekly at first, so the work needs a regular slot in the diary.
+
+### Do you work with leaders outside tech?
+Yes. Technology is the environment I know most deeply, but the pressures of senior roles are similar across many sectors.
+
+### How much does it cost, and how does it work?
+Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour.
 
 ## Contact
 
@@ -1614,6 +1676,8 @@ Send a short note about what brings you here and where you are located.
 
 If the situation fits what I offer, we arrange an initial conversation. The relevant fee and any location-specific practicalities are made clear before ongoing work begins.
 
+The first conversation is a free introductory call, usually between 30 minutes and an hour, and ongoing sessions are €100 or £90 each.
+
 ## Contact
 
 If you want to find out whether this fits, book a consultation.
@@ -1697,10 +1761,10 @@ That is common. Equal enthusiasm is not required. Both people do need enough wil
 ## Fees
 
 ### How much does it cost?
-I don't publish one universal fee because my fees vary depending on the circumstances and location of the work. I tell you the relevant fee before we agree to begin.
+Sessions are €100 or £90 each. The fee is per session and is the same for individual psychotherapy, couples therapy and professional coaching. I confirm it before we agree to begin.
 
-### Why not list a single price?
-Because it would be inaccurate for some clients.
+### Is the first conversation free?
+Yes. The first conversation is a free introductory call, usually between 30 minutes and an hour.
 
 ## Starting
 
@@ -1746,6 +1810,9 @@ Greek and English. Sessions can take place in either language or move between th
 
 ### Can you work with me if I live abroad?
 Possibly. Professional rules depend on where both therapist and client are located. Tell me where you are currently based and I will confirm before ongoing therapy begins.
+
+### Which countries can you work with clients in?
+I work with clients across the UK and Europe. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. Tell me where you are currently based and I will confirm before ongoing therapy begins.
 
 ## Confidentiality
 

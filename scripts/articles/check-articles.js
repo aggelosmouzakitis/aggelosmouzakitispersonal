@@ -82,9 +82,10 @@ function expected(a, report) {
   // A link to a merged page goes straight to where it now 301s (relink).
   for (const [from, to] of Object.entries(a.relink || {})) src = src.split('](' + from + ')').join('](' + to + ')');
   // Contextual links the site adds (contextLinks): the phrase, linked, in Part 2.
-  for (const [phrase, href] of a.contextLinks || []) {
+  for (const [phrase, href, within] of a.contextLinks || []) {
     const cut = src.indexOf('## PART 3');
-    src = src.slice(0, cut).replace(phrase, '[' + phrase + '](' + href + ')') + src.slice(cut);
+    const find = within || phrase;
+    src = src.slice(0, cut).replace(find, find.replace(phrase, '[' + phrase + '](' + href + ')')) + src.slice(cut);
   }
   const blocks = blocksOf(splitParts(src, a.slug)['2'], a.slug);
   // The documented differences: resolved placeholders become their links,

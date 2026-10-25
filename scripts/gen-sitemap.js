@@ -4,9 +4,12 @@
 // sitemap if it also has a canonical, a title and a description. Redirected,
 // noindex and retired URLs are absent by construction: they are not in the table.
 //
-// lastmod comes from the file's own git history (the last commit that touched
-// that page or the source that renders it), falling back to the file mtime, so
-// the dates reflect real content changes rather than the date of the build.
+// lastmod comes from the page file's own git history (the last commit that
+// touched it), falling back to the file mtime, so the dates reflect real
+// content changes rather than the date of the build. Every page is committed
+// with its content prerendered (scripts/seo/prerender.js), so its file changes
+// whenever what it shows does; the shared sources (site-copy.jsx holds all 26
+// canonical pages) would move every page's date when one of them changes.
 //
 // Run: node scripts/gen-sitemap.js
 const fs = require('fs');
@@ -14,13 +17,6 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 const { ORIGIN, PAGES } = require('./seo/site-meta.js');
 const ROOT = path.resolve(__dirname, '..');
-
-// Page → the sources that actually change its content. A page's lastmod is the
-// most recent commit date across its own file and those sources. The canonical
-// pages are rendered by site-pages.jsx from site-copy.jsx; the two tools by
-// the clarity engine.
-const CANONICAL_SOURCES = ['site-copy.jsx', 'site-pages.jsx', 'site-chrome.jsx'];
-const TOOL_SOURCES = ['clarity-data.jsx', 'clarity-tools.jsx', 'site-chrome.jsx'];
 
 function lastCommitDate(file) {
   try {
@@ -31,12 +27,8 @@ function lastCommitDate(file) {
 }
 
 function lastmodFor(p) {
-  const files = [p.file].concat(p.sources || (p.og ? CANONICAL_SOURCES : TOOL_SOURCES));
-
-  const dates = files
-    .map((f) => (fs.existsSync(path.join(ROOT, f)) ? lastCommitDate(f) : null))
-    .filter(Boolean);
-  if (dates.length) return dates.sort().pop();
+  const date = lastCommitDate(p.file);
+  if (date) return date;
   // Uncommitted or brand-new file: fall back to its mtime.
   const st = fs.statSync(path.join(ROOT, p.file));
   return st.mtime.toISOString().slice(0, 10);

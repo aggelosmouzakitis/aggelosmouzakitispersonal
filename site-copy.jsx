@@ -370,8 +370,8 @@ window.SITE_COPY = {
       "name": "Men in Tech & Demanding Careers",
       "url": "/therapy-for-men-in-tech/",
       "type": "audience",
-      "seoTitle": "Therapy for Men | Tech, Business & Demanding Careers",
-      "metaDescription": "Online psychotherapy for men in tech, startups and demanding careers dealing with relationships, burnout, anxiety, difficult decisions and work taking over life.",
+      "seoTitle": "Therapist for Men in Tech | Online, UK & Europe",
+      "metaDescription": "Online therapy for men in tech, business and demanding careers, with a BACP-registered psychotherapist with 18+ years in product and growth.",
       "hero": {"eyebrow": "MEN IN TECH & DEMANDING CAREERS", "h1": "Therapy for men in tech, business and demanding careers.", "blocks": [
         {"t": "p", "text": "You can be doing well professionally and still be sleeping badly, carrying work into dinner or spending days replaying one performance conversation."},
         {"t": "p", "text": "Tech, product and business are familiar contexts from more than 18 years working in them."},
@@ -381,6 +381,11 @@ window.SITE_COPY = {
         {"h2": "The professional culture matters", "id": "the-professional-culture-matters", "blocks": [
           {"t": "p", "text": "Technology roles often combine rapid change, visible performance and unclear boundaries around responsibility. Teams change, priorities move, roles get redefined and a manager leaving can turn the job you accepted into a different job very quickly."},
           {"t": "p", "text": "Those details matter because they shape the pressure around the problem. They do not need to be translated into generic language about work-life balance before therapy can begin."}
+        ]},
+        {"h2": "Who tends to come", "id": "who-tends-to-come", "blocks": [
+          {"t": "p", "text": "Software engineers, engineering managers, product managers, designers, data people, consultants and founders. Some are early in their careers. Many are senior enough that very few people at work hear the full version of what is going on."},
+          {"t": "p", "text": "The specific role matters less than the pattern: work that carries a lot of weight and a life outside it that is getting less of you."},
+          {"t": "ctas", "items": [{"label": "Founders", "href": "/therapy-for-founders/"}, {"label": "Executives", "href": "/therapy-for-executives/"}]}
         ]},
         {"h2": "When work continues after hours", "id": "when-work-continues-after-hours", "blocks": [
           {"t": "p", "text": "A common pattern is that the workday ends before the thinking does."},
@@ -410,7 +415,10 @@ window.SITE_COPY = {
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Is this only for people in technology?", "blocks": [{"t": "p", "text": "No. Technology is the environment I know most deeply, but I also work with men in other demanding professional careers."}]},
           {"t": "sub", "h3": "Do I need to be a founder or executive?", "blocks": [{"t": "p", "text": "No. Senior individual contributors, consultants, managers and business owners can fit this practice as well."}]},
-          {"t": "sub", "h3": "What if my main issue is my relationship?", "blocks": [{"t": "p", "text": "Then we work on the relationship. Your profession is context, not the subject you are required to talk about."}]}
+          {"t": "sub", "h3": "What if my main issue is my relationship?", "blocks": [{"t": "p", "text": "Then we work on the relationship. Your profession is context, not the subject you are required to talk about."}]},
+          {"t": "sub", "h3": "Do you work with clients in the UK and Europe?", "blocks": [{"t": "p", "text": "Yes, online. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. I confirm that I can work with you based on where you are located before ongoing therapy begins."}]},
+          {"t": "sub", "h3": "Will my employer know?", "blocks": [{"t": "p", "text": "No. I do not contact your employer and nothing is shared with them. Confidentiality has professional and legal limits, which I explain before ongoing work begins."}]},
+          {"t": "sub", "h3": "How much does it cost, and how does it work?", "blocks": [{"t": "p", "text": "Sessions are €100 or £90 each, online by video, in English or Greek. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If this sounds like the kind of context you want your therapist to understand, get in touch."},
@@ -424,8 +432,8 @@ window.SITE_COPY = {
       "name": "Founders & Business Owners",
       "url": "/therapy-for-founders/",
       "type": "audience",
-      "seoTitle": "Therapy for Entrepreneurs, Founders & Business Owners",
-      "metaDescription": "Online psychotherapy for entrepreneurs, founders and business owners dealing with pressure, burnout, relationships, difficult decisions and identity beyond the company.",
+      "seoTitle": "Therapist for Startup Founders & Entrepreneurs | Online",
+      "metaDescription": "Online psychotherapy for startup founders, entrepreneurs and business owners, with a BACP-registered therapist who built two startups himself.",
       "hero": {"eyebrow": "FOUNDERS & BUSINESS OWNERS", "h1": "Therapy for entrepreneurs, founders and business owners.", "blocks": [
         {"t": "p", "text": "Founding or owning a business makes it difficult to separate work from the rest of life. Money, staff, relationships and your own sense of identity can become tied to the same decisions."},
         {"t": "p", "text": "Therapy can help when that overlap starts creating problems in the company, at home or in the way you are functioning yourself."},
@@ -435,6 +443,12 @@ window.SITE_COPY = {
         {"h2": "Ownership changes the stakes", "id": "ownership-changes-the-stakes", "blocks": [
           {"t": "p", "text": "An employee can decide to resign. A founder deciding whether to step back is also thinking about staff, customers, investors and a relationship that has already organised years of life around the company."},
           {"t": "p", "text": "That is why stepping back can be more complicated than reducing hours or delegating more work."}
+        ]},
+        {"h2": "Nowhere to put the unedited version", "id": "nowhere-to-put-the-unedited-version", "blocks": [
+          {"t": "p", "text": "Founders spend a lot of time managing what different people can hear."},
+          {"t": "p", "text": "Investors need confidence. The team needs direction. A co-founder may be part of the problem. Your partner already lives with the consequences of the company and may have heard enough about it for one week."},
+          {"t": "p", "text": "Some of that editing is sensible. The difficulty starts when nobody gets the full picture, including you."},
+          {"t": "ctas", "items": [{"label": "The loneliness and emotional pressure that founders experience", "href": "/blog/the-loneliness-and-emotional-pressure-that-founders-experience/"}]}
         ]},
         {"h2": "Working harder", "id": "working-harder", "blocks": [
           {"t": "p", "text": "There is always another customer to call, another number to check or another operational problem that genuinely deserves attention."},
@@ -458,6 +472,13 @@ window.SITE_COPY = {
           {"t": "p", "text": "If the company is entangled with anxiety, relationships, self-worth, grief or a pattern that keeps repeating despite good advice, Individual Psychotherapy gives us more room."},
           {"t": "ctas", "items": [{"label": "Professional coaching", "href": "/professional-coaching/"}, {"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}, {"label": "Therapy vs coaching", "href": "/therapy-vs-coaching/"}]}
         ]},
+        {"h2": "Common questions", "id": "common-questions", "blocks": [
+          {"t": "sub", "h3": "Will my board, investors or co-founder know I am in therapy?", "blocks": [{"t": "p", "text": "No. I do not report to anyone in your company, and nobody there is contacted. Confidentiality has professional and legal limits, which I explain before ongoing work begins."}]},
+          {"t": "sub", "h3": "Can we talk about the business itself?", "blocks": [{"t": "p", "text": "Yes. Runway, hiring, a difficult board meeting or a dispute with a co-founder are legitimate parts of the situation. Therapy looks at what is happening to you around those decisions, not only at the decisions themselves."}]},
+          {"t": "sub", "h3": "My co-founder relationship is the main problem. Can therapy help with that?", "blocks": [{"t": "p", "text": "Individual psychotherapy can focus heavily on a co-founder relationship. That can include trust, resentment, how decisions get made and whether you want to continue working together."}]},
+          {"t": "sub", "h3": "What about my partner?", "blocks": [{"t": "p", "text": "Partners live with the company too. If both of you want the relationship itself to be the focus, Couples Therapy is a separate service."}]},
+          {"t": "sub", "h3": "How much does it cost, and how does it work?", "blocks": [{"t": "p", "text": "Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."}]}
+        ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If the company is taking up more of your life than you want it to, book a consultation."},
           {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
@@ -470,8 +491,8 @@ window.SITE_COPY = {
       "name": "Executives & Leaders",
       "url": "/therapy-for-executives/",
       "type": "audience",
-      "seoTitle": "Executive Therapist | Therapy for Executives & Leaders",
-      "metaDescription": "Online psychotherapy for executives and senior leaders dealing with pressure, burnout, difficult decisions, relationships, career transitions and the personal cost of responsibility.",
+      "seoTitle": "Executive Therapist | Online Therapy for Senior Leaders",
+      "metaDescription": "Confidential online psychotherapy for executives, directors and senior leaders, with a BACP-registered psychotherapist who spent 18+ years in technology.",
       "hero": {"eyebrow": "EXECUTIVES & LEADERS", "h1": "Psychotherapy for executives and senior leaders.", "blocks": [
         {"t": "p", "text": "Senior roles bring responsibility, limited places to speak candidly and decisions that can affect other people’s work and livelihoods."},
         {"t": "p", "text": "Much of the day may involve editing what you say, carrying information other people do not have and deciding what can reasonably be shared with whom. That can leave very few neutral places to think out loud."},
@@ -503,6 +524,11 @@ window.SITE_COPY = {
           {"t": "p", "text": "There is nothing irrational about finding that difficult."},
           {"t": "ctas", "items": [{"label": "Career change & decisions", "href": "/career-transition-therapy/"}]}
         ]},
+        {"h2": "Discretion", "id": "discretion", "blocks": [
+          {"t": "p", "text": "I do not report to your employer, board or anyone else in the organisation, and nobody there is contacted. Sessions are online, so there is no waiting room and no one to bump into."},
+          {"t": "p", "text": "What we discuss is confidential within the professional and legal limits that apply. I explain those limits before ongoing work begins."},
+          {"t": "ctas", "items": [{"label": "Confidentiality", "href": "/confidentiality/"}]}
+        ]},
         {"h2": "My background", "id": "my-background", "blocks": [
           {"t": "p", "text": "My previous career included years inside larger technology organisations and around senior decision-making. Matrixed responsibility, organisational politics and the pressure around senior roles are familiar contexts."},
           {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
@@ -510,7 +536,10 @@ window.SITE_COPY = {
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Do I need to be C-suite?", "blocks": [{"t": "p", "text": "No. I also work with directors, senior managers and other experienced professionals whose role carries significant responsibility, visibility or organisational pressure."}]},
           {"t": "sub", "h3": "Is this executive coaching?", "blocks": [{"t": "p", "text": "No. This page is about psychotherapy. Professional Coaching is a separate service for bounded professional decisions."}]},
-          {"t": "sub", "h3": "What if the issue has nothing to do with work?", "blocks": [{"t": "p", "text": "That is fine. Seniority explains part of the context I know well. It does not determine what you bring."}]}
+          {"t": "sub", "h3": "What if the issue has nothing to do with work?", "blocks": [{"t": "p", "text": "That is fine. Seniority explains part of the context I know well. It does not determine what you bring."}]},
+          {"t": "sub", "h3": "Can sessions fit around a senior schedule?", "blocks": [{"t": "p", "text": "Sessions are online, so there is no travel time. They are weekly at first, so the work needs a regular slot in the diary."}]},
+          {"t": "sub", "h3": "Do you work with leaders outside tech?", "blocks": [{"t": "p", "text": "Yes. Technology is the environment I know most deeply, but the pressures of senior roles are similar across many sectors."}]},
+          {"t": "sub", "h3": "How much does it cost, and how does it work?", "blocks": [{"t": "p", "text": "Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "Book a consultation if you want a private place to think about what is going on."},
@@ -976,7 +1005,8 @@ window.SITE_COPY = {
         ]},
         {"h2": "The first conversation", "id": "the-first-conversation", "blocks": [
           {"t": "p", "text": "Send a short note about what brings you here and where you are located."},
-          {"t": "p", "text": "If the situation fits what I offer, we arrange an initial conversation. The relevant fee and any location-specific practicalities are made clear before ongoing work begins."}
+          {"t": "p", "text": "If the situation fits what I offer, we arrange an initial conversation. The relevant fee and any location-specific practicalities are made clear before ongoing work begins."},
+          {"t": "p", "text": "The first conversation is a free introductory call, usually between 30 minutes and an hour, and ongoing sessions are €100 or £90 each."}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you want to find out whether this fits, book a consultation."},
@@ -1018,8 +1048,8 @@ window.SITE_COPY = {
           {"t": "sub", "h3": "What if one of us is more interested in therapy than the other?", "blocks": [{"t": "p", "text": "That is common. Equal enthusiasm is not required. Both people do need enough willingness to participate honestly."}]}
         ]},
         {"h2": "Fees", "id": "fees", "blocks": [
-          {"t": "sub", "h3": "How much does it cost?", "blocks": [{"t": "p", "text": "I don’t publish one universal fee because my fees vary depending on the circumstances and location of the work. I tell you the relevant fee before we agree to begin."}]},
-          {"t": "sub", "h3": "Why not list a single price?", "blocks": [{"t": "p", "text": "Because it would be inaccurate for some clients."}]}
+          {"t": "sub", "h3": "How much does it cost?", "blocks": [{"t": "p", "text": "Sessions are €100 or £90 each. The fee is per session and is the same for individual psychotherapy, couples therapy and professional coaching. I confirm it before we agree to begin."}]},
+          {"t": "sub", "h3": "Is the first conversation free?", "blocks": [{"t": "p", "text": "Yes. The first conversation is a free introductory call, usually between 30 minutes and an hour."}]}
         ]},
         {"h2": "Starting", "id": "starting", "blocks": [
           {"t": "sub", "h3": "What happens when I contact you?", "blocks": [{"t": "p", "text": "Send a short description of what brings you here and where you are currently located. I read it myself. If the situation falls within what I offer, we arrange an initial conversation."}]},
@@ -1038,7 +1068,8 @@ window.SITE_COPY = {
         {"h2": "Language and location", "id": "language-and-location", "blocks": [
           {"t": "sub", "h3": "Are sessions online?", "blocks": [{"t": "p", "text": "Yes. My work is primarily online by video."}]},
           {"t": "sub", "h3": "What languages do you work in?", "blocks": [{"t": "p", "text": "Greek and English. Sessions can take place in either language or move between them naturally."}]},
-          {"t": "sub", "h3": "Can you work with me if I live abroad?", "blocks": [{"t": "p", "text": "Possibly. Professional rules depend on where both therapist and client are located. Tell me where you are currently based and I will confirm before ongoing therapy begins."}]}
+          {"t": "sub", "h3": "Can you work with me if I live abroad?", "blocks": [{"t": "p", "text": "Possibly. Professional rules depend on where both therapist and client are located. Tell me where you are currently based and I will confirm before ongoing therapy begins."}]},
+          {"t": "sub", "h3": "Which countries can you work with clients in?", "blocks": [{"t": "p", "text": "I work with clients across the UK and Europe. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. Tell me where you are currently based and I will confirm before ongoing therapy begins."}]}
         ]},
         {"h2": "Confidentiality", "id": "confidentiality", "blocks": [
           {"t": "sub", "h3": "Is psychotherapy confidential?", "blocks": [{"t": "p", "text": "Yes, within the professional and legal limits that apply. Those limits are explained before ongoing work begins."}]},

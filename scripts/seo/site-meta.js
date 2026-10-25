@@ -14,11 +14,14 @@
 //   - ORIGIN + path, always https, always a trailing slash, no query strings.
 //   - og:url === canonical === the URL that returns 200.
 //   - One Person entity for the whole site (PERSON_ID); pages reference it.
-//   - Conservative structured data: only what a visitor can read on the page.
-//     No price or priceRange, no reviews or aggregateRating, no address or
-//     areaServed, no medical types, no FAQPage. The professional description
-//     is "BACP-registered psychotherapist", the site's visible wording;
-//     "licensed psychotherapist" is not used anywhere.
+//   - Conservative structured data: only what the site states. The published
+//     fee (€100 or £90 per session) and the area served (the UK and Europe:
+//     the UK, Ireland, Greece) as /faq/ and the audience pages give them; no
+//     reviews or aggregateRating, no address, city or geo, no medical types.
+//     FAQPage only where the page shows those questions, with their visible
+//     wording. The professional description is "BACP-registered
+//     psychotherapist", the site's visible wording; "licensed psychotherapist"
+//     is not used anywhere.
 
 const fs = require('fs');
 const path = require('path');
@@ -50,6 +53,8 @@ const PERSON_FULL = {
   '@type': 'Person',
   '@id': PERSON_ID,
   name: 'Aggelos Mouzakitis',
+  // The spelling some directories use (It's Complicated, below).
+  alternateName: ['Angelos Mouzakitis'],
   url: ORIGIN + '/',
   image: abs('/img/aggelos-about.webp'),
   jobTitle: 'BACP-registered psychotherapist',
@@ -59,8 +64,10 @@ const PERSON_FULL = {
     'Psychotherapy', 'Couples therapy', 'Professional coaching', 'Relationship problems',
     'Separation and divorce', 'Burnout', 'Career change', 'Anxiety', 'Self-worth',
   ],
+  memberOf: { '@type': 'Organization', name: 'British Association for Counselling and Psychotherapy', alternateName: 'BACP', url: 'https://www.bacp.co.uk' },
   sameAs: [
     'https://www.psychologytoday.com/profile/1662603',
+    'https://complicated.life/find-a-therapist/london/integrative-psychotherapist-angelos-mouzakitis',
     'https://www.linkedin.com/in/growth-product-manager/',
     'https://undisguised.io',
     'https://www.youtube.com/channel/UCfeHgYhNWwIRgWyRW9J0YCA',
@@ -84,6 +91,32 @@ const PERSON_FULL = {
   ],
 };
 const PERSON_REF = { '@type': 'Person', '@id': PERSON_ID, name: 'Aggelos Mouzakitis', url: ORIGIN + '/' };
+
+// ─── The practice ────────────────────────────────────────────────────────────
+// Online only: the area it serves, never an address, a city or geo (a
+// validator's warning about the missing address is expected).
+const AREA_SERVED = [
+  { '@type': 'Country', name: 'United Kingdom' },
+  { '@type': 'Country', name: 'Ireland' },
+  { '@type': 'Country', name: 'Greece' },
+  { '@type': 'Continent', name: 'Europe' },
+];
+const PRACTICE = {
+  '@type': 'ProfessionalService',
+  '@id': ORIGIN + '/#practice',
+  name: 'Aggelos Mouzakitis',
+  url: ORIGIN + '/',
+  description: 'Online psychotherapy, couples therapy and professional coaching in English or Greek, for clients across the UK and Europe.',
+  founder: { '@id': PERSON_ID },
+  priceRange: '€100 / £90 per session',
+  knowsLanguage: ['en', 'el'],
+  areaServed: AREA_SERVED,
+};
+// The published fee, the same for every service: one offer per currency.
+const offers = (description) => [
+  { '@type': 'Offer', price: 100, priceCurrency: 'EUR', description },
+  { '@type': 'Offer', price: 90, priceCurrency: 'GBP', description },
+];
 
 const WEBSITE = {
   '@type': 'WebSite', '@id': WEBSITE_ID, name: SITE_NAME, url: ORIGIN + '/',
@@ -151,13 +184,37 @@ const CANONICAL = [
 ];
 
 // The three services sit under Work With Me in the breadcrumb and carry a
-// Service node: name, type, provider and the page's own description. Nothing
-// about price, place or eligibility — the pages say those are agreed first.
+// Service node: name, type, provider, the page's own description, the
+// languages, the area served and the published fee. The three audience pages
+// carry one too, named by their H1. Nothing about place or eligibility: the
+// pages say location is confirmed first.
 const SERVICE_TYPE = {
   'individual-psychotherapy': 'Psychotherapy',
   'couples-therapy': 'Couples therapy',
   'professional-coaching': 'Professional coaching',
 };
+const AUDIENCE_SERVICE = ['therapy-for-men-in-tech', 'therapy-for-founders', 'therapy-for-executives'];
+// What one fee buys, where a page states the session length with it.
+const OFFER_UNIT = { 'couples-therapy': 'Per 50–60 minute session' };
+// The pages that show questions and answers (a section of nothing but
+// questions, drawn as the FAQ accordion by site-pages.jsx). Their FAQPage
+// holds every one of them, in the page's own words.
+const FAQ_PAGES = [
+  'individual-psychotherapy', 'couples-therapy', 'therapy-for-men-in-tech', 'therapy-for-founders',
+  'therapy-for-executives', 'greek-speaking-psychotherapist', 'executive-burnout-therapy', 'faq',
+];
+const plain = (t) => t.replace(/\*\*/g, '');
+// site-pages.jsx isFaq: every block a question (an H3 ending in "?").
+const isFaq = (s) => s.blocks.length > 0 && s.blocks.every((b) => b.t === 'sub' && /\?$/.test(b.h3));
+function faqOf(c) {
+  const answer = (blocks) => blocks.map((b) => (b.t === 'p' ? b.text : b.t === 'lines' ? b.lines.join(' ')
+    : b.t === 'list' ? b.items.join(' ') : null)).filter(Boolean).map(plain).join(' ');
+  const questions = [].concat(...c.sections.filter(isFaq).map((s) => s.blocks)).map((q) => ({
+    '@type': 'Question', name: plain(q.h3), acceptedAnswer: { '@type': 'Answer', text: answer(q.blocks) },
+  }));
+  if (!questions.length) throw new Error(`site-meta: ${c.url} is in FAQ_PAGES but shows no questions`);
+  return questions;
+}
 const PAGE_TYPE = { about: 'ProfilePage', contact: 'ContactPage', 'free-tools': 'CollectionPage' };
 // A page whose H1 changed after its share card was published gets a new card
 // file: /img/* is served immutable, so the old URL keeps the old picture.
@@ -188,7 +245,7 @@ function canonicalPage([id, priority, changefreq, crumb]) {
     og: { key: OG_FILE[id] || id, label: id === 'home' ? 'Aggelos Mouzakitis' : c.hero.eyebrow, title: c.hero.h1 },
   };
   if (id === 'home') {
-    entry.schema = [PERSON_FULL, WEBSITE, {
+    entry.schema = [PERSON_FULL, PRACTICE, WEBSITE, {
       '@type': 'WebPage', '@id': abs('/') + '#webpage', url: ORIGIN + '/', name: c.seoTitle,
       isPartOf: { '@id': WEBSITE_ID }, inLanguage: 'en', about: { '@id': PERSON_ID },
     }];
@@ -196,20 +253,23 @@ function canonicalPage([id, priority, changefreq, crumb]) {
   }
   const trail = SERVICE_TYPE[id] ? [['Work with me', '/work-with-me/']] : [];
   const nodes = pageNodes(url, c.seoTitle, crumb, PAGE_TYPE[id], trail);
-  // The manifesto's map is drawn by its own small script as well.
-  if (id === 'undisguised') entry.sources = ['site-copy.jsx', 'site-pages.jsx', 'site-chrome.jsx', 'site-undisguised.jsx'];
   if (id === 'about') {
     nodes[0].mainEntity = { '@id': PERSON_ID };
     delete nodes[0].about;
-    entry.schema = [PERSON_FULL].concat(nodes);
+    entry.schema = [PERSON_FULL, PRACTICE].concat(nodes);
     return entry;
   }
-  if (SERVICE_TYPE[id]) {
+  if (SERVICE_TYPE[id] || AUDIENCE_SERVICE.includes(id)) {
     nodes.push({
-      '@type': 'Service', '@id': abs(url) + '#service', name: crumb, serviceType: SERVICE_TYPE[id],
+      '@type': 'Service', '@id': abs(url) + '#service',
+      name: SERVICE_TYPE[id] ? crumb : c.hero.h1.replace(/\.$/, ''),
+      serviceType: SERVICE_TYPE[id] || 'Psychotherapy',
       url: abs(url), description, provider: { '@id': PERSON_ID },
+      availableLanguage: ['en', 'el'], areaServed: AREA_SERVED,
+      offers: offers(OFFER_UNIT[id] || 'Per session'),
     });
   }
+  if (FAQ_PAGES.includes(id)) entry.faq = faqOf(c);
   if (id === 'free-tools') {
     nodes.push({
       '@type': 'ItemList', '@id': abs('/free-tools/') + '#collection',
@@ -270,7 +330,6 @@ function articlePage(a) {
     ogImage: abs('/img/og/v2/' + a.slug + '.png'),
     ogImageAlt: art.h1,
     og: { key: a.slug, label: labels[0], title: art.h1 },
-    sources: [ARTICLE_REGISTRY.dataSource(a), a.brief, 'site-pages.jsx', 'site-chrome.jsx'],
     bundles: [ARTICLE_REGISTRY.dataBundle(a)],
     schema: [posting, breadcrumb],
   };
@@ -292,7 +351,6 @@ const PAGES = CANONICAL.map(canonicalPage).concat([
     ogImage: abs('/img/og/v2/work-life-check.png'),
     ogImageAlt: 'The Work & Life Check: What is work actually costing you?',
     og: { key: 'work-life-check', label: 'The Work & Life Check', title: 'What is work actually costing you?' },
-    sources: ['work-life-check.jsx', 'clarity-tools.jsx', 'site-chrome.jsx'],
     schema: toolNodes('/work-life-check/', 'The Work & Life Check',
       'A 17-question reflection on five areas where work can cost more than it shows: switching off, recovery, an open decision, relationships and the weight of performance. A reflection tool, not a clinical assessment or diagnosis.'),
   },

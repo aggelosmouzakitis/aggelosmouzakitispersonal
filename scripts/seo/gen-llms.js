@@ -66,8 +66,9 @@ and situations.
 - Couples sessions are weekly (usually 50–60 minutes) or biweekly (can be 90
   minutes); the format is agreed before ongoing work begins.
 - Work is primarily online by video, in Greek or English.
-- There is no single published fee: fees vary with the circumstances and
-  location of the work, and the relevant fee is given before work begins.
+- Fees: €100 or £90 per session.
+- The first conversation is a free introductory call, usually between 30 minutes and an hour.
+- Work is online only, for clients across the UK and Europe, with the UK as the main focus.
 - Professional rules depend on where both therapist and client are located;
   eligibility is confirmed before ongoing therapy begins.
 - This is not a crisis or emergency service.

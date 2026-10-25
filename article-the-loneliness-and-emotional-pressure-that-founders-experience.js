@@ -36,7 +36,7 @@ window.SITE_ARTICLE_PAGES["the-loneliness-and-emotional-pressure-that-founders-e
   "toc": null,
   "intro": [{
     "t": "p",
-    "text": "There’s a specific isolation that shows up in founders that’s distinct from regular loneliness. A founder can have a supportive partner, close friends, even access to therapy, and still feel completely alone in what they’re dealing with."
+    "text": "There’s a specific isolation that shows up in [founders](/therapy-for-founders/) that’s distinct from regular loneliness. A founder can have a supportive partner, close friends, even access to therapy, and still feel completely alone in what they’re dealing with."
   }, {
     "t": "p",
     "text": "The support system wants to help. They genuinely care. But they don’t have the framework to understand what the founder is experiencing, so the help they offer doesn’t land. The partner suggests taking a vacation. Friends say to delegate more or set boundaries. A therapist recommends mindfulness or work-life balance. The founder nods, appreciates the effort, but knows none of this addresses the actual problem."

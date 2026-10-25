@@ -13,9 +13,10 @@
 // meta description (present + unique), canonical (present,
 // self-referencing, single), robots (no accidental noindex), <html lang="en">,
 // no /el/ alternates, exactly one H1, Open Graph completeness, og:url ===
-// canonical, OG image resolves, JSON-LD parses and asserts nothing the page
-// does not (no price, offers, reviews, ratings, address, areaServed, FAQPage,
-// LocalBusiness or medical types), retired positioning wording, internal links
+// canonical, OG image resolves, JSON-LD parses and asserts nothing the site
+// does not (no reviews, ratings, address, geo, LocalBusiness or medical types;
+// offers only at the published fee; FAQPage only with the questions and
+// answers the page shows), retired positioning wording, internal links
 // that 404 or go through a redirect, retired URLs linked from anywhere, orphan
 // pages, every legacy URL in routes.js (one 301 hop, a real 410, or a 404 for
 // URLs that never existed), no catch-all redirects, every 301 rule one hop to
@@ -194,30 +195,40 @@ async function main() {
     // JSON-LD
     const blocks = all(h, /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g);
     if (!blocks.length) err(url, 'no JSON-LD');
+    // The page as it reads: inline markup (bold, links) joins its words.
+    const readable = decode(body.replace(/<(script|style)[\s\S]*?<\/\1>/g, '')
+      .replace(/<\/?(?:strong|em|b|i|a|span|abbr|small)\b[^>]*>|<!--[\s\S]*?-->/g, '')
+      .replace(/<[^>]+>/g, ' ')).replace(/&#x27;/g, "'").replace(/\s+/g, ' ');
     for (const b of blocks) {
       let data;
       try { data = JSON.parse(b); } catch (e) { err(url, 'JSON-LD does not parse'); continue; }
       const graph = data['@graph'] || [data];
-      // Every FAQ answer in the schema must exist in the page text.
+      // Every FAQ question and answer in the schema must read the same on the page.
       for (const node of graph) {
         if (node['@type'] !== 'FAQPage') continue;
         for (const q of node.mainEntity || []) {
-          if (!text.includes(q.name)) err(url, `FAQ schema question not in page text: "${q.name.slice(0, 50)}"`);
+          if (!readable.includes(q.name)) err(url, `FAQ schema question not in page text: "${q.name.slice(0, 50)}"`);
+          const a = (q.acceptedAnswer || {}).text || '';
+          if (!a || !readable.includes(a)) err(url, `FAQ schema answer not in page text: "${q.name.slice(0, 50)}"`);
         }
       }
       // Claims this site's visible copy never makes. Ratings, reviews, awards,
-      // prices, addresses, service areas and medical typing were all either
-      // present before or easy to reintroduce, and none of them are supported
-      // by anything a visitor can read. Fail rather than let them drift back.
-      const FABRICATED = ['aggregateRating', 'review', 'reviewRating', 'award', 'awards', 'address',
-        'areaServed', 'priceRange', 'price', 'offers', 'telephone', 'openingHours', 'openingHoursSpecification'];
+      // addresses and medical typing were all either present before or easy
+      // to reintroduce, and none of them are supported by anything a visitor
+      // can read. Fail rather than let them drift back. The fee and the area
+      // served are stated (/faq/, the audience pages): an offer must carry the
+      // published fee.
+      const FABRICATED = ['aggregateRating', 'review', 'reviewRating', 'award', 'awards', 'address', 'geo',
+        'telephone', 'openingHours', 'openingHoursSpecification'];
+      const FEES = { EUR: 100, GBP: 90 };
       const MEDICAL = /^(MedicalBusiness|Physician|MedicalClinic|MedicalOrganization|MedicalTherapy|MedicalCondition|Dentist|Hospital)$/;
       const scan = (n) => {
         if (Array.isArray(n)) return n.forEach(scan);
         if (!n || typeof n !== 'object') return;
         for (const t of [].concat(n['@type'] || [])) {
           if (MEDICAL.test(t)) err(url, `medical schema type "${t}" — the page describes no clinical service`);
-          if (/^(Review|AggregateRating|LocalBusiness|FAQPage)$/.test(t)) err(url, `schema type "${t}" — not published on this site`);
+          if (/^(Review|AggregateRating|LocalBusiness)$/.test(t)) err(url, `schema type "${t}" — not published on this site`);
+          if (t === 'Offer' && FEES[n.priceCurrency] !== n.price) err(url, `offer of ${n.price} ${n.priceCurrency} is not the published fee`);
         }
         for (const k of Object.keys(n)) {
           if (FABRICATED.includes(k)) err(url, `schema asserts "${k}", which no visible copy supports`);

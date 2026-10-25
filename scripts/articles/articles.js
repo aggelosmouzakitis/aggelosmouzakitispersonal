@@ -76,7 +76,9 @@
 //               beyond those its brief supplies: [exact phrase, href]. The
 //               phrase must occur once and outside any link; it is wrapped,
 //               never reworded. Used sparingly, to tie the guides together and
-//               give each a path to its service page.
+//               give each a path to its service page. A phrase that recurs
+//               takes a third element, the longer text that holds it once
+//               ([phrase, href, within]); only the phrase is linked.
 //   inLanguage  for BlogPosting (default en-GB, as the guides' briefs ask).
 //   schemaImage 'none' when the brief rules out the author portrait as the
 //               article's image; 'author' when the brief keeps it to the
@@ -122,7 +124,7 @@ const ARTICLES = [
   },
   {
     slug: 'burnout-at-work',
-    contextLinks: [['Therapy may help when repeated overcommitment or difficulty stopping is contributing', '/executive-burnout-therapy/']],
+    contextLinks: [['Therapy may help when repeated overcommitment or difficulty stopping is contributing', '/executive-burnout-therapy/'], ['the escalation point for every decision', '/therapy-for-executives/'], ['a founder', '/therapy-for-founders/']],
     brief: 'content/articles/burnout-at-work.md',
     published: '2026-10-01T22:26:00+01:00',
     modified: null,
@@ -187,7 +189,7 @@ const ARTICLES = [
   },
   {
     slug: 'cant-switch-off-from-work',
-    contextLinks: [['Therapy can help when checking and rumination repeatedly affect sleep or relationships', '/executive-burnout-therapy/']],
+    contextLinks: [['Therapy can help when checking and rumination repeatedly affect sleep or relationships', '/executive-burnout-therapy/'], ['Founders', '/therapy-for-founders/']],
     brief: 'content/articles/cant-switch-off-from-work.md',
     published: '2026-10-01T22:57:00+01:00',
     modified: null,
@@ -330,7 +332,7 @@ const ARTICLES = [
   },
   {
     slug: 'perfectionism-at-work',
-    contextLinks: [['keep delivering while feeling progressively more exhausted and resentful', '/high-functioning-burnout/']],
+    contextLinks: [['keep delivering while feeling progressively more exhausted and resentful', '/high-functioning-burnout/'], ['A senior engineer', '/therapy-for-men-in-tech/']],
     brief: 'content/articles/perfectionism-at-work.md',
     published: '2026-10-02T06:53:00+01:00',
     modified: null,
@@ -383,11 +385,16 @@ const ARTICLES = [
   // first publication dates kept, the canonical entries made real.
   ...[
     ['vacation-same-feeling', 'You took the vacation. You came back feeling the same way.', '2026-04-24', '2 min read'],
-    ['who-are-you-if-you-are-not-crushing-it', 'Who are you if you’re not “crushing” it?', '2026-01-27', '7 min read'],
-    ['the-loneliness-and-emotional-pressure-that-founders-experience', 'The loneliness and emotional pressure that founders experience', '2026-02-09', '10 min read'],
+    ['who-are-you-if-you-are-not-crushing-it', 'Who are you if you’re not “crushing” it?', '2026-01-27', '7 min read',
+      [['founder', '/therapy-for-founders/']]],
+    // The opening sentence repeats the deck word for word: the link is in the
+    // body's, found by the sentence that follows it.
+    ['the-loneliness-and-emotional-pressure-that-founders-experience', 'The loneliness and emotional pressure that founders experience', '2026-02-09', '10 min read',
+      [['founders', '/therapy-for-founders/', 'shows up in founders that’s distinct from regular loneliness. A founder can have']]],
     ['the-high-cost-of-endless-pondering', 'The high cost of endless pondering', '2025-12-02', '10 min read'],
-  ].map(([slug, listing, published, readTime]) => ({
+  ].map(([slug, listing, published, readTime, contextLinks]) => ({
     slug,
+    contextLinks,
     url: `/blog/${slug}/`,
     brief: `content/articles/${slug}.md`,
     source: `archive/blog/${slug}/index.html`,

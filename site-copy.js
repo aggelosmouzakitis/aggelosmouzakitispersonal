@@ -1019,8 +1019,8 @@ window.SITE_COPY = {
       "name": "Men in Tech & Demanding Careers",
       "url": "/therapy-for-men-in-tech/",
       "type": "audience",
-      "seoTitle": "Therapy for Men | Tech, Business & Demanding Careers",
-      "metaDescription": "Online psychotherapy for men in tech, startups and demanding careers dealing with relationships, burnout, anxiety, difficult decisions and work taking over life.",
+      "seoTitle": "Therapist for Men in Tech | Online, UK & Europe",
+      "metaDescription": "Online therapy for men in tech, business and demanding careers, with a BACP-registered psychotherapist with 18+ years in product and growth.",
       "hero": {
         "eyebrow": "MEN IN TECH & DEMANDING CAREERS",
         "h1": "Therapy for men in tech, business and demanding careers.",
@@ -1047,6 +1047,25 @@ window.SITE_COPY = {
         }, {
           "t": "p",
           "text": "Those details matter because they shape the pressure around the problem. They do not need to be translated into generic language about work-life balance before therapy can begin."
+        }]
+      }, {
+        "h2": "Who tends to come",
+        "id": "who-tends-to-come",
+        "blocks": [{
+          "t": "p",
+          "text": "Software engineers, engineering managers, product managers, designers, data people, consultants and founders. Some are early in their careers. Many are senior enough that very few people at work hear the full version of what is going on."
+        }, {
+          "t": "p",
+          "text": "The specific role matters less than the pattern: work that carries a lot of weight and a life outside it that is getting less of you."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "Founders",
+            "href": "/therapy-for-founders/"
+          }, {
+            "label": "Executives",
+            "href": "/therapy-for-executives/"
+          }]
         }]
       }, {
         "h2": "When work continues after hours",
@@ -1152,6 +1171,27 @@ window.SITE_COPY = {
             "t": "p",
             "text": "Then we work on the relationship. Your profession is context, not the subject you are required to talk about."
           }]
+        }, {
+          "t": "sub",
+          "h3": "Do you work with clients in the UK and Europe?",
+          "blocks": [{
+            "t": "p",
+            "text": "Yes, online. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. I confirm that I can work with you based on where you are located before ongoing therapy begins."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Will my employer know?",
+          "blocks": [{
+            "t": "p",
+            "text": "No. I do not contact your employer and nothing is shared with them. Confidentiality has professional and legal limits, which I explain before ongoing work begins."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "How much does it cost, and how does it work?",
+          "blocks": [{
+            "t": "p",
+            "text": "Sessions are €100 or £90 each, online by video, in English or Greek. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."
+          }]
         }]
       }, {
         "h2": "Contact",
@@ -1174,8 +1214,8 @@ window.SITE_COPY = {
       "name": "Founders & Business Owners",
       "url": "/therapy-for-founders/",
       "type": "audience",
-      "seoTitle": "Therapy for Entrepreneurs, Founders & Business Owners",
-      "metaDescription": "Online psychotherapy for entrepreneurs, founders and business owners dealing with pressure, burnout, relationships, difficult decisions and identity beyond the company.",
+      "seoTitle": "Therapist for Startup Founders & Entrepreneurs | Online",
+      "metaDescription": "Online psychotherapy for startup founders, entrepreneurs and business owners, with a BACP-registered therapist who built two startups himself.",
       "hero": {
         "eyebrow": "FOUNDERS & BUSINESS OWNERS",
         "h1": "Therapy for entrepreneurs, founders and business owners.",
@@ -1202,6 +1242,25 @@ window.SITE_COPY = {
         }, {
           "t": "p",
           "text": "That is why stepping back can be more complicated than reducing hours or delegating more work."
+        }]
+      }, {
+        "h2": "Nowhere to put the unedited version",
+        "id": "nowhere-to-put-the-unedited-version",
+        "blocks": [{
+          "t": "p",
+          "text": "Founders spend a lot of time managing what different people can hear."
+        }, {
+          "t": "p",
+          "text": "Investors need confidence. The team needs direction. A co-founder may be part of the problem. Your partner already lives with the consequences of the company and may have heard enough about it for one week."
+        }, {
+          "t": "p",
+          "text": "Some of that editing is sensible. The difficulty starts when nobody gets the full picture, including you."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "The loneliness and emotional pressure that founders experience",
+            "href": "/blog/the-loneliness-and-emotional-pressure-that-founders-experience/"
+          }]
         }]
       }, {
         "h2": "Working harder",
@@ -1275,6 +1334,45 @@ window.SITE_COPY = {
           }]
         }]
       }, {
+        "h2": "Common questions",
+        "id": "common-questions",
+        "blocks": [{
+          "t": "sub",
+          "h3": "Will my board, investors or co-founder know I am in therapy?",
+          "blocks": [{
+            "t": "p",
+            "text": "No. I do not report to anyone in your company, and nobody there is contacted. Confidentiality has professional and legal limits, which I explain before ongoing work begins."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Can we talk about the business itself?",
+          "blocks": [{
+            "t": "p",
+            "text": "Yes. Runway, hiring, a difficult board meeting or a dispute with a co-founder are legitimate parts of the situation. Therapy looks at what is happening to you around those decisions, not only at the decisions themselves."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "My co-founder relationship is the main problem. Can therapy help with that?",
+          "blocks": [{
+            "t": "p",
+            "text": "Individual psychotherapy can focus heavily on a co-founder relationship. That can include trust, resentment, how decisions get made and whether you want to continue working together."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "What about my partner?",
+          "blocks": [{
+            "t": "p",
+            "text": "Partners live with the company too. If both of you want the relationship itself to be the focus, Couples Therapy is a separate service."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "How much does it cost, and how does it work?",
+          "blocks": [{
+            "t": "p",
+            "text": "Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."
+          }]
+        }]
+      }, {
         "h2": "Contact",
         "id": "contact",
         "blocks": [{
@@ -1295,8 +1393,8 @@ window.SITE_COPY = {
       "name": "Executives & Leaders",
       "url": "/therapy-for-executives/",
       "type": "audience",
-      "seoTitle": "Executive Therapist | Therapy for Executives & Leaders",
-      "metaDescription": "Online psychotherapy for executives and senior leaders dealing with pressure, burnout, difficult decisions, relationships, career transitions and the personal cost of responsibility.",
+      "seoTitle": "Executive Therapist | Online Therapy for Senior Leaders",
+      "metaDescription": "Confidential online psychotherapy for executives, directors and senior leaders, with a BACP-registered psychotherapist who spent 18+ years in technology.",
       "hero": {
         "eyebrow": "EXECUTIVES & LEADERS",
         "h1": "Psychotherapy for executives and senior leaders.",
@@ -1389,6 +1487,22 @@ window.SITE_COPY = {
           }]
         }]
       }, {
+        "h2": "Discretion",
+        "id": "discretion",
+        "blocks": [{
+          "t": "p",
+          "text": "I do not report to your employer, board or anyone else in the organisation, and nobody there is contacted. Sessions are online, so there is no waiting room and no one to bump into."
+        }, {
+          "t": "p",
+          "text": "What we discuss is confidential within the professional and legal limits that apply. I explain those limits before ongoing work begins."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "Confidentiality",
+            "href": "/confidentiality/"
+          }]
+        }]
+      }, {
         "h2": "My background",
         "id": "my-background",
         "blocks": [{
@@ -1424,6 +1538,27 @@ window.SITE_COPY = {
           "blocks": [{
             "t": "p",
             "text": "That is fine. Seniority explains part of the context I know well. It does not determine what you bring."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Can sessions fit around a senior schedule?",
+          "blocks": [{
+            "t": "p",
+            "text": "Sessions are online, so there is no travel time. They are weekly at first, so the work needs a regular slot in the diary."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Do you work with leaders outside tech?",
+          "blocks": [{
+            "t": "p",
+            "text": "Yes. Technology is the environment I know most deeply, but the pressures of senior roles are similar across many sectors."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "How much does it cost, and how does it work?",
+          "blocks": [{
+            "t": "p",
+            "text": "Sessions are €100 or £90 each, online by video, in English or Greek, for clients across the UK and Europe. They usually last 50–60 minutes and are weekly at first. The first conversation is a free introductory call, usually between 30 minutes and an hour."
           }]
         }]
       }, {
@@ -2628,6 +2763,9 @@ window.SITE_COPY = {
         }, {
           "t": "p",
           "text": "If the situation fits what I offer, we arrange an initial conversation. The relevant fee and any location-specific practicalities are made clear before ongoing work begins."
+        }, {
+          "t": "p",
+          "text": "The first conversation is a free introductory call, usually between 30 minutes and an hour, and ongoing sessions are €100 or £90 each."
         }]
       }, {
         "h2": "Contact",
@@ -2799,14 +2937,14 @@ window.SITE_COPY = {
           "h3": "How much does it cost?",
           "blocks": [{
             "t": "p",
-            "text": "I don’t publish one universal fee because my fees vary depending on the circumstances and location of the work. I tell you the relevant fee before we agree to begin."
+            "text": "Sessions are €100 or £90 each. The fee is per session and is the same for individual psychotherapy, couples therapy and professional coaching. I confirm it before we agree to begin."
           }]
         }, {
           "t": "sub",
-          "h3": "Why not list a single price?",
+          "h3": "Is the first conversation free?",
           "blocks": [{
             "t": "p",
-            "text": "Because it would be inaccurate for some clients."
+            "text": "Yes. The first conversation is a free introductory call, usually between 30 minutes and an hour."
           }]
         }]
       }, {
@@ -2910,6 +3048,13 @@ window.SITE_COPY = {
           "blocks": [{
             "t": "p",
             "text": "Possibly. Professional rules depend on where both therapist and client are located. Tell me where you are currently based and I will confirm before ongoing therapy begins."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Which countries can you work with clients in?",
+          "blocks": [{
+            "t": "p",
+            "text": "I work with clients across the UK and Europe. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. Tell me where you are currently based and I will confirm before ongoing therapy begins."
           }]
         }]
       }, {

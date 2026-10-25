@@ -187,7 +187,7 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
       "h3": "Working conditions",
       "blocks": [{
         "t": "ul",
-        "items": ["**Load:** The work cannot fit into paid hours, or an “exceptional” deadline has become the normal week.", "**Low control:** You are accountable for delivery but cannot alter the scope, staffing or sequence of the work.", "Role ambiguity means conflicting requests arrive without anyone deciding which takes priority. Completing one can mean failing another.", "Unfairness may involve uneven workloads, inconsistent treatment or effort that receives little recognition. Bullying and discrimination require attention in their own right.", "A values conflict can arise when the organisation repeatedly asks you to do work you believe is wrong, or prevents you from doing the job to an acceptable standard.", "Inadequate recovery includes interrupted breaks and time off that depends on remaining reachable. Shift patterns or responsibilities at home can further restrict recovery.", "Chronic responsibility becomes especially difficult when there is no reliable cover. A manager may remain the escalation point for every decision; a founder may hold responsibility that cannot simply be handed back at five."]
+        "items": ["**Load:** The work cannot fit into paid hours, or an “exceptional” deadline has become the normal week.", "**Low control:** You are accountable for delivery but cannot alter the scope, staffing or sequence of the work.", "Role ambiguity means conflicting requests arrive without anyone deciding which takes priority. Completing one can mean failing another.", "Unfairness may involve uneven workloads, inconsistent treatment or effort that receives little recognition. Bullying and discrimination require attention in their own right.", "A values conflict can arise when the organisation repeatedly asks you to do work you believe is wrong, or prevents you from doing the job to an acceptable standard.", "Inadequate recovery includes interrupted breaks and time off that depends on remaining reachable. Shift patterns or responsibilities at home can further restrict recovery.", "Chronic responsibility becomes especially difficult when there is no reliable cover. A manager may remain [the escalation point for every decision](/therapy-for-executives/); [a founder](/therapy-for-founders/) may hold responsibility that cannot simply be handed back at five."]
       }, {
         "t": "p",
         "text": "The same hours can have different effects depending on what happens within them. A busy role with clear priorities and reliable support differs from one where you must repeatedly defend your decisions and anticipate another change of direction."
@@ -354,7 +354,7 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
       "text": "Persistent low mood or loss of enjoyment also warrants help. The [NHS advises seeing a GP for depression symptoms lasting most of the day, every day, for more than two weeks](https://www.nhs.uk/mental-health/conditions/depression-in-adults/symptoms/). Seek help sooner if symptoms are severe or you are struggling to cope. A GP can assess health concerns and discuss treatment or support, including whether time away from work is appropriate."
     }, {
       "t": "p",
-      "text": "[Therapy may help when repeated overcommitment or difficulty stopping is contributing](/executive-burnout-therapy/), or when the experience has affected how you see yourself. It can also help with associated anxiety or depression. Staffing, unsafe conditions and employment disputes require action beyond sessions. [Considering therapy](/considering-therapy/) explains what beginning the work involves."
+      "text": "[Therapy may help when repeated overcommitment or difficulty stopping is contributing](/executive-burnout-therapy/), or when the experience has affected how you see yourself. It can also help with associated anxiety or depression. Staffing, unsafe conditions and employment disputes require action beyond sessions. [Considering therapy](/considering-therapy/) explains what beginning the work involves. If the pressure comes from a career in tech, there is more on [therapy for men in tech and demanding careers](/therapy-for-men-in-tech/)."
     }, {
       "t": "p",
       "text": "**Urgent help:** If you are at immediate risk of harming yourself or cannot stay safe, seek emergency help now. In the UK, call 999 or go to A&E; elsewhere, contact local emergency services. The [NHS explains urgent mental health support options](https://www.nhs.uk/nhs-services/mental-health-services/where-to-get-urgent-help-for-mental-health/)."
@@ -411,5 +411,5 @@ window.SITE_ARTICLE_PAGES["burnout-at-work"] = {
       "href": "/contact/"
     }
   },
-  "wordCount": 3100
+  "wordCount": 3121
 };

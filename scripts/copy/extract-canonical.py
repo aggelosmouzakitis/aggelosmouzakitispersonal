@@ -88,6 +88,8 @@ CTA_HREF = {
     'Therapy for entrepreneurs, founders and business owners': '/therapy-for-founders/',
     'Therapy for founders': '/therapy-for-founders/',
     'Therapy for Founders': '/therapy-for-founders/',
+    'Founders': '/therapy-for-founders/',
+    'Executives': '/therapy-for-executives/',
     'Considering therapy': '/considering-therapy/',
     'Considering Therapy': '/considering-therapy/',
     'Relationship problems': '/relationship-problems-men/',
@@ -112,6 +114,7 @@ CTA_HREF = {
     'Confidentiality': '/confidentiality/',
     'Take the burnout check-in': '/free-tools/burned-out/',
     'Take the career reflection': '/free-tools/quit-your-job/',
+    'The loneliness and emotional pressure that founders experience': '/blog/the-loneliness-and-emotional-pressure-that-founders-experience/',
     'Read Undisguised': 'https://www.undisguised.io/',
     'Read the Undisguised newsletter': 'https://www.undisguised.io/',
     # The manifesto (/undisguised/). A link to it from another page is set as

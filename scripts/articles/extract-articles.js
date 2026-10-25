@@ -375,8 +375,11 @@ function extract(a) {
 
   // Contextual links the site adds to the article's own wording (articles.js
   // contextLinks): each exact phrase, found once in the article and outside
-  // any link, is wrapped in a link. No word changes.
-  for (const [phrase, href] of a.contextLinks || []) {
+  // any link, is wrapped in a link. No word changes. A phrase that recurs is
+  // found by the longer text around it (`within`, once in the article).
+  for (const [phrase, href, within] of a.contextLinks || []) {
+    const find = within || phrase;
+    if (within && within.split(phrase).length !== 2) fail(slug, `contextLinks: "${phrase}" must occur once in "${within}"`);
     const holders = [];
     const scan = (list) => list.forEach((b, i) => {
       if (b.t === 'sub') scan(b.blocks);
@@ -385,11 +388,11 @@ function extract(a) {
     });
     scan(intro);
     sections.forEach((s) => scan(s.blocks));
-    const hits = holders.filter(([o, k]) => o[k].includes(phrase));
-    const count = hits.reduce((n, [o, k]) => n + o[k].split(phrase).length - 1, 0);
-    if (count !== 1) fail(slug, `contextLinks: "${phrase}" occurs ${count} times, expected once`);
+    const hits = holders.filter(([o, k]) => o[k].includes(find));
+    const count = hits.reduce((n, [o, k]) => n + o[k].split(find).length - 1, 0);
+    if (count !== 1) fail(slug, `contextLinks: "${find}" occurs ${count} times, expected once`);
     const [o, k] = hits[0];
-    const at = o[k].indexOf(phrase);
+    const at = o[k].indexOf(find) + find.indexOf(phrase);
     const before = o[k].slice(0, at);
     if ((before.match(/\[/g) || []).length !== (before.match(/\]/g) || []).length) fail(slug, `contextLinks: "${phrase}" is inside a link`);
     o[k] = before + '[' + phrase + '](' + href + ')' + o[k].slice(at + phrase.length);
