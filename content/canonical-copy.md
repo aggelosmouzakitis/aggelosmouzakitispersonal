@@ -90,7 +90,7 @@ Confidentiality
 | 3 | Work With Me | /work-with-me/ | Psychotherapy, Couples Therapy & Coaching \| Aggelos Mouzakitis | Individual psychotherapy, couples therapy and professional coaching with Aggelos Mouzakitis. Online work for relationships, burnout, anxiety, career decisions and professional problems. | Three ways to work together. |
 | 4 | Individual Psychotherapy | /individual-psychotherapy/ | Online Individual Psychotherapy \| Aggelos Mouzakitis | Online individual psychotherapy for relationships, burnout, anxiety, difficult decisions and recurring patterns, with a BACP-registered psychotherapist. | Individual psychotherapy for the parts of life that aren't resolving on their own. |
 | 5 | Couples Therapy | /couples-therapy/ | Online Couples Therapy \| Conflict, Distance & Work Pressure | Online couples therapy for recurring conflict, emotional distance and relationships affected by work, pressure and major life changes. | Online couples therapy for recurring conflict, distance and relationship strain. |
-| 6 | Professional Coaching | /professional-coaching/ | Professional Coaching for Tech & Career Decisions \| Aggelos Mouzakitis | Professional coaching for experienced people in tech, startups and business making career, leadership, independence and other difficult professional decisions. | Professional coaching for a decision you actually have to make. |
+| 6 | Professional Coaching | /professional-coaching/ | Career Coaching for Tech Professionals \| Aggelos Mouzakitis | Career and leadership coaching for experienced people in tech, startups and business with a real decision to make: leaving, going independent or stepping up. | Professional coaching for a decision you actually have to make. |
 | 7 | Therapy vs Coaching | /therapy-vs-coaching/ | Therapy vs Coaching: Which Fits Your Situation? | A practical guide to the difference between psychotherapy and professional coaching, especially for career decisions, anxiety, recurring patterns and problems that cross between work and personal life. | Therapy or coaching? |
 | 8 | Men in Tech & Demanding Careers | /therapy-for-men-in-tech/ | Therapist for Men in Tech \| Online, UK & Europe | Online therapy for men in tech, business and demanding careers, from a BACP-registered psychotherapist with 18+ years in product and growth. | Therapy for men in tech, business and demanding careers. |
 | 9 | Founders & Business Owners | /therapy-for-founders/ | Therapist for Startup Founders & Entrepreneurs \| Online | Online psychotherapy for startup founders, entrepreneurs and business owners, with a BACP-registered therapist who built two startups himself. | Therapy for entrepreneurs, founders and business owners. |
@@ -431,6 +431,12 @@ If both partners want the relationship itself to be the focus, that is what Coup
 **Relationship problems →**  
 **Couples therapy →**
 
+## My background
+
+I am a BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy from the University of Derby. Before psychotherapy, I spent more than 18 years in product and growth.
+
+**About me →**
+
 ## Practicalities
 
 **Format**  
@@ -455,7 +461,7 @@ I normally work **weekly for at least the first few months**. We can review freq
 
 You can stop therapy whenever you choose. I ask people to start with a realistic level of commitment because psychotherapy is difficult to develop through occasional sessions booked only when something has blown up.
 
-Before ongoing work begins, I confirm that I can work with you based on your location and circumstances.
+I work with clients in the UK, Ireland, Greece and elsewhere in Europe. Before ongoing work begins, I confirm that I can work with you based on your location and circumstances.
 
 **Fees and practicalities →**
 
@@ -469,6 +475,12 @@ Sometimes. I will also point out patterns or reasoning that look incomplete. The
 
 ### What if I am already seeing another therapist?
 Tell me before we start. Parallel work needs to make sense clinically and practically.
+
+### Is this counselling or psychotherapy?
+People in the UK and Ireland often use the two words for similar work. My training covers both, with an MSc in Integrative Counselling & Psychotherapy, and we start with whatever brought you in, whichever word you use.
+
+### Do you work with clients in Ireland and Greece?
+Yes, online. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. I confirm that I can work with you based on where you are located before ongoing therapy begins.
 
 ## Contact
 
@@ -532,6 +544,12 @@ Come individually when you want to understand your own behaviour or your partner
 
 **Individual psychotherapy →**
 
+## My background
+
+I am a BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy from the University of Derby. I work with couples online, in English or Greek.
+
+**About me →**
+
 ## Practicalities
 
 **Format**  
@@ -552,7 +570,7 @@ English or Greek
 **Introductory call**  
 Free, usually 30 minutes to an hour
 
-We agree the format before ongoing work begins. I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located.
+We agree the format before ongoing work begins. I work with clients in the UK, Ireland, Greece and elsewhere in Europe. I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located.
 
 The fee for the longer couples session is agreed separately before booking.
 
@@ -569,6 +587,9 @@ The work does not assume that staying together is the correct outcome. We can lo
 ### Can I come alone about my relationship?
 Yes. That would normally be individual psychotherapy.
 
+### Is couples therapy the same as couples counselling?
+Mostly, yes. In the UK and Ireland, couples counselling, relationship counselling and couples therapy are often used for the same kind of work. What matters more is that both of you can attend and talk honestly about the relationship.
+
 ## Contact
 
 If both of you want to talk about the relationship, book a consultation.
@@ -580,8 +601,8 @@ If both of you want to talk about the relationship, book a consultation.
 # 6. Professional Coaching
 
 **URL:** `/professional-coaching/`  
-**SEO title:** Professional Coaching for Tech & Career Decisions | Aggelos Mouzakitis  
-**Meta description:** Professional coaching for experienced people in tech, startups and business making career, leadership, independence and other difficult professional decisions.
+**SEO title:** Career Coaching for Tech Professionals | Aggelos Mouzakitis  
+**Meta description:** Career and leadership coaching for experienced people in tech, startups and business with a real decision to make: leaving, going independent or stepping up.
 
 ## Hero
 
@@ -612,6 +633,10 @@ The aim is to understand the trade-offs clearly enough to make a decision or ide
 Career decisions are rarely made in clean conditions. Salary, equity matters, family commitments matter. The market may be poor. A title can take years to earn. Going independent sounds different once the question of where clients will come from becomes concrete.
 
 Before psychotherapy, I spent more than 18 years in product and growth, including seven years running a consultancy and work with more than 100 technology companies. The professional context is usually familiar enough that the work can stay focused on the decision rather than explaining the environment.
+
+I am also a BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy from the University of Derby.
+
+**About me →**
 
 ## How sessions work
 
@@ -651,9 +676,20 @@ English or Greek
 **Introductory call**  
 Free, usually 30 minutes to an hour
 
-Format and frequency depend on the decision and are agreed before we begin.
+Format and frequency depend on the decision and are agreed before we begin. I work with clients in the UK, Ireland, Greece and elsewhere in Europe.
 
 **Fees and practicalities →**
+
+## Common questions
+
+### How is this different from psychotherapy?
+Coaching stays with a professional question: the options, the trade-offs and what to do next. If the decision is tied up with anxiety, self-worth, relationships or a pattern that keeps repeating, psychotherapy gives us more room.
+
+### How many sessions will I need?
+It depends on the decision. We agree the format and frequency before starting.
+
+### Do you only work with people in tech?
+The service is designed for experienced people in tech, startups and business. If your situation is elsewhere, describe it when you get in touch and I will tell you whether it fits.
 
 ## Contact
 

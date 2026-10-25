@@ -199,17 +199,23 @@ window.SITE_COPY = {
           {"t": "p", "text": "If both partners want the relationship itself to be the focus, that is what Couples Therapy is for."},
           {"t": "ctas", "items": [{"label": "Relationship problems", "href": "/relationship-problems-men/"}, {"label": "Couples therapy", "href": "/couples-therapy/"}]}
         ]},
+        {"h2": "My background", "id": "my-background", "blocks": [
+          {"t": "p", "text": "I am a BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy from the University of Derby. Before psychotherapy, I spent more than 18 years in product and growth."},
+          {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
+        ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
           {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
           {"t": "p", "text": "I normally work **weekly for at least the first few months**. We can review frequency later."},
           {"t": "p", "text": "You can stop therapy whenever you choose. I ask people to start with a realistic level of commitment because psychotherapy is difficult to develop through occasional sessions booked only when something has blown up."},
-          {"t": "p", "text": "Before ongoing work begins, I confirm that I can work with you based on your location and circumstances."},
+          {"t": "p", "text": "I work with clients in the UK, Ireland, Greece and elsewhere in Europe. Before ongoing work begins, I confirm that I can work with you based on your location and circumstances."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Do I need a diagnosis?", "blocks": [{"t": "p", "text": "No. A diagnosis is not a prerequisite for psychotherapy."}]},
           {"t": "sub", "h3": "Will you give me advice?", "blocks": [{"t": "p", "text": "Sometimes. I will also point out patterns or reasoning that look incomplete. The important decisions remain yours."}]},
-          {"t": "sub", "h3": "What if I am already seeing another therapist?", "blocks": [{"t": "p", "text": "Tell me before we start. Parallel work needs to make sense clinically and practically."}]}
+          {"t": "sub", "h3": "What if I am already seeing another therapist?", "blocks": [{"t": "p", "text": "Tell me before we start. Parallel work needs to make sense clinically and practically."}]},
+          {"t": "sub", "h3": "Is this counselling or psychotherapy?", "blocks": [{"t": "p", "text": "People in the UK and Ireland often use the two words for similar work. My training covers both, with an MSc in Integrative Counselling & Psychotherapy, and we start with whatever brought you in, whichever word you use."}]},
+          {"t": "sub", "h3": "Do you work with clients in Ireland and Greece?", "blocks": [{"t": "p", "text": "Yes, online. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. I confirm that I can work with you based on where you are located before ongoing therapy begins."}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you want to talk about whether individual psychotherapy fits, book a consultation."},
@@ -254,16 +260,21 @@ window.SITE_COPY = {
           {"t": "p", "text": "Come individually when you want to understand your own behaviour or your partner does not want to attend. Come as a couple when both of you want to work directly on the relationship."},
           {"t": "ctas", "items": [{"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}]}
         ]},
+        {"h2": "My background", "id": "my-background", "blocks": [
+          {"t": "p", "text": "I am a BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy from the University of Derby. I work with couples online, in English or Greek."},
+          {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
+        ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
           {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes, or up to 90 minutes"}, {"a": "Frequency", "b": "Weekly, or every two weeks for the longer session"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per standard session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
-          {"t": "p", "text": "We agree the format before ongoing work begins. I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."},
+          {"t": "p", "text": "We agree the format before ongoing work begins. I work with clients in the UK, Ireland, Greece and elsewhere in Europe. I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."},
           {"t": "p", "text": "The fee for the longer couples session is agreed separately before booking."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
         {"h2": "Common questions", "id": "common-questions", "blocks": [
           {"t": "sub", "h3": "Do we need to be close to separation?", "blocks": [{"t": "p", "text": "No. Couples come with recurring conflict, distance, trust problems and other relationship difficulties well before separation."}]},
           {"t": "sub", "h3": "What if we are already discussing separation?", "blocks": [{"t": "p", "text": "The work does not assume that staying together is the correct outcome. We can look at what has happened, whether repair is realistic and what each of you wants."}]},
-          {"t": "sub", "h3": "Can I come alone about my relationship?", "blocks": [{"t": "p", "text": "Yes. That would normally be individual psychotherapy."}]}
+          {"t": "sub", "h3": "Can I come alone about my relationship?", "blocks": [{"t": "p", "text": "Yes. That would normally be individual psychotherapy."}]},
+          {"t": "sub", "h3": "Is couples therapy the same as couples counselling?", "blocks": [{"t": "p", "text": "Mostly, yes. In the UK and Ireland, couples counselling, relationship counselling and couples therapy are often used for the same kind of work. What matters more is that both of you can attend and talk honestly about the relationship."}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If both of you want to talk about the relationship, book a consultation."},
@@ -277,8 +288,8 @@ window.SITE_COPY = {
       "name": "Professional Coaching",
       "url": "/professional-coaching/",
       "type": "service",
-      "seoTitle": "Professional Coaching for Tech & Career Decisions | Aggelos Mouzakitis",
-      "metaDescription": "Professional coaching for experienced people in tech, startups and business making career, leadership, independence and other difficult professional decisions.",
+      "seoTitle": "Career Coaching for Tech Professionals | Aggelos Mouzakitis",
+      "metaDescription": "Career and leadership coaching for experienced people in tech, startups and business with a real decision to make: leaving, going independent or stepping up.",
       "hero": {"eyebrow": "PROFESSIONAL COACHING", "h1": "Professional coaching for a decision you actually have to make.", "blocks": [
         {"t": "p", "text": "This is a separate service from psychotherapy. It is for experienced people in tech, startups and business who have a professional decision with real trade-offs and want a serious place to work it through."},
         {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
@@ -295,7 +306,9 @@ window.SITE_COPY = {
         ]},
         {"h2": "Professional context", "id": "professional-context", "blocks": [
           {"t": "p", "text": "Career decisions are rarely made in clean conditions. Salary, equity matters, family commitments matter. The market may be poor. A title can take years to earn. Going independent sounds different once the question of where clients will come from becomes concrete."},
-          {"t": "p", "text": "Before psychotherapy, I spent more than 18 years in product and growth, including seven years running a consultancy and work with more than 100 technology companies. The professional context is usually familiar enough that the work can stay focused on the decision rather than explaining the environment."}
+          {"t": "p", "text": "Before psychotherapy, I spent more than 18 years in product and growth, including seven years running a consultancy and work with more than 100 technology companies. The professional context is usually familiar enough that the work can stay focused on the decision rather than explaining the environment."},
+          {"t": "p", "text": "I am also a BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy from the University of Derby."},
+          {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
         ]},
         {"h2": "How sessions work", "id": "how-sessions-work", "blocks": [
           {"t": "p", "text": "Assumptions are challenged when they look weak. Options can be tested before they become irreversible where that is practical. If the same decision has been researched for six months and no new information is appearing, more research is unlikely to solve it."},
@@ -309,8 +322,13 @@ window.SITE_COPY = {
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
           {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Length agreed before starting"}, {"a": "Frequency", "b": "Depends on the decision"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
-          {"t": "p", "text": "Format and frequency depend on the decision and are agreed before we begin."},
+          {"t": "p", "text": "Format and frequency depend on the decision and are agreed before we begin. I work with clients in the UK, Ireland, Greece and elsewhere in Europe."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
+        ]},
+        {"h2": "Common questions", "id": "common-questions", "blocks": [
+          {"t": "sub", "h3": "How is this different from psychotherapy?", "blocks": [{"t": "p", "text": "Coaching stays with a professional question: the options, the trade-offs and what to do next. If the decision is tied up with anxiety, self-worth, relationships or a pattern that keeps repeating, psychotherapy gives us more room."}]},
+          {"t": "sub", "h3": "How many sessions will I need?", "blocks": [{"t": "p", "text": "It depends on the decision. We agree the format and frequency before starting."}]},
+          {"t": "sub", "h3": "Do you only work with people in tech?", "blocks": [{"t": "p", "text": "The service is designed for experienced people in tech, startups and business. If your situation is elsewhere, describe it when you get in touch and I will tell you whether it fits."}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "Tell me the professional decision you are trying to make."},

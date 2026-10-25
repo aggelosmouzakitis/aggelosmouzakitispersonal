@@ -232,7 +232,7 @@ const INDIVIDUAL_UNIT = 'Per 50–60-minute individual psychotherapy session';
 // one instance of a repeated FAQ).
 const FAQ_MARKED = new Set();
 const FAQ_PAGES = [
-  'individual-psychotherapy', 'couples-therapy', 'therapy-for-men-in-tech', 'therapy-for-founders',
+  'individual-psychotherapy', 'couples-therapy', 'professional-coaching', 'therapy-for-men-in-tech', 'therapy-for-founders',
   'therapy-for-executives', 'therapy-for-men', 'therapy-for-software-engineers', 'greek-speaking-psychotherapist',
   'executive-burnout-therapy', 'faq',
 ];

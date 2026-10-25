@@ -565,6 +565,19 @@ window.SITE_COPY = {
           }]
         }]
       }, {
+        "h2": "My background",
+        "id": "my-background",
+        "blocks": [{
+          "t": "p",
+          "text": "I am a BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy from the University of Derby. Before psychotherapy, I spent more than 18 years in product and growth."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "About me",
+            "href": "/about/"
+          }]
+        }]
+      }, {
         "h2": "Practicalities",
         "id": "practicalities",
         "blocks": [{
@@ -596,7 +609,7 @@ window.SITE_COPY = {
           "text": "You can stop therapy whenever you choose. I ask people to start with a realistic level of commitment because psychotherapy is difficult to develop through occasional sessions booked only when something has blown up."
         }, {
           "t": "p",
-          "text": "Before ongoing work begins, I confirm that I can work with you based on your location and circumstances."
+          "text": "I work with clients in the UK, Ireland, Greece and elsewhere in Europe. Before ongoing work begins, I confirm that I can work with you based on your location and circumstances."
         }, {
           "t": "ctas",
           "items": [{
@@ -627,6 +640,20 @@ window.SITE_COPY = {
           "blocks": [{
             "t": "p",
             "text": "Tell me before we start. Parallel work needs to make sense clinically and practically."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Is this counselling or psychotherapy?",
+          "blocks": [{
+            "t": "p",
+            "text": "People in the UK and Ireland often use the two words for similar work. My training covers both, with an MSc in Integrative Counselling & Psychotherapy, and we start with whatever brought you in, whichever word you use."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Do you work with clients in Ireland and Greece?",
+          "blocks": [{
+            "t": "p",
+            "text": "Yes, online. The UK is the main focus of the practice, and I also work with clients in Ireland, Greece and elsewhere in Europe. I confirm that I can work with you based on where you are located before ongoing therapy begins."
           }]
         }]
       }, {
@@ -735,6 +762,19 @@ window.SITE_COPY = {
           }]
         }]
       }, {
+        "h2": "My background",
+        "id": "my-background",
+        "blocks": [{
+          "t": "p",
+          "text": "I am a BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy from the University of Derby. I work with couples online, in English or Greek."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "About me",
+            "href": "/about/"
+          }]
+        }]
+      }, {
         "h2": "Practicalities",
         "id": "practicalities",
         "blocks": [{
@@ -760,7 +800,7 @@ window.SITE_COPY = {
           }]
         }, {
           "t": "p",
-          "text": "We agree the format before ongoing work begins. I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."
+          "text": "We agree the format before ongoing work begins. I work with clients in the UK, Ireland, Greece and elsewhere in Europe. I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."
         }, {
           "t": "p",
           "text": "The fee for the longer couples session is agreed separately before booking."
@@ -795,6 +835,13 @@ window.SITE_COPY = {
             "t": "p",
             "text": "Yes. That would normally be individual psychotherapy."
           }]
+        }, {
+          "t": "sub",
+          "h3": "Is couples therapy the same as couples counselling?",
+          "blocks": [{
+            "t": "p",
+            "text": "Mostly, yes. In the UK and Ireland, couples counselling, relationship counselling and couples therapy are often used for the same kind of work. What matters more is that both of you can attend and talk honestly about the relationship."
+          }]
         }]
       }, {
         "h2": "Contact",
@@ -817,8 +864,8 @@ window.SITE_COPY = {
       "name": "Professional Coaching",
       "url": "/professional-coaching/",
       "type": "service",
-      "seoTitle": "Professional Coaching for Tech & Career Decisions | Aggelos Mouzakitis",
-      "metaDescription": "Professional coaching for experienced people in tech, startups and business making career, leadership, independence and other difficult professional decisions.",
+      "seoTitle": "Career Coaching for Tech Professionals | Aggelos Mouzakitis",
+      "metaDescription": "Career and leadership coaching for experienced people in tech, startups and business with a real decision to make: leaving, going independent or stepping up.",
       "hero": {
         "eyebrow": "PROFESSIONAL COACHING",
         "h1": "Professional coaching for a decision you actually have to make.",
@@ -865,6 +912,15 @@ window.SITE_COPY = {
         }, {
           "t": "p",
           "text": "Before psychotherapy, I spent more than 18 years in product and growth, including seven years running a consultancy and work with more than 100 technology companies. The professional context is usually familiar enough that the work can stay focused on the decision rather than explaining the environment."
+        }, {
+          "t": "p",
+          "text": "I am also a BACP-registered psychotherapist with an MSc in Integrative Counselling & Psychotherapy from the University of Derby."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "About me",
+            "href": "/about/"
+          }]
         }]
       }, {
         "h2": "How sessions work",
@@ -927,12 +983,37 @@ window.SITE_COPY = {
           }]
         }, {
           "t": "p",
-          "text": "Format and frequency depend on the decision and are agreed before we begin."
+          "text": "Format and frequency depend on the decision and are agreed before we begin. I work with clients in the UK, Ireland, Greece and elsewhere in Europe."
         }, {
           "t": "ctas",
           "items": [{
             "label": "Fees and practicalities",
             "href": "/fees-and-practicalities/"
+          }]
+        }]
+      }, {
+        "h2": "Common questions",
+        "id": "common-questions",
+        "blocks": [{
+          "t": "sub",
+          "h3": "How is this different from psychotherapy?",
+          "blocks": [{
+            "t": "p",
+            "text": "Coaching stays with a professional question: the options, the trade-offs and what to do next. If the decision is tied up with anxiety, self-worth, relationships or a pattern that keeps repeating, psychotherapy gives us more room."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "How many sessions will I need?",
+          "blocks": [{
+            "t": "p",
+            "text": "It depends on the decision. We agree the format and frequency before starting."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Do you only work with people in tech?",
+          "blocks": [{
+            "t": "p",
+            "text": "The service is designed for experienced people in tech, startups and business. If your situation is elsewhere, describe it when you get in touch and I will tell you whether it fits."
           }]
         }]
       }, {
