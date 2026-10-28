@@ -38,7 +38,9 @@
 //               row groups, the default), 'scroll' (the table scrolls in a
 //               labelled, focusable region) or 'fit' (a narrow table that
 //               stays a table and wraps). A "---:" delimiter right-aligns its
-//               column (amounts).
+//               column (amounts). rowHeaders: false when the first column is
+//               not a label for its row (two columns set side by side).
+//   tables      several tables: one such config each, in the article's order.
 //   callout     the one safety callout, if the brief asks for one: the final
 //               paragraph of `section`, beginning with `startsWith`.
 //   wordCount   what the brief counts: 'headline', 'deck', 'body' (the
@@ -375,6 +377,39 @@ const ARTICLES = [
     // established restrained notice treatment"
     notice: 'When to get urgent help',
     // "calculate from visible editorial content"
+    wordCount: ['headline', 'deck', 'body'],
+    // As for the other guides of this series: no article image to give.
+    schemaImage: 'none',
+    links: {},
+  },
+  {
+    slug: 'emotionally-unavailable-husband',
+    brief: 'content/articles/emotionally-unavailable-husband.md',
+    // Europe/Dublin is on GMT (+00:00) from 25 October 2026.
+    published: '2026-10-28T22:08:00+00:00',
+    modified: null,
+    // "actual `datePublished` and substantive `dateModified`": the
+    // publication, until a substantive update.
+    schemaModified: 'published',
+    category: 'Guide',
+    readTime: '21 min read',
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    related: { label: 'Work & Relationships', href: '/work-affecting-relationship/' },
+    // Three tables, each named as Part 3 writes it (hidden: the visible
+    // article stays Part 2). The two three-column tables scroll inside an
+    // accessibly named, focusable wrapper on narrow screens; the two-column
+    // comparison stays a table, its columns side by side with no row headers
+    // ("Use row headers where appropriate").
+    tables: [
+      { caption: 'Observed changes, possible explanations and limits of interpretation', captionFrom: 'brief', captionHidden: true, narrow: 'scroll' },
+      { caption: 'Supporting a partner and taking responsibility for his recovery', captionFrom: 'brief', captionHidden: true, narrow: 'fit', rowHeaders: false },
+      { caption: 'Choosing individual, couples, career, medical or workplace support', captionFrom: 'brief', captionHidden: true, narrow: 'scroll' },
+    ],
+    // The safety section stays ordinary, fully visible text: the brief asks
+    // for no banner or notice treatment.
+    callout: null,
+    // "the word count of visible public content"
     wordCount: ['headline', 'deck', 'body'],
     // As for the other guides of this series: no article image to give.
     schemaImage: 'none',

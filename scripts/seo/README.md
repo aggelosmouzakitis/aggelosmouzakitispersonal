@@ -34,6 +34,15 @@ To add one: save the brief as `content/articles/<slug>.md`, add an entry to
 `scripts/articles/articles.js`, then the full pipeline from `npm run articles`
 (with `npm run pages`, and `node scripts/seo/og.js <slug>` for its share card).
 
+What a brief can ask for, beyond prose, lists and the FAQ: a curated TOC (the
+first table under "Table of contents"; a later table gives the ids of the H2s
+it leaves out), in-page links to its own sections (`#id`, checked against its
+headings), `tel:` numbers, one or several tables (articles.js `table` or
+`tables`: caption, narrow-screen mode, row headers), and a CTA that is either
+one paragraph and its button or a longer sequence of paragraphs, one primary
+button and quieter text links ("Primary button: `…`; destination `…`").
+check-articles.js proves each against the brief.
+
 The four essays the canonical copy features on /blog/ are back the same way, at
 their original `/blog/<slug>/` URLs: `node scripts/articles/from-archive.js
 <slug>` turns the archived page into its source (word for word; only the old

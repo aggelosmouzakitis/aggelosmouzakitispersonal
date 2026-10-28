@@ -68,6 +68,7 @@ function normaliseLinks(md, slug) {
     if (href.startsWith(ORIGIN + '/')) return '](' + href.slice(ORIGIN.length) + ')';
     if (/^\/(?!\/)/.test(href)) return m;
     if (/^tel:\+?\d+$/.test(href)) return m; // a phone number the brief supplies
+    if (/^#[a-z0-9-]+$/.test(href)) return m; // a section of the article (its id is checked)
     if (!/^https:\/\//.test(href)) fail(slug, `link is neither a site path nor https: ${href}`);
     return m;
   });
@@ -116,15 +117,17 @@ function subsections(text) {
 // closing full stop; keys lower-case and without "Exact" ("- Exact heading:
 // `…`" and "Heading: `…`." are one field). A field that names a link ("Exact
 // name, linked to `/about/`: `…`" or "Name: `…`, linked to `/about/`.") also
-// gives "<key> link".
+// gives "<key> link"; one that names where it goes ("Primary button: `…`;
+// destination `/…/`.") gives "<key> destination".
 function fieldsOf(text) {
   const out = {};
-  for (const m of text.matchAll(/^(?:- )?(.+?): `([^`]+)`(?:,? linked to `([^`]+)`)?\.?\s*$/gm)) {
+  for (const m of text.matchAll(/^(?:- )?(.+?): `([^`]+)`(?:,? linked to `([^`]+)`)?(?:;? destination `([^`]+)`)?\.?\s*$/gm)) {
     const raw = m[1].trim();
     const key = raw.replace(/,?\s*linked to `[^`]+`/i, '').trim().toLowerCase().replace(/^exact /, '');
     out[key] = m[2];
     const link = m[3] || (raw.match(/linked to `([^`]+)`/i) || [])[1];
     if (link) out[key + ' link'] = link;
+    if (m[4]) out[key + ' destination'] = m[4];
   }
   return out;
 }
@@ -202,10 +205,23 @@ function extract(a) {
   const notes = subsections(parts['3']);
   const need = (t) => notes[t] || fail(slug, `Part 3 has no "### ${t}"`);
   const tocText = notes['Table of contents'] || '';
-  const tocLabel = tocText ? (tocText.match(/label(?: the block)?:? `([^`]+)`/i) || [])[1] || fail(slug, 'Part 3 TOC has no label') : null;
-  const toc = [...tocText.matchAll(/^\|\s*([^|`]+?)\s*\|\s*`#([a-z0-9-]+)`\s*\|$/gm)]
+  const tocLabel = tocText ? (tocText.match(/label(?: the (?:block|navigation))?:? `([^`]+)`/i) || [])[1] || fail(slug, 'Part 3 TOC has no label') : null;
+  // The first table is the TOC. A curated TOC leaves some H2s out; their ids
+  // come from a later table ("Assign these additional H2 IDs, without adding
+  // them to the TOC").
+  const tocTables = [];
+  let tocRows = null;
+  for (const line of tocText.split('\n')) {
+    if (!/^\|/.test(line.trim())) { tocRows = null; continue; }
+    if (!tocRows) tocTables.push(tocRows = []);
+    tocRows.push(line.trim());
+  }
+  const idRows = (lines) => lines.map((l) => l.match(/^\|\s*([^|`]+?)\s*\|\s*`#([a-z0-9-]+)`\s*\|$/)).filter(Boolean)
     .map((m) => ({ label: smart(m[1]), id: m[2] }));
+  const toc = tocTables.length ? idRows(tocTables[0]) : [];
   if (tocText && !toc.length) fail(slug, 'Part 3 TOC table is empty');
+  const extraIds = [].concat(...tocTables.slice(1).map(idRows));
+  if (extraIds.length && !/additional H2 IDs|without adding them to the TOC/i.test(tocText)) fail(slug, 'Part 3 TOC has a second table of ids but does not say it is outside the TOC');
   // The CTA heading's id, when Part 3 gives one (else one from its words).
   const ctaIdGiven = (tocText.match(/Assign `#([a-z0-9-]+)` to the final commercial CTA H2/)
     || tocText.match(/final CTA the ID `#?([a-z0-9-]+)`/) || [])[1];
@@ -232,7 +248,7 @@ function extract(a) {
   if (quoted) ctaSpec.copy = quoted[1].split('\n').map((l) => l.replace(/^> ?/, '').trim()).filter(Boolean).join(' ');
   if (!notes['Final CTA'] && a.close !== 'writing') fail(slug, 'no Final CTA in Part 3 and no close in articles.js');
   const ctaId = notes['Final CTA'] ? ctaIdGiven || slugify(ctaSpec.heading || '') : null;
-  const ids = toc.map((t) => t.id).concat(notes['Final CTA'] ? [ctaId] : []);
+  const ids = toc.concat(extraIds).map((t) => t.id).concat(notes['Final CTA'] ? [ctaId] : []);
   if ((notes['Final CTA'] && !ctaId) || new Set(ids).size !== ids.length) fail(slug, 'duplicate or missing anchor IDs in Part 3');
   const header = need('Article header');
   for (const v of [a.category, a.type, a.readTime].filter(Boolean)) {
@@ -247,7 +263,8 @@ function extract(a) {
     new RegExp('the deck, the paragraph beginning ' + Q), new RegExp('deck is the first paragraph (?:under|after) the H1, beginning ' + Q),
     new RegExp('first paragraph (?:under|after) the H1, beginning ' + Q + ',? as the deck'));
   const introStart = first(new RegExp('(?:introduction|body opening) begins ' + Q), new RegExp('paragraph beginning ' + Q + ' starts the article introduction'),
-    new RegExp('beginning ' + Q + ' starts the body'), new RegExp('before the opening paragraph beginning ' + Q));
+    new RegExp('beginning ' + Q + ' starts the body'), new RegExp('before the opening paragraph beginning ' + Q),
+    new RegExp('the opening beginning ' + Q));
   const introCount = NUMBERS[((header.match(/\b(one|two|three|four|five|six) (?:opening )?paragraphs\b/i) || [])[1] || '').toLowerCase()];
   const deckSentences = NUMBERS[((header.match(/\b(one|two|three)-sentence deck\b/i) || [])[1] || '').toLowerCase()];
 
@@ -325,7 +342,7 @@ function extract(a) {
         const prev = section && section.blocks[section.blocks.length - 1];
         if (!prev || prev.t !== 'p' || prev.text !== ctaSpec.eyebrow) fail(slug, 'no CTA eyebrow before the CTA heading');
         section.blocks.pop();
-        cta = { id: ctaId, eyebrow: prev.text, h2, text: null, button: null };
+        cta = { id: ctaId, eyebrow: prev.text, h2, text: null, button: null, parts: [] };
         section = null;
         continue;
       }
@@ -361,11 +378,11 @@ function extract(a) {
       if (align.some(Boolean)) block.align = align;
     }
     if (cta) {
-      // After the CTA heading: its copy, then the paragraph that is its link.
-      const link = block.t === 'p' && block.text.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-      if (link && cta.text) cta.button = { label: link[1], href: link[2] };
-      else if (block.t === 'p' && !cta.text) cta.text = block.text;
-      else fail(slug, 'unexpected content after the CTA');
+      // After the CTA heading: its copy and its links (paragraphs that are
+      // only a link), in order; checked against Part 3 below.
+      if (block.t !== 'p') fail(slug, 'unexpected content after the CTA');
+      const link = block.text.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+      cta.parts.push(link ? { t: 'link', label: link[1], href: link[2] } : { t: 'p', text: block.text });
       continue;
     }
     if (sub) sub.blocks.push(block);
@@ -409,14 +426,22 @@ function extract(a) {
   if (intro.some((b) => !['p', 'quote', 'hr'].includes(b.t))) fail(slug, 'the introduction holds more than paragraphs');
 
   // Sections ↔ the TOC table: same headings, same order; ids from the table.
-  // Without a TOC (an essay), each H2 still gets an id from its words.
+  // A curated TOC lists some of the H2s, in their order, and Part 3 gives the
+  // others' ids. Without a TOC (an essay), each H2 gets an id from its words.
   const got = sections.map((s) => s.h2);
-  if (toc.length && got.join('\n') !== toc.map((t) => t.label).join('\n')) {
+  const idOf = new Map(toc.concat(extraIds).map((t) => [t.label, t.id]));
+  if (extraIds.length) {
+    const missing = got.filter((h) => !idOf.has(h));
+    const unknown = [...idOf.keys()].filter((l) => !got.includes(l));
+    if (missing.length || unknown.length) fail(slug, `H2s without a Part 3 id: ${missing.join(' | ') || '—'}; ids for no H2: ${unknown.join(' | ') || '—'}`);
+    const listed = got.filter((h) => toc.some((t) => t.label === h));
+    if (listed.join('\n') !== toc.map((t) => t.label).join('\n')) fail(slug, 'the TOC is not in the order of its sections');
+  } else if (toc.length && got.join('\n') !== toc.map((t) => t.label).join('\n')) {
     fail(slug, `the H2s and the Part 3 TOC differ:\n  H2s: ${got.join(' | ')}\n  TOC: ${toc.map((t) => t.label).join(' | ')}`);
   }
   const used = new Set();
   sections.forEach((s, i) => {
-    let id = toc.length ? toc[i].id : slugify(plain(s.h2));
+    let id = extraIds.length ? idOf.get(s.h2) : toc.length ? toc[i].id : slugify(plain(s.h2));
     for (let n = 2; !toc.length && used.has(id); n++) id = slugify(plain(s.h2)) + '-' + n;
     used.add(s.id = id);
     const subs = s.blocks.filter((b) => b.t === 'sub');
@@ -425,14 +450,52 @@ function extract(a) {
     if (a.notice && s.h2 === smart(a.notice)) s.kind = 'notice';
   });
 
+  // A link to a section of the article must land on one of its headings.
+  const allText = JSON.stringify([intro, sections]);
+  for (const m of allText.matchAll(/\]\(#([a-z0-9-]+)\)/g)) {
+    if (!used.has(m[1]) && m[1] !== ctaId) fail(slug, `an in-page link to #${m[1]}, which no heading has`);
+  }
+
   // The CTA against Part 3, word for word; or, for an essay, the Writing
   // page's own close from the canonical copy (no new wording).
   let close = null;
   if (notes['Final CTA']) {
-    if (!cta || !cta.text || !cta.button) fail(slug, 'the CTA is incomplete');
-    if (smart(ctaSpec.copy || '') !== cta.text) fail(slug, 'CTA copy differs from Part 3');
-    if (smart(ctaSpec['button label'] || '') !== cta.button.label) fail(slug, 'CTA button label differs from Part 3');
-    if ((ctaSpec.destination || '').replace(ORIGIN, '') !== cta.button.href) fail(slug, 'CTA destination differs from Part 3');
+    if (!cta) fail(slug, 'the CTA is incomplete');
+    const parts = cta.parts;
+    delete cta.parts;
+    // A link's closing arrow is the site's own (drawn after every button and
+    // text link, hidden from assistive technology), so it leaves the label.
+    const arrowless = (s) => s.replace(/\s*→$/, '');
+    if (ctaSpec['button label'] || ctaSpec.copy) {
+      // The established CTA: one paragraph, then its button.
+      if (parts.length !== 2 || parts[0].t !== 'p' || parts[1].t !== 'link') fail(slug, 'the CTA is incomplete');
+      cta.text = parts[0].text;
+      cta.button = { label: parts[1].label, href: parts[1].href };
+      if (smart(ctaSpec.copy || '') !== cta.text) fail(slug, 'CTA copy differs from Part 3');
+      if (smart(ctaSpec['button label'] || '') !== cta.button.label) fail(slug, 'CTA button label differs from Part 3');
+      if ((ctaSpec.destination || '').replace(ORIGIN, '') !== cta.button.href) fail(slug, 'CTA destination differs from Part 3');
+    } else {
+      // A longer CTA: paragraphs, one primary button and quieter text links,
+      // each as Part 3 lists them ("First paragraph", "Primary button: `…`;
+      // destination `…`", "Secondary text link", "Final sentence", …).
+      const keys = Object.keys(ctaSpec);
+      const specCopy = keys.filter((k) => /(?:paragraph|sentence)$/.test(k)).map((k) => smart(ctaSpec[k]));
+      const specLinks = keys.filter((k) => /(?:button|link)$/.test(k)).map((k) => ({
+        t: /button$/.test(k) ? 'button' : 'link', label: arrowless(smart(ctaSpec[k])), href: (ctaSpec[k + ' destination'] || '').replace(ORIGIN, ''),
+      }));
+      const ps = parts.filter((x) => x.t === 'p');
+      const links = parts.filter((x) => x.t === 'link');
+      if (ps.map((x) => x.text).join('\n') !== specCopy.join('\n')) fail(slug, 'CTA copy differs from Part 3');
+      if (JSON.stringify(links.map((x) => [arrowless(x.label), x.href])) !== JSON.stringify(specLinks.map((x) => [x.label, x.href]))) {
+        fail(slug, 'CTA links differ from Part 3');
+      }
+      if (specLinks.filter((x) => x.t === 'button').length !== 1) fail(slug, 'Part 3 must name exactly one primary button');
+      let n = 0;
+      cta.blocks = parts.map((x) => (x.t === 'p' ? x : specLinks[n++]));
+      cta.text = ps[0].text;
+      const primary = specLinks.find((x) => x.t === 'button');
+      cta.button = { label: primary.label, href: primary.href };
+    }
   } else {
     if (cta) fail(slug, 'a CTA in Part 2 without its Final CTA spec');
     const window = {};
@@ -456,10 +519,15 @@ function extract(a) {
   sections.forEach((s) => listsOf(s).forEach((list) => list.forEach((b, i) => {
     if (b.t === 'table') tables.push({ t: b, list, i, section: s });
   })));
-  if (tables.length > 1) fail(slug, 'more than one table: each needs its own caption and note');
-  if (tables.length) {
-    const { t, list, i, section: s } = tables[0];
-    const cfg = a.table || fail(slug, 'a table needs its caption or note (articles.js table)');
+  // One config per table, in order (articles.js `tables`, or `table` for one).
+  const cfgs = a.tables || (a.table ? [a.table] : []);
+  if (tables.length && tables.length !== cfgs.length) fail(slug, `${tables.length} table(s) but ${cfgs.length} config(s) in articles.js (table or tables)`);
+  tables.forEach(({ t, list, i, section: s }, n) => {
+    const cfg = cfgs[n];
+    // Several tables need ids of their own.
+    const suffix = tables.length > 1 ? '-' + (n + 1) : '';
+    if (suffix) t.captionId = 'art-table-caption' + suffix;
+    if (cfg.rowHeaders === false) t.rowHeaders = false;
     const before = list[i - 1];
     const after = list[i + 1];
     if (cfg.caption && (cfg.captionFrom || 'paragraph') === 'paragraph') {
@@ -481,13 +549,13 @@ function extract(a) {
     if (cfg.note) {
       const note = [before, after].find((b) => b && b.t === 'p' && plain(b.text).startsWith(smart(cfg.note)));
       if (!note) fail(slug, `no paragraph next to the table begins "${cfg.note}"`);
-      note.id = 'table-note';
+      note.id = 'table-note' + suffix;
       t.describedBy = note.id;
     }
     const all = [];
     sections.forEach((x) => listsOf(x).forEach((l) => l.forEach((b) => b.t === 'p' && all.push(plain(b.text)))));
     if (t.caption && !t.captionHidden && all.some((p) => p.includes(t.caption))) fail(slug, 'the caption sentence would be visible twice');
-  }
+  });
 
   if (a.notice && !sections.some((s) => s.kind === 'notice')) fail(slug, `no section "${a.notice}" for the notice`);
 

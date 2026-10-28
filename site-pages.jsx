@@ -58,6 +58,7 @@
     ['achievement-self-worth', 'being careful turns into needing to be beyond criticism', '/perfectionism-at-work/'],
     ['work-affecting-relationship', 'continue thinking about the company for the rest of the evening', '/cant-switch-off-from-work/'],
     ['work-affecting-relationship', 'Burnout often shows up in relationships before it shows up in performance', '/burnout-at-work/'],
+    ['work-affecting-relationship', 'it can feel like you are not really there', '/emotionally-unavailable-husband/'],
     ['therapy-for-software-engineers', 'Professional coaching', '/professional-coaching/'],
     // Undisguised: a phrase that already says what one movement of the map is
     // about links to that movement on /undisguised/, at most one per page.
@@ -1290,14 +1291,17 @@
   // so the page itself never scrolls sideways.
   function ArticleTable({ t }) {
     const scroll = t.narrow === 'scroll';
-    const name = t.caption ? 'art-table-caption' : t.labelledBy;
+    const captionId = t.captionId || 'art-table-caption';
+    const name = t.caption ? captionId : t.labelledBy;
+    // rowHeaders false: two columns set side by side, neither labelling the other.
+    const rowHead = t.rowHeaders !== false;
     const num = (i) => (t.align && t.align[i] ? 'art-num art-num--' + t.align[i] : undefined);
     const table = e('table', { className: 'art-table art-table--' + (t.narrow || 'stack'), role: 'table', 'aria-labelledby': t.caption ? undefined : t.labelledBy, 'aria-describedby': t.describedBy },
-      t.caption ? e('caption', { id: 'art-table-caption', className: t.captionHidden ? 'sp-vh' : undefined }, inlineMd(t.caption)) : null,
-      e('colgroup', null, t.head.map((h, i) => e('col', { key: i, className: i ? 'art-table__ev' : 'art-table__key' }))),
+      t.caption ? e('caption', { id: captionId, className: t.captionHidden ? 'sp-vh' : undefined }, inlineMd(t.caption)) : null,
+      e('colgroup', null, t.head.map((h, i) => e('col', { key: i, className: rowHead ? (i ? 'art-table__ev' : 'art-table__key') : undefined }))),
       e('thead', { role: 'rowgroup' }, e('tr', { role: 'row' },
         t.head.map((h, i) => e('th', { key: i, scope: 'col', role: 'columnheader', className: num(i) }, inlineMd(h))))),
-      e('tbody', { role: 'rowgroup' }, t.rows.map((r, i) => e('tr', { key: i, role: 'row' }, r.map((c, j) => (j
+      e('tbody', { role: 'rowgroup' }, t.rows.map((r, i) => e('tr', { key: i, role: 'row' }, r.map((c, j) => (j || !rowHead
         ? e('td', { key: j, role: 'cell', className: num(j), 'data-label': plainMd(t.head[j]) }, inlineMd(c))
         : e('th', { key: j, scope: 'row', role: 'rowheader', 'data-label': plainMd(t.head[0]) }, inlineMd(c))))))));
     return scroll ? e('div', { className: 'art-table-scroll', role: 'region', 'aria-labelledby': name, tabIndex: 0 }, table) : table;
@@ -1353,14 +1357,31 @@
           e('div', { className: 'read close__in' },
             e('p', { className: 'close__label' }, a.cta.eyebrow),
             e('h2', { className: 'close__text art-cta__h', id: a.cta.id }, a.cta.h2),
-            e('p', { className: 'close__text close__text--long art-cta__p' }, a.cta.text),
-            e('div', { className: 'close__actions' }, e(Btn, { item: a.cta.button }))))
+            a.cta.blocks ? e(CtaBlocks, { blocks: a.cta.blocks }) : e(React.Fragment, null,
+              e('p', { className: 'close__text close__text--long art-cta__p' }, a.cta.text),
+              e('div', { className: 'close__actions' }, e(Btn, { item: a.cta.button })))))
         // An essay: the Writing page's own close, word for word.
         : e(window.CloseBand, {
           label: a.close.label,
           text: a.close.text,
           actions: a.close.actions.map((it) => e(isPrimary(it) ? Btn : TLink, { key: it.href, item: it })),
         }));
+  }
+
+  // A longer CTA, in its brief's order: paragraphs, and between them its
+  // actions (the one primary button, the rest quieter text links), each run of
+  // actions in the close band's own row.
+  function CtaBlocks({ blocks }) {
+    const out = [];
+    blocks.forEach((b, i) => {
+      if (b.t === 'p') { out.push(e('p', { key: i, className: 'close__text close__text--long art-cta__p' }, inlineMd(b.text))); return; }
+      const item = { label: b.label, href: b.href };
+      const action = e(b.t === 'button' ? Btn : TLink, { key: i, item });
+      const last = out[out.length - 1];
+      if (last && last.type === 'div') out[out.length - 1] = e('div', { key: last.key, className: 'close__actions' }, [].concat(last.props.children, action));
+      else out.push(e('div', { key: 'a' + i, className: 'close__actions' }, [action]));
+    });
+    return out;
   }
 
   function ArticleSite({ id }) {
@@ -2049,6 +2070,7 @@ ${TABLE_CSS}
 /* The close: the site's dark band, the article's CTA in it */
 .art-cta .art-cta__h{margin:0 auto}
 .art-cta .art-cta__p{margin:18px auto 0}
+.art-cta .close__actions+.art-cta__p{margin-top:36px}
 `;
 
   // The Undisguised map emblem (MapEmblem): the manifesto's hero figure and

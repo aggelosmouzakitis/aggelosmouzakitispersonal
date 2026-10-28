@@ -14,10 +14,11 @@
 //     with their pointers;
 //   - structure: one H1; breadcrumb → metadata line → H1 → deck → author
 //     block → TOC → introduction; the exact metadata line, author block and
-//     TOC (labels, order, every target an H2 with the brief's id); the table
-//     (caption or name, description, header cells both ways); the FAQ in
-//     full with no accordion; the numbered references; one CTA with one
-//     button, the only booking link in the content;
+//     TOC (labels, order, every target an H2 with the brief's id); each
+//     table (caption or name, description, header cells, row headers where it
+//     has them); the FAQ in full with no accordion; the numbered references;
+//     one CTA with its one button and any quieter links, and only the booking
+//     links the brief has;
 //   - head: title, description, canonical, og:type article; the BlogPosting
 //     (headline, description, author, publisher, dates, en-GB, section, the
 //     image the page shows, wordCount recounted from the page); no FAQPage;
@@ -26,7 +27,7 @@
 //     301 straight to it.
 // As a reader gets it (JavaScript on)
 //   - no page-level horizontal overflow from 320px to 1280px;
-//   - below 640px the table is set as its brief asks: labelled row groups
+//   - below 640px each table is set as its brief asks: labelled row groups
 //     with the column label beside every cell ('stack'), or its columns kept
 //     in a labelled, focusable region that scrolls ('scroll'); its text is
 //     never shrunk to fit;
@@ -77,7 +78,7 @@ function runs(md) {
   return { text: norm(plain(md)), links, strong, em };
 }
 
-function expected(a, report) {
+function expected(a, report, art) {
   let src = fs.readFileSync(path.join(ROOT, a.brief), 'utf8');
   // A link to a merged page goes straight to where it now 301s (relink).
   for (const [from, to] of Object.entries(a.relink || {})) src = src.split('](' + from + ')').join('](' + to + ')');
@@ -94,8 +95,15 @@ function expected(a, report) {
   // before the CTA is the CTA band's own edge.
   const hidden = report.blockers.map((b) => norm(b.hidden || `[INTERNAL LINK NEEDED: ${b.placeholder}]`));
   const out = [];
-  const cfg = a.table || {};
-  const moved = cfg.caption && (cfg.captionFrom || 'paragraph') === 'paragraph' ? norm(cfg.caption) : null;
+  // Each table's config, in order (articles.js tables, or table for one).
+  const cfgs = a.tables || (a.table ? [a.table] : []);
+  const cfgAt = new Map();
+  blocks.filter((b) => b.t === 'table').forEach((b, n) => cfgAt.set(b, cfgs[n] || {}));
+  // The CTA's links (paragraphs that are only a link, after its heading): its
+  // one button, then quieter text links; their closing arrow is the site's own.
+  const ctaAt = art && art.cta ? blocks.findIndex((b) => b.t === 'h' && b.level === 2 && norm(b.md) === norm(art.cta.h2)) : -1;
+  const ctaLinks = art && art.cta ? (art.cta.blocks || [{ t: 'button' }]).filter((x) => x.t !== 'p') : [];
+  let ctaLink = 0;
   blocks.forEach((b, i) => {
     if (b.t === 'hr') return;
     if (b.t === 'h') { out.push(Object.assign({ kind: 'h' + b.level }, runs(b.md))); return; }
@@ -107,21 +115,28 @@ function expected(a, report) {
       for (const h of hidden) if (md.includes(h)) md = norm(md.replace(h, ' '));
       if (!md) return;
       const next = blocks[i + 1];
-      if (moved && next && next.t === 'table' && md.endsWith(' ' + moved)) {
+      const cfgNext = next && next.t === 'table' ? cfgAt.get(next) : null;
+      const moved = cfgNext && cfgNext.caption && (cfgNext.captionFrom || 'paragraph') === 'paragraph' ? norm(cfgNext.caption) : null;
+      if (moved && md.endsWith(' ' + moved)) {
         out.push(Object.assign({ kind: 'p' }, runs(md.slice(0, -moved.length))));
         out.push(Object.assign({ kind: 'caption' }, runs(moved)));
         return;
       }
       const button = md.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-      if (button && i === blocks.length - 1) { out.push({ kind: 'button', text: norm(button[1]), links: [], strong: [], em: [], href: relative(button[2]) }); return; }
+      if (button && ctaAt >= 0 && i > ctaAt) {
+        const kind = ctaLinks[ctaLink++].t === 'button' ? 'button' : 'link';
+        out.push({ kind, text: norm(button[1]).replace(/\s*→$/, ''), links: [], strong: [], em: [], href: relative(button[2]) });
+        return;
+      }
       out.push(Object.assign({ kind: 'p' }, runs(md)));
       return;
     }
     if (b.t === 'ul' || b.t === 'ol') { b.items.forEach((it) => out.push(Object.assign({ kind: 'li' }, runs(it)))); return; }
+    const cfg = cfgAt.get(b);
     if (cfg.caption && cfg.captionFrom === 'brief') out.push(Object.assign({ kind: 'caption' }, runs(cfg.caption)));
     const rows = b.rows.map((r) => r.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim()));
     rows[0].forEach((c) => out.push(Object.assign({ kind: 'th' }, runs(c))));
-    rows.slice(2).forEach((r) => r.forEach((c, j) => out.push(Object.assign({ kind: j ? 'td' : 'th' }, runs(c)))));
+    rows.slice(2).forEach((r) => r.forEach((c, j) => out.push(Object.assign({ kind: j || cfg.rowHeaders === false ? 'td' : 'th' }, runs(c)))));
   });
   return out;
 }
@@ -138,14 +153,15 @@ function pageBlocks() {
   const scope = [document.querySelector('article.art'), document.querySelector('section.art-cta')].filter(Boolean);
   const out = [];
   for (const root of scope) {
-    for (const el of root.querySelectorAll('h1, h2, h3, p, li, caption, th, td, a.btn')) {
-      if (el.closest(SKIP)) continue;
-      const kind = el.matches('a.btn') ? 'button' : el.tagName.toLowerCase();
+    for (const el of root.querySelectorAll('h1, h2, h3, p, li, caption, th, td, a.btn, a.tlink')) {
+      if (el.closest(SKIP) || (el.matches('a.tlink') && !el.closest('section.art-cta'))) continue;
+      const kind = el.matches('a.btn') ? 'button' : el.matches('a.tlink') ? 'link' : el.tagName.toLowerCase();
+      const action = kind === 'button' || kind === 'link';
       out.push({
         kind,
         text: text(el),
-        href: kind === 'button' ? el.getAttribute('href') : undefined,
-        links: kind === 'button' ? [] : [...el.querySelectorAll('a')].map((x) => ({ text: text(x), href: x.getAttribute('href') })),
+        href: action ? el.getAttribute('href') : undefined,
+        links: action ? [] : [...el.querySelectorAll('a')].map((x) => ({ text: text(x), href: x.getAttribute('href') })),
         strong: [...el.querySelectorAll('strong')].map(text),
         em: [...el.querySelectorAll('em')].map(text),
       });
@@ -205,7 +221,7 @@ async function checkArticle(browser, a) {
   const res = await p.goto(url);
   if (!res || res.status() !== 200) { err(slug, `${art.url} returns ${res && res.status()}`); await ctx.close(); return; }
 
-  const want = expected(a, report);
+  const want = expected(a, report, art);
   const got = await p.evaluate(pageBlocks);
   const n = compareBlocks(slug, want, got);
   if (a.source) {
@@ -226,9 +242,24 @@ async function checkArticle(browser, a) {
     const h1 = qa('h1');
     const toc = q('nav.art-toc');
     const tocLabel = toc && document.getElementById(toc.getAttribute('aria-labelledby'));
-    const table = q('.art-table');
-    const desc = table && document.getElementById(table.getAttribute('aria-describedby'));
-    const named = table && table.getAttribute('aria-labelledby') && document.getElementById(table.getAttribute('aria-labelledby'));
+    const tableOf = (table) => {
+      const desc = document.getElementById(table.getAttribute('aria-describedby'));
+      const named = table.getAttribute('aria-labelledby') && document.getElementById(table.getAttribute('aria-labelledby'));
+      return {
+        caption: t(table.querySelector('caption')),
+        captionHidden: !!table.querySelector('caption.sp-vh'),
+        describedBy: t(desc),
+        labelledBy: named ? named.tagName + '#' + named.id : null,
+        cols: table.querySelectorAll('thead th[scope="col"]').length,
+        rows: table.querySelectorAll('tbody tr').length,
+        rowHeaders: table.querySelectorAll('tbody th[scope="row"]').length,
+        roles: !!table.querySelector('[role="columnheader"]') && !!table.querySelector('[role="cell"]'),
+        // the scrolling region: [role, its name, focusable]
+        region: table.parentElement.matches('.art-table-scroll')
+          ? [table.parentElement.getAttribute('role'), t(document.getElementById(table.parentElement.getAttribute('aria-labelledby'))), table.parentElement.getAttribute('tabindex')]
+          : null,
+      };
+    };
     const ld = qa('script[type="application/ld+json"]').map((x) => x.textContent);
     const head = (sel, attr) => { const el = document.head.querySelector(sel); return el ? el.getAttribute(attr) : null; };
     const words = (els) => els.map((el) => el.textContent).join(' ').split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
@@ -255,20 +286,7 @@ async function checkArticle(browser, a) {
         links: qa('main section.close:not(.art-cta) a').map((x) => [x.getAttribute('href'), t(x).replace(/\s*→$/, '')]) },
       booking: qa('main a[href="/contact/"]').length,
       dupIds: ids.filter((x, i) => ids.indexOf(x) !== i),
-      table: table && {
-        caption: t(table.querySelector('caption')),
-        captionHidden: !!table.querySelector('caption.sp-vh'),
-        describedBy: t(desc),
-        labelledBy: named ? named.tagName + '#' + named.id : null,
-        cols: table.querySelectorAll('thead th[scope="col"]').length,
-        rows: table.querySelectorAll('tbody tr').length,
-        rowHeaders: table.querySelectorAll('tbody th[scope="row"]').length,
-        roles: !!table.querySelector('[role="columnheader"]') && !!table.querySelector('[role="rowheader"]') && !!table.querySelector('[role="cell"]'),
-        // the scrolling region: [role, its name, focusable]
-        region: table.parentElement.matches('.art-table-scroll')
-          ? [table.parentElement.getAttribute('role'), t(document.getElementById(table.parentElement.getAttribute('aria-labelledby'))), table.parentElement.getAttribute('tabindex')]
-          : null,
-      },
+      tables: qa('.art-table').map(tableOf),
       faq: q('.art-sec--faq') ? q('.art-sec--faq').querySelectorAll('h3').length : 0,
       accordions: qa('main details, main summary').length,
       refs: refsSec ? refsSec.querySelectorAll('ol > li').length : 0,
@@ -306,29 +324,34 @@ async function checkArticle(browser, a) {
   eq('TOC', s.toc, art.toc ? art.toc.items.map((it) => ['#' + it.id, it.label]) : []);
   eq('H2 ids', s.h2s, art.sections.map((x) => [x.id, x.h2]));
   if (art.cta) {
-    eq('CTA', s.cta, { eyebrow: art.cta.eyebrow, h2: [art.cta.id, art.cta.h2], links: [[art.cta.button.href, art.cta.button.label]] });
+    const ctaLinks = art.cta.blocks ? art.cta.blocks.filter((b) => b.t !== 'p').map((b) => [b.href, b.label]) : [[art.cta.button.href, art.cta.button.label]];
+    eq('CTA', s.cta, { eyebrow: art.cta.eyebrow, h2: [art.cta.id, art.cta.h2], links: ctaLinks });
     eq('closes', s.close, null);
   } else {
     eq('close (the Writing page’s)', s.close, { label: art.close.label, text: art.close.text,
       links: art.close.actions.map((it) => [it.href, it.label]) });
     eq('CTA', s.cta.links, []);
   }
-  eq('booking links in the content', s.booking, 1);
+  // The booking links the brief itself has (its CTA's, usually one), or the
+  // Writing page close's for an essay.
+  const bookings = art.cta
+    ? (splitParts(fs.readFileSync(path.join(ROOT, a.brief), 'utf8'), slug)['2'].match(/\]\((?:https:\/\/aggelosmouzakitis\.com)?\/contact\/\)/g) || []).length
+    : art.close.actions.filter((it) => it.href === '/contact/').length;
+  eq('booking links in the content', s.booking, bookings);
   eq('duplicate ids', s.dupIds, []);
   const tbl = [];
   art.sections.forEach((x) => x.blocks.forEach((b) => { if (b.t === 'table') tbl.push(b); if (b.t === 'sub') b.blocks.forEach((c) => c.t === 'table' && tbl.push(c)); }));
-  if (tbl.length) {
-    const t = tbl[0];
+  eq('tables', s.tables, tbl.map((t) => {
     const desc = t.describedBy && art.sections.flatMap((x) => x.blocks.flatMap((b) => (b.t === 'sub' ? b.blocks : [b]))).find((b) => b.id === t.describedBy);
-    eq('table', s.table, {
+    return {
       caption: t.caption || null,
       captionHidden: !!t.captionHidden,
       describedBy: desc ? plain(desc.text) : null,
       labelledBy: t.labelledBy ? 'H2#' + t.labelledBy : null,
-      cols: t.head.length, rows: t.rows.length, rowHeaders: t.rows.length, roles: true,
+      cols: t.head.length, rows: t.rows.length, rowHeaders: t.rowHeaders === false ? 0 : t.rows.length, roles: true,
       region: t.narrow === 'scroll' ? ['region', t.caption || art.sections.find((x) => x.id === t.labelledBy).h2, '0'] : null,
-    });
-  }
+    };
+  }));
   const notice = art.sections.find((x) => x.kind === 'notice');
   if (notice && !s.html.includes(`<section class="art-sec art-sec--notice"><h2 class="h2" id="${notice.id}">`)) err(slug, `the "${notice.h2}" section is not in the notice treatment`);
   const faq = art.sections.find((x) => x.kind === 'faq');
@@ -392,18 +415,24 @@ async function checkArticle(browser, a) {
     await pg.waitForFunction(() => document.querySelector('main section.close .btn'));
     const r = await pg.evaluate(() => {
       const over = document.documentElement.scrollWidth - document.documentElement.clientWidth;
-      const cells = [...document.querySelectorAll('.art-table tbody th, .art-table tbody td')];
-      const labels = cells.map((el) => [getComputedStyle(el, '::before').content, el.getAttribute('data-label')]);
-      const thead = document.querySelector('.art-table thead');
-      const region = document.querySelector('.art-table-scroll');
+      // Each table: how it is set at this width.
+      const tables = [...document.querySelectorAll('.art-table')].map((table) => {
+        const cells = [...table.querySelectorAll('tbody th, tbody td')];
+        const labels = cells.map((el) => [getComputedStyle(el, '::before').content, el.getAttribute('data-label')]);
+        const thead = table.querySelector('thead');
+        const region = table.parentElement.matches('.art-table-scroll') ? table.parentElement : null;
+        return {
+          mode: table.matches('.art-table--scroll') ? 'scroll' : table.matches('.art-table--fit') ? 'fit' : 'stack',
+          labelled: cells.length > 0 && labels.every(([content, label]) => content.includes(JSON.stringify(label))),
+          theadShown: thead ? thead.getBoundingClientRect().height > 2 : null,
+          scrolls: region ? region.scrollWidth > region.clientWidth : null,
+          fontPx: cells.length ? Math.min(...cells.map((el) => parseFloat(getComputedStyle(el).fontSize))) : null,
+        };
+      });
       return {
         over,
-        mode: document.querySelector('.art-table--scroll') ? 'scroll' : document.querySelector('.art-table--fit') ? 'fit' : document.querySelector('.art-table') ? 'stack' : null,
+        tables,
         aligned: [...document.querySelectorAll('.art-table .art-num--right')].every((el) => getComputedStyle(el).textAlign === 'right'),
-        labelled: cells.length > 0 && labels.every(([content, label]) => content.includes(JSON.stringify(label))),
-        theadShown: thead ? thead.getBoundingClientRect().height > 2 : null,
-        scrolls: region ? region.scrollWidth > region.clientWidth : null,
-        fontPx: cells.length ? parseFloat(getComputedStyle(cells[cells.length - 1]).fontSize) : null,
         section: [
           !!document.querySelector('.hdr__btn.is-current'),
           [...document.querySelectorAll('.hdr__panel a, .mmenu__links a')].filter((x) => x.getAttribute('aria-current') === 'true').map((x) => x.getAttribute('href')),
@@ -411,13 +440,16 @@ async function checkArticle(browser, a) {
       };
     });
     if (r.over > 0) err(slug, `${width}px: page overflows horizontally by ${r.over}px`);
-    if (r.mode === 'stack' && width < 640 && (r.theadShown || !r.labelled)) err(slug, `${width}px: the table is not set as labelled row groups`);
-    if (r.mode === 'scroll' && width < 640 && (!r.theadShown || !r.scrolls)) err(slug, `${width}px: the table does not keep its columns and scroll in its region`);
-    if (r.mode && width >= 768 && r.theadShown === false) err(slug, `${width}px: the table header row is hidden`);
-    if (r.mode === 'scroll' && width >= 768 && r.scrolls) err(slug, `${width}px: the table scrolls where it should fit`);
-    if (r.mode === 'fit' && !r.theadShown) err(slug, `${width}px: the table header row is hidden`);
+    r.tables.forEach((x, n) => {
+      const which = r.tables.length > 1 ? `table ${n + 1}` : 'the table';
+      if (x.mode === 'stack' && width < 640 && (x.theadShown || !x.labelled)) err(slug, `${width}px: ${which} is not set as labelled row groups`);
+      if (x.mode === 'scroll' && width < 640 && (!x.theadShown || !x.scrolls)) err(slug, `${width}px: ${which} does not keep its columns and scroll in its region`);
+      if (width >= 768 && x.theadShown === false) err(slug, `${width}px: ${which}'s header row is hidden`);
+      if (x.mode === 'scroll' && width >= 768 && x.scrolls) err(slug, `${width}px: ${which} scrolls where it should fit`);
+      if (x.mode === 'fit' && !x.theadShown) err(slug, `${width}px: ${which}'s header row is hidden`);
+      if (x.fontPx !== null && x.fontPx < 15) err(slug, `${width}px: ${which}'s text shrunk to ${x.fontPx}px`);
+    });
     if (!r.aligned) err(slug, `${width}px: a right-aligned column is not right-aligned`);
-    if (r.fontPx !== null && r.fontPx < 15) err(slug, `${width}px: table text shrunk to ${r.fontPx}px`);
     if (width === 1280) {
       eq('header section', r.section, [true, ['/blog/', '/blog/']]);
       // Every TOC link lands its heading at the top, instantly (reduced motion).

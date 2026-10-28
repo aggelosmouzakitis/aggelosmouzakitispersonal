@@ -8,6 +8,19 @@
 // placeholders are left out with their pointers.
 
 window.SITE_ARTICLES = [{
+  "id": "emotionally-unavailable-husband",
+  "url": "/emotionally-unavailable-husband/",
+  "h1": "Emotionally Unavailable Husband? When Work Stress Starts Taking Over the Relationship",
+  "deck": "When your husband or partner becomes harder to reach, the timing, his working conditions and what happens between you all matter. Understanding the pressure should also help you decide what needs to change.",
+  "category": "Guide",
+  "published": "2026-10-28T22:08:00+00:00",
+  "publishedLabel": "October 2026",
+  "readTime": "21 min read",
+  "related": {
+    "label": "Work & Relationships",
+    "href": "/work-affecting-relationship/"
+  }
+}, {
   "id": "burnout-vs-stress-depression",
   "url": "/burnout-vs-stress-depression/",
   "h1": "Burnout vs Stress vs Depression: How to Tell the Difference",
