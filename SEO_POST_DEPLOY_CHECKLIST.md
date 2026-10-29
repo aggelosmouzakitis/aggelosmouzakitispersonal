@@ -118,7 +118,7 @@ submitting shows each operation's outcome.
 
 1. `/contact/?leaddebug=1`: send one enquiry with Name `WEBSITE FORM TEST`,
    your own address, and Message `Automated final QA test. Safe to ignore.`
-   Expect "Thanks. Your message has been sent." and
+   Expect "Thanks for getting in touch." and
    `sheet ok · owner ok · reply skipped`, then:
    - a new row in the Leads tab
    - one `template_6mv5hou` send in EmailJS → History
