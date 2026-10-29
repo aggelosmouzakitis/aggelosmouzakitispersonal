@@ -165,7 +165,7 @@
       href: item.href
     }, item.label, ' ', e(Arrow));
   }
-  // Book a consultation is the primary action wherever it appears; everything
+  // Book a free clarity call is the primary action wherever it appears; everything
   // else is a secondary link. Links whose page is not published are left out.
   const isPrimary = it => it.href === CONTACT_URL;
 
@@ -226,7 +226,7 @@
   // Three variants: feature (a panel with its own heading and the filled
   // button; exploratory pages), inline (a lead line and an outlined button;
   // problem pages) and compact (one line and a text link; service and audience
-  // pages, where Book a consultation stays the primary action). Every link is
+  // pages, where Book a free clarity call stays the primary action). Every link is
   // a plain <a href> to /work-life-check/?source=<page>-<variant>: the check
   // reads the source for its analytics (source_page), then drops it from the
   // address bar; the page's canonical is the bare URL. The wording is the
@@ -329,7 +329,7 @@
       source: 'blog-feature'
     }
   };
-  // The homepage hero has exactly two actions: Book a consultation, then this.
+  // The homepage hero has exactly two actions: Book a free clarity call, then this.
   const WLC_HERO = {
     label: WLC_BUTTON,
     href: wlcHref('home-hero')
@@ -824,7 +824,7 @@
     const h = p.hero;
     const ps = h.blocks.filter(b => b.t === 'p');
     let ctas = [].concat.apply([], h.blocks.filter(b => b.t === 'ctas').map(b => b.items));
-    // primaryOnly keeps just the page's primary action (Book a consultation);
+    // primaryOnly keeps just the page's primary action (Book a free clarity call);
     // `extra` joins as the second action, after it.
     if (primaryOnly) ctas = ctas.filter(isPrimary);
     if (extra) ctas = ctas.slice(0, 1).concat([extra], ctas.slice(1));
@@ -1385,7 +1385,7 @@
     }))), e('div', {
       className: 'wrap home-hero__in'
     },
-    // Two actions: Book a consultation, then the Work & Life Check. Individual
+    // Two actions: Book a free clarity call, then the Work & Life Check. Individual
     // psychotherapy is reached from the Services menu and Ways to work with me.
     e('div', {
       className: 'home-hero__text'
@@ -2001,13 +2001,17 @@
   // canonical owner template, Reply-To the visitor) and a row in the leads
   // sheet, run independently. The success state appears only once EmailJS has
   // accepted the notification; otherwise the form comes back with everything
-  // still filled in and the address to write to directly. One send in flight at
-  // a time. Validation, the honeypot, the soft rate limit and the analytics
+  // still filled in and a link to write to the address directly. One send in
+  // flight at a time. The honeypot, the soft rate limit and the analytics
   // events are unchanged.
   const MAXLEN = 3000;
   const COUNTER_FROM = 2600;
   // Offered only if sending fails; the address the previous site published.
   const CONTACT_EMAIL = 'aggelos.mouzakitis@gmail.com';
+  // The service the form starts on. Until the visitor changes it, analytics
+  // reads 'none', as it did when the choice started empty.
+  const SERVICE_DEFAULT = 'Not sure';
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   function track(name, params) {
     try {
       if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
@@ -2032,31 +2036,31 @@
   function ContactForm({
     form
   }) {
-    const fields = form.fields;
-    const labelOf = i => fields[i] ? fields[i].label : '';
-    // The four fields of the copy, in its order; Service is optional so nobody
-    // has to decide on a service before getting in touch.
-    const L = {
-      name: labelOf(0),
-      email: labelOf(1),
-      location: labelOf(2),
-      message: labelOf(3)
-    };
-    const service = fields.find(f => f.options) || {
-      label: 'Service',
-      options: []
-    };
+    // Each field by its key (scripts/copy/extract-canonical.py, FORM_FIELDS),
+    // never by its position, so no value goes out under another's heading.
+    const F = {};
+    form.fields.forEach(f => {
+      F[f.key] = f;
+    });
+    const T = form.text;
+    const options = F.service.options;
+    const serviceDefault = (options.find(o => o.value === SERVICE_DEFAULT) || options[0]).value;
+    const notes = form.blocks.filter(b => b.t === 'p');
+    const noteLinks = [].concat(...form.blocks.filter(b => b.t === 'ctas').map(b => b.items)).filter(it => it.href);
     const [v, setV] = useState({
       name: '',
       email: '',
       location: '',
       message: '',
-      service: '',
+      service: serviceDefault,
       hp: ''
     });
     const [errors, setErrors] = useState({});
     const [formErr, setFormErr] = useState(false);
     const [status, setStatus] = useState('idle'); // idle | sending | success
+    // Whether the visitor changed the service: until then analytics reads
+    // 'none' for it, while the notification carries the default.
+    const [chosen, setChosen] = useState(false);
     const refs = {
       name: useRef(null),
       email: useRef(null),
@@ -2065,9 +2069,10 @@
     };
     const live = useRef(null);
     const successRef = useRef(null);
+    const submitRef = useRef(null);
     const lastRef = useRef(0);
     const sendingRef = useRef(false); // true from submit until EmailJS answers: no second send
-
+    const failedRef = useRef(false);
     useEffect(() => {
       track('contact_page_viewed', {
         source_page: document.referrer || 'direct'
@@ -2078,30 +2083,70 @@
         try {
           successRef.current.focus();
         } catch (err) {/* focus is best-effort */}
-        announce('Thanks. Your message has been sent.');
+        announce(T.success);
+      }
+      // The button was disabled while sending, which drops focus: once a
+      // failed send has re-enabled it, put focus back on it, so the next
+      // Enter or Space tries again.
+      if (status === 'idle' && failedRef.current) {
+        failedRef.current = false;
+        const a = document.activeElement;
+        if ((!a || a === document.body) && submitRef.current) submitRef.current.focus();
       }
     }, [status]);
     const announce = t => {
       if (live.current) live.current.textContent = t;
     };
-    const set = k => ev => setV(Object.assign({}, v, {
-      [k]: ev.target.value
-    }));
+    function fieldError(k, val) {
+      if (k === 'name') return sanitize(val.name) ? null : 'Please add your name.';
+      if (k === 'email') {
+        const em = sanitize(val.email);
+        if (!em) return 'Please add your email.';
+        return validEmail(em) ? null : 'Please enter a valid email address.';
+      }
+      if (k === 'location') return sanitize(val.location) ? null : 'Please add the country you’ll be in.';
+      if (k === 'message') return sanitizeLong(val.message) ? null : 'Please add a short note. ‘Not sure yet’ is fine.';
+      return null;
+    }
+    const ORDER = ['name', 'email', 'location', 'message'];
     function validate() {
       const er = {};
-      if (!sanitize(v.name)) er.name = 'Please add your name.';
-      const em = sanitize(v.email);
-      if (!em) er.email = 'Please add your email.';else if (!validEmail(em)) er.email = 'Please enter a valid email address.';
-      if (!sanitize(v.location)) er.location = 'Please add where you are currently located.';
-      if (!sanitizeLong(v.message)) er.message = 'Please add a few lines.';
+      ORDER.forEach(k => {
+        const m = fieldError(k, v);
+        if (m) er[k] = m;
+      });
       return er;
     }
+    // A field showing an error is checked again as it changes, so the message
+    // goes as soon as the field is right.
+    const set = k => ev => {
+      const next = Object.assign({}, v, {
+        [k]: ev.target.value
+      });
+      setV(next);
+      if (errors[k]) {
+        const er = Object.assign({}, errors);
+        const m = fieldError(k, next);
+        if (m) er[k] = m;else delete er[k];
+        setErrors(er);
+      }
+    };
+    const onService = ev => {
+      const value = ev.target.value;
+      setV(Object.assign({}, v, {
+        service: value
+      }));
+      setChosen(true);
+      track('interest_selected_manually', {
+        interest: slugOf(value)
+      });
+    };
     function onSubmit(ev) {
       ev.preventDefault();
       if (sendingRef.current) return; // a send is in flight: clicks and Enter do nothing
       const src = document.referrer || 'direct';
       track('form_submission_attempted', {
-        interest: v.service || 'none',
+        interest: chosen ? v.service : 'none',
         source_page: src
       });
       // Honeypot: bots only. Looks sent, sends nothing.
@@ -2114,12 +2159,11 @@
       }
       const er = validate();
       setErrors(er);
-      const order = ['name', 'email', 'location', 'message'];
-      const first = order.find(k => er[k]);
+      const first = ORDER.find(k => er[k]);
       if (first) {
         setFormErr(false);
         if (refs[first].current) refs[first].current.focus();
-        announce('The form has errors. Please check the highlighted fields.');
+        announce('Please check the highlighted fields.');
         return;
       }
       const now = Date.now();
@@ -2138,16 +2182,17 @@
       const email = sanitize(v.email);
       const loc = sanitize(v.location).slice(0, 200);
       const msg = sanitizeLong(v.message).slice(0, MAXLEN);
-      const svc = v.service; // optional: only in the email when chosen
+      const svc = v.service; // the default ("Not sure") unless the visitor chose another
+      const interest = chosen ? slugOf(svc) : 'none';
       // The notification exactly as it arrives. Every visible field; the
-      // optional one only when it has a value.
-      const message = ['New enquiry from aggelosmouzakitis.com', '', 'Name:', name, '', 'Email:', email, '', L.location + ':', loc, ''].concat(svc ? ['Interest / reason for contact:', svc, ''] : [], ['Message:', msg, '', 'Page:', window.location.href, '', 'Submitted:', when.toISOString().slice(0, 16).replace('T', ' ') + ' UTC', '', 'Reply-to:', email]).join('\n');
+      // location under its label on the form.
+      const message = ['New enquiry from aggelosmouzakitis.com', '', 'Name:', name, '', 'Email:', email, '', F.location.label + ':', loc, ''].concat(svc ? ['Interest / reason for contact:', svc, ''] : [], ['Message:', msg, '', 'Page:', window.location.href, '', 'Submitted:', when.toISOString().slice(0, 16).replace('T', ' ') + ' UTC', '', 'Reply-to:', email]).join('\n');
       const ok = () => {
         sendingRef.current = false;
         lastRef.current = Date.now();
         safeSet('ct_last', String(lastRef.current));
         track('form_submission_succeeded', {
-          interest: svc ? slugOf(svc) : 'none',
+          interest,
           source_page: src
         });
         setStatus('success');
@@ -2158,12 +2203,13 @@
           console.error('Contact send error:', err);
         } catch (e2) {/* noop */}
         track('form_submission_failed', {
-          interest: svc ? slugOf(svc) : 'none',
+          interest,
           source_page: src
         });
+        failedRef.current = true;
         setStatus('idle');
         setFormErr(true);
-        announce('Something went wrong and your message was not sent.');
+        announce(T.error);
       };
       if (typeof window.submitLead !== 'function') {
         fail(new Error('Lead capture unavailable'));
@@ -2190,6 +2236,9 @@
         if (res && res.owner === 'ok') ok();else fail(new Error('Notification not sent: ' + JSON.stringify(res && res.detail)));
       });
     }
+
+    // Outside both states, so what it announces is read when the form gives
+    // way to the thanks.
     const liveRegion = e('div', {
       ref: live,
       className: 'sp-vh',
@@ -2198,37 +2247,32 @@
     });
     if (status === 'success') {
       return e('div', {
-        className: 'ct-form ct-form--done'
+        className: 'ct-done'
       }, liveRegion, e('h2', {
         className: 'sp-form__done',
         tabIndex: -1,
         ref: successRef
-      }, 'Thanks. Your message has been sent.'), e('p', {
+      }, T.success), e('p', {
         className: 'p'
-      }, 'I’ll get back to you as soon as I can.'), e('div', {
-        className: 'links'
-      }, e(TLink, {
-        item: {
-          label: 'Back to the homepage',
-          href: '/'
-        }
-      })));
+      }, T.successMessage));
     }
-    const field = (key, label, input, help) => {
+    const field = (key, input, help) => {
+      const f = F[key];
       const er = errors[key];
-      const desc = [help ? key + '-help' : null, er ? key + '-err' : null].filter(Boolean).join(' ') || undefined;
+      const desc = [er ? key + '-err' : null, help ? key + '-help' : null].filter(Boolean).join(' ') || undefined;
       return e('div', {
         className: 'ct-field'
       }, e('label', {
         className: 'ct-label',
         htmlFor: 'ct-' + key
-      }, label), e(input.tag, Object.assign({
+      }, f.label), e(input.tag, Object.assign({
         id: 'ct-' + key,
         ref: refs[key],
         required: true,
         'aria-required': 'true',
         'aria-invalid': er ? 'true' : 'false',
         'aria-describedby': desc,
+        placeholder: f.placeholder,
         value: v[key],
         onChange: set(key)
       }, input.props)), er ? e('p', {
@@ -2242,17 +2286,15 @@
       'aria-live': 'polite'
     }, v.message.length + ' / ' + MAXLEN) : null;
     const sending = status === 'sending';
-    return e('form', {
+    const lastNote = notes.length - 1;
+    return e('div', {
+      className: 'ct'
+    }, liveRegion, e('form', {
       className: 'ct-form',
       noValidate: true,
       onSubmit,
-      'aria-labelledby': 'page-title'
-    }, liveRegion, formErr ? e('div', {
-      className: 'sp-formerr',
-      role: 'alert'
-    }, e('p', null, 'Something went wrong and your message was not sent.'), e('p', null, 'Please try again or email me directly at ', e('a', {
-      href: 'mailto:' + CONTACT_EMAIL
-    }, CONTACT_EMAIL), '.')) : null,
+      'aria-label': form.submit.label
+    },
     // Honeypot: off-screen, out of the tab order and hidden from assistive
     // technology; people never fill it. Its label and id match no autofill
     // category: a hidden field called "Company" gets filled by browsers and
@@ -2276,14 +2318,14 @@
       onChange: set('hp')
     })), e('div', {
       className: 'ct-pair'
-    }, field('name', L.name, {
+    }, field('name', {
       tag: 'input',
       props: {
         className: 'ct-input',
         type: 'text',
         autoComplete: 'name'
       }
-    }), field('email', L.email, {
+    }), field('email', {
       tag: 'input',
       props: {
         className: 'ct-input',
@@ -2291,48 +2333,131 @@
         autoComplete: 'email',
         inputMode: 'email'
       }
-    })), field('location', L.location, {
+    })), e('div', {
+      className: 'ct-pair'
+    }, field('location', {
       tag: 'input',
       props: {
         className: 'ct-input',
         type: 'text',
         autoComplete: 'country-name'
       }
-    }), e('fieldset', {
-      className: 'ct-field ct-service'
-    }, e('legend', {
-      className: 'ct-label'
-    }, service.label), e('div', {
-      className: 'ct-choices'
-    }, service.options.map(opt => e('label', {
-      key: opt,
-      className: 'ct-choice'
-    }, e('input', {
-      type: 'radio',
-      name: 'service',
-      value: opt,
-      checked: v.service === opt,
-      onChange: () => {
-        setV(Object.assign({}, v, {
-          service: opt
-        }));
-        track('interest_selected_manually', {
-          interest: slugOf(opt)
-        });
-      }
-    }), e('span', null, opt))))), field('message', L.message, {
+    }),
+    // Optional, and it starts on "Not sure", so nobody has to decide on
+    // a service before getting in touch.
+    e('div', {
+      className: 'ct-field'
+    }, e('label', {
+      className: 'ct-label',
+      htmlFor: 'ct-service'
+    }, F.service.label, F.service.hint ? [' ', e('span', {
+      key: 'hint',
+      className: 'ct-label__hint'
+    }, F.service.hint)] : null), e('div', {
+      className: 'ct-select'
+    }, e('select', {
+      id: 'ct-service',
+      className: 'ct-input',
+      value: v.service,
+      onChange: onService
+    }, options.map(o => e('option', {
+      key: o.value,
+      value: o.value
+    }, o.label))), e('span', {
+      className: 'ct-select__caret',
+      'aria-hidden': 'true'
+    }, e('svg', {
+      width: 10,
+      height: 6,
+      viewBox: '0 0 10 6',
+      focusable: 'false'
+    }, e('path', {
+      d: 'M1 1l4 4 4-4',
+      stroke: 'currentColor',
+      strokeWidth: 1.5,
+      fill: 'none'
+    })))))), field('message', {
       tag: 'textarea',
       props: {
         className: 'ct-input ct-textarea',
-        rows: 6,
+        rows: 4,
         maxLength: MAXLEN
       }
-    }, count), e('button', {
+    }, count),
+    // A failed send: directly above the button, with the address to
+    // write to as the way round it.
+    formErr && !sending ? e('div', {
+      className: 'sp-formerr',
+      role: 'alert'
+    }, e('p', null, T.error), e('p', null, e('a', {
+      href: 'mailto:' + CONTACT_EMAIL
+    }, T.emailLink))) : null, e('button', {
       className: 'btn ct-submit',
       type: 'submit',
-      disabled: sending
-    }, e('span', null, sending ? 'Sending…' : form.submit.label), sending ? null : e(Arrow)));
+      disabled: sending,
+      ref: submitRef
+    }, e('span', null, sending ? T.sending : form.submit.label), sending ? null : e(Arrow)),
+    // The first line under the button, then the small print with its
+    // link (Confidentiality) at its end.
+    notes.map((b, i) => e('p', {
+      key: i,
+      className: i === 0 ? 'ct-note' : 'ct-small'
+    }, rich(b.text), i === lastNote && i > 0 ? noteLinks.map(it => [' ', e('a', {
+      key: it.href,
+      href: it.href
+    }, it.label)]) : null))));
   }
+
+  // "Bogdan Liutic · 28 October 2026": the date as a <time>.
+  function citeWithDate(cite) {
+    const m = cite.match(/^(.*?)(\d{1,2}) (\w+) (\d{4})$/);
+    const month = m ? MONTHS.indexOf(m[3]) : -1;
+    if (month < 0) return cite;
+    const iso = m[4] + '-' + String(month + 1).padStart(2, '0') + '-' + m[2].padStart(2, '0');
+    return [m[1], e('time', {
+      key: 'd',
+      dateTime: iso
+    }, m[2] + ' ' + m[3] + ' ' + m[4])];
+  }
+
+  // The mentoring feedback beside the form: its label, the rating, the
+  // excerpts and the link to the reviews themselves. Labelled as mentoring
+  // feedback wherever it appears; no Review markup (scripts/seo/site-meta.js).
+  function ContactProof({
+    s,
+    ctx
+  }) {
+    const links = [].concat(...s.blocks.filter(b => b.t === 'ctas').map(b => b.items)).filter(it => it.href);
+    return e('section', {
+      className: 'contact__proof',
+      'aria-labelledby': s.id + '-h'
+    }, e('h2', {
+      className: 'label contact__proof-h',
+      id: s.id + '-h'
+    }, s.h2), s.blocks.filter(b => b.t === 'p').map((b, i) => e('p', {
+      key: i,
+      className: 'contact__rating'
+    }, rich(b.text, ctx))), e('div', {
+      className: 'quotes contact__quotes'
+    }, s.blocks.filter(b => b.t === 'quote').map((q, i) => e('figure', {
+      key: i,
+      className: 'quote'
+    }, e('blockquote', null, e('p', null, q.text)), e('figcaption', null, citeWithDate(q.cite))))), links.map(it => e('a', Object.assign({
+      key: it.href,
+      className: 'tlink contact__more',
+      href: it.href
+    }, isExternal(it.href) ? {
+      target: '_blank',
+      rel: 'noopener noreferrer'
+    } : {}), e('span', null, it.label), e(Arrow), isExternal(it.href) ? e('span', {
+      className: 'sp-vh'
+    }, '(opens in a new tab)') : null)));
+  }
+
+  // The opening (eyebrow, H1, the practical line, the paragraph and the
+  // quieter note under it), then the form beside the feedback on the 1120
+  // axis; below about 800px the feedback follows the form. The form column
+  // is #enquiry, where the header's call to action points on this page.
   function ContactPage({
     p
   }) {
@@ -2340,57 +2465,46 @@
       id: p.id
     };
     const h = p.hero;
-    const ps = h.blocks.filter(b => b.t === 'p');
-    const next = p.sections.find(s => s.id === 'what-happens-next');
-    const privacy = p.sections.find(s => s.id === 'privacy');
-    const others = p.sections.filter(s => s !== next && s !== privacy);
+    const proof = p.sections.find(s => s.blocks.some(b => b.t === 'quote'));
+    const others = p.sections.filter(s => s !== proof);
+    const facts = h.sub ? h.sub.split(' · ') : [];
     return e('div', {
-      className: 'wrap contact'
+      className: 'wide contact'
     }, e('header', {
       className: 'contact__head'
     }, e('p', {
       className: 'eyebrow'
     }, h.eyebrow), e('h1', {
-      className: 'h1',
+      className: 'h1 contact__h1',
       id: 'page-title'
-    }, h.h1), ps.map((b, i) => e('p', {
+    }, h.h1), facts.length ? e('ul', {
+      className: 'contact__facts'
+    }, facts.map((t, i) => e('li', {
+      key: t
+    }, t, i < facts.length - 1 ? [' ', e('span', {
+      key: 'dot',
+      'aria-hidden': 'true'
+    }, '·')] : null))) : null, h.blocks.map((b, i) => b.t === 'p' ? e('p', {
       key: i,
-      className: 'lead' + (i === ps.length - 1 && ps.length > 1 ? ' lead--strong' : '')
-    }, rich(b.text, ctx)))), e('div', {
+      className: 'lead contact__lead'
+    }, rich(b.text, ctx)) : b.t === 'meta' ? e('p', {
+      key: i,
+      className: 'contact__note'
+    }, b.text) : null)), e('div', {
       className: 'contact__grid'
     }, e('div', {
-      className: 'contact__form'
+      className: 'contact__form',
+      id: 'enquiry'
     }, e(ContactForm, {
       form: p.form
-    })), e('aside', {
-      className: 'contact__aside'
-    }, next ? e('section', {
-      className: 'contact__next',
-      'aria-labelledby': 'next-h'
-    }, e('h2', {
-      className: 'contact__h',
-      id: 'next-h'
-    }, next.h2), e('div', {
-      className: 'flow'
-    }, e(Blocks, {
-      blocks: next.blocks,
+    })), proof ? e(ContactProof, {
+      s: proof,
       ctx
-    }))) : null, privacy ? e('section', {
-      className: 'contact__privacy',
-      'aria-labelledby': 'privacy-h'
-    }, e('h2', {
-      className: 'label contact__privacy-h',
-      id: 'privacy-h'
-    }, privacy.h2), e('div', {
-      className: 'flow'
-    }, e(Blocks, {
-      blocks: privacy.blocks,
-      ctx
-    }))) : null, others.map(s => e(ReadSection, {
+    }) : null), others.map(s => e(ReadSection, {
       key: s.id,
       s,
       ctx
-    })))));
+    })));
   }
 
   // ── Articles ───────────────────────────────────────────────────────────────
@@ -3558,53 +3672,66 @@
 .essay__link:hover{color:var(--green);text-decoration-color:currentColor}
 .essay .flow>.links+.related{margin-top:4px}
 
-/* Contact */
-.contact{padding-block:clamp(48px,6vw,88px) var(--sec)}
-.contact__head{max-width:720px}
-.contact__head .h1{max-width:16ch}
-.lead--strong{margin-top:12px;font-weight:600;color:var(--heading)}
-.contact__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:40px clamp(40px,6vw,96px);margin-top:clamp(36px,4vw,56px);align-items:start}
-.contact__form{min-width:0;padding-top:28px;border-top:3px solid var(--green)}
-.contact__aside{min-width:0;display:flex;flex-direction:column;gap:36px}
-.contact__next{padding-top:28px;border-top:1px solid rgba(23,25,25,.26)}
-.contact__h{margin:0 0 16px;font-family:var(--font-heading);font-size:clamp(22px,calc(19px + .5vw),27px);font-weight:800;letter-spacing:-.025em;color:var(--heading)}
-.contact__next .p{font-size:17px;line-height:1.65}
-.contact__privacy{padding:24px;background:var(--bone-deep)}
-.contact__privacy-h{margin-bottom:12px;color:var(--green-pressed)}
-.contact__privacy .tlink,.contact__privacy .inl{color:var(--green-pressed)}
-.contact__privacy .p{font-size:17px;line-height:1.6}
-.contact__privacy .links{margin-top:10px}
-.ct-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 20px}
-.ct-field{display:block;margin:0 0 22px;padding:0;border:0;min-width:0}
-.ct-label{display:block;margin-bottom:8px;padding:0;font-size:14px;font-weight:700;color:var(--heading)}
+/* Contact: a compact opening, then the form (3) beside the mentoring
+   feedback (2) on the 1120 axis; the feedback wraps below the form when the
+   two no longer fit (440px + 280px). */
+.contact{padding-block:clamp(36px,4.5vw,56px) var(--sec)}
+.contact__head{margin-bottom:clamp(32px,3.6vw,48px)}
+.contact__h1{max-width:none;font-size:clamp(32px,calc(22px + 1.9vw),46px);line-height:1.04}
+.contact__facts{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 14px;margin:18px 0 0;padding:0;list-style:none;font-family:var(--font-heading);font-size:clamp(19px,calc(17.6px + .3vw),22px);font-weight:650;line-height:1.3;letter-spacing:-.01em;color:var(--green)}
+.contact__facts li{display:inline-flex;align-items:baseline;gap:14px}
+.contact__facts span{color:var(--sage)}
+.contact__lead{margin-top:20px;max-width:36em}
+.contact__note{margin:12px 0 0;max-width:40em;font-size:16px;line-height:1.5;color:var(--meta);text-wrap:pretty}
+.contact__grid{display:flex;flex-wrap:wrap;align-items:flex-start;gap:56px clamp(48px,6vw,80px)}
+.contact__form{flex:3 1 440px;min-width:0;padding-top:28px;border-top:3px solid var(--green);scroll-margin-top:24px}
+.contact__proof{flex:2 1 280px;min-width:0;padding-top:24px;border-top:1px solid rgba(23,25,25,.26)}
+.contact__proof-h{line-height:1.4;text-wrap:balance}
+.contact__rating{margin:8px 0 0;font-size:15px;line-height:1.5;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.contact__quotes{margin-top:20px}
+.contact__quotes .quote{padding:22px 0 24px}
+.contact__quotes .quote figcaption{margin-top:12px}
+.contact__more{margin-top:10px}
+/* Two fields side by side when each has 240px, else stacked. A pair shares
+   its rows (label, input, error), so the inputs stay level when one label
+   wraps or one field shows an error. */
+.ct-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));column-gap:20px}
+.ct-pair>.ct-field{display:grid;grid-row:span 3;grid-template-rows:subgrid;align-content:start}
+.ct-pair .ct-label{align-self:end}
+.ct-field{display:block;margin:0 0 20px;padding:0;border:0;min-width:0}
+.ct-label{display:block;margin-bottom:8px;padding:0;font-size:14px;font-weight:700;line-height:1.45;color:var(--heading)}
+.ct-label__hint{font-weight:500;color:var(--ink-2)}
 .ct-input{display:block;width:100%;min-height:52px;padding:12px 14px;background:var(--bone);border:1px solid rgba(23,25,25,.3);border-radius:0;font:inherit;font-size:16px;line-height:1.4;color:var(--heading)}
 .ct-input:focus{outline:3px solid var(--green);outline-offset:1px;border-color:var(--green)}
 .ct-input[aria-invalid="true"]{border-color:#A3362A}
-.ct-textarea{min-height:170px;padding:14px;line-height:1.55;resize:vertical}
-.ct-choices{display:flex;flex-wrap:wrap;gap:8px}
-.ct-choice{position:relative;display:inline-flex}
-.ct-choice input{position:absolute;opacity:0;width:1px;height:1px}
-.ct-choice span{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid rgba(23,25,25,.3);font-size:15px;font-weight:600;color:var(--heading);cursor:pointer}
-.ct-choice input:checked+span{background:var(--heading);border-color:var(--heading);color:var(--bone)}
-.ct-choice input:focus-visible+span{outline:3px solid var(--green);outline-offset:2px}
-.ct-help{margin:6px 0 0;font-size:14px;color:var(--meta)}
-.sp-err{margin:6px 0 0;font-size:14px;font-weight:600;color:#A3362A}
-.sp-formerr{margin:0 0 22px;padding:14px 16px;border-left:3px solid #A3362A;background:rgba(163,54,42,.06);font-size:16px;line-height:1.55;color:var(--heading)}
+.ct-input::placeholder{color:var(--meta);opacity:1}
+.ct-textarea{min-height:132px;padding:14px;line-height:1.55;resize:vertical}
+.ct-select{position:relative;min-width:0}
+.ct-select .ct-input{padding-right:44px;appearance:none;-webkit-appearance:none;cursor:pointer}
+.ct-select__caret{position:absolute;top:50%;right:17px;display:flex;transform:translateY(-50%);pointer-events:none;color:var(--heading)}
+.ct-help{margin:6px 0 0;font-size:14px;line-height:1.45;color:var(--meta)}
+.sp-err{margin:6px 0 0;font-size:14px;font-weight:600;line-height:1.45;color:#A3362A}
+.sp-formerr{margin:0 0 16px;padding:14px 16px;border-left:3px solid #A3362A;background:rgba(163,54,42,.06);font-size:16px;line-height:1.55;color:var(--heading)}
 .sp-formerr a{color:var(--green);font-weight:600;border-bottom:1.5px solid currentColor;overflow-wrap:anywhere}
 .sp-formerr p{margin:0}
 .sp-formerr p+p{margin-top:6px}
 .ct-submit{width:100%;min-height:56px}
 .ct-submit[disabled]{opacity:.7;cursor:progress}
+.ct-note{margin:14px 0 0;font-size:16px;line-height:1.5;color:var(--ink-2);text-wrap:pretty}
+.ct-small{margin:6px 0 0;font-size:14px;line-height:1.55;color:var(--meta);text-wrap:pretty}
+.ct-small a{padding:12px 0;font-weight:600;color:var(--green);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;white-space:nowrap}
+.ct-small a:hover{color:var(--green-pressed)}
 .sp-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .sp-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.sp-form__done{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + .8vw),32px);font-weight:800;letter-spacing:-.03em;color:var(--heading);outline:none}
+.sp-form__done{margin:0 0 14px;font-family:var(--font-heading);font-size:clamp(24px,calc(20px + .8vw),32px);font-weight:800;line-height:1.15;letter-spacing:-.03em;color:var(--heading);outline:none}
+.ct-done .p{max-width:34em}
 
 /* Composition axes: 760 reading (.read), 960 paired/practical (.mid), 1120 comparison (.wide), 1240 hero/photo/services (.wrap).
    Body measure inside the reading axis: 36em (≈ 72 characters); leads 32em (≈ 62). */
 .mid{width:min(960px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
 .wide{width:min(1120px,calc(100% - 2 * var(--gutter)));margin-inline:auto}
 .sec--step{padding-top:clamp(80px,8.4vw,120px)}
-.read .p,.read-l .p,.col .p,.compare .p,.contact__aside .p{max-width:36em}
+.read .p,.read-l .p,.col .p,.compare .p{max-width:36em}
 .read .p--emph,.read-l .p--emph{max-width:32em}
 /* A reading column that starts on its container's left edge (.wrap or .mid)
    instead of the page's centred reading axis; same width as .read. */

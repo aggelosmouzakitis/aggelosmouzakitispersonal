@@ -91,7 +91,7 @@ window.SITE_ARTICLE_PAGES["vacation-same-feeling"] = {
       "label": "Considering therapy",
       "href": "/considering-therapy/"
     }, {
-      "label": "Book a consultation",
+      "label": "Book a free clarity call",
       "href": "/contact/"
     }]
   },

@@ -607,7 +607,7 @@ window.CLARITY_DATA['quit-your-job'] = {
   // are the Free Tools page's own, from the canonical copy).
   cta: { heading: 'Want another perspective?', links: [
     { label: 'Career Change & Decisions', href: '/career-transition-therapy/' },
-    { label: 'Book a consultation', href: '/contact/', primary: true },
+    { label: 'Book a free clarity call', href: '/contact/', primary: true },
   ] },
   breakdownGroups: [
     { title: 'What is pushing you', note: 'Higher means more pressure to change in that area.', keys: A3_PUSH },
@@ -1206,7 +1206,7 @@ window.CLARITY_DATA['burned-out'] = {
   },
   cta: { heading: 'Want another perspective?', sub: 'For clinical concerns, speak to a professional.', links: [
     { label: 'Burnout & Can\u2019t Switch Off', href: '/executive-burnout-therapy/' },
-    { label: 'Book a consultation', href: '/contact/', primary: true },
+    { label: 'Book a free clarity call', href: '/contact/', primary: true },
   ] },
   breakdownGroups: [
     { title: 'Work strain', note: 'Higher means stronger evidence of work-related depletion in that area.', keys: A5_STRAIN },

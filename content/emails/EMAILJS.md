@@ -102,7 +102,7 @@ Plus each form's own fields:
 
 | Source | Subject | Extra fields |
 |---|---|---|
-| `contact` | `New website enquiry — <name>` | `location`, `service` (only when chosen) |
+| `contact` | `New website enquiry — <name>` | `location`, `service` (`Not sure` unless another service was chosen) |
 | `clarity-tool` (`burned-out`, `quit-your-job`) | `[TOOL] <tool title> — <name or email>` | `overall_grade`, `overall_score`, `section_breakdown`, `all_answers` |
 | `work-life-check` | `[Work & Life Check] <primary result> — <email>` | `primary_result_title`, `secondary_result_title`, `switching_off_score`, `recovery_score`, `decision_score`, `relationship_score`, `performance_score`, `environment_change_answer` (Q16), `repeating_pattern_answer` (Q17), `context_type`, `timestamp` |
 
@@ -117,10 +117,10 @@ Name:
 Email:
 <email>
 
-Current location / country:
+Country you’ll be in for the call:
 <location>
 
-Interest / reason for contact:      (only when a service was chosen)
+Interest / reason for contact:      (Not sure, unless another service was chosen)
 <service>
 
 Message:
@@ -136,10 +136,15 @@ Reply-to:
 <email>
 ```
 
-The contact form shows "Thanks. Your message has been sent." only once EmailJS
-has accepted this notification. If EmailJS refuses it or doesn't answer within
-15 seconds, the form shows the failure message with the direct address and
-keeps everything the person typed. The sheet row is written either way.
+The heading above `<location>` is the form's label for that field; the
+`location` key itself is unchanged.
+
+The contact form shows "Thanks for getting in touch." only once EmailJS has
+accepted this notification. If EmailJS refuses it or doesn't answer within
+15 seconds, the form shows the failure message with a link to write to the
+address directly ("You can also email me directly.") and keeps everything the
+person typed. The sheet row is written either way, and a sheet row alone does
+not show the success message.
 
 The Work & Life Check notification (`message`) opens with the following lines,
 then the result exactly as emailed, then all 17 answers:

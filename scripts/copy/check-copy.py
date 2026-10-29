@@ -10,8 +10,13 @@ in document order. The check works sentence by sentence because the design
 sometimes sets one paragraph as several elements (a lead line, four rows, a
 statement): the words and their order are what must not change. Link wording
 is checked for presence only, since a design may place links differently.
-The header and footer wording is checked on the homepage. Run after
-prerendering:
+The header and footer wording is checked on the homepage. On /contact/ the
+enquiry form is checked where it is drawn, between the opening and the
+reviews: its labels and choices, the button, the lines under it, and each
+placeholder in its field's attribute. The wording of the form's later states
+(sending, success, the send error) is not in the snapshot, which shows the
+form as it first appears; site-pages.jsx takes it from the same data. Run
+after prerendering:
 
     python3 scripts/copy/check-copy.py [content/canonical-copy.md]
 
@@ -49,13 +54,19 @@ def sentences(text):
     return [t for t in (norm(x) for x in SENTENCE_END.split(norm(text))) if t]
 
 
+def page_root(file):
+    return file.read_text(encoding='utf-8').split('<div id="root">', 1)[1]
+
+
 def page_text(file):
-    h = file.read_text(encoding='utf-8')
-    root = h.split('<div id="root">', 1)[1]
-    root = re.sub(r'<(script|style)\b[\s\S]*?</\1>', ' ', root)
+    root = re.sub(r'<(script|style)\b[\s\S]*?</\1>', ' ', page_root(file))
     root = re.sub(INLINE, '', root)
     root = re.sub(r'<[^>]+>', ' ', root)
     return norm(html.unescape(root))
+
+
+def placeholders(file):
+    return {norm(html.unescape(v)) for v in re.findall(r'\bplaceholder="([^"]*)"', page_root(file))}
 
 
 def items_for(page):
@@ -101,25 +112,33 @@ def items_for(page):
     if hero.get('sub'):
         out.append(('seq', norm(hero['sub'])))
     blocks(hero['blocks'])
+    form = page.get('form')
+    if form:
+        for f in form['fields']:
+            out.append(('link', norm(f['label'] + (' ' + f['hint'] if f.get('hint') else ''))))
+            for o in f.get('options', []):
+                out.append(('link', norm(o['label'])))
+            if f.get('placeholder'):
+                out.append(('placeholder', norm(f['placeholder'])))
+        out.append(('link', norm(form['submit']['label'])))
+        blocks(form['blocks'])
     for s in page['sections']:
         if s.get('eyebrow'):
             out.append(('seq', norm(s['eyebrow'])))
         out.append(('seq', norm(s['h2'])))
         blocks(s['blocks'])
-    if page.get('form'):
-        for f in page['form']['fields']:
-            out.append(('link', norm(f['label'])))
-            for o in f.get('options', []):
-                out.append(('link', norm(o)))
-        out.append(('link', norm(page['form']['submit']['label'])))
     return out
 
 
-def check(url, items, body):
+def check(url, items, body, attrs=frozenset()):
     missing, disordered = [], []
     cursor = 0
     for kind, text in items:
         if text in EXPECTED_MISSING:
+            continue
+        if kind == 'placeholder':
+            if text not in attrs:
+                missing.append('placeholder: ' + text)
             continue
         # case-insensitive for eyebrows and labels set in capitals by CSS
         pos = body.find(text, cursor) if kind == 'seq' else body.find(text)
@@ -147,7 +166,7 @@ def main(src):
             problems += 1
             continue
         items = items_for(page)
-        missing, disordered = check(url, items, page_text(file))
+        missing, disordered = check(url, items, page_text(file), placeholders(file))
         total += len(items)
         bad = len(missing) + len(disordered)
         print(f'{"OK " if not bad else "ERR"} {url:36} {len(items):3} items checked, '

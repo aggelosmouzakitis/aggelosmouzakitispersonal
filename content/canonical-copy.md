@@ -2,7 +2,7 @@
 
 **Status:** Final implementation source of truth
 **Positioning:** Psychotherapy primarily for men in tech, startups, business and demanding careers
-**Primary CTA:** Book a consultation
+**Primary CTA:** Book a free clarity call
 
 ## Header navigation
 
@@ -31,7 +31,7 @@
 
 **FAQ**
 
-**Primary CTA:** Book a consultation
+**Primary CTA:** Book a free clarity call
 
 Problem pages remain live and are reached through contextual links and related-navigation patterns rather than the primary header.
 
@@ -108,7 +108,7 @@ Confidentiality
 | 21 | Reviews | /reviews/ | Reviews & Client Feedback \| Aggelos Mouzakitis | Feedback from psychotherapy clients and from people Aggelos Mouzakitis has worked with through mentoring and professional advisory conversations. | Feedback from people I have worked with. |
 | 22 | Free Tools | /free-tools/ | Free Tools for Burnout & Career Decisions \| Aggelos Mouzakitis | Short reflection tools for burnout, difficult career decisions and situations where work has become hard to separate from the rest of life. | Three short reflection tools. |
 | 23 | Writing | /blog/ | Writing on Work, Relationships & Psychotherapy \| Aggelos Mouzakitis | Essays on work, ambition, burnout, relationships, career decisions, anxiety, achievement and the psychological life behind demanding careers. | Writing on work, relationships and psychotherapy. |
-| 24 | Contact | /contact/ | Contact Aggelos Mouzakitis \| Book a Consultation | Contact Aggelos Mouzakitis about individual psychotherapy, couples therapy or professional coaching. Online sessions in Greek or English. | Tell me briefly what brings you here. |
+| 24 | Contact | /contact/ | Free 30-Minute Clarity Call \| Aggelos Mouzakitis | A free 30-minute clarity call to talk through something you’re stuck with, get an honest outside perspective and consider next steps. No obligation to continue. | Start with what’s been on your mind. |
 | 25 | Confidentiality | /confidentiality/ | Confidentiality \| Aggelos Mouzakitis | Information about confidentiality, clinical supervision, records, communication and the limits that apply to psychotherapy with Aggelos Mouzakitis. | Confidentiality |
 | 26 | Undisguised | /undisguised/ | Undisguised: A Manifesto for Living Deliberately \| Aggelos Mouzakitis | A manifesto by Aggelos Mouzakitis on understanding what drives us, questioning the roles we've learned to play and making more deliberate choices about how we live. | Undisguised. |
 | 27 | Therapy for Men | /therapy-for-men/ | Online Therapy for Men \| Aggelos Mouzakitis | Online psychotherapy for men dealing with relationship difficulties, responsibility, anxiety or decisions they keep putting off. In English or Greek. | Online therapy for men. |
@@ -131,7 +131,7 @@ Confidentiality
 
 The people who come here are often used to solving problems for a living. That works well until the problem is a relationship, a career you no longer want, or a mind that keeps working long after the day is over.
 
-**Book a consultation →**  
+**Book a free clarity call →**  
 **Individual psychotherapy →**
 
 ## Credential strip
@@ -235,7 +235,7 @@ My clinical background includes an MSc in Integrative Counselling & Psychotherap
 
 If you think this might fit, tell me briefly what brings you here.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 **Prefer to read first? Explore Undisguised →**
 
@@ -314,7 +314,7 @@ Professional context matters when it is relevant. It does not determine what the
 
 If the way I work sounds useful, get in touch.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -332,7 +332,7 @@ If the way I work sounds useful, get in touch.
 
 Individual psychotherapy is the main part of the practice, alongside couples therapy and a separate professional coaching service.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## Individual Psychotherapy
 
@@ -370,9 +370,9 @@ If you are not sure, describe the situation when you contact me and I will tell 
 
 Send a short note about what brings you here and where you are currently located. If the situation falls within what I offer, we arrange an initial conversation.
 
-The first conversation is a free introductory call, usually between 30 minutes and an hour. Standard sessions after that are €100 or £90 each.
+The first conversation is a free 30-minute clarity call. Standard sessions after that are €100 or £90 each.
 
-**Book a consultation →**  
+**Book a free clarity call →**  
 **Fees and practicalities →**
 
 ---
@@ -391,7 +391,7 @@ The first conversation is a free introductory call, usually between 30 minutes a
 
 Most people arrive with something concrete such as a relationship that is getting worse, work they cannot stop thinking about, a decision that has stayed open for months, or the sense that ordinary life is taking much more effort than it used to. You do not need a psychological explanation before starting.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## What brings people in
 
@@ -455,7 +455,7 @@ English or Greek
 €100 or £90 per session
 
 **Introductory call**  
-Free, usually 30 minutes to an hour
+Free 30-minute clarity call
 
 I normally work **weekly for at least the first few months**. We can review frequency later.
 
@@ -486,7 +486,7 @@ Yes, online. The UK is the main focus of the practice, and I also work with clie
 
 If you want to talk about whether individual psychotherapy fits, book a consultation.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -506,7 +506,7 @@ Couples come with recurring arguments, emotional distance, damaged trust or the 
 
 Both partners attend so the interaction itself can be worked with directly.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## Why couples come
 
@@ -568,7 +568,7 @@ English or Greek
 €100 or £90 per standard session
 
 **Introductory call**  
-Free, usually 30 minutes to an hour
+Free 30-minute clarity call
 
 We agree the format before ongoing work begins. I work with clients in the UK, Ireland, Greece and elsewhere in Europe. I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located.
 
@@ -594,7 +594,7 @@ Mostly, yes. In the UK and Ireland, couples counselling, relationship counsellin
 
 If both of you want to talk about the relationship, book a consultation.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -612,7 +612,7 @@ If both of you want to talk about the relationship, book a consultation.
 
 This is a separate service from psychotherapy. It is for experienced people in tech, startups and business who have a professional decision with real trade-offs and want a serious place to work it through.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## When coaching fits
 
@@ -674,7 +674,7 @@ English or Greek
 €100 or £90 per session
 
 **Introductory call**  
-Free, usually 30 minutes to an hour
+Free 30-minute clarity call
 
 Format and frequency depend on the decision and are agreed before we begin. I work with clients in the UK, Ireland, Greece and elsewhere in Europe.
 
@@ -695,7 +695,7 @@ The service is designed for experienced people in tech, startups and business. I
 
 Tell me the professional decision you are trying to make.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -715,7 +715,7 @@ Both can begin with the same sentence: “I need to make a decision about work.�
 
 Professional coaching is for a bounded professional issue that can remain primarily professional. Psychotherapy gives us more room when the apparent work problem is tied up with anxiety, self-worth, relationships, grief, shame or a pattern that keeps repeating despite good advice.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## When coaching is enough
 
@@ -777,7 +777,7 @@ For a broader explanation of what psychotherapy itself is like, see Considering 
 
 If you are not sure which category fits, describe the situation rather than choosing the service first.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -797,7 +797,7 @@ You can be doing well professionally and still be sleeping badly, carrying work 
 
 Tech, product and business are familiar contexts from more than 18 years working in them.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## The professional culture matters
 
@@ -875,7 +875,7 @@ English or Greek
 €100 or £90 per session
 
 **Introductory call**  
-Free, usually 30 minutes to an hour
+Free 30-minute clarity call
 
 I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins.
 
@@ -903,7 +903,7 @@ I do not provide reports to your employer. Sessions are confidential within the 
 
 If this sounds like the kind of context you want your therapist to understand, get in touch.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -923,7 +923,7 @@ Founding or owning a business makes it difficult to separate work from the rest 
 
 Therapy can help when that overlap starts creating problems in the company, at home or in the way you are functioning yourself.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## Ownership changes the stakes
 
@@ -998,7 +998,7 @@ English or Greek
 €100 or £90 per session
 
 **Introductory call**  
-Free, usually 30 minutes to an hour
+Free 30-minute clarity call
 
 I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins.
 
@@ -1023,7 +1023,7 @@ Partners live with the company too. If both of you want the relationship itself 
 
 If the company is taking up more of your life than you want it to, book a consultation.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -1043,7 +1043,7 @@ Senior roles bring responsibility, limited places to speak candidly and decision
 
 Much of the day may involve editing what you say, carrying information other people do not have and deciding what can reasonably be shared with whom. That can leave very few neutral places to think out loud.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## The job changes with seniority
 
@@ -1117,7 +1117,7 @@ English or Greek
 €100 or £90 per session
 
 **Introductory call**  
-Free, usually 30 minutes to an hour
+Free 30-minute clarity call
 
 I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins.
 
@@ -1145,7 +1145,7 @@ Yes. Technology is the environment I know most deeply, but the pressures of seni
 
 Book a consultation if you want a private place to think about what is going on.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -1165,7 +1165,7 @@ This page is mainly for Greek-speaking people who want therapy with someone who 
 
 It is especially relevant to Greeks living abroad, including people working in tech, startups and other international careers who may find that combination difficult to find where they live.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## Shared language and culture
 
@@ -1209,7 +1209,7 @@ Greek or English
 €100 or £90 per session
 
 **Introductory call**  
-Free, usually 30 minutes to an hour
+Free 30-minute clarity call
 
 I work with clients across the UK and Europe, including Greece. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there.
 
@@ -1233,7 +1233,7 @@ No. The wider practice is positioned mainly towards men in tech, startups, busin
 
 If you would prefer to work in Greek, mention it when you contact me.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -1253,7 +1253,7 @@ The issue is often obvious. You keep having the same argument. Your partner says
 
 You can work on your part even if your partner never comes to therapy.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## Why people come
 
@@ -1305,7 +1305,7 @@ Individual psychotherapy is for your experience and behaviour. Couples therapy i
 
 If the relationship is the reason you are looking for therapy, say that directly.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -1323,7 +1323,7 @@ If the relationship is the reason you are looking for therapy, say that directly
 
 This period creates practical decisions at exactly the time concentration and judgement are already under pressure. There are conversations with a partner, children, family, work and sometimes lawyers. Your own position may change several times in the same week.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## The ending may still be unclear
 
@@ -1381,7 +1381,7 @@ Before treating either reaction as a decision, it is useful to understand what h
 
 If you are going through a separation or divorce and want somewhere to think clearly, book a consultation.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -1400,7 +1400,7 @@ If you are going through a separation or divorce and want somewhere to think cle
 Work can be genuinely demanding and still create a relationship problem when the same pressure repeatedly determines evenings, weekends and plans.
 
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## How the shift happens
 
@@ -1469,7 +1469,7 @@ Couples therapy fits when both of you want to work directly on how the current a
 
 If work has become a regular source of conflict at home, book a consultation.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -1491,7 +1491,7 @@ A lot of people remain productive for a long time. The calendar is full, the wor
 
 Outside work, sleep gets worse, patience gets shorter and time off stops doing what it used to do.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## Still performing
 
@@ -1569,7 +1569,7 @@ Significant physical symptoms or sleep problems may need medical assessment as w
 
 If you have been functioning through exhaustion for a while, book a consultation.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -1589,7 +1589,7 @@ You may have wanted to leave for a year, but the salary is good, your family is 
 
 Career decisions become more complicated when income, identity, family expectations and self-worth are tied to the same choice.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## Leaving a good job
 
@@ -1648,7 +1648,7 @@ My Jobs to be Done background makes that kind of investigation familiar. Psychot
 
 If you have been circling the same career decision for months, book a consultation.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -1668,7 +1668,7 @@ If you have been circling the same career decision for months, book a consultati
 
 You research the decision until you feel calmer, then another objection appears and the analysis starts again. The problem is no longer a lack of information.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## What overthinking looks like
 
@@ -1721,7 +1721,7 @@ The aim is not to stop useful thinking. It is to distinguish analysis that impro
 
 If the same analysis keeps restarting, book a consultation.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -1741,7 +1741,7 @@ A promotion, strong review or business win can feel good and still become the ne
 
 For some people, achievement gradually becomes one of the main ways they regulate how they feel about themselves.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## Results and self-worth
 
@@ -1800,7 +1800,7 @@ The question is whether the ambition still feels like yours, what happens when y
 
 If achievement has started carrying more psychological weight than you want it to, book a consultation.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -1818,7 +1818,7 @@ If achievement has started carrying more psychological weight than you want it t
 
 You do not need to decide whether you “qualify” for therapy before contacting a therapist. The more useful question is whether it could help with something specific that is already affecting your life.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## How serious does it need to be?
 
@@ -1867,7 +1867,7 @@ Send a short note about what brings you here and where you are located.
 
 If the situation fits what I offer, we arrange an initial conversation. The relevant fee and any location-specific practicalities are made clear before ongoing work begins.
 
-The first conversation is a free introductory call, usually between 30 minutes and an hour, and ongoing sessions are €100 or £90 each.
+The first conversation is a free 30-minute clarity call, and ongoing sessions are €100 or £90 each.
 
 **Fees and practicalities →**
 
@@ -1875,7 +1875,7 @@ The first conversation is a free introductory call, usually between 30 minutes a
 
 If you want to find out whether this fits, book a consultation.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -1959,7 +1959,7 @@ Standard sessions are €100 or £90. Individual psychotherapy and standard coup
 **Fees and practicalities →**
 
 ### Is the first conversation free?
-Yes. The first conversation is a free introductory call, usually between 30 minutes and an hour.
+Yes. The first conversation is a free 30-minute clarity call.
 
 ## Starting
 
@@ -2030,7 +2030,7 @@ No. I don't provide emergency psychiatric or crisis-response services. If you or
 
 If you have a question that is specific to your situation, ask it directly.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -2097,7 +2097,7 @@ Psychotherapy feedback is anonymous because the work involves material people re
 If the way I work sounds right for you, you can read more about therapy or get in touch.
 
 **Considering therapy →**  
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -2138,7 +2138,7 @@ Related: **Career Change & Decisions →**
 There is no ideal score. The result gives you a more precise description of the issue and points you towards relevant reading or a service that may fit.
 
 **Considering therapy →**  
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -2226,48 +2226,64 @@ Undisguised is my email newsletter. It includes essays and shorter ideas about w
 If you have already spent a long time thinking about something and want to talk about it directly, get in touch.
 
 **Considering therapy →**  
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
 # 24. Contact
 
 **URL:** `/contact/`  
-**SEO title:** Contact Aggelos Mouzakitis | Book a Consultation  
-**Meta description:** Contact Aggelos Mouzakitis about individual psychotherapy, couples therapy or professional coaching. Online sessions in Greek or English.
+**SEO title:** Free 30-Minute Clarity Call | Aggelos Mouzakitis  
+**Meta description:** A free 30-minute clarity call to talk through something you’re stuck with, get an honest outside perspective and consider next steps. No obligation to continue.
 
 ## Hero
 
 **CONTACT**
 
-# Tell me briefly what brings you here.
+# Start with what’s been on your mind.
 
-Include where you are currently located and whether you are asking about individual psychotherapy, couples therapy, professional coaching or are not sure yet.
+**Free · 30 minutes · Online · Confidential**
 
-Enquiries are reviewed personally.
+30 minutes on something you’re stuck with. I’ll give you my honest take and suggest next steps where I can. You can leave it at one call.
 
-## Suggested form fields
+*If you’d like, we can record the call and I’ll send you a short written summary.*
+
+## Enquiry form
 
 **Name**  
 **Email**  
-**Current location / country**  
-**What would you like help with?**  
-**Service:** Individual Psychotherapy / Couples Therapy / Professional Coaching / Not sure
+**Country you’ll be in for the call**  
+**Service (optional):** Not sure / Individual psychotherapy / Couples therapy / Professional coaching  
+**What would you like to talk about?**  
+**Placeholder:** A sentence or two is enough. You don’t need to have it all worked out.
 
-**Send enquiry →**
+**Request a free clarity call →**
 
-## What happens next
+I’ll read your message personally and email you to arrange a time.
 
-If the situation falls within what I offer, we arrange an initial conversation. Before ongoing work begins, the fee, session format and any location-specific practicalities are made clear.
+Please keep sensitive personal or medical details out of this first message.
 
-If another therapist, doctor or specialist service appears more appropriate, I will say so.
+**Confidentiality →**
 
-## Privacy
+**Sending:** Sending…  
+**Success:** Thanks for getting in touch.  
+**Success message:** I’ll read your message personally and email you to arrange a time for our free 30-minute clarity call.  
+**Error:** Your message couldn’t be sent. Please try again.  
+**Email link:** You can also email me directly.
 
-Please avoid sending highly sensitive medical or personal information through the first contact form.
+## Feedback from GrowthMentor mentoring calls
 
-**Confidentiality →**  
-**FAQ →**
+5.00/5 · 73 reviews on GrowthMentor
+
+> “Calm, honest and practical. … gave me clear advice on next steps.”
+>
+> **Bogdan Liutic · 28 October 2026**
+
+> “He immediately identified the broader patterns behind my professional challenges…”
+>
+> **Orit Mutznik · 16 October 2026**
+
+**Read the reviews on GrowthMentor →**
 
 ---
 
@@ -2294,6 +2310,8 @@ Clinical supervision is part of responsible psychotherapy practice. It is handle
 Practical communication, records and information collected through the website are handled according to the privacy arrangements that apply to the practice.
 
 The first contact form is for initial enquiries. Please avoid including highly sensitive medical or personal information that is not needed to arrange the first conversation.
+
+Recording a call is optional. We only record if you agree beforehand. Before recording, we’ll agree how the recording and written summary will be stored, shared and deleted. You can have the call without being recorded.
 
 ## Limits of confidentiality
 
@@ -2477,7 +2495,7 @@ You may handle difficult conversations at work and still spend weeks putting one
 
 I am a BACP-registered psychotherapist with a previous career in product and growth. Sessions are online, in English or Greek.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## Agreeing when you wanted to say no
 
@@ -2528,7 +2546,7 @@ English or Greek
 €100 or £90 per session
 
 **Introductory call**  
-Free, usually 30 minutes to an hour
+Free 30-minute clarity call
 
 I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins.
 
@@ -2552,7 +2570,7 @@ I mainly work with men. I also work with other adults when we are a suitable fit
 
 Tell me briefly what has been happening and where you are currently located.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -2572,7 +2590,7 @@ The incident is resolved, but you keep the channel open. When your partner asks 
 
 I am a BACP-registered psychotherapist with a previous career in product and growth. I offer online therapy in English or Greek.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## Checking after your shift ends
 
@@ -2620,7 +2638,7 @@ English or Greek
 €100 or £90 per session
 
 **Introductory call**  
-Free, usually 30 minutes to an hour
+Free 30-minute clarity call
 
 I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins.
 
@@ -2644,7 +2662,7 @@ Professional coaching is a separate service for a question that can stay focused
 
 If work keeps occupying more of your life than you want it to, tell me what has been happening.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---
 
@@ -2660,9 +2678,9 @@ If work keeps occupying more of your life than you want it to, tell me what has 
 
 # Fees and practicalities.
 
-Individual psychotherapy sessions cost €100 or £90 and usually last 50–60 minutes. The introductory call is free, usually between 30 minutes and an hour.
+Individual psychotherapy sessions cost €100 or £90 and usually last 50–60 minutes. The first conversation is a free 30-minute clarity call.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ## Fees
 
@@ -2719,6 +2737,6 @@ I do not provide emergency psychiatric or crisis-response services. If you or so
 
 If you have a practical question that is specific to your situation, include it in your message.
 
-**Book a consultation →**
+**Book a free clarity call →**
 
 ---

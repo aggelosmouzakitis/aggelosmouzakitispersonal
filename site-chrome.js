@@ -219,7 +219,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 
   // ─── HEADER ──────────────────────────────────────────────────────────────────
   // Desktop (≥1080px): Home · About · Services ▾ · Resources ▾ · FAQ and the
-  // outlined Book a consultation. Services and Resources are disclosure buttons
+  // outlined Book a free clarity call. Services and Resources are disclosure buttons
   // (aria-expanded/aria-controls) over a bone panel; Escape closes and returns
   // focus to the button, as do a click outside and focus leaving the nav.
   // Below 1080px one Menu button opens a bone panel: Services and Resources as
@@ -227,11 +227,16 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
   // `section` names the section a page sits in without being its page: an
   // article at its own URL sits on the blog (/blog/), so its group reads as
   // current and its link carries aria-current="true".
+  // The call to action goes to /contact/; on /contact/ itself, to its form
+  // (#enquiry), closing the mobile menu on the way.
   function SiteHeader({
     section
   }) {
     const nav = NAV_DATA.nav;
     const cur = currentPath();
+    const cta = nav.cta ? Object.assign({}, nav.cta, cur === CONTACT_URL ? {
+      href: '#enquiry'
+    } : null) : null;
     const [open, setOpen] = useState(null);
     const [menu, setMenu] = useState(false);
     const [macc, setMacc] = useState(null);
@@ -353,10 +358,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
         className: 'mmenu__links',
         hidden: !expanded
       }, links(it.items, 'm')));
-    }), nav.cta ? ce('a', {
-      href: nav.cta.href,
-      className: 'mmenu__cta'
-    }, nav.cta.label, ce('span', {
+    }), cta ? ce('a', {
+      href: cta.href,
+      className: 'mmenu__cta',
+      onClick: () => setMenu(false)
+    }, cta.label, ce('span', {
       'aria-hidden': 'true'
     }, '→')) : null));
     return ce('header', {
@@ -371,10 +377,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
       href: '/',
       className: 'hdr__brand',
       'aria-label': 'Aggelos Mouzakitis, home'
-    }, 'Aggelos', ce('span', null, '.')), desktop, nav.cta ? ce('a', {
-      href: nav.cta.href,
+    }, 'Aggelos', ce('span', null, '.')), desktop, cta ? ce('a', {
+      href: cta.href,
       className: 'hdr__cta'
-    }, nav.cta.label, ce('span', {
+    }, cta.label, ce('span', {
       'aria-hidden': 'true'
     }, '→')) : null, ce('button', {
       type: 'button',
@@ -430,7 +436,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
     return ce('section', {
       className: 'band close on-dark',
       'aria-labelledby': label ? 'close-h' : undefined,
-      'aria-label': label ? undefined : 'Book a consultation'
+      'aria-label': label ? undefined : 'Book a free clarity call'
     }, ce('div', {
       className: 'read close__in'
     }, label ? ce('h2', {
@@ -539,7 +545,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
     cta = true
   }) {
     const cta0 = NAV_DATA.nav.cta || {
-      label: 'Book a consultation',
+      label: 'Book a free clarity call',
       href: CONTACT_URL
     };
     return ce(React.Fragment, null, ce(ChromeStyles), ce(SiteHeader), ce('main', {

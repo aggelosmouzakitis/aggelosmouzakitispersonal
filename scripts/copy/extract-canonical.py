@@ -24,6 +24,9 @@ here and never published as written:
   **Note:** text       an editorial note about a page (before its Hero);
                        kept with the page data, never rendered
   **Signature:** label · text   the footer's signature link (Footer copy)
+In the Contact page's "Enquiry form" section, each bold line is a field
+(FORM_FIELDS), "**Label:** a / b" a field's choices (SERVICE_VALUE), and the
+lines labelled in FORM_TEXT its placeholder and the wording of its states.
 
 The only liberties it takes are typographic: straight apostrophes become
 typographic ones (don't -> don’t) and "→" is split off link labels and drawn
@@ -76,7 +79,7 @@ TYPE_BY_URL = {
 # essays (site-articles.js, scripts/articles/articles.js `listing`); an entry
 # whose essay is not published is left off the page rather than shown dead.
 CTA_HREF = {
-    'Book a consultation': '/contact/',
+    'Book a free clarity call': '/contact/',
     'Individual psychotherapy': '/individual-psychotherapy/',
     'Explore individual psychotherapy': '/individual-psychotherapy/',
     'How individual psychotherapy works': '/individual-psychotherapy/',
@@ -125,6 +128,7 @@ CTA_HREF = {
     'Take the burnout check-in': '/free-tools/burned-out/',
     'Take the career reflection': '/free-tools/quit-your-job/',
     'The loneliness and emotional pressure that founders experience': '/blog/the-loneliness-and-emotional-pressure-that-founders-experience/',
+    'Read the reviews on GrowthMentor': 'https://www.growthmentor.com/mentors/aggelos-m#reviews-section',
     'Read Undisguised': 'https://www.undisguised.io/',
     'Read the Undisguised newsletter': 'https://www.undisguised.io/',
     # The manifesto (/undisguised/). A link to it from another page is set as
@@ -174,7 +178,39 @@ NAV_HREF = {
     'Reviews': '/reviews/',
 }
 
-FORM_SUBMIT = 'Send enquiry'
+# ── The enquiry form on /contact/ (its "Enquiry form" section) ───────────────
+FORM_SECTION = 'enquiry-form'
+FORM_SUBMIT = 'Request a free clarity call'
+# Each field's wording → the field it is: its id, validation and heading in
+# the notification (site-pages.jsx, ContactForm). Fields are found by this key,
+# never by their position, so reordering or rewording them cannot send one
+# field's value under another's heading. "(optional)" after a label is drawn
+# as its hint.
+FORM_FIELDS = {
+    'Name': 'name',
+    'Email': 'email',
+    'Country you’ll be in for the call': 'location',
+    'Service': 'service',
+    'What would you like to talk about?': 'message',
+}
+# The service choices: the wording shown → the value the notification, the
+# Leads sheet and GA4 have always received.
+SERVICE_VALUE = {
+    'Not sure': 'Not sure',
+    'Individual psychotherapy': 'Individual Psychotherapy',
+    'Couples therapy': 'Couples Therapy',
+    'Professional coaching': 'Professional Coaching',
+}
+# The form's other wording, each a labelled line ("**Sending:** Sending…").
+FORM_TEXT = {
+    'Placeholder': 'placeholder',        # in the field on the line above
+    'Sending': 'sending',                # the button while a send is in flight
+    'Success': 'success',                # the heading once the notification is accepted
+    'Success message': 'successMessage',
+    'Error': 'error',                    # above the button when a send fails
+    'Email link': 'emailLink',           # under it, to the address to write to directly
+}
+FORM_LINE_RE = re.compile(r'^\*\*([^*]+?)(?::\*\*\s*(.+)|\*\*)$')
 
 CTA_RE = re.compile(r'^\*\*(.+?)\s*→\*\*$')
 RELATED_RE = re.compile(r'^Related:\s*\*\*(.+?)(\s*→)?\*\*$')
@@ -435,25 +471,45 @@ def main(path):
                     if not page['hero']['blocks'] and 'sub' not in page['hero']:
                         page['hero']['sub'] = smart(bold.group(1).strip())
                         continue
-            if section is not None and section['id'] == 'suggested-form-fields':
-                for l in lines:
-                    m = CTA_RE.match(l)
-                    if m:
-                        label = smart(m.group(1).strip())
-                        if label != FORM_SUBMIT:
-                            raise SystemExit(f'unexpected form button {label!r}')
-                        section['blocks'].append({'t': 'submit', 'label': label})
-                        continue
-                    m = re.match(r'^\*\*Service:\*\*\s*(.+)$', l)
-                    if m:
-                        opts = [smart(o.strip()) for o in m.group(1).split('/')]
-                        section['blocks'].append({'t': 'field', 'label': 'Service', 'options': opts})
-                        continue
-                    m = BOLD_LINE_RE.match(l)
-                    if not m:
-                        raise SystemExit(f'unexpected form-field line {l!r}')
-                    section['blocks'].append({'t': 'field', 'label': smart(m.group(1).strip())})
-                continue
+            if section is not None and section['id'] == FORM_SECTION:
+                # The submit button; the fields and the form's labelled
+                # wording; anything else (the lines under the button, their
+                # link) is ordinary copy.
+                cta = CTA_RE.match(lines[0])
+                if cta and smart(cta.group(1).strip()) == FORM_SUBMIT:
+                    if len(lines) != 1:
+                        raise SystemExit(f'{where}: the form button must be a line of its own')
+                    section['blocks'].append({'t': 'submit', 'label': FORM_SUBMIT})
+                    continue
+                if lines[0].startswith('**') and not cta:
+                    for l in lines:
+                        m = FORM_LINE_RE.match(l)
+                        if not m:
+                            raise SystemExit(f'unexpected form line {l!r}')
+                        label, value = smart(m.group(1).strip()), m.group(2)
+                        if label in FORM_TEXT and value is not None:
+                            key = FORM_TEXT[label]
+                            if key == 'placeholder':
+                                if not section['blocks'] or section['blocks'][-1]['t'] != 'field':
+                                    raise SystemExit(f'{where}: a Placeholder line must follow its field')
+                                section['blocks'][-1]['placeholder'] = smart(value.strip())
+                            else:
+                                section['blocks'].append({'t': 'text', 'key': key, 'text': smart(value.strip())})
+                            continue
+                        name, hint = re.match(r'^(.*?)(?:\s+(\(optional\)))?$', label).groups()
+                        if name not in FORM_FIELDS:
+                            raise SystemExit(f'unknown form field {label!r}: add it to FORM_FIELDS')
+                        field = {'t': 'field', 'key': FORM_FIELDS[name], 'label': name}
+                        if hint:
+                            field['hint'] = hint
+                        if value is not None:
+                            opts = [smart(o.strip()) for o in value.split('/')]
+                            unknown = [o for o in opts if o not in SERVICE_VALUE]
+                            if unknown:
+                                raise SystemExit(f'unknown form choice {unknown[0]!r}: add it to SERVICE_VALUE')
+                            field['options'] = [{'label': o, 'value': SERVICE_VALUE[o]} for o in opts]
+                        section['blocks'].append(field)
+                    continue
             new = classify(lines, where)
             # consecutive label/value pairs form one block (credentials, facts)
             if new[0]['t'] == 'pairs' and target and target[-1]['t'] == 'pairs':
@@ -502,10 +558,20 @@ def main(path):
         entry['hero'] = hero
         entry['sections'] = pg['sections']
         if url == '/contact/':
-            spec = next(s for s in pg['sections'] if s['id'] == 'suggested-form-fields')
+            spec = next((s for s in pg['sections'] if s['id'] == FORM_SECTION), None)
+            if spec is None:
+                raise SystemExit(f'{url}: no "Enquiry form" section')
             fields = [b for b in spec['blocks'] if b['t'] == 'field']
-            submit = next(b for b in spec['blocks'] if b['t'] == 'submit')
-            entry['form'] = {'fields': fields, 'submit': submit}
+            submit = next((b for b in spec['blocks'] if b['t'] == 'submit'), None)
+            text = {b['key']: b['text'] for b in spec['blocks'] if b['t'] == 'text'}
+            keys = [f['key'] for f in fields]
+            gone = [k for k in FORM_FIELDS.values() if k not in keys]
+            gone += [k for k in FORM_TEXT.values() if k != 'placeholder' and k not in text]
+            if gone or not submit or len(set(keys)) != len(keys):
+                raise SystemExit(f'{url}: the enquiry form is incomplete (missing {gone or "its button"}, or a field twice)')
+            # The lines under the button and their link, in document order.
+            rest = [b for b in spec['blocks'] if b['t'] not in ('field', 'submit', 'text')]
+            entry['form'] = {'fields': fields, 'submit': submit, 'text': text, 'blocks': rest}
             entry['sections'] = [s for s in pg['sections'] if s is not spec]
         out[pid] = entry
 
@@ -565,7 +631,9 @@ if __name__ == '__main__':
               '// (typographic apostrophes; → drawn by the UI).\n')
     copy_header = (
         f'// site-copy.jsx — the canonical copy for the {len(pages)} canonical pages.\n//\n' + source + '//\n'
-        '// Shape: pages[id] = { url, type, seoTitle, metaDescription, note?, hero, sections }\n'
+        '// Shape: pages[id] = { url, type, seoTitle, metaDescription, note?, hero, sections, form? }\n'
+        '//   form     = { fields: [{ key, label, hint?, placeholder?, options? }], submit, text, blocks }\n'
+        '//              (/contact/ only: its enquiry form, the states\' wording in text)\n'
         '//   hero     = { eyebrow, h1, sub?, blocks }\n'
         '//   sections = [{ h2, id, eyebrow?, blocks }]\n'
         '//   blocks   = p | lines | list | ctas | related | meta | pairs | quote | question | table\n'

@@ -254,7 +254,7 @@ function faqOf(c) {
 const PAGE_TYPE = { about: 'ProfilePage', contact: 'ContactPage', 'free-tools': 'CollectionPage' };
 // A page whose H1 changed after its share card was published gets a new card
 // file: /img/* is served immutable, so the old URL keeps the old picture.
-const OG_FILE = { 'free-tools': 'free-tools-2' };
+const OG_FILE = { 'free-tools': 'free-tools-2', contact: 'contact-2' };
 
 // The free tools in the order /free-tools/ shows them (the Work & Life Check
 // first, the entry point) — the ItemList and llms.txt use the same order.

@@ -160,7 +160,7 @@ window.SITE_ARTICLE_PAGES["who-are-you-if-you-are-not-crushing-it"] = {
       "label": "Considering therapy",
       "href": "/considering-therapy/"
     }, {
-      "label": "Book a consultation",
+      "label": "Book a free clarity call",
       "href": "/contact/"
     }]
   },

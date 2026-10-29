@@ -72,7 +72,7 @@ window.SITE_NAV = {
       "href": "/faq/"
     }],
     "cta": {
-      "label": "Book a consultation",
+      "label": "Book a free clarity call",
       "href": "/contact/"
     }
   },

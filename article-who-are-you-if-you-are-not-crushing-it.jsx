@@ -67,6 +67,6 @@ window.SITE_ARTICLE_PAGES["who-are-you-if-you-are-not-crushing-it"] = {
     ]}
   ],
   "cta": null,
-  "close": {"label":"Contact","text":"If you have already spent a long time thinking about something and want to talk about it directly, get in touch.","actions":[{"label":"Considering therapy","href":"/considering-therapy/"},{"label":"Book a consultation","href":"/contact/"}]},
+  "close": {"label":"Contact","text":"If you have already spent a long time thinking about something and want to talk about it directly, get in touch.","actions":[{"label":"Considering therapy","href":"/considering-therapy/"},{"label":"Book a free clarity call","href":"/contact/"}]},
   "wordCount": 1623
 };

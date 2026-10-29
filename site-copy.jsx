@@ -6,7 +6,9 @@
 // rather than editing it here. Only typography differs from the source
 // (typographic apostrophes; → drawn by the UI).
 //
-// Shape: pages[id] = { url, type, seoTitle, metaDescription, note?, hero, sections }
+// Shape: pages[id] = { url, type, seoTitle, metaDescription, note?, hero, sections, form? }
+//   form     = { fields: [{ key, label, hint?, placeholder?, options? }], submit, text, blocks }
+//              (/contact/ only: its enquiry form, the states' wording in text)
 //   hero     = { eyebrow, h1, sub?, blocks }
 //   sections = [{ h2, id, eyebrow?, blocks }]
 //   blocks   = p | lines | list | ctas | related | meta | pairs | quote | question | table
@@ -26,7 +28,7 @@ window.SITE_COPY = {
       "metaDescription": "Online psychotherapy primarily for men in tech, startups and demanding careers, with Aggelos Mouzakitis, BACP-registered psychotherapist.",
       "hero": {"eyebrow": "BACP-REGISTERED PSYCHOTHERAPIST · BACKGROUND IN TECH, PRODUCT & GROWTH", "h1": "Therapy for men in tech, startups and demanding careers.", "blocks": [
         {"t": "p", "text": "The people who come here are often used to solving problems for a living. That works well until the problem is a relationship, a career you no longer want, or a mind that keeps working long after the day is over."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}, {"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}, {"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}]}
       ]},
       "sections": [
         {"h2": "Credential strip", "id": "credential-strip", "blocks": [
@@ -70,7 +72,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you think this might fit, tell me briefly what brings you here."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]},
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]},
           {"t": "ctas", "items": [{"label": "Prefer to read first? Explore Undisguised", "href": "/undisguised/"}]}
         ]}
       ]
@@ -119,7 +121,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If the way I work sounds useful, get in touch."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -133,7 +135,7 @@ window.SITE_COPY = {
       "metaDescription": "Individual psychotherapy, couples therapy and professional coaching with Aggelos Mouzakitis. Online work for relationships, burnout, anxiety, career decisions and professional problems.",
       "hero": {"eyebrow": "WORK WITH ME", "h1": "Three ways to work together.", "blocks": [
         {"t": "p", "text": "Individual psychotherapy is the main part of the practice, alongside couples therapy and a separate professional coaching service."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Individual Psychotherapy", "id": "individual-psychotherapy", "blocks": [
@@ -158,8 +160,8 @@ window.SITE_COPY = {
         ]},
         {"h2": "How to start", "id": "how-to-start", "blocks": [
           {"t": "p", "text": "Send a short note about what brings you here and where you are currently located. If the situation falls within what I offer, we arrange an initial conversation."},
-          {"t": "p", "text": "The first conversation is a free introductory call, usually between 30 minutes and an hour. Standard sessions after that are €100 or £90 each."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}, {"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
+          {"t": "p", "text": "The first conversation is a free 30-minute clarity call. Standard sessions after that are €100 or £90 each."},
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}, {"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]}
       ]
     },
@@ -173,7 +175,7 @@ window.SITE_COPY = {
       "metaDescription": "Online individual psychotherapy for relationships, burnout, anxiety, difficult decisions and recurring patterns, with a BACP-registered psychotherapist.",
       "hero": {"eyebrow": "INDIVIDUAL PSYCHOTHERAPY", "h1": "Individual psychotherapy for the parts of life that aren’t resolving on their own.", "blocks": [
         {"t": "p", "text": "Most people arrive with something concrete such as a relationship that is getting worse, work they cannot stop thinking about, a decision that has stayed open for months, or the sense that ordinary life is taking much more effort than it used to. You do not need a psychological explanation before starting."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "What brings people in", "id": "what-brings-people-in", "blocks": [
@@ -204,7 +206,7 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free 30-minute clarity call"}]},
           {"t": "p", "text": "I normally work **weekly for at least the first few months**. We can review frequency later."},
           {"t": "p", "text": "You can stop therapy whenever you choose. I ask people to start with a realistic level of commitment because psychotherapy is difficult to develop through occasional sessions booked only when something has blown up."},
           {"t": "p", "text": "I work with clients in the UK, Ireland, Greece and elsewhere in Europe. Before ongoing work begins, I confirm that I can work with you based on your location and circumstances."},
@@ -219,7 +221,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you want to talk about whether individual psychotherapy fits, book a consultation."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -234,7 +236,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "COUPLES THERAPY", "h1": "Online couples therapy for recurring conflict, distance and relationship strain.", "blocks": [
         {"t": "p", "text": "Couples come with recurring arguments, emotional distance, damaged trust or the effect of work and other pressures on the relationship."},
         {"t": "p", "text": "Both partners attend so the interaction itself can be worked with directly."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Why couples come", "id": "why-couples-come", "blocks": [
@@ -265,7 +267,7 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes, or up to 90 minutes"}, {"a": "Frequency", "b": "Weekly, or every two weeks for the longer session"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per standard session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes, or up to 90 minutes"}, {"a": "Frequency", "b": "Weekly, or every two weeks for the longer session"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per standard session"}, {"a": "Introductory call", "b": "Free 30-minute clarity call"}]},
           {"t": "p", "text": "We agree the format before ongoing work begins. I work with clients in the UK, Ireland, Greece and elsewhere in Europe. I also confirm that couples therapy is appropriate for the situation and that I can professionally work with you based on where you are located."},
           {"t": "p", "text": "The fee for the longer couples session is agreed separately before booking."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
@@ -278,7 +280,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If both of you want to talk about the relationship, book a consultation."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -292,7 +294,7 @@ window.SITE_COPY = {
       "metaDescription": "Career and leadership coaching for experienced people in tech, startups and business with a real decision to make: leaving, going independent or stepping up.",
       "hero": {"eyebrow": "PROFESSIONAL COACHING", "h1": "Professional coaching for a decision you actually have to make.", "blocks": [
         {"t": "p", "text": "This is a separate service from psychotherapy. It is for experienced people in tech, startups and business who have a professional decision with real trade-offs and want a serious place to work it through."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "When coaching fits", "id": "when-coaching-fits", "blocks": [
@@ -321,7 +323,7 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}, {"label": "Career change & decisions", "href": "/career-transition-therapy/"}, {"label": "Therapy vs coaching", "href": "/therapy-vs-coaching/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Length agreed before starting"}, {"a": "Frequency", "b": "Depends on the decision"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Length agreed before starting"}, {"a": "Frequency", "b": "Depends on the decision"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free 30-minute clarity call"}]},
           {"t": "p", "text": "Format and frequency depend on the decision and are agreed before we begin. I work with clients in the UK, Ireland, Greece and elsewhere in Europe."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
@@ -332,7 +334,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "Tell me the professional decision you are trying to make."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -347,7 +349,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "THERAPY VS COACHING", "h1": "Therapy or coaching?", "blocks": [
         {"t": "p", "text": "Both can begin with the same sentence: “I need to make a decision about work.” The useful question is what kind of problem the decision has become."},
         {"t": "p", "text": "Professional coaching is for a bounded professional issue that can remain primarily professional. Psychotherapy gives us more room when the apparent work problem is tied up with anxiety, self-worth, relationships, grief, shame or a pattern that keeps repeating despite good advice."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "When coaching is enough", "id": "when-coaching-is-enough", "blocks": [
@@ -384,7 +386,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you are not sure which category fits, describe the situation rather than choosing the service first."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -399,7 +401,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "MEN IN TECH & DEMANDING CAREERS", "h1": "Therapy for men in tech, business and demanding careers.", "blocks": [
         {"t": "p", "text": "You can be doing well professionally and still be sleeping badly, carrying work into dinner or spending days replaying one performance conversation."},
         {"t": "p", "text": "Tech, product and business are familiar contexts from more than 18 years working in them."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "The professional culture matters", "id": "the-professional-culture-matters", "blocks": [
@@ -437,7 +439,7 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free 30-minute clarity call"}]},
           {"t": "p", "text": "I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
@@ -450,7 +452,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If this sounds like the kind of context you want your therapist to understand, get in touch."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -465,7 +467,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "FOUNDERS & BUSINESS OWNERS", "h1": "Therapy for entrepreneurs, founders and business owners.", "blocks": [
         {"t": "p", "text": "Founding or owning a business makes it difficult to separate work from the rest of life. Money, staff, relationships and your own sense of identity can become tied to the same decisions."},
         {"t": "p", "text": "Therapy can help when that overlap starts creating problems in the company, at home or in the way you are functioning yourself."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Ownership changes the stakes", "id": "ownership-changes-the-stakes", "blocks": [
@@ -502,7 +504,7 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "Professional coaching", "href": "/professional-coaching/"}, {"label": "Individual psychotherapy", "href": "/individual-psychotherapy/"}, {"label": "Therapy vs coaching", "href": "/therapy-vs-coaching/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free 30-minute clarity call"}]},
           {"t": "p", "text": "I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
@@ -514,7 +516,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If the company is taking up more of your life than you want it to, book a consultation."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -529,7 +531,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "EXECUTIVES & LEADERS", "h1": "Psychotherapy for executives and senior leaders.", "blocks": [
         {"t": "p", "text": "Senior roles bring responsibility, limited places to speak candidly and decisions that can affect other people’s work and livelihoods."},
         {"t": "p", "text": "Much of the day may involve editing what you say, carrying information other people do not have and deciding what can reasonably be shared with whom. That can leave very few neutral places to think out loud."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "The job changes with seniority", "id": "the-job-changes-with-seniority", "blocks": [
@@ -567,7 +569,7 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free 30-minute clarity call"}]},
           {"t": "p", "text": "I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
@@ -580,7 +582,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "Book a consultation if you want a private place to think about what is going on."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -595,7 +597,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "GREEK-SPEAKING PSYCHOTHERAPY", "h1": "Online psychotherapy in Greek or English.", "blocks": [
         {"t": "p", "text": "This page is mainly for Greek-speaking people who want therapy with someone who shares the language and cultural context without needing it explained from scratch."},
         {"t": "p", "text": "It is especially relevant to Greeks living abroad, including people working in tech, startups and other international careers who may find that combination difficult to find where they live."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Shared language and culture", "id": "shared-language-and-culture", "blocks": [
@@ -615,7 +617,7 @@ window.SITE_COPY = {
           {"t": "p", "text": "Being Greek is context, not the subject you are required to talk about."}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "Greek or English"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "Greek or English"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free 30-minute clarity call"}]},
           {"t": "p", "text": "I work with clients across the UK and Europe, including Greece. Before ongoing psychotherapy begins, I confirm that I can professionally work with you based on where you are currently located and the rules that apply there."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
@@ -627,7 +629,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you would prefer to work in Greek, mention it when you contact me."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -642,7 +644,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "RELATIONSHIP PROBLEMS", "h1": "Individual psychotherapy for men dealing with relationship problems.", "blocks": [
         {"t": "p", "text": "The issue is often obvious. You keep having the same argument. Your partner says you have become distant. Separation has been mentioned. Or both of you have stopped talking properly because you already know how the conversation will go."},
         {"t": "p", "text": "You can work on your part even if your partner never comes to therapy."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Why people come", "id": "why-people-come", "blocks": [
@@ -675,7 +677,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If the relationship is the reason you are looking for therapy, say that directly."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -689,7 +691,7 @@ window.SITE_COPY = {
       "metaDescription": "Online psychotherapy for men dealing with separation, divorce, relationship endings, anger, grief, difficult decisions and keeping the rest of life functioning.",
       "hero": {"eyebrow": "SEPARATION & DIVORCE", "h1": "Psychotherapy during separation, divorce or the end of a long relationship.", "blocks": [
         {"t": "p", "text": "This period creates practical decisions at exactly the time concentration and judgement are already under pressure. There are conversations with a partner, children, family, work and sometimes lawyers. Your own position may change several times in the same week."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "The ending may still be unclear", "id": "the-ending-may-still-be-unclear", "blocks": [
@@ -727,7 +729,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you are going through a separation or divorce and want somewhere to think clearly, book a consultation."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -741,7 +743,7 @@ window.SITE_COPY = {
       "metaDescription": "Psychotherapy for when work, ambition, burnout or professional pressure is creating distance, conflict or resentment in a relationship.",
       "hero": {"eyebrow": "WORK & RELATIONSHIPS", "h1": "When work is starting to damage the relationship.", "blocks": [
         {"t": "p", "text": "Work can be genuinely demanding and still create a relationship problem when the same pressure repeatedly determines evenings, weekends and plans."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "How the shift happens", "id": "how-the-shift-happens", "blocks": [
@@ -784,7 +786,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If work has become a regular source of conflict at home, book a consultation."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -799,7 +801,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "BURNOUT & CAN’T SWITCH OFF", "h1": "Therapy for burnout when you can’t switch off.", "sub": "You can be burned out and still be performing well at work.", "blocks": [
         {"t": "p", "text": "A lot of people remain productive for a long time. The calendar is full, the work is getting done and nobody at the office thinks there is a crisis."},
         {"t": "p", "text": "Outside work, sleep gets worse, patience gets shorter and time off stops doing what it used to do."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Still performing", "id": "still-performing", "blocks": [
@@ -846,7 +848,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you have been functioning through exhaustion for a while, book a consultation."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -861,7 +863,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "CAREER CHANGE & DECISIONS", "h1": "Therapy for career change and difficult career decisions.", "blocks": [
         {"t": "p", "text": "You may have wanted to leave for a year, but the salary is good, your family is used to it and another chunk of equity vests in six months."},
         {"t": "p", "text": "Career decisions become more complicated when income, identity, family expectations and self-worth are tied to the same choice."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Leaving a good job", "id": "leaving-a-good-job", "blocks": [
@@ -898,7 +900,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you have been circling the same career decision for months, book a consultation."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -912,7 +914,7 @@ window.SITE_COPY = {
       "metaDescription": "Online psychotherapy for anxiety, overthinking, constant scenario-running and difficult decisions, particularly for men in tech and demanding careers.",
       "hero": {"eyebrow": "ANXIETY & OVERTHINKING", "h1": "Therapy for anxiety and overthinking.", "sub": "Overthinking can continue long after there is useful information left to gather.", "blocks": [
         {"t": "p", "text": "You research the decision until you feel calmer, then another objection appears and the analysis starts again. The problem is no longer a lack of information."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "What overthinking looks like", "id": "what-overthinking-looks-like", "blocks": [
@@ -947,7 +949,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If the same analysis keeps restarting, book a consultation."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -962,7 +964,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "ACHIEVEMENT, FAILURE & SELF-WORTH", "h1": "Psychotherapy for achievement, perfectionism and self-worth.", "blocks": [
         {"t": "p", "text": "A promotion, strong review or business win can feel good and still become the new normal very quickly."},
         {"t": "p", "text": "For some people, achievement gradually becomes one of the main ways they regulate how they feel about themselves."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Results and self-worth", "id": "results-and-self-worth", "blocks": [
@@ -1001,7 +1003,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If achievement has started carrying more psychological weight than you want it to, book a consultation."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -1015,7 +1017,7 @@ window.SITE_COPY = {
       "metaDescription": "A plain explanation of what psychotherapy with Aggelos Mouzakitis is like, what happens in sessions, how often therapy meets and whether it may fit.",
       "hero": {"eyebrow": "CONSIDERING THERAPY", "h1": "Considering therapy?", "blocks": [
         {"t": "p", "text": "You do not need to decide whether you “qualify” for therapy before contacting a therapist. The more useful question is whether it could help with something specific that is already affecting your life."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "How serious does it need to be?", "id": "how-serious-does-it-need-to-be", "blocks": [
@@ -1046,12 +1048,12 @@ window.SITE_COPY = {
         {"h2": "The first conversation", "id": "the-first-conversation", "blocks": [
           {"t": "p", "text": "Send a short note about what brings you here and where you are located."},
           {"t": "p", "text": "If the situation fits what I offer, we arrange an initial conversation. The relevant fee and any location-specific practicalities are made clear before ongoing work begins."},
-          {"t": "p", "text": "The first conversation is a free introductory call, usually between 30 minutes and an hour, and ongoing sessions are €100 or £90 each."},
+          {"t": "p", "text": "The first conversation is a free 30-minute clarity call, and ongoing sessions are €100 or £90 each."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you want to find out whether this fits, book a consultation."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -1090,7 +1092,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Fees", "id": "fees", "blocks": [
           {"t": "sub", "h3": "How much does it cost?", "blocks": [{"t": "p", "text": "Standard sessions are €100 or £90. Individual psychotherapy and standard couples sessions usually last 50–60 minutes. The longer couples session has a separately agreed fee. Professional coaching is €100 or £90 per session, with its format agreed before starting."}, {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}]},
-          {"t": "sub", "h3": "Is the first conversation free?", "blocks": [{"t": "p", "text": "Yes. The first conversation is a free introductory call, usually between 30 minutes and an hour."}]}
+          {"t": "sub", "h3": "Is the first conversation free?", "blocks": [{"t": "p", "text": "Yes. The first conversation is a free 30-minute clarity call."}]}
         ]},
         {"h2": "Starting", "id": "starting", "blocks": [
           {"t": "sub", "h3": "What happens when I contact you?", "blocks": [{"t": "p", "text": "Send a short description of what brings you here and where you are currently located. I read it myself. If the situation falls within what I offer, we arrange an initial conversation."}]},
@@ -1121,7 +1123,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you have a question that is specific to your situation, ask it directly."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -1155,7 +1157,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If the way I work sounds right for you, you can read more about therapy or get in touch."},
-          {"t": "ctas", "items": [{"label": "Considering therapy", "href": "/considering-therapy/"}, {"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Considering therapy", "href": "/considering-therapy/"}, {"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -1185,7 +1187,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Results", "id": "results", "blocks": [
           {"t": "p", "text": "There is no ideal score. The result gives you a more precise description of the issue and points you towards relevant reading or a service that may fit."},
-          {"t": "ctas", "items": [{"label": "Considering therapy", "href": "/considering-therapy/"}, {"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Considering therapy", "href": "/considering-therapy/"}, {"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -1222,7 +1224,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you have already spent a long time thinking about something and want to talk about it directly, get in touch."},
-          {"t": "ctas", "items": [{"label": "Considering therapy", "href": "/considering-therapy/"}, {"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Considering therapy", "href": "/considering-therapy/"}, {"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -1232,23 +1234,21 @@ window.SITE_COPY = {
       "name": "Contact",
       "url": "/contact/",
       "type": "contact",
-      "seoTitle": "Contact Aggelos Mouzakitis | Book a Consultation",
-      "metaDescription": "Contact Aggelos Mouzakitis about individual psychotherapy, couples therapy or professional coaching. Online sessions in Greek or English.",
-      "hero": {"eyebrow": "CONTACT", "h1": "Tell me briefly what brings you here.", "blocks": [
-        {"t": "p", "text": "Include where you are currently located and whether you are asking about individual psychotherapy, couples therapy, professional coaching or are not sure yet."},
-        {"t": "p", "text": "Enquiries are reviewed personally."}
+      "seoTitle": "Free 30-Minute Clarity Call | Aggelos Mouzakitis",
+      "metaDescription": "A free 30-minute clarity call to talk through something you’re stuck with, get an honest outside perspective and consider next steps. No obligation to continue.",
+      "hero": {"eyebrow": "CONTACT", "h1": "Start with what’s been on your mind.", "sub": "Free · 30 minutes · Online · Confidential", "blocks": [
+        {"t": "p", "text": "30 minutes on something you’re stuck with. I’ll give you my honest take and suggest next steps where I can. You can leave it at one call."},
+        {"t": "meta", "text": "If you’d like, we can record the call and I’ll send you a short written summary."}
       ]},
       "sections": [
-        {"h2": "What happens next", "id": "what-happens-next", "blocks": [
-          {"t": "p", "text": "If the situation falls within what I offer, we arrange an initial conversation. Before ongoing work begins, the fee, session format and any location-specific practicalities are made clear."},
-          {"t": "p", "text": "If another therapist, doctor or specialist service appears more appropriate, I will say so."}
-        ]},
-        {"h2": "Privacy", "id": "privacy", "blocks": [
-          {"t": "p", "text": "Please avoid sending highly sensitive medical or personal information through the first contact form."},
-          {"t": "ctas", "items": [{"label": "Confidentiality", "href": "/confidentiality/"}, {"label": "FAQ", "href": "/faq/"}]}
+        {"h2": "Feedback from GrowthMentor mentoring calls", "id": "feedback-from-growthmentor-mentoring-calls", "blocks": [
+          {"t": "p", "text": "5.00/5 · 73 reviews on GrowthMentor"},
+          {"t": "quote", "text": "“Calm, honest and practical. … gave me clear advice on next steps.”", "cite": "Bogdan Liutic · 28 October 2026"},
+          {"t": "quote", "text": "“He immediately identified the broader patterns behind my professional challenges…”", "cite": "Orit Mutznik · 16 October 2026"},
+          {"t": "ctas", "items": [{"label": "Read the reviews on GrowthMentor", "href": "https://www.growthmentor.com/mentors/aggelos-m#reviews-section"}]}
         ]}
       ],
-      "form": {"fields": [{"t": "field", "label": "Name"}, {"t": "field", "label": "Email"}, {"t": "field", "label": "Current location / country"}, {"t": "field", "label": "What would you like help with?"}, {"t": "field", "label": "Service", "options": ["Individual Psychotherapy", "Couples Therapy", "Professional Coaching", "Not sure"]}], "submit": {"t": "submit", "label": "Send enquiry"}}
+      "form": {"fields": [{"t": "field", "key": "name", "label": "Name"}, {"t": "field", "key": "email", "label": "Email"}, {"t": "field", "key": "location", "label": "Country you’ll be in for the call"}, {"t": "field", "key": "service", "label": "Service", "hint": "(optional)", "options": [{"label": "Not sure", "value": "Not sure"}, {"label": "Individual psychotherapy", "value": "Individual Psychotherapy"}, {"label": "Couples therapy", "value": "Couples Therapy"}, {"label": "Professional coaching", "value": "Professional Coaching"}]}, {"t": "field", "key": "message", "label": "What would you like to talk about?", "placeholder": "A sentence or two is enough. You don’t need to have it all worked out."}], "submit": {"t": "submit", "label": "Request a free clarity call"}, "text": {"sending": "Sending…", "success": "Thanks for getting in touch.", "successMessage": "I’ll read your message personally and email you to arrange a time for our free 30-minute clarity call.", "error": "Your message couldn’t be sent. Please try again.", "emailLink": "You can also email me directly."}, "blocks": [{"t": "p", "text": "I’ll read your message personally and email you to arrange a time."}, {"t": "p", "text": "Please keep sensitive personal or medical details out of this first message."}, {"t": "ctas", "items": [{"label": "Confidentiality", "href": "/confidentiality/"}]}]}
     },
     "confidentiality": {
       "id": "confidentiality",
@@ -1267,7 +1267,8 @@ window.SITE_COPY = {
         ]},
         {"h2": "Records and communication", "id": "records-and-communication", "blocks": [
           {"t": "p", "text": "Practical communication, records and information collected through the website are handled according to the privacy arrangements that apply to the practice."},
-          {"t": "p", "text": "The first contact form is for initial enquiries. Please avoid including highly sensitive medical or personal information that is not needed to arrange the first conversation."}
+          {"t": "p", "text": "The first contact form is for initial enquiries. Please avoid including highly sensitive medical or personal information that is not needed to arrange the first conversation."},
+          {"t": "p", "text": "Recording a call is optional. We only record if you agree beforehand. Before recording, we’ll agree how the recording and written summary will be stored, shared and deleted. You can have the call without being recorded."}
         ]},
         {"h2": "Limits of confidentiality", "id": "limits-of-confidentiality", "blocks": [
           {"t": "p", "text": "Specific limits depend on professional duties and the jurisdiction relevant to the work. Situations involving immediate risk, safeguarding or legal obligations may need to be handled differently from ordinary therapeutic material."}
@@ -1341,7 +1342,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "THERAPY FOR MEN", "h1": "Online therapy for men.", "blocks": [
         {"t": "p", "text": "You may handle difficult conversations at work and still spend weeks putting one off with your partner. Each evening, there is another reason it can wait."},
         {"t": "p", "text": "I am a BACP-registered psychotherapist with a previous career in product and growth. Sessions are online, in English or Greek."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Agreeing when you wanted to say no", "id": "agreeing-when-you-wanted-to-say-no", "blocks": [
@@ -1364,7 +1365,7 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "How individual psychotherapy works", "href": "/individual-psychotherapy/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free 30-minute clarity call"}]},
           {"t": "p", "text": "I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
@@ -1376,7 +1377,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "Tell me briefly what has been happening and where you are currently located."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -1391,7 +1392,7 @@ window.SITE_COPY = {
       "hero": {"eyebrow": "SOFTWARE ENGINEERS", "h1": "Online therapy for software engineers.", "blocks": [
         {"t": "p", "text": "The incident is resolved, but you keep the channel open. When your partner asks about the weekend, you realise you have missed most of the conversation."},
         {"t": "p", "text": "I am a BACP-registered psychotherapist with a previous career in product and growth. I offer online therapy in English or Greek."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Checking after your shift ends", "id": "checking-after-your-shift-ends", "blocks": [
@@ -1413,7 +1414,7 @@ window.SITE_COPY = {
           {"t": "ctas", "items": [{"label": "About me", "href": "/about/"}]}
         ]},
         {"h2": "Practicalities", "id": "practicalities", "blocks": [
-          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free, usually 30 minutes to an hour"}]},
+          {"t": "pairs", "items": [{"a": "Format", "b": "Online by video"}, {"a": "Sessions", "b": "Usually 50–60 minutes"}, {"a": "Frequency", "b": "Normally weekly at first"}, {"a": "Languages", "b": "English or Greek"}, {"a": "Fee", "b": "€100 or £90 per session"}, {"a": "Introductory call", "b": "Free 30-minute clarity call"}]},
           {"t": "p", "text": "I confirm whether I can work with you based on your location and circumstances before ongoing therapy begins."},
           {"t": "ctas", "items": [{"label": "Fees and practicalities", "href": "/fees-and-practicalities/"}]}
         ]},
@@ -1425,7 +1426,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If work keeps occupying more of your life than you want it to, tell me what has been happening."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     },
@@ -1438,8 +1439,8 @@ window.SITE_COPY = {
       "seoTitle": "Therapy Fees & Practicalities | Aggelos Mouzakitis",
       "metaDescription": "Online therapy costs €100 or £90 for a standard session. Session length, frequency, languages, the free introductory call and longer couples sessions.",
       "hero": {"eyebrow": "FEES & PRACTICALITIES", "h1": "Fees and practicalities.", "blocks": [
-        {"t": "p", "text": "Individual psychotherapy sessions cost €100 or £90 and usually last 50–60 minutes. The introductory call is free, usually between 30 minutes and an hour."},
-        {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+        {"t": "p", "text": "Individual psychotherapy sessions cost €100 or £90 and usually last 50–60 minutes. The first conversation is a free 30-minute clarity call."},
+        {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
       ]},
       "sections": [
         {"h2": "Fees", "id": "fees", "blocks": [
@@ -1473,7 +1474,7 @@ window.SITE_COPY = {
         ]},
         {"h2": "Contact", "id": "contact", "blocks": [
           {"t": "p", "text": "If you have a practical question that is specific to your situation, include it in your message."},
-          {"t": "ctas", "items": [{"label": "Book a consultation", "href": "/contact/"}]}
+          {"t": "ctas", "items": [{"label": "Book a free clarity call", "href": "/contact/"}]}
         ]}
       ]
     }

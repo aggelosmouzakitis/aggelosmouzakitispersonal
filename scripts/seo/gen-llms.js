@@ -70,7 +70,7 @@ and situations.
 - Fees: €100 or £90 per standard session (individual psychotherapy, a standard
   50–60-minute couples session or professional coaching). The fee for the
   longer couples session is agreed separately before booking.
-- The first conversation is a free introductory call, usually between 30 minutes and an hour.
+- The first conversation is a free 30-minute clarity call.
 - Clients are across the UK and Europe, including Ireland and Greece, with the UK as the main focus.
 - Professional rules depend on where both therapist and client are located;
   eligibility is confirmed before ongoing therapy begins.

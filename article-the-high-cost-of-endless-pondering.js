@@ -282,7 +282,7 @@ window.SITE_ARTICLE_PAGES["the-high-cost-of-endless-pondering"] = {
       "label": "Considering therapy",
       "href": "/considering-therapy/"
     }, {
-      "label": "Book a consultation",
+      "label": "Book a free clarity call",
       "href": "/contact/"
     }]
   },

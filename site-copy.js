@@ -6,7 +6,9 @@
 // rather than editing it here. Only typography differs from the source
 // (typographic apostrophes; → drawn by the UI).
 //
-// Shape: pages[id] = { url, type, seoTitle, metaDescription, note?, hero, sections }
+// Shape: pages[id] = { url, type, seoTitle, metaDescription, note?, hero, sections, form? }
+//   form     = { fields: [{ key, label, hint?, placeholder?, options? }], submit, text, blocks }
+//              (/contact/ only: its enquiry form, the states' wording in text)
 //   hero     = { eyebrow, h1, sub?, blocks }
 //   sections = [{ h2, id, eyebrow?, blocks }]
 //   blocks   = p | lines | list | ctas | related | meta | pairs | quote | question | table
@@ -33,7 +35,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }, {
             "label": "Individual psychotherapy",
@@ -245,7 +247,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }, {
@@ -361,7 +363,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -384,7 +386,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -458,11 +460,11 @@ window.SITE_COPY = {
           "text": "Send a short note about what brings you here and where you are currently located. If the situation falls within what I offer, we arrange an initial conversation."
         }, {
           "t": "p",
-          "text": "The first conversation is a free introductory call, usually between 30 minutes and an hour. Standard sessions after that are €100 or £90 each."
+          "text": "The first conversation is a free 30-minute clarity call. Standard sessions after that are €100 or £90 each."
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }, {
             "label": "Fees and practicalities",
@@ -488,7 +490,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -599,7 +601,7 @@ window.SITE_COPY = {
             "b": "€100 or £90 per session"
           }, {
             "a": "Introductory call",
-            "b": "Free, usually 30 minutes to an hour"
+            "b": "Free 30-minute clarity call"
           }]
         }, {
           "t": "p",
@@ -665,7 +667,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -691,7 +693,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -796,7 +798,7 @@ window.SITE_COPY = {
             "b": "€100 or £90 per standard session"
           }, {
             "a": "Introductory call",
-            "b": "Free, usually 30 minutes to an hour"
+            "b": "Free 30-minute clarity call"
           }]
         }, {
           "t": "p",
@@ -852,7 +854,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -875,7 +877,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -979,7 +981,7 @@ window.SITE_COPY = {
             "b": "€100 or £90 per session"
           }, {
             "a": "Introductory call",
-            "b": "Free, usually 30 minutes to an hour"
+            "b": "Free 30-minute clarity call"
           }]
         }, {
           "t": "p",
@@ -1025,7 +1027,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -1051,7 +1053,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -1166,7 +1168,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -1192,7 +1194,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -1334,7 +1336,7 @@ window.SITE_COPY = {
             "b": "€100 or £90 per session"
           }, {
             "a": "Introductory call",
-            "b": "Free, usually 30 minutes to an hour"
+            "b": "Free 30-minute clarity call"
           }]
         }, {
           "t": "p",
@@ -1394,7 +1396,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -1420,7 +1422,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -1553,7 +1555,7 @@ window.SITE_COPY = {
             "b": "€100 or £90 per session"
           }, {
             "a": "Introductory call",
-            "b": "Free, usually 30 minutes to an hour"
+            "b": "Free 30-minute clarity call"
           }]
         }, {
           "t": "p",
@@ -1606,7 +1608,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -1632,7 +1634,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -1762,7 +1764,7 @@ window.SITE_COPY = {
             "b": "€100 or £90 per session"
           }, {
             "a": "Introductory call",
-            "b": "Free, usually 30 minutes to an hour"
+            "b": "Free 30-minute clarity call"
           }]
         }, {
           "t": "p",
@@ -1822,7 +1824,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -1848,7 +1850,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -1915,7 +1917,7 @@ window.SITE_COPY = {
             "b": "€100 or £90 per session"
           }, {
             "a": "Introductory call",
-            "b": "Free, usually 30 minutes to an hour"
+            "b": "Free 30-minute clarity call"
           }]
         }, {
           "t": "p",
@@ -1968,7 +1970,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -1994,7 +1996,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2092,7 +2094,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2115,7 +2117,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2220,7 +2222,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2243,7 +2245,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2376,7 +2378,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2403,7 +2405,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2556,7 +2558,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2582,7 +2584,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2690,7 +2692,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2714,7 +2716,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2810,7 +2812,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2836,7 +2838,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2948,7 +2950,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -2971,7 +2973,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -3050,7 +3052,7 @@ window.SITE_COPY = {
           "text": "If the situation fits what I offer, we arrange an initial conversation. The relevant fee and any location-specific practicalities are made clear before ongoing work begins."
         }, {
           "t": "p",
-          "text": "The first conversation is a free introductory call, usually between 30 minutes and an hour, and ongoing sessions are €100 or £90 each."
+          "text": "The first conversation is a free 30-minute clarity call, and ongoing sessions are €100 or £90 each."
         }, {
           "t": "ctas",
           "items": [{
@@ -3067,7 +3069,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -3241,7 +3243,7 @@ window.SITE_COPY = {
           "h3": "Is the first conversation free?",
           "blocks": [{
             "t": "p",
-            "text": "Yes. The first conversation is a free introductory call, usually between 30 minutes and an hour."
+            "text": "Yes. The first conversation is a free 30-minute clarity call."
           }]
         }]
       }, {
@@ -3402,7 +3404,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -3487,7 +3489,7 @@ window.SITE_COPY = {
             "label": "Considering therapy",
             "href": "/considering-therapy/"
           }, {
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -3565,7 +3567,7 @@ window.SITE_COPY = {
             "label": "Considering therapy",
             "href": "/considering-therapy/"
           }, {
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -3775,7 +3777,7 @@ window.SITE_COPY = {
             "label": "Considering therapy",
             "href": "/considering-therapy/"
           }, {
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -3787,68 +3789,103 @@ window.SITE_COPY = {
       "name": "Contact",
       "url": "/contact/",
       "type": "contact",
-      "seoTitle": "Contact Aggelos Mouzakitis | Book a Consultation",
-      "metaDescription": "Contact Aggelos Mouzakitis about individual psychotherapy, couples therapy or professional coaching. Online sessions in Greek or English.",
+      "seoTitle": "Free 30-Minute Clarity Call | Aggelos Mouzakitis",
+      "metaDescription": "A free 30-minute clarity call to talk through something you’re stuck with, get an honest outside perspective and consider next steps. No obligation to continue.",
       "hero": {
         "eyebrow": "CONTACT",
-        "h1": "Tell me briefly what brings you here.",
+        "h1": "Start with what’s been on your mind.",
+        "sub": "Free · 30 minutes · Online · Confidential",
         "blocks": [{
           "t": "p",
-          "text": "Include where you are currently located and whether you are asking about individual psychotherapy, couples therapy, professional coaching or are not sure yet."
+          "text": "30 minutes on something you’re stuck with. I’ll give you my honest take and suggest next steps where I can. You can leave it at one call."
         }, {
-          "t": "p",
-          "text": "Enquiries are reviewed personally."
+          "t": "meta",
+          "text": "If you’d like, we can record the call and I’ll send you a short written summary."
         }]
       },
       "sections": [{
-        "h2": "What happens next",
-        "id": "what-happens-next",
+        "h2": "Feedback from GrowthMentor mentoring calls",
+        "id": "feedback-from-growthmentor-mentoring-calls",
         "blocks": [{
           "t": "p",
-          "text": "If the situation falls within what I offer, we arrange an initial conversation. Before ongoing work begins, the fee, session format and any location-specific practicalities are made clear."
+          "text": "5.00/5 · 73 reviews on GrowthMentor"
         }, {
-          "t": "p",
-          "text": "If another therapist, doctor or specialist service appears more appropriate, I will say so."
-        }]
-      }, {
-        "h2": "Privacy",
-        "id": "privacy",
-        "blocks": [{
-          "t": "p",
-          "text": "Please avoid sending highly sensitive medical or personal information through the first contact form."
+          "t": "quote",
+          "text": "“Calm, honest and practical. … gave me clear advice on next steps.”",
+          "cite": "Bogdan Liutic · 28 October 2026"
+        }, {
+          "t": "quote",
+          "text": "“He immediately identified the broader patterns behind my professional challenges…”",
+          "cite": "Orit Mutznik · 16 October 2026"
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Confidentiality",
-            "href": "/confidentiality/"
-          }, {
-            "label": "FAQ",
-            "href": "/faq/"
+            "label": "Read the reviews on GrowthMentor",
+            "href": "https://www.growthmentor.com/mentors/aggelos-m#reviews-section"
           }]
         }]
       }],
       "form": {
         "fields": [{
           "t": "field",
+          "key": "name",
           "label": "Name"
         }, {
           "t": "field",
+          "key": "email",
           "label": "Email"
         }, {
           "t": "field",
-          "label": "Current location / country"
+          "key": "location",
+          "label": "Country you’ll be in for the call"
         }, {
           "t": "field",
-          "label": "What would you like help with?"
-        }, {
-          "t": "field",
+          "key": "service",
           "label": "Service",
-          "options": ["Individual Psychotherapy", "Couples Therapy", "Professional Coaching", "Not sure"]
+          "hint": "(optional)",
+          "options": [{
+            "label": "Not sure",
+            "value": "Not sure"
+          }, {
+            "label": "Individual psychotherapy",
+            "value": "Individual Psychotherapy"
+          }, {
+            "label": "Couples therapy",
+            "value": "Couples Therapy"
+          }, {
+            "label": "Professional coaching",
+            "value": "Professional Coaching"
+          }]
+        }, {
+          "t": "field",
+          "key": "message",
+          "label": "What would you like to talk about?",
+          "placeholder": "A sentence or two is enough. You don’t need to have it all worked out."
         }],
         "submit": {
           "t": "submit",
-          "label": "Send enquiry"
-        }
+          "label": "Request a free clarity call"
+        },
+        "text": {
+          "sending": "Sending…",
+          "success": "Thanks for getting in touch.",
+          "successMessage": "I’ll read your message personally and email you to arrange a time for our free 30-minute clarity call.",
+          "error": "Your message couldn’t be sent. Please try again.",
+          "emailLink": "You can also email me directly."
+        },
+        "blocks": [{
+          "t": "p",
+          "text": "I’ll read your message personally and email you to arrange a time."
+        }, {
+          "t": "p",
+          "text": "Please keep sensitive personal or medical details out of this first message."
+        }, {
+          "t": "ctas",
+          "items": [{
+            "label": "Confidentiality",
+            "href": "/confidentiality/"
+          }]
+        }]
       }
     },
     "confidentiality": {
@@ -3883,6 +3920,9 @@ window.SITE_COPY = {
         }, {
           "t": "p",
           "text": "The first contact form is for initial enquiries. Please avoid including highly sensitive medical or personal information that is not needed to arrange the first conversation."
+        }, {
+          "t": "p",
+          "text": "Recording a call is optional. We only record if you agree beforehand. Before recording, we’ll agree how the recording and written summary will be stored, shared and deleted. You can have the call without being recorded."
         }]
       }, {
         "h2": "Limits of confidentiality",
@@ -4136,7 +4176,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -4224,7 +4264,7 @@ window.SITE_COPY = {
             "b": "€100 or £90 per session"
           }, {
             "a": "Introductory call",
-            "b": "Free, usually 30 minutes to an hour"
+            "b": "Free 30-minute clarity call"
           }]
         }, {
           "t": "p",
@@ -4277,7 +4317,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -4303,7 +4343,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -4388,7 +4428,7 @@ window.SITE_COPY = {
             "b": "€100 or £90 per session"
           }, {
             "a": "Introductory call",
-            "b": "Free, usually 30 minutes to an hour"
+            "b": "Free 30-minute clarity call"
           }]
         }, {
           "t": "p",
@@ -4441,7 +4481,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -4460,11 +4500,11 @@ window.SITE_COPY = {
         "h1": "Fees and practicalities.",
         "blocks": [{
           "t": "p",
-          "text": "Individual psychotherapy sessions cost €100 or £90 and usually last 50–60 minutes. The introductory call is free, usually between 30 minutes and an hour."
+          "text": "Individual psychotherapy sessions cost €100 or £90 and usually last 50–60 minutes. The first conversation is a free 30-minute clarity call."
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]
@@ -4570,7 +4610,7 @@ window.SITE_COPY = {
         }, {
           "t": "ctas",
           "items": [{
-            "label": "Book a consultation",
+            "label": "Book a free clarity call",
             "href": "/contact/"
           }]
         }]

@@ -169,7 +169,7 @@
       h2: 'If this has been going on for a while',
       body: ['You can keep reading about the area that came up, or talk about the situation directly.', 'You do not need to decide in advance whether the problem is “work”, “personal” or psychological. Start with what is actually happening.'],
       primary: {
-        label: 'Book a consultation',
+        label: 'Book a free clarity call',
         href: '/contact/'
       },
       secondary: 'Read the relevant page'
@@ -394,7 +394,7 @@
       secondary_related_page_title: pages[1] ? pages[1].title : '',
       secondary_related_page_url: pages[1] ? ORIGIN + pages[1].href : '',
       consultation_intro: low ? '' : 'If you would rather talk about what is going on directly:',
-      consultation_label: low ? '' : 'Book a consultation:',
+      consultation_label: low ? '' : 'Book a free clarity call:',
       consultation_url: low ? '' : ORIGIN + COPY.close.primary.href,
       source_page: SOURCE
     };

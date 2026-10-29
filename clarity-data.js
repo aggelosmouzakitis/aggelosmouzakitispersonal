@@ -1129,7 +1129,7 @@ window.CLARITY_DATA['quit-your-job'] = {
       label: 'Career Change & Decisions',
       href: '/career-transition-therapy/'
     }, {
-      label: 'Book a consultation',
+      label: 'Book a free clarity call',
       href: '/contact/',
       primary: true
     }]
@@ -2295,7 +2295,7 @@ window.CLARITY_DATA['burned-out'] = {
       label: 'Burnout & Can\u2019t Switch Off',
       href: '/executive-burnout-therapy/'
     }, {
-      label: 'Book a consultation',
+      label: 'Book a free clarity call',
       href: '/contact/',
       primary: true
     }]

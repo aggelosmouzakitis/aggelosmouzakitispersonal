@@ -196,7 +196,7 @@ function withSeparators(items) {
 
 // ─── HEADER ──────────────────────────────────────────────────────────────────
 // Desktop (≥1080px): Home · About · Services ▾ · Resources ▾ · FAQ and the
-// outlined Book a consultation. Services and Resources are disclosure buttons
+// outlined Book a free clarity call. Services and Resources are disclosure buttons
 // (aria-expanded/aria-controls) over a bone panel; Escape closes and returns
 // focus to the button, as do a click outside and focus leaving the nav.
 // Below 1080px one Menu button opens a bone panel: Services and Resources as
@@ -204,9 +204,12 @@ function withSeparators(items) {
 // `section` names the section a page sits in without being its page: an
 // article at its own URL sits on the blog (/blog/), so its group reads as
 // current and its link carries aria-current="true".
+// The call to action goes to /contact/; on /contact/ itself, to its form
+// (#enquiry), closing the mobile menu on the way.
 function SiteHeader({ section }) {
   const nav = NAV_DATA.nav;
   const cur = currentPath();
+  const cta = nav.cta ? Object.assign({}, nav.cta, cur === CONTACT_URL ? { href: '#enquiry' } : null) : null;
   const [open, setOpen] = useState(null);
   const [menu, setMenu] = useState(false);
   const [macc, setMacc] = useState(null);
@@ -284,14 +287,14 @@ function SiteHeader({ section }) {
             it.label, ce('span', { className: 'mmenu__sign', 'aria-hidden': 'true' }, expanded ? '−' : '+')),
           ce('div', { id: 'm-' + id, className: 'mmenu__links', hidden: !expanded }, links(it.items, 'm')));
       }),
-      nav.cta ? ce('a', { href: nav.cta.href, className: 'mmenu__cta' }, nav.cta.label, ce('span', { 'aria-hidden': 'true' }, '→')) : null));
+      cta ? ce('a', { href: cta.href, className: 'mmenu__cta', onClick: () => setMenu(false) }, cta.label, ce('span', { 'aria-hidden': 'true' }, '→')) : null));
 
   return ce('header', { className: 'hdr', ref: rootRef },
     ce('a', { className: 'skip-link', href: '#main' }, 'Skip to content'),
     ce('div', { className: 'wrap hdr__in' },
       ce('a', { href: '/', className: 'hdr__brand', 'aria-label': 'Aggelos Mouzakitis, home' }, 'Aggelos', ce('span', null, '.')),
       desktop,
-      nav.cta ? ce('a', { href: nav.cta.href, className: 'hdr__cta' }, nav.cta.label, ce('span', { 'aria-hidden': 'true' }, '→')) : null,
+      cta ? ce('a', { href: cta.href, className: 'hdr__cta' }, cta.label, ce('span', { 'aria-hidden': 'true' }, '→')) : null,
       ce('button', { type: 'button', className: 'hdr__menu-btn', 'aria-expanded': menu ? 'true' : 'false', 'aria-controls': 'site-menu',
         ref: menuBtn, onClick: () => setMenu(!menu) },
         menu ? 'Close' : 'Menu',
@@ -317,7 +320,7 @@ function UdMark() {
 // primary one.
 function CloseBand({ label, text, actions, aside }) {
   const long = text && text.length > 110;
-  return ce('section', { className: 'band close on-dark', 'aria-labelledby': label ? 'close-h' : undefined, 'aria-label': label ? undefined : 'Book a consultation' },
+  return ce('section', { className: 'band close on-dark', 'aria-labelledby': label ? 'close-h' : undefined, 'aria-label': label ? undefined : 'Book a free clarity call' },
     ce('div', { className: 'read close__in' },
       label ? ce('h2', { id: 'close-h', className: 'close__label' }, label) : null,
       text ? ce('p', { className: 'close__text' + (long ? ' close__text--long' : '') }, text) : null,
@@ -367,7 +370,7 @@ function SiteFooterX() {
 // For pages that render their own content: the two free tools (form: the
 // centred reading container, no close) and /ask-me-anything/el (wide).
 function LegacyShell({ children, form, cta = true }) {
-  const cta0 = NAV_DATA.nav.cta || { label: 'Book a consultation', href: CONTACT_URL };
+  const cta0 = NAV_DATA.nav.cta || { label: 'Book a free clarity call', href: CONTACT_URL };
   return ce(React.Fragment, null,
     ce(ChromeStyles),
     ce(SiteHeader),

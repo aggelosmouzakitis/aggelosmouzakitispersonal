@@ -245,7 +245,7 @@ window.SITE_ARTICLE_PAGES["the-loneliness-and-emotional-pressure-that-founders-e
       "label": "Considering therapy",
       "href": "/considering-therapy/"
     }, {
-      "label": "Book a consultation",
+      "label": "Book a free clarity call",
       "href": "/contact/"
     }]
   },
