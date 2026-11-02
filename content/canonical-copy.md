@@ -1895,6 +1895,45 @@ For a fuller explanation of what therapy itself is like, see **Considering Thera
 
 **Considering therapy →**
 
+## Questions you might not ask out loud.
+
+### Can I swear in therapy?
+Fuck yes. You don't need to edit yourself for my benefit.
+
+### Can I ask you personal questions?
+Absolutely. You can ask me anything.
+
+I won't necessarily answer everything, but I'll happily explain why.
+
+### Do I have to talk about my childhood?
+Nope.
+
+We start with what's happening now. If we keep running into something that seems connected to your past, I'll get curious and suggest we explore it.
+
+We're not going digging through your childhood just because that's what therapists supposedly do.
+
+### Do you ever get bored talking to clients?
+I don't find people boring. But I'm human. I get tired sometimes, I drink coffee, and I'm not always at 100%.
+
+Being present is part of my job. If I can't give a session the attention it deserves, I won't pretend otherwise.
+
+### Do you actually give a shit, or is this just a paycheck?
+Both, I guess?
+
+You pay for my time and expertise. Giving a shit is included.
+
+### Are you going to make me take psychiatric medication?
+Nope. I'm a psychotherapist, not a prescribing clinician.
+
+If I think medication might be worth discussing with a doctor or psychiatrist, I'll tell you. What you decide with them is up to you.
+
+### Would you judge me if I told you something fucked up?
+I might challenge something you've done. That's different from judging you as a person.
+
+I'm interested in understanding what happened and why, not deciding whether you're a good or bad person.
+
+And if you're worried I'll judge you, tell me that too.
+
 ## Services
 
 ### What services do you offer?
@@ -1985,9 +2024,6 @@ Sometimes. I also make observations and ask direct questions. Important life dec
 
 ### Are sessions structured?
 There is enough continuity that we should both understand what we are working on. I don't run every client through a standard programme.
-
-### Will we talk about childhood?
-If it helps explain something active in the present. We start with the issue that brought you in.
 
 ### Can I talk about work in psychotherapy?
 Yes. Work is part of life.

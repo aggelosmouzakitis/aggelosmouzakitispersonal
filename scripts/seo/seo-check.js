@@ -57,7 +57,9 @@ const RETIRED_LABELS = [
   /business\s*&\s*career advisor/i, /\bbusiness advisor\b/i, /private business & career advisor/i,
   /\bfree assessment\b/i, /find your focus area/i, /starting diagnostic/i,
   /strategy or execution/i, /\bbusiness constraint\b/i, /become a solopreneur/i,
-  /wtf friday/i, /ask me something/i, /ask me anything/i, /licensed psychotherapist/i,
+  // "Ask me anything" the retired label; the sentence "You can ask me
+  // anything." (/faq/, "Can I ask you personal questions?") is plain prose.
+  /wtf friday/i, /ask me something/i, /(?<!can )ask me anything/i, /licensed psychotherapist/i,
   /working globally/i, /\bworldwide\b/i,
   /psychotherapy \/ decision coaching/i, /career strategy consulting/i,
   /solo business growth consulting/i,

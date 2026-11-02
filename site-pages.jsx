@@ -451,9 +451,11 @@
   }
 
   // Questions and answers: one accordion row each; the page's first is open.
-  function FaqSection({ s, ctx, openFirst }) {
+  // A featured set (FAQ_FEATURED) is the same accordion on the bone-deep card.
+  const FAQ_FEATURED = { faq: 'questions-you-might-not-ask-out-loud' };
+  function FaqSection({ s, ctx, openFirst, featured }) {
     return e('section', { className: 'sec', id: s.id, 'aria-labelledby': s.id + '-h' },
-      e('div', { className: 'read' },
+      e('div', { className: 'read' + (featured ? ' faq-feature' : '') },
         e('h2', { className: 'h2', id: s.id + '-h' }, s.h2),
         e('div', { className: 'faq' },
           s.blocks.filter((b) => b.t === 'sub').map((q, i) => e('details', { key: q.h3, open: openFirst && i === 0 ? true : undefined },
@@ -640,7 +642,7 @@
     if (isFaq(s)) {
       const openFirst = !state.opened;
       state.opened = true;
-      return e(FaqSection, { s, ctx, openFirst });
+      return e(FaqSection, { s, ctx, openFirst, featured: FAQ_FEATURED[p.id] === s.id });
     }
     const roles = ROLES[p.id] && ROLES[p.id][s.id];
     return e(ReadSection, { s, ctx, roles, axis: AXIS[p.id] && AXIS[p.id][s.id] });
@@ -1843,6 +1845,11 @@
 .faq details[open] .faq__sign{transform:rotate(45deg)}
 .faq__a{padding:0 0 24px}
 .faq__a .p{font-size:clamp(17px,calc(16.4px + .1vw),17.5px);line-height:1.65}
+/* The featured set (/faq/ "Questions you might not ask out loud."): the card
+   of .tool--featured, reaching --feat-bleed past the reading axis; on its
+   bone-deep ground the green text is the pressed green (see .sage). */
+.read.faq-feature{--feat-bleed:min(24px,calc(var(--gutter) - 8px));width:min(calc(var(--read-max) + 2 * var(--feat-bleed)),calc(100% - 2 * var(--gutter) + 2 * var(--feat-bleed)));padding:clamp(28px,4vw,44px) var(--feat-bleed) clamp(12px,2vw,20px);background:var(--bone-deep);border-top:3px solid var(--green)}
+.faq-feature .faq summary:hover h3,.faq-feature .faq__sign{color:var(--green-pressed)}
 
 /* Continue with */
 .continue{padding-top:clamp(56px,5vw,72px)}

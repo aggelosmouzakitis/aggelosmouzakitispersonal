@@ -3098,6 +3098,83 @@ window.SITE_COPY = {
         }]
       },
       "sections": [{
+        "h2": "Questions you might not ask out loud.",
+        "id": "questions-you-might-not-ask-out-loud",
+        "blocks": [{
+          "t": "sub",
+          "h3": "Can I swear in therapy?",
+          "blocks": [{
+            "t": "p",
+            "text": "Fuck yes. You don’t need to edit yourself for my benefit."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Can I ask you personal questions?",
+          "blocks": [{
+            "t": "p",
+            "text": "Absolutely. You can ask me anything."
+          }, {
+            "t": "p",
+            "text": "I won’t necessarily answer everything, but I’ll happily explain why."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Do I have to talk about my childhood?",
+          "blocks": [{
+            "t": "p",
+            "text": "Nope."
+          }, {
+            "t": "p",
+            "text": "We start with what’s happening now. If we keep running into something that seems connected to your past, I’ll get curious and suggest we explore it."
+          }, {
+            "t": "p",
+            "text": "We’re not going digging through your childhood just because that’s what therapists supposedly do."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Do you ever get bored talking to clients?",
+          "blocks": [{
+            "t": "p",
+            "text": "I don’t find people boring. But I’m human. I get tired sometimes, I drink coffee, and I’m not always at 100%."
+          }, {
+            "t": "p",
+            "text": "Being present is part of my job. If I can’t give a session the attention it deserves, I won’t pretend otherwise."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Do you actually give a shit, or is this just a paycheck?",
+          "blocks": [{
+            "t": "p",
+            "text": "Both, I guess?"
+          }, {
+            "t": "p",
+            "text": "You pay for my time and expertise. Giving a shit is included."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Are you going to make me take psychiatric medication?",
+          "blocks": [{
+            "t": "p",
+            "text": "Nope. I’m a psychotherapist, not a prescribing clinician."
+          }, {
+            "t": "p",
+            "text": "If I think medication might be worth discussing with a doctor or psychiatrist, I’ll tell you. What you decide with them is up to you."
+          }]
+        }, {
+          "t": "sub",
+          "h3": "Would you judge me if I told you something fucked up?",
+          "blocks": [{
+            "t": "p",
+            "text": "I might challenge something you’ve done. That’s different from judging you as a person."
+          }, {
+            "t": "p",
+            "text": "I’m interested in understanding what happened and why, not deciding whether you’re a good or bad person."
+          }, {
+            "t": "p",
+            "text": "And if you’re worried I’ll judge you, tell me that too."
+          }]
+        }]
+      }, {
         "h2": "Services",
         "id": "services",
         "blocks": [{
@@ -3301,13 +3378,6 @@ window.SITE_COPY = {
           "blocks": [{
             "t": "p",
             "text": "There is enough continuity that we should both understand what we are working on. I don’t run every client through a standard programme."
-          }]
-        }, {
-          "t": "sub",
-          "h3": "Will we talk about childhood?",
-          "blocks": [{
-            "t": "p",
-            "text": "If it helps explain something active in the present. We start with the issue that brought you in."
           }]
         }, {
           "t": "sub",
