@@ -15,12 +15,21 @@
 //   3. reply  only when record.reply is given: an email to the person, e.g. a
 //             diagnostic result (template_gcj2lrd, To: {{user_email}}).
 //
-// done(ok, result) — result is { ok, sheet, owner, reply, detail } with each
-// status 'ok' | 'failed' | 'skipped', and for the sheet also 'unconfirmed'
-// (the request went out but its answer could not be read). ok means the lead
-// is confirmed somewhere: the sheet answered {"ok":true}, or EmailJS accepted
-// the owner email. Nothing reports a success it did not get: a timeout is a
-// failure, and an unconfirmed sheet write alone is not a success.
+// When EmailJS refuses an email (owner or reply), a fourth step runs:
+//   4. backup the same notification, POSTed to the Apps Script, which emails
+//             it to the owner with MailApp, saying which email failed. This
+//             is what keeps a broken EmailJS service (e.g. its Gmail
+//             connection revoked: 412 "Invalid grant") from losing leads.
+//
+// done(ok, result) — result is { ok, notified, sheet, owner, reply, fallback,
+// detail } with each status 'ok' | 'failed' | 'skipped', for the sheet also
+// 'unconfirmed' (the request went out but its answer could not be read), and
+// for the backup also 'unavailable' (an email failed but the sheet did not
+// offer a backup). notified means the owner was told: EmailJS delivered the
+// notification, or the backup did. ok means the lead is confirmed somewhere:
+// the sheet answered {"ok":true}, or the owner was notified. Nothing reports a
+// success it did not get: a timeout is a failure, and an unconfirmed sheet
+// write alone is not a success.
 //
 // ── EmailJS templates (what each one is, from the code and delivered mail) ──
 //   template_6mv5hou  OWNER notification — the canonical one for every form.
@@ -129,14 +138,14 @@ function leadTime(when) {
 function leadSettle(ms, timeoutStatus, timeoutDetail, run) {
   return new Promise(function (resolve) {
     var settled = false;
-    var end = function (status, detail) {
+    var end = function (status, detail, extra) {
       if (!settled) {
         settled = true;
         clearTimeout(timer);
-        resolve({
+        resolve(leadMerge(extra, {
           status: status,
           detail: detail || ''
-        });
+        }));
       }
     };
     var timer = setTimeout(function () {
@@ -178,11 +187,50 @@ function leadPostToSheet(payload) {
         } catch (e) {
           j = null;
         }
-        if (j && j.ok === true) end('ok', 'row appended');else if (j && j.ok === false) end('failed', 'script error: ' + (j.error || 'unknown'));else end('unconfirmed', 'HTTP ' + res.status + ', unreadable answer');
+        // notify: this deployment can also send the backup notification.
+        if (j && j.ok === true) end('ok', 'row appended', {
+          notify: j.notify === true
+        });else if (j && j.ok === false) end('failed', 'script error: ' + (j.error || 'unknown'));else end('unconfirmed', 'HTTP ' + res.status + ', unreadable answer');
       });
     }).catch(function (err) {
       var offline = typeof navigator !== 'undefined' && navigator.onLine === false;
       end(offline ? 'failed' : 'unconfirmed', (offline ? 'offline: ' : 'answer not readable: ') + String(err && err.message || err));
+    });
+  });
+}
+
+// 4. The backup notification. Only after EmailJS refused the owner email (or
+// the person's email), and only when the sheet's answer said this deployment
+// handles it, so an older Apps Script never stores it as a row. The script
+// emails it to the owner itself (MailApp), independent of EmailJS and its
+// Gmail connection. One request, never retried.
+function leadFallbackNotify(fields) {
+  return leadSettle(LEAD_TIMEOUT_MS, 'failed', 'no answer within ' + LEAD_TIMEOUT_MS / 1000 + 's', function (end) {
+    if (typeof fetch !== 'function') {
+      end('failed', 'fetch unavailable');
+      return;
+    }
+    fetch(LEAD_SHEET_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(leadMerge(fields, {
+        notify_fallback: '1'
+      })),
+      redirect: 'follow'
+    }).then(function (res) {
+      return res.text().then(function (t) {
+        var j = null;
+        try {
+          j = JSON.parse(t);
+        } catch (e) {
+          j = null;
+        }
+        if (j && j.ok === true && j.notified === true) end('ok', 'sent by the Apps Script');else end('failed', j && j.error ? 'script error: ' + j.error : 'HTTP ' + res.status + ', unreadable answer');
+      });
+    }).catch(function (err) {
+      end('failed', String(err && err.message || err));
     });
   });
 }
@@ -276,22 +324,49 @@ function submitLead(rec, done) {
     detail: ''
   })];
   Promise.all(jobs).then(function (r) {
+    // An email EmailJS refused: the owner's (the lead would go unseen) or the
+    // person's (they would wait for something that never comes). Either way
+    // the owner gets the full notification another way, saying what failed.
+    var emailFailed = r[1].status === 'failed' || r[2].status === 'failed';
+    var fallback = emailFailed && r[0].status === 'ok' && r[0].notify ? leadFallbackNotify({
+      subject: subject,
+      message: message,
+      name: leadStr(rec.name),
+      email: leadStr(rec.email),
+      reply_to: leadStr(rec.email),
+      source: rec.source || '',
+      owner_status: r[1].status,
+      owner_detail: r[1].detail,
+      reply_status: r[2].status,
+      reply_detail: r[2].detail
+    }) : Promise.resolve({
+      status: emailFailed ? 'unavailable' : 'skipped',
+      detail: emailFailed ? 'the sheet did not offer a backup (status ' + r[0].status + ')' : ''
+    });
+    return fallback.then(function (fb) {
+      return r.concat([fb]);
+    });
+  }).then(function (r) {
     var result = {
       source: rec.source,
       subject: subject,
       sheet: r[0].status,
       owner: r[1].status,
       reply: r[2].status,
+      fallback: r[3].status,
       detail: {
         sheet: r[0].detail,
         owner: r[1].detail,
-        reply: r[2].detail
+        reply: r[2].detail,
+        fallback: r[3].detail
       }
     };
+    // The owner was told: EmailJS delivered the notification, or the backup did.
+    result.notified = result.owner === 'ok' || result.owner === 'failed' && result.fallback === 'ok';
     // Recorded = something confirmed it. An unreadable sheet answer does not
     // count: better a person resends (or uses the address the form offers)
     // than a lead lost behind a success message.
-    result.ok = result.sheet === 'ok' || result.owner === 'ok';
+    result.ok = result.sheet === 'ok' || result.notified;
     leadReport(result);
     if (typeof done === 'function') {
       try {
@@ -309,10 +384,10 @@ function submitLead(rec, done) {
 function leadReport(result) {
   try {
     if (typeof window !== 'undefined') window.leadLast = result;
-    var line = '[lead] ' + result.source + ' · sheet ' + result.sheet + ' · owner ' + result.owner + ' · reply ' + result.reply;
+    var line = '[lead] ' + result.source + ' · sheet ' + result.sheet + ' · owner ' + result.owner + ' · reply ' + result.reply + ' · backup ' + result.fallback;
     // Every operation that failed, or whose outcome is unknown, is reported.
-    var problems = ['sheet', 'owner', 'reply'].filter(function (stage) {
-      return result[stage] === 'failed' || result[stage] === 'unconfirmed';
+    var problems = ['sheet', 'owner', 'reply', 'fallback'].filter(function (stage) {
+      return result[stage] === 'failed' || result[stage] === 'unconfirmed' || result[stage] === 'unavailable';
     });
     if (!problems.length) console.info(line);else if (problems.some(function (stage) {
       return result[stage] === 'failed';
@@ -351,7 +426,7 @@ function leadDebugPanel(result) {
       el.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;max-height:45vh;overflow:auto;margin:0;padding:14px 16px;background:#16231E;color:#F3F0E8;font:12.5px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;border-top:3px solid #047857';
       document.body.appendChild(el);
     }
-    el.textContent = 'LEAD DEBUG · ' + new Date().toISOString() + '\n' + 'source   ' + result.source + '\nsubject  ' + result.subject + '\n' + 'sheet    ' + result.sheet + '  ' + result.detail.sheet + '\n' + 'owner    ' + result.owner + '  ' + result.detail.owner + '\n' + 'reply    ' + result.reply + '  ' + result.detail.reply + '\n' + 'ok       ' + result.ok;
+    el.textContent = 'LEAD DEBUG · ' + new Date().toISOString() + '\n' + 'source   ' + result.source + '\nsubject  ' + result.subject + '\n' + 'sheet    ' + result.sheet + '  ' + result.detail.sheet + '\n' + 'owner    ' + result.owner + '  ' + result.detail.owner + '\n' + 'reply    ' + result.reply + '  ' + result.detail.reply + '\n' + 'backup   ' + result.fallback + '  ' + result.detail.fallback + '\n' + 'notified ' + result.notified + '\n' + 'ok       ' + result.ok;
   } catch (e) {/* noop */}
 }
 if (typeof window !== 'undefined') {

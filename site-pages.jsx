@@ -1012,8 +1012,9 @@
   // Delivery goes through window.submitLead (lead-capture.js), the same path as
   // the diagnostics' notifications: the EmailJS notification to Aggelos (the
   // canonical owner template, Reply-To the visitor) and a row in the leads
-  // sheet, run independently. The success state appears only once EmailJS has
-  // accepted the notification; otherwise the form comes back with everything
+  // sheet, run independently. The success state appears only once the
+  // notification is delivered (by EmailJS, or by the Apps Script's backup when
+  // EmailJS refuses it); otherwise the form comes back with everything
   // still filled in and a link to write to the address directly. One send in
   // flight at a time. The honeypot, the soft rate limit and the analytics
   // events are unchanged.
@@ -1186,9 +1187,10 @@
         detailExtra: 'location: ' + loc,
         params: { location: loc, service: svc },
       }, (recorded, res) => {
-        // Sent means EmailJS accepted the notification. The sheet row is
-        // written either way, but it is not what tells Aggelos.
-        if (res && res.owner === 'ok') ok();
+        // Sent means Aggelos was told: EmailJS accepted the notification, or,
+        // when EmailJS refused it, the Apps Script's backup email went out.
+        // The sheet row alone is not what tells him.
+        if (res && res.notified) ok();
         else fail(new Error('Notification not sent: ' + JSON.stringify(res && res.detail)));
       });
     }

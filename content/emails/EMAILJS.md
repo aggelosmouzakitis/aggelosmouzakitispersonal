@@ -12,6 +12,34 @@ failing never stops the others:
 2. **owner**: the owner notification, always through `template_6mv5hou`
 3. **reply**: only when a form sends the person something. Today that is only
    the Work & Life Check result, through `template_gcj2lrd`
+4. **backup**: only when EmailJS refuses the owner or the reply email. The
+   same notification is POSTed to the Apps Script, which emails it to
+   `aggelos.mouzakitis@gmail.com` itself (MailApp), subject starting
+   `[backup]`, saying which email failed. It needs the Apps Script version in
+   `scripts/leads-apps-script.gs` deployed: the site only uses the backup when
+   the sheet's answer includes `"notify": true`.
+
+## When EmailJS stops sending: `412 Gmail_API: Invalid grant`
+
+This is what happened from 11 November 2026. Google revoked the OAuth
+token behind `service_i4xq7vg` (this happens after a Google password change,
+a security review, removing EmailJS under Google Account → Security →
+Third-party access, or long inactivity). Every send then fails with 412 until
+the account is reconnected. The site cannot fix this itself.
+
+1. EmailJS → **Email Services** → `service_i4xq7vg` → **Reconnect account**
+   (or Disconnect, then Connect Account) → sign in to the sending Gmail
+   account and tick **"Send email on your behalf"**. Save. The service ID
+   stays the same.
+2. EmailJS → **Events**: the next send should read `200 OK`. Test from
+   `/contact/?leaddebug=1`.
+3. Leads submitted during the outage are all in the sheet. Re-send their
+   notifications with `resendMissedNotifications` in the Apps Script (set
+   `RESEND_FROM` first).
+
+With the backup deployed, an outage like this no longer loses
+notifications. They arrive as `[backup] …` from the Apps Script's account
+until EmailJS is reconnected.
 
 ## The templates
 
@@ -139,9 +167,10 @@ Reply-to:
 The heading above `<location>` is the form's label for that field; the
 `location` key itself is unchanged.
 
-The contact form shows "Thanks for getting in touch." only once EmailJS has
-accepted this notification. If EmailJS refuses it or doesn't answer within
-15 seconds, the form shows the failure message with a link to write to the
+The contact form shows "Thanks for getting in touch." only once this
+notification is delivered: by EmailJS, or by the backup when EmailJS refuses
+it. If neither delivers it within the time limits (15 seconds each), the form
+shows the failure message with a link to write to the
 address directly ("You can also email me directly.") and keeps everything the
 person typed. The sheet row is written either way, and a sheet row alone does
 not show the success message.
