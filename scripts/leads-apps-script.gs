@@ -59,8 +59,9 @@
  * OWNER_EMAIL, once (identical resubmissions are sent once).
  */
 
-// Where lead notifications go: the address the contact form publishes.
-var OWNER_EMAIL = 'aggelos.mouzakitis@gmail.com';
+// Where lead notifications go: the same inboxes as the EmailJS templates.
+// Comma-separated; every address gets every backup and resent notification.
+var OWNER_EMAIL = 'aggelos.mouzakitis@gmail.com, aggelos@growthsandwich.com';
 
 // resendMissedNotifications(): rows at or after this moment (ISO, UTC) are
 // re-sent. The EmailJS Gmail connection broke on 2026-11-11.

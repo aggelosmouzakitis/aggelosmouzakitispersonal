@@ -14,7 +14,8 @@ failing never stops the others:
    the Work & Life Check result, through `template_gcj2lrd`
 4. **backup**: only when EmailJS refuses the owner or the reply email. The
    same notification is POSTed to the Apps Script, which emails it to
-   `aggelos.mouzakitis@gmail.com` itself (MailApp), subject starting
+   `aggelos.mouzakitis@gmail.com` and `aggelos@growthsandwich.com` itself
+   (MailApp, `OWNER_EMAIL` in the script), subject starting
    `[backup]`, saying which email failed. It needs the Apps Script version in
    `scripts/leads-apps-script.gs` deployed: the site only uses the backup when
    the sheet's answer includes `"notify": true`.
