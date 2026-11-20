@@ -423,7 +423,7 @@ const ARTICLES = [
     brief: 'content/articles/people-pleasing-in-men.md',
     // Europe/Dublin is on GMT (+00:00). If the page goes live on another
     // day, change this and re-run the pipeline.
-    published: '2026-11-20T16:00:00+00:00',
+    published: '2026-11-20T15:48:00+00:00',
     modified: null,
     // "`dateModified`: the publication timestamp until a substantive update"
     schemaModified: 'published',
