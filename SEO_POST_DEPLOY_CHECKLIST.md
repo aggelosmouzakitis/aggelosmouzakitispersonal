@@ -58,7 +58,7 @@ done
 
 ```bash
 curl -s "$SITE/robots.txt" | grep -i '^sitemap'                 # the sitemap URL
-curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 47 (32 pages + 11 guides + 4 essays published again)
+curl -s "$SITE/sitemap.xml" | grep -c '<loc>'                    # expect 48 (32 pages + 12 guides + 4 essays published again)
 curl -sI "$SITE/llms.txt" | head -1                              # 200
 
 # every sitemap URL must be 200 and self-canonical
@@ -159,7 +159,7 @@ open "https://www.bing.com/webmasters"
 
 # IndexNow: confirm the key file is live BEFORE submitting
 curl -s "$SITE/f4a06bec48967c20f68efb4d562c6b71.txt"   # must print the key, nothing else
-npm run seo:indexnow                                    # every sitemap URL (47)
+npm run seo:indexnow                                    # every sitemap URL (48)
 
 # the retired URLs too, so they get re-crawled and dropped
 node scripts/seo/indexnow.js $(node -e "const {LEGACY}=require('./scripts/seo/routes.js');console.log(LEGACY.filter((r)=>r[1]===301||r[1]===410).map((r)=>r[0]).join(' '))")
@@ -173,7 +173,7 @@ node scripts/seo/indexnow.js $(node -e "const {LEGACY}=require('./scripts/seo/ro
   (`/work-anxiety/`, `/burnout-at-work/`,
   `/my-job-gives-me-anxiety-should-i-quit/`, `/cant-switch-off-from-work/`,
   `/high-functioning-burnout/`, `/career-change-anxiety/`, `/career-change-at-40/`, `/imposter-syndrome-at-work/`, `/perfectionism-at-work/`, `/burnout-vs-stress-depression/`,
-  `/emotionally-unavailable-husband/`): one valid `BlogPosting` with the visible
+  `/emotionally-unavailable-husband/`, `/people-pleasing-in-men/`): one valid `BlogPosting` with the visible
   date (and, for `/high-functioning-burnout/`, `datePublished` 2026-04-16 with
   the `dateModified` of its update), no `FAQPage`.
 - Schema Markup Validator — <https://validator.schema.org/> — same URLs. One

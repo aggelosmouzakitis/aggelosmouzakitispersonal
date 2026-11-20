@@ -8,6 +8,19 @@
 // placeholders are left out with their pointers.
 
 window.SITE_ARTICLES = [{
+  "id": "people-pleasing-in-men",
+  "url": "/people-pleasing-in-men/",
+  "h1": "People-Pleasing in Men: Signs, Causes and What Helps",
+  "deck": "Some men spend years being the reliable one at work, with their parents and in their relationships. It can work remarkably well until those people start asking for things that cannot all happen. This guide looks at people-pleasing in men, where it may come from, what it costs and how to change it without becoming less caring.",
+  "category": "Guide",
+  "published": "2026-11-20T16:00:00+00:00",
+  "publishedLabel": "November 2026",
+  "readTime": "21 min read",
+  "related": {
+    "label": "Therapy for Men",
+    "href": "/therapy-for-men/"
+  }
+}, {
   "id": "emotionally-unavailable-husband",
   "url": "/emotionally-unavailable-husband/",
   "h1": "Emotionally Unavailable Husband? When Work Stress Starts Taking Over the Relationship",

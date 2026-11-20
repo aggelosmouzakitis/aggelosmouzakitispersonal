@@ -233,7 +233,7 @@ window.SITE_ARTICLE_PAGES["emotionally-unavailable-husband"] = {
       "h3": "4. Perfectionism and difficulty disappointing people",
       "blocks": [{
         "t": "p",
-        "text": "He may agree to another client deadline while asking you to tolerate another cancelled evening. [Perfectionism at work](/perfectionism-at-work/) can make reasonable stopping points difficult to accept. Keeping colleagues satisfied then repeatedly takes priority over commitments at home."
+        "text": "He may agree to another client deadline while asking you to tolerate another cancelled evening. [Perfectionism at work](/perfectionism-at-work/) can make reasonable stopping points difficult to accept. [Keeping colleagues satisfied then repeatedly takes priority over commitments at home](/people-pleasing-in-men/)."
       }]
     }, {
       "t": "sub",

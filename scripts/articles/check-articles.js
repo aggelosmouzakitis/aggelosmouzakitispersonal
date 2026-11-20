@@ -324,7 +324,12 @@ async function checkArticle(browser, a) {
   eq('TOC', s.toc, art.toc ? art.toc.items.map((it) => ['#' + it.id, it.label]) : []);
   eq('H2 ids', s.h2s, art.sections.map((x) => [x.id, x.h2]));
   if (art.cta) {
-    const ctaLinks = art.cta.blocks ? art.cta.blocks.filter((b) => b.t !== 'p').map((b) => [b.href, b.label]) : [[art.cta.button.href, art.cta.button.label]];
+    // Every link in the band, in order: its actions, and any link inside one
+    // of its paragraphs ("… · [Fees and practicalities](/fees-and-practicalities/)").
+    const inline = (md) => [...md.matchAll(/\[([^\]]*)\]\(([^)\s]+)\)/g)].map((m) => [relative(m[2]), norm(plain(m[1]))]);
+    const ctaLinks = art.cta.blocks
+      ? [].concat(...art.cta.blocks.map((b) => (b.t === 'p' ? inline(b.text) : [[b.href, b.label]])))
+      : [[art.cta.button.href, art.cta.button.label]];
     eq('CTA', s.cta, { eyebrow: art.cta.eyebrow, h2: [art.cta.id, art.cta.h2], links: ctaLinks });
     eq('closes', s.close, null);
   } else {

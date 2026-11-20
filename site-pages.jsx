@@ -60,6 +60,9 @@
     ['work-affecting-relationship', 'Burnout often shows up in relationships before it shows up in performance', '/burnout-at-work/'],
     ['work-affecting-relationship', 'it can feel like you are not really there', '/emotionally-unavailable-husband/'],
     ['therapy-for-software-engineers', 'Professional coaching', '/professional-coaching/'],
+    ['therapy-for-men', 'Agreeing can end an uncomfortable conversation quickly', '/people-pleasing-in-men/'],
+    ['relationship-problems-men', 'Avoiding conflict can reduce tension in the moment and build resentment over time', '/people-pleasing-in-men/'],
+    ['executive-burnout-therapy', 'You keep saying yes because dropping something feels irresponsible', '/people-pleasing-in-men/'],
     // Undisguised: a phrase that already says what one movement of the map is
     // about links to that movement on /undisguised/, at most one per page.
     // Phrases about the person, never about the therapy's method: the
@@ -2173,6 +2176,8 @@ ${TABLE_CSS}
 /* The close: the site's dark band, the article's CTA in it */
 .art-cta .art-cta__h{margin:0 auto}
 .art-cta .art-cta__p{margin:18px auto 0}
+.art-cta .art-a{color:var(--bone);text-decoration-color:rgba(243,240,232,.55)}
+.art-cta .art-a:hover{color:var(--sage)}
 .art-cta .close__actions+.art-cta__p{margin-top:36px}
 `;
 

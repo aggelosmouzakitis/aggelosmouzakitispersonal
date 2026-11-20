@@ -384,6 +384,9 @@ const ARTICLES = [
   },
   {
     slug: 'emotionally-unavailable-husband',
+    // The partner's view of the pattern the people-pleasing guide examines
+    // from his side (work commitments taking priority over home).
+    contextLinks: [['Keeping colleagues satisfied then repeatedly takes priority over commitments at home', '/people-pleasing-in-men/']],
     brief: 'content/articles/emotionally-unavailable-husband.md',
     // Europe/Dublin is on GMT (+00:00) from 25 October 2026.
     published: '2026-10-28T22:08:00+00:00',
@@ -413,6 +416,30 @@ const ARTICLES = [
     wordCount: ['headline', 'deck', 'body'],
     // As for the other guides of this series: no article image to give.
     schemaImage: 'none',
+    links: {},
+  },
+  {
+    slug: 'people-pleasing-in-men',
+    brief: 'content/articles/people-pleasing-in-men.md',
+    // Europe/Dublin is on GMT (+00:00). If the page goes live on another
+    // day, change this and re-run the pipeline.
+    published: '2026-11-20T16:00:00+00:00',
+    modified: null,
+    // "`dateModified`: the publication timestamp until a substantive update"
+    schemaModified: 'published',
+    category: 'Guide',
+    readTime: '21 min read',
+    authorImage: '/img/aggelos-about.webp',
+    authorImageSize: [840, 1050],
+    related: { label: 'Therapy for Men', href: '/therapy-for-men/' },
+    // No table, callout or notice: the brief asks for none.
+    callout: null,
+    // "computed from the visible editorial word count (headline, deck and
+    // body including the FAQ)"
+    wordCount: ['headline', 'deck', 'body'],
+    // "the approved portrait as the author's image": the BlogPosting's
+    // author, not an invented article image.
+    schemaImage: 'author',
     links: {},
   },
   // The four essays the canonical copy features on /blog/, brought back from

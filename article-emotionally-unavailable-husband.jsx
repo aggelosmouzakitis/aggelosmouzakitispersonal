@@ -84,7 +84,7 @@ window.SITE_ARTICLE_PAGES["emotionally-unavailable-husband"] = {
         {"t":"p","text":"Fear of being exposed as inadequate can drive excessive preparation and concealment. Sometimes home also starts feeling like another place where a failure will be noticed. The guide to [imposter syndrome at work](/imposter-syndrome-at-work/) examines the behaviours, including distinguishing them from a genuine skill gap."}
       ]},
       {"t":"sub","h3":"4. Perfectionism and difficulty disappointing people", "blocks": [
-        {"t":"p","text":"He may agree to another client deadline while asking you to tolerate another cancelled evening. [Perfectionism at work](/perfectionism-at-work/) can make reasonable stopping points difficult to accept. Keeping colleagues satisfied then repeatedly takes priority over commitments at home."}
+        {"t":"p","text":"He may agree to another client deadline while asking you to tolerate another cancelled evening. [Perfectionism at work](/perfectionism-at-work/) can make reasonable stopping points difficult to accept. [Keeping colleagues satisfied then repeatedly takes priority over commitments at home](/people-pleasing-in-men/)."}
       ]},
       {"t":"sub","h3":"5. Career or existential stagnation", "blocks": [
         {"t":"p","text":"The workload may be manageable while the prospect of continuing feels unbearable. [Career change anxiety](/career-change-anxiety/) can involve salary, status, regret or losing a familiar identity. For a founder, payroll obligations and a struggling company may make even discussing alternatives feel consequential. Neither practical constraints nor psychological difficulty should be dismissed."}
